@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PleiadesDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="PleiadesDB" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AccountStatuses" EntityType="PleiadesDBModel.AccountStatus" />
+    <EntitySet Name="DomainUsers" EntityType="PleiadesDBModel.DomainUser" />
+    <EntitySet Name="Users" EntityType="PleiadesDBModel.User" />
+    <AssociationSet Name="FK_system_User_system_AccountStatus" Association="PleiadesDBModel.FK_system_User_system_AccountStatus">
+      <End Role="AccountStatus" EntitySet="AccountStatuses" />
+      <End Role="DomainUser" EntitySet="DomainUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_domain_User_membership_User" Association="PleiadesDBModel.FK_domain_User_membership_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="DomainUser" EntitySet="DomainUsers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AccountStatus">
+    <Key>
+      <PropertyRef Name="AccountStatusId" />
+    </Key>
+    <Property Type="Int32" Name="AccountStatusId" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DomainUsers" Relationship="PleiadesDBModel.FK_system_User_system_AccountStatus" FromRole="AccountStatus" ToRole="DomainUser" />
+  </EntityType>
+  <EntityType Name="DomainUser">
+    <Key>
+      <PropertyRef Name="DomainUserId" />
+    </Key>
+    <Property Type="Int32" Name="DomainUserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Guid" Name="MembershipUserId" Nullable="false" />
+    <Property Type="String" Name="UserRole" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="AccountStatus" Nullable="false" />
+    <Property Type="Int32" Name="AccountLevel" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="LastModified" Nullable="false" />
+    <Property Type="DateTime" Name="CreationDate" Nullable="false" />
+    <NavigationProperty Name="AccountStatus1" Relationship="PleiadesDBModel.FK_system_User_system_AccountStatus" FromRole="DomainUser" ToRole="AccountStatus" />
+    <NavigationProperty Name="User" Relationship="PleiadesDBModel.FK_domain_User_membership_User" FromRole="DomainUser" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Guid" Name="Id" Nullable="false" />
+    <Property Type="DateTime" Name="CreationDate" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ApplicationName" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Password" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PasswordQuestion" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PasswordAnswer" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsApproved" Nullable="false" />
+    <Property Type="DateTime" Name="LastActivityDate" />
+    <Property Type="DateTime" Name="LastLoginDate" />
+    <Property Type="DateTime" Name="LastPasswordChangedDate" />
+    <Property Type="Boolean" Name="IsOnline" />
+    <Property Type="Boolean" Name="IsLockedOut" />
+    <Property Type="DateTime" Name="LastLockedOutDate" />
+    <Property Type="Int32" Name="FailedPasswordAttemptCount" />
+    <Property Type="DateTime" Name="FailedPasswordAttemptWindowStart" />
+    <Property Type="Int32" Name="FailedPasswordAnswerAttemptCount" />
+    <Property Type="DateTime" Name="FailedPasswordAnswerAttemptWindowStart" />
+    <Property Type="DateTime" Name="LastModified" />
+    <Property Type="String" Name="Comment" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DomainUsers" Relationship="PleiadesDBModel.FK_domain_User_membership_User" FromRole="User" ToRole="DomainUser" />
+  </EntityType>
+  <Association Name="FK_system_User_system_AccountStatus">
+    <End Type="PleiadesDBModel.AccountStatus" Role="AccountStatus" Multiplicity="1" />
+    <End Type="PleiadesDBModel.DomainUser" Role="DomainUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountStatus">
+        <PropertyRef Name="AccountStatusId" />
+      </Principal>
+      <Dependent Role="DomainUser">
+        <PropertyRef Name="AccountStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_domain_User_membership_User">
+    <End Type="PleiadesDBModel.User" Role="User" Multiplicity="1" />
+    <End Type="PleiadesDBModel.DomainUser" Role="DomainUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DomainUser">
+        <PropertyRef Name="MembershipUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

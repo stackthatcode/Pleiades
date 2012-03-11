@@ -1,0 +1,159 @@
+﻿
+.loginbutton
+{
+    background: url(../Images/arrow-right.png) no-repeat top left;
+    display: block;
+    width: 44px;
+    height: 41px;
+    text-indent: -9999px; /* hides the link text */
+    border: 0px none;
+}
+
+.loginbutton:hover
+{
+    background: url(../Images/arrow-rightOVER.png) no-repeat top left;
+}
+
+.backbutton
+{
+    background: url(../Images/backarrow-left.png) no-repeat top left;
+    display: block;
+    width: 120px;
+    height: 40px;
+    text-indent: -9999px; /* hides the link text */
+    border: 0px none;
+    cursor: pointer;
+    float:left;
+}
+
+.savebutton
+{
+    background: url(../Images/savebutton.png) no-repeat top left;
+    display: block;
+    width: 102px;
+    height: 28px;
+    text-indent: -9999px; /* hides the link text */
+    border: 0px none;
+    cursor: pointer;
+}
+
+.cancelbutton
+{
+    background: url(../Images/cancelbutton.png) no-repeat top left;
+    display: block;
+    width: 102px;
+    height: 28px;
+    text-indent: -9999px; /* hides the link text */
+    border: 0px none;
+    cursor: pointer;
+}
+
+.resetbutton
+{
+    background: url(../Images/resetbutton.png) no-repeat top left;
+    display: block;
+    width: 102px;
+    height: 28px;
+    text-indent: -9999px; /* hides the link text */
+    border: 0px none;
+    cursor: pointer;
+}
+
+.editbutton
+{
+    background: url(../Images/editbutton.png) no-repeat top left;
+    display: block;
+    width: 102px;
+    height: 28px;
+    text-indent: -9999px; /* hides the link text */
+    border: 0px none;
+    cursor: pointer;
+}
+
+.deletebutton
+{
+    background: url(../Images/deletebutton.png) no-repeat top left;
+    display: block;
+    width: 102px;
+    height: 28px;
+    text-indent: -9999px; /* hides the link text */
+    border: 0px none;
+    cursor: pointer;
+}
+
+.yesbutton
+{
+    background: url(../Images/yesbutton.png) no-repeat top left;
+    display: block;
+    width: 102px;
+    height: 28px;
+    text-indent: -9999px; /* hides the link text */
+    border: 0px none;
+    cursor: pointer;
+}
+
+.nobutton
+{
+    background: url(../Images/nobutton.png) no-repeat top left;
+    display: block;
+    width: 102px;
+    height: 28px;
+    text-indent: -9999px; /* hides the link text */
+    border: 0px none;
+    cursor: pointer;
+}
+
+.unlockbutton
+{
+    background: url(../Images/unlockbutton.png) no-repeat top left;
+    display: block;
+    width: 102px;
+    height: 28px;
+    text-indent: -9999px; /* hides the link text */
+    border: 0px none;
+    cursor: pointer;
+}
+
+.changebutton
+{
+    background: url(../Images/changebutton.png) no-repeat top left;
+    display: block;
+    width: 102px;
+    height: 28px;
+    text-indent: -9999px; /* hides the link text */
+    border: 0px none;
+    cursor: pointer;
+}
+
+.okbutton
+{
+    background: url(../Images/okbutton.png) no-repeat top left;
+    display: block;
+    width: 102px;
+    height: 28px;
+    text-indent: -9999px; /* hides the link text */
+    border: 0px none;
+    cursor: pointer;
+}
+
+.donebutton
+{
+    background: url(../Images/donebutton.png) no-repeat top left;
+    display: block;
+    width: 102px;
+    height: 28px;
+    text-indent: -9999px; /* hides the link text */
+    border: 0px none;
+    cursor: pointer;
+}
+
+.addnewbutton
+{
+    background: url(../Images/addnewbutton.png) no-repeat top left;
+    display: block;
+    width: 102px;
+    height: 28px;
+    text-indent: -9999px; /* hides the link text */
+    border: 0px none;
+    cursor: pointer;
+}

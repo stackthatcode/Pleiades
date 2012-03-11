@@ -1,0 +1,94 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title>Pleiades Commerce - Administrative</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="description" content="UI Elements: Large Drop Down Menu" />
+    <meta name="keywords" content="jquery, drop down, menu, navigation, large, mega" />
+
+    <%: Html.Stylesheet("~/Content/Stylesheets/AdminMenu.css") %>
+    <%: Html.Stylesheet("~/Content/Stylesheets/Pleiades.css") %>
+    <%: Html.Stylesheet("~/Content/Stylesheets/Buttons.css") %>
+
+    <%: Html.Javascript("~/Scripts/Generic/jquery-1.5.1.js")%>
+    <%: Html.Javascript("~/Scripts/Generic/jquery-ui-1.8.11.js")%>    
+    <%: Html.Javascript("~/Scripts/Domain/GenericUtil.js")%>
+    <%: Html.Javascript("~/Scripts/Domain/AdminMenu.js")%>
+</head>
+
+<body>
+    <div id="overlay"></div>
+
+	<div style="background-color:#444;">
+        <!-- TODO: move this to CSS file -->
+		<div style="width:1000px; margin-left:auto; margin-right:auto; display:block; height:60px;">
+			<h1 class="header" style="float:left; padding-left:0px; padding-top:5px">Pleiades Commerce</h1>
+            <% Html.RenderAction("HeaderSummary", "Home"); %>
+		</div>
+	</div>
+    
+	<div class="ldd_menu" style="z-index:100;">			
+		<ul id="ldd_menu" class="ldd_menu">
+			<li>
+                <%: Html.RouteLink("Home", new { controller = "Home", action = "Index" })%>
+			</li>
+			<li>
+				<a href="#">Products</a>
+				<div class="ldd_submenu">
+					<ul>
+						<li><%: Html.RouteLink("Manage Categories", new { controller = "Category", action = "Index" }) %></li>
+						<li><a href="#">Manage Products</a></li>
+						<li><a href="#">Manage Inventory</a></li>
+					</ul>
+					<a class="ldd_subfoot" href="#">Choose a Product Management function to perform</a>
+				</div>
+			</li>
+			<li>
+				<a href="#">Order Fulfillment</a>
+				<div class="ldd_submenu">
+					<ul>
+						<li><a href="#">View Pending Orders</a></li>
+						<li><a href="#">Search All Orders</a></li>
+					</ul>
+					<a class="ldd_subfoot" href="#">Choose an Order Fulfillment function to perform</a>
+				</div>
+			</li>
+            <li>
+				<a href="#">Customers</a>
+            </li>
+            <li>
+				<a href="#">Admin Users</a>
+                <div class="ldd_submenu">
+					<ul>
+						<li><%: Html.RouteLink("Manage Existing Admins", new { controller = "AdminManager", action = "List" })%></li>
+						<li><%: Html.RouteLink("Create New Admin", new { controller = "AdminManager", action = "Create" })%></li>
+					</ul>
+					<a class="ldd_subfoot" href="#">Choose an Admin User function to perform</a>
+				</div>
+			</li>
+			<li>
+                <%: Html.RouteLink("Go To Storefront", new { area = "", controller = "Products", action = "List" }) %>
+			</li>
+			<li>
+                <%: Html.RouteLink("Logout", new { controller = "Account", action = "Logout" }) %>
+			</li>
+		</ul>			
+	</div>
+	
+	<div style="height:300px; width:1000px; margin-left:auto; margin-right:auto;">
+        <div style="padding-top:50px;">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        // <!-- TODO: find a way to queue all script initialization --> 
+        $(function () {
+            InitializeAdminMenu()
+        });
+    </script>
+</body>
+</html>

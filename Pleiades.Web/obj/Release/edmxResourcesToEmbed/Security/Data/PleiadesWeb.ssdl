@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PleiadesDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="PleiadesDBModelStoreContainer">
+    <EntitySet Name="AccountStatuses" EntityType="PleiadesDBModel.Store.AccountStatuses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DomainUsers" EntityType="PleiadesDBModel.Store.DomainUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="PleiadesDBModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_domain_User_membership_User" Association="PleiadesDBModel.Store.FK_domain_User_membership_User">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="DomainUsers" EntitySet="DomainUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_system_User_system_AccountStatus" Association="PleiadesDBModel.Store.FK_system_User_system_AccountStatus">
+      <End Role="AccountStatuses" EntitySet="AccountStatuses" />
+      <End Role="DomainUsers" EntitySet="DomainUsers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AccountStatuses">
+    <Key>
+      <PropertyRef Name="AccountStatusId" />
+    </Key>
+    <Property Name="AccountStatusId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="DomainUsers">
+    <Key>
+      <PropertyRef Name="DomainUserId" />
+    </Key>
+    <Property Name="DomainUserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MembershipUserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserRole" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="AccountStatus" Type="int" Nullable="false" />
+    <Property Name="AccountLevel" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="LastModified" Type="datetime" Nullable="false" />
+    <Property Name="CreationDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="ApplicationName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Password" Type="nvarchar" MaxLength="100" />
+    <Property Name="PasswordQuestion" Type="nvarchar" MaxLength="255" />
+    <Property Name="PasswordAnswer" Type="nvarchar" MaxLength="255" />
+    <Property Name="IsApproved" Type="bit" Nullable="false" />
+    <Property Name="LastActivityDate" Type="datetime" />
+    <Property Name="LastLoginDate" Type="datetime" />
+    <Property Name="LastPasswordChangedDate" Type="datetime" />
+    <Property Name="IsOnline" Type="bit" />
+    <Property Name="IsLockedOut" Type="bit" />
+    <Property Name="LastLockedOutDate" Type="datetime" />
+    <Property Name="FailedPasswordAttemptCount" Type="int" />
+    <Property Name="FailedPasswordAttemptWindowStart" Type="datetime" />
+    <Property Name="FailedPasswordAnswerAttemptCount" Type="int" />
+    <Property Name="FailedPasswordAnswerAttemptWindowStart" Type="datetime" />
+    <Property Name="LastModified" Type="datetime" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK_domain_User_membership_User">
+    <End Role="Users" Type="PleiadesDBModel.Store.Users" Multiplicity="1" />
+    <End Role="DomainUsers" Type="PleiadesDBModel.Store.DomainUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DomainUsers">
+        <PropertyRef Name="MembershipUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_system_User_system_AccountStatus">
+    <End Role="AccountStatuses" Type="PleiadesDBModel.Store.AccountStatuses" Multiplicity="1" />
+    <End Role="DomainUsers" Type="PleiadesDBModel.Store.DomainUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountStatuses">
+        <PropertyRef Name="AccountStatusId" />
+      </Principal>
+      <Dependent Role="DomainUsers">
+        <PropertyRef Name="AccountStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

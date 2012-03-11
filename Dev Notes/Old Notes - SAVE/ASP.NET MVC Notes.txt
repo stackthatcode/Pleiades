@@ -1,0 +1,159 @@
+2011/10/2
+=========
+
+CONCLUSION ON TROY GOODE'S MEMBERSHIP KIT
+=========================================
+* Consolidate the Membership Configuration Settings into a single object - BTW, they exist for the User/Role management - DONE
+* Add public static void CreateAdminMemberIfNotExists() - DONE
+* Use the custom EF Provider for Membership and write a Custom Role Provider ==> NOPE - use the default! -- DONE
+* Write integration tests -- create a separate Integration Testing database -- DONE
+* Copy the basic UI flow for User Management
+* Keep the Touch method thingy -- maybe - DONE
+* All things go in the AutoCalc.Security.Providers namespace - DONE
+
+
+
+STUFF YOU'RE GONNA HAVE TO GET OVER
+===================================
+1.) Default providers are a black box -- that can, at times, completely suck.  OTOH, it's a proven technology.  Crucial.
+2.) Strongly-typed Roles aren't completely necessary -- they can be actuated by an attribute with a dictionary which maps to the Roles.  Boom!  There's strong-typing
+3.) Add additional SQL tables and enforce referential integrity.  Wrap the Provider in a Wrapper (similar to Troy's), Mock the provider and verify calls to the Providers & respective Repositories.
+- UserManagementRepository
+- RoleManagementRepository
+4.) Gee, life is easier when you re-use existing code, right...??? :-)
+
+
+
+KNEE JERK REACTION TO THE MVC MEMBERSHIP STARTER KIT
+====================================================
+o BIG BEEF: is it really beneficial to fragment the Membership Provider / Role Provider into services?  Why?  To separate the Provider from the Service?
+o MORE BEEF: the User Administration Controller contains tons of logics, too many services, is too heavy, etc. etc.
+o Maintainable?  Maybe...
+o What is the honest benefit of abstracting the PasswordResetRetrieval settings?  To isolate and control settings for unit testing?  
+o Paging was coupled to the "Services" -- and thus, the tests deal with Paging.  IMM, paging is a separate concern
+ALTERNATIVE: Why not control that stuff through mocking...?
+o Unless I'm mistaken, doesn't the Membership Provider automatically read configuration settings...?  Why separate settings...?  Are the Services to be configured separately?  What's going on here...?
+TRIPLE WHAMMY - why not mock the MembershipProvider...?  It's an abstract class
+o Is the touch method even necessary?  IOW, if the cross cutting of concerns is adequately addressed, then security will be *inescable* 
+ALSO: the 
+
+ 
+** Plus Side **
+-> Is good at writing tests :-) -- on second thought, it's a thin wrapper around the mocks, so what is it really testing...?  Especially with the ability to mock MembershipProvider, having trouble seeing the benefit of this "wrapper"...
+-> IPagedList (by itself) looks really nice! ==> Mayhaps, replace my paged list with it?
+-> AuthorizeUnlessOnlyUserAttribute
+-> Usage of the Touch() method is done very well
+-> REALLY GOOD: he successfully implements role management using the ASP.NET MVC framework.  It works, and that's alright!
+
+
+2011/09/28
+==========
+
+APPLICABLE READING:
+
+
+## DATA LAYER - VERY MUCH WORTH CHECKING OUT ##
+===============================================
+1.) Implement the Membership Starter Kit == IN PROGRESS
+2.) Create the Custom Authorization Attribute w/ Strong-Typing ==> Control MVC's response
+3.) HOW TO: Secure the Machine Key - and not put it in web.config
+4.) Sign-up to Stack Overflow and ask about the security of FormsAuthentication
+5.) Apply the Email Address hack
+
+<authentication mode="Forms">
+	<forms name=".AuthCookie" loginUrl="login.aspx" protection="All"/>
+</authentication>
+  
+<membership defaultProvider="AspNetSqlMembershipProvider" userIsOnlineTimeWindow="15" hashAlgorithmType="">
+  <providers>
+    <clear />
+    <add connectionStringName="LocalSqlServer" enablePasswordRetrieval="false" 
+         enablePasswordReset="true" requiresUniqueEmail="false"
+         passwordFormat="Encrypted" .../>
+  </providers>
+</membership>
+
+Review Notes
+------------
+* Any reason why we can't hard code RequiresUniqueEmail == true?  And EncryptedPassword == true
+* Also: why should they retrieve/reset their password?  Change-only is allowed
+* Nice function to use: GetNumberOfUsersOnline()
+* Does FormsAuthentication use the same encryption key for the password as for the Forms Auth cookie?
+
+Setting Timeout
+---------------
+<system.web>
+  <authentication mode="Forms">
+	<forms timeout="50000000"/>
+  </authentication>
+</system.web>
+
+### SECURITY RECOMMENDATIONS ###
+================================
+1.) HTTPS on the Login Page
+2.) Stay posted on common Security Threats - ASP.NET Security Vulnerability => http://weblogs.asp.net/scottgu/archive/2010/09/18/important-asp-net-security-vulnerability.aspx
+3.) Look at the common HTTP Codes
+4.) HYPOTHESIS ==> for total security we'd need to control the Machine.Key ourselves i.e. VPS/Dedi
+5.) Periodically change the Machine Key
+
+
+
+2011/09/22 - fruits
+
+HOSTING OPTIONS
+===============
+PLAN = Shared ---> VPS ---> Dedi
+Shared Hosting => http://discountasp.net
+Hosting Directory => http://www.microsoft.com/web/hosting/
+VPS Hosting => Rackspace.com
+Shared/Dedi Hosting => MyHosting.com
+Shared/Dedi Hosting => FireHost.com
+Moar => inurl:StackOverflow
+
+FOLLOW-UP
+=========
+** Found VPS for less than $100/month.  -- POSSIBLE SOLUTION
+** Alternative: ORM Database Combos - MySQL/PostgresSQL + NHibernate
+** ULTIMATE SOLUTION ==> rewrite the data layer, son!
+
+
+
+Detail Issues / Questions to Investigate
+========================================
+** How does ASP.NET MVC address Model to Controller binding?
+** How do you use the Repository Pattern with an ORM?  Can you do cross table joins?
+** How do you properly configure DI in ASP.NET MVC?
+** How to create CSS style sheets and share across projects?  What's the best practice for creating partial views...?  How can CSS style sheets be accessed centrally?
+
+- How does EF handle concurrency issues?  What is the UoW pattern and how does it relate to EF?
+- DDD - what's with the wierd design of Bids and Users in Pro ASP.NET MVC 2?  
+- Session Management - how can we create persistent sessions?  How can we preserve user data after a session has died?
+- How to design a proper controller for AJAX-powered applications?
+- How to deal with Failed Route Matching... which error page?
+
+RHINO MOCKS ==> how can you return a result from a method and ignore parameters...? <-- ANSWER: YES!
+NEXT (MORE ON MOCKS) ==> Why are you using DynamicMocks when you should be using Stubs?
+TODO: replace DynamicMocks with Stubs
+
+** BIG EUREKA! - Routing cares about type inference in Route Mapping
+
+
+Big ASP.NET MVC Gotchas
+=======================
+1.) Put the more specific Routes before the less-specific.  /Products/List/3 is more  specific than /Products/List/.
+2.) IMPORTANT Remember MvcHtmlString, ok?
+
+Outbound Route Matching Algorithm - (Apply to all possible Routes)
+=================================
+1.) The Route object must be able to obtain a value for each of its curly brace parameters from any of these 3 "collections":
+
+a.) Explicitly provided values (parameter values in the Route Dictionary...?)
+b.) RouteData values from the current request - EXCEPT: those that appear
+c.) Defaults collection
+
+2.) None of the explicitly-provided parameters may disagree with the Route object's default-only parameters.  A default-only parameter is one that appears in the entry's Defaults collection -- but does not appear as a parameter in the URL pattern.
+
+TRANSLATION: if this Route has default values, then they may NOT disagree with the
+3.) No constraint violations.
+
+

@@ -1,0 +1,8 @@
+*.obj	
+ClassA.cs
+*.dll
+*.vsmdi
+*.cache
+*.pdb
+*/bin/*
+*/obj/*

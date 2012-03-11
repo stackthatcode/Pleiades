@@ -1,0 +1,134 @@
+
+11/27/2011
+==========
+** BIGGEST QUESTION - how to Edit Grid without doing it inline...? -- DOING IT INLINE, FOR NOW.
+- AJAX Assault! - IN PROGRESS
+- Create "Get Page of" Server method - DONE
+- Add Generate Page Links Controller method - DONE
+* Wading knee-deep, aggressively into AJAX, JSON, JQuery with ASP.NET MVC - PHENOMENAL INITIATIVE, BRAH.
+* Revamped Paging method for usage w/ Entity Framework - GOOD JOB!
+* Created Category Controller, mocked-up View, added Entities and service - GOOD JOB, MAN!
+* Designed Category flow - DONE
+
+11/26/2011
+==========
+** BIG PROJECT ==> Add Root User / Eliminate IsLeadAdmin(); -- Easy enough
+* TODO: Write Tests for Admin Manager Controller - DONE - LEGEND, MY FRIEND, LEGEND :-D  GO TAKE A BREAK AND REWARD YUHSELF!
+* TODO: Write Tests for Account Controller - DONE
+* TODO: Add Tests for the Admin Routes - DONE
+* Verify that Domain Users are getting "touched" with each HttpRequest - FIXED!  GOOD JOB, MAN!
+- Clean-up the Menu on top - DONE
+* Move DomainUser Domain => WebUI Model....? - , Don't Worry About It, DONE
+* The "Back Button" - DONE
+4.) How to Render Straight Actions?  How to pass model to Partial View....? - DONE
+3.) MVC Platform => how to leverage Partial Views (we gots da HtmlHelperz already) - DONE
+* Fixed security hole - DONE
+* Decorate methods with Http method - DONE
+* Centralize Warning Css Class from Delete.aspx - DONE
+
+11/22/2011
+==========
+* Created ModelBinder for DomainUser => DONE
+* Currently Logged on as User XXX => DONE
+TOP PRIORITY ==> DROP BOX - DONE
+* Fix the "Is Approved == FALSE" logic for Authentication - kick user out, if they're not approved -DONE, GOOD JOB
+** Domain logic - Maximum of 5 Admins --> no more! - DONE -- with Integration Tests, too ==> DONE
+* Last minute Reset Password Screen - DONE
+
+11/20/2011
+==========
+* Make Unlock Button - DONE
+* Eliminate full namespace from View Page directive Inherits attribute - DONE
+* Create User Validation - DONE
+* Reset Password - DONE
+- Interface for changing password (email is later) - DONE
+* Fix UserName Model issue on Edit Page.... - FIXED!
+* Fixed REdirect after Create bug - DONE
+* New TagIfNotEmtpy - DONE
+* New ViewDataKeys class - DONE
+* New Create Admin Model class - DONE
+- Fixed Validation Attributes
+* Delete Admin - DONE
+- Are you sure Yes/No button? - DONE IN GIMP
+
+11/19/2011
+==========
+* Create New Admin Page - DONE
+- Controller logic, etc - DONE
+- Partial View for seeing Admin - DONE
+** Domain logic - nobody can change Lead Admin password - DONE
+** Domain logic - nobody can disable the Admin - DONE
+* Finish Coding Admin User Page - DONE
+- Add Validation To Edit User Screen (minimum length, required) / get the visuals right for message - DONE
+- Create Disable/Enable Button - DONE
+- Fixed Date Time bug
+* CREATE DESIGNS FIRST! - DONE
+- Create Reset Password Button - DONE
+- Standard Radio Button Control - DONE
+* Design View Admin User Page -- DONE
+- Create Approve/Disapprove Drop Down List - DONE, WITH RADIO BUTTONS
+
+11/14/2011
+==========
+- Refactoring, namespace, project renames, etc. -- DONE, GOOD
+- Review and refactor CSS file
+- Create HtmlHelper for Edit User Editor
+
+11/13/2011
+==========
+- Centralize the Page Title in base class - Master Page (use Routing...?) ==> NOT NOW, BUDDY, CAN BE DONE LATER
+
+11/12/2011 (and Sunday)
+=======================
+* Design Edit Admin User Page -- DONE - GOOD JOB, SIR!
+* Create Home Page with Hot Links to Admin Pages -- DONE
+* Action Link Buttons - ON HOLD, FOR NOW
+* Submit Image Buttons - BLINGED -- DONE!
+* Html Helpers - CSS Script, JS -- DONE
+Find a way to Keep Repository objects the way they are... without replicating classes across layers -- ON GOING, BUT DONE
+11.) Find a good resource on creating good grids... -- DON'T NEED IT, I'M A G.
+1.) Make an Admin sitemap -- DONE
+2.) Rough sketch of Admin screens -- DONE
+6.) Create a Master Page -- DONE
+INTEGRATE Master Page in Existing Admin Screens -- DONE
+3.) Dissect Login Screen - try individual entry field -- DONE
+MORE ==> Designed the Pleiades Interface
+
+Interest...
+-----------
+==> Multiple Checkboxes - FOUND
+==> Rich Clientside UI Stuff --> Hidden Field - FOUND
+==> Validation - FOUND
+
+Finished For Now
+================
+0.5.) Form Basics, control basics, etc. ==>  DONE
+0.) Expression Trees, boss.  Gotta do them. ==> DONE -- GOOD JOB, SIR.  IT's 1AM.  GO SLEEP.
+1.) Trace through the FormLine Sample code -- see what EditorFor emits... ==> DONE
+2.) See how to make custom dropdown list -- ABANDONED -- Customizing MVC is a Bad Idea (tm) 
+
+
+11/6/2011
+1.) Logout Function
+2.) Invalid Creds - Auto Logout
+Build Skeleton for WebUI - Public & Administrative - DONE
+
+11/4/2011
+---------
+1.) New WebUI Project with brand new routing - w/ Routing Tests - DONE.  GOOD JOB, BRAH!!!
+
+Next Steps => 10/30/2011 - 9:01:00 PM> Update
+---------------------------------------------
+*** Gallio Docs...? -- URGENT -- DONE.  VERY GOOD JOB, BRAH!!!
+
+10/13/2011 - 12:25:00 AM Update -- EXECUTED.  GOOD JOB, BRAH!
+-------------------------------
+1.) Add the User Retrieval & Touch methods from the starter kit using the PagedList ==> also add Tests - DONE
+1.5.) Refactor / reorganize Testing Helpers, Utilities, HttpContext Mock/Stub stuff - get the old tests running, cleaned-up and reusable - DONE
+=> Dynamic Mocks vs. Stubs - Verify? -- DONE, FOR NOW; USE STUBS!
+=> Separate Test.Utilities assembly -- DONE
+1.75.) Add Password Service Update Last Modified to DomainUserService -- DONE
+2.) Next: create the Authorization Services - Roles, Products, etc. ==> and Tests for these services -- DONE
+3.) Create the Authorization Attribute -- DONE
+0.) Revisit Routing + Routing Tests -- DONE
+4.) View the SQL that EF emits - esp. with Paging - DONE
