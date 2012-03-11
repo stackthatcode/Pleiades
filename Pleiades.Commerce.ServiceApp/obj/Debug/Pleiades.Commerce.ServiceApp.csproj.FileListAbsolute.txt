@@ -1,8 +1,0 @@
-C:\Users\Aleks\Desktop\MVC+5 SRC\Pleiades SRC\Pleiades.Commerce.ServiceApp\bin\Web.Config
-C:\Users\Aleks\Desktop\MVC+5 SRC\Pleiades SRC\Pleiades.Commerce.ServiceApp\bin\Web.Debug.Config
-C:\Users\Aleks\Desktop\MVC+5 SRC\Pleiades SRC\Pleiades.Commerce.ServiceApp\bin\Web.Release.Config
-C:\Users\Aleks\Desktop\MVC+5 SRC\Pleiades SRC\Pleiades.Commerce.ServiceApp\bin\Pleiades.Commerce.ServiceApp.dll
-C:\Users\Aleks\Desktop\MVC+5 SRC\Pleiades SRC\Pleiades.Commerce.ServiceApp\bin\Pleiades.Commerce.ServiceApp.pdb
-C:\Users\Aleks\Desktop\MVC+5 SRC\Pleiades SRC\Pleiades.Commerce.ServiceApp\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\Aleks\Desktop\MVC+5 SRC\Pleiades SRC\Pleiades.Commerce.ServiceApp\obj\Debug\Pleiades.Commerce.ServiceApp.dll
-C:\Users\Aleks\Desktop\MVC+5 SRC\Pleiades SRC\Pleiades.Commerce.ServiceApp\obj\Debug\Pleiades.Commerce.ServiceApp.pdb
