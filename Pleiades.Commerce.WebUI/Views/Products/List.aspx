@@ -7,6 +7,10 @@
 </head>
 <body>
     <h1>Products Home Page - Under Construction</h1>
+
+    <%: Html.RouteLink("Go To Admin Area", new { area = "Admin", controller = "Home", action = "Index" }) %>
+
+
     <div>
         <% using(Html.BeginForm("List", "Products", FormMethod.Post)) 
            { %>

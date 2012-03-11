@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" 
-    MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<UserViewModel>" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<UserViewModel>" %>
     
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <%: Html.StandardActionButton(StandardButton.Back, "Details", routeValues: new { id = this.RouteData.Values["id"].ToString() })%>    
@@ -16,14 +15,14 @@
                     "DeleteConfirm", "AdminManager", new { id = this.RouteData.Values["id"] }, 
                     FormMethod.Post, new { enctype = "multipart/form-data" }))
             { %>
-        <table class="recordgrid" cellpadding="0" cellspacing="0">
-        <tr>
-            <td class="label-right" style="width:160px; font-weight:bold;">Confirm Delete</td>
-            <td><%: Html.StandardActionButton(StandardButton.No, "List", style: "float:left;")%>
-                <%: Html.StandardSubmitButton(StandardButton.Yes, "Submit", style: "float:left;")%>
-            </td>
-        </tr>
-        </table>
+            <table class="recordgrid" cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="label-right" style="width:160px; font-weight:bold;">Confirm Delete</td>
+                <td><%: Html.StandardActionButton(StandardButton.No, "List", style: "float:left;")%>
+                    <%: Html.StandardSubmitButton(StandardButton.Yes, "Submit", style: "float:left;")%>
+                </td>
+            </tr>
+            </table>
         <% } %>
     </div>
 </asp:Content>

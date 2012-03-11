@@ -1,0 +1,185 @@
+Git Learning Curve
+------------------
+
+# Installing Git and setting it to use
+=> http://help.github.com/win-set-up-git/
+
+
+time git log > /dev/null
+du -d l -h
+
+git --version
+git config
+git config user.name
+
+
+# Add a directory to a repository
+$ git init
+
+# Add all your files to Git, bwoah!
+$ git add --all
+
+* What's a user token? ==> appears to identify me, combined with the fact I placed my public key on that website
+
+# What Remote sources am I mapped to?
+git remote -v
+
+# Forking / Cloning Code from Github
+git clone git://github.com/stackthatcode/HelloWorld.git
+
+# Adding a Remote source
+$ git remote add origin git@github.com:username/Hello-World.git
+$ git push origin master
+
+# Using Vim
+http://fosswire.com/post/2007/11/ultra-quick-start-in-vim/
+
+# Pushing all changes to staging area
+$ git commit -a
+
+#Add a single file to staging
+$ git add READTHIS.txt
+
+# Commit those changes
+$ git commit
+
+# Diff current changes
+$ git diff
+
+# Diff staged changes
+$ git diff --staged
+ 
+# Good notes on git ignore files
+http://progit.org/book/ch2-2.html
+
+# Removing Files
+$ git rm log/\*.log
+$ git rm \*~
+
+ # Undo changes to file - check out from the repo!
+ $ git checkout README.txt
+ 
+ # Renaming a File
+ $ git mv README.txt README123.txt
+ 
+ # Viewing log with diff
+ $ git log -p
+ 
+ # Viewing last 2 entries
+ $ git log -2
+ 
+ # View log with Stats
+ $ git log --stat
+ 
+# View log with various options
+$ git log --pretty
+$ git log --pretty=format:"%h - %an, %ar : %s"
+ 
+# More log stuff here ==> http://progit.org/book/ch2-3.html
+ 
+ 
+# Fix the last git message
+$ git commit --amend
+
+$ git checkout -- benchmarks.rb
+$ git status
+
+# Identify remote repositories for the current local directory/repo
+$ git remote -v
+
+# Get any new changes
+$ git fetch origin
+
+# Get new changes and merge
+$ git pull
+
+# Push my latest modifications to master
+$ git push origin master
+
+# Get my URL's and stuff for 'origin'
+$ git remote show origin
+
+$ git br -d testing
+
+
+
+# Rename my remote reference
+$ git remote rename pbr pavel
+
+# Remove remote
+$ git remote rm paul
+
+# Show me existing tags
+$ git tag
+$ git tag -l 'v1.4.2.*'
+
+# Whut's in that tag?
+$ git show v1.0
+
+# Tag a specific commit
+$ git log --pretty=oneline
+$ git tag -a v1.2 9fceb02
+
+# Pushing a Tag to the remote
+$ git push origin v1.0
+
+# Sum nice aliasesss
+$ git config --global alias.co checkout
+$ git config --global alias.br branch
+$ git config --global alias.ci commit
+$ git config --global alias.st status
+$ git config --global alias.last 'log -1 HEAD'
+
+# Git last alias command
+$ git last
+
+# Fundamental Git branching theory
+http://progit.org/book/ch3-1.html
+
+# Create a new branch
+$ git branch testing
+$ git checkout testing
+$ git branch
+
+# Merge with the current branch
+$ git merge hotfix
+
+# Delete a branch
+$ git branch -d hotfix
+
+# Who's stuff has not been merged back into current branch?
+$ git branch --no-merge 
+
+# Who's stuff HAS been merged back?
+$ git branch --merge
+
+# Update from the remote
+$ git fetch origin
+
+# Merging changes from remote branch into current branch
+$ git merge origin/master
+
+# Push changes to remote
+$ git push origin master
+
+# Push changes to a different branch on remote
+$ git push origin serverfix:serverfix
+
+# Delete remote branch
+$ git push origin :newfeature
+
+# Git show remote branches
+$ git remote show origin
+
+# Gitting the remote branch to local
+$ git fetch origin
+$ git checkout -b bigfix4 origin/bigfix4
+
+# Delete remote branch
+$ git br -rd origin/bigfix5
+
+# List the heads of remote branches
+$ git ls-remote
+
+# SVN Update, Son!!!
+$ git pull
