@@ -8,7 +8,7 @@ using Pleiades.Commerce.WebUI.Plumbing.Model;
 using Pleiades.Commerce.WebUI.Plumbing.Security;
 using Pleiades.Web.Security.Concrete;
 using Pleiades.Web.Security.Model;
-
+using Pleiades.Commerce.WebUI.Plumbing.ErrorHandling;
 
 namespace Pleiades.Commerce.WebUI
 {
@@ -19,7 +19,7 @@ namespace Pleiades.Commerce.WebUI
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            filters.Add(new CustomErrorAttribute());
         }
 
         public static void RegisterRoutes(RouteCollection routes)
@@ -76,6 +76,7 @@ namespace Pleiades.Commerce.WebUI
 
             // Uncomment to enable Phil Haack's Tool
             // RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
+
         }
 
     }

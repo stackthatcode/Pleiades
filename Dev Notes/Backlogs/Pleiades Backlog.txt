@@ -1,6 +1,16 @@
 Pleiades Administrative Area - TODO
 ===================================
 
+URGENT ==> ** Fix the latest wierd MVC bug on Edit with empty first name **
+
+A DREAM VISION...
+=================
+1.) I have groups of reusable Service, Repository, and Provider objects
+2.) I create a light-weight, simple Controller class each Action which corresponds to a View
+3.) While creating my Views, I link to CSS and JS files using object methods
+4.) Creating links and actions is... brainlessly easy, entirely OO'ed
+5.) Adding controls, 
+
 
 SPECIAL CRITIQUE - THE AJAX FAIL WORLD
 ======================================
@@ -14,9 +24,13 @@ SPECIAL CRITIQUE - THE AJAX FAIL WORLD
 - No real state management - state is implied
 - Debugging these Javascript issues - no call stack, no breakpoint, how to improve?
 
-
 CURRENT WOES/PAINPOINTS
 =======================
+- MVC Postback Controls: how to make building controls terse, yet injectible and reusable
+=> Some way to use the extension methods, but leverage the DI container, somehow
+=> Some way to get the CSS as an embedded resource
+=> Some way to make the CSS names sub-class-able...?
+
 - MEGA: coupling of views to hard-coded CSS structures... how do decouple CSS...?
 - MASSIVE: the must be some way to greatly increase the OOP usage of Routelink and Actionlink's so that it's strongly typed i.e. MakeGotoAdminPageLink()
 - BIG: Master Page brings the CSS style sheets, and yet content pages can't control this...???

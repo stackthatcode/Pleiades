@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using AutoMapper;
 using Pleiades.Commerce.WebUI.Areas.Admin.Models;
 using Pleiades.Commerce.WebUI.Plumbing.Security;
-using Pleiades.Commerce.WebUI.Plumbing.UI.HtmlHelpers;
+using Pleiades.Commerce.WebUI.Plumbing.UI.StandardHtmlHelpers;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Concrete;
 using Pleiades.Web.Security.Model;

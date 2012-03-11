@@ -90,17 +90,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductListModel.cs" />
+    <Compile Include="Plumbing\ErrorHandling\CustomErrorAttribute.cs" />
     <Compile Include="Plumbing\Model\DomainUserBinder.cs" />
     <Compile Include="Plumbing\Security\ConcreteAuthorizeAttribute.cs" />
-    <Compile Include="Plumbing\UI\HtmlHelpers\InlineGridExtension.cs" />
-    <Compile Include="Plumbing\UI\HtmlHelpers\MetadataExtractor.cs" />
-    <Compile Include="Plumbing\UI\HtmlHelpers\StandardPagingLinksExtension.cs" />
-    <Compile Include="Plumbing\UI\HtmlHelpers\StandardRadioButtonExtension.cs" />
-    <Compile Include="Plumbing\UI\HtmlHelpers\StandardButtonExtension.cs" />
-    <Compile Include="Plumbing\UI\HtmlHelpers\TextboxHelper.cs" />
-    <Compile Include="Plumbing\UI\HtmlHelpers\ViewDataKeys.cs" />
+    <Compile Include="Plumbing\UI\StandardHtmlHelpers\PagingLinksBuilder.cs" />
+    <Compile Include="Plumbing\UI\StandardHtmlHelpers\RadioButtonBuilder.cs" />
+    <Compile Include="Plumbing\UI\StandardHtmlHelpers\ButtonBuilder.cs" />
+    <Compile Include="Plumbing\UI\StandardHtmlHelpers\ViewDataKeys.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Plumbing\UI\HtmlHelpers\StandardTextBoxExtension.cs" />
+    <Compile Include="Plumbing\UI\StandardHtmlHelpers\TextBoxBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Account\Logon.aspx" />
