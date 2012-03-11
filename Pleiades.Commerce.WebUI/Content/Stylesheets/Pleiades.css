@@ -1,3 +1,5 @@
+/* General styles stuff i.e. body, header, etc.
+-----------------------------------------------------------*/
 body
 {
     font-size: .85em;
@@ -48,7 +50,6 @@ h1.error
 
 /* Dotted-line
 -----------------------------------------------------------*/
-
 div.dottedline
 {
     border-top:1px dotted #999; 
@@ -77,7 +78,8 @@ textarea
     min-height: 75px;
 }
 
-/** Standard DotNet stuff... not bad, but not used ***/
+/** 
+Standard DotNet stuff... not bad, but not used ***/
 .editor-label 
 {
     margin: 1em 0 0 0;
@@ -137,7 +139,6 @@ table.datagrid td
     padding: 0px;
     margin: 0px;    
 }
-
 
 table.recordgrid tr
 {

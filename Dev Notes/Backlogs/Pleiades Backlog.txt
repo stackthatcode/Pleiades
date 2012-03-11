@@ -1,6 +1,7 @@
 Pleiades Administrative Area - TODO
 ===================================
 
+
 SPECIAL CRITIQUE - THE AJAX FAIL WORLD
 ======================================
 - Large amounts of repetition in the Ajax Grid
@@ -13,8 +14,11 @@ SPECIAL CRITIQUE - THE AJAX FAIL WORLD
 - No real state management - state is implied
 - Debugging these Javascript issues - no call stack, no breakpoint, how to improve?
 
+
 CURRENT WOES/PAINPOINTS
 =======================
+- MEGA: coupling of views to hard-coded CSS structures... how do decouple CSS...?
+- MASSIVE: the must be some way to greatly increase the OOP usage of Routelink and Actionlink's so that it's strongly typed i.e. MakeGotoAdminPageLink()
 - BIG: Master Page brings the CSS style sheets, and yet content pages can't control this...???
 - Organization of CSS file - no real convention, feels ad-hoc.  Same issue with locating scripts and images.  Lacks overall reusability
 - Image mouse over fail on login page - no pre-load
@@ -32,7 +36,9 @@ ACTION ITEMS
 * Leave the Category stuff as Legacy
 * Move scripts into Content
 * Move the Public stuff into its own Area
-
+* Package the Navigation Menu in its own View
+* Start using IIS for development
+* BIG => Redesign the Login Page
 
 
 CURRENT
@@ -71,6 +77,7 @@ LEVEL 2 BACKLOG
 
 Productivity Concerns
 ---------------------
+0.) Need to upgrade CSS knowledge base - badly!
 1.) Learn how to user AutoMapper - it's powerful
 2.) Design interfaces, first!
 3.) Get Adobe Photoshop...?
