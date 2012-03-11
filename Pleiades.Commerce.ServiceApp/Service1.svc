@@ -1,3 +1,0 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" 
-    Service="Pleiades.Commerce.ServiceApp.Service1Enhanced" CodeBehind="Service1.svc.cs"
-    Factory="Pleiades.Commerce.ServiceApp.Service1HostFactory" %>
