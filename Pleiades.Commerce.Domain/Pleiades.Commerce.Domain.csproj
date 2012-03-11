@@ -73,18 +73,7 @@
     <Compile Include="Model\LeftTable.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\SampleProduct.cs" />
-    <Compile Include="Concrete\SampleProductRepository.cs" />
     <Compile Include="Model\Store.cs" />
-    <Compile Include="NHibernateFluent\Mapping\EmployeeMap.cs" />
-    <Compile Include="NHibernateFluent\Mapping\LeftTableMap.cs" />
-    <Compile Include="NHibernateFluent\Mapping\ProductMap.cs" />
-    <Compile Include="NHibernateFluent\Mapping\StoreMap.cs" />
-    <Compile Include="NHibernateFluent\NHManager.cs" />
-    <Compile Include="NHibernateFluent\NHManagerSingleton.cs" />
-    <Compile Include="NHibernate\EnhancedCriteria.cs" />
-    <Compile Include="NHibernate\OpenSessionFactory.cs" />
-    <Compile Include="NHibernate\Transaction.cs" />
-    <Compile Include="NHibernate\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -93,9 +82,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PleiadesWeb.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="NHibernate\Mappings\Product.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pleiades.Utilities\Pleiades.Utilities.csproj">

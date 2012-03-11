@@ -15,14 +15,17 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
     public class AccountController : Controller
     {
         public readonly bool PersistentCookie = true;
-        public IHttpContextUserService AuthService { get; set; }
         public IDomainUserService UserService { get; set; }
+        public IFormsAuthenticationService FormsAuthService { get; set; }
+        public IMembershipService MembershipService { get; set; }
+
 
         // TODO: replace with Dependency Injection
         public AccountController()
         {
-            AuthService = new HttpContextUserService();
+            FormsAuthService = new FormsAuthenticationService();
             UserService = new DomainUserService();
+            MembershipService = new MembershipService();
         }
 
         [HttpGet]
@@ -42,16 +45,16 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
             }
 
             // 2.) Can we validate the User with these credentials?
-            var validateduser = UserService.ValidateUserByEmailAddr(model.UserName, model.Password);
+            var validateduser = this.MembershipService.ValidateUserByEmailAddr(model.UserName, model.Password);
             if (validateduser == null)
             {
-                AuthService.ClearAuthenticationCookie();
+                this.FormsAuthService.ClearAuthenticationCookie();
                 ModelState.AddModelError("", "Failed authentication credentials");
                 return View();
             }
             
             // Success - set the Form Authentication Cookie
-            AuthService.SetAuthCookieForUser(validateduser, this.PersistentCookie);
+            this.FormsAuthService.SetAuthCookieForUser(validateduser, this.PersistentCookie);
             if (returnUrl != null)
                 return Redirect(returnUrl);
             else
@@ -62,7 +65,7 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Logout()
         {
-            AuthService.ClearAuthenticationCookie();
+            FormsAuthService.ClearAuthenticationCookie();
             return new RedirectToRouteResult(
                     new RouteValueDictionary(new { area = "", controller = "Products", action = "List" }));
         }

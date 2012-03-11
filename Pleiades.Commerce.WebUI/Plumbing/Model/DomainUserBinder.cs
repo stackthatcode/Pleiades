@@ -12,13 +12,13 @@ namespace Pleiades.Commerce.WebUI.Plumbing.Model
 {
     public class DomainUserBinder : IModelBinder
     {
-        public IDomainUserService userService { get; set; }
-        public IHttpContextUserService authService { get; set; }
+        public IDomainUserService DomainUserService { get; set; }
+        public IHttpContextUserService HttpContextUserService { get; set; }
 
         public DomainUserBinder()
         {
-            authService = new HttpContextUserService();
-            userService = new DomainUserService();
+            this.HttpContextUserService = new HttpContextUserService();
+            this.DomainUserService = new DomainUserService();
         }
 
         public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
@@ -26,8 +26,7 @@ namespace Pleiades.Commerce.WebUI.Plumbing.Model
             if (bindingContext.Model != null)
                 throw new Exception("Cannot update instances");
 
-            var username = authService.GetUserNameFromContext(controllerContext.HttpContext);
-            var user = userService.RetrieveUserByMembershipUserName(username);
+            var user = HttpContextUserService.RetrieveUserFromHttpContext(controllerContext.HttpContext);
             return user;
         }
     }

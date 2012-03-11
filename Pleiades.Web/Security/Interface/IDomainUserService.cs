@@ -13,6 +13,7 @@ namespace Pleiades.Web.Security.Interface
     /// </summary>
     public interface IDomainUserService
     {
+        void Initialize();
         DomainUser Create(DomainUserCreateRequest newUserRequest, out MembershipCreateStatus createStatus);
         DomainUser RetrieveUserByDomainUserId(int domainUserId);
         DomainUser RetrieveUserByMembershipUserName(string username);

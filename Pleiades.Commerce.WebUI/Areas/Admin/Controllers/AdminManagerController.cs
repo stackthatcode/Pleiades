@@ -29,7 +29,7 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
 
         public AdminManagerController()
         {
-            // TODO: wire the Ninject IoC Plumbing into this, heah!
+            // TODO: wire the Autofac IoC Plumbing into this, heah!
             DomainUserService = new DomainUserService();
             MembershipService = new MembershipService();
         }
@@ -63,22 +63,22 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
 
             // Some way to validate args sent Service en-masse.... like passing a context or something
 
-            var username = this.DomainUserService.GenerateUserName();
             MembershipCreateStatus status;
 
             var newuser = 
                 this.DomainUserService.Create(
-                    username,
-                    createAdminModel.Password,
-                    createAdminModel.Email,
-                    DefaultQuestion,
-                    DefaultAnswer,
-                    createAdminModel.IsApproved,
-                    AccountStatus.Active,
-                    UserRole.Admin,
-                    AccountLevel.Standard,
-                    createAdminModel.FirstName,
-                    createAdminModel.LastName,
+                    new DomainUserCreateRequest
+                    {
+                        Password = createAdminModel.Password,
+                        Email = createAdminModel.Email,
+                        PasswordQuestion = DefaultQuestion,
+                        PasswordAnswer = DefaultAnswer,
+                        AccountStatus = AccountStatus.Active,
+                        UserRole = UserRole.Admin,
+                        AccountLevel = AccountLevel.Standard,
+                        FirstName = createAdminModel.FirstName,
+                        LastName =  createAdminModel.LastName
+                    },
                     out status);
 
             if (status != MembershipCreateStatus.Success)
@@ -118,7 +118,7 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
             // Update Membership stuff
             if (dbDomainUser.UserRole != UserRole.Root)
             {
-                MembershipService.SetUserApproval(dbDomainUser.MembershipUser, userViewModel.IsApproved);
+                MembershipService.SetUserApproval(dbDomainUser, userViewModel.IsApproved);
             }
 
             // Leave Email Disabled for now
@@ -141,7 +141,7 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
                 return View(model);
 
             var user = DomainUserService.RetrieveUserByDomainUserId(id);
-            MembershipService.ChangePassword(user.MembershipUser, model.OldPassword, model.NewPassword);
+            MembershipService.ChangePassword(user, model.OldPassword, model.NewPassword);
 
             return RedirectToAction("Details", new { id = id });
         }
@@ -150,7 +150,7 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
         public ActionResult Reset(int id)
         {
             var user = DomainUserService.RetrieveUserByDomainUserId(id);
-            var newpassword = MembershipService.ResetPassword(user.MembershipUser);
+            var newpassword = this.MembershipService.ResetPassword(user);
 
             return View(
                 new ResetPasswordModel { 
@@ -161,7 +161,7 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
         public ActionResult Unlock(int id)
         {
             var user = DomainUserService.RetrieveUserByDomainUserId(id);
-            MembershipService.UnlockUser(user.MembershipUser);
+            MembershipService.UnlockUser(user);
             return RedirectToAction("Details", new { id = id });
         }
 

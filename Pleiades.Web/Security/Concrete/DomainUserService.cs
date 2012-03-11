@@ -30,20 +30,12 @@ namespace Pleiades.Web.Security.Concrete
 
 
         /// <summary>
-        /// ctor
-        /// </summary>
-        public DomainUserService()
-        {
-            this.Initialize();
-        }
-
-        /// <summary>
         /// Ensures the Root User Account Exists
         /// 
         /// TODO: separate this capability and create a standalone applet that handles this - make it part of 
         /// ... the deployment process
         /// </summary>
-        private void Initialize()
+        public void Initialize()
         {
             // If Root User does not exist, then we have to create it
             var rootUsers = this.RetreiveAll(1, 999, new List<UserRole>() { UserRole.Root });

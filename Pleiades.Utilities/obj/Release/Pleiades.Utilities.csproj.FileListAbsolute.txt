@@ -15,3 +15,20 @@ C:\DEV\Pleiades SRC\Pleiades.Utilities\bin\Release\NHamcrest.pdb
 C:\DEV\Pleiades SRC\Pleiades.Utilities\obj\Release\ResolveAssemblyReference.cache
 C:\DEV\Pleiades SRC\Pleiades.Utilities\obj\Release\Pleiades.Utilities.dll
 C:\DEV\Pleiades SRC\Pleiades.Utilities\obj\Release\Pleiades.Utilities.pdb
+C:\DEV\Pleiades\Pleiades.Utilities\bin\Release\Pleiades.Utilities.dll
+C:\DEV\Pleiades\Pleiades.Utilities\bin\Release\Pleiades.Utilities.pdb
+C:\DEV\Pleiades\Pleiades.Utilities\bin\Release\AutoMapper.dll
+C:\DEV\Pleiades\Pleiades.Utilities\bin\Release\Gallio.dll
+C:\DEV\Pleiades\Pleiades.Utilities\bin\Release\Gallio35.dll
+C:\DEV\Pleiades\Pleiades.Utilities\bin\Release\Gallio40.dll
+C:\DEV\Pleiades\Pleiades.Utilities\bin\Release\MbUnit.dll
+C:\DEV\Pleiades\Pleiades.Utilities\bin\Release\MbUnit35.dll
+C:\DEV\Pleiades\Pleiades.Utilities\bin\Release\MbUnit40.dll
+C:\DEV\Pleiades\Pleiades.Utilities\bin\Release\PagedList.dll
+C:\DEV\Pleiades\Pleiades.Utilities\bin\Release\Rhino.Mocks.dll
+C:\DEV\Pleiades\Pleiades.Utilities\bin\Release\NHamcrest.dll
+C:\DEV\Pleiades\Pleiades.Utilities\bin\Release\Rhino.Mocks.xml
+C:\DEV\Pleiades\Pleiades.Utilities\bin\Release\NHamcrest.pdb
+C:\DEV\Pleiades\Pleiades.Utilities\obj\Release\ResolveAssemblyReference.cache
+C:\DEV\Pleiades\Pleiades.Utilities\obj\Release\Pleiades.Utilities.dll
+C:\DEV\Pleiades\Pleiades.Utilities\obj\Release\Pleiades.Utilities.pdb
