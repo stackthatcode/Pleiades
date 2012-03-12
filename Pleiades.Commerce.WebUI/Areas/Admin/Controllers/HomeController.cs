@@ -17,7 +17,7 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
             return View();
         }
 
-        [HttpGet]
+        // TODO: just removed HttpGet attribute from this - what is *exact* theory behind that failure.  Hmmm???
         public ViewResult HeaderSummary(DomainUser user)
         {
             return View(user);

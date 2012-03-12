@@ -1,7 +1,9 @@
 Pleiades Administrative Area - TODO
 ===================================
 
+
 URGENT ==> ** Fix the latest wierd MVC bug on Edit with empty first name **
+
 
 A DREAM VISION...
 =================
@@ -10,6 +12,9 @@ A DREAM VISION...
 3.) While creating my Views, I link to CSS and JS files using object methods
 4.) Creating links and actions is... brainlessly easy, entirely OO'ed
 5.) Adding controls, 
+
+** ALSO: an Auto Model Trim thingy ** - wire it into ASP.NET MVC
+** HOW ABOUT: strongly typed Redirects?  Yeah man! **
 
 
 SPECIAL CRITIQUE - THE AJAX FAIL WORLD

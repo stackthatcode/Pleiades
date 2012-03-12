@@ -76,8 +76,6 @@ namespace Pleiades.Commerce.WebUI
 
             // Uncomment to enable Phil Haack's Tool
             // RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
-
         }
-
     }
 }

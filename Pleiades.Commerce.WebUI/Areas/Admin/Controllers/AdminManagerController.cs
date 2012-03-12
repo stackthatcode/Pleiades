@@ -122,7 +122,10 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
             }
 
             // Leave Email Disabled for now
-            //membershipservice.ChangeEmailAddress(dbDomainUser.MembershipUser, userViewModel.Email);
+            if (userViewModel.Email != dbDomainUser.MembershipUser.Email)
+            {
+                MembershipService.ChangeEmailAddress(dbDomainUser, userViewModel.Email);
+            }
             
             return RedirectToAction("Details", new { id = id });
         }
