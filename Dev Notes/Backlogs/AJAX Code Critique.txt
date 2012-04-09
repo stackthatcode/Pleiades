@@ -1,0 +1,48 @@
+
+
+TODO => move controls in a separate assembly
+
+
+A DREAM VISION...
+=================
+1.) I have groups of reusable Service, Repository, and Provider objects
+2.) I create a light-weight, simple Controller class each Action which corresponds to a View
+3.) While creating my Views, I link to CSS and JS files using object methods
+4.) Creating links and actions is... brainlessly easy, entirely OO'ed
+5.) Adding controls, 
+
+** ALSO: an Auto Model Trim thingy ** - wire it into ASP.NET MVC
+** HOW ABOUT: strongly typed Redirects?  Yeah man! **
+
+
+SPECIAL CRITIQUE - THE AJAX FAIL WORLD
+======================================
+- Large amounts of repetition in the Ajax Grid
+- Coupling of ASP.NET MVC Controllers and Views to the AJAX front end... pretty poor design IMO
+- BUT WAIT: there are AJAX methods mixed into the Controller
+- BUT WAIT: now MVC Views (which can function dynamically i.e. without compiler safety) can FAIL and bring us down
+- No real, systematic error handling for JQuery failures
+- Horrifically slow
+- Too many implementation details... should be some way to query my service to get standard methods... not unlike COM
+- No real state management - state is implied
+- Debugging these Javascript issues - no call stack, no breakpoint, how to improve?
+
+
+CURRENT WOES/PAINPOINTS
+=======================
+- MVC Postback Controls: how to make building controls terse, yet injectible and reusable
+=> Some way to use the extension methods, but leverage the DI container, somehow
+=> Some way to get the CSS as an embedded resource
+=> Some way to make the CSS names sub-class-able...?
+
+- MEGA: coupling of views to hard-coded CSS structures... how do decouple CSS...?
+- MASSIVE: the must be some way to greatly increase the OOP usage of Routelink and Actionlink's so that it's strongly typed i.e. MakeGotoAdminPageLink()
+- BIG: Master Page brings the CSS style sheets, and yet content pages can't control this...???
+- Organization of CSS file - no real convention, feels ad-hoc.  Same issue with locating scripts and images.  Lacks overall reusability
+- Image mouse over fail on login page - no pre-load
+- With MVC in general - not entirely clear on the validation best practices.  Would prefer to have Domain Objects managing validation, and have MVC be a dumb terminal
+- STill not comfortable with Routelinks, Actionlinks, etc.
+- Arent Scripts technically content?
+- Lack of symmetry with the Admin Area and the default Area
+- Don't know how the various web.config files in sub-directories come into play
+- How safe, secure is Github?  Disaster recovery?  Mirrored?

@@ -1,6 +1,11 @@
 Backlog Burndown
 ================
 
+3/29/2012
+---------
+* JQuery Selectors - half of Chapter 2
+* Two weeks - Crockford book, cover-to-cover
+
 
 3/11/2012
 ---------

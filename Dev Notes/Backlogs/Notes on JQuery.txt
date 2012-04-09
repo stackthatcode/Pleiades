@@ -1,0 +1,115 @@
+Notes on JQuery
+===============
+
+QUERYING STUFF
+~~~~~~~~~~~~~~
+- img[alt] returns all images that have such an attribute
+- Don't use the attributes to set the onclick method
+- Not particulalry crazy about the sibling methods
+- Positional filters - are actually CSS pseudo-classes :first, :last, :first-child, :last-child, :only-child => 1-based indexing
+- :has selector - tr:has(td
+- http://www.w3schools.com/css/css_pseudo_classes.asp
+- E[A], E[A=V], E[A^=V], E[A$=V], E[A!=V] ==> all work with string values in the attribute value
+- :gt(), :lt(), :eq() filter the *matching* elements, not the child elements => zero-based indexing
+- :nth-child() function matches child elements specifically
+- :not(:checked) - pass values to the "function" - :not(selector)
+- :contains works with the element text
+- :not(:parent) => returns all leaf elements
+- :parent => has child elements
+- All images that don't have "dog" in the src attribute
+
+
+WRAPPED-SET OPERATIONS
+~~~~~~~~~~~~~~~~~~~~~~
+- show(), hide(), size()
+- eq(), first(), last() return WRAPPED set 
+- get() => returns NON-wrapped set, get(-1) returns the last element
+- add(selector) - expand the wrapped set
+- Use the "," operator to add elements
+- $('img').not('[title*=puppy]') OR $('img').filter('[title*=puppy]')
+- $('td').filter(function() { return $(this).contains('Ruby') }).addClass('thickBorder');
+- $('img').filter( function() { return this.id==="cozmo" }).addClass('thickBorder');
+- hasClass() returns true or false
+- $('img').slice(2, 3).addClass('thickBorder'); => x = start-element, y = end-element
+- alert($('li').has(':contains(CSS1)').size());
+- $('tr').has('td:contains(Dynamic)').addClass('thickBorder')
+- alert($('img').map(function() { return this.id }).get()); => just like LINQ Select()
+- $('img').each( function(index) { alert(index + " " + this.src); });
+- $([1, 2, 4]).each(function() { alert(this); });
+- $(".myList").children().addClass("thickBorder");
+- $(".myList").next().addClass("thickBorder");
+- $(".myList").prev().addClass("thickBorder");
+- $(".myList").parent().addClass("thickBorder");
+- parents() => travels all the way
+- $("li:not(:has(a))").filter(":not(:has(li))").addClass("thickBorder");
+- $(".myList").closest("div").addClass("thickBorder"); => http://api.jquery.com/closest/
+- $(".myList > li").find("li").addClass("thickBorder"); COMPARE WITH =>  $(".myList > li").filter("li").addClass("thickBorder");
+- $(".myList > li").add("img").end().addClass("thickBorder");
+- $(".myList > li").add("img").andSelf().end().addClass("thickBorder");
+- andSelf() - for what...?
+
+
+** NOTE ** attributes are not limited to this only e.g. value, id, target
+- CROSS BROWSER NORMALIZED LIST OF ATTRIBUTES => cellspacing, colspan, cssFloat, float, for, frameborder, maxlength, readonly, rowspan, styleFloat, tabindex, usemap
+
+
+BRING STUFF TO LIFE
+~~~~~~~~~~~~~~~~~~~
+- $("li").each(function(index) { $(this).click(function() { alert(index); }); });
+- $(".myList > li").cellspacing(20);
+- $("table").attr("cellspacing", 2)
+- $("td:contains(Java)").attr("colspan", 2)
+- $("td:contains(Java)").attr("colspan", function(index, previousValue) { previousValue % 2 + 1 });
+- $("td:contains(Java)").attr("colspan", function(index, previousValue) { return previousValue + 1 });
+- $("td:contains(Java), td:contains(Smalltalk)").attr( { colspan: 2 });
+- $("td:contains(Java), td:contains(Smalltalk)").removeAttr("colspan");
+- $("td:eq(3)").data("myval", "123"); alert($("td:eq(3)").data("myval")); $("td:eq(3)").removeData("myval");
+- $("td:even").addClass("thickBorder"); alert("ready?"); $("td:even").removeClass("thickBorder"); 
+- $("td").click( function(e) { $(this).toggleClass("thickBorder"); alert($(this).attr("className") + "  " + $(this).hasClass("thickBorder")); });
+- $("img:even").css("opacity", "0.5");
+- $("img").width(100).height(100);
+- ALSO: - $("img").width()  and  $("img").height();
+- REMEMBER: innerHeight(), innerWidth() ==> includes padding, excludes border
+- REMEMBER: outerHeight(margin), outerWidth(margin) ==> includes padding and border AND when margin == true, includes margin
+- $(document).scrollTop(200);
+- DON'T FORGET => offset() and position()
+- html() => $("td:contains(Smalltalk)").html($("<span>").text("hi!"));
+- alert($("td:contains(Smalltalk)").html());
+- alert($(".myList").text());
+- $('td').append("<strong>well, hello!</strong>") => operates on the content of the elements.  prepend() TOO
+- $('td').before("<td>well, hello!</td>") => after() as well, addes content as siblings
+- $('td').append($("#littlebear")); => MOVES the actual element
+- $("<td>See now?</td>").appendTo("td");
+- $("td").parent().empty().append($("<td>See now?</td>")); => not what I wanted, but on the way...
+- $("#cozmo").wrap($("<div>").addClass("thickBorder"));
+- $("img").wrapAll($("<div>").addClass("thickBorder"));
+- $("ul").wrapInner($("<div>").addClass("thickBorder"));
+- $("ul").unwrap();
+- $(".thickBorder").remove(); => removes elements
+- $("ul").detach();	=> keeps events and stuff in tact
+- $("td").empty();
+- $("#cozmo").clone().appendTo("td");
+- $('img[alt]').each(function() { $(this).replaceWith($('<span>').attr('alt', $(this).attr('alt'))); }); => this is awesome!
+- $('<h2>I dont have a this pointer</h2>').replaceAll('img[alt]');
+- alert($("input:checkbox").val().length); => val() works best with single values
+- alert($("input:checkbox").map( function() { return $(this).val(); }).toArray()) => HERE'S HOW YOU USE MAP
+- $("input:text").val('hello there');
+- $("input:checkbox").val(['1', '4']);
+
+
+DOUBLE SUBMISSION PROTECTION
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- $("form").submit( function() { $(":submit", this).attr("disabled", "disabled"); });
+
+
+MORE ERRATA
+~~~~~~~~~~~
+- DO THIS => $('img').index($("img#verbena"))
+- DON'T DO THIS => $('img').index("img#verbena") - how did Bear get this wrong...?
+
+
+BEST OF IonesWorks JQUERY
+========================
+table:has(th:contains("Type")) > tbody > tr:nth-child(2) > td:gt(0)
+
+
