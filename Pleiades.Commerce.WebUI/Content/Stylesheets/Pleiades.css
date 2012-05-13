@@ -92,7 +92,7 @@ Standard DotNet stuff... not bad, but not used ***/
 
 
 
-/* Styles for validation helpers
+/* Styles for validation helpers - these names are built-in to the ASP.NET MVC Framework
 -----------------------------------------------------------*/
 .field-validation-error
 {

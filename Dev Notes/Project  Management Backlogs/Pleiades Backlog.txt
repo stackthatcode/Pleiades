@@ -1,0 +1,92 @@
+Pleiades Administrative Area - TODO
+===================================
+
+PRODUCT MANAGEMENT
+==================
+- Project Planning the next Phase for v1.0 - Identify major tasks => IN PROGRESS
+- Identify and Mock-up Major Workflows => IN PROGRESS
+- Review "desine" links => PROGRESS
+- Pleiades Brand + UI Design => TODO
+
+R&D CURRENT
+===========
+- Continue with Review of Pleiades AJAX Grid => IN PROGRESS
+- R&D CSS + Image + Script File Management => IN PROGRESS
+- Find alternative OSS AJAX Grids => IN PROGRESS - NEED WORKFLOWS FIRST, THO
+
+TECHNICAL EXECUTION
+===================
+- Separate the Standard Controls from Pleiades => TODO
+- Create a separate Utilities folder => TODO
+- Isolate Web Test Utilities to their own assembly => TODO
+
+
+
+
+CURRENT KNOWN WORKFLOWS => IN PROGRESS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Admin Login Page
+- Customer Product Browsing et al.
+- Manage Existing Admin User
+- Create New Admin User
+- Category Create/Manage
+- Inventory Create/Manage
+- Order Management/Fulfillment
+- User Password Retreival
+- Customer Support Contact
+
+
+
+
+BACKLOG
+=======
+* Research & Design
+- How to manage CSS files and dependencies from separate assemblies in ASP.NET MVC => TODO
+- http://fluentvalidation.codeplex.com/
+
+* Product Management/Planning
+- Identify All Significant Workflows =>  IN PROGRESS
+
+* New ASP.NET MVC Infrastructure
+- Standard Control Refactoring for CSS
+- Enable Dependency Injection w/ Autofac => TODO NEXT
+- Error Handler Module
+- Logging Module
+- Email Service w/ Links (MSMQ?)
+
+* DESIGN REVISION
+- Pleiades Brand Identity
+- Identify all significant flows
+- Logo, Font, Color Scheme
+- Design Review everything I like => IN PROGRESS
+- Redesign the Login Page
+- Package the Navigation Menu in its own View
+
+* General Code Mods
+- Leave the Category stuff as Legacy
+- Move scripts into Content
+- Move the Public stuff into its own Area
+- Start using IIS for development
+
+* Pleiades Framework
+- Create a separate assembly for Unit Testing Helpers
+- Create generalized Pleiades Pop-up JQuery Library (OK, YES/NO dialogs)
+- Copy jqia2.support.js functions
+- Refine the 
+
+* General Fixes
+- Disable Caching for AJAX stuff => TODO
+
+* Testing/Coverage
+- Change Test Framework to NUnit => TODO
+- Unit Test AuthorizeAttributeBase => TODO
+
+
+
+
+VALUABLE STUFF
+--------------
+http://thenounproject.com/3/ => USE THESE!!!
+http://web-kreation.com/demos/Sliding_login_panel_jquery/#
+http://tympanus.net/Tutorials/SlideDownBoxMenu/
+http://imcreator.com/?utm_source=Codrops&utm_medium=banner&utm_content=round_big&utm_campaign=design_your_website

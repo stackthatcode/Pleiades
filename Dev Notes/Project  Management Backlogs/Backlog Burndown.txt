@@ -1,0 +1,108 @@
+Backlog Burndown
+================
+
+5/12/2012
+---------
+* Fix the rest of the code after major refactoring (mainly namespaces) - DONE
+* Douglas Crockford's Javascript Book - DONE
+* JQuery Book - DONE
+- KNEE DEEP JQuery + AJAX + JSON => Learn JQuery Animation, dude! - DONE
+- JQuery AJAX -> ok, "bind" to the AJAX error - http://docs.jquery.com/Ajax_Events - DONE
+URGENT ==> ** Fix the latest wierd MVC bug on Edit with empty first name ** - DONE (I THINK)
+
+3/29/2012
+---------
+* JQuery Selectors - half of Chapter 2
+* Two weeks - Crockford book, cover-to-cover
+
+
+3/11/2012
+---------
+* Move to GitHub => C:\Users\Aleks\Desktop\MVC+5 SRC\GitHub => DONE
+
+
+3/10/2012
+---------
+* VERY WELL DONE, MUCHACHO!!! - Git that muthafuckin Git!
+* LEARN GIT, SON! => DONE
+- http://progit.org/book/ch3-6.html => DONE
+- Find a decent Git GUI / Branch Visualizer => MSYSGIT IS QUITE NICE
+- Visual Studio Plug-in => Git Extensions => DONE
+
+
+2/27/2012
+---------
+Rollup in tha club n shit, like a muthafuckin G!
+
+SIDE PROJECT - Pleiades.Web.Security
+====================================
+TODO: Add Fixture for creating Test Users and leaving them  => DONE
+TODO: Unit Test HttpContextUserService & AuthorizeAttributeBase => DONE
+TODO: Integration Test Root User, too => DONE!
+
+** Complete Root Admin Project - with Unit Tests, etc. - DONE
+-- 	Must be ROOT to change any membership for Root - DONE
+
+
+2/25/2012
+---------
+PLEIADES SATURDAY PURGE
+=======================
+TODO: Make Root User credentials immutable - DONE
+TODO: Unit Test DomainUserService, esp. Root/Admin Users threshhold AND Touch function => DONE
+
+1.) Removed extract Touch methods
+2.) Massive overhaul of naming
+3.) Decoupled AuthAttr from Http Context User Retrieval methods
+4.) Cleaned and commented numerous Html Helpers
+5.) Created separate FormsAuthenticationService
+6.) Root User code clean-up
+7.) Completed Separation of Membership Service from Domain Service
+
+*** OVERALL => truly refactored and clarified a lot of the SoC, esp. with the Attribute and also made the Integration Tests cleaner.  Seriously good job!!!
+
+
+
+** EMERGENCY - ALEKSJONES.COM => renew domain...! => DONE
+
+1/1/2012
+--------
+Categories Grid Burndown ==> COMPLETE.  PHENOMENAL, MAN -- GOOD JOB!
+** Position Add New Button on Page - DONE
+** Enable JS Event on button via Grid object - DONE
+** Create Controller method - DONE
+** Render the HTML in the Table - DONE
+- BUG - Fix the Paging Issue - FIXED
+- BUG - Empty Description - FIXED
+- JavaScript Named Parmeters - IRRELEVANT
+- Add Animated "highlight" effect on Validate - DONE
+- Add Add button - DONE
+** Add the Mouse On and Mouse Off thingies to Textboxes...? - DONE
+- Highlight newly edited row - DONE
+- Selected Page - DONE
+- The Error Handler - DONE
+- Remove "selected" class from Paging - WHA? DONE
+- Add Empty Layer (click here to add a new one) - DONE
+- Manage Categories Z-Index correction - DONE
+- Add Grid Order By Functions; remembers which column is Order By - DONE
+** Change the Active from True/False to Yes/No - DONE
+- Fixed a Sorting/Paging Bug! - DONE
+
+12/28/2011
+##########
+- Add Delete button, AJAX, Controller code, etc. - DONE
+
+12/27/2011
+@@@@@@@@@@
+
+PLEIADES - AJAX VOLLEY
+----------------------
+- BIGGEST QUESTION - how to Edit Grid without doing it inline...? - ANSWER, DON'T DO THAT - DONE
+- Design the JQuery Edit/Add Panel - DONE
+- Add hidden field with Category ID - DONE
+- Create Div layer with Edit which sends AJAX back to server - DONE
+- Create JQuery effect for updating a table cell inline with highlighting - DONE
+- WHAT DOES THIS DO? <script type="text/javascript"> $(function () { - DONE
+- HOW DOES => JavaScript handle closures...? - DONE
+* Centralized Error Handling - DONE
+

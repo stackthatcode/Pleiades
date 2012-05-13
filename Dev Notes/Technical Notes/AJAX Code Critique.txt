@@ -1,5 +1,4 @@
 
-
 TODO => move controls in a separate assembly
 
 
@@ -26,6 +25,15 @@ SPECIAL CRITIQUE - THE AJAX FAIL WORLD
 - Too many implementation details... should be some way to query my service to get standard methods... not unlike COM
 - No real state management - state is implied
 - Debugging these Javascript issues - no call stack, no breakpoint, how to improve?
+
+
+
+POSTBACK NIGHTMARES
+===================
+- Handling Browser Back Button
+- Handling CSS composition - esp. with Master Pages => maybe establish convention by enforcing a certain Master Page
+=> For correct rendering, my page requires { CSS File, Image Includes }
+- Handling Image references
 
 
 CURRENT WOES/PAINPOINTS

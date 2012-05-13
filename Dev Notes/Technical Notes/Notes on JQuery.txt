@@ -25,7 +25,7 @@ WRAPPED-SET OPERATIONS
 - eq(), first(), last() return WRAPPED set 
 - get() => returns NON-wrapped set, get(-1) returns the last element
 - add(selector) - expand the wrapped set
-- Use the "," operator to add elements
+- $("#child1, #child2") - select multiple elements
 - $('img').not('[title*=puppy]') OR $('img').filter('[title*=puppy]')
 - $('td').filter(function() { return $(this).contains('Ruby') }).addClass('thickBorder');
 - $('img').filter( function() { return this.id==="cozmo" }).addClass('thickBorder');
@@ -47,6 +47,7 @@ WRAPPED-SET OPERATIONS
 - $(".myList > li").add("img").end().addClass("thickBorder");
 - $(".myList > li").add("img").andSelf().end().addClass("thickBorder");
 - andSelf() - for what...?
+- Get me the inner html => .html();
 
 
 ** NOTE ** attributes are not limited to this only e.g. value, id, target
@@ -97,6 +98,49 @@ BRING STUFF TO LIFE
 - $("input:checkbox").val(['1', '4']);
 
 
+EVENTS - IMPORTANT NOTES
+~~~~~~~~~~~~~~~~~~~~~~~~
+- Use bind() and unbind()
+- $("#child1,#child2").bind('click.set1', function(event) { ... });
+- Use "namespaces" for events e.g. ==> $("#child1,#child2").bind('click.set1', function(event) { ... });
+- Use the jquery.Event object for normalized access to properties
+- MVP Functions => preventDefault(), stopPropagation()
+- triggerHandler(...) = good news, brah
+- toggle(...) more  good news
+- $("#child2").bind('mouseover mouseout', function(event) { ... }); == $("#child2").hover()
+
+
+ANIMATING JQUERY
+~~~~~~~~~~~~~~~~
+- $(element).is(":visible"), $(element).is(":hidden")
+- FUCK IT, THIS WORKS, TOO => $(this).closest('div.module').find('div.body')
+- $(this).toggleClass('class name here', $(this).is(':hidden')); => turns it on and off
+- toggle(speed, callback) => speed { normal, slow, fast} OR a number
+- PIMP TIGHT: use implicit rules => div.module div.caption {...} VERSUS div.module.rolledup div.caption {...}
+- Excellent lab! => file:///C:/DEV/JQuery%20Fun/jqia2.source/chapter5/lab.effects.html
+- fadeIn, fadeOut, fadeTo, slideUp, slideDown, slideToggle
+- CRUCIAL: stop(clearQueue, gotoEnd)
+- Use that animate() stuff, bwoah
+- IMPORTANT: add normal functions to the animation queue with queue('fx', function() { ...; $(this).dequeue('fx'); });
+
+GOLD KNOWLEDGE! ==> http://stackoverflow.com/questions/2842432/jquery-position-isnt-returning-offset-relative-to-parent
+
+
+MORE JQUERY UTILITIES => ACTUALLY VERY IMPORTANT
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- trim(), each(), grep() == LINQ Where(), map() == LINQ Select()
+- $.inArray(value, array); 
+- $.merge(array1, array2);
+- I LIKE => var func1 = function() { writeln($.makeArray(arguments));
+- $.extend(target, source1, source2);
+- $.isArray(o), $.isEmptyObject(o), $.isFunction(o), $.isPlainObject(o), $.isXMLDoc(node)
+- $.noop() => OK, BRAH
+- USEFUL => $.contains(container, containee),
+- DATA => $.data(element, name, value); AND $.removeData(element, name);
+- What's up the PROXY, biyatch? => Proxy in JQuery == call/apply in JS
+- $.getScript() is for Pimp-Playas
+
+
 DOUBLE SUBMISSION PROTECTION
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - $("form").submit( function() { $(":submit", this).attr("disabled", "disabled"); });
@@ -111,5 +155,78 @@ MORE ERRATA
 BEST OF IonesWorks JQUERY
 ========================
 table:has(th:contains("Type")) > tbody > tr:nth-child(2) > td:gt(0)
+
+
+PLUG-INS N SHIT
+===============
+- jquery.aleks-1.5.js
+- Nice code for creating options with defaults => PAGE 209
+- options||{} => this expression returns empty object if options is null
+- create a JQuery function:
+
+(function($) {
+	$.say = function(what) { alert('I say ' + what); }
+})(jQuery);
+
+- create a wrapper function:
+
+(function($) {
+	$.fn.makeItBlue = function() {
+		return this.css('color', 'blue');
+	}
+})(jQuery);
+
+- Use end to return the original wrapped set
+
+(function($) {
+	$.fn.setReadOnly = function(readonly) {
+		return this.filter('input:text')
+			.attr('readOnly', readonly)
+			.css('opacity', readonly ? 0.5 : 1.0)
+			.end();
+	};
+})(jQuery);
+
+
+AJAX FOREVER
+============
+- OLD SCHOOL => xhr.open(), xhr.send(), xhr.onreadystatechange()
+- Encoding Request Data as URI => encodeURIComponent => xhr.send('a=1&b=2&c=3'); 
+- USE JQuery => encodeURIComponent() on data values == this is the same thing as a form post, brah.  Old school.
+- TODO RESEARCH => serialize(), serializeArray(), load() => DONE - THIS IS FOR URI ENCODED STUFF
+
+
+NOTES ON JQUERY AJAX METHOD
+===========================
+- dataType => pertains to the Response
+- contentType => pertains to the Request
+- contentType => application/x-www-form-urlencoded == default
+- contentType => application/application/json; charset=utf-8 == JSON, baby!
+- success, error & complete => either success or error is invoked first
+- timeout => you know what!
+- cache => critical on GET's
+
+MOAR TEXTBOOK
+=============
+- Use $.ajaxSetup(...) to set global settings and events
+- Order of Events
+
+ajaxSend
+success
+ajaxSuccess
+error
+ajaxError
+complete
+ajaxComplete
+ajaxStop
+
+- Remember that $.extend merges objects
+- GOOD! => event.PageX and event.PageY are for locating events.
+
+
+AJAX STEPS FORWARD
+==================
+- Re-read Douglas Crockford's Appendix E on JSON & his JSON2 library
+- Examine ASP.NET MVC JsonResult & JsonValueProviderFactory
 
 

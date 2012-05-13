@@ -14,7 +14,7 @@ namespace Pleiades.Commerce.WebUI.Plumbing.UI.StandardHtmlHelpers
         public const string CssClass = "stdtextbox";
 
         /// <summary>
-        /// Creates Standard Text Boxes
+        /// Creates Standard Text Boxes for Postback Forms
         /// 
         /// NOTE: is coupled to the Pleiades.CSS StyleSheet
         /// </summary>

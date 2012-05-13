@@ -1,0 +1,13 @@
+
+A Wee-Bit About View
+--------------------
+<% Html.RenderAction(...) %> ==> Uses Model Binding with a Partial View
+<% Html.RenderPartial(...) %> ==> Pass Model explicitly
+<% Html.Action(...) %> ==> returns a string
+
+Technical Questions
+-------------------
+- RegEx mystery - why do newlines score a hit?
+- What are all of the default prototypes?
+- How can we see the call stack in Javascript?
+- Still need more on call / apply - http://stackoverflow.com/questions/1986896/what-is-the-difference-between-call-and-apply => DONE

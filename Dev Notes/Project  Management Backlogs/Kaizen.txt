@@ -1,0 +1,28 @@
+KAIZEN!
+~~~~~~~
+
+Process Improvement
+-------------------
+- Separate design from coding process -- design interfaces separately
+- Choose an area of focus and improve that area alone
+
+Tools, Libraries, Platforms
+---------------------------
+- Git Tortoise
+- LINQPad
+- ASP.NET MVC 4/4.5
+- Resharper
+- Adobe Photoshop
+
+Skills Focus
+--------------------
+- More Git training
+- Need to upgrade CSS knowledge base - badly!
+- Learn how to use AutoMapper - it's powerful
+- Learn HTML 5
+- http://www.trendsaction.com/product.php?product=The+Secret+of+Selling++~+Anything&ulaCartSID=seiaICHSexmAHeeSRLcmGcYcW1330577506
+
+Cheat Sheets
+------------
+- GOOD: http://cheat.errtheblog.com/s/git
+- TODO: find one for JQuery
