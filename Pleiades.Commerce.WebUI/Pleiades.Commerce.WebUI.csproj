@@ -180,9 +180,9 @@
     <Content Include="Areas\Admin\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pleiades.Commerce.Domain\Pleiades.Commerce.Domain.csproj">
+    <ProjectReference Include="..\Pleiades.Commerce.Domain\Pleiades.Commerce.Domain.Old.csproj">
       <Project>{42A7AC30-5CEC-4B4F-9BA6-0EBBA04962B0}</Project>
-      <Name>Pleiades.Commerce.Domain</Name>
+      <Name>Pleiades.Commerce.Domain.Old</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pleiades.Utilities\Pleiades.Utilities.csproj">
       <Project>{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}</Project>

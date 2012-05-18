@@ -17,7 +17,7 @@ using System.Runtime.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 
-namespace Pleiades.Commerce.Domain.Data
+namespace Pleiades.Commerce.Domain.Old.Data
 {
     #region Contexts
     

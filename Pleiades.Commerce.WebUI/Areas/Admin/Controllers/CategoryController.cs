@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Pleiades.Commerce.Domain.Abstract;
-using Pleiades.Commerce.Domain.Concrete;
-using Pleiades.Commerce.Domain.Model;
+using Pleiades.Commerce.Domain.Old.Abstract;
+using Pleiades.Commerce.Domain.Old.Concrete;
+using Pleiades.Commerce.Domain.Old.Model;
 using Pleiades.Commerce.WebUI.Areas.Admin.Models;
 
 namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers

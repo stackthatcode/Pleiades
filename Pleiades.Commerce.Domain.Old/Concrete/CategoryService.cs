@@ -4,12 +4,12 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using PagedList;
-using Pleiades.Commerce.Domain.Abstract;
-using Pleiades.Commerce.Domain.Data;
-using Pleiades.Commerce.Domain.Model;
+using Pleiades.Commerce.Domain.Old.Abstract;
+using Pleiades.Commerce.Domain.Old.Data;
+using Pleiades.Commerce.Domain.Old.Model;
 using Pleiades.Utilities.General;
 
-namespace Pleiades.Commerce.Domain.Concrete
+namespace Pleiades.Commerce.Domain.Old.Concrete
 {
     public class CategoryService : ICategoryService
     {

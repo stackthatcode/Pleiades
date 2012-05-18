@@ -59,7 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\ICategoryService.cs" />
-    <Compile Include="Abstract\ISampleProductRepository.cs" />
     <Compile Include="Concrete\CategoryService.cs" />
     <Compile Include="Abstract\CategoryServiceSort.cs" />
     <Compile Include="Data\PleiadesWeb.Designer.cs">
@@ -67,13 +66,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PleiadesWeb.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\Category.cs" />
-    <Compile Include="Model\RightTable.cs" />
-    <Compile Include="Model\Employee.cs" />
-    <Compile Include="Model\LeftTable.cs" />
-    <Compile Include="Model\Product.cs" />
-    <Compile Include="Model\SampleProduct.cs" />
-    <Compile Include="Model\Store.cs" />
+    <Compile Include="Model OLD\Category.cs" />
+    <Compile Include="Model OLD\Product.cs" />
+    <Compile Include="Model OLD\Employee.cs" />
+    <Compile Include="Model OLD\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +85,7 @@
       <Name>Pleiades.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

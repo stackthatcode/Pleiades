@@ -67,9 +67,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pleiades.Commerce.Domain\Pleiades.Commerce.Domain.csproj">
+    <ProjectReference Include="..\Pleiades.Commerce.Domain\Pleiades.Commerce.Domain.Old.csproj">
       <Project>{42A7AC30-5CEC-4B4F-9BA6-0EBBA04962B0}</Project>
-      <Name>Pleiades.Commerce.Domain</Name>
+      <Name>Pleiades.Commerce.Domain.Old</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pleiades.Commerce.WebUI\Pleiades.Commerce.WebUI.csproj">
       <Project>{EC92BFF1-A3ED-4A02-B5EC-833E55830967}</Project>

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using PagedList;
-using Pleiades.Commerce.Domain.Model;
+using Pleiades.Commerce.Domain.Old.Model;
 
-namespace Pleiades.Commerce.Domain.Abstract
+namespace Pleiades.Commerce.Domain.Old.Abstract
 {
     public interface ICategoryService
     {

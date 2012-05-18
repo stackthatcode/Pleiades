@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Web.Tests", "Pleia
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Commerce.WebUI", "Pleiades.Commerce.WebUI\Pleiades.Commerce.WebUI.csproj", "{EC92BFF1-A3ED-4A02-B5EC-833E55830967}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Commerce.Domain", "Pleiades.Commerce.Domain\Pleiades.Commerce.Domain.csproj", "{42A7AC30-5CEC-4B4F-9BA6-0EBBA04962B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Commerce.Domain.Old", "Pleiades.Commerce.Domain\Pleiades.Commerce.Domain.Old.csproj", "{42A7AC30-5CEC-4B4F-9BA6-0EBBA04962B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Commerce.Domain.Tests", "Pleiades.Commerce.Tests\Pleiades.Commerce.Domain.Tests.csproj", "{8E13AFCD-A334-4319-809F-1BB420F7C657}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Commerce.WebUI.Tests", "Pleiades.Commerce.WebUI.Tests\Pleiades.Commerce.WebUI.Tests.csproj", "{2046AE83-482A-40B5-B6D8-E3D855111CC4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Ajax.Test", "Pleiades.Ajax.Test\Pleiades.Ajax.Test.csproj", "{DECFABC6-517A-4790-94EB-1A16A9243F96}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{EB60AF86-B610-404D-BB62-4C50C1CB96C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
