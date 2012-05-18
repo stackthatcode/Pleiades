@@ -1,18 +1,30 @@
 Pleiades Administrative Area - TODO
 ===================================
 
+STACK OVERFLOW
+==============
+- Best practices for CSS, Images, Javascript, ASP.NET MVC and especially HTML Helpers
+
+
 PRODUCT MANAGEMENT
 ==================
-- Project Planning the next Phase for v1.0 - Identify major tasks => IN PROGRESS
 - Identify and Mock-up Major Workflows => IN PROGRESS
+* Find a bunch of good E-Commerce Sites, bookmark and critique => IN PROGRESS
+* Develop a Product specification => URGENT
+
+http://37signals.com/37searchreport.pdf
+
+- Project Planning the next Phase for v1.0 - Identify major tasks => IN PROGRESS
+
 - Review "desine" links => PROGRESS
-- Pleiades Brand + UI Design => TODO
+* Pleiades Brand + UI Design => TODO
 
 R&D CURRENT
 ===========
 - Continue with Review of Pleiades AJAX Grid => IN PROGRESS
 - R&D CSS + Image + Script File Management => IN PROGRESS
 - Find alternative OSS AJAX Grids => IN PROGRESS - NEED WORKFLOWS FIRST, THO
+- TODO: create an identity to penetrate social networks
 
 TECHNICAL EXECUTION
 ===================
@@ -20,7 +32,10 @@ TECHNICAL EXECUTION
 - Create a separate Utilities folder => TODO
 - Isolate Web Test Utilities to their own assembly => TODO
 
-
+IDEAS
+=====
+- Need to create a Cache which can be incrementally modified - IncrementalCache => TODO
+- Maybe create a CacheEnvelope which contains the object PLUS a dirty bit.  How to abstract caching? => TODO
 
 
 CURRENT KNOWN WORKFLOWS => IN PROGRESS
@@ -69,6 +84,7 @@ BACKLOG
 - Start using IIS for development
 
 * Pleiades Framework
+- Isolate the Entity Framework stuff from the Membership Provider
 - Create a separate assembly for Unit Testing Helpers
 - Create generalized Pleiades Pop-up JQuery Library (OK, YES/NO dialogs)
 - Copy jqia2.support.js functions

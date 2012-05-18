@@ -1,0 +1,140 @@
+GENERAL FLOW
+============
+
+- No mouseover images for buttons - other than CSS properties.  PERIOD.  No reason to solve that problem.
+- TODO: review JQuery metro skin
+
+- Engage with the Customer via a survey ala http://www.cannonsafe.com/survey/
+- Nice: padding:5px on select fields 
+
+- STRATEGY: vacuum the content off of fightshop.com and use it as proxies
+
+- How best to manage Admin Navigation?
+- What is the most expedient way to enable Admin browsing of Products?
+- How can colors, and features of the object be managed...?  What does that back-end look like?
+- Can we manually edit Navigation Links?  Or, are they configured with the IoC container?
+
+
+
+
+FIGHT SHOP CRITIQUE
+===================
+1.) Pretty damn amazing, overall - nice delivery
+2.) The same Product is not supported in different colors
+3.) https://www.fightshop.com/customer/account/create/ Simple and Effective
+
+
+SEARCHING ON SITES
+==================
+- http://www.jafrum.com/s.nl?search=agv => can't even search by Women's and Men's
+
+
+
+
+Object Storm
+============
+- Product Object
+* Name
+* Rich Text Description
+* Categories => searchable
+* Keywords/Tags => searchable
+* Optional Brand Tag => searchable
+* SKU Number
+* Suggested Price
+* Is Visible
+
+- Offer Object
+* Reference a Product
+* Time Limit
+* Navigation Link to an Offer Page
+
+- Product Search Object
+
+- Product Search Results Object
+
+
+
+Admin Screens
+~~~~~~~~~~~~~
+- Admin Manage Product 
+* Information
+* Categories
+* Tags
+* Images
+
+- Admin Manage Inventory
+* View List of Products by Category, Tag, Brand
+
+- Admin Manage Categories
+
+- Admin Manage Product Tags
+
+- Admin Order Processing
+* Pending Orders
+* Shipped Orders
+* Closed Orders
+* Damaged Orders
+
+- Admin Refund Processing
+
+- Admin Manage Admin Users
+* etc. etc.
+
+- Admin User Password Reset Tracking
+
+- Admin List Customers
+* View Order History
+* View Login History
+
+
+CONTENT
+=======
+- About Us Page
+- Service Page
+- Terms and Conditions Page
+- News Page
+- Survey Form
+- FAQ
+- Shipping Terms
+
+- Contact Us Form
+- Live Chat Widget
+
+- Keyword for Searching Product
+- Anonymous User Action (how?)
+
+- My Shopping Cart
+- Customer Login Page
+- Customer Password Recovery
+
+- Checkout Page
+- Order Review Page
+- Who Are You?  Name, Email, Password
+- Payment Information Page
+- Payment Gateway Service
+- Thank You Page
+
+- Multi-step Process Flow
+- Shipping Information Page
+- Email Link Generator Service
+- Caching Service
+
+- Shopping Cart Service
+- Inventory
+- Image Upload Admin Page
+- Async Image Upload and Filter
+- Strongly-Typed Navigation
+
+- Product Landing Page
+- Category Landing Page
+- Store Landing Page
+- Mailing List Squeeze Page
+
+- Product Search Page (???)
+- Product Listing Widget
+- Product Detail w/ Rich Text
+- Link to Product
+- Link to Category
+
+- Analytics Tracker - Anonymous and Otherwise
+
