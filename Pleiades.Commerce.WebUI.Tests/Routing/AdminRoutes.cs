@@ -9,8 +9,8 @@ using Gallio.Framework;
 using MbUnit.Framework;
 using Rhino.Mocks;
 using Pleiades.Commerce.WebUI;
-using Pleiades.Utilities.TestHelpers.General;
-using Pleiades.Utilities.TestHelpers.Web;
+using Pleiades.Framework.TestHelpers;
+using Pleiades.Framework.TestHelpers.Web;
 
 namespace Pleiades.Commerce.WebUI.TestsRouting
 {

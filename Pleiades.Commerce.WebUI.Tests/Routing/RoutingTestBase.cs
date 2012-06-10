@@ -9,7 +9,7 @@ using Gallio.Framework;
 using MbUnit.Framework;
 using Pleiades.Commerce.WebUI;
 using Pleiades.Commerce.WebUI.Areas.Admin;
-using Pleiades.Utilities.TestHelpers.Web;
+using Pleiades.Framework.TestHelpers.Web;
 
 namespace Pleiades.Commerce.WebUI.TestsRouting
 {

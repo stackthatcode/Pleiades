@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AutoMapper;
-using Pleiades.Utilities.General;
+using Pleiades.Framework.Helpers;
 
-namespace Pleiades.Web.Security.Model
+namespace Pleiades.Framework.Web.Security.Model
 {
+    /// <summary>
+    /// This probably belongs in the Domain assembly, as it's very context specific for security stuffs 
+    /// </summary>
     public class DomainUserCondensed
     {
         // Membership

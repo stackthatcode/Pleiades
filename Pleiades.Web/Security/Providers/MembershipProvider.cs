@@ -172,8 +172,10 @@ namespace Pleiades.Web.Security.Providers
         public override void Initialize(string name, NameValueCollection config)
         {
             // Initialize values from web.config.
-            if (config == null) 
+            if (config == null)
+            {
                 throw new ArgumentNullException("config");
+            }
 
             if (String.IsNullOrEmpty(name))
             {
@@ -218,8 +220,7 @@ namespace Pleiades.Web.Security.Providers
             }
 
             // Initialize SqlConnection.
-            ConnectionStringSettings ConnectionStringSettings = 
-                    ConfigurationManager.ConnectionStrings[config["connectionStringName"]];
+            var ConnectionStringSettings = ConfigurationManager.ConnectionStrings[config["connectionStringName"]];
 
             if (ConnectionStringSettings == null || ConnectionStringSettings.ConnectionString.Trim() == "")
             {
@@ -240,8 +241,10 @@ namespace Pleiades.Web.Security.Providers
             }
 
             if (machineKey.ValidationKey.Contains("AutoGenerate"))
-                if (PasswordFormat != MembershipPasswordFormat.Clear) 
+            {
+                if (PasswordFormat != MembershipPasswordFormat.Clear)
                     throw new ProviderException("Hashed or Encrypted passwords are not supported with auto-generated keys.");
+            }
         }
 
         /// <summary>
@@ -384,10 +387,15 @@ namespace Pleiades.Web.Security.Providers
         /// <param name="answer">The password answer for the user.</param>
         public override string GetPassword(string username, string answer)
         {
-            if (!EnablePasswordRetrieval) 
+            if (!EnablePasswordRetrieval)
+            {
                 throw new ProviderException("Password Retrieval Not Enabled.");
-            if (PasswordFormat == MembershipPasswordFormat.Hashed) 
+            }
+
+            if (PasswordFormat == MembershipPasswordFormat.Hashed)
+            {
                 throw new ProviderException("Cannot retrieve Hashed passwords.");
+            }
 
             string password = string.Empty;
             PleiadesDB context = new PleiadesDB(ConnectionString);

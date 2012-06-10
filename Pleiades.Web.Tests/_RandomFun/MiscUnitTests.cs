@@ -5,8 +5,8 @@ using System.Linq.Expressions;
 using System.Web.Mvc;
 using Gallio.Framework;
 using MbUnit.Framework;
-using Pleiades.Web.Security.Model;
-using Pleiades.Web.Common.MvcHelpers;
+using Pleiades.Framework.Web.Security.Model;
+using Pleiades.Web.MvcHelpers;
 
 namespace Pleiades.Web.Tests.RandomFun
 {

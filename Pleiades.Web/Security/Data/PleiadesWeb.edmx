@@ -257,16 +257,16 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="PleiadesWeb" ZoomLevel="81">
+      <Diagram Name="PleiadesWeb" ZoomLevel="106">
         <EntityTypeShape EntityType="PleiadesDBModel.AccountStatus" Width="2.5" PointX="10.75" PointY="0.75" Height="1.59568359375" />
         <EntityTypeShape EntityType="PleiadesDBModel.DomainUser" Width="2.125" PointX="14.75" PointY="0.875" Height="3.1340950520833335" />
-        <EntityTypeShape EntityType="PleiadesDBModel.User" Width="2.5" PointX="10.75" PointY="2.75" Height="5.2494108072916674" />
+        <EntityTypeShape EntityType="PleiadesDBModel.User" Width="3.25" PointX="10.75" PointY="2.75" Height="5.2494108072916674" />
         <AssociationConnector Association="PleiadesDBModel.FK_system_User_system_AccountStatus" >
           <ConnectorPoint PointX="13.25" PointY="1.610341796875" />
           <ConnectorPoint PointX="14.75" PointY="1.610341796875" />
         </AssociationConnector>
         <AssociationConnector Association="PleiadesDBModel.FK_domain_User_membership_User" >
-          <ConnectorPoint PointX="13.25" PointY="3.3795475260416667" />
+          <ConnectorPoint PointX="14" PointY="3.3795475260416667" />
           <ConnectorPoint PointX="14.75" PointY="3.3795475260416667" />
         </AssociationConnector>
       </Diagram>

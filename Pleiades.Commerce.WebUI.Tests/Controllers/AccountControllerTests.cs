@@ -11,10 +11,10 @@ using Rhino.Mocks;
 using Pleiades.Commerce.WebUI;
 using Pleiades.Commerce.WebUI.Areas.Admin.Controllers;
 using Pleiades.Commerce.WebUI.Areas.Admin.Models;
-using Pleiades.Utilities.TestHelpers.General;
-using Pleiades.Utilities.TestHelpers.Web;
-using Pleiades.Web.Security.Interface;
-using Pleiades.Web.Security.Model;
+using Pleiades.Framework.TestHelpers;
+using Pleiades.Framework.TestHelpers.Web;
+using Pleiades.Framework.Web.Security.Interface;
+using Pleiades.Framework.Web.Security.Model;
 
 namespace Pleiades.Commerce.WebUI.TestsControllers
 {

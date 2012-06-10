@@ -180,17 +180,17 @@
     <Content Include="Areas\Admin\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pleiades.Commerce.Domain\Pleiades.Commerce.Domain.Old.csproj">
+    <ProjectReference Include="..\Pleiades.Commerce.Domain.Old\Pleiades.Commerce.Domain.Old.csproj">
       <Project>{42A7AC30-5CEC-4B4F-9BA6-0EBBA04962B0}</Project>
       <Name>Pleiades.Commerce.Domain.Old</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Utilities\Pleiades.Utilities.csproj">
+    <ProjectReference Include="..\Pleiades.Utilities\Pleiades.Framework.TestHelpers.csproj">
       <Project>{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}</Project>
-      <Name>Pleiades.Utilities</Name>
+      <Name>Pleiades.Framework.TestHelpers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Web\Pleiades.Web.csproj">
+    <ProjectReference Include="..\Pleiades.Web\Pleiades.Framework.Web.csproj">
       <Project>{804F063C-505F-441E-B205-688C42E637AD}</Project>
-      <Name>Pleiades.Web</Name>
+      <Name>Pleiades.Framework.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

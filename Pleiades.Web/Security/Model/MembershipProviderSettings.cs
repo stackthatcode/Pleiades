@@ -7,7 +7,7 @@ using System.Web.Security;
 namespace Pleiades.Web.Security
 {
     /// <summary>
-    /// Provides an envelope for storing ASP.NET MembershipProvider settings - apart from static class properties
+    /// Isolates Membership Provider Settings to a separate object
     /// </summary>
 	public class MembershipProviderSettings
 	{

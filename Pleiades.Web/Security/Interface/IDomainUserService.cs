@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Security;
-using Pleiades.Web.Security.Model;
-using PagedList;
+using Pleiades.Framework.Data;
+using Pleiades.Framework.Web.Security.Model;
 
-namespace Pleiades.Web.Security.Interface
+namespace Pleiades.Framework.Web.Security.Interface
 {
     /// <summary>
     /// Contains all CRUD operations for managing Domain Users
@@ -18,8 +18,8 @@ namespace Pleiades.Web.Security.Interface
         DomainUser RetrieveUserByDomainUserId(int domainUserId);
         DomainUser RetrieveUserByMembershipUserName(string username);
         DomainUser RetrieveUserByEmail(string emailaddr);
-        IPagedList<DomainUserCondensed> RetreiveAll(int pageNumber, int pageSize, List<UserRole> role);
-        IPagedList<DomainUserCondensed> RetreiveByLikeEmail(
+        IPagedModel<DomainUserCondensed> RetreiveAll(int pageNumber, int pageSize, List<UserRole> role);
+        IPagedModel<DomainUserCondensed> RetreiveByLikeEmail(
             string emailAddressToMatch, int pageNumber, int pageSize, List<UserRole> role);
         int RetrieveTotalUsers();
         void Update(DomainUser user);

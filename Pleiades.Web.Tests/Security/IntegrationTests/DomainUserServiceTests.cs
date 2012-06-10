@@ -6,9 +6,9 @@ using System.Web.Security;
 using Gallio.Framework;
 using MbUnit.Framework;
 using PagedList;
-using Pleiades.Utilities.General;
-using Pleiades.Web.Security.Model;
-using Pleiades.Web.Security.Concrete;
+using Pleiades.Framework.Helpers;
+using Pleiades.Framework.Web.Security.Model;
+using Pleiades.Framework.Web.Security.Concrete;
 
 namespace Pleiades.Web.Tests.Security.IntegrationTests
 {

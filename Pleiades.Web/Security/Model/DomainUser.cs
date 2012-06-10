@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Security;
 
-namespace Pleiades.Web.Security.Model
+namespace Pleiades.Framework.Web.Security.Model
 {
     /// <summary>
     /// Root Aggregate for Domain & Membership User objects
@@ -25,8 +25,8 @@ namespace Pleiades.Web.Security.Model
         public string LastName { get; set; }
 
         // Other
-        public DateTime CreationDate { get; set; }
         public DateTime LastModified { get; set; }
+        public DateTime CreationDate { get; set; }
 
 
         public DomainUser()

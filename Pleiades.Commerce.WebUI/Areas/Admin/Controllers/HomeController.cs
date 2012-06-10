@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Pleiades.Commerce.WebUI.Plumbing.Security;
-using Pleiades.Web.Security.Model;
+using Pleiades.Framework.Web.Security.Model;
 
 namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
 {

@@ -7,7 +7,7 @@ using PagedList;
 using Pleiades.Commerce.Domain.Old.Abstract;
 using Pleiades.Commerce.Domain.Old.Data;
 using Pleiades.Commerce.Domain.Old.Model;
-using Pleiades.Utilities.General;
+using Pleiades.Framework.Helpers;
 
 namespace Pleiades.Commerce.Domain.Old.Concrete
 {

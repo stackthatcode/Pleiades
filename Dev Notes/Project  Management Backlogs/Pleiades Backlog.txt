@@ -1,9 +1,18 @@
 Pleiades Administrative Area - TODO
 ===================================
 
-STACK OVERFLOW
-==============
+STACK OVERFLOW QUESTIONS
+========================
 - Best practices for CSS, Images, Javascript, ASP.NET MVC and especially HTML Helpers
+- http://ace.ajax.org/build/kitchen-sink.html
+- How do you handle lazy-loading with EntityFramework?
+- How do you manage POCOs, database indexes, etc. with EF?
+
+GIT QUESTIONS
+=============
+- How do you get a complete snapshot of a certain Revision in Git...? => IN PROGRESS
+- How do you move files/directories with Git? => IN PROGRESS
+
 
 
 PRODUCT MANAGEMENT
@@ -15,7 +24,6 @@ PRODUCT MANAGEMENT
 http://37signals.com/37searchreport.pdf
 
 - Project Planning the next Phase for v1.0 - Identify major tasks => IN PROGRESS
-
 - Review "desine" links => PROGRESS
 * Pleiades Brand + UI Design => TODO
 

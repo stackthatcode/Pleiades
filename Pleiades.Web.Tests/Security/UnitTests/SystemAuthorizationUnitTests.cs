@@ -6,11 +6,11 @@ using System.Web.Security;
 using Gallio.Framework;
 using MbUnit.Framework;
 using Rhino.Mocks;
-using Pleiades.Web.Security.Interface;
-using Pleiades.Web.Security.Model;
-using Pleiades.Web.Security.Concrete;
-using Pleiades.Utilities.TestHelpers.General;
-using Pleiades.Utilities.TestHelpers.Web;
+using Pleiades.Framework.Web.Security.Interface;
+using Pleiades.Framework.Web.Security.Model;
+using Pleiades.Framework.Web.Security.Concrete;
+using Pleiades.Framework.TestHelpers;
+using Pleiades.Framework.TestHelpers.Web;
 
 namespace Pleiades.Web.Tests.SecurityUnitTests
 {

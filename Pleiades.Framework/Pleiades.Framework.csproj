@@ -31,31 +31,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper">
-      <HintPath>..\packages\AutoMapper.2.1.267\lib\net40\AutoMapper.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\AutoMapper.cs" />
+    <Compile Include="Data\IPagedModel.cs" />
+    <Compile Include="Data\IUnitOfWork.cs" />
+    <Compile Include="Data\QueryablePagedModel.cs" />
     <Compile Include="Helpers\EnumHelpers.cs" />
-    <Compile Include="Helpers\GenericExtensions.cs" />
+    <Compile Include="Helpers\ParsingExtensions.cs" />
     <Compile Include="Helpers\Linq.cs" />
-    <Compile Include="Helpers\Paging.cs" />
-    <Compile Include="Helpers\Random.cs" />
+    <Compile Include="Data\Paging.cs" />
+    <Compile Include="Helpers\RandomStringGenerator.cs" />
     <Compile Include="Helpers\Reflection.cs" />
+    <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Helpers\StringWriterWithEncoding.cs" />
     <Compile Include="Data\IGenericRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Security;
-using Pleiades.Web.Security.Concrete;
-using Pleiades.Web.Security.Model;
+using Pleiades.Framework.Web.Security.Concrete;
+using Pleiades.Framework.Web.Security.Model;
 using Gallio.Framework;
 using MbUnit.Framework;
-using Pleiades.Utilities.General;
+using Pleiades.Framework.Helpers;
 
 namespace Pleiades.Web.Tests.Security.IntegrationTests
 {

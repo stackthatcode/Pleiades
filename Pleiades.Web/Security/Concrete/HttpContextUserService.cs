@@ -5,10 +5,10 @@ using System.Text;
 using System.Web;
 using System.Web.Security;
 using System.Security.Principal;
-using Pleiades.Web.Security.Interface;
-using Pleiades.Web.Security.Model;
+using Pleiades.Framework.Web.Security.Interface;
+using Pleiades.Framework.Web.Security.Model;
 
-namespace Pleiades.Web.Security.Concrete
+namespace Pleiades.Framework.Web.Security.Concrete
 {
     /// <summary>
     /// Acts as intermediary between HttpContext and DomainUserService.  

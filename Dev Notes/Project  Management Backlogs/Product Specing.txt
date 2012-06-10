@@ -1,9 +1,108 @@
+6/3/2012
+========
+- What do we call the Assembly that contains all the Concrete Repositorys, Services, Mediators, Providers, and worker classes that do thing...?
+
+
+
+5/30/2012
+=========
+
+COMPETITIVE ANALYSIS
+--------------------
+- http://www.fightersmarket.com => Volusion site - pretty nice
+- http://www.riofightwear.com/ => Another Volusion site - done poorly
+
+
+
+PRODUCT/TAXONOMY UI
+===================
+- Home Page 
+* You have 589 Products
+* Of those, 13 are not classified => This hurts, man
+
+
+PRODUCT object spec
+-------------------
+- ID
+- Name
+- Description
+- Product Type => boom! Already building a taxonomy
+- Product Sub Type => yup!
+- Gender
+- Brand
+- Features
+
+
+
+
+TAXONOMY Edge Cases / Problems to Solve
+---------------------------------------
+- Create a new Product for a Taxonomy which doesn't exist => workflow issue
+- Delete a Taxonomy => what happens to "orphaned" Products? => workflow issue
+- How do we manage multiple Taxonomies...?  What does that workflow look like? => workflow
+- Starting with a clean slate...? => workflow issue
+- How to prevent users from misplacing items in the taxonomy? => scope - or usability
+- What do we call the Taxonomy? => Classification...?
+
+What falls in a Taxonomy?
+-------------------------
+- Gender (or not)
+- Clothing Type
+- 
+
+TAXONOMY ENGINEERING
+--------------------
+- AHA!  Taxonomy could be based entirely on Product Properties!!!
+
+
+Taxonomy User Stories
+---------------------
+- Customer marches from the Root to a Leaf e.g.: All => Jiu Jitsu Gear => Atama
+- Customer says: Let me find all Atama gear (shirts, sandals, gi's, etc.)
+- Customer says: I want to go to the women's section of the store, then look at Atama stuff.  Hmmm...?
+
+
+5/29/2012
+=========
+
+FINAL SPECIFICATION
+*******************
+- Use MMA/fighting-gear for the beta product
+- Bounded Context => representation of Product decoupled from searchability
+- Products are classified using a Taxonomy
+
+
+REUSABLE DATA ENTRY - THE ETERNAL PROBLEM
+=========================================
+- How do we organize features into reusable groups...?
+- The workflow may enable one to enter features as desired, and they provide suggestions for
+- You can NOT add features unless they're in the catalog of features => restrictive and unwieldy
+- There is NO reusability of features => OK, now people can find stuff any old willy nilly way...
+- Without reusability, the Admin is likely to repeat themselves, esp. when they have a high volume of products...
+- Same problem as real estate, moving company, export company, etc. etc.
+
+
+Best Fit Solution
+-----------------
+- Make creation of the taxonomy as painless as humanly possible.
+- Enable Admins to create and assign Products to one-to-many Taxonomies.
+
+
+UX: How do Customers find the Products?
+---------------------------------------
+- Click thru a Landing Page, or a Featured Offer
+- Taxonomy FIRST
+- Product Keyword Search => search by tags, which also contain elements of the taxonomy
+
+
 ALL ABOUT PRODUCTS
 ==================
 - Can a Product belong to more than one Category?  It appears that Fight Shop supports multiple categories... (FOLLOW-UP: no, it does not)
 - Are Categories a Taxonomy?  I think that they are.  How to make Taxonomies searchable?
 - How do major things like Color influence the search?  How are Colors abstracted?
 - What happens when two items are next to each other and don't possess the same searchable traits?  Context?  Or this too abstract?
+
+
 
 5/16/2012
 =========
@@ -54,23 +153,11 @@ INPUT: Mens > Shirts > Polo > Izod
 - Exact Filter UTN Polos => prune Resultset
 - Exact Filter UTN Izod => prune Resultset
 
-Search Case #2 - Keyword Search
-===============================
-
-
-
-=> QUESTION: how to 
-=> 
-
-
 Tag Object
 ==========
 - UniversalTagName  e.g.: Shirts
 - List<string> ExactMatchName e.g.: Shirts
 - List<string> Mispellings e.g.: Shurt, sirts
-
-
-
 
 Tag Serialization Process
 =========================

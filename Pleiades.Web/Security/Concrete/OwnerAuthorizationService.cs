@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Pleiades.Web.Security.Interface;
-using Pleiades.Web.Security.Model;
+using Pleiades.Framework.Web.Security.Interface;
+using Pleiades.Framework.Web.Security.Model;
 
-namespace Pleiades.Web.Security.Concrete
+namespace Pleiades.Framework.Web.Security.Concrete
 {
     public class OwnerAuthorizationService : IOwnerAuthorizationService
     {

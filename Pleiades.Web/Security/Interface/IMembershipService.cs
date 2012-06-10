@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Pleiades.Web.Security.Model;
+using Pleiades.Framework.Web.Security.Model;
 
-namespace Pleiades.Web.Security.Interface
+namespace Pleiades.Framework.Web.Security.Interface
 {
     /// <summary>
     /// Contains all Membership Provider-related operations for managing Domain Users

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
-using Pleiades.Web.Common.PagedModel;
+using Pleiades.Web.Common.Paging;
 using PagedList;
 
 namespace Pleiades.Commerce.WebUI.Plumbing.UI.StandardHtmlHelpers

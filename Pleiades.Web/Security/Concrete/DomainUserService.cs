@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Web.Security;
 using PagedList;
-using Pleiades.Web.Security.Interface;
+using Pleiades.Framework.Web.Security.Interface;
 using Pleiades.Web.Security.Data;
-using Pleiades.Web.Security.Model;
-using Pleiades.Utilities.General;
+using Pleiades.Framework.Web.Security.Model;
+using Pleiades.Framework.Helpers;
 using AutoMapper;
 
-namespace Pleiades.Web.Security.Concrete
+namespace Pleiades.Framework.Web.Security.Concrete
 {
     /// <summary>
     /// Core Domain User Service

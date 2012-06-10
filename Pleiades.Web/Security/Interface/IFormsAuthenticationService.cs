@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Web.Security;
-using Pleiades.Web.Security.Interface;
-using Pleiades.Web.Security.Model;
+using Pleiades.Framework.Web.Security.Model;
 
-namespace Pleiades.Web.Security.Interface
+namespace Pleiades.Framework.Web.Security.Interface
 {
     public interface IFormsAuthenticationService
     {

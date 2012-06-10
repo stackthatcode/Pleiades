@@ -32,8 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gallio" />
-    <Reference Include="MbUnit" />
+    <Reference Include="nunit.framework, Version=2.6.0.12035, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList, Version=1.1.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\PagedList.dll</HintPath>
@@ -49,8 +51,6 @@
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
-    <Reference Include="Gallio35" />
-    <Reference Include="MbUnit35" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -62,31 +62,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="_RandomStuff\Fixture1.cs" />
-    <Compile Include="_RandomStuff\SampleObjects\ClassA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pleiades.Commerce.Domain\Pleiades.Commerce.Domain.Old.csproj">
-      <Project>{42A7AC30-5CEC-4B4F-9BA6-0EBBA04962B0}</Project>
-      <Name>Pleiades.Commerce.Domain.Old</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Commerce.WebUI\Pleiades.Commerce.WebUI.csproj">
       <Project>{EC92BFF1-A3ED-4A02-B5EC-833E55830967}</Project>
       <Name>Pleiades.Commerce.WebUI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Utilities\Pleiades.Utilities.csproj">
+    <ProjectReference Include="..\Pleiades.Utilities\Pleiades.Framework.TestHelpers.csproj">
       <Project>{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}</Project>
-      <Name>Pleiades.Utilities</Name>
+      <Name>Pleiades.Framework.TestHelpers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Web\Pleiades.Web.csproj">
+    <ProjectReference Include="..\Pleiades.Web\Pleiades.Framework.Web.csproj">
       <Project>{804F063C-505F-441E-B205-688C42E637AD}</Project>
-      <Name>Pleiades.Web</Name>
+      <Name>Pleiades.Framework.Web</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Domain\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

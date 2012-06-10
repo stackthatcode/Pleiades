@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Pleiades.Utilities.General;
-using Pleiades.Web.Security.Model;
+using Pleiades.Framework.Helpers;
+using Pleiades.Framework.Web.Security.Model;
 
 namespace Pleiades.Commerce.WebUI.Areas.Admin.Models
 {

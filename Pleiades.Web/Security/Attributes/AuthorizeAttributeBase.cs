@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
-using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using Pleiades.Web.Security.Interface;
-using Pleiades.Web.Security.Model;
-using Pleiades.Web.Security.Concrete;
+using Pleiades.Framework.Web.Security.Interface;
+using Pleiades.Framework.Web.Security.Model;
+using Pleiades.Framework.Web.Security.Concrete;
 
 namespace Pleiades.Web.Security.Attributes
 {

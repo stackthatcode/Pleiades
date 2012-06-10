@@ -6,8 +6,8 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Pleiades.Commerce.WebUI.Plumbing.Model;
 using Pleiades.Commerce.WebUI.Plumbing.Security;
-using Pleiades.Web.Security.Concrete;
-using Pleiades.Web.Security.Model;
+using Pleiades.Framework.Web.Security.Concrete;
+using Pleiades.Framework.Web.Security.Model;
 using Pleiades.Commerce.WebUI.Plumbing.ErrorHandling;
 
 namespace Pleiades.Commerce.WebUI

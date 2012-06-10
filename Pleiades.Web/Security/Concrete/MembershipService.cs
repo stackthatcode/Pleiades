@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Security;
-using Pleiades.Web.Security.Interface;
-using Pleiades.Web.Security.Model;
+using Pleiades.Framework.Web.Security.Interface;
+using Pleiades.Framework.Web.Security.Model;
 using Pleiades.Web.Security.Utility;
 
-namespace Pleiades.Web.Security.Concrete
+namespace Pleiades.Framework.Web.Security.Concrete
 {
     public class MembershipService : IMembershipService
     {
         public IDomainUserService DomainUserService { get; set; }
-
 
         /// <summary>
         /// ctor
