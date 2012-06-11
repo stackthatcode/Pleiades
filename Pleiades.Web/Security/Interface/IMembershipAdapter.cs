@@ -7,9 +7,9 @@ using Pleiades.Framework.Web.Security.Model;
 namespace Pleiades.Framework.Web.Security.Interface
 {
     /// <summary>
-    /// Contains all Membership Provider-related operations for managing Domain Users
+    /// Contains all Membership Provider-related operations for managing Domain User objects -- root Entity Aggregates
     /// </summary>
-    public interface IMembershipService
+    public interface IMembershipAdapter
     {
         DomainUser ValidateUserByEmailAddr(string emailaddr, string password);
         void Touch(Model.DomainUser user);

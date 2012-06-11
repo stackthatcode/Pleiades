@@ -1,6 +1,17 @@
 Pleiades Administrative Area - TODO
 ===================================
 
+SECURITY/FRAMEWORK REFACTORING BACKLOG / NOTES
+==============================================
+- Bit the bullet -- write an adapter for the MembershipService
+- Write Unit Tests for Execution namespace
+- Decouple Membership from DomainUserService => only consume MembershipService operations
+- Verify the User "Touch" usage
+- Create a IDomainUserRepository
+- Write Unit Tests for the MembershipProvider
+- Move the AuthorizationAttribute sequence of validation into StepComposite
+
+
 STACK OVERFLOW QUESTIONS
 ========================
 - Best practices for CSS, Images, Javascript, ASP.NET MVC and especially HTML Helpers

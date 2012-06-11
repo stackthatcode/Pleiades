@@ -18,12 +18,12 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("PleiadesDBModel", "FK_system_User_system_AccountStatus", "AccountStatus", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Pleiades.Web.Security.Data.AccountStatus), "DomainUser", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Pleiades.Web.Security.Data.DomainUser), true)]
-[assembly: EdmRelationshipAttribute("PleiadesDBModel", "FK_domain_User_membership_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Pleiades.Web.Security.Data.User), "DomainUser", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Pleiades.Web.Security.Data.DomainUser), true)]
+[assembly: EdmRelationshipAttribute("PleiadesDBModel", "FK_system_User_system_AccountStatus", "AccountStatus", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Pleiades.Framework.Web.Security.Data.AccountStatus), "DomainUser", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Pleiades.Framework.Web.Security.Data.DomainUser), true)]
+[assembly: EdmRelationshipAttribute("PleiadesDBModel", "FK_domain_User_membership_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Pleiades.Framework.Web.Security.Data.User), "DomainUser", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Pleiades.Framework.Web.Security.Data.DomainUser), true)]
 
 #endregion
 
-namespace Pleiades.Web.Security.Data
+namespace Pleiades.Framework.Web.Security.Data
 {
     #region Contexts
     

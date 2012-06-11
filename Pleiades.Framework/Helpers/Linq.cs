@@ -7,15 +7,15 @@ namespace Pleiades.Framework.Helpers
 {
     public static class Linq
     {
-        public static void ForEach<T>(this IEnumerable<T> Input, Action<T> Func)
+        public static void ForEach<T>(this IEnumerable<T> input, Action<T> action)
         {
-            foreach (T Element in Input)
-                Func(Element);
+            foreach (T Element in input)
+                action(Element);
         }
 
-        public static List<TOut> ToCastedList<T, TOut>(this IEnumerable<T> Input)
+        public static List<TOut> ToCastedList<T, TOut>(this IEnumerable<T> input)
         {
-            return Input.Cast<TOut>().ToList();
+            return input.Cast<TOut>().ToList();
         }
 
         public static string ToCommaDelimitedList<T>(this List<T> input)

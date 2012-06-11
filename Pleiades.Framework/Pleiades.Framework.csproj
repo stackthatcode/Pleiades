@@ -41,6 +41,10 @@
     <Compile Include="Data\IPagedModel.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Data\QueryablePagedModel.cs" />
+    <Compile Include="Execution\IStepContext.cs" />
+    <Compile Include="Execution\IStepObserver.cs" />
+    <Compile Include="Execution\Step.cs" />
+    <Compile Include="Execution\StepComposite.cs" />
     <Compile Include="Helpers\EnumHelpers.cs" />
     <Compile Include="Helpers\ParsingExtensions.cs" />
     <Compile Include="Helpers\Linq.cs" />

@@ -40,7 +40,7 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
         {
             // Arrange
             var acctController = new AccountController();
-            acctController.MembershipService = MockRepository.GenerateMock<IMembershipService>();
+            acctController.MembershipService = MockRepository.GenerateMock<IMembershipAdapter>();
             acctController.MembershipService.Expect(x => x.ValidateUserByEmailAddr("admin", "123")).Return(null);
             acctController.FormsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
             acctController.FormsAuthService.Expect(x => x.ClearAuthenticationCookie());
@@ -60,7 +60,7 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
             // Arrange
             var acctController = new AccountController();
             var domainUser = new DomainUser();
-            acctController.MembershipService = MockRepository.GenerateMock<IMembershipService>();
+            acctController.MembershipService = MockRepository.GenerateMock<IMembershipAdapter>();
             acctController.MembershipService.Expect(x => x.ValidateUserByEmailAddr("admin", "123")).Return(domainUser);
             acctController.FormsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
             acctController.FormsAuthService.Expect(x => x.SetAuthCookieForUser(domainUser, acctController.PersistentCookie));
@@ -80,7 +80,7 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
             // Arrange
             var acctController = new AccountController();
             var domainUser = new DomainUser();
-            acctController.MembershipService = MockRepository.GenerateMock<IMembershipService>();
+            acctController.MembershipService = MockRepository.GenerateMock<IMembershipAdapter>();
             acctController.MembershipService.Expect(x => x.ValidateUserByEmailAddr("admin", "123")).Return(domainUser);
             acctController.FormsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
             acctController.FormsAuthService.Expect(x => x.SetAuthCookieForUser(domainUser, acctController.PersistentCookie));

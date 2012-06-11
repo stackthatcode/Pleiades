@@ -19,28 +19,26 @@ namespace Pleiades.Framework.Web.Security.Model
         public string ApplicationName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string Password { get; set; }
         public string PasswordQuestion { get; set; }
         public string PasswordAnswer { get; set; }
         public bool IsApproved { get; set; }
         public DateTime LastActivityDate { get; set; }
-        public DateTime LastLogin { get; set; }
+        public DateTime LastLoginDate { get; set; }
         public DateTime LastPasswordChangedDate { get; set; }
         public bool IsOnline { get; set; }
-        public bool IsLockedOut { get; set; }
+        public bool? IsLockedOut { get; set; }
         public DateTime LastLockedOutDate { get; set; }
         public int FailedPasswordAttemptCount { get; set; }
-        public int FailedPasswordAttemptCount { get; set; }
-        public int FailedPasswordAttemptWindowStart { get; set; }
+        public DateTime FailedPasswordAttemptWindowStart { get; set; }
         public int FailedPasswordAnswerAttemptCount { get; set; }
-        public int FailedPasswordAnswerAttemptWindowStart { get; set; }
+        public DateTime FailedPasswordAnswerAttemptWindowStart { get; set; }
 
         // Properties are externally-manipulable through interface
         public string Comment { get; set; }
 
         // Membership Provider state properties
-        public DateTime CreationDate { get; private set; }
-        public DateTime LastModified { get; private set; }
+        public DateTime CreationDate { get; set; }
+        public DateTime LastModified { get; set; }
 
 
         /// <summary>

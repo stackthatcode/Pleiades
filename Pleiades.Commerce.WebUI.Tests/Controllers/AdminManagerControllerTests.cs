@@ -168,7 +168,7 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
                 .Return(user);
             adminmgrController.DomainUserService.Expect(x => x.Update(user));
 
-            adminmgrController.MembershipService = MockRepository.GenerateMock<IMembershipService>();
+            adminmgrController.MembershipService = MockRepository.GenerateMock<IMembershipAdapter>();
             adminmgrController.MembershipService.Expect(x => x.SetUserApproval(user, true));
 
             // Act
@@ -187,7 +187,7 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
             var domainUser = new DomainUser();
             adminmgrController.DomainUserService = MockRepository.GenerateMock<IDomainUserService>();
             adminmgrController.DomainUserService.Expect(x => x.RetrieveUserByDomainUserId(123)).Return(domainUser);
-            adminmgrController.MembershipService = MockRepository.GenerateMock<IMembershipService>();
+            adminmgrController.MembershipService = MockRepository.GenerateMock<IMembershipAdapter>();
             adminmgrController.MembershipService.Expect(x => x.ChangePassword(domainUser, "123", "1234"));
 
             // Act
@@ -207,7 +207,7 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
             var domainUser = new DomainUser();
             adminmgrController.DomainUserService = MockRepository.GenerateMock<IDomainUserService>();
             adminmgrController.DomainUserService.Expect(x => x.RetrieveUserByDomainUserId(123)).Return(domainUser);
-            adminmgrController.MembershipService = MockRepository.GenerateMock<IMembershipService>();
+            adminmgrController.MembershipService = MockRepository.GenerateMock<IMembershipAdapter>();
             adminmgrController.MembershipService.Expect(x => x.UnlockUser(domainUser));
             
             // Act

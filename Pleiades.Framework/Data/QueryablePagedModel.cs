@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Pleiades.Framework.Data;
 
-namespace Pleiades.Framework.Web.Common
+namespace Pleiades.Framework.Data
 {
     /// <summary>
     /// Abstracts paging and filtering operations for View Models.  
     /// Simply construct, set the Items, Items Per Page and it's ready to go!
     /// </summary>
-    public class PagedModel<T> : IPagedModel
+    public class PagedModel<T> : IPagedModel<T>
     {
         protected IQueryable<T> items;
         protected int cachedItemCount = 0;

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Pleiades.Framework.Web.Common
+namespace Pleiades.Framework.Data
 {
-    public interface IPagedModel
+    public interface IPagedModel<T>
     {
         int CurrentPageNumber { get; set; }
         int ItemsPerPage { get; set; }

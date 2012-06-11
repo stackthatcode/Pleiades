@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Security;
-using PagedList;
-using Pleiades.Framework.Web.Security.Interface;
-using Pleiades.Web.Security.Data;
-using Pleiades.Framework.Web.Security.Model;
-using Pleiades.Framework.Helpers;
 using AutoMapper;
+using Pleiades.Framework.Data;
+using Pleiades.Framework.Helpers;
+using Pleiades.Framework.Web.Security.Data;
+using Pleiades.Framework.Web.Security.Interface;
+using Pleiades.Framework.Web.Security.Model;
+
 
 namespace Pleiades.Framework.Web.Security.Concrete
 {
@@ -29,6 +30,10 @@ namespace Pleiades.Framework.Web.Security.Concrete
         private const int MaxAdminUsers = 5;
 
 
+        public DomainUserService()
+        {
+        }
+
         /// <summary>
         /// Ensures the Root User Account Exists
         /// 
@@ -39,7 +44,7 @@ namespace Pleiades.Framework.Web.Security.Concrete
         {
             // If Root User does not exist, then we have to create it
             var rootUsers = this.RetreiveAll(1, 999, new List<UserRole>() { UserRole.Root });
-            if (rootUsers.Count > 0)
+            if (rootUsers.Count() > 0)
             {
                 return;
             }
@@ -79,7 +84,7 @@ namespace Pleiades.Framework.Web.Security.Concrete
 
             if (newUserRequest.UserRole == UserRole.Admin)
             {
-                var countAdmin = this.RetreiveAll(1, 999, new List<UserRole>() { UserRole.Admin }).Count;
+                var countAdmin = this.RetreiveAll(1, 999, new List<UserRole>() { UserRole.Admin }).Count();
                 if (countAdmin >= MaxAdminUsers)
                 {
                     throw new Exception(String.Format("Maximum number of Admin Users is {0}", MaxAdminUsers));
@@ -88,7 +93,7 @@ namespace Pleiades.Framework.Web.Security.Concrete
 
             if (newUserRequest.UserRole == UserRole.Root)
             {
-                var countRoot = this.RetreiveAll(1, 999, new List<UserRole>() { UserRole.Root }).Count;
+                var countRoot = this.RetreiveAll(1, 999, new List<UserRole>() { UserRole.Root }).Count();
                 if (countRoot >= MaxRootUsers)
                 {
                     throw new Exception(String.Format("Maximum number of Root Users is 1", MaxRootUsers));
@@ -217,7 +222,7 @@ namespace Pleiades.Framework.Web.Security.Concrete
         /// <summary>
         /// Retrieve All method with built-in Paging and User Role filtering
         /// </summary>
-        public IPagedList<DomainUserCondensed> RetreiveAll(int pageNumber, int pageSize, List<UserRole> role)
+        public IEnumerable<DomainUserCondensed> RetreiveAll(int pageNumber, int pageSize, List<UserRole> role)
         {
             var listOfRoleStrings = role.Select(x => x.ToString()).ToList();
 
@@ -239,7 +244,7 @@ namespace Pleiades.Framework.Web.Security.Concrete
         /// <summary>
         /// Retrieve filtered by Paging, User Role and Email Address
         /// </summary>
-        public IPagedList<DomainUserCondensed> RetreiveByLikeEmail(
+        public IEnumerable<DomainUserCondensed> RetreiveByLikeEmail(
                 string emailAddressToMatch, int pageNumber, int pageSize, List<UserRole> role)
         {
             var listOfRoleStrings = role.Select(x => x.ToString()).ToList();
@@ -257,12 +262,11 @@ namespace Pleiades.Framework.Web.Security.Concrete
             return RetrieveUserListItemOutput(records, pageNumber, pageSize);
         }
 
-        private IPagedList<DomainUserCondensed> RetrieveUserListItemOutput(
+        private IEnumerable<DomainUserCondensed> RetrieveUserListItemOutput(
                 IQueryable<DomainUserCondensed> records, int pageNumber, int pageSize)
         {
             var count = records.Count();
-            var pagedresults = records.Page<DomainUserCondensed>(pageNumber, pageSize);
-            return new StaticPagedList<DomainUserCondensed>(pagedresults, pageNumber - 1, pageSize, count);
+            return records.Page<DomainUserCondensed>(pageNumber, pageSize);
         }
 
         /// <summary>
@@ -280,7 +284,7 @@ namespace Pleiades.Framework.Web.Security.Concrete
         public void Update(Model.DomainUser domainUser)
         {
             var pleiadesDB = new PleiadesDB();
-            Data.DomainUser domainUserEntity 
+            var domainUserEntity 
                 = pleiadesDB.DomainUsers.First(x => x.DomainUserId == domainUser.DomainUserId);
 
             domainUserEntity.UserRole = domainUser.UserRole.ToString();

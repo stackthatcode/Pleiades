@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Specialized;
-using System.Configuration;
 using System.Configuration.Provider;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web.Configuration;
-using System.Web.Hosting;
 using System.Web.Security;
-using Pleiades.Web.Security.Data;
+using Pleiades.Framework.Data;
+using Pleiades.Framework.Helpers;
 
-namespace Pleiades.Web.Security.Providers
+namespace Pleiades.Framework.Web.Security.Providers
 {
     /// <summary>
     /// Entity Framework 4.0 Customer Membership Provider
@@ -22,26 +21,39 @@ namespace Pleiades.Web.Security.Providers
     /// 2.) Update User doesn't push state into entity objects - FIXED
     /// 3.) Validate User allows Locked User to login - FIXED
     /// 4.) Unlock User fails to update IsLockedOut flag - FIXED
+    /// 
+    /// UPDATE: completed abstracted the MembershipRepository and replaced config settings with the MembershipProviderSettings refs
     /// </summary>
     public class MembershipProvider : System.Web.Security.MembershipProvider
     {
-        #region members
-        private const int newPasswordLength = 8;
-        private string applicationName;
-        private bool enablePasswordReset;
-        private bool enablePasswordRetrieval;
-        private MachineKeySection machineKey; // Used when determining encryption key values.
-        private int maxInvalidPasswordAttempts;
-        private int minRequiredNonAlphanumericCharacters;
-        private int minRequiredPasswordLength;
-        private int passwordAttemptWindow;
-        private MembershipPasswordFormat passwordFormat;
-        private string passwordStrengthRegularExpression;
-        private bool requiresQuestionAndAnswer;
-        private bool requiresUniqueEmail;
-        #endregion
+        public const int newPasswordLength = 8;
 
-        #region properties
+        // These are set by the Initialize method which reads from a config file
+        public static MembershipProviderSettings MembershipProviderSettings { get; protected set; }
+        public IMembershipRepository MembershipRepository { get; set; }
+
+        /// <summary>
+        /// Invokes the Action on the RepositoryShim to get whatever repository is wired into the application
+        /// </summary>
+        public MembershipProvider()
+        {
+            this.MembershipRepository = RepositoryShim.GetInstance();
+        }
+
+
+        #region Membership Provider property overrides
+        /// <summary>
+        /// The name of the application using the custom membership provider.
+        /// </summary>
+        /// <returns>
+        /// The name of the application using the custom membership provider.
+        /// </returns>
+        public override string ApplicationName
+        {
+            get { return MembershipProviderSettings.ApplicationName; }
+            set { MembershipProviderSettings.ApplicationName = value; }
+        }
+
         /// <summary>
         /// Indicates whether the membership provider is configured to allow users to retrieve their passwords.
         /// </summary>
@@ -50,7 +62,7 @@ namespace Pleiades.Web.Security.Providers
         /// </returns>
         public override bool EnablePasswordRetrieval
         {
-            get { return enablePasswordRetrieval; }
+            get { return MembershipProviderSettings.EnablePasswordRetrieval; }
         }
 
         /// <summary>
@@ -61,7 +73,7 @@ namespace Pleiades.Web.Security.Providers
         /// </returns>
         public override bool EnablePasswordReset
         {
-            get { return enablePasswordReset; }
+            get { return MembershipProviderSettings.EnablePasswordReset; }
         }
 
         /// <summary>
@@ -72,16 +84,8 @@ namespace Pleiades.Web.Security.Providers
         /// </returns>
         public override bool RequiresQuestionAndAnswer
         {
-            get { return requiresQuestionAndAnswer; }
+            get { return MembershipProviderSettings.RequiresQuestionAndAnswer; }
         }
-
-        /// <summary>
-        /// The name of the application using the custom membership provider.
-        /// </summary>
-        /// <returns>
-        /// The name of the application using the custom membership provider.
-        /// </returns>
-        public override string ApplicationName { get; set; }
 
         /// <summary>
         /// Gets the number of invalid password or password-answer attempts allowed before the membership user is locked out.
@@ -91,7 +95,7 @@ namespace Pleiades.Web.Security.Providers
         /// </returns>
         public override int MaxInvalidPasswordAttempts
         {
-            get { return maxInvalidPasswordAttempts; }
+            get { return MembershipProviderSettings.MaxInvalidPasswordAttempts; }
         }
 
         /// <summary>
@@ -102,7 +106,7 @@ namespace Pleiades.Web.Security.Providers
         /// </returns>
         public override int PasswordAttemptWindow
         {
-            get { return passwordAttemptWindow; }
+            get { return MembershipProviderSettings.PasswordAttemptWindow; }
         }
 
         /// <summary>
@@ -113,7 +117,7 @@ namespace Pleiades.Web.Security.Providers
         /// </returns>
         public override bool RequiresUniqueEmail
         {
-            get { return requiresUniqueEmail; }
+            get { return MembershipProviderSettings.RequiresUniqueEmail; }
         }
 
         /// <summary>
@@ -124,7 +128,7 @@ namespace Pleiades.Web.Security.Providers
         /// </returns>
         public override MembershipPasswordFormat PasswordFormat
         {
-            get { return passwordFormat; }
+            get { return MembershipProviderSettings.PasswordFormat; }
         }
 
         /// <summary>
@@ -135,7 +139,7 @@ namespace Pleiades.Web.Security.Providers
         /// </returns>
         public override int MinRequiredPasswordLength
         {
-            get { return minRequiredPasswordLength; }
+            get { return MembershipProviderSettings.MinRequiredPasswordLength; }
         }
 
         /// <summary>
@@ -146,7 +150,7 @@ namespace Pleiades.Web.Security.Providers
         /// </returns>
         public override int MinRequiredNonAlphanumericCharacters
         {
-            get { return minRequiredNonAlphanumericCharacters; }
+            get { return MembershipProviderSettings.MinRequiredNonAlphanumericCharacters; }
         }
 
         /// <summary>
@@ -157,11 +161,10 @@ namespace Pleiades.Web.Security.Providers
         /// </returns>
         public override string PasswordStrengthRegularExpression
         {
-            get { return passwordStrengthRegularExpression; }
+            get { return MembershipProviderSettings.PasswordStrengthRegularExpression; }
         }
-
-        public string ConnectionString { get; set; }
         #endregion
+
 
         #region public methods
         /// <summary>
@@ -179,72 +182,20 @@ namespace Pleiades.Web.Security.Providers
 
             if (String.IsNullOrEmpty(name))
             {
-                name = "EFMembershipProvider";
+                name = "Pleiades MembershipProvider";
             }
 
             if (String.IsNullOrEmpty(config["description"]))
             {
                 config.Remove("description");
-                config.Add("description", "Smart-Soft EF Membership Provider");
+                config.Add("description", "Smart-Soft/Pleiades Abstracted Membership Provider");
             }
+
+            // Load the Configuration Settings into an object and set the global instance
+            MembershipProviderSettings = new MembershipProviderSettings(config);
 
             // Initialize the abstract base class.
-            base.Initialize(name, config);
-
-            applicationName = GetConfigValue(config["applicationName"], HostingEnvironment.ApplicationVirtualPath);
-            maxInvalidPasswordAttempts = Convert.ToInt32(GetConfigValue(config["maxInvalidPasswordAttempts"], "5"));
-            passwordAttemptWindow = Convert.ToInt32(GetConfigValue(config["passwordAttemptWindow"], "10"));
-            minRequiredNonAlphanumericCharacters = Convert.ToInt32(GetConfigValue(config["minRequiredNonAlphanumericCharacters"], "1"));
-            minRequiredPasswordLength = Convert.ToInt32(GetConfigValue(config["minRequiredPasswordLength"], "7"));
-            passwordStrengthRegularExpression = Convert.ToString(GetConfigValue(config["passwordStrengthRegularExpression"], ""));
-            enablePasswordReset = Convert.ToBoolean(GetConfigValue(config["enablePasswordReset"], "true"));
-            enablePasswordRetrieval = Convert.ToBoolean(GetConfigValue(config["enablePasswordRetrieval"], "true"));
-            requiresQuestionAndAnswer = Convert.ToBoolean(GetConfigValue(config["requiresQuestionAndAnswer"], "false"));
-            requiresUniqueEmail = Convert.ToBoolean(GetConfigValue(config["requiresUniqueEmail"], "true"));
-
-            string temp_format = config["passwordFormat"] ?? "Hashed";
-
-            switch (temp_format)
-            {
-                case "Hashed":
-                    passwordFormat = MembershipPasswordFormat.Hashed;
-                    break;
-                case "Encrypted":
-                    passwordFormat = MembershipPasswordFormat.Encrypted;
-                    break;
-                case "Clear":
-                    passwordFormat = MembershipPasswordFormat.Clear;
-                    break;
-                default:
-                    throw new ProviderException("Password format not supported.");
-            }
-
-            // Initialize SqlConnection.
-            var ConnectionStringSettings = ConfigurationManager.ConnectionStrings[config["connectionStringName"]];
-
-            if (ConnectionStringSettings == null || ConnectionStringSettings.ConnectionString.Trim() == "")
-            {
-                throw new ProviderException("Connection string cannot be blank.");
-            }
-            ConnectionString = ConnectionStringSettings.ConnectionString;
-
-            // Get encryption and decryption key information from the configuration.
-            Configuration cfg;
-            if (HostingEnvironment.IsHosted)
-            {
-                cfg = WebConfigurationManager.OpenWebConfiguration(HostingEnvironment.ApplicationVirtualPath);
-                machineKey = (MachineKeySection)cfg.GetSection("system.web/machineKey");
-            }
-            else
-            {
-                machineKey = (MachineKeySection)ConfigurationManager.GetSection("system.web/machineKey");
-            }
-
-            if (machineKey.ValidationKey.Contains("AutoGenerate"))
-            {
-                if (PasswordFormat != MembershipPasswordFormat.Clear)
-                    throw new ProviderException("Hashed or Encrypted passwords are not supported with auto-generated keys.");
-            }
+            base.Initialize(name, config); 
         }
 
         /// <summary>
@@ -264,7 +215,7 @@ namespace Pleiades.Web.Security.Providers
                                                   object providerUserKey, out MembershipCreateStatus status)
         {
             // Validate username/password
-            ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(username, password, true);
+            var args = new ValidatePasswordEventArgs(username, password, true);
             OnValidatingPassword(args);
 
             if (args.Cancel)
@@ -280,15 +231,15 @@ namespace Pleiades.Web.Security.Providers
             }
 
             // Check whether user with passed username already exists
-            MembershipUser u = GetUser(username, false);
+            var membershipUser = this.MembershipRepository.GetUser(username, false);
 
-            if (u != null)
+            if (membershipUser != null)
             {
                 status = MembershipCreateStatus.DuplicateUserName;
                 return null;
             }
 
-            DateTime createDate = DateTime.Now;
+            var createDate = DateTime.Now;
 
             if (providerUserKey == null)
             {
@@ -303,12 +254,11 @@ namespace Pleiades.Web.Security.Providers
                 }
             }
 
-            PleiadesDB context = new PleiadesDB(ConnectionString);
-            User user = new User
+            var user = new Model.MembershipUser 
             {
-                Id = (Guid)providerUserKey,
-                Username = username,
-                ApplicationName = applicationName,
+                ProviderUserKey = (Guid)providerUserKey,
+                UserName = username,
+                ApplicationName = this.ApplicationName,
                 Email = email,
                 Password = EncodePassword(password),
                 PasswordQuestion = passwordQuestion,
@@ -329,8 +279,8 @@ namespace Pleiades.Web.Security.Providers
 
             try
             {
-                context.Users.AddObject(user);
-                context.SaveChanges();
+                this.MembershipRepository.Add(user);
+                this.MembershipRepository.SaveChanges();
                 status = MembershipCreateStatus.Success;
             }
             catch
@@ -353,24 +303,23 @@ namespace Pleiades.Web.Security.Providers
                 string password, string newPasswordQuestion, string newPasswordAnswer)
         {
             //check if user is authenticated
-            if (!ValidateUser(username, password)) 
+            if (!ValidateUser(username, password))
+            {
                 return false;
-            
-            PleiadesDB context = new PleiadesDB(ConnectionString);
-            IQueryable<User> users = from u in context.Users
-                                     where u.Username == username && u.ApplicationName == applicationName
-                                     select u;
+            }
 
-            if (users.Count() != 1) 
+            var user = this.MembershipRepository.GetUser(username);
+            if (user == null)
+            {
                 throw new ProviderException("Change password question and answer failed. No unique user found.");
+            }
 
-            User user = users.First();
             user.PasswordAnswer = EncodePassword(newPasswordAnswer);
             user.PasswordQuestion = newPasswordQuestion;
 
             try
             {
-                context.SaveChanges();
+                this.MembershipRepository.SaveChanges();
                 return true;
             }
             catch
@@ -398,23 +347,23 @@ namespace Pleiades.Web.Security.Providers
             }
 
             string password = string.Empty;
-            PleiadesDB context = new PleiadesDB(ConnectionString);
 
-            IQueryable<User> users = from u in context.Users
-                                     where u.Username == username && u.ApplicationName == applicationName
-                                     select u;
-
-            if (users.Count() != 1) 
+            var user = this.MembershipRepository.GetUser(username);
+            if (user == null)
+            {
                 throw new ProviderException("Get password failed. No unique user found.");
-
-            User user = users.First();
+            }
             if (user != null)
             {
-                if (Convert.ToBoolean(user.IsLockedOut)) 
+                if (Convert.ToBoolean(user.IsLockedOut))
+                {
                     throw new MembershipPasswordException("The supplied user is locked out.");
+                }
             }
-            else 
+            else
+            {
                 throw new MembershipPasswordException("The supplied user name is not found.");
+            }
 
             if (RequiresQuestionAndAnswer && !CheckPassword(answer, user.PasswordAnswer))
             {
@@ -422,8 +371,10 @@ namespace Pleiades.Web.Security.Providers
                 throw new MembershipPasswordException("Incorrect password answer.");
             }
 
-            if (PasswordFormat == MembershipPasswordFormat.Encrypted) 
+            if (PasswordFormat == MembershipPasswordFormat.Encrypted)
+            {
                 password = UnEncodePassword(user.Password);
+            }
 
             return password;
         }
@@ -438,35 +389,35 @@ namespace Pleiades.Web.Security.Providers
         public override bool ChangePassword(string username, string oldPassword, string newPassword)
         {
             //check if user is authenticated
-            if (!ValidateUser(username, oldPassword)) 
+            if (!ValidateUser(username, oldPassword))
+            {
                 return false;
+            }
 
-            //notify that password is going to change
-            ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(username, newPassword, true);
+            // Notify that password is going to change
+            var args = new ValidatePasswordEventArgs(username, newPassword, true);
             OnValidatingPassword(args);
 
             if (args.Cancel)
             {
-                if (args.FailureInformation != null) 
+                if (args.FailureInformation != null)
+                {
                     throw args.FailureInformation;
+                }
                 throw new MembershipPasswordException("Change password canceled due to new password validation failure.");
             }
 
-            PleiadesDB context = new PleiadesDB(ConnectionString);
-            IQueryable<User> users = from u in context.Users
-                                     where u.Username == username && u.ApplicationName == applicationName
-                                     select u;
-
-            if (users.Count() != 1) 
+            var user = this.MembershipRepository.GetUser(username);
+            if (user == null)
+            {
                 throw new ProviderException("Change password failed. No unique user found.");
-
-            User user = users.First();
+            }
             user.Password = EncodePassword(newPassword);
             user.LastPasswordChangedDate = DateTime.Now;
 
             try
             {
-                context.SaveChanges();
+                this.MembershipRepository.SaveChanges();
                 return true;
             }
             catch
@@ -483,8 +434,10 @@ namespace Pleiades.Web.Security.Providers
         /// <param name="answer">The password answer for the specified user.</param>
         public override string ResetPassword(string username, string answer)
         {
-            if (!EnablePasswordReset) 
+            if (!EnablePasswordReset)
+            {
                 throw new NotSupportedException("Password reset is not enabled.");
+            }
 
             if (answer == null && RequiresQuestionAndAnswer)
             {
@@ -494,8 +447,8 @@ namespace Pleiades.Web.Security.Providers
 
             string newPassword = Membership.GeneratePassword(newPasswordLength, MinRequiredNonAlphanumericCharacters);
 
-            ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(username, newPassword, true);
-            OnValidatingPassword(args);
+            var args = new ValidatePasswordEventArgs(username, newPassword, true);
+            this.OnValidatingPassword(args);
 
             if (args.Cancel)
             {
@@ -503,21 +456,15 @@ namespace Pleiades.Web.Security.Providers
                 throw new MembershipPasswordException("Reset password canceled due to password validation failure.");
             }
 
-            PleiadesDB context = new PleiadesDB(ConnectionString);
-            IQueryable<User> users = from u in context.Users
-                                     where u.Username == username && u.ApplicationName == applicationName
-                                     select u;
-
-            if (users.Count() != 1) throw new ProviderException("Reset password failed. No unique user found.");
-
-            User user = users.First();
-            if (user != null)
+            var user = this.MembershipRepository.GetUser(username);
+            if (user == null)
             {
-                if (Convert.ToBoolean(user.IsLockedOut)) throw new MembershipPasswordException("The supplied user is locked out.");
+                throw new ProviderException("Reset password failed. No unique user found.");
             }
-            else
+
+            if (Convert.ToBoolean(user.IsLockedOut)) 
             {
-                throw new MembershipPasswordException("The supplied user name is not found.");
+                throw new MembershipPasswordException("The supplied user is locked out.");
             }
 
             if (RequiresQuestionAndAnswer && !CheckPassword(answer, user.PasswordAnswer))
@@ -531,7 +478,7 @@ namespace Pleiades.Web.Security.Providers
                 user.Password = EncodePassword(newPassword);
                 user.LastPasswordChangedDate = DateTime.Now;
 
-                context.SaveChanges();
+                this.MembershipRepository.SaveChanges();
                 return newPassword;
             }
             catch
@@ -546,22 +493,16 @@ namespace Pleiades.Web.Security.Providers
         /// <param name="membershipUser">A <see cref="T:System.Web.Security.MembershipUser" /> object that represents the user to update and the updated information for the user.</param>
         public override void UpdateUser(MembershipUser membershipUser)
         {
-            PleiadesDB context = new PleiadesDB(ConnectionString);
-            IQueryable<User> users = from u in context.Users
-                                     where u.Username == membershipUser.UserName && u.ApplicationName == applicationName
-                                     select u;
-
-            if (users.Count() != 1) 
+            var user = this.MembershipRepository.GetUser(membershipUser.UserName);
+            if (user == null)
+            {
                 throw new ProviderException("Update user failed. No unique user found.");
-
-            User user = users.First();
-            if (user == null) 
-                return;
+            }
 
             user.Email = membershipUser.Email;
             user.Comment = membershipUser.Comment;
             user.IsApproved = membershipUser.IsApproved;
-            context.SaveChanges();
+            this.MembershipRepository.SaveChanges();
         }
 
         /// <summary>
@@ -574,26 +515,19 @@ namespace Pleiades.Web.Security.Providers
         {
             bool isValid = false;
 
-            PleiadesDB context = new PleiadesDB(ConnectionString);
-            IQueryable<User> users = from u in context.Users
-                                     where u.Username == username && u.ApplicationName == applicationName
-                                     select u;
-
-            if (users.Count() != 1) 
+            var user = this.MembershipRepository.GetUser(username);
+            if (user == null)
+            {
                 return false;
-
-            User user = users.First();
-            if (user == null) 
-                return false;
+            }
 
             if (CheckPassword(password, user.Password))
             {
                 if (user.IsApproved && (!user.IsLockedOut ?? false))
                 {
                     isValid = true;
-
                     user.LastLoginDate = DateTime.Now;
-                    context.SaveChanges();
+                    this.MembershipRepository.SaveChanges();
                 }
             }
             else
@@ -613,20 +547,16 @@ namespace Pleiades.Web.Security.Providers
         {
             try
             {
-                PleiadesDB context = new PleiadesDB(ConnectionString);
-                IQueryable<User> users = from u in context.Users
-                                         where u.Username == userName && u.ApplicationName == applicationName
-                                         select u;
-
-                if (users.Count() != 1) return false;
-
-                User user = users.First();
-                if (user == null) return false;
+                var user = this.MembershipRepository.GetUser(userName);
+                if (user == null)
+                {
+                    return false;
+                }
 
                 // FIXED
                 user.LastLockedOutDate = DateTime.Now;
                 user.IsLockedOut = false;
-                context.SaveChanges();
+                this.MembershipRepository.SaveChanges();
                 return true;
             }
             catch
@@ -645,23 +575,17 @@ namespace Pleiades.Web.Security.Providers
         {
             MembershipUser membershipUser = null;
 
-            PleiadesDB context = new PleiadesDB(ConnectionString);
-            IQueryable<User> users = from u in context.Users
-                                     where u.Id == (Guid)providerUserKey && u.ApplicationName == applicationName
-                                     select u;
-
-            if (users.Count() == 1)
+            var user = this.MembershipRepository.GetUserByProviderKey(providerUserKey, userIsOnline);
+            if (user == null)
             {
-                User user = users.First();
-                if (user != null)
+                return null;
+            }
+            else
+            {
+                if (userIsOnline)
                 {
-                    membershipUser = GetMembershipUserFromPersitentObject(user);
-
-                    if (userIsOnline)
-                    {
-                        user.LastActivityDate = DateTime.Now;
-                        context.SaveChanges();
-                    }
+                    user.LastActivityDate = DateTime.Now;
+                    this.MembershipRepository.SaveChanges();
                 }
             }
 
@@ -677,25 +601,16 @@ namespace Pleiades.Web.Security.Providers
         public override MembershipUser GetUser(string username, bool userIsOnline)
         {
             MembershipUser membershipUser = null;
-
-            PleiadesDB context = new PleiadesDB(ConnectionString);
-            IQueryable<User> users = from u in context.Users
-                                     where u.Username == username && u.ApplicationName == applicationName
-                                     select u;
-
-            if (users.Count() == 1)
+            var user = this.MembershipRepository.GetUser(username, userIsOnline);
+            
+            if (user == null)
             {
-                User user = users.First();
-                if (user != null)
-                {
-                    membershipUser = GetMembershipUserFromPersitentObject(user);
-
-                    if (userIsOnline)
-                    {
-                        user.LastActivityDate = DateTime.Now;
-                        context.SaveChanges();
-                    }
-                }
+                return null;
+            }
+            else
+            {
+                user.LastActivityDate = DateTime.Now;
+                this.MembershipRepository.SaveChanges();
             }
 
             return membershipUser;
@@ -708,23 +623,7 @@ namespace Pleiades.Web.Security.Providers
         /// <param name="email">The e-mail address to search for.</param>
         public override string GetUserNameByEmail(string email)
         {
-            try
-            {
-                PleiadesDB context = new PleiadesDB(ConnectionString);
-                IQueryable<User> users = from u in context.Users
-                                         where u.Email == email && u.ApplicationName == applicationName
-                                         select u;
-
-                if (users.Count() != 1) 
-                    return string.Empty;
-
-                User user = users.First();
-                return user != null ? user.Username : string.Empty;
-            }
-            catch
-            {
-                return string.Empty;
-            }
+            return this.MembershipRepository.GetUserNameByEmail(email);
         }
 
         /// <summary>
@@ -735,29 +634,20 @@ namespace Pleiades.Web.Security.Providers
         /// <param name="deleteAllRelatedData">true to delete data related to the user from the database; false to leave data related to the user in the database.</param>
         public override bool DeleteUser(string username, bool deleteAllRelatedData)
         {
-            try
-            {
-                PleiadesDB context = new PleiadesDB(ConnectionString);
-                IQueryable<User> users = from u in context.Users
-                                         where u.Username == username && u.ApplicationName == applicationName
-                                         select u;
-
-                if (users.Count() != 1) return false;
-
-                User user = users.First();
-                context.DeleteObject(user);
-                context.SaveChanges();
-
-                if (deleteAllRelatedData)
-                {
-                    // TODO: delete user related data
-                }
-                return true;
-            }
-            catch
+            var user = this.MembershipRepository.GetUser(username);
+            if (user == null)
             {
                 return false;
             }
+
+            this.MembershipRepository.Delete(user);
+            this.MembershipRepository.SaveChanges();
+
+            if (deleteAllRelatedData)
+            {
+                // TODO: delete user related data
+            }
+            return true;
         }
 
         /// <summary>
@@ -771,24 +661,19 @@ namespace Pleiades.Web.Security.Providers
         /// <param name="totalRecords">The total number of matched users.</param>
         public override MembershipUserCollection GetAllUsers(int pageIndex, int pageSize, out int totalRecords)
         {
-            MembershipUserCollection users = new MembershipUserCollection();
+            var users = new MembershipUserCollection();
 
             //retrieve all users for the current application name from the database
-            PleiadesDB context = new PleiadesDB(ConnectionString);
-
-            totalRecords = (from u in context.Users
-                            where u.ApplicationName == applicationName
-                            select u).Distinct().Count();
-            if (totalRecords <= 0) return users;
-
-            IQueryable<User> efUsers = (from u in context.Users
-                                        where u.ApplicationName == applicationName
-                                        orderby u.Username
-                                        select u).Skip(pageIndex * pageSize).Take(pageSize);
-
-            foreach (User user in efUsers)
+            var dbUsers = this.MembershipRepository.GetAll();
+            totalRecords = dbUsers.Count();
+            if (totalRecords <= 0)
             {
-                users.Add(GetMembershipUserFromPersitentObject(user));
+                return users;
+            }
+
+            foreach (var user in dbUsers.Page(pageIndex, pageSize))
+            {
+                users.Add(user.ToSecurityMembershipUser(this.Name));
             }
 
             return users;
@@ -800,14 +685,7 @@ namespace Pleiades.Web.Security.Providers
         /// <returns>The number of users currently accessing the application.</returns>
         public override int GetNumberOfUsersOnline()
         {
-            TimeSpan onlineSpan = new TimeSpan(0, Membership.UserIsOnlineTimeWindow, 0);
-            DateTime compareTime = DateTime.Now.Subtract(onlineSpan);
-
-            PleiadesDB context = new PleiadesDB(ConnectionString);
-
-            return (from u in context.Users
-                    where u.ApplicationName == applicationName && u.LastActivityDate > compareTime
-                    select u).Distinct().Count();
+            return this.MembershipRepository.GetNumberOfUsersOnline();
         }
 
         /// <summary>
@@ -822,22 +700,9 @@ namespace Pleiades.Web.Security.Providers
         /// <param name="totalRecords">The total number of matched users.</param>
         public override MembershipUserCollection FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
-            MembershipUserCollection membershipUsers = new MembershipUserCollection();
-            PleiadesDB context = new PleiadesDB(ConnectionString);
-            IQueryable<User> users = from u in context.Users
-                                     where u.Username.Contains(usernameToMatch) && u.ApplicationName == applicationName
-                                     orderby u.Username
-                                     select u;
-
-            totalRecords = users.Count();
-            if (users.Count() <= 0) 
-                return membershipUsers;
-
-            foreach (User user in users.Skip(pageIndex * pageSize).Take(pageSize))
-            {
-                membershipUsers.Add(GetMembershipUserFromPersitentObject(user));
-            }
-
+            var membershipUsers = new MembershipUserCollection();
+            var results = this.MembershipRepository.FindUsersByName(usernameToMatch, pageIndex, pageSize, out totalRecords);
+            results.ForEach(x => membershipUsers.Add(x.ToSecurityMembershipUser(this.Name)));
             return membershipUsers;
         }
 
@@ -853,65 +718,28 @@ namespace Pleiades.Web.Security.Providers
         /// <param name="totalRecords">The total number of matched users.</param>
         public override MembershipUserCollection FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
-            MembershipUserCollection membershipUsers = new MembershipUserCollection();
-            PleiadesDB context = new PleiadesDB(ConnectionString);
-            IQueryable<User> users = from u in context.Users
-                                     where u.Email.Contains(emailToMatch) && u.ApplicationName == applicationName
-                                     select u;
-
-            totalRecords = users.Count();
-            if (users.Count() <= 0) 
-                return membershipUsers;
-
-            foreach (User user in users.Skip(pageIndex * pageSize).Take(pageSize))
-            {
-                membershipUsers.Add(GetMembershipUserFromPersitentObject(user));
-            }
-
+            var membershipUsers = new MembershipUserCollection();
+            var results = this.MembershipRepository.FindUsersByEmail(emailToMatch, pageIndex, pageSize, out totalRecords);
+            results.ForEach(x => membershipUsers.Add(x.ToSecurityMembershipUser(this.Name)));
             return membershipUsers;
         }
-
         #endregion
 
-        #region private methods
-        /// <summary>
-        /// A helper function that takes the current persistent user and creates a MembershiUser from the values.
-        /// </summary>
-        /// <param name="user">user object containing the user data retrieved from database</param>
-        /// <returns>membership user object</returns>
-        private MembershipUser GetMembershipUserFromPersitentObject(User user)
-        {
-            return new MembershipUser(Name,
-                                      user.Username,
-                                      user.Id,
-                                      user.Email,
-                                      user.PasswordQuestion,
-                                      user.Comment,
-                                      user.IsApproved,
-                                      Convert.ToBoolean(user.IsLockedOut),
-                                      Convert.ToDateTime(user.CreationDate),
-                                      Convert.ToDateTime(user.LastLoginDate),
-                                      Convert.ToDateTime(user.LastActivityDate),
-                                      Convert.ToDateTime(user.LastPasswordChangedDate),
-                                      Convert.ToDateTime(user.LastLockedOutDate));
-        }
 
+        #region private methods
         /// <summary>
         /// A helper method that performs the checks and updates associated with password failure tracking.
         /// </summary>
         private void UpdateFailureCount(string username, string failureType)
         {
-            PleiadesDB context = new PleiadesDB(ConnectionString);
-            IQueryable<User> users = from u in context.Users
-                                     where u.Username == username && u.ApplicationName == applicationName
-                                     select u;
+            var user = this.MembershipRepository.GetUser(username);
 
-            if (users.Count() != 1) 
+            if (user == null)
+            {
                 throw new ProviderException("Update failure count failed. No unique user found.");
+            }
 
-            User user = users.First();
-
-            DateTime windowStart = new DateTime();
+            var windowStart = new DateTime();
             int failureCount = 0;
 
             if (failureType == "password")
@@ -926,7 +754,7 @@ namespace Pleiades.Web.Security.Providers
                 windowStart = Convert.ToDateTime(user.FailedPasswordAnswerAttemptWindowStart);
             }
 
-            DateTime windowEnd = windowStart.AddMinutes(PasswordAttemptWindow);
+            var windowEnd = windowStart.AddMinutes(PasswordAttemptWindow);
 
             if (failureCount == 0 || DateTime.Now > windowEnd)
             {
@@ -945,7 +773,7 @@ namespace Pleiades.Web.Security.Providers
 
                 try
                 {
-                    context.SaveChanges();
+                    this.MembershipRepository.SaveChanges();
                 }
                 catch
                 {
@@ -965,7 +793,7 @@ namespace Pleiades.Web.Security.Providers
 
                     try
                     {
-                        context.SaveChanges();
+                        this.MembershipRepository.SaveChanges();
                     }
                     catch
                     {
@@ -987,7 +815,7 @@ namespace Pleiades.Web.Security.Providers
 
                     try
                     {
-                        context.SaveChanges();
+                        this.MembershipRepository.SaveChanges();
                     }
                     catch
                     {
@@ -1003,7 +831,7 @@ namespace Pleiades.Web.Security.Providers
         /// <param name="password">password</param>
         /// <param name="dbpassword">database password</param>
         /// <returns>whether the passwords are identical</returns>
-        private bool CheckPassword(string password, string dbpassword)
+        protected bool CheckPassword(string password, string dbpassword)
         {
             string pass1 = password;
             string pass2 = dbpassword;
@@ -1028,7 +856,7 @@ namespace Pleiades.Web.Security.Providers
         /// </summary>
         /// <param name="password"></param>
         /// <returns></returns>
-        private string EncodePassword(string password)
+        protected string EncodePassword(string password)
         {
             string encodedPassword = password;
 
@@ -1040,7 +868,7 @@ namespace Pleiades.Web.Security.Providers
                     encodedPassword = Convert.ToBase64String(EncryptPassword(Encoding.Unicode.GetBytes(password)));
                     break;
                 case MembershipPasswordFormat.Hashed:
-                    HMACSHA1 hash = new HMACSHA1 { Key = HexToByte(machineKey.ValidationKey) };
+                    HMACSHA1 hash = new HMACSHA1 { Key = MembershipProviderSettings.MachineKey.ValidationKey.HexToByte() };
                     encodedPassword = Convert.ToBase64String(hash.ComputeHash(Encoding.Unicode.GetBytes(password)));
                     break;
                 default:
@@ -1055,7 +883,7 @@ namespace Pleiades.Web.Security.Providers
         /// </summary>
         /// <param name="encodedPassword"></param>
         /// <returns></returns>
-        private string UnEncodePassword(string encodedPassword)
+        protected string UnEncodePassword(string encodedPassword)
         {
             string password = encodedPassword;
 
@@ -1073,32 +901,6 @@ namespace Pleiades.Web.Security.Providers
             }
 
             return password;
-        }
-
-        /// <summary>
-        /// Converts a hexadecimal string to a byte array. Used to convert encryption key values from the configuration.
-        /// </summary>
-        /// <param name="hexString"></param>
-        /// <returns></returns>
-        private static byte[] HexToByte(string hexString)
-        {
-            byte[] returnBytes = new byte[hexString.Length / 2];
-            for (int i = 0; i < returnBytes.Length; i++)
-            {
-                returnBytes[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
-            }
-            return returnBytes;
-        }
-
-        /// <summary>
-        /// A helper function to retrieve config values from the configuration file.
-        /// </summary>
-        /// <param name="configValue"></param>
-        /// <param name="defaultValue"></param>
-        /// <returns></returns>
-        private static string GetConfigValue(string configValue, string defaultValue)
-        {
-            return String.IsNullOrEmpty(configValue) ? defaultValue : configValue;
         }
         #endregion
     }

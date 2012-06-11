@@ -41,11 +41,11 @@ namespace Pleiades.Web.Security.Attributes
         /// <summary>
         /// Local property extracts Attribute Properties
         /// </summary>
-        protected Model.SecurityRequirementsContext SecurityRequirementsContext
+        protected SecurityRequirementsContext SecurityRequirementsContext
         {
             get
             {
-                return new Model.SecurityRequirementsContext
+                return new SecurityRequirementsContext
                 {
                     AuthorizationZone = AuthorizationZone,
                     AccountLevelRestriction = AccountLevelRestriction,

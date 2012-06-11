@@ -17,7 +17,7 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
         public readonly bool PersistentCookie = true;
         public IDomainUserService UserService { get; set; }
         public IFormsAuthenticationService FormsAuthService { get; set; }
-        public IMembershipService MembershipService { get; set; }
+        public IMembershipAdapter MembershipService { get; set; }
 
 
         // TODO: replace with Dependency Injection
@@ -25,7 +25,7 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
         {
             FormsAuthService = new FormsAuthenticationService();
             UserService = new DomainUserService();
-            MembershipService = new MembershipService();
+            MembershipService = new MembershipAdapter();
         }
 
         [HttpGet]

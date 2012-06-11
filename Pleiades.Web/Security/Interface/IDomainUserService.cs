@@ -18,8 +18,8 @@ namespace Pleiades.Framework.Web.Security.Interface
         DomainUser RetrieveUserByDomainUserId(int domainUserId);
         DomainUser RetrieveUserByMembershipUserName(string username);
         DomainUser RetrieveUserByEmail(string emailaddr);
-        IPagedModel<DomainUserCondensed> RetreiveAll(int pageNumber, int pageSize, List<UserRole> role);
-        IPagedModel<DomainUserCondensed> RetreiveByLikeEmail(
+        IEnumerable<DomainUserCondensed> RetreiveAll(int pageNumber, int pageSize, List<UserRole> role);
+        IEnumerable<DomainUserCondensed> RetreiveByLikeEmail(
             string emailAddressToMatch, int pageNumber, int pageSize, List<UserRole> role);
         int RetrieveTotalUsers();
         void Update(DomainUser user);

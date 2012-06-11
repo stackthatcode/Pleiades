@@ -25,13 +25,13 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
         public const string DefaultAnswer = "Default";
 
         public IDomainUserService DomainUserService { get; set; }
-        public IMembershipService MembershipService { get; set; }
+        public IMembershipAdapter MembershipService { get; set; }
 
         public AdminManagerController()
         {
             // TODO: wire the Autofac IoC Plumbing into this, heah!
             DomainUserService = new DomainUserService();
-            MembershipService = new MembershipService();
+            MembershipService = new MembershipAdapter();
         }
 
         [HttpGet]

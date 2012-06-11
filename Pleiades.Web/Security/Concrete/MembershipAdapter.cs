@@ -9,14 +9,18 @@ using Pleiades.Web.Security.Utility;
 
 namespace Pleiades.Framework.Web.Security.Concrete
 {
-    public class MembershipService : IMembershipService
+    /// <summary>
+    /// 
+    /// </summary>
+    public class MembershipAdapter : IMembershipAdapter
     {
+        // TODO: eliminate this...?
         public IDomainUserService DomainUserService { get; set; }
 
         /// <summary>
         /// ctor
         /// </summary>
-        public MembershipService()
+        public MembershipAdapter()
         {
             DomainUserService = new DomainUserService();
         }
@@ -58,9 +62,9 @@ namespace Pleiades.Framework.Web.Security.Concrete
         /// <summary>
         /// Unlock a User Account that's failed Validation too many times
         /// </summary>
-        public void UnlockUser(Model.DomainUser user)
+        public void UnlockUser(string userName)
         {
-            var membershipUser = Membership.GetUser(user.MembershipUser.UserName);
+            var membershipUser = Membership.GetUser(userName);
             membershipUser.UnlockUser();
             this.DomainUserService.UpdateLastModified(user);
         }
@@ -70,8 +74,6 @@ namespace Pleiades.Framework.Web.Security.Concrete
         /// </summary>
         public string ResetPassword(Model.DomainUser user)
         {
-            this.RootUserAssertion(user);
-
             var membershipUser = Membership.GetUser(user.MembershipUser.UserName);
             var resetPassword = membershipUser.ResetPassword();
             DomainUserService.UpdateLastModified(user);
@@ -83,8 +85,6 @@ namespace Pleiades.Framework.Web.Security.Concrete
         /// </summary>
         public string ResetPasswordWithAnswer(Model.DomainUser user, string answer)
         {
-            this.RootUserAssertion(user);
-
             var membershipUser = Membership.GetUser(user.MembershipUser.UserName);
             var resetPassword = membershipUser.ResetPassword(answer);
             DomainUserService.UpdateLastModified(user);
@@ -105,8 +105,6 @@ namespace Pleiades.Framework.Web.Security.Concrete
         /// </summary>
         public void ChangePassword(Model.DomainUser user, string oldPassword, string newPassword)
         {
-            this.RootUserAssertion(user);
-
             var membershipUser = Membership.GetUser(user.MembershipUser.UserName);
             if (!membershipUser.ChangePassword(oldPassword, newPassword))
             {
@@ -121,8 +119,6 @@ namespace Pleiades.Framework.Web.Security.Concrete
         /// </summary>
         public void ChangePasswordQuestionAndAnswer(Model.DomainUser user, string password, string question, string answer)
         {
-            RootUserAssertion(user);
-
             var membershipUser = Membership.GetUser(user.MembershipUser.UserName);
             if (!membershipUser.ChangePasswordQuestionAndAnswer(password, question, answer))
             {
@@ -137,8 +133,6 @@ namespace Pleiades.Framework.Web.Security.Concrete
         /// </summary>
         public void ChangeEmailAddress(Model.DomainUser user, string emailAddress)
         {
-            RootUserAssertion(user);
-
             var userName = Membership.GetUserNameByEmail(emailAddress);
             if (userName == user.MembershipUser.UserName)
                 return;
@@ -159,8 +153,6 @@ namespace Pleiades.Framework.Web.Security.Concrete
         /// </summary>
         public void SetUserApproval(Model.DomainUser user, bool approved)
         {
-            RootUserAssertion(user);
-
             var membershipUser = Membership.GetUser(user.MembershipUser.UserName);
             membershipUser.IsApproved = approved;
             Membership.UpdateUser(membershipUser);
@@ -177,19 +169,5 @@ namespace Pleiades.Framework.Web.Security.Concrete
             var membershipUser = Membership.GetUser(user.MembershipUser.UserName);
         }
           
-
-        /// <summary>
-        /// Ensures the Root User's Membership data cannot be modified by application layer
-        /// The only way to change Root is to delete them from the data base and run Initialize (redeploy)
-        /// </summary>
-        /// <param name="user"></param>
-        private void RootUserAssertion(Model.DomainUser user)
-        {
-            var domainUser = DomainUserService.RetrieveUserByDomainUserId(user.DomainUserId);
-            if (domainUser.UserRole == UserRole.Root)
-            {
-                throw new Exception("Root User Membership cannot be modified by the application layer");
-            }
-        }
     }
 }

@@ -11,6 +11,6 @@ namespace Pleiades.Framework.Data
         void Add(T entity);
         void Delete(T entity);
         void Edit(T entity);
-        void Save();
+        void SaveChanges();
     }
 }

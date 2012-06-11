@@ -16,13 +16,13 @@ namespace Pleiades.Framework.Web.Security.Concrete
     /// </summary>
     public class HttpContextUserService : IHttpContextUserService
     {
-        public IMembershipService MembershipUserService { get; set; }
+        public IMembershipAdapter MembershipUserService { get; set; }
         public IDomainUserService DomainUserService { get; set; }
         public IFormsAuthenticationService FormsAuthenticationService { get; set; }
 
         public HttpContextUserService()
         {
-            this.MembershipUserService = new MembershipService();
+            this.MembershipUserService = new MembershipAdapter();
             this.DomainUserService = new DomainUserService();
             this.FormsAuthenticationService = new FormsAuthenticationService();
         }
