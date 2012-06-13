@@ -60,35 +60,15 @@
     <Compile Include="MvcHelpers\NavigationLink.cs" />
     <Compile Include="MvcHelpers\NavigationLinkFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\Interface\IOwnerAuthorizationService.cs" />
     <Compile Include="Security\Interface\IFormsAuthenticationService.cs" />
-    <Compile Include="Security\Interface\ISystemAuthorizationService.cs" />
-    <Compile Include="Security\Interface\IDomainUserService.cs" />
-    <Compile Include="Security\Interface\IMembershipAdapter.cs" />
+    <Compile Include="Security\Interface\IMembershipService.cs" />
     <Compile Include="Security\Attributes\AuthorizeAttributeBase.cs" />
     <Compile Include="Security\Concrete\HttpContextUserService.cs" />
-    <Compile Include="Security\Concrete\OwnerAuthorizationService.cs" />
     <Compile Include="Security\Concrete\FormsAuthenticationService.cs" />
-    <Compile Include="Security\Concrete\SystemAuthorizationService.cs" />
-    <Compile Include="Security\Concrete\DomainUserService.cs" />
-    <Compile Include="Security\Concrete\MembershipAdapter.cs" />
-    <Compile Include="Security\Data\PleiadesWeb.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PleiadesWeb.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Security\Model\DomainUserCreateRequest.cs" />
-    <Compile Include="Security\Model\SecurityRequirementsContext.cs" />
-    <Compile Include="Security\Model\OwnershipContext.cs" />
-    <Compile Include="Security\Model\AuthorizationZone.cs" />
-    <Compile Include="Security\Model\DomainUserCondensed.cs" />
-    <Compile Include="Security\Model\AccountStatus.cs" />
+    <Compile Include="Security\Concrete\MembershipService.cs" />
     <Compile Include="Security\Interface\IHttpContextUserService.cs" />
-    <Compile Include="Security\Model\SecurityResponseCode.cs" />
+    <Compile Include="Security\Model\CreateNewMembershipUserRequest.cs" />
     <Compile Include="Security\Model\MembershipUser.cs" />
-    <Compile Include="Security\Model\DomainUser.cs" />
-    <Compile Include="Security\Model\AccountLevel.cs" />
-    <Compile Include="Security\Model\UserRole.cs" />
     <Compile Include="MvcHelpers\EnumToSelectList.cs" />
     <Compile Include="Security\Providers\ExtensionMethods.cs" />
     <Compile Include="Security\Interface\IMembershipRepository.cs" />
@@ -99,6 +79,10 @@
     <Compile Include="Security\Providers\MembershipProviderSettings.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Pleiades.Framework.Security\Pleiades.Framework.Identity.csproj">
+      <Project>{7F1F1DA2-6F72-4D68-A06C-D3379941B060}</Project>
+      <Name>Pleiades.Framework.Identity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Framework\Pleiades.Framework.csproj">
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
       <Name>Pleiades.Framework</Name>
@@ -111,10 +95,6 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="Security\Data\PleiadesWeb.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PleiadesWeb.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

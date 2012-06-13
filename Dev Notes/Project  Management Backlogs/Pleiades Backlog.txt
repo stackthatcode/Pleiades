@@ -3,7 +3,7 @@ Pleiades Administrative Area - TODO
 
 SECURITY/FRAMEWORK REFACTORING BACKLOG / NOTES
 ==============================================
-- Bit the bullet -- write an adapter for the MembershipService
+- Bite the bullet -- write an adapter for the MembershipService => NO!
 - Write Unit Tests for Execution namespace
 - Decouple Membership from DomainUserService => only consume MembershipService operations
 - Verify the User "Touch" usage

@@ -40,11 +40,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AggregateRootUserRepository.cs" />
     <Compile Include="BrandRepository.cs" />
     <Compile Include="ColorRepository.cs" />
+    <Compile Include="DomainUserRepository.cs" />
     <Compile Include="MembershipRepository.cs" />
     <Compile Include="ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Pleiades.Web\Pleiades.Framework.Web.csproj">
+      <Project>{804F063C-505F-441E-B205-688C42E637AD}</Project>
+      <Name>Pleiades.Framework.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,7 +6,7 @@ namespace Pleiades.Framework.Web.Security.Interface
 {
     public interface IFormsAuthenticationService
     {
-        void SetAuthCookieForUser(DomainUser user, bool persistent);
+        void SetAuthCookieForUser(string username, bool persistent);
         void ClearAuthenticationCookie();
     }
 }

@@ -39,31 +39,5 @@ namespace Pleiades.Framework.Web.Security.Model
         // Membership Provider state properties
         public DateTime CreationDate { get; set; }
         public DateTime LastModified { get; set; }
-
-
-        /// <summary>
-        /// Transfers from MembershipUser to Pleiades MembershipUser
-        /// 
-        /// TODO: replace this entirely with AutoMapper
-        /// </summary>
-        public static Model.MembershipUser ConvertToPleiades(System.Web.Security.MembershipUser user)
-        {
-            return new MembershipUser
-            {
-                UserName = user.UserName,
-                ProviderUserKey = user.ProviderUserKey,
-
-                Email = user.Email,
-                Comment = user.Comment,
-                IsApproved = user.IsApproved,
-
-                CreationDate = user.CreationDate,
-                IsLockedOut = user.IsLockedOut,
-                IsOnline = user.IsOnline,
-                LastActivityDate = user.LastActivityDate,
-                LastLoginDate = user.LastLoginDate,
-                PasswordQuestion = user.PasswordQuestion,
-            };
-        }
     }
 }

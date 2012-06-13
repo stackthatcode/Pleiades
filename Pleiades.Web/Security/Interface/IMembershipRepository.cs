@@ -66,11 +66,7 @@ namespace Pleiades.Framework.Web.Security.Providers
             //    membershipUsers.Add(GetMembershipUserFromPersitentObject(user));
             //}
             //
-            //return membershipUsers;
-
-    
-    
-    
+            //return membershipUsers;    
     
             //MembershipUserCollection membershipUsers = new MembershipUserCollection();
             //PleiadesDB context = new PleiadesDB(ConnectionString);

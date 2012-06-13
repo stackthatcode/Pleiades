@@ -29,6 +29,11 @@ namespace Pleiades.Framework.Data.EF
             return query;
         }
 
+        public T FindFirstOrDefault(Expression<Func<T, bool>> predicate)
+        {
+            return this.Context.Set<T>().FirstOrDefault(predicate);
+        }
+
         public virtual void Add(T entity)
         {
             this.Context.Set<T>().Add(entity);
@@ -48,5 +53,16 @@ namespace Pleiades.Framework.Data.EF
         {
             this.Context.SaveChanges();
         }
+
+        public virtual int Count()
+        {
+            return this.GetAll().Count();
+        }
+
+        public virtual int Count(Expression<Func<T, bool>> predicate)
+        {
+            return this.FindBy(predicate).Count();
+        }
+
     }
 }

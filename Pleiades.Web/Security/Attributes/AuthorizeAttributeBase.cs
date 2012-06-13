@@ -5,9 +5,13 @@ using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Pleiades.Framework.Identity.Interface;
+using Pleiades.Framework.Identity.Concrete;
+using Pleiades.Framework.Identity.Model;
+using Pleiades.Framework.Security;
 using Pleiades.Framework.Web.Security.Interface;
-using Pleiades.Framework.Web.Security.Model;
 using Pleiades.Framework.Web.Security.Concrete;
+using Pleiades.Framework.Web.Security.Model;
 
 namespace Pleiades.Web.Security.Attributes
 {
@@ -59,12 +63,12 @@ namespace Pleiades.Web.Security.Attributes
         /// <summary>
         /// ctor
         /// </summary>
-        public AuthorizeAttributeBase()
+        public AuthorizeAttributeBase(IHttpContextUserService contextService, 
+                IDomainUserService domainUserSerivce, ISystemAuthorizationService authService)
         {
-            // TODO: wire these so the DI framework can inject them
-            this.HttpContextUserService = new HttpContextUserService();
-            this.DomainUserService = new DomainUserService();
-            this.SystemAuthorizationService = new SystemAuthService();
+            this.HttpContextUserService = contextService;
+            this.DomainUserService = domainUserSerivce;
+            this.SystemAuthorizationService = authService;
         }
 
         /// <summary>

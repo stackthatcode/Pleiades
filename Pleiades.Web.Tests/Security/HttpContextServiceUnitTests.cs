@@ -90,7 +90,7 @@ namespace Pleiades.Web.Tests.SecurityUnitTests
                 x.RetrieveUserByMembershipUserName("bob123"))
                 .Return(user);
 
-            var membershipService = MockRepository.GenerateMock<IMembershipAdapter>();
+            var membershipService = MockRepository.GenerateMock<IMembershipService>();
             membershipService.Expect(x => x.Touch(user));
 
             var context = HttpContextStubFactory.Make(IsAuthenticated: true, AuthenticatedName: "bob123");

@@ -1,5 +1,6 @@
 ﻿using System;
 using Model = Pleiades.Framework.Web.Security.Model;
+using WebSecurity = System.Web.Security;
 
 namespace Pleiades.Framework.Web.Security.Providers
 {
@@ -10,10 +11,10 @@ namespace Pleiades.Framework.Web.Security.Providers
         /// </summary>
         /// <param name="user">user object containing the user data retrieved from database</param>
         /// <returns>membership user object</returns>
-        public static System.Web.Security.MembershipUser ToSecurityMembershipUser(this Model.MembershipUser user, string providerName)
+        public static WebSecurity.MembershipUser ToSecurityMembershipUser(this Model.MembershipUser user, string providerName)
         {
-            return new 
-                System.Web.Security.MembershipUser(
+            return new
+                WebSecurity.MembershipUser(
                         providerName,
                         user.UserName,
                         user.ProviderUserKey,
@@ -27,6 +28,31 @@ namespace Pleiades.Framework.Web.Security.Providers
                         Convert.ToDateTime(user.LastActivityDate),
                         Convert.ToDateTime(user.LastPasswordChangedDate),
                         Convert.ToDateTime(user.LastLockedOutDate));
+        }
+
+        /// <summary>
+        /// Transfers from MembershipUser to Pleiades MembershipUser
+        /// 
+        /// TODO: replace this entirely with AutoMapper
+        /// </summary>
+        public static Model.MembershipUser ToModelMembershipUser(this System.Web.Security.MembershipUser user)
+        {
+            return new Model.MembershipUser
+            {
+                UserName = user.UserName,
+                ProviderUserKey = user.ProviderUserKey,
+
+                Email = user.Email,
+                Comment = user.Comment,
+                IsApproved = user.IsApproved,
+
+                CreationDate = user.CreationDate,
+                IsLockedOut = user.IsLockedOut,
+                IsOnline = user.IsOnline,
+                LastActivityDate = user.LastActivityDate,
+                LastLoginDate = user.LastLoginDate,
+                PasswordQuestion = user.PasswordQuestion,
+            };
         }
 
     }

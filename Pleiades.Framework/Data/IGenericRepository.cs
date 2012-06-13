@@ -8,9 +8,12 @@ namespace Pleiades.Framework.Data
     {
         IQueryable<T> GetAll();
         IQueryable<T> FindBy(Expression<Func<T, bool>> predicate);
+        T FindFirstOrDefault(Expression<Func<T, bool>> predicate);
         void Add(T entity);
         void Delete(T entity);
         void Edit(T entity);
         void SaveChanges();
+        int Count();
+        int Count(Expression<Func<T, bool>> predicate);
     }
 }
