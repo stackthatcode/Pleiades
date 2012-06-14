@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
-using Pleiades.Framework.Web.Security.Model;
+using Pleiades.Framework.Membership.Model;
 
-namespace Pleiades.Framework.Web.Security.Interface
+namespace Pleiades.Framework.Membership.Interface
 {
     public interface IHttpContextUserService
     {

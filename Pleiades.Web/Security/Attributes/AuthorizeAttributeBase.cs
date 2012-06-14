@@ -20,13 +20,6 @@ namespace Pleiades.Web.Security.Attributes
     /// </summary>
     public class AuthorizeAttributeBase : AuthorizeAttribute
     {
-        // Service Dependencies
-        public IHttpContextUserService HttpContextUserService { get; set; }
-        public IDomainUserService DomainUserService { get; set; }
-        public ISystemAuthorizationService SystemAuthorizationService { get; set; }
-
-
-        #region Security Requirements Context Properties
         /// <summary>
         /// The AuthorizationZone specifies 
         /// </summary>
@@ -42,34 +35,20 @@ namespace Pleiades.Web.Security.Attributes
         /// </summary> 
         public bool PaymentArea { get; set; }
 
+
         /// <summary>
         /// Local property extracts Attribute Properties
         /// </summary>
-        protected SecurityRequirementsContext SecurityRequirementsContext
+        protected SecurityRequirementsContext MakeSecurityRequirementsContext()
         {
-            get
+            return new SecurityRequirementsContext
             {
-                return new SecurityRequirementsContext
-                {
-                    AuthorizationZone = AuthorizationZone,
-                    AccountLevelRestriction = AccountLevelRestriction,
-                    PaymentArea = PaymentArea,
-                };
-            }
+                AuthorizationZone = this.AuthorizationZone,
+                AccountLevelRestriction = this.AccountLevelRestriction,
+                PaymentArea = this.PaymentArea,
+            };
         }
-        #endregion
 
-
-        /// <summary>
-        /// ctor
-        /// </summary>
-        public AuthorizeAttributeBase(IHttpContextUserService contextService, 
-                IDomainUserService domainUserSerivce, ISystemAuthorizationService authService)
-        {
-            this.HttpContextUserService = contextService;
-            this.DomainUserService = domainUserSerivce;
-            this.SystemAuthorizationService = authService;
-        }
 
         /// <summary>
         /// Overrides the ASP.NET MVC default authorization with Framework logic
@@ -77,8 +56,6 @@ namespace Pleiades.Web.Security.Attributes
         /// <param name="filterContext">ASP.NET MVC AuthorizationContext</param>
         public override sealed void OnAuthorization(AuthorizationContext filterContext)
         {
-            // *** TODO: is there some way to attach this object to the HttpContext?  Put it in a Session? *** //
-
             // Create a DomainUser object based on the HttpContext
             var domainUser = this.HttpContextUserService.RetrieveUserFromHttpContext(filterContext.HttpContext);
 

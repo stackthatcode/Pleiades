@@ -6,7 +6,7 @@ using System.Web.Configuration;
 using System.Web.Hosting;
 using System.Web.Security;
 
-namespace Pleiades.Framework.Web.Security.Providers
+namespace Pleiades.Framework.MembershipProvider.Providers
 {
     /// <summary>
     /// Isolates Membership Provider Settings

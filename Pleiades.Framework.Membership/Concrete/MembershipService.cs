@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Security;
 using SecurityMembershipUser = System.Web.Security.MembershipUser;
-using Pleiades.Framework.Web.Security.Interface;
-using Pleiades.Framework.Web.Security.Model;
-using Pleiades.Framework.Web.Security.Providers;
+using Pleiades.Framework.MembershipProvider.Interface;
+using Pleiades.Framework.MembershipProvider.Model;
+using Pleiades.Framework.MembershipProvider.Providers;
 using Pleiades.Web.Security.Utility;
 
-namespace Pleiades.Framework.Web.Security.Concrete
+namespace Pleiades.Framework.MembershipProvider.Concrete
 {
     public class MembershipService : IMembershipService
     {
         // QUESTION: How to address these...? DomainUserService.UpdateLastModified(user); => ANSWER: DON'T!
 
-        public Model.MembershipUser CreateUser(CreateNewMembershipUserRequest request, MembershipCreateStatus createStatus)
+        public Model.MembershipUser CreateUser(CreateNewMembershipUserRequest request, out MembershipCreateStatus createStatus)
         {
             var generatedUserName = GenerateUserName();
             var membershipuser = 
@@ -213,7 +213,7 @@ namespace Pleiades.Framework.Web.Security.Concrete
         /// Signal User Activity has occured
         /// </summary>
         /// <param name="user"></param>
-        public void Touch(string userName)
+        public void Touch(string username)
         {
             var membershipUser = Membership.GetUser(username);
         }          

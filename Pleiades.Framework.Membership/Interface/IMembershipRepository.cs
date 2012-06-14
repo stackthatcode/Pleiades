@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Pleiades.Framework.Data;
-using Pleiades.Framework.Web.Security.Model;
+using Pleiades.Framework.MembershipProvider.Model;
 
-namespace Pleiades.Framework.Web.Security.Providers
+namespace Pleiades.Framework.MembershipProvider.Providers
 {
     /// <summary>
     /// Contract for Persistence Layer operations needed by the Membership Provider

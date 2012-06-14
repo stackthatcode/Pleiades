@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Web.Security;
-using Pleiades.Framework.Membership.Model;
+using Pleiades.Framework.MembershipProvider.Model;
 
-namespace Pleiades.Framework.Membership.Interface
+namespace Pleiades.Framework.MembershipProvider.Interface
 {
     public interface IFormsAuthenticationService
     {

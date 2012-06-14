@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Web;
 using System.Web.Security;
 using System.Security.Principal;
+using Pleiades.Framework.Identity.Interface;
 using Pleiades.Framework.Web.Security.Interface;
 using Pleiades.Framework.Web.Security.Model;
 
@@ -20,11 +18,13 @@ namespace Pleiades.Framework.Web.Security.Concrete
         public IDomainUserService DomainUserService { get; set; }
         public IFormsAuthenticationService FormsAuthenticationService { get; set; }
 
-        public HttpContextUserService()
+
+        public HttpContextUserService(IMembershipService membershipUserService,
+                IDomainUserService domainUserService, IFormsAuthenticationService formsAuthenticationService)
         {
-            this.MembershipUserService = new MembershipService();
-            this.DomainUserService = new DomainUserService();
-            this.FormsAuthenticationService = new FormsAuthenticationService();
+            this.MembershipUserService = membershipUserService;
+            this.DomainUserService = domainUserService;
+            this.FormsAuthenticationService = formsAuthenticationService;
         }
 
         /// <summary>
@@ -32,9 +32,6 @@ namespace Pleiades.Framework.Web.Security.Concrete
         /// </summary>
         public DomainUser RetrieveUserFromHttpContext(HttpContextBase httpContext)
         {
-            // Build the User's Identity
-            var user = new DomainUser();
-
             var httpContextUserName = this.GetUserNameFromContext(httpContext);
 
             // No username in context?  Return a blank/anon User
@@ -44,7 +41,7 @@ namespace Pleiades.Framework.Web.Security.Concrete
             }
 
             // Attempt to retrieve the Domain User from the system
-            user = DomainUserService.RetrieveUserByMembershipUserName(httpContextUserName);
+            var user = DomainUserService.RetrieveUserByMembershipUserName(httpContextUserName);
 
             // Does this User exist in our system?  
             if (user == null)

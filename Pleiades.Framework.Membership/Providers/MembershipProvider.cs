@@ -9,7 +9,7 @@ using System.Web.Security;
 using Pleiades.Framework.Data;
 using Pleiades.Framework.Helpers;
 
-namespace Pleiades.Framework.Web.Security.Providers
+namespace Pleiades.Framework.MembershipProvider.Providers
 {
     /// <summary>
     /// Entity Framework 4.0 Customer Membership Provider

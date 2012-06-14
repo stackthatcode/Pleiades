@@ -1,17 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Pleiades.Framework.Web.Security.Model;
+using MembershipCreateStatus = System.Web.Security.MembershipCreateStatus;
+using Pleiades.Framework.MembershipProvider.Model;
 
-namespace Pleiades.Framework.Web.Security.Interface
+namespace Pleiades.Framework.MembershipProvider.Interface
 {
     /// <summary>
     /// Contains all Membership Provider-related operations for managing Domain User objects -- root Entity Aggregates
     /// </summary>
     public interface IMembershipService
     {
-        MembershipUser CreateUser(CreateNewMembershipUserRequest request);
+        // TODO: wire these in
+        //        var user = DomainUserService.RetrieveUserByEmail(emailaddr);
+        //if (user == null)
+        //{
+        //    return null;
+        //}
+
+        //if (user.AccountStatus == Model.AccountStatus.Disabled)
+        //{
+        //    return null;
+        //}
+
+        MembershipUser CreateUser(CreateNewMembershipUserRequest request, out MembershipCreateStatus createStatus);
         string GenerateUserName();
 
         MembershipUser ValidateUserByEmailAddr(string emailaddr, string password);        

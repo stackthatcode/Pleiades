@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Pleiades.Framework.Web.Security.Providers
+namespace Pleiades.Framework.MembershipProvider.Providers
 {
     /// <summary>
     /// Enables injection of IMembershipRepository implementation into the MembershipProvider, which controls the construction
