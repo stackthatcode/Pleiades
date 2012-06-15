@@ -43,11 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authorization\AccountLevelStep.cs" />
+    <Compile Include="Execution\AccountLevelStep.cs" />
     <Compile Include="Concrete\DomainUserService.cs" />
-    <Compile Include="Authorization\AccountStatusAuthorizationStep.cs" />
-    <Compile Include="Authorization\SimpleOwnerVerificationStep.cs" />
-    <Compile Include="Authorization\RoleAuthorizationStep.cs" />
+    <Compile Include="Execution\AccountStatusAuthorizationStep.cs" />
+    <Compile Include="Execution\CompositeIdentityAuthStep.cs" />
+    <Compile Include="Execution\SimpleOwnerAuthorizationStep.cs" />
+    <Compile Include="Execution\RoleAuthorizationStep.cs" />
     <Compile Include="Interface\IDomainUserService.cs" />
     <Compile Include="Interface\ISecurityRequirementsContext.cs" />
     <Compile Include="Model\AccountLevel.cs" />

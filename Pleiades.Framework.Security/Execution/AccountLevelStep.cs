@@ -4,7 +4,7 @@ using Pleiades.Framework.Security;
 using Pleiades.Framework.Identity.Interface;
 using Pleiades.Framework.Identity.Model;
 
-namespace Pleiades.Framework.Security.Authorization
+namespace Pleiades.Framework.Identity.Execution
 {
     public class AccountLevelStep<T> : Step<T>
             where T : ISecurityRequirementsContext, ISecurityContext

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Pleiades.Framework.Helpers;
-using Pleiades.Framework.Web.Security.Model;
 
 namespace Pleiades.Web.MvcHelpers
 {

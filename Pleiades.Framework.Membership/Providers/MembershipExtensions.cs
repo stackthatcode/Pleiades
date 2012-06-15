@@ -4,7 +4,7 @@ using WebSecurity = System.Web.Security;
 
 namespace Pleiades.Framework.MembershipProvider.Providers
 {
-    public static class ExtensionMethods
+    public static class MembershipExtensions
     {
         /// <summary>
         /// A helper function that takes the current persistent user and creates a MembershiUser from the values.

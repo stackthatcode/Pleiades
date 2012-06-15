@@ -44,9 +44,9 @@ namespace Pleiades.Framework.Identity.Concrete
                 }
             }
 
-            if (newUserRequest.UserRole == UserRole.Root)
+            if (newUserRequest.UserRole == UserRole.Supreme)
             {
-                var countRoot = this.GetUserCountByRole(UserRole.Root);
+                var countRoot = this.GetUserCountByRole(UserRole.Supreme);
                 if (countRoot >= MaxRootUsers)
                 {
                     throw new Exception(String.Format("Maximum number of Root Users is 1", MaxRootUsers));
@@ -123,7 +123,7 @@ namespace Pleiades.Framework.Identity.Concrete
         public void Delete(Model.DomainUser domainUser)
         {
             var domainUserEntity = this.RetrieveUserById(domainUser.ID);
-            if (domainUserEntity.UserRole == UserRole.Root)
+            if (domainUserEntity.UserRole == UserRole.Supreme)
             {
                 throw new Exception("Illegal to delete Root User from application layer");
             }

@@ -60,13 +60,9 @@
     <Compile Include="MvcHelpers\NavigationLink.cs" />
     <Compile Include="MvcHelpers\NavigationLinkFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\Execution\GetUserFromHttpContextStep.cs" />
-    <Compile Include="Security\Attributes\AuthorizeAttributeBase.cs" />
-    <Compile Include="Security\Concrete\HttpContextUserService.cs" />
-    <Compile Include="Security\Concrete\FormsAuthenticationService.cs" />
+    <Compile Include="Security\AuthorizeAttributeBase.cs" />
     <Compile Include="MvcHelpers\EnumToSelectList.cs" />
-    <Compile Include="Security\Interface\IFormsAuthenticationService.cs" />
-    <Compile Include="Security\Interface\IHttpContextUserService.cs" />
+    <Compile Include="Security\SecurityCodeProcessorBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pleiades.Framework.Security\Pleiades.Framework.Identity.csproj">
@@ -82,11 +78,8 @@
       <Name>Pleiades.Framework.TestHelpers</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="obj\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

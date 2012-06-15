@@ -9,7 +9,7 @@ using Pleiades.Framework.Security;
 
 namespace Pleiades.Framework.Identity.Execution
 {
-    public class OwnerAuthorizationStep<T> : Step<T> 
+    public class SimpleOwnerAuthorizationStep<T> : Step<T> 
             where T : ISecurityRequirementsContext, ISecurityContext
     {
         public override void Execute(T context)
