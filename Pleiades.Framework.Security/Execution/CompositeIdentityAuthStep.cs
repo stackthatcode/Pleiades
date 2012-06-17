@@ -1,20 +1,20 @@
-﻿using System;
-using Pleiades.Framework.Execution;
-using Pleiades.Framework.Security;
+﻿using Pleiades.Framework.Execution;
 using Pleiades.Framework.Identity.Interface;
 using Pleiades.Framework.Identity.Model;
+using Pleiades.Framework.Injection;
+using Pleiades.Framework.Security;
 
 namespace Pleiades.Framework.Identity.Execution
 {
     public class CompositeIdentityAuthStep<T> : StepComposite<T>
-            where T : ISecurityRequirementsContext, ISecurityContext
+            where T : IIdentityRequirementsContext, ISecurityContext, IIdentityUserContext
     {
-        public CompositeIdentityAuthStep()
+        public CompositeIdentityAuthStep(Container container) : base(container)
         {
-            this.Add(new AccountStatusAuthorizationStep<T>());
-            this.Add(new RoleAuthorizationStep<T>());
-            this.Add(new SimpleOwnerAuthorizationStep<T>());
-            this.Add(new AccountLevelStep<T>());
+            this.Inject<AccountStatusAuthorizationStep<T>>();
+            this.Inject<RoleAuthorizationStep<T>>();
+            this.Inject<SimpleOwnerAuthorizationStep<T>>();
+            this.Inject<AccountLevelStep<T>>();
         }
     }
 }

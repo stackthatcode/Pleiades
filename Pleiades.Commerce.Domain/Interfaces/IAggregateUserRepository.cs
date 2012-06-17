@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using Pleiades.Commerce.Domain.Entities.Users;
+using Pleiades.Framework.Data;
+using Pleiades.Framework.Identity.Model;
 
-namespace Pleiades.Commerce.Identity.Interface
+namespace Pleiades.Commerce.Domain.Interface
 {
-    public interface IAggregateUserRepository
+    public interface IAggregateUserRepository : IGenericRepository<AggregateUser>
     {
-        // Move these into the "Combined User Service"
-        DomainUser RetrieveUserByMembershipUserName(string username);
-        DomainUser RetrieveUserByEmail(string emailaddr);
-        IEnumerable<DomainUserCondensed> RetreiveAll(int pageNumber, int pageSize, List<UserRole> role);
-        IEnumerable<DomainUserCondensed> RetreiveByLikeEmail(
-            string emailAddressToMatch, int pageNumber, int pageSize, List<UserRole> role);
+        AggregateUser RetrieveUserByMembershipUserName(string username);
+        AggregateUser RetrieveUserByEmail(string emailaddr);
+        IEnumerable<AggregateUser> RetreiveAll(int pageNumber, int pageSize, List<IdentityUserRole> role);
+        IEnumerable<AggregateUser> RetreiveByLikeEmail(
+            string emailAddressToMatch, int pageNumber, int pageSize, List<IdentityUserRole> role);
     }
 }

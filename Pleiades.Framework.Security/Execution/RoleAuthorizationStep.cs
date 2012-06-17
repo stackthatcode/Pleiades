@@ -6,38 +6,39 @@ using Pleiades.Framework.Identity.Model;
 
 namespace Pleiades.Framework.Identity.Execution
 {
-    public class RoleAuthorizationStep<T> : Step<T> 
-            where T : ISecurityRequirementsContext, ISecurityContext
+    public class RoleAuthorizationStep<T> : Step<T>
+            where T : IIdentityRequirementsContext, ISecurityContext, IIdentityUserContext
     {
         public override void Execute(T context)
         {
             // Public areas are accessible by everybody
-            if (context.AuthorizationZone == AuthorizationZone.Public)
+            if (context.IdentityRequirements.AuthorizationZone == AuthorizationZone.Public)
             {
                 return;
             }
 
             // Admins have no barriers
-            if (context.User.UserRole.IsAdministrator())
+            if (context.IdentityUser.UserRole.IsAdministrator())
             {
                 return;
             }
 
             // Reject anyone that's in an Admin area that's not an Admin
-            if (context.AuthorizationZone == AuthorizationZone.Administrative && context.User.UserRole.IsNotAdministrator())
+            if (context.IdentityRequirements.AuthorizationZone == AuthorizationZone.Administrative && 
+                context.IdentityUser.UserRole.IsNotAdministrator())
             {
                 context.SecurityResponseCode = SecurityResponseCode.AccessDenied;
-                context.ExecutionStateValid = false;
+                this.Kill(context);
                 return;
             }
 
             // Reject anyone that's not Trusted in a Trusted area; solicit for Logon
-            if (context.AuthorizationZone == AuthorizationZone.Restricted
-                && context.User.UserRole != UserRole.Trusted
-                && context.User.UserRole.IsNotAdministrator())
+            if (context.IdentityRequirements.AuthorizationZone == AuthorizationZone.Restricted
+                && context.IdentityUser.UserRole != IdentityUserRole.Trusted
+                && context.IdentityUser.UserRole.IsNotAdministrator())
             {
                 context.SecurityResponseCode = SecurityResponseCode.AccessDeniedSolicitLogon;
-                context.ExecutionStateValid = false;
+                this.Kill(context);
                 return;
             }
 

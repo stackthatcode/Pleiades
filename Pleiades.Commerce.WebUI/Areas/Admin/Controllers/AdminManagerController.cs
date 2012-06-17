@@ -110,7 +110,7 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
                 return View(userViewModel);
             }
 
-            // Update Domain User stuff
+            // Update Identity User stuff
             dbDomainUser.FirstName = userViewModel.FirstName;
             dbDomainUser.LastName = userViewModel.LastName;
             DomainUserService.Update(dbDomainUser);

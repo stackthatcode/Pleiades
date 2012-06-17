@@ -7,12 +7,12 @@ using Pleiades.Framework.Data;
 
 namespace Pleiades.Framework.Data.EF
 {
-    public abstract class GenericRepository<T> : IGenericRepository<T>
+    public class EFGenericRepository<T> : IGenericRepository<T>
             where T : class
     {
         protected DbContext Context { get; set; }
 
-        public GenericRepository(DbContext context)
+        public EFGenericRepository(DbContext context)
         {
             this.Context = context;
         }
@@ -23,13 +23,13 @@ namespace Pleiades.Framework.Data.EF
             return query;
         }
 
-        public IQueryable<T> FindBy(Expression<Func<T, bool>> predicate)
+        public virtual IQueryable<T> FindBy(Expression<Func<T, bool>> predicate)
         {
             IQueryable<T> query = this.Context.Set<T>().Where(predicate);
             return query;
         }
 
-        public T FindFirstOrDefault(Expression<Func<T, bool>> predicate)
+        public virtual T FindFirstOrDefault(Expression<Func<T, bool>> predicate)
         {
             return this.Context.Set<T>().FirstOrDefault(predicate);
         }

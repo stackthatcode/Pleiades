@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Pleiades.Commerce.Domain.Entities
+namespace Pleiades.Commerce.Domain.Entities.Products
 {
     /// <summary>
     /// Represents the aggregate root of a single product.  Every variant (generally color schema) will

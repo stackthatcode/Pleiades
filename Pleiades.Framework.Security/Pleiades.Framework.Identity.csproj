@@ -44,21 +44,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Execution\AccountLevelStep.cs" />
-    <Compile Include="Concrete\DomainUserService.cs" />
+    <Compile Include="Concrete\IdentityUserService.cs" />
     <Compile Include="Execution\AccountStatusAuthorizationStep.cs" />
     <Compile Include="Execution\CompositeIdentityAuthStep.cs" />
     <Compile Include="Execution\SimpleOwnerAuthorizationStep.cs" />
     <Compile Include="Execution\RoleAuthorizationStep.cs" />
-    <Compile Include="Interface\IDomainUserService.cs" />
-    <Compile Include="Interface\ISecurityRequirementsContext.cs" />
+    <Compile Include="Interface\IIdentityRepository.cs" />
+    <Compile Include="Interface\IIdentityUserContext.cs" />
+    <Compile Include="Interface\IIdentityUserService.cs" />
+    <Compile Include="Interface\IIdentityRequirementsContext.cs" />
     <Compile Include="Model\AccountLevel.cs" />
     <Compile Include="Model\AccountStatus.cs" />
     <Compile Include="Model\AuthorizationZone.cs" />
-    <Compile Include="Model\CreateNewDomainUserRequest.cs" />
-    <Compile Include="Model\DomainUser.cs" />
-    <Compile Include="Model\OwnershipContext.cs" />
-    <Compile Include="Model\SecurityRequirementsContext.cs" />
-    <Compile Include="Model\UserRole.cs" />
+    <Compile Include="Model\CreateNewIdentityUserRequest.cs" />
+    <Compile Include="Model\IdentityUser.cs" />
+    <Compile Include="Model\IdentityRequirements.cs" />
+    <Compile Include="Model\IdentityUserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

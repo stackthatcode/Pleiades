@@ -5,7 +5,7 @@ using Pleiades.Framework.MembershipProvider.Model;
 namespace Pleiades.Framework.MembershipProvider.Interface
 {
     /// <summary>
-    /// Contains all Membership Provider-related operations for managing Domain User objects -- root Entity Aggregates
+    /// Contains all Membership Provider-related operations for managing Membership User objects -- root Entity Aggregates
     /// </summary>
     public interface IMembershipService
     {

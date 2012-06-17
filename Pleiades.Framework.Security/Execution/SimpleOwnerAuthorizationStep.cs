@@ -9,23 +9,30 @@ using Pleiades.Framework.Security;
 
 namespace Pleiades.Framework.Identity.Execution
 {
-    public class SimpleOwnerAuthorizationStep<T> : Step<T> 
-            where T : ISecurityRequirementsContext, ISecurityContext
+    public class SimpleOwnerAuthorizationStep<T> : Step<T>
+            where T : IIdentityRequirementsContext, ISecurityContext, IIdentityUserContext
     {
         public override void Execute(T context)
         {
-            if (context.User.UserRole.IsAdministrator())
+            if (context.IdentityUser.UserRole.IsAdministrator())
             {
                 return;
             }
 
-            if (context.User.ID == context.ResourceOwnerDomainUserId)
+            if (context.IdentityRequirements.ResourceOwnerIdentityUserId == null)
             {
                 return;
             }
 
-            context.SecurityResponseCode = SecurityResponseCode.AccessDenied;
-            context.ExecutionStateValid = false;
+            if (context.IdentityUser.ID == context.IdentityRequirements.ResourceOwnerIdentityUserId)
+            {
+                return;
+            }
+
+            this.Kill(context, () =>
+            {
+                context.SecurityResponseCode = SecurityResponseCode.AccessDenied;
+            });
         }
     }
 }

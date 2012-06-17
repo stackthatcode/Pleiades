@@ -5,13 +5,13 @@ namespace Pleiades.Framework.Identity.Model
     /// <summary>
     /// Root Aggregate for Domain & Membership User objects
     /// </summary>
-    public class DomainUser
+    public class IdentityUser
     {
         // Domain specific data
         public int ID { get; set; }
 
         // Authorization properties
-        public UserRole UserRole { get; set; }
+        public IdentityUserRole UserRole { get; set; }
         public AccountStatus? AccountStatus { get; set; }
         public AccountLevel? AccountLevel { get; set; }
         
@@ -23,9 +23,9 @@ namespace Pleiades.Framework.Identity.Model
         public DateTime LastModified { get; set; }
         public DateTime CreationDate { get; set; }
 
-        public DomainUser()
+        public IdentityUser()
         {
-            UserRole = UserRole.Anonymous;
+            UserRole = IdentityUserRole.Anonymous;
         }
     }
 }

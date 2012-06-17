@@ -7,35 +7,46 @@ using Pleiades.Framework.Identity.Model;
 namespace Pleiades.Framework.Identity.Execution
 {
     public class AccountStatusAuthorizationStep<T> : Step<T>
-            where T : ISecurityRequirementsContext, ISecurityContext
+            where T : IIdentityRequirementsContext, ISecurityContext, IIdentityUserContext
     {
         public override void Execute(T context)
         {
-            if (context.User.UserRole.IsAdministrator())
+            if (context.IdentityUser.UserRole.IsAdministrator())
             {
                 return;
             }
 
-            if (context.AuthorizationZone != AuthorizationZone.Restricted)
+            if (context.IdentityRequirements.AuthorizationZone != AuthorizationZone.Restricted)
             {
                 return;
             }
 
-            if (context.User.AccountStatus == null)
+            if (context.IdentityUser.AccountStatus == null)
             {
-                return;
+                this.Kill(context, 
+                    () =>
+                    {
+                        context.SecurityResponseCode = SecurityResponseCode.AccessDeniedSolicitLogon;
+                    });
             }
 
-            if (context.User.AccountStatus == AccountStatus.Disabled)
+            if (context.IdentityUser.AccountStatus == AccountStatus.Disabled)
             {
-                context.SecurityResponseCode = SecurityResponseCode.AccessDeniedSolicitLogon;
-                context.ExecutionStateValid = false;
+                this.Kill(context,
+                    () =>
+                    {
+                        context.SecurityResponseCode = SecurityResponseCode.AccessDeniedSolicitLogon;
+                    });
             }
 
-            if (context.User.AccountStatus == AccountStatus.PaymentRequired && context.PaymentArea != true)
+            if (context.IdentityUser.AccountStatus == AccountStatus.PaymentRequired && 
+                context.IdentityRequirements.PaymentArea != true)
             {
-                context.SecurityResponseCode = SecurityResponseCode.AccountDisabledNonPayment;
-                context.ExecutionStateValid = false;
+                this.Kill(context,
+                    () =>
+                    {
+                        context.SecurityResponseCode = SecurityResponseCode.AccountDisabledNonPayment;
+                    });
             }
 
             // Keep stepping!

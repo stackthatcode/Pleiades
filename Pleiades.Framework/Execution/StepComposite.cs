@@ -1,17 +1,28 @@
 ﻿using System.Collections.Generic;
 using Pleiades.Framework.Helpers;
+using Pleiades.Framework.Injection;
 
 namespace Pleiades.Framework.Execution
 {
     public class StepComposite<TContext> : Step<TContext>
             where TContext : IStepContext
     {
+        protected Container Container { get; set; }
         protected List<Step<TContext>> Steps = new List<Step<TContext>>();
 
-        public void Add(Step<TContext> step)
+
+        public StepComposite(Container container)
         {
+            this.Steps = new List<Step<TContext>>();
+            this.Container = container;
+        }
+
+        public void Inject<TChildStep>() where TChildStep : Step<TContext>
+        {
+            var step = this.Container.Resolve<TChildStep>();
             this.Steps.Add(step);
         }
+
 
         public override void Attach(IStepObserver observer)
         {

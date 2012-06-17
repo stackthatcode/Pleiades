@@ -25,5 +25,16 @@ namespace Pleiades.Framework.Execution
         {
             this.Observers.ForEach(x => x.Notify(o));
         }
+
+        public virtual void Kill(TContext context)
+        {
+            context.ExecutionStateValid = false;
+        }
+
+        public virtual void Kill(TContext context, Action action)
+        {
+            this.Kill(context);
+            action();
+        }
     }
 }

@@ -11,25 +11,26 @@ namespace Pleiades.Framework.Web.Security
     /// <summary>
     /// Base class for deriving Pleiades Framework-powered ASP.NET MVC Authorization Attributes
     /// </summary>
-    public abstract class AuthorizeAttributeBase : AuthorizeAttribute
+    public abstract class AuthorizeFilterBase<T> : IAuthorizationFilter
+            where T : ISecurityContext
     {
-        public abstract Step<ISecurityContext> AuthorizationStep { get; }
+        protected abstract Step<T> BuildAuthorizationStep { get; }
 
-        public abstract ISecurityContext BuildSecurityContext(AuthorizationContext filterContext);
+        protected abstract T BuildSecurityContext(AuthorizationContext filterContext);
 
-        public abstract SecurityCodeProcessorBase SecurityCodeProcessor { get; }
+        protected abstract SecurityCodeProcessorBase BuildSecurityCodeProcessor { get; }
 
         /// <summary>
         /// Overrides the ASP.NET MVC default authorization with Framework logic
         /// </summary>
         /// <param name="filterContext">ASP.NET MVC AuthorizationContext</param>
-        public override sealed void OnAuthorization(AuthorizationContext filterContext)
+        public void OnAuthorization(AuthorizationContext filterContext)
         {
             var context = this.BuildSecurityContext(filterContext);
 
-            this.AuthorizationStep.Execute(context);
+            this.BuildAuthorizationStep.Execute(context);
 
-            this.SecurityCodeProcessor.ProcessSecurityCode(context.SecurityResponseCode, filterContext);
+            this.BuildSecurityCodeProcessor.ProcessSecurityCode(context.SecurityResponseCode, filterContext);
         }
     }
 }

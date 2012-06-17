@@ -47,7 +47,7 @@ namespace Pleiades.Framework.MembershipProvider.Concrete
         }
 
         /// <summary>
-        /// Returns a non-null Domain User if Validation succeeds
+        /// Returns a non-null Membership User if Validation succeeds
         /// </summary>
         public Model.MembershipUser ValidateUserByEmailAddr(string emailAddress, string password)
         {
@@ -166,7 +166,7 @@ namespace Pleiades.Framework.MembershipProvider.Concrete
         }
 
         /// <summary>
-        /// Change Domain User's Password
+        /// Change Membership User's Password
         /// </summary>
         public void ChangePassword(string username, string oldPassword, string newPassword)
         {
@@ -178,7 +178,7 @@ namespace Pleiades.Framework.MembershipProvider.Concrete
         }
 
         /// <summary>
-        /// Change Domain User's Password with Question and Answer
+        /// Change Membership User's Password with Question and Answer
         /// </summary>
         public void ChangePasswordQuestionAndAnswer(string username, string password, string question, string answer)
         {
@@ -190,7 +190,7 @@ namespace Pleiades.Framework.MembershipProvider.Concrete
         }
 
         /// <summary>
-        /// Change Domain User's Email Address
+        /// Change Membership User's Email Address
         /// </summary>
         public void ChangeEmailAddress(string username, string emailAddress)
         {

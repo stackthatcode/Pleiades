@@ -1,35 +1,49 @@
-﻿using Pleiades.Framework.Execution;
+﻿using Pleiades.Commerce.Domain.Interface;
+using Pleiades.Commerce.Domain.Entities.Users;
+using Pleiades.Commerce.Web.Security.Model;
+using Pleiades.Framework.Execution;
 using Pleiades.Framework.Identity.Interface;
+using Pleiades.Framework.Identity.Model;
+using Pleiades.Framework.MembershipProvider.Interface;
+using Pleiades.Framework.MembershipProvider.Providers;
 
-namespace Pleiades.Framework.Web.Security.Execution
+namespace Pleiades.Commerce.Web.Security.Execution
 {
-    //public class GetUserFromHttpContextStep : Step<ISecurityRequirementsContext>
-    //{
-    //    public GetUserFromHttpContextStep()
-    //    {
-    //    }
+    public class GetUserFromHttpContextStep : Step<CommerceSecurityContext>
+    {
+        public IAggregateUserRepository AggregateUserRepository { get; set; }
+        public IFormsAuthenticationService FormsAuthenticationService { get; set; }
+        public IMembershipService MembershipService { get; set; }
 
-        
-    //    // No username in context?  Return a blank/anon User
-    //    if (httpContextUserName == null)
-    //    {
-    //        return new DomainUser();
-    //    }
+        public GetUserFromHttpContextStep(
+                IAggregateUserRepository aggregateUserRepository, 
+                IFormsAuthenticationService formsAuthenticationService,
+                IMembershipService membershipService)
+        {
+            this.AggregateUserRepository = aggregateUserRepository;
+            this.FormsAuthenticationService = formsAuthenticationService;
+            this.MembershipService = membershipService;
+        }
 
-    //    // Attempt to retrieve the Domain User from the system
-    //    var user = DomainUserService.RetrieveUserByMembershipUserName(httpContextUserName);
+        public override void Execute(CommerceSecurityContext context)
+        {
+            var userName = context.HttpContext.AuthenticatedUserName();
+            if (userName == null)
+            {
+                context.AggregateUser = AggregateUser.AnonymousUserFactory();
+                return;
+            }
 
-    //    // Does this User exist in our system?  
-    //    if (user == null)
-    //    {
-    //        this.FormsAuthenticationService.ClearAuthenticationCookie();
-    //        return new DomainUser();
-    //    }
+            context.AggregateUser = this.AggregateUserRepository.RetrieveUserByMembershipUserName(userName);
 
-    //    // OK - we've got a valid Domain User accessing our system, so trigger a MembershipProvider "touch"
-    //    this.MembershipUserService.Touch(user);
+            if (context.AggregateUser == null)
+            {
+                this.FormsAuthenticationService.ClearAuthenticationCookie();
+                context.AggregateUser = AggregateUser.AnonymousUserFactory();
+                return;
+            }
 
-    //    // .. and return
-    //    return user;
-    //}
+            this.MembershipService.Touch(userName);
+        }
+    }
 }

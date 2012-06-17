@@ -33,6 +33,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,11 +43,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\Aspect\AggregateSecurityReqContext.cs" />
-    <Compile Include="Security\Aspect\DomainAuthAttribute.cs" />
+    <Compile Include="Security\Aspect\CommerceAuthorizeAttribute.cs" />
+    <Compile Include="Security\Aspect\CommerceAuthorizeFilter.cs" />
+    <Compile Include="Security\Execution\CommerceStepComposite.cs" />
     <Compile Include="Security\Execution\GetUserFromHttpContextStep.cs" />
+    <Compile Include="Security\Model\CommerceSecurityContext.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Pleiades.Commerce.Domain\Pleiades.Commerce.Domain.csproj">
+      <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
+      <Name>Pleiades.Commerce.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Framework.Membership\Pleiades.Framework.MembershipProvider.csproj">
       <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
       <Name>Pleiades.Framework.MembershipProvider</Name>

@@ -60,7 +60,7 @@
     <Compile Include="MvcHelpers\NavigationLink.cs" />
     <Compile Include="MvcHelpers\NavigationLinkFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\AuthorizeAttributeBase.cs" />
+    <Compile Include="Security\AuthorizeFilterBase.cs" />
     <Compile Include="MvcHelpers\EnumToSelectList.cs" />
     <Compile Include="Security\SecurityCodeProcessorBase.cs" />
   </ItemGroup>

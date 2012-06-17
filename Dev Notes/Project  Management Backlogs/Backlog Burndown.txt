@@ -1,6 +1,18 @@
 Backlog Burndown
 ================
 
+6/17/2012
+---------
+THUS FAR: 
+1.) Massive, massive overhaul of the Security Model, introduced the Abstract Framework, literally TOO MUCH to list.  Great, great, job,  main!
+2.) Also finished two Javascript books and am in the process of adopting Git
+
+- Bite the bullet -- write an adapter for the MembershipService => YES - DONE
+- Decouple Membership from DomainUserService => only consume MembershipService operations => DONE
+- Create a IDomainUserRepository =>  DONE
+- Move the AuthorizationAttribute sequence of validation into StepComposite => DONE
+
+
 5/12/2012
 ---------
 * Fix the rest of the code after major refactoring (mainly namespaces) - DONE

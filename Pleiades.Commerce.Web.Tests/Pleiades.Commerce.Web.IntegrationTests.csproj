@@ -8,8 +8,8 @@
     <ProjectGuid>{FE635455-8016-4AB0-BA25-5A459A76ABA1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pleiades.Commerce.Web.Tests</RootNamespace>
-    <AssemblyName>Pleiades.Commerce.Web.Tests</AssemblyName>
+    <RootNamespace>Pleiades.Commerce.Web.IntegrationTests</RootNamespace>
+    <AssemblyName>Pleiades.Commerce.Web.IntegrationTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

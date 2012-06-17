@@ -1,4 +1,5 @@
 ﻿using System;
+using Pleiades.Framework.MembershipProvider.Interface;
 
 namespace Pleiades.Framework.MembershipProvider.Providers
 {

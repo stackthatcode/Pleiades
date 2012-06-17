@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Pleiades.Framework.Identity.Model
+﻿namespace Pleiades.Framework.Identity.Model
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class SecurityRequirementsContext
+    public class IdentityRequirements
     {
+        public int? ResourceOwnerIdentityUserId { get; set; }
         public AuthorizationZone AuthorizationZone { get; set; }
         public AccountLevel AccountLevelRestriction { get; set; }
         public bool PaymentArea { get; set; }
 
-        public SecurityRequirementsContext()
+        public IdentityRequirements()
         {
+            this.ResourceOwnerIdentityUserId = null;
             this.AuthorizationZone = AuthorizationZone.Public;
             this.AccountLevelRestriction = AccountLevel.Standard;
             this.PaymentArea = false;

@@ -13,7 +13,7 @@ using Pleiades.Framework.Web.Security.Concrete;
 namespace Pleiades.Web.Tests.Security.IntegrationTests
 {
     /// <summary>
-    /// Basic Domain User Retrieval Integration Tests
+    /// Basic Identity User Retrieval Integration Tests
     /// </summary>
     [TestFixture]
     [Ignore]

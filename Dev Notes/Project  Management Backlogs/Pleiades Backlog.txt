@@ -1,15 +1,16 @@
 Pleiades Administrative Area - TODO
 ===================================
 
-SECURITY/FRAMEWORK REFACTORING BACKLOG / NOTES
-==============================================
-- Bite the bullet -- write an adapter for the MembershipService => NO!
-- Write Unit Tests for Execution namespace
-- Decouple Membership from DomainUserService => only consume MembershipService operations
-- Verify the User "Touch" usage
-- Create a IDomainUserRepository
-- Write Unit Tests for the MembershipProvider
-- Move the AuthorizationAttribute sequence of validation into StepComposite
+SECURITY/FRAMEWORK REFACTORING BACKLOG / NOTES 6/17/2012
+========================================================
+- Add Code First initialization stuff => TODO
+- Write Unit Tests for Execution namespace => TODO
+- Write Unit Tests for the MembershipService and/or Provider =>  TODO
+- Write Unit Tests for the IdentityUser => TODO
+- Create framework for automatically testing Repositories with auto-property-compare => TODO
+
+AND PROBABLY => eliminate the need to have Integration Tests for all things security => TODO
+
 
 
 STACK OVERFLOW QUESTIONS

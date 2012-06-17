@@ -8,6 +8,7 @@ using System.Web.Configuration;
 using System.Web.Security;
 using Pleiades.Framework.Data;
 using Pleiades.Framework.Helpers;
+using Pleiades.Framework.MembershipProvider.Interface;
 
 namespace Pleiades.Framework.MembershipProvider.Providers
 {

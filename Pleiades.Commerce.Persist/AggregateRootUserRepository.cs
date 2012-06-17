@@ -16,63 +16,66 @@ namespace Pleiades.Commerce.Identity.Interface
 
 
         /// <summary>
-        /// Ensures the Root User Account Exists
-        /// 
         /// TODO: separate this capability and create a standalone applet that handles this - make it part of 
         /// ... the deployment process
         /// 
         /// SOLUTION: create the UserBootstrapService
+        /// 
+        /// Ensures the Root User Account Exists
         /// </summary>
-        public void Initialize()
-        {
-            if (this.GetUserCountByRole(UserRole.Root) > 0)
-            {
-                return;
-            }
+        //public void Initialize()
+        //{
+        //    if (this.GetUserCountByRole(UserRole.Root) > 0)
+        //    {
+        //        return;
+        //    }
 
-            var user = this.Create(
-                new CreateNewDomainUserRequest()
-                {
-                    Password = defaultCode,
-                    Email = defaultEmail,
-                    PasswordQuestion = defaultQuestion,
-                    PasswordAnswer = defaultAnswer,
-                    IsApproved = true,
-                    AccountStatus = Model.AccountStatus.Active,
-                    UserRole = UserRole.Root,
-                    AccountLevel = AccountLevel.Gold,
-                    FirstName = "Aleks",
-                    LastName = "Jones"
-                });
+        //    var user = this.Create(
+        //        new CreateNewDomainUserRequest()
+        //        {
+        //            Password = defaultCode,
+        //            Email = defaultEmail,
+        //            PasswordQuestion = defaultQuestion,
+        //            PasswordAnswer = defaultAnswer,
+        //            IsApproved = true,
+        //            AccountStatus = Model.AccountStatus.Active,
+        //            UserRole = UserRole.Root,
+        //            AccountLevel = AccountLevel.Gold,
+        //            FirstName = "Aleks",
+        //            LastName = "Jones"
+        //        });
 
-            if (user == null)
-            {
-                throw new Exception("Unable to create the default Root User");
-            }
-        }
+        //    if (user == null)
+        //    {
+        //        throw new Exception("Unable to create the default Root User");
+        //    }
+        //}
         
         /// <summary>
-        /// Worker method gets Users by User Name
+        /// DEPRECATED!
+        /// 
+        /// Worker method gets Users by User Name 
         /// </summary>
-        private Model.DomainUser RetrieveHelper(string membershipUserName, Data.DomainUser domainUserEntity)
-        {
-            var domainUser = new Model.DomainUser()
-            {
-                DomainUserId = domainUserEntity.DomainUserId,
-                UserRole = domainUserEntity.UserRole.StringToEnum<UserRole>(),
-                AccountLevel = (Model.AccountLevel)domainUserEntity.AccountLevel,
-                AccountStatus = (Model.AccountStatus)domainUserEntity.AccountStatus,
-                FirstName = domainUserEntity.FirstName,
-                LastName = domainUserEntity.LastName,
-                LastModified = domainUserEntity.LastModified,
-                CreationDate = domainUserEntity.CreationDate,
-            };
+        //private Model.DomainUser RetrieveHelper(string membershipUserName, Data.DomainUser domainUserEntity)
+        //{
+        //    var domainUser = new Model.DomainUser()
+        //    {
+        //        DomainUserId = domainUserEntity.DomainUserId,
+        //        UserRole = domainUserEntity.UserRole.StringToEnum<UserRole>(),
+        //        AccountLevel = (Model.AccountLevel)domainUserEntity.AccountLevel,
+        //        AccountStatus = (Model.AccountStatus)domainUserEntity.AccountStatus,
+        //        FirstName = domainUserEntity.FirstName,
+        //        LastName = domainUserEntity.LastName,
+        //        LastModified = domainUserEntity.LastModified,
+        //        CreationDate = domainUserEntity.CreationDate,
+        //    };
 
-            return domainUser;
-        }
+        //    return domainUser;
+        //}
+
 
         /// <summary>
-        /// Retrieve Domain User by Email Address
+        /// Retrieve Identity User by Email Address
         /// </summary>
         public Model.DomainUser RetrieveUserByEmail(string emailaddr)
         {
@@ -81,7 +84,7 @@ namespace Pleiades.Commerce.Identity.Interface
         }
 
         /// <summary>
-        /// Retrieve Domain User by UserName - actually UserCode
+        /// Retrieve Identity User by UserName - actually UserCode
         /// </summary>        
         public Model.DomainUser RetrieveUserByMembershipUserName(string username)
         {
@@ -95,30 +98,33 @@ namespace Pleiades.Commerce.Identity.Interface
         }
 
         /// <summary>
+        /// DEPRECATED
+        /// 
         /// Worker method gets Users by User Name
         /// </summary>
-        private Model.DomainUser RetrieveHelper(string membershipUserName, Data.DomainUser domainUserEntity)
-        {
-            var domainUser = new Model.DomainUser()
-            {
-                DomainUserId = domainUserEntity.DomainUserId,
-                UserRole = domainUserEntity.UserRole.StringToEnum<UserRole>(),
-                AccountLevel = (Model.AccountLevel)domainUserEntity.AccountLevel,
-                AccountStatus = (Model.AccountStatus)domainUserEntity.AccountStatus,
-                FirstName = domainUserEntity.FirstName,
-                LastName = domainUserEntity.LastName,
-                LastModified = domainUserEntity.LastModified,
-                CreationDate = domainUserEntity.CreationDate,
-            };
+        //private Model.DomainUser RetrieveHelper(string membershipUserName, Data.DomainUser domainUserEntity)
+        //{
+        //    var domainUser = new Model.DomainUser()
+        //    {
+        //        DomainUserId = domainUserEntity.DomainUserId,
+        //        UserRole = domainUserEntity.UserRole.StringToEnum<UserRole>(),
+        //        AccountLevel = (Model.AccountLevel)domainUserEntity.AccountLevel,
+        //        AccountStatus = (Model.AccountStatus)domainUserEntity.AccountStatus,
+        //        FirstName = domainUserEntity.FirstName,
+        //        LastName = domainUserEntity.LastName,
+        //        LastModified = domainUserEntity.LastModified,
+        //        CreationDate = domainUserEntity.CreationDate,
+        //    };
 
-            // Lil experiment
-            // var domainUser2 = new Model.DomainUser();
-            // domainUserEntity.AutoMap<Data.DomainUser, Model.DomainUser>(domainUser2);
+        //    // Lil experiment
+        //    // var domainUser2 = new Model.DomainUser();
+        //    // domainUserEntity.AutoMap<Data.DomainUser, Model.DomainUser>(domainUser2);
 
-            var membershipUser = Membership.GetUser(membershipUserName);
-            domainUser.MembershipUser = Model.MembershipUser.ConvertToPleiades(membershipUser);
-            return domainUser;
-        }
+        //    var membershipUser = Membership.GetUser(membershipUserName);
+        //    domainUser.MembershipUser = Model.MembershipUser.ConvertToPleiades(membershipUser);
+        //    return domainUser;
+        //}
+
 
         /// <summary>
         /// Retrieve All method with built-in Paging and User Role filtering

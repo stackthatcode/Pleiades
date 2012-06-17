@@ -41,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Users\AggregateUser.cs" />
-    <Compile Include="Entities\Users\AggregateUserCondensed.cs" />
     <Compile Include="Entities\Products\Brand.cs" />
     <Compile Include="Entities\Products\Color.cs" />
     <Compile Include="Entities\Products\Feature.cs" />
@@ -57,15 +56,24 @@
     <Compile Include="Interfaces\IColorRepository.cs" />
     <Compile Include="Interfaces\IProductRootRepository.cs" />
     <Compile Include="Interfaces\ISizeGroupRepository.cs" />
-    <Compile Include="Services\AggregateUserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Concrete\" />
+    <Folder Include="Execution\" />
     <Folder Include="Mediators\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Pleiades.Framework.Membership\Pleiades.Framework.MembershipProvider.csproj">
+      <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
+      <Name>Pleiades.Framework.MembershipProvider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Framework.Security\Pleiades.Framework.Identity.csproj">
       <Project>{7F1F1DA2-6F72-4D68-A06C-D3379941B060}</Project>
       <Name>Pleiades.Framework.Identity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Framework.csproj">
+      <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
+      <Name>Pleiades.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

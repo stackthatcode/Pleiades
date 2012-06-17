@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Pleiades.Framework.Data;
+using Pleiades.Commerce.Domain.Entities.Products;
 
-namespace Pleiades.Commerce.Domain.Repositories
+namespace Pleiades.Commerce.Domain.Interface
 {
-    public interface IColorRepository
+    public interface IColorRepository : IGenericRepository<Color>
     {
 
     }

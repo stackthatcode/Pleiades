@@ -31,8 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,19 +45,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AggregateRootUserRepository.cs" />
     <Compile Include="BrandRepository.cs" />
     <Compile Include="ColorRepository.cs" />
-    <Compile Include="DomainUserRepository.cs" />
+    <Compile Include="IdentityUserRepository.cs" />
     <Compile Include="MembershipRepository.cs" />
     <Compile Include="ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Pleiades.Framework.Membership\Pleiades.Framework.MembershipProvider.csproj">
+      <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
+      <Name>Pleiades.Framework.MembershipProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pleiades.Framework.Security\Pleiades.Framework.Identity.csproj">
+      <Project>{7F1F1DA2-6F72-4D68-A06C-D3379941B060}</Project>
+      <Name>Pleiades.Framework.Identity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Framework.csproj">
+      <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
+      <Name>Pleiades.Framework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Web\Pleiades.Framework.Web.csproj">
       <Project>{804F063C-505F-441E-B205-688C42E637AD}</Project>
       <Name>Pleiades.Framework.Web</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Plieades.Data\Pleiades.Framework.Data.EF.csproj">
+      <Project>{89303370-B830-4A89-8646-0F9D287AD657}</Project>
+      <Name>Pleiades.Framework.Data.EF</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

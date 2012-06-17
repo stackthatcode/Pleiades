@@ -41,7 +41,6 @@
     <Compile Include="Data\IPagedModel.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Data\QueryablePagedModel.cs" />
-    <Compile Include="Execution\IStep.cs" />
     <Compile Include="Execution\IStepContext.cs" />
     <Compile Include="Execution\IStepObserver.cs" />
     <Compile Include="Execution\Step.cs" />
@@ -55,6 +54,7 @@
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Helpers\StringWriterWithEncoding.cs" />
     <Compile Include="Data\IGenericRepository.cs" />
+    <Compile Include="Injection\Container.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\ISecurityContext.cs" />
     <Compile Include="Security\SecurityResponseCode.cs" />

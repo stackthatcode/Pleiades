@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Pleiades.Commerce.Domain.Entities
+namespace Pleiades.Commerce.Domain.Entities.Products
 {
     public class Feature
     {
