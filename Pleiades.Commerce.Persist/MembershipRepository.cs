@@ -30,19 +30,9 @@ namespace Pleiades.Commerce.Persist
             return this.FindFirstOrDefault(x => x.UserName == username);
         }
 
-        public MembershipUser GetUser(string username, bool userIsOnline)
+        public MembershipUser GetUserByProviderKey(object providerKey)
         {
-            var user = this.GetUser(username);
-            
-            // TODO: add time check
-
-            return user;
-            // if (userIsOnline
-        }
-
-        public MembershipUser GetUserByProviderKey(object providerKey, bool userIsOnline)
-        {
-            throw new System.NotImplementedException();
+            return this.FindFirstOrDefault(x => x.ProviderUserKey == providerKey.ToString());
         }
 
         public string GetUserNameByEmail(string email)
@@ -62,19 +52,40 @@ namespace Pleiades.Commerce.Persist
 
         public IList<MembershipUser> GetAllUsers(int pageIndex, int pageSize, out int totalRecords)
         {
-            throw new NotFiniteNumberException();
+            totalRecords = this.Count();
+            return this.Data().Page(pageIndex, pageSize).ToList();
         }
 
         public int GetNumberOfUsersOnline()
         {
-            throw new NotFiniteNumberException();
+            return (from u in this.Data()
+                    where u.LastActivityDate > LastActivityCutoff()
+                    select u).Distinct().Count();
 
-            //PleiadesDB context = new PleiadesDB(ConnectionString);
+        }
 
-            //return (from u in context.Users
-            //        where u.ApplicationName == applicationName && u.LastActivityDate > compareTime
-            //        select u).Distinct().Count();
+        public IList<MembershipUser> FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
+        {
+            var results = 
+                (from u in this.Data()
+                 where u.UserName.Contains(usernameToMatch)
+                 orderby u.UserName
+                 select u);
 
+            totalRecords = results.Count();
+            return results.ToList();
+        }
+
+        public IList<MembershipUser> FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
+        {
+            var results =
+                (from u in this.Data()
+                 where u.UserName.Contains(emailToMatch)
+                 orderby u.UserName
+                 select u);
+
+            totalRecords = results.Count();
+            return results.ToList();
         }
 
         private DateTime LastActivityCutoff()
@@ -83,51 +94,5 @@ namespace Pleiades.Commerce.Persist
             var compareTime = DateTime.Now.Subtract(onlineSpan);
             return compareTime;
         }
-
-        public IList<MembershipUser> FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IList<MembershipUser> FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        
-            //MembershipUserCollection membershipUsers = new MembershipUserCollection();
-            //PleiadesDB context = new PleiadesDB(ConnectionString);
-            //IQueryable<User> users = from u in context.Users
-            //                         where u.Username.Contains(usernameToMatch) && u.ApplicationName == applicationName
-            //                         orderby u.Username
-            //                         select u;
-
-            //totalRecords = users.Count();
-            //if (users.Count() <= 0) 
-            //    return membershipUsers;
-
-            //foreach (User user in users.Skip(pageIndex * pageSize).Take(pageSize))
-            //{
-            //    membershipUsers.Add(GetMembershipUserFromPersitentObject(user));
-            //}
-            //
-            //return membershipUsers;    
-    
-            //MembershipUserCollection membershipUsers = new MembershipUserCollection();
-            //PleiadesDB context = new PleiadesDB(ConnectionString);
-            //IQueryable<User> users = from u in context.Users
-            //                         where u.Email.Contains(emailToMatch) && u.ApplicationName == applicationName
-            //                         select u;
-            //
-            //totalRecords = users.Count();
-            //if (users.Count() <= 0) 
-            //    return membershipUsers;
-            //
-            //foreach (User user in users.Skip(pageIndex * pageSize).Take(pageSize))
-            //{
-            //    membershipUsers.Add(GetMembershipUserFromPersitentObject(user));
-            //}
-            //
-            //return membershipUsers;    
     }
 }

@@ -28,6 +28,7 @@ namespace Pleiades.Framework.MembershipProvider.Providers
     public class MembershipProvider : System.Web.Security.MembershipProvider
     {
         public const int newPasswordLength = 8;
+        public const int userIsOnlineTimeWindow = 15;   // TODO: pull this from config file
 
         // These are set by the Initialize method which reads from a config file
         public static MembershipProviderSettings MembershipProviderSettings { get; protected set; }
@@ -194,6 +195,7 @@ namespace Pleiades.Framework.MembershipProvider.Providers
             // TODO: not entirely happy with this, but we'll see about it later on...
             this.MembershipRepository = RepositoryShim.GetInstance();
             this.MembershipRepository.ApplicationName = this.ApplicationName;
+            this.MembershipRepository.UserIsOnlineTimeWindow = userIsOnlineTimeWindow;
         }
 
         /// <summary>
@@ -571,9 +573,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         /// <param name="userIsOnline">true to update the last-activity date/time stamp for the user; false to return user information without updating the last-activity date/time stamp for the user.</param>
         public override MembershipUser GetUser(object providerUserKey, bool userIsOnline)
         {
-            MembershipUser membershipUser = null;
+            var user = this.MembershipRepository.GetUserByProviderKey(providerUserKey);
 
-            var user = this.MembershipRepository.GetUserByProviderKey(providerUserKey, userIsOnline);
             if (user == null)
             {
                 return null;
@@ -585,9 +586,9 @@ namespace Pleiades.Framework.MembershipProvider.Providers
                     user.LastActivityDate = DateTime.Now;
                     this.MembershipRepository.SaveChanges();
                 }
-            }
 
-            return membershipUser;
+                return user.ToSecurityMembershipUser(this.Name);
+            }
         }
 
         /// <summary>
@@ -598,8 +599,7 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         /// <param name="userIsOnline">true to update the last-activity date/time stamp for the user; false to return user information without updating the last-activity date/time stamp for the user.</param>
         public override MembershipUser GetUser(string username, bool userIsOnline)
         {
-            MembershipUser membershipUser = null;
-            var user = this.MembershipRepository.GetUser(username, userIsOnline);
+            var user = this.MembershipRepository.GetUser(username);
             
             if (user == null)
             {
@@ -609,9 +609,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
             {
                 user.LastActivityDate = DateTime.Now;
                 this.MembershipRepository.SaveChanges();
+                return user.ToSecurityMembershipUser(this.Name);
             }
-
-            return membershipUser;
         }
 
         /// <summary>

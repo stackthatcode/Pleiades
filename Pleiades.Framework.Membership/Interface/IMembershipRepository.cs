@@ -12,11 +12,13 @@ namespace Pleiades.Framework.MembershipProvider.Interface
     public interface IMembershipRepository : IGenericRepository<MembershipUser>
     {
         string ApplicationName { get; set; }
+        int UserIsOnlineTimeWindow { get; set; }
+
         MembershipUser GetUser(string username);
-        MembershipUser GetUser(string username, bool userIsOnline);
-        MembershipUser GetUserByProviderKey(object providerKey, bool userIsOnline);
+        MembershipUser GetUserByProviderKey(object providerKey);
         string GetUserNameByEmail(string email);
         bool DeleteUser(string username, bool deleteAllRelatedData);
+
         IList<MembershipUser> GetAllUsers(int pageIndex, int pageSize, out int totalRecords);
         int GetNumberOfUsersOnline();
         IList<MembershipUser> FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords);
