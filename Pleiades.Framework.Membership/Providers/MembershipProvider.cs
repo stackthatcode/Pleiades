@@ -33,14 +33,6 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         public static MembershipProviderSettings MembershipProviderSettings { get; protected set; }
         public IMembershipRepository MembershipRepository { get; set; }
 
-        /// <summary>
-        /// Invokes the Action on the RepositoryShim to get whatever repository is wired into the application
-        /// </summary>
-        public MembershipProvider()
-        {
-            this.MembershipRepository = RepositoryShim.GetInstance();
-        }
-
 
         #region Membership Provider property overrides
         /// <summary>
@@ -196,7 +188,12 @@ namespace Pleiades.Framework.MembershipProvider.Providers
             MembershipProviderSettings = new MembershipProviderSettings(config);
 
             // Initialize the abstract base class.
-            base.Initialize(name, config); 
+            base.Initialize(name, config);
+
+            // Get and instance and set the Application Name
+            // TODO: not entirely happy with this, but we'll see about it later on...
+            this.MembershipRepository = RepositoryShim.GetInstance();
+            this.MembershipRepository.ApplicationName = this.ApplicationName;
         }
 
         /// <summary>

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using Pleiades.Framework.Data;
 using Pleiades.Framework.Data.EF;
 using Pleiades.Framework.MembershipProvider.Interface;
@@ -13,32 +15,29 @@ namespace Pleiades.Commerce.Persist
         {
         }
 
-        public static void TestOfTests()
-        {
-            IGenericRepository<MembershipUser> repository = new EFGenericRepository<MembershipUser>(null);
-        }
+        public string ApplicationName { get; set; }
+
+        public int UserIsOnlineTimeWindow { get; set; } 
 
 
-        public string ApplicationName
+        protected override IQueryable<MembershipUser> Data()
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-                throw new System.NotImplementedException();
-            }
+            return base.Data().Where(x => x.ApplicationName == this.ApplicationName);
         }
 
         public MembershipUser GetUser(string username)
         {
-            throw new System.NotImplementedException();
+            return this.FindFirstOrDefault(x => x.UserName == username);
         }
 
         public MembershipUser GetUser(string username, bool userIsOnline)
         {
-            throw new System.NotImplementedException();
+            var user = this.GetUser(username);
+            
+            // TODO: add time check
+
+            return user;
+            // if (userIsOnline
         }
 
         public MembershipUser GetUserByProviderKey(object providerKey, bool userIsOnline)
@@ -48,54 +47,27 @@ namespace Pleiades.Commerce.Persist
 
         public string GetUserNameByEmail(string email)
         {
-            throw new System.NotImplementedException();
+            var user = this.Data()
+                .FirstOrDefault(x => x.Email == email);
+
+            return user == null ? string.Empty : user.UserName;
         }
 
         public bool DeleteUser(string username, bool deleteAllRelatedData)
         {
-            throw new System.NotImplementedException();
+            var user = this.GetUser(username);
+            this.Delete(user);
+            return true;
         }
 
-        public System.Collections.Generic.IList<MembershipUser> GetAllUsers(int pageIndex, int pageSize, out int totalRecords)
+        public IList<MembershipUser> GetAllUsers(int pageIndex, int pageSize, out int totalRecords)
         {
-            throw new System.NotImplementedException();
+            throw new NotFiniteNumberException();
         }
 
         public int GetNumberOfUsersOnline()
         {
-            throw new System.NotImplementedException();
-        }
-
-        public System.Collections.Generic.IList<MembershipUser> FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public System.Collections.Generic.IList<MembershipUser> FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        
-
-        //IQueryable<User> users = from u in context.Users
-        //                         where u.Username == username && u.ApplicationName == applicationName
-        //                         select u;
-
-        
-        //PleiadesDB context = new PleiadesDB(ConnectionString);
-        //IQueryable<User> users = from u in context.Users
-        //                         where u.Email == email && u.ApplicationName == applicationName
-        //                         select u;
-
-        //if (users.Count() != 1) 
-        //    return string.Empty;
-
-        //User user = users.First();
-        //return user != null ? user.Username : string.Empty;
-
-            //        TimeSpan onlineSpan = new TimeSpan(0, Membership.UserIsOnlineTimeWindow, 0);
-            //DateTime compareTime = DateTime.Now.Subtract(onlineSpan);
+            throw new NotFiniteNumberException();
 
             //PleiadesDB context = new PleiadesDB(ConnectionString);
 
@@ -103,9 +75,27 @@ namespace Pleiades.Commerce.Persist
             //        where u.ApplicationName == applicationName && u.LastActivityDate > compareTime
             //        select u).Distinct().Count();
 
+        }
 
+        private DateTime LastActivityCutoff()
+        {
+            var onlineSpan = new TimeSpan(0, this.UserIsOnlineTimeWindow, 0);
+            var compareTime = DateTime.Now.Subtract(onlineSpan);
+            return compareTime;
+        }
 
-            //        MembershipUserCollection membershipUsers = new MembershipUserCollection();
+        public IList<MembershipUser> FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IList<MembershipUser> FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        
+            //MembershipUserCollection membershipUsers = new MembershipUserCollection();
             //PleiadesDB context = new PleiadesDB(ConnectionString);
             //IQueryable<User> users = from u in context.Users
             //                         where u.Username.Contains(usernameToMatch) && u.ApplicationName == applicationName

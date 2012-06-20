@@ -4,15 +4,10 @@ using System.Linq;
 
 namespace Pleiades.Commerce.Identity.Interface
 {
-    public class AggregateRootUserRepository
+    public class AggregateRootUserRepository : 
     {
         public const int MaximumNumberOfAdmins = 3;
 
-        // TODO: replace this with encrypted values stored in the Assembly manifest - or do the deploy thingy
-        private const string defaultCode = "#3#3#3#3";
-        private const string defaultEmail = "aleksjones@gmail.com";
-        private const string defaultQuestion = "Dad's name";
-        private const string defaultAnswer = "Donald";
 
 
         /// <summary>
@@ -23,6 +18,13 @@ namespace Pleiades.Commerce.Identity.Interface
         /// 
         /// Ensures the Root User Account Exists
         /// </summary>
+        // TODO: replace this with encrypted values stored in the Assembly manifest - or do the deploy thingy
+        private const string defaultCode = "#3#3#3#3";
+        private const string defaultEmail = "aleksjones@gmail.com";
+        private const string defaultQuestion = "Dad's name";
+        private const string defaultAnswer = "Donald";
+ 
+
         //public void Initialize()
         //{
         //    if (this.GetUserCountByRole(UserRole.Root) > 0)
