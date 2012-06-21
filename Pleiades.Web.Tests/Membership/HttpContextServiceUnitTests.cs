@@ -18,6 +18,7 @@ namespace Pleiades.Web.Tests.SecurityUnitTests
     public class AuthenticationUnitTests
     {
         // QUESTION: DOES THE SQL PROVIDER RUN WHEN THE REQEUST IS SENT THROUGHT THE PIPELINE...???
+        // ANSWER: SOMETIMES - WILL BE CONTROLLED BY SERVICE-LEVEL CACHING :-D
 
         [Test]
         public void GetFormAuthenticationUserNameFromMockHttpContext()

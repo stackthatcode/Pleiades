@@ -17,8 +17,6 @@ namespace Pleiades.Commerce.Persist
 
         public string ApplicationName { get; set; }
 
-        public int UserIsOnlineTimeWindow { get; set; } 
-
 
         protected override IQueryable<MembershipUser> Data()
         {
@@ -56,12 +54,11 @@ namespace Pleiades.Commerce.Persist
             return this.Data().Page(pageIndex, pageSize).ToList();
         }
 
-        public int GetNumberOfUsersOnline()
+        public int GetNumberOfUsersOnline(TimeSpan userIsOnlineTimeWindow)
         {
             return (from u in this.Data()
-                    where u.LastActivityDate > LastActivityCutoff()
+                    where u.LastActivityDate > LastActivityCutoff(userIsOnlineTimeWindow)
                     select u).Distinct().Count();
-
         }
 
         public IList<MembershipUser> FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
@@ -88,10 +85,9 @@ namespace Pleiades.Commerce.Persist
             return results.ToList();
         }
 
-        private DateTime LastActivityCutoff()
+        private DateTime LastActivityCutoff(TimeSpan userIsOnlineTimeWindow)
         {
-            var onlineSpan = new TimeSpan(0, this.UserIsOnlineTimeWindow, 0);
-            var compareTime = DateTime.Now.Subtract(onlineSpan);
+            var compareTime = DateTime.Now.Subtract(userIsOnlineTimeWindow);
             return compareTime;
         }
     }

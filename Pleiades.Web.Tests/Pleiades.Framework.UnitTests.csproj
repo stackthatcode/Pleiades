@@ -9,8 +9,8 @@
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pleiades.Web.Tests</RootNamespace>
-    <AssemblyName>Pleiades.Web.Tests</AssemblyName>
+    <RootNamespace>Pleiades.Framework.UnitTests</RootNamespace>
+    <AssemblyName>Pleiades.Framework.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,14 +32,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gallio" />
-    <Reference Include="MbUnit" />
-    <Reference Include="PagedList, Version=1.1.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\PagedList.dll</HintPath>
+    <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Rhino.Mocks">
-      <HintPath>..\Lib\Rhino.Mocks.dll</HintPath>
+      <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -47,8 +44,6 @@
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
-    <Reference Include="Gallio35" />
-    <Reference Include="MbUnit35" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -60,19 +55,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Execution\ContextStub.cs" />
+    <Compile Include="Execution\StepAlwaysKillWithLambda.cs" />
+    <Compile Include="Execution\StepAlwaysKill.cs" />
+    <Compile Include="Execution\StepOk.cs" />
+    <Compile Include="Execution\StepTests.cs" />
+    <Compile Include="Execution\StepThatNotifies.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HttpContext\HttpContextStubTests.cs" />
-    <Compile Include="Web\Security\HttpContextServiceUnitTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Web\Security\OwnerAuthorizationUnitTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Web\Security\SystemAuthorizationUnitTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Framework.csproj">
+      <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
+      <Name>Pleiades.Framework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Utilities\Pleiades.Framework.TestHelpers.csproj">
       <Project>{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}</Project>
       <Name>Pleiades.Framework.TestHelpers</Name>
@@ -86,11 +81,9 @@
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Execution\" />
-    <Folder Include="Membership\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

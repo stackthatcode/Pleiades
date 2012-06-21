@@ -157,6 +157,11 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         {
             get { return MembershipProviderSettings.PasswordStrengthRegularExpression; }
         }
+
+        public TimeSpan UserIsOnlineTimeWindow
+        {
+            get { return MembershipProviderSettings.UserIsOnlineTimeWindow; }
+        }        
         #endregion
 
 
@@ -195,7 +200,6 @@ namespace Pleiades.Framework.MembershipProvider.Providers
             // TODO: not entirely happy with this, but we'll see about it later on...
             this.MembershipRepository = RepositoryShim.GetInstance();
             this.MembershipRepository.ApplicationName = this.ApplicationName;
-            this.MembershipRepository.UserIsOnlineTimeWindow = userIsOnlineTimeWindow;
         }
 
         /// <summary>
@@ -231,8 +235,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
             }
 
             // Check whether user with passed username already exists
-            var membershipUser = this.MembershipRepository.GetUser(username, false);
-
+            var membershipUser = this.MembershipRepository.GetUser(username);
+                
             if (membershipUser != null)
             {
                 status = MembershipCreateStatus.DuplicateUserName;
@@ -682,7 +686,7 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         /// <returns>The number of users currently accessing the application.</returns>
         public override int GetNumberOfUsersOnline()
         {
-            return this.MembershipRepository.GetNumberOfUsersOnline();
+            return this.MembershipRepository.GetNumberOfUsersOnline(this.UserIsOnlineTimeWindow);
         }
 
         /// <summary>

@@ -27,9 +27,13 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         public bool EnablePasswordRetrieval { get; private set; }
         public bool RequiresQuestionAndAnswer { get; private set; }
         public bool RequiresUniqueEmail { get; private set; }
+        public TimeSpan UserIsOnlineTimeWindow { get; private set; }
 
         public MembershipProviderSettings(NameValueCollection config)
         {
+            // TODO: wire this properly into parsing the configuration
+            this.UserIsOnlineTimeWindow = new TimeSpan(0, 15, 0);
+
             this.MaxInvalidPasswordAttempts = Convert.ToInt32(GetConfigValue(config["maxInvalidPasswordAttempts"], "5"));
             this.PasswordAttemptWindow = Convert.ToInt32(GetConfigValue(config["passwordAttemptWindow"], "10"));
             this.MinRequiredNonAlphanumericCharacters = Convert.ToInt32(GetConfigValue(config["minRequiredNonAlphanumericCharacters"], "1"));
