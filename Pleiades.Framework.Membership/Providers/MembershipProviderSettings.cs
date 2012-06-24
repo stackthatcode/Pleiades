@@ -13,21 +13,27 @@ namespace Pleiades.Framework.MembershipProvider.Providers
     /// </summary>
 	public class MembershipProviderSettings
 	{
-        public string ApplicationName { get; set; }
-        public MachineKeySection MachineKey { get; private set; }
-        public string ConnectionString { get; private set; }
+        public virtual string ApplicationName { get; set; }
+        public virtual MachineKeySection MachineKey { get; protected set; }
+        public virtual string ConnectionString { get; protected set; }
 
-        public int MaxInvalidPasswordAttempts { get; private set; }
-        public int PasswordAttemptWindow { get; private set; }
-        public int MinRequiredPasswordLength { get; private set; }
-        public int MinRequiredNonAlphanumericCharacters { get; private set; }
-        public string PasswordStrengthRegularExpression { get; private set; }
-        public MembershipPasswordFormat PasswordFormat { get; private set; }
-        public bool EnablePasswordReset { get; private set; }
-        public bool EnablePasswordRetrieval { get; private set; }
-        public bool RequiresQuestionAndAnswer { get; private set; }
-        public bool RequiresUniqueEmail { get; private set; }
-        public TimeSpan UserIsOnlineTimeWindow { get; private set; }
+        public virtual int MaxInvalidPasswordAttempts { get; protected set; }
+        public virtual int PasswordAttemptWindow { get; protected set; }
+        public virtual int MinRequiredPasswordLength { get; protected set; }
+        public virtual int MinRequiredNonAlphanumericCharacters { get; protected set; }
+        public virtual string PasswordStrengthRegularExpression { get; protected set; }
+        public virtual MembershipPasswordFormat PasswordFormat { get; protected set; }
+        public virtual bool EnablePasswordReset { get; protected set; }
+        public virtual bool EnablePasswordRetrieval { get; protected set; }
+        public virtual bool RequiresQuestionAndAnswer { get; protected set; }
+        public virtual bool RequiresUniqueEmail { get; protected set; }
+        public virtual TimeSpan UserIsOnlineTimeWindow { get; protected set; }
+
+
+
+        public MembershipProviderSettings()
+        {
+        }
 
         public MembershipProviderSettings(NameValueCollection config)
         {
@@ -72,10 +78,9 @@ namespace Pleiades.Framework.MembershipProvider.Providers
             }
 
             // Get encryption and decryption key information from the configuration.
-            Configuration cfg;
             if (HostingEnvironment.IsHosted)
             {
-                cfg = WebConfigurationManager.OpenWebConfiguration(HostingEnvironment.ApplicationVirtualPath);
+                var cfg = WebConfigurationManager.OpenWebConfiguration(HostingEnvironment.ApplicationVirtualPath);
                 MachineKey = (MachineKeySection)cfg.GetSection("system.web/machineKey");
             }
             else

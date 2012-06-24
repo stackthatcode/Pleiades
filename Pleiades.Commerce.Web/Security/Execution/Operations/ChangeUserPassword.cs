@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Pleiades.Commerce.IntegrationTests
+namespace Pleiades.Commerce.Web.Security.Execution.Operations
 {
-    public class Class1
+    class ChangeUserPassword
     {
     }
 }

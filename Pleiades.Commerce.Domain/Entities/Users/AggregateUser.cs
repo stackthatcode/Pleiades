@@ -17,7 +17,7 @@ namespace Pleiades.Commerce.Domain.Entities.Users
                 {
                      IdentityUser = new IdentityUser
                      {
-                         UserRole = IdentityUserRole.Anonymous
+                         UserRole = UserRole.Anonymous
                      },
                 };
         }

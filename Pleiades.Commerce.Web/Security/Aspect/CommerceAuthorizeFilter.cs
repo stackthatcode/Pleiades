@@ -12,7 +12,7 @@ namespace Pleiades.Commerce.Web.Security
 {
     public abstract class CommerceAuthorizeAttribute : AuthorizeFilterBase<CommerceSecurityContext>
     {
-        public Container Container { get; set; }
+        public IContainer Container { get; set; }
 
         #region Attribute Properties
         /// <summary>
@@ -31,7 +31,7 @@ namespace Pleiades.Commerce.Web.Security
         public bool PaymentArea { get; set; }
         #endregion
 
-        public CommerceAuthorizeAttribute(Container container)
+        public CommerceAuthorizeAttribute(IContainer container)
         {
             this.Container = container;
         }
@@ -50,11 +50,11 @@ namespace Pleiades.Commerce.Web.Security
             };
         }
 
-        protected override Step<CommerceSecurityContext> BuildAuthorizationStep
+        protected override Func<Step<CommerceSecurityContext>> BuildAuthorizationStep
         {
             get
             {
-                return this.Container.Resolve<CommerceStepComposite>();
+                return () => this.Container.Resolve<AuthorizationStepComposite>();
             }
         }
 

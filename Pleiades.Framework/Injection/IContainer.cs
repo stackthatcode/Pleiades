@@ -1,6 +1,6 @@
 ﻿namespace Pleiades.Framework.Injection
 {
-    public interface Container
+    public interface IContainer
     {
         T Resolve<T>();
     }

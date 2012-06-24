@@ -8,8 +8,8 @@
     <ProjectGuid>{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pleiades.Utilities</RootNamespace>
-    <AssemblyName>Pleiades.Utilities</AssemblyName>
+    <RootNamespace>Pleiades.Framework.TestHelpers</RootNamespace>
+    <AssemblyName>Pleiades.Framework.TestHelpers</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

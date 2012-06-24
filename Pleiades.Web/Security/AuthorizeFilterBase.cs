@@ -14,8 +14,8 @@ namespace Pleiades.Framework.Web.Security
     public abstract class AuthorizeFilterBase<T> : IAuthorizationFilter
             where T : ISecurityContext
     {
-        protected abstract Step<T> BuildAuthorizationStep { get; }
-
+        protected abstract Func<Step<T>> BuildAuthorizationStep { get; }
+    
         protected abstract T BuildSecurityContext(AuthorizationContext filterContext);
 
         protected abstract SecurityCodeProcessorBase BuildSecurityCodeProcessor { get; }
@@ -28,7 +28,7 @@ namespace Pleiades.Framework.Web.Security
         {
             var context = this.BuildSecurityContext(filterContext);
 
-            this.BuildAuthorizationStep.Execute(context);
+            this.BuildAuthorizationStep().Execute(context);
 
             this.BuildSecurityCodeProcessor.ProcessSecurityCode(context.SecurityResponseCode, filterContext);
         }

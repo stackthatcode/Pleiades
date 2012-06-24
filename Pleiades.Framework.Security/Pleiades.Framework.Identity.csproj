@@ -43,10 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Execution\AccountLevelStep.cs" />
+    <Compile Include="Execution\AccountLevelAuthorizationStep.cs" />
     <Compile Include="Concrete\IdentityUserService.cs" />
     <Compile Include="Execution\AccountStatusAuthorizationStep.cs" />
-    <Compile Include="Execution\CompositeIdentityAuthStep.cs" />
     <Compile Include="Execution\SimpleOwnerAuthorizationStep.cs" />
     <Compile Include="Execution\RoleAuthorizationStep.cs" />
     <Compile Include="Interface\IIdentityRepository.cs" />

@@ -7,11 +7,11 @@ namespace Pleiades.Framework.Execution
     public class StepComposite<TContext> : Step<TContext>
             where TContext : IStepContext
     {
-        protected Container Container { get; set; }
+        protected IContainer Container { get; set; }
         protected List<Step<TContext>> Steps = new List<Step<TContext>>();
 
 
-        public StepComposite(Container container)
+        public StepComposite(IContainer container)
         {
             this.Steps = new List<Step<TContext>>();
             this.Container = container;
@@ -23,6 +23,10 @@ namespace Pleiades.Framework.Execution
             this.Steps.Add(step);
         }
 
+        public void Register(Step<TContext> step)
+        {
+            this.Steps.Add(step);
+        }
 
         public override void Attach(IStepObserver observer)
         {

@@ -16,7 +16,7 @@ namespace Pleiades.Framework.Identity.Execution
                 return;
             }
 
-            if (context.IdentityRequirements.AuthorizationZone != AuthorizationZone.Restricted)
+            if (context.IdentityRequirements.AuthorizationZone == AuthorizationZone.Public)
             {
                 return;
             }

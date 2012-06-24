@@ -6,7 +6,7 @@ using Pleiades.Framework.Identity.Model;
 
 namespace Pleiades.Framework.Identity.Execution
 {
-    public class AccountLevelStep<T> : Step<T>
+    public class AccountLevelAuthorizationStep<T> : Step<T>
             where T : IIdentityRequirementsContext, ISecurityContext, IIdentityUserContext
     {
         public override void Execute(T context)

@@ -1,20 +1,27 @@
 Pleiades Administrative Area - TODO
 ===================================
 
-SECURITY/FRAMEWORK REFACTORING BACKLOG / NOTES 6/17/2012
-========================================================
-- Add Code First initialization stuff => TODO
-- Write Unit Tests for Execution namespace => TODO
-- Write Unit Tests for the MembershipService and/or Provider =>  TODO
-- Write Unit Tests for the IdentityUser => TODO
-- Create framework for automatically testing Repositories with auto-property-compare => TODO
+6/24/2012 UPDATE
+================
+- Write Unit Tests for the MembershipService and/or Provider => IN PROGRESS
 
-AND PROBABLY => eliminate the need to have Integration Tests for all things security => TODO
+- Add Code First initialization stuff => TODO
+- Add Integration Test Fixture for the EFRepository => TODO
+- Add Integration Tests for Membership w/ live configuration (CreateUser, Retreive, Update) => TODO
+
+- Write Unit Tests for Execution namespace => DONE
+- Write Unit Tests for the IdentityUser => DONE
+- AND PROBABLY => eliminate the need to have Integration Tests for all things security => DONE
+
+- Write the rapid, rapid Property Comparison tool... DO IT MAN!!! => DONE
+- Create framework for automatically testing Repositories with auto-property-compare => IN PROGRESS
 
 
 
 STACK OVERFLOW QUESTIONS
 ========================
+- Research how to Unit Test around Expression Trees =>  TODO
+- What the heck is a predicate, again...??? => TODO
 - Best practices for CSS, Images, Javascript, ASP.NET MVC and especially HTML Helpers
 - http://ace.ajax.org/build/kitchen-sink.html
 - How do you handle lazy-loading with EntityFramework?
@@ -22,7 +29,7 @@ STACK OVERFLOW QUESTIONS
 
 GIT QUESTIONS
 =============
-- How do you get a complete snapshot of a certain Revision in Git...? => IN PROGRESS
+- How do you get a complete snapshot of a certain Revision in Git...? => IN PROGRESS - APPEARS TO BE CHECKOUT COMMAND
 - How do you move files/directories with Git? => IN PROGRESS
 
 

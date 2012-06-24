@@ -8,7 +8,7 @@ using Pleiades.Framework.Execution;
 namespace Pleiades.Framework.UnitTests.Execution
 {
     [TestFixture]
-    public class StepTests
+    public class TestFixtureForStep
     {
         [Test]
         public void No_Kill_Leaves_ExecutionStateValid_True()

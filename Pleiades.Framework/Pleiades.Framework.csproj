@@ -54,8 +54,9 @@
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Helpers\StringWriterWithEncoding.cs" />
     <Compile Include="Data\IGenericRepository.cs" />
-    <Compile Include="Injection\Container.cs" />
+    <Compile Include="Injection\IContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\PropertyReflection.cs" />
     <Compile Include="Security\ISecurityContext.cs" />
     <Compile Include="Security\SecurityResponseCode.cs" />
   </ItemGroup>

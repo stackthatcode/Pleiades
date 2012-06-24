@@ -10,9 +10,11 @@ using Pleiades.Web.Security.Utility;
 
 namespace Pleiades.Framework.MembershipProvider.Concrete
 {
+    /// <summary>
+    /// Wrapper around common Membership functions - enables testability of Membership-related functions
+    /// </summary>
     public class MembershipService : IMembershipService
     {
-        // QUESTION: How to address these...? DomainUserService.UpdateLastModified(user); => ANSWER: DON'T!
 
         public Model.MembershipUser CreateUser(CreateNewMembershipUserRequest request, out MembershipCreateStatus createStatus)
         {

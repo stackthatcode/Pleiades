@@ -25,13 +25,13 @@ namespace Pleiades.Framework.MembershipProvider.Providers
     /// 
     /// UPDATE: completed abstracted the MembershipRepository and replaced config settings with the MembershipProviderSettings refs
     /// </summary>
-    public class MembershipProvider : System.Web.Security.MembershipProvider
+    public class PfMembershipProvider : System.Web.Security.MembershipProvider
     {
         public const int newPasswordLength = 8;
         public const int userIsOnlineTimeWindow = 15;   // TODO: pull this from config file
 
         // These are set by the Initialize method which reads from a config file
-        public static MembershipProviderSettings MembershipProviderSettings { get; protected set; }
+        public static MembershipProviderSettings MembershipProviderSettings { get; set; }
         public IMembershipRepository MembershipRepository { get; set; }
 
 

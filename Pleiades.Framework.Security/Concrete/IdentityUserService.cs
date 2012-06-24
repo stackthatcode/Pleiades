@@ -15,46 +15,41 @@ namespace Pleiades.Framework.Identity.Concrete
     /// </summary>
     public class IdentityUserService : IIdentityUserService
     {
-        public const int MaxRootUsers = 1;
+        public const int MaxSupremeUsers = 1;
         public const int MaxAdminUsers = 5;
 
-        public IGenericRepository<Model.IdentityUser> Repository { get; set; }
+        public IIdentityRepository Repository { get; set; }
 
         public IdentityUserService(IIdentityRepository identityRepository)
         {
             this.Repository = identityRepository;
         }
 
-        public IdentityUserService(IGenericRepository<Model.IdentityUser> repository)
+        public int GetUserCountByRole(UserRole role)
         {
-            this.Repository = repository;
-        }
-
-        public int GetUserCountByRole(IdentityUserRole role)
-        {
-            return this.Repository.GetAll().Where(x => x.UserRole == role).Count();
+            return this.Repository.GetUserCountByRole(role);
         }
 
         /// <summary>
         /// Generate a new Identity User - avoid creating quantity of Root & Admin Users beyond threshhold
         /// </summary>
-        public Model.IdentityUser Create(CreateNewIdentityUserRequest newUserRequest)
+        public Model.IdentityUser Create(CreateOrModifyIdentityUserRequest newUserRequest)
         {
-            if (newUserRequest.UserRole == IdentityUserRole.Admin)
+            if (newUserRequest.UserRole == UserRole.Admin)
             {
-                var countAdmin = this.GetUserCountByRole(IdentityUserRole.Admin);
+                var countAdmin = this.GetUserCountByRole(UserRole.Admin);
                 if (countAdmin >= MaxAdminUsers)
                 {
                     throw new Exception(String.Format("Maximum number of Admin Users is {0}", MaxAdminUsers));
                 }
             }
 
-            if (newUserRequest.UserRole == IdentityUserRole.Supreme)
+            if (newUserRequest.UserRole == UserRole.Supreme)
             {
-                var countRoot = this.GetUserCountByRole(IdentityUserRole.Supreme);
-                if (countRoot >= MaxRootUsers)
+                var countRoot = this.GetUserCountByRole(UserRole.Supreme);
+                if (countRoot >= MaxSupremeUsers)
                 {
-                    throw new Exception(String.Format("Maximum number of Root Users is 1", MaxRootUsers));
+                    throw new Exception(String.Format("Maximum number of Root Users is 1", MaxSupremeUsers));
                 }
             }
 
@@ -82,7 +77,7 @@ namespace Pleiades.Framework.Identity.Concrete
         /// </summary>
         public Model.IdentityUser RetrieveUserById(int identityUserId)
         {
-            var identityUserEntity = this.Repository.FindFirstOrDefault(x => x.ID == identityUserId);
+            var identityUserEntity = this.Repository.RetrieveUserById(identityUserId);
             return identityUserEntity;
         }
 
@@ -97,9 +92,9 @@ namespace Pleiades.Framework.Identity.Concrete
         /// <summary>
         /// Update existing Identity User - will only modify Identity User entities, not Membership!
         /// </summary>
-        public void Update(Model.IdentityUser changes)
+        public void Update(Model.CreateOrModifyIdentityUserRequest changes)
         {
-            var identityUserEntity = this.RetrieveUserById(changes.ID);
+            var identityUserEntity = this.Repository.RetrieveUserById(changes.ID);
             
             identityUserEntity.UserRole = changes.UserRole;
             identityUserEntity.AccountStatus = changes.AccountStatus;
@@ -114,9 +109,9 @@ namespace Pleiades.Framework.Identity.Concrete
         /// <summary>
         /// Set the Last Modified footprint
         /// </summary>
-        public void UpdateLastModified(Model.IdentityUser identityUser)
+        public void UpdateLastModified(int id)
         {
-            var identityUserEntity = this.RetrieveUserById(identityUser.ID);
+            var identityUserEntity = this.Repository.RetrieveUserById(id);
             identityUserEntity.LastModified = DateTime.Now;
             this.Repository.SaveChanges();
         }
@@ -125,10 +120,10 @@ namespace Pleiades.Framework.Identity.Concrete
         /// Delete Identity User
         /// </summary>
         /// <param name="identityUser"></param>
-        public void Delete(Model.IdentityUser identityUser)
+        public void Delete(int id)
         {
-            var identityUserEntity = this.RetrieveUserById(identityUser.ID);
-            if (identityUserEntity.UserRole == IdentityUserRole.Supreme)
+            var identityUserEntity = this.Repository.RetrieveUserById(id);
+            if (identityUserEntity.UserRole == UserRole.Supreme)
             {
                 throw new Exception("Illegal to delete Root User from application layer");
             }

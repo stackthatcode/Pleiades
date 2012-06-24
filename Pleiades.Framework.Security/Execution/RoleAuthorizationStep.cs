@@ -34,7 +34,7 @@ namespace Pleiades.Framework.Identity.Execution
 
             // Reject anyone that's not Trusted in a Trusted area; solicit for Logon
             if (context.IdentityRequirements.AuthorizationZone == AuthorizationZone.Restricted
-                && context.IdentityUser.UserRole != IdentityUserRole.Trusted
+                && context.IdentityUser.UserRole != UserRole.Trusted
                 && context.IdentityUser.UserRole.IsNotAdministrator())
             {
                 context.SecurityResponseCode = SecurityResponseCode.AccessDeniedSolicitLogon;

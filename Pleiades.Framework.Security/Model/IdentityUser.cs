@@ -11,7 +11,7 @@ namespace Pleiades.Framework.Identity.Model
         public int ID { get; set; }
 
         // Authorization properties
-        public IdentityUserRole UserRole { get; set; }
+        public UserRole UserRole { get; set; }
         public AccountStatus? AccountStatus { get; set; }
         public AccountLevel? AccountLevel { get; set; }
         
@@ -25,7 +25,7 @@ namespace Pleiades.Framework.Identity.Model
 
         public IdentityUser()
         {
-            UserRole = IdentityUserRole.Anonymous;
+            UserRole = UserRole.Anonymous;
         }
     }
 }

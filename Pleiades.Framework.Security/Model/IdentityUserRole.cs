@@ -6,7 +6,7 @@ using Pleiades.Framework.Helpers;
 
 namespace Pleiades.Framework.Identity.Model
 {
-    public enum IdentityUserRole
+    public enum UserRole
     {
         Anonymous = 1,
         Trusted = 2,
@@ -16,12 +16,12 @@ namespace Pleiades.Framework.Identity.Model
 
     public static class UserRoleExtensions
     {
-        public static bool IsAdministrator(this IdentityUserRole role)
+        public static bool IsAdministrator(this UserRole role)
         {
-            return (role == IdentityUserRole.Admin || role == IdentityUserRole.Supreme);
+            return (role == UserRole.Admin || role == UserRole.Supreme);
         }
 
-        public static bool IsNotAdministrator(this IdentityUserRole role)
+        public static bool IsNotAdministrator(this UserRole role)
         {
             return !(role.IsAdministrator());
         }

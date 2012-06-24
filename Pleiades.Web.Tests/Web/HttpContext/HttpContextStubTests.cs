@@ -6,8 +6,7 @@ using System.Text;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Security;
-using Gallio.Framework;
-using MbUnit.Framework;
+using NUnit.Framework;
 using Rhino.Mocks;
 using Pleiades.Framework.TestHelpers;
 using Pleiades.Framework.TestHelpers.Web;
@@ -15,7 +14,6 @@ using Pleiades.Framework.TestHelpers.Web;
 namespace Pleiades.Web.Tests.HttpContext
 {
     [TestFixture]
-    [Ignore]
     public class HttpContextMockTests
     {
         [Test]
