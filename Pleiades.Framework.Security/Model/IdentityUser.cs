@@ -3,7 +3,7 @@
 namespace Pleiades.Framework.Identity.Model
 {
     /// <summary>
-    /// Root Aggregate for Domain & Membership User objects
+    /// Identity User object
     /// </summary>
     public class IdentityUser
     {

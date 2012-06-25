@@ -1,21 +1,29 @@
 Pleiades Administrative Area - TODO
 ===================================
 
-6/24/2012 UPDATE
-================
-- Write Unit Tests for the MembershipService and/or Provider => IN PROGRESS
-
+6/24/2012 UPDATE => 6/25/2012 UPDATE
+====================================
 - Add Code First initialization stuff => TODO
-- Add Integration Test Fixture for the EFRepository => TODO
-- Add Integration Tests for Membership w/ live configuration (CreateUser, Retreive, Update) => TODO
+- Write Integration Tests for EFRepository, DbContext, etc. => TODO
+- Refactor Integration Tests for Membership w/ live configuration (CreateUser, Retreive, Update) => TODO
+- Write Unit Tests for the Aggregate Root User => TODO
+- Test the new Attributes w/ Filter => TODO
 
-- Write Unit Tests for Execution namespace => DONE
-- Write Unit Tests for the IdentityUser => DONE
-- AND PROBABLY => eliminate the need to have Integration Tests for all things security => DONE
+- *** Celebrate coming Out-of-the-Wild with Membership Refactoring!
 
+
+BACKLOG
+=======
+- Write Unit Tests for the MembershipService and/or Provider => DONE
+- Add Integration Test Fixture for the EFRepository => DONE
 - Write the rapid, rapid Property Comparison tool... DO IT MAN!!! => DONE
 - Create framework for automatically testing Repositories with auto-property-compare => IN PROGRESS
 
+BURNDOWN
+========
+- Write Unit Tests for Execution namespace => DONE
+- Write Unit Tests for the IdentityUser => DONE
+- AND PROBABLY => eliminate the need to have Integration Tests for all things security => DONE
 
 
 STACK OVERFLOW QUESTIONS

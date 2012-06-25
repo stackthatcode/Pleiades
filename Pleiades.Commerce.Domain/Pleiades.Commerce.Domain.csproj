@@ -60,7 +60,6 @@
   <ItemGroup>
     <Folder Include="Concrete\" />
     <Folder Include="Execution\" />
-    <Folder Include="Mediators\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pleiades.Framework.Membership\Pleiades.Framework.MembershipProvider.csproj">

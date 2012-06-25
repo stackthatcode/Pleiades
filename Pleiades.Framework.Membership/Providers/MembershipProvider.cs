@@ -161,7 +161,13 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         public TimeSpan UserIsOnlineTimeWindow
         {
             get { return MembershipProviderSettings.UserIsOnlineTimeWindow; }
-        }        
+        }
+
+
+        public string Name
+        {
+            get { return MembershipProviderSettings.ProviderName; }
+        }
         #endregion
 
 
@@ -181,7 +187,7 @@ namespace Pleiades.Framework.MembershipProvider.Providers
 
             if (String.IsNullOrEmpty(name))
             {
-                name = "Pleiades MembershipProvider";
+                MembershipProviderSettings.ProviderName = "Pleiades MembershipProvider";
             }
 
             if (String.IsNullOrEmpty(config["description"]))
@@ -194,7 +200,7 @@ namespace Pleiades.Framework.MembershipProvider.Providers
             MembershipProviderSettings = new MembershipProviderSettings(config);
 
             // Initialize the abstract base class.
-            base.Initialize(name, config);
+            base.Initialize(MembershipProviderSettings.ProviderName, config);
 
             // Get and instance and set the Application Name
             // TODO: not entirely happy with this, but we'll see about it later on...

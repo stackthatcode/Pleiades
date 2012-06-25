@@ -14,6 +14,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
 	public class MembershipProviderSettings
 	{
         public virtual string ApplicationName { get; set; }
+        public virtual string ProviderName { get; set; }
+
         public virtual MachineKeySection MachineKey { get; protected set; }
         public virtual string ConnectionString { get; protected set; }
 
@@ -28,7 +30,6 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         public virtual bool RequiresQuestionAndAnswer { get; protected set; }
         public virtual bool RequiresUniqueEmail { get; protected set; }
         public virtual TimeSpan UserIsOnlineTimeWindow { get; protected set; }
-
 
 
         public MembershipProviderSettings()
