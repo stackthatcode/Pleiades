@@ -25,15 +25,14 @@ namespace Pleiades.Framework.Data.EF
             return this.Context.Set<T>();
         }
 
-        public virtual IQueryable<T> GetAll()
+        public virtual void Add(T entity)
         {
-            IQueryable<T> query = this.Data();
-            return query;
+            this.Context.Set<T>().Add(entity);
         }
 
         public virtual IQueryable<T> FindBy(Expression<Func<T, bool>> predicate)
         {
-            IQueryable<T> query = this.Data().Where(predicate);
+            var query = this.Data().Where(predicate);
             return query;
         }
 
@@ -42,9 +41,10 @@ namespace Pleiades.Framework.Data.EF
             return this.Data().FirstOrDefault(predicate);
         }
 
-        public virtual void Add(T entity)
+        public virtual IQueryable<T> GetAll()
         {
-            this.Context.Set<T>().Add(entity);
+            var query = this.Data();
+            return query;
         }
 
         public virtual void Delete(T entity)
@@ -71,6 +71,5 @@ namespace Pleiades.Framework.Data.EF
         {
             return this.FindBy(predicate).Count();
         }
-
     }
 }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Pleiades.Framework.IntegrationTests.DataEF
+namespace Pleiades.Framework.IntegrationTests.Membership
 {
-    class CrudOpsFixture
+    class MembershipRepository
     {
     }
 }

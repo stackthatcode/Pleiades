@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Security;
-using Gallio.Framework;
-using MbUnit.Framework;
+using NUnit.Framework;
 using Pleiades.Framework.Web.Security.Model;
 using Pleiades.Framework.Web.Security.Concrete;
 

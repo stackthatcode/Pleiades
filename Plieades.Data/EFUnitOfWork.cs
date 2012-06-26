@@ -7,7 +7,7 @@ namespace Pleiades.Framework.Data.EF
 {
     public class EFUnitOfWork : IUnitOfWork
     {
-        DbContext Context { get; set; }
+        public DbContext Context { get; set; }
 
         public EFUnitOfWork(DbContext context)
         {
@@ -16,19 +16,16 @@ namespace Pleiades.Framework.Data.EF
 
         public void Execute(Action action)
         {
-            using (var transaction = new TransactionScope())
+            bool success = false;
+
+            using (var scope = new TransactionScope(TransactionScopeOption.Required))
             {
-                try
-                {
-                    action.Invoke();
-                    transaction.Complete();
-                }
-                catch
-                {
-                    // Dispose will trigger a rollback
-                    transaction.Dispose();
-                }
+                action.Invoke();
+                scope.Complete();
+                success = true;
             }
+            
+            this.Context.SaveChanges();
         }
     }
 }

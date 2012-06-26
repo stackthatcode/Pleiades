@@ -7,18 +7,19 @@ namespace Pleiades.Framework.Utilities
 {
     public static class PropertyReflection
     {
-        public static bool ValuePropertyCompare<T>(this T input1, T input2) 
+        public static bool StrungOutCompare<T>(this T input1, T input2) 
                 where T : class
         {
             var type = typeof(T);
+
             foreach (var property in type.GetProperties())
             {
-                if (!property.PropertyType.IsValueType) continue;
+                if (!property.PropertyType.IsValueType && property.PropertyType.FullName != "System.String") continue;
 
-                var value1 = property.GetValue(input1, new object[0]);
-                var value2 = property.GetValue(input2, new object[0]);
-
-                if (value1 != value2)
+                var value1 = property.GetValue(input1, null);
+                var value2 = property.GetValue(input2, null);
+                
+                if (value1.ToString() != value2.ToString())
                 {
                     return false;
                 }

@@ -53,14 +53,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataEF\CrudOpsFixture.cs" />
-    <Compile Include="DataEF\TestContext.cs" />
-    <Compile Include="DataEF\TestEntity.cs" />
+    <Compile Include="DataEF\TestFixture.cs" />
+    <Compile Include="DataEF\MyEntityRepository.cs" />
+    <Compile Include="DataEF\MyContext.cs" />
+    <Compile Include="DataEF\MyEntity.cs" />
+    <Compile Include="Membership\MembershipContext.cs" />
+    <Compile Include="Membership\MembershipRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Membership\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.Config">
       <SubType>Designer</SubType>
@@ -75,6 +76,14 @@
     <ProjectReference Include="..\Pleiades.Framework.Security\Pleiades.Framework.Identity.csproj">
       <Project>{7F1F1DA2-6F72-4D68-A06C-D3379941B060}</Project>
       <Name>Pleiades.Framework.Identity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Framework.csproj">
+      <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
+      <Name>Pleiades.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plieades.Data\Pleiades.Framework.Data.EF.csproj">
+      <Project>{89303370-B830-4A89-8646-0F9D287AD657}</Project>
+      <Name>Pleiades.Framework.Data.EF</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

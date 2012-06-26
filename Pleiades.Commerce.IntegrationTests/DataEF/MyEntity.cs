@@ -1,6 +1,6 @@
 ﻿namespace Pleiades.Framework.IntegrationTests.DataEF
 {
-    public class TestEntity
+    public class MyEntity
     {
         public virtual int Id { get; set; }
         public virtual string Name { get; set; }
