@@ -8,6 +8,7 @@ using System.Web.Configuration;
 using System.Web.Security;
 using Pleiades.Framework.Data;
 using Pleiades.Framework.Helpers;
+using Pleiades.Framework.MembershipProvider.Concrete;
 using Pleiades.Framework.MembershipProvider.Interface;
 
 namespace Pleiades.Framework.MembershipProvider.Providers
@@ -187,7 +188,7 @@ namespace Pleiades.Framework.MembershipProvider.Providers
 
             if (String.IsNullOrEmpty(name))
             {
-                MembershipProviderSettings.ProviderName = "Pleiades MembershipProvider";
+                name = "Pleiades MembershipProvider";
             }
 
             if (String.IsNullOrEmpty(config["description"]))
@@ -197,10 +198,10 @@ namespace Pleiades.Framework.MembershipProvider.Providers
             }
 
             // Load the Configuration Settings into an object and set the global instance
-            MembershipProviderSettings = new MembershipProviderSettings(config);
+            MembershipProviderSettings = new MembershipProviderSettings(name, config);
 
             // Initialize the abstract base class.
-            base.Initialize(MembershipProviderSettings.ProviderName, config);
+            base.Initialize(name, config);
 
             // Get and instance and set the Application Name
             // TODO: not entirely happy with this, but we'll see about it later on...
@@ -249,8 +250,7 @@ namespace Pleiades.Framework.MembershipProvider.Providers
                 return null;
             }
 
-            var createDate = DateTime.Now;
-
+            
             if (providerUserKey == null)
             {
                 providerUserKey = Guid.NewGuid();
@@ -264,6 +264,7 @@ namespace Pleiades.Framework.MembershipProvider.Providers
                 }
             }
 
+            var createDate = DateTime.Now;
             var user = new Model.MembershipUser 
             {
                 ProviderUserKey = (Guid)providerUserKey,
@@ -275,7 +276,7 @@ namespace Pleiades.Framework.MembershipProvider.Providers
                 PasswordAnswer = passwordAnswer,
                 IsApproved = isApproved,
                 LastActivityDate = createDate,
-                LastLoginDate = DateTime.Now,
+                LastLoginDate = createDate,
                 LastPasswordChangedDate = createDate,
                 CreationDate = createDate,
                 IsOnline = false,
@@ -284,7 +285,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
                 FailedPasswordAttemptCount = 0,
                 FailedPasswordAttemptWindowStart = createDate,
                 FailedPasswordAnswerAttemptCount = 0,
-                FailedPasswordAnswerAttemptWindowStart = createDate
+                FailedPasswordAnswerAttemptWindowStart = createDate,
+                LastModified = createDate,
             };
 
             try
@@ -293,8 +295,11 @@ namespace Pleiades.Framework.MembershipProvider.Providers
                 this.MembershipRepository.SaveChanges();
                 status = MembershipCreateStatus.Success;
             }
-            catch
+            catch(Exception ex)
             {
+                // TODO - get my Logs(!!!)
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+
                 status = MembershipCreateStatus.UserRejected;
             }
 

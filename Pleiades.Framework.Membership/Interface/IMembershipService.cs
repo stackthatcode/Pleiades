@@ -9,25 +9,12 @@ namespace Pleiades.Framework.MembershipProvider.Interface
     /// </summary>
     public interface IMembershipService
     {
-        // TODO: wire these in
-        //        var user = DomainUserService.RetrieveUserByEmail(emailaddr);
-        //if (user == null)
-        //{
-        //    return null;
-        //}
-
-        //if (user.AccountStatus == Model.AccountStatus.Disabled)
-        //{
-        //    return null;
-        //}
-
         MembershipUser CreateUser(CreateNewMembershipUserRequest request, out MembershipCreateStatus createStatus);
         string GenerateUserName();
-
-        MembershipUser ValidateUserByEmailAddr(string emailaddr, string password);        
-
+        MembershipUser ValidateUserByEmailAddr(string emailaddr, string password);
         MembershipUser GetSingleUserByEmail(string emailAddress);
         MembershipUser GetUserByUserName(string userName);
+
         string GetUserNameByEmail(string emailAddress);
         int GetNumberOfUsersOnline();
 

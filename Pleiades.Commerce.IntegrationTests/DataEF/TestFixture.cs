@@ -78,58 +78,74 @@ namespace Pleiades.Framework.IntegrationTests.DataEF
         }
 
         [Test]
-        public void Test_Transaction_Edit()
+        public void Test_Transaction_Save_Rollback_Save_Test()
         {
             // First, initialize
             this.EmptyRepository();
-            var context = new MyContext();
-            var repository = new MyEntityRepository(context);
 
             // Arrange
             var entity1 = new MyEntity { Name = "Olga", Description = "Hi everybody, I'm like librarian", Amount = 777 };
-            repository.Add(entity1);
-            repository.SaveChanges();
 
-            // Assert
-            var entity1Db = repository.FindFirstOrDefault(x => x.Name == "Olga");
-            Assert.IsTrue(entity1Db.StrungOutCompare(entity1));
-
-            // 1st Transaction - Fails!
             try
             {
-                var unitOfWork = new EFUnitOfWork(context);
-                unitOfWork.Execute(() => 
+                var context1 = new MyContext();
+                var repository1 = new MyEntityRepository(context1);
+                var unitOfWork1 = new EFUnitOfWork(context1);
+                unitOfWork1.Execute(() =>
                     {
-                        entity1Db.Amount = 800;
-                        repository.Edit(entity1Db);
-                        throw new Exception("If I can't have data, nobody can!!!");
+                        repository1.Add(entity1);
+                        repository1.SaveChanges();
                     });
             }
-            catch
+            finally
             {
-                // Should kill the Transaction
             }
 
-            var entity1Db2 = repository.FindFirstOrDefault(x => x.Name == "Olga");
-            Assert.AreEqual(777, entity1Db2.Amount);
-
-            // 2nd Transaction - Succeeds!
+            // Next, fail on Purpose!
             try
             {
-                var unitOfWork = new EFUnitOfWork(context);
-                unitOfWork.Execute(() =>
+                var context2 = new MyContext();
+                var repository2 = new MyEntityRepository(context2); 
+                var unitOfWork2 = new EFUnitOfWork(context2);
+                unitOfWork2.Execute(() => 
                 {
-                    entity1Db2.Amount = 800;
-                    repository.Edit(entity1Db2);
+                    // Assert
+                    var entity2 = repository2.FindFirstOrDefault(x => x.Name == "Olga");
+                    Assert.IsTrue(entity2.StrungOutCompare(entity1));
+
+                    entity2.Amount = 800;
+                    repository2.Edit(entity2);
+                    throw new Exception("If I can't have data, nobody can!!!");
                 });
             }
             catch
             {
-                // Should kill the Transaction
+                // Transaction should be dead
             }
 
-            var entity1Db3 = repository.FindFirstOrDefault(x => x.Name == "Olga");
-            Assert.AreEqual(800, entity1Db2.Amount);
+            // Finally, let the transaction - succeeds!
+            try
+            {
+                var context3 = new MyContext();
+                var repository3 = new MyEntityRepository(context3);
+                var unitOfWork3 = new EFUnitOfWork(context3);
+                unitOfWork3.Execute(() =>
+                {
+                    var entity3 = repository3.FindFirstOrDefault(x => x.Name == "Olga");
+                    Assert.AreEqual(777, entity3.Amount);
+
+                    entity3.Amount = 800;
+                    repository3.Edit(entity3);
+                });
+
+                var context4 = new MyContext();
+                var repository4 = new MyEntityRepository(context4);
+                var entity4 = repository4.FindFirstOrDefault(x => x.Name == "Olga");
+                Assert.AreEqual(800, entity4.Amount);
+            }
+            finally
+            {
+            }
         }
 
         public void EmptyRepository()

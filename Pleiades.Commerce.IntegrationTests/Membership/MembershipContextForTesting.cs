@@ -6,17 +6,15 @@ using Pleiades.Framework.MembershipProvider.Model;
 
 namespace Pleiades.Framework.IntegrationTests.Membership
 {
-    public class MembershipContext : DbContext
+    public class MembershipContextForTesting : DbContext
     {
         public DbSet<MembershipUser> MyEntities { get; set; }
 
-        public MembershipContext() : 
-            base("MyTestDatabase")
+        public MembershipContextForTesting() : base("MyTestDatabase")
         {
         }
 
-        public MembershipContext(string conn)
-            : base(conn)
+        public MembershipContextForTesting(string conn) : base(conn)
         {
         }
     }

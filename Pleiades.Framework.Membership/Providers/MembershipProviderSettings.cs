@@ -36,8 +36,9 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         {
         }
 
-        public MembershipProviderSettings(NameValueCollection config)
+        public MembershipProviderSettings(string providerName, NameValueCollection config)
         {
+            this.ProviderName = providerName;
             // TODO: wire this properly into parsing the configuration
             this.UserIsOnlineTimeWindow = new TimeSpan(0, 15, 0);
 

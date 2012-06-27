@@ -53,9 +53,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\HttpContextExtensions.cs" />
     <Compile Include="Providers\MembershipExtensions.cs" />
-    <Compile Include="Providers\MembershipProvider.cs" />
+    <Compile Include="Providers\PfMembershipProvider.cs" />
     <Compile Include="Providers\MembershipProviderSettings.cs" />
-    <Compile Include="Providers\RepositoryShim.cs" />
+    <Compile Include="Concrete\RepositoryShim.cs" />
     <Compile Include="Utility\ExtensionMethods.cs" />
     <Compile Include="Utility\MachineKeyGenerator.cs" />
   </ItemGroup>

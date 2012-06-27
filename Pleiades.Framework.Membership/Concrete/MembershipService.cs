@@ -73,7 +73,7 @@ namespace Pleiades.Framework.MembershipProvider.Concrete
         /// </summary>
         public Model.MembershipUser GetSingleUserByEmail(string emailAddress)
         {
-            var users = Membership.FindUsersByEmail(emailAddress);
+            var users =  Membership.FindUsersByEmail(emailAddress);
             if (users.Count == 0)
             {
                 return null;
@@ -83,7 +83,9 @@ namespace Pleiades.Framework.MembershipProvider.Concrete
                 throw new Exception("Multiple users were found with email address: " + emailAddress);
             }
 
-            var user = (SecurityMembershipUser)users.GetEnumerator().Current;
+            var enumerator = users.GetEnumerator();
+            enumerator.MoveNext();
+            var user = (SecurityMembershipUser)enumerator.Current;
             return user.ToModelMembershipUser();
         }
 

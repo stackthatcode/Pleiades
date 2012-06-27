@@ -1,7 +1,7 @@
 ﻿using System;
 using Pleiades.Framework.MembershipProvider.Interface;
 
-namespace Pleiades.Framework.MembershipProvider.Providers
+namespace Pleiades.Framework.MembershipProvider.Concrete
 {
     /// <summary>
     /// Enables injection of IMembershipRepository implementation into the MembershipProvider, which controls the construction

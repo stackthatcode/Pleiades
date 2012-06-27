@@ -46,6 +46,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,8 +59,8 @@
     <Compile Include="DataEF\MyEntityRepository.cs" />
     <Compile Include="DataEF\MyContext.cs" />
     <Compile Include="DataEF\MyEntity.cs" />
-    <Compile Include="Membership\MembershipContext.cs" />
-    <Compile Include="Membership\MembershipRepository.cs" />
+    <Compile Include="Membership\MembershipContextForTesting.cs" />
+    <Compile Include="Membership\TestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
@@ -69,6 +71,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Pleiades.Commerce.Persist\Pleiades.Commerce.Persist.csproj">
+      <Project>{E616B84E-1830-4909-9A56-58A656EA9B5B}</Project>
+      <Name>Pleiades.Commerce.Persist</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Framework.Membership\Pleiades.Framework.MembershipProvider.csproj">
       <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
       <Name>Pleiades.Framework.MembershipProvider</Name>

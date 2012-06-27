@@ -69,8 +69,8 @@ namespace Pleiades.Commerce.Persist
         {
             var results =
                 (from u in this.Data()
-                 where u.UserName.Contains(emailToMatch)
-                 orderby u.UserName
+                 where u.Email.Contains(emailToMatch)
+                 orderby u.Email
                  select u);
 
             totalRecords = results.Count();

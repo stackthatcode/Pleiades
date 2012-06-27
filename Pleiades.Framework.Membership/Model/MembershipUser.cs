@@ -11,6 +11,9 @@ namespace Pleiades.Framework.MembershipProvider.Model
     /// </summary>
     public class MembershipUser
     {
+        // For EF's sake
+        public int Id { get; set; }
+
         // Membership Identifiers
         public object ProviderUserKey { get; set; }
         public string UserName { get; set; }
