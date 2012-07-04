@@ -13,29 +13,31 @@ namespace Pleiades.Framework.UnitTests.Membership.Provider
     [TestFixture]
     public class MembershipProviderTests
     {
-        PfMembershipProvider Provider;
-
-        [SetUp]
-        public void TestSetup()
+        public IMembershipRepository ProviderRepositoryInjector(PfMembershipProvider provider)
         {
-            Provider = new PfMembershipProvider();
-            Provider.MembershipRepository = MockRepository.GenerateStub<IMembershipRepository>();
             PfMembershipProvider.MembershipProviderSettings = MockRepository.GenerateStub<MembershipProviderSettings>();
             PfMembershipProvider.MembershipProviderSettings.ProviderName = "My Provider";
+            var repository = MockRepository.GenerateStub<IMembershipRepository>();
+            provider.RepositoryFactory = () => repository;
+            return repository;
         }
+
 
         [Test]
         public void CreateUser_Fails_With_DuplicateEmail() 
         {
             // Arrange
+            var provider = new PfMembershipProvider();
+            var repository = ProviderRepositoryInjector(provider);
+
             var username = "1111111";
             var email = "aleks@test.com";
             PfMembershipProvider.MembershipProviderSettings.Expect(x => x.RequiresUniqueEmail).Return(true);
-            Provider.MembershipRepository.Expect(x => x.GetUserNameByEmail(email)).Return(username);
+            repository.Expect(x => x.GetUserNameByEmail(email)).Return(username);
 
             // Act
             MembershipCreateStatus statusOutput;
-            var user = Provider.CreateUser(
+            var user = provider.CreateUser(
                 username, "password1", email, "Whawt's This?", "What it is", true, Guid.NewGuid(), out statusOutput);
             
             // Assert
@@ -47,17 +49,20 @@ namespace Pleiades.Framework.UnitTests.Membership.Provider
         public void CreateUser_Fails_With_DuplicateUserName()
         {
             // Arrange
+            var provider = new PfMembershipProvider();
+            var repository = ProviderRepositoryInjector(provider);
+
             var username = "1111111";
-            var email = "aleks@test.com"; 
+            var email = "aleks@test.com";
             PfMembershipProvider.MembershipProviderSettings.Expect(x => x.RequiresUniqueEmail).Return(true);
-            Provider.MembershipRepository.Expect(x => x.GetUserNameByEmail(null)).IgnoreArguments().Return("");
-            Provider.MembershipRepository.Expect(x => x.GetUser(username)).Return(new Model.MembershipUser());
-            
+            repository.Expect(x => x.GetUserNameByEmail(null)).IgnoreArguments().Return("");
+            repository.Expect(x => x.GetUser(username)).Return(new Model.MembershipUser());
+
             // Act
             MembershipCreateStatus statusOutput;
-            var user = Provider.CreateUser(
+            var user = provider.CreateUser(
                 username, "password1", email, "Whawt's This?", "What it is", true, Guid.NewGuid(), out statusOutput);
-            
+
             // Assert
             Assert.AreEqual(MembershipCreateStatus.DuplicateUserName, statusOutput);
             Assert.IsNull(user);
@@ -67,15 +72,17 @@ namespace Pleiades.Framework.UnitTests.Membership.Provider
         public void CreateUser_Fails_With_Invalid_Guid()
         {
             // Arrange
+            var provider = new PfMembershipProvider();
+            var repository = ProviderRepositoryInjector(provider); 
             var username = "1111111";
             var email = "aleks@test.com";
             PfMembershipProvider.MembershipProviderSettings.Expect(x => x.RequiresUniqueEmail).Return(true);
-            Provider.MembershipRepository.Expect(x => x.GetUserNameByEmail(null)).IgnoreArguments().Return("");
-            Provider.MembershipRepository.Expect(x => x.GetUser(username)).Return(null);
+            repository.Expect(x => x.GetUserNameByEmail(null)).IgnoreArguments().Return("");
+            repository.Expect(x => x.GetUser(username)).Return(null);
 
             // Act
             MembershipCreateStatus statusOutput;
-            var user = Provider.CreateUser(
+            var user = provider.CreateUser(
                 username, "password1", email, "Whawt's This?", "What it is", true, "INVALID GUID", out statusOutput);
 
             // Assert
@@ -87,18 +94,20 @@ namespace Pleiades.Framework.UnitTests.Membership.Provider
         public void CreateUser_Fails_If_Repository_Throws()
         {
             // Arrange
+            var provider = new PfMembershipProvider();
+            var repository = ProviderRepositoryInjector(provider);
             var username = "1111111";
             var email = "aleks@test.com";
             PfMembershipProvider.MembershipProviderSettings.Expect(x => x.RequiresUniqueEmail).Return(true);
-            Provider.MembershipRepository.Expect(x => x.GetUserNameByEmail(null)).IgnoreArguments().Return("");
-            Provider.MembershipRepository.Expect(x => x.GetUser(username)).Return(null);
-            Provider.MembershipRepository
+            repository.Expect(x => x.GetUserNameByEmail(null)).IgnoreArguments().Return("");
+            repository.Expect(x => x.GetUser(username)).Return(null);
+            repository
                     .Expect(x => x.Add(null)).IgnoreArguments()
                     .Do((Action<Model.MembershipUser>)((x) => { this.Throw(); }));
 
             // Act
             MembershipCreateStatus statusOutput;
-            var user = Provider.CreateUser(
+            var user = provider.CreateUser(
                 username, "password1", email, "Whawt's This?", "What it is", true, Guid.NewGuid(), out statusOutput);
 
             // Assert
@@ -110,25 +119,27 @@ namespace Pleiades.Framework.UnitTests.Membership.Provider
         public void CreateUser_Succeeds()
         {
             // Arrange
+            var provider = new PfMembershipProvider();
+            var repository = ProviderRepositoryInjector(provider); 
             var username = "1111111";
             var email = "aleks@test.com";
             PfMembershipProvider.MembershipProviderSettings.Expect(x => x.RequiresUniqueEmail).Return(true);
-            Provider.MembershipRepository.Expect(x => x.GetUserNameByEmail(null)).IgnoreArguments().Return("");
-            Provider.MembershipRepository.Expect(x => x.GetUser(username)).Return(null).Repeat.Once();
-            Provider.MembershipRepository.Expect(x => x.Add(null)).IgnoreArguments();
-            Provider.MembershipRepository.Expect(x => x.SaveChanges());
-            Provider.MembershipRepository.Expect(x => x.GetUser(username))
+            repository.Expect(x => x.GetUserNameByEmail(null)).IgnoreArguments().Return("");
+            repository.Expect(x => x.GetUser(username)).Return(null).Repeat.Once();
+            repository.Expect(x => x.Add(null)).IgnoreArguments();
+            repository.Expect(x => x.SaveChanges());
+            repository.Expect(x => x.GetUser(username))
                 .Return(new Model.MembershipUser()
                 {
                     ProviderUserKey = Guid.NewGuid(),
                 }).Repeat.Once();
-            
+
             // Act
             MembershipCreateStatus statusOutput = MembershipCreateStatus.UserRejected;
 
             try
             {
-                var user = Provider.CreateUser(
+                var user = provider.CreateUser(
                     username, "password1", email, "Whawt's This?", "What it is", true, Guid.NewGuid(), out statusOutput);
             }
             catch
@@ -145,14 +156,16 @@ namespace Pleiades.Framework.UnitTests.Membership.Provider
         public void ChangePasswordQuestionAndAnswer_Invalid_Credentials_Fails()
         {
             // Arrange
+            var provider = new PfMembershipProvider();
+            var repository = ProviderRepositoryInjector(provider); 
             var username = "1111111";
             var email = "aleks@test.com";
             PfMembershipProvider.MembershipProviderSettings.Expect(x => x.RequiresUniqueEmail).Return(true);
-            Provider.MembershipRepository.Expect(x => x.GetUser(username)).Return(null);
+            repository.Expect(x => x.GetUser(username)).Return(null);
 
 
             // Act
-            var result = Provider.ChangePasswordQuestionAndAnswer(username, "pass1", "Whatsdtgkn", "Potatoes");
+            var result = provider.ChangePasswordQuestionAndAnswer(username, "pass1", "Whatsdtgkn", "Potatoes");
 
             // Assert
             Assert.IsFalse(result);
@@ -160,7 +173,7 @@ namespace Pleiades.Framework.UnitTests.Membership.Provider
 
         public void Throw()
         {
-            throw new Exception("I don't like you!"); 
+            throw new Exception("I am an Exception!");
         }
     }
 }

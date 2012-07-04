@@ -3,8 +3,6 @@ Pleiades Administrative Area - TODO
 
 6/24/2012 UPDATE => 6/25/2012 UPDATE
 ====================================
-- Add Code First initialization stuff => TODO
-- Write Integration Tests for EFRepository, DbContext, etc. => TODO
 - Refactor Integration Tests for Membership w/ live configuration (CreateUser, Retreive, Update) => TODO
 - Write Unit Tests for the Aggregate Root User => TODO
 - Test the new Attributes w/ Filter => TODO

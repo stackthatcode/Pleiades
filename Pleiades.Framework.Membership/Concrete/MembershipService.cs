@@ -15,7 +15,6 @@ namespace Pleiades.Framework.MembershipProvider.Concrete
     /// </summary>
     public class MembershipService : IMembershipService
     {
-
         public Model.MembershipUser CreateUser(CreateNewMembershipUserRequest request, out MembershipCreateStatus createStatus)
         {
             var generatedUserName = GenerateUserName();

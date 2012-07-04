@@ -5,13 +5,12 @@ using NUnit.Framework;
 using Pleiades.Framework.Data.EF;
 using Pleiades.Framework.Utilities;
 
-
 namespace Pleiades.Framework.IntegrationTests.DataEF
 {
     [TestFixture]
     public class TestFixture
     {
-        [SetUp]        
+        [TestFixtureSetUp]        
         public void BuildDatabase()
         {
             var context = new MyContext();

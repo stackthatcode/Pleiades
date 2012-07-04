@@ -1,6 +1,13 @@
 Backlog Burndown
 ================
 
+7/4/2012
+--------
+Again, too much to list -- near completion of the Great Refactoring #1
+- Add Code First initialization stuff => DONE
+- Write Integration Tests for EFRepository, DbContext, etc. => DONE
+
+
 6/17/2012
 ---------
 THUS FAR: 

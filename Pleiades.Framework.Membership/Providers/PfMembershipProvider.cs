@@ -33,7 +33,9 @@ namespace Pleiades.Framework.MembershipProvider.Providers
 
         // These are set by the Initialize method which reads from a config file
         public static MembershipProviderSettings MembershipProviderSettings { get; set; }
-        public IMembershipRepository MembershipRepository { get; set; }
+
+        // Repository Factories are instance-level, to enable Unit Tests to maintain completely separate Repositories
+        public Func<IMembershipRepository> RepositoryFactory { get; set; }
 
 
         #region Membership Provider property overrides
@@ -203,10 +205,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
             // Initialize the abstract base class.
             base.Initialize(name, config);
 
-            // Get and instance and set the Application Name
-            // TODO: not entirely happy with this, but we'll see about it later on...
-            this.MembershipRepository = RepositoryShim.GetInstance();
-            this.MembershipRepository.ApplicationName = this.ApplicationName;
+            // Get the RepositoryFactory from the Shim
+            this.RepositoryFactory = PfMembershipRepositoryShim.RepositoryFactory;
         }
 
         /// <summary>
@@ -242,7 +242,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
             }
 
             // Check whether user with passed username already exists
-            var membershipUser = this.MembershipRepository.GetUser(username);
+            var repository = RepositoryFactory.Invoke();
+            var membershipUser = repository.GetUser(username);
                 
             if (membershipUser != null)
             {
@@ -291,8 +292,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
 
             try
             {
-                this.MembershipRepository.Add(user);
-                this.MembershipRepository.SaveChanges();
+                repository.Add(user);
+                repository.SaveChanges();
                 status = MembershipCreateStatus.Success;
             }
             catch(Exception ex)
@@ -323,7 +324,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
                 return false;
             }
 
-            var user = this.MembershipRepository.GetUser(username);
+            var repository = RepositoryFactory.Invoke();
+            var user = repository.GetUser(username);
             if (user == null)
             {
                 throw new ProviderException("Change password question and answer failed. No unique user found.");
@@ -334,7 +336,7 @@ namespace Pleiades.Framework.MembershipProvider.Providers
 
             try
             {
-                this.MembershipRepository.SaveChanges();
+                repository.SaveChanges();
                 return true;
             }
             catch
@@ -363,7 +365,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
 
             string password = string.Empty;
 
-            var user = this.MembershipRepository.GetUser(username);
+            var repository = RepositoryFactory.Invoke();
+            var user = repository.GetUser(username);
             if (user == null)
             {
                 throw new ProviderException("Get password failed. No unique user found.");
@@ -422,7 +425,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
                 throw new MembershipPasswordException("Change password canceled due to new password validation failure.");
             }
 
-            var user = this.MembershipRepository.GetUser(username);
+            var repository = RepositoryFactory.Invoke();
+            var user = repository.GetUser(username);
             if (user == null)
             {
                 throw new ProviderException("Change password failed. No unique user found.");
@@ -432,7 +436,7 @@ namespace Pleiades.Framework.MembershipProvider.Providers
 
             try
             {
-                this.MembershipRepository.SaveChanges();
+                repository.SaveChanges();
                 return true;
             }
             catch
@@ -471,7 +475,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
                 throw new MembershipPasswordException("Reset password canceled due to password validation failure.");
             }
 
-            var user = this.MembershipRepository.GetUser(username);
+            var repository = RepositoryFactory.Invoke();
+            var user = repository.GetUser(username);
             if (user == null)
             {
                 throw new ProviderException("Reset password failed. No unique user found.");
@@ -493,7 +498,7 @@ namespace Pleiades.Framework.MembershipProvider.Providers
                 user.Password = EncodePassword(newPassword);
                 user.LastPasswordChangedDate = DateTime.Now;
 
-                this.MembershipRepository.SaveChanges();
+                repository.SaveChanges();
                 return newPassword;
             }
             catch
@@ -508,16 +513,26 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         /// <param name="membershipUser">A <see cref="T:System.Web.Security.MembershipUser" /> object that represents the user to update and the updated information for the user.</param>
         public override void UpdateUser(MembershipUser membershipUser)
         {
-            var user = this.MembershipRepository.GetUser(membershipUser.UserName);
+            var repository = RepositoryFactory.Invoke();
+            var user = repository.GetUser(membershipUser.UserName);
             if (user == null)
             {
                 throw new ProviderException("Update user failed. No unique user found.");
             }
 
+            if (this.RequiresUniqueEmail)
+            {
+                var userNameWithEmailAlreadyExisting = this.GetUserNameByEmail(membershipUser.Email);
+                if (userNameWithEmailAlreadyExisting != String.Empty && userNameWithEmailAlreadyExisting != user.UserName)
+                {
+                    throw new ProviderException("Email Address already taken:" + membershipUser.Email);
+                }
+            }
+
             user.Email = membershipUser.Email;
             user.Comment = membershipUser.Comment;
             user.IsApproved = membershipUser.IsApproved;
-            this.MembershipRepository.SaveChanges();
+            repository.SaveChanges();
         }
 
         /// <summary>
@@ -530,7 +545,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         {
             bool isValid = false;
 
-            var user = this.MembershipRepository.GetUser(username);
+            var repository = RepositoryFactory.Invoke();
+            var user = repository.GetUser(username);
             if (user == null)
             {
                 return false;
@@ -542,7 +558,7 @@ namespace Pleiades.Framework.MembershipProvider.Providers
                 {
                     isValid = true;
                     user.LastLoginDate = DateTime.Now;
-                    this.MembershipRepository.SaveChanges();
+                    repository.SaveChanges();
                 }
             }
             else
@@ -562,7 +578,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         {
             try
             {
-                var user = this.MembershipRepository.GetUser(userName);
+                var repository = RepositoryFactory.Invoke();
+                var user = repository.GetUser(userName);
                 if (user == null)
                 {
                     return false;
@@ -571,7 +588,7 @@ namespace Pleiades.Framework.MembershipProvider.Providers
                 // FIXED
                 user.LastLockedOutDate = DateTime.Now;
                 user.IsLockedOut = false;
-                this.MembershipRepository.SaveChanges();
+                repository.SaveChanges();
                 return true;
             }
             catch
@@ -588,7 +605,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         /// <param name="userIsOnline">true to update the last-activity date/time stamp for the user; false to return user information without updating the last-activity date/time stamp for the user.</param>
         public override MembershipUser GetUser(object providerUserKey, bool userIsOnline)
         {
-            var user = this.MembershipRepository.GetUserByProviderKey(providerUserKey);
+            var repository = RepositoryFactory.Invoke();
+            var user = repository.GetUserByProviderKey(providerUserKey);
 
             if (user == null)
             {
@@ -599,7 +617,7 @@ namespace Pleiades.Framework.MembershipProvider.Providers
                 if (userIsOnline)
                 {
                     user.LastActivityDate = DateTime.Now;
-                    this.MembershipRepository.SaveChanges();
+                    repository.SaveChanges();
                 }
 
                 return user.ToSecurityMembershipUser(this.Name);
@@ -614,7 +632,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         /// <param name="userIsOnline">true to update the last-activity date/time stamp for the user; false to return user information without updating the last-activity date/time stamp for the user.</param>
         public override MembershipUser GetUser(string username, bool userIsOnline)
         {
-            var user = this.MembershipRepository.GetUser(username);
+            var repository = RepositoryFactory.Invoke();
+            var user = repository.GetUser(username);
             
             if (user == null)
             {
@@ -623,7 +642,7 @@ namespace Pleiades.Framework.MembershipProvider.Providers
             else
             {
                 user.LastActivityDate = DateTime.Now;
-                this.MembershipRepository.SaveChanges();
+                repository.SaveChanges();
                 return user.ToSecurityMembershipUser(this.Name);
             }
         }
@@ -635,7 +654,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         /// <param name="email">The e-mail address to search for.</param>
         public override string GetUserNameByEmail(string email)
         {
-            return this.MembershipRepository.GetUserNameByEmail(email);
+            var repository = RepositoryFactory.Invoke();
+            return repository.GetUserNameByEmail(email);
         }
 
         /// <summary>
@@ -646,14 +666,15 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         /// <param name="deleteAllRelatedData">true to delete data related to the user from the database; false to leave data related to the user in the database.</param>
         public override bool DeleteUser(string username, bool deleteAllRelatedData)
         {
-            var user = this.MembershipRepository.GetUser(username);
+            var repository = RepositoryFactory.Invoke();
+            var user = repository.GetUser(username);
             if (user == null)
             {
                 return false;
             }
 
-            this.MembershipRepository.Delete(user);
-            this.MembershipRepository.SaveChanges();
+            repository.Delete(user);
+            repository.SaveChanges();
 
             if (deleteAllRelatedData)
             {
@@ -676,7 +697,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
             var users = new MembershipUserCollection();
 
             //retrieve all users for the current application name from the database
-            var dbUsers = this.MembershipRepository.GetAll();
+            var repository = RepositoryFactory.Invoke();
+            var dbUsers = repository.GetAll();
             totalRecords = dbUsers.Count();
             if (totalRecords <= 0)
             {
@@ -697,7 +719,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         /// <returns>The number of users currently accessing the application.</returns>
         public override int GetNumberOfUsersOnline()
         {
-            return this.MembershipRepository.GetNumberOfUsersOnline(this.UserIsOnlineTimeWindow);
+            var repository = RepositoryFactory.Invoke();
+            return repository.GetNumberOfUsersOnline(this.UserIsOnlineTimeWindow);
         }
 
         /// <summary>
@@ -713,7 +736,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         public override MembershipUserCollection FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
             var membershipUsers = new MembershipUserCollection();
-            var results = this.MembershipRepository.FindUsersByName(usernameToMatch, pageIndex, pageSize, out totalRecords);
+            var repository = RepositoryFactory.Invoke();
+            var results = repository.FindUsersByName(usernameToMatch, pageIndex, pageSize, out totalRecords);
             results.ForEach(x => membershipUsers.Add(x.ToSecurityMembershipUser(this.Name)));
             return membershipUsers;
         }
@@ -731,7 +755,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         public override MembershipUserCollection FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
             var membershipUsers = new MembershipUserCollection();
-            var results = this.MembershipRepository.FindUsersByEmail(emailToMatch, pageIndex, pageSize, out totalRecords);
+            var repository = RepositoryFactory.Invoke();
+            var results = repository.FindUsersByEmail(emailToMatch, pageIndex, pageSize, out totalRecords);
             results.ForEach(x => membershipUsers.Add(x.ToSecurityMembershipUser(this.Name)));
             return membershipUsers;
         }
@@ -744,7 +769,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         /// </summary>
         private void UpdateFailureCount(string username, string failureType)
         {
-            var user = this.MembershipRepository.GetUser(username);
+            var repository = RepositoryFactory.Invoke();
+            var user = repository.GetUser(username);
 
             if (user == null)
             {
@@ -785,7 +811,7 @@ namespace Pleiades.Framework.MembershipProvider.Providers
 
                 try
                 {
-                    this.MembershipRepository.SaveChanges();
+                    repository.SaveChanges();
                 }
                 catch
                 {
@@ -805,7 +831,7 @@ namespace Pleiades.Framework.MembershipProvider.Providers
 
                     try
                     {
-                        this.MembershipRepository.SaveChanges();
+                        repository.SaveChanges();
                     }
                     catch
                     {
@@ -827,7 +853,7 @@ namespace Pleiades.Framework.MembershipProvider.Providers
 
                     try
                     {
-                        this.MembershipRepository.SaveChanges();
+                        repository.SaveChanges();
                     }
                     catch
                     {
