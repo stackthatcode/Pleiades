@@ -7,9 +7,9 @@ using Pleiades.Framework.Identity.Model;
 using Pleiades.Framework.MembershipProvider.Interface;
 using Pleiades.Framework.MembershipProvider.Providers;
 
-namespace Pleiades.Commerce.Web.Security.Execution
+namespace Pleiades.Commerce.Web.Security.Execution.Authorization
 {
-    public class GetUserFromHttpContextStep : Step<CommerceSecurityContext>
+    public class GetUserFromHttpContextStep : Step<AggrUserAuthContext>
     {
         public IAggregateUserRepository AggregateUserRepository { get; set; }
         public IFormsAuthenticationService FormsAuthenticationService { get; set; }
@@ -25,7 +25,7 @@ namespace Pleiades.Commerce.Web.Security.Execution
             this.MembershipService = membershipService;
         }
 
-        public override void Execute(CommerceSecurityContext context)
+        public override void Execute(AggrUserAuthContext context)
         {
             var userName = context.HttpContext.AuthenticatedUserName();
             if (userName == null)

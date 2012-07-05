@@ -11,3 +11,19 @@ Technical Questions
 - What are all of the default prototypes?
 - How can we see the call stack in Javascript?
 - Still need more on call / apply - http://stackoverflow.com/questions/1986896/what-is-the-difference-between-call-and-apply => DONE
+
+STACK OVERFLOW QUESTIONS
+========================
+- Research how to Unit Test around Expression Trees =>  TODO
+- What the heck is a predicate, again...??? => TODO
+- Best practices for CSS, Images, Javascript, ASP.NET MVC and especially HTML Helpers
+- http://ace.ajax.org/build/kitchen-sink.html
+- How do you handle lazy-loading with EntityFramework?
+- How do you manage POCOs, database indexes, etc. with EF?
+
+GIT QUESTIONS
+=============
+- How do you get a complete snapshot of a certain Revision in Git...? => IN PROGRESS - APPEARS TO BE CHECKOUT COMMAND
+- How do you move files/directories with Git? => IN PROGRESS
+
+

@@ -5,64 +5,60 @@ using Pleiades.Framework.Injection;
 using Pleiades.Framework.Execution;
 using Pleiades.Framework.Security;
 using Pleiades.Framework.Web.Security;
-using Pleiades.Commerce.Web.Security.Execution;
+using Pleiades.Commerce.Web.Security.Execution.Authorization;
 using Pleiades.Commerce.Web.Security.Model;
 
 namespace Pleiades.Commerce.Web.Security
 {
-    public abstract class CommerceAuthorizeAttribute : AuthorizeFilterBase<CommerceSecurityContext>
+    public abstract class CommerceAuthorizeAttribute : AuthorizeFilterBase<AggrUserAuthContext>
     {
+        // Commentary -- it's on consumers to decide how to do this
+
+
         public IContainer Container { get; set; }
 
-        #region Attribute Properties
-        /// <summary>
-        /// The AuthorizationZone specifies 
-        /// </summary>
         public AuthorizationZone AuthorizationZone { get; set; }
-
-        /// <summary>
-        /// The Account Level Restriction identifies the *minimum* Account Level which is allowed authorization
-        /// </summary>
         public AccountLevel AccountLevelRestriction { get; set; }
+        public bool IsPaymentArea { get; set; }
 
-        /// <summary>
-        /// Identifies if this is a Payment Area, so delinquent accounts can take care of business
-        /// </summary> 
-        public bool PaymentArea { get; set; }
-        #endregion
 
         public CommerceAuthorizeAttribute(IContainer container)
         {
             this.Container = container;
         }
 
-        protected override CommerceSecurityContext BuildSecurityContext(AuthorizationContext filterContext)
-        {
-            return new CommerceSecurityContext
-            {
-                HttpContext = filterContext.HttpContext,
-                IdentityRequirements = new IdentityRequirements
-                {
-                    AuthorizationZone = this.AuthorizationZone,
-                    AccountLevelRestriction = this.AccountLevelRestriction,
-                    PaymentArea = this.PaymentArea,
-                },
-            };
-        }
 
-        protected override Func<Step<CommerceSecurityContext>> BuildAuthorizationStep
+        protected override Func<AuthorizationContext, AggrUserAuthContext> BuildSecurityContext
         {
             get
             {
-                return () => this.Container.Resolve<AuthorizationStepComposite>();
+                return (authcontext) =>
+                    new AggrUserAuthContext
+                    {
+                        HttpContext = authcontext.HttpContext,
+                        IdentityRequirements = new IdentityRequirements
+                        {
+                            AuthorizationZone = this.AuthorizationZone,
+                            AccountLevelRestriction = this.AccountLevelRestriction,
+                            PaymentArea = this.IsPaymentArea,
+                        },
+                    };
             }
         }
 
-        protected override SecurityCodeProcessorBase BuildSecurityCodeProcessor
+        protected override Func<Step<AggrUserAuthContext>> BuildAuthorizationExecution
         {
-            get 
+            get
             {
-                return new SecurityCodeProcessorBase();
+                return () => this.Container.Resolve<AuthAggrUserFromHttpContextStep>();
+            }
+        }
+
+        protected override Func<SecurityCodeFilterResponder> BuildSecurityCodeFilterResponder
+        {
+            get
+            {
+                return () => new SecurityCodeFilterResponder();
             }
         }
     }

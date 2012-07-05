@@ -62,7 +62,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AuthorizeFilterBase.cs" />
     <Compile Include="MvcHelpers\EnumToSelectList.cs" />
-    <Compile Include="Security\SecurityCodeProcessorBase.cs" />
+    <Compile Include="Security\SecurityCodeFilterResponder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pleiades.Framework.Security\Pleiades.Framework.Identity.csproj">

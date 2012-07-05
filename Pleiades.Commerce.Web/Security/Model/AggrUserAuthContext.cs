@@ -7,15 +7,15 @@ using Pleiades.Framework.Identity.Model;
 
 namespace Pleiades.Commerce.Web.Security.Model
 {
-    public class CommerceSecurityContext : ISecurityContext, IIdentityRequirementsContext, IIdentityUserContext
+    public class AggrUserAuthContext : ISecurityContext, IIdentityRequirementsContext, IIdentityUserContext
     {
-        public HttpContextBase HttpContext { get; set; }
-        public IdentityRequirements IdentityRequirements { get; set; }
-
-        public AggregateUser AggregateUser { get; set; }
-        
-        public SecurityResponseCode SecurityResponseCode { get; set; }
         public bool ExecutionStateValid { get; set; }
+
+        public HttpContextBase HttpContext { get; set; }
+        public AggregateUser AggregateUser { get; set; }        
+        public SecurityResponseCode SecurityResponseCode { get; set; }
+
+        public IdentityRequirements IdentityRequirements { get; set; }
 
         public IdentityUser IdentityUser
         {

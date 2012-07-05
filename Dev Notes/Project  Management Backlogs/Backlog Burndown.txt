@@ -1,11 +1,37 @@
 Backlog Burndown
 ================
 
+7/4/2012 - Follow-up
+--------------------
+- Start using IIS for development
+- Isolate the Entity Framework stuff from the Membership Provider
+- Create a separate assembly for Unit Testing Helpers
+- Change Test Framework to NUnit => DONE
+- Unit Test AuthorizeAttributeBase => DONE
+- Create a separate Utilities folder => DONE
+- Isolate Web Test Utilities to their own assembly => DONE
+- Separate the Standard Controls from Pleiades => DONE
+
 7/4/2012
 --------
-Again, too much to list -- near completion of the Great Refactoring #1
+- Refactor Integration Tests for Membership w/ live configuration (CreateUser, Retreive, Update) => DONE - MILESTONE
+- Again, too much to list -- near completion of the Great Refactoring #1
 - Add Code First initialization stuff => DONE
 - Write Integration Tests for EFRepository, DbContext, etc. => DONE
+
+
+BACKLOG
+=======
+- Write Unit Tests for the MembershipService and/or Provider => DONE
+- Add Integration Test Fixture for the EFRepository => DONE
+- Write the rapid, rapid Property Comparison tool... DO IT MAN!!! => DONE
+- Create framework for automatically testing Repositories with auto-property-compare => DONE
+
+BURNDOWN
+========
+- Write Unit Tests for Execution namespace => DONE
+- Write Unit Tests for the IdentityUser => DONE
+- AND PROBABLY => eliminate the need to have Integration Tests for all things security => DONE
 
 
 6/17/2012

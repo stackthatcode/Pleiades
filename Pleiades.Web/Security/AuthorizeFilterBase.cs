@@ -13,12 +13,13 @@ namespace Pleiades.Framework.Web.Security
     /// </summary>
     public abstract class AuthorizeFilterBase<T> : IAuthorizationFilter
             where T : ISecurityContext
-    {
-        protected abstract Func<Step<T>> BuildAuthorizationStep { get; }
-    
-        protected abstract T BuildSecurityContext(AuthorizationContext filterContext);
+    {    
+        // TODO: can these be injected by MVC...?
+        protected abstract Func<AuthorizationContext, T> BuildSecurityContext { get; }
+        
+        protected abstract Func<Step<T>> BuildAuthorizationExecution { get; }
 
-        protected abstract SecurityCodeProcessorBase BuildSecurityCodeProcessor { get; }
+        protected abstract Func<SecurityCodeFilterResponder> BuildSecurityCodeFilterResponder { get; }
 
         /// <summary>
         /// Overrides the ASP.NET MVC default authorization with Framework logic
@@ -26,11 +27,14 @@ namespace Pleiades.Framework.Web.Security
         /// <param name="filterContext">ASP.NET MVC AuthorizationContext</param>
         public void OnAuthorization(AuthorizationContext filterContext)
         {
+            var authorizationProcess = this.BuildAuthorizationExecution();
             var context = this.BuildSecurityContext(filterContext);
 
-            this.BuildAuthorizationStep().Execute(context);
+            authorizationProcess.Execute(context);
+            var responseCode = context.SecurityResponseCode;
 
-            this.BuildSecurityCodeProcessor.ProcessSecurityCode(context.SecurityResponseCode, filterContext);
+            var responder = this.BuildSecurityCodeFilterResponder();
+            responder.ProcessSecurityCode(responseCode, filterContext);
         }
     }
 }

@@ -1,43 +1,16 @@
-Pleiades Administrative Area - TODO
-===================================
-
-6/24/2012 UPDATE => 6/25/2012 UPDATE
-====================================
-- Refactor Integration Tests for Membership w/ live configuration (CreateUser, Retreive, Update) => TODO
-- Write Unit Tests for the Aggregate Root User => TODO
+FRONTRANGE - HOTZONE
+====================
+- Consolidate ISecurityContext, IIdentityRequirementsContext, IIdentityUserContext => TODO
+- Implement IAggregateUserRepository => TODO 
+- Write Unit & Integration Tests for the Aggregate Root User => TODO
+- Write Unit Tests for GetAggregateUserFromHttpContextStep => TODO
+- Wire Filter into Attribute => TODO
 - Test the new Attributes w/ Filter => TODO
+- Delete AuthorizeFilterBase - move to Commerce.Web entirely => TODO
+- SecurityCodeFilterResponder - make an interface => TODO
+- Create Pipelines with Owner Authorization for Changing Passwords, etc. => TODO
 
-- *** Celebrate coming Out-of-the-Wild with Membership Refactoring!
-
-
-BACKLOG
-=======
-- Write Unit Tests for the MembershipService and/or Provider => DONE
-- Add Integration Test Fixture for the EFRepository => DONE
-- Write the rapid, rapid Property Comparison tool... DO IT MAN!!! => DONE
-- Create framework for automatically testing Repositories with auto-property-compare => IN PROGRESS
-
-BURNDOWN
-========
-- Write Unit Tests for Execution namespace => DONE
-- Write Unit Tests for the IdentityUser => DONE
-- AND PROBABLY => eliminate the need to have Integration Tests for all things security => DONE
-
-
-STACK OVERFLOW QUESTIONS
-========================
-- Research how to Unit Test around Expression Trees =>  TODO
-- What the heck is a predicate, again...??? => TODO
-- Best practices for CSS, Images, Javascript, ASP.NET MVC and especially HTML Helpers
-- http://ace.ajax.org/build/kitchen-sink.html
-- How do you handle lazy-loading with EntityFramework?
-- How do you manage POCOs, database indexes, etc. with EF?
-
-GIT QUESTIONS
-=============
-- How do you get a complete snapshot of a certain Revision in Git...? => IN PROGRESS - APPEARS TO BE CHECKOUT COMMAND
-- How do you move files/directories with Git? => IN PROGRESS
-
+- *** Celebrate coming Out-of-the-Wild with The Great Refactoring #1!
 
 
 PRODUCT MANAGEMENT
@@ -46,43 +19,21 @@ PRODUCT MANAGEMENT
 * Find a bunch of good E-Commerce Sites, bookmark and critique => IN PROGRESS
 * Develop a Product specification => URGENT
 
-http://37signals.com/37searchreport.pdf
+- http://37signals.com/37searchreport.pdf => READ
 
 - Project Planning the next Phase for v1.0 - Identify major tasks => IN PROGRESS
 - Review "desine" links => PROGRESS
 * Pleiades Brand + UI Design => TODO
 
-R&D CURRENT
-===========
+* R&D CURRENT
 - Continue with Review of Pleiades AJAX Grid => IN PROGRESS
 - R&D CSS + Image + Script File Management => IN PROGRESS
 - Find alternative OSS AJAX Grids => IN PROGRESS - NEED WORKFLOWS FIRST, THO
 - TODO: create an identity to penetrate social networks
 
-TECHNICAL EXECUTION
-===================
-- Separate the Standard Controls from Pleiades => TODO
-- Create a separate Utilities folder => TODO
-- Isolate Web Test Utilities to their own assembly => TODO
-
-IDEAS
-=====
+* IDEAS
 - Need to create a Cache which can be incrementally modified - IncrementalCache => TODO
 - Maybe create a CacheEnvelope which contains the object PLUS a dirty bit.  How to abstract caching? => TODO
-
-
-CURRENT KNOWN WORKFLOWS => IN PROGRESS
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Admin Login Page
-- Customer Product Browsing et al.
-- Manage Existing Admin User
-- Create New Admin User
-- Category Create/Manage
-- Inventory Create/Manage
-- Order Management/Fulfillment
-- User Password Retreival
-- Customer Support Contact
-
 
 
 
@@ -106,7 +57,7 @@ BACKLOG
 - Pleiades Brand Identity
 - Identify all significant flows
 - Logo, Font, Color Scheme
-- Design Review everything I like => IN PROGRESS
+- Design Review everything I like
 - Redesign the Login Page
 - Package the Navigation Menu in its own View
 
@@ -114,23 +65,28 @@ BACKLOG
 - Leave the Category stuff as Legacy
 - Move scripts into Content
 - Move the Public stuff into its own Area
-- Start using IIS for development
 
 * Pleiades Framework
-- Isolate the Entity Framework stuff from the Membership Provider
-- Create a separate assembly for Unit Testing Helpers
 - Create generalized Pleiades Pop-up JQuery Library (OK, YES/NO dialogs)
 - Copy jqia2.support.js functions
-- Refine the 
 
 * General Fixes
 - Disable Caching for AJAX stuff => TODO
 
-* Testing/Coverage
-- Change Test Framework to NUnit => TODO
-- Unit Test AuthorizeAttributeBase => TODO
 
 
+
+CURRENT KNOWN WORKFLOWS => IN PROGRESS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Admin Login Page
+- Customer Product Browsing et al.
+- Manage Existing Admin User
+- Create New Admin User
+- Category Create/Manage
+- Inventory Create/Manage
+- Order Management/Fulfillment
+- User Password Retreival
+- Customer Support Contact
 
 
 VALUABLE STUFF
