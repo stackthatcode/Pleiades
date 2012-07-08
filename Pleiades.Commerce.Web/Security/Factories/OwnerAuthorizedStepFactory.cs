@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Pleiades.Commerce.Persist
+namespace Pleiades.Commerce.Web.Security.Factories
 {
-    class BrandRepository
+    class OwnerAuthorizedStepFactory
     {
     }
 }

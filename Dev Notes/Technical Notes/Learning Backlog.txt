@@ -1,0 +1,75 @@
+Technical Backlog
+~~~~~~~~~~~~~~~~~
+
+FRONTRANGE
+==========
+- Garbage Collector => IN PROGRESS
+- Multi-threading, TPL => IN PROGRESS
+- How to do Git Checkouts correctly => IN PROGRESS
+- How do you move files/directories with Git? => IN PROGRESS
+
+BACKLOG
+=======
+- LINQ syntax
+- LINQ Pad
+- Ants, Debug Dump
+- Reactive Extensions
+- Expression Trees
+- HTML5
+- CSS (Margin + Padding, esp)
+
+
+STACK OVERFLOW QUESTIONS
+========================
+- Research how to Unit Test around Expression Trees =>  TODO
+- What the heck is a predicate, again...??? => TODO
+- http://ace.ajax.org/build/kitchen-sink.html => TODO
+
+- Best practices for CSS, Images, Javascript, ASP.NET MVC and especially HTML Helpers
+- How do you handle lazy-loading with EntityFramework?
+- How do you manage POCOs, database indexes, etc. with EF?
+
+
+Book Reading List
+~~~~~~~~~~~~~~~~~
+- Domain Driven Design - Eric Evans =>  IN PROGRESS
+- MVC Book - Security Chapter
+- Hosting with IIS
+- Dependency Injection in .Net
+- LINQ in Action
+- C# In Depth by Jon Skeet
+- P of EAA by Martin Fowler
+- Refactoring by Martin Fowler
+
+Esoteric, Lower-level
+~~~~~~~~~~~~~~~~~~~~~
+- Reflection, Emiting Classes
+- ILDASM
+- AppDomain
+- GAC
+- EventList Collection
+- Assembly Stuff
+- MSIL
+
+Bigger Fish
+~~~~~~~~~~~
+- NodeJs
+- Ruby on Rails
+- Android/iOS Phones
+- NoSQL - Riak, Cassandra, etc.
+- Linux
+
+
+A Wee-Bit About View
+--------------------
+<% Html.RenderAction(...) %> ==> Uses Model Binding with a Partial View
+<% Html.RenderPartial(...) %> ==> Pass Model explicitly
+<% Html.Action(...) %> ==> returns a string
+
+JavaScript Questions
+--------------------
+- RegEx mystery - why do newlines score a hit?
+- What are all of the default prototypes?
+- How can we see the call stack in Javascript?
+- Still need more on call / apply - http://stackoverflow.com/questions/1986896/what-is-the-difference-between-call-and-apply => DONE
+

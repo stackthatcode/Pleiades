@@ -5,7 +5,7 @@ using Pleiades.Framework.Data.EF;
 using Pleiades.Framework.Identity.Interface;
 using Pleiades.Framework.Identity.Model;
 
-namespace Pleiades.Commerce.Persist
+namespace Pleiades.Commerce.Persist.Users
 {
     public class IdentityUserRepository : EFGenericRepository<IdentityUser>, IIdentityRepository
     {

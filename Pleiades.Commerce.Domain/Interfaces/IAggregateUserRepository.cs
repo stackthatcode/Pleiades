@@ -9,8 +9,7 @@ namespace Pleiades.Commerce.Domain.Interface
     {
         AggregateUser RetrieveUserByMembershipUserName(string username);
         AggregateUser RetrieveUserByEmail(string emailaddr);
-        IEnumerable<AggregateUser> RetreiveAll(int pageNumber, int pageSize, List<UserRole> role);
-        IEnumerable<AggregateUser> RetreiveByLikeEmail(
-            string emailAddressToMatch, int pageNumber, int pageSize, List<UserRole> role);
+        IEnumerable<AggregateUser> RetreiveAll(List<UserRole> role);
+        IEnumerable<AggregateUser> RetreiveByLikeEmail(string emailAddressToMatch, List<UserRole> role);
     }
 }

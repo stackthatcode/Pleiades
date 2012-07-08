@@ -45,14 +45,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BrandRepository.cs" />
-    <Compile Include="ColorRepository.cs" />
-    <Compile Include="IdentityUserRepository.cs" />
-    <Compile Include="MembershipRepository.cs" />
-    <Compile Include="ProductRepository.cs" />
+    <Compile Include="Users\AggregateUserRepository.cs" />
+    <Compile Include="Products\BrandRepository.cs" />
+    <Compile Include="Products\ColorRepository.cs" />
+    <Compile Include="Users\IdentityUserRepository.cs" />
+    <Compile Include="Users\MembershipRepository.cs" />
+    <Compile Include="Products\ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Pleiades.Commerce.Domain\Pleiades.Commerce.Domain.csproj">
+      <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
+      <Name>Pleiades.Commerce.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Framework.Membership\Pleiades.Framework.MembershipProvider.csproj">
       <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
       <Name>Pleiades.Framework.MembershipProvider</Name>

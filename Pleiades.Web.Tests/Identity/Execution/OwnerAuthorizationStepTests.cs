@@ -17,19 +17,16 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         public void Null_ResourceOwnerIdentityUserId_Allows_Access_To_Anybody()
         {
             // Arrange
-            var context = new StubSecurityContext()
+            var context = new IdentityAuthorizationContext()
             {
-                IdentityUser = new IdentityUser
+                CurrentUser = new IdentityUser
                 {
                     ID = 333,
                 },
-                IdentityRequirements = new IdentityRequirements()
-                {
-                    ResourceOwnerIdentityUserId = null,
-                }
+                ResourceOwnerId = null,
             };
 
-            var step = new SimpleOwnerAuthorizationStep<StubSecurityContext>();
+            var step = new SimpleOwnerAuthorizationStep<IdentityAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -44,19 +41,16 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         public void ResourceOwner_Can_Access_Own_Resources()
         {
             // Arrange
-            var context = new StubSecurityContext()
+            var context = new IdentityAuthorizationContext()
             {
-                IdentityUser = new IdentityUser
+                CurrentUser = new IdentityUser
                 {
                     ID = 333,
                 },
-                IdentityRequirements = new IdentityRequirements() 
-                {
-                    ResourceOwnerIdentityUserId = 333,
-                }
+                ResourceOwnerId = 333,
             };
 
-            var step = new SimpleOwnerAuthorizationStep<StubSecurityContext>();
+            var step = new SimpleOwnerAuthorizationStep<IdentityAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -70,19 +64,16 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         public void ResourceNonOwner_Denied_Resources()
         {
             // Arrange
-            var context = new StubSecurityContext()
+            var context = new IdentityAuthorizationContext()
             {
-                IdentityUser = new IdentityUser
+                CurrentUser = new IdentityUser
                 {
                     ID = 444,
                 },
-                IdentityRequirements = new IdentityRequirements()
-                {
-                    ResourceOwnerIdentityUserId = 333,
-                }
+                ResourceOwnerId = 333,
             };
 
-            var step = new SimpleOwnerAuthorizationStep<StubSecurityContext>();
+            var step = new SimpleOwnerAuthorizationStep<IdentityAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -96,16 +87,13 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         public void Admin_Can_Access_Anything()
         {
             // Arrange
-            var context = new StubSecurityContext()
+            var context = new IdentityAuthorizationContext()
             {
-                IdentityUser = StubUserGenerator.AdminUser,
-                IdentityRequirements = new IdentityRequirements()
-                {
-                    ResourceOwnerIdentityUserId = 333,
-                }
+                CurrentUser = StubUserGenerator.AdminUser,
+                ResourceOwnerId = 333,
             };
 
-            var step = new SimpleOwnerAuthorizationStep<StubSecurityContext>();
+            var step = new SimpleOwnerAuthorizationStep<IdentityAuthorizationContext>();
 
             // Act
             step.Execute(context);

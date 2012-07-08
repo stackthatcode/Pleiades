@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E8A2DAB1-0764-441F-AE3A-74201ABA8C93}</ProjectGuid>
+    <ProjectGuid>{080581DA-D122-4195-A615-DF9B85DEE99E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pleiades.Commerce.Web</RootNamespace>
-    <AssemblyName>Pleiades.Commerce.Web</AssemblyName>
+    <RootNamespace>Pleiades.Commerce.WebUI.UnitTests</RootNamespace>
+    <AssemblyName>Pleiades.Commerce.WebUI.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,8 +33,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,38 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\Aspect\CommerceAuthorizeAttribute.cs" />
-    <Compile Include="Security\Aspect\CommerceAuthorizeFilter.cs" />
-    <Compile Include="Security\Execution\Authorization\AuthorizeFromHttpContextStepComposite.cs" />
-    <Compile Include="Security\Execution\Authorization\GetUserFromHttpContextStep.cs" />
-    <Compile Include="Security\Factories\OwnerAuthorizedStepFactory.cs" />
-    <Compile Include="Security\Execution\Operations\ChangeUserPasswordStep.cs" />
-    <Compile Include="Security\Model\AggrUserAuthContext.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pleiades.Commerce.Domain\Pleiades.Commerce.Domain.csproj">
-      <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
-      <Name>Pleiades.Commerce.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Framework.Membership\Pleiades.Framework.MembershipProvider.csproj">
-      <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
-      <Name>Pleiades.Framework.MembershipProvider</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Framework.Security\Pleiades.Framework.Identity.csproj">
-      <Project>{7F1F1DA2-6F72-4D68-A06C-D3379941B060}</Project>
-      <Name>Pleiades.Framework.Identity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Framework.csproj">
-      <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
-      <Name>Pleiades.Framework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Web\Pleiades.Framework.Web.csproj">
-      <Project>{804F063C-505F-441E-B205-688C42E637AD}</Project>
-      <Name>Pleiades.Framework.Web</Name>
-    </ProjectReference>
+    <Folder Include="Controllers\" />
+    <Folder Include="Routing\" />
+    <Folder Include="Security\" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

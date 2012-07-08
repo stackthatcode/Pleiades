@@ -17,13 +17,8 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         public void DelinquentUser_Allowed_In_Public_Area()
         {
             // Arrange
-            var context = new StubSecurityContext()
-            {
-                IdentityUser = StubUserGenerator.DelinquentTrustedUser,
-                IdentityRequirements = IdentityRequirementsGenerator.PublicArea,
-            };
-
-            var step = new AccountStatusAuthorizationStep<StubSecurityContext>();
+            var context = AuthContextGenerator.PublicArea(StubUserGenerator.DelinquentTrustedUser);
+            var step = new AccountStatusAuthorizationStep<IdentityAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -37,13 +32,8 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         public void DelinquentUser_NotAllowed_In_Restricted_Gold_Area()
         {
             // Arrange
-            var context = new StubSecurityContext()
-            {
-                IdentityUser = StubUserGenerator.DelinquentTrustedUser,
-                IdentityRequirements = IdentityRequirementsGenerator.RestrictedGoldNonPaymentArea,
-            };
-
-            var step = new AccountStatusAuthorizationStep<StubSecurityContext>();
+            var context = AuthContextGenerator.RestrictedGoldNonPaymentArea(StubUserGenerator.DelinquentTrustedUser);
+            var step = new AccountStatusAuthorizationStep<IdentityAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -57,13 +47,8 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         public void DelinquentUser_NotAllowed_In_Restricted_Standard_Area()
         {
             // Arrange
-            var context = new StubSecurityContext()
-            {
-                IdentityUser = StubUserGenerator.DelinquentTrustedUser,
-                IdentityRequirements = IdentityRequirementsGenerator.RestrictedStandardNonPaymentArea,
-            };
-
-            var step = new AccountStatusAuthorizationStep<StubSecurityContext>();
+            var context = AuthContextGenerator.RestrictedStandardNonPaymentArea(StubUserGenerator.DelinquentTrustedUser);
+            var step = new AccountStatusAuthorizationStep<IdentityAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -77,13 +62,8 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         public void DelinquentUser_Allowed_In_RestrictedPaymentArea()
         {
             // Arrange
-            var context = new StubSecurityContext()
-            {
-                IdentityUser = StubUserGenerator.DelinquentTrustedUser,
-                IdentityRequirements = IdentityRequirementsGenerator.RestrictedPaymentArea,
-            };
-
-            var step = new AccountStatusAuthorizationStep<StubSecurityContext>();
+            var context = AuthContextGenerator.RestrictedPaymentArea(StubUserGenerator.DelinquentTrustedUser);
+            var step = new AccountStatusAuthorizationStep<IdentityAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -99,13 +79,8 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         public void DisabledAccount_Allowed_In_Public()
         {
             // Arrange
-            var context = new StubSecurityContext()
-            {
-                IdentityUser = StubUserGenerator.DisabledAccountTrustedUser,
-                IdentityRequirements = IdentityRequirementsGenerator.PublicArea,
-            };
-
-            var step = new AccountStatusAuthorizationStep<StubSecurityContext>();
+            var context = AuthContextGenerator.PublicArea(StubUserGenerator.DisabledAccountTrustedUser);
+            var step = new AccountStatusAuthorizationStep<IdentityAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -119,13 +94,8 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         public void DisabledAccount_NotAllowed_In_RestrictedGoldArea()
         {
             // Arrange
-            var context = new StubSecurityContext()
-            {
-                IdentityUser = StubUserGenerator.DisabledAccountTrustedUser,
-                IdentityRequirements = IdentityRequirementsGenerator.RestrictedGoldNonPaymentArea,
-            };
-
-            var step = new AccountStatusAuthorizationStep<StubSecurityContext>();
+            var context = AuthContextGenerator.RestrictedGoldNonPaymentArea(StubUserGenerator.DisabledAccountTrustedUser);
+            var step = new AccountStatusAuthorizationStep<IdentityAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -139,13 +109,8 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         public void DisabledAccount_NotAllowed_In_RestrictedStandardArea()
         {
             // Arrange
-            var context = new StubSecurityContext()
-            {
-                IdentityUser = StubUserGenerator.DisabledAccountTrustedUser,
-                IdentityRequirements = IdentityRequirementsGenerator.RestrictedStandardNonPaymentArea,
-            };
-
-            var step = new AccountStatusAuthorizationStep<StubSecurityContext>();
+            var context = AuthContextGenerator.RestrictedStandardNonPaymentArea(StubUserGenerator.DisabledAccountTrustedUser);
+            var step = new AccountStatusAuthorizationStep<IdentityAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -159,13 +124,8 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         public void DisabledAccount_NotAllowed_In_RestrictedPaymentArea()
         {
             // Arrange
-            var context = new StubSecurityContext()
-            {
-                IdentityUser = StubUserGenerator.DisabledAccountTrustedUser,
-                IdentityRequirements = IdentityRequirementsGenerator.RestrictedPaymentArea,
-            };
-
-            var step = new AccountStatusAuthorizationStep<StubSecurityContext>();
+            var context = AuthContextGenerator.RestrictedPaymentArea(StubUserGenerator.DisabledAccountTrustedUser);
+            var step = new AccountStatusAuthorizationStep<IdentityAuthorizationContext>();
 
             // Act
             step.Execute(context);

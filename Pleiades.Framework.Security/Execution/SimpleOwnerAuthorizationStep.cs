@@ -9,22 +9,21 @@ using Pleiades.Framework.Security;
 
 namespace Pleiades.Framework.Identity.Execution
 {
-    public class SimpleOwnerAuthorizationStep<T> : Step<T>
-            where T : IIdentityRequirementsContext, ISecurityContext, IIdentityUserContext
+    public class SimpleOwnerAuthorizationStep<T> : Step<T> where T : IIdentityAuthorizationContext
     {
         public override void Execute(T context)
         {
-            if (context.IdentityUser.UserRole.IsAdministrator())
+            if (context.CurrentUser.UserRole.IsAdministrator())
             {
                 return;
             }
 
-            if (context.IdentityRequirements.ResourceOwnerIdentityUserId == null)
+            if (context.ResourceOwnerId == null)
             {
                 return;
             }
 
-            if (context.IdentityUser.ID == context.IdentityRequirements.ResourceOwnerIdentityUserId)
+            if (context.CurrentUser.ID == context.ResourceOwnerId)
             {
                 return;
             }

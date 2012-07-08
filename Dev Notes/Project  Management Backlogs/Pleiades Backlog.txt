@@ -1,16 +1,20 @@
 FRONTRANGE - HOTZONE
 ====================
-- Consolidate ISecurityContext, IIdentityRequirementsContext, IIdentityUserContext => TODO
-- Implement IAggregateUserRepository => TODO 
-- Write Unit & Integration Tests for the Aggregate Root User => TODO
-- Write Unit Tests for GetAggregateUserFromHttpContextStep => TODO
+- Consolidate ISecurityContext, IIdentityRequirementsContext, IIdentityUserContext => DONE!
+- Implement IAggregateUserRepository => DONE
+- Delete AuthorizeFilterBase - move to Commerce.Web entirely => DONE
+- Write Unit Tests for GetAggregateUserFromHttpContextStep => DONE
+
+
+- SecurityCodeFilterResponder - make an interface => TODO
+- Design Pipeline structure that supports SimpleOwnerAuthorizationStep<AggrUserAuthContext> => TODO
+- Create Pipelines with Owner Authorization for Changing Passwords, etc. => TODO
+- Write Integration Tests for the AggregateUserRepository => TODO
 - Wire Filter into Attribute => TODO
 - Test the new Attributes w/ Filter => TODO
-- Delete AuthorizeFilterBase - move to Commerce.Web entirely => TODO
-- SecurityCodeFilterResponder - make an interface => TODO
-- Create Pipelines with Owner Authorization for Changing Passwords, etc. => TODO
 
 - *** Celebrate coming Out-of-the-Wild with The Great Refactoring #1!
+
 
 
 PRODUCT MANAGEMENT

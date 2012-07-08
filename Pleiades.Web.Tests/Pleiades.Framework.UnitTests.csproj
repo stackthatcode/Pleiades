@@ -68,7 +68,6 @@
     <Compile Include="Identity\Execution\AccountLevelAuthorizationStepTests.cs" />
     <Compile Include="Identity\Execution\OwnerAuthorizationStepTests.cs" />
     <Compile Include="Identity\Execution\RoleAuthorizationStepTests.cs" />
-    <Compile Include="Identity\Execution\StubSecurityContext.cs" />
     <Compile Include="Identity\Execution\IdentityRequirementsGenerator.cs" />
     <Compile Include="Identity\Execution\StubUserGenerator.cs" />
     <Compile Include="Membership\Provider\MembershipProviderTests.cs" />

@@ -2,67 +2,57 @@
 
 namespace Pleiades.Framework.UnitTests.Identity.Execution
 {
-    public class IdentityRequirementsGenerator
+    public class AuthContextGenerator
     {
-        public static IdentityRequirements PublicArea
+        public static IdentityAuthorizationContext PublicArea(IdentityUser user)
         {
-            get
+            return new IdentityAuthorizationContext()
             {
-                return new IdentityRequirements()
-                {
-                    AuthorizationZone = AuthorizationZone.Public,
-                };
-            }
+                AuthorizationZone = AuthorizationZone.Public,
+                CurrentUser = user,
+            };
         }
 
-        public static IdentityRequirements RestrictedStandardNonPaymentArea
+        public static IdentityAuthorizationContext RestrictedStandardNonPaymentArea(IdentityUser user)
         {
-            get
+            return new IdentityAuthorizationContext()
             {
-                return new IdentityRequirements()
-                {
-                    AuthorizationZone = AuthorizationZone.Restricted,
-                    AccountLevelRestriction = AccountLevel.Standard,
-                    PaymentArea = false,
-                };
-            }
+                AuthorizationZone = AuthorizationZone.Restricted,
+                AccountLevelRestriction = AccountLevel.Standard,
+                IsPaymentArea = false,
+                CurrentUser = user,
+            };
         }
 
-        public static IdentityRequirements RestrictedGoldNonPaymentArea
+        public static IdentityAuthorizationContext RestrictedGoldNonPaymentArea(IdentityUser user)
         {
-            get
+            return new IdentityAuthorizationContext()
             {
-                return new IdentityRequirements()
-                {
-                    AuthorizationZone = AuthorizationZone.Restricted,
-                    AccountLevelRestriction = AccountLevel.Gold,
-                    PaymentArea = false,
-                };
-            }
+                AuthorizationZone = AuthorizationZone.Restricted,
+                AccountLevelRestriction = AccountLevel.Gold,
+                IsPaymentArea = false,
+                CurrentUser = user,
+            };
         }
 
-        public static IdentityRequirements RestrictedPaymentArea
+        public static IdentityAuthorizationContext RestrictedPaymentArea(IdentityUser user)
         {
-            get
+            return new IdentityAuthorizationContext()
             {
-                return new IdentityRequirements()
-                {
-                    AuthorizationZone = AuthorizationZone.Restricted,
-                    AccountLevelRestriction = AccountLevel.Standard,
-                    PaymentArea = true,
-                };
-            }
+                AuthorizationZone = AuthorizationZone.Restricted,
+                AccountLevelRestriction = AccountLevel.Standard,
+                IsPaymentArea = true,
+                CurrentUser = user,
+            };
         }
 
-        public static IdentityRequirements AdministrativeArea
+        public static IdentityAuthorizationContext AdministrativeArea(IdentityUser user)
         {
-            get
+            return new IdentityAuthorizationContext()
             {
-                return new IdentityRequirements()
-                {
-                    AuthorizationZone = AuthorizationZone.Administrative,
-                };
-            }
+                AuthorizationZone = AuthorizationZone.Administrative,
+                CurrentUser = user,
+            };
         }
     }
 }

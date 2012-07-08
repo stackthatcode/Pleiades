@@ -6,22 +6,21 @@ using Pleiades.Framework.Identity.Model;
 
 namespace Pleiades.Framework.Identity.Execution
 {
-    public class AccountStatusAuthorizationStep<T> : Step<T>
-            where T : IIdentityRequirementsContext, ISecurityContext, IIdentityUserContext
+    public class AccountStatusAuthorizationStep<T> : Step<T> where T : IIdentityAuthorizationContext
     {
         public override void Execute(T context)
         {
-            if (context.IdentityUser.UserRole.IsAdministrator())
+            if (context.CurrentUser.UserRole.IsAdministrator())
             {
                 return;
             }
 
-            if (context.IdentityRequirements.AuthorizationZone == AuthorizationZone.Public)
+            if (context.AuthorizationZone == AuthorizationZone.Public)
             {
                 return;
             }
 
-            if (context.IdentityUser.AccountStatus == null)
+            if (context.CurrentUser.AccountStatus == null)
             {
                 this.Kill(context, 
                     () =>
@@ -30,7 +29,7 @@ namespace Pleiades.Framework.Identity.Execution
                     });
             }
 
-            if (context.IdentityUser.AccountStatus == AccountStatus.Disabled)
+            if (context.CurrentUser.AccountStatus == AccountStatus.Disabled)
             {
                 this.Kill(context,
                     () =>
@@ -39,8 +38,8 @@ namespace Pleiades.Framework.Identity.Execution
                     });
             }
 
-            if (context.IdentityUser.AccountStatus == AccountStatus.PaymentRequired && 
-                context.IdentityRequirements.PaymentArea != true)
+            if (context.CurrentUser.AccountStatus == AccountStatus.PaymentRequired && 
+                context.IsPaymentArea != true)
             {
                 this.Kill(context,
                     () =>

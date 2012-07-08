@@ -17,13 +17,9 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         public void ActiveTrustedStandardUser_Allowed_In_RestrictedStandardNonPaymentArea()
         {
             // Arrange
-            var context = new StubSecurityContext()
-            {
-                IdentityUser = StubUserGenerator.ActiveTrustedStandardUser,
-                IdentityRequirements = IdentityRequirementsGenerator.RestrictedStandardNonPaymentArea,
-            };
+            var context = AuthContextGenerator.RestrictedStandardNonPaymentArea(StubUserGenerator.ActiveTrustedStandardUser);
 
-            var step = new AccountLevelAuthorizationStep<StubSecurityContext>();
+            var step = new AccountLevelAuthorizationStep<IdentityAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -37,13 +33,9 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         public void ActiveTrustedStandardUser_Denied_In_RestrictedGoldNonPaymentArea()
         {
             // Arrange
-            var context = new StubSecurityContext()
-            {
-                IdentityUser = StubUserGenerator.ActiveTrustedStandardUser,
-                IdentityRequirements = IdentityRequirementsGenerator.RestrictedGoldNonPaymentArea,
-            };
+            var context = AuthContextGenerator.RestrictedGoldNonPaymentArea(StubUserGenerator.ActiveTrustedStandardUser);
 
-            var step = new AccountLevelAuthorizationStep<StubSecurityContext>();
+            var step = new AccountLevelAuthorizationStep<IdentityAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -59,13 +51,9 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         public void ActiveTrustedGoldUser_Allowed_In_RestrictedStandardNonPaymentArea()
         {
             // Arrange
-            var context = new StubSecurityContext()
-            {
-                IdentityUser = StubUserGenerator.ActiveTrustedGoldUser,
-                IdentityRequirements = IdentityRequirementsGenerator.RestrictedStandardNonPaymentArea,
-            };
+            var context = AuthContextGenerator.RestrictedStandardNonPaymentArea(StubUserGenerator.ActiveTrustedGoldUser);
 
-            var step = new AccountLevelAuthorizationStep<StubSecurityContext>();
+            var step = new AccountLevelAuthorizationStep<IdentityAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -79,13 +67,8 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         public void ActiveTrustedGoldUser_Allowed_In_RestrictedGoldNonPaymentArea()
         {
             // Arrange
-            var context = new StubSecurityContext()
-            {
-                IdentityUser = StubUserGenerator.ActiveTrustedGoldUser,
-                IdentityRequirements = IdentityRequirementsGenerator.RestrictedGoldNonPaymentArea,
-            };
-
-            var step = new AccountLevelAuthorizationStep<StubSecurityContext>();
+            var context = AuthContextGenerator.RestrictedGoldNonPaymentArea(StubUserGenerator.ActiveTrustedGoldUser);
+            var step = new AccountLevelAuthorizationStep<IdentityAuthorizationContext>();
 
             // Act
             step.Execute(context);

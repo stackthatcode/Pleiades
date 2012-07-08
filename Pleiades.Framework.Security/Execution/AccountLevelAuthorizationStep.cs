@@ -7,28 +7,28 @@ using Pleiades.Framework.Identity.Model;
 namespace Pleiades.Framework.Identity.Execution
 {
     public class AccountLevelAuthorizationStep<T> : Step<T>
-            where T : IIdentityRequirementsContext, ISecurityContext, IIdentityUserContext
+            where T : IIdentityAuthorizationContext
     {
         public override void Execute(T context)
         {
-            if (context.IdentityUser.UserRole.IsAdministrator())
+            if (context.CurrentUser.UserRole.IsAdministrator())
             {
                 return; 
             }
 
             // Only applies to Restricted Areas
-            if (context.IdentityRequirements.AuthorizationZone != AuthorizationZone.Restricted)
+            if (context.AuthorizationZone != AuthorizationZone.Restricted)
             {
                 return;
             }
 
-            if (context.IdentityRequirements.AccountLevelRestriction == AccountLevel.Standard)
+            if (context.AccountLevelRestriction == AccountLevel.Standard)
             {
                 return;
             }
 
-            if (context.IdentityRequirements.AccountLevelRestriction == AccountLevel.Gold && 
-                context.IdentityUser.AccountLevel != AccountLevel.Gold)
+            if (context.AccountLevelRestriction == AccountLevel.Gold && 
+                context.CurrentUser.AccountLevel != AccountLevel.Gold)
             {
                 this.Kill(context,
                     () =>

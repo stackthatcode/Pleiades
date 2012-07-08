@@ -13,6 +13,8 @@ namespace Pleiades.Framework.IntegrationTests.DataEF
         [TestFixtureSetUp]        
         public void BuildDatabase()
         {
+            Console.WriteLine("Creating Database for Integration Testing of Data.EntityFramework assembly");
+
             var context = new MyContext();
             if (context.Database.Exists())
             {

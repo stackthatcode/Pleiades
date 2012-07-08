@@ -6,9 +6,9 @@ using Pleiades.Commerce.Web.Security.Model;
 
 namespace Pleiades.Commerce.Web.Security.Execution.Authorization
 {
-    public class AuthorizeAggrUserFromHttpContextStep : StepComposite<AggrUserAuthContext>        
+    public class AuthorizeFromHttpContextStepComposite : StepComposite<AggrUserAuthContext>        
     {
-        public AuthorizeAggrUserFromHttpContextStep(IContainer container)
+        public AuthorizeFromHttpContextStepComposite(IContainer container)
             : base(container)
         {
             // Load an Aggregate User entity based on the credentials in the HttpContext

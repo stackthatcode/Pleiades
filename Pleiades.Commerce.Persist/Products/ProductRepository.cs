@@ -1,4 +1,4 @@
-﻿namespace Pleiades.Commerce.Persist
+﻿namespace Pleiades.Commerce.Persist.Products
 {
     public class ProductRepository
     {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Configuration.Provider;
 using System.Web.Security;
 using NUnit.Framework;
-using Pleiades.Commerce.Persist;
+using Pleiades.Commerce.Persist.Users;
 using Pleiades.Framework.MembershipProvider.Concrete;
 using Pleiades.Framework.MembershipProvider.Model;
 using Pleiades.Framework.MembershipProvider.Providers;
@@ -23,7 +23,7 @@ namespace Pleiades.Framework.IntegrationTests.Membership
             {
                 context.Database.Delete();
             }
-            Console.WriteLine("Creating Database for Integration Testing");
+            Console.WriteLine("Creating Database for Integration Testing of Membership");
             context.Database.Create();
 
             var repository = new MembershipRepository(context);
