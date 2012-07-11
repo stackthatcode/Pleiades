@@ -15,14 +15,17 @@ namespace Pleiades.Framework.MembershipProvider.Concrete
     /// </summary>
     public class MembershipService : IMembershipService
     {
-        public Model.MembershipUser CreateUser(CreateNewMembershipUserRequest request, out MembershipCreateStatus createStatus)
+        public Model.MembershipUser CreateUser(
+                CreateNewMembershipUserRequest request, out PleiadesMembershipCreateStatus outCreateStatus)
         {
+            MembershipCreateStatus createStatus;
             var generatedUserName = GenerateUserName();
             var membershipuser = 
                 Membership.CreateUser(
                     generatedUserName, request.Password, request.Email, request.PasswordQuestion,
                     request.PasswordAnswer, request.IsApproved, out createStatus);
 
+            outCreateStatus = (PleiadesMembershipCreateStatus)createStatus;
             return membershipuser.ToModelMembershipUser();
         }
 

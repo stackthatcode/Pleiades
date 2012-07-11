@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PleiadesContext.cs" />
     <Compile Include="Users\AggregateUserRepository.cs" />
     <Compile Include="Products\BrandRepository.cs" />
     <Compile Include="Products\ColorRepository.cs" />

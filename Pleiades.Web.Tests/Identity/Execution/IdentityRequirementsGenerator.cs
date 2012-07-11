@@ -4,54 +4,54 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
 {
     public class AuthContextGenerator
     {
-        public static IdentityAuthorizationContext PublicArea(IdentityUser user)
+        public static SystemAuthorizationContext PublicArea(IdentityUser user)
         {
-            return new IdentityAuthorizationContext()
+            return new SystemAuthorizationContext()
             {
                 AuthorizationZone = AuthorizationZone.Public,
-                CurrentUser = user,
+                CurrentIdentity = user,
             };
         }
 
-        public static IdentityAuthorizationContext RestrictedStandardNonPaymentArea(IdentityUser user)
+        public static SystemAuthorizationContext RestrictedStandardNonPaymentArea(IdentityUser user)
         {
-            return new IdentityAuthorizationContext()
+            return new SystemAuthorizationContext()
             {
                 AuthorizationZone = AuthorizationZone.Restricted,
                 AccountLevelRestriction = AccountLevel.Standard,
                 IsPaymentArea = false,
-                CurrentUser = user,
+                CurrentIdentity = user,
             };
         }
 
-        public static IdentityAuthorizationContext RestrictedGoldNonPaymentArea(IdentityUser user)
+        public static SystemAuthorizationContext RestrictedGoldNonPaymentArea(IdentityUser user)
         {
-            return new IdentityAuthorizationContext()
+            return new SystemAuthorizationContext()
             {
                 AuthorizationZone = AuthorizationZone.Restricted,
                 AccountLevelRestriction = AccountLevel.Gold,
                 IsPaymentArea = false,
-                CurrentUser = user,
+                CurrentIdentity = user,
             };
         }
 
-        public static IdentityAuthorizationContext RestrictedPaymentArea(IdentityUser user)
+        public static SystemAuthorizationContext RestrictedPaymentArea(IdentityUser user)
         {
-            return new IdentityAuthorizationContext()
+            return new SystemAuthorizationContext()
             {
                 AuthorizationZone = AuthorizationZone.Restricted,
                 AccountLevelRestriction = AccountLevel.Standard,
                 IsPaymentArea = true,
-                CurrentUser = user,
+                CurrentIdentity = user,
             };
         }
 
-        public static IdentityAuthorizationContext AdministrativeArea(IdentityUser user)
+        public static SystemAuthorizationContext AdministrativeArea(IdentityUser user)
         {
-            return new IdentityAuthorizationContext()
+            return new SystemAuthorizationContext()
             {
                 AuthorizationZone = AuthorizationZone.Administrative,
-                CurrentUser = user,
+                CurrentIdentity = user,
             };
         }
     }

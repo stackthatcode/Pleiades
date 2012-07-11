@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using Pleiades.Commerce.Domain.Entities.Users;
+using Pleiades.Commerce.Domain.Model.Users;
 using Pleiades.Framework.Data;
 using Pleiades.Framework.Identity.Model;
+using Pleiades.Framework.MembershipProvider.Model;
 
 namespace Pleiades.Commerce.Domain.Interface
 {

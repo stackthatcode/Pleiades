@@ -8,8 +8,7 @@ namespace Pleiades.Framework.Execution
             where TContext : IStepContext
     {
         protected IContainer Container { get; set; }
-        protected List<Step<TContext>> Steps = new List<Step<TContext>>();
-
+        public List<Step<TContext>> Steps { get; private set; }
 
         public StepComposite(IContainer container)
         {

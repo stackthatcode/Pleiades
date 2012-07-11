@@ -57,6 +57,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Execution\ContextStub.cs" />
+    <Compile Include="Execution\StepXYZ.cs" />
+    <Compile Include="Execution\TestFixtureForInsertedStepFactory.cs" />
     <Compile Include="Execution\TestFixtureForStepComposite.cs" />
     <Compile Include="Execution\StepAlwaysKillWithLambda.cs" />
     <Compile Include="Execution\StepAlwaysKill.cs" />

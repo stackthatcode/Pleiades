@@ -6,7 +6,7 @@ using Pleiades.Framework.Identity.Model;
 
 namespace Pleiades.Framework.Identity.Execution
 {
-    public class RoleAuthorizationStep<T> : Step<T> where T : IIdentityAuthorizationContext
+    public class RoleAuthorizationStep<T> : Step<T> where T : ISystemAuthorizationContext
     {
         public override void Execute(T context)
         {
@@ -17,14 +17,14 @@ namespace Pleiades.Framework.Identity.Execution
             }
 
             // Admins have no barriers
-            if (context.CurrentUser.UserRole.IsAdministrator())
+            if (context.CurrentIdentity.UserRole.IsAdministrator())
             {
                 return;
             }
 
             // Reject anyone that's in an Admin area that's not an Admin
             if (context.AuthorizationZone == AuthorizationZone.Administrative && 
-                context.CurrentUser.UserRole.IsNotAdministrator())
+                context.CurrentIdentity.UserRole.IsNotAdministrator())
             {
                 context.SecurityResponseCode = SecurityResponseCode.AccessDenied;
                 this.Kill(context);
@@ -33,8 +33,8 @@ namespace Pleiades.Framework.Identity.Execution
 
             // Reject anyone that's not Trusted in a Trusted area; solicit for Logon
             if (context.AuthorizationZone == AuthorizationZone.Restricted
-                && context.CurrentUser.UserRole != UserRole.Trusted
-                && context.CurrentUser.UserRole.IsNotAdministrator())
+                && context.CurrentIdentity.UserRole != UserRole.Trusted
+                && context.CurrentIdentity.UserRole.IsNotAdministrator())
             {
                 context.SecurityResponseCode = SecurityResponseCode.AccessDeniedSolicitLogon;
                 this.Kill(context);

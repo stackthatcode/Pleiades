@@ -1,5 +1,4 @@
 ﻿using System.Data.Entity;
-using NUnit.Framework;
 
 namespace Pleiades.Framework.IntegrationTests.DataEF
 {
@@ -7,13 +6,11 @@ namespace Pleiades.Framework.IntegrationTests.DataEF
     {
         public DbSet<MyEntity> MyEntities { get; set; }
 
-        public MyContext() : 
-            base("MyTestDatabase")
+        public MyContext() : base("MyTestDatabase")
         {
         }
 
-        public MyContext(string conn)
-            : base(conn)
+        public MyContext(string conn) : base(conn)
         {
         }
     }

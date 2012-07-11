@@ -12,7 +12,7 @@ BACKLOG
 =======
 - LINQ syntax
 - LINQ Pad
-- Ants, Debug Dump
+- Ants, Debug Dump => IN PROGRESS
 - Reactive Extensions
 - Expression Trees
 - HTML5

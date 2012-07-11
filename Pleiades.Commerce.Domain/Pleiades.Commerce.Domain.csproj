@@ -33,6 +33,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,25 +42,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Users\AggregateUser.cs" />
-    <Compile Include="Entities\Products\Brand.cs" />
-    <Compile Include="Entities\Products\Color.cs" />
-    <Compile Include="Entities\Products\Feature.cs" />
-    <Compile Include="Entities\Products\Image.cs" />
-    <Compile Include="Entities\Products\InventoryCounter.cs" />
-    <Compile Include="Entities\Products\ProductRoot.cs" />
-    <Compile Include="Entities\Products\Product.cs" />
-    <Compile Include="Entities\Products\Size.cs" />
-    <Compile Include="Entities\Products\SizeGroup.cs" />
+    <Compile Include="Concrete\AggregateUserService.cs" />
+    <Compile Include="Model\Users\AggregateUser.cs" />
+    <Compile Include="Model\Products\Brand.cs" />
+    <Compile Include="Model\Products\Color.cs" />
+    <Compile Include="Model\Products\Feature.cs" />
+    <Compile Include="Model\Products\Image.cs" />
+    <Compile Include="Model\Products\InventoryCounter.cs" />
+    <Compile Include="Model\Products\ProductRoot.cs" />
+    <Compile Include="Model\Products\Product.cs" />
+    <Compile Include="Model\Products\Size.cs" />
+    <Compile Include="Model\Products\SizeGroup.cs" />
     <Compile Include="Interfaces\IAggregateUserRepository.cs" />
+    <Compile Include="Interfaces\IAggregateUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Entities\Products\StandardSize.cs" />
+    <Compile Include="Model\Products\StandardSize.cs" />
     <Compile Include="Interfaces\IColorRepository.cs" />
     <Compile Include="Interfaces\IProductRootRepository.cs" />
     <Compile Include="Interfaces\ISizeGroupRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Concrete\" />
     <Folder Include="Execution\" />
   </ItemGroup>
   <ItemGroup>

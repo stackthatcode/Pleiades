@@ -1,19 +1,23 @@
 FRONTRANGE - HOTZONE
 ====================
-- Consolidate ISecurityContext, IIdentityRequirementsContext, IIdentityUserContext => DONE!
-- Implement IAggregateUserRepository => DONE
-- Delete AuthorizeFilterBase - move to Commerce.Web entirely => DONE
-- Write Unit Tests for GetAggregateUserFromHttpContextStep => DONE
+- SecurityCodeFilterResponder - make an interface => DONE
+- Possibly create a OwnerAuthorizationContext...? => DONE
+- Design Pipeline structure that supports SimpleOwnerAuthorizationStep<AggrUserAuthContext> => DONE
+- Create Pipelines with Owner Authorization for Changing Passwords, etc. =>  DONE
+- Pre-Executed Step...? => DONE
+- OK: how do I prevent myself from shooting myself in the foot...? => DONE
+- Create test DBContext for AggregateUserRepository => DONE
 
+- Write Integration Tests for the AggregateUserRepository => IN PROGRESS
+- Write Create User method for AggregateUserRepository => IN PROGRESS
 
-- SecurityCodeFilterResponder - make an interface => TODO
-- Design Pipeline structure that supports SimpleOwnerAuthorizationStep<AggrUserAuthContext> => TODO
-- Create Pipelines with Owner Authorization for Changing Passwords, etc. => TODO
-- Write Integration Tests for the AggregateUserRepository => TODO
 - Wire Filter into Attribute => TODO
 - Test the new Attributes w/ Filter => TODO
 
+- Create CategoryRepository => IN PROGRESS
+
 - *** Celebrate coming Out-of-the-Wild with The Great Refactoring #1!
+
 
 
 

@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Pleiades.Commerce.Domain.Interface;
-using Pleiades.Commerce.Domain.Entities.Users;
+using Pleiades.Commerce.Domain.Model.Users;
 using Pleiades.Framework.Data;
 using Pleiades.Framework.Data.EF;
+using Pleiades.Framework.Identity.Interface;
 using Pleiades.Framework.Identity.Model;
+using Pleiades.Framework.MembershipProvider.Interface;
+using Pleiades.Framework.MembershipProvider.Model;
 
 namespace Pleiades.Commerce.Persist
 {
     public class AggregateUserRepository : EFGenericRepository<AggregateUser>, IAggregateUserRepository
     {
-        public AggregateUserRepository(DbContext context)
-            : base(context)
+        public AggregateUserRepository(DbContext context) : base(context)
         {
         }
 

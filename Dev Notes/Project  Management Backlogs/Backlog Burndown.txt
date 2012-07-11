@@ -1,6 +1,14 @@
 Backlog Burndown
 ================
 
+7/8/2012
+--------
+- Consolidate ISecurityContext, IIdentityRequirementsContext, IIdentityUserContext => DONE!
+- Implement IAggregateUserRepository => DONE
+- Delete AuthorizeFilterBase - move to Commerce.Web entirely => DONE
+- Write Unit Tests for GetAggregateUserFromHttpContextStep => DONE -- ANOTHER MILESTONE!
+
+
 7/4/2012 - Follow-up
 --------------------
 - Start using IIS for development

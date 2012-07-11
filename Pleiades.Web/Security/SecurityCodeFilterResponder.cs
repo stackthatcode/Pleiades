@@ -2,13 +2,14 @@
 using System.Web.Mvc;
 using System.Web.Security;
 using Pleiades.Framework.Security;
+using Pleiades.Framework.Web.Interface;
 
 namespace Pleiades.Framework.Web.Security
 {
     /// <summary>
     /// Abstracts and enables composition of responses to Security Authorization attempts
     /// </summary>
-    public class SecurityCodeFilterResponder
+    public class SecurityCodeFilterResponder : ISecurityCodeFilterResponder
     {
         /// <summary>
         /// Based on the SecurityResponseCode

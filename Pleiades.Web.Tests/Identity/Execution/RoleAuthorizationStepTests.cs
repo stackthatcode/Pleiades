@@ -18,7 +18,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.PublicArea(StubUserGenerator.AnonymousUser);
-            var step = new RoleAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new RoleAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -33,7 +33,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.RestrictedStandardNonPaymentArea(StubUserGenerator.AnonymousUser);
-            var step = new RoleAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new RoleAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -48,7 +48,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.RestrictedGoldNonPaymentArea(StubUserGenerator.AnonymousUser);
-            var step = new RoleAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new RoleAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -63,7 +63,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.RestrictedPaymentArea(StubUserGenerator.AnonymousUser);
-            var step = new RoleAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new RoleAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -78,7 +78,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.AdministrativeArea(StubUserGenerator.AnonymousUser);
-            var step = new RoleAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new RoleAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -95,7 +95,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.PublicArea(StubUserGenerator.ActiveTrustedStandardUser);
-            var step = new RoleAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new RoleAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -110,7 +110,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.RestrictedStandardNonPaymentArea(StubUserGenerator.ActiveTrustedStandardUser);
-            var step = new RoleAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new RoleAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -125,7 +125,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.RestrictedGoldNonPaymentArea(StubUserGenerator.ActiveTrustedStandardUser);
-            var step = new RoleAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new RoleAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -140,7 +140,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.RestrictedPaymentArea(StubUserGenerator.ActiveTrustedStandardUser);
-            var step = new RoleAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new RoleAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -155,7 +155,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.AdministrativeArea(StubUserGenerator.ActiveTrustedStandardUser);
-            var step = new RoleAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new RoleAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -172,7 +172,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.PublicArea(StubUserGenerator.AdminUser);
-            var step = new RoleAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new RoleAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -187,7 +187,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.RestrictedStandardNonPaymentArea(StubUserGenerator.AdminUser);
-            var step = new RoleAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new RoleAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -202,7 +202,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.RestrictedGoldNonPaymentArea(StubUserGenerator.AdminUser);
-            var step = new RoleAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new RoleAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -217,7 +217,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.RestrictedPaymentArea(StubUserGenerator.AdminUser);
-            var step = new RoleAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new RoleAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -232,7 +232,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.AdministrativeArea(StubUserGenerator.AdminUser);
-            var step = new RoleAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new RoleAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -249,7 +249,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.PublicArea(StubUserGenerator.SupremeUser);
-            var step = new RoleAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new RoleAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -264,7 +264,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.RestrictedStandardNonPaymentArea(StubUserGenerator.SupremeUser);
-            var step = new RoleAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new RoleAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -279,7 +279,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.RestrictedGoldNonPaymentArea(StubUserGenerator.SupremeUser);
-            var step = new RoleAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new RoleAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -294,7 +294,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.RestrictedPaymentArea(StubUserGenerator.SupremeUser);
-            var step = new RoleAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new RoleAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -309,7 +309,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.AdministrativeArea(StubUserGenerator.SupremeUser);
-            var step = new RoleAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new RoleAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);

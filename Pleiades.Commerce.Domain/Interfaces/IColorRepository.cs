@@ -1,5 +1,5 @@
 ﻿using Pleiades.Framework.Data;
-using Pleiades.Commerce.Domain.Entities.Products;
+using Pleiades.Commerce.Domain.Model.Products;
 
 namespace Pleiades.Commerce.Domain.Interface
 {

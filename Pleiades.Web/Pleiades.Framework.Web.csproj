@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interface\ISecurityCodeFilterResponder.cs" />
     <Compile Include="MvcHelpers\StyleTagGenerator.cs" />
     <Compile Include="MvcHelpers\FormLineExtensions.cs" />
     <Compile Include="MvcHelpers\ScriptTagGenerator.cs" />

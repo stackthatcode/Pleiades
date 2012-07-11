@@ -19,7 +19,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
             // Arrange
             var context = AuthContextGenerator.RestrictedStandardNonPaymentArea(StubUserGenerator.ActiveTrustedStandardUser);
 
-            var step = new AccountLevelAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new AccountLevelAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -35,7 +35,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
             // Arrange
             var context = AuthContextGenerator.RestrictedGoldNonPaymentArea(StubUserGenerator.ActiveTrustedStandardUser);
 
-            var step = new AccountLevelAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new AccountLevelAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -53,7 +53,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
             // Arrange
             var context = AuthContextGenerator.RestrictedStandardNonPaymentArea(StubUserGenerator.ActiveTrustedGoldUser);
 
-            var step = new AccountLevelAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new AccountLevelAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -68,7 +68,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         {
             // Arrange
             var context = AuthContextGenerator.RestrictedGoldNonPaymentArea(StubUserGenerator.ActiveTrustedGoldUser);
-            var step = new AccountLevelAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new AccountLevelAuthorizationStep<SystemAuthorizationContext>();
 
             // Act
             step.Execute(context);

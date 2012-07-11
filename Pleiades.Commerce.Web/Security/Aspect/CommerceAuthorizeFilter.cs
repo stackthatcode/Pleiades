@@ -5,7 +5,7 @@ using Pleiades.Framework.Injection;
 using Pleiades.Framework.Execution;
 using Pleiades.Framework.Security;
 using Pleiades.Framework.Web.Security;
-using Pleiades.Commerce.Web.Security.Execution.Authorization;
+using Pleiades.Commerce.Web.Security.Execution;
 using Pleiades.Commerce.Web.Security.Model;
 
 namespace Pleiades.Commerce.Web.Security
@@ -23,11 +23,11 @@ namespace Pleiades.Commerce.Web.Security
         {
             this.Container = container;
         }
-                
+
         public void  OnAuthorization(AuthorizationContext filterContext)
         {
             var context = 
-                new AggrUserAuthContext()
+                new SystemAuthorizationContextBase()
                 {
                     HttpContext = filterContext.HttpContext,
                     AuthorizationZone = this.AuthorizationZone,
@@ -35,7 +35,7 @@ namespace Pleiades.Commerce.Web.Security
                     IsPaymentArea = this.IsPaymentArea,
                 };
             
-            var execution = this.Container.Resolve<AuthorizeFromHttpContextStepComposite>();
+            var execution = this.Container.Resolve<AuthorizeFromFilterComposite>();
             execution.Execute(context);
 
             var response = new SecurityCodeFilterResponder();

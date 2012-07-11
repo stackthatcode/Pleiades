@@ -17,16 +17,16 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         public void Null_ResourceOwnerIdentityUserId_Allows_Access_To_Anybody()
         {
             // Arrange
-            var context = new IdentityAuthorizationContext()
+            var context = new OwnerAuthorizationContext()
             {
-                CurrentUser = new IdentityUser
+                CurrentUserIdentity = new IdentityUser
                 {
                     ID = 333,
                 },
-                ResourceOwnerId = null,
+                OwnerIdentityId = null,
             };
 
-            var step = new SimpleOwnerAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new SimpleOwnerAuthorizationStep<OwnerAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -41,16 +41,16 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         public void ResourceOwner_Can_Access_Own_Resources()
         {
             // Arrange
-            var context = new IdentityAuthorizationContext()
+            var context = new OwnerAuthorizationContext()
             {
-                CurrentUser = new IdentityUser
+                CurrentUserIdentity = new IdentityUser
                 {
                     ID = 333,
                 },
-                ResourceOwnerId = 333,
+                OwnerIdentityId = 333,
             };
 
-            var step = new SimpleOwnerAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new SimpleOwnerAuthorizationStep<OwnerAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -64,16 +64,16 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         public void ResourceNonOwner_Denied_Resources()
         {
             // Arrange
-            var context = new IdentityAuthorizationContext()
+            var context = new OwnerAuthorizationContext()
             {
-                CurrentUser = new IdentityUser
+                CurrentUserIdentity = new IdentityUser
                 {
                     ID = 444,
                 },
-                ResourceOwnerId = 333,
+                OwnerIdentityId = 333,
             };
 
-            var step = new SimpleOwnerAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new SimpleOwnerAuthorizationStep<OwnerAuthorizationContext>();
 
             // Act
             step.Execute(context);
@@ -87,13 +87,13 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
         public void Admin_Can_Access_Anything()
         {
             // Arrange
-            var context = new IdentityAuthorizationContext()
+            var context = new OwnerAuthorizationContext()
             {
-                CurrentUser = StubUserGenerator.AdminUser,
-                ResourceOwnerId = 333,
+                CurrentUserIdentity = StubUserGenerator.AdminUser,
+                OwnerIdentityId = 333,
             };
 
-            var step = new SimpleOwnerAuthorizationStep<IdentityAuthorizationContext>();
+            var step = new SimpleOwnerAuthorizationStep<OwnerAuthorizationContext>();
 
             // Act
             step.Execute(context);

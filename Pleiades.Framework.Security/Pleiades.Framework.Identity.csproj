@@ -48,15 +48,18 @@
     <Compile Include="Execution\AccountStatusAuthorizationStep.cs" />
     <Compile Include="Execution\SimpleOwnerAuthorizationStep.cs" />
     <Compile Include="Execution\RoleAuthorizationStep.cs" />
+    <Compile Include="Factories\OwnerAuthorizedStepFactory.cs" />
+    <Compile Include="Interface\IOwnerAuthorizationContext.cs" />
     <Compile Include="Interface\IIdentityRepository.cs" />
     <Compile Include="Interface\IIdentityUserService.cs" />
-    <Compile Include="Interface\IIdentityAuthorizationContext.cs" />
+    <Compile Include="Interface\ISystemAuthorizationContext.cs" />
     <Compile Include="Model\AccountLevel.cs" />
     <Compile Include="Model\AccountStatus.cs" />
     <Compile Include="Model\AuthorizationZone.cs" />
+    <Compile Include="Model\OwnerAuthorizationContext.cs" />
     <Compile Include="Model\CreateNewIdentityUserRequest.cs" />
     <Compile Include="Model\IdentityUser.cs" />
-    <Compile Include="Model\IdentityAuthorizationContext.cs" />
+    <Compile Include="Model\SystemAuthorizationContext.cs" />
     <Compile Include="Model\IdentityUserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
+﻿using System.Security.Principal;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Pleiades.Commerce.Domain.Entities.Users;
+using Pleiades.Commerce.Domain.Model.Users;
 using Pleiades.Commerce.Domain.Interface;
-using Pleiades.Commerce.Web.Security.Execution.Authorization;
+using Pleiades.Commerce.Web.Security.Execution;
 using Pleiades.Commerce.Web.Security.Model;
 using Pleiades.Framework.Identity.Interface;
 using Pleiades.Framework.Identity.Model;
@@ -31,10 +28,10 @@ namespace Pleiades.Commerce.Web.UnitTests.Execution
             var membershipService = MockRepository.GenerateMock<IMembershipService>();
             membershipService.Expect(x => x.Touch("12345678"));
 
-            var step = new GetUserFromHttpContextStep(aggrUserRepository, formsAuthService, membershipService);
+            var step = new GetUserFromFilterContextStep(aggrUserRepository, formsAuthService, membershipService);
             var httpContext = HttpContextStubFactory.Make(AuthenticatedName: "12345678", IsAuthenticated: true);
 
-            var context = new AggrUserAuthContext()
+            var context = new SystemAuthorizationContextBase()
             {
                 HttpContext = httpContext,
             };
@@ -47,7 +44,7 @@ namespace Pleiades.Commerce.Web.UnitTests.Execution
             formsAuthService.VerifyAllExpectations();
             membershipService.VerifyAllExpectations();
 
-            Assert.AreSame(aggrUser, context.AggregateUser);
+            Assert.AreSame(aggrUser, context.ThisUser);
         }
 
         [Test]
@@ -63,10 +60,10 @@ namespace Pleiades.Commerce.Web.UnitTests.Execution
 
             var membershipService = MockRepository.GenerateMock<IMembershipService>();
 
-            var step = new GetUserFromHttpContextStep(aggrUserRepository, formsAuthService, membershipService);
+            var step = new GetUserFromFilterContextStep(aggrUserRepository, formsAuthService, membershipService);
             var httpContext = HttpContextStubFactory.Make(AuthenticatedName: "12345678", IsAuthenticated: true);
 
-            var context = new AggrUserAuthContext()
+            var context = new SystemAuthorizationContextBase()
             {
                 HttpContext = httpContext,
             };
@@ -79,7 +76,7 @@ namespace Pleiades.Commerce.Web.UnitTests.Execution
             formsAuthService.VerifyAllExpectations();
             membershipService.VerifyAllExpectations();
 
-            Assert.AreEqual(UserRole.Anonymous, context.AggregateUser.IdentityUser.UserRole);
+            Assert.AreEqual(UserRole.Anonymous, context.ThisUser.IdentityUser.UserRole);
         }
 
         [Test]
@@ -91,10 +88,10 @@ namespace Pleiades.Commerce.Web.UnitTests.Execution
             var formsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
             var membershipService = MockRepository.GenerateMock<IMembershipService>();
 
-            var step = new GetUserFromHttpContextStep(aggrUserRepository, formsAuthService, membershipService);
+            var step = new GetUserFromFilterContextStep(aggrUserRepository, formsAuthService, membershipService);
             var httpContext = HttpContextStubFactory.Make(AuthenticatedName: null, IsAuthenticated: false);
 
-            var context = new AggrUserAuthContext()
+            var context = new SystemAuthorizationContextBase()
             {
                 HttpContext = httpContext,
             };
@@ -107,8 +104,7 @@ namespace Pleiades.Commerce.Web.UnitTests.Execution
             formsAuthService.VerifyAllExpectations();
             membershipService.VerifyAllExpectations();
 
-            Assert.AreEqual(UserRole.Anonymous, context.AggregateUser.IdentityUser.UserRole);
+            Assert.AreEqual(UserRole.Anonymous, context.ThisUser.IdentityUser.UserRole);
         }
-
     }
 }
