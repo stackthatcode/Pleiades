@@ -1,5 +1,4 @@
-﻿using System.Web.Security;
-using Pleiades.Commerce.Domain.Interface;
+﻿using Pleiades.Commerce.Domain.Interface;
 using Pleiades.Commerce.Domain.Model.Users;
 using Pleiades.Framework.Identity.Interface;
 using Pleiades.Framework.Identity.Model;
@@ -26,12 +25,11 @@ namespace Pleiades.Commerce.Domain.Concrete
 
         public AggregateUser Create(
                 CreateNewMembershipUserRequest membershipUserRequest, 
-                CreateOrModifyIdentityUserRequest identityUserRequest)
+                CreateOrModifyIdentityUserRequest identityUserRequest,
+                out PleiadesMembershipCreateStatus outStatus)
         {
-            MembershipCreateStatus outStatus;
             var membershipUser = this.MembershipService.CreateUser(membershipUserRequest, out outStatus);
-
-            if (outStatus != MembershipCreateStatus.Success)
+            if (outStatus != PleiadesMembershipCreateStatus.Success)
             {
                 return null;
             }
@@ -41,7 +39,7 @@ namespace Pleiades.Commerce.Domain.Concrete
             var aggegrateUser = new AggregateUser
             {
                 IdentityUser = identityUser,
-                MembershipUser = membershipUser,
+                MembershipUserName = membershipUser.UserName,
             };
 
             this.AggregateUserRepository.Add(aggegrateUser);

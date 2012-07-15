@@ -10,7 +10,8 @@ using Pleiades.Commerce.Web.Security.Model;
 
 namespace Pleiades.Commerce.Web.Security
 {
-    public abstract class CommerceAuthorizeAttribute : IAuthorizationFilter
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+    public class CommerceAuthorizeAttribute : AuthorizeAttribute
     {
         public IContainer Container { get; set; }
 

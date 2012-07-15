@@ -11,6 +11,7 @@ namespace Pleiades.Framework.Identity.Model
     /// </summary>
     public enum AccountLevel
     {
+        NotApplicable = 0,
         Standard = 1,
         Gold = 2,
     };

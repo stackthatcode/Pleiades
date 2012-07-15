@@ -8,7 +8,7 @@ namespace Pleiades.Commerce.Domain.Model.Users
     {
         public int ID { get; set; }
         public IdentityUser IdentityUser { get; set; }
-        public MembershipUser MembershipUser { get; set; }
+        public string MembershipUserName { get; set; }
 
         public static AggregateUser AnonymousUserFactory()
         {

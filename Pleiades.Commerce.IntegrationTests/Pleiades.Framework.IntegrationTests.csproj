@@ -60,8 +60,6 @@
     <Compile Include="DataEF\MyEntityRepository.cs" />
     <Compile Include="DataEF\MyContext.cs" />
     <Compile Include="DataEF\MyEntity.cs" />
-    <Compile Include="Membership\MembershipContextForTesting.cs" />
-    <Compile Include="Membership\TestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

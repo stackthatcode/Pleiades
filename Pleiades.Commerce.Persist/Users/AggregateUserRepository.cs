@@ -19,14 +19,9 @@ namespace Pleiades.Commerce.Persist
         {
         }
 
-        public AggregateUser RetrieveUserByMembershipUserName(string username)
+        public AggregateUser RetrieveUserByMembershipUserName(string membershipUsername)
         {
-            return this.Data().FirstOrDefault(x => x.MembershipUser.UserName == username);
-        }
-
-        public AggregateUser RetrieveUserByEmail(string emailaddr)
-        {
-            return this.Data().FirstOrDefault(x => x.MembershipUser.Email == emailaddr);
+            return this.Data().FirstOrDefault(x => x.MembershipUserName == membershipUsername);
         }
 
         public IEnumerable<AggregateUser> RetreiveAll(List<UserRole> roles)
@@ -34,11 +29,12 @@ namespace Pleiades.Commerce.Persist
             return this.Data().Where(x => roles.Contains(x.IdentityUser.UserRole));
         }
 
-        public IEnumerable<AggregateUser> RetreiveByLikeEmail(string emailAddressToMatch, List<UserRole> roles)
+        public IEnumerable<AggregateUser> 
+                RetreiveByMembershipEmailAndRole(
+                    List<string> membershipUserNames, List<UserRole> roles)
         {
             return this.Data().Where(x => 
-                    roles.Contains(x.IdentityUser.UserRole) && 
-                    x.MembershipUser.Email.Contains(emailAddressToMatch));
+                roles.Contains(x.IdentityUser.UserRole) && membershipUserNames.Contains(x.MembershipUserName));
         }
     }
 }

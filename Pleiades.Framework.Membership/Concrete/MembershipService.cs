@@ -6,7 +6,6 @@ using SecurityMembershipUser = System.Web.Security.MembershipUser;
 using Pleiades.Framework.MembershipProvider.Interface;
 using Pleiades.Framework.MembershipProvider.Model;
 using Pleiades.Framework.MembershipProvider.Providers;
-using Pleiades.Web.Security.Utility;
 
 namespace Pleiades.Framework.MembershipProvider.Concrete
 {
@@ -15,6 +14,11 @@ namespace Pleiades.Framework.MembershipProvider.Concrete
     /// </summary>
     public class MembershipService : IMembershipService
     {
+        public void ForceInitialize()
+        {
+            var name = Membership.ApplicationName;
+        }
+
         public Model.MembershipUser CreateUser(
                 CreateNewMembershipUserRequest request, out PleiadesMembershipCreateStatus outCreateStatus)
         {
@@ -101,7 +105,7 @@ namespace Pleiades.Framework.MembershipProvider.Concrete
             {
                 return null;
             }
-            return user.Email;
+            return user.UserName;
         }
 
         public Model.MembershipUser GetUserByUserName(string username)

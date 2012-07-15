@@ -21,8 +21,8 @@ namespace Pleiades.Commerce.Web.Security.Execution.NonPublic
 
         public override void Execute(ChangeUserPasswordContext context)
         {
-            var user = context.OwnerUser.MembershipUser;
-            this.MembershipService.ChangePassword(user.UserName, context.OldPassword, context.NewPassword);
+            this.MembershipService.ChangePassword(
+                context.OwnerUser.MembershipUserName, context.OldPassword, context.NewPassword);
         }
     }
 }

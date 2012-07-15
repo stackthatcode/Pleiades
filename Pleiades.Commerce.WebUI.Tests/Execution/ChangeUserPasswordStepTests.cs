@@ -18,15 +18,10 @@ namespace Pleiades.Commerce.Web.UnitTests.Execution
         {
             // Arrange
             var identityUser = new IdentityUser();
-            var membershipUser = new MembershipUser()
-            {
-                UserName = "12345678"
-            };
-
             var user = new AggregateUser()
             {
                 IdentityUser = identityUser,
-                MembershipUser = membershipUser,
+                MembershipUserName = "12345678",
             };
 
             var membershipService = MockRepository.GenerateMock<IMembershipService>();

@@ -4,8 +4,11 @@ using Pleiades.Framework.MembershipProvider.Model;
 
 namespace Pleiades.Commerce.Domain.Interface
 {
-    public class IAggregateUserService
+    public interface IAggregateUserService
     {
-        AggregateUser Create(CreateNewMembershipUserRequest membershipUser, CreateOrModifyIdentityUserRequest identityUser);
+        AggregateUser Create(
+            CreateNewMembershipUserRequest membershipUser, 
+            CreateOrModifyIdentityUserRequest identityUser,
+            out PleiadesMembershipCreateStatus outStatus);
     }
 }

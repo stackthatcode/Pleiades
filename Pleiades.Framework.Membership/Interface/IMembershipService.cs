@@ -9,6 +9,8 @@ namespace Pleiades.Framework.MembershipProvider.Interface
     /// </summary>
     public interface IMembershipService
     {
+        void ForceInitialize();
+
         MembershipUser CreateUser(CreateNewMembershipUserRequest request, out PleiadesMembershipCreateStatus outCreateStatus);
         string GenerateUserName();
         MembershipUser ValidateUserByEmailAddr(string emailaddr, string password);

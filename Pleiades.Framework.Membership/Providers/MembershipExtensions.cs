@@ -37,6 +37,8 @@ namespace Pleiades.Framework.MembershipProvider.Providers
         /// </summary>
         public static Model.MembershipUser ToModelMembershipUser(this System.Web.Security.MembershipUser user)
         {
+            if (user == null) return null;
+            
             return new Model.MembershipUser
             {
                 UserName = user.UserName,

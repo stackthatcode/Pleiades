@@ -1,22 +1,21 @@
 FRONTRANGE - HOTZONE
 ====================
-- SecurityCodeFilterResponder - make an interface => DONE
-- Possibly create a OwnerAuthorizationContext...? => DONE
-- Design Pipeline structure that supports SimpleOwnerAuthorizationStep<AggrUserAuthContext> => DONE
-- Create Pipelines with Owner Authorization for Changing Passwords, etc. =>  DONE
-- Pre-Executed Step...? => DONE
-- OK: how do I prevent myself from shooting myself in the foot...? => DONE
-- Create test DBContext for AggregateUserRepository => DONE
+- Fix the MVC Application with the Great Refactoring => IN PROGRESS
+* Pleiades.Commerce.WebUI.UnitTests NuGet packages
+* Fix Route Tests
+* Fix the Admin Manager
+* Test the new Attributes w/ Filter => TODO
+* Add the Repository Shim to Global something
 
-- Write Integration Tests for the AggregateUserRepository => IN PROGRESS
-- Write Create User method for AggregateUserRepository => IN PROGRESS
-
-- Wire Filter into Attribute => TODO
-- Test the new Attributes w/ Filter => TODO
-
-- Create CategoryRepository => IN PROGRESS
+- Create a new CategoryRepository => TODO
+- Create CategoryControllerTests => TODO
 
 - *** Celebrate coming Out-of-the-Wild with The Great Refactoring #1!
+
+- Let's dig deeper into Git => TODO
+* Try some branching
+* Play with the Log commands
+* Review the Git GUI tools
 
 
 
@@ -26,6 +25,8 @@ PRODUCT MANAGEMENT
 - Identify and Mock-up Major Workflows => IN PROGRESS
 * Find a bunch of good E-Commerce Sites, bookmark and critique => IN PROGRESS
 * Develop a Product specification => URGENT
+
+- FUN STUFF - start mocking up the interfaces => TODO
 
 - http://37signals.com/37searchreport.pdf => READ
 
@@ -50,6 +51,8 @@ BACKLOG
 * Research & Design
 - How to manage CSS files and dependencies from separate assemblies in ASP.NET MVC => TODO
 - http://fluentvalidation.codeplex.com/
+
+* Should we create IdentityUser Integration Tests? => TODO
 
 * Product Management/Planning
 - Identify All Significant Workflows =>  IN PROGRESS

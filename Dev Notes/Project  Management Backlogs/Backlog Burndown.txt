@@ -1,13 +1,24 @@
 Backlog Burndown
 ================
 
+7/15/2012
+---------
+- SecurityCodeFilterResponder - make an interface => DONE
+- Possibly create a OwnerAuthorizationContext...? => DONE
+- Design Pipeline structure that supports SimpleOwnerAuthorizationStep<AggrUserAuthContext> => DONE
+- Create Pipelines with Owner Authorization for Changing Passwords, etc. =>  DONE
+- Pre-Executed Step...? => DONE
+- OK: how do I prevent myself from shooting myself in the foot...? => DONE
+- Create test DBContext for AggregateUserRepository => DONE
+- Write Create User method for AggregateUserRepository => DONE
+- Write Integration Tests for the AggregateUserRepository => DONE
+
 7/8/2012
 --------
 - Consolidate ISecurityContext, IIdentityRequirementsContext, IIdentityUserContext => DONE!
 - Implement IAggregateUserRepository => DONE
 - Delete AuthorizeFilterBase - move to Commerce.Web entirely => DONE
 - Write Unit Tests for GetAggregateUserFromHttpContextStep => DONE -- ANOTHER MILESTONE!
-
 
 7/4/2012 - Follow-up
 --------------------

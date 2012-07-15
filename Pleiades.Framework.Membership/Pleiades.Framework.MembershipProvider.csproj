@@ -57,7 +57,6 @@
     <Compile Include="Providers\PfMembershipProvider.cs" />
     <Compile Include="Providers\MembershipProviderSettings.cs" />
     <Compile Include="Providers\PfMembershipRepositoryShim.cs" />
-    <Compile Include="Utility\ExtensionMethods.cs" />
     <Compile Include="Utility\MachineKeyGenerator.cs" />
   </ItemGroup>
   <ItemGroup>

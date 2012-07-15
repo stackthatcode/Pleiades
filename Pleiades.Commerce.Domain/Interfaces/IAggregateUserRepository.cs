@@ -9,8 +9,9 @@ namespace Pleiades.Commerce.Domain.Interface
     public interface IAggregateUserRepository : IGenericRepository<AggregateUser>
     {
         AggregateUser RetrieveUserByMembershipUserName(string username);
-        AggregateUser RetrieveUserByEmail(string emailaddr);
         IEnumerable<AggregateUser> RetreiveAll(List<UserRole> role);
-        IEnumerable<AggregateUser> RetreiveByLikeEmail(string emailAddressToMatch, List<UserRole> role);
+        IEnumerable<AggregateUser> 
+            RetreiveByMembershipEmailAndRole(
+                List<string> membershipUserNames, List<UserRole> role);
     }
 }

@@ -2,6 +2,6 @@
 {
     public class Constants
     {
-        public const string DatabaseConnString = "PleiadesTestDb";
+        public const string DatabaseConnString = "CommerceIntegrationTestDb";
     }
 }

@@ -5,12 +5,14 @@ using System.Text;
 using System.Configuration.Provider;
 using System.Web.Security;
 using NUnit.Framework;
+using Pleiades.Commerce.Persist;
 using Pleiades.Commerce.Persist.Users;
 using Pleiades.Framework.MembershipProvider.Concrete;
 using Pleiades.Framework.MembershipProvider.Model;
 using Pleiades.Framework.MembershipProvider.Providers;
+using Pleiades.Framework.Utility;
 
-namespace Pleiades.Framework.IntegrationTests.Membership
+namespace Pleiades.Commerce.Web.IntegrationTests.Membership
 {
     [TestFixture]
     public class TestFixture
@@ -18,24 +20,22 @@ namespace Pleiades.Framework.IntegrationTests.Membership
         [TestFixtureSetUp]
         public void TestSetup()
         {
-            var context = new MembershipContextForTesting();
-            if (context.Database.Exists())
-            {
-                context.Database.Delete();
-            }
-            Console.WriteLine("Creating Database for Integration Testing of Membership");
-            context.Database.Create();
+            var context = new PleiadesContext(Constants.DatabaseConnString);
 
-            var repository = new MembershipRepository(context);
-
-            PfMembershipRepositoryShim.RepositoryFactory = 
+            // Prepare Repository Factory
+            PfMembershipRepositoryShim.RepositoryFactory =
                 () =>
                 {
-                    var _dbContext = new MembershipContextForTesting();
-                    var _repository = new MembershipRepository(_dbContext);
+                    var _dbContext = context;
+                    var _repository = new MembershipRepository(context);
                     _repository.ApplicationName = System.Web.Security.Membership.ApplicationName;
                     return _repository;
                 };
+            var membershipService = new MembershipService();
+
+            var membershipRepository = PfMembershipRepositoryShim.RepositoryFactory();
+            membershipRepository.GetAll().ForEach(x => membershipRepository.Delete(x));
+            context.SaveChanges();
         }
 
         [Test]
@@ -51,10 +51,10 @@ namespace Pleiades.Framework.IntegrationTests.Membership
                 PasswordQuestion = "Who dat?",
             };
 
-            MembershipCreateStatus statusResponse;
+            PleiadesMembershipCreateStatus statusResponse;
             var newUser = service.CreateUser(request, out statusResponse);
 
-            Assert.AreEqual(statusResponse, MembershipCreateStatus.Success);
+            Assert.AreEqual(statusResponse, PleiadesMembershipCreateStatus.Success);
             Assert.AreEqual(request.Email, newUser.Email);
             Assert.AreEqual(request.IsApproved, newUser.IsApproved);
         }
@@ -72,10 +72,10 @@ namespace Pleiades.Framework.IntegrationTests.Membership
                 PasswordQuestion = "Who dat?",
             };
 
-            MembershipCreateStatus statusResponse;
+            PleiadesMembershipCreateStatus statusResponse;
             var newUser = service.CreateUser(request, out statusResponse);
 
-            Assert.AreEqual(statusResponse, MembershipCreateStatus.Success);
+            Assert.AreEqual(statusResponse, PleiadesMembershipCreateStatus.Success);
 
             var result = service.ValidateUserByEmailAddr(request.Email, request.Password);
             Assert.IsNotNull(result);
@@ -94,10 +94,10 @@ namespace Pleiades.Framework.IntegrationTests.Membership
                 PasswordQuestion = "Who dat?",
             };
 
-            MembershipCreateStatus statusResponse;
+            PleiadesMembershipCreateStatus statusResponse;
             var newUser = service.CreateUser(request, out statusResponse);
 
-            Assert.AreEqual(statusResponse, MembershipCreateStatus.Success);
+            Assert.AreEqual(statusResponse, PleiadesMembershipCreateStatus.Success);
 
             var result = service.ValidateUserByEmailAddr(request.Email, "bullshit password");
             Assert.IsNull(result);
@@ -116,11 +116,11 @@ namespace Pleiades.Framework.IntegrationTests.Membership
                 PasswordQuestion = "Who dat?",                
             };
 
-            MembershipCreateStatus statusResponse;
+            PleiadesMembershipCreateStatus statusResponse;
             var newUser = service.CreateUser(request, out statusResponse);
-            Assert.AreEqual(MembershipCreateStatus.Success, statusResponse);
+            Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
 
-            Assert.AreEqual(statusResponse, MembershipCreateStatus.Success);
+            Assert.AreEqual(statusResponse, PleiadesMembershipCreateStatus.Success);
 
             var result = service.ValidateUserByEmailAddr(request.Email, request.Password);
             Assert.IsNull(result);
@@ -139,9 +139,9 @@ namespace Pleiades.Framework.IntegrationTests.Membership
                 PasswordQuestion = "Who dat?",
             };
 
-            MembershipCreateStatus statusResponse;
+            PleiadesMembershipCreateStatus statusResponse;
             var newUser = service.CreateUser(request, out statusResponse);
-            Assert.AreEqual(MembershipCreateStatus.Success, statusResponse);
+            Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
 
             // Reset the Password
             var resetPwd = service.ResetPassword(newUser.UserName);
@@ -173,9 +173,9 @@ namespace Pleiades.Framework.IntegrationTests.Membership
                 PasswordQuestion = "Who dat?",
             };
 
-            MembershipCreateStatus statusResponse;
+            PleiadesMembershipCreateStatus statusResponse;
             var newUser = service.CreateUser(request, out statusResponse);
-            Assert.AreEqual(MembershipCreateStatus.Success, statusResponse);
+            Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
 
             // Disapprove User
             service.SetUserApproval(newUser.UserName, false);
@@ -205,9 +205,9 @@ namespace Pleiades.Framework.IntegrationTests.Membership
                 PasswordQuestion = "Who dat?",
             };
 
-            MembershipCreateStatus statusResponse;
+            PleiadesMembershipCreateStatus statusResponse;
             var newUser = service.CreateUser(request, out statusResponse);
-            Assert.AreEqual(MembershipCreateStatus.Success, statusResponse);
+            Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
 
             // Get user
             for (int i = 0; i < 10; i++)
@@ -240,9 +240,9 @@ namespace Pleiades.Framework.IntegrationTests.Membership
                 PasswordQuestion = "Who dat?",
             };
 
-            MembershipCreateStatus statusResponse;
+            PleiadesMembershipCreateStatus statusResponse;
             var newUser = service.CreateUser(request, out statusResponse);
-            Assert.AreEqual(MembershipCreateStatus.Success, statusResponse);
+            Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
 
             // Change the password
             var membershipUserService = new MembershipService();
@@ -267,9 +267,9 @@ namespace Pleiades.Framework.IntegrationTests.Membership
                 PasswordQuestion = "Who dat?",
             };
 
-            MembershipCreateStatus statusResponse;
+            PleiadesMembershipCreateStatus statusResponse;
             var newUser1 = service.CreateUser(request1, out statusResponse);
-            Assert.AreEqual(MembershipCreateStatus.Success, statusResponse);
+            Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
 
             var request2 = new CreateNewMembershipUserRequest()
             {
@@ -281,7 +281,7 @@ namespace Pleiades.Framework.IntegrationTests.Membership
             };
 
             var newUser2 = service.CreateUser(request2, out statusResponse);
-            Assert.AreEqual(MembershipCreateStatus.Success, statusResponse);
+            Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
 
             // Should throw an Exception
             service.ChangeEmailAddress(newUser1.UserName, "bob999@gmail.com");
@@ -300,9 +300,9 @@ namespace Pleiades.Framework.IntegrationTests.Membership
                 PasswordQuestion = "Who dat?",
             };
 
-            MembershipCreateStatus statusResponse;
+            PleiadesMembershipCreateStatus statusResponse;
             var newUser1 = service.CreateUser(request1, out statusResponse);
-            Assert.AreEqual(MembershipCreateStatus.Success, statusResponse);
+            Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
 
             var question = service.PasswordQuestion(newUser1.UserName);
             Assert.AreEqual(question, request1.PasswordQuestion);
@@ -334,9 +334,9 @@ namespace Pleiades.Framework.IntegrationTests.Membership
                 PasswordQuestion = "Who dat?",
             };
 
-            MembershipCreateStatus statusResponse;
+            PleiadesMembershipCreateStatus statusResponse;
             var newUser1 = service.CreateUser(request1, out statusResponse);
-            Assert.AreEqual(MembershipCreateStatus.Success, statusResponse);
+            Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
 
             // Reset the Password with WRONG answer
             var resetPwd = service.ResetPasswordWithAnswer(request1.Email, "Donald777");
@@ -360,9 +360,9 @@ namespace Pleiades.Framework.IntegrationTests.Membership
                 PasswordQuestion = "Who dat?",
             };
 
-            MembershipCreateStatus statusResponse;
+            PleiadesMembershipCreateStatus statusResponse;
             var newUser1 = service.CreateUser(request1, out statusResponse);
-            Assert.AreEqual(MembershipCreateStatus.Success, statusResponse);
+            Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
 
             // Change the question and answer
             service.ChangePasswordQuestionAndAnswer(newUser1.UserName, "password123", "New Question", "New Answer");

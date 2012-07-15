@@ -4,7 +4,7 @@ using System.Linq;
 using System.Data.Entity;
 using Pleiades.Framework.MembershipProvider.Model;
 
-namespace Pleiades.Framework.IntegrationTests.Membership
+namespace Pleiades.Commerce.Web.IntegrationTests.Membership
 {
     public class MembershipContextForTesting : DbContext
     {

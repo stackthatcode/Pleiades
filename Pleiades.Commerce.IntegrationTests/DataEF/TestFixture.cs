@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Pleiades.Framework.Data.EF;
-using Pleiades.Framework.Utilities;
+using Pleiades.Framework.Utility;
 
 namespace Pleiades.Framework.IntegrationTests.DataEF
 {
