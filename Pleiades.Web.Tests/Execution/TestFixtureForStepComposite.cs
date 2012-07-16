@@ -15,7 +15,7 @@ namespace Pleiades.Framework.UnitTests.Execution
         public void StepComposite_Inject_Invokes_Resolve_On_Container()
         {
             // Arrange
-            var container = MockRepository.GenerateMock<IContainer>();
+            var container = MockRepository.GenerateMock<IGenericContainer>();
             container.Expect(x => x.Resolve<StepOk>()).Return(new StepOk());            
             var step = new StepComposite<ContextStub>(container);
 
@@ -30,7 +30,7 @@ namespace Pleiades.Framework.UnitTests.Execution
         public void StepComposite_Executes_All_Steps()
         {
             // Arrange 
-            var container = MockRepository.GenerateStub<IContainer>();
+            var container = MockRepository.GenerateStub<IGenericContainer>();
             var stepComposite = new StepComposite<ContextStub>(container);
             var context = new ContextStub();
 
@@ -57,7 +57,7 @@ namespace Pleiades.Framework.UnitTests.Execution
         public void StepComposite_Executes_All_Steps_Until_Kill()
         {
             // Arrange 
-            var container = MockRepository.GenerateStub<IContainer>();
+            var container = MockRepository.GenerateStub<IGenericContainer>();
             var stepComposite = new StepComposite<ContextStub>(container);
             var context = new ContextStub();
 

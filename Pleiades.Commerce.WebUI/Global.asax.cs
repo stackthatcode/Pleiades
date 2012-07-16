@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Autofac;
+using Autofac.Integration.Mvc;
 using Pleiades.Commerce.WebUI.Plumbing.Model;
 using Pleiades.Commerce.WebUI.Plumbing.Security;
 using Pleiades.Framework.Web.Security.Concrete;
@@ -15,7 +17,7 @@ namespace Pleiades.Commerce.WebUI
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
 
-    public class MvcApplication : System.Web.HttpApplication
+    public class CommerceApplication : HttpApplication
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
@@ -56,6 +58,15 @@ namespace Pleiades.Commerce.WebUI
                 "Products - 'failover route'",
                 "{controller}/{action}",
                 new { controller = "Products", action = "List" });
+        }
+
+        public static void RegisterDIContainer()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterControllers(typeof(CommerceApplication).Assembly);
+            builder.RegisterModule<CommerceModule>();
+            var container = builder.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
 
         protected void Application_Start()

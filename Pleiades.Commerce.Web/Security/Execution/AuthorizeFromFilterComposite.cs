@@ -8,7 +8,7 @@ namespace Pleiades.Commerce.Web.Security.Execution
 {
     public class AuthorizeFromFilterComposite : StepComposite<SystemAuthorizationContextBase>        
     {
-        public AuthorizeFromFilterComposite(IContainer container)
+        public AuthorizeFromFilterComposite(IGenericContainer container)
             : base(container)
         {
             // Load an Aggregate User entity based on the credentials in the HttpContext

@@ -10,7 +10,7 @@ namespace Pleiades.Framework.Identity.Factories
             InsertedStepFactory<TContext, SimpleOwnerAuthorizationStep<TContext>>
             where TContext : IOwnerAuthorizationContext
     {
-        public OwnerAuthorizedStepFactory(IContainer container)
+        public OwnerAuthorizedStepFactory(IGenericContainer container)
             : base(container)
         {
         }

@@ -58,6 +58,7 @@
     <Compile Include="Interfaces\IColorRepository.cs" />
     <Compile Include="Interfaces\IProductRootRepository.cs" />
     <Compile Include="Interfaces\ISizeGroupRepository.cs" />
+    <Compile Include="DomainRegistration.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Execution\" />

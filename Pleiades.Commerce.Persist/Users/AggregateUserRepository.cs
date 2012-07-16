@@ -11,7 +11,7 @@ using Pleiades.Framework.Identity.Model;
 using Pleiades.Framework.MembershipProvider.Interface;
 using Pleiades.Framework.MembershipProvider.Model;
 
-namespace Pleiades.Commerce.Persist
+namespace Pleiades.Commerce.Persist.Users
 {
     public class AggregateUserRepository : EFGenericRepository<AggregateUser>, IAggregateUserRepository
     {

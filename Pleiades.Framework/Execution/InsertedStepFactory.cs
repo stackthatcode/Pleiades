@@ -9,9 +9,9 @@ namespace Pleiades.Framework.Execution
             where TContext : IStepContext
             where TInsertedStep : Step<TContext>
     {
-        IContainer Container { get; set; }
+        IGenericContainer Container { get; set; }
 
-        public InsertedStepFactory(IContainer container)
+        public InsertedStepFactory(IGenericContainer container)
         {
             this.Container = container;
         }

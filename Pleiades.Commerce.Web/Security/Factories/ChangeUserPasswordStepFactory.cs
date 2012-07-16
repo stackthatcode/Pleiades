@@ -7,7 +7,7 @@ namespace Pleiades.Commerce.Web.Security.Factories
 {
     public class ChangeUserPasswordStepFactory : OwnerAuthorizedStepFactory<ChangeUserPasswordContext>
     {
-        public ChangeUserPasswordStepFactory(IContainer container) : base(container)
+        public ChangeUserPasswordStepFactory(IGenericContainer container) : base(container)
         {
         }
     }

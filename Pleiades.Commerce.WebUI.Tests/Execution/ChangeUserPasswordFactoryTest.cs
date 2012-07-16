@@ -22,7 +22,7 @@ namespace Pleiades.Commerce.Web.UnitTests.Execution
             var step1 = new SimpleOwnerAuthorizationStep<ChangeUserPasswordContext>();
             var step2 = new ChangeUserPasswordStep(null);
 
-            var container = MockRepository.GenerateMock<IContainer>();
+            var container = MockRepository.GenerateMock<IGenericContainer>();
             container.Expect(x => x.Resolve<SimpleOwnerAuthorizationStep<ChangeUserPasswordContext>>()).Return(step1);
             container.Expect(x => x.Resolve<ChangeUserPasswordStep>()).Return(step2);
             var factory = new ChangeUserPasswordStepFactory(container);

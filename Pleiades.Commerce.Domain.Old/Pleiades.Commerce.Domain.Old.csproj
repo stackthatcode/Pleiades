@@ -61,23 +61,8 @@
     <Compile Include="Abstract\ICategoryService.cs" />
     <Compile Include="Concrete\CategoryService.cs" />
     <Compile Include="Abstract\CategoryServiceSort.cs" />
-    <Compile Include="Data\PleiadesWeb.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PleiadesWeb.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Model OLD\Category.cs" />
-    <Compile Include="Model OLD\Product.cs" />
-    <Compile Include="Model OLD\Employee.cs" />
-    <Compile Include="Model OLD\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
-    <EntityDeploy Include="Data\PleiadesWeb.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PleiadesWeb.Designer.cs</LastGenOutput>
-    </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pleiades.Utilities\Pleiades.Framework.TestHelpers.csproj">

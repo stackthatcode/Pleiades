@@ -13,14 +13,14 @@ namespace Pleiades.Commerce.Web.Security
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class CommerceAuthorizeAttribute : AuthorizeAttribute
     {
-        public IContainer Container { get; set; }
+        public IGenericContainer Container { get; set; }
 
         public AuthorizationZone AuthorizationZone { get; set; }
         public AccountLevel AccountLevelRestriction { get; set; }
         public bool IsPaymentArea { get; set; }
 
 
-        public CommerceAuthorizeAttribute(IContainer container)
+        public CommerceAuthorizeAttribute(IGenericContainer container)
         {
             this.Container = container;
         }

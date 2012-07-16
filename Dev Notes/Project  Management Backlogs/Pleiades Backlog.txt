@@ -1,5 +1,10 @@
 FRONTRANGE - HOTZONE
 ====================
+
+- Wire in Autofac => TODO
+- Create a new CategoryRepository => TODO
+- Create CategoryControllerTests => TODO
+
 - Fix the MVC Application with the Great Refactoring => IN PROGRESS
 * Pleiades.Commerce.WebUI.UnitTests NuGet packages
 * Fix Route Tests
@@ -7,8 +12,6 @@ FRONTRANGE - HOTZONE
 * Test the new Attributes w/ Filter => TODO
 * Add the Repository Shim to Global something
 
-- Create a new CategoryRepository => TODO
-- Create CategoryControllerTests => TODO
 
 - *** Celebrate coming Out-of-the-Wild with The Great Refactoring #1!
 
@@ -16,7 +19,7 @@ FRONTRANGE - HOTZONE
 * Try some branching
 * Play with the Log commands
 * Review the Git GUI tools
-
+* How do I git my current hashcode...?
 
 
 

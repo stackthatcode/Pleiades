@@ -7,10 +7,10 @@ namespace Pleiades.Framework.Execution
     public class StepComposite<TContext> : Step<TContext>
             where TContext : IStepContext
     {
-        protected IContainer Container { get; set; }
+        protected IGenericContainer Container { get; set; }
         public List<Step<TContext>> Steps { get; private set; }
 
-        public StepComposite(IContainer container)
+        public StepComposite(IGenericContainer container)
         {
             this.Steps = new List<Step<TContext>>();
             this.Container = container;

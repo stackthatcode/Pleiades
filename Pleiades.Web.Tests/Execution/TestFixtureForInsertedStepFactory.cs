@@ -15,7 +15,7 @@ namespace Pleiades.Framework.UnitTests.Execution
             // Arrange
             var step1 = new StepXYZ();
             var step2 = new StepOk();
-            var container = MockRepository.GenerateMock<IContainer>();
+            var container = MockRepository.GenerateMock<IGenericContainer>();
             container.Expect(x => x.Resolve<StepXYZ>()).Return(step1);
             container.Expect(x => x.Resolve<StepOk>()).Return(step2);
             var factory = new InsertedStepXYZFactory(container);
@@ -33,7 +33,7 @@ namespace Pleiades.Framework.UnitTests.Execution
 
     public class InsertedStepXYZFactory : InsertedStepFactory<ContextStub, StepXYZ>
     {
-        public InsertedStepXYZFactory(IContainer container)
+        public InsertedStepXYZFactory(IGenericContainer container)
             : base(container)
         {
         }
