@@ -10,20 +10,21 @@ using Pleiades.Commerce.WebUI;
 using Pleiades.Commerce.WebUI.Areas.Admin;
 using Pleiades.Framework.TestHelpers.Web;
 
-namespace Pleiades.Commerce.WebUI.TestsRouting
+namespace Pleiades.Commerce.WebUI.UnitTests.Routing
 {
     public class RoutingTestBase
     {
-        public RouteCollection Routes { get; set; }
-
-        [SetUp]
+        [TestFixtureSetUp]
         public void TestSetup()
         {
-            Routes = RoutingHelper.BuildRouteList<MvcApplication>(
+            RouteTable.Routes.Clear();
+
+            RoutingHelper.BuildAreaRegistrations(
                 new List<AreaRegistration>() 
                 { 
                     new AdminAreaRegistration() 
                 });
+            CommerceHttpApplication.RegisterDefaultArea();
         }
     }
 }

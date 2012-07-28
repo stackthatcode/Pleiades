@@ -9,29 +9,24 @@ namespace Pleiades.Framework.Identity
 {
     public class IdentityRegistration
     {
-        IGenericBuilder Builder;
-
-        public IdentityRegistration(IGenericBuilder builder)
+        public static void Register(IGenericBuilder builder)
         {
-            this.Builder = builder;
+            builder.RegisterType<IdentityUserService>();
         }
 
-        public void RegisterConcrete()
+        public static void RegisterSystemAuthorization<TContext>(IGenericBuilder builder) 
+                where TContext : ISystemAuthorizationContext
         {
-            this.Builder.RegisterType<IdentityUserService>();
+            builder.RegisterType<AccountLevelAuthorizationStep<TContext>>();
+            builder.RegisterType<AccountStatusAuthorizationStep<TContext>>();
+            builder.RegisterType<RoleAuthorizationStep<TContext>>();
         }
 
-        public void RegisterSystemAuthorization<TContext>() where TContext : ISystemAuthorizationContext
+        public static void RegisterOwnerAuthorization<TContext>(IGenericBuilder builder) 
+                where TContext : IOwnerAuthorizationContext
         {
-            this.Builder.RegisterType<AccountLevelAuthorizationStep<TContext>>();
-            this.Builder.RegisterType<AccountStatusAuthorizationStep<TContext>>();
-            this.Builder.RegisterType<RoleAuthorizationStep<TContext>>();
-        }
-
-        public void RegisterOwnerAuthorization<TContext>() where TContext : IOwnerAuthorizationContext
-        {
-            this.Builder.RegisterType<SimpleOwnerAuthorizationStep<TContext>>();
-            this.Builder.RegisterType<OwnerAuthorizedStepFactory<TContext>>();
+            builder.RegisterType<SimpleOwnerAuthorizationStep<TContext>>();
+            builder.RegisterType<OwnerAuthorizedStepFactory<TContext>>();
         }
     }
 }

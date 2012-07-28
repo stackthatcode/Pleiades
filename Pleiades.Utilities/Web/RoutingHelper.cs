@@ -13,29 +13,17 @@ namespace Pleiades.Framework.TestHelpers.Web
     {
         /// <summary>
         /// Crucial: initializes the Routes for HttpApplication
+        /// IMPORTANT - pay attention to which set of Routes are loaded first, as that will affect
+        /// .. the ordering in the Routing Table
         /// </summary>
-        public static RouteCollection BuildRouteList<TAppType>(List<AreaRegistration> areaRegistrations)
-                    where TAppType : System.Web.HttpApplication
+        public static void BuildAreaRegistrations(List<AreaRegistration> areaRegistrations)
         {
-            // Create a Route Collection for the Application
-            var routes = new RouteCollection();
-
-            // IMPORTANT - pay attention to which set of Routes are loaded first, as that will affect
-            // .. the ordering in the Routing Table
-            
             // Load the area Registration routes first
             foreach (var registration in areaRegistrations)
             {
-                var areaRegistrationContext = new AreaRegistrationContext(registration.AreaName, routes);
+                var areaRegistrationContext = new AreaRegistrationContext(registration.AreaName, RouteTable.Routes);
                 registration.RegisterArea(areaRegistrationContext);
             }
-
-            //  Invoke the Register Routes method
-            Type appType = typeof(TAppType);
-            MethodInfo registerMethod = appType.GetMethod("RegisterRoutes");
-            Object myStaticMethodResult = registerMethod.Invoke(null, new object[] { routes });
-
-            return routes;
         }
 
 

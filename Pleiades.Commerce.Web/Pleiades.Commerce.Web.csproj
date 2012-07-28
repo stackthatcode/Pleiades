@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\Concrete\CommerceSecurityCodeResponder.cs" />
     <Compile Include="WebRegistration.cs" />
     <Compile Include="Security\Aspect\CommerceAuthorizeFilter.cs" />
     <Compile Include="Security\Execution\AuthorizeFromFilterComposite.cs" />

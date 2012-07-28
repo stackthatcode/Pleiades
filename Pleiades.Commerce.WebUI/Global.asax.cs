@@ -6,10 +6,6 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
-using Pleiades.Commerce.WebUI.Plumbing.Model;
-using Pleiades.Commerce.WebUI.Plumbing.Security;
-using Pleiades.Framework.Web.Security.Concrete;
-using Pleiades.Framework.Web.Security.Model;
 using Pleiades.Commerce.WebUI.Plumbing.ErrorHandling;
 
 namespace Pleiades.Commerce.WebUI
@@ -17,15 +13,43 @@ namespace Pleiades.Commerce.WebUI
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
 
-    public class CommerceApplication : HttpApplication
+    public class CommerceHttpApplication : HttpApplication
     {
-        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+        protected void Application_Start()
         {
-            filters.Add(new CustomErrorAttribute());
+            RegisterDIContainer();
+
+            AreaRegistration.RegisterAllAreas();
+            RegisterDefaultArea();
+
+            RegisterGlobalFilters();
+
+            //ModelBinders.Binders.Add(typeof(DomainUser), new DomainUserBinder());
+
+
+            // Initialize Pleiades Security
+            //var userservice = new DomainUserService();
+            //userservice.Initialize();
+
+            // Uncomment to enable Phil Haack's Tool
+            // RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
         }
 
-        public static void RegisterRoutes(RouteCollection routes)
+        public static void RegisterDIContainer()
         {
+            var builder = new ContainerBuilder();
+            builder.RegisterControllers(typeof(CommerceHttpApplication).Assembly);
+            builder.RegisterModule<CommerceModule>();
+            var container = builder.Build();
+
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+        }
+
+        public static void RegisterDefaultArea()
+        {
+            // Other than a bare minimum of defaults, these need to rolled into their own Area
+            var routes = RouteTable.Routes;
+
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
@@ -37,7 +61,7 @@ namespace Pleiades.Commerce.WebUI
                 "Products - All Categories by Page",
                 "Page{page}",
                 new { controller = "Products", action = "List", category = (string)null, page = "1" },
-                new { page = @"\d+"} );
+                new { page = @"\d+" });
 
             routes.MapRoute(
                 "Products - List by Category",
@@ -60,33 +84,10 @@ namespace Pleiades.Commerce.WebUI
                 new { controller = "Products", action = "List" });
         }
 
-        public static void RegisterDIContainer()
+        public static void RegisterGlobalFilters()
         {
-            var builder = new ContainerBuilder();
-            builder.RegisterControllers(typeof(CommerceApplication).Assembly);
-            builder.RegisterModule<CommerceModule>();
-            var container = builder.Build();
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            GlobalFilters.Filters.Add(new CustomErrorAttribute());
         }
 
-        protected void Application_Start()
-        {
-            // Model Binders
-            ModelBinders.Binders.Add(typeof(DomainUser), new DomainUserBinder());
-
-            // Filters
-            RegisterGlobalFilters(GlobalFilters.Filters);
-
-            // Routes
-            AreaRegistration.RegisterAllAreas();
-            RegisterRoutes(RouteTable.Routes);
-
-            // Initialize Pleiades Security
-            var userservice = new DomainUserService();
-            userservice.Initialize();
-
-            // Uncomment to enable Phil Haack's Tool
-            // RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
-        }
     }
 }

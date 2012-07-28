@@ -11,7 +11,7 @@ using Pleiades.Commerce.WebUI;
 using Pleiades.Framework.TestHelpers;
 using Pleiades.Framework.TestHelpers.Web;
 
-namespace Pleiades.Commerce.WebUI.TestsRouting
+namespace Pleiades.Commerce.WebUI.UnitTests.Routing
 {
     [TestFixture]
     public class AdminRoutes : RoutingTestBase
@@ -21,7 +21,7 @@ namespace Pleiades.Commerce.WebUI.TestsRouting
         {
             // Inbound 
             var routeData2 = RoutingHelper.TestInboundRoute(
-                this.Routes,
+                RouteTable.Routes,
                 "http://testurl.com",
                 "~/Admin",
                 new { controller = "Home", action = "Index" },
@@ -29,7 +29,7 @@ namespace Pleiades.Commerce.WebUI.TestsRouting
 
             // Outbound
             string url = RoutingHelper.GenerateOutboundUrl(
-                this.Routes,
+                RouteTable.Routes,
                 new { area = "Admin", controller = "Home", action = "Index" });
             url.ShouldEqual("/Admin");
         }
@@ -39,7 +39,7 @@ namespace Pleiades.Commerce.WebUI.TestsRouting
         {
             // Inbound 
             var routeData2 = RoutingHelper.TestInboundRoute(
-                this.Routes,
+                RouteTable.Routes,
                 "http://testurl.com",
                 "~/Admin/TestController/TestAction/3",
                 new { controller = "TestController", action = "TestAction", id = "3" },
@@ -47,7 +47,7 @@ namespace Pleiades.Commerce.WebUI.TestsRouting
 
             // Outbound
             string url = RoutingHelper.GenerateOutboundUrl(
-                this.Routes,
+                RouteTable.Routes,
                 new { area = "Admin", controller = "TestController", action = "TestAction", id = "3" });
             url.ShouldEqual("/Admin/TestController/TestAction/3");
         }
@@ -57,7 +57,7 @@ namespace Pleiades.Commerce.WebUI.TestsRouting
         {
             // Inbound 
             var routeData2 = RoutingHelper.TestInboundRoute(
-                this.Routes,
+                RouteTable.Routes,
                 "http://testurl.com",
                 "~/Admin/TestController/TestAction",
                 new { controller = "TestController", action = "TestAction" },
@@ -65,7 +65,7 @@ namespace Pleiades.Commerce.WebUI.TestsRouting
 
             // Outbound
             string url = RoutingHelper.GenerateOutboundUrl(
-                this.Routes,
+                RouteTable.Routes,
                 new { area = "Admin", controller = "TestController", action = "TestAction" });
             url.ShouldEqual("/Admin/TestController/TestAction");
         }
@@ -75,7 +75,7 @@ namespace Pleiades.Commerce.WebUI.TestsRouting
         {
             // Inbound 
             var routeData2 = RoutingHelper.TestInboundRoute(
-                this.Routes,
+                RouteTable.Routes,
                 "http://testurl.com",
                 "~/Admin/AdminManager/List",
                 new { controller = "AdminManager", action = "List" },
@@ -83,7 +83,7 @@ namespace Pleiades.Commerce.WebUI.TestsRouting
 
             // Outbound
             string url = RoutingHelper.GenerateOutboundUrl(
-                this.Routes,
+                RouteTable.Routes,
                 new { area = "Admin", controller = "AdminManager", action = "List", page = "3" });
             url.ShouldEqual("/Admin/AdminManager/List/Page3");
         }

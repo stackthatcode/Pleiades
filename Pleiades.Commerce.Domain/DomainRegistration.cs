@@ -4,9 +4,9 @@ using Pleiades.Commerce.Domain.Concrete;
 
 namespace Pleiades.Commerce.Domain
 {
-    public class DomainRegistration : IRegistration
+    public class DomainRegistration
     {
-        public void Register(IGenericBuilder builder)
+        public static void Register(IGenericBuilder builder)
         {
             builder.RegisterType<AggregateUserService>();
         }

@@ -8,5 +8,6 @@ namespace Pleiades.Framework.Injection
     public interface IGenericBuilder
     {
         void RegisterType<T>();
+        void RegisterTypeAs<TConcrete, TBase>();
     }
 }

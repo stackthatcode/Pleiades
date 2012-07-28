@@ -1,5 +1,8 @@
 ﻿using System;
 using Autofac;
+using Pleiades.Framework.Autofac;
+using Pleiades.Commerce.Persist;
+using Pleiades.Commerce.Web;
 
 namespace Pleiades.Commerce.WebUI
 {
@@ -7,7 +10,10 @@ namespace Pleiades.Commerce.WebUI
     {
         protected override void Load(ContainerBuilder builder)
         {
-            // TODO: Register Persist & Web
+            var genericBuilder = new GenericBuilder(builder);
+
+            PersistRegistration.Register(genericBuilder);
+            WebRegistration.Register (genericBuilder);            
         }
     }
 }

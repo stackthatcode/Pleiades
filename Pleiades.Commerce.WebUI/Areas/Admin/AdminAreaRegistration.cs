@@ -32,7 +32,6 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin
                 new { controller = "Category", action = "PageById" }
             );
 
-
             context.MapRoute(
                 "Category Table With Pages",
                 "Admin/Category/{action}/Page{page}",

@@ -1,42 +1,43 @@
 FRONTRANGE - HOTZONE
 ====================
+*** Celebrate coming Out-of-the-Wild with The Great Refactoring #1! ***
 
-- Wire in Autofac => TODO
-- Create a new CategoryRepository => TODO
-- Create CategoryControllerTests => TODO
-
+MVC RELATED
+~~~~~~~~~~~
 - Fix the MVC Application with the Great Refactoring => IN PROGRESS
-* Pleiades.Commerce.WebUI.UnitTests NuGet packages
-* Fix Route Tests
-* Fix the Admin Manager
+* Fix Route Tests => DONE
+* Fix the HomeController, AccountController and Tests => TODO
+* Add the Repository Shim to Global something => TODO
+* Fix the Admin Manager => TODO
 * Test the new Attributes w/ Filter => TODO
-* Add the Repository Shim to Global something
+- Refactor the Standard Control Framework => TODO
+- Create new CategoryRepository => TODO
+- Create new CategoryControllerTests => TODO
 
-
-- *** Celebrate coming Out-of-the-Wild with The Great Refactoring #1!
-
+GIT RELATED
+~~~~~~~~~~~
 - Let's dig deeper into Git => TODO
 * Try some branching
 * Play with the Log commands
 * Review the Git GUI tools
 * How do I git my current hashcode...?
 
-
-
-PRODUCT MANAGEMENT
-==================
+UI/UX/PRODUCT RELATED
+~~~~~~~~~~~~~~~~~~~~~
+- FUN STUFF - start mocking up the interfaces => TODO
 - Identify and Mock-up Major Workflows => IN PROGRESS
 * Find a bunch of good E-Commerce Sites, bookmark and critique => IN PROGRESS
 * Develop a Product specification => URGENT
-
-- FUN STUFF - start mocking up the interfaces => TODO
-
 - http://37signals.com/37searchreport.pdf => READ
-
 - Project Planning the next Phase for v1.0 - Identify major tasks => IN PROGRESS
 - Review "desine" links => PROGRESS
 * Pleiades Brand + UI Design => TODO
 
+
+
+
+PRODUCT MANAGEMENT
+==================
 * R&D CURRENT
 - Continue with Review of Pleiades AJAX Grid => IN PROGRESS
 - R&D CSS + Image + Script File Management => IN PROGRESS
@@ -86,7 +87,6 @@ BACKLOG
 
 * General Fixes
 - Disable Caching for AJAX stuff => TODO
-
 
 
 

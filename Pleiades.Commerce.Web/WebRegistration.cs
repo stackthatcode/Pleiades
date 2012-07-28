@@ -2,6 +2,9 @@
 using Pleiades.Framework.Injection;
 using Pleiades.Framework.Identity;
 using Pleiades.Framework.MembershipProvider;
+using Pleiades.Framework.Web.Interface;
+using Pleiades.Framework.Web.Security;
+using Pleiades.Commerce.Web.Security.Concrete;
 using Pleiades.Commerce.Web.Security.Execution;
 using Pleiades.Commerce.Web.Security.Execution.NonPublic;
 using Pleiades.Commerce.Web.Security.Factories;
@@ -9,19 +12,17 @@ using Pleiades.Commerce.Web.Security.Model;
 
 namespace Pleiades.Commerce.Web
 {
-    public class WebRegistration : IRegistration
+    public class WebRegistration
     {
-        public void Register(IGenericBuilder builder)
+        public static void Register(IGenericBuilder builder)
         {
             // Pleiades.Framework.Identity
-            var identityBuilder = new IdentityRegistration(builder);
-            identityBuilder.RegisterConcrete();
-            identityBuilder.RegisterOwnerAuthorization<OwnerAuthorizationContext>();
-            identityBuilder.RegisterSystemAuthorization<SystemAuthorizationContextBase>();
+            IdentityRegistration.Register(builder);
+            IdentityRegistration.RegisterOwnerAuthorization<OwnerAuthorizationContext>(builder);
+            IdentityRegistration.RegisterSystemAuthorization<SystemAuthorizationContextBase>(builder);
 
             // Pleiades.Framework.MembershipProvider
-            var membershipBuilder = new MembershipRegistration(builder);
-            membershipBuilder.Register();
+            MembershipRegistration.Register(builder);
 
             // Pleiades.Commerce.Web
             builder.RegisterType<ChangeUserPasswordStep>();
@@ -30,6 +31,7 @@ namespace Pleiades.Commerce.Web
             builder.RegisterType<ChangeUserPasswordStepFactory>();
 
             // Pleiades.Framework.Web
+            builder.RegisterTypeAs<CommerceSecurityCodeResponder, ISecurityCodeFilterResponder>();
         }
     }
 }

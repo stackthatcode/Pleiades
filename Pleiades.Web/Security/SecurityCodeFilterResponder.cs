@@ -52,10 +52,6 @@ namespace Pleiades.Framework.Web.Security
         /// </summary>
         protected virtual void AccessDeniedSolicitLogon(AuthorizationContext filterContext)
         {
-            filterContext.Result = new RedirectResult(
-                FormsAuthentication.LoginUrl + "?returnUrl=" +
-                    filterContext.HttpContext.Server.UrlEncode(filterContext.HttpContext.Request.RawUrl));
-
             filterContext.HttpContext.Response.StatusCode = 302;
             filterContext.Result = new HttpUnauthorizedResult();
         }

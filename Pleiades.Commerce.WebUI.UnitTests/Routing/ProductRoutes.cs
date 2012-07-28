@@ -11,7 +11,7 @@ using Pleiades.Commerce.WebUI;
 using Pleiades.Framework.TestHelpers;
 using Pleiades.Framework.TestHelpers.Web;
 
-namespace Pleiades.Commerce.WebUI.TestsRouting
+namespace Pleiades.Commerce.WebUI.UnitTests.Routing
 {
     [TestFixture]
     public class ProductRoutes : RoutingTestBase
@@ -21,7 +21,7 @@ namespace Pleiades.Commerce.WebUI.TestsRouting
         {
             // Inbound 
             var routeData2 = RoutingHelper.TestInboundRoute(
-                this.Routes,
+                RouteTable.Routes,
                 "http://google.com",
                 "~/",
                 new { controller = "Products", category = (string)null, action = "List" },
@@ -29,7 +29,7 @@ namespace Pleiades.Commerce.WebUI.TestsRouting
 
             // Outbound
             string url = RoutingHelper.GenerateOutboundUrl(
-                this.Routes,
+                RouteTable.Routes,
                 new { controller = "Products", action = "List", category = (string)null });
             url.ShouldEqual("/");
         }
@@ -39,7 +39,7 @@ namespace Pleiades.Commerce.WebUI.TestsRouting
         {
             // Inbound 
             var routeData2 = RoutingHelper.TestInboundRoute(
-                this.Routes,
+                RouteTable.Routes,
                 "http://google.com",
                 "~/Page1",
                 new { controller = "Products", category = (string)null, action = "List", page = "1" },
@@ -47,7 +47,7 @@ namespace Pleiades.Commerce.WebUI.TestsRouting
 
             // Outbound
             string url = RoutingHelper.GenerateOutboundUrl(
-                this.Routes,
+                RouteTable.Routes,
                 new { controller = "Products", action = "List", page = "1" });
 
             url.ShouldEqual("/Page1");
@@ -58,7 +58,7 @@ namespace Pleiades.Commerce.WebUI.TestsRouting
         {
             // Inbound 
             var routeData2 = RoutingHelper.TestInboundRoute(
-                this.Routes,
+                RouteTable.Routes,
                 "http://google.com",
                 "~/Motorcycles",
                 new { controller = "Products", action = "List", category = "Motorcycles" },
@@ -66,7 +66,7 @@ namespace Pleiades.Commerce.WebUI.TestsRouting
 
             // Outbound
             string url = RoutingHelper.GenerateOutboundUrl(
-                this.Routes,
+                RouteTable.Routes,
                 new { controller = "Products", action = "List", category = "Motorcycles" });
 
             url.ShouldEqual("/Motorcycles");
@@ -77,7 +77,7 @@ namespace Pleiades.Commerce.WebUI.TestsRouting
         {
             // Inbound 
             var routeData2 = RoutingHelper.TestInboundRoute(
-                this.Routes,
+                RouteTable.Routes,
                 "http://google.com",
                 "~/Motorcycles/Page3",
                 new { controller = "Products", action = "List", category = "Motorcycles", page = "3" },
@@ -85,7 +85,7 @@ namespace Pleiades.Commerce.WebUI.TestsRouting
 
             // Outbound
             string url = RoutingHelper.GenerateOutboundUrl(
-                this.Routes,
+                RouteTable.Routes,
                 new { controller = "Products", action = "List", category = "Motorcycles", page = "3" });
 
             url.ShouldEqual("/Motorcycles/Page3");
@@ -96,7 +96,7 @@ namespace Pleiades.Commerce.WebUI.TestsRouting
         {
             // Inbound 
             var routeData2 = RoutingHelper.TestInboundRoute(
-                this.Routes,
+                RouteTable.Routes,
                 "http://google.com",
                 "~/Products/GetImage/7",
                 new { controller = "Products", action = "GetImage", productid = "7" },
@@ -104,7 +104,7 @@ namespace Pleiades.Commerce.WebUI.TestsRouting
 
             // Outbound
             string url = RoutingHelper.GenerateOutboundUrl(
-                this.Routes,
+                RouteTable.Routes,
                 new { controller = "Products", action = "GetImage", productid = "7" });
 
             url.ShouldEqual("/Products/GetImage/7");
@@ -115,7 +115,7 @@ namespace Pleiades.Commerce.WebUI.TestsRouting
         {
             // Inbound 
             var routeData2 = RoutingHelper.TestInboundRoute(
-                this.Routes,
+                RouteTable.Routes,
                 "http://google.com",
                 "~/Products/List",
                 new { controller = "Products", action = "List" },
@@ -123,7 +123,7 @@ namespace Pleiades.Commerce.WebUI.TestsRouting
 
             // Outbound
             string url = RoutingHelper.GenerateOutboundUrl(
-                this.Routes,
+                RouteTable.Routes,
                 new { controller = "Products", action = "List" });
 
             url.ShouldEqual("/");

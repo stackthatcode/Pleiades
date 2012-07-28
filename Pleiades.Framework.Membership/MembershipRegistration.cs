@@ -6,17 +6,10 @@ namespace Pleiades.Framework.MembershipProvider
 {
     public class MembershipRegistration
     {
-        IGenericBuilder Builder;
-
-        public MembershipRegistration(IGenericBuilder builder)
+        public static void Register(IGenericBuilder builder)
         {
-            this.Builder = builder;
-        }
-
-        public void Register()
-        {
-            this.Builder.RegisterType<FormsAuthenticationService>();
-            this.Builder.RegisterType<MembershipService>();
+            builder.RegisterType<FormsAuthenticationService>();
+            builder.RegisterType<MembershipService>();
         }
     }
 }
