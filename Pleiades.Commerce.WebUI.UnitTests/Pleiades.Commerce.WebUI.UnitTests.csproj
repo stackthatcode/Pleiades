@@ -51,8 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Routing\AdminRoutes.cs" />
-    <Compile Include="Routing\ProductRoutes.cs" />
+    <Compile Include="Routing\AdminRouteTests.cs" />
+    <Compile Include="Routing\DefaultRouteTests.cs" />
+    <Compile Include="Routing\ProductRouteTests.cs" />
     <Compile Include="Routing\RoutingTestBase.cs" />
   </ItemGroup>
   <ItemGroup>

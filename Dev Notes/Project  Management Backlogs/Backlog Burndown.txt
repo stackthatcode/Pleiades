@@ -1,6 +1,11 @@
 Backlog Burndown
 ================
 
+7/30/2012 
+---------
+* Fix Route Tests => DONE
+* Design Reviews of metrotwit.com and bofu2u's product => DONE
+
 7/15/2012
 ---------
 - SecurityCodeFilterResponder - make an interface => DONE

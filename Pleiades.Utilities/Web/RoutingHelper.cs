@@ -11,11 +11,6 @@ namespace Pleiades.Framework.TestHelpers.Web
 {
     public class RoutingHelper
     {
-        /// <summary>
-        /// Crucial: initializes the Routes for HttpApplication
-        /// IMPORTANT - pay attention to which set of Routes are loaded first, as that will affect
-        /// .. the ordering in the Routing Table
-        /// </summary>
         public static void BuildAreaRegistrations(List<AreaRegistration> areaRegistrations)
         {
             // Load the area Registration routes first
@@ -26,42 +21,41 @@ namespace Pleiades.Framework.TestHelpers.Web
             }
         }
 
-
         /// <summary>
         /// Given an established collection of Routes, will apply values to create an Outbound Url
         /// </summary>
-        public static string GenerateOutboundUrl(RouteCollection routes, object values)
+        public static string GenerateOutboundUrl(RouteCollection routes, object outboundValues)
         {
-            var currentRouteData = new RouteData();
             var httpcontext = HttpContextStubFactory.Make(AppRelativeCurrentExecutionFilePath: null);
-
-            RequestContext requestcontext = new RequestContext(httpcontext, currentRouteData);
+            var requestcontext = new RequestContext(httpcontext, new RouteData());
 
             return UrlHelper.GenerateUrl(null, null, null,
-                    new RouteValueDictionary(values), routes, requestcontext, true);
+                    new RouteValueDictionary(outboundValues), routes, requestcontext, true);
         }
 
         /// <summary>
         /// Convenience method for Testing Routes: tests the Route extracted from the AppRelativePath
-        /// <returns></returns>
-        public static RouteData TestInboundRoute(RouteCollection routes, 
-                string Url, string Path, object expectedValues, object expectedDataTokens)
+        /// </summary>
+        public static RouteData VerifyInboundRoute(
+                RouteCollection routes, string currentApplicationPath = "http://testurl.com", string inboundUrl = "/",
+                object expectedRouteValues = null, object expectedDataTokens = null)
         {
             // This passes
-            var httpcontext = HttpContextStubFactory.Make(Url: Url, AppRelativeCurrentExecutionFilePath: Path);
+            var httpcontext = HttpContextStubFactory.Make(
+                Url: currentApplicationPath, AppRelativeCurrentExecutionFilePath: inboundUrl);
 
             // Attempt to match the Route
             var routeData = routes.GetRouteData(httpcontext);
 
             // Verification for non-matches
-            if (expectedValues == null)
+            if (expectedRouteValues == null)
             {
                 Assert.IsNull(routeData);
                 return null;
             }
 
             // Verification for explicit match
-            var expectedRouteDictionary = new RouteValueDictionary(expectedValues);
+            var expectedRouteDictionary = new RouteValueDictionary(expectedRouteValues);
             foreach (var expectedValue in expectedRouteDictionary)
             {
                 if (expectedValue.Value == null)

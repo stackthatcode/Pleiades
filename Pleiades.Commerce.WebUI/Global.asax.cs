@@ -10,22 +10,30 @@ using Pleiades.Commerce.WebUI.Plumbing.ErrorHandling;
 
 namespace Pleiades.Commerce.WebUI
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-    // visit http://go.microsoft.com/?LinkId=9394801
-
     public class CommerceHttpApplication : HttpApplication
-    {
+    {        
+        // TODO: move this to Navigation plumbing
+
+        public static RouteValueDictionary HomeRoute()
+        {
+            return 
+                new RouteValueDictionary(
+                    new {
+                            area = "Public",
+                            controller = "Products",
+                            action = "List",
+                            category = (string)null, 
+                        });
+        }
+
         protected void Application_Start()
         {
             RegisterDIContainer();
-
             AreaRegistration.RegisterAllAreas();
-            RegisterDefaultArea();
-
+            RegisterDefaultRoutes();
             RegisterGlobalFilters();
 
             //ModelBinders.Binders.Add(typeof(DomainUser), new DomainUserBinder());
-
 
             // Initialize Pleiades Security
             //var userservice = new DomainUserService();
@@ -45,49 +53,20 @@ namespace Pleiades.Commerce.WebUI
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
 
-        public static void RegisterDefaultArea()
+        public static void RegisterDefaultRoutes()
         {
-            // Other than a bare minimum of defaults, these need to rolled into their own Area
-            var routes = RouteTable.Routes;
+            RouteTable.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-            routes.MapRoute(
-                "Products - Root/List All",
-                "",
-                new { controller = "Products", action = "List", category = (string)null, page = UrlParameter.Optional });
-
-            routes.MapRoute(
-                "Products - All Categories by Page",
-                "Page{page}",
-                new { controller = "Products", action = "List", category = (string)null, page = "1" },
-                new { page = @"\d+" });
-
-            routes.MapRoute(
-                "Products - List by Category",
-                "{category}",
-                new { controller = "Products", action = "List", page = "1" });
-
-            routes.MapRoute(
-                "Products - List by Category and Page",
-                "{category}/Page{page}",
-                new { controller = "Products", action = "List" });
-
-            routes.MapRoute(
-                "Product - Get Image",
-                "Products/GetImage/{productid}",
-                new { controller = "Products", action = "GetImage" });
-
-            routes.MapRoute(
-                "Products - 'failover route'",
-                "{controller}/{action}",
-                new { controller = "Products", action = "List" });
+            // Direct traffic to ~/Public/Products/List
+            RouteTable.Routes.MapRoute(
+                "Default Route",
+                String.Empty,   // URL
+                new { area = "Public", controller = "Products", action = "List", });
         }
 
         public static void RegisterGlobalFilters()
         {
             GlobalFilters.Filters.Add(new CustomErrorAttribute());
         }
-
     }
 }

@@ -1,0 +1,82 @@
+UI Color Scheme, Master Page Layout, Structure, etc.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Comparables Review => MicrositeMasters.com (Bofu2U?)
+----------------------------------------------------
+
+1.) http://www.micrositemasters.com/features.php
+- Clean and soft, nicely organized
+- Subtle cues imbues it with 3D quality e.g.: button highlights & shadows
+- Could use a little more contrast, appears a bit washed out
+
+2.) http://www.micrositemasters.com/pricing.php are 
+- Cartoonish Checkmarks are strangely effective
+- The line break in the columns is sloppy, and the serif-ed font is not happening
+- The text block is artificially constrained
+
+3.) http://www.micrositemasters.com/login.php
+- Look amateurish
+- Bottom banner - why 3D?
+- Gradient madness - Elance Designer Disease
+- Wierd alignment issues, looks hastily planned
+
+
+
+
+Comparables Review => http://www.metrotwit.com/
+-----------------------------------------------
+
+1.) Header
+- Bold, awesome header, wonderful blue and white contrast
+- Comments in the upper right: elegant fade in of the quotes AND nice subtle difference in text color
+- Nice shade of blue with the "MetroTwit for Desktop" mouse over
+- "Learn More" text nicely complements
+
+- BUT: why not make "MetroTwit" float left with the "T"?)
+- ALSO: switching between center and left alignment.
+- DOWN ARROW: floating in outerspace.
+- BIGGEST COMPLAINT: seems like a lot of space was wasted, and elements may float in outer space a bit too much.  Nothing anchors things.
+=> How to fix? Use Proximity or Repetition!
+
+2.) Menu Bar
+- Perfect font, great contrast, nice mouse over highlight
+
+- WHY: the blue	difference?  Either use the same blue, or pad the top... otherwise looks a little wierdish
+- STATE: doesn't mean much with this page if you scroll...
+
+3.) MetroTwit for Desktop - Top Area
+- LOVE the large font typeface and contrast smaller text
+- The Green complements the Blue nicely
+
+- SPACE: again, there's a little bit much space, but this is mitigated by the line
+
+4.) MetroTwit for Desktop - Tri-Columns
+- Awesome repetition, like the secondary heading
+- Beautiful Blue and White Buttons and nice MetroTwit show "widget"
+
+- BUT: how in the hell would the User find them?
+- ALSO: the text which spans two columns is disruptive... oh, well
+
+5.) http://www.metrotwit.com/show/
+- Nice angle on the screen
+- Nice transition from Bold to Non-Bold Heading
+- Pretty well-balanced
+
+- SPACE: slight issues with space, but pardonable
+- The break from white to black is abrupt.
+
+6.) MetroTwit for Windows8
+- Well-balanced, nice contract, nice blue, nice shadow
+- BUT: the green and blue don't mesh together
+
+
+
+
+Comparable Review: http://www.touchality.com/ => TODO
+---------------------------------------------
+
+Comparable Review: http://www.apple.com/ipad/ => TODO
+---------------------------------------------
+
+
+

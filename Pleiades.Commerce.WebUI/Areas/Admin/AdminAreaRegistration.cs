@@ -15,7 +15,7 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "Admin Home",
+                "Home Route",
                 "Admin/",
                 new { controller = "Home", action = "Index" }
             );

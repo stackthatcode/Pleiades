@@ -8,6 +8,7 @@ using System.Web.Routing;
 using NUnit.Framework;
 using Pleiades.Commerce.WebUI;
 using Pleiades.Commerce.WebUI.Areas.Admin;
+using Pleiades.Commerce.WebUI.Areas.Public;
 using Pleiades.Framework.TestHelpers.Web;
 
 namespace Pleiades.Commerce.WebUI.UnitTests.Routing
@@ -22,9 +23,11 @@ namespace Pleiades.Commerce.WebUI.UnitTests.Routing
             RoutingHelper.BuildAreaRegistrations(
                 new List<AreaRegistration>() 
                 { 
-                    new AdminAreaRegistration() 
+                    new AdminAreaRegistration(),
+                    new PublicAreaRegistration(),
                 });
-            CommerceHttpApplication.RegisterDefaultArea();
+
+            CommerceHttpApplication.RegisterDefaultRoutes();
         }
     }
 }

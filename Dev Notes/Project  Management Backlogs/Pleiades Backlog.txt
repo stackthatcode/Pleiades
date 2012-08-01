@@ -5,8 +5,15 @@ FRONTRANGE - HOTZONE
 MVC RELATED
 ~~~~~~~~~~~
 - Fix the MVC Application with the Great Refactoring => IN PROGRESS
-* Fix Route Tests => DONE
-* Fix the HomeController, AccountController and Tests => TODO
+
+- ASP.NET MVC ROUTES - MUST MASTER => ALMOST DONE - NEED A LITTLE MORE TINKERING
+* Do we want /Public/Products/List to route back to / ...? => DONE 
+* How do we deal with ~/ ? => DONE
+* Create a new Area for the Default stuff => DONE
+
+* Research the Outbound Link builders in MVC => TODO 
+
+* Fix the HomeController, AccountController and Tests => IN PROGRESS
 * Add the Repository Shim to Global something => TODO
 * Fix the Admin Manager => TODO
 * Test the new Attributes w/ Filter => TODO
@@ -14,24 +21,39 @@ MVC RELATED
 - Create new CategoryRepository => TODO
 - Create new CategoryControllerTests => TODO
 
+Enhanced MVC
+- Create a Catalog of canned routes for easy navigation through Application => TODO
+
+
+BLOG POSTS!
+~~~~~~~~~~~
+- HTTP Context Stub on steroids
+- JavaScript Monad
+- C# Currying Function
+
+
 GIT RELATED
 ~~~~~~~~~~~
 - Let's dig deeper into Git => TODO
+* Play with the Log commands => TODO
+* Play with git add => TODO
+* Play with git commit => TODO
 * Try some branching
-* Play with the Log commands
 * Review the Git GUI tools
 * How do I git my current hashcode...?
 
 UI/UX/PRODUCT RELATED
 ~~~~~~~~~~~~~~~~~~~~~
-- FUN STUFF - start mocking up the interfaces => TODO
+- UI Comparable Analysis => IN PROGRESS (GOOD JOB!)
+- FUN STUFF - start mocking up the interfaces => IN PROGRESS
+
 - Identify and Mock-up Major Workflows => IN PROGRESS
+* Pleiades Brand + UI Design => TODO
 * Find a bunch of good E-Commerce Sites, bookmark and critique => IN PROGRESS
 * Develop a Product specification => URGENT
 - http://37signals.com/37searchreport.pdf => READ
 - Project Planning the next Phase for v1.0 - Identify major tasks => IN PROGRESS
 - Review "desine" links => PROGRESS
-* Pleiades Brand + UI Design => TODO
 
 
 

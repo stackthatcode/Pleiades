@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Pleiades.Commerce.WebUI.Models
+namespace Pleiades.Commerce.WebUI.Areas.Public.Models
 {
     public class ProductListModel
     {

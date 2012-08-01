@@ -42,7 +42,7 @@ namespace Pleiades.Framework.TestHelpers.Web
                 ServerVariables = ServerVariables ?? new NameValueCollection(),
                 Headers = Headers ?? new NameValueCollection(),
                 IsInRoles = IsInRoles ?? new List<string>(),
-                SessionVariables = new NameValueCollection(),
+                SessionVariables = SessionVariables ?? new NameValueCollection(),
                 AuthenticatedName = AuthenticatedName,
                 AuthenticationType = AuthenticationType,
                 IsAuthenticated = IsAuthenticated,
