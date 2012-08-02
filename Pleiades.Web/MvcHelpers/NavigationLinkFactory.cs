@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Pleiades.Framework.Helpers;
 
-namespace Pleiades.Web.MvcHelpers
+namespace Pleiades.Framework.Web.MvcHelpers
 {
     /// <summary>
     /// TODO: abstract the setting of various Link Route Values

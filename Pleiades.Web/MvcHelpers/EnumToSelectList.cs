@@ -5,7 +5,7 @@ using System.Text;
 using System.Web.Mvc;
 using Pleiades.Framework.Helpers;
 
-namespace Pleiades.Web.MvcHelpers
+namespace Pleiades.Framework.Web.MvcHelpers
 {
     public class EnumToSelectList
     {

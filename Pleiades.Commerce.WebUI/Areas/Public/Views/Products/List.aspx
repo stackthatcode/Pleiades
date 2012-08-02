@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<Pleiades.Commerce.WebUI.Models.ProductListModel>" %>
+﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<ProductListModel>" %>
 
 <!DOCTYPE html>
 <html>
@@ -6,11 +6,12 @@
     <title>Pleiades Commerce - Administrative</title>
 </head>
 <body>
-    <h1>Products Home Page - Under Construction</h1>
+    <h1>Welcome Back to Pleiades!- Under Construction</h1>
 
     <%: Html.RouteLink("Go To Admin Area", new { area = "Admin", controller = "Home", action = "Index" }) %>
+    <br />
 
-
+    <h4>Sample Data Entry Form</h4>
     <div>
         <% using(Html.BeginForm("List", "Products", FormMethod.Post)) 
            { %>

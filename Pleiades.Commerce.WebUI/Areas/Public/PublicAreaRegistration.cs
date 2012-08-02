@@ -40,6 +40,12 @@ namespace Pleiades.Commerce.WebUI.Areas.Public
                 "Products - 'failover route'",
                 "Public/{controller}/{action}",
                 new { controller = "Products", action = "List" });
+
+            context.MapRoute(
+                "Products - 'default route'",
+                String.Empty,
+                new { controller = "Products", action = "List" });
+
         }
     }
 }

@@ -1,6 +1,15 @@
 Backlog Burndown
 ================
 
+8/2/2012
+--------
+???
+
+- ASP.NET MVC ROUTES - MUST MASTER => ALMOST DONE - NEED A LITTLE MORE TINKERING
+* Do we want /Public/Products/List to route back to / ...? => NO 
+* How do we deal with ~/ ? => DONE - 
+* Create a new Area for the Default stuff => DONE
+
 7/30/2012 
 ---------
 * Fix Route Tests => DONE

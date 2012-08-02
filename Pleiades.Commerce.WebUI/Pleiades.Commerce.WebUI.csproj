@@ -83,6 +83,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminManagerController.cs" />
     <Compile Include="Areas\Admin\Models\LogOnViewModel.cs" />
     <Compile Include="Areas\Public\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Public\PublicAreaRegistration.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="Areas\Public\Models\ProductListModel.cs" />
     <Compile Include="CommerceModule.cs" />
     <Compile Include="Plumbing\ErrorHandling\CustomErrorAttribute.cs" />
+    <Compile Include="Plumbing\Navigation\NavigationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -185,10 +188,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Public\Views\Shared\" />
     <Folder Include="Plumbing\Model\" />
-    <Folder Include="Plumbing\Navigation\" />
     <Folder Include="Plumbing\UI\" />
   </ItemGroup>
   <ItemGroup>

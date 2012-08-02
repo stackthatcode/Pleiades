@@ -6,22 +6,48 @@ MVC RELATED
 ~~~~~~~~~~~
 - Fix the MVC Application with the Great Refactoring => IN PROGRESS
 
-- ASP.NET MVC ROUTES - MUST MASTER => ALMOST DONE - NEED A LITTLE MORE TINKERING
-* Do we want /Public/Products/List to route back to / ...? => DONE 
-* How do we deal with ~/ ? => DONE
-* Create a new Area for the Default stuff => DONE
-
-* Research the Outbound Link builders in MVC => TODO 
 
 * Fix the HomeController, AccountController and Tests => IN PROGRESS
+* Fix the web.config with assembly references => IN PROGRESS
 * Add the Repository Shim to Global something => TODO
-* Fix the Admin Manager => TODO
+* Fix the Login Page => TODO
 * Test the new Attributes w/ Filter => TODO
+
+* Fix the Admin Manager => TODO
 - Refactor the Standard Control Framework => TODO
+
+THOUGHTS:
+---------
+1.) FormLineEditor's are for rapidly building interfaces.
+2.) We need: Input Control rendering, Model Binding stuff for Postback, and rendering Validation
+3.) DESIRE => Composable Control Builders
+* Can add stuff to the Control that injects Style
+* Can add stuff to the Control that adds Validation Feedback
+
+4.) Why do we need to compose Labels with the Editor itself...?  What's the honest trade-off?
+* Add stuff to the Label itself for Validation Feedback
+
+5.) Try using Facebook without JavaScript
+
+STUFF TO CONFIGURE/BUILD
+------------------------
+=> Location of CSS Files Directory
+=> Location of JavaScript Directory
+=> Location of Control Dependent Images and CSS and JS Files
+=> Method:
+
+SomethingLibrary.SetDependenciesLocation()
+SomethingLibrary.InjectControlDependencies()
+
+Technical Debt #1 - how does the CSS file and JavaScript know how to render the file paths...?
+
+
+
 - Create new CategoryRepository => TODO
 - Create new CategoryControllerTests => TODO
 
 Enhanced MVC
+* Research creating Simplified Outbound Link builders in MVC => TODO 
 - Create a Catalog of canned routes for easy navigation through Application => TODO
 
 
@@ -37,6 +63,10 @@ GIT RELATED
 - Let's dig deeper into Git => TODO
 * Play with the Log commands => TODO
 * Play with git add => TODO
+TRY: git add --dry-run .
+TRY: git add --verbose
+TRY: git add --update
+TRY: git status
 * Play with git commit => TODO
 * Try some branching
 * Review the Git GUI tools

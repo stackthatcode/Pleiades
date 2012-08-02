@@ -57,7 +57,8 @@
     <Compile Include="Routing\RoutingTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <Folder Include="Controllers\Admin\" />
+    <Folder Include="Controllers\Public\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

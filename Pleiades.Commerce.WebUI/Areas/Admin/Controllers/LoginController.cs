@@ -12,7 +12,7 @@ using Pleiades.Framework.Web.Security.Model;
 
 namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
 {
-    public class AccountController : Controller
+    public class LoginController : Controller
     {
         public readonly bool PersistentCookie = true;
         public IDomainUserService UserService { get; set; }
@@ -21,7 +21,7 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
 
 
         // TODO: replace with Dependency Injection
-        public AccountController()
+        public LoginController()
         {
             FormsAuthService = new FormsAuthenticationService();
             UserService = new DomainUserService();

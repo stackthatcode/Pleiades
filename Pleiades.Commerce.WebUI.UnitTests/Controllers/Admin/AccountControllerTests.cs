@@ -25,7 +25,7 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
         public void TestLogonInvalidFormReturnsView()
         {
             // Arrange
-            var acctController = new AccountController();
+            var acctController = new LoginController();
 
             // Act
             acctController.ModelState.AddModelError("", "bad creds");
@@ -39,7 +39,7 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
         public void TestLogonBadUserDataReturnsView()
         {
             // Arrange
-            var acctController = new AccountController();
+            var acctController = new LoginController();
             acctController.MembershipService = MockRepository.GenerateMock<IMembershipService>();
             acctController.MembershipService.Expect(x => x.ValidateUserByEmailAddr("admin", "123")).Return(null);
             acctController.FormsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
@@ -58,7 +58,7 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
         public void TestLogonGoodUserNoREdirectBack()
         {
             // Arrange
-            var acctController = new AccountController();
+            var acctController = new LoginController();
             var domainUser = new DomainUser();
             acctController.MembershipService = MockRepository.GenerateMock<IMembershipService>();
             acctController.MembershipService.Expect(x => x.ValidateUserByEmailAddr("admin", "123")).Return(domainUser);
@@ -78,7 +78,7 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
         public void TestLogonGoodUserWithRedirect()
         {
             // Arrange
-            var acctController = new AccountController();
+            var acctController = new LoginController();
             var domainUser = new DomainUser();
             acctController.MembershipService = MockRepository.GenerateMock<IMembershipService>();
             acctController.MembershipService.Expect(x => x.ValidateUserByEmailAddr("admin", "123")).Return(domainUser);

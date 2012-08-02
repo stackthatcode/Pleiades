@@ -11,21 +11,7 @@ using Pleiades.Commerce.WebUI.Plumbing.ErrorHandling;
 namespace Pleiades.Commerce.WebUI
 {
     public class CommerceHttpApplication : HttpApplication
-    {        
-        // TODO: move this to Navigation plumbing
-
-        public static RouteValueDictionary HomeRoute()
-        {
-            return 
-                new RouteValueDictionary(
-                    new {
-                            area = "Public",
-                            controller = "Products",
-                            action = "List",
-                            category = (string)null, 
-                        });
-        }
-
+    {
         protected void Application_Start()
         {
             RegisterDIContainer();
@@ -33,13 +19,9 @@ namespace Pleiades.Commerce.WebUI
             RegisterDefaultRoutes();
             RegisterGlobalFilters();
 
-            //ModelBinders.Binders.Add(typeof(DomainUser), new DomainUserBinder());
+            // ModelBinders.Binders.Add(typeof(DomainUser), new DomainUserBinder());
 
-            // Initialize Pleiades Security
-            //var userservice = new DomainUserService();
-            //userservice.Initialize();
-
-            // Uncomment to enable Phil Haack's Tool
+            // Uncomment to enable Phil Haack's Tool => ***SAVE***
             // RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
         }
 
@@ -56,12 +38,6 @@ namespace Pleiades.Commerce.WebUI
         public static void RegisterDefaultRoutes()
         {
             RouteTable.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-            // Direct traffic to ~/Public/Products/List
-            RouteTable.Routes.MapRoute(
-                "Default Route",
-                String.Empty,   // URL
-                new { area = "Public", controller = "Products", action = "List", });
         }
 
         public static void RegisterGlobalFilters()
