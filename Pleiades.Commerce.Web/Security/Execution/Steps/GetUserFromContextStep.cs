@@ -6,15 +6,15 @@ using Pleiades.Framework.Identity.Interface;
 using Pleiades.Framework.MembershipProvider.Interface;
 using Pleiades.Framework.MembershipProvider.Providers;
 
-namespace Pleiades.Commerce.Web.Security.Execution
+namespace Pleiades.Commerce.Web.Security.Execution.Steps
 {
-    public class GetUserFromFilterContextStep : Step<SystemAuthorizationContextBase>
+    public class GetUserFromContextStep : Step<SystemAuthorizationContextBase>
     {
         public IAggregateUserRepository AggregateUserRepository { get; set; }
         public IFormsAuthenticationService FormsAuthenticationService { get; set; }
         public IMembershipService MembershipService { get; set; }
 
-        public GetUserFromFilterContextStep(
+        public GetUserFromContextStep(
                 IAggregateUserRepository aggregateUserRepository, 
                 IFormsAuthenticationService formsAuthenticationService,
                 IMembershipService membershipService)

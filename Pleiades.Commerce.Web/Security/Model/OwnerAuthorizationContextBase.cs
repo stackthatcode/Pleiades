@@ -8,7 +8,7 @@ using Pleiades.Commerce.Domain.Model.Users;
 
 namespace Pleiades.Commerce.Web.Security.Model
 {
-    public class OwnerAuthorizationContext : IOwnerAuthorizationContext
+    public class OwnerAuthorizationContextBase : IOwnerAuthorizationContext
     {
         public AggregateUser ThisUser { get; set; }
         public AggregateUser OwnerUser { get; set; }
@@ -19,7 +19,7 @@ namespace Pleiades.Commerce.Web.Security.Model
         public SecurityResponseCode SecurityResponseCode { get; set; }
         public bool ExecutionStateValid { get; set; }
 
-        public OwnerAuthorizationContext()
+        public OwnerAuthorizationContextBase()
         {
             this.ThisUser = null;
             this.OwnerUser = null;

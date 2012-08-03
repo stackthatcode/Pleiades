@@ -43,14 +43,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\Concrete\CommerceSecurityCodeResponder.cs" />
+    <Compile Include="Security\Concrete\SecurityCodeResponder.cs" />
+    <Compile Include="Security\Execution\Authorization\OwnerAuthorizationCompositeBase.cs" />
+    <Compile Include="Security\Execution\Composites\ChangeUserPasswordComposite.cs" />
     <Compile Include="WebRegistration.cs" />
     <Compile Include="Security\Aspect\CommerceAuthorizeFilter.cs" />
-    <Compile Include="Security\Execution\AuthorizeFromFilterComposite.cs" />
-    <Compile Include="Security\Execution\GetUserFromFilterContextStep.cs" />
-    <Compile Include="Security\Execution\NonPublic\ChangeUserPasswordStep.cs" />
-    <Compile Include="Security\Factories\ChangeUserPasswordStepFactory.cs" />
-    <Compile Include="Security\Model\OwnerAuthorizationContext.cs" />
+    <Compile Include="Security\Execution\Composites\SystemAuthorizationComposite.cs" />
+    <Compile Include="Security\Execution\Steps\GetUserFromContextStep.cs" />
+    <Compile Include="Security\Execution\Steps\ChangeUserPasswordStep.cs" />
+    <Compile Include="Security\Model\OwnerAuthorizationContextBase.cs" />
     <Compile Include="Security\Model\SystemAuthorizationContextBase.cs" />
     <Compile Include="Security\Model\ChangeUserPasswordContext.cs" />
   </ItemGroup>

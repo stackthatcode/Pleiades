@@ -1,18 +1,18 @@
 ﻿using Pleiades.Framework.Execution;
 using Pleiades.Framework.Injection;
 using Pleiades.Framework.Identity.Execution;
-using Pleiades.Commerce.Web.Security.Execution;
+using Pleiades.Commerce.Web.Security.Execution.Steps;
 using Pleiades.Commerce.Web.Security.Model;
 
-namespace Pleiades.Commerce.Web.Security.Execution
+namespace Pleiades.Commerce.Web.Security.Execution.Composites
 {
-    public class AuthorizeFromFilterComposite : StepComposite<SystemAuthorizationContextBase>        
+    public class SystemAuthorizationComposite : StepComposite<SystemAuthorizationContextBase>        
     {
-        public AuthorizeFromFilterComposite(IGenericContainer container)
+        public SystemAuthorizationComposite(IGenericContainer container)
             : base(container)
         {
             // Load an Aggregate User entity based on the credentials in the HttpContext
-            this.Inject<GetUserFromFilterContextStep>();
+            this.Inject<GetUserFromContextStep>();
 
             // Identity Authroziation
             this.Inject<AccountStatusAuthorizationStep<SystemAuthorizationContextBase>>();

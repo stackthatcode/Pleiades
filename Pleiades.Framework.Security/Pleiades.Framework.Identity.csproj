@@ -49,7 +49,6 @@
     <Compile Include="Execution\AccountStatusAuthorizationStep.cs" />
     <Compile Include="Execution\SimpleOwnerAuthorizationStep.cs" />
     <Compile Include="Execution\RoleAuthorizationStep.cs" />
-    <Compile Include="Factories\OwnerAuthorizedStepFactory.cs" />
     <Compile Include="Interface\IOwnerAuthorizationContext.cs" />
     <Compile Include="Interface\IIdentityRepository.cs" />
     <Compile Include="Interface\IIdentityUserService.cs" />

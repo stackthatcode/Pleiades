@@ -50,16 +50,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Admin\LoginControllerTests.cs" />
+    <Compile Include="Controllers\Admin\AdminManagerControllerTests.cs" />
+    <Compile Include="Controllers\Public\ProductControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\AdminRouteTests.cs" />
     <Compile Include="Routing\DefaultRouteTests.cs" />
     <Compile Include="Routing\ProductRouteTests.cs" />
     <Compile Include="Routing\RoutingTestBase.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\Admin\" />
-    <Folder Include="Controllers\Public\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

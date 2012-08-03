@@ -4,7 +4,7 @@ using Pleiades.Framework.Web.Security;
 
 namespace Pleiades.Commerce.Web.Security.Concrete
 {
-    public class CommerceSecurityCodeResponder : SecurityCodeFilterResponder
+    public class SecurityCodeResponder : SecurityCodeFilterResponder
     {
         protected override void AccessDeniedSolicitLogon(System.Web.Mvc.AuthorizationContext filterContext)
         {

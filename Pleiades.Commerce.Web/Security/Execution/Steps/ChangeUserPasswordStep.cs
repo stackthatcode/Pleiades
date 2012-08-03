@@ -4,7 +4,7 @@ using Pleiades.Framework.Identity.Model;
 using Pleiades.Framework.Identity.Interface;
 using Pleiades.Framework.MembershipProvider.Interface;
 
-namespace Pleiades.Commerce.Web.Security.Execution.NonPublic
+namespace Pleiades.Commerce.Web.Security.Execution.Steps
 {
     /// <summary>
     /// WARNING: do not construct this object directly.  Please use the ChangeUserPasswordStepFactory

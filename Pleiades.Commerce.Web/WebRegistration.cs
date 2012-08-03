@@ -5,9 +5,9 @@ using Pleiades.Framework.MembershipProvider;
 using Pleiades.Framework.Web.Interface;
 using Pleiades.Framework.Web.Security;
 using Pleiades.Commerce.Web.Security.Concrete;
-using Pleiades.Commerce.Web.Security.Execution;
-using Pleiades.Commerce.Web.Security.Execution.NonPublic;
-using Pleiades.Commerce.Web.Security.Factories;
+using Pleiades.Commerce.Web.Security.Execution.Authorization;
+using Pleiades.Commerce.Web.Security.Execution.Composites;
+using Pleiades.Commerce.Web.Security.Execution.Steps;
 using Pleiades.Commerce.Web.Security.Model;
 
 namespace Pleiades.Commerce.Web
@@ -16,22 +16,27 @@ namespace Pleiades.Commerce.Web
     {
         public static void Register(IGenericBuilder builder)
         {
+            // TODO: explicitly register Identity stuff here...?
+            // TODO: explicitly register Membership stuff here....?
+
             // Pleiades.Framework.Identity
-            IdentityRegistration.Register(builder);
-            IdentityRegistration.RegisterOwnerAuthorization<OwnerAuthorizationContext>(builder);
-            IdentityRegistration.RegisterSystemAuthorization<SystemAuthorizationContextBase>(builder);
+            IdentityRegistration.RegisterConcrete(builder);
+            IdentityRegistration.RegisterOwnerAuthorizationByContext<OwnerAuthorizationContextBase>(builder);
+            IdentityRegistration.RegisterSystemAuthorizationByContext<SystemAuthorizationContextBase>(builder);
 
             // Pleiades.Framework.MembershipProvider
             MembershipRegistration.Register(builder);
 
-            // Pleiades.Commerce.Web
-            builder.RegisterType<ChangeUserPasswordStep>();
-            builder.RegisterType<AuthorizeFromFilterComposite>();
-            builder.RegisterType<GetUserFromFilterContextStep>();
-            builder.RegisterType<ChangeUserPasswordStepFactory>();
+            // Concrete
+            builder.RegisterTypeAs<SecurityCodeResponder, ISecurityCodeFilterResponder>();
 
-            // Pleiades.Framework.Web
-            builder.RegisterTypeAs<CommerceSecurityCodeResponder, ISecurityCodeFilterResponder>();
+            // Composites
+            builder.RegisterType<ChangeUserPasswordComposite>();
+            builder.RegisterType<GetUserFromContextStep>();
+
+            // Steps
+            builder.RegisterType<ChangeUserPasswordStep>();
+            builder.RegisterType<GetUserFromContextStep>();
         }
     }
 }
