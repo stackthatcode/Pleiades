@@ -13,7 +13,7 @@ namespace Pleiades.Framework.Identity.Model
         public int? ResourceOwnerId { get; set; }
 
         public SecurityResponseCode SecurityResponseCode { get; set; }
-        public bool ExecutionStateValid { get; set; }
+        public bool IsExecutionStateValid { get; set; }
 
 
         public SystemAuthorizationContext()
@@ -26,7 +26,7 @@ namespace Pleiades.Framework.Identity.Model
             this.ResourceOwnerId = null;
 
             this.SecurityResponseCode = Security.SecurityResponseCode.Allowed;
-            this.ExecutionStateValid = true;
+            this.IsExecutionStateValid = true;
         }       
     }
 }

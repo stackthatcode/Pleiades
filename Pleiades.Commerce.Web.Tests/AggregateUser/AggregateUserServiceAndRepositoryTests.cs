@@ -98,7 +98,7 @@ namespace Pleiades.Commerce.Web.IntegrationTests.Users
 
             var membershipService = new MembershipService();
             var membershipUserName = membershipService.GetUserNameByEmail("anne@holtz.com");
-            var testUser = this.AggregateUserRepository.RetrieveUserByMembershipUserName(membershipUserName);
+            var testUser = this.AggregateUserRepository.RetrieveByMembershipUserName(membershipUserName);
 
             Assert.IsNotNull(testUser);
             Assert.AreEqual("Anne", testUser.IdentityUser.FirstName);

@@ -9,35 +9,35 @@ namespace Pleiades.Framework.Identity.Execution
     public class AccountLevelAuthorizationStep<T> : Step<T>
             where T : ISystemAuthorizationContext
     {
-        public override void Execute(T context)
+        public override T Execute(T context)
         {
             if (context.CurrentIdentity.UserRole.IsAdministrator())
             {
-                return; 
+                return context; 
             }
 
             // Only applies to Restricted Areas
             if (context.AuthorizationZone != AuthorizationZone.Restricted)
             {
-                return;
+                return context;
             }
 
             if (context.AccountLevelRestriction == AccountLevel.Standard)
             {
-                return;
+                return context;
             }
 
             if (context.AccountLevelRestriction == AccountLevel.Gold && 
                 context.CurrentIdentity.AccountLevel != AccountLevel.Gold)
             {
-                this.Kill(context,
-                    () =>
-                    {
-                        context.SecurityResponseCode = SecurityResponseCode.AccessDeniedToAccountLevel;
-                    });
+                return 
+                    this.Kill(context, () =>
+                        {
+                            context.SecurityResponseCode = SecurityResponseCode.AccessDeniedToAccountLevel;
+                        });
             }
 
-            return;
+            return context;
         }
     }
 }

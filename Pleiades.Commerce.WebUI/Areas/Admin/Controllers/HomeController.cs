@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Web;
 using System.Web.Mvc;
+using Pleiades.Framework.Identity.Model;
 using Pleiades.Commerce.Web.Security.Aspect;
-using Pleiades.Framework.Web.Security.Model;
+using Pleiades.Commerce.Domain.Model.Users;
 
 namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
 {
-    [ConcreteAuthorize(AuthorizationZone = AuthorizationZone.Administrative)]
+    //[CommerceAuthorize(AuthorizationZone = AuthorizationZone.Administrative)]
     public class HomeController : Controller
     {
         [HttpGet]
@@ -16,7 +17,7 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
         }
 
         // TODO: just removed HttpGet attribute from this - what is *exact* theory behind that failure.  Hmmm???
-        public ViewResult HeaderSummary(DomainUser user)
+        public ViewResult HeaderSummary(AggregateUser user)
         {
             return View(user);
         }

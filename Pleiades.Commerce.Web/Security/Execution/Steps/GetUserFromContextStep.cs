@@ -24,25 +24,26 @@ namespace Pleiades.Commerce.Web.Security.Execution.Steps
             this.MembershipService = membershipService;
         }
 
-        public override void Execute(SystemAuthorizationContextBase context)
+        public override SystemAuthorizationContextBase Execute(SystemAuthorizationContextBase context)
         {
             var userName = context.HttpContext.AuthenticatedUserName();
             if (userName == null)
             {
                 context.ThisUser = AggregateUser.AnonymousUserFactory();
-                return;
+                return context;
             }
 
-            context.ThisUser = this.AggregateUserRepository.RetrieveUserByMembershipUserName(userName);
+            context.ThisUser = this.AggregateUserRepository.RetrieveByMembershipUserName(userName);
 
             if (context.ThisUser == null)
             {
                 this.FormsAuthenticationService.ClearAuthenticationCookie();
                 context.ThisUser = AggregateUser.AnonymousUserFactory();
-                return;
+                return context;
             }
 
             this.MembershipService.Touch(userName);
+            return context;
         }
     }
 }

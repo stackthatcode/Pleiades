@@ -8,10 +8,10 @@ namespace Pleiades.Commerce.Domain.Interface
 {
     public interface IAggregateUserRepository : IGenericRepository<AggregateUser>
     {
-        AggregateUser RetrieveUserByMembershipUserName(string username);
-        IEnumerable<AggregateUser> RetreiveAll(List<UserRole> role);
+        AggregateUser RetrieveByMembershipUserName(string username);
+        IEnumerable<AggregateUser> Retreive(List<UserRole> role);
         IEnumerable<AggregateUser> 
-            RetreiveByMembershipEmailAndRole(
+            Retreive(
                 List<string> membershipUserNames, List<UserRole> role);
     }
 }

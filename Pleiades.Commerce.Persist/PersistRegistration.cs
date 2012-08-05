@@ -21,7 +21,7 @@ namespace Pleiades.Commerce.Persist
             builder.RegisterType<IdentityUserRepository>();
             builder.RegisterType<MembershipRepository>();
 
-            // TODO: add the Products Repos
+            // TODO: add the Products Repository
         }
     }
 }

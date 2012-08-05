@@ -3,7 +3,7 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using Pleiades.Commerce.Domain.Model.Users;
 using Pleiades.Commerce.Domain.Interface;
-using Pleiades.Commerce.Web.Security.Execution;
+using Pleiades.Commerce.Web.Security.Execution.Steps;
 using Pleiades.Commerce.Web.Security.Model;
 using Pleiades.Framework.Identity.Interface;
 using Pleiades.Framework.Identity.Model;
@@ -21,7 +21,7 @@ namespace Pleiades.Commerce.Web.UnitTests.Execution
             // Arrange
             var aggrUser = new AggregateUser();
             var aggrUserRepository = MockRepository.GenerateMock<IAggregateUserRepository>();
-            aggrUserRepository.Expect(x => x.RetrieveUserByMembershipUserName("12345678")).Return(aggrUser);
+            aggrUserRepository.Expect(x => x.RetrieveByMembershipUserName("12345678")).Return(aggrUser);
 
             var formsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
 
@@ -53,7 +53,7 @@ namespace Pleiades.Commerce.Web.UnitTests.Execution
             // Arrange
             var aggrUser = new AggregateUser();
             var aggrUserRepository = MockRepository.GenerateMock<IAggregateUserRepository>();
-            aggrUserRepository.Expect(x => x.RetrieveUserByMembershipUserName("12345678")).Return(null);
+            aggrUserRepository.Expect(x => x.RetrieveByMembershipUserName("12345678")).Return(null);
 
             var formsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
             formsAuthService.Expect(x => x.ClearAuthenticationCookie());

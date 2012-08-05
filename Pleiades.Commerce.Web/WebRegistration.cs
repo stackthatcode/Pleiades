@@ -5,7 +5,7 @@ using Pleiades.Framework.MembershipProvider;
 using Pleiades.Framework.Web.Interface;
 using Pleiades.Framework.Web.Security;
 using Pleiades.Commerce.Web.Security.Concrete;
-using Pleiades.Commerce.Web.Security.Execution.Authorization;
+using Pleiades.Commerce.Web.Security.Execution.Abstract;
 using Pleiades.Commerce.Web.Security.Execution.Composites;
 using Pleiades.Commerce.Web.Security.Execution.Steps;
 using Pleiades.Commerce.Web.Security.Model;

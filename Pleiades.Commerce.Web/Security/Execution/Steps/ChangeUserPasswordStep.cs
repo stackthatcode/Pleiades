@@ -19,10 +19,12 @@ namespace Pleiades.Commerce.Web.Security.Execution.Steps
             this.MembershipService = membershipService;
         }
 
-        public override void Execute(ChangeUserPasswordContext context)
+        public override ChangeUserPasswordContext Execute(ChangeUserPasswordContext context)
         {
             this.MembershipService.ChangePassword(
                 context.OwnerUser.MembershipUserName, context.OldPassword, context.NewPassword);
+
+            return context;
         }
     }
 }

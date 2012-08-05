@@ -7,10 +7,10 @@ namespace Pleiades.Framework.UnitTests.Execution
     {
         public ContextStub()
         {
-            this.ExecutionStateValid = true;
+            this.IsExecutionStateValid = true;
         }
 
-        public virtual bool ExecutionStateValid { get; set; }
+        public virtual bool IsExecutionStateValid { get; set; }
         public virtual string PropertyA { get; set; }
         public virtual int PropertyB { get; set; }
     }

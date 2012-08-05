@@ -65,7 +65,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Users\AggregateUserServiceAndRepositoryTests.cs" />
+    <Compile Include="AggregateUser\AggregateUserServiceAndRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Products\" />

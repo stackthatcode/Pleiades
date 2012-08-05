@@ -41,6 +41,7 @@
     <Compile Include="Data\IPagedModel.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Data\QueryablePagedModel.cs" />
+    <Compile Include="Execution\BareContext.cs" />
     <Compile Include="Execution\IStepContext.cs" />
     <Compile Include="Execution\IStepObserver.cs" />
     <Compile Include="Execution\Step.cs" />

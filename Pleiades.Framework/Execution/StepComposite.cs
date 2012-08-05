@@ -38,11 +38,11 @@ namespace Pleiades.Framework.Execution
         }
 
         // Executes a sequence of Steps
-        public override void Execute(TContext context)
+        public override TContext Execute(TContext context)
         {
-            if (!context.ExecutionStateValid)
+            if (!context.IsExecutionStateValid)
             {
-                return;
+                return context;
             }
 
             foreach (var step in Steps)
@@ -50,11 +50,13 @@ namespace Pleiades.Framework.Execution
                 step.Execute(context);
 
                 // If the ExecutionState is no longer valid, then stop!
-                if (!context.ExecutionStateValid)
+                if (!context.IsExecutionStateValid)
                 {
-                    return;
+                    return context;
                 }
             }
+
+            return context;
         }
     }
 }

@@ -5,9 +5,10 @@ namespace Pleiades.Framework.UnitTests.Execution
 {
     public class StepOk : Step<ContextStub>
     {
-        public override void Execute(ContextStub context)
+        public override ContextStub Execute(ContextStub context)
         {
             context.PropertyB = 999;
+            return context;
         }
     }
 }

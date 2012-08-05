@@ -7,9 +7,9 @@ namespace Pleiades.Framework.UnitTests.Execution
 {
     public class StepAlwaysKillWithLambda : Step<ContextStub>
     {
-        public override void Execute(ContextStub context)
+        public override ContextStub Execute(ContextStub context)
         {
-            this.Kill(context, () => context.PropertyA = "Oh my!");
+            return this.Kill(context, () => context.PropertyA = "Oh my!");
         }
     }
 }

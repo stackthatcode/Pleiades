@@ -11,9 +11,10 @@ namespace Pleiades.Framework.UnitTests.Execution
             this.NotifyPayload = notifyPayload;
         }
 
-        public override void Execute(ContextStub context)
+        public override ContextStub Execute(ContextStub context)
         {
             this.Notify(this.NotifyPayload);
+            return context;
         }
     }
 }

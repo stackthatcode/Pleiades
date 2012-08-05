@@ -6,12 +6,14 @@ using Pleiades.Commerce.Web.Security.Execution;
 using Pleiades.Commerce.Web.Security.Model;
 using Pleiades.Commerce.Web.Security.Execution.Steps;
 
-namespace Pleiades.Commerce.Web.Security.Execution.Authorization
+namespace Pleiades.Commerce.Web.Security.Execution.Abstract
 {
-    public class OwnerAuthorizationCompositeBase<T> : StepComposite<T>
+    // TODO: possibly move this into Identity Framework?
+
+    public abstract class SimpleOwnerAuthComposite<T> : StepComposite<T>
             where T : OwnerAuthorizationContextBase
     {
-        public OwnerAuthorizationCompositeBase(IGenericContainer container, Step<T> guardedSteps)
+        public SimpleOwnerAuthComposite(IGenericContainer container, Step<T> guardedSteps)
             : base(container)
         {
             // Authorization Step

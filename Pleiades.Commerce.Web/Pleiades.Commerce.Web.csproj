@@ -44,10 +44,13 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Concrete\SecurityCodeResponder.cs" />
-    <Compile Include="Security\Execution\Authorization\OwnerAuthorizationCompositeBase.cs" />
+    <Compile Include="Security\Execution\Abstract\SimpleOwnerAuthComposite.cs" />
     <Compile Include="Security\Execution\Composites\ChangeUserPasswordComposite.cs" />
+    <Compile Include="Security\Execution\Steps\AuthenticateUserByRoleStep.cs" />
+    <Compile Include="Security\Execution\Steps\LogoutStep.cs" />
+    <Compile Include="Security\Model\AuthenticateUserByRoleContext.cs" />
     <Compile Include="WebRegistration.cs" />
-    <Compile Include="Security\Aspect\CommerceAuthorizeFilter.cs" />
+    <Compile Include="Security\Aspect\CommerceAuthorizeAttribute.cs" />
     <Compile Include="Security\Execution\Composites\SystemAuthorizationComposite.cs" />
     <Compile Include="Security\Execution\Steps\GetUserFromContextStep.cs" />
     <Compile Include="Security\Execution\Steps\ChangeUserPasswordStep.cs" />

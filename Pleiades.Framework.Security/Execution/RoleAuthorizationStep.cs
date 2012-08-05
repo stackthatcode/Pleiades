@@ -8,18 +8,18 @@ namespace Pleiades.Framework.Identity.Execution
 {
     public class RoleAuthorizationStep<T> : Step<T> where T : ISystemAuthorizationContext
     {
-        public override void Execute(T context)
+        public override T Execute(T context)
         {
             // Public areas are accessible by everybody
             if (context.AuthorizationZone == AuthorizationZone.Public)
             {
-                return;
+                return context;
             }
 
             // Admins have no barriers
             if (context.CurrentIdentity.UserRole.IsAdministrator())
             {
-                return;
+                return context;
             }
 
             // Reject anyone that's in an Admin area that's not an Admin
@@ -28,7 +28,7 @@ namespace Pleiades.Framework.Identity.Execution
             {
                 context.SecurityResponseCode = SecurityResponseCode.AccessDenied;
                 this.Kill(context);
-                return;
+                return context;
             }
 
             // Reject anyone that's not Trusted in a Trusted area; solicit for Logon
@@ -37,11 +37,11 @@ namespace Pleiades.Framework.Identity.Execution
                 && context.CurrentIdentity.UserRole.IsNotAdministrator())
             {
                 context.SecurityResponseCode = SecurityResponseCode.AccessDeniedSolicitLogon;
-                this.Kill(context);
-                return;
+                return this.Kill(context);
             }
 
             // No denials, keep stepping!
+            return context;
         }
     }
 }

@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using Rhino.Mocks;
 using Pleiades.Commerce.Domain.Model.Users;
-using Pleiades.Commerce.Web.Security.Execution.NonPublic;
+using Pleiades.Commerce.Web.Security.Execution.Steps;
 using Pleiades.Commerce.Web.Security.Model;
 using Pleiades.Framework.Identity.Model;
 using Pleiades.Framework.MembershipProvider.Interface;
@@ -17,10 +17,9 @@ namespace Pleiades.Commerce.Web.UnitTests.Execution
         public void Verify_Step_Properly_Invokes_Services()
         {
             // Arrange
-            var identityUser = new IdentityUser();
             var user = new AggregateUser()
             {
-                IdentityUser = identityUser,
+                IdentityUser = new IdentityUser(),
                 MembershipUserName = "12345678",
             };
 

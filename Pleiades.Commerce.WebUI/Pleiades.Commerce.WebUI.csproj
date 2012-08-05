@@ -84,7 +84,6 @@
   <ItemGroup>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
-    <Compile Include="Areas\Admin\Controllers\AdminManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Models\LogOnViewModel.cs" />
     <Compile Include="Areas\Public\Controllers\ProductsController.cs" />
@@ -99,6 +98,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Views\Account\Logon.aspx" />
     <Content Include="Areas\Admin\Views\Home\HeaderSummary.ascx" />
     <Content Include="Areas\Admin\Views\Home\Index.aspx" />
     <Content Include="Areas\Admin\Views\Shared\Admin.Master" />
@@ -163,6 +163,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Pleiades.Commerce.Domain\Pleiades.Commerce.Domain.csproj">
+      <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
+      <Name>Pleiades.Commerce.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Commerce.Persist\Pleiades.Commerce.Persist.csproj">
       <Project>{E616B84E-1830-4909-9A56-58A656EA9B5B}</Project>
       <Name>Pleiades.Commerce.Persist</Name>
@@ -174,6 +178,10 @@
     <ProjectReference Include="..\Pleiades.Framework.Autofac\Pleiades.Framework.Autofac.csproj">
       <Project>{8D4A56BB-9D7A-41B3-9CB8-2AA0055AF6E0}</Project>
       <Name>Pleiades.Framework.Autofac</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pleiades.Framework.Security\Pleiades.Framework.Identity.csproj">
+      <Project>{7F1F1DA2-6F72-4D68-A06C-D3379941B060}</Project>
+      <Name>Pleiades.Framework.Identity</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pleiades.Framework\Pleiades.Framework.csproj">
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
@@ -195,6 +203,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Public\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

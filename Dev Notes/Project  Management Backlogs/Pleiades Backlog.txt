@@ -5,9 +5,10 @@ FRONTRANGE - HOTZONE
 MVC RELATED
 ~~~~~~~~~~~
 - Fix the MVC Application with the Great Refactoring => IN PROGRESS
+- Fixed AccountController => DONE - SUPERB REFACTORING
+- Created Account Login Execution => DONE - AGAIN, SUPERB!!!
 
-
-* Fix the HomeController, AccountController and Tests => IN PROGRESS
+* Fix the HomeController, and Tests => IN PROGRESS
 * Fix the web.config with assembly references => IN PROGRESS
 * Add the Repository Shim to Global something => TODO
 * Fix the Login Page => TODO
@@ -15,6 +16,20 @@ MVC RELATED
 
 * Fix the Admin Manager => TODO
 - Refactor the Standard Control Framework => TODO
+
+
+
+DESIGN BACKLOG
+~~~~~~~~~~~~~~
+- DESIGN: unsure about organization of stuff between Pleiades.Commerce.Web and Pleiades.Commerce.Domain... =>  TODO
+- Start adding Logging stuff - you won't be sorry!
+
+TEST BACKLOG
+~~~~~~~~~~~~
+* AggregateUserRepository Retreive(...) overloads => TODO
+* IdentityUserRepository Integration Tests??? => TODO
+
+
 
 THOUGHTS:
 ---------

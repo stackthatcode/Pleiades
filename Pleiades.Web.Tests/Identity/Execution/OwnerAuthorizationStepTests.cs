@@ -33,7 +33,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
 
             // Assert
             Assert.AreEqual(SecurityResponseCode.Allowed, context.SecurityResponseCode);
-            Assert.AreEqual(true, context.ExecutionStateValid);
+            Assert.AreEqual(true, context.IsExecutionStateValid);
         }
 
 
@@ -57,7 +57,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
 
             // Assert
             Assert.AreEqual(SecurityResponseCode.Allowed, context.SecurityResponseCode);
-            Assert.AreEqual(true, context.ExecutionStateValid);
+            Assert.AreEqual(true, context.IsExecutionStateValid);
         }
 
         [Test]
@@ -80,7 +80,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
 
             // Assert
             Assert.AreEqual(SecurityResponseCode.AccessDenied, context.SecurityResponseCode);
-            Assert.AreEqual(false, context.ExecutionStateValid);
+            Assert.AreEqual(false, context.IsExecutionStateValid);
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace Pleiades.Framework.UnitTests.Identity.Execution
 
             // Assert
             Assert.AreEqual(SecurityResponseCode.Allowed, context.SecurityResponseCode);
-            Assert.AreEqual(true, context.ExecutionStateValid);
+            Assert.AreEqual(true, context.IsExecutionStateValid);
         }
 
     }

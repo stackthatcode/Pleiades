@@ -12,7 +12,7 @@ namespace Pleiades.Commerce.Web.Security.Model
         public SystemAuthorizationContextBase()
         {
             this.SecurityResponseCode = SecurityResponseCode.Allowed;
-            this.ExecutionStateValid = true;
+            this.IsExecutionStateValid = true;
         }
 
         // Http 
@@ -29,6 +29,6 @@ namespace Pleiades.Commerce.Web.Security.Model
 
         // Step Execution Results
         public SecurityResponseCode SecurityResponseCode { get; set; }
-        public bool ExecutionStateValid { get; set; }
+        public bool IsExecutionStateValid { get; set; }
     }
 }

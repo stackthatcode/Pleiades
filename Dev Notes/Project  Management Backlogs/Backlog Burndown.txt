@@ -1,6 +1,10 @@
 Backlog Burndown
 ================
 
+8/5/2012
+--------
+* Fix the Security Stuff to eliminate wierd factory => DONE! - REASON VERSUS EMOTION!!!
+
 8/2/2012
 --------
 ???

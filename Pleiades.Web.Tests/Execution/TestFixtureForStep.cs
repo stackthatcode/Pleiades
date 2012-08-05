@@ -16,9 +16,9 @@ namespace Pleiades.Framework.UnitTests.Execution
             var step = new StepOk();
             var context = new ContextStub();
 
-            Assert.IsTrue(context.ExecutionStateValid);
+            Assert.IsTrue(context.IsExecutionStateValid);
             step.Execute(context);
-            Assert.IsTrue(context.ExecutionStateValid);
+            Assert.IsTrue(context.IsExecutionStateValid);
         }
 
         [Test]
@@ -27,9 +27,9 @@ namespace Pleiades.Framework.UnitTests.Execution
             var step = new StepAlwaysKill();
             var context = new ContextStub();
 
-            Assert.IsTrue(context.ExecutionStateValid);
+            Assert.IsTrue(context.IsExecutionStateValid);
             step.Execute(context);
-            Assert.IsFalse(context.ExecutionStateValid);
+            Assert.IsFalse(context.IsExecutionStateValid);
         }
 
         [Test]
@@ -38,9 +38,9 @@ namespace Pleiades.Framework.UnitTests.Execution
             var step = new StepAlwaysKillWithLambda();
             var context = new ContextStub();
 
-            Assert.IsTrue(context.ExecutionStateValid);
+            Assert.IsTrue(context.IsExecutionStateValid);
             step.Execute(context);
-            Assert.IsFalse(context.ExecutionStateValid);
+            Assert.IsFalse(context.IsExecutionStateValid);
         }
 
         [Test]

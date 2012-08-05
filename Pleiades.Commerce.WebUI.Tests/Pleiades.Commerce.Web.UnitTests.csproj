@@ -55,9 +55,15 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Execution\ChangeUserPasswordFactoryTest.cs" />
+    <Compile Include="Execution\AuthenticateUserByRoleStepTests.cs" />
+    <Compile Include="Execution\ChangeUserPasswordCompositeTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Execution\ChangeUserPasswordStepTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Execution\GetUserFromHttpContextStepTests.cs" />
-    <Compile Include="Execution\ChangeUserPasswordStepTests.cs" />
+    <Compile Include="Execution\LogoutStepTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

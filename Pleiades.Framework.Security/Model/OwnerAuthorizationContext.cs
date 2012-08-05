@@ -9,7 +9,7 @@ namespace Pleiades.Framework.Identity.Model
         public int? OwnerIdentityId { get; set; }
 
         public SecurityResponseCode SecurityResponseCode { get; set; }
-        public bool ExecutionStateValid { get; set; }
+        public bool IsExecutionStateValid { get; set; }
 
 
         public OwnerAuthorizationContext()
@@ -18,7 +18,7 @@ namespace Pleiades.Framework.Identity.Model
             this.OwnerIdentityId = null;
 
             this.SecurityResponseCode = Security.SecurityResponseCode.Allowed;
-            this.ExecutionStateValid = true;
+            this.IsExecutionStateValid = true;
         }       
     }
 }

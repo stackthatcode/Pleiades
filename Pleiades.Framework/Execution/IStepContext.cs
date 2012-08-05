@@ -2,6 +2,6 @@
 {
     public interface IStepContext
     {
-        bool ExecutionStateValid { get; set; }
+        bool IsExecutionStateValid { get; set; }
     }
 }

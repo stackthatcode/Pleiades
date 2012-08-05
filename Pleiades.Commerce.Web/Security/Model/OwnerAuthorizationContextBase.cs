@@ -17,7 +17,7 @@ namespace Pleiades.Commerce.Web.Security.Model
         public int? OwnerIdentityId { get { return OwnerUser == null ? null : (int?)OwnerUser.IdentityUser.ID; } }
 
         public SecurityResponseCode SecurityResponseCode { get; set; }
-        public bool ExecutionStateValid { get; set; }
+        public bool IsExecutionStateValid { get; set; }
 
         public OwnerAuthorizationContextBase()
         {
@@ -25,7 +25,7 @@ namespace Pleiades.Commerce.Web.Security.Model
             this.OwnerUser = null;
 
             this.SecurityResponseCode = SecurityResponseCode.Allowed;
-            this.ExecutionStateValid = true;
+            this.IsExecutionStateValid = true;
         }
     }
 }

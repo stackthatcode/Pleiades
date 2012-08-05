@@ -6,27 +6,25 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
-using Gallio.Framework;
-using MbUnit.Framework;
-using PagedList;
+using NUnit.Framework;
 using Rhino.Mocks;
+using Pleiades.Framework.TestHelpers;
+using Pleiades.Framework.TestHelpers.Web;
+
+using Pleiades.Commerce.Domain.Model.Users;
 using Pleiades.Commerce.WebUI;
 using Pleiades.Commerce.WebUI.Areas.Admin.Controllers;
 using Pleiades.Commerce.WebUI.Areas.Admin.Models;
-using Pleiades.Framework.TestHelpers;
-using Pleiades.Framework.TestHelpers.Web;
-using Pleiades.Framework.Web.Security.Interface;
-using Pleiades.Framework.Web.Security.Model;
 
 namespace Pleiades.Commerce.WebUI.TestsControllers
 {
     [TestFixture]
     public class AdminManagerControllerTests
     {
-        public IEnumerable<DomainUserCondensed> domainUserYielder()
+        public IEnumerable<AggregateUser> aggregateUserYielder()
         {
             for (int i=0; i < 5; i++)
-                yield return new DomainUserCondensed();
+                yield return new AggregateUser();
         }        
 
         [Test]
@@ -37,7 +35,7 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
             adminmgrController.DomainUserService = MockRepository.GenerateMock<IDomainUserService>();
             adminmgrController.DomainUserService
                 .Expect(x => x.RetreiveAll(1, AdminManagerController.PageSize, new List<UserRole>() { UserRole.Admin, UserRole.Root }))
-                .Return(new PagedList.PagedList<DomainUserCondensed>(domainUserYielder(), 0, 1));
+                .Return(new PagedList.PagedList<DomainUserCondensed>(aggregateUserYielder(), 0, 1));
 
             // Act
             var result = adminmgrController.List(1);

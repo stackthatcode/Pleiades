@@ -12,7 +12,7 @@ namespace Pleiades.Framework.Execution
         /// Steps receive the Context to use for Validation and for affecting State changes
         /// Returns true if the Step was Valid and Executed a State Change
         /// </summary>
-        public abstract void Execute(TContext context);
+        public abstract TContext Execute(TContext context);
 
         // Subscribes an observer to listen for Notifications
         public virtual void Attach(IStepObserver observer)
@@ -26,15 +26,17 @@ namespace Pleiades.Framework.Execution
             this.Observers.ForEach(x => x.Notify(o));
         }
 
-        public virtual void Kill(TContext context)
+        public virtual TContext Kill(TContext context)
         {
-            context.ExecutionStateValid = false;
+            context.IsExecutionStateValid = false;
+            return context;
         }
 
-        public virtual void Kill(TContext context, Action action)
+        public virtual TContext Kill(TContext context, Action action)
         {
             this.Kill(context);
             action();
+            return context;
         }
     }
 }

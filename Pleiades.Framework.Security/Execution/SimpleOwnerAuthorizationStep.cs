@@ -11,27 +11,28 @@ namespace Pleiades.Framework.Identity.Execution
 {
     public class SimpleOwnerAuthorizationStep<T> : Step<T> where T : IOwnerAuthorizationContext
     {
-        public override void Execute(T context)
+        public override T Execute(T context)
         {
             if (context.CurrentUserIdentity.UserRole.IsAdministrator())
             {
-                return;
+                return context;
             }
 
             if (context.OwnerIdentityId == null)
             {
-                return;
+                return context;
             }
 
             if (context.CurrentUserIdentity.ID == context.OwnerIdentityId)
             {
-                return;
+                return context;
             }
 
-            this.Kill(context, () =>
-            {
-                context.SecurityResponseCode = SecurityResponseCode.AccessDenied;
-            });
+            return 
+                this.Kill(context, () =>
+                {
+                    context.SecurityResponseCode = SecurityResponseCode.AccessDenied;
+                });
         }
     }
 }
