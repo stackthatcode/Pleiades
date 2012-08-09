@@ -6,16 +6,16 @@ namespace Pleiades.Framework.Autofac
 {
     public class Container : Injection.IGenericContainer
     {
-        IContainer AutofacContainer { get; set; }
+        ILifetimeScope LifetimeScope { get; set; }
 
-        public Container(IContainer autofacContainer)
+        public Container(ILifetimeScope lifetimeScope)
         {
-            this.AutofacContainer = autofacContainer;
+            this.LifetimeScope = lifetimeScope;
         }
 
         public T Resolve<T>()
         {
-            return this.AutofacContainer.Resolve<T>();
+            return this.LifetimeScope.Resolve<T>();
         }
     }
 }

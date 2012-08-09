@@ -94,11 +94,11 @@
     <Compile Include="Areas\Public\Models\ProductListModel.cs" />
     <Compile Include="CommerceModule.cs" />
     <Compile Include="Plumbing\ErrorHandling\CustomErrorAttribute.cs" />
-    <Compile Include="Plumbing\Navigation\NavigationHelper.cs" />
+    <Compile Include="Plumbing\Navigation\OutboundNavigation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Account\Logon.aspx" />
+    <Content Include="Areas\Admin\Views\Login\Logon.aspx" />
     <Content Include="Areas\Admin\Views\Home\HeaderSummary.ascx" />
     <Content Include="Areas\Admin\Views\Home\Index.aspx" />
     <Content Include="Areas\Admin\Views\Shared\Admin.Master" />

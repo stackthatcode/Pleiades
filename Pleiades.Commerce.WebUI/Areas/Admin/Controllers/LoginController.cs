@@ -9,6 +9,7 @@ using Pleiades.Framework.Identity.Model;
 using Pleiades.Commerce.Web.Security.Execution.Steps;
 using Pleiades.Commerce.Web.Security.Model;
 using Pleiades.Commerce.WebUI.Areas.Admin.Models;
+using Pleiades.Commerce.WebUI.Plumbing.Navigation;
 
 namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
 {
@@ -16,7 +17,6 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
     {
         public readonly bool PersistentCookie = true;
         public IGenericContainer Container { get; set; }
-        public object StepContext { get; set; }
 
         public LoginController(IGenericContainer container)
         {
@@ -29,16 +29,6 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
             return View();
         }
 
-        // Here's the rub if we go with this design!
-        //
-        // 1.) We need to test Model to Context translation => http://stackoverflow.com/questions/6872447/using-rhino-mocks-how-to-check-the-value-of-a-struct-field-in-the-parameter-pass
-        // 2.) We need to test Invalid Model returns empty View
-        // 3.) We need to test IsExecutionStateValid == false
-        // 4.) We need to test IsExecutionStateValid == true - ReturnUrl != ""
-        // 5.) We need to test IsExecutionStateValid == true - ReturnUrl == ""
-
-        // PROBLEMS - building solid, testable connection between Model and Context
-
         [HttpPost]
         public ActionResult Logon(LogOnViewModel model, string returnUrl)
         {
@@ -48,7 +38,7 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
                 return View();
             }
 
-            this.StepContext = new AuthenticateUserByRoleContext
+            var context = new AuthenticateUserByRoleContext
             {
                 AttemptedUserName = model.UserName,
                 AttemptedPassword = model.Password,
@@ -57,8 +47,10 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
             };
 
             var step = this.Container.Resolve<AuthenticateUserByRoleStep>();
-            var result = step.Execute((AuthenticateUserByRoleContext)StepContext);
-
+            
+            // NOTE: checking the returned result simplifies testing
+            var result = step.Execute(context); 
+            
             if (result.IsExecutionStateValid == false)
             {
                 ModelState.AddModelError("", "Failed authentication credentials");
@@ -69,11 +61,8 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
             {
                 return Redirect(returnUrl);
             }
-            else
-            {
-                return new RedirectToRouteResult
-                    (new RouteValueDictionary(new { area = "Admin", controller = "Home", action = "Index" }));
-            }
+
+            return new RedirectToRouteResult(OutboundNavigation.AdminHome);
         }
 
         [HttpGet]
@@ -81,8 +70,7 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
         {
             var step = this.Container.Resolve<LogoutStep>();
             step.Execute(new BareContext());
-            return new RedirectToRouteResult(
-                    new RouteValueDictionary(new { area = "Public", controller = "Products", action = "List" }));
+            return new RedirectToRouteResult(OutboundNavigation.PublicHome);
         }
     }
 }

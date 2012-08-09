@@ -4,9 +4,9 @@ FRONTRANGE - HOTZONE
 
 MVC RELATED
 ~~~~~~~~~~~
+
 - Fix the MVC Application with the Great Refactoring => IN PROGRESS
-- Fixed AccountController => DONE - SUPERB REFACTORING
-- Created Account Login Execution => DONE - AGAIN, SUPERB!!!
+
 
 * Fix the HomeController, and Tests => IN PROGRESS
 * Fix the web.config with assembly references => IN PROGRESS
@@ -28,6 +28,13 @@ TEST BACKLOG
 ~~~~~~~~~~~~
 * AggregateUserRepository Retreive(...) overloads => TODO
 * IdentityUserRepository Integration Tests??? => TODO
+
+
+Store This Shit Away Somewhere
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+AT&T => 415-248-4000
+Riverside Publishing => 630-467-7000 
+
 
 
 

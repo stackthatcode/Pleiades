@@ -8,7 +8,9 @@
 <body>
     <h1>Welcome Back to Pleiades!- Under Construction</h1>
 
-    <%: Html.RouteLink("Go To Admin Area", new { area = "Admin", controller = "Home", action = "Index" }) %>
+    <%: Html.RouteLink("Go To Admin Area", OutboundNavigation.AdminHome) %>
+    <%: Html.RouteLink("Go To Admin Login", OutboundNavigation.AdminLogin) %>
+
     <br />
 
     <h4>Sample Data Entry Form</h4>

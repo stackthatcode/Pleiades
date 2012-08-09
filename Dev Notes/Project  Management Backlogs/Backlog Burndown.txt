@@ -1,14 +1,42 @@
 Backlog Burndown
 ================
 
+
+        // Here's the rub if we go with this design!
+        //
+        // 1.) We need to test Model to Context translation => 
+        // http://stackoverflow.com/questions/6872447/using-rhino-mocks-how-to-check-the-value-of-a-struct-field-in-the-parameter-pass
+        
+        // 2.) We need to test Invalid Model returns empty View
+        
+        // 3.) We need to test IsExecutionStateValid == false
+        
+        // Separate Redirect Function -- make that testable
+        // 4.) We need to test IsExecutionStateValid == true - ReturnUrl != ""
+        // 5.) We need to test IsExecutionStateValid == true - ReturnUrl == ""
+
+        // PROBLEMS - building solid, testable connection between Model and Context
+        // PROBLEM - step testing feels like an extra layer of translation.  This is not about encapsulation, it's
+        // .. about solid testable code, man!
+
+        // Validation Methods
+        // 1.) Metadata in UI Model
+        // 2.) Imperative Validation wired to UI Model
+        // 3.) Execution business logic 
+
+8/6/2012
+--------
+* Bounded Context Problem => SOLVED! - VERY HAPPY WITH PROGRESSIVE RESULTS :-D
+
 8/5/2012
 --------
 * Fix the Security Stuff to eliminate wierd factory => DONE! - REASON VERSUS EMOTION!!!
+* TONS OF WORK!!! => refactored Commerce.Web to make Authentication logic reusable across Controllers
+- Fixed AccountController => DONE - SUPERB REFACTORING
+- Created Account Login Execution => DONE - AGAIN, SUPERB!!!
 
 8/2/2012
 --------
-???
-
 - ASP.NET MVC ROUTES - MUST MASTER => ALMOST DONE - NEED A LITTLE MORE TINKERING
 * Do we want /Public/Products/List to route back to / ...? => NO 
 * How do we deal with ~/ ? => DONE - 

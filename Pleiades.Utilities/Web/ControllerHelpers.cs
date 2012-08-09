@@ -13,14 +13,24 @@ namespace Pleiades.Framework.TestHelpers.Web
 {
     public static class ControllerHelpers
     {
-        public static void ShouldBeRedirectionTo(this ActionResult actionResult, object expectedRouteValues)
+        public static void ShouldBeRedirectionTo(this ActionResult actionResult, string expectedURL)
+        {
+            ((RedirectResult)actionResult).Url.ShouldEqual(expectedURL);
+        }
+
+        public static void ShouldBeRedirectionTo(this ActionResult actionResult, object expectedRouteAnonymousObject)
         {
             var actualRouteDict = ((RedirectToRouteResult)actionResult).RouteValues;
-            var expectedRouteDict = new RouteValueDictionary(expectedRouteValues);
+            var expectedRouteDict = new RouteValueDictionary(expectedRouteAnonymousObject);
             expectedRouteDict.ForEach(item => actualRouteDict[item.Key].ShouldEqual(item.Value));
         }
 
-        // Not to be confused - ViewName == "" is not the same as Index
+        public static void ShouldBeRedirectionTo(this ActionResult actionResult, RouteValueDictionary expectedRouteDictionary)
+        {
+            var actualRouteDict = ((RedirectToRouteResult)actionResult).RouteValues;
+            expectedRouteDictionary.ForEach(item => actualRouteDict[item.Key].ShouldEqual(item.Value));
+        }
+
         public static void ShouldBeDefaultView(this ActionResult actionResult)
         {
             actionResult.ShouldBeView(String.Empty);

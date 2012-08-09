@@ -35,8 +35,10 @@ namespace Pleiades.Commerce.Web
             builder.RegisterType<GetUserFromContextStep>();
 
             // Steps
+            builder.RegisterType<AuthenticateUserByRoleStep>();
             builder.RegisterType<ChangeUserPasswordStep>();
             builder.RegisterType<GetUserFromContextStep>();
+            builder.RegisterType<LogoutStep>();
         }
     }
 }

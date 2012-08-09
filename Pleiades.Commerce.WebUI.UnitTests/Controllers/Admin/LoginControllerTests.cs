@@ -15,90 +15,124 @@ using Pleiades.Commerce.Web.Security.Model;
 using Pleiades.Commerce.WebUI;
 using Pleiades.Commerce.WebUI.Areas.Admin.Controllers;
 using Pleiades.Commerce.WebUI.Areas.Admin.Models;
+using Pleiades.Commerce.WebUI.Plumbing.Navigation;
 
 namespace Pleiades.Commerce.WebUI.TestsControllers
 {
     [TestFixture]
-    public class AccountControllerTests
+    public class LoginControllerTests
     {
         [Test]
-        public void TestLogonInvalidFormReturnsView()
+        public void Logon_Get_Returns_Default_View()
+        {
+            var controller = new LoginController(null);
+            var result = controller.Logon();
+            result.ShouldBeDefaultView();
+        }
+
+
+        // TODO: move this and other somewhere central
+        public IGenericContainer MockContainer()
+        {
+            return MockRepository.GenerateMock<IGenericContainer>();
+        }
+
+        // TODO: move this and other somewhere central
+        public void MockContainerResolve<T>(IGenericContainer container, T output)
+        {
+            container.Expect(x => x.Resolve<T>()).Return(output);
+        }
+
+
+        // This describes the basic pattern for mocking Execution Step and verify translation of UI Models into 
+        // Execution Context.
+        public AuthenticateUserByRoleStep MockAuthenticateUserByRoleStep(LogOnViewModel model, bool valid)
+        {
+            var step = MockRepository.GenerateMock<AuthenticateUserByRoleStep>(null, null, null);
+            step.Expect(x => x.Execute(Arg<AuthenticateUserByRoleContext>.Matches(
+                    m => m.AttemptedUserName == model.UserName && m.AttemptedPassword == model.Password)))
+                .Return(new AuthenticateUserByRoleContext { IsExecutionStateValid = valid });
+            return step;
+        }
+
+        // Basic Testing pattern for passing UI Model to step, verifying that 
+        // 1.) Model has translated correctly to Context
+        // 2.) Service located has been invoked to create Step
+        // 3.) Step has been executed
+        // 4.) Controller method responds to Step Execution and/or model input with correct View
+        //
+        // Alternate pattern #1
+        // 1.) Controller method responds to Model Validation with correct View
+
+        [Test]
+        public void Logon_Bad_Credentials_Returns_Same_View()
         {
             // Arrange
-            var step = MockRepository.GenerateMock<AuthenticateUserByRoleStep>();
-            step.Expect(x => 
-                x.Execute(null)).IgnoreArguments().Return(new AuthenticateUserByRoleContext { IsExecutionStateValid = false });
-
-            var container = MockRepository.GenerateMock<IGenericContainer>();
-            container.Expect(x => x.Resolve<AuthenticateUserByRoleStep>()).Return(step);
+            var model = new LogOnViewModel { UserName = "admin", Password = "123" };
+            var step = this.MockAuthenticateUserByRoleStep(model, false);
+            var container = this.MockContainer();
+            MockContainerResolve<AuthenticateUserByRoleStep>(container, step);
 
             var controller = new LoginController(container);
 
             // Act
-            var result = controller.Logon(null, "");
+            var result = controller.Logon(model, null);
 
             // Assert
-            result.ShouldBeView();
+            container.VerifyAllExpectations();
+            step.VerifyAllExpectations();
+            result.ShouldBeDefaultView();
         }
 
-        //[Test]
-        //public void TestLogonBadUserDataReturnsView()
-        //{
-        //    // Arrange
-        //    var acctController = new LoginController();
-        //    acctController.MembershipService = MockRepository.GenerateMock<IMembershipService>();
-        //    acctController.MembershipService.Expect(x => x.ValidateUserByEmailAddr("admin", "123")).Return(null);
-        //    acctController.FormsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
-        //    acctController.FormsAuthService.Expect(x => x.ClearAuthenticationCookie());
+        [Test]
+        public void Logon_Good_Credentials_With_Null_ReturnUrl_Returns_Redirect_To_Admin_Home()
+        {
+            // Arrange
+            var model = new LogOnViewModel { UserName = "admin", Password = "123" };
+            var step = MockAuthenticateUserByRoleStep(model, true);
+            var container = MockRepository.GenerateMock<IGenericContainer>();
+            container.Expect(x => x.Resolve<AuthenticateUserByRoleStep>()).Return(step);
+            var controller = new LoginController(container);
+            
+            // Act
+            var result = controller.Logon(model, null);
 
-        //    // Act
-        //    var result = acctController.Logon(new LogOnViewModel { UserName = "admin", Password = "123" }, null);
-                
-        //    // Assert
-        //    result.ShouldBeView();
-        //    acctController.MembershipService.VerifyAllExpectations();
-        //    acctController.FormsAuthService.VerifyAllExpectations();
-        //}
+            // Assert
+            container.VerifyAllExpectations();
+            step.VerifyAllExpectations();
+            result.ShouldBeRedirectionTo(new { area = "Admin", controller = "Home", action = "Index" });
+        }
 
-        //[Test]
-        //public void TestLogonGoodUserNoREdirectBack()
-        //{
-        //    // Arrange
-        //    var acctController = new LoginController();
-        //    var domainUser = new DomainUser();
-        //    acctController.MembershipService = MockRepository.GenerateMock<IMembershipService>();
-        //    acctController.MembershipService.Expect(x => x.ValidateUserByEmailAddr("admin", "123")).Return(domainUser);
-        //    acctController.FormsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
-        //    acctController.FormsAuthService.Expect(x => x.SetAuthCookieForUser(domainUser, acctController.PersistentCookie));
+        [Test]
+        public void Logon_Good_Credentials_With_NonNull_ReturnUrl_Returns_Redirect_To_Admin_Home()
+        {
+            // Arrange
+            var model = new LogOnViewModel { UserName = "admin", Password = "123" };
+            var step = MockAuthenticateUserByRoleStep(model, true);
+            var container = MockRepository.GenerateMock<IGenericContainer>();
+            container.Expect(x => x.Resolve<AuthenticateUserByRoleStep>()).Return(step);
+            var controller = new LoginController(container);
 
-        //    // Act
-        //    var result = acctController.Logon(new LogOnViewModel { UserName = "admin", Password = "123" }, null);
+            // Act
+            var result = controller.Logon(model, "MyUrl.aspx");
 
-        //    // Assert
-        //    result.ShouldBeRedirectionTo(new { area = "Admin", controller = "Home", action = "Index" });
-        //    acctController.FormsAuthService.VerifyAllExpectations();
-        //    acctController.MembershipService.VerifyAllExpectations();
-        //}
+            // Assert
+            container.VerifyAllExpectations();
+            step.VerifyAllExpectations();
+            result.ShouldBeRedirectionTo("MyUrl.aspx");
+        }
 
-        //[Test]
-        //public void TestLogonGoodUserWithRedirect()
-        //{
-        //    // Arrange
-        //    var acctController = new LoginController();
-        //    var domainUser = new DomainUser();
-        //    acctController.MembershipService = MockRepository.GenerateMock<IMembershipService>();
-        //    acctController.MembershipService.Expect(x => x.ValidateUserByEmailAddr("admin", "123")).Return(domainUser);
-        //    acctController.FormsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
-        //    acctController.FormsAuthService.Expect(x => x.SetAuthCookieForUser(domainUser, acctController.PersistentCookie));
+        [Test]
+        public void Logout_Executes_LogoutStep_And_Returns_Redirect_To_Public_Home()
+        {
+            var container = this.MockContainer();
+            var step = MockRepository.GenerateMock<LogoutStep>(new object [] { null });
+            step.Expect(x => x.Execute(null)).IgnoreArguments().Return(null);
+            MockContainerResolve<LogoutStep>(container, step);
 
-        //    // Act
-        //    var result = acctController.Logon(new LogOnViewModel { UserName = "admin", Password = "123" }, "winter/solstice/3");
-
-        //    // Assert
-        //    Assert.IsInstanceOfType<RedirectResult>(result);
-        //    ((RedirectResult)result).Url.ShouldEqual("winter/solstice/3");
-        //    acctController.FormsAuthService.VerifyAllExpectations();
-        //    acctController.MembershipService.VerifyAllExpectations();
-        //}
+            var controller = new LoginController(container);
+            var result = controller.Logout();
+            result.ShouldBeRedirectionTo(OutboundNavigation.PublicHome);
+        }
     }
 }

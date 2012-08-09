@@ -46,7 +46,7 @@
 
             <div style="clear:both; height:25px;"></div>
             <% Html.EnableClientValidation(); %>
-            <% using (Html.BeginForm("Logon", "Account", FormMethod.Post, new { autocomplete = "off" }))
+            <% using (Html.BeginForm("Logon", "Login", FormMethod.Post, new { autocomplete = "off" }))
             { %>
                 <table>
                 <tr>
