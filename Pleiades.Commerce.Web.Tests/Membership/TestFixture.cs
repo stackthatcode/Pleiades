@@ -20,7 +20,7 @@ namespace Pleiades.Commerce.Web.IntegrationTests.Membership
         [TestFixtureSetUp]
         public void TestSetup()
         {
-            var context = new PleiadesContext(Constants.DatabaseConnString);
+            var context = new PleiadesContext();
 
             // Prepare Repository Factory
             PfMembershipRepositoryShim.RepositoryFactory =

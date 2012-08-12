@@ -69,7 +69,7 @@ namespace Pleiades.Framework.Identity.Concrete
             this.Repository.SaveChanges();
 
             // Get the Identity User Aggregate Root we just added
-            return RetrieveUserById(identityUserEntity.ID);
+            return identityUserEntity;
         }
 
         /// <summary>

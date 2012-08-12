@@ -56,11 +56,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants.cs" />
     <Compile Include="DatabasePriming.cs" />
-    <Compile Include="Membership\MembershipContextForTesting.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="IdentityUser\IdentityUserAndRepositoryTests.cs" />
     <Compile Include="Membership\TestFixture.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -74,7 +71,9 @@
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pleiades.Commerce.Domain\Pleiades.Commerce.Domain.csproj">

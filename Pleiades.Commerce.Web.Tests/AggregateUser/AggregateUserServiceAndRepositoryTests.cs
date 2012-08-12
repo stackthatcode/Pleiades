@@ -29,7 +29,7 @@ namespace Pleiades.Commerce.Web.IntegrationTests.Users
         [TestFixtureSetUp]
         public void Setup()
         {
-            var context = new PleiadesContext(Constants.DatabaseConnString);
+            var context = new PleiadesContext();
             if (!context.Database.Exists())
             {
                 // Build Database
@@ -68,10 +68,11 @@ namespace Pleiades.Commerce.Web.IntegrationTests.Users
         [Test]
         public void Verify_CanCreate_And_RetrieveUser_ByMembershipUserName()
         {
-            var context = new PleiadesContext(Constants.DatabaseConnString);
+            var context = new PleiadesContext();
 
             var identityuser1 = new CreateOrModifyIdentityUserRequest
                 {
+                    AccountLevel = Framework.Identity.Model.AccountLevel.Standard,
                     FirstName = "John",
                     LastName = "Gerber",
                 };
@@ -83,6 +84,7 @@ namespace Pleiades.Commerce.Web.IntegrationTests.Users
 
             var identityuser2 = new CreateOrModifyIdentityUserRequest
                 {
+                    AccountLevel = Framework.Identity.Model.AccountLevel.Gold,
                     FirstName = "Anne",
                     LastName = "Holtz",
                 };

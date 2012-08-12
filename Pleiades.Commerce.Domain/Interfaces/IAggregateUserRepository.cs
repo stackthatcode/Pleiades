@@ -10,8 +10,6 @@ namespace Pleiades.Commerce.Domain.Interface
     {
         AggregateUser RetrieveByMembershipUserName(string username);
         IEnumerable<AggregateUser> Retreive(List<UserRole> role);
-        IEnumerable<AggregateUser> 
-            Retreive(
-                List<string> membershipUserNames, List<UserRole> role);
+        IEnumerable<AggregateUser> Retreive(List<string> membershipUserNames, List<UserRole> role);
     }
 }

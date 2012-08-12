@@ -8,10 +8,10 @@ namespace Pleiades.Framework.Identity.Model
 {
     public enum UserRole
     {
-        Anonymous = 1,
-        Trusted = 2,
-        Admin = 3,
-        Supreme = 4,   
+        Anonymous = 0,
+        Trusted = 1,
+        Admin = 2,
+        Supreme = 3,   
     };
 
     public static class UserRoleExtensions

@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IdentityRegistration.cs" />
     <Compile Include="Execution\AccountLevelAuthorizationStep.cs" />
     <Compile Include="Concrete\IdentityUserService.cs" />
     <Compile Include="Execution\AccountStatusAuthorizationStep.cs" />

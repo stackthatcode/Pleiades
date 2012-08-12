@@ -6,7 +6,7 @@ namespace Pleiades.Framework.IntegrationTests.DataEF
     {
         public DbSet<MyEntity> MyEntities { get; set; }
 
-        public MyContext() : base("FrameworkIntegrationTestDb")
+        public MyContext() : base("PleiadesDb")
         {
         }
 

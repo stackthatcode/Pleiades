@@ -16,8 +16,8 @@ namespace Pleiades.Commerce.Persist.Users
 
         public int GetUserCountByRole(UserRole role)
         {
-            return this.Data().Count(x => x.UserRole == role);
-            throw new System.NotImplementedException();
+            var enumRole = role.ToString();
+            return this.Data().Count(x => x.UserRoleValue == enumRole);
         }
 
         public IdentityUser RetrieveUserById(int id)

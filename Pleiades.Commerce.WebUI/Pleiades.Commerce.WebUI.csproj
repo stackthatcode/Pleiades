@@ -47,8 +47,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="PagedList, Version=1.1.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -92,7 +92,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Areas\Public\Models\ProductListModel.cs" />
-    <Compile Include="CommerceModule.cs" />
     <Compile Include="Plumbing\ErrorHandling\CustomErrorAttribute.cs" />
     <Compile Include="Plumbing\Navigation\OutboundNavigation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -141,7 +140,9 @@
     <Content Include="Include\Scripts\Generic\modernizr-1.7.js" />
     <Content Include="Include\Scripts\Generic\modernizr-1.7.min.js" />
     <Content Include="Areas\Public\Views\Products\List.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -167,6 +168,10 @@
       <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
       <Name>Pleiades.Commerce.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Pleiades.Commerce.Initializer\Pleiades.Commerce.Initializer.csproj">
+      <Project>{8E922D95-E286-4AF1-89E2-943EA247B806}</Project>
+      <Name>Pleiades.Commerce.Initializer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Commerce.Persist\Pleiades.Commerce.Persist.csproj">
       <Project>{E616B84E-1830-4909-9A56-58A656EA9B5B}</Project>
       <Name>Pleiades.Commerce.Persist</Name>
@@ -175,9 +180,9 @@
       <Project>{E8A2DAB1-0764-441F-AE3A-74201ABA8C93}</Project>
       <Name>Pleiades.Commerce.Web</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Framework.Autofac\Pleiades.Framework.Autofac.csproj">
-      <Project>{8D4A56BB-9D7A-41B3-9CB8-2AA0055AF6E0}</Project>
-      <Name>Pleiades.Framework.Autofac</Name>
+    <ProjectReference Include="..\Pleiades.Framework.Membership\Pleiades.Framework.MembershipProvider.csproj">
+      <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
+      <Name>Pleiades.Framework.MembershipProvider</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pleiades.Framework.Security\Pleiades.Framework.Identity.csproj">
       <Project>{7F1F1DA2-6F72-4D68-A06C-D3379941B060}</Project>
@@ -194,6 +199,10 @@
     <ProjectReference Include="..\Pleiades.Web\Pleiades.Framework.Web.csproj">
       <Project>{804F063C-505F-441E-B205-688C42E637AD}</Project>
       <Name>Pleiades.Framework.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plieades.Data\Pleiades.Framework.Data.EF.csproj">
+      <Project>{89303370-B830-4A89-8646-0F9D287AD657}</Project>
+      <Name>Pleiades.Framework.Data.EF</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -224,7 +233,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1910</DevelopmentServerPort>
+          <DevelopmentServerPort>30297</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

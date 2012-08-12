@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="Concrete\FormsAuthenticationService.cs" />
     <Compile Include="Concrete\MembershipService.cs" />
-    <Compile Include="MembershipRegistration.cs" />
     <Compile Include="Interface\IFormsAuthenticationService.cs" />
     <Compile Include="Interface\IMembershipRepository.cs" />
     <Compile Include="Interface\IMembershipService.cs" />

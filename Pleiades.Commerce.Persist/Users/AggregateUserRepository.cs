@@ -21,18 +21,22 @@ namespace Pleiades.Commerce.Persist.Users
 
         public AggregateUser RetrieveByMembershipUserName(string membershipUsername)
         {
-            return this.Data().FirstOrDefault(x => x.MembershipUserName == membershipUsername);
+            return this.Data()
+                .Include(x => x.IdentityUser)
+                .FirstOrDefault(x => x.MembershipUserName == membershipUsername);
         }
 
         public IEnumerable<AggregateUser> Retreive(List<UserRole> roles)
         {
-            return this.Data().Where(x => roles.Contains(x.IdentityUser.UserRole));
+            var enumRoles = roles.Select(x => x.ToString());
+            return this.Data().Where(x => enumRoles.Contains(x.IdentityUser.UserRoleValue));
         }
 
         public IEnumerable<AggregateUser> Retreive(List<string> membershipUserNames, List<UserRole> roles)
         {
-            return this.Data().Where(x => 
-                roles.Contains(x.IdentityUser.UserRole) && membershipUserNames.Contains(x.MembershipUserName));
+            var enumRoles = roles.Select(x => x.ToString());
+            return this.Data().Where(x =>
+                enumRoles.Contains(x.IdentityUser.UserRoleValue) && membershipUserNames.Contains(x.MembershipUserName));
         }
     }
 }

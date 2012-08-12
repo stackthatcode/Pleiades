@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -26,7 +27,11 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Logon()
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                Debug.WriteLine("What?");
+            }
+            return View(new LogOnViewModel());
         }
 
         [HttpPost]

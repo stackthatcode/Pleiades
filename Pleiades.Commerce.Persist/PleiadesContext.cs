@@ -12,6 +12,8 @@ namespace Pleiades.Commerce.Persist
 {
     public class PleiadesContext : DbContext
     {
+        public readonly Guid ContextId = Guid.NewGuid();
+        
         public DbSet<AggregateUser> AggregateUsers { get; set; }
         public DbSet<MembershipUser> MembershipUsers { get; set; }
         public DbSet<IdentityUser> IdentityUsers { get; set; }

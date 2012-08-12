@@ -38,15 +38,16 @@ namespace Pleiades.Commerce.Domain.Concrete
 
             var aggegrateUser = new AggregateUser
             {
-                IdentityUser = identityUser,
                 MembershipUserName = membershipUser.UserName,
             };
 
             this.AggregateUserRepository.Add(aggegrateUser);
             this.AggregateUserRepository.SaveChanges();
 
+            aggegrateUser.IdentityUser = identityUser;
+            this.AggregateUserRepository.SaveChanges();
+
             return aggegrateUser;
         }
-
     }
 }

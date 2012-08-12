@@ -4,11 +4,11 @@ using Pleiades.Framework.Injection;
 
 namespace Pleiades.Commerce.Initializer
 {
-    public class Container : Injection.IGenericContainer
+    public class AutofacContainer : IGenericContainer
     {
         ILifetimeScope LifetimeScope { get; set; }
 
-        public Container(ILifetimeScope lifetimeScope)
+        public AutofacContainer(ILifetimeScope lifetimeScope)
         {
             this.LifetimeScope = lifetimeScope;
         }

@@ -1,32 +1,41 @@
 FRONTRANGE - HOTZONE
 ====================
 *** Celebrate coming Out-of-the-Wild with The Great Refactoring #1! ***
-
 MVC RELATED
 ~~~~~~~~~~~
-
 - Fix the MVC Application with the Great Refactoring => IN PROGRESS
+* Add the Repository Shim to Global something => DONE
+* Fix the HomeController, and Tests => DONE
+* Fix the Login Page => DONE
+* Added Pleiades.Commerce.Initializer applet => DONE
 
-
-* Fix the HomeController, and Tests => IN PROGRESS
-* Fix the web.config with assembly references => IN PROGRESS
-* Add the Repository Shim to Global something => TODO
-* Fix the Login Page => TODO
 * Test the new Attributes w/ Filter => TODO
+- http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
+- http://haacked.com/archive/2011/04/25/conditional-filters.aspx
 
+* Fix the web.config with assembly references => IN PROGRESS
 * Fix the Admin Manager => TODO
 - Refactor the Standard Control Framework => TODO
+* http://stackoverflow.com/questions/6308794/html-validationmessagefor-custom-validationmessage-always-shown => AMONG OTHER THINGS
 
+DESIGN & TECH BACKLOG
+~~~~~~~~~~~~~~~~~~~~~
+- EntityFramework - how to perform basic CRUD stuff - Damn Brutha! => TODO
+- Autofac LifetimeScope w/ the database stuff and the Repository Shim => TODO - FOR NOW, JUST USE MEMBERSHIP IN ISOLATED EXECUTIONS
+- EntityFramework Transactions and ASP.NET MVC Concurrency
+- DESIGN: unsure about organization of stuff between Pleiades.Commerce.Web and Pleiades.Commerce.Domain... =>  DONE - SEE BELOW
+- Start adding Logging stuff - you won't be sorry! => TODO
 
+ARCHITECTURE
+------------
+1.) Move all Pleiades.Commerce.Web => Pleiades.Commerce.AggregateUser
+2.) Delete Plieades.Commerce.Web
+3.) Rename Pleiades.Commerce.Initializer => Pleiades.Commerce.IntegrationPoint
+FUTURE DIRECTIONS: NHIBERNATE + MYSQL => and eventually, RAVENDB(!!!)
 
-DESIGN BACKLOG
-~~~~~~~~~~~~~~
-- DESIGN: unsure about organization of stuff between Pleiades.Commerce.Web and Pleiades.Commerce.Domain... =>  TODO
-- Start adding Logging stuff - you won't be sorry!
-
-TEST BACKLOG
-~~~~~~~~~~~~
-* AggregateUserRepository Retreive(...) overloads => TODO
+TEST BACKLOG -- FEEL THE BURN!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* AggregateUserRepository Retreive(...) overloads => TODO - FEELING THAT BURN, YET?
 * IdentityUserRepository Integration Tests??? => TODO
 
 
