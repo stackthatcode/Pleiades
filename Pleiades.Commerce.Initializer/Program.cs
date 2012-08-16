@@ -7,10 +7,11 @@ using Pleiades.Framework.Data;
 using Pleiades.Framework.Identity.Model;
 using Pleiades.Framework.MembershipProvider.Model;
 using Pleiades.Framework.Utility;
-using Pleiades.Commerce.Domain;
+using Pleiades.Framework.Web.Security.Interface;
 using Pleiades.Commerce.Domain.Interface;
 using Pleiades.Commerce.Persist;
-using Pleiades.Commerce.Persist.Users;
+using Pleiades.Commerce.Persist.Security;
+using Pleiades.Commerce.WebUI;
 
 namespace Pleiades.Commerce.Initializer
 {

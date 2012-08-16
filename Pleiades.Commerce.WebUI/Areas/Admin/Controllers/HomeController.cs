@@ -2,8 +2,8 @@
 using System.Web;
 using System.Web.Mvc;
 using Pleiades.Framework.Identity.Model;
-using Pleiades.Commerce.Domain.Model.Users;
-using Pleiades.Commerce.Web.Security.Aspect;
+using Pleiades.Framework.Web.Security.Aspect;
+using Pleiades.Framework.Web.Security.Model;
 using Pleiades.Commerce.WebUI.Plumbing.Navigation;
 
 namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers

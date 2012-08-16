@@ -2,7 +2,7 @@
 using Pleiades.Framework.Identity.Model;
 using Pleiades.Framework.MembershipProvider.Model;
 
-namespace Pleiades.Commerce.Domain.Model.Users
+namespace Pleiades.Framework.Web.Security.Model
 {
     public class AggregateUser
     {

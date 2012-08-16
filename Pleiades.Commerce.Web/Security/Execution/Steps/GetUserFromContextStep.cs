@@ -1,12 +1,12 @@
 ﻿using Pleiades.Commerce.Domain.Interface;
 using Pleiades.Commerce.Domain.Model.Users;
-using Pleiades.Commerce.Web.Security.Model;
+using Pleiades.Framework.Web.Security.Model;
 using Pleiades.Framework.Execution;
 using Pleiades.Framework.Identity.Interface;
 using Pleiades.Framework.MembershipProvider.Interface;
 using Pleiades.Framework.MembershipProvider.Providers;
 
-namespace Pleiades.Commerce.Web.Security.Execution.Steps
+namespace Pleiades.Framework.Web.Security.Execution.Steps
 {
     public class GetUserFromContextStep : Step<SystemAuthorizationContextBase>
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Pleiades.Commerce.Web.IntegrationTests.IdentityUser
+namespace Pleiades.Commerce.IntegrationTests.IdentityUser
 {
     class IdentityUserAndRepositoryTests
     {

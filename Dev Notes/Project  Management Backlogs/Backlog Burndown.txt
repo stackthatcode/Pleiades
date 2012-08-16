@@ -1,6 +1,16 @@
 Backlog Burndown
 ================
 
+8/12/2012
+---------
+* Add the Repository Shim to Global something => DONE
+* Fix the HomeController, and Tests => DONE
+* Fix the Login Page => DONE
+* Added Pleiades.Commerce.Initializer applet => DONE
+* Changed Autofac Registration process =>  DONE
+* Proposed a new, correct Component Integration architecture => DONE - VERY GOOD JOB, MANG!
+
+
 
         // Here's the rub if we go with this design!
         //

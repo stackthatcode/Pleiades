@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration.Provider;
 using System.Linq;
 using System.Text;
-using System.Configuration.Provider;
 using System.Web.Security;
 using NUnit.Framework;
 using Pleiades.Commerce.Persist;
-using Pleiades.Commerce.Persist.Users;
+using Pleiades.Commerce.Persist.Security;
 using Pleiades.Framework.MembershipProvider.Concrete;
 using Pleiades.Framework.MembershipProvider.Model;
 using Pleiades.Framework.MembershipProvider.Providers;
 using Pleiades.Framework.Utility;
 
-namespace Pleiades.Commerce.Web.IntegrationTests.Membership
+namespace Pleiades.Commerce.IntegrationTests.Membership
 {
     [TestFixture]
     public class TestFixture

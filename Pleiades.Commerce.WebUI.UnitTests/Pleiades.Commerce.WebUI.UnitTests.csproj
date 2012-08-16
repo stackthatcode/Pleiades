@@ -72,10 +72,6 @@
       <Project>{EC92BFF1-A3ED-4A02-B5EC-833E55830967}</Project>
       <Name>Pleiades.Commerce.WebUI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Commerce.Web\Pleiades.Commerce.Web.csproj">
-      <Project>{E8A2DAB1-0764-441F-AE3A-74201ABA8C93}</Project>
-      <Name>Pleiades.Commerce.Web</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Framework\Pleiades.Framework.csproj">
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
       <Name>Pleiades.Framework</Name>
@@ -83,6 +79,10 @@
     <ProjectReference Include="..\Pleiades.Utilities\Pleiades.Framework.TestHelpers.csproj">
       <Project>{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}</Project>
       <Name>Pleiades.Framework.TestHelpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pleiades.Web\Pleiades.Framework.Web.csproj">
+      <Project>{804F063C-505F-441E-B205-688C42E637AD}</Project>
+      <Name>Pleiades.Framework.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

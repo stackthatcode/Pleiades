@@ -5,9 +5,8 @@ using Pleiades.Framework.Injection;
 using Pleiades.Framework.Data.EF;
 using Pleiades.Framework.Identity.Interface;
 using Pleiades.Framework.MembershipProvider.Interface;
-using Pleiades.Commerce.Persist.Users;
-using Pleiades.Commerce.Domain;
-using Pleiades.Commerce.Domain.Interface;
+using Pleiades.Framework.Web.Security.Interface;
+using Pleiades.Commerce.Persist.Security;
 
 namespace Pleiades.Commerce.Persist
 {
@@ -15,8 +14,6 @@ namespace Pleiades.Commerce.Persist
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterModule<DomainModule>();
-
             // Context and Unit of Work
             builder.RegisterType<PleiadesContext>().As<DbContext>().InstancePerLifetimeScope();
             builder.RegisterType<EFUnitOfWork>().InstancePerLifetimeScope();

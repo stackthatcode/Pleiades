@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D4EBBD91-DDCA-4E18-A04D-50008A9158F3}</ProjectGuid>
+    <ProjectGuid>{FE635455-8016-4AB0-BA25-5A459A76ABA1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pleiades.Framework.IntegrationTests</RootNamespace>
-    <AssemblyName>Pleiades.Framework.IntegrationTests</AssemblyName>
+    <RootNamespace>Pleiades.Commerce.IntegrationTests</RootNamespace>
+    <AssemblyName>Pleiades.Commerce.IntegrationTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Accessibility">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
@@ -38,9 +41,6 @@
     <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Rhino.Mocks">
-      <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -56,20 +56,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataEF\TestFixture.cs" />
-    <Compile Include="DataEF\MyEntityRepository.cs" />
-    <Compile Include="DataEF\MyContext.cs" />
-    <Compile Include="DataEF\MyEntity.cs" />
+    <Compile Include="AggregateUser\AggregateUserServiceAndRepositoryTests.cs" />
+    <Compile Include="DatabasePriming.cs" />
+    <Compile Include="IdentityUser\IdentityUserAndRepositoryTests.cs" />
+    <Compile Include="Membership\TestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Products\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Pleiades.Commerce.Domain\Pleiades.Commerce.Domain.csproj">
+      <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
+      <Name>Pleiades.Commerce.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Commerce.Persist\Pleiades.Commerce.Persist.csproj">
       <Project>{E616B84E-1830-4909-9A56-58A656EA9B5B}</Project>
       <Name>Pleiades.Commerce.Persist</Name>
@@ -85,6 +93,10 @@
     <ProjectReference Include="..\Pleiades.Framework\Pleiades.Framework.csproj">
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
       <Name>Pleiades.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pleiades.Web\Pleiades.Framework.Web.csproj">
+      <Project>{804F063C-505F-441E-B205-688C42E637AD}</Project>
+      <Name>Pleiades.Framework.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\Plieades.Data\Pleiades.Framework.Data.EF.csproj">
       <Project>{89303370-B830-4A89-8646-0F9D287AD657}</Project>

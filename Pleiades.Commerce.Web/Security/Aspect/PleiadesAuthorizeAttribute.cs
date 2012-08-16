@@ -5,32 +5,38 @@ using Pleiades.Framework.Identity.Model;
 using Pleiades.Framework.Injection;
 using Pleiades.Framework.Security;
 using Pleiades.Framework.Web.Security;
-using Pleiades.Commerce.Web.Security.Concrete;
-using Pleiades.Commerce.Web.Security.Execution.Composites;
-using Pleiades.Commerce.Web.Security.Model;
+using Pleiades.Framework.Web.Security.Execution.Composites;
+using Pleiades.Framework.Web.Security.Model;
 
-
-namespace Pleiades.Commerce.Web.Security.Aspect
+namespace Pleiades.Framework.Web.Security.Aspect
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public class CommerceAuthorizeAttribute : AuthorizeAttribute
+    public class PleiadesAuthorizeAttribute : AuthorizeAttribute
     {
-        public SystemAuthorizationComposite AuthorizeExecution { get; set; }
-        public SecurityCodeResponder Responder { get; set; }
+        public StepComposite<SystemAuthorizationContextBase> AuthorizeExecution { get; set; }
+        public PostbackSecurityResponder Responder { get; set; }
+        public PleiadesAuthorizeRule ContextRule { get; set; }
 
+        // System Authorization stuff
         public AuthorizationZone AuthorizationZone { get; set; }
         public AccountLevel AccountLevelRestriction { get; set; }
         public bool IsPaymentArea { get; set; }
 
 
-        public CommerceAuthorizeAttribute(SystemAuthorizationComposite authorizeExecution, SecurityCodeResponder responder)
+        public PleiadesAuthorizeAttribute(
+                StepComposite<SystemAuthorizationContextBase> authorizeExecution, 
+                PostbackSecurityResponder responder,
+                PleiadesAuthorizeRule contextRule)
         {
             this.AuthorizeExecution = authorizeExecution;
             this.Responder = responder;
+            this.ContextRule = contextRule;
         }
 
         public void OnAuthorization(AuthorizationContext filterContext)
         {
+            if (!this.ContextRule.MustAuthorize(filterContext)) return;
+            
             var context = 
                 new SystemAuthorizationContextBase()
                 {

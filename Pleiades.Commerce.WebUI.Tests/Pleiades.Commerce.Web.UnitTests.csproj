@@ -71,10 +71,6 @@
       <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
       <Name>Pleiades.Commerce.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Commerce.Web\Pleiades.Commerce.Web.csproj">
-      <Project>{E8A2DAB1-0764-441F-AE3A-74201ABA8C93}</Project>
-      <Name>Pleiades.Commerce.Web</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Framework.Membership\Pleiades.Framework.MembershipProvider.csproj">
       <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
       <Name>Pleiades.Framework.MembershipProvider</Name>

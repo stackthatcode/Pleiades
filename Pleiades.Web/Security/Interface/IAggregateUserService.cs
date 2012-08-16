@@ -1,8 +1,8 @@
-﻿using Pleiades.Commerce.Domain.Model.Users;
-using Pleiades.Framework.Identity.Model;
+﻿using Pleiades.Framework.Identity.Model;
 using Pleiades.Framework.MembershipProvider.Model;
+using Pleiades.Framework.Web.Security.Model;
 
-namespace Pleiades.Commerce.Domain.Interface
+namespace Pleiades.Framework.Web.Security.Interface
 {
     public interface IAggregateUserService
     {

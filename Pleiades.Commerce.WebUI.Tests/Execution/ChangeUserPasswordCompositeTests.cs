@@ -3,10 +3,10 @@ using Rhino.Mocks;
 using Pleiades.Framework.Execution;
 using Pleiades.Framework.Identity.Execution;
 using Pleiades.Framework.Injection;
-using Pleiades.Commerce.Web.Security.Execution.Abstract;
-using Pleiades.Commerce.Web.Security.Execution.Composites;
-using Pleiades.Commerce.Web.Security.Execution.Steps;
-using Pleiades.Commerce.Web.Security.Model;
+using Pleiades.Framework.Web.Security.Execution.Abstract;
+using Pleiades.Framework.Web.Security.Execution.Composites;
+using Pleiades.Framework.Web.Security.Execution.Steps;
+using Pleiades.Framework.Web.Security.Model;
 
 namespace Pleiades.Commerce.Web.UnitTests.Execution
 {

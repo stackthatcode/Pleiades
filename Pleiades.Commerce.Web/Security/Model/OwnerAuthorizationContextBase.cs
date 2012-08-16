@@ -6,7 +6,7 @@ using Pleiades.Framework.Identity.Model;
 using Pleiades.Framework.Security;
 using Pleiades.Commerce.Domain.Model.Users;
 
-namespace Pleiades.Commerce.Web.Security.Model
+namespace Pleiades.Framework.Web.Security.Model
 {
     public class OwnerAuthorizationContextBase : IOwnerAuthorizationContext
     {

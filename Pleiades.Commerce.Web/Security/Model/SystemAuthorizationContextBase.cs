@@ -5,7 +5,7 @@ using Pleiades.Framework.Identity.Interface;
 using Pleiades.Framework.Identity.Model;
 using Pleiades.Framework.Security;
 
-namespace Pleiades.Commerce.Web.Security.Model
+namespace Pleiades.Framework.Web.Security.Model
 {
     public class SystemAuthorizationContextBase : ISystemAuthorizationContext
     {

@@ -8,11 +8,10 @@ using Pleiades.Framework.MembershipProvider.Concrete;
 using Pleiades.Framework.MembershipProvider.Interface;
 using Pleiades.Framework.Web.Interface;
 using Pleiades.Framework.Web.Security;
-using Pleiades.Commerce.Web.Security.Concrete;
-using Pleiades.Commerce.Web.Security.Execution.Abstract;
-using Pleiades.Commerce.Web.Security.Execution.Composites;
-using Pleiades.Commerce.Web.Security.Execution.Steps;
-using Pleiades.Commerce.Web.Security.Model;
+using Pleiades.Framework.Web.Security.Execution.Abstract;
+using Pleiades.Framework.Web.Security.Execution.Composites;
+using Pleiades.Framework.Web.Security.Execution.Steps;
+using Pleiades.Framework.Web.Security.Model;
 
 namespace Pleiades.Commerce.Web
 {
@@ -32,7 +31,7 @@ namespace Pleiades.Commerce.Web
             builder.RegisterType<MembershipService>().As<IMembershipService>().InstancePerLifetimeScope();
 
             // Concrete
-            builder.RegisterType<SecurityCodeResponder>().As<ISecurityCodeFilterResponder>().InstancePerLifetimeScope();
+            builder.RegisterType<PostbackSecurityResponder>().As<ISecurityCodeResponder>().InstancePerLifetimeScope();
 
             // Composites
             builder.RegisterType<ChangeUserPasswordComposite>().InstancePerLifetimeScope();

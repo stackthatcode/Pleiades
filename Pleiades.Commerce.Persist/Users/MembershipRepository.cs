@@ -7,7 +7,7 @@ using Pleiades.Framework.Data.EF;
 using Pleiades.Framework.MembershipProvider.Interface;
 using Pleiades.Framework.MembershipProvider.Model;
 
-namespace Pleiades.Commerce.Persist.Users
+namespace Pleiades.Commerce.Persist.Security
 {
     public class MembershipRepository : EFGenericRepository<MembershipUser>, IMembershipRepository
     {

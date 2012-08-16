@@ -1,16 +1,16 @@
 FRONTRANGE - HOTZONE
 ====================
 *** Celebrate coming Out-of-the-Wild with The Great Refactoring #1! ***
+
 MVC RELATED
 ~~~~~~~~~~~
 - Fix the MVC Application with the Great Refactoring => IN PROGRESS
-* Add the Repository Shim to Global something => DONE
-* Fix the HomeController, and Tests => DONE
-* Fix the Login Page => DONE
-* Added Pleiades.Commerce.Initializer applet => DONE
 
-* Test the new Attributes w/ Filter => TODO
-- http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
+- Moved Commerce.Web in Framework.Web => MEGA SUCCESS(!!!)
+
+- LAST STEP: create interfaces for PleiadesAuthorizeRule & PostbackSecurityResponder => TODO
+
+* Test the new Attributes w/ Filter => IN PROGRESS
 - http://haacked.com/archive/2011/04/25/conditional-filters.aspx
 
 * Fix the web.config with assembly references => IN PROGRESS
@@ -32,6 +32,11 @@ ARCHITECTURE
 2.) Delete Plieades.Commerce.Web
 3.) Rename Pleiades.Commerce.Initializer => Pleiades.Commerce.IntegrationPoint
 FUTURE DIRECTIONS: NHIBERNATE + MYSQL => and eventually, RAVENDB(!!!)
+
+SECURITY
+--------
+1.) Easily the most important security article evar => - http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
+2.) Look up Troy Hunt's article's, too
 
 TEST BACKLOG -- FEEL THE BURN!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

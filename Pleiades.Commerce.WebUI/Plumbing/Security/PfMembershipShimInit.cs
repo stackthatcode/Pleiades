@@ -1,7 +1,8 @@
 ﻿using System;
 using Pleiades.Framework.MembershipProvider.Providers;
 using Pleiades.Commerce.Persist;
-using Pleiades.Commerce.Persist.Users;
+using Pleiades.Commerce.Persist.Security;
+
 namespace Pleiades.Commerce.Initializer
 {
     public class PfMembershipShimInit

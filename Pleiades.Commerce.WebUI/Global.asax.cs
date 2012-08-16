@@ -1,25 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
+using Pleiades.Framework.Injection;
 using Pleiades.Framework.MembershipProvider.Providers;
+using Pleiades.Framework.Web.Security;
 using Pleiades.Commerce.Initializer;
-using Pleiades.Commerce.Persist;
-using Pleiades.Commerce.Persist.Users;
+using Pleiades.Framework.Web.Security.Aspect;
+using Pleiades.Commerce.WebUI.Plumbing.Autofac;
 using Pleiades.Commerce.WebUI.Plumbing.ErrorHandling;
 
 namespace Pleiades.Commerce.WebUI
 {
     public class CommerceHttpApplication : HttpApplication
     {
+        IGenericContainer Container { get; set; }
+
         protected void Application_Start()
         {
             // Components
             RegisterDIContainer();
+
+            // Membership
             PfMembershipShimInit.SetFactory();
 
             // Routes
@@ -29,20 +33,24 @@ namespace Pleiades.Commerce.WebUI
             // Filters
             RegisterGlobalFilters();            
 
+            // Model Binders
             // ModelBinders.Binders.Add(typeof(DomainUser), new DomainUserBinder());
 
-            // Uncomment to enable Phil Haack's Tool => ***SAVE***
+            // Phil Haack's Tool => ***SAVE***
             // RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
         }
 
-        public static void RegisterDIContainer()
+        public void RegisterDIContainer()
         {
+            // Build the container
             var builder = new ContainerBuilder();
+            builder.RegisterModule<CommerceRootModule>();
             builder.RegisterControllers(typeof(CommerceHttpApplication).Assembly);
-            builder.RegisterModule<Pleiades.Commerce.Initializer.CommerceRootModule>();
             var container = builder.Build();
 
+            // Wire container into ASP.NET MVC
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            this.Container = new AutofacContainer(container.BeginLifetimeScope());
         }
 
         public static void RegisterDefaultRoutes()
@@ -50,9 +58,12 @@ namespace Pleiades.Commerce.WebUI
             RouteTable.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
         }
 
-        public static void RegisterGlobalFilters()
+        public void RegisterGlobalFilters()
         {
-            GlobalFilters.Filters.Add(new CustomErrorAttribute());
+            GlobalFilters.Filters.Add(this.Container.Resolve<PleiadesAuthorizeAttribute>());
+            
+            // TODO: respond to this one
+            // GlobalFilters.Filters.Add(new CustomErrorAttribute());
         }
     }
 }

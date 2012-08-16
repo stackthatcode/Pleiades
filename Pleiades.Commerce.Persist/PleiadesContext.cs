@@ -4,8 +4,7 @@ using System.Linq;
 using System.Data.Entity;
 using Pleiades.Framework.Identity.Model;
 using Pleiades.Framework.MembershipProvider.Model;
-using Pleiades.Commerce.Domain.Model.Users;
-using Pleiades.Commerce.Domain.Model.Products;
+using Pleiades.Framework.Web.Security.Model;
 
 
 namespace Pleiades.Commerce.Persist

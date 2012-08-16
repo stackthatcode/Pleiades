@@ -2,11 +2,8 @@
 using System.Web.Security;
 using System.Collections.Generic;
 using System.Linq;
-using Pleiades.Commerce.Domain.Concrete;
-using Pleiades.Commerce.Domain.Interface;
-using Pleiades.Commerce.Domain.Model.Users;
 using Pleiades.Commerce.Persist;
-using Pleiades.Commerce.Persist.Users;
+using Pleiades.Commerce.Persist.Security;
 using Pleiades.Framework.Data;
 using Pleiades.Framework.Identity.Concrete;
 using Pleiades.Framework.Identity.Model;
@@ -14,11 +11,13 @@ using Pleiades.Framework.MembershipProvider.Concrete;
 using Pleiades.Framework.MembershipProvider.Interface;
 using Pleiades.Framework.MembershipProvider.Model;
 using Pleiades.Framework.MembershipProvider.Providers;
+using Pleiades.Framework.Web.Security.Concrete;
+using Pleiades.Framework.Web.Security.Interface;
 using Pleiades.Framework.Utility;
 using NUnit.Framework;
 
 
-namespace Pleiades.Commerce.Web.IntegrationTests.Users
+namespace Pleiades.Commerce.IntegrationTests.AggregateUser
 {
     [TestFixture]
     public class AggregateUserServiceAndRepositoryTests

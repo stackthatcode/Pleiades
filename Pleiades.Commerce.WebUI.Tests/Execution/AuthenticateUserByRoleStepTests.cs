@@ -14,8 +14,8 @@ using Pleiades.Framework.MembershipProvider.Interface;
 using Pleiades.Framework.MembershipProvider.Model;
 using Pleiades.Commerce.Domain.Interface;
 using Pleiades.Commerce.Domain.Model.Users;
-using Pleiades.Commerce.Web.Security.Execution.Steps;
-using Pleiades.Commerce.Web.Security.Model;
+using Pleiades.Framework.Web.Security.Execution.Steps;
+using Pleiades.Framework.Web.Security.Model;
 
 namespace Pleiades.Commerce.WebUI.TestsControllers
 {

@@ -88,12 +88,17 @@
     <Compile Include="Areas\Admin\Models\LogOnViewModel.cs" />
     <Compile Include="Areas\Public\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Public\PublicAreaRegistration.cs" />
+    <Compile Include="CommerceRootModule.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Areas\Public\Models\ProductListModel.cs" />
+    <Compile Include="Plumbing\Autofac\AutofacContainer.cs" />
     <Compile Include="Plumbing\ErrorHandling\CustomErrorAttribute.cs" />
     <Compile Include="Plumbing\Navigation\OutboundNavigation.cs" />
+    <Compile Include="Plumbing\Security\CommerceAuthorizationRule.cs" />
+    <Compile Include="Plumbing\Security\CommerceSecurityCodeResponder.cs" />
+    <Compile Include="Plumbing\Security\PfMembershipShimInit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -168,17 +173,9 @@
       <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
       <Name>Pleiades.Commerce.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Commerce.Initializer\Pleiades.Commerce.Initializer.csproj">
-      <Project>{8E922D95-E286-4AF1-89E2-943EA247B806}</Project>
-      <Name>Pleiades.Commerce.Initializer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Commerce.Persist\Pleiades.Commerce.Persist.csproj">
       <Project>{E616B84E-1830-4909-9A56-58A656EA9B5B}</Project>
       <Name>Pleiades.Commerce.Persist</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Commerce.Web\Pleiades.Commerce.Web.csproj">
-      <Project>{E8A2DAB1-0764-441F-AE3A-74201ABA8C93}</Project>
-      <Name>Pleiades.Commerce.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pleiades.Framework.Membership\Pleiades.Framework.MembershipProvider.csproj">
       <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>

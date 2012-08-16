@@ -2,7 +2,7 @@
 using Autofac;
 using Pleiades.Framework.Injection;
 
-namespace Pleiades.Commerce.Initializer
+namespace Pleiades.Commerce.WebUI.Plumbing.Autofac
 {
     public class AutofacContainer : IGenericContainer
     {

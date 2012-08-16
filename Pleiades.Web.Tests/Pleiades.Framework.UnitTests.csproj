@@ -73,6 +73,11 @@
     <Compile Include="Identity\Execution\StubUserGenerator.cs" />
     <Compile Include="Membership\Provider\MembershipProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\Security\AuthenticateUserByRoleStepTests.cs" />
+    <Compile Include="Web\Security\ChangeUserPasswordCompositeTests.cs" />
+    <Compile Include="Web\Security\ChangeUserPasswordStepTests.cs" />
+    <Compile Include="Web\Security\GetUserFromHttpContextStepTests.cs" />
+    <Compile Include="Web\Security\LogoutStepTests.cs" />
     <Compile Include="Web\HttpContext\HttpContextStubTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -100,9 +105,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Membership\Execution\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
