@@ -7,7 +7,7 @@ using Pleiades.Framework.Web.Security.Model;
 
 namespace Pleiades.Framework.Web.Security.Execution.Composites
 {
-    public class ChangeUserPasswordComposite : SimpleOwnerAuthComposite<ChangeUserPasswordContext>
+    public class ChangeUserPasswordComposite : OwnerAuthCompositeBase<ChangeUserPasswordContext>
     {
         public ChangeUserPasswordComposite(IGenericContainer container, ChangeUserPasswordStep step) 
             : base(container, step)

@@ -5,6 +5,7 @@ using Pleiades.Framework.Identity.Model;
 using Pleiades.Framework.Injection;
 using Pleiades.Framework.Security;
 using Pleiades.Framework.Web.Security;
+using Pleiades.Framework.Web.Security.Interface;
 using Pleiades.Framework.Web.Security.Execution.Composites;
 using Pleiades.Framework.Web.Security.Model;
 
@@ -14,8 +15,8 @@ namespace Pleiades.Framework.Web.Security.Aspect
     public class PleiadesAuthorizeAttribute : AuthorizeAttribute
     {
         public StepComposite<SystemAuthorizationContextBase> AuthorizeExecution { get; set; }
-        public PostbackSecurityResponder Responder { get; set; }
-        public PleiadesAuthorizeRule ContextRule { get; set; }
+        public IPostbackSecurityResponder Responder { get; set; }
+        public IAuthorizationRule AuthorizationRule { get; set; }
 
         // System Authorization stuff
         public AuthorizationZone AuthorizationZone { get; set; }
@@ -23,19 +24,18 @@ namespace Pleiades.Framework.Web.Security.Aspect
         public bool IsPaymentArea { get; set; }
 
 
-        public PleiadesAuthorizeAttribute(
-                StepComposite<SystemAuthorizationContextBase> authorizeExecution, 
-                PostbackSecurityResponder responder,
-                PleiadesAuthorizeRule contextRule)
+        public PleiadesAuthorizeAttribute(IGenericContainer container)
         {
-            this.AuthorizeExecution = authorizeExecution;
-            this.Responder = responder;
-            this.ContextRule = contextRule;
+            this.AuthorizeExecution = 
+                container.ResolveKeyed<StepComposite<SystemAuthorizationContextBase>>(
+                    FrameworkWebModule.SystemAuthorizationStepKey);
+            this.Responder = container.Resolve<IPostbackSecurityResponder>();
+            this.AuthorizationRule = container.Resolve<IAuthorizationRule>();
         }
 
-        public void OnAuthorization(AuthorizationContext filterContext)
+        public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            if (!this.ContextRule.MustAuthorize(filterContext)) return;
+            if (!this.AuthorizationRule.MustAuthorize(filterContext)) return;
             
             var context = 
                 new SystemAuthorizationContextBase()
@@ -47,7 +47,7 @@ namespace Pleiades.Framework.Web.Security.Aspect
                 };
             
             this.AuthorizeExecution.Execute(context);
-            this.Responder.ProcessSecurityCode(context.SecurityResponseCode, filterContext);
+            this.Responder.Execute(context.SecurityResponseCode, filterContext);
         }
     }
 }

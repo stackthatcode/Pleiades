@@ -17,5 +17,10 @@ namespace Pleiades.Commerce.WebUI.Plumbing.Autofac
         {
             return this.LifetimeScope.Resolve<T>();
         }
+
+        public T ResolveKeyed<T>(object key)
+        {
+            return this.LifetimeScope.ResolveKeyed<T>(key);
+        }
     }
 }

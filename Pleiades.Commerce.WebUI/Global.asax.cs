@@ -44,7 +44,7 @@ namespace Pleiades.Commerce.WebUI
         {
             // Build the container
             var builder = new ContainerBuilder();
-            builder.RegisterModule<CommerceRootModule>();
+            builder.RegisterModule<CommerceWebUIModule>();
             builder.RegisterControllers(typeof(CommerceHttpApplication).Assembly);
             var container = builder.Build();
 

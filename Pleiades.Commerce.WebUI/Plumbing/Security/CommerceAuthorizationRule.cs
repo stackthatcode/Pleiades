@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Web.Mvc;
-using Pleiades.Framework.Web.Security.Aspect;
+using Pleiades.Framework.Web.Security.Interface;
 using Pleiades.Commerce.WebUI.Areas.Admin.Controllers;
 using Pleiades.Commerce.WebUI.Areas.Public.Controllers;
 
 namespace Pleiades.Commerce.WebUI.Plumbing.Security
 {
-    public class CommerceAuthorizationRule : PleiadesAuthorizeRule 
+    public class CommerceAuthorizationRule : IAuthorizationRule 
     {
-        public override bool MustAuthorize(AuthorizationContext filterContext)
+        public bool MustAuthorize(AuthorizationContext filterContext)
         {
             if (filterContext.Controller is ProductsController)
                 return false;

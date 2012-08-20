@@ -48,7 +48,7 @@ namespace Pleiades.Commerce.Initializer
         public static void RegisterDIContainer()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterModule<CommerceRootModule>();
+            builder.RegisterModule<CommerceWebUIModule>();
             var container = builder.Build();
             LifetimeScope = container.BeginLifetimeScope();
         }

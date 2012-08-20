@@ -1,10 +1,10 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
-using Pleiades.Framework.Web.Security.Aspect;
+using Pleiades.Framework.Web.Security.Concrete;
 
 namespace Pleiades.Commerce.WebUI.Plumbing.Security
 {
-    public class CommerceSecurityCodeResponder : PostbackSecurityResponder
+    public class CommerceSecurityCodeResponder : DefaultResponder
     {
         protected override void AccessDeniedSolicitLogon(System.Web.Mvc.AuthorizationContext filterContext)
         {
