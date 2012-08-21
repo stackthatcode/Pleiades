@@ -33,7 +33,7 @@
             <div style="clear:both;"></div>
             
             <% Html.EnableClientValidation(); %>
-            <% using (Html.BeginForm("Logon", "Login", FormMethod.Post, new { autocomplete = "off" }))
+            <% using (Html.BeginForm("Authenticate", "Login", FormMethod.Post, new { autocomplete = "off" }))
             { %>
                 <div style="float:left;">
                 <h4>Username</h4>
@@ -53,7 +53,7 @@
 
         <p>Please enter valid credentials to access the administrative area.</p>
         <p><a href="#">Click here</a> if you forgot your password.</p>
-        <p>To return to the Storefront, <%: Html.RouteLink("click here", OutboundNavigation.PublicHome) %>.</p>
+        <p>To return to the Storefront, <%: Html.RouteLink("click here", OutboundNavigation.PublicHome()) %>.</p>
 
     </div>
 </body>

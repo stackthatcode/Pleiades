@@ -1,6 +1,16 @@
 Backlog Burndown
 ================
 
+8/21/2012
+---------
+Too much to list since last time (AGAIN!)
+
+- Moved Commerce.Web in Framework.Web => MEGA SUCCESS(!!!)
+- LAST STEP: create interfaces for PleiadesAuthorizeRule & PostbackSecurityResponder => DONE
+* Test the new Attributes w/ Filter => DONE
+- http://haacked.com/archive/2011/04/25/conditional-filters.aspx => DONE
+=> *** HOT ZONE *** - fix the Attribute Logic and Security should be under wraps.  Add an extra State Property for Successful Authorize => DONE - IT'S CALLED SECURITY CODE
+
 8/12/2012
 ---------
 * Add the Repository Shim to Global something => DONE

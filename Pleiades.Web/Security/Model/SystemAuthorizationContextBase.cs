@@ -9,8 +9,9 @@ namespace Pleiades.Framework.Web.Security.Model
 {
     public class SystemAuthorizationContextBase : ISystemAuthorizationContext
     {
-        public SystemAuthorizationContextBase()
+        public SystemAuthorizationContextBase(HttpContextBase httpContext)
         {
+            this.HttpContext = httpContext;
             this.SecurityResponseCode = SecurityResponseCode.Allowed;
             this.IsExecutionStateValid = true;
         }
@@ -18,14 +19,14 @@ namespace Pleiades.Framework.Web.Security.Model
         // Http 
         public HttpContextBase HttpContext { get; set; }
 
-        // User
-        public AggregateUser ThisUser { get; set; }
-        public IdentityUser CurrentIdentity { get { return ThisUser == null ? null : ThisUser.IdentityUser; } }
-
         // Identity-based System-level Authorization Requirements
         public AuthorizationZone AuthorizationZone { get; set; }
         public AccountLevel AccountLevelRestriction { get; set; }
         public bool IsPaymentArea { get; set; }
+
+        // User
+        public AggregateUser ThisUser { get; set; }
+        public IdentityUser CurrentIdentity { get { return ThisUser == null ? null : ThisUser.IdentityUser; } }
 
         // Step Execution Results
         public SecurityResponseCode SecurityResponseCode { get; set; }

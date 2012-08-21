@@ -8,7 +8,7 @@ using Pleiades.Framework.Web.Security.Model;
 namespace Pleiades.Framework.Web.Security.Execution.Steps
 {
     public class AuthenticateUserByRoleStep : Step<AuthenticateUserByRoleContext>
-    {        
+    {
         public IMembershipService MembershipService { get; set; }
         public IAggregateUserRepository AggregateUserRepository { get; set; }
         public IFormsAuthenticationService FormsAuthService { get; set; }

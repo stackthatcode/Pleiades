@@ -96,13 +96,13 @@
     <Compile Include="Plumbing\Autofac\AutofacContainer.cs" />
     <Compile Include="Plumbing\ErrorHandling\CustomErrorAttribute.cs" />
     <Compile Include="Plumbing\Navigation\OutboundNavigation.cs" />
-    <Compile Include="Plumbing\Security\CommerceAuthorizationRule.cs" />
-    <Compile Include="Plumbing\Security\CommerceSecurityCodeResponder.cs" />
+    <Compile Include="Plumbing\Security\MySystemAuthContextBuilder.cs" />
+    <Compile Include="Plumbing\Security\MySecurityCodeResponder.cs" />
     <Compile Include="Plumbing\Security\PfMembershipShimInit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Login\Logon.aspx" />
+    <Content Include="Areas\Admin\Views\Login\Authenticate.aspx" />
     <Content Include="Areas\Admin\Views\Home\HeaderSummary.ascx" />
     <Content Include="Areas\Admin\Views\Home\Index.aspx" />
     <Content Include="Areas\Admin\Views\Shared\Admin.Master" />

@@ -26,7 +26,7 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
         public void Logon_Get_Returns_Default_View()
         {
             var controller = new LoginController(null);
-            var result = controller.Logon();
+            var result = controller.Authenticate();
             result.ShouldBeDefaultView();
         }
 
@@ -76,7 +76,7 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
             var controller = new LoginController(container);
 
             // Act
-            var result = controller.Logon(model, null);
+            var result = controller.Authenticate(model, null);
 
             // Assert
             container.VerifyAllExpectations();
@@ -95,7 +95,7 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
             var controller = new LoginController(container);
             
             // Act
-            var result = controller.Logon(model, null);
+            var result = controller.Authenticate(model, null);
 
             // Assert
             container.VerifyAllExpectations();
@@ -114,7 +114,7 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
             var controller = new LoginController(container);
 
             // Act
-            var result = controller.Logon(model, "MyUrl.aspx");
+            var result = controller.Authenticate(model, "MyUrl.aspx");
 
             // Assert
             container.VerifyAllExpectations();
@@ -132,7 +132,7 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
 
             var controller = new LoginController(container);
             var result = controller.Logout();
-            result.ShouldBeRedirectionTo(OutboundNavigation.PublicHome);
+            result.ShouldBeRedirectionTo(OutboundNavigation.PublicHome());
         }
     }
 }

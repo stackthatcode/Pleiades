@@ -58,6 +58,8 @@
     <Compile Include="Routing\DefaultRouteTests.cs" />
     <Compile Include="Routing\ProductRouteTests.cs" />
     <Compile Include="Routing\RoutingTestBase.cs" />
+    <Compile Include="Security\TestForMySecurityCodeResponder.cs" />
+    <Compile Include="Security\TestsForMySecurityContextBuilder.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

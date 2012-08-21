@@ -30,10 +30,7 @@ namespace Pleiades.Framework.UnitTests.Web.Security
             var step = new GetUserFromContextStep(aggrUserRepository, formsAuthService, membershipService);
             var httpContext = HttpContextStubFactory.Make(AuthenticatedName: "12345678", IsAuthenticated: true);
 
-            var context = new SystemAuthorizationContextBase()
-            {
-                HttpContext = httpContext,
-            };
+            var context = new SystemAuthorizationContextBase(httpContext);
 
             // Act
             step.Execute(context);
@@ -62,10 +59,7 @@ namespace Pleiades.Framework.UnitTests.Web.Security
             var step = new GetUserFromContextStep(aggrUserRepository, formsAuthService, membershipService);
             var httpContext = HttpContextStubFactory.Make(AuthenticatedName: "12345678", IsAuthenticated: true);
 
-            var context = new SystemAuthorizationContextBase()
-            {
-                HttpContext = httpContext,
-            };
+            var context = new SystemAuthorizationContextBase(httpContext);
 
             // Act
             step.Execute(context);
@@ -90,10 +84,7 @@ namespace Pleiades.Framework.UnitTests.Web.Security
             var step = new GetUserFromContextStep(aggrUserRepository, formsAuthService, membershipService);
             var httpContext = HttpContextStubFactory.Make(AuthenticatedName: null, IsAuthenticated: false);
 
-            var context = new SystemAuthorizationContextBase()
-            {
-                HttpContext = httpContext,
-            };
+            var context = new SystemAuthorizationContextBase(httpContext);
 
             // Act
             step.Execute(context);

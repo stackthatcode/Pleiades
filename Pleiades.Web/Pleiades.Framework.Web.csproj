@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Security\Concrete\AggregateUserService.cs" />
-    <Compile Include="Security\Interface\IAuthorizationRule.cs" />
+    <Compile Include="Security\Interface\ISystemAuthContextBuilder.cs" />
     <Compile Include="Security\Interface\IPostbackSecurityResponder.cs" />
     <Compile Include="MvcHelpers\StyleTagGenerator.cs" />
     <Compile Include="MvcHelpers\FormLineExtensions.cs" />
@@ -69,7 +69,7 @@
     <Compile Include="MvcHelpers\NavigationLink.cs" />
     <Compile Include="MvcHelpers\NavigationLinkFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\Concrete\DefaultAuthorizationRule.cs" />
+    <Compile Include="Security\Concrete\DefaultAuthContextBuilder.cs" />
     <Compile Include="Security\Aspect\PleiadesAuthorizeAttribute.cs" />
     <Compile Include="MvcHelpers\EnumToSelectList.cs" />
     <Compile Include="Security\Execution\Abstract\OwnerAuthCompositeBase.cs" />

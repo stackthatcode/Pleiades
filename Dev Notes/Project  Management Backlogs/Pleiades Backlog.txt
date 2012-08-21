@@ -6,18 +6,16 @@ MVC RELATED
 ~~~~~~~~~~~
 - Fix the MVC Application with the Great Refactoring => IN PROGRESS
 
-- Moved Commerce.Web in Framework.Web => MEGA SUCCESS(!!!)
-- LAST STEP: create interfaces for PleiadesAuthorizeRule & PostbackSecurityResponder => DONE
-* Test the new Attributes w/ Filter => IN PROGRESS
-- http://haacked.com/archive/2011/04/25/conditional-filters.aspx => IN PROGRESS
-
-=> *** HOT ZONE *** - fix the Attribute Logic and Security should be under wraps.  Add an extra State Property for Successful Authorize?
-
-
-* Fix the web.config with assembly references => IN PROGRESS
-* Fix the Admin Manager => TODO
+- Test the Security Cookie/Forms Authentication stuff => TODO
+*** Fix the Admin Manager => TODO
+*** Fix the Category Controller stuff => TODO
 - Refactor the Standard Control Framework => TODO
 * http://stackoverflow.com/questions/6308794/html-validationmessagefor-custom-validationmessage-always-shown => AMONG OTHER THINGS
+* Fix the web.config with assembly references => IN PROGRESS
+
+- Upgrade to ASP.NET MVC 4.0 (4.5?) => TODO
+- Web Optimization Toolkit => TODO
+
 
 DESIGN & TECH BACKLOG
 ~~~~~~~~~~~~~~~~~~~~~

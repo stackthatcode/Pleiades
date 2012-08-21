@@ -25,7 +25,7 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult Logon()
+        public ActionResult Authenticate()
         {
             if (!ModelState.IsValid)
             {
@@ -35,7 +35,7 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Logon(LogOnViewModel model, string returnUrl)
+        public ActionResult Authenticate(LogOnViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
                 return Redirect(returnUrl);
             }
 
-            return new RedirectToRouteResult(OutboundNavigation.AdminHome);
+            return new RedirectToRouteResult(OutboundNavigation.AdminHome());
         }
 
         [HttpGet]
@@ -75,7 +75,7 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
         {
             var step = this.Container.Resolve<LogoutStep>();
             step.Execute(new BareContext());
-            return new RedirectToRouteResult(OutboundNavigation.PublicHome);
+            return new RedirectToRouteResult(OutboundNavigation.PublicHome());
         }
     }
 }
