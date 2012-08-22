@@ -9,7 +9,7 @@ using NUnit.Framework;
 
 namespace Pleiades.Framework.TestHelpers.Web
 {
-    public class RoutingHelper
+    public static class RoutingHelper
     {
         public static void BuildAreaRegistrations(List<AreaRegistration> areaRegistrations)
         {
@@ -56,6 +56,8 @@ namespace Pleiades.Framework.TestHelpers.Web
 
             // Verification for explicit match
             var expectedRouteDictionary = new RouteValueDictionary(expectedRouteValues);
+            var expectedDataTokenDictionary = new RouteValueDictionary(expectedDataTokens);
+
             foreach (var expectedValue in expectedRouteDictionary)
             {
                 if (expectedValue.Value == null)
@@ -63,14 +65,18 @@ namespace Pleiades.Framework.TestHelpers.Web
                 else
                     routeData.Values[expectedValue.Key].ShouldEqual(expectedValue.Value);
             }
-
-            var expectedDataTokenDictionary = new RouteValueDictionary(expectedDataTokens);
             foreach (var expectedToken in expectedDataTokenDictionary)
             {
                 routeData.DataTokens[expectedToken.Key].ShouldEqual(expectedToken.Value);
             }
 
             return routeData;
+        }
+
+        public static void MatchesExpectedRouteDictionary(this RouteValueDictionary actual, RouteValueDictionary expected)
+        {
+            actual.ToList().ForEach(actualKVP => Assert.AreEqual(expected[actualKVP.Key], actualKVP.Value));
+            expected.ToList().ForEach(expectedKVP => Assert.AreEqual(expected[expectedKVP.Key], expectedKVP.Value));
         }
     }
 }

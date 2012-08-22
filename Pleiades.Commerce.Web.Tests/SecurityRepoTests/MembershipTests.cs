@@ -15,7 +15,7 @@ using Pleiades.Framework.Utility;
 namespace Pleiades.Commerce.IntegrationTests.Membership
 {
     [TestFixture]
-    public class TestFixture
+    public class MembershipTests
     {
         [TestFixtureSetUp]
         public void TestSetup()

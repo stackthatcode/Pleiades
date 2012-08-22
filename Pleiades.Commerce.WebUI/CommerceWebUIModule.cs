@@ -18,7 +18,7 @@ namespace Pleiades.Commerce.WebUI
             builder.RegisterType<AutofacContainer>().As<IGenericContainer>().InstancePerLifetimeScope();
 
             // External Modules
-            FrameworkWebModule.RegisterAuthorizationRule<MySystemAuthContextBuilder>();
+            FrameworkWebModule.RegisterAuthContextBuilder<MySystemAuthContextBuilder>();
             FrameworkWebModule.RegisterPostbackResponder<MySecurityCodeResponder>();
             builder.RegisterModule<FrameworkWebModule>();
             builder.RegisterModule<CommercePersistModule>();

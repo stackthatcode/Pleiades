@@ -14,8 +14,7 @@ namespace Pleiades.Commerce.WebUI.Plumbing.Security
     {
         public SystemAuthorizationContextBase Build(AuthorizationContext filterContext)
         {
-            if (filterContext.Controller is LoginController ||
-                filterContext.Controller is ProductsController)
+            if (filterContext.Controller is LoginController || filterContext.Controller is ProductsController)
             {
                 return new SystemAuthorizationContextBase(filterContext.HttpContext)
                 {

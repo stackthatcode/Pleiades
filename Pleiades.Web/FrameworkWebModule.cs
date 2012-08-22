@@ -27,7 +27,7 @@ namespace Pleiades.Framework.Web
         
         static FrameworkWebModule()
         {
-            RegisterAuthorizationRule<DefaultAuthContextBuilder>();
+            RegisterAuthContextBuilder<DefaultAuthContextBuilder>();
             RegisterPostbackResponder<DefaultResponder>();
             RegisterSystemAuthorizer<SystemAuthorizationComposite>();
         }
@@ -65,7 +65,7 @@ namespace Pleiades.Framework.Web
             builder.RegisterType<LogoutStep>().InstancePerLifetimeScope();
         }
 
-        public static void RegisterAuthorizationRule<T>() where T : ISystemAuthContextBuilder
+        public static void RegisterAuthContextBuilder<T>() where T : ISystemAuthContextBuilder
         {
             AuthorizationRuleRegistration = (builder) => 
                 builder.RegisterType<T>().As<ISystemAuthContextBuilder>().InstancePerLifetimeScope();

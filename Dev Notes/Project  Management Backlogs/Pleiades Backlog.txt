@@ -6,6 +6,7 @@ MVC RELATED
 ~~~~~~~~~~~
 - Fix the MVC Application with the Great Refactoring => IN PROGRESS
 
+- Add Logout Button => TODO
 - Test the Security Cookie/Forms Authentication stuff => TODO
 *** Fix the Admin Manager => TODO
 *** Fix the Category Controller stuff => TODO
@@ -27,9 +28,6 @@ DESIGN & TECH BACKLOG
 
 ARCHITECTURE
 ------------
-1.) Move all Pleiades.Commerce.Web => Pleiades.Commerce.AggregateUser
-2.) Delete Plieades.Commerce.Web
-3.) Rename Pleiades.Commerce.Initializer => Pleiades.Commerce.IntegrationPoint
 FUTURE DIRECTIONS: NHIBERNATE + MYSQL => and eventually, RAVENDB(!!!)
 
 SECURITY

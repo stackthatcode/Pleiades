@@ -61,6 +61,7 @@ namespace Pleiades.Framework.TestHelpers.Web
 		{
             var request = MockRepository.GenerateStub<HttpRequestBase>();
             request.Stub(x => x.Url).Return(new Uri(args.Url));
+            request.Stub(x => x.RawUrl).Return(args.Url);
             request.Stub(x => x.HttpMethod).Return(args.HttpMethod);
             request.Stub(x => x.AppRelativeCurrentExecutionFilePath).Return(args.AppRelativeCurrentExecutionFilePath);
             request.Stub(x => x.IsAuthenticated).Return(args.IsAuthenticated);

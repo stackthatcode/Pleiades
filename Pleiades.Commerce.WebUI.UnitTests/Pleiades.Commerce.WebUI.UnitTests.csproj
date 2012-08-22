@@ -74,6 +74,10 @@
       <Project>{EC92BFF1-A3ED-4A02-B5EC-833E55830967}</Project>
       <Name>Pleiades.Commerce.WebUI</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Pleiades.Framework.Security\Pleiades.Framework.Identity.csproj">
+      <Project>{7F1F1DA2-6F72-4D68-A06C-D3379941B060}</Project>
+      <Name>Pleiades.Framework.Identity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Framework\Pleiades.Framework.csproj">
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
       <Name>Pleiades.Framework</Name>

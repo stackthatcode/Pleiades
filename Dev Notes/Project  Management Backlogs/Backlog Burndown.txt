@@ -1,6 +1,13 @@
 Backlog Burndown
 ================
 
+8/22/2012
+=========
+GREAT! => Created Unit Tests for Security Plumbing => DONE
+1.) Move all Pleiades.Commerce.Web => Pleiades.Commerce.AggregateUser => DONE
+2.) Delete Plieades.Commerce.Web => DONE
+3.) Rename Pleiades.Commerce.Initializer => Pleiades.Commerce.IntegrationPoint => DONE
+
 8/21/2012
 ---------
 Too much to list since last time (AGAIN!)
