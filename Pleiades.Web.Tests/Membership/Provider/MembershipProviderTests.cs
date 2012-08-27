@@ -4,11 +4,11 @@ using System.Linq;
 using System.Web.Security;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Pleiades.Framework.MembershipProvider.Interface;
-using Model = Pleiades.Framework.MembershipProvider.Model;
-using Pleiades.Framework.MembershipProvider.Providers;
+using Pleiades.Web.Security.Interface;
+using Model = Pleiades.Web.Security.Model;
+using Pleiades.Web.Security.Providers;
 
-namespace Pleiades.Framework.UnitTests.Membership.Provider
+namespace Pleiades.UnitTests.Membership.Provider
 {
     [TestFixture]
     public class MembershipProviderTests

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Web.Mvc;
-using Pleiades.Framework.Identity.Model;
-using Pleiades.Framework.Web.Security.Interface;
-using Pleiades.Framework.Web.Security.Model;
-using Pleiades.Commerce.WebUI.Areas.Admin.Controllers;
-using Pleiades.Commerce.WebUI.Areas.Public.Controllers;
+using Pleiades.Web.Security.Interface;
+using Pleiades.Web.Security.Model;
+using Commerce.WebUI.Areas.Admin.Controllers;
+using Commerce.WebUI.Areas.Public.Controllers;
 
-namespace Pleiades.Commerce.WebUI.Plumbing.Security
+namespace Commerce.WebUI.Plumbing.Security
 {
     // *** TODO: Create a Unit Test for this guy ***
 
@@ -14,7 +13,7 @@ namespace Pleiades.Commerce.WebUI.Plumbing.Security
     {
         public SystemAuthorizationContextBase Build(AuthorizationContext filterContext)
         {
-            if (filterContext.Controller is LoginController || filterContext.Controller is ProductsController)
+            if (filterContext.Controller is AuthController || filterContext.Controller is ProductsController)
             {
                 return new SystemAuthorizationContextBase(filterContext.HttpContext)
                 {

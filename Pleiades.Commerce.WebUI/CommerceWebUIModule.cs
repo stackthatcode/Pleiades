@@ -1,14 +1,14 @@
 ﻿using System;
 using Autofac;
-using Pleiades.Framework.Injection;
-using Pleiades.Framework.Web;
-using Pleiades.Framework.Web.Security.Aspect;
-using Pleiades.Framework.Web.Security.Interface;
-using Pleiades.Commerce.Persist;
-using Pleiades.Commerce.WebUI.Plumbing.Autofac;
-using Pleiades.Commerce.WebUI.Plumbing.Security;
+using Pleiades.Injection;
+using Pleiades.Web;
+using Pleiades.Web.Security.Aspect;
+using Pleiades.Web.Security.Interface;
+using Commerce.Persist;
+using Commerce.WebUI.Plumbing.Autofac;
+using Commerce.WebUI.Plumbing.Security;
 
-namespace Pleiades.Commerce.WebUI
+namespace Commerce.WebUI
 {
     public class CommerceWebUIModule : Autofac.Module
     {

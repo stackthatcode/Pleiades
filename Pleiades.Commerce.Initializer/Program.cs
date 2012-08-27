@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Autofac;
-using Pleiades.Framework.Data;
-using Pleiades.Framework.Identity.Model;
-using Pleiades.Framework.MembershipProvider.Model;
-using Pleiades.Framework.Utility;
-using Pleiades.Framework.Web.Security.Interface;
-using Pleiades.Commerce.Domain.Interface;
-using Pleiades.Commerce.Persist;
-using Pleiades.Commerce.Persist.Security;
-using Pleiades.Commerce.WebUI;
+using Pleiades.Data;
+using Pleiades.Utility;
+using Pleiades.Web.Security.Model;
+using Pleiades.Web.Security.Interface;
+using Commerce.Domain.Interface;
+using Commerce.Persist;
+using Commerce.Persist.Security;
+using Commerce.WebUI;
 
-namespace Pleiades.Commerce.Initializer
+namespace CommerceInitializer
 {
     class Program
     {

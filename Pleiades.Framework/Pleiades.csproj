@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}</ProjectGuid>
+    <ProjectGuid>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pleiades.Framework.TestHelpers</RootNamespace>
-    <AssemblyName>Pleiades.Framework.TestHelpers</AssemblyName>
+    <RootNamespace>Pleiades</RootNamespace>
+    <AssemblyName>Pleiades</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,41 +31,40 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
-      <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\IPagedModel.cs" />
+    <Compile Include="Data\IUnitOfWork.cs" />
+    <Compile Include="Data\QueryablePagedModel.cs" />
+    <Compile Include="Execution\BareContext.cs" />
+    <Compile Include="Execution\IStepContext.cs" />
+    <Compile Include="Execution\IStepObserver.cs" />
+    <Compile Include="Execution\Step.cs" />
+    <Compile Include="Execution\StepComposite.cs" />
+    <Compile Include="Helpers\EnumHelpers.cs" />
+    <Compile Include="Helpers\ParsingExtensions.cs" />
+    <Compile Include="Helpers\Linq.cs" />
+    <Compile Include="Data\Paging.cs" />
+    <Compile Include="Helpers\RandomStringGenerator.cs" />
+    <Compile Include="Helpers\Reflection.cs" />
+    <Compile Include="Helpers\StringExtensions.cs" />
+    <Compile Include="Helpers\StringWriterWithEncoding.cs" />
+    <Compile Include="Data\IGenericRepository.cs" />
+    <Compile Include="Injection\IGenericContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestHelpers.cs" />
-    <Compile Include="Web\ControllerHelpers.cs" />
-    <Compile Include="Web\HtmlHelperMockFactory.cs" />
-    <Compile Include="Web\HttpContextStubFactory.cs" />
-    <Compile Include="Web\HttpContextStubParams.cs" />
-    <Compile Include="Web\RoutingHelper.cs" />
+    <Compile Include="Utility\EnumExtensions.cs" />
+    <Compile Include="Utility\LinqExtensions.cs" />
+    <Compile Include="Utility\PropertyReflection.cs" />
+    <Compile Include="Security\ISecurityContext.cs" />
+    <Compile Include="Security\SecurityResponseCode.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Framework.csproj">
-      <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
-      <Name>Pleiades.Framework</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

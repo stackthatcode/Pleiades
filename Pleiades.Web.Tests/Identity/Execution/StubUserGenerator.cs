@@ -1,7 +1,7 @@
 ﻿using System;
-using Pleiades.Framework.Identity.Model;
+using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Framework.UnitTests.Identity.Execution
+namespace Pleiades.UnitTests.Identity.Execution
 {
     public class StubUserGenerator
     {

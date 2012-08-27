@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
-using Pleiades.Framework.Identity.Model;
-using Pleiades.Framework.MembershipProvider.Model;
-using Pleiades.Framework.Web.Security.Model;
+using Pleiades.Web.Security.Model;
 
-
-namespace Pleiades.Commerce.Persist
+namespace Commerce.Persist
 {
     public class PleiadesContext : DbContext
     {

@@ -1,7 +1,7 @@
 ﻿using System;
-using Pleiades.Framework.Utility;
+using Pleiades.Utility;
 
-namespace Pleiades.Framework.Identity.Model
+namespace Pleiades.Web.Security.Model
 {
     /// <summary>
     /// Identity User object

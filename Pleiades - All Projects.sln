@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Framework.Web", "Pleiades.Web\Pleiades.Framework.Web.csproj", "{804F063C-505F-441E-B205-688C42E637AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Web", "Pleiades.Web\Pleiades.Web.csproj", "{804F063C-505F-441E-B205-688C42E637AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Framework.TestHelpers", "Pleiades.Utilities\Pleiades.Framework.TestHelpers.csproj", "{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.TestHelpers", "Pleiades.Utilities\Pleiades.TestHelpers.csproj", "{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Framework.UnitTests", "Pleiades.Web.Tests\Pleiades.Framework.UnitTests.csproj", "{5F92F823-9790-4F67-9BCB-2AE22FCBED41}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.UnitTests", "Pleiades.Web.Tests\Pleiades.UnitTests.csproj", "{5F92F823-9790-4F67-9BCB-2AE22FCBED41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Commerce.WebUI", "Pleiades.Commerce.WebUI\Pleiades.Commerce.WebUI.csproj", "{EC92BFF1-A3ED-4A02-B5EC-833E55830967}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commerce.WebUI", "Pleiades.Commerce.WebUI\Commerce.WebUI.csproj", "{EC92BFF1-A3ED-4A02-B5EC-833E55830967}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{8F70F38E-584A-42A3-BA71-9D356C46679E}"
 EndProject
@@ -15,29 +15,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{71
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Commerce.Domain.Old", "Pleiades.Commerce.Domain.Old\Pleiades.Commerce.Domain.Old.csproj", "{42A7AC30-5CEC-4B4F-9BA6-0EBBA04962B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Commerce.Domain", "Pleiades.Commerce.Domain\Pleiades.Commerce.Domain.csproj", "{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commerce.Domain", "Pleiades.Commerce.Domain\Commerce.Domain.csproj", "{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Framework.Data.EF", "Plieades.Data\Pleiades.Framework.Data.EF.csproj", "{89303370-B830-4A89-8646-0F9D287AD657}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Data.EF", "Plieades.Data\Pleiades.Data.EF.csproj", "{89303370-B830-4A89-8646-0F9D287AD657}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Framework", "Pleiades.Framework\Pleiades.Framework.csproj", "{10CEE227-9B7C-4D97-B53A-229E8D45B15F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades", "Pleiades.Framework\Pleiades.csproj", "{10CEE227-9B7C-4D97-B53A-229E8D45B15F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Commerce.Persist", "Pleiades.Commerce.Persist\Pleiades.Commerce.Persist.csproj", "{E616B84E-1830-4909-9A56-58A656EA9B5B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commerce.Persist", "Pleiades.Commerce.Persist\Commerce.Persist.csproj", "{E616B84E-1830-4909-9A56-58A656EA9B5B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Middleware", "Middleware", "{276C8A3C-9C15-4FFA-850A-F9A547DBD855}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Framework.DataEF.IntegrationTests", "Pleiades.Commerce.IntegrationTests\Pleiades.Framework.DataEF.IntegrationTests.csproj", "{D4EBBD91-DDCA-4E18-A04D-50008A9158F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.IntegrationTests.DataEF", "Pleiades.Commerce.IntegrationTests\Pleiades.IntegrationTests.DataEF.csproj", "{D4EBBD91-DDCA-4E18-A04D-50008A9158F3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{42DBB876-C427-4C24-B1FA-E1F80B93A5FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Framework.Identity", "Pleiades.Framework.Security\Pleiades.Framework.Identity.csproj", "{7F1F1DA2-6F72-4D68-A06C-D3379941B060}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Web.Security.Identity", "Pleiades.Framework.Security\Pleiades.Web.Security.Identity.csproj", "{7F1F1DA2-6F72-4D68-A06C-D3379941B060}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Framework.MembershipProvider", "Pleiades.Framework.Membership\Pleiades.Framework.MembershipProvider.csproj", "{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Web.Security.Membership", "Pleiades.Framework.Membership\Pleiades.Web.Security.Membership.csproj", "{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Commerce.IntegrationTests", "Pleiades.Commerce.Web.Tests\Pleiades.Commerce.IntegrationTests.csproj", "{FE635455-8016-4AB0-BA25-5A459A76ABA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commerce.IntegrationTests", "Pleiades.Commerce.Web.Tests\Commerce.IntegrationTests.csproj", "{FE635455-8016-4AB0-BA25-5A459A76ABA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Commerce.WebUI.UnitTests", "Pleiades.Commerce.WebUI.UnitTests\Pleiades.Commerce.WebUI.UnitTests.csproj", "{080581DA-D122-4195-A615-DF9B85DEE99E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commerce.WebUI.UnitTests", "Pleiades.Commerce.WebUI.UnitTests\Commerce.WebUI.UnitTests.csproj", "{080581DA-D122-4195-A615-DF9B85DEE99E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Commerce.Initializer", "Pleiades.Commerce.Initializer\Pleiades.Commerce.Initializer.csproj", "{8E922D95-E286-4AF1-89E2-943EA247B806}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commerce.Initializer", "Pleiades.Commerce.Initializer\Commerce.Initializer.csproj", "{8E922D95-E286-4AF1-89E2-943EA247B806}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

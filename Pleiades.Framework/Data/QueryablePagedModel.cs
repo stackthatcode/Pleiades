@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Pleiades.Framework.Data;
+using Pleiades.Data;
 
-namespace Pleiades.Framework.Data
+namespace Pleiades.Data
 {
     /// <summary>
     /// Abstracts paging and filtering operations for View Models.  

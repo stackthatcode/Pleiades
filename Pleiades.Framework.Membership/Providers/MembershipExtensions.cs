@@ -1,8 +1,8 @@
 ﻿using System;
-using Model = Pleiades.Framework.MembershipProvider.Model;
+using Model = Pleiades.Web.Security.Model;
 using WebSecurity = System.Web.Security;
 
-namespace Pleiades.Framework.MembershipProvider.Providers
+namespace Pleiades.Web.Security.Providers
 {
     public static class MembershipExtensions
     {

@@ -7,17 +7,12 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Pleiades.Framework.Execution;
-using Pleiades.Framework.Identity.Interface;
-using Pleiades.Framework.Identity.Model;
-using Pleiades.Framework.MembershipProvider.Interface;
-using Pleiades.Framework.MembershipProvider.Model;
-using Pleiades.Framework.Web.Security.Interface;
-using Pleiades.Framework.Web.Security.Model;
-using Pleiades.Framework.Web.Security.Execution.Steps;
-using Pleiades.Framework.Web.Security.Model;
+using Pleiades.Execution;
+using Pleiades.Web.Security.Interface;
+using Pleiades.Web.Security.Execution.Steps;
+using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Framework.UnitTests.Web.Security
+namespace Pleiades.UnitTests.Web.Security
 {
     [TestFixture]
     public class AuthenticateUserByRoleStepTests

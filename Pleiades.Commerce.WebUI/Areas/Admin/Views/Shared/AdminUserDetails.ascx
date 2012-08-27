@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Pleiades.Commerce.WebUI.Areas.Admin.Models.UserViewModel>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Commerce.WebUI.Areas.Admin.Models.UserViewModel>" %>
 
 <table class="recordgrid" cellpadding="0" cellspacing="0">
 <tr>

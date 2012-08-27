@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Web;
 using System.Web.Mvc;
-using Pleiades.Framework.Identity.Model;
-using Pleiades.Framework.Web.Security.Aspect;
-using Pleiades.Framework.Web.Security.Model;
-using Pleiades.Commerce.WebUI.Plumbing.Navigation;
+using Pleiades.Web.Security.Aspect;
+using Pleiades.Web.Security.Model;
+using Commerce.WebUI.Plumbing.Navigation;
 
-namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
+namespace Commerce.WebUI.Areas.Admin.Controllers
 {
     //[CommerceAuthorize(AuthorizationZone = AuthorizationZone.Administrative)]
     public class HomeController : Controller

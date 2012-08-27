@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Pleiades.Framework.Helpers;
+using Pleiades.Helpers;
 
-namespace Pleiades.Framework.Security
+namespace Pleiades.Security
 {
     /// <summary>
     /// Universal Security Response Codes

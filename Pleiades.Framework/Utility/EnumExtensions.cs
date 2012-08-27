@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Pleiades.Framework.Utility
+namespace Pleiades.Utility
 {
     public static class EnumExtensions
     {

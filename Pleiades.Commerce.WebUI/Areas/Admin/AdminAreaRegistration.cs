@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Pleiades.Commerce.WebUI.Areas.Admin
+namespace Commerce.WebUI.Areas.Admin
 {
     public class AdminAreaRegistration : AreaRegistration
     {

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Pleiades.Framework.Data.EF.Utility
+namespace Pleiades.Data.EF.Utility
 {
     public static class AutoMapperExtensions
     {

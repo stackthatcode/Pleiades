@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Pleiades.Framework.Data;
+using Pleiades.Data;
 using PagedList;
 
-namespace Pleiades.Framework.Data.EF.Utility
+namespace Pleiades.Data.EF.Utility
 {
     public static class PagedListExtensions
     {

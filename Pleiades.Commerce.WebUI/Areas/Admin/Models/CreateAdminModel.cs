@@ -5,10 +5,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Pleiades.Framework.Helpers;
-using Pleiades.Framework.Web.Security.Model;
+using Pleiades.Helpers;
+using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Commerce.WebUI.Areas.Admin.Models
+namespace Commerce.WebUI.Areas.Admin.Models
 {
     public class CreateAdminModel
     {

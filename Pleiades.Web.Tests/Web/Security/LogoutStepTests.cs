@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Pleiades.Framework.Execution;
-using Pleiades.Framework.MembershipProvider.Interface;
-using Pleiades.Framework.Web.Security.Execution.Steps;
+using Pleiades.Execution;
+using Pleiades.Web.Security.Interface;
+using Pleiades.Web.Security.Execution.Steps;
 
-namespace Pleiades.Framework.UnitTests.Web.Security
+namespace Pleiades.UnitTests.Web.Security
 {
     [TestFixture]
     public class LogoutStepTests

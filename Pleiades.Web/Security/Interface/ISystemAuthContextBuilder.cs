@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
-using Pleiades.Framework.Web.Security.Model;
+using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Framework.Web.Security.Interface
+namespace Pleiades.Web.Security.Interface
 {
     public interface ISystemAuthContextBuilder
     {

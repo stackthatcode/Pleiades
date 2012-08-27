@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Pleiades.Framework.Helpers;
-using Pleiades.Framework.Injection;
+using Pleiades.Helpers;
+using Pleiades.Injection;
 
-namespace Pleiades.Framework.Execution
+namespace Pleiades.Execution
 {
     public class StepComposite<TContext> : Step<TContext>
             where TContext : IStepContext

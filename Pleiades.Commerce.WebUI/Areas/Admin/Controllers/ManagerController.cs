@@ -1,50 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Security;
 using System.Web;
+using System.Web.Security;
 using System.Web.Mvc;
 using AutoMapper;
-using Pleiades.Commerce.WebUI.Areas.Admin.Models;
-using Pleiades.Commerce.WebUI.Plumbing.Security;
-using Pleiades.Commerce.WebUI.Plumbing.UI.StandardHtmlHelpers;
-using Pleiades.Framework.Web.Security.Interface;
-using Pleiades.Framework.Web.Security.Concrete;
-using Pleiades.Framework.Web.Security.Model;
-using Pleiades.Web.Security.Utility;
-using Pleiades.Framework.Helpers;
+using Commerce.WebUI.Areas.Admin.Models;
+using Pleiades.Web.Security.Interface;
+using Pleiades.Web.Security.Model;
 
-
-namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
+namespace Commerce.WebUI.Areas.Admin.Controllers
 {
-    [ConcreteAuthorize(AuthorizationZone = AuthorizationZone.Administrative)]
-    public class AdminManagerController : Controller
+    public class ManagerController : Controller
     {
         public const int PageSize = 10;
         public const string DefaultQuestion = "Type Default";
         public const string DefaultAnswer = "Default";
 
-        public IDomainUserService DomainUserService { get; set; }
+        public IAggregateUserRepository AggregateUserRepository { get; set; }
+        public IAggregateUserService AggregateUserService { get; set; }
         public IMembershipService MembershipService { get; set; }
+        public IIdentityUserService IdentityUserService { get; set; }
 
-        public AdminManagerController()
+        public ManagerController(
+                IAggregateUserRepository aggregateUserRepository, 
+                IAggregateUserService aggregateUserService,
+                IMembershipService membershipService,
+                IIdentityUserService identityUserService)
         {
-            // TODO: wire the Autofac IoC Plumbing into this, heah!
-            DomainUserService = new DomainUserService();
-            MembershipService = new MembershipService();
+            AggregateUserRepository = aggregateUserRepository;
+            AggregateUserService = aggregateUserService;
+            MembershipService = membershipService;
+            IdentityUserService = identityUserService;
         }
 
         [HttpGet]
         public ActionResult List(int page = 1)
         {
-            var users = DomainUserService.RetreiveAll(page, PageSize, new List<UserRole>() { UserRole.Admin, UserRole.Root });
+            var users = AggregateUserRepository.Retreive(new List<UserRole>() { UserRole.Admin, UserRole.Supreme });
             return View(new ListUsersViewModel { Users = users });
         }
 
         [HttpGet]
         public ActionResult Details(int id)
         {
-            var user = DomainUserService.RetrieveUserByDomainUserId(id);
+            var user = AggregateUserRepository.FindFirstOrDefault(x => x.ID == id);
             var userModel = UserViewModel.Make(user);
             return View(userModel);
         }
@@ -58,21 +58,24 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(CreateAdminModel createAdminModel)
         {
-            if (!ModelState.IsValid)
-                return View(createAdminModel);
+            if (!ModelState.IsValid) return View(createAdminModel);
 
-            // Some way to validate args sent Service en-masse.... like passing a context or something
+            // TODO: Some way to validate args sent Service en-masse.... like passing a context or something
 
-            MembershipCreateStatus status;
+            PleiadesMembershipCreateStatus status;
 
-            var newuser = 
-                this.DomainUserService.Create(
-                    new CreateNewUserRequest
+            var newuser =
+                this.AggregateUserService.Create(
+                    new CreateNewMembershipUserRequest
                     {
-                        Password = createAdminModel.Password,
                         Email = createAdminModel.Email,
-                        PasswordQuestion = DefaultQuestion,
+                        IsApproved = true,
+                        Password = createAdminModel.Password,
                         PasswordAnswer = DefaultAnswer,
+                        PasswordQuestion = DefaultQuestion,
+                    },
+                    new CreateOrModifyIdentityUserRequest
+                    {                        
                         AccountStatus = AccountStatus.Active,
                         UserRole = UserRole.Admin,
                         AccountLevel = AccountLevel.Standard,
@@ -81,13 +84,13 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
                     },
                     out status);
 
-            if (status != MembershipCreateStatus.Success)
+            if (status != PleiadesMembershipCreateStatus.Success)
             {
-                ViewData[ViewDataKeys.ErrorMessage] = "Error creating user with following code: " + status.ToString();
+                ViewData["ErrorMessage"] = "Error creating user with following code: " + status.ToString();
                 return View(createAdminModel);
             }
 
-            return RedirectToAction("Details", new { id = newuser.DomainUserId });
+            return RedirectToAction("Details", new { id = newuser.ID });
         }
 
         [HttpGet]

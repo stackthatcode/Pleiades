@@ -2,12 +2,12 @@
 using System.Web.Mvc;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Pleiades.Framework.Identity.Model;
-using Pleiades.Commerce.WebUI.Areas.Admin.Controllers;
-using Pleiades.Commerce.WebUI.Areas.Public.Controllers;
-using Pleiades.Commerce.WebUI.Plumbing.Security;
+using Pleiades.Web.Security.Model;
+using Commerce.WebUI.Areas.Admin.Controllers;
+using Commerce.WebUI.Areas.Public.Controllers;
+using Commerce.WebUI.Plumbing.Security;
 
-namespace Pleiades.Commerce.WebUI.UnitTests.Security
+namespace Commerce.WebUI.UnitTests.Security
 {
     [TestFixture]
     public class TestsForMySecurityContextBuilder
@@ -17,7 +17,7 @@ namespace Pleiades.Commerce.WebUI.UnitTests.Security
         {
             // Arrange
             var context = MockRepository.GenerateStub<AuthorizationContext>();
-            context.Controller = new LoginController(null);
+            context.Controller = new AuthController(null);
             var builder = new MySystemAuthContextBuilder();
 
             // Act

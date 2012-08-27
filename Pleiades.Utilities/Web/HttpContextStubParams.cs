@@ -3,7 +3,7 @@ using System.Web;
 using System.Security.Principal;
 using System.Collections.Specialized;
 
-namespace Pleiades.Framework.TestHelpers.Web
+namespace Pleiades.TestHelpers.Web
 {
     public class HttpContextStubParams
     {

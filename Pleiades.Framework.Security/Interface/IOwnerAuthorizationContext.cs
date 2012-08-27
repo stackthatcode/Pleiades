@@ -1,7 +1,7 @@
-﻿using Pleiades.Framework.Identity.Model;
-using Pleiades.Framework.Security;
+﻿using Pleiades.Web.Security.Model;
+using Pleiades.Security;
 
-namespace Pleiades.Framework.Identity.Interface
+namespace Pleiades.Web.Security.Interface
 {
     public interface IOwnerAuthorizationContext : ISecurityContext
     {

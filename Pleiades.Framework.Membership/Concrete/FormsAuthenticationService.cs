@@ -1,7 +1,7 @@
 ﻿using System.Web.Security;
-using Pleiades.Framework.MembershipProvider.Interface;
+using Pleiades.Web.Security.Interface;
 
-namespace Pleiades.Framework.MembershipProvider.Concrete
+namespace Pleiades.Web.Security.Concrete
 {
     public class FormsAuthenticationService : IFormsAuthenticationService
     {

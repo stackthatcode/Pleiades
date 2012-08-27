@@ -7,17 +7,17 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Pleiades.Framework.Injection;
-using Pleiades.Framework.TestHelpers;
-using Pleiades.Framework.TestHelpers.Web;
-using Pleiades.Framework.Web.Security.Execution.Steps;
-using Pleiades.Framework.Web.Security.Model;
-using Pleiades.Commerce.WebUI;
-using Pleiades.Commerce.WebUI.Areas.Admin.Controllers;
-using Pleiades.Commerce.WebUI.Areas.Admin.Models;
-using Pleiades.Commerce.WebUI.Plumbing.Navigation;
+using Pleiades.Injection;
+using Pleiades.TestHelpers;
+using Pleiades.TestHelpers.Web;
+using Pleiades.Web.Security.Execution.Steps;
+using Pleiades.Web.Security.Model;
+using Commerce.WebUI;
+using Commerce.WebUI.Areas.Admin.Controllers;
+using Commerce.WebUI.Areas.Admin.Models;
+using Commerce.WebUI.Plumbing.Navigation;
 
-namespace Pleiades.Commerce.WebUI.TestsControllers
+namespace Commerce.WebUI.TestsControllers
 {
     [TestFixture]
     public class LoginControllerTests
@@ -25,8 +25,8 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
         [Test]
         public void Logon_Get_Returns_Default_View()
         {
-            var controller = new LoginController(null);
-            var result = controller.Authenticate();
+            var controller = new AuthController(null);
+            var result = controller.Login();
             result.ShouldBeDefaultView();
         }
 
@@ -73,10 +73,10 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
             var container = this.MockContainer();
             MockContainerResolve<AuthenticateUserByRoleStep>(container, step);
 
-            var controller = new LoginController(container);
+            var controller = new AuthController(container);
 
             // Act
-            var result = controller.Authenticate(model, null);
+            var result = controller.Login(model, null);
 
             // Assert
             container.VerifyAllExpectations();
@@ -92,10 +92,10 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
             var step = MockAuthenticateUserByRoleStep(model, true);
             var container = MockRepository.GenerateMock<IGenericContainer>();
             container.Expect(x => x.Resolve<AuthenticateUserByRoleStep>()).Return(step);
-            var controller = new LoginController(container);
+            var controller = new AuthController(container);
             
             // Act
-            var result = controller.Authenticate(model, null);
+            var result = controller.Login(model, null);
 
             // Assert
             container.VerifyAllExpectations();
@@ -111,10 +111,10 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
             var step = MockAuthenticateUserByRoleStep(model, true);
             var container = MockRepository.GenerateMock<IGenericContainer>();
             container.Expect(x => x.Resolve<AuthenticateUserByRoleStep>()).Return(step);
-            var controller = new LoginController(container);
+            var controller = new AuthController(container);
 
             // Act
-            var result = controller.Authenticate(model, "MyUrl.aspx");
+            var result = controller.Login(model, "MyUrl.aspx");
 
             // Assert
             container.VerifyAllExpectations();
@@ -130,7 +130,7 @@ namespace Pleiades.Commerce.WebUI.TestsControllers
             step.Expect(x => x.Execute(null)).IgnoreArguments().Return(null);
             MockContainerResolve<LogoutStep>(container, step);
 
-            var controller = new LoginController(container);
+            var controller = new AuthController(container);
             var result = controller.Logout();
             result.ShouldBeRedirectionTo(OutboundNavigation.PublicHome());
         }

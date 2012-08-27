@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using Pleiades.Framework.Data.EF;
-using Pleiades.Framework.Utility;
+using Pleiades.Data.EF;
+using Pleiades.Utility;
 
-namespace Pleiades.Framework.IntegrationTests.DataEF
+namespace Pleiades.IntegrationTests.DataEF
 {
     [TestFixture]
     public class TestFixture

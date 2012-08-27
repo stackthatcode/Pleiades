@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-using Pleiades.Framework.Helpers;
+using Pleiades.Helpers;
 
-namespace Pleiades.Framework.Web.MvcHelpers
+namespace Pleiades.Web.MvcHelpers
 {
     /// <summary>
     /// Generic Tag generator

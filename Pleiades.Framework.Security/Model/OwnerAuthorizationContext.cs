@@ -1,7 +1,7 @@
-﻿using Pleiades.Framework.Identity.Interface;
-using Pleiades.Framework.Security;
+﻿using Pleiades.Security;
+using Pleiades.Web.Security.Interface;
 
-namespace Pleiades.Framework.Identity.Model
+namespace Pleiades.Web.Security.Model
 {
     public class OwnerAuthorizationContext : IOwnerAuthorizationContext
     {
@@ -17,7 +17,7 @@ namespace Pleiades.Framework.Identity.Model
             this.CurrentUserIdentity = null;
             this.OwnerIdentityId = null;
 
-            this.SecurityResponseCode = Security.SecurityResponseCode.Allowed;
+            this.SecurityResponseCode = SecurityResponseCode.Allowed;
             this.IsExecutionStateValid = true;
         }       
     }

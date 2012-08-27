@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using Pleiades.Framework.Data;
-using Pleiades.Framework.Data.EF;
-using Pleiades.Framework.MembershipProvider.Interface;
-using Pleiades.Framework.MembershipProvider.Model;
+using Pleiades.Data;
+using Pleiades.Data.EF;
+using Pleiades.Web.Security.Interface;
+using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Commerce.Persist.Security
+namespace Commerce.Persist.Security
 {
     public class MembershipRepository : EFGenericRepository<MembershipUser>, IMembershipRepository
     {

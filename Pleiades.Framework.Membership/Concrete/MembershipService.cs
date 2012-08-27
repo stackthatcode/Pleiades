@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Security;
 using SecurityMembershipUser = System.Web.Security.MembershipUser;
-using Pleiades.Framework.MembershipProvider.Interface;
-using Pleiades.Framework.MembershipProvider.Model;
-using Pleiades.Framework.MembershipProvider.Providers;
+using Pleiades.Web.Security.Interface;
+using Pleiades.Web.Security.Model;
+using Pleiades.Web.Security.Providers;
 
-namespace Pleiades.Framework.MembershipProvider.Concrete
+namespace Pleiades.Web.Security.Concrete
 {
     /// <summary>
     /// Wrapper around common Membership functions - enables testability of Membership-related functions

@@ -6,12 +6,12 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using NUnit.Framework;
-using Pleiades.Commerce.WebUI;
-using Pleiades.Commerce.WebUI.Areas.Admin;
-using Pleiades.Commerce.WebUI.Areas.Public;
-using Pleiades.Framework.TestHelpers.Web;
+using Commerce.WebUI;
+using Commerce.WebUI.Areas.Admin;
+using Commerce.WebUI.Areas.Public;
+using Pleiades.TestHelpers.Web;
 
-namespace Pleiades.Commerce.WebUI.UnitTests.Routing
+namespace Commerce.WebUI.UnitTests.Routing
 {
     public class RoutingTestBase
     {

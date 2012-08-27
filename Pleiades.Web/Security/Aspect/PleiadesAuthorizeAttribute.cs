@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Web.Mvc;
-using Pleiades.Framework.Execution;
-using Pleiades.Framework.Identity.Model;
-using Pleiades.Framework.Injection;
-using Pleiades.Framework.Security;
-using Pleiades.Framework.Web.Security;
-using Pleiades.Framework.Web.Security.Interface;
-using Pleiades.Framework.Web.Security.Execution.Composites;
-using Pleiades.Framework.Web.Security.Model;
+using Pleiades.Execution;
+using Pleiades.Injection;
+using Pleiades.Security;
+using Pleiades.Web.Security.Interface;
+using Pleiades.Web.Security.Execution.Composites;
+using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Framework.Web.Security.Aspect
+namespace Pleiades.Web.Security.Aspect
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class PleiadesAuthorizeAttribute : AuthorizeAttribute

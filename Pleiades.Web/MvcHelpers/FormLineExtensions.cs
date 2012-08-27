@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 
-namespace Pleiades.Framework.Web.MvcHelpers
+namespace Pleiades.Web.MvcHelpers
 {
     /// <summary>
     /// Convenience methods banging out Label + Editor combinations

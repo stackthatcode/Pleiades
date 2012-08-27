@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Pleiades.Framework.Helpers
+namespace Pleiades.Helpers
 {
     public static class EnumHelpers
     {

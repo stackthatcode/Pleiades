@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Pleiades.Framework.Helpers;
+using Pleiades.Helpers;
 
-namespace Pleiades.Framework.Execution
+namespace Pleiades.Execution
 {
     public abstract class Step<TContext> where TContext : IStepContext
     {

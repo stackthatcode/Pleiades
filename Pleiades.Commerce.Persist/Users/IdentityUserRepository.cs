@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using System.Data.Entity;
-using Pleiades.Framework.Data;
-using Pleiades.Framework.Data.EF;
-using Pleiades.Framework.Identity.Interface;
-using Pleiades.Framework.Identity.Model;
+using Pleiades.Data;
+using Pleiades.Data.EF;
+using Pleiades.Web.Security.Interface;
+using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Commerce.Persist.Security
+namespace Commerce.Persist.Security
 {
     public class IdentityUserRepository : EFGenericRepository<IdentityUser>, IIdentityRepository
     {

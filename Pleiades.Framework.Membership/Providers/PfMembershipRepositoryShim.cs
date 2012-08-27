@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Pleiades.Framework.MembershipProvider.Interface;
+using Pleiades.Web.Security.Interface;
 
-namespace Pleiades.Framework.MembershipProvider.Providers
+namespace Pleiades.Web.Security.Providers
 {
     public class PfMembershipRepositoryShim
     {

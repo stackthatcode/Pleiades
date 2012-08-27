@@ -1,11 +1,11 @@
 ﻿using System;
-using Pleiades.Commerce.Persist;
-using Pleiades.Commerce.Persist.Security;
-using Pleiades.Framework.Data;
-using Pleiades.Framework.Utility;
+using Commerce.Persist;
+using Commerce.Persist.Security;
+using Pleiades.Data;
+using Pleiades.Utility;
 using NUnit.Framework;
 
-namespace Pleiades.Commerce.IntegrationTests
+namespace CommerceIntegrationTests
 {
     [TestFixture]
     public class DatabasePriming

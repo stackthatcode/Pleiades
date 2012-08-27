@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Pleiades.Framework.Injection;
-using Pleiades.Framework.Web.Security.Execution.Abstract;
-using Pleiades.Framework.Web.Security.Execution.Steps;
-using Pleiades.Framework.Web.Security.Model;
+using Pleiades.Injection;
+using Pleiades.Web.Security.Execution.Abstract;
+using Pleiades.Web.Security.Execution.Steps;
+using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Framework.Web.Security.Execution.Composites
+namespace Pleiades.Web.Security.Execution.Composites
 {
     public class ChangeUserPasswordComposite : OwnerAuthCompositeBase<ChangeUserPasswordContext>
     {

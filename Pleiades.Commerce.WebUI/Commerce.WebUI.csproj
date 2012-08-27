@@ -10,8 +10,8 @@
     <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pleiades.Commerce.WebUI</RootNamespace>
-    <AssemblyName>Pleiades.Commerce.WebUI</AssemblyName>
+    <RootNamespace>Commerce.WebUI</RootNamespace>
+    <AssemblyName>Commerce.WebUI</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
@@ -83,9 +83,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AuthController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManagerController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\Admin\Models\ChangePasswordModel.cs" />
+    <Compile Include="Areas\Admin\Models\CreateAdminModel.cs" />
     <Compile Include="Areas\Admin\Models\LogOnViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\ResetPasswordModel.cs" />
+    <Compile Include="Areas\Admin\Models\UserViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Areas\Public\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Public\PublicAreaRegistration.cs" />
     <Compile Include="CommerceWebUIModule.cs" />
@@ -102,9 +111,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Login\Authenticate.aspx" />
+    <Content Include="Areas\Admin\Views\Auth\Login.aspx" />
     <Content Include="Areas\Admin\Views\Home\HeaderSummary.ascx" />
     <Content Include="Areas\Admin\Views\Home\Index.aspx" />
+    <Content Include="Areas\Admin\Views\Manager\Change.aspx" />
+    <Content Include="Areas\Admin\Views\Manager\Create.aspx" />
+    <Content Include="Areas\Admin\Views\Manager\Delete.aspx" />
+    <Content Include="Areas\Admin\Views\Manager\Details.aspx" />
+    <Content Include="Areas\Admin\Views\Manager\Edit.aspx" />
+    <Content Include="Areas\Admin\Views\Manager\List.aspx" />
+    <Content Include="Areas\Admin\Views\Manager\Reset.aspx" />
     <Content Include="Areas\Admin\Views\Shared\Admin.Master" />
     <Content Include="Areas\Admin\Views\Shared\AdminUserDetails.ascx" />
     <Content Include="Areas\Admin\Views\Web.config" />
@@ -169,37 +185,37 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pleiades.Commerce.Domain\Pleiades.Commerce.Domain.csproj">
+    <ProjectReference Include="..\Pleiades.Commerce.Domain\Commerce.Domain.csproj">
       <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
-      <Name>Pleiades.Commerce.Domain</Name>
+      <Name>Commerce.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Commerce.Persist\Pleiades.Commerce.Persist.csproj">
+    <ProjectReference Include="..\Pleiades.Commerce.Persist\Commerce.Persist.csproj">
       <Project>{E616B84E-1830-4909-9A56-58A656EA9B5B}</Project>
-      <Name>Pleiades.Commerce.Persist</Name>
+      <Name>Commerce.Persist</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Framework.Membership\Pleiades.Framework.MembershipProvider.csproj">
+    <ProjectReference Include="..\Pleiades.Framework.Membership\Pleiades.Web.Security.Membership.csproj">
       <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
-      <Name>Pleiades.Framework.MembershipProvider</Name>
+      <Name>Pleiades.Web.Security.Membership</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Framework.Security\Pleiades.Framework.Identity.csproj">
+    <ProjectReference Include="..\Pleiades.Framework.Security\Pleiades.Web.Security.Identity.csproj">
       <Project>{7F1F1DA2-6F72-4D68-A06C-D3379941B060}</Project>
-      <Name>Pleiades.Framework.Identity</Name>
+      <Name>Pleiades.Web.Security.Identity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Framework.csproj">
+    <ProjectReference Include="..\Pleiades.Framework\Pleiades.csproj">
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
-      <Name>Pleiades.Framework</Name>
+      <Name>Pleiades</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Utilities\Pleiades.Framework.TestHelpers.csproj">
+    <ProjectReference Include="..\Pleiades.Utilities\Pleiades.TestHelpers.csproj">
       <Project>{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}</Project>
-      <Name>Pleiades.Framework.TestHelpers</Name>
+      <Name>Pleiades.TestHelpers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Web\Pleiades.Framework.Web.csproj">
+    <ProjectReference Include="..\Pleiades.Web\Pleiades.Web.csproj">
       <Project>{804F063C-505F-441E-B205-688C42E637AD}</Project>
-      <Name>Pleiades.Framework.Web</Name>
+      <Name>Pleiades.Web</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Plieades.Data\Pleiades.Framework.Data.EF.csproj">
+    <ProjectReference Include="..\Plieades.Data\Pleiades.Data.EF.csproj">
       <Project>{89303370-B830-4A89-8646-0F9D287AD657}</Project>
-      <Name>Pleiades.Framework.Data.EF</Name>
+      <Name>Pleiades.Data.EF</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

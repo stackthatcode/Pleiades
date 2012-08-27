@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Pleiades.Framework.Identity.Concrete;
-using Pleiades.Framework.Identity.Interface;
-using Pleiades.Framework.Identity.Model;
+using Pleiades.Web.Security.Concrete;
+using Pleiades.Web.Security.Interface;
+using Pleiades.Web.Security.Model;
 
 namespace Pleiades.Web.Tests.Security.IntegrationTests
 {

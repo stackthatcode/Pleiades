@@ -3,12 +3,12 @@ using System.Net;
 using System.Web.Mvc;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Pleiades.Framework.Security;
-using Pleiades.Framework.TestHelpers.Web;
-using Pleiades.Commerce.WebUI.Plumbing.Navigation;
-using Pleiades.Commerce.WebUI.Plumbing.Security;
+using Pleiades.Security;
+using Pleiades.TestHelpers.Web;
+using Commerce.WebUI.Plumbing.Navigation;
+using Commerce.WebUI.Plumbing.Security;
 
-namespace Pleiades.Commerce.WebUI.UnitTests.Security
+namespace Commerce.WebUI.UnitTests.Security
 {
     [TestFixture]
     public class TestForMySecurityCodeResponder

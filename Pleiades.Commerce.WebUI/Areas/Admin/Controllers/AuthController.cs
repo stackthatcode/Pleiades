@@ -4,28 +4,27 @@ using System.Diagnostics;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Pleiades.Framework.Execution;
-using Pleiades.Framework.Injection;
-using Pleiades.Framework.Identity.Model;
-using Pleiades.Framework.Web.Security.Execution.Steps;
-using Pleiades.Framework.Web.Security.Model;
-using Pleiades.Commerce.WebUI.Areas.Admin.Models;
-using Pleiades.Commerce.WebUI.Plumbing.Navigation;
+using Pleiades.Execution;
+using Pleiades.Injection;
+using Pleiades.Web.Security.Execution.Steps;
+using Pleiades.Web.Security.Model;
+using Commerce.WebUI.Areas.Admin.Models;
+using Commerce.WebUI.Plumbing.Navigation;
 
-namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
+namespace Commerce.WebUI.Areas.Admin.Controllers
 {
-    public class LoginController : Controller
+    public class AuthController : Controller
     {
         public readonly bool PersistentCookie = true;
         public IGenericContainer Container { get; set; }
 
-        public LoginController(IGenericContainer container)
+        public AuthController(IGenericContainer container)
         {
             this.Container = container;
         }
 
         [HttpGet]
-        public ActionResult Authenticate()
+        public ActionResult Login()
         {
             if (!ModelState.IsValid)
             {
@@ -35,7 +34,7 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Authenticate(LogOnViewModel model, string returnUrl)
+        public ActionResult Login(LogOnViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {

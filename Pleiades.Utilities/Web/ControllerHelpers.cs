@@ -5,11 +5,11 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web.Routing;
 using NUnit.Framework;
-using Pleiades.Framework.Helpers;
-using Pleiades.Framework.TestHelpers;
+using Pleiades.Helpers;
+using Pleiades.TestHelpers;
 
 
-namespace Pleiades.Framework.TestHelpers.Web
+namespace Pleiades.TestHelpers.Web
 {
     public static class ControllerHelpers
     {

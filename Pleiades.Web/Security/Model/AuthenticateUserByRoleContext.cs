@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Pleiades.Framework.Execution;
-using Pleiades.Framework.Identity.Model;
+using Pleiades.Execution;
+using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Framework.Web.Security.Model
+namespace Pleiades.Web.Security.Model
 {
     public class AuthenticateUserByRoleContext : IStepContext
     {

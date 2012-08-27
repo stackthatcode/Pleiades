@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Web.Security;
-using System.Collections.Generic;
-using System.Linq;
-using Pleiades.Commerce.Persist;
-using Pleiades.Commerce.Persist.Security;
-using Pleiades.Framework.Data;
-using Pleiades.Framework.Identity.Concrete;
-using Pleiades.Framework.Identity.Model;
-using Pleiades.Framework.MembershipProvider.Concrete;
-using Pleiades.Framework.MembershipProvider.Interface;
-using Pleiades.Framework.MembershipProvider.Model;
-using Pleiades.Framework.MembershipProvider.Providers;
-using Pleiades.Framework.Web.Security.Concrete;
-using Pleiades.Framework.Web.Security.Interface;
-using Pleiades.Framework.Utility;
 using NUnit.Framework;
+using Pleiades.Data;
+using Pleiades.Web.Security.Concrete;
+using Pleiades.Web.Security.Interface;
+using Pleiades.Web.Security.Model;
+using Pleiades.Web.Security.Providers;
+using Pleiades.Utility;
+using Commerce.Persist;
+using Commerce.Persist.Security;
 
 
-namespace Pleiades.Commerce.IntegrationTests.AggregateUser
+namespace CommerceIntegrationTests.AggregateUser
 {
     [TestFixture]
     public class AggregateUserServiceAndRepositoryTests
@@ -71,7 +65,7 @@ namespace Pleiades.Commerce.IntegrationTests.AggregateUser
 
             var identityuser1 = new CreateOrModifyIdentityUserRequest
                 {
-                    AccountLevel = Framework.Identity.Model.AccountLevel.Standard,
+                    AccountLevel = AccountLevel.Standard,
                     FirstName = "John",
                     LastName = "Gerber",
                 };
@@ -83,7 +77,7 @@ namespace Pleiades.Commerce.IntegrationTests.AggregateUser
 
             var identityuser2 = new CreateOrModifyIdentityUserRequest
                 {
-                    AccountLevel = Framework.Identity.Model.AccountLevel.Gold,
+                    AccountLevel = AccountLevel.Gold,
                     FirstName = "Anne",
                     LastName = "Holtz",
                 };

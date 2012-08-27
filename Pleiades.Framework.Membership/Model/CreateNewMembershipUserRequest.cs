@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Pleiades.Framework.MembershipProvider.Model
+namespace Pleiades.Web.Security.Model
 {
     public class CreateNewMembershipUserRequest
     {

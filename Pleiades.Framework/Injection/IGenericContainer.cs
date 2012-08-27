@@ -1,4 +1,4 @@
-﻿namespace Pleiades.Framework.Injection
+﻿namespace Pleiades.Injection
 {
     public interface IGenericContainer
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Pleiades.Framework.Helpers
+namespace Pleiades.Helpers
 {
     public class Reflection
     {

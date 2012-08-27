@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Pleiades.Framework.TestHelpers
+namespace Pleiades.TestHelpers
 {
     public static class TestHelpers
     {

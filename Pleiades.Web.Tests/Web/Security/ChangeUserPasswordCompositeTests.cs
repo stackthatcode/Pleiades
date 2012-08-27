@@ -1,14 +1,14 @@
 ﻿using NUnit.Framework;
 using Rhino.Mocks;
-using Pleiades.Framework.Execution;
-using Pleiades.Framework.Identity.Execution;
-using Pleiades.Framework.Injection;
-using Pleiades.Framework.Web.Security.Execution.Abstract;
-using Pleiades.Framework.Web.Security.Execution.Composites;
-using Pleiades.Framework.Web.Security.Execution.Steps;
-using Pleiades.Framework.Web.Security.Model;
+using Pleiades.Execution;
+using Pleiades.Injection;
+using Pleiades.Web.Security.Execution;
+using Pleiades.Web.Security.Execution.Abstract;
+using Pleiades.Web.Security.Execution.Composites;
+using Pleiades.Web.Security.Execution.Steps;
+using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Framework.UnitTests.Web.Security
+namespace Pleiades.UnitTests.Web.Security
 {
     [TestFixture]
     public class ChangeUserPasswordCompositeTests

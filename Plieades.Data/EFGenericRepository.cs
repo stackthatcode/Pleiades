@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Data.Entity;
-using Pleiades.Framework.Data;
+using Pleiades.Data;
 
-namespace Pleiades.Framework.Data.EF
+namespace Pleiades.Data.EF
 {
     public class EFGenericRepository<T> : IGenericRepository<T>
             where T : class

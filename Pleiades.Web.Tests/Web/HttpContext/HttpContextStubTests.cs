@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Security;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Pleiades.Framework.TestHelpers;
-using Pleiades.Framework.TestHelpers.Web;
+using Pleiades.TestHelpers;
+using Pleiades.TestHelpers.Web;
 
 namespace Pleiades.Web.Tests.HttpContext
 {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Pleiades.Framework.Web.MvcHelpers
+namespace Pleiades.Web.MvcHelpers
 {
     /// <summary>
     /// Container object for passing around/processing/rendering Navigation Links

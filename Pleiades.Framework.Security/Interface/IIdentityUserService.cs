@@ -1,8 +1,8 @@
 ﻿using System;
-using Pleiades.Framework.Data;
-using Pleiades.Framework.Identity.Model;
+using Pleiades.Data;
+using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Framework.Identity.Interface
+namespace Pleiades.Web.Security.Interface
 {
     /// <summary>
     /// Contains all CRUD operations for managing Identity Users

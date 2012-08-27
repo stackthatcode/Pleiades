@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Web.Mvc;
 using System.Web.Security;
-using Pleiades.Framework.Security;
-using Pleiades.Framework.Web.Security.Interface;
+using Pleiades.Security;
+using Pleiades.Web.Security.Interface;
 
-namespace Pleiades.Framework.Web.Security.Concrete
+namespace Pleiades.Web.Security.Concrete
 {
     /// <summary>
     /// Abstracts and enables composition of responses to Security Authorization attempts

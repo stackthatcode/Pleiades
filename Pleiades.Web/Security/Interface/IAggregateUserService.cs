@@ -1,8 +1,6 @@
-﻿using Pleiades.Framework.Identity.Model;
-using Pleiades.Framework.MembershipProvider.Model;
-using Pleiades.Framework.Web.Security.Model;
+﻿using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Framework.Web.Security.Interface
+namespace Pleiades.Web.Security.Interface
 {
     public interface IAggregateUserService
     {

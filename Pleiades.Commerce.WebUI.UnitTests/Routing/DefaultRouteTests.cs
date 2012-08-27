@@ -5,11 +5,11 @@ using System.Web.Routing;
 using System.Collections.Generic;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Pleiades.Commerce.WebUI;
-using Pleiades.Framework.TestHelpers;
-using Pleiades.Framework.TestHelpers.Web;
+using Commerce.WebUI;
+using Pleiades.TestHelpers;
+using Pleiades.TestHelpers.Web;
 
-namespace Pleiades.Commerce.WebUI.UnitTests.Routing
+namespace Commerce.WebUI.UnitTests.Routing
 {
     [TestFixture]
     public class DefaultRouteTests : RoutingTestBase

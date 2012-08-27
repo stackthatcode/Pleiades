@@ -2,7 +2,7 @@
 using System.Web.Routing;
 using Rhino.Mocks;
 
-namespace Pleiades.Framework.TestHelpers.Web
+namespace Pleiades.TestHelpers.Web
 {
     /// <summary>
     /// Pipe dream, mayhaps?

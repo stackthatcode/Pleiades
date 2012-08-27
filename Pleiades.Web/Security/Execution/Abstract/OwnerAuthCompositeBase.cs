@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using Pleiades.Framework.Execution;
-using Pleiades.Framework.Injection;
-using Pleiades.Framework.Identity.Execution;
-using Pleiades.Framework.Web.Security.Execution;
-using Pleiades.Framework.Web.Security.Model;
-using Pleiades.Framework.Web.Security.Execution.Steps;
+using Pleiades.Execution;
+using Pleiades.Injection;
+using Pleiades.Web.Security.Execution;
+using Pleiades.Web.Security.Model;
+using Pleiades.Web.Security.Execution.Steps;
 
-namespace Pleiades.Framework.Web.Security.Execution.Abstract
+namespace Pleiades.Web.Security.Execution.Abstract
 {
     public abstract class OwnerAuthCompositeBase<T> : StepComposite<T>
             where T : OwnerAuthorizationContextBase

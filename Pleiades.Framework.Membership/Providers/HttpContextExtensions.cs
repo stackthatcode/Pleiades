@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Security.Principal;
 
-namespace Pleiades.Framework.MembershipProvider.Providers
+namespace Pleiades.Web.Security.Providers
 {
     public static class HttpContextExtensions
     {

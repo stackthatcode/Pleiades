@@ -1,8 +1,8 @@
 ﻿using System;
 using Autofac;
-using Pleiades.Framework.Injection;
+using Pleiades.Injection;
 
-namespace Pleiades.Commerce.Domain
+namespace Commerce.Domain
 {
     public class DomainModule : Module
     {

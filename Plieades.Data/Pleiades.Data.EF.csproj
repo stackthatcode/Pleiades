@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</ProjectGuid>
+    <ProjectGuid>{89303370-B830-4A89-8646-0F9D287AD657}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pleiades.Commerce.Domain</RootNamespace>
-    <AssemblyName>Pleiades.Commerce.Domain</AssemblyName>
+    <RootNamespace>Pleiades.Data.EF</RootNamespace>
+    <AssemblyName>Pleiades.Data.EF</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,14 +31,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
-      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.dll</HintPath>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.1.267\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="Autofac.Configuration">
-      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.Configuration.dll</HintPath>
+    <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList">
+      <HintPath>..\Lib\PagedList.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,42 +52,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Products\Brand.cs" />
-    <Compile Include="Model\Products\Color.cs" />
-    <Compile Include="Model\Products\Feature.cs" />
-    <Compile Include="Model\Products\Image.cs" />
-    <Compile Include="Model\Products\InventoryCounter.cs" />
-    <Compile Include="Model\Products\ProductRoot.cs" />
-    <Compile Include="Model\Products\Product.cs" />
-    <Compile Include="Model\Products\Size.cs" />
-    <Compile Include="Model\Products\SizeGroup.cs" />
+    <Compile Include="EFGenericRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\Products\StandardSize.cs" />
-    <Compile Include="Interfaces\IColorRepository.cs" />
-    <Compile Include="Interfaces\IProductRootRepository.cs" />
-    <Compile Include="Interfaces\ISizeGroupRepository.cs" />
-    <Compile Include="DomainModule.cs" />
+    <Compile Include="EFUnitOfWork.cs" />
+    <Compile Include="Utility\AutoMapper.cs" />
+    <Compile Include="Utility\PagedListExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Concrete\" />
-    <Folder Include="Execution\" />
+    <None Include="App.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pleiades.Framework.Membership\Pleiades.Framework.MembershipProvider.csproj">
-      <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
-      <Name>Pleiades.Framework.MembershipProvider</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Framework.Security\Pleiades.Framework.Identity.csproj">
-      <Project>{7F1F1DA2-6F72-4D68-A06C-D3379941B060}</Project>
-      <Name>Pleiades.Framework.Identity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Framework.csproj">
+    <ProjectReference Include="..\Pleiades.Framework\Pleiades.csproj">
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
-      <Name>Pleiades.Framework</Name>
+      <Name>Pleiades</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

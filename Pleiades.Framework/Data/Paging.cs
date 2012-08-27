@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Pleiades.Framework.Data
+namespace Pleiades.Data
 {
     /// <summary>
     /// All-purpose paging functions

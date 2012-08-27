@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using Pleiades.Framework.Data;
-using Pleiades.Framework.Helpers;
-using Pleiades.Framework.Identity.Interface;
-using Pleiades.Framework.Identity.Model;
+using Pleiades.Data;
+using Pleiades.Helpers;
+using Pleiades.Web.Security.Interface;
+using Pleiades.Web.Security.Model;
 
-
-namespace Pleiades.Framework.Identity.Concrete
+namespace Pleiades.Web.Security.Concrete
 {
     /// <summary>
     /// Core Identity User Service

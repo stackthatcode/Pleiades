@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using Rhino.Mocks;
 using NUnit.Framework;
 
-namespace Pleiades.Framework.TestHelpers.Web
+namespace Pleiades.TestHelpers.Web
 {
     public static class RoutingHelper
     {

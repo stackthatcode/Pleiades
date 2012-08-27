@@ -1,11 +1,9 @@
 ﻿using System;
-using Pleiades.Framework.Execution;
-using Pleiades.Framework.Identity.Interface;
-using Pleiades.Framework.MembershipProvider.Interface;
-using Pleiades.Framework.Web.Security.Interface;
-using Pleiades.Framework.Web.Security.Model;
+using Pleiades.Execution;
+using Pleiades.Web.Security.Interface;
+using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Framework.Web.Security.Execution.Steps
+namespace Pleiades.Web.Security.Execution.Steps
 {
     public class AuthenticateUserByRoleStep : Step<AuthenticateUserByRoleContext>
     {

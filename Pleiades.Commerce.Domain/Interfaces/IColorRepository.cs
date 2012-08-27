@@ -1,7 +1,7 @@
-﻿using Pleiades.Framework.Data;
-using Pleiades.Commerce.Domain.Model.Products;
+﻿using Pleiades.Data;
+using Commerce.Domain.Model.Products;
 
-namespace Pleiades.Commerce.Domain.Interface
+namespace Commerce.Domain.Interface
 {
     public interface IColorRepository : IGenericRepository<Color>
     {

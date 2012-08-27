@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<Pleiades.Commerce.WebUI.Areas.Admin.Models.LogOnViewModel>" %>
+﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<Commerce.WebUI.Areas.Admin.Models.LogOnViewModel>" %>
 
 <!DOCTYPE html>
 <html>
@@ -33,7 +33,7 @@
             <div style="clear:both;"></div>
             
             <% Html.EnableClientValidation(); %>
-            <% using (Html.BeginForm("Authenticate", "Login", FormMethod.Post, new { autocomplete = "off" }))
+            <% using (Html.BeginForm("Login", "Auth", FormMethod.Post, new { autocomplete = "off" }))
             { %>
                 <div style="float:left;">
                 <h4>Username</h4>

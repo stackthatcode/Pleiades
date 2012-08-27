@@ -1,4 +1,4 @@
-﻿namespace Pleiades.Commerce.Persist.Products
+﻿namespace Commerce.Persist.Products
 {
     class ColorRepository
     {

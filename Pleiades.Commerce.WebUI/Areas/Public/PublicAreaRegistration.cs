@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 
-namespace Pleiades.Commerce.WebUI.Areas.Public
+namespace Commerce.WebUI.Areas.Public
 {
     public class PublicAreaRegistration : AreaRegistration
     {

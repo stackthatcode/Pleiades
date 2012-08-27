@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Pleiades.Framework.Helpers;
-using Pleiades.Framework.Web.Security.Model;
+using Pleiades.Web.Security.Interface;
+using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Commerce.WebUI.Areas.Admin.Models
+
+namespace Commerce.WebUI.Areas.Admin.Models
 {
     public class UserViewModel
     {
-        // Domain specific data
         [ReadOnly(true)]
         [HiddenInput (DisplayValue = false)]
-        public int DomainUserId { get; set; }
+        public int AggregateUserId { get; set; }
 
         [ReadOnly(true)]
         [HiddenInput(DisplayValue = false)]
@@ -57,20 +54,23 @@ namespace Pleiades.Commerce.WebUI.Areas.Admin.Models
         public bool IsOnline { get; set; }
 
 
-        public static UserViewModel Make(DomainUser user)
+        public static UserViewModel Make(AggregateUser user)
         {
-            var userModel = user.AutoMap<DomainUser, UserViewModel>(new UserViewModel());
-            user.MembershipUser.AutoMap<MembershipUser, UserViewModel>(userModel);
-            return userModel;
+            return new UserViewModel
+            {
+                AggregateUserId = user.ID,
+                 AccountLevel = user.IdentityUser.AccountLevel,
+                  AccountStatus = user.IdentityUser.AccountStatus,
+                   CreationDate = user
+            }
         }
 
-        public string Name
+        public string FullName
         {
             get
             {
                 return FirstName + " " + LastName;
             }
         }
-
     }
 }

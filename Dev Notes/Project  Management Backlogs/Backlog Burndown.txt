@@ -1,6 +1,11 @@
 Backlog Burndown
 ================
 
+8/23/2012
+=========
+- Add Logout Button => DONE
+- Test the Security Cookie/Forms Authentication stuff => DONE
+
 8/22/2012
 =========
 GREAT! => Created Unit Tests for Security Plumbing => DONE

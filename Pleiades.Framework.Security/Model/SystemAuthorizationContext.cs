@@ -1,7 +1,7 @@
-﻿using Pleiades.Framework.Identity.Interface;
-using Pleiades.Framework.Security;
+﻿using Pleiades.Security;
+using Pleiades.Web.Security.Interface;
 
-namespace Pleiades.Framework.Identity.Model
+namespace Pleiades.Web.Security.Model
 {
     public class SystemAuthorizationContext : ISystemAuthorizationContext
     {
@@ -25,7 +25,7 @@ namespace Pleiades.Framework.Identity.Model
             this.IsPaymentArea = false;
             this.ResourceOwnerId = null;
 
-            this.SecurityResponseCode = Security.SecurityResponseCode.Allowed;
+            this.SecurityResponseCode = SecurityResponseCode.Allowed;
             this.IsExecutionStateValid = true;
         }       
     }

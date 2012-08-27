@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 
-namespace Pleiades.Framework.Web.MvcHelpers
+namespace Pleiades.Web.MvcHelpers
 {
     public static class StyleTagGenerator
     {

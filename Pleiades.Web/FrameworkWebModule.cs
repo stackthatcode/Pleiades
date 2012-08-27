@@ -1,21 +1,17 @@
 ﻿using System;
 using Autofac;
-using Pleiades.Framework.Execution;
-using Pleiades.Framework.Injection;
-using Pleiades.Framework.Identity.Concrete;
-using Pleiades.Framework.Identity.Interface;
-using Pleiades.Framework.Identity.Execution;
-using Pleiades.Framework.MembershipProvider.Concrete;
-using Pleiades.Framework.MembershipProvider.Interface;
-using Pleiades.Framework.Web.Security.Aspect;
-using Pleiades.Framework.Web.Security.Concrete;
-using Pleiades.Framework.Web.Security.Execution.Abstract;
-using Pleiades.Framework.Web.Security.Execution.Composites;
-using Pleiades.Framework.Web.Security.Execution.Steps;
-using Pleiades.Framework.Web.Security.Interface;
-using Pleiades.Framework.Web.Security.Model;
+using Pleiades.Execution;
+using Pleiades.Injection;
+using Pleiades.Web.Security.Aspect;
+using Pleiades.Web.Security.Concrete;
+using Pleiades.Web.Security.Execution;
+using Pleiades.Web.Security.Interface;
+using Pleiades.Web.Security.Execution.Abstract;
+using Pleiades.Web.Security.Execution.Composites;
+using Pleiades.Web.Security.Execution.Steps;
+using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Framework.Web
+namespace Pleiades.Web
 {
     public class FrameworkWebModule : Module
     {
@@ -34,18 +30,18 @@ namespace Pleiades.Framework.Web
 
         protected override void Load(ContainerBuilder builder)
         {
-            // Pleiades.Framework.Identity
+            // Pleiades.Identity
             builder.RegisterType<IdentityUserService>().As<IIdentityUserService>().InstancePerLifetimeScope();
             builder.RegisterType<AccountLevelAuthorizationStep<SystemAuthorizationContextBase>>().InstancePerLifetimeScope();
             builder.RegisterType<AccountStatusAuthorizationStep<SystemAuthorizationContextBase>>().InstancePerLifetimeScope();
             builder.RegisterType<RoleAuthorizationStep<SystemAuthorizationContextBase>>().InstancePerLifetimeScope();
             builder.RegisterType<SimpleOwnerAuthorizationStep<OwnerAuthorizationContextBase>>().InstancePerLifetimeScope();
 
-            // Pleiades.Framework.MembershipProvider            
+            // Pleiades.MembershipProvider            
             builder.RegisterType<FormsAuthenticationService>().As<IFormsAuthenticationService>().InstancePerLifetimeScope();
             builder.RegisterType<MembershipService>().As<IMembershipService>().InstancePerLifetimeScope();
 
-            // Pleiades.Framework.Web.Security
+            // Pleiades.Web.Security
             builder.RegisterType<AggregateUserService>().As<IAggregateUserService>().InstancePerLifetimeScope();
             builder.RegisterType<PleiadesAuthorizeAttribute>();
             

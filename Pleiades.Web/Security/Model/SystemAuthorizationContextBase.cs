@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Web;
-using Pleiades.Framework.Web.Security.Model;
-using Pleiades.Framework.Identity.Interface;
-using Pleiades.Framework.Identity.Model;
-using Pleiades.Framework.Security;
+using Pleiades.Security;
+using Pleiades.Web.Security.Model;
+using Pleiades.Web.Security.Interface;
 
-namespace Pleiades.Framework.Web.Security.Model
+namespace Pleiades.Web.Security.Model
 {
     public class SystemAuthorizationContextBase : ISystemAuthorizationContext
     {

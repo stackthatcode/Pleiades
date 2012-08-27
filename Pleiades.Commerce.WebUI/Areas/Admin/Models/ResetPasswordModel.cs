@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Pleiades.Commerce.WebUI.Areas.Admin.Models
+namespace Commerce.WebUI.Areas.Admin.Models
 {
     public class ResetPasswordModel
     {

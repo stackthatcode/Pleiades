@@ -1,4 +1,4 @@
-﻿namespace Pleiades.Framework.IntegrationTests.DataEF
+﻿namespace Pleiades.IntegrationTests.DataEF
 {
     public class MyEntity
     {

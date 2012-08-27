@@ -9,7 +9,7 @@ using System.Web.Routing;
 using Rhino.Mocks;
 using HttpSessionStateBase = System.Web.HttpSessionStateBase;
 
-namespace Pleiades.Framework.TestHelpers.Web
+namespace Pleiades.TestHelpers.Web
 {
     /// <summary>
     /// My good enough HttpContext Stub

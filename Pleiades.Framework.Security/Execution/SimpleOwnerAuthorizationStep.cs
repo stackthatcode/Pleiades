@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Pleiades.Framework.Execution;
-using Pleiades.Framework.Identity.Interface;
-using Pleiades.Framework.Identity.Model;
-using Pleiades.Framework.Security;
+using Pleiades.Execution;
+using Pleiades.Security;
+using Pleiades.Web.Security.Interface;
+using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Framework.Identity.Execution
+namespace Pleiades.Web.Security.Execution
 {
     public class SimpleOwnerAuthorizationStep<T> : Step<T> where T : IOwnerAuthorizationContext
     {

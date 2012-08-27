@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Web.Security;
 using NUnit.Framework;
-using Pleiades.Commerce.Persist;
-using Pleiades.Commerce.Persist.Security;
-using Pleiades.Framework.MembershipProvider.Concrete;
-using Pleiades.Framework.MembershipProvider.Model;
-using Pleiades.Framework.MembershipProvider.Providers;
-using Pleiades.Framework.Utility;
+using Commerce.Persist;
+using Commerce.Persist.Security;
+using Pleiades.Web.Security.Concrete;
+using Pleiades.Web.Security.Model;
+using Pleiades.Web.Security.Providers;
+using Pleiades.Utility;
 
-namespace Pleiades.Commerce.IntegrationTests.Membership
+namespace CommerceIntegrationTests.Membership
 {
     [TestFixture]
     public class MembershipTests

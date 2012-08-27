@@ -1,15 +1,13 @@
 ﻿using System.Security.Principal;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Pleiades.Framework.Web.Security.Execution.Steps;
-using Pleiades.Framework.Web.Security.Interface;
-using Pleiades.Framework.Web.Security.Model;
-using Pleiades.Framework.Identity.Interface;
-using Pleiades.Framework.Identity.Model;
-using Pleiades.Framework.MembershipProvider.Interface;
-using Pleiades.Framework.TestHelpers.Web;
+using Pleiades.Web.Security.Execution.Steps;
+using Pleiades.Web.Security.Interface;
+using Pleiades.Web.Security.Model;
+using Pleiades.Web.Security.Interface;
+using Pleiades.TestHelpers.Web;
 
-namespace Pleiades.Framework.UnitTests.Web.Security
+namespace Pleiades.UnitTests.Web.Security
 {
     [TestFixture]
     public class GetUserFromHttpContextStepTest

@@ -1,4 +1,4 @@
-﻿namespace Pleiades.Framework.MembershipProvider.Model
+﻿namespace Pleiades.Web.Security.Model
 {
     public enum PleiadesMembershipCreateStatus
     {

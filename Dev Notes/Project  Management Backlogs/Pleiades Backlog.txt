@@ -5,11 +5,13 @@ FRONTRANGE - HOTZONE
 MVC RELATED
 ~~~~~~~~~~~
 - Fix the MVC Application with the Great Refactoring => IN PROGRESS
+- FIX THIS WITH AN EXTENSION METHOD =><%: Html.RouteLink("LOGOUT", OutboundNavigation.AdminLogout(), new Dictionary<string, object>() { { "class", "header" } })%>
 
-- Add Logout Button => TODO
-- Test the Security Cookie/Forms Authentication stuff => TODO
-*** Fix the Admin Manager => TODO
-*** Fix the Category Controller stuff => TODO
+*** Fix the Admin Manager => IN PROGRESS
+- TODO: how to bridge MembershipUser with AggregateUser...?  Change it back, since we can prevent it from re-adding...
+
+*** Fix the Category Controller stuff => TODO - MAYBE FIX, MAYBE REWRITE
+
 - Refactor the Standard Control Framework => TODO
 * http://stackoverflow.com/questions/6308794/html-validationmessagefor-custom-validationmessage-always-shown => AMONG OTHER THINGS
 * Fix the web.config with assembly references => IN PROGRESS

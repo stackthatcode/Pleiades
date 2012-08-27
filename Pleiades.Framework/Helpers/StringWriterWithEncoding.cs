@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace Pleiades.Framework.Helpers
+namespace Pleiades.Helpers
 {
     public sealed class StringWriterWithEncoding : StringWriter
     {

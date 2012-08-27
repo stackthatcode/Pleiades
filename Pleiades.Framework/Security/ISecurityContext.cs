@@ -1,6 +1,6 @@
-﻿using Pleiades.Framework.Execution;
+﻿using Pleiades.Execution;
 
-namespace Pleiades.Framework.Security
+namespace Pleiades.Security
 {
     public interface ISecurityContext : IStepContext
     {

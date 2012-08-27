@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Security;
 
-namespace Pleiades.Framework.MembershipProvider.Model
+namespace Pleiades.Web.Security.Model
 {
     /// <summary>
     /// Membership User maps ASP.NET Membership Provider concerns to a seperate object

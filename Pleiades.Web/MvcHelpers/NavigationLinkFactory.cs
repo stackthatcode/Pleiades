@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Pleiades.Framework.Helpers;
+using Pleiades.Helpers;
 
-namespace Pleiades.Framework.Web.MvcHelpers
+namespace Pleiades.Web.MvcHelpers
 {
     /// <summary>
     /// TODO: abstract the setting of various Link Route Values

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Pleiades.Framework.Data
+namespace Pleiades.Data
 {
     public interface IGenericRepository<T> where T : class
     {

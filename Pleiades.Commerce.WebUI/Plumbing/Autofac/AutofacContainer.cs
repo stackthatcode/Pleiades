@@ -1,8 +1,8 @@
 ﻿using System;
 using Autofac;
-using Pleiades.Framework.Injection;
+using Pleiades.Injection;
 
-namespace Pleiades.Commerce.WebUI.Plumbing.Autofac
+namespace Commerce.WebUI.Plumbing.Autofac
 {
     public class AutofacContainer : IGenericContainer
     {

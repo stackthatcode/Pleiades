@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Pleiades.Commerce.WebUI.Plumbing.ErrorHandling
+namespace Commerce.WebUI.Plumbing.ErrorHandling
 {
     public class CustomErrorAttribute :  HandleErrorAttribute
     {

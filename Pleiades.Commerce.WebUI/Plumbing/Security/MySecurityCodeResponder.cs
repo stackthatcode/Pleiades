@@ -1,9 +1,9 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
-using Pleiades.Framework.Web.Security.Concrete;
-using Pleiades.Commerce.WebUI.Plumbing.Navigation;
+using Pleiades.Web.Security.Concrete;
+using Commerce.WebUI.Plumbing.Navigation;
 
-namespace Pleiades.Commerce.WebUI.Plumbing.Security
+namespace Commerce.WebUI.Plumbing.Security
 {
     public class MySecurityCodeResponder : DefaultResponder
     {

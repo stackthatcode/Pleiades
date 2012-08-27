@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Pleiades.Framework.Data;
-using Pleiades.Framework.Identity.Model;
-using Pleiades.Framework.Web.Security.Model;
+using Pleiades.Data;
+using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Framework.Web.Security.Interface
+namespace Pleiades.Web.Security.Interface
 {
     public interface IAggregateUserRepository : IGenericRepository<AggregateUser>
     {

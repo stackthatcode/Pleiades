@@ -1,14 +1,14 @@
 ﻿using System;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Pleiades.Framework.Web.Security.Model;
-using Pleiades.Framework.Web.Security.Execution.Steps;
-using Pleiades.Framework.Web.Security.Model;
-using Pleiades.Framework.Identity.Model;
-using Pleiades.Framework.MembershipProvider.Interface;
-using Pleiades.Framework.MembershipProvider.Model;
+using Pleiades.Web.Security.Model;
+using Pleiades.Web.Security.Execution.Steps;
+using Pleiades.Web.Security.Model;
+using Pleiades.Web.Security.Model;
+using Pleiades.Web.Security.Interface;
+using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Framework.UnitTests.Web.Security
+namespace Pleiades.UnitTests.Web.Security
 {
     [TestFixture]
     public class ChangeUserPasswordStepTests

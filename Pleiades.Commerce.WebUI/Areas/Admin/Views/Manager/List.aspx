@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" 
     MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" 
-    Inherits="System.Web.Mvc.ViewPage<Pleiades.Commerce.WebUI.Areas.Admin.Models.ListUsersViewModel>" %>
+    Inherits="System.Web.Mvc.ViewPage<Commerce.WebUI.Areas.Admin.Models.ListUsersViewModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <%: Html.StandardActionButton(StandardButton.Back, "Index", routeValues: new { controller = "Home" })%>

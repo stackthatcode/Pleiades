@@ -1,4 +1,4 @@
-﻿namespace Pleiades.Framework.Execution
+﻿namespace Pleiades.Execution
 {
     public interface IStepObserver
     {

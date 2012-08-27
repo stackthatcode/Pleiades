@@ -4,15 +4,15 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
-using Pleiades.Framework.Injection;
-using Pleiades.Framework.MembershipProvider.Providers;
-using Pleiades.Framework.Web.Security;
-using Pleiades.Commerce.Initializer;
-using Pleiades.Framework.Web.Security.Aspect;
-using Pleiades.Commerce.WebUI.Plumbing.Autofac;
-using Pleiades.Commerce.WebUI.Plumbing.ErrorHandling;
+using Pleiades.Injection;
+using Pleiades.Web.Security.Providers;
+using Pleiades.Web.Security;
+using CommerceInitializer;
+using Pleiades.Web.Security.Aspect;
+using Commerce.WebUI.Plumbing.Autofac;
+using Commerce.WebUI.Plumbing.ErrorHandling;
 
-namespace Pleiades.Commerce.WebUI
+namespace Commerce.WebUI
 {
     public class CommerceHttpApplication : HttpApplication
     {

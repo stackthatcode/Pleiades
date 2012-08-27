@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Data.Entity;
 using Autofac;
-using Pleiades.Framework.Injection;
-using Pleiades.Framework.Data.EF;
-using Pleiades.Framework.Identity.Interface;
-using Pleiades.Framework.MembershipProvider.Interface;
-using Pleiades.Framework.Web.Security.Interface;
-using Pleiades.Commerce.Persist.Security;
+using Pleiades.Injection;
+using Pleiades.Data.EF;
+using Pleiades.Web.Security.Interface;
+using Pleiades.Web.Security.Interface;
+using Pleiades.Web.Security.Interface;
+using Commerce.Persist.Security;
 
-namespace Pleiades.Commerce.Persist
+namespace Commerce.Persist
 {
     public class CommercePersistModule : Module
     {

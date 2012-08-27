@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-namespace Pleiades.Commerce.WebUI.Areas.Admin.Models
+namespace Commerce.WebUI.Areas.Admin.Models
 {
     public class LogOnViewModel
     {

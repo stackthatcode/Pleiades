@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Rhino.Mocks;
 using NUnit.Framework;
-using Pleiades.Framework.Execution;
+using Pleiades.Execution;
 
-namespace Pleiades.Framework.UnitTests.Execution
+namespace Pleiades.UnitTests.Execution
 {
     [TestFixture]
     public class TestFixtureForStep

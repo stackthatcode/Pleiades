@@ -6,12 +6,12 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web.Configuration;
 using System.Web.Security;
-using Pleiades.Framework.Data;
-using Pleiades.Framework.Helpers;
-using Pleiades.Framework.MembershipProvider.Concrete;
-using Pleiades.Framework.MembershipProvider.Interface;
+using Pleiades.Data;
+using Pleiades.Helpers;
+using Pleiades.Web.Security.Concrete;
+using Pleiades.Web.Security.Interface;
 
-namespace Pleiades.Framework.MembershipProvider.Providers
+namespace Pleiades.Web.Security.Providers
 {
     /// <summary>
     /// Entity Framework 4.0 Customer Membership Provider

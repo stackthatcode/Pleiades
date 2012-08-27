@@ -1,8 +1,7 @@
 ﻿using System;
-using Pleiades.Framework.Identity.Model;
-using Pleiades.Framework.MembershipProvider.Model;
+using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Framework.Web.Security.Model
+namespace Pleiades.Web.Security.Model
 {
     public class AggregateUser
     {

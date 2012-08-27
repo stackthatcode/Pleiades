@@ -1,7 +1,7 @@
-﻿using Pleiades.Framework.Data;
-using Pleiades.Framework.Identity.Model;
+﻿using Pleiades.Data;
+using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Framework.Identity.Interface
+namespace Pleiades.Web.Security.Interface
 {
     public interface IIdentityRepository : IGenericRepository<IdentityUser>
     {

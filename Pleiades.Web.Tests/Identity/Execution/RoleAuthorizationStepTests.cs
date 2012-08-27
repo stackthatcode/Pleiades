@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Pleiades.Framework.Execution;
-using Pleiades.Framework.Identity.Execution;
-using Pleiades.Framework.Identity.Model;
-using Pleiades.Framework.Security;
+using Pleiades.Execution;
+using Pleiades.Security;
+using Pleiades.Web.Security.Execution;
+using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Framework.UnitTests.Identity.Execution
+namespace Pleiades.UnitTests.Identity.Execution
 {
     [TestFixture]
     public class RoleAuthorizationStepTests

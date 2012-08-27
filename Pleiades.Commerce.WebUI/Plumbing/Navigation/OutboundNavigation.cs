@@ -2,7 +2,7 @@
 using System.Web;
 using System.Web.Routing;
 
-namespace Pleiades.Commerce.WebUI.Plumbing.Navigation
+namespace Commerce.WebUI.Plumbing.Navigation
 {
     // TODO: add ControllerObject.ToRoute() extension method
 
@@ -22,7 +22,13 @@ namespace Pleiades.Commerce.WebUI.Plumbing.Navigation
 
         public static RouteValueDictionary AdminLogin()
         {
-            return new RouteValueDictionary(new { area = "Admin", controller = "Login", action = "Authenticate", });
+            return new RouteValueDictionary(new { area = "Admin", controller = "Auth", action = "Login", });
         }
+
+        public static RouteValueDictionary AdminLogout()
+        {
+            return new RouteValueDictionary(new { area = "Admin", controller = "Auth", action = "Logout", });
+        }
+
     }
 }
