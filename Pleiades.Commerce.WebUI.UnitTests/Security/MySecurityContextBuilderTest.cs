@@ -10,7 +10,7 @@ using Commerce.WebUI.Plumbing.Security;
 namespace Commerce.WebUI.UnitTests.Security
 {
     [TestFixture]
-    public class TestsForMySecurityContextBuilder
+    public class MySecurityContextBuilderTest
     {
         [Test]
         public void LoginControllerIsPublic()

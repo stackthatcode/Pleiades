@@ -1,0 +1,29 @@
+ORM Nightmare
+=============
+
+Problems With Aggregate User
+----------------------------
+1.) Want to conveniently do a cross table join for Aggregate User, but don't care about the state of the objects - no, do NOT want to UPDATE the objects...?
+2.) How to use MembershipRepository, which is really only good for the MembershipProvider...?
+3.) Want to return an AggregateUser object that contains everything... 
+4.) General Frustration at Membership -- can't control how dependencies are inject, thus lose ability to use the same in memory DbContext.  Thus, looking at duplication repositories... gah!
+5.) MOREOVER: forced to add this offensive RepositoryShim with its separate context.  Not good!
+6.) Why make the AggregateRepository/Service separate?  Honestly?
+7.) Is the Repository the best possible model for dealing with data...?
+
+
+ARCHITECTURAL QUESTION! ==> how does the Entity Root Aggregate gel with the Repository...?  How much logic does DDD prescribe?
+
+FATAL
+~~~~~
+- EntityFramework performance is considered to be awful
+- The DBContext is all or nothing!  I'd rather have more granular control over what's getting updated... can I get that from NHibernate?
+
+Issues, Wierd Stuff With ORMS
+-----------------------------
+- Trackability of data.  
+
+Best Possible Solutions?
+------------------------
+1.) Bury the complexity in the AggregateRepository / Service
+2.) Services do have testable logic which doesn't really belong in the Repository... plus, implementation details for the Reposit

@@ -59,10 +59,10 @@ namespace Commerce.WebUI.Areas.Admin.Models
             return new UserViewModel
             {
                 AggregateUserId = user.ID,
-                 AccountLevel = user.IdentityUser.AccountLevel,
-                  AccountStatus = user.IdentityUser.AccountStatus,
-                   CreationDate = user
-            }
+                AccountLevel = user.IdentityUser.AccountLevel,
+                AccountStatus = user.IdentityUser.AccountStatus,
+                // CreationDate = user
+            };
         }
 
         public string FullName

@@ -1,4 +1,5 @@
-﻿using Pleiades.Web.Security.Interface;
+﻿using System.Linq;
+using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 
 namespace Pleiades.Web.Security.Concrete
@@ -24,23 +25,23 @@ namespace Pleiades.Web.Security.Concrete
                 CreateOrModifyIdentityUserRequest identityUserRequest,
                 out PleiadesMembershipCreateStatus outStatus)
         {
+            // Create Membership User... does this belong here?
             var membershipUser = this.MembershipService.CreateUser(membershipUserRequest, out outStatus);
             if (outStatus != PleiadesMembershipCreateStatus.Success)
             {
                 return null;
             }
 
-            var identityUser = this.IdentityUserService.Create(identityUserRequest);
+            // Get the Membership User
+            var membershipUserThisContext = AggregateUserRepository.RetreiveMembershipUser(membershipUser.UserName);
 
+            var identityUser = this.IdentityUserService.Create(identityUserRequest);
             var aggegrateUser = new AggregateUser
             {
-                MembershipUserName = membershipUser.UserName,
+                MembershipUser = membershipUserThisContext,
+                IdentityUser = identityUser,
             };
-
             this.AggregateUserRepository.Add(aggegrateUser);
-            this.AggregateUserRepository.SaveChanges();
-
-            aggegrateUser.IdentityUser = identityUser;
             this.AggregateUserRepository.SaveChanges();
 
             return aggegrateUser;

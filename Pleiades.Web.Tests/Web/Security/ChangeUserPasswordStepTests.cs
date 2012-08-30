@@ -20,7 +20,10 @@ namespace Pleiades.UnitTests.Web.Security
             var user = new AggregateUser()
             {
                 IdentityUser = new IdentityUser(),
-                MembershipUserName = "12345678",
+                MembershipUser = new MembershipUser
+                {
+                    UserName = "12345678",
+                }
             };
 
             var membershipService = MockRepository.GenerateMock<IMembershipService>();

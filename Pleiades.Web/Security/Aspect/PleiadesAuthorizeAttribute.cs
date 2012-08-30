@@ -16,11 +16,6 @@ namespace Pleiades.Web.Security.Aspect
         public StepComposite<SystemAuthorizationContextBase> AuthorizeExecution { get; set; }
         public IPostbackSecurityResponder Responder { get; set; }
 
-        // System Authorization stuff
-        //public AuthorizationZone AuthorizationZone { get; set; }
-        //public AccountLevel AccountLevelRestriction { get; set; }
-        //public bool IsPaymentArea { get; set; }
-
 
         public PleiadesAuthorizeAttribute(IGenericContainer container)
         {
@@ -34,7 +29,6 @@ namespace Pleiades.Web.Security.Aspect
         public override void OnAuthorization(AuthorizationContext filterContext)
         {            
             var context = this.ContextBuilder.Build(filterContext);
-
             this.AuthorizeExecution.Execute(context);
             this.Responder.Execute(context.SecurityResponseCode, filterContext);
         }

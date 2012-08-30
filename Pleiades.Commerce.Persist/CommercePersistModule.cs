@@ -21,7 +21,7 @@ namespace Commerce.Persist
             // Domain-serving Repositories
             builder.RegisterType<AggregateUserRepository>().As<IAggregateUserRepository>().InstancePerLifetimeScope();
             builder.RegisterType<IdentityUserRepository>().As<IIdentityRepository>().InstancePerLifetimeScope();
-            builder.RegisterType<MembershipRepository>().As<IMembershipRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<PfMembershipRepository>().As<IMembershipProviderRepository>().InstancePerLifetimeScope();
 
             // TODO: add the Products Repository
         }

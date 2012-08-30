@@ -57,7 +57,7 @@
     <Compile Include="Products\BrandRepository.cs" />
     <Compile Include="Products\ColorRepository.cs" />
     <Compile Include="Users\IdentityUserRepository.cs" />
-    <Compile Include="Users\MembershipRepository.cs" />
+    <Compile Include="Users\MembershipProviderRepository.cs" />
     <Compile Include="Products\ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

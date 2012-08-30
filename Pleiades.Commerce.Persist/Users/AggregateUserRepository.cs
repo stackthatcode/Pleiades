@@ -7,10 +7,6 @@ using Pleiades.Data;
 using Pleiades.Data.EF;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
-using Pleiades.Web.Security.Interface;
-using Pleiades.Web.Security.Model;
-using Pleiades.Web.Security.Interface;
-using Pleiades.Web.Security.Model;
 
 namespace Commerce.Persist.Security
 {
@@ -20,24 +16,36 @@ namespace Commerce.Persist.Security
         {
         }
 
+        // Exists to patch the Membership User's isolated Database Context issues
+        public MembershipUser RetreiveMembershipUser(string membershipUsername)
+        {
+            return this.Context
+                .Set<MembershipUser>()
+                .FirstOrDefault(x => x.UserName == membershipUsername);
+        }
+
         public AggregateUser RetrieveByMembershipUserName(string membershipUsername)
         {
-            return this.Data()
+            this.Context.Set<MembershipUser>();
+
+            var output = this.TrackableData()
                 .Include(x => x.IdentityUser)
-                .FirstOrDefault(x => x.MembershipUserName == membershipUsername);
+                .FirstOrDefault(x => x.MembershipUser.UserName == membershipUsername);
+            return output;   
         }
 
         public IEnumerable<AggregateUser> Retreive(List<UserRole> roles)
         {
             var enumRoles = roles.Select(x => x.ToString());
-            return this.Data().Where(x => enumRoles.Contains(x.IdentityUser.UserRoleValue));
+            return this.TrackableData().Where(x => enumRoles.Contains(x.IdentityUser.UserRoleValue));
         }
 
         public IEnumerable<AggregateUser> Retreive(List<string> membershipUserNames, List<UserRole> roles)
         {
             var enumRoles = roles.Select(x => x.ToString());
-            return this.Data().Where(x =>
-                enumRoles.Contains(x.IdentityUser.UserRoleValue) && membershipUserNames.Contains(x.MembershipUserName));
+            return this.TrackableData().Where(x =>
+                enumRoles.Contains(x.IdentityUser.UserRoleValue) && 
+                membershipUserNames.Contains(x.MembershipUser.UserName));
         }
     }
 }

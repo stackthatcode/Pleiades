@@ -11,7 +11,7 @@ namespace Pleiades.Web.Security.Providers
     /// <summary>
     /// Isolates Membership Provider Settings
     /// </summary>
-	public class MembershipProviderSettings
+	public class PfMembershipProviderSettings
 	{
         public virtual string ApplicationName { get; set; }
         public virtual string ProviderName { get; set; }
@@ -32,13 +32,14 @@ namespace Pleiades.Web.Security.Providers
         public virtual TimeSpan UserIsOnlineTimeWindow { get; protected set; }
 
 
-        public MembershipProviderSettings()
+        public PfMembershipProviderSettings()
         {
         }
 
-        public MembershipProviderSettings(string providerName, NameValueCollection config)
+        public PfMembershipProviderSettings(string providerName, NameValueCollection config)
         {
             this.ProviderName = providerName;
+
             // TODO: wire this properly into parsing the configuration
             this.UserIsOnlineTimeWindow = new TimeSpan(0, 15, 0);
 

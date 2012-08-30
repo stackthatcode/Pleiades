@@ -4,50 +4,36 @@ FRONTRANGE - HOTZONE
 
 MVC RELATED
 ~~~~~~~~~~~
+=> IMPORTANT - find a decent DDD community
+=> IMPORTANT - sign-in to StackOverflow
+
 - Fix the MVC Application with the Great Refactoring => IN PROGRESS
+* Fix the ManagerController + Tests => IN PROGRESS - TOP PRORITY
+* GetAll MembershipUserNames method to the AggregateUserRepository => TODO
+* AggregateUserRepository Retreive(...) overloads => IN PROGRESS - FEELING THAT BURN, YET?
+* IdentityUserRepository Integration Tests??? => IN PROGREESS
+* Fix the Category Controller stuff => TODO - MAYBE FIX, MAYBE REWRITE
+* FrameworkWebModule => find all ResolveKeyed and replace with a Broker type wrapper method to simplify => TODO
+
+Getting into MVC again, finally!
+--------------------------------
 - FIX THIS WITH AN EXTENSION METHOD =><%: Html.RouteLink("LOGOUT", OutboundNavigation.AdminLogout(), new Dictionary<string, object>() { { "class", "header" } })%>
-
-*** Fix the Admin Manager => IN PROGRESS
-- TODO: how to bridge MembershipUser with AggregateUser...?  Change it back, since we can prevent it from re-adding...
-
-*** Fix the Category Controller stuff => TODO - MAYBE FIX, MAYBE REWRITE
-
 - Refactor the Standard Control Framework => TODO
 * http://stackoverflow.com/questions/6308794/html-validationmessagefor-custom-validationmessage-always-shown => AMONG OTHER THINGS
 * Fix the web.config with assembly references => IN PROGRESS
 
 - Upgrade to ASP.NET MVC 4.0 (4.5?) => TODO
 - Web Optimization Toolkit => TODO
+- FUTURE DIRECTIONS: NHIBERNATE + MYSQL => and eventually, RAVENDB(!!!)
 
-
-DESIGN & TECH BACKLOG
+DESIGN & TECH BACKLOG - REVIEW
 ~~~~~~~~~~~~~~~~~~~~~
 - EntityFramework - how to perform basic CRUD stuff - Damn Brutha! => TODO
 - Autofac LifetimeScope w/ the database stuff and the Repository Shim => TODO - FOR NOW, JUST USE MEMBERSHIP IN ISOLATED EXECUTIONS
 - EntityFramework Transactions and ASP.NET MVC Concurrency
-- DESIGN: unsure about organization of stuff between Pleiades.Commerce.Web and Pleiades.Commerce.Domain... =>  DONE - SEE BELOW
 - Start adding Logging stuff - you won't be sorry! => TODO
-
-ARCHITECTURE
-------------
-FUTURE DIRECTIONS: NHIBERNATE + MYSQL => and eventually, RAVENDB(!!!)
-
-SECURITY
---------
-1.) Easily the most important security article evar => - http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
-2.) Look up Troy Hunt's article's, too
-
-TEST BACKLOG -- FEEL THE BURN!
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-* AggregateUserRepository Retreive(...) overloads => TODO - FEELING THAT BURN, YET?
-* IdentityUserRepository Integration Tests??? => TODO
-
-
-Store This Shit Away Somewhere
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-AT&T => 415-248-4000
-Riverside Publishing => 630-467-7000 
-
+- Easily the most important security article evar => - http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
+- Look up Troy Hunt's article's, too
 
 
 

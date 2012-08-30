@@ -56,10 +56,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SecurityRepoTests\AggregateUserServiceAndRepositoryTests.cs" />
+    <Compile Include="Security\AggregateUserRepositoryTests.cs" />
+    <Compile Include="Security\AggregateUserServiceTests.cs" />
     <Compile Include="DatabasePriming.cs" />
-    <Compile Include="SecurityRepoTests\IdentityUserAndRepositoryTests.cs" />
-    <Compile Include="SecurityRepoTests\MembershipTests.cs" />
+    <Compile Include="Security\IdentityServiceTests.cs" />
+    <Compile Include="Security\MembershipServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

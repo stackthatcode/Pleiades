@@ -11,7 +11,7 @@ using Commerce.WebUI.Plumbing.Security;
 namespace Commerce.WebUI.UnitTests.Security
 {
     [TestFixture]
-    public class TestForMySecurityCodeResponder
+    public class MySecurityCodeResponderTest
     {
         [Test]
         public void Verify_AccessDeniedSolicitLogon()

@@ -23,5 +23,15 @@ namespace Commerce.Persist
         public PleiadesContext(string conn) : base(conn)
         {
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<AggregateUser>().
+            // {
+            //     m.ToTable("UserRoles");
+            //     m.MapLeftKey("UserId");
+            //     m.MapRightKey("RoleId");
+            // });
+        }
     }
 }

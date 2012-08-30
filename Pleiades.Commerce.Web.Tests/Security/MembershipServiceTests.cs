@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration.Provider;
-using System.Linq;
-using System.Text;
 using System.Web.Security;
 using NUnit.Framework;
 using Commerce.Persist;
@@ -12,30 +9,16 @@ using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Providers;
 using Pleiades.Utility;
 
-namespace CommerceIntegrationTests.Membership
+namespace Commerce.IntegrationTests.Security
 {
     [TestFixture]
-    public class MembershipTests
+    public class MembershipRepositoryTests
     {
         [TestFixtureSetUp]
         public void TestSetup()
         {
-            var context = new PleiadesContext();
-
-            // Prepare Repository Factory
-            PfMembershipRepositoryShim.RepositoryFactory =
-                () =>
-                {
-                    var _dbContext = context;
-                    var _repository = new MembershipRepository(context);
-                    _repository.ApplicationName = System.Web.Security.Membership.ApplicationName;
-                    return _repository;
-                };
-            var membershipService = new MembershipService();
-
-            var membershipRepository = PfMembershipRepositoryShim.RepositoryFactory();
-            membershipRepository.GetAll().ForEach(x => membershipRepository.Delete(x));
-            context.SaveChanges();
+            DatabasePriming.CleanOutTheDatabase();
+            DatabasePriming.InitializeMembership();
         }
 
         [Test]

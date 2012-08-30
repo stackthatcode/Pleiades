@@ -47,10 +47,10 @@ namespace Pleiades.UnitTests.Web.Security
             var membership = MockRepository.GenerateMock<IMembershipService>();
             membership.Expect(x => x.ValidateUserByEmailAddr("admin", "123")).Return(membershipUser);
 
-            var aggrUser = new AggregateUser 
-            { 
-                IdentityUser = new IdentityUser { UserRole = UserRole.Trusted } ,
-                MembershipUserName = "12345678",
+            var aggrUser = new AggregateUser
+            {
+                IdentityUser = new IdentityUser { UserRole = UserRole.Trusted },
+                MembershipUser = membershipUser,
             };
             
             var aggregateRepository = MockRepository.GenerateMock<IAggregateUserRepository>();
@@ -86,7 +86,7 @@ namespace Pleiades.UnitTests.Web.Security
             var aggrUser = new AggregateUser
             {
                 IdentityUser = new IdentityUser { UserRole = UserRole.Admin },
-                MembershipUserName = "12345678",
+                MembershipUser = membershipUser,
             };
 
             var aggregateRepository = MockRepository.GenerateMock<IAggregateUserRepository>();

@@ -20,7 +20,7 @@ namespace Pleiades.Web.Security.Execution.Steps
         public override ChangeUserPasswordContext Execute(ChangeUserPasswordContext context)
         {
             this.MembershipService.ChangePassword(
-                context.OwnerUser.MembershipUserName, context.OldPassword, context.NewPassword);
+                context.OwnerUser.MembershipUser.UserName, context.OldPassword, context.NewPassword);
 
             return context;
         }

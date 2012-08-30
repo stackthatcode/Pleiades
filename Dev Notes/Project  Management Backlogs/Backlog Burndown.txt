@@ -1,6 +1,14 @@
 Backlog Burndown
 ================
 
+8/30/2012
+---------
+*** Slanging way too much code, brah!  Keep at it!!
+-- Fix the MembershipRepositoryTests => TODO/URGENT - DONE
+- BIG TODO: create a Registration Method for the MembershipRepositoryShim => DONE
+- Badly want to remove Application Name in MembershipRepository -- it's a nuissance and adds no value, not for enterprise-level stuff => FIXED
+- TODO: how to bridge MembershipUser with AggregateUser...?  Change it back, since we can prevent it from re-adding...
+
 8/23/2012
 =========
 - Add Logout Button => DONE

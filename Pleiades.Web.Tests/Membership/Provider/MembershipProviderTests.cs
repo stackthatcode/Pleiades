@@ -13,12 +13,14 @@ namespace Pleiades.UnitTests.Membership.Provider
     [TestFixture]
     public class MembershipProviderTests
     {
-        public IMembershipRepository ProviderRepositoryInjector(PfMembershipProvider provider)
+        public IMembershipProviderRepository ProviderRepositoryInjector(PfMembershipProvider provider)
         {
-            PfMembershipProvider.MembershipProviderSettings = MockRepository.GenerateStub<MembershipProviderSettings>();
-            PfMembershipProvider.MembershipProviderSettings.ProviderName = "My Provider";
-            var repository = MockRepository.GenerateStub<IMembershipRepository>();
-            provider.RepositoryFactory = () => repository;
+            var repository = MockRepository.GenerateStub<IMembershipProviderRepository>();
+            PfMembershipRepositoryBroker.Register((settings) => repository);
+
+            PfMembershipProvider.Settings = MockRepository.GenerateStub<PfMembershipProviderSettings>();
+            PfMembershipProvider.Settings.ProviderName = "My Provider";
+
             return repository;
         }
 
@@ -32,7 +34,7 @@ namespace Pleiades.UnitTests.Membership.Provider
 
             var username = "1111111";
             var email = "aleks@test.com";
-            PfMembershipProvider.MembershipProviderSettings.Expect(x => x.RequiresUniqueEmail).Return(true);
+            PfMembershipProvider.Settings.Expect(x => x.RequiresUniqueEmail).Return(true);
             repository.Expect(x => x.GetUserNameByEmail(email)).Return(username);
 
             // Act
@@ -54,7 +56,7 @@ namespace Pleiades.UnitTests.Membership.Provider
 
             var username = "1111111";
             var email = "aleks@test.com";
-            PfMembershipProvider.MembershipProviderSettings.Expect(x => x.RequiresUniqueEmail).Return(true);
+            PfMembershipProvider.Settings.Expect(x => x.RequiresUniqueEmail).Return(true);
             repository.Expect(x => x.GetUserNameByEmail(null)).IgnoreArguments().Return("");
             repository.Expect(x => x.GetUser(username)).Return(new Model.MembershipUser());
 
@@ -76,7 +78,7 @@ namespace Pleiades.UnitTests.Membership.Provider
             var repository = ProviderRepositoryInjector(provider); 
             var username = "1111111";
             var email = "aleks@test.com";
-            PfMembershipProvider.MembershipProviderSettings.Expect(x => x.RequiresUniqueEmail).Return(true);
+            PfMembershipProvider.Settings.Expect(x => x.RequiresUniqueEmail).Return(true);
             repository.Expect(x => x.GetUserNameByEmail(null)).IgnoreArguments().Return("");
             repository.Expect(x => x.GetUser(username)).Return(null);
 
@@ -98,7 +100,7 @@ namespace Pleiades.UnitTests.Membership.Provider
             var repository = ProviderRepositoryInjector(provider);
             var username = "1111111";
             var email = "aleks@test.com";
-            PfMembershipProvider.MembershipProviderSettings.Expect(x => x.RequiresUniqueEmail).Return(true);
+            PfMembershipProvider.Settings.Expect(x => x.RequiresUniqueEmail).Return(true);
             repository.Expect(x => x.GetUserNameByEmail(null)).IgnoreArguments().Return("");
             repository.Expect(x => x.GetUser(username)).Return(null);
             repository
@@ -123,7 +125,7 @@ namespace Pleiades.UnitTests.Membership.Provider
             var repository = ProviderRepositoryInjector(provider); 
             var username = "1111111";
             var email = "aleks@test.com";
-            PfMembershipProvider.MembershipProviderSettings.Expect(x => x.RequiresUniqueEmail).Return(true);
+            PfMembershipProvider.Settings.Expect(x => x.RequiresUniqueEmail).Return(true);
             repository.Expect(x => x.GetUserNameByEmail(null)).IgnoreArguments().Return("");
             repository.Expect(x => x.GetUser(username)).Return(null).Repeat.Once();
             repository.Expect(x => x.Add(null)).IgnoreArguments();
@@ -160,7 +162,7 @@ namespace Pleiades.UnitTests.Membership.Provider
             var repository = ProviderRepositoryInjector(provider); 
             var username = "1111111";
             var email = "aleks@test.com";
-            PfMembershipProvider.MembershipProviderSettings.Expect(x => x.RequiresUniqueEmail).Return(true);
+            PfMembershipProvider.Settings.Expect(x => x.RequiresUniqueEmail).Return(true);
             repository.Expect(x => x.GetUser(username)).Return(null);
 
 

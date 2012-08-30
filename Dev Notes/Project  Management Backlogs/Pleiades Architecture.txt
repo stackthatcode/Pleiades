@@ -1,0 +1,21 @@
+Summary of Pleiades.Web.Security Division of Concerns
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+IdentityService
+~~~~~~~~~~~~~~~
+- Independent logic for managing User Roles and Ownership Authorization
+
+MembershipService 
+~~~~~~~~~~~~~~~~
+- Wrapper around Microsoft MembershipProvider
+
+AggregateService
+~~~~~~~~~~~~~~~~
+- aggregates User creation across Identity and Membership boundaries
+- overlaps MembershipRepository, due to DbContext isolation 
+
+
+OUTSTANDING ISSUES
+~~~~~~~~~~~~~~~~~~
+- Because Membership service can't participate in Transactions, need belt and suspends for creating AggregateUsers...
+

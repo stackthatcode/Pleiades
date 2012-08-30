@@ -24,7 +24,7 @@ namespace Commerce.WebUI
             RegisterDIContainer();
 
             // Membership
-            PfMembershipShimInit.SetFactory();
+            MembershipRepositoryShim.SetFactory();
 
             // Routes
             AreaRegistration.RegisterAllAreas();

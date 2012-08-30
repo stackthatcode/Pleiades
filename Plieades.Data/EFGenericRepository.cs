@@ -20,9 +20,14 @@ namespace Pleiades.Data.EF
         /// <summary>
         /// All queryable operations should work directly with this
         /// </summary>
-        protected virtual IQueryable<T> Data()
+        protected virtual IQueryable<T> TrackableData()
         {
             return this.Context.Set<T>();
+        }
+
+        protected virtual IQueryable<T> ReadOnlyData()
+        {
+            return this.Context.Set<T>().AsNoTracking<T>();
         }
 
         public virtual void Add(T entity)
@@ -32,18 +37,18 @@ namespace Pleiades.Data.EF
 
         public virtual IQueryable<T> FindBy(Expression<Func<T, bool>> predicate)
         {
-            var query = this.Data().Where(predicate);
+            var query = this.TrackableData().Where(predicate);
             return query;
         }
 
         public virtual T FindFirstOrDefault(Expression<Func<T, bool>> predicate)
         {
-            return this.Data().FirstOrDefault(predicate);
+            return this.TrackableData().FirstOrDefault(predicate);
         }
 
         public virtual IQueryable<T> GetAll()
         {
-            var query = this.Data();
+            var query = this.TrackableData();
             return query;
         }
 

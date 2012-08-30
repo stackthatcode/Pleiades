@@ -46,7 +46,7 @@
     <Compile Include="Concrete\FormsAuthenticationService.cs" />
     <Compile Include="Concrete\MembershipService.cs" />
     <Compile Include="Interface\IFormsAuthenticationService.cs" />
-    <Compile Include="Interface\IMembershipRepository.cs" />
+    <Compile Include="Interface\IMembershipProviderRepository.cs" />
     <Compile Include="Interface\IMembershipService.cs" />
     <Compile Include="Model\CreateNewMembershipUserRequest.cs" />
     <Compile Include="Model\PleiadesMembershipCreateStatus.cs" />
@@ -55,8 +55,8 @@
     <Compile Include="Providers\HttpContextExtensions.cs" />
     <Compile Include="Providers\MembershipExtensions.cs" />
     <Compile Include="Providers\PfMembershipProvider.cs" />
-    <Compile Include="Providers\MembershipProviderSettings.cs" />
-    <Compile Include="Providers\PfMembershipRepositoryShim.cs" />
+    <Compile Include="Providers\PfMembershipProviderSettings.cs" />
+    <Compile Include="Providers\PfMembershipRepositoryBroker.cs" />
     <Compile Include="Utility\MachineKeyGenerator.cs" />
   </ItemGroup>
   <ItemGroup>

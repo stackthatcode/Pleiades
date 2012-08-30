@@ -9,7 +9,7 @@ namespace Pleiades.Web.Security.Interface
     /// <summary>
     /// Contract for Persistence Layer operations needed by the Membership Provider
     /// </summary>
-    public interface IMembershipRepository : IGenericRepository<MembershipUser>
+    public interface IMembershipProviderRepository : IGenericRepository<MembershipUser>
     {
         string ApplicationName { get; set; }
 

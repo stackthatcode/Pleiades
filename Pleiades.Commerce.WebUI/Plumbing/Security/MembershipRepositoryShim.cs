@@ -5,20 +5,18 @@ using Commerce.Persist.Security;
 
 namespace CommerceInitializer
 {
-    public class PfMembershipShimInit
+    public class MembershipRepositoryShim
     {
         // BIG, BIG, TODO: wire this into Autofac so that with each ASP.NET MVC Request, it gets its own lifetime scope
+        // FOLLOW-UP => you can't do that, son!
 
         public static void SetFactory()
         {
-            PfMembershipRepositoryShim.RepositoryFactory =
-            () =>
+            PfMembershipRepositoryBroker.Register((settings) =>
             {
                 var _dbContext = new PleiadesContext();
-                var _repository = new MembershipRepository(_dbContext);
-                _repository.ApplicationName = System.Web.Security.Membership.ApplicationName;
-                return _repository;
-            };
+                return new PfMembershipRepository(_dbContext, settings.ApplicationName);
+            });
         }
     }
 }

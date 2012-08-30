@@ -9,17 +9,18 @@ using Pleiades.Web.Security.Model;
 
 namespace Commerce.Persist.Security
 {
-    public class MembershipRepository : EFGenericRepository<MembershipUser>, IMembershipRepository
+    public class PfMembershipRepository : EFGenericRepository<MembershipUser>, IMembershipProviderRepository
     {
-        public MembershipRepository(DbContext context) : base(context)
+        public PfMembershipRepository(DbContext context, string applicationName) : base(context)
         {
+            this.ApplicationName = applicationName;
         }
 
         public string ApplicationName { get; set; }
 
-        protected override IQueryable<MembershipUser> Data()
+        protected override IQueryable<MembershipUser> TrackableData()
         {
-            return base.Data().Where(x => x.ApplicationName == this.ApplicationName);
+            return base.TrackableData().Where(x => x.ApplicationName == this.ApplicationName);
         }
 
         public MembershipUser GetUser(string username)
@@ -34,7 +35,7 @@ namespace Commerce.Persist.Security
 
         public string GetUserNameByEmail(string email)
         {
-            var user = this.Data()
+            var user = this.TrackableData()
                 .FirstOrDefault(x => x.Email == email);
 
             return user == null ? string.Empty : user.UserName;
@@ -50,13 +51,13 @@ namespace Commerce.Persist.Security
         public IList<MembershipUser> GetAllUsers(int pageIndex, int pageSize, out int totalRecords)
         {
             totalRecords = this.Count();
-            return this.Data().Page(pageIndex, pageSize).ToList();
+            return this.TrackableData().Page(pageIndex, pageSize).ToList();
         }
 
         public IList<MembershipUser> FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
             var results = 
-                (from u in this.Data()
+                (from u in this.TrackableData()
                  where u.UserName.Contains(usernameToMatch)
                  orderby u.UserName
                  select u);
@@ -68,7 +69,7 @@ namespace Commerce.Persist.Security
         public IList<MembershipUser> FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
             var results =
-                (from u in this.Data()
+                (from u in this.TrackableData()
                  where u.Email.Contains(emailToMatch)
                  orderby u.Email
                  select u);
@@ -79,7 +80,7 @@ namespace Commerce.Persist.Security
 
         public int GetNumberOfUsersOnline(TimeSpan userIsOnlineTimeWindow)
         {
-            return (from u in this.Data()
+            return (from u in this.TrackableData()
                     where u.LastActivityDate > LastActivityCutoff(userIsOnlineTimeWindow)
                     select u).Distinct().Count();
         }

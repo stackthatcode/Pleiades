@@ -23,7 +23,7 @@ namespace CommerceInitializer
         {
             // Components
             RegisterDIContainer();
-            PfMembershipShimInit.SetFactory();
+            MembershipRepositoryShim.SetFactory();
 
             // Data
             InitializeDatabase();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using MembershipCreateStatus = System.Web.Security.MembershipCreateStatus;
 using Pleiades.Web.Security.Model;
 
@@ -16,7 +17,8 @@ namespace Pleiades.Web.Security.Interface
         MembershipUser ValidateUserByEmailAddr(string emailaddr, string password);
         MembershipUser GetSingleUserByEmail(string emailAddress);
         MembershipUser GetUserByUserName(string userName);
-
+        List<MembershipUser> GetAllUsers();
+        
         string GetUserNameByEmail(string emailAddress);
         int GetNumberOfUsersOnline();
 

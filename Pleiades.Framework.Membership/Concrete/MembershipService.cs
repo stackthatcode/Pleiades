@@ -108,6 +108,19 @@ namespace Pleiades.Web.Security.Concrete
             return user.UserName;
         }
 
+        public List<Model.MembershipUser> GetAllUsers()
+        {            
+            int totalRecords;
+            var result = Membership.GetAllUsers(1, System.Int32.MaxValue, out totalRecords);
+            var output = new List<Model.MembershipUser>();
+            foreach (var user in result)
+            {
+                var modelUser = ((SecurityMembershipUser)user).ToModelMembershipUser();
+                output.Add(modelUser);
+            }
+            return output;
+        }
+
         public Model.MembershipUser GetUserByUserName(string username)
         {
             var users = Membership.FindUsersByName(username);

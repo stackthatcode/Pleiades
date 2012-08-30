@@ -17,7 +17,7 @@ namespace Commerce.Persist.Security
         public int GetUserCountByRole(UserRole role)
         {
             var enumRole = role.ToString();
-            return this.Data().Count(x => x.UserRoleValue == enumRole);
+            return this.TrackableData().Count(x => x.UserRoleValue == enumRole);
         }
 
         public IdentityUser RetrieveUserById(int id)

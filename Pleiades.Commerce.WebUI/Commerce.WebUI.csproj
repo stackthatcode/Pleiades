@@ -85,9 +85,6 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AuthController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ManagerController.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Areas\Admin\Models\ChangePasswordModel.cs" />
     <Compile Include="Areas\Admin\Models\CreateAdminModel.cs" />
     <Compile Include="Areas\Admin\Models\LogOnViewModel.cs" />
@@ -107,7 +104,7 @@
     <Compile Include="Plumbing\Navigation\OutboundNavigation.cs" />
     <Compile Include="Plumbing\Security\MySystemAuthContextBuilder.cs" />
     <Compile Include="Plumbing\Security\MySecurityCodeResponder.cs" />
-    <Compile Include="Plumbing\Security\PfMembershipShimInit.cs" />
+    <Compile Include="Plumbing\Security\MembershipRepositoryShim.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -15,6 +15,6 @@ namespace Pleiades.Web.Security.Interface
         int RetrieveTotalUsers();
         void Update(CreateOrModifyIdentityUserRequest user);
         void UpdateLastModified(int id);    // Er, can we deprecate this guy?
-        void Delete(int id);        
+        void Delete(int id);
     }
 }
