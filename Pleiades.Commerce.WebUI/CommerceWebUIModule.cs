@@ -18,9 +18,10 @@ namespace Commerce.WebUI
             builder.RegisterType<AutofacContainer>().As<IGenericContainer>().InstancePerLifetimeScope();
 
             // External Modules
-            FrameworkWebModule.RegisterAuthContextBuilder<MySystemAuthContextBuilder>();
-            FrameworkWebModule.RegisterPostbackResponder<MySecurityCodeResponder>();
-            builder.RegisterModule<FrameworkWebModule>();
+            WebModule.RegisterAuthContextBuilder<MySystemAuthContextBuilder>();
+            WebModule.RegisterPostbackResponder<MySecurityCodeResponder>();
+
+            builder.RegisterModule<WebModule>();
             builder.RegisterModule<CommercePersistModule>();
         }
     }

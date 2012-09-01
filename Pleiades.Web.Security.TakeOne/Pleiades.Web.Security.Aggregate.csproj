@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{804F063C-505F-441E-B205-688C42E637AD}</ProjectGuid>
+    <ProjectGuid>{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pleiades.Web</RootNamespace>
-    <AssemblyName>Pleiades.Web</AssemblyName>
+    <RootNamespace>Pleiades.Web.Security</RootNamespace>
+    <AssemblyName>Pleiades.Web.Security</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -37,21 +37,10 @@
     <Reference Include="Autofac.Configuration">
       <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="AutoMapper, Version=2.1.267.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\AutoMapper.2.1.267\lib\net40\AutoMapper.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Web.Routing" />
-    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,29 +48,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MvcHelpers\StyleTagGenerator.cs" />
-    <Compile Include="MvcHelpers\FormLineExtensions.cs" />
-    <Compile Include="MvcHelpers\ScriptTagGenerator.cs" />
-    <Compile Include="MvcHelpers\TagIfNotEmpty.cs" />
-    <Compile Include="MvcHelpers\NavigationLink.cs" />
-    <Compile Include="MvcHelpers\NavigationLinkFactory.cs" />
+    <Compile Include="Concrete\AggregateUserService.cs" />
+    <Compile Include="Concrete\IdentityUserService.cs" />
+    <Compile Include="Execution\Composites\ChangeUserPasswordComposite.cs" />
+    <Compile Include="Execution\Composites\SystemAuthorizationComposite.cs" />
+    <Compile Include="Execution\Composites\OwnerSecuredCompositeBase.cs" />
+    <Compile Include="Execution\Step\AccountLevelAuthorizationStep.cs" />
+    <Compile Include="Execution\Step\AccountStatusAuthorizationStep.cs" />
+    <Compile Include="Execution\Step\AuthenticateUserByRoleStep.cs" />
+    <Compile Include="Execution\Step\ChangeUserPasswordStep.cs" />
+    <Compile Include="Execution\Step\GetUserFromContextStep.cs" />
+    <Compile Include="Execution\Step\LogoutStep.cs" />
+    <Compile Include="Execution\Step\RoleAuthorizationStep.cs" />
+    <Compile Include="Execution\Step\SimpleOwnerAuthorizationStep.cs" />
+    <Compile Include="WebSecurityAggregateModule.cs" />
+    <Compile Include="Interface\IAggregateUserRepository.cs" />
+    <Compile Include="Interface\IAggregateUserService.cs" />
+    <Compile Include="Interface\IIdentityRepository.cs" />
+    <Compile Include="Interface\IIdentityUserService.cs" />
+    <Compile Include="Model\AccountLevel.cs" />
+    <Compile Include="Model\AccountStatus.cs" />
+    <Compile Include="Model\AggregateUser.cs" />
+    <Compile Include="Execution\Context\AuthenticateUserByRoleContext.cs" />
+    <Compile Include="Model\AuthorizationZone.cs" />
+    <Compile Include="Execution\Context\ChangeUserPasswordContext.cs" />
+    <Compile Include="Model\CreateNewIdentityUserRequest.cs" />
+    <Compile Include="Model\IdentityUser.cs" />
+    <Compile Include="Model\IdentityUserRole.cs" />
+    <Compile Include="Execution\Context\OwnerAuthorizationContext.cs" />
+    <Compile Include="Execution\Context\SystemAuthorizationContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MvcHelpers\EnumToSelectList.cs" />
-    <Compile Include="Security\Aspect\PleiadesAuthorizeAttribute.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Security\Concrete\DefaultAuthorizationContextBuilder.cs" />
-    <Compile Include="Security\Concrete\DefaultPostbackSecurityResponder.cs" />
-    <Compile Include="Security\Execution\Step\DefaultAuthorizationStep.cs" />
-    <Compile Include="Security\Interface\IPostbackSecurityResponder.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Security\Interface\ISystemAuthorizationContext.cs" />
-    <Compile Include="Security\Interface\ISystemAuthorizationContextBuilder.cs" />
-    <Compile Include="Security\Execution\Context\DefaultAuthorizationContext.cs" />
-    <Compile Include="WebModule.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pleiades.Framework.Membership\Pleiades.Web.Security.Membership.csproj">
@@ -92,12 +88,11 @@
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
       <Name>Pleiades</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Utilities\Pleiades.TestHelpers.csproj">
-      <Project>{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}</Project>
-      <Name>Pleiades.TestHelpers</Name>
+    <ProjectReference Include="..\Pleiades.Web\Pleiades.Web.csproj">
+      <Project>{804F063C-505F-441E-B205-688C42E637AD}</Project>
+      <Name>Pleiades.Web</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
