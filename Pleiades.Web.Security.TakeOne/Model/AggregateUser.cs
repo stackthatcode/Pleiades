@@ -6,7 +6,7 @@ namespace Pleiades.Web.Security.Model
     public class AggregateUser
     {
         public int ID { get; set; }
-        public IdentityUser Identity { get; set; }
+        public IdentityProfile IdentityProfile { get; set; }
         public MembershipUser Membership { get; set; }
 
         public static AggregateUser AnonymousUserFactory()
@@ -14,7 +14,7 @@ namespace Pleiades.Web.Security.Model
             return
                 new AggregateUser
                 {
-                    Identity = new IdentityUser
+                    IdentityProfile = new IdentityProfile
                     {
                         UserRole = UserRole.Anonymous
                     },

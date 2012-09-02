@@ -18,14 +18,14 @@ namespace Pleiades.Web.Security.Execution.Step
             }
 
             // Admins have no barriers
-            if (context.ThisUser.Identity.UserRole.IsAdministrator())
+            if (context.ThisUser.IdentityProfile.UserRole.IsAdministrator())
             {
                 return context;
             }
 
             // Reject anyone that's in an Admin area that's not an Admin
             if (context.AuthorizationZone == AuthorizationZone.Administrative && 
-                context.ThisUser.Identity.UserRole.IsNotAdministrator())
+                context.ThisUser.IdentityProfile.UserRole.IsNotAdministrator())
             {
                 context.SecurityResponseCode = SecurityResponseCode.AccessDenied;
                 this.Kill(context);
@@ -34,8 +34,8 @@ namespace Pleiades.Web.Security.Execution.Step
 
             // Reject anyone that's not Trusted in a Trusted area; solicit for Logon
             if (context.AuthorizationZone == AuthorizationZone.Restricted
-                && context.ThisUser.Identity.UserRole != UserRole.Trusted
-                && context.ThisUser.Identity.UserRole.IsNotAdministrator())
+                && context.ThisUser.IdentityProfile.UserRole != UserRole.Trusted
+                && context.ThisUser.IdentityProfile.UserRole.IsNotAdministrator())
             {
                 context.SecurityResponseCode = SecurityResponseCode.AccessDeniedSolicitLogon;
                 return this.Kill(context);

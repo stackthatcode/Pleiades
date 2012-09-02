@@ -6,9 +6,9 @@ namespace Pleiades.Web.Security.Model
     /// <summary>
     /// Identity User object
     /// </summary>
-    public class IdentityUser
+    public class IdentityProfile
     {
-        public IdentityUser()
+        public IdentityProfile()
         {
             this.UserRole = UserRole.Anonymous;
             this.AccountLevel = AccountLevel.NotApplicable;

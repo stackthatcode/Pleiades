@@ -60,7 +60,7 @@ namespace CommerceInitializer
 
             if (users.ToList().Count() < 1)
             {
-                var identityuser1 = new CreateOrModifyIdentityUserRequest
+                var identityuser1 = new CreateOrModifyIdentityRequest
                 {
                     AccountLevel = AccountLevel.NotApplicable,
                     UserRole = UserRole.Supreme,

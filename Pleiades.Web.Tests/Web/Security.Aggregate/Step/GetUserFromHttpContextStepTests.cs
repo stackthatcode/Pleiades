@@ -8,7 +8,7 @@ using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Interface;
 using Pleiades.TestHelpers.Web;
 
-namespace Pleiades.UnitTests.Web.Security
+namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
 {
     [TestFixture]
     public class GetUserFromHttpContextStepTest
@@ -68,7 +68,7 @@ namespace Pleiades.UnitTests.Web.Security
             formsAuthService.VerifyAllExpectations();
             membershipService.VerifyAllExpectations();
 
-            Assert.AreEqual(UserRole.Anonymous, context.ThisUser.Identity.UserRole);
+            Assert.AreEqual(UserRole.Anonymous, context.ThisUser.IdentityProfile.UserRole);
         }
 
         [Test]
@@ -93,7 +93,7 @@ namespace Pleiades.UnitTests.Web.Security
             formsAuthService.VerifyAllExpectations();
             membershipService.VerifyAllExpectations();
 
-            Assert.AreEqual(UserRole.Anonymous, context.ThisUser.Identity.UserRole);
+            Assert.AreEqual(UserRole.Anonymous, context.ThisUser.IdentityProfile.UserRole);
         }
     }
 }

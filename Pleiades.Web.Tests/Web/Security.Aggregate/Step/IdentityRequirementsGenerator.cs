@@ -2,23 +2,23 @@
 using Pleiades.Web.Security.Execution.Step;
 using Pleiades.Web.Security.Model;
 
-namespace Pleiades.UnitTests.Identity.Execution
+namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
 {
     public class AuthContextGenerator
     {
-        public static SystemAuthorizationContext PublicArea(IdentityUser user)
+        public static SystemAuthorizationContext PublicArea(IdentityProfile user)
         {
             return new SystemAuthorizationContext(null)
             {
                 AuthorizationZone = AuthorizationZone.Public,
                 ThisUser = new AggregateUser
                 {
-                    Identity = user,
+                    IdentityProfile = user,
                 }
             };
         }
 
-        public static SystemAuthorizationContext RestrictedStandardNonPaymentArea(IdentityUser user)
+        public static SystemAuthorizationContext RestrictedStandardNonPaymentArea(IdentityProfile user)
         {
             return new SystemAuthorizationContext(null)
             {
@@ -27,12 +27,12 @@ namespace Pleiades.UnitTests.Identity.Execution
                 IsPaymentArea = false,
                 ThisUser = new AggregateUser
                 {
-                    Identity = user,
+                    IdentityProfile = user,
                 }
             };
         }
 
-        public static SystemAuthorizationContext RestrictedGoldNonPaymentArea(IdentityUser user)
+        public static SystemAuthorizationContext RestrictedGoldNonPaymentArea(IdentityProfile user)
         {
             return new SystemAuthorizationContext(null)
             {
@@ -41,12 +41,12 @@ namespace Pleiades.UnitTests.Identity.Execution
                 IsPaymentArea = false,
                 ThisUser = new AggregateUser
                 {
-                    Identity = user,
+                    IdentityProfile = user,
                 }
             };
         }
 
-        public static SystemAuthorizationContext RestrictedPaymentArea(IdentityUser user)
+        public static SystemAuthorizationContext RestrictedPaymentArea(IdentityProfile user)
         {
             return new SystemAuthorizationContext(null)
             {
@@ -55,19 +55,19 @@ namespace Pleiades.UnitTests.Identity.Execution
                 IsPaymentArea = true,
                 ThisUser = new AggregateUser
                 {
-                    Identity = user,
+                    IdentityProfile = user,
                 }
             };
         }
 
-        public static SystemAuthorizationContext AdministrativeArea(IdentityUser user)
+        public static SystemAuthorizationContext AdministrativeArea(IdentityProfile user)
         {
             return new SystemAuthorizationContext(null)
             {
                 AuthorizationZone = AuthorizationZone.Administrative,
                 ThisUser = new AggregateUser
                 {
-                    Identity = user,
+                    IdentityProfile = user,
                 }
             };
         }

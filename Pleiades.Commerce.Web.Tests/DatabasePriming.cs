@@ -48,14 +48,9 @@ namespace Commerce.IntegrationTests
             }
 
             // Empty the Membership Users
+            context.AggregateUsers.ForEach(x => context.AggregateUsers.Remove(x));
+            context.IdentityProfiles.ForEach(x => context.IdentityProfiles.Remove(x));
             context.MembershipUsers.ForEach(x => context.MembershipUsers.Remove(x));
-
-            // Empty Aggregate and Identity Users
-            var identityRepository = new IdentityUserRepository(context);
-            var aggregateUserRepository = new AggregateUserRepository(context);
-
-            identityRepository.GetAll().ForEach(x => identityRepository.Delete(x));
-            aggregateUserRepository.GetAll().ForEach(x => aggregateUserRepository.Delete(x));
             context.SaveChanges();
         }
     }

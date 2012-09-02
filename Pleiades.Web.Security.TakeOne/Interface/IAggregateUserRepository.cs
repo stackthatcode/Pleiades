@@ -6,8 +6,9 @@ namespace Pleiades.Web.Security.Interface
 {
     public interface IAggregateUserRepository : IGenericRepository<AggregateUser>
     {
-        MembershipUser RetreiveMembershipUser(string username);
         AggregateUser RetrieveByMembershipUserName(string username);
+        AggregateUser RetrieveById(int Id);
+        MembershipUser RetreiveMembershipUser(string username);
         int GetUserCountByRole(UserRole role);
         IEnumerable<AggregateUser> Retreive(List<UserRole> role);
         IEnumerable<AggregateUser> Retreive(List<string> membershipUserNames, List<UserRole> role);

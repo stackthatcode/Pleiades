@@ -49,7 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Concrete\AggregateUserService.cs" />
-    <Compile Include="Concrete\IdentityUserService.cs" />
     <Compile Include="Execution\Composites\ChangeUserPasswordComposite.cs" />
     <Compile Include="Execution\Composites\SystemAuthorizationComposite.cs" />
     <Compile Include="Execution\Composites\OwnerSecuredCompositeBase.cs" />
@@ -64,8 +63,6 @@
     <Compile Include="WebSecurityAggregateModule.cs" />
     <Compile Include="Interface\IAggregateUserRepository.cs" />
     <Compile Include="Interface\IAggregateUserService.cs" />
-    <Compile Include="Interface\IIdentityRepository.cs" />
-    <Compile Include="Interface\IIdentityUserService.cs" />
     <Compile Include="Model\AccountLevel.cs" />
     <Compile Include="Model\AccountStatus.cs" />
     <Compile Include="Model\AggregateUser.cs" />
@@ -73,8 +70,8 @@
     <Compile Include="Model\AuthorizationZone.cs" />
     <Compile Include="Execution\Context\ChangeUserPasswordContext.cs" />
     <Compile Include="Model\CreateNewIdentityUserRequest.cs" />
-    <Compile Include="Model\IdentityUser.cs" />
-    <Compile Include="Model\IdentityUserRole.cs" />
+    <Compile Include="Model\IdentityProfile.cs" />
+    <Compile Include="Model\UserRole.cs" />
     <Compile Include="Execution\Context\OwnerAuthorizationContext.cs" />
     <Compile Include="Execution\Context\SystemAuthorizationContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

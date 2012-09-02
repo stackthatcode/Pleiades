@@ -71,10 +71,6 @@
       <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
       <Name>Pleiades.Web.Security.Membership</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Framework.Security\Pleiades.Web.Security.Identity.csproj">
-      <Project>{7F1F1DA2-6F72-4D68-A06C-D3379941B060}</Project>
-      <Name>Pleiades.Web.Security.Identity</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Framework\Pleiades.csproj">
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
       <Name>Pleiades</Name>

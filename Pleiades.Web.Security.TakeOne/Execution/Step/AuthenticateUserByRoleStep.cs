@@ -36,7 +36,7 @@ namespace Pleiades.Web.Security.Execution.Step
 
             var aggregateuser = this.AggregateUserRepository.RetrieveByMembershipUserName(membershipUser.UserName);
 
-            if (!context.ExpectedRoles.Contains(aggregateuser.Identity.UserRole))
+            if (!context.ExpectedRoles.Contains(aggregateuser.IdentityProfile.UserRole))
             {
                 this.FormsAuthService.ClearAuthenticationCookie();
                 context.Message = "Invalid Role";

@@ -11,8 +11,8 @@ namespace Pleiades.Web.Security.Execution.Context
         public AggregateUser ThisUser { get; set; }
         public AggregateUser OwnerUser { get; set; }
 
-        public IdentityUser CurrentUserIdentity { get { return ThisUser == null ? null : ThisUser.Identity; } }
-        public int? OwnerIdentityId { get { return OwnerUser == null ? null : (int?)OwnerUser.Identity.ID; } }
+        public IdentityProfile CurrentUserIdentity { get { return ThisUser == null ? null : ThisUser.IdentityProfile; } }
+        public int? OwnerIdentityId { get { return OwnerUser == null ? null : (int?)OwnerUser.IdentityProfile.ID; } }
 
         public SecurityResponseCode SecurityResponseCode { get; set; }
         public bool IsExecutionStateValid { get; set; }

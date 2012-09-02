@@ -8,7 +8,7 @@ using Pleiades.Security;
 using Pleiades.Web.Security.Execution.Step;
 using Pleiades.Web.Security.Model;
 
-namespace Pleiades.UnitTests.Identity.Execution
+namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
 {
     [TestFixture]
     public class RoleAuthorizationStepTests

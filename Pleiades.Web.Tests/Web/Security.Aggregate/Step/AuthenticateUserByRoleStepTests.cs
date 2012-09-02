@@ -13,7 +13,7 @@ using Pleiades.Web.Security.Execution.Context;
 using Pleiades.Web.Security.Execution.Step;
 using Pleiades.Web.Security.Model;
 
-namespace Pleiades.UnitTests.Web.Security
+namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
 {
     [TestFixture]
     public class AuthenticateUserByRoleStepTests
@@ -50,7 +50,7 @@ namespace Pleiades.UnitTests.Web.Security
 
             var aggrUser = new AggregateUser
             {
-                Identity = new IdentityUser { UserRole = UserRole.Trusted },
+                IdentityProfile = new IdentityProfile { UserRole = UserRole.Trusted },
                 Membership = membershipUser,
             };
             
@@ -86,7 +86,7 @@ namespace Pleiades.UnitTests.Web.Security
 
             var aggrUser = new AggregateUser
             {
-                Identity = new IdentityUser { UserRole = UserRole.Admin },
+                IdentityProfile = new IdentityProfile { UserRole = UserRole.Admin },
                 Membership = membershipUser,
             };
 

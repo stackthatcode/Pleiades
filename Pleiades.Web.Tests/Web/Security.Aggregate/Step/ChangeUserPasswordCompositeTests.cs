@@ -7,7 +7,7 @@ using Pleiades.Web.Security.Execution.Composites;
 using Pleiades.Web.Security.Execution.Step;
 using Pleiades.Web.Security.Model;
 
-namespace Pleiades.UnitTests.Web.Security
+namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
 {
     [TestFixture]
     public class ChangeUserPasswordCompositeTests

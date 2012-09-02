@@ -6,7 +6,7 @@ using Pleiades.Execution;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Execution.Step;
 
-namespace Pleiades.UnitTests.Web.Security
+namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
 {
     [TestFixture]
     public class LogoutStepTests

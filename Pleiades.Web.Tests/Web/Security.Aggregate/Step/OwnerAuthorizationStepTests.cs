@@ -9,7 +9,7 @@ using Pleiades.Web.Security.Execution.Context;
 using Pleiades.Web.Security.Execution.Step;
 using Pleiades.Web.Security.Model;
 
-namespace Pleiades.UnitTests.Identity.Execution
+namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
 {
     [TestFixture]
     public class OwnerAuthorizationStepTests
@@ -22,7 +22,7 @@ namespace Pleiades.UnitTests.Identity.Execution
             {
                 ThisUser = new AggregateUser
                 {
-                    Identity = new IdentityUser { ID = 333, }
+                    IdentityProfile = new IdentityProfile { ID = 333, }
                 },
                 OwnerUser = null,
             };
@@ -46,11 +46,11 @@ namespace Pleiades.UnitTests.Identity.Execution
             {
                 ThisUser = new AggregateUser
                 {
-                    Identity = new IdentityUser { ID = 333, }
+                    IdentityProfile = new IdentityProfile { ID = 333, }
                 },
                 OwnerUser = new AggregateUser
                 {
-                    Identity = new IdentityUser { ID = 333, }
+                    IdentityProfile = new IdentityProfile { ID = 333, }
                 },
             };
 
@@ -72,11 +72,11 @@ namespace Pleiades.UnitTests.Identity.Execution
             {
                 ThisUser = new AggregateUser
                 {
-                    Identity = new IdentityUser { ID = 444, }
+                    IdentityProfile = new IdentityProfile { ID = 444, }
                 },
                 OwnerUser = new AggregateUser
                 {
-                    Identity = new IdentityUser { ID = 333, }
+                    IdentityProfile = new IdentityProfile { ID = 333, }
                 },
             };
 
@@ -98,11 +98,11 @@ namespace Pleiades.UnitTests.Identity.Execution
             {
                 ThisUser = new AggregateUser
                 {
-                    Identity = StubUserGenerator.AdminUser,
+                    IdentityProfile = StubUserGenerator.AdminUser,
                 },
                 OwnerUser = new AggregateUser
                 {
-                    Identity = new IdentityUser { ID = 333, }
+                    IdentityProfile = new IdentityProfile { ID = 333, }
                 },
             };
 

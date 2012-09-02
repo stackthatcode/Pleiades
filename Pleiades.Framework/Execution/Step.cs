@@ -4,7 +4,7 @@ using Pleiades.Helpers;
 
 namespace Pleiades.Execution
 {
-    public abstract class Step<TContext> where TContext : IStepContext
+    public abstract class Step<TContext> : IStep<TContext> where TContext : IStepContext
     {
         protected List<IStepObserver> Observers = new List<IStepObserver>();
 

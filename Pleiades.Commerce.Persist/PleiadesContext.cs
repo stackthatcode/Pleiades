@@ -12,7 +12,7 @@ namespace Commerce.Persist
         
         public DbSet<AggregateUser> AggregateUsers { get; set; }
         public DbSet<MembershipUser> MembershipUsers { get; set; }
-        public DbSet<IdentityUser> IdentityUsers { get; set; }
+        public DbSet<IdentityProfile> IdentityProfiles { get; set; }
         
         // public DbSet<AggregateUser> AggregateUsers { get; set; } -- todo: add Category
 

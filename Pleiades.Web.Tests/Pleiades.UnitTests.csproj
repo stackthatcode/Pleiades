@@ -64,41 +64,43 @@
     <Compile Include="Execution\StepOk.cs" />
     <Compile Include="Execution\TestFixtureForStep.cs" />
     <Compile Include="Execution\StepThatNotifies.cs" />
-    <Compile Include="Web\Concrete\IdentityUserServiceTests.cs" />
+    <Compile Include="Web\Security.Aggregate\Concrete\AggregateUserServiceTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Web\Security.Membership\Provider\MembershipProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\HttpContext\HttpContextStubTests.cs" />
-    <Compile Include="Web\Security.Aggregate\AccountLevelAuthorizationStepTests.cs">
+    <Compile Include="Web\Security.Aggregate\Step\AccountLevelAuthorizationStepTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\Security.Aggregate\AccountStatusAuthorizationStepTests.cs">
+    <Compile Include="Web\Security.Aggregate\Step\AccountStatusAuthorizationStepTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\Security.Aggregate\AuthenticateUserByRoleStepTests.cs">
+    <Compile Include="Web\Security.Aggregate\Step\AuthenticateUserByRoleStepTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\Security.Aggregate\ChangeUserPasswordCompositeTests.cs">
+    <Compile Include="Web\Security.Aggregate\Step\ChangeUserPasswordCompositeTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\Security.Aggregate\ChangeUserPasswordStepTests.cs">
+    <Compile Include="Web\Security.Aggregate\Step\ChangeUserPasswordStepTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\Security.Aggregate\GetUserFromHttpContextStepTests.cs">
+    <Compile Include="Web\Security.Aggregate\Step\GetUserFromHttpContextStepTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\Security.Aggregate\IdentityRequirementsGenerator.cs">
+    <Compile Include="Web\Security.Aggregate\Step\IdentityRequirementsGenerator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\Security.Aggregate\LogoutStepTests.cs">
+    <Compile Include="Web\Security.Aggregate\Step\LogoutStepTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\Security.Aggregate\OwnerAuthorizationStepTests.cs">
+    <Compile Include="Web\Security.Aggregate\Step\OwnerAuthorizationStepTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\Security.Aggregate\RoleAuthorizationStepTests.cs">
+    <Compile Include="Web\Security.Aggregate\Step\RoleAuthorizationStepTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\Security.Aggregate\StubUserGenerator.cs">
+    <Compile Include="Web\Security.Aggregate\Step\StubUserGenerator.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

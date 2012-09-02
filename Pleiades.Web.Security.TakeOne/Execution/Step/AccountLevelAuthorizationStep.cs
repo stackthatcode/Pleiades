@@ -11,7 +11,7 @@ namespace Pleiades.Web.Security.Execution.Step
     {
         public override SystemAuthorizationContext Execute(SystemAuthorizationContext context)
         {
-            if (context.ThisUser.Identity.UserRole.IsAdministrator())
+            if (context.ThisUser.IdentityProfile.UserRole.IsAdministrator())
             {
                 return context; 
             }
@@ -28,7 +28,7 @@ namespace Pleiades.Web.Security.Execution.Step
             }
 
             if (context.AccountLevelRestriction == AccountLevel.Gold && 
-                context.ThisUser.Identity.AccountLevel != AccountLevel.Gold)
+                context.ThisUser.IdentityProfile.AccountLevel != AccountLevel.Gold)
             {
                 return 
                     this.Kill(context, () =>

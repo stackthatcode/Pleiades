@@ -1,26 +1,26 @@
 ﻿using System;
 using Pleiades.Web.Security.Model;
 
-namespace Pleiades.UnitTests.Identity.Execution
+namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
 {
     public class StubUserGenerator
     {
-        public static IdentityUser AnonymousUser
+        public static IdentityProfile AnonymousUser
         {
             get
             {
-                return new IdentityUser()
+                return new IdentityProfile()
                 {
                     UserRole = UserRole.Anonymous,
                 };
             }
         }
 
-        public static IdentityUser ActiveTrustedGoldUser
+        public static IdentityProfile ActiveTrustedGoldUser
         {
             get
             {
-                return new IdentityUser()
+                return new IdentityProfile()
                 {
                     UserRole = UserRole.Trusted,
                     AccountStatus = AccountStatus.Active,
@@ -29,11 +29,11 @@ namespace Pleiades.UnitTests.Identity.Execution
             }
         }
 
-        public static IdentityUser ActiveTrustedStandardUser
+        public static IdentityProfile ActiveTrustedStandardUser
         {
             get
             {
-                return new IdentityUser()
+                return new IdentityProfile()
                 {
                     UserRole = UserRole.Trusted,
                     AccountStatus = AccountStatus.Active,
@@ -42,11 +42,11 @@ namespace Pleiades.UnitTests.Identity.Execution
             }
         }
 
-        public static IdentityUser DelinquentTrustedUser
+        public static IdentityProfile DelinquentTrustedUser
         {
             get
             {
-                return new IdentityUser()
+                return new IdentityProfile()
                 {
                     UserRole = UserRole.Trusted,
                     AccountStatus = AccountStatus.PaymentRequired,
@@ -55,11 +55,11 @@ namespace Pleiades.UnitTests.Identity.Execution
             }
         }
 
-        public static IdentityUser DisabledAccountTrustedUser
+        public static IdentityProfile DisabledAccountTrustedUser
         {
             get
             {
-                return new IdentityUser()
+                return new IdentityProfile()
                 {
                     UserRole = UserRole.Trusted,
                     AccountStatus = AccountStatus.Disabled,
@@ -68,11 +68,11 @@ namespace Pleiades.UnitTests.Identity.Execution
             }
         }
 
-        public static IdentityUser AdminUser
+        public static IdentityProfile AdminUser
         {
             get
             {
-                return new IdentityUser()
+                return new IdentityProfile()
                 {
                     UserRole = UserRole.Admin,
                     AccountStatus = AccountStatus.Active,
@@ -80,11 +80,11 @@ namespace Pleiades.UnitTests.Identity.Execution
             }
         }
 
-        public static IdentityUser SupremeUser
+        public static IdentityProfile SupremeUser
         {
             get
             {
-                return new IdentityUser()
+                return new IdentityProfile()
                 {
                     UserRole = UserRole.Supreme,
                     AccountStatus = AccountStatus.Active,

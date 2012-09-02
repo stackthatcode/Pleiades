@@ -29,23 +29,34 @@ namespace Commerce.Persist.Security
             this.Context.Set<MembershipUser>();
 
             var output = this.TrackableData()
-                .Include(x => x.IdentityUser)
-                .FirstOrDefault(x => x.MembershipUser.UserName == membershipUsername);
+                .Include(x => x.IdentityProfile)
+                .FirstOrDefault(x => x.Membership.UserName == membershipUsername);
             return output;   
         }
 
         public IEnumerable<AggregateUser> Retreive(List<UserRole> roles)
         {
             var enumRoles = roles.Select(x => x.ToString());
-            return this.TrackableData().Where(x => enumRoles.Contains(x.IdentityUser.UserRoleValue));
+            return this.TrackableData().Where(x => enumRoles.Contains(x.IdentityProfile.UserRoleValue));
         }
 
         public IEnumerable<AggregateUser> Retreive(List<string> membershipUserNames, List<UserRole> roles)
         {
             var enumRoles = roles.Select(x => x.ToString());
             return this.TrackableData().Where(x =>
-                enumRoles.Contains(x.IdentityUser.UserRoleValue) && 
-                membershipUserNames.Contains(x.MembershipUser.UserName));
+                enumRoles.Contains(x.IdentityProfile.UserRoleValue) && 
+                membershipUserNames.Contains(x.Membership.UserName));
+        }
+
+
+        public AggregateUser RetrieveById(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetUserCountByRole(UserRole role)
+        {
+            throw new NotImplementedException();
         }
     }
 }

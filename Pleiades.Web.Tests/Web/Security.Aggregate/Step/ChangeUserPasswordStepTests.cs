@@ -9,7 +9,7 @@ using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 
-namespace Pleiades.UnitTests.Web.Security
+namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
 {
     [TestFixture]
     public class ChangeUserPasswordStepTests
@@ -20,7 +20,7 @@ namespace Pleiades.UnitTests.Web.Security
             // Arrange
             var user = new AggregateUser()
             {
-                Identity = new IdentityUser(),
+                IdentityProfile = new IdentityProfile(),
                 Membership = new MembershipUser
                 {
                     UserName = "12345678",

@@ -10,7 +10,6 @@ using Pleiades.Utility;
 using Commerce.Persist;
 using Commerce.Persist.Security;
 
-
 namespace Commerce.IntegrationTests.Security
 {
     [TestFixture]
@@ -20,18 +19,19 @@ namespace Commerce.IntegrationTests.Security
         public void Setup()
         {
             DatabasePriming.CleanOutTheDatabase();
-            DatabasePriming.InitializeMembership();
+
+            // When we create a new MembershipService, the Shim will inject the DbContext
+            DatabasePriming.InitializeMembership(); 
         }
 
         public AggregateUserService CreateAggregateUserService()
         {            
             // Create the Aggregate User Service with a separate Database Context
             var dbContext2 = new PleiadesContext();
-            var identityUserService = new IdentityUserService(new IdentityUserRepository(dbContext2));
             var membershipService = new MembershipService();
             var aggregateUserRepository = new AggregateUserRepository(dbContext2);
 
-            return new AggregateUserService(membershipService, identityUserService, aggregateUserRepository);
+            return new AggregateUserService(membershipService, aggregateUserRepository);
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace Commerce.IntegrationTests.Security
             // Arrange
             var context = new PleiadesContext();
 
-            var identityuser1 = new CreateOrModifyIdentityUserRequest
+            var identityuser1 = new CreateOrModifyIdentityRequest
                 {
                     AccountLevel = AccountLevel.Standard,
                     FirstName = "John",
@@ -52,7 +52,7 @@ namespace Commerce.IntegrationTests.Security
                     Password = "1234567890",
                 };
 
-            var identityuser2 = new CreateOrModifyIdentityUserRequest
+            var identityuser2 = new CreateOrModifyIdentityRequest
                 {
                     AccountLevel = AccountLevel.Gold,
                     FirstName = "Anne",
@@ -79,8 +79,8 @@ namespace Commerce.IntegrationTests.Security
             var testUser = aggregateUserRepository.RetrieveByMembershipUserName(membershipUserName);
 
             Assert.IsNotNull(testUser);
-            Assert.AreEqual("Anne", testUser.IdentityUser.FirstName);
-            Assert.AreEqual("Holtz", testUser.IdentityUser.LastName);
+            Assert.AreEqual("Anne", testUser.IdentityProfile.FirstName);
+            Assert.AreEqual("Holtz", testUser.IdentityProfile.LastName);
             Assert.AreEqual("anne@holtz.com", "anne@holtz.com");
         }
     }
