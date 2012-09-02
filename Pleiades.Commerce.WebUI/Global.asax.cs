@@ -27,8 +27,7 @@ namespace Commerce.WebUI
             MembershipRepositoryShim.SetFactory();
 
             // Routes
-            AreaRegistration.RegisterAllAreas();
-            RegisterDefaultRoutes();
+            RegisterRoutes();
 
             // Filters
             RegisterGlobalFilters();            
@@ -53,14 +52,15 @@ namespace Commerce.WebUI
             this.Container = new AutofacContainer(container.BeginLifetimeScope());
         }
 
-        public static void RegisterDefaultRoutes()
+        public static void RegisterRoutes()
         {
+            AreaRegistration.RegisterAllAreas();
             RouteTable.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
         }
 
         public void RegisterGlobalFilters()
         {
-            GlobalFilters.Filters.Add(this.Container.Resolve<PleiadesAuthorizeAttribute>());
+            GlobalFilters.Filters.Add(this.Container.Resolve<SystemAuthorizeAttribute>());
             
             // TODO: respond to this one
             // GlobalFilters.Filters.Add(new CustomErrorAttribute());

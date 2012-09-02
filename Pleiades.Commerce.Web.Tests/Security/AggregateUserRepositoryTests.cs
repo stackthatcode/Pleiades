@@ -15,7 +15,6 @@ namespace Commerce.IntegrationTests.Security
             // TODO...
         }
 
-
         //[Test]
         //public void Verify_RetrieveUserById()
         //{

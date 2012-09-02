@@ -2,6 +2,7 @@
 using Autofac;
 using Pleiades.Execution;
 using Pleiades.Injection;
+using Pleiades.Web.Security.Aspect;
 using Pleiades.Web.Security.Concrete;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Execution.Context;
@@ -9,9 +10,9 @@ using Pleiades.Web.Security.Execution.Composites;
 using Pleiades.Web.Security.Execution.Step;
 using Pleiades.Web.Security.Model;
 
-namespace Pleiades.Web
+namespace Pleiades.Web.Security
 {
-    public class WebSecuritytAggregateModule : Module
+    public class WebSecurityAggregateModule : Module
     {       
         protected override void Load(ContainerBuilder builder)
         {
@@ -19,7 +20,8 @@ namespace Pleiades.Web
             builder.RegisterType<FormsAuthenticationService>().As<IFormsAuthenticationService>().InstancePerLifetimeScope();
             builder.RegisterType<MembershipService>().As<IMembershipService>().InstancePerLifetimeScope();
 
-            // Pleiades.Web.Security.Aggregate
+            // Aspect
+            builder.RegisterType<SystemAuthorizeAttribute>().InstancePerLifetimeScope();
 
             // Services
             builder.RegisterType<AggregateUserService>().As<IAggregateUserService>().InstancePerLifetimeScope();
@@ -36,7 +38,7 @@ namespace Pleiades.Web
             
             // Composites Steps
             builder.RegisterType<ChangeUserPasswordComposite>().InstancePerLifetimeScope();
-            builder.RegisterType<GetUserFromContextStep>().InstancePerLifetimeScope();
+            builder.RegisterType<SystemAuthorizationComposite>().InstancePerLifetimeScope();
         }   
     }
 }

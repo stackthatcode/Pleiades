@@ -27,7 +27,7 @@ namespace Commerce.WebUI.UnitTests.Routing
                     new PublicAreaRegistration(),
                 });
 
-            CommerceHttpApplication.RegisterDefaultRoutes();
+            CommerceHttpApplication.RegisterRoutes();
         }
     }
 }

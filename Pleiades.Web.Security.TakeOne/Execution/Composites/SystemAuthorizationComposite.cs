@@ -7,8 +7,7 @@ using Pleiades.Web.Security.Model;
 
 namespace Pleiades.Web.Security.Execution.Composites
 {
-    public class SystemAuthorizationComposite : 
-            StepComposite<SystemAuthorizationContext>, IStep<ISystemAuthorizationContext>
+    public class SystemAuthorizationComposite : StepComposite<SystemAuthorizationContext>
     {
         public SystemAuthorizationComposite(IGenericContainer container)
             : base(container)
@@ -20,7 +19,7 @@ namespace Pleiades.Web.Security.Execution.Composites
         }
 
         // This bit of glue is needed to allow us to Register this Composite as IStep<ISystemAuthorizationContext>
-        public ISystemAuthorizationContext Execute(ISystemAuthorizationContext context)
+        public SystemAuthorizationContext Execute(SystemAuthorizationContext context)
         {
             return base.Execute((SystemAuthorizationContext)context);
         }

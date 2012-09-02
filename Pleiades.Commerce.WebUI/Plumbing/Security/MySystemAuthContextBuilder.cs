@@ -10,7 +10,7 @@ namespace Commerce.WebUI.Plumbing.Security
 {
     public class MySystemAuthContextBuilder : ISystemAuthorizationContextBuilder 
     {
-        public ISystemAuthorizationContext Build(AuthorizationContext filterContext)
+        public SystemAuthorizationContext Build(AuthorizationContext filterContext)
         {
             if (filterContext.Controller is AuthController || filterContext.Controller is ProductsController)
             {

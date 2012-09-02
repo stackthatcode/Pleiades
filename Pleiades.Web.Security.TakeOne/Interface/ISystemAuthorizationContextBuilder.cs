@@ -6,6 +6,6 @@ namespace Pleiades.Web.Security.Interface
 {
     public interface ISystemAuthorizationContextBuilder
     {
-        ISystemAuthorizationContext Build(AuthorizationContext filterContext);
+        SystemAuthorizationContext Build(AuthorizationContext filterContext);
     }
 }

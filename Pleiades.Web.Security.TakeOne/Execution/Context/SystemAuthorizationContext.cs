@@ -6,7 +6,7 @@ using Pleiades.Web.Security.Model;
 
 namespace Pleiades.Web.Security.Execution.Context
 {
-    public class SystemAuthorizationContext : ISystemAuthorizationContext
+    public class SystemAuthorizationContext : ISecurityContext, IStepContext
     {
         public HttpContextBase HttpContext { get; set; }
         public AggregateUser ThisUser { get; set; }

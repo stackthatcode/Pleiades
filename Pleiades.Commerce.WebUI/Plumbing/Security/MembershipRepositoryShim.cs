@@ -7,8 +7,8 @@ namespace CommerceInitializer
 {
     public class MembershipRepositoryShim
     {
-        // BIG, BIG, TODO: wire this into Autofac so that with each ASP.NET MVC Request, it gets its own lifetime scope
-        // FOLLOW-UP => you can't do that, son!
+        // ### BIG, BIG, TODO: wire this into Autofac so that with each ASP.NET MVC Request, it gets its own lifetime scope
+        // *** FOLLOW-UP => you can't do that, son!
 
         public static void SetFactory()
         {

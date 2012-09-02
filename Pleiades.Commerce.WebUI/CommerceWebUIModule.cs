@@ -1,7 +1,7 @@
 ﻿using System;
 using Autofac;
 using Pleiades.Injection;
-using Pleiades.Web;
+using Pleiades.Web.Security;
 using Pleiades.Web.Security.Aspect;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Execution.Composites;
@@ -19,11 +19,10 @@ namespace Commerce.WebUI
             builder.RegisterType<AutofacContainer>().As<IGenericContainer>().InstancePerLifetimeScope();
 
             // External Modules
-            WebInjectionBroker.RegisterAuthContextBuilder<MySystemAuthContextBuilder>();
-            WebInjectionBroker.RegisterPostbackResponder<MySecurityCodeResponder>();
-            WebInjectionBroker.RegisterSystemAuthorizationStep<SystemAuthorizationComposite>();
+            WebSecurityAggregateBroker.RegisterAuthorizationContextBuilder<MySystemAuthContextBuilder>();
+            WebSecurityAggregateBroker.RegisterPostbackResponder<MySecurityCodeResponder>();
 
-            builder.RegisterModule<WebModule>();
+            builder.RegisterModule<WebSecurityAggregateModule>();
             builder.RegisterModule<CommercePersistModule>();
         }
     }

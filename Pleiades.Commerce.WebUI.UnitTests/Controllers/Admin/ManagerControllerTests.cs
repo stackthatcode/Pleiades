@@ -29,7 +29,7 @@ namespace Commerce.WebUI.TestsControllers
         public void TestListAction()
         {
             // Arrange
-            var adminmgrController = new AdminManagerController();
+            var adminmgrController = new ManagerController();
             adminmgrController.DomainUserService = MockRepository.GenerateMock<IDomainUserService>();
             adminmgrController.DomainUserService
                 .Expect(x => x.RetreiveAll(1, AdminManagerController.PageSize, new List<UserRole>() { UserRole.Admin, UserRole.Root }))
