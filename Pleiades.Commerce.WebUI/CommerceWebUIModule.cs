@@ -22,6 +22,8 @@ namespace Commerce.WebUI
             WebSecurityAggregateBroker.RegisterAuthorizationContextBuilder<MySystemAuthContextBuilder>();
             WebSecurityAggregateBroker.RegisterPostbackResponder<MySecurityCodeResponder>();
 
+            WebSecurityAggregateBroker.Build(builder);
+
             builder.RegisterModule<WebSecurityAggregateModule>();
             builder.RegisterModule<CommercePersistModule>();
         }

@@ -51,6 +51,28 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
         }
 
         [Test]
+        [ExpectedException(typeof(Exception))]
+        public void Verify_Cant_Add_Anonymous_User()
+        {
+            // Arrange            
+            var request = new CreateOrModifyIdentityRequest()
+            {
+                UserRole = UserRole.Anonymous,
+                AccountLevel = AccountLevel.Gold,
+                AccountStatus = AccountStatus.Active,
+                FirstName = "Jon",
+                LastName = "Smith",
+            };
+            var aggregateUserService = new AggregateUserService(null, null);
+
+            // Act
+            PleiadesMembershipCreateStatus createStatus;
+            aggregateUserService.Create(null, request, out createStatus);
+
+            // Assert - show thorw!
+        }
+
+        [Test]
         public void Verify_MembershipFailure_Create_Request()
         {
             // Arrange            

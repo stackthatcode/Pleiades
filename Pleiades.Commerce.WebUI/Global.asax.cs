@@ -20,14 +20,14 @@ namespace Commerce.WebUI
 
         protected void Application_Start()
         {
+            // Routes
+            RegisterRoutes();
+
             // Components
             RegisterDIContainer();
 
             // Membership
             MembershipRepositoryShim.SetFactory();
-
-            // Routes
-            RegisterRoutes();
 
             // Filters
             RegisterGlobalFilters();            
@@ -36,7 +36,7 @@ namespace Commerce.WebUI
             // ModelBinders.Binders.Add(typeof(DomainUser), new DomainUserBinder());
 
             // Phil Haack's Tool => ***SAVE***
-            // RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
+            //RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
         }
 
         public void RegisterDIContainer()

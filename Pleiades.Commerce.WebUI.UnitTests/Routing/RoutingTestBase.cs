@@ -23,7 +23,7 @@ namespace Commerce.WebUI.UnitTests.Routing
             RoutingHelper.BuildAreaRegistrations(
                 new List<AreaRegistration>() 
                 { 
-                    new AdminAreaRegistration(),
+                   // new AdminAreaRegistration(),
                     new PublicAreaRegistration(),
                 });
 

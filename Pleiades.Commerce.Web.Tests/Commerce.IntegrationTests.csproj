@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Security\AggregateUserRepositoryTests.cs" />
-    <Compile Include="Security\AggregateUserServiceTests.cs" />
+    <Compile Include="Security\AggregateUserServiceAndRepositoryTests.cs" />
     <Compile Include="DatabasePriming.cs" />
     <Compile Include="Security\MembershipServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

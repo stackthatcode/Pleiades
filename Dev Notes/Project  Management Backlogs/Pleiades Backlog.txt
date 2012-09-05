@@ -4,14 +4,13 @@ FRONTRANGE - HOTZONE
 
 MVC RELATED
 ~~~~~~~~~~~
-=> IMPORTANT - find a decent DDD community
-=> IMPORTANT - sign-in to StackOverflow
-
 - Fix the MVC Application with the Great Refactoring => IN PROGRESS
+* Fix the wierd Routing Issue => DONE
+* PRevent Anonymous Users from being Created => DONE
 
-* Fix the wierd Routing Issue => TODO
-* Write 5 AggregateUserRepositoryTests => TODO
+* Write 5 AggregateUserRepositoryTests => IN PROGRESS - 2 MORE TESTS
 * Fix the ManagerController + Tests => IN PROGRESS
+
 
 
 Getting into MVC again, finally!
@@ -23,9 +22,17 @@ Getting into MVC again, finally!
 * http://stackoverflow.com/questions/6308794/html-validationmessagefor-custom-validationmessage-always-shown => AMONG OTHER THINGS
 * Fix the web.config with assembly references => IN PROGRESS
 
+
+Backlog
+-------
+- A new computer?  A desktop, mayhaps? => TODO
+=> IMPORTANT - find a decent DDD community
+=> IMPORTANT - sign-in to StackOverflow
 - Upgrade to ASP.NET MVC 4.0 (4.5?) => TODO
 - Web Optimization Toolkit => TODO
 - FUTURE DIRECTIONS: NHIBERNATE + MYSQL => and eventually, RAVENDB(!!!)
+* Get Scott Hanselman's obj/bin cleaner utility => IN PROGRESS
+
 
 DESIGN & TECH BACKLOG - REVIEW
 ~~~~~~~~~~~~~~~~~~~~~

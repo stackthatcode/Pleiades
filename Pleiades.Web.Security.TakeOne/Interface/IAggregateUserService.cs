@@ -8,6 +8,5 @@ namespace Pleiades.Web.Security.Interface
             CreateNewMembershipUserRequest membershipUser, 
             CreateOrModifyIdentityRequest identityUser,
             out PleiadesMembershipCreateStatus outStatus);
-        void UpdateIdentity(int aggregateUserID, Model.CreateOrModifyIdentityRequest changes);
     }
 }

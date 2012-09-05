@@ -26,6 +26,11 @@ namespace Pleiades.Web.Security.Concrete
                 CreateOrModifyIdentityRequest identityUserRequest,
                 out PleiadesMembershipCreateStatus outStatus)
         {
+            if (identityUserRequest.UserRole == UserRole.Anonymous)
+            {
+                throw new Exception("Can't create an Anonymous User");
+            }
+
             if (identityUserRequest.UserRole == UserRole.Admin && 
                 this.Repository.GetUserCountByRole(UserRole.Admin) >= MaxAdminUsers)
             {
@@ -65,23 +70,6 @@ namespace Pleiades.Web.Security.Concrete
             this.Repository.Add(aggegrateUser);
             this.Repository.SaveChanges();
             return aggegrateUser;
-        }
-
-        /// <summary>
-        /// Update existing Identity User - will only modify Identity User entities, not Membership!
-        /// </summary>
-        public void UpdateIdentity(int aggregateUserID, Model.CreateOrModifyIdentityRequest changes)
-        {
-            var identity = this.Repository.RetrieveById(aggregateUserID).IdentityProfile;
-
-            identity.UserRole = changes.UserRole;
-            identity.AccountStatus = changes.AccountStatus;
-            identity.AccountLevel = changes.AccountLevel;
-            identity.FirstName = changes.FirstName;
-            identity.LastName = changes.LastName;
-            identity.LastModified = DateTime.Now;
-
-            this.Repository.SaveChanges();
         }
     }
 }

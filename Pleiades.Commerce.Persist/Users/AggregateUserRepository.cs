@@ -43,20 +43,49 @@ namespace Commerce.Persist.Security
         public IEnumerable<AggregateUser> Retreive(List<string> membershipUserNames, List<UserRole> roles)
         {
             var enumRoles = roles.Select(x => x.ToString());
-            return this.TrackableData().Where(x =>
+            return this.ReadOnlyData().Where(x =>
                 enumRoles.Contains(x.IdentityProfile.UserRoleValue) && 
                 membershipUserNames.Contains(x.Membership.UserName));
         }
 
-
-        public AggregateUser RetrieveById(int Id)
+        public AggregateUser RetrieveById(int aggregateUserId)
         {
-            throw new NotImplementedException();
+            return this.ReadOnlyData()
+                .Include(x => x.IdentityProfile)
+                .Include(x => x.Membership)
+                .FirstOrDefault(x => x.ID == aggregateUserId);
         }
+
+        protected AggregateUser RetrieveByIdForWriting(int aggregateUserId)
+        {
+            return this.TrackableData()
+                .Include(x => x.IdentityProfile)
+                .Include(x => x.Membership)
+                .FirstOrDefault(x => x.ID == aggregateUserId);
+        }
+
 
         public int GetUserCountByRole(UserRole role)
         {
-            throw new NotImplementedException();
+            var roleName = role.ToString();
+            return this.ReadOnlyData().Count(x => x.IdentityProfile.UserRoleValue == roleName);
+        }
+
+        /// <summary>
+        /// Update existing Identity User - will only modify Identity User entities, not Membership!
+        /// </summary>
+        public void UpdateIdentity(int aggregateUserID, CreateOrModifyIdentityRequest changes)
+        {
+            var identity = this.RetrieveByIdForWriting(aggregateUserID).IdentityProfile;
+            
+            identity.UserRole = changes.UserRole;
+            identity.AccountStatus = changes.AccountStatus;
+            identity.AccountLevel = changes.AccountLevel;
+            identity.FirstName = changes.FirstName;
+            identity.LastName = changes.LastName;
+            identity.LastModified = DateTime.Now;
+
+            this.Context.SaveChanges();
         }
     }
 }
