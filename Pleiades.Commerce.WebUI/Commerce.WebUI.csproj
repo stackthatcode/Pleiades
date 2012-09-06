@@ -50,10 +50,6 @@
     <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="PagedList, Version=1.1.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\PagedList.dll</HintPath>
-    </Reference>
     <Reference Include="RouteDebug">
       <HintPath>..\Lib\RouteDebug.dll</HintPath>
     </Reference>
@@ -182,37 +178,33 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pleiades.Commerce.Domain\Commerce.Domain.csproj">
-      <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
-      <Name>Commerce.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Commerce.Persist\Commerce.Persist.csproj">
+    <ProjectReference Include="..\Commerce.Persist\Commerce.Persist.csproj">
       <Project>{E616B84E-1830-4909-9A56-58A656EA9B5B}</Project>
       <Name>Commerce.Persist</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Framework.Membership\Pleiades.Web.Security.Membership.csproj">
-      <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
-      <Name>Pleiades.Web.Security.Membership</Name>
+    <ProjectReference Include="..\Pleiades.Data.EF\Pleiades.Data.EF.csproj">
+      <Project>{89303370-B830-4A89-8646-0F9D287AD657}</Project>
+      <Name>Pleiades.Data.EF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Framework\Pleiades.csproj">
+    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Base.csproj">
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
-      <Name>Pleiades</Name>
+      <Name>Pleiades.Base</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pleiades.Utilities\Pleiades.TestHelpers.csproj">
       <Project>{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}</Project>
       <Name>Pleiades.TestHelpers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Web.Security.TakeOne\Pleiades.Web.Security.Aggregate.csproj">
+    <ProjectReference Include="..\Pleiades.Web.Security.Aggregate\Pleiades.Web.Security.Aggregate.csproj">
       <Project>{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}</Project>
       <Name>Pleiades.Web.Security.Aggregate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pleiades.Web.Security.Membership\Pleiades.Web.Security.Membership.csproj">
+      <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
+      <Name>Pleiades.Web.Security.Membership</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pleiades.Web\Pleiades.Web.csproj">
       <Project>{804F063C-505F-441E-B205-688C42E637AD}</Project>
       <Name>Pleiades.Web</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Plieades.Data\Pleiades.Data.EF.csproj">
-      <Project>{89303370-B830-4A89-8646-0F9D287AD657}</Project>
-      <Name>Pleiades.Data.EF</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

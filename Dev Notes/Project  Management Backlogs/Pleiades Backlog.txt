@@ -1,20 +1,24 @@
 FRONTRANGE - HOTZONE
 ====================
-*** Celebrate coming Out-of-the-Wild with The Great Refactoring #1! ***
 
 MVC RELATED
 ~~~~~~~~~~~
 - Fix the MVC Application with the Great Refactoring => IN PROGRESS
 * Fix the wierd Routing Issue => DONE
 * PRevent Anonymous Users from being Created => DONE
+=> IMPORTANT - COPY SHIT TO ENCRYPTED ZIP AND PUT ON DROP BOX - DONE
+=> IMPORTANT - GET LATEST IN AN EMPTY DIR - DONE
+* Write 5 AggregateUserRepositoryTests => IN PROGRESS - DONE
 
-* Write 5 AggregateUserRepositoryTests => IN PROGRESS - 2 MORE TESTS
+
 * Fix the ManagerController + Tests => IN PROGRESS
+*** Celebrate coming Out-of-the-Wild with The Great Refactoring #1! *** => TODO
 
 
 
-Getting into MVC again, finally!
---------------------------------
+Another Backlog
+---------------
+* http://www.hanselman.com/blog/NuGetPackageOfTheWeek5DebuggingASPNETMVCApplicationsWithGlimpse.aspx
 * Postback Control Framework => TODO
 * Create a new CategoryController/Views/Domain Model, etc.
 - FIX THIS WITH AN EXTENSION METHOD =><%: Html.RouteLink("LOGOUT", OutboundNavigation.AdminLogout(), new Dictionary<string, object>() { { "class", "header" } })%>

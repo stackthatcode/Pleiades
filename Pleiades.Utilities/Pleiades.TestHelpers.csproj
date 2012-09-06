@@ -59,9 +59,9 @@
     <Compile Include="Web\RoutingHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pleiades.Framework\Pleiades.csproj">
+    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Base.csproj">
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
-      <Name>Pleiades</Name>
+      <Name>Pleiades.Base</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
