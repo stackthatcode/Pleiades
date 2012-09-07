@@ -62,8 +62,6 @@ namespace Pleiades.Web.Security.Concrete
                     AccountLevel = identityUserRequest.AccountLevel,
                     FirstName = identityUserRequest.FirstName,
                     LastName = identityUserRequest.LastName,
-                    CreationDate = DateTime.Now,
-                    LastModified = DateTime.Now,
                 }
             };
 

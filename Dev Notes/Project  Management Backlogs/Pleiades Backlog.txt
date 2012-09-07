@@ -4,14 +4,7 @@ FRONTRANGE - HOTZONE
 MVC RELATED
 ~~~~~~~~~~~
 - Fix the MVC Application with the Great Refactoring => IN PROGRESS
-* Fix the wierd Routing Issue => DONE
-* PRevent Anonymous Users from being Created => DONE
-=> IMPORTANT - COPY SHIT TO ENCRYPTED ZIP AND PUT ON DROP BOX - DONE
-=> IMPORTANT - GET LATEST IN AN EMPTY DIR - DONE
-* Write 5 AggregateUserRepositoryTests => IN PROGRESS - DONE
-
-
-* Fix the ManagerController + Tests => IN PROGRESS
+* Fix the ManagerController + Tests => IN PROGRESS - EASY PICKINGS
 *** Celebrate coming Out-of-the-Wild with The Great Refactoring #1! *** => TODO
 
 
@@ -25,6 +18,8 @@ Another Backlog
 - Refactor the Standard Control Framework => TODO
 * http://stackoverflow.com/questions/6308794/html-validationmessagefor-custom-validationmessage-always-shown => AMONG OTHER THINGS
 * Fix the web.config with assembly references => IN PROGRESS
+- How to deal with LastUpdated field => IN PROGRESS
+
 
 
 Backlog

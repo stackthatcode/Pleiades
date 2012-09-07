@@ -46,10 +46,5 @@ namespace Pleiades.Web.Security.Model
         // Profile data
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
-        // Other
-        public DateTime LastModified { get; set; }
-        public DateTime CreationDate { get; set; }
-
     }
 }

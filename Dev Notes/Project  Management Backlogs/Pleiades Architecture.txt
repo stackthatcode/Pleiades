@@ -1,6 +1,15 @@
 Summary of Pleiades.Web.Security Division of Concerns
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+TECHNICAL DEBT LOG
+~~~~~~~~~~~~~~~~~~
+- ManagerController Edit shows the consequence of using "payload" objects to send changes back to the database.  This is kind of where the ORM is supposed to come into play...
+- 
+
+
+
+
 IdentityService
 ~~~~~~~~~~~~~~~
 - Independent logic for managing User Roles and Ownership Authorization
@@ -13,19 +22,4 @@ AggregateService
 ~~~~~~~~~~~~~~~~
 - aggregates User creation across Identity and Membership boundaries
 - overlaps MembershipRepository, due to DbContext isolation 
-
-OUTSTANDING ISSUES
-~~~~~~~~~~~~~~~~~~
-- Because Membership service can't participate in Transactions, need belt and suspends for creating AggregateUsers... => THIS IS A REAL PROBLEM
-
-
-Retrospective on Security Framework
------------------------------------
-- Bugged by the fact the Identity is purely pluggable, since it makes assumptions about the Domain.  This seems like an argument for moving it into Pleiades.Web and calling the Pleiades.Web.Security.Patina.
-
-* Could converge Identity with the Aggregate Services... as this is more "honest".  Thus, the overlapping Repository concerns are managed by the AggregateRepository.
-
-* AggregateUser is already coupled to Identity ==> plus Identity is not swappable.
-
-
 

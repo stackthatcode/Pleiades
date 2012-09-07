@@ -71,7 +71,6 @@ namespace Commerce.Persist.Security
                 .FirstOrDefault(x => x.ID == aggregateUserId);
         }
 
-
         public int GetUserCountByRole(UserRole role)
         {
             var roleName = role.ToString();
@@ -84,14 +83,17 @@ namespace Commerce.Persist.Security
         /// </summary>
         public void UpdateIdentity(int aggregateUserID, CreateOrModifyIdentityRequest changes)
         {
-            var identity = this.RetrieveByIdForWriting(aggregateUserID).IdentityProfile;
+            var user = this.RetrieveByIdForWriting(aggregateUserID);
+            var identity = user.IdentityProfile;
+            var membership = user.Membership;
             
             identity.UserRole = changes.UserRole;
             identity.AccountStatus = changes.AccountStatus;
             identity.AccountLevel = changes.AccountLevel;
             identity.FirstName = changes.FirstName;
             identity.LastName = changes.LastName;
-            identity.LastModified = DateTime.Now;
+
+            membership.LastModified = DateTime.Now;
 
             this.Context.SaveChanges();
         }

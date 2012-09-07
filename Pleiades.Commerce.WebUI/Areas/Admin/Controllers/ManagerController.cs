@@ -20,32 +20,37 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         public IAggregateUserRepository AggregateUserRepository { get; set; }
         public IAggregateUserService AggregateUserService { get; set; }
         public IMembershipService MembershipService { get; set; }
-        public IIdentityUserService IdentityUserService { get; set; }
 
         public ManagerController(
                 IAggregateUserRepository aggregateUserRepository, 
                 IAggregateUserService aggregateUserService,
-                IMembershipService membershipService,
-                IIdentityUserService identityUserService)
+                IMembershipService membershipService)
         {
             AggregateUserRepository = aggregateUserRepository;
             AggregateUserService = aggregateUserService;
             MembershipService = membershipService;
-            IdentityUserService = identityUserService;
         }
 
         [HttpGet]
         public ActionResult List(int page = 1)
         {
             var users = AggregateUserRepository.Retreive(new List<UserRole>() { UserRole.Admin, UserRole.Supreme });
-            return View(new ListUsersViewModel { Users = users });
+            var listUsersViewModel =
+                new ListUsersViewModel
+                    {
+                        Users = users.Select(user => new UserViewModel(user)).ToList()
+                    };
+            return View(); 
         }
 
         [HttpGet]
         public ActionResult Details(int id)
         {
-            var user = AggregateUserRepository.FindFirstOrDefault(x => x.ID == id);
-            var userModel = UserViewModel.Make(user);
+            var user = AggregateUserRepository.RetrieveById(id);
+
+            // TODO: what if the User is null...?
+
+            var userModel = new UserViewModel(user);
             return View(userModel);
         }
 
@@ -74,7 +79,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
                         PasswordAnswer = DefaultAnswer,
                         PasswordQuestion = DefaultQuestion,
                     },
-                    new CreateOrModifyIdentityUserRequest
+                    new CreateOrModifyIdentityRequest
                     {                        
                         AccountStatus = AccountStatus.Active,
                         UserRole = UserRole.Admin,
@@ -96,38 +101,44 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var user = DomainUserService.RetrieveUserByDomainUserId(id);
-            var userModel = UserViewModel.Make(user);
+            var user = this.AggregateUserRepository.RetrieveById(id);
+            var userModel = new UserViewModel(user);
             return View(userModel);
         }
 
         [HttpPost]
         public ActionResult Edit(int id, UserViewModel userViewModel)
         {
-            // This is an interesting issue here, neh...?  Don't save this data on the client side, no matter what!
-            var dbDomainUser = DomainUserService.RetrieveUserByDomainUserId(id);
-            userViewModel.UserName = dbDomainUser.MembershipUser.UserName;
-
             if (!ModelState.IsValid)
             {
                 return View(userViewModel);
             }
 
-            // Update Identity User stuff
-            dbDomainUser.FirstName = userViewModel.FirstName;
-            dbDomainUser.LastName = userViewModel.LastName;
-            DomainUserService.Update(dbDomainUser);
+            var userData = this.AggregateUserRepository.RetrieveById(id);
+
+            // 
+            this.AggregateUserRepository.UpdateIdentity(id,
+                new CreateOrModifyIdentityRequest
+                {
+                    AccountLevel = userData.IdentityProfile.AccountLevel,
+                    AccountStatus = userData.IdentityProfile.AccountStatus,
+                    UserRole = userData.IdentityProfile.UserRole,
+                    FirstName = userViewModel.FirstName,
+                    LastName = userViewModel.LastName,
+                });
 
             // Update Membership stuff
-            if (dbDomainUser.UserRole != UserRole.Root)
+
+            var membershipUserName = userData.Membership.UserName;
+
+            if (userData.IdentityProfile.UserRole != UserRole.Supreme)
             {
-                MembershipService.SetUserApproval(dbDomainUser, userViewModel.IsApproved);
+                MembershipService.SetUserApproval(membershipUserName, userViewModel.IsApproved);
             }
 
-            // Leave Email Disabled for now
-            if (userViewModel.Email != dbDomainUser.MembershipUser.Email)
+            if (userViewModel.Email != userData.Membership.Email)
             {
-                MembershipService.ChangeEmailAddress(dbDomainUser, userViewModel.Email);
+                MembershipService.ChangeEmailAddress(membershipUserName, userViewModel.Email);
             }
             
             return RedirectToAction("Details", new { id = id });
@@ -136,18 +147,20 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Change(int id)
         {
-            var user = DomainUserService.RetrieveUserByDomainUserId(id);
-            return View(new ChangePasswordModel { Email = user.MembershipUser.Email });
+            var user = this.AggregateUserRepository.RetrieveById(id);
+            return View(new ChangePasswordModel { Email = user.Membership.Email });
         }
 
         [HttpPost]
         public ActionResult Change(int id, ChangePasswordModel model)
         {
             if (!this.ModelState.IsValid)
+            {
                 return View(model);
+            }
 
-            var user = DomainUserService.RetrieveUserByDomainUserId(id);
-            MembershipService.ChangePassword(user, model.OldPassword, model.NewPassword);
+            var user = this.AggregateUserRepository.RetrieveById(id);
+            this.MembershipService.ChangePassword(user.Membership.UserName, model.OldPassword, model.NewPassword);
 
             return RedirectToAction("Details", new { id = id });
         }
@@ -155,35 +168,33 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Reset(int id)
         {
-            var user = DomainUserService.RetrieveUserByDomainUserId(id);
-            var newpassword = this.MembershipService.ResetPassword(user);
+            var user = this.AggregateUserRepository.RetrieveById(id);
+            var newpassword = this.MembershipService.ResetPassword(user.Membership.UserName);
 
-            return View(
-                new ResetPasswordModel { 
-                    Email = user.MembershipUser.Email, NewPassword = newpassword });
+            return View(new ResetPasswordModel { Email = user.Membership.Email, NewPassword = newpassword });
         }
 
         [HttpGet]
         public ActionResult Unlock(int id)
         {
-            var user = DomainUserService.RetrieveUserByDomainUserId(id);
-            MembershipService.UnlockUser(user);
+            var user = this.AggregateUserRepository.RetrieveById(id);
+            MembershipService.UnlockUser(user.Membership.UserName);
             return RedirectToAction("Details", new { id = id });
         }
 
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            var user = DomainUserService.RetrieveUserByDomainUserId(id);
-            var userModel = UserViewModel.Make(user);
+            var user = this.AggregateUserRepository.RetrieveById(id);
+            var userModel = new UserViewModel(user);
             return View(userModel);
         }
 
         [HttpPost]
         public ActionResult DeleteConfirm(int id)
         {
-            var user = DomainUserService.RetrieveUserByDomainUserId(id);
-            DomainUserService.Delete(user);
+            var user = this.AggregateUserRepository.RetrieveById(id);
+            this.AggregateUserRepository.Delete(user);
 
             return RedirectToAction("List");
         }

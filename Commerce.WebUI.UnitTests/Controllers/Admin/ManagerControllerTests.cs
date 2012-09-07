@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
-using System.Web.Security;
 using NUnit.Framework;
 using Rhino.Mocks;
 using Pleiades.TestHelpers;
 using Pleiades.TestHelpers.Web;
-using Commerce.WebUI;
+using Pleiades.Web.Security.Interface;
+using Pleiades.Web.Security.Model;
+using Commerce.Domain.Interface;
 using Commerce.WebUI.Areas.Admin.Controllers;
 using Commerce.WebUI.Areas.Admin.Models;
 
@@ -19,47 +18,76 @@ namespace Commerce.WebUI.TestsControllers
     [TestFixture]
     public class AdminManagerControllerTests
     {
-        //public IEnumerable<AggregateUser> aggregateUserYielder()
-        //{
-        //    for (int i=0; i < 5; i++)
-        //        yield return new AggregateUser();
-        //}        
+        public AggregateUser AdminUserFactory()
+        {
+            return new AggregateUser
+            {
+                ID = 999,
+                IdentityProfile = new IdentityProfile
+                {
+                    AccountLevel = AccountLevel.NotApplicable,
+                    AccountStatus = AccountStatus.Active,
+                    FirstName = "John",
+                    LastName = "Fathers",
+                    UserRole = UserRole.Admin,
+                },
+                Membership = new MembershipUser
+                {
+                    CreationDate = DateTime.Now.AddDays(-7),
+                    Email = "john@gmail.com",
+                    IsApproved = true,
+                    IsLockedOut = false,
+                    IsOnline = false,
+                    LastModified = DateTime.Now.AddHours(-3),
+                }
+            };
+        }
 
         [Test]
-        public void TestListAction()
+        public void Verify_List_POST()
         {
             // Arrange
-            var adminmgrController = new ManagerController();
-            adminmgrController.DomainUserService = MockRepository.GenerateMock<IDomainUserService>();
-            adminmgrController.DomainUserService
-                .Expect(x => x.RetreiveAll(1, AdminManagerController.PageSize, new List<UserRole>() { UserRole.Admin, UserRole.Root }))
-                .Return(new PagedList.PagedList<DomainUserCondensed>(aggregateUserYielder(), 0, 1));
+            var aggregateUserRepository = MockRepository.GenerateMock<IAggregateUserRepository>();
+
+            aggregateUserRepository 
+                .Expect(x => x.Retreive(new List<UserRole>() { UserRole.Admin, UserRole.Supreme }))
+                .Return(new List<AggregateUser> 
+                        { 
+                            AdminUserFactory(), 
+                            AdminUserFactory(), 
+                            AdminUserFactory()
+                        });
+
+            var adminmgrController = new ManagerController(aggregateUserRepository, null, null);
 
             // Act
             var result = adminmgrController.List(1);
 
             // Assert
             result.ShouldBeView();
-            adminmgrController.DomainUserService.VerifyAllExpectations();
+            aggregateUserRepository.VerifyAllExpectations();
         }
 
-        //[Test]
-        //public void TestDetailAction()
-        //{
-        //    // Arrange
-        //    var adminmgrController = new AdminManagerController();
-        //    adminmgrController.DomainUserService = MockRepository.GenerateMock<IDomainUserService>();
-        //    adminmgrController.DomainUserService
-        //        .Expect(x => x.RetrieveUserByDomainUserId(123))
-        //        .Return(new DomainUser());
+        [Test]
+        public void Verify_Detail_GET()
+        {
+            // Arrange
+            var aggregateUserRepository = MockRepository.GenerateMock<IAggregateUserRepository>();
 
-        //    // Act
-        //    var result = adminmgrController.Details(123);
+            aggregateUserRepository
+                .Expect(x => x.RetrieveById(123))
+                .Return(AdminUserFactory());
+            
+            var adminmgrController = new ManagerController(aggregateUserRepository, null, null);
 
-        //    // Assert
-        //    result.ShouldBeView();
-        //    adminmgrController.DomainUserService.VerifyAllExpectations();
-        //}
+
+            // Act
+            var result = adminmgrController.Details(123);
+
+            // Assert
+            result.ShouldBeView();
+            aggregateUserRepository.VerifyAllExpectations();
+        }
 
         //// TODO: can we really justify writing a CRUD Test...????
         //[Test]

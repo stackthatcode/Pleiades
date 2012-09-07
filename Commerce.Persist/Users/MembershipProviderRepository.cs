@@ -11,12 +11,13 @@ namespace Commerce.Persist.Security
 {
     public class PfMembershipRepository : EFGenericRepository<MembershipUser>, IMembershipProviderRepository
     {
-        public PfMembershipRepository(DbContext context, string applicationName) : base(context)
+        public string ApplicationName { get; set; }
+
+        public PfMembershipRepository(DbContext context, string applicationName)
+            : base(context)
         {
             this.ApplicationName = applicationName;
         }
-
-        public string ApplicationName { get; set; }
 
         protected override IQueryable<MembershipUser> TrackableData()
         {

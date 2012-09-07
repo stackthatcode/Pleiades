@@ -5,7 +5,6 @@ using System.Web.Mvc;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 
-
 namespace Commerce.WebUI.Areas.Admin.Models
 {
     public class UserViewModel
@@ -47,22 +46,29 @@ namespace Commerce.WebUI.Areas.Admin.Models
         public string Email { get; set; }
 
         // Membership Data read-only
-        public bool IsApproved { get; set; }
-        public bool IsLockedOut { get; set; }
+        public bool IsApproved { get; protected set; }
+        public bool IsLockedOut { get; protected set; }
 
         [ReadOnly(true)]
         public bool IsOnline { get; set; }
 
-
-        public static UserViewModel Make(AggregateUser user)
+        public UserViewModel()
         {
-            return new UserViewModel
-            {
-                AggregateUserId = user.ID,
-                AccountLevel = user.IdentityProfile.AccountLevel,
-                AccountStatus = user.IdentityProfile.AccountStatus,
-                // CreationDate = user
-            };
+        }
+
+        public UserViewModel(AggregateUser user)
+        {
+            AggregateUserId = user.ID;
+            AccountLevel = user.IdentityProfile.AccountLevel;
+            AccountStatus = user.IdentityProfile.AccountStatus;
+            CreationDate = user.Membership.CreationDate;
+            Email = user.Membership.Email;
+            FirstName = user.IdentityProfile.FirstName;
+            LastName = user.IdentityProfile.LastName;
+            IsApproved = user.Membership.IsApproved;
+            IsLockedOut = user.Membership.IsLockedOut ?? false;
+            IsOnline = user.Membership.IsOnline;
+            LastModified = user.Membership.LastModified;
         }
 
         public string FullName
