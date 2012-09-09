@@ -1,0 +1,6 @@
+The Crazier, The Better!
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Create a consulting firm that focuses on using Alt.Net-centric development techniques
+- Attack mobile computing head-on - go after iOS development with a vengance
+

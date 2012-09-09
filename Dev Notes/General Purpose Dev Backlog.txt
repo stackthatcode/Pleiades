@@ -27,7 +27,6 @@ BLOG POSTS!
 - Paean to the Bounded Context
 - Reactive Extensions
 
-
 VALUABLE STUFF
 --------------
 http://thenounproject.com/3/ => USE THESE!!!

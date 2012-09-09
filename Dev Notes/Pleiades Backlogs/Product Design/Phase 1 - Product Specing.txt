@@ -1,25 +1,3 @@
-FINAL SPECIFICATION
-*******************
-- Use MMA/fighting-gear for the beta product
-- Bounded Context => representation of Product decoupled from searchability
-- Products are classified using a Taxonomy
-
-
-PRODUCT object spec
--------------------
-- ID
-- Name
-- Description
-- Product Type => boom! Already building a taxonomy
-- Product Sub Type => yup!
-- Gender
-- Brand
-- Features
-
-
-
-
-
 PHASE 1 PRODUCT SPECING POST MORTEM - Main Takeaways
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Bounded Context solves (or provides a better route) the Taxonomy Issue

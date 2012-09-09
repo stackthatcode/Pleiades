@@ -3,20 +3,7 @@ FRONTRANGE - HOTZONE
 - Fix the MVC Application with the Great Refactoring => IN PROGRESS
 * Fix the ManagerController + Tests => IN PROGRESS - EASY PICKINGS
 *** Celebrate coming Out-of-the-Wild with The Great Refactoring #1! *** => TODO
-
-
-
-UI/UX/PRODUCT RELATED
-~~~~~~~~~~~~~~~~~~~~~
-- UI Comparable Analysis => IN PROGRESS (GOOD JOB!)
-- Identify and Mock-up Major Workflows => IN PROGRESS
-* Pleiades Brand + UI Design => TODO
-* Find a bunch of good E-Commerce Sites, bookmark and critique => IN PROGRESS
-* Develop a Product specification => URGENT
-- http://37signals.com/37searchreport.pdf => READ
-- Project Planning the next Phase for v1.0 - Identify major tasks => IN PROGRESS
-- Review "desine" links => PROGRESS
-
+- Postback Control Framework additions =>< TODO
 
 Another Backlog
 ---------------
@@ -31,14 +18,6 @@ Another Backlog
 - Web Optimization Toolkit => TODO
 - FUTURE DIRECTIONS: NHIBERNATE + MYSQL => and eventually, RAVENDB(!!!)
 * Get Scott Hanselman's obj/bin cleaner utility => IN PROGRESS
-
-DESIGN & TECH BACKLOG - REVIEW
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- EntityFramework - how to perform basic CRUD stuff - Damn Brutha! => TODO
-- EntityFramework Transactions and ASP.NET MVC Concurrency => TODO
-- Start adding Logging stuff - you won't be sorry! => TODO
-- Easily the most important security article evar => - http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
-- Look up Troy Hunt's article's, too
 
 
 THOUGHTS ON UI CODING
@@ -73,17 +52,15 @@ Enhanced MVC
 
 
 
-PRODUCT MANAGEMENT
-==================
-* R&D CURRENT
-- Continue with Review of Pleiades AJAX Grid => IN PROGRESS
-- R&D CSS + Image + Script File Management => IN PROGRESS
-- Find alternative OSS AJAX Grids => IN PROGRESS - NEED WORKFLOWS FIRST, THO
-- TODO: create an identity to penetrate social networks
 
-* IDEAS
-- Need to create a Cache which can be incrementally modified - IncrementalCache => TODO
-- Maybe create a CacheEnvelope which contains the object PLUS a dirty bit.  How to abstract caching? => TODO
+DESIGN & TECH BACKLOG - REVIEW
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- EntityFramework - how to perform basic CRUD stuff - Damn Brutha! => TODO
+- EntityFramework Transactions and ASP.NET MVC Concurrency => TODO
+- Start adding Logging stuff - you won't be sorry! => TODO
+- Easily the most important security article evar => - http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
+- Look up Troy Hunt's article's, too
+
 
 BACKLOG
 =======
@@ -93,23 +70,12 @@ BACKLOG
 
 * Should we create IdentityUser Integration Tests? => TODO
 
-* Product Management/Planning
-- Identify All Significant Workflows =>  IN PROGRESS
-
 * New ASP.NET MVC Infrastructure
 - Standard Control Refactoring for CSS
 - Enable Dependency Injection w/ Autofac => TODO NEXT
 - Error Handler Module
 - Logging Module
 - Email Service w/ Links (MSMQ?)
-
-* DESIGN REVISION
-- Pleiades Brand Identity
-- Identify all significant flows
-- Logo, Font, Color Scheme
-- Design Review everything I like
-- Redesign the Login Page
-- Package the Navigation Menu in its own View
 
 * General Code Mods
 - Leave the Category stuff as Legacy

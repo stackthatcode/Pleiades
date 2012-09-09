@@ -1,0 +1,23 @@
+COMPETITIVE ANALYSIS
+~~~~~~~~~~~~~~~~~~~~
+
+Forward Commerce
+----------------
+* http://getfwd.com/ -- scary, inspiring, and impressive.  Very nice.  Tip my hat to these folks!
+* Getting down to business, their Categories Editor is not all that impressive.  Noticed that they're struggling with hierarchical management of categories
+* I love the color scheme and UI.  It's well done.
+* They have the concept of BUNDLE ITEM - good idea.
+* I can see that they may be struggling with the inline editing of categories and so forth.
+
+MMA Warehouse
+-------------
+* http://www.mmawarehouse.com/ => Easily the best MMA online store, so far
+* On further inspection, the taxonomy is actually kind of wierd, especially the left-side browsing stuff...
+* INTERESTING: there are multiple bread crumb paths to products
+* DRAWBACK - can't browse by brand
+
+Others
+------
+- http://www.fightersmarket.com => Volusion site - pretty nice
+- http://www.riofightwear.com/ => Another Volusion site - done poorly
+

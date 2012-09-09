@@ -1,0 +1,90 @@
+Front Range
+-----------
+- Build some POC's with Knockout.js => TODO
+- Re-design the Category and Product Type Editor => TODO
+- Start building Product, Category and Image objects => IN PROGRESS
+
+
+
+UI/UX/PRODUCT BACKLOG
+~~~~~~~~~~~~~~~~~~~~~
+- UI Comparable Analysis => IN PROGRESS (GOOD JOB!)
+- Identify and Mock-up Major Workflows => IN PROGRESS
+* Pleiades Brand + UI Design => TODO
+* Find a bunch of good E-Commerce Sites, bookmark and critique => IN PROGRESS
+* Develop a Product specification => IN PROGRESS
+- http://37signals.com/37searchreport.pdf => READ
+- Project Planning the next Phase for v1.0 - Identify major tasks => IN PROGRESS
+- Review "desine" links => PROGRESS
+
+
+PRODUCT MANAGEMENT
+==================
+* R&D CURRENT
+- Continue with Review of Pleiades AJAX Grid => IN PROGRESS
+- R&D CSS + Image + Script File Management => IN PROGRESS
+- Find alternative OSS AJAX Grids => IN PROGRESS - NEED WORKFLOWS FIRST, THO
+- TODO: create an identity to penetrate social networks
+
+* IDEAS
+- Need to create a Cache which can be incrementally modified - IncrementalCache => TODO
+- Maybe create a CacheEnvelope which contains the object PLUS a dirty bit.  How to abstract caching? => TODO
+
+* Product Management/Planning
+- Identify All Significant Workflows =>  IN PROGRESS
+
+* DESIGN REVISION
+- Pleiades Brand Identity
+- Identify all significant flows
+- Logo, Font, Color Scheme
+- Design Review everything I like
+- Redesign the Login Page
+- Package the Navigation Menu in its own View
+
+
+PRODUCT Object
+--------------
+- Name
+- SKU Number
+- Description
+- Category => Clothing, Supplement, Jiu Jitsu, 
+- Product Type => Boxing Gloves, Gi, Muscle Building etc.
+- Color => Red, Blue, White, N/A
+- Gender => Male, Female, Both, N/A
+- Brand => Tapout, Fuji, Hayabuase, etc.
+- Size => A1, A2, A3, etc. SM, L, XL, etc., N/A
+- Pictures
+- Main Picture
+- Suggested Price =>  Decimal
+- Cost => Decimal
+- Weight => Integer, N/A
+- Ratings...? - Phase 2
+
+Inventory Object
+----------------
+- PRODUCT
+- Available Quantity
+- List<ORDER>
+
+Object to which TAXONOMY can be applied
+---------------------------------------
+- Color
+- Category
+- Gender
+- Product Type
+- Brand
+
+
+
+QUESTIONS
+~~~~~~~~~
+- Can Taxonomies exclude certain Products which have an undetermined selection? => SURE, WHY NOT?
+- How are Product ordered when browsing? => TODO
+- Do we need sophisticated sub-Product Type browsing? => TODO 
+
+FINAL SPECIFICATION
+*******************
+- Use MMA/fighting-gear for the beta product
+- Bounded Context => representation of Product decoupled from Searchability
+
+
