@@ -1,0 +1,155 @@
+FINAL SPECIFICATION
+*******************
+- Use MMA/fighting-gear for the beta product
+- Bounded Context => representation of Product decoupled from searchability
+- Products are classified using a Taxonomy
+
+
+PRODUCT object spec
+-------------------
+- ID
+- Name
+- Description
+- Product Type => boom! Already building a taxonomy
+- Product Sub Type => yup!
+- Gender
+- Brand
+- Features
+
+
+
+
+
+PHASE 1 PRODUCT SPECING POST MORTEM - Main Takeaways
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Bounded Context solves (or provides a better route) the Taxonomy Issue
+- Read the 5/16/2012 Discussion Below
+
+5/16/2012 - A Good Discussion
+=============================
+- IDEA! => decouple Product object from Searchable traits => YES!
+- PROBLEM => how to create Taxonomic Menus, etc. without coupling to database...?  How to enforce RI...?
+- EGADS!  Why is our thinking about Data Problems so deeply confined to SQL...?
+- There are multiple Taxonomies, multiple Searches
+- Searches and Taxonomies may just be forms of Searches
+- TRUTH ABOUT SEARCH => OR searches are a "fail" in e-commerce.
+- SQL works very well for storing normalized data, but not much else => I wish I could work on stuff in memory
+- ARCHITECTURE => no reason why Search and Product storage could not be 100% decoupled from each other - SOA
+- ORDERING is applied directly to Tags
+- PROGRAMMING EASE => why not do all Searching, Filtering, and Ordering directly on the product cache...?
+- Is there a way to categorize Tags...?
+- How can navigation Menus get crafted to reflect current browsing state...?  How can current browing state be abstract...?
+
+
+TAXONOMY Edge Cases / Problems to Solve => ALL ENTIRELY IRRELEVANT - BOUNDED CONTEXT SOLVES THE ISSUE
+-----------------------------------------------------------------------------------------------------
+- Create a new Product for a Taxonomy which doesn't exist => workflow issue
+- Delete a Taxonomy => what happens to "orphaned" Products? => workflow issue
+- How do we manage multiple Taxonomies...?  What does that workflow look like? => workflow
+- Starting with a clean slate...? => workflow issue
+- How to prevent users from misplacing items in the taxonomy? => scope - or usability
+- What do we call the Taxonomy? => Classification...?
+
+What falls in a Taxonomy? => IRRELEVANT - TAXONOMY CAPTURES WHATEVER IT WANTS!
+------------------------------------------------------------------------------
+- Gender (or not)
+- Clothing Type
+
+TAXONOMY ENGINEERING
+--------------------
+- AHA!  Taxonomy could be based entirely on Product Properties!!! => YES!
+
+REUSABLE DATA ENTRY - THE ETERNAL PROBLEM => ANSWER = FEATURES WILL BE RESUABLE
+===============================================================================
+- How do we organize features into reusable groups...?
+- The workflow may enable one to enter features as desired, and they provide suggestions for
+- You can NOT add features unless they're in the catalog of features => restrictive and unwieldy
+- There is NO reusability of features => OK, now people can find stuff any old willy nilly way...
+- Without reusability, the Admin is likely to repeat themselves, esp. when they have a high volume of products...
+- Same problem as real estate, moving company, export company, etc. etc.
+
+Best Fit Solution
+-----------------
+- Make creation of the taxonomy as painless as humanly possible.
+- Enable Admins to create and assign Products to one-to-many Taxonomies. => THIS IS FALSE - TAXONOMIES SHOULD BE DECOUPLED FROM PRODUCTS
+
+UX: How do Customers find the Products?
+---------------------------------------
+- Click thru a Landing Page, or a Featured Offer => v1
+- Taxonomy FIRST => v1
+- Product Keyword Search => search by tags, which also contain elements of the taxonomy - OUT OF SCOPE
+
+ALL ABOUT PRODUCTS
+==================
+- Can a Product belong to more than one Category?  It appears that Fight Shop supports multiple categories... (FOLLOW-UP: no, it does not)
+- Are Categories a Taxonomy?  I think that they are.  How to make Taxonomies searchable? => IRRELEVANT
+- How do major things like Color influence the search?  How are Colors abstracted? => IRRELEVANT
+- What happens when two items are next to each other and don't possess the same searchable traits?  Context?  Or this too abstract?
+- OK: Taxonomies are independent of Tags => YES!
+
+Abstract Search Algorithm
+=========================
+- Identify current Resultset
+- Apply Filter to Resultset
+- Repeat until Filters are complete
+
+=> EDGECASE: the First Filter will hit every row / every other Filter will only hit stuff that was returned from First Filter
+
+Search Case #1 - Taxonomy 
+=========================
+INPUT: Mens > Shirts > Polo > Izod
+- Exact Create UTN Result Mens => store in Resultset
+- Exact Filter UTN Shirts => prune Resultset
+- Exact Filter UTN Polos => prune Resultset
+- Exact Filter UTN Izod => prune Resultset
+
+Tag Object
+==========
+- UniversalTagName  e.g.: Shirts
+- List<string> ExactMatchName e.g.: Shirts
+- List<string> Mispellings e.g.: Shurt, sirts
+
+Tag Serialization Process
+=========================
+0.) SKU Number => SKU Tag
+1.) Product Name => Product Name Tag
+2.) Brand => Brand Tag
+3.) Category/Keyword Tags => 1 to N Category/Keyword Tags
+
+Sample Taxonomies
+=================
+- Motorcycle Accessories => Protective Gear => Men's =>  Helmets
+- Motorcycle Accessories => Protective Gear => Women's =>  Helmets
+- Boys => Jeans
+- Girls => Jeans
+
+Taxonomies, Search, etc. => SOLVE BY BOUNDED CONTEXT - THE TAXONOMY CONTROLS WHAT'S SHOWN AND WHAT NOT
+======================================================================================================
+- Filtering by Guys & Girls should affect *every* search => thus browsing by Taxonomy makes a lot of sense
+- Size and Color are optional - they will affect the User's interaction - both Admin and Customer
+- AHA! - is it really a Taxonomy, or can the tags be weighted?  IOW, is a Taxonomy something that exists *apart* from the product?  A Taxonomy is a type of a Search!!!
+
+Searchable Abstract Objects Types => THIS IS CONCRETE WHERE ABSTRACTION COULD SUCCEED!
+======================================================================================
+- Keyword Tags
+- Brand - optional (what if it's a single-branded website)
+- Size - optional
+- Color - optional
+
+Search Precedence Proposal => THIS IS PHASE 2
+=============================================
+0.) SKU Number
+1.) Product Name
+2.) Brand
+2.) Category Tags
+3.) Keyword Tags
+4.) Description
+
+Search Algorithm Pseudocode
+===========================
+1.) In order of Precedences, accumulate Hits, and attach a Score
+2.) Order By Hit Score
+3.) Remove Duplicates
+4.) ???
+5.) Profit
+

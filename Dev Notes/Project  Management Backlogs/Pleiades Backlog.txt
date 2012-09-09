@@ -1,17 +1,25 @@
 FRONTRANGE - HOTZONE
 ====================
-
-MVC RELATED
-~~~~~~~~~~~
 - Fix the MVC Application with the Great Refactoring => IN PROGRESS
 * Fix the ManagerController + Tests => IN PROGRESS - EASY PICKINGS
 *** Celebrate coming Out-of-the-Wild with The Great Refactoring #1! *** => TODO
 
 
 
+UI/UX/PRODUCT RELATED
+~~~~~~~~~~~~~~~~~~~~~
+- UI Comparable Analysis => IN PROGRESS (GOOD JOB!)
+- Identify and Mock-up Major Workflows => IN PROGRESS
+* Pleiades Brand + UI Design => TODO
+* Find a bunch of good E-Commerce Sites, bookmark and critique => IN PROGRESS
+* Develop a Product specification => URGENT
+- http://37signals.com/37searchreport.pdf => READ
+- Project Planning the next Phase for v1.0 - Identify major tasks => IN PROGRESS
+- Review "desine" links => PROGRESS
+
+
 Another Backlog
 ---------------
-* http://www.hanselman.com/blog/NuGetPackageOfTheWeek5DebuggingASPNETMVCApplicationsWithGlimpse.aspx
 * Postback Control Framework => TODO
 * Create a new CategoryController/Views/Domain Model, etc.
 - FIX THIS WITH AN EXTENSION METHOD =><%: Html.RouteLink("LOGOUT", OutboundNavigation.AdminLogout(), new Dictionary<string, object>() { { "class", "header" } })%>
@@ -19,41 +27,29 @@ Another Backlog
 * http://stackoverflow.com/questions/6308794/html-validationmessagefor-custom-validationmessage-always-shown => AMONG OTHER THINGS
 * Fix the web.config with assembly references => IN PROGRESS
 - How to deal with LastUpdated field => IN PROGRESS
-
-
-
-Backlog
--------
-- A new computer?  A desktop, mayhaps? => TODO
-=> IMPORTANT - find a decent DDD community
-=> IMPORTANT - sign-in to StackOverflow
 - Upgrade to ASP.NET MVC 4.0 (4.5?) => TODO
 - Web Optimization Toolkit => TODO
 - FUTURE DIRECTIONS: NHIBERNATE + MYSQL => and eventually, RAVENDB(!!!)
 * Get Scott Hanselman's obj/bin cleaner utility => IN PROGRESS
 
-
 DESIGN & TECH BACKLOG - REVIEW
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - EntityFramework - how to perform basic CRUD stuff - Damn Brutha! => TODO
-- EntityFramework Transactions and ASP.NET MVC Concurrency
+- EntityFramework Transactions and ASP.NET MVC Concurrency => TODO
 - Start adding Logging stuff - you won't be sorry! => TODO
 - Easily the most important security article evar => - http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
 - Look up Troy Hunt's article's, too
 
 
-
-THOUGHTS:
----------
+THOUGHTS ON UI CODING
+---------------------
 1.) FormLineEditor's are for rapidly building interfaces.
 2.) We need: Input Control rendering, Model Binding stuff for Postback, and rendering Validation
 3.) DESIRE => Composable Control Builders
 * Can add stuff to the Control that injects Style
 * Can add stuff to the Control that adds Validation Feedback
-
 4.) Why do we need to compose Labels with the Editor itself...?  What's the honest trade-off?
 * Add stuff to the Label itself for Validation Feedback
-
 5.) Try using Facebook without JavaScript
 
 STUFF TO CONFIGURE/BUILD
@@ -68,50 +64,12 @@ SomethingLibrary.InjectControlDependencies()
 
 Technical Debt #1 - how does the CSS file and JavaScript know how to render the file paths...?
 
-
-
 - Create new CategoryRepository => TODO
 - Create new CategoryControllerTests => TODO
 
 Enhanced MVC
 * Research creating Simplified Outbound Link builders in MVC => TODO 
 - Create a Catalog of canned routes for easy navigation through Application => TODO
-
-
-BLOG POSTS!
-~~~~~~~~~~~
-- HTTP Context Stub on steroids
-- JavaScript Monad
-- C# Currying Function
-
-
-GIT RELATED
-~~~~~~~~~~~
-- Let's dig deeper into Git => TODO
-* Play with the Log commands => TODO
-* Play with git add => TODO
-TRY: git add --dry-run .
-TRY: git add --verbose
-TRY: git add --update
-TRY: git status
-* Play with git commit => TODO
-* Try some branching
-* Review the Git GUI tools
-* How do I git my current hashcode...?
-
-UI/UX/PRODUCT RELATED
-~~~~~~~~~~~~~~~~~~~~~
-- UI Comparable Analysis => IN PROGRESS (GOOD JOB!)
-- FUN STUFF - start mocking up the interfaces => IN PROGRESS
-
-- Identify and Mock-up Major Workflows => IN PROGRESS
-* Pleiades Brand + UI Design => TODO
-* Find a bunch of good E-Commerce Sites, bookmark and critique => IN PROGRESS
-* Develop a Product specification => URGENT
-- http://37signals.com/37searchreport.pdf => READ
-- Project Planning the next Phase for v1.0 - Identify major tasks => IN PROGRESS
-- Review "desine" links => PROGRESS
-
 
 
 
@@ -126,8 +84,6 @@ PRODUCT MANAGEMENT
 * IDEAS
 - Need to create a Cache which can be incrementally modified - IncrementalCache => TODO
 - Maybe create a CacheEnvelope which contains the object PLUS a dirty bit.  How to abstract caching? => TODO
-
-
 
 BACKLOG
 =======
@@ -167,24 +123,3 @@ BACKLOG
 * General Fixes
 - Disable Caching for AJAX stuff => TODO
 
-
-
-CURRENT KNOWN WORKFLOWS => IN PROGRESS
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Admin Login Page
-- Customer Product Browsing et al.
-- Manage Existing Admin User
-- Create New Admin User
-- Category Create/Manage
-- Inventory Create/Manage
-- Order Management/Fulfillment
-- User Password Retreival
-- Customer Support Contact
-
-
-VALUABLE STUFF
---------------
-http://thenounproject.com/3/ => USE THESE!!!
-http://web-kreation.com/demos/Sliding_login_panel_jquery/#
-http://tympanus.net/Tutorials/SlideDownBoxMenu/
-http://imcreator.com/?utm_source=Codrops&utm_medium=banner&utm_content=round_big&utm_campaign=design_your_website

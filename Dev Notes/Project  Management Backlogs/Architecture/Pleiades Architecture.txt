@@ -5,8 +5,6 @@ Summary of Pleiades.Web.Security Division of Concerns
 TECHNICAL DEBT LOG
 ~~~~~~~~~~~~~~~~~~
 - ManagerController Edit shows the consequence of using "payload" objects to send changes back to the database.  This is kind of where the ORM is supposed to come into play...
-- 
-
 
 
 

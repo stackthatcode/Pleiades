@@ -1,0 +1,37 @@
+Backlog
+-------
+=> IMPORTANT - find a decent DDD community
+=> IMPORTANT - sign-in to StackOverflow
+* http://www.hanselman.com/blog/NuGetPackageOfTheWeek5DebuggingASPNETMVCApplicationsWithGlimpse.aspx
+
+GIT RELATED
+~~~~~~~~~~~
+- Let's dig deeper into Git => TODO
+* Play with the Log commands => TODO
+* Play with git add => TODO
+TRY: git add --dry-run .
+TRY: git add --verbose
+TRY: git add --update
+TRY: git status
+* Play with git commit => TODO
+* Try some branching
+* Review the Git GUI tools
+* How do I git my current hashcode...?
+
+BLOG POSTS!
+~~~~~~~~~~~
+- HTTP Context Stub on steroids
+- JavaScript Monad
+- C# Currying Function
+- What ever happened to Agile == TDD...?
+- Paean to the Bounded Context
+- Reactive Extensions
+
+
+VALUABLE STUFF
+--------------
+http://thenounproject.com/3/ => USE THESE!!!
+http://web-kreation.com/demos/Sliding_login_panel_jquery/#
+http://tympanus.net/Tutorials/SlideDownBoxMenu/
+http://imcreator.com/?utm_source=Codrops&utm_medium=banner&utm_content=round_big&utm_campaign=design_your_website
+

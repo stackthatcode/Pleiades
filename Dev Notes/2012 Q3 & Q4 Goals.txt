@@ -6,7 +6,7 @@ Front Range
 1.) Write C#, WCF take money home from Redbox.com
 2.) Learn NHibernate exceedingly well
 3.) Learn App Fabric exceedingly well
-4.) Learn multi-threading, TPL, locking exceedingly well
+4.) Learn asynchronous, multi-threading, TPL, locking exceedingly well
 5.) Investigate WCF RESTful services
 
 Rear Range
@@ -17,12 +17,12 @@ Rear Range
 - Learn Knockout.JS
 - Finish Evan's DDD book
 
+2013???
+-------
 => EXTRA: redesign blog with business purpose
 => EXTRA: create Moo business cards
 => EXTRA: deploy to Windows Azure
 
-2013???
--------
 - Mobile
 - MMO
 - Hot Dog Stand?
