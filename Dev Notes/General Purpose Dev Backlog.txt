@@ -20,12 +20,21 @@ TRY: git status
 
 BLOG POSTS!
 ~~~~~~~~~~~
+- Learn
+- Prevent Logic Leakage i.e. Membership User Approval and Aggregate User
 - HTTP Context Stub on steroids
 - JavaScript Monad
 - C# Currying Function
 - What ever happened to Agile == TDD...?
 - Paean to the Bounded Context
 - Reactive Extensions
+
+
+The Crazier, The Better!
+~~~~~~~~~~~~~~~~~~~~~~~~
+- Create a consulting firm that focuses on using Alt.Net-centric development techniques
+- Attack mobile computing head-on - go after iOS development with a vengance
+
 
 VALUABLE STUFF
 --------------

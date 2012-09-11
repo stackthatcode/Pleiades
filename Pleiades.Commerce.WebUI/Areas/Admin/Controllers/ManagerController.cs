@@ -13,7 +13,6 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
 {
     public class ManagerController : Controller
     {
-        public const int PageSize = 10;
         public const string DefaultQuestion = "Type Default";
         public const string DefaultAnswer = "Default";
 
@@ -43,12 +42,12 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             return View(); 
         }
 
+        // TODO: what if the User is null...?
+
         [HttpGet]
         public ActionResult Details(int id)
         {
             var user = AggregateUserRepository.RetrieveById(id);
-
-            // TODO: what if the User is null...?
 
             var userModel = new UserViewModel(user);
             return View(userModel);
@@ -116,7 +115,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
 
             var userData = this.AggregateUserRepository.RetrieveById(id);
 
-            // 
+            // First Leg of Update
             this.AggregateUserRepository.UpdateIdentity(id,
                 new CreateOrModifyIdentityRequest
                 {
@@ -127,7 +126,8 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
                     LastName = userViewModel.LastName,
                 });
 
-            // Update Membership stuff
+            // Update Membership stuff - seems like an argument to only operate on the Entity Aggregate Root, eh?
+            // TODO: replace MembershipService with AggregateMembershipService
 
             var membershipUserName = userData.Membership.UserName;
 
@@ -177,6 +177,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Unlock(int id)
         {
+            // TODO: Move this from Membership into AggregateUserService - it's a bridge, more or less
             var user = this.AggregateUserRepository.RetrieveById(id);
             MembershipService.UnlockUser(user.Membership.UserName);
             return RedirectToAction("Details", new { id = id });

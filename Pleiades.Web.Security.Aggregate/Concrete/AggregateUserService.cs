@@ -69,5 +69,31 @@ namespace Pleiades.Web.Security.Concrete
             this.Repository.SaveChanges();
             return aggegrateUser;
         }
+
+
+        public void SetUserPassword(int id, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string ResetPassword(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetUserApproval(int id, bool isApproved)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ChangeEmailAddress(int id, string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UnlockUser(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

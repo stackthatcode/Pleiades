@@ -2,6 +2,8 @@ FRONTRANGE - HOTZONE
 ====================
 - Fix the MVC Application with the Great Refactoring => IN PROGRESS
 * Fix the ManagerController + Tests => IN PROGRESS - EASY PICKINGS
+* Part of this ^^^ implement bridge methods for AggregateUserService, to move logic out of the Controller into Services, Domain and Execution => IN PROGRESS
+
 *** Celebrate coming Out-of-the-Wild with The Great Refactoring #1! *** => TODO
 - Postback Control Framework additions =>< TODO
 
@@ -60,10 +62,21 @@ DESIGN & TECH BACKLOG - REVIEW
 - Start adding Logging stuff - you won't be sorry! => TODO
 - Easily the most important security article evar => - http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
 - Look up Troy Hunt's article's, too
+- Best Practices for Unit Testing CRUD, esp. when passing objects around?  How do we verify the payload?
+=> POSSIBLE ANSWER: create View Model to Domain Model Transformer Services and inject them like everything else?
+
+
+The Crazier, The Better!
+~~~~~~~~~~~~~~~~~~~~~~~~
+- Create a consulting firm that focuses on using Alt.Net-centric development techniques
+- Attack mobile computing head-on - go after iOS development with a vengance
 
 
 BACKLOG
 =======
+* Security n Stuff
+- Move User Approval functions from MembershipService into AggregateUserService
+
 * Research & Design
 - How to manage CSS files and dependencies from separate assemblies in ASP.NET MVC => TODO
 - http://fluentvalidation.codeplex.com/

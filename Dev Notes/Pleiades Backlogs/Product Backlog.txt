@@ -1,8 +1,10 @@
 Front Range
 -----------
-- Build some POC's with Knockout.js => TODO
-- Re-design the Category and Product Type Editor => TODO
+- Finish writing User Stories => IN PROGRESS
+- Start Describing Top-Level Navigation Flows => IN PROGRESS
 - Start building Product, Category and Image objects => IN PROGRESS
+- Re-design the Category and Product Type Editor => IN PROGRESS
+- Build some POC's with Knockout.js => TODO
 
 
 

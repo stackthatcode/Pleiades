@@ -89,119 +89,86 @@ namespace Commerce.WebUI.TestsControllers
             aggregateUserRepository.VerifyAllExpectations();
         }
 
-        //// TODO: can we really justify writing a CRUD Test...????
-        //[Test]
-        //public void TestCreate()
-        //{
-        //    // Arrange
-        //    var model = new CreateAdminModel
-        //    { 
-        //        Email = "test@test.com", FirstName = "Al", IsApproved = true, LastName = "Capone", 
-        //        Password = "123", PasswordVerify = "1234" 
-        //    };
+        // TODO: can we really justify writing a CRUD Test...????
 
-        //    var adminmgrController = new AdminManagerController();
-        //    adminmgrController.DomainUserService = MockRepository.GenerateMock<IDomainUserService>();
-        //    MembershipCreateStatus status;
+        [Test]
+        public void Verify_Create_POST()
+        {
+            // Arrange
+            var model = new CreateAdminModel
+            {
+                Email = "test@test.com",
+                FirstName = "Al",
+                IsApproved = true,
+                LastName = "Capone",
+                Password = "123",
+                PasswordVerify = "1234"
+            };
 
-        //    adminmgrController.DomainUserService
-        //        .Expect(x => x.Create(
-        //                new CreateNewUserRequest()
-        //                {
-        //                    Password = "123", 
-        //                    Email = "test@test.com",
-        //                    PasswordQuestion = AdminManagerController.DefaultQuestion,
-        //                    PasswordAnswer = AdminManagerController.DefaultAnswer, 
-        //                    IsApproved = true, 
-        //                    AccountStatus = AccountStatus.Active, 
-        //                    UserRole = UserRole.Admin,
-        //                    AccountLevel = AccountLevel.Standard, 
-        //                    FirstName = "Al", 
-        //                    LastName = "Capone"
-        //                }, out status))
-        //        .IgnoreArguments()
-        //        .Return(new DomainUser())
-        //        .OutRef(MembershipCreateStatus.Success);
+            PleiadesMembershipCreateStatus status;
+            
+            var aggrService = MockRepository.GenerateMock<IAggregateUserService>();
+            aggrService
+                .Expect(x => x.Create(null, null, out status))
+                .IgnoreArguments()
+                .Return(new AggregateUser() { ID = 123 })
+                .OutRef(PleiadesMembershipCreateStatus.Success);
 
-        //    // Act
-        //    adminmgrController.Create(model);
+            var controller = new ManagerController(null, aggrService, null);
 
-        //    // Assert
-        //    adminmgrController.DomainUserService.VerifyAllExpectations();
-        //}
+            // Act
+            var result = controller.Create(model);
 
-        //[Test]
-        //public void TestEditInvalidState()
-        //{
-        //    // Arrange
-        //    var adminmgrController = new AdminManagerController();
-        //    adminmgrController.DomainUserService = MockRepository.GenerateMock<IDomainUserService>();
-        //    adminmgrController.DomainUserService
-        //        .Expect(x => x.RetrieveUserByDomainUserId(123))
-        //        .Return(new DomainUser() { MembershipUser = new Web.Security.Model.MembershipUser() });
-        //    adminmgrController.ModelState.AddModelError("", "It's all messed up!");
+            // Assert
+            aggrService.VerifyAllExpectations();
+        }
 
-        //    // Act
-        //    adminmgrController.Edit(123, new UserViewModel());
+        [Test]
+        public void Verify_Edit_POST_TestEditInvalidState()
+        {
+            // Arrange
+            var controller = new ManagerController(null, null, null);
+            controller.ModelState.AddModelError("", "It's all messed up!");
 
-        //    // Assert
-        //    adminmgrController.DomainUserService.VerifyAllExpectations();
-        //}
+            // Act
+            var result = controller.Edit(123, new UserViewModel());
 
-        //// TODO: update this after adding the LeadRole
-        //[Test]
-        //[Ignore]
-        //public void TestEditDontDisapproveLeadAdmin()
-        //{
-        //    // Arrange
-        //    var adminmgrController = new AdminManagerController();
+            // Assert
+            result.ShouldBeDefaultView();
+        }
 
-        //    var user = MockRepository.GenerateStub<DomainUser>();
-        //    var membershipUser = MockRepository.GenerateStub<Web.Security.Model.MembershipUser>();
-        //    user.MembershipUser = membershipUser;
-        //    membershipUser.Stub(x => x.UserName).Return("admin");
+        [Test]
+        public void Verify_Edit_POST_ValidState_NonSupreme()
+        {
+            // Arrange
+            var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
+            repository.Expect(x => x.RetrieveById(123))
+                .Return(new AggregateUser()
+                    {
+                        Membership = new MembershipUser { UserName = "789023", Email = "test@test.com" },
+                        IdentityProfile = new IdentityProfile { UserRole = UserRole.Trusted },
+                    });
+            repository.Expect(x => x.UpdateIdentity(123, null)).IgnoreArguments();
 
-        //    adminmgrController.DomainUserService = MockRepository.GenerateMock<IDomainUserService>();
-        //    adminmgrController.DomainUserService
-        //        .Expect(x => x.RetrieveUserByDomainUserId(123))
-        //        .Return(user);
-        //    adminmgrController.ModelState.AddModelError("", "It's all messed up!");
+            var membership = MockRepository.GenerateMock<IMembershipService>();
+            membership.Expect(x => x.SetUserApproval("789023", true));
+            membership.Expect(x => x.ChangeEmailAddress("789023", "test123@test.com"));
 
-        //    // Act
-        //    var result = adminmgrController.Edit(123, new UserViewModel() { IsApproved = false, });
+            var controller = new ManagerController(repository, null, membership);
 
-        //    // Assert
-        //    adminmgrController.DomainUserService.VerifyAllExpectations();
-        //    result.ShouldBeView();
-        //}
+            var input = new UserViewModel()
+            {
+                Email = "test123@test.com",
+                IsApproved = true,                  
+            };
 
-        //[Test]
-        //public void TestEditValidState()
-        //{
-        //    // Arrange
-        //    var adminmgrController = new AdminManagerController();
+            // Act
+            var result = controller.Edit(123, new UserViewModel());
 
-        //    var user = MockRepository.GenerateStub<DomainUser>();
-        //    var membershipUser = MockRepository.GenerateStub<Web.Security.Model.MembershipUser>();
-        //    user.MembershipUser = membershipUser;
-        //    user.MembershipUser.IsApproved = true;
-
-        //    adminmgrController.DomainUserService = MockRepository.GenerateMock<IDomainUserService>();
-        //    adminmgrController.DomainUserService
-        //        .Expect(x => x.RetrieveUserByDomainUserId(123))
-        //        .Return(user);
-        //    adminmgrController.DomainUserService.Expect(x => x.Update(user));
-
-        //    adminmgrController.MembershipService = MockRepository.GenerateMock<IMembershipService>();
-        //    adminmgrController.MembershipService.Expect(x => x.SetUserApproval(user, true));
-
-        //    // Act
-        //    var result = adminmgrController.Edit(123, new UserViewModel() { IsApproved = true, });
-
-        //    // Assert
-        //    adminmgrController.DomainUserService.VerifyAllExpectations();
-        //    result.ShouldBeRedirectionTo(new { action = "Details", id = 123 } );
-        //}
+            // Assert
+            result.ShouldBeRedirectionTo(new { action = "Details" });
+            repository.VerifyAllExpectations();
+        }
 
         //[Test]
         //public void TestChange()
