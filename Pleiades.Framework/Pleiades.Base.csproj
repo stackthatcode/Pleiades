@@ -42,11 +42,12 @@
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Data\QueryablePagedModel.cs" />
     <Compile Include="Execution\BareContext.cs" />
+    <Compile Include="Execution\ConditionalStep.cs" />
     <Compile Include="Execution\IStep.cs" />
     <Compile Include="Execution\IStepContext.cs" />
     <Compile Include="Execution\IStepObserver.cs" />
     <Compile Include="Execution\Step.cs" />
-    <Compile Include="Execution\StepComposite.cs" />
+    <Compile Include="Execution\CompositeStep.cs" />
     <Compile Include="Helpers\EnumHelpers.cs" />
     <Compile Include="Helpers\ParsingExtensions.cs" />
     <Compile Include="Helpers\Linq.cs" />
@@ -56,7 +57,7 @@
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Helpers\StringWriterWithEncoding.cs" />
     <Compile Include="Data\IGenericRepository.cs" />
-    <Compile Include="Injection\IGenericContainer.cs" />
+    <Compile Include="Injection\IServiceLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\EnumExtensions.cs" />
     <Compile Include="Utility\LinqExtensions.cs" />

@@ -1,11 +1,100 @@
 Summary of Pleiades.Web.Security Division of Concerns
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+UHOH!!!  ON-NOES!!!  Attack on the Pipelines and Filters
+--------------------------------------------------------
+- Can lead to an explosion in the number of interfaces that are tied together, just to achieve the polymorphism from generics.
+- Testing of the passing of inputs in the context is not friendly to Mocking frameworks.
+- IOW: the onus of quorum checking is on the code, not the Unit Tests.
+- EVERYTIME I want to guard a Step with Owner Authorization, I have to create a new Composite object -- this is inheritance.
+- Too much abstraction -- I have no idea what's happening where and when.
+- I have no idea who put what in the Context.
+- Composition OVER OWNERSHIP!!!!!!!!
+- I accuse Steps of DOUBLE ABSTRACTION -- here's why: you can no longer say: "it's a thing that does XYZ.  You have to say it's a THING called XYZ that DOES XYZ."
+- IOW, there's not insight based on the interface, because it's sooooo broadly polymorphic.
+
+
+Story of the Edit User Request
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Cross Cutting Security
+1.) Get UserName from Cookie
+2.) Get Current User from AggregateUserRepo
+3.) Touch Current User in Membership
+4.) System Authorize User based on Role and Security Context
+
+// Model Validation
+5.) Check that Model is valid
+
+// Build Context
+6.) Get the Target User from AggregateUserRepo based on RESTful URL
+7.) Populate Conext Object
+
+// Getting Wierd
+8.) Use ServiceLocator to create an Orchestration object
+9.) Execute Orchestration object from Controller
+9.1.) Validates the Current User can appropriately act on Target User
+9.2.) Impose state change on Domain inside sub-steps of Orchestration object
+
+// Respond
+10.) FIN
+
+
+About the Step and CompositeStep
+--------------------------------
+- Inject is wierd... couples Composites to Dependency Injection => so what?  How else were we going to construct Steps and their dependencies
+- The only class that uses Register is the OwnerSecuredCompositeBase
+- How to compose a two Composites?  A new Composite which injects both?
+- It seems like the SimpleOwnerAuthorizationStep kind of cross cutting...
+- Possibly use a Proxy to wrap Composites?  What about generic types?  How to ensure type integrity...?
+- Want to create re-usable guard steps that express the Domain language
+- Can we build CompositeSteps without Inject?  CompositeStepBuilder?  What are the alternatives?
+
+BASE COVERED
+------------
+- Ok, so I have individual Steps, which are Unit Tested.
+- Other than calling Inject, how can composites get composed...?
+
+StepFactory
+	.Build()
+	.Add<Step1>()
+	.Add<Step2>()
+	.Add<Step3>()
+	.Flush();
+
+- Question, how to test this? => Verify the generated Composite with Unit Test
+- Ok, this is more functional... what will we have, a stack of functions crammed in a single class?  Composites don't look so bad, now, eh?
+- CHIEF CONCERN => create a Composite which doesn't correctly impose Owner Security check... not good!
+- SO, how about the OwnerSecuredStepFactory.Emit => creates Composites that are guaranteed to Inject a certain Step
+
+What everything boils down to is: in a MultiTenant application, how do we ensure that MultiTentancy is 100% completely enforced...? => OK, THAT'S A UNICORN, NO?
+
+
+
+
+Ok, here's what goes in the Controller, and the impact of Stateful Execution
+----------------------------------------------------------------------------
+- List => invokes Repository
+- Details => invokes Repository
+- Create => invokes Service, UserRole.Admin is hard-coded, so, OK
+- Edit GET => invokes Service
+- Edit POST => invokes Repository UpdateIdentity and Membership Service SetUserApproval and ChangeEmailAddress
+
+
+
+VENTING: SimpleOwnerAuthorization exhibits some fundamental problems with this entire Context thing
+---------------------------------------------------------------------------------------------------
+- Everytime I want to reuse steps, I have to create both a new Step, Context AND Composite, just to leverage OwnerSecuredCompositeBase
+- Moreover: even though type-safety ensures that everything glues-together, nothing prevents consumers of these steps from not properly loading the Context, other than Unit Tests, I suppose.
+- PUT ANOTHER WAY: the type-safety of generics is causing the number of classes to balloon
+- MORE DEEPLY: much of the code lacks reusability
+- AND SO ON: the Dependency Injection modules look **maddening** - this does not feel like reusable code
+
+- BOTTOM LINE: I don't want to have to create new subclasses to accomodate the generics
+
 
 TECHNICAL DEBT LOG
 ~~~~~~~~~~~~~~~~~~
 - ManagerController Edit shows the consequence of using "payload" objects to send changes back to the database.  This is kind of where the ORM is supposed to come into play...
-
 
 
 IdentityService

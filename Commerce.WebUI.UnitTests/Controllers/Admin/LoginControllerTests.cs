@@ -32,13 +32,13 @@ namespace Commerce.WebUI.TestsControllers
 
 
         // TODO: move this and other somewhere central
-        public IGenericContainer MockContainer()
+        public IServiceLocator MockContainer()
         {
-            return MockRepository.GenerateMock<IGenericContainer>();
+            return MockRepository.GenerateMock<IServiceLocator>();
         }
 
         // TODO: move this and other somewhere central
-        public void MockContainerResolve<T>(IGenericContainer container, T output)
+        public void MockContainerResolve<T>(IServiceLocator container, T output)
         {
             container.Expect(x => x.Resolve<T>()).Return(output);
         }
@@ -90,7 +90,7 @@ namespace Commerce.WebUI.TestsControllers
             // Arrange
             var model = new LogOnViewModel { UserName = "admin", Password = "123" };
             var step = MockAuthenticateUserByRoleStep(model, true);
-            var container = MockRepository.GenerateMock<IGenericContainer>();
+            var container = MockRepository.GenerateMock<IServiceLocator>();
             container.Expect(x => x.Resolve<AuthenticateUserByRoleStep>()).Return(step);
             var controller = new AuthController(container);
             
@@ -109,7 +109,7 @@ namespace Commerce.WebUI.TestsControllers
             // Arrange
             var model = new LogOnViewModel { UserName = "admin", Password = "123" };
             var step = MockAuthenticateUserByRoleStep(model, true);
-            var container = MockRepository.GenerateMock<IGenericContainer>();
+            var container = MockRepository.GenerateMock<IServiceLocator>();
             container.Expect(x => x.Resolve<AuthenticateUserByRoleStep>()).Return(step);
             var controller = new AuthController(container);
 

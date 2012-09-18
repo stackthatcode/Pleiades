@@ -11,7 +11,7 @@ namespace Pleiades.Web.Security.Execution.Step
     {
         public override SystemAuthorizationContext Execute(SystemAuthorizationContext context)
         {
-            if (context.ThisUser.IdentityProfile.UserRole.IsAdministrator())
+            if (context.CurrentUser.IdentityProfile.UserRole.IsAdministratorOrSupreme())
             {
                 return context;
             }
@@ -21,7 +21,7 @@ namespace Pleiades.Web.Security.Execution.Step
                 return context;
             }
 
-            if (context.ThisUser.IdentityProfile.AccountStatus == null)
+            if (context.CurrentUser.IdentityProfile.AccountStatus == null)
             {
                 return 
                     this.Kill(context, 
@@ -31,7 +31,7 @@ namespace Pleiades.Web.Security.Execution.Step
                         });
             }
 
-            if (context.ThisUser.IdentityProfile.AccountStatus == AccountStatus.Disabled)
+            if (context.CurrentUser.IdentityProfile.AccountStatus == AccountStatus.Disabled)
             {
                 return 
                     this.Kill(context,
@@ -41,7 +41,7 @@ namespace Pleiades.Web.Security.Execution.Step
                         });
             }
 
-            if (context.ThisUser.IdentityProfile.AccountStatus == AccountStatus.PaymentRequired && 
+            if (context.CurrentUser.IdentityProfile.AccountStatus == AccountStatus.PaymentRequired && 
                 context.IsPaymentArea != true)
             {
                 return 

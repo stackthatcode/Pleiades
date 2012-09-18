@@ -16,7 +16,7 @@ namespace Commerce.WebUI
         protected override void Load(ContainerBuilder builder)
         {
             // Autofac
-            builder.RegisterType<AutofacContainer>().As<IGenericContainer>().InstancePerLifetimeScope();
+            builder.RegisterType<AutofacContainer>().As<IServiceLocator>().InstancePerLifetimeScope();
 
             // External Modules
             WebSecurityAggregateBroker.RegisterAuthorizationContextBuilder<MySystemAuthContextBuilder>();

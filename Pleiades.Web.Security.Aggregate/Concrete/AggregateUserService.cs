@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web;
+using Pleiades.Security;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 
@@ -12,13 +15,43 @@ namespace Pleiades.Web.Security.Concrete
 
         public IAggregateUserRepository Repository { get; set; }
         public IMembershipService MembershipService { get; set; }
+        public IOwnerAuthorizationService OwnerAuthorizationService { get; set; }
+        public IFormsAuthenticationService FormsService { get; set; }
+
 
         public AggregateUserService(
                 IMembershipService membershipService, 
-                IAggregateUserRepository aggregateUserRepository)
+                IAggregateUserRepository aggregateUserRepository,
+                IOwnerAuthorizationService ownerAuthorizationService,
+                IFormsAuthenticationService formsAuthenticationService)
         {
             this.MembershipService = membershipService;
             this.Repository = aggregateUserRepository;
+            this.OwnerAuthorizationService = ownerAuthorizationService;
+            this.FormsService = formsAuthenticationService;
+        }
+
+        public bool Authenticate(string username, string password, bool persistenceCookie, List<UserRole> expectedRoles)
+        {
+            var membershipUser = this.MembershipService.ValidateUserByEmailAddr(username, password);
+
+            if (membershipUser == null)
+            {
+                this.FormsService.ClearAuthenticationCookie();
+                return false;
+            }
+
+            var aggregateuser = this.Repository.RetrieveByMembershipUserName(membershipUser.UserName);
+
+            if (!expectedRoles.Contains(aggregateuser.IdentityProfile.UserRole))
+            {
+                this.FormsService.ClearAuthenticationCookie();
+                return false;
+            }
+
+            // Success!
+            this.FormsService.SetAuthCookieForUser(membershipUser.UserName, persistenceCookie);
+            return true;
         }
 
         public AggregateUser Create(
@@ -57,9 +90,9 @@ namespace Pleiades.Web.Security.Concrete
                 Membership = membershipUserThisContext,
                 IdentityProfile =  new Model.IdentityProfile
                 {
-                    AccountStatus = identityUserRequest.AccountStatus,
-                    UserRole = identityUserRequest.UserRole,
-                    AccountLevel = identityUserRequest.AccountLevel,
+                    AccountStatus = identityUserRequest.AccountStatus.Value,
+                    UserRole = identityUserRequest.UserRole.Value,
+                    AccountLevel = identityUserRequest.AccountLevel.Value,
                     FirstName = identityUserRequest.FirstName,
                     LastName = identityUserRequest.LastName,
                 }
@@ -70,30 +103,63 @@ namespace Pleiades.Web.Security.Concrete
             return aggegrateUser;
         }
 
-
-        public void SetUserPassword(int id, string password)
+        public void UpdateEmail(int aggregateUserId, string email)
         {
-            throw new NotImplementedException();
+            var securityCode = this.OwnerAuthorizationService.Authorize(aggregateUserId);
+            if (securityCode != SecurityResponseCode.Allowed)
+            {
+                throw new Exception("Current User does not have Authorization to do that: " + securityCode);
+            }
+
+            if (email == null)
+            {
+                throw new Exception("Cannot set email address to null");
+            }
+
+            var userData = this.Repository.RetrieveById(aggregateUserId);
+            var membershipUserName = userData.Membership.UserName;
+
+            MembershipService.ChangeEmailAddress(membershipUserName, email);
         }
 
-        public string ResetPassword(int id)
+        public void UpdateApproval(int aggregateUserId, bool approval)
         {
-            throw new NotImplementedException();
+            var securityCode = this.OwnerAuthorizationService.Authorize(aggregateUserId);
+            if (securityCode != SecurityResponseCode.Allowed)
+            {
+                throw new Exception("Current User does not have Authorization to do that: " + securityCode);
+            }
+            
+            var userData = this.Repository.RetrieveById(aggregateUserId);
+            var membershipUserName = userData.Membership.UserName;
+
+            if (userData.IdentityProfile.UserRole != UserRole.Supreme)
+            {
+                MembershipService.SetUserApproval(membershipUserName, approval);
+            }
         }
 
-        public void SetUserApproval(int id, bool isApproved)
+        public void UpdateIdentity(int aggregateUserId, CreateOrModifyIdentityRequest identityUserRequest)
         {
-            throw new NotImplementedException();
+            var securityCode = this.OwnerAuthorizationService.Authorize(aggregateUserId);
+            if (securityCode != SecurityResponseCode.Allowed)
+            {
+                throw new Exception("Current User does not have Authorization to do that: " + securityCode);
+            }
+
+            this.Repository.UpdateIdentity(
+                        aggregateUserId,
+                        new CreateOrModifyIdentityRequest
+                        {
+                            FirstName = identityUserRequest.FirstName,
+                            LastName = identityUserRequest.LastName,
+                        });
         }
 
-        public void ChangeEmailAddress(int id, string email)
+        public void ChangeUserPassword(int aggregateUserId, string oldPassword, string newPassword)
         {
-            throw new NotImplementedException();
-        }
-
-        public void UnlockUser(int id)
-        {
-            throw new NotImplementedException();
+            var user = this.Repository.RetrieveById(aggregateUserId);
+            this.MembershipService.ChangePassword(user.Membership.UserName, oldPassword, newPassword);
         }
     }
 }

@@ -7,6 +7,14 @@ FRONTRANGE - HOTZONE
 *** Celebrate coming Out-of-the-Wild with The Great Refactoring #1! *** => TODO
 - Postback Control Framework additions =>< TODO
 
+
+Methods of Security
+-------------------
+- Controller-bound System-Level Authorization
+- OwnerAuthorizedComposite-dervied Execution Composites
+
+
+
 Another Backlog
 ---------------
 * Postback Control Framework => TODO

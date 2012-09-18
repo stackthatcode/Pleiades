@@ -16,7 +16,7 @@ namespace Commerce.WebUI
 {
     public class CommerceHttpApplication : HttpApplication
     {
-        IGenericContainer Container { get; set; }
+        IServiceLocator Container { get; set; }
 
         protected void Application_Start()
         {

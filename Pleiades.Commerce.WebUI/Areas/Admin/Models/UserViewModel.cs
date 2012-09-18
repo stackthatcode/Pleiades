@@ -45,8 +45,8 @@ namespace Commerce.WebUI.Areas.Admin.Models
         [RegularExpression(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$", ErrorMessage = "Please enter a valid email address")]
         public string Email { get; set; }
 
-        // Membership Data read-only
-        public bool IsApproved { get; protected set; }
+        // Membership Data read-only -- why readonly...?
+        public bool IsApproved { get; set; }
         public bool IsLockedOut { get; protected set; }
 
         [ReadOnly(true)]

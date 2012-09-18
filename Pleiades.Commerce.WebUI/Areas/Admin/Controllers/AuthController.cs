@@ -17,9 +17,9 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
     public class AuthController : Controller
     {
         public readonly bool PersistentCookie = true;
-        public IGenericContainer Container { get; set; }
+        public IServiceLocator Container { get; set; }
 
-        public AuthController(IGenericContainer container)
+        public AuthController(IServiceLocator container)
         {
             this.Container = container;
         }

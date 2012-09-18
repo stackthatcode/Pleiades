@@ -15,12 +15,12 @@ namespace Pleiades.UnitTests.Execution
         public void StepComposite_Inject_Invokes_Resolve_On_Container()
         {
             // Arrange
-            var container = MockRepository.GenerateMock<IGenericContainer>();
+            var container = MockRepository.GenerateMock<IServiceLocator>();
             container.Expect(x => x.Resolve<StepOk>()).Return(new StepOk());            
-            var step = new StepComposite<ContextStub>(container);
+            var step = new CompositeStep<ContextStub>(container);
 
             // Act
-            step.Inject<StepOk>();
+            step.ResolveAndAdd<StepOk>();
             
             // Assert
             container.VerifyAllExpectations();
@@ -30,8 +30,8 @@ namespace Pleiades.UnitTests.Execution
         public void StepComposite_Executes_All_Steps()
         {
             // Arrange 
-            var container = MockRepository.GenerateStub<IGenericContainer>();
-            var stepComposite = new StepComposite<ContextStub>(container);
+            var container = MockRepository.GenerateStub<IServiceLocator>();
+            var stepComposite = new CompositeStep<ContextStub>(container);
             var context = new ContextStub();
 
             var step1 = MockRepository.GenerateMock<Step<ContextStub>>();
@@ -42,9 +42,9 @@ namespace Pleiades.UnitTests.Execution
             step2.Expect(x => x.Execute(context));
             step3.Expect(x => x.Execute(context));
 
-            stepComposite.Register(step1);
-            stepComposite.Register(step2);
-            stepComposite.Register(step3);
+            stepComposite.Add(step1);
+            stepComposite.Add(step2);
+            stepComposite.Add(step3);
 
             // Act
             stepComposite.Execute(context);
@@ -57,8 +57,8 @@ namespace Pleiades.UnitTests.Execution
         public void StepComposite_Executes_All_Steps_Until_Kill()
         {
             // Arrange 
-            var container = MockRepository.GenerateStub<IGenericContainer>();
-            var stepComposite = new StepComposite<ContextStub>(container);
+            var container = MockRepository.GenerateStub<IServiceLocator>();
+            var stepComposite = new CompositeStep<ContextStub>(container);
             var context = new ContextStub();
 
             var step1 = new StepOk();
@@ -67,11 +67,11 @@ namespace Pleiades.UnitTests.Execution
             var step4 = MockRepository.GenerateMock<Step<ContextStub>>();
             var step5 = MockRepository.GenerateMock<Step<ContextStub>>();
 
-            stepComposite.Register(step1);
-            stepComposite.Register(step2);
-            stepComposite.Register(step3);
-            stepComposite.Register(step4);
-            stepComposite.Register(step5);
+            stepComposite.Add(step1);
+            stepComposite.Add(step2);
+            stepComposite.Add(step3);
+            stepComposite.Add(step4);
+            stepComposite.Add(step5);
 
             // Act
             stepComposite.Execute(context);

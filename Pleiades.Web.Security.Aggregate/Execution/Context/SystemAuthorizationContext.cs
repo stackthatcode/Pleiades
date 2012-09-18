@@ -9,7 +9,7 @@ namespace Pleiades.Web.Security.Execution.Context
     public class SystemAuthorizationContext : ISecurityContext, IStepContext
     {
         public HttpContextBase HttpContext { get; set; }
-        public AggregateUser ThisUser { get; set; }
+        public AggregateUser CurrentUser { get; set; }
 
         public AuthorizationZone AuthorizationZone { get; set; }
         public AccountLevel AccountLevelRestriction { get; set; }
@@ -22,7 +22,7 @@ namespace Pleiades.Web.Security.Execution.Context
         public SystemAuthorizationContext(HttpContextBase httpContext)
         {
             this.HttpContext = httpContext;            
-            this.ThisUser = null;
+            this.CurrentUser = null;
 
             this.AuthorizationZone = AuthorizationZone.Public;
             this.AccountLevelRestriction = AccountLevel.Standard;

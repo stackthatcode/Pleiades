@@ -39,12 +39,12 @@ namespace Pleiades.Web.Security
             ResponderRegistrationAction.Invoke(builder);
         }
 
-        public static ISystemAuthorizationContextBuilder ResolveAuthorizationContextBuilder(this IGenericContainer injector)
+        public static ISystemAuthorizationContextBuilder ResolveAuthorizationContextBuilder(this IServiceLocator injector)
         {
             return injector.Resolve<ISystemAuthorizationContextBuilder>();
         }
 
-        public static IPostbackSecurityResponder ResolvePostbackResponder(this IGenericContainer injector)
+        public static IPostbackSecurityResponder ResolvePostbackResponder(this IServiceLocator injector)
         {
             return injector.Resolve<IPostbackSecurityResponder>();
         }

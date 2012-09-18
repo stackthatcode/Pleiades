@@ -8,9 +8,8 @@ using System.Web.Routing;
 using NUnit.Framework;
 using Rhino.Mocks;
 using Pleiades.Execution;
+using Pleiades.Web.Security.Concrete;
 using Pleiades.Web.Security.Interface;
-using Pleiades.Web.Security.Execution.Context;
-using Pleiades.Web.Security.Execution.Step;
 using Pleiades.Web.Security.Model;
 
 namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
@@ -24,19 +23,19 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
             // Arrange
             var membership = MockRepository.GenerateMock<IMembershipService>();
             membership.Expect(x => x.ValidateUserByEmailAddr("admin", "123")).Return(null);
+
             var formsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
             formsAuthService.Expect(x => x.ClearAuthenticationCookie());
 
-            var step = new AuthenticateUserByRoleStep(membership, null, formsAuthService);
-            var context = new AuthenticateUserByRoleContext() { AttemptedUserName = "admin", AttemptedPassword = "123" };
-
+            var service = new AggregateUserService(membership, null, null, formsAuthService);
+            
             // Act
-            step.Execute(context);
+            var result = service.Authenticate("admin", "123", true, null);
                 
             // Assert
             membership.VerifyAllExpectations();
             formsAuthService.VerifyAllExpectations();
-            Assert.IsFalse(context.IsExecutionStateValid);
+            Assert.IsFalse(result);
         }
 
         [Test]
@@ -59,20 +58,16 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
 
             var formsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
             formsAuthService.Expect(x => x.ClearAuthenticationCookie());
-
-            var step = new AuthenticateUserByRoleStep(membership, aggregateRepository, formsAuthService);
-            var context = new AuthenticateUserByRoleContext() 
-            { 
-                AttemptedUserName = "admin", AttemptedPassword = "123", ExpectedRoles = new List<UserRole> { UserRole.Admin },
-            };
-
+            
+            var service = new AggregateUserService(membership, null, null, formsAuthService);
+            
             // Act
-            step.Execute(context);
+            var result = service.Authenticate("admin", "123", true, new List<UserRole> { UserRole.Admin });
 
             // Assert
             membership.VerifyAllExpectations();
             formsAuthService.VerifyAllExpectations();
-            Assert.IsFalse(context.IsExecutionStateValid);
+            Assert.IsFalse(result);
         }
 
         [Test]
@@ -96,23 +91,17 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
             var formsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
             formsAuthService.Expect(x => x.SetAuthCookieForUser("12345678", true));
 
-            var step = new AuthenticateUserByRoleStep(membership, aggregateRepository, formsAuthService);
-            var context = new AuthenticateUserByRoleContext()
-            {
-                AttemptedUserName = "admin",
-                AttemptedPassword = "123",
-                ExpectedRoles = new List<UserRole> { UserRole.Admin },
-                PersistenceCookie = true,
-            };
+
+            var service = new AggregateUserService(membership, null, null, formsAuthService);
 
             // Act
-            step.Execute(context);
+            var result = service.Authenticate("admin", "123", true, new List<UserRole> { UserRole.Admin });
 
             // Assert
             membership.VerifyAllExpectations();
             aggregateRepository.VerifyAllExpectations();
             formsAuthService.VerifyAllExpectations();
-            Assert.True(context.IsExecutionStateValid);
+            Assert.True(result);
         }
 
     }

@@ -7,21 +7,15 @@ using Pleiades.Web.Security.Model;
 
 namespace Pleiades.Web.Security.Execution.Composites
 {
-    public class SystemAuthorizationComposite : StepComposite<SystemAuthorizationContext>
+    public class SystemAuthorizationComposite : CompositeStep<SystemAuthorizationContext>
     {
-        public SystemAuthorizationComposite(IGenericContainer container)
+        public SystemAuthorizationComposite(IServiceLocator container)
             : base(container)
         {
-            this.Inject<GetUserFromContextStep>();
-            this.Inject<AccountStatusAuthorizationStep>();
-            this.Inject<RoleAuthorizationStep>();
-            this.Inject<AccountLevelAuthorizationStep>();
-        }
-
-        // This bit of glue is needed to allow us to Register this Composite as IStep<ISystemAuthorizationContext>
-        public SystemAuthorizationContext Execute(SystemAuthorizationContext context)
-        {
-            return base.Execute((SystemAuthorizationContext)context);
+            this.ResolveAndAdd<GetUserFromHttpContextStep>();
+            this.ResolveAndAdd<AccountStatusAuthorizationStep>();
+            this.ResolveAndAdd<RoleAuthorizationStep>();
+            this.ResolveAndAdd<AccountLevelAuthorizationStep>();
         }
     }
 }

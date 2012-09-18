@@ -5,13 +5,18 @@ using System.Web;
 using System.Web.Mvc;
 using NUnit.Framework;
 using Rhino.Mocks;
+using Pleiades.Execution;
+using Pleiades.Injection;
 using Pleiades.TestHelpers;
 using Pleiades.TestHelpers.Web;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
+using Pleiades.Web.Security.Execution.Composites;
+using Pleiades.Web.Security.Execution.Context;
 using Commerce.Domain.Interface;
 using Commerce.WebUI.Areas.Admin.Controllers;
 using Commerce.WebUI.Areas.Admin.Models;
+
 
 namespace Commerce.WebUI.TestsControllers
 {
@@ -89,8 +94,6 @@ namespace Commerce.WebUI.TestsControllers
             aggregateUserRepository.VerifyAllExpectations();
         }
 
-        // TODO: can we really justify writing a CRUD Test...????
-
         [Test]
         public void Verify_Create_POST()
         {
@@ -141,33 +144,23 @@ namespace Commerce.WebUI.TestsControllers
         public void Verify_Edit_POST_ValidState_NonSupreme()
         {
             // Arrange
-            var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
-            repository.Expect(x => x.RetrieveById(123))
-                .Return(new AggregateUser()
-                    {
-                        Membership = new MembershipUser { UserName = "789023", Email = "test@test.com" },
-                        IdentityProfile = new IdentityProfile { UserRole = UserRole.Trusted },
-                    });
-            repository.Expect(x => x.UpdateIdentity(123, null)).IgnoreArguments();
+            var controller = new ManagerController(null, null, null);
 
-            var membership = MockRepository.GenerateMock<IMembershipService>();
-            membership.Expect(x => x.SetUserApproval("789023", true));
-            membership.Expect(x => x.ChangeEmailAddress("789023", "test123@test.com"));
-
-            var controller = new ManagerController(repository, null, membership);
-
-            var input = new UserViewModel()
-            {
-                Email = "test123@test.com",
-                IsApproved = true,                  
-            };
+            var step = MockRepository.GenerateMock<UpdateUserComposite>();
+            step.Expect(x => x.Execute(null))
+                .IgnoreArguments()
+                .Return(null);
+            
+            var serviceLocator = MockRepository.GenerateMock<IServiceLocator>(null, null);
+            serviceLocator.Expect(x => x.Resolve<UpdateUserComposite>()).Return(step);
 
             // Act
             var result = controller.Edit(123, new UserViewModel());
 
             // Assert
             result.ShouldBeRedirectionTo(new { action = "Details" });
-            repository.VerifyAllExpectations();
+            serviceLocator.VerifyAllExpectations();
+            step.VerifyAllExpectations();
         }
 
         //[Test]
@@ -226,6 +219,30 @@ namespace Commerce.WebUI.TestsControllers
         //    adminmgrController.DomainUserService.VerifyAllExpectations();
         //    result.ShouldBeRedirectionTo(new { action = "List" });
         //}
+
+
+        
+            //var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
+            //repository.Expect(x => x.RetrieveById(123))
+            //    .Return(new AggregateUser()
+            //        {
+            //            Membership = new MembershipUser { UserName = "789023", Email = "test@test.com" },
+            //            IdentityProfile = new IdentityProfile { UserRole = UserRole.Trusted },
+            //        });
+            //repository.Expect(x => x.UpdateIdentity(123, null)).IgnoreArguments();
+
+            //var membership = MockRepository.GenerateMock<IMembershipService>();
+            //membership.Expect(x => x.SetUserApproval("789023", true));
+            //membership.Expect(x => x.ChangeEmailAddress("789023", "test123@test.com"));
+
+            //var controller = new ManagerController(repository, null, membership);
+
+            //var input = new UserViewModel()
+            //{
+            //    Email = "test123@test.com",
+            //    IsApproved = true,                  
+            //};
+
     
     }
 }

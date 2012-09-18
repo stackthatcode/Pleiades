@@ -11,7 +11,7 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
             return new SystemAuthorizationContext(null)
             {
                 AuthorizationZone = AuthorizationZone.Public,
-                ThisUser = new AggregateUser
+                CurrentUser = new AggregateUser
                 {
                     IdentityProfile = user,
                 }
@@ -25,7 +25,7 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
                 AuthorizationZone = AuthorizationZone.Restricted,
                 AccountLevelRestriction = AccountLevel.Standard,
                 IsPaymentArea = false,
-                ThisUser = new AggregateUser
+                CurrentUser = new AggregateUser
                 {
                     IdentityProfile = user,
                 }
@@ -39,7 +39,7 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
                 AuthorizationZone = AuthorizationZone.Restricted,
                 AccountLevelRestriction = AccountLevel.Gold,
                 IsPaymentArea = false,
-                ThisUser = new AggregateUser
+                CurrentUser = new AggregateUser
                 {
                     IdentityProfile = user,
                 }
@@ -53,7 +53,7 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
                 AuthorizationZone = AuthorizationZone.Restricted,
                 AccountLevelRestriction = AccountLevel.Standard,
                 IsPaymentArea = true,
-                ThisUser = new AggregateUser
+                CurrentUser = new AggregateUser
                 {
                     IdentityProfile = user,
                 }
@@ -65,7 +65,7 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
             return new SystemAuthorizationContext(null)
             {
                 AuthorizationZone = AuthorizationZone.Administrative,
-                ThisUser = new AggregateUser
+                CurrentUser = new AggregateUser
                 {
                     IdentityProfile = user,
                 }

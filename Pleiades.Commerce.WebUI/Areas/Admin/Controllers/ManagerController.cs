@@ -4,8 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.Mvc;
-using AutoMapper;
 using Commerce.WebUI.Areas.Admin.Models;
+using Pleiades.Execution;
+using Pleiades.Injection;
+using Pleiades.Web.Security.Execution.Context;
+using Pleiades.Web.Security.Execution.Composites;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 
@@ -18,16 +21,14 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
 
         public IAggregateUserRepository AggregateUserRepository { get; set; }
         public IAggregateUserService AggregateUserService { get; set; }
-        public IMembershipService MembershipService { get; set; }
+
 
         public ManagerController(
                 IAggregateUserRepository aggregateUserRepository, 
-                IAggregateUserService aggregateUserService,
-                IMembershipService membershipService)
+                IAggregateUserService aggregateUserService)
         {
             AggregateUserRepository = aggregateUserRepository;
             AggregateUserService = aggregateUserService;
-            MembershipService = membershipService;
         }
 
         [HttpGet]
@@ -35,20 +36,15 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         {
             var users = AggregateUserRepository.Retreive(new List<UserRole>() { UserRole.Admin, UserRole.Supreme });
             var listUsersViewModel =
-                new ListUsersViewModel
-                    {
-                        Users = users.Select(user => new UserViewModel(user)).ToList()
-                    };
+                new ListUsersViewModel { Users = users.Select(user => new UserViewModel(user)).ToList() };
             return View(); 
         }
-
-        // TODO: what if the User is null...?
 
         [HttpGet]
         public ActionResult Details(int id)
         {
+            // TODO: what if the User is null...? => GOTO THE ERROR PAGE
             var user = AggregateUserRepository.RetrieveById(id);
-
             var userModel = new UserViewModel(user);
             return View(userModel);
         }
@@ -62,12 +58,12 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(CreateAdminModel createAdminModel)
         {
-            if (!ModelState.IsValid) return View(createAdminModel);
-
-            // TODO: Some way to validate args sent Service en-masse.... like passing a context or something
+            if (!ModelState.IsValid)
+            {
+                return View(createAdminModel);
+            }
 
             PleiadesMembershipCreateStatus status;
-
             var newuser =
                 this.AggregateUserService.Create(
                     new CreateNewMembershipUserRequest
@@ -96,7 +92,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
 
             return RedirectToAction("Details", new { id = newuser.ID });
         }
-
+        
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -108,39 +104,25 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(int id, UserViewModel userViewModel)
         {
+            // ModelState validation
             if (!ModelState.IsValid)
             {
                 return View(userViewModel);
             }
 
-            var userData = this.AggregateUserRepository.RetrieveById(id);
+            // Build Context
+            var targetUser = this.AggregateUserRepository.RetrieveById(id);
+            var currentUser = this.AggregateUserService.GetCurrentUserFromHttpContext();
 
-            // First Leg of Update
-            this.AggregateUserRepository.UpdateIdentity(id,
-                new CreateOrModifyIdentityRequest
-                {
-                    AccountLevel = userData.IdentityProfile.AccountLevel,
-                    AccountStatus = userData.IdentityProfile.AccountStatus,
-                    UserRole = userData.IdentityProfile.UserRole,
-                    FirstName = userViewModel.FirstName,
-                    LastName = userViewModel.LastName,
-                });
-
-            // Update Membership stuff - seems like an argument to only operate on the Entity Aggregate Root, eh?
-            // TODO: replace MembershipService with AggregateMembershipService
-
-            var membershipUserName = userData.Membership.UserName;
-
-            if (userData.IdentityProfile.UserRole != UserRole.Supreme)
+            var context = new UpdateUserContext(currentUser, targetUser)
             {
-                MembershipService.SetUserApproval(membershipUserName, userViewModel.IsApproved);
-            }
+                NewEmail = userViewModel.Email,
+                NewIsApproved = userViewModel.IsApproved,
+            };
 
-            if (userViewModel.Email != userData.Membership.Email)
-            {
-                MembershipService.ChangeEmailAddress(membershipUserName, userViewModel.Email);
-            }
-            
+            // Execute
+
+            // Respond
             return RedirectToAction("Details", new { id = id });
         }
 
@@ -165,6 +147,8 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             return RedirectToAction("Details", new { id = id });
         }
 
+
+
         [HttpGet]
         public ActionResult Reset(int id)
         {
@@ -177,7 +161,6 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Unlock(int id)
         {
-            // TODO: Move this from Membership into AggregateUserService - it's a bridge, more or less
             var user = this.AggregateUserRepository.RetrieveById(id);
             MembershipService.UnlockUser(user.Membership.UserName);
             return RedirectToAction("Details", new { id = id });

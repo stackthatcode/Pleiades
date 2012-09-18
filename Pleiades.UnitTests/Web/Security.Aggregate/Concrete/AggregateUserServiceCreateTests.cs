@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using Rhino.Mocks;
+using Pleiades.Security;
 using Pleiades.Web.Security.Concrete;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
@@ -9,7 +10,7 @@ using Pleiades.Web.Security.Model;
 namespace Pleiades.Web.Tests.Security.IntegrationTests
 {
     [TestFixture]
-    public class AggregateUserServiceTests
+    public class AggregateUserServiceCreateTests
     {
         [Test]
         [ExpectedException(typeof(Exception))]
@@ -17,7 +18,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
         {
             // Arrange
             var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
-            var aggregateUserService = new  AggregateUserService(null, repository);
+            var aggregateUserService = new  AggregateUserService(null, repository, null, null);
             repository.Expect(x => x.GetUserCountByRole(UserRole.Admin)).Return(AggregateUserService.MaxAdminUsers);
 
             // Act
@@ -36,7 +37,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
         {
             // Arrange
             var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
-            var aggregateUserService = new AggregateUserService(null, repository);
+            var aggregateUserService = new AggregateUserService(null, repository, null, null);
             repository.Expect(x => x.GetUserCountByRole(UserRole.Admin)).Return(1);
             repository.Expect(x => x.GetUserCountByRole(UserRole.Supreme)).Return(AggregateUserService.MaxSupremeUsers);
 
@@ -63,7 +64,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
                 FirstName = "Jon",
                 LastName = "Smith",
             };
-            var aggregateUserService = new AggregateUserService(null, null);
+            var aggregateUserService = new AggregateUserService(null, null, null, null);
 
             // Act
             PleiadesMembershipCreateStatus createStatus;
@@ -93,7 +94,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
                 .IgnoreArguments()
                 .OutRef(PleiadesMembershipCreateStatus.DuplicateUserName);
 
-            var aggregateUserService = new AggregateUserService(membership, null);
+            var aggregateUserService = new AggregateUserService(membership, null, null, null);
 
             // Act
             var response =
@@ -130,13 +131,17 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             var membership = MockRepository.GenerateMock<IMembershipService>();
             membership.Expect(x => x.CreateUser(null, out createStatus)).IgnoreArguments().OutRef(PleiadesMembershipCreateStatus.Success);
 
-            var aggregateUserService = new AggregateUserService(membership, repository);
-
             // Act
-            var response = 
-                aggregateUserService.Create(
+            var aggregateUserService = new AggregateUserService(membership, repository, null, null);
+
+            var response = aggregateUserService.Create(
                     null,
-                    new CreateOrModifyIdentityRequest() { UserRole = UserRole.Trusted },
+                    new CreateOrModifyIdentityRequest() 
+                    {
+                        AccountStatus = AccountStatus.Active,
+                        AccountLevel = AccountLevel.Gold,
+                        UserRole = UserRole.Trusted 
+                    },
                     out createStatus);
 
             // Assert
@@ -144,6 +149,5 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             membership.VerifyAllExpectations();
             Assert.IsNotNull(response);
         }
-
     }
 }

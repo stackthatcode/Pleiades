@@ -25,20 +25,15 @@ namespace Pleiades.Web.Security
 
             // Services
             builder.RegisterType<AggregateUserService>().As<IAggregateUserService>().InstancePerLifetimeScope();
+            builder.RegisterType<HttpContextUserService>().As<IHttpContextUserService>().InstancePerLifetimeScope();
+            builder.RegisterType<OwnerAuthorizationService>().As<IOwnerAuthorizationService>().InstancePerLifetimeScope();
 
             // Authorization Steps
             builder.RegisterType<AccountLevelAuthorizationStep>().InstancePerLifetimeScope();
             builder.RegisterType<AccountStatusAuthorizationStep>().InstancePerLifetimeScope();
             builder.RegisterType<RoleAuthorizationStep>().InstancePerLifetimeScope();
-            builder.RegisterType<SimpleOwnerAuthorizationStep<OwnerAuthorizationContext>>().InstancePerLifetimeScope();
-            builder.RegisterType<AuthenticateUserByRoleStep>().InstancePerLifetimeScope();
-            builder.RegisterType<ChangeUserPasswordStep>().InstancePerLifetimeScope();
-            builder.RegisterType<GetUserFromContextStep>().InstancePerLifetimeScope();
-            builder.RegisterType<LogoutStep>().InstancePerLifetimeScope();
-            
-            // Composites Steps
-            builder.RegisterType<ChangeUserPasswordComposite>().InstancePerLifetimeScope();
-            builder.RegisterType<SystemAuthorizationComposite>().InstancePerLifetimeScope();
+            builder.RegisterType<GetUserFromHttpContextStep>().InstancePerLifetimeScope();
+            builder.RegisterType<SystemAuthorizationComposite>().InstancePerLifetimeScope();            
         }   
     }
 }

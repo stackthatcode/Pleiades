@@ -14,18 +14,6 @@ namespace Pleiades.Execution
         /// </summary>
         public abstract TContext Execute(TContext context);
 
-        // Subscribes an observer to listen for Notifications
-        public virtual void Attach(IStepObserver observer)
-        {
-            this.Observers.Add(observer);
-        }
-
-        // Broadcast notification to all subscribed Observers
-        public virtual void Notify(object o)
-        {
-            this.Observers.ForEach(x => x.Notify(o));
-        }
-
         public virtual TContext Kill(TContext context)
         {
             context.IsExecutionStateValid = false;
@@ -37,6 +25,18 @@ namespace Pleiades.Execution
             this.Kill(context);
             action();
             return context;
+        }
+
+        // Subscribes an observer to listen for Notifications
+        public virtual void Attach(IStepObserver observer)
+        {
+            this.Observers.Add(observer);
+        }
+
+        // Broadcast notification to all subscribed Observers
+        public virtual void Notify(object o)
+        {
+            this.Observers.ForEach(x => x.Notify(o));
         }
     }
 }

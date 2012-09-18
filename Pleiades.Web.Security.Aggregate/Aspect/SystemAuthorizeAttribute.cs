@@ -16,22 +16,22 @@ namespace Pleiades.Web.Security.Aspect
         // Injected by downstream consumers of my stuff
         public ISystemAuthorizationContextBuilder ContextBuilder { get; set; }
         public IPostbackSecurityResponder Responder { get; set; }
-
         public SystemAuthorizationComposite AuthorizeExecution { get; set; }
 
-        public SystemAuthorizeAttribute(IGenericContainer container)
+        public SystemAuthorizeAttribute(
+                ISystemAuthorizationContextBuilder contextBuilder,
+                IPostbackSecurityResponder responder,
+                SystemAuthorizationComposite authorizeExecution)
         {
-            this.ContextBuilder = container.ResolveAuthorizationContextBuilder();
-            this.Responder = container.ResolvePostbackResponder();
-
-            this.AuthorizeExecution = container.Resolve<SystemAuthorizationComposite>();
+            this.ContextBuilder = contextBuilder;
+            this.Responder = responder;
+            this.AuthorizeExecution = authorizeExecution;
         }
 
         public override void OnAuthorization(AuthorizationContext filterContext)
         {            
             var context = this.ContextBuilder.Build(filterContext);
             this.AuthorizeExecution.Execute(context);
-
             this.Responder.Execute(context.SecurityResponseCode, filterContext);
         }
     }

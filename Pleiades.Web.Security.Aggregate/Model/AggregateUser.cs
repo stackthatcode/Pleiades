@@ -9,7 +9,7 @@ namespace Pleiades.Web.Security.Model
         public IdentityProfile IdentityProfile { get; set; }
         public MembershipUser Membership { get; set; }
 
-        public static AggregateUser AnonymousUserFactory()
+        public static AggregateUser AnonymousFactory()
         {
             return
                 new AggregateUser

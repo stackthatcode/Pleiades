@@ -1,4 +1,5 @@
-﻿using Pleiades.Web.Security.Model;
+﻿using System.Collections.Generic;
+using Pleiades.Web.Security.Model;
 
 namespace Pleiades.Web.Security.Interface
 {
@@ -13,10 +14,14 @@ namespace Pleiades.Web.Security.Interface
             CreateOrModifyIdentityRequest identityUser,
             out PleiadesMembershipCreateStatus outStatus);
 
-        void SetUserPassword(int id, string password);
-        string ResetPassword(int id);
-        void SetUserApproval(int id, bool isApproved);
-        void ChangeEmailAddress(int id, string email);
-        void UnlockUser(int id);
+        bool Authenticate(string username, string password, bool persistenceCookie, List<UserRole> expectedRoles);
+
+        void UpdateEmail(int aggregateUserId, string email);
+
+        void UpdateApproval(int aggregateUserId, bool approval);
+
+        void UpdateIdentity(int aggregateUserId, CreateOrModifyIdentityRequest identityUserRequest);
+
+        void ChangeUserPassword(int aggregateUserId, string oldPassword, string newPassword);
     }
 }

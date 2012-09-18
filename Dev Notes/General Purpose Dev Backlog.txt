@@ -6,21 +6,24 @@ Backlog
 
 GIT RELATED
 ~~~~~~~~~~~
-- Let's dig deeper into Git => TODO
-* Play with the Log commands => TODO
-* Play with git add => TODO
+TRY: git clone XYZ (find some javascript library)
+TRY: git log (try all the varieties)
+TRY: git status
+TRY: git diff -- how to do it better...???
 TRY: git add --dry-run .
 TRY: git add --verbose
 TRY: git add --update
-TRY: git status
+
 * Play with git commit => TODO
-* Try some branching
-* Review the Git GUI tools
-* How do I git my current hashcode...?
+* Try some branching => TODO
+* Review the Git GUI tools => TODO
+* How do I git my current hashcode...? => TODO
+
+
 
 BLOG POSTS!
 ~~~~~~~~~~~
-- Learn
+- Define Resuable for me
 - Prevent Logic Leakage i.e. Membership User Approval and Aggregate User
 - HTTP Context Stub on steroids
 - JavaScript Monad

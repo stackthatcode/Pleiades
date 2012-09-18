@@ -86,15 +86,19 @@ namespace Commerce.Persist.Security
             var user = this.RetrieveByIdForWriting(aggregateUserID);
             var identity = user.IdentityProfile;
             var membership = user.Membership;
-            
-            identity.UserRole = changes.UserRole;
-            identity.AccountStatus = changes.AccountStatus;
-            identity.AccountLevel = changes.AccountLevel;
-            identity.FirstName = changes.FirstName;
-            identity.LastName = changes.LastName;
+
+            if (changes.UserRole != null) 
+                identity.UserRole = changes.UserRole.Value;
+            if (changes.AccountStatus != null)
+                identity.AccountStatus = changes.AccountStatus.Value;
+            if (changes.AccountLevel != null)
+                identity.AccountLevel = changes.AccountLevel.Value;
+            if (changes.FirstName != null)
+                identity.FirstName = changes.FirstName;
+            if (changes.LastName != null)
+                identity.LastName = changes.LastName;
 
             membership.LastModified = DateTime.Now;
-
             this.Context.SaveChanges();
         }
     }

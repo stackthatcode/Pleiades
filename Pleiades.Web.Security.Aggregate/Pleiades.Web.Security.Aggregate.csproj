@@ -52,17 +52,15 @@
     <Compile Include="Concrete\AggregateUserService.cs" />
     <Compile Include="Concrete\DefaultAuthorizationContextBuilder.cs" />
     <Compile Include="Concrete\DefaultPostbackSecurityResponder.cs" />
-    <Compile Include="Execution\Composites\ChangeUserPasswordComposite.cs" />
+    <Compile Include="Concrete\HttpContextUserService.cs" />
+    <Compile Include="Concrete\OwnerAuthorizationService.cs" />
     <Compile Include="Execution\Composites\SystemAuthorizationComposite.cs" />
-    <Compile Include="Execution\Composites\OwnerSecuredCompositeBase.cs" />
     <Compile Include="Execution\Step\AccountLevelAuthorizationStep.cs" />
     <Compile Include="Execution\Step\AccountStatusAuthorizationStep.cs" />
-    <Compile Include="Execution\Step\AuthenticateUserByRoleStep.cs" />
-    <Compile Include="Execution\Step\ChangeUserPasswordStep.cs" />
-    <Compile Include="Execution\Step\GetUserFromContextStep.cs" />
-    <Compile Include="Execution\Step\LogoutStep.cs" />
+    <Compile Include="Execution\Step\GetUserFromHttpContextStep.cs" />
     <Compile Include="Execution\Step\RoleAuthorizationStep.cs" />
-    <Compile Include="Execution\Step\SimpleOwnerAuthorizationStep.cs" />
+    <Compile Include="Interface\IHttpContextUserService.cs" />
+    <Compile Include="Interface\IOwnerAuthorizationService.cs" />
     <Compile Include="Interface\IPostbackSecurityResponder.cs" />
     <Compile Include="Interface\ISystemAuthorizationContextBuilder.cs" />
     <Compile Include="WebSecurityAggregateBroker.cs" />
@@ -72,13 +70,10 @@
     <Compile Include="Model\AccountLevel.cs" />
     <Compile Include="Model\AccountStatus.cs" />
     <Compile Include="Model\AggregateUser.cs" />
-    <Compile Include="Execution\Context\AuthenticateUserByRoleContext.cs" />
     <Compile Include="Model\AuthorizationZone.cs" />
-    <Compile Include="Execution\Context\ChangeUserPasswordContext.cs" />
-    <Compile Include="Model\CreateNewIdentityUserRequest.cs" />
+    <Compile Include="Model\CreateOrModifyIdentityRequest.cs" />
     <Compile Include="Model\IdentityProfile.cs" />
     <Compile Include="Model\UserRole.cs" />
-    <Compile Include="Execution\Context\OwnerAuthorizationContext.cs" />
     <Compile Include="Execution\Context\SystemAuthorizationContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -95,6 +90,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

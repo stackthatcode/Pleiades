@@ -4,7 +4,7 @@ using Pleiades.Injection;
 
 namespace Commerce.WebUI.Plumbing.Autofac
 {
-    public class AutofacContainer : IGenericContainer
+    public class AutofacContainer : IServiceLocator
     {
         ILifetimeScope LifetimeScope { get; set; }
 

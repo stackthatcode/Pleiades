@@ -10,14 +10,24 @@
 
     public static class UserRoleExtensions
     {
-        public static bool IsAdministrator(this UserRole role)
+        public static bool IsSupreme(this UserRole role)
+        {
+            return (role == UserRole.Supreme);
+        }
+
+        public static bool IsNotSupreme(this UserRole role)
+        {
+            return (role != UserRole.Supreme);
+        }
+
+        public static bool IsAdministratorOrSupreme(this UserRole role)
         {
             return (role == UserRole.Admin || role == UserRole.Supreme);
         }
 
-        public static bool IsNotAdministrator(this UserRole role)
+        public static bool IsNotAdministratorOrSupreme(this UserRole role)
         {
-            return !(role.IsAdministrator());
+            return !(role.IsAdministratorOrSupreme());
         }
     }
 }
