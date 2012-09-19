@@ -13,11 +13,11 @@ namespace Commerce.WebUI.UnitTests.Security
     public class MySecurityContextBuilderTest
     {
         [Test]
-        public void LoginControllerIsPublic()
+        public void AuthControllerIsPublic()
         {
             // Arrange
             var context = MockRepository.GenerateStub<AuthorizationContext>();
-            context.Controller = new AuthController(null);
+            context.Controller = new AuthController(null, null);
             var builder = new MySystemAuthContextBuilder();
 
             // Act
@@ -47,7 +47,7 @@ namespace Commerce.WebUI.UnitTests.Security
         }
 
         [Test]
-        public void AdminHomeIsSecured()
+        public void AdminHomeIsAdminstrativeZone()
         {
             // Arrange
             var context = MockRepository.GenerateStub<AuthorizationContext>();

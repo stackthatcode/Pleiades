@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{FE635455-8016-4AB0-BA25-5A459A76ABA1}</ProjectGuid>
+    <ProjectGuid>{11018755-DEC2-493C-82D1-58DCC1AF5927}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Commerce.IntegrationTests</RootNamespace>
-    <AssemblyName>Commerce.IntegrationTests</AssemblyName>
+    <RootNamespace>ClassLibrary1</RootNamespace>
+    <AssemblyName>ClassLibrary1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,24 +31,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Accessibility">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,51 +51,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Security\AggregateUserRepositoryTests.cs" />
-    <Compile Include="DatabasePriming.cs" />
-    <Compile Include="Security\MembershipServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Concrete\AggregateUserServiceAuthenticateTests.cs" />
+    <Compile Include="Concrete\AggregateUserServiceCreateTests.cs" />
+    <Compile Include="Concrete\AggregateUserServiceUpdateTests.cs" />
+    <Compile Include="Concrete\OwnerAuthorizationStepTests.cs" />
+    <Compile Include="Provider\MembershipProviderTests.cs" />
+    <Compile Include="Step\AccountLevelAuthorizationStepTests.cs" />
+    <Compile Include="Step\AccountStatusAuthorizationStepTests.cs" />
+    <Compile Include="Step\GetUserFromHttpContextStepTests.cs" />
+    <Compile Include="Step\IdentityRequirementsGenerator.cs" />
+    <Compile Include="Step\RoleAuthorizationStepTests.cs" />
+    <Compile Include="Step\StubUserGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Products\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Commerce.Domain\Commerce.Domain.csproj">
-      <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
-      <Name>Commerce.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Commerce.Persist\Commerce.Persist.csproj">
-      <Project>{E616B84E-1830-4909-9A56-58A656EA9B5B}</Project>
-      <Name>Commerce.Persist</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Web.Security.Membership\Pleiades.Web.Security.Membership.csproj">
-      <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
-      <Name>Pleiades.Web.Security.Membership</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Framework\Pleiades.Base.csproj">
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
       <Name>Pleiades.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pleiades.Utilities\Pleiades.TestHelpers.csproj">
+      <Project>{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}</Project>
+      <Name>Pleiades.TestHelpers</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pleiades.Web.Security.Aggregate\Pleiades.Web.Security.Aggregate.csproj">
       <Project>{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}</Project>
       <Name>Pleiades.Web.Security.Aggregate</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Pleiades.Web.Security.Membership\Pleiades.Web.Security.Membership.csproj">
+      <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
+      <Name>Pleiades.Web.Security.Membership</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Web\Pleiades.Web.csproj">
       <Project>{804F063C-505F-441E-B205-688C42E637AD}</Project>
       <Name>Pleiades.Web</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Data.EF\Pleiades.Data.EF.csproj">
-      <Project>{89303370-B830-4A89-8646-0F9D287AD657}</Project>
-      <Name>Pleiades.Data.EF</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

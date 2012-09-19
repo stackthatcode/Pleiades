@@ -1,23 +1,15 @@
 FRONTRANGE - HOTZONE
 ====================
 - Fix the MVC Application with the Great Refactoring => IN PROGRESS
-* Fix the ManagerController + Tests => IN PROGRESS - EASY PICKINGS
-* Part of this ^^^ implement bridge methods for AggregateUserService, to move logic out of the Controller into Services, Domain and Execution => IN PROGRESS
+- Refactor the ManagerController Tests => IN PROGRESS
+- Fix the Commerce.IntegrationTests => IN PROGRESS
+- Full End-to-End ManagerController run-thru =>  TODO
 
 *** Celebrate coming Out-of-the-Wild with The Great Refactoring #1! *** => TODO
-- Postback Control Framework additions =>< TODO
-
-
-Methods of Security
--------------------
-- Controller-bound System-Level Authorization
-- OwnerAuthorizedComposite-dervied Execution Composites
-
-
+- Postback Control Framework additions => TODO
 
 Another Backlog
 ---------------
-* Postback Control Framework => TODO
 * Create a new CategoryController/Views/Domain Model, etc.
 - FIX THIS WITH AN EXTENSION METHOD =><%: Html.RouteLink("LOGOUT", OutboundNavigation.AdminLogout(), new Dictionary<string, object>() { { "class", "header" } })%>
 - Refactor the Standard Control Framework => TODO
@@ -28,6 +20,7 @@ Another Backlog
 - Web Optimization Toolkit => TODO
 - FUTURE DIRECTIONS: NHIBERNATE + MYSQL => and eventually, RAVENDB(!!!)
 * Get Scott Hanselman's obj/bin cleaner utility => IN PROGRESS
+
 
 
 THOUGHTS ON UI CODING

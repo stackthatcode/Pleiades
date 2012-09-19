@@ -4,10 +4,7 @@ using System.Diagnostics;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Pleiades.Execution;
-using Pleiades.Injection;
-using Pleiades.Web.Security.Execution.Context;
-using Pleiades.Web.Security.Execution.Step;
+using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 using Commerce.WebUI.Areas.Admin.Models;
 using Commerce.WebUI.Plumbing.Navigation;
@@ -16,12 +13,15 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
 {
     public class AuthController : Controller
     {
-        public readonly bool PersistentCookie = true;
-        public IServiceLocator Container { get; set; }
+        public const bool PersistentCookie = true;
+        public IAggregateUserService AggregateUserService { get; set; }
+        public IFormsAuthenticationService FormsAuthenticationService { get; set; }
 
-        public AuthController(IServiceLocator container)
+        public AuthController(
+                IAggregateUserService aggregateUserService, IFormsAuthenticationService formsAuthenticationService)
         {
-            this.Container = container;
+            this.AggregateUserService = aggregateUserService;
+            this.FormsAuthenticationService = formsAuthenticationService;
         }
 
         [HttpGet]
@@ -43,20 +43,10 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
                 return View();
             }
 
-            var context = new AuthenticateUserByRoleContext
-            {
-                AttemptedUserName = model.UserName,
-                AttemptedPassword = model.Password,
-                ExpectedRoles = new List<UserRole> { UserRole.Supreme, UserRole.Admin },
-                PersistenceCookie = this.PersistentCookie,
-            };
-
-            var step = this.Container.Resolve<AuthenticateUserByRoleStep>();
-            
-            // NOTE: checking the returned result simplifies testing
-            var result = step.Execute(context); 
-            
-            if (result.IsExecutionStateValid == false)
+            var result = this.AggregateUserService.Authenticate(
+                model.UserName, model.Password, PersistentCookie, new List<UserRole> { UserRole.Supreme, UserRole.Admin });
+                        
+            if (result == false)
             {
                 ModelState.AddModelError("", "Failed authentication credentials");
                 return View();
@@ -73,8 +63,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Logout()
         {
-            var step = this.Container.Resolve<LogoutStep>();
-            step.Execute(new BareContext());
+            this.FormsAuthenticationService.ClearAuthenticationCookie();
             return new RedirectToRouteResult(OutboundNavigation.PublicHome());
         }
     }

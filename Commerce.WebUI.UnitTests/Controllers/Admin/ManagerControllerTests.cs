@@ -53,7 +53,6 @@ namespace Commerce.WebUI.TestsControllers
         {
             // Arrange
             var aggregateUserRepository = MockRepository.GenerateMock<IAggregateUserRepository>();
-
             aggregateUserRepository 
                 .Expect(x => x.Retreive(new List<UserRole>() { UserRole.Admin, UserRole.Supreme }))
                 .Return(new List<AggregateUser> 
@@ -141,108 +140,38 @@ namespace Commerce.WebUI.TestsControllers
         }
 
         [Test]
-        public void Verify_Edit_POST_ValidState_NonSupreme()
+        public void Verify_Edit_POST_ValidState()
         {
             // Arrange
-            var controller = new ManagerController(null, null, null);
-
-            var step = MockRepository.GenerateMock<UpdateUserComposite>();
-            step.Expect(x => x.Execute(null))
-                .IgnoreArguments()
-                .Return(null);
+            var service = MockRepository.GenerateMock<IAggregateUserService>();
+            service.Expect(x => x.UpdateIdentity(888, null)).IgnoreArguments();
+            var controller = new ManagerController(null, service, null);
             
-            var serviceLocator = MockRepository.GenerateMock<IServiceLocator>(null, null);
-            serviceLocator.Expect(x => x.Resolve<UpdateUserComposite>()).Return(step);
-
             // Act
             var result = controller.Edit(123, new UserViewModel());
 
             // Assert
             result.ShouldBeRedirectionTo(new { action = "Details" });
-            serviceLocator.VerifyAllExpectations();
-            step.VerifyAllExpectations();
+            service.VerifyAllExpectations();
         }
 
-        //[Test]
-        //public void TestChange()
-        //{
-        //    // Arrange
-        //    var adminmgrController = new AdminManagerController();
-        //    var domainUser = new DomainUser();
-        //    adminmgrController.DomainUserService = MockRepository.GenerateMock<IDomainUserService>();
-        //    adminmgrController.DomainUserService.Expect(x => x.RetrieveUserByDomainUserId(123)).Return(domainUser);
-        //    adminmgrController.MembershipService = MockRepository.GenerateMock<IMembershipService>();
-        //    adminmgrController.MembershipService.Expect(x => x.ChangePassword(domainUser, "123", "1234"));
-
-        //    // Act
-        //    var result = adminmgrController.Change(123,
-        //        new ChangePasswordModel() { OldPassword = "123", NewPassword = "1234", PasswordVerify = "1234" });
-
-        //    // Assert
-        //    adminmgrController.DomainUserService.VerifyAllExpectations();
-        //    result.ShouldBeRedirectionTo(new { action = "Details", id = 123 });
-        //}
 
         //[Test]
-        //public void TestUnlock()
-        //{
-        //    // Arrange
-        //    var adminmgrController = new AdminManagerController();
-        //    var domainUser = new DomainUser();
-        //    adminmgrController.DomainUserService = MockRepository.GenerateMock<IDomainUserService>();
-        //    adminmgrController.DomainUserService.Expect(x => x.RetrieveUserByDomainUserId(123)).Return(domainUser);
-        //    adminmgrController.MembershipService = MockRepository.GenerateMock<IMembershipService>();
-        //    adminmgrController.MembershipService.Expect(x => x.UnlockUser(domainUser));
-            
-        //    // Act
-        //    var result = adminmgrController.Unlock(123);
-                
-        //    // Assert
-        //    adminmgrController.DomainUserService.VerifyAllExpectations();
-        //    result.ShouldBeRedirectionTo(new { action = "Details", id = 123 });
-        //}
+        //public void Verify_Change_GET();
 
         //[Test]
-        //public void TestDeleteConfirm()
-        //{
-        //    // Arrange
-        //    var adminmgrController = new AdminManagerController();
-        //    var domainUser = new DomainUser();
-        //    adminmgrController.DomainUserService = MockRepository.GenerateMock<IDomainUserService>();
-        //    adminmgrController.DomainUserService.Expect(x => x.RetrieveUserByDomainUserId(123)).Return(domainUser);
-        //    adminmgrController.DomainUserService.Expect(x => x.Delete(domainUser));
-            
-        //    // Act
-        //    var result = adminmgrController.DeleteConfirm(123);
+        //public void Verify_Change_POST();
 
-        //    // Assert
-        //    adminmgrController.DomainUserService.VerifyAllExpectations();
-        //    result.ShouldBeRedirectionTo(new { action = "List" });
-        //}
+        //[Test]
+        //public void Verify_Reset_GET();
 
+        //[Test]
+        //public void Verify_Unlock_GET();
 
-        
-            //var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
-            //repository.Expect(x => x.RetrieveById(123))
-            //    .Return(new AggregateUser()
-            //        {
-            //            Membership = new MembershipUser { UserName = "789023", Email = "test@test.com" },
-            //            IdentityProfile = new IdentityProfile { UserRole = UserRole.Trusted },
-            //        });
-            //repository.Expect(x => x.UpdateIdentity(123, null)).IgnoreArguments();
+        //[Test]
+        //public void Verify_Delete_GET();
 
-            //var membership = MockRepository.GenerateMock<IMembershipService>();
-            //membership.Expect(x => x.SetUserApproval("789023", true));
-            //membership.Expect(x => x.ChangeEmailAddress("789023", "test123@test.com"));
-
-            //var controller = new ManagerController(repository, null, membership);
-
-            //var input = new UserViewModel()
-            //{
-            //    Email = "test123@test.com",
-            //    IsApproved = true,                  
-            //};
-
-    
+        //[Test]
+        //public void Verify_DeleteConfirm_POST();
     }
 }

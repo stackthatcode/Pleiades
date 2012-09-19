@@ -103,6 +103,23 @@ namespace Pleiades.Web.Security.Concrete
             return aggegrateUser;
         }
 
+        public void UpdateIdentity(int aggregateUserId, CreateOrModifyIdentityRequest identityUserRequest)
+        {
+            var securityCode = this.OwnerAuthorizationService.Authorize(aggregateUserId);
+            if (securityCode != SecurityResponseCode.Allowed)
+            {
+                throw new Exception("Current User does not have Authorization to do that: " + securityCode);
+            }
+
+            this.Repository.UpdateIdentity(
+                        aggregateUserId,
+                        new CreateOrModifyIdentityRequest
+                        {
+                            FirstName = identityUserRequest.FirstName,
+                            LastName = identityUserRequest.LastName,
+                        });
+        }
+
         public void UpdateEmail(int aggregateUserId, string email)
         {
             var securityCode = this.OwnerAuthorizationService.Authorize(aggregateUserId);
@@ -119,7 +136,7 @@ namespace Pleiades.Web.Security.Concrete
             var userData = this.Repository.RetrieveById(aggregateUserId);
             var membershipUserName = userData.Membership.UserName;
 
-            MembershipService.ChangeEmailAddress(membershipUserName, email);
+            this.MembershipService.ChangeEmailAddress(membershipUserName, email);
         }
 
         public void UpdateApproval(int aggregateUserId, bool approval)
@@ -137,23 +154,6 @@ namespace Pleiades.Web.Security.Concrete
             {
                 MembershipService.SetUserApproval(membershipUserName, approval);
             }
-        }
-
-        public void UpdateIdentity(int aggregateUserId, CreateOrModifyIdentityRequest identityUserRequest)
-        {
-            var securityCode = this.OwnerAuthorizationService.Authorize(aggregateUserId);
-            if (securityCode != SecurityResponseCode.Allowed)
-            {
-                throw new Exception("Current User does not have Authorization to do that: " + securityCode);
-            }
-
-            this.Repository.UpdateIdentity(
-                        aggregateUserId,
-                        new CreateOrModifyIdentityRequest
-                        {
-                            FirstName = identityUserRequest.FirstName,
-                            LastName = identityUserRequest.LastName,
-                        });
         }
 
         public void ChangeUserPassword(int aggregateUserId, string oldPassword, string newPassword)

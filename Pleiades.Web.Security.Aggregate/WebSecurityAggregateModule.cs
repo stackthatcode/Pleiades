@@ -20,9 +20,6 @@ namespace Pleiades.Web.Security
             builder.RegisterType<FormsAuthenticationService>().As<IFormsAuthenticationService>().InstancePerLifetimeScope();
             builder.RegisterType<MembershipService>().As<IMembershipService>().InstancePerLifetimeScope();
 
-            // Aspect
-            builder.RegisterType<SystemAuthorizeAttribute>().InstancePerLifetimeScope();
-
             // Services
             builder.RegisterType<AggregateUserService>().As<IAggregateUserService>().InstancePerLifetimeScope();
             builder.RegisterType<HttpContextUserService>().As<IHttpContextUserService>().InstancePerLifetimeScope();
@@ -33,7 +30,10 @@ namespace Pleiades.Web.Security
             builder.RegisterType<AccountStatusAuthorizationStep>().InstancePerLifetimeScope();
             builder.RegisterType<RoleAuthorizationStep>().InstancePerLifetimeScope();
             builder.RegisterType<GetUserFromHttpContextStep>().InstancePerLifetimeScope();
-            builder.RegisterType<SystemAuthorizationComposite>().InstancePerLifetimeScope();            
+            builder.RegisterType<SystemAuthorizationComposite>().InstancePerLifetimeScope();
+
+            // Aspect
+            builder.RegisterType<SystemAuthorizeAttribute>().InstancePerLifetimeScope();
         }   
     }
 }

@@ -16,11 +16,11 @@ namespace Pleiades.Web.Security.Interface
 
         bool Authenticate(string username, string password, bool persistenceCookie, List<UserRole> expectedRoles);
 
+        void UpdateIdentity(int aggregateUserId, CreateOrModifyIdentityRequest identityUserRequest);
+
         void UpdateEmail(int aggregateUserId, string email);
 
         void UpdateApproval(int aggregateUserId, bool approval);
-
-        void UpdateIdentity(int aggregateUserId, CreateOrModifyIdentityRequest identityUserRequest);
 
         void ChangeUserPassword(int aggregateUserId, string oldPassword, string newPassword);
     }

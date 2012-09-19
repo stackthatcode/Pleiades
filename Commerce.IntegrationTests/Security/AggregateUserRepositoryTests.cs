@@ -15,8 +15,10 @@ using Commerce.Persist.Security;
 namespace Commerce.IntegrationTests.Security
 {
     [TestFixture]
-    public class AggregateUserServiceAndRepositoryTests
+    public class AggregateUserRepositoryTests
     {
+        // TODO LATER: Verify_RetreiveByMembershipUserNamesAndUserRoles()
+
         [TestFixtureSetUp]
         public void Setup()
         {
@@ -34,7 +36,7 @@ namespace Commerce.IntegrationTests.Security
             var membershipService = new MembershipService();
             var aggregateUserRepository = new AggregateUserRepository(dbContext2);
 
-            return new AggregateUserService(membershipService, aggregateUserRepository);
+            return new AggregateUserService(membershipService, aggregateUserRepository, null, null);
         }
 
         [Test]
@@ -185,8 +187,5 @@ namespace Commerce.IntegrationTests.Security
             Assert.IsTrue(bothUserTypes.Any(x => x.IdentityProfile.UserRole == UserRole.Trusted));
             Assert.IsTrue(bothUserTypes.Any(x => x.IdentityProfile.UserRole == UserRole.Admin));
         }
-
-
-        // TODO LATER: Verify_RetreiveByMembershipUserNamesAndUserRoles()
     }
 }

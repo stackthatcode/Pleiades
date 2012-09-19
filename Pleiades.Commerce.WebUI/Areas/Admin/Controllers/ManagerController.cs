@@ -21,14 +21,16 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
 
         public IAggregateUserRepository AggregateUserRepository { get; set; }
         public IAggregateUserService AggregateUserService { get; set; }
-
+        public IMembershipService MembershipService { get; set; }
 
         public ManagerController(
                 IAggregateUserRepository aggregateUserRepository, 
-                IAggregateUserService aggregateUserService)
+                IAggregateUserService aggregateUserService,
+                IMembershipService membershipService)
         {
             AggregateUserRepository = aggregateUserRepository;
             AggregateUserService = aggregateUserService;
+            MembershipService = membershipService;
         }
 
         [HttpGet]
@@ -104,23 +106,17 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(int id, UserViewModel userViewModel)
         {
-            // ModelState validation
+            // Validate
             if (!ModelState.IsValid)
             {
                 return View(userViewModel);
             }
 
-            // Build Context
-            var targetUser = this.AggregateUserRepository.RetrieveById(id);
-            var currentUser = this.AggregateUserService.GetCurrentUserFromHttpContext();
-
-            var context = new UpdateUserContext(currentUser, targetUser)
-            {
-                NewEmail = userViewModel.Email,
-                NewIsApproved = userViewModel.IsApproved,
-            };
-
             // Execute
+            this.AggregateUserService
+                .UpdateIdentity(id, 
+                    new CreateOrModifyIdentityRequest 
+                        { FirstName = userViewModel.FirstName, LastName = userViewModel.LastName });
 
             // Respond
             return RedirectToAction("Details", new { id = id });
@@ -136,18 +132,16 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Change(int id, ChangePasswordModel model)
         {
-            if (!this.ModelState.IsValid)
-            {
+            // Validate
+            if (!this.ModelState.IsValid) 
                 return View(model);
-            }
 
-            var user = this.AggregateUserRepository.RetrieveById(id);
-            this.MembershipService.ChangePassword(user.Membership.UserName, model.OldPassword, model.NewPassword);
+            // Execute
+            this.AggregateUserService.ChangeUserPassword(id, model.OldPassword, model.NewPassword);
 
+            // Respond
             return RedirectToAction("Details", new { id = id });
         }
-
-
 
         [HttpGet]
         public ActionResult Reset(int id)
@@ -179,7 +173,6 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         {
             var user = this.AggregateUserRepository.RetrieveById(id);
             this.AggregateUserRepository.Delete(user);
-
             return RedirectToAction("List");
         }
     }

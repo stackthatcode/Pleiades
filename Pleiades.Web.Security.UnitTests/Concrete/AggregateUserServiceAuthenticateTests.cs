@@ -58,8 +58,8 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
 
             var formsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
             formsAuthService.Expect(x => x.ClearAuthenticationCookie());
-            
-            var service = new AggregateUserService(membership, null, null, formsAuthService);
+
+            var service = new AggregateUserService(membership, aggregateRepository, null, formsAuthService);
             
             // Act
             var result = service.Authenticate("admin", "123", true, new List<UserRole> { UserRole.Admin });
@@ -91,8 +91,7 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
             var formsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
             formsAuthService.Expect(x => x.SetAuthCookieForUser("12345678", true));
 
-
-            var service = new AggregateUserService(membership, null, null, formsAuthService);
+            var service = new AggregateUserService(membership, aggregateRepository, null, formsAuthService);
 
             // Act
             var result = service.Authenticate("admin", "123", true, new List<UserRole> { UserRole.Admin });
@@ -103,6 +102,5 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
             formsAuthService.VerifyAllExpectations();
             Assert.True(result);
         }
-
     }
 }
