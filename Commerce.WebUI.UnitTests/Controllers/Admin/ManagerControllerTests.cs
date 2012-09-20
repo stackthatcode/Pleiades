@@ -155,23 +155,129 @@ namespace Commerce.WebUI.TestsControllers
             service.VerifyAllExpectations();
         }
 
+        [Test]
+        public void Verify_Change_GET()
+        {
+            var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
+            repository
+                .Expect(x => x.RetrieveById(888))
+                .Return(new AggregateUser { Membership = new MembershipUser { Email = "hull@hello.com" } });
+            var controller = new ManagerController(repository, null, null);
 
-        //[Test]
-        //public void Verify_Change_GET();
+            var result = controller.Change(888);
 
-        //[Test]
-        //public void Verify_Change_POST();
+            result.ShouldBeView();
+            repository.VerifyAllExpectations();
+        }
 
-        //[Test]
-        //public void Verify_Reset_GET();
+        [Test]
+        public void Verify_Change_POST_ValidState()
+        {
+            var service = MockRepository.GenerateMock<IAggregateUserService>();
+            service.Expect(x => x.ChangeUserPassword(888, "pass123", "pass456"));
+            var controller = new ManagerController(null, service, null);
 
-        //[Test]
-        //public void Verify_Unlock_GET();
+            var result = controller.Change(888, new ChangePasswordModel() { OldPassword = "pass123", NewPassword = "pass456" });
 
-        //[Test]
-        //public void Verify_Delete_GET();
+            result.ShouldBeRedirectionTo(new { Action = "Details" });
+            service.VerifyAllExpectations();
+        }
 
-        //[Test]
-        //public void Verify_DeleteConfirm_POST();
+        [Test]
+        public void Verify_Change_POST_InvalidState()
+        {
+            var controller = new ManagerController(null, null, null);
+            controller.ModelState.AddModelError("what", "don't type that in, son!");
+            
+            var result = controller.Change(888, new ChangePasswordModel());
+
+            result.ShouldBeView();
+        }
+
+        [Test]
+        public void Verify_Reset_GET()
+        {
+            var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
+            repository
+                .Expect(x => x.RetrieveById(888))
+                .Return(new AggregateUser { Membership = new MembershipUser { UserName = "123456" } });
+
+            var service = MockRepository.GenerateMock<IMembershipService>();
+            service
+                .Expect(x => x.ResetPassword("123456"))
+                .Return("seruifjk");
+
+            var controller = new ManagerController(repository, null, service);
+
+            var result = controller.Reset(888);
+
+            result.ShouldBeView();
+            repository.VerifyAllExpectations();
+            service.VerifyAllExpectations();
+        }
+
+        [Test]
+        public void Verify_Unlock_GET()
+        {
+            var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
+            repository
+                .Expect(x => x.RetrieveById(888))
+                .Return(new AggregateUser { Membership = new MembershipUser { UserName = "123456" } });
+
+            var service = MockRepository.GenerateMock<IMembershipService>();
+            service.Expect(x => x.UnlockUser("123456"));
+
+            var controller = new ManagerController(repository, null, service);
+
+            var result = controller.Unlock(888);
+
+            result.ShouldBeRedirectionTo(new { Action = "Details" });
+            repository.VerifyAllExpectations();
+            service.VerifyAllExpectations();
+        }
+
+        [Test]
+        public void Verify_Delete_GET()
+        {
+            var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
+            repository
+                .Expect(x => x.RetrieveById(888))
+                .Return(new AggregateUser 
+                { 
+                    Membership = new MembershipUser { UserName = "123456" },
+                    IdentityProfile = new IdentityProfile(),
+                });
+
+            var controller = new ManagerController(repository, null, null);
+
+            var result = controller.Delete(888);
+
+            result.ShouldBeView();
+            repository.VerifyAllExpectations();
+        }
+
+        [Test]
+        public void Verify_DeleteConfirm_POST()
+        {
+            var user = new AggregateUser
+            {
+                Membership = new MembershipUser { UserName = "123456" },
+                IdentityProfile = new IdentityProfile(),
+            };
+            var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
+            repository
+                .Expect(x => x.RetrieveById(888))
+                .Return(user);
+            repository.Expect(x => x.Delete(user));
+
+            var controller = new ManagerController(repository, null, null);
+
+            // Act
+            var result = controller.DeleteConfirm(888);
+
+            // Assert
+            result.ShouldBeRedirectionTo(new { Action = "List" });
+            repository.VerifyAllExpectations();
+        }
     }
 }

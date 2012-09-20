@@ -19,7 +19,14 @@
     <div style="height:30px; text-align:center; background-color:#666; color:#FFF; width:100%">
         <div style="width:1000px; text-align:left; margin:auto;">
             <span style="font-weight:bold;">PLEIADES COMMERCE - THIS IS THE TEST HEADER</span>
+            &nbsp;
+            &nbsp;
+            &nbsp;
             <%: Html.RouteLink("LOGOUT", OutboundNavigation.AdminLogout(), new Dictionary<string, object>() { { "class", "header" } })%>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <%: Html.RouteLink("BACK TO PUBLIC HOME", OutboundNavigation.PublicHome(), new Dictionary<string, object>() { { "class", "header" } })%>
         </div>
 	</div>
     

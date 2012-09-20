@@ -47,6 +47,7 @@ namespace Commerce.IntegrationTests.Security
 
             var identityuser1 = new CreateOrModifyIdentityRequest
                 {
+                    AccountStatus = AccountStatus.Active,
                     UserRole = UserRole.Trusted,
                     AccountLevel = AccountLevel.Standard,
                     FirstName = "John",
@@ -60,6 +61,7 @@ namespace Commerce.IntegrationTests.Security
 
             var identityuser2 = new CreateOrModifyIdentityRequest
                 {
+                    AccountStatus = AccountStatus.Active,
                     UserRole = UserRole.Trusted,
                     AccountLevel = AccountLevel.Gold,
                     FirstName = "Anne",

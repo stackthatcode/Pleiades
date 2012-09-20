@@ -30,5 +30,9 @@ namespace Commerce.WebUI.Plumbing.Navigation
             return new RouteValueDictionary(new { area = "Admin", controller = "Auth", action = "Logout", });
         }
 
+        public static RouteValueDictionary AdminManagerList()
+        {
+            return new RouteValueDictionary(new { area = "Admin", controller = "Manager", action = "List", });
+        }
     }
 }

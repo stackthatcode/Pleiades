@@ -164,7 +164,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         public ActionResult Delete(int id)
         {
             var user = this.AggregateUserRepository.RetrieveById(id);
-            var userModel = new UserViewModel(user);
+            var userModel = new UserViewModel(user);    
             return View(userModel);
         }
 

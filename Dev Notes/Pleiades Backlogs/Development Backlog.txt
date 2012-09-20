@@ -1,42 +1,45 @@
 FRONTRANGE - HOTZONE
 ====================
-- Fix the MVC Application with the Great Refactoring => IN PROGRESS
-- Refactor the ManagerController Tests => IN PROGRESS
-- Fix the Commerce.IntegrationTests => IN PROGRESS
-- Full End-to-End ManagerController run-thru =>  TODO
+*** Celebrate coming Out-of-the-Wild with The Great Refactoring #1! *** => TODO - HOW?
 
-*** Celebrate coming Out-of-the-Wild with The Great Refactoring #1! *** => TODO
+- Review the StandardControlFramework and devise spec => TODO
+- Where are my User Stories? => TODO
+- Start mocking the basic Admin Home Page, playing with navigation schemas => TOOD
 - Postback Control Framework additions => TODO
+- Incorporate Razor View Engine => TODO
+- Design the organization of Admin Stylesheets => TODO
+- Create a new CategoryController/Views/Domain Model, etc. => TODO
+
 
 Another Backlog
 ---------------
-* Create a new CategoryController/Views/Domain Model, etc.
-- FIX THIS WITH AN EXTENSION METHOD =><%: Html.RouteLink("LOGOUT", OutboundNavigation.AdminLogout(), new Dictionary<string, object>() { { "class", "header" } })%>
-- Refactor the Standard Control Framework => TODO
-* http://stackoverflow.com/questions/6308794/html-validationmessagefor-custom-validationmessage-always-shown => AMONG OTHER THINGS
+- FIX THIS WITH AN EXTENSION METHOD => <%: Html.RouteLink("LOGOUT", OutboundNavigation.AdminLogout(), new Dictionary<string, object>() { { "class", "header" } })%>
 * Fix the web.config with assembly references => IN PROGRESS
 - How to deal with LastUpdated field => IN PROGRESS
 - Upgrade to ASP.NET MVC 4.0 (4.5?) => TODO
 - Web Optimization Toolkit => TODO
-- FUTURE DIRECTIONS: NHIBERNATE + MYSQL => and eventually, RAVENDB(!!!)
 * Get Scott Hanselman's obj/bin cleaner utility => IN PROGRESS
 
 
 
-THOUGHTS ON UI CODING
----------------------
-1.) FormLineEditor's are for rapidly building interfaces.
-2.) We need: Input Control rendering, Model Binding stuff for Postback, and rendering Validation
-3.) DESIRE => Composable Control Builders
+THOUGHTS ON UI CODING - JUST GET THE NEEDS!!!
+---------------------------------------------
+1.) FormLineEditor's are for rapidly building interfaces.  We're willing to lose *maximum* steam in exchange for sanity
+
+2.) DESIRE => Composable Control Builders
 * Can add stuff to the Control that injects Style
 * Can add stuff to the Control that adds Validation Feedback
-4.) Why do we need to compose Labels with the Editor itself...?  What's the honest trade-off?
-* Add stuff to the Label itself for Validation Feedback
-5.) Try using Facebook without JavaScript
 
-STUFF TO CONFIGURE/BUILD
-------------------------
-=> Location of CSS Files Directory
+4.) Why do we need to compose Labels with the Editor itself...?  What's the honest trade-off? => HATED IT!
+* Add stuff to the Label itself for Validation Feedback
+
+
+=> Easily, tersely identify the 
+
+1.) Configurable location of CSS Files Directory
+
+<%: ControlFrameworkXYZBuilder.Editor(x => x.FirstName)  %>
+
 => Location of JavaScript Directory
 => Location of Control Dependent Images and CSS and JS Files
 => Method:
@@ -44,14 +47,8 @@ STUFF TO CONFIGURE/BUILD
 SomethingLibrary.SetDependenciesLocation()
 SomethingLibrary.InjectControlDependencies()
 
-Technical Debt #1 - how does the CSS file and JavaScript know how to render the file paths...?
+Technical Cha #1 - how does the CSS file and JavaScript know how to render the file paths...?
 
-- Create new CategoryRepository => TODO
-- Create new CategoryControllerTests => TODO
-
-Enhanced MVC
-* Research creating Simplified Outbound Link builders in MVC => TODO 
-- Create a Catalog of canned routes for easy navigation through Application => TODO
 
 
 

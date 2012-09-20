@@ -60,8 +60,16 @@ namespace CommerceInitializer
 
             if (users.ToList().Count() < 1)
             {
+                var membershipService = LifetimeScope.Resolve<IMembershipService>();
+                var membershipUserName = membershipService.GetUserNameByEmail("aleksjones@gmail.com");
+                if (membershipUserName != null)
+                {
+                    membershipService.DeleteUser(membershipUserName);
+                }
+
                 var identityuser1 = new CreateOrModifyIdentityRequest
                 {
+                    AccountStatus = AccountStatus.Active,
                     AccountLevel = AccountLevel.NotApplicable,
                     UserRole = UserRole.Supreme,
                     FirstName = "Master",
