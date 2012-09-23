@@ -1,102 +1,69 @@
+
 FRONTRANGE - HOTZONE
 ====================
 *** Celebrate coming Out-of-the-Wild with The Great Refactoring #1! *** => TODO - HOW?
 
-- Review the StandardControlFramework and devise spec => TODO
+- Important: Create a separate Model for Editing Users => TODO
+- RadioButtonBuilderExtension - it makes sense to save repeating this work over and over => TODO: REFACTOR
+- QuickForm TextEditorFor method => IN PROGRESS
+- LabelFor Extension - check the (*) functionality => TODO
+- Apply indexes and eliminate "label-right" => TODO
+- Finish building the QfEditor, Text, Label, Radio classes => TODO
+- Test out the Validation Summary controls => TODO
+
+Next Phase
+----------
+- Incorporate Razor View Engine => TODO
 - Where are my User Stories? => TODO
 - Start mocking the basic Admin Home Page, playing with navigation schemas => TOOD
-- Postback Control Framework additions => TODO
-- Incorporate Razor View Engine => TODO
-- Design the organization of Admin Stylesheets => TODO
 - Create a new CategoryController/Views/Domain Model, etc. => TODO
 
 
-Another Backlog
----------------
-- FIX THIS WITH AN EXTENSION METHOD => <%: Html.RouteLink("LOGOUT", OutboundNavigation.AdminLogout(), new Dictionary<string, object>() { { "class", "header" } })%>
-* Fix the web.config with assembly references => IN PROGRESS
-- How to deal with LastUpdated field => IN PROGRESS
+PUT THESE IN THE QF CSS FILE ***
+--------------------------------
+ValidationInputCssClassName = "input-validation-error";
+ValidationInputValidCssClassName = "input-validation-valid";
+ValidationMessageCssClassName = "field-validation-error";
+ValidationMessageValidCssClassName = "field-validation-valid";
+ValidationSummaryCssClassName = "validation-summary-errors";
+ValidationSummaryValidCssClassName = "validation-summary-valid";
+
+
+Development Backlog
+-------------------
 - Upgrade to ASP.NET MVC 4.0 (4.5?) => TODO
 - Web Optimization Toolkit => TODO
+* Fix the web.config with assembly references => IN PROGRESS
+- How to deal with LastUpdated field => IN PROGRESS
 * Get Scott Hanselman's obj/bin cleaner utility => IN PROGRESS
+- Fluent Dependency Builder => TODO
+- TO BUILD => unobtrusive JQuery initialization stuff
 
-
-
-THOUGHTS ON UI CODING - JUST GET THE NEEDS!!!
----------------------------------------------
-1.) FormLineEditor's are for rapidly building interfaces.  We're willing to lose *maximum* steam in exchange for sanity
-
-2.) DESIRE => Composable Control Builders
-* Can add stuff to the Control that injects Style
-* Can add stuff to the Control that adds Validation Feedback
-
-4.) Why do we need to compose Labels with the Editor itself...?  What's the honest trade-off? => HATED IT!
-* Add stuff to the Label itself for Validation Feedback
-
-
-=> Easily, tersely identify the 
-
-1.) Configurable location of CSS Files Directory
-
-<%: ControlFrameworkXYZBuilder.Editor(x => x.FirstName)  %>
-
-=> Location of JavaScript Directory
-=> Location of Control Dependent Images and CSS and JS Files
-=> Method:
-
-SomethingLibrary.SetDependenciesLocation()
-SomethingLibrary.InjectControlDependencies()
-
-Technical Cha #1 - how does the CSS file and JavaScript know how to render the file paths...?
-
-
-
-
-
-DESIGN & TECH BACKLOG - REVIEW
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Research Backlog
+----------------
+- What's the benefit of <: stuff again...? => TODO
+- RESEARCH => difference between PartialViews, USerControls, etc.
+- RESEARCH => difference between <%: and <%=
+- RESEARCH => Model Binding, how it all works - REVIEW
 - EntityFramework - how to perform basic CRUD stuff - Damn Brutha! => TODO
 - EntityFramework Transactions and ASP.NET MVC Concurrency => TODO
 - Start adding Logging stuff - you won't be sorry! => TODO
 - Easily the most important security article evar => - http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
 - Look up Troy Hunt's article's, too
-- Best Practices for Unit Testing CRUD, esp. when passing objects around?  How do we verify the payload?
-=> POSSIBLE ANSWER: create View Model to Domain Model Transformer Services and inject them like everything else?
 
 
-The Crazier, The Better!
-~~~~~~~~~~~~~~~~~~~~~~~~
-- Create a consulting firm that focuses on using Alt.Net-centric development techniques
-- Attack mobile computing head-on - go after iOS development with a vengance
-
-
-BACKLOG
-=======
+THE OTHER BACKLOG
+=================
 * Security n Stuff
-- Move User Approval functions from MembershipService into AggregateUserService
-
 * Research & Design
-- How to manage CSS files and dependencies from separate assemblies in ASP.NET MVC => TODO
-- http://fluentvalidation.codeplex.com/
-
+- How to manage CSS files and dependencies from separate assemblies in ASP.NET MVC => IN PROGRESS
+- http://fluentvalidation.codeplex.com/ => TODO
 * Should we create IdentityUser Integration Tests? => TODO
-
-* New ASP.NET MVC Infrastructure
-- Standard Control Refactoring for CSS
-- Enable Dependency Injection w/ Autofac => TODO NEXT
 - Error Handler Module
 - Logging Module
 - Email Service w/ Links (MSMQ?)
-
-* General Code Mods
-- Leave the Category stuff as Legacy
-- Move scripts into Content
-- Move the Public stuff into its own Area
-
 * Pleiades Framework
 - Create generalized Pleiades Pop-up JQuery Library (OK, YES/NO dialogs)
 - Copy jqia2.support.js functions
-
 * General Fixes
 - Disable Caching for AJAX stuff => TODO
-

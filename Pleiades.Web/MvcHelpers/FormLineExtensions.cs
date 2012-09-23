@@ -11,23 +11,10 @@ namespace Pleiades.Web.MvcHelpers
 {
     /// <summary>
     /// Convenience methods banging out Label + Editor combinations
-    /// 
-    /// TODO: enable custom Editor injection via the parameters (or otherwise?)
     /// TODO: enable the custom help text
     /// </summary>
     public static class FormLineExtensions
     {
-        /// <summary>
-        /// Creates combination of HtmlHelper-spawned Label and DropDownList wrapped in a div tag container
-        /// </summary>
-        /// <param name="htmlHelper"></param>
-        /// <param name="modelProperty">Specifies which Model Property to make an EditorFor</param>
-        /// <param name="templateName">Overrideable option for Editor template</param>
-        /// <param name="selectList">Sequence of SelectListItems</param>
-        /// <param name="labelText">Label Text</param>
-        /// <param name="customHelpText">TEMPORARILY DISABLED</param>
-        /// <param name="containerHtmlAttributes">Additional Html Attributes for </param>
-        /// <returns>MvcHtmlString command object</returns>
         public static MvcHtmlString FormLineDropDownListFor<TModel, TProperty>(
                 this HtmlHelper<TModel> htmlHelper, 
                 Expression<Func<TModel, TProperty>> modelProperty, 
@@ -47,17 +34,7 @@ namespace Pleiades.Web.MvcHelpers
 
             return FormLine(labelHtml, editorHtml);
         }
-
-        /// <summary>
-        /// Creates combination of HtmlHelper-spawned Label and Editor wrapped in a div tag container
-        /// </summary>
-        /// <param name="htmlHelper"></param>
-        /// <param name="modelProperty">Specifies which Model Property to make an EditorFor</param>
-        /// <param name="templateName">Overrideable option for Editor template</param>
-        /// <param name="labelText">Label Text</param>
-        /// <param name="customHelpText">TEMPORARILY DISABLED</param>
-        /// <param name="containerHtmlAttributes">Additional Html Attributes for </param>
-        /// <returns>MvcHtmlString command object</returns>
+       
         public static MvcHtmlString FormLineEditorFor<TModel, TProperty>(
                 this HtmlHelper<TModel> htmlHelper, 
                 Expression<Func<TModel, TProperty>> modelProperty, 
@@ -119,7 +96,6 @@ namespace Pleiades.Web.MvcHelpers
                 string customText = null)
         {
             // Can do all sorts of things here -- eg: reflect over attributes and add hints, etc...
-        } 
-         */
+        */
     }
 }

@@ -60,16 +60,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MvcHelpers\StyleTagGenerator.cs" />
-    <Compile Include="MvcHelpers\FormLineExtensions.cs" />
     <Compile Include="MvcHelpers\ScriptTagGenerator.cs" />
     <Compile Include="MvcHelpers\TagIfNotEmpty.cs" />
-    <Compile Include="MvcHelpers\NavigationLink.cs" />
-    <Compile Include="MvcHelpers\NavigationLinkFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvcHelpers\EnumToSelectList.cs" />
-    <Compile Include="WebModule.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pleiades.Framework\Pleiades.Base.csproj">

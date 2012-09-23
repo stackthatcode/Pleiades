@@ -103,6 +103,12 @@
     <Compile Include="Plumbing\Security\MySystemAuthContextBuilder.cs" />
     <Compile Include="Plumbing\Security\MySecurityCodeResponder.cs" />
     <Compile Include="Plumbing\Security\MembershipRepositoryShim.cs" />
+    <Compile Include="QuickForm\CSharp\QfButtonHelpers.cs" />
+    <Compile Include="QuickForm\CSharp\PagingLinksBuilder_OLD.cs" />
+    <Compile Include="QuickForm\CSharp\QfClearDiv.cs" />
+    <Compile Include="QuickForm\CSharp\QfRadioButton.cs" />
+    <Compile Include="QuickForm\CSharp\QfDependencyExtension.cs" />
+    <Compile Include="QuickForm\CSharp\QfHtmlHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -119,42 +125,42 @@
     <Content Include="Areas\Admin\Views\Shared\Admin.Master" />
     <Content Include="Areas\Admin\Views\Shared\AdminUserDetails.ascx" />
     <Content Include="Areas\Admin\Views\Web.config" />
-    <Content Include="Include\Images\addnewbutton.png" />
-    <Content Include="Include\Images\ajax-loader.gif" />
-    <Content Include="Include\Images\arrow-right.png" />
-    <Content Include="Include\Images\arrow-rightOVER.png" />
-    <Content Include="Include\Images\backarrow-left.png" />
-    <Content Include="Include\Images\cancelbutton.png" />
-    <Content Include="Include\Images\changebutton.png" />
-    <Content Include="Include\Images\deletebutton.png" />
-    <Content Include="Include\Images\donebutton.png" />
-    <Content Include="Include\Images\editbutton.png" />
-    <Content Include="Include\Images\nobutton.png" />
-    <Content Include="Include\Images\okbutton.png" />
-    <Content Include="Include\Images\resetbutton.png" />
-    <Content Include="Include\Images\savebutton.png" />
-    <Content Include="Include\Images\unlockbutton.png" />
-    <Content Include="Include\Images\yesbutton.png" />
-    <Content Include="Include\Stylesheets\AdminMenu.css" />
-    <Content Include="Include\Images\body-background.gif" />
-    <Content Include="Include\Stylesheets\Buttons.css" />
-    <Content Include="Include\Stylesheets\PleiadesAjax.css" />
-    <Content Include="Include\Scripts\Domain\AdminMenu.js" />
+    <Content Include="Content\Style\Main.css" />
+    <Content Include="QuickForm\Images\addnewbutton.png" />
+    <Content Include="QuickForm\Images\ajax-loader.gif" />
+    <Content Include="QuickForm\Images\arrow-right.png" />
+    <Content Include="QuickForm\Images\arrow-rightOVER.png" />
+    <Content Include="QuickForm\Images\backarrow-left.png" />
+    <Content Include="QuickForm\Images\cancelbutton.png" />
+    <Content Include="QuickForm\Images\changebutton.png" />
+    <Content Include="QuickForm\Images\deletebutton.png" />
+    <Content Include="QuickForm\Images\donebutton.png" />
+    <Content Include="QuickForm\Images\editbutton.png" />
+    <Content Include="QuickForm\Images\nobutton.png" />
+    <Content Include="QuickForm\Images\okbutton.png" />
+    <Content Include="QuickForm\Images\resetbutton.png" />
+    <Content Include="QuickForm\Images\savebutton.png" />
+    <Content Include="QuickForm\Images\unlockbutton.png" />
+    <Content Include="QuickForm\Images\yesbutton.png" />
+    <Content Include="QuickForm\Images\body-background.gif" />
+    <Content Include="QuickForm\Style\QfButtons.css" />
+    <Content Include="Content\Style\PleiadesAjax.css" />
+    <Content Include="Content\Scripts\Commerce\AdminMenu.js" />
     <Content Include="Global.asax" />
-    <Content Include="Include\Stylesheets\Pleiades.css" />
-    <Content Include="Include\Scripts\Domain\AjaxGrid.js" />
-    <Content Include="Include\Scripts\Domain\GenericUtil.js" />
-    <Content Include="Include\Scripts\Generic\jquery-1.5.1-vsdoc.js" />
-    <Content Include="Include\Scripts\Generic\jquery-1.5.1.js" />
-    <Content Include="Include\Scripts\Generic\jquery-1.5.1.min.js" />
-    <Content Include="Include\Scripts\Generic\jquery-ui-1.8.11.js" />
-    <Content Include="Include\Scripts\Generic\jquery-ui-1.8.11.min.js" />
-    <Content Include="Include\Scripts\Generic\jquery.tmpl.js" />
-    <Content Include="Include\Scripts\Generic\jquery.validate-vsdoc.js" />
-    <Content Include="Include\Scripts\Generic\jquery.validate.js" />
-    <Content Include="Include\Scripts\Generic\jquery.validate.min.js" />
-    <Content Include="Include\Scripts\Generic\modernizr-1.7.js" />
-    <Content Include="Include\Scripts\Generic\modernizr-1.7.min.js" />
+    <Content Include="QuickForm\Style\QfStyle.css" />
+    <Content Include="Content\Scripts\Commerce\AjaxGrid.js" />
+    <Content Include="Content\Scripts\Commerce\GenericUtil.js" />
+    <Content Include="Content\Scripts\JQuery\jquery-1.5.1-vsdoc.js" />
+    <Content Include="Content\Scripts\JQuery\jquery-1.5.1.js" />
+    <Content Include="Content\Scripts\JQuery\jquery-1.5.1.min.js" />
+    <Content Include="Content\Scripts\JQuery\jquery-ui-1.8.11.js" />
+    <Content Include="Content\Scripts\JQuery\jquery-ui-1.8.11.min.js" />
+    <Content Include="Content\Scripts\JQuery\jquery.tmpl.js" />
+    <Content Include="Content\Scripts\JQuery\jquery.validate-vsdoc.js" />
+    <Content Include="Content\Scripts\JQuery\jquery.validate.js" />
+    <Content Include="Content\Scripts\JQuery\jquery.validate.min.js" />
+    <Content Include="Content\Scripts\JQuery\modernizr-1.7.js" />
+    <Content Include="Content\Scripts\JQuery\modernizr-1.7.min.js" />
     <Content Include="Areas\Public\Views\Products\List.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -165,16 +171,16 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Include\Scripts\Generic\jquery.unobtrusive-ajax.js" />
-    <Content Include="Include\Scripts\Generic\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Include\Scripts\Generic\jquery.validate.unobtrusive.js" />
-    <Content Include="Include\Scripts\Generic\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Include\Scripts\Generic\MicrosoftAjax.js" />
-    <Content Include="Include\Scripts\Generic\MicrosoftAjax.debug.js" />
-    <Content Include="Include\Scripts\Generic\MicrosoftMvcAjax.js" />
-    <Content Include="Include\Scripts\Generic\MicrosoftMvcAjax.debug.js" />
-    <Content Include="Include\Scripts\Generic\MicrosoftMvcValidation.js" />
-    <Content Include="Include\Scripts\Generic\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Content\Scripts\JQuery\jquery.unobtrusive-ajax.js" />
+    <Content Include="Content\Scripts\JQuery\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Content\Scripts\JQuery\jquery.validate.unobtrusive.js" />
+    <Content Include="Content\Scripts\JQuery\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\Scripts\JQuery\MicrosoftAjax.js" />
+    <Content Include="Content\Scripts\JQuery\MicrosoftAjax.debug.js" />
+    <Content Include="Content\Scripts\JQuery\MicrosoftMvcAjax.js" />
+    <Content Include="Content\Scripts\JQuery\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Content\Scripts\JQuery\MicrosoftMvcValidation.js" />
+    <Content Include="Content\Scripts\JQuery\MicrosoftMvcValidation.debug.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -211,8 +217,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Public\Views\Shared\" />
+    <Folder Include="Content\Images\" />
     <Folder Include="Plumbing\Model\" />
-    <Folder Include="Plumbing\UI\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Public\Views\Web.config" />

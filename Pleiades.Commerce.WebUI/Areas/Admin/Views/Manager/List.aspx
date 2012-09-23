@@ -1,11 +1,12 @@
-﻿<%@ Page Title="" Language="C#" 
-    MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" 
-    Inherits="System.Web.Mvc.ViewPage<Commerce.WebUI.Areas.Admin.Models.ListUsersViewModel>" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="ViewPage<ListUsersViewModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%: Html.StandardActionButton(StandardButton.Back, "Index", routeValues: new { controller = "Home" })%>
+    <%: Html.QfRouteButton(QfButtonId.Back, "Back", OutboundNavigation.AdminHome()) %>
+    <%: Html.QfClearDiv() %>
+    <%: Html.QfActionButton(QfButtonId.Ok, "List") %>
+    <%: Html.QfClearDiv() %>
+    
     <h1>Manage Existing Admins</h1>
-
     <div style="padding-top:30px;">
         
         <!-- Make Partial View...? -->
@@ -29,14 +30,12 @@
            <tr>
                 <td><%: user.UserRole %></td>
                 <td><%: user.Email.TruncateAfter(20) %></td>
-                <td><%: user.Name.TruncateAfter(20) %></td>
+                <td><%: user.FullName.TruncateAfter(20) %></td>
                 <td><%: user.CreationDate %></td>
                 <td align="center"><%: user.IsApproved %></td>
                 <td align="center"><%: user.IsOnline %></td>
                 <td align="center"><%: user.IsLockedOut %></td>
-                <td align="right">
-                    <%: Html.RouteLink("View", new { area = "Admin", controller = "AdminManager", action = "Details", id = user.DomainUserId }) %>
-                </td>
+                <td align="right"><%: Html.RouteLink("View", OutboundNavigation.AdminManagerDetails(user.AggregateUserId)) %></td>
            </tr>
         <% } %>
         </tbody>

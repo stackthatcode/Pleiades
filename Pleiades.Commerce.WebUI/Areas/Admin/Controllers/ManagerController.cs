@@ -39,7 +39,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             var users = AggregateUserRepository.Retreive(new List<UserRole>() { UserRole.Admin, UserRole.Supreme });
             var listUsersViewModel =
                 new ListUsersViewModel { Users = users.Select(user => new UserViewModel(user)).ToList() };
-            return View(); 
+            return View(listUsersViewModel); 
         }
 
         [HttpGet]
@@ -113,10 +113,16 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             }
 
             // Execute
-            this.AggregateUserService
-                .UpdateIdentity(id, 
-                    new CreateOrModifyIdentityRequest 
-                        { FirstName = userViewModel.FirstName, LastName = userViewModel.LastName });
+            this.AggregateUserService.UpdateIdentity(id, 
+                    new CreateOrModifyIdentityRequest { FirstName = userViewModel.FirstName, LastName = userViewModel.LastName });
+
+            // TODO: add Unit Test for this branch
+            var user = this.AggregateUserRepository.RetrieveById(id);
+            if (user.IdentityProfile.UserRole != UserRole.Supreme)
+            {
+                this.AggregateUserService.UpdateEmail(id, userViewModel.Email);
+                this.AggregateUserService.UpdateApproval(id, userViewModel.IsApproved);
+            }
 
             // Respond
             return RedirectToAction("Details", new { id = id });

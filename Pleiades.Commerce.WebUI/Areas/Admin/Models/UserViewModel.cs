@@ -59,6 +59,7 @@ namespace Commerce.WebUI.Areas.Admin.Models
         public UserViewModel(AggregateUser user)
         {
             AggregateUserId = user.ID;
+            UserRole = user.IdentityProfile.UserRole;
             AccountLevel = user.IdentityProfile.AccountLevel;
             AccountStatus = user.IdentityProfile.AccountStatus;
             CreationDate = user.Membership.CreationDate;

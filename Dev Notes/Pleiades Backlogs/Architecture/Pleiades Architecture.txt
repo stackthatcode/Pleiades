@@ -14,6 +14,44 @@ UHOH!!!  ON-NOES!!!  Attack on the Pipelines and Filters
 - IOW, there's not insight based on the interface, because it's sooooo broadly polymorphic.
 
 
+
+
+
+- FormLineEditor's are for rapidly building interfaces.  We're willing to lose *maximum* steam in exchange for sanity.  Yes!
+* Allows for the standard JQuery (or otherwise) OnLoad event, which then 
+- TO BUILD => fluent heading builder...
+
+// Also, to make life easy...
+QuickForm.ClearDiv();
+
+// Register this during App_Start
+QuickForm.CSSFileDirectory = "~/Content/QuickForm/";
+QuickForm.JQueryDependency = "";
+
+Commerce.Plumbing.
+
+// In the heading...
+FluentHeadingBuilder()
+	.Register(x => 
+	.Register(x => QuickForm.DependencyBuilder)
+	.Register(x => JQuery.UnobstrusiveScriptBuilder)
+	.Flush();
+
+// THIS ^^^^ Flush() method needs to keep track of every CSS File and JQuery File it includes in a ToUpper-ed list
+
+*** REVIEW => FormLineExtensions + Pleiades.Web
+1.) It's convenient, but how reusable is it?   What it a label or control needs more or less width to render properly?
+2.) ALTERNATIVE TO FormLine => make the side-by-side thingy, which allows chaining of controls together...?
+3.) Having worked with a mad designer, anything is possible... stuff seems a little bit rigid, now
+
+- DESIRE => Composable Control Builders - mayhaps Fluent
+* Can add stuff to the Control that injects Style
+* Can add stuff to the Control that adds Validation Feedback
+- Why do we need to compose Labels with the Editor itself...?  What's the honest trade-off? => HATED IT!
+* Add stuff to the Label itself for Validation Feedback
+- Configurable location of CSS Files Directory, which themselves need to reference Image Files...?  Hmmm....
+
+
 Story of the Edit User Request
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Cross Cutting Security

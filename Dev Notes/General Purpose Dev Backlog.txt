@@ -23,6 +23,7 @@ TRY: git add --update
 
 BLOG POSTS!
 ~~~~~~~~~~~
+- Fluent Header Builder for MVC 
 - Define Resuable for me
 - Prevent Logic Leakage i.e. Membership User Approval and Aggregate User
 - HTTP Context Stub on steroids

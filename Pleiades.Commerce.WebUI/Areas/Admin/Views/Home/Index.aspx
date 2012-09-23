@@ -9,6 +9,4 @@
     <%: Html.RouteLink("Manage Admin Users", OutboundNavigation.AdminManagerList()) %>
 
     <br />
-
-
 </asp:Content>

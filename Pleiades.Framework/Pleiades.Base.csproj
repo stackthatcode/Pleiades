@@ -64,6 +64,7 @@
     <Compile Include="Utility\PropertyReflection.cs" />
     <Compile Include="Security\ISecurityContext.cs" />
     <Compile Include="Security\SecurityResponseCode.cs" />
+    <Compile Include="Utility\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

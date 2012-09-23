@@ -7,7 +7,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="description" content="UI Elements: Large Drop Down Menu" />
     <meta name="keywords" content="jquery, drop down, menu, navigation, large, mega" />
-    <style>
+    <%= Html.MakeQfHtmlHead() %>
+
+    <style type="text/css">
         a.header:link { color:#FFFFFF; }      /* unvisited link */
         a.header:visited { color:#FFFFFF; }  /* visited link */
         a.header:hover { color:#CCCCCC; }  /* mouse over link */
@@ -22,11 +24,11 @@
             &nbsp;
             &nbsp;
             &nbsp;
-            <%: Html.RouteLink("LOGOUT", OutboundNavigation.AdminLogout(), new Dictionary<string, object>() { { "class", "header" } })%>
+            <%: Html.RouteLink("LOGOUT", OutboundNavigation.AdminLogout(), new Dictionary<string, object>() { { "class", "header" } }) %>
             &nbsp;
             &nbsp;
             &nbsp;
-            <%: Html.RouteLink("BACK TO PUBLIC HOME", OutboundNavigation.PublicHome(), new Dictionary<string, object>() { { "class", "header" } })%>
+            <%: Html.RouteLink("BACK TO PUBLIC HOME", OutboundNavigation.PublicHome(), new Dictionary<string, object>() { { "class", "header" } }) %>
         </div>
 	</div>
     

@@ -17,8 +17,10 @@
     <div>
         <% using(Html.BeginForm("List", "Products", FormMethod.Post)) 
            { %>
-            <%: Html.FormLineEditorFor(x => x.Name) %>
-            <%: Html.FormLineEditorFor(x => x.AccountBalance) %>
+            <%: Html.QfTextEditorFor(x => x.Name) %>
+            <%: Html.QfTextEditorFor(x => x.AccountBalance)%>
+
+            <!-- Replace  these -->
             <%: Html.FormLineDropDownListFor(x => x.SelectedValue, this.Model.EzList, "Select ...") %>
             <input id="savebutton" value="Click Here To Save" type="submit" />
         <% } %>
