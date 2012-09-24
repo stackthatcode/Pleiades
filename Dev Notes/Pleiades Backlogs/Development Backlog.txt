@@ -3,13 +3,16 @@ FRONTRANGE - HOTZONE
 ====================
 *** Celebrate coming Out-of-the-Wild with The Great Refactoring #1! *** => TODO - HOW?
 
-- Important: Create a separate Model for Editing Users => TODO
-- RadioButtonBuilderExtension - it makes sense to save repeating this work over and over => TODO: REFACTOR
+- RadioButtonBuilderExtension - it makes sense to save repeating this work over and over => IN PROGRESS
 - QuickForm TextEditorFor method => IN PROGRESS
+- Finish building the QfEditor, Text, Label, Radio classes => IN PROGRESS
+- Test out the Validation Summary controls => IN PROGRESS
+- Write CSS Classes and finish Testing in the ProductList testbed => IN PROGRESS
+
+- Important: Create a separate Model for Editing Users => TODO
 - LabelFor Extension - check the (*) functionality => TODO
 - Apply indexes and eliminate "label-right" => TODO
-- Finish building the QfEditor, Text, Label, Radio classes => TODO
-- Test out the Validation Summary controls => TODO
+
 
 Next Phase
 ----------
@@ -23,10 +26,27 @@ PUT THESE IN THE QF CSS FILE ***
 --------------------------------
 ValidationInputCssClassName = "input-validation-error";
 ValidationInputValidCssClassName = "input-validation-valid";
+
 ValidationMessageCssClassName = "field-validation-error";
 ValidationMessageValidCssClassName = "field-validation-valid";
+
 ValidationSummaryCssClassName = "validation-summary-errors";
 ValidationSummaryValidCssClassName = "validation-summary-valid";
+
+
+Research Backlog
+----------------
+- RESEARCH => ToHtmlString() => TODO
+- What's the benefit of <: stuff again...? => TODO
+- RESEARCH => difference between PartialViews, USerControls, etc.
+- RESEARCH => difference between <%: and <%=
+- RESEARCH => Model Binding, how it all works - REVIEW
+- RESEARCH => Custom Validation
+- EntityFramework - how to perform basic CRUD stuff - Damn Brutha! => TODO
+- EntityFramework Transactions and ASP.NET MVC Concurrency => TODO
+- Start adding Logging stuff - you won't be sorry! => TODO
+- Easily the most important security article evar => - http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
+- Look up Troy Hunt's article's, too
 
 
 Development Backlog
@@ -38,18 +58,6 @@ Development Backlog
 * Get Scott Hanselman's obj/bin cleaner utility => IN PROGRESS
 - Fluent Dependency Builder => TODO
 - TO BUILD => unobtrusive JQuery initialization stuff
-
-Research Backlog
-----------------
-- What's the benefit of <: stuff again...? => TODO
-- RESEARCH => difference between PartialViews, USerControls, etc.
-- RESEARCH => difference between <%: and <%=
-- RESEARCH => Model Binding, how it all works - REVIEW
-- EntityFramework - how to perform basic CRUD stuff - Damn Brutha! => TODO
-- EntityFramework Transactions and ASP.NET MVC Concurrency => TODO
-- Start adding Logging stuff - you won't be sorry! => TODO
-- Easily the most important security article evar => - http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
-- Look up Troy Hunt's article's, too
 
 
 THE OTHER BACKLOG

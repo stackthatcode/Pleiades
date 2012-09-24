@@ -11,49 +11,58 @@ namespace Commerce.WebUI.QuickForm.CSharp
 {
     public static class QfTextEditorExtensions
     {
-        public const string DivCssClass = "qfradiodiv";
+        // TODO: provide hooks to enable folks to choose how to render validation            
+
+        public const string QfDivContainerClass = "qf-editor";
+        public const string QfRadioLabelClass = "qf-label";
         public const string ErrorMessage = "ErrorMessage";
-        public const string ContainerCssClass = "qf-editor";
 
 
         public static MvcHtmlString QfTextEditorFor<TModel, TProperty>(
             this HtmlHelper<TModel> html, Expression<Func<TModel, TProperty>> property, int maxlength = 50, string style = "")
         {
-            var textboxHtml = html.TextBoxFor(
-                    property, new { style = style, maxlength = maxlength }).ToHtmlString();
-
-            return HelperFunction(html, property, textboxHtml);
+            var textboxHtml = html.TextBoxFor(property, new { style = style, maxlength = maxlength }).ToHtmlString();
+            return WrapInAContainerDiv(html, property, textboxHtml);
         }
 
         public static MvcHtmlString QfPasswordFor<TModel, TProperty>(
             this HtmlHelper<TModel> html, Expression<Func<TModel, TProperty>> expression, int maxlength = 25, string style = "")
         {
-            var editorHtml = html.PasswordFor(
-                    expression, new { style = style, maxlength = maxlength }).ToHtmlString();
-
-            return HelperFunction(html, expression, editorHtml);
+            var editorHtml = html.PasswordFor(expression, new { style = style, maxlength = maxlength }).ToHtmlString();
+            return WrapInAContainerDiv(html, expression, editorHtml);
         }
 
         public static MvcHtmlString QfDropDownListFor<TModel, TProperty>(
                 this HtmlHelper<TModel> htmlHelper,
-                Expression<Func<TModel, TProperty>> property,
+                Expression<Func<TModel, TProperty>> expression,
                 IEnumerable<SelectListItem> selectList,
                 object htmlAttributes = null)
         {
-
-            // Create the Container Div - which holds Label + Editor
+            var editorHtml = htmlHelper.DropDownListFor(expression, selectList, htmlAttributes).ToHtmlString();
+            return WrapInAContainerDiv(htmlHelper, expression, editorHtml);
+        }
+        
+        public static MvcHtmlString WrapInAContainerDiv<TModel, TProperty>(
+            this HtmlHelper<TModel> html, Expression<Func<TModel, TProperty>> expression, string editorHtml)
+        {
             var container = new TagBuilder("div");
-            if (htmlAttributes != null)
-            {
-                container.MergeAttributes(new RouteValueDictionary(htmlAttributes));
-            }
+            container.AddCssClass(QfDivContainerClass);
+            container.InnerHtml += editorHtml;
+            container.InnerHtml += html.ValidationMessageFor(expression);
 
-            // Create the Editor HTML
-            var editorHtml =
-                htmlHelper.DropDownListFor(property, selectList, htmlAttributes).ToString() +
-                htmlHelper.ValidationMessageFor(property);
+            return MvcHtmlString.Create(container.ToString());
+        }
 
-            return HelperFunction(htmlHelper, property, editorHtml);
+        public static MvcHtmlString QfLabelFor<TModel, TProperty>(
+                this HtmlHelper<TModel> htmlHelper,
+                Expression<Func<TModel, TProperty>> expression,
+                string overrideText = null)
+        {
+            var labelHtml = (overrideText == null) ?
+                htmlHelper.LabelFor<TModel, TProperty>(expression).ToHtmlString() :
+                htmlHelper.LabelFor<TModel, TProperty>(expression, overrideText).ToHtmlString();
+
+            return htmlHelper.WrapInAContainerDiv(expression, labelHtml);
         }
 
         public static MvcHtmlString QfRadioButtonFor<TModel, TProperty>(this HtmlHelper<TModel> helper,
@@ -64,37 +73,18 @@ namespace Commerce.WebUI.QuickForm.CSharp
             var radio_id = memberName + "_" + value;
 
             var parentDiv = new TagBuilder("div");
-            parentDiv.AddCssClass(DivCssClass);
+            parentDiv.AddCssClass(QfDivContainerClass);
             parentDiv.MergeAttribute("style", style);
 
             var labelTag = new TagBuilder("label");
             labelTag.MergeAttribute("for", radio_id);
-            labelTag.AddCssClass(LabelCssClass);
+            labelTag.AddCssClass(QfRadioLabelClass);
 
             labelTag.InnerHtml = label;
             parentDiv.InnerHtml += labelTag.ToString();
             parentDiv.InnerHtml += helper.RadioButtonFor(expression, value, new { id = radio_id });
 
             return MvcHtmlString.Create(parentDiv.ToString());
-        }
-
-        // TODO: add QfLabelFor
-
-
-
-        private static MvcHtmlString HelperFunction<TModel, TProperty>(
-            this HtmlHelper<TModel> html, Expression<Func<TModel, TProperty>> expression, string editorHtml)
-        {
-            // Containing Div
-            var container = new TagBuilder("div");
-            container.AddCssClass(QfDependencyExtension.ContainerCssClass);
-            container.InnerHtml += editorHtml;
-            container.InnerHtml += html.ValidationMessageFor(expression);
-
-            // Following-clearing Div -- UPDATE: provide hooks to enable folks to choose how to render validation            
-            // Validation Message
-
-            return MvcHtmlString.Create(container.ToString());
         }
     }
 }

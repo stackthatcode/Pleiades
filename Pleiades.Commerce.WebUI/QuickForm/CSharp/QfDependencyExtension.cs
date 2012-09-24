@@ -23,7 +23,7 @@ namespace Commerce.WebUI.QuickForm.CSharp
         }
         
         // TODO: outfit this with Fluent stuff
-        public static string MakeQfHtmlHead(this HtmlHelper html)
+        public static string QfRenderHtmlHead(this HtmlHelper html)
         {
             return
                 html.Stylesheet(CssVirtualPath + "QfStyle.css").ToString() + Environment.NewLine +

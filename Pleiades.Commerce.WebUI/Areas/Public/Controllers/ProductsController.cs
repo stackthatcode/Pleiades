@@ -14,7 +14,9 @@ namespace Commerce.WebUI.Areas.Public.Controllers
 
         public ActionResult List()
         {
-            var model = new ProductListModel { Name = "arthur", AccountBalance = 999, SelectedValue = 1 };
+            var model = new ProductListModel 
+                { Name = "arthur", AccountBalance = 999, SelectedValueForRadio = "1", SelectedValueForDropDownList = "2" };
+
             return View(model);
         }
 

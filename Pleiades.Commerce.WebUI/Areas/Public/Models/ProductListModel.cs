@@ -9,7 +9,7 @@ namespace Commerce.WebUI.Areas.Public.Models
 {
     public class ProductListModel
     {
-        public IEnumerable<SelectListItem> EzList
+        public IEnumerable<SelectListItem> SelectListGenerator
         {
             get
             {
@@ -25,6 +25,11 @@ namespace Commerce.WebUI.Areas.Public.Models
         [Required]
         public int AccountBalance { get; set; }
 
-        public int SelectedValue { get; set; }
+        [Required]
+        public string Password { get; set; }
+
+        public string SelectedValueForRadio { get; set; }
+
+        public string SelectedValueForDropDownList { get; set; }
     }
 }
