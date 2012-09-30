@@ -1,20 +1,20 @@
-﻿body {
-}
-
-/* General styles stuff i.e. body, header, etc.
+﻿/* General styles stuff i.e. body, header, etc.
 -----------------------------------------------------------*/
 body {
     font-size: .85em;
     font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
     color: #232323;
     background-color: #fff;
+    padding: 30px;
 }
 
-
+/*
 * {
     padding:0;
     margin:0;
 }
+*/
+
 
 div.clr {
    clear:both; 
@@ -53,8 +53,9 @@ h1.error
 -----------------------------------------------------------*/
 div.dottedline
 {
-    border-top:1px dotted #999; 
-    height:20px; width:984px;
+    border-top: 1px dotted #999; 
+    height: 20px; 
+    width: 984px;
 }
 
 
@@ -63,14 +64,14 @@ div.dottedline
 -----------------------------------------------------------*/
 fieldset 
 {
-    border:1px solid #ddd;
-    padding:0 1.4em 1.4em 1.4em;
-    margin:0 0 1.5em 0;
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
 }
 
 legend 
 {
-    font-size:1.2em;
+    font-size: 1.2em;
     font-weight: bold;
 }
 
@@ -79,36 +80,62 @@ textarea
     min-height: 75px;
 }
 
-/** 
-Standard DotNet stuff... not bad, but not used ***/
-
 
 /** Pleiades Editors - DARK
 -----------------------------------------------------------*/
 .login-editor 
 {
-    font-size:30px;
+    font-size: 30px;
     background-color: #FFF !important;
 }
 
-
-
-.editor-label 
+table.mytable td:nth-child(1)
 {
-    margin: 1em 0 0 0;
+    width: 400px;
+    text-align: left;
 }
 
-.editor-field 
+table.mytable td:nth-child(2)
 {
-    margin:0.5em 0 0 0;
+    width: 300px;
+    text-align: left;
 }
 
 
 
 
+/** Styles for validation helpers - these names are built-in to the ASP.NET MVC Framework 
+-----------------------------------------------------------
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+**/
 
 /** Grid Styling - used by the Admin Grid
--------------------------------------------- **/
+--------------------------------------------
 table.datagrid thead td
 {
     font-weight: bold;
@@ -158,37 +185,4 @@ table.recordgrid td.label-right
 {
     text-align: right;
     padding-right:30px;
-}
-
-
-
-/* Styles for validation helpers - these names are built-in to the ASP.NET MVC Framework
------------------------------------------------------------*/
-.field-validation-error
-{
-    color: #ff0000;
-}
-
-.field-validation-valid
-{
-    display: none;
-}
-
-
-.input-validation-error
-{
-    border: 1px solid #ff0000;
-    background-color: #ffeeee;
-}
-
-.validation-summary-errors
-{
-    font-weight: bold;
-    color: #ff0000;
-}
-
-.validation-summary-valid
-{
-    display: none;
-}
-
+} **/

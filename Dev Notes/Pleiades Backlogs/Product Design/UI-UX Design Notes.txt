@@ -1,0 +1,40 @@
+UX/UI Design Notes
+~~~~~~~~~~~~~~~~~~
+
+TOOLING STRATEGY
+----------------
+- Q4 2012 thru Q1 2013 => Continue to use GIMP and Inkscape to get Storefront rolling
+- Q2 2013 => Purchase Adobe Photoshop and invest time in learning to use the tool
+
+
+Notes on Aesthetics
+-------------------
+- The Admin UI colors => charcol, blue, black and white
+
+ACTION ITEMS
+------------
+- Start building mock-up of the only Store Front =>  TODO
+- Use this with Bootstrap - http://fortawesome.github.com/Font-Awesome/ => TODO
+
+TOOLS DEBATE
+------------
+- See the WickedFire thread on infographics vendors
+- http://piktochart.com/ => INFOGRAPHICS
+- Inkscape 
+- GIMP
+- Corel Draw
+
+LIST OF NICE REFERENCE PONTS
+----------------------------
+- http://coalitiontechnologies.com/
+
+- http://www.blind.com/work/project/blind-showreel-2012/ => visual PRO's - the text highlights to RED
+- http://www.ciceroinc.com/mobility/ => one way of doing the charcol-blue-black-white
+- https://speakerdeck.com/u/dodeja/p/picplum-tech-stack => very awesome, looks good and technically sound
+- groupon.com => always a good reference point for clean and beautiful
+- eusje.wordpress.com/2011/03/17/web-design-trend-metro-ui/ => get all Metro n stuff
+- http://automattic.com/ => nice font, nice color, nice constrast.  And nice business :-)
+- http://www.dustincurtis.com/index.html => neat idea for experimentation with many types of design
+- http://jetstrap.com/ => what's possible with Bootstrap
+- https://www.mint.com/how-it-works/graphs/ => looks good, but I'm not crazy about the serif small font
+- http://tech4globe.com/windows-8-%E2%80%93-a-whole-new-operating-system-for-windows-fans.html => OK

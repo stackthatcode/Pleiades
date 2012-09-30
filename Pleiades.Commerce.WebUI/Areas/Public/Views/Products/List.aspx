@@ -4,7 +4,8 @@
 <html>
 <head runat="server">
     <title>Pleiades Commerce - Administrative</title>
-    <%= Html.QfRenderHtmlHead()%>
+    <%= Html.Stylesheet("~/Content/Style/Main.css") %>
+    <%= Html.QfRenderHtmlHead() %>
 </head>
 <body>
     <h1>Welcome Back to Pleiades!- Under Construction</h1>
@@ -18,7 +19,7 @@
     <div>
         <% using(Html.BeginForm("List", "Products", FormMethod.Post)) 
            { %>
-           <table>
+           <table class="mytable">
            <tr>
             <td><%: Html.QfLabelFor(x => x.Name) %></td>
             <td><%: Html.QfTextEditorFor(x => x.Name) %></td>
@@ -47,7 +48,7 @@
            </tr>
 
            <tr>
-            <td colspan="2"><%: Html.ValidationSummary() %></td>
+            <td colspan="2"><%: Html.QfValidationSummary() %></td>
            </tr>
            </table>
 

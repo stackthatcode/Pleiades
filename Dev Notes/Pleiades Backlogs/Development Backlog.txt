@@ -1,37 +1,53 @@
-
 FRONTRANGE - HOTZONE
 ====================
-*** Celebrate coming Out-of-the-Wild with The Great Refactoring #1! *** => TODO - HOW?
 
-- RadioButtonBuilderExtension - it makes sense to save repeating this work over and over => IN PROGRESS
-- QuickForm TextEditorFor method => IN PROGRESS
-- Finish building the QfEditor, Text, Label, Radio classes => IN PROGRESS
-- Test out the Validation Summary controls => IN PROGRESS
-- Write CSS Classes and finish Testing in the ProductList testbed => IN PROGRESS
+BURN DOWN
+---------
+*** Celebrate coming Out-of-the-Wild with The Great Refactoring #1! *** => TODO - HOW?  PLAY POOL?
 
+=> Adobe Photoshop Product Research - DONE
+=> Competitive Solutions Summary - DONE
+
+
+Front Range
+-----------
 - Important: Create a separate Model for Editing Users => TODO
-- LabelFor Extension - check the (*) functionality => TODO
-- Apply indexes and eliminate "label-right" => TODO
+- Fix the other Admin Editing Screens, including the Add User button => TODO
+- Add new commands to the Commerce Initializer i.e. Delete all Users => tODO
+- Learn Bootstrap - do a tutorial => TODO
+- User Stories & Domain Model => TODO
 
-
-Next Phase
-----------
 - Incorporate Razor View Engine => TODO
-- Where are my User Stories? => TODO
-- Start mocking the basic Admin Home Page, playing with navigation schemas => TOOD
+- Learn Knockout.js => TODO
 - Create a new CategoryController/Views/Domain Model, etc. => TODO
 
 
-PUT THESE IN THE QF CSS FILE ***
---------------------------------
-ValidationInputCssClassName = "input-validation-error";
-ValidationInputValidCssClassName = "input-validation-valid";
+BIG FISH
+--------
+=> Write User Stories - after reading through Shopify's API docs
+=> Domain Modeling for Commerce
+=> Admin Bootstrap Design
+=> Category Editor using JKB development: MILESTONE
+=> Entity Framework Code First
+=> Store Front Design
+=> Payment Processing Options, API's etc. => IN PROGRESS
+=> Custom Caching solution...?
+=> Find a good resource for Typography, Fonts, etc. => TODO
+=> Keep learning Git, dude
 
-ValidationMessageCssClassName = "field-validation-error";
-ValidationMessageValidCssClassName = "field-validation-valid";
 
-ValidationSummaryCssClassName = "validation-summary-errors";
-ValidationSummaryValidCssClassName = "validation-summary-valid";
+E-Commerce API's & Payment Processors
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Shopify
+- Cheddar Getter
+- Braintree
+- Google Wallet / Google Check-out
+- WePay
+- Stripe
+- PayPal
+- Wickedfire look-up payment processors...? => TODO
+- Authorize.NET
+
 
 
 Research Backlog

@@ -4,8 +4,6 @@ Front Range
 - Start Describing Top-Level Navigation Flows => IN PROGRESS
 - Start building Product, Category and Image objects => IN PROGRESS
 - Re-design the Category and Product Type Editor => IN PROGRESS
-- Build some POC's with Knockout.js => TODO
-
 
 
 UI/UX/PRODUCT BACKLOG
@@ -18,7 +16,6 @@ UI/UX/PRODUCT BACKLOG
 - http://37signals.com/37searchreport.pdf => READ
 - Project Planning the next Phase for v1.0 - Identify major tasks => IN PROGRESS
 - Review "desine" links => PROGRESS
-
 
 PRODUCT MANAGEMENT
 ==================
@@ -76,17 +73,8 @@ Object to which TAXONOMY can be applied
 - Product Type
 - Brand
 
-
-
 QUESTIONS
 ~~~~~~~~~
 - Can Taxonomies exclude certain Products which have an undetermined selection? => SURE, WHY NOT?
 - How are Product ordered when browsing? => TODO
 - Do we need sophisticated sub-Product Type browsing? => TODO 
-
-FINAL SPECIFICATION
-*******************
-- Use MMA/fighting-gear for the beta product
-- Bounded Context => representation of Product decoupled from Searchability
-
-

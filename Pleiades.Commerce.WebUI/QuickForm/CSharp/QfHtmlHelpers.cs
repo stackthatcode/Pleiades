@@ -13,8 +13,8 @@ namespace Commerce.WebUI.QuickForm.CSharp
     {
         // TODO: provide hooks to enable folks to choose how to render validation            
 
-        public const string QfDivContainerClass = "qf-editor";
-        public const string QfRadioLabelClass = "qf-label";
+        public const string QfDivContainerClass = "qf-container";
+        public const string QfRadioLabelClass = "qf-radiolabel";
         public const string ErrorMessage = "ErrorMessage";
 
 
@@ -62,7 +62,12 @@ namespace Commerce.WebUI.QuickForm.CSharp
                 htmlHelper.LabelFor<TModel, TProperty>(expression).ToHtmlString() :
                 htmlHelper.LabelFor<TModel, TProperty>(expression, overrideText).ToHtmlString();
 
-            return htmlHelper.WrapInAContainerDiv(expression, labelHtml);
+            var container = new TagBuilder("div");
+            container.AddCssClass(QfDivContainerClass);
+            container.InnerHtml += htmlHelper.ValidationMessageFor(expression, "* ", new { style = "font:bold;" });
+            container.InnerHtml += labelHtml;
+
+            return MvcHtmlString.Create(container.ToString());
         }
 
         public static MvcHtmlString QfRadioButtonFor<TModel, TProperty>(this HtmlHelper<TModel> helper,
@@ -84,6 +89,15 @@ namespace Commerce.WebUI.QuickForm.CSharp
             parentDiv.InnerHtml += labelTag.ToString();
             parentDiv.InnerHtml += helper.RadioButtonFor(expression, value, new { id = radio_id });
 
+            return MvcHtmlString.Create(parentDiv.ToString());
+        }
+
+        public static MvcHtmlString QfValidationSummary<TModel>(this HtmlHelper<TModel> helper, string style = "")
+        {
+            var parentDiv = new TagBuilder("div");
+            parentDiv.AddCssClass(QfDivContainerClass);
+            parentDiv.MergeAttribute("style", style);
+            parentDiv.InnerHtml = helper.ValidationSummary().ToString();
             return MvcHtmlString.Create(parentDiv.ToString());
         }
     }

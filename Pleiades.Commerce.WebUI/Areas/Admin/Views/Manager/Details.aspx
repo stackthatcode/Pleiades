@@ -7,7 +7,7 @@
     <div style="padding-top:30px;">
         <div class="dottedline"></div>
         <%: Html.Partial("AdminUserDetails", this.Model) %>
-
+        
         <div style="font-size:1px;"></div>
         
         <table class="recordgrid" cellpadding="0" cellspacing="0">

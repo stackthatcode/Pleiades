@@ -1,26 +1,26 @@
-div.qf-editor input[type=text]
+div.qf-container input[type=text]
 {
     font-size: 18px;
     color: #222;
     width: 390px;
 }
 
-div.qf-editor input[type=text].input-validation-error
+div.qf-container input[type=text].input-validation-error
 {
     background-color: #FFCCCC;
 }
 
-
-div.qf-editor span.field-validation-error
+div.qf-container input[type=password].input-validation-error
 {
-    color: #FF0000;
+    background-color: #FFCCCC;
 }
 
-div.qf-editor .qf-radiodiv
+div.qf-container label
 {
+    color: #444;
 }
 
-div.qf-editor .qf-radiolabel
+div.qf-container label.qf-radiolabel
 {
     padding-right: 10px;
     padding-left: 10px;
@@ -32,3 +32,23 @@ div.qf-clr
     clear: both;
 }
 
+
+div.qf-container span.field-validation-error
+{
+    color: #FF6666;
+}
+
+div.qf-container span.field-validation-valid
+{
+    display: none;
+}
+
+div.qf-container div.validation-summary-errors
+{
+    color: #FF6666;
+}
+
+div.qf-container div.validation-summary-valid
+{
+    display: none;
+}
