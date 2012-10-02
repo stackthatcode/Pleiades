@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="ViewPage<UserViewModel>" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="ViewPage<EditUserModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <%: Html.QfRouteButton(QfButtonId.Back, "Back", OutboundNavigation.AdminManagerList()) %> 
@@ -47,11 +47,9 @@
             <tr>
                 <td></td>
                 <td align="left">
-                    <%: Html.QfRouteButton(
-                        QfButtonId.Cancel, 
-                        "Details", 
-                        OutboundNavigation.AdminManagerDetails(this.RouteData.Values["id"]),
-                        style: "float:left;")%>
+                    <%: Html.QfRouteButton(QfButtonId.Cancel, 
+                        "Details", OutboundNavigation.AdminManagerDetails(this.RouteData.Values["id"]), style: "float:left;")%>
+
                     <%: Html.QfSubmitButton(QfButtonId.Save, "save", style: "float:left;") %>
                 </td>
             </tr>

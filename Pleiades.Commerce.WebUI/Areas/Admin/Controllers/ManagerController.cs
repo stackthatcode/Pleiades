@@ -37,8 +37,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         public ActionResult List(int page = 1)
         {
             var users = AggregateUserRepository.Retreive(new List<UserRole>() { UserRole.Admin, UserRole.Supreme });
-            var listUsersViewModel =
-                new ListUsersViewModel { Users = users.Select(user => new UserViewModel(user)).ToList() };
+            var listUsersViewModel = users.Select(user => new UserViewModel(user)).ToList();
             return View(listUsersViewModel); 
         }
 
@@ -46,6 +45,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         public ActionResult Details(int id)
         {
             // TODO: what if the User is null...? => GOTO THE ERROR PAGE
+
             var user = AggregateUserRepository.RetrieveById(id);
             var userModel = new UserViewModel(user);
             return View(userModel);
@@ -99,12 +99,12 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         public ActionResult Edit(int id)
         {
             var user = this.AggregateUserRepository.RetrieveById(id);
-            var userModel = new UserViewModel(user);
+            var userModel = new EditUserModel(user);
             return View(userModel);
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, UserViewModel userViewModel)
+        public ActionResult Edit(int id, EditUserModel userViewModel)
         {
             // Validate
             if (!ModelState.IsValid)
@@ -177,8 +177,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult DeleteConfirm(int id)
         {
-            var user = this.AggregateUserRepository.RetrieveById(id);
-            this.AggregateUserRepository.Delete(user);
+            this.AggregateUserRepository.Delete(id);
             return RedirectToAction("List");
         }
     }

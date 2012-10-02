@@ -13,5 +13,6 @@ namespace Pleiades.Web.Security.Interface
         IEnumerable<AggregateUser> Retreive(List<string> membershipUserNames, List<UserRole> role);
         int GetUserCountByRole(UserRole role);
         void UpdateIdentity(int aggregateUserID, CreateOrModifyIdentityRequest changes);
-    }
+        void Delete(int aggregateUserID);
+        }
 }

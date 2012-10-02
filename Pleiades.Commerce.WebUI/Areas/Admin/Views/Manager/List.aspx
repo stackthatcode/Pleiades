@@ -1,9 +1,9 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="ViewPage<ListUsersViewModel>" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="ViewPage<List<UserViewModel>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <%: Html.QfRouteButton(QfButtonId.Back, "Back", OutboundNavigation.AdminHome()) %>
     <%: Html.QfClearDiv() %>
-    <%: Html.QfActionButton(QfButtonId.Ok, "List") %>
+    <%: Html.ActionLink("Add New User", "Create") %>
     <%: Html.QfClearDiv() %>
     
     <h1>Manage Existing Admins</h1>
@@ -25,7 +25,7 @@
         </thead>
         
         <tbody>
-        <% foreach (var user in this.Model.Users)
+        <% foreach (var user in this.Model)
            { %>
            <tr>
                 <td><%: user.UserRole %></td>

@@ -133,7 +133,7 @@ namespace Commerce.WebUI.TestsControllers
             controller.ModelState.AddModelError("", "It's all messed up!");
 
             // Act
-            var result = controller.Edit(123, new UserViewModel());
+            var result = controller.Edit(123, new EditUserModel());
 
             // Assert
             result.ShouldBeDefaultView();
@@ -148,7 +148,7 @@ namespace Commerce.WebUI.TestsControllers
             var controller = new ManagerController(null, service, null);
             
             // Act
-            var result = controller.Edit(123, new UserViewModel());
+            var result = controller.Edit(123, new EditUserModel());
 
             // Assert
             result.ShouldBeRedirectionTo(new { action = "Details" });

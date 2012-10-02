@@ -63,7 +63,7 @@ namespace Commerce.Persist.Security
                 .FirstOrDefault(x => x.ID == aggregateUserId);
         }
 
-        protected AggregateUser RetrieveByIdForWriting(int aggregateUserId)
+        public AggregateUser RetrieveByIdForWriting(int aggregateUserId)
         {
             return this.TrackableData()
                 .Include(x => x.IdentityProfile)
@@ -99,6 +99,13 @@ namespace Commerce.Persist.Security
                 identity.LastName = changes.LastName;
 
             membership.LastModified = DateTime.Now;
+            this.Context.SaveChanges();
+        }
+
+        public void Delete(int aggregateUserID)
+        {
+            var user = this.RetrieveByIdForWriting(aggregateUserID);
+            this.Delete(user);
             this.Context.SaveChanges();
         }
     }

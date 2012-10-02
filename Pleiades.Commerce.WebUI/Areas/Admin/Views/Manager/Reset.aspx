@@ -16,8 +16,7 @@
             <td></td>
             <td align="left">
                 <div style="width:600px;">
-                <%: Html.StandardActionButton(StandardButton.Done, 
-                        "Details", style: "float:left;", routeValues: new { id = this.RouteData.Values["id"] })%>
+                <%: Html.QfActionButton(QfButtonId.Done, "Details", style: "float:left;", route: new { id = this.RouteData.Values["id"] })%>
                 </div>
             </td>
         </tr>

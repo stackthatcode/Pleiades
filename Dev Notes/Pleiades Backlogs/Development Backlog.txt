@@ -9,23 +9,47 @@ BURN DOWN
 => Competitive Solutions Summary - DONE
 
 
-Front Range
------------
-- Important: Create a separate Model for Editing Users => TODO
-- Fix the other Admin Editing Screens, including the Add User button => TODO
-- Add new commands to the Commerce Initializer i.e. Delete all Users => tODO
-- Learn Bootstrap - do a tutorial => TODO
-- User Stories & Domain Model => TODO
-
-- Incorporate Razor View Engine => TODO
-- Learn Knockout.js => TODO
-- Create a new CategoryController/Views/Domain Model, etc. => TODO
-
-
 BIG FISH
 --------
+=> Domain Modeling for Commerce Categories
+=> Design the Categories interface flow
+=> Design the AJAX architecture for Categories
 => Write User Stories - after reading through Shopify's API docs
-=> Domain Modeling for Commerce
+
+
+
+Category Editor - GROCERY LIST
+------------------------------
+- Design the actual interface, pookie!!! => TODO
+- C# Controller => JSON => JQuery method which creates RESTful Actions
+- Call that method ^^^  /Admin/Category/Interface
+- ARCHITECTURE: define the glue that connects the server to the client
+- DEBATE: do we want paging on the Category Editor...?  Probably not... Lazy loading, though, that's another issue
+- Need templating engine and/OR make QuickForm.js client-side control creator => TODO
+- Address AJAX Error Handling - er, I mean all Error Handling =>tODO
+
+
+
+Front Range
+-----------
+- Important: Create a separate Model for Editing Users => DONE
+- Fix the other Admin Editing Screens, including the Add User button => DONE
+
+- Learn Bootstrap - do a tutorial => IN PROGRESS
+* Build buttons, menus, validation stuff => TODO
+
+- Learn how Less works => IN PROGRESS - USE LESS FOR NEW STYLESHEETS
+* Apply variables to QuickForm.css => TODO
+
+- User Stories & Domain Model => TODO
+- Incorporate Razor View Engine => TODO
+- Learn Knockout.js => TODO
+
+
+
+
+MORE BIG FISH
+-------------
 => Admin Bootstrap Design
 => Category Editor using JKB development: MILESTONE
 => Entity Framework Code First
@@ -63,10 +87,12 @@ Research Backlog
 - Start adding Logging stuff - you won't be sorry! => TODO
 - Easily the most important security article evar => - http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
 - Look up Troy Hunt's article's, too
+- RESEARCH a lighter-weight ORM => TODO
 
 
 Development Backlog
 -------------------
+- Add new commands to the Commerce Initializer i.e. Delete all Users => TODO
 - Upgrade to ASP.NET MVC 4.0 (4.5?) => TODO
 - Web Optimization Toolkit => TODO
 * Fix the web.config with assembly references => IN PROGRESS
@@ -74,6 +100,9 @@ Development Backlog
 * Get Scott Hanselman's obj/bin cleaner utility => IN PROGRESS
 - Fluent Dependency Builder => TODO
 - TO BUILD => unobtrusive JQuery initialization stuff
+
+=> http://www.larentis.eu/bootstrap_toggle_buttons/ - LIKE THEM...!
+
 
 
 THE OTHER BACKLOG
