@@ -1,11 +1,112 @@
 UX/UI Design Notes
 ~~~~~~~~~~~~~~~~~~
 
+Bootstrap Cheat Notes
+---------------------
+
+
+20121009 PCommerce Category Editor
+----------------------------------
+- Accordion Design, with right side detail
+
+DESIGN QUESTIONS
+----------------
+- Where do new rows go...?  What happens to updated rows...?
+- Where do global error messages go...?
+- Where do the Add New buttons go...?
+- What to the right side detail if they scroll...?  Experiment with changing state after they start scrolling...
+- What happens if they click on a another? => ANSWER - YOU'RE DONE EDITING THE OTHER ONE.  IT'S A STUPID LIST...!
+
+
+20121009 List of UI Components of Admin Interface
+-------------------------------------------------
+
+Generic
+-------
+- Admin Login
+- Error Page
+
+Lists
+-----
+- Category Editor
+- Sizes Editor
+- Colors Editor
+- Demographic Editor
+- Brand Editor
+
+Inventory
+---------
+- Inventory Search
+- Inventory Editor
+
+Products
+--------
+- Product Search
+- Product Editor
+
+Orders
+------
+- Order Search
+- Order Editor
+
+Users
+-----
+- User Search
+- User Editor
+
+
+
+
+20121006 Table Design Pow Wow
+-----------------------------
+- Aleks: craftsman's pride
+- Maria Says: it's cumbersome 
+- Maria Says: why do you want it all on one page -- it's too busy
+- Maria Says: take me to the page where it's just Jeans, or just Jackets
+- Maria Says: benefit == ability all sub-categories
+- Aleks: can't see all top-level categories - that's something you'd want to see
+
+=> POINT - don't assume a Product can't belong to multiple Categories and/or Sub-Categories
+
+Stuff That's Good and Works about Fwd-Commerce
+----------------------------------------------
+- Can browse all Categories and Sub-Categories WHILE Editing a Category or a Sub-Category
+- Can browse by a single action -- dragging a scrollbar
+- One click on a BIG GRID brings up the editor - easy and probably works well on tablets
+- The "Tabbed" browsing inside of Categories.  Nice, clear representation state with other opportunities
+- Moreover - it remembers the state as you click through the grid.  E.g.: now I'm browsing the Products that belong to each Category
+- Can change the parent of a Category at will
+- Can edit ANY entry in the entire hierarchy - and within one click!
+- The AJAX hour glass on the background is subtle and cool
+- Listing the number of Products under a Category is *good*, and the date Last Updated is OK
+- Search Category field is OK
+- Maybe forcing *everything* to be a Sub Category isn't a bad idea...
+- The light on dark background works pretty well
+- Selecting a Category is clean...
+- There is a clean division between searching and editing...
+
+Stuff That's Not so Good and doesn't Works about Fwd-Commerce
+-------------------------------------------------------------
+- Can't see all top-level Categories
+- Possibly too much scrolling... and for what?  What User Story is there for scrolling?  To search: scroll and scroll.
+- The right side Editor is small... that could present difficulties
+- Any state change -- Add New, Update, Delete, Move to new Parent needs to be reflected on the right
+- It is possible to get lost and say "hey, what am I doing, again...?"
+- Will only work on small lists (20 - 40)
+- While I'm Editing a Category, if I scroll through the list, I lose the place of the Category I'm currently editing.  "Where's the next sub-category, again?"
+- Matching the left-side state to whatever I'm editing could be tricky when adding a new Category 
+- The Delete icon is not completely easy to find.
+- Adding Images to Categories... isn't this coupling content to data...?
+- Too much random access... it would be preferable to narrow focus to one specific area
+- Maria calls it cumbersome, too much on one page
+- Seem fixated on the "one-page site design"
+
+
+
 TOOLING STRATEGY
 ----------------
 - Q4 2012 thru Q1 2013 => Continue to use GIMP and Inkscape to get Storefront rolling
 - Q2 2013 => Purchase Adobe Photoshop and invest time in learning to use the tool
-
 
 Notes on Aesthetics
 -------------------
@@ -27,7 +128,6 @@ TOOLS DEBATE
 LIST OF NICE REFERENCE PONTS
 ----------------------------
 - http://coalitiontechnologies.com/
-
 - http://www.blind.com/work/project/blind-showreel-2012/ => visual PRO's - the text highlights to RED
 - http://www.ciceroinc.com/mobility/ => one way of doing the charcol-blue-black-white
 - https://speakerdeck.com/u/dodeja/p/picplum-tech-stack => very awesome, looks good and technically sound

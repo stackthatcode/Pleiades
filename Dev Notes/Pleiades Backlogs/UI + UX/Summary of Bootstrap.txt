@@ -1,0 +1,37 @@
+
+Bootstrap Summary
+-----------------
+- Heading
+- Page Header
+- p, strong, em, abbr
+- address
+- blockquote
+- ul+li
+- dl+dt
+- pre for code
+- table, .table, .table-striped, .table-hover (doesn't work), .table-condensed
+- input, @placeholder, .form-search, .span1
+- span.uneditable-input
+- form, .inline,
+- http://twitter.github.com/bootstrap/base-css.html#forms
+- buttons
+- btn .btn-block, .btn-large, 
+- btn btn-large btn-primary disabled => use this for navigation n stuff
+- div .btn-toolbar, div .btn-group
+- Nav "Pills"
+- Tabbable Nav
+- Inverted Navigation
+- Breadcrumbs
+- Pagination
+
+- Transitions
+- Popovers
+- Modals
+- Tool-tip
+- Menus
+- Alerts
+- Accordion
+- Affix left-side menu
+
+- http://twitter.github.com/bootstrap/customize.html => TODO
+

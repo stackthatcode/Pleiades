@@ -1,52 +1,76 @@
 FRONTRANGE - HOTZONE
 ====================
 
-BURN DOWN
----------
-*** Celebrate coming Out-of-the-Wild with The Great Refactoring #1! *** => TODO - HOW?  PLAY POOL?
-
-=> Adobe Photoshop Product Research - DONE
-=> Competitive Solutions Summary - DONE
-
-
-BIG FISH
---------
-=> Domain Modeling for Commerce Categories
-=> Design the Categories interface flow
-=> Design the AJAX architecture for Categories
-=> Write User Stories - after reading through Shopify's API docs
-
-
-
-Category Editor - GROCERY LIST
-------------------------------
-- Design the actual interface, pookie!!! => TODO
-- C# Controller => JSON => JQuery method which creates RESTful Actions
-- Call that method ^^^  /Admin/Category/Interface
-- ARCHITECTURE: define the glue that connects the server to the client
-- DEBATE: do we want paging on the Category Editor...?  Probably not... Lazy loading, though, that's another issue
-- Need templating engine and/OR make QuickForm.js client-side control creator => TODO
-- Address AJAX Error Handling - er, I mean all Error Handling =>tODO
-
+Burndown
+~~~~~~~~
+- Learn Bootstrap - do a tutorial => DONE
+* Build buttons, menus, validation stuff => DONE
 
 
 Front Range
 -----------
+=> Pleiades Admin Interface Mockup => IN PROGRESS
+=> Category Editor Interface => IN PROGRESS
+
+=> Convert existing Pleiades stuff to Admin Interface/Bootstrap => TODO
+=> Domain Modeling and Write User Stories - after reading through Shopify's API docs => TODO
+
+=> Where did I put my fonts...?  What's a good resource for typography and fonts...? => TODO
+
 - Important: Create a separate Model for Editing Users => DONE
 - Fix the other Admin Editing Screens, including the Add User button => DONE
 
-- Learn Bootstrap - do a tutorial => IN PROGRESS
-* Build buttons, menus, validation stuff => TODO
-
-- Learn how Less works => IN PROGRESS - USE LESS FOR NEW STYLESHEETS
-* Apply variables to QuickForm.css => TODO
-
-- User Stories & Domain Model => TODO
-- Incorporate Razor View Engine => TODO
-- Learn Knockout.js => TODO
+*** BTW - who is Assistly.com?
 
 
 
+
+What's in a Name...?
+--------------------
+- Push Commerce
+- Push Sell
+- Pick Commerce
+- Close
+- Shrewd Sale
+- Badger Sell
+- Slick Sell
+- Sly Sell
+- JSell
+- MasterSell
+- MasterSale
+- SaleMaster
+- pushcommerce.io
+- mastersale.io
+- fastersale.io
+- master-sell.io
+- FasterSale
+- pushmarket.io
+- cyclone.io
+
+
+Category Editor - GROCERY LIST
+------------------------------
+- Design the actual interface, pookie!!! => IN PROGRESS
+- C# Controller => JSON => JQuery method which creates RESTful Actions => TODO
+- ARCHITECTURE: define the glue that connects the server to the client 
+- Address AJAX Error Handling - er, I mean all Error Handling =>tODO
+=> Design the Categories interface flow
+=> Design the AJAX architecture for Categories
+
+
+Technology Backlog
+------------------
+- JavaScript + tools => IN PROGRESS
+- JQuery => IN PROGRESS
+- Bootstrap.js => IN PROGRESS
+- Knockout.js => TODO
+- Less => IN PROGRESS
+- Entity Framework => IN PROGRESS
+- Razor View Engine => IN PROGRESS
+- Git + GitHub => IN PROGRESS
+- Azure => EVENTUALLY
+- CSS styling => EVENTUALLY
+ 
 
 MORE BIG FISH
 -------------
@@ -57,7 +81,7 @@ MORE BIG FISH
 => Payment Processing Options, API's etc. => IN PROGRESS
 => Custom Caching solution...?
 => Find a good resource for Typography, Fonts, etc. => TODO
-=> Keep learning Git, dude
+
 
 
 E-Commerce API's & Payment Processors
@@ -101,12 +125,11 @@ Development Backlog
 - Fluent Dependency Builder => TODO
 - TO BUILD => unobtrusive JQuery initialization stuff
 
-=> http://www.larentis.eu/bootstrap_toggle_buttons/ - LIKE THEM...!
-
 
 
 THE OTHER BACKLOG
 =================
+- CSS Selectors via JQuery => IMPORTANT
 * Security n Stuff
 * Research & Design
 - How to manage CSS files and dependencies from separate assemblies in ASP.NET MVC => IN PROGRESS
