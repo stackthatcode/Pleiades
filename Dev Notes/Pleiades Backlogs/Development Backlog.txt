@@ -22,32 +22,6 @@ Front Range
 
 *** BTW - who is Assistly.com?
 
-
-
-
-What's in a Name...?
---------------------
-- Push Commerce
-- Push Sell
-- Pick Commerce
-- Close
-- Shrewd Sale
-- Badger Sell
-- Slick Sell
-- Sly Sell
-- JSell
-- MasterSell
-- MasterSale
-- SaleMaster
-- pushcommerce.io
-- mastersale.io
-- fastersale.io
-- master-sell.io
-- FasterSale
-- pushmarket.io
-- cyclone.io
-
-
 Category Editor - GROCERY LIST
 ------------------------------
 - Design the actual interface, pookie!!! => IN PROGRESS
@@ -112,6 +86,12 @@ Research Backlog
 - Easily the most important security article evar => - http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
 - Look up Troy Hunt's article's, too
 - RESEARCH a lighter-weight ORM => TODO
+
+
+Good Stuff
+----------
+- http://fortawesome.github.com/Font-Awesome/
+- 
 
 
 Development Backlog

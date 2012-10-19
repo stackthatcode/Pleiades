@@ -2,20 +2,30 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>pushmarket - admin login</title>
+    <title>pushmarket - edit categories</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
     <!-- Le styles -->
     <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;
         padding-bottom: 40px;
       }
+	  
+	  .table td {
+		vertical-align:middle;
+	  }
+	  .table td span:nth-child(2) {
+		text-align:right;
+	  }
+	  h4 {
+		color: #666;
+	  }
     </style>
-    <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -68,8 +78,7 @@
                 </ul>
               </li>
 			</ul>
-			
-			<p class="navbar-text pull-right">Logged in as <a href="#" style="color:#08C;" class="navbar-link">aleksjones@gmail.com</a></p>
+				<p class="navbar-text pull-right">Logged in as <a href="#" style="color:#08C;" class="navbar-link">aleksjones@gmail.com</a></p>
 			
 			
 			<!--
@@ -82,47 +91,141 @@
         </div>
       </div>
     </div>
-
 	
-    <div class="container">
+	<!-- We'll repeat this concept everywhere -->
+	<div  style="position:fixed; padding-top:60px; top:0px; width:100%; height:75px; background-color:#FFF; border-bottom:1px dotted #CCC;">
+		<div class="container">
+			<div class="row-fluid">
+				<div class="span9">
+					<h1><a href="#" style="color:#999;">All Categories</a> &gt; Shoes</h1>
+				</div>
+				<div class="span3" style="margin-top:15px; text-align:right;">
+							<a class="btn btn-primary btn-block"><i class="icon-plus icon-white"></i> Add New Sub-Category</a>
+					<!--<a class="btn btn-inverse btn-block">&laquo; Back To All Categories</a>-->
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- NOTES: what does a container do, exactly? -->
+    <div class="container" style="margin-top:75px;">
+	
+		<!--
+		<ul class="breadcrumb">
+		  <li><a href="#">Admin Home</a> <span class="divider">/</span></li>
+		  <li><a href="#">Lists</a> <span class="divider">/</span></li>
+		  <li class="active">Manage Categories</li>
+		</ul>
+		-->
+		
+		<!--
+		<div class="row-fluid" style="margin-bottom:30px;">
+			<div class="span9">
+				<h1>Lists &gt; Categories<small> &nbsp;Add, Edit, Delete</small></h1>
+			</div>
+			<div class="span3" style="margin-top:15px;">
+				<a class="btn btn-primary btn-block">&laquo; Add Parent Category</a>
+			</div>
+		</div>
+		-->
 
-      <!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="hero-unit"> <!-- and try this: style="border: 1px solid #AAA;"> -->
-		<h1 style="color">admin sign-in</h1>
-		<hr>
 		
-		<div style="float:left; margin-right:20px;">
-			<p>
-				<label>Enter your User Id</label>
-				<input type="text" placeholder="User Name" />
-			</p>
-			<a>Forgot your username? &raquo;</a>
-		</div>
+		<table class="table table-hover">
+			<tbody>
+			<tr>
+				<td>
+					<span class="span9">
+						<h4>Shoes</h4>
+					</span>
+					<span class="span3">
+					</span>
+				</td>
+			</tr>
+			
+			
+			<tr>
+				<td>
+					<span class="span6">
+						<h4>&nbsp; &nbsp; &raquo; Ass-Kicking Shoes</h4>
+					</span>
+					<span class="span3">
+					</span>
+				</td>
+			</tr>
+			<tr style="background-color:#EEE;">
+				<td>
+					<form>
+					<div>
+						<span class="span8" style="float:left;padding-top:5px;"><!-- why is this float:left?  thought that was automatic...? -->
+							<input id="entry" style="float:left; width:250px; margin-right:20px;" class="input-large" type="text" value="Sport Casual" placeholder="Enter Category Name" />
+							<input id="entry" style="float:left; width:250px;" class="input-large" type="text" value="sport-casual-seo-tag" placeholder="Enter SEO Tag" />
+						</span>
+						
+						<span class="span4" style="padding-top:5px; text-align:right;">
+							<a class="btn btn-primary" href="#"><i class="icon-ok icon-white"></i> Save</a>
+							<a class="btn btn-inverse" href="#"><i class="icon-remove icon-white"></i> Cancel</a>
+							<a class="btn btn-inverse" href="#"><i class="icon-search icon-white"></i> Products</a>
+						</span>
+					</div>
+					
+					<div style="clear:both; height:20px;width:1px;"></div>
+					</div>
+					
+					<div>
+						<span class="span9" style="float:left;">					
+							<a class="btn btn-primary" href="#"><i class="icon-trash icon-white"></i> Delete</a>
+							<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+								Change Parent Category...
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+							</ul>
+						</span>
+						
+						<span class="span3">
+						</span>
+					</div>
+					</form>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="span6">
+						<h4>&nbsp; &nbsp;  &raquo; Boots</h4>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="span6">
+						<h4>&nbsp; &nbsp;  &raquo; Mountaineering</h4>
+					</span>
+				</td>
+			</tr>			
+			<tr>
+				<td>
+					<span class="span6">
+						<h4>&nbsp; &nbsp;  &raquo; Clubbing</h4>
+					</span>
+					<span class="span3">
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="span6">
+						<h4>&nbsp; &nbsp;  &raquo; Tennis Shoes</h4>
+					</span>
+					<span class="span3">
+					</span>
+				</td>
+			</tr>
+			</tbody>
+		<table>
 		
-		<div style="float:left; margin-right:20px;">
-			<p>
-				<label>Enter your Password</label>	
-				<input type="text" placeholder="Password" />
-			</p>
-			<a>Forgot your password? &raquo;</a>
-		</div>
-		
-		<div style="width:200px; float:left; padding-top:20px;">
-			<a class="btn btn-primary btn-large btn-block">Login &raquo;</a>
-		</div>
-		
-		<div style="clear:both;"></div>
-		<hr>
-		
-		<div style="clear:both;">
-			<p>
-				<a>&laquo; Back to the Storefront</a>
-			</p>
-		</div>
-      </div>
-
       <!-- Example row of columns -->
       <div class="row">
+	  
 	  <!--
         <div class="span4">
           <h2>Heading</h2>
@@ -144,12 +247,17 @@
 
       <hr>
 
-      <footer>
-        <p>&copy; Push Global Software Solutions - LLC 2012 | <a href="#">Company</a> | <a href="#">Contact Technical Support</a></p>
-      </footer>
-
     </div> <!-- /container -->
 
+	<div class="navbar navbar-fixed-bottom">
+		<div style="background-color:#FFF; height:30px; padding-top:10px;  border-top:1px dotted #CCC;">
+			<div class="container">
+			  <footer>
+				<p>&copy; Push Global Software Solutions - LLC 2012 | <a href="#">Company</a> | <a href="#">Contact Technical Support</a></p>
+			  </footer>
+			</div>
+		</div>
+	</div>
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
