@@ -1,6 +1,38 @@
 Backlog Burndown
 ================
 
+=> Admin Bootstrap Design => DONE
+
+// Drill-Down
+// 1 - Save Scroll Position
+// 2 - Scroll To Top
+// 3 - Add Next Interface To DOM in the correct Position
+// 4 - Slide-Left
+// 5 - If Exists, Restore Scroll Position
+// 6 - Hide Prev Interface
+
+// Drill-Up
+// 1 - Save Scroll Position
+// 2 - Scroll To Top
+// 3 - Add Prev Interface To DOM
+// 4 - Slide Right
+// 5 - Restore Scroll Position
+// 6 - Hide Next Interface
+
+10/20/2012
+----------
+- Learn Bootstrap - do a tutorial => DONE
+* Build buttons, menus, validation stuff => DONE
+- Design the actual interface, pookie!!! => DONE
+- ARCHITECTURE: define the glue that connects the server to the client => DONE
+- Design the Categories interface flow => DONE
+=> Pleiades Admin Interface Mockup => DONE
+=> Category Editor Interface => DONe
+
+
+TOO MANY SKIPPEd BURN DOWNS...!!!!  SAVE STUFF IN CASE THE LAWYERS ASK, ETC.
+
+
 8/30/2012
 ---------
 *** Slanging way too much code, brah!  Keep at it!!

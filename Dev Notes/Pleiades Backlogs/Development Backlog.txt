@@ -3,33 +3,94 @@ FRONTRANGE - HOTZONE
 
 Burndown
 ~~~~~~~~
-- Learn Bootstrap - do a tutorial => DONE
-* Build buttons, menus, validation stuff => DONE
+JQuery Sliding Drill Down Action
+- HTML Overflow => DONE
+- Motion/animation => DONE
+- Scroll Position Save + Recovery => DONE
 
 
 Front Range
 -----------
-=> Pleiades Admin Interface Mockup => IN PROGRESS
-=> Category Editor Interface => IN PROGRESS
+- Create a JQuery plug-in - or at least a self-contained script => TODO
+- How to determine the height of the Div...?  Add a function to it or something...? => TODO
+- http://stackoverflow.com/questions/6237198/jquery-show-div-and-scroll-to-it-without-hashtag-in-url
+- Possibly create a separate Adapter class...  which can be mocked up so I can test my AJAX stuff separately => TODO
+
+
+Sub-Category Editor
+-------------------
+- Render Function - IN PROGRESS
+- Template for Heading - IN PROGRESS
+- Templates for Top and Sub - IN PROGRESS
+
+- Bind Function
+- Editor Template
+- Save Button
+- Cancel Button
+- Products Button
+- Delete Button
+- Change Parent Category Button
+- Add New Category Button
+- Go Back Button
+
+
+Category Editor - GROCERY LIST
+------------------------------
+AJAX Architecture => IN PROGRESS
+- How to map the JSON objects from MVVM to MVC
+
+C# Controller
+- CRUD JSON Methods => TODO
+- C# + JQuery method which creates RESTful Actions => TODO - MAYBE
+
+Templates
+- Find Template Engine => TODO
+- Add New Template => TODO
+- Edit Template => TODO
+
+Control Flow
+- Maintain State via closures wired to the  ???
+
+Interface Design Stuff
+- Change Parent Category => TODO
+- Collapse/Expand Button => TODO
+- AJAX Hourglass Design => TODO
+- Back Button interception Plumbing => TODO
+- Bread Crumb Rendering
+- Design Category => Product Listing => TODO
+- Tooltips => TODO
+
+Infrastructure
+- Error Handling 400 => TODO
+- Error Handling 500 => TODO
+- Timeout Error Handling => TODO
+- Server Side Error Logging => TODO
+
+Front-End Coding
+- How to include all these dependencies...? => We'll see
+
+MVVM Plumbing
+- Knockout.js => IN PROGRESS
+- Research Template Engine => TODO
+
+
+
+
+
+What about this...?
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+
 
 => Convert existing Pleiades stuff to Admin Interface/Bootstrap => TODO
 => Domain Modeling and Write User Stories - after reading through Shopify's API docs => TODO
-
 => Where did I put my fonts...?  What's a good resource for typography and fonts...? => TODO
 
 - Important: Create a separate Model for Editing Users => DONE
 - Fix the other Admin Editing Screens, including the Add User button => DONE
+- Add the window shade effect to the top Menu => TODO
 
-*** BTW - who is Assistly.com?
 
-Category Editor - GROCERY LIST
-------------------------------
-- Design the actual interface, pookie!!! => IN PROGRESS
-- C# Controller => JSON => JQuery method which creates RESTful Actions => TODO
-- ARCHITECTURE: define the glue that connects the server to the client 
-- Address AJAX Error Handling - er, I mean all Error Handling =>tODO
-=> Design the Categories interface flow
-=> Design the AJAX architecture for Categories
 
 
 Technology Backlog
@@ -37,25 +98,24 @@ Technology Backlog
 - JavaScript + tools => IN PROGRESS
 - JQuery => IN PROGRESS
 - Bootstrap.js => IN PROGRESS
-- Knockout.js => TODO
+- Knockout.js => IN PROGRESS
 - Less => IN PROGRESS
 - Entity Framework => IN PROGRESS
 - Razor View Engine => IN PROGRESS
 - Git + GitHub => IN PROGRESS
 - Azure => EVENTUALLY
-- CSS styling => EVENTUALLY
+- CSS styling => IN PROGRESS
  
-
 MORE BIG FISH
 -------------
-=> Admin Bootstrap Design
+=> How do browsers handle caching of the Javascript Libraries...? => TODO
 => Category Editor using JKB development: MILESTONE
 => Entity Framework Code First
 => Store Front Design
 => Payment Processing Options, API's etc. => IN PROGRESS
 => Custom Caching solution...?
 => Find a good resource for Typography, Fonts, etc. => TODO
-
+=> http://news.ycombinator.com/item?id=4669866 => IMPORTANT
 
 
 E-Commerce API's & Payment Processors
@@ -71,15 +131,14 @@ E-Commerce API's & Payment Processors
 - Authorize.NET
 
 
-
 Research Backlog
 ----------------
-- RESEARCH => ToHtmlString() => TODO
+- ToHtmlString() => TODO
 - What's the benefit of <: stuff again...? => TODO
-- RESEARCH => difference between PartialViews, USerControls, etc.
-- RESEARCH => difference between <%: and <%=
-- RESEARCH => Model Binding, how it all works - REVIEW
-- RESEARCH => Custom Validation
+- difference between PartialViews, USerControls, etc.
+- difference between <%: and <%=
+- Model Binding, how it all works - REVIEW
+- Custom Validation
 - EntityFramework - how to perform basic CRUD stuff - Damn Brutha! => TODO
 - EntityFramework Transactions and ASP.NET MVC Concurrency => TODO
 - Start adding Logging stuff - you won't be sorry! => TODO
@@ -91,8 +150,6 @@ Research Backlog
 Good Stuff
 ----------
 - http://fortawesome.github.com/Font-Awesome/
-- 
-
 
 Development Backlog
 -------------------
@@ -104,8 +161,6 @@ Development Backlog
 * Get Scott Hanselman's obj/bin cleaner utility => IN PROGRESS
 - Fluent Dependency Builder => TODO
 - TO BUILD => unobtrusive JQuery initialization stuff
-
-
 
 THE OTHER BACKLOG
 =================

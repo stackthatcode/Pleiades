@@ -1,6 +1,34 @@
 The Crazier, The Better!
 ~~~~~~~~~~~~~~~~~~~~~~~~
-
 - Create a consulting firm that focuses on using Alt.Net-centric development techniques
 - Attack mobile computing head-on - go after iOS development with a vengance
+
+Branding
+--------
+aleksjones.io => Blogging Outlet
+- Marketing
+- Tech
+- Brand
+
+push-software.io => Services
+
+pushmarket.biz => Live Site
+
+
+This guy is THE MAN => http://www.s3mobileapps.com/
+
+Important => http://xamarin.com/
+
+This Stage
+~~~~~~~~~~
+- C#, ASP.NET MVC, ORM, TDD, DDD, MVVM, JavaScript, JQuery, EF, Git, KnockoutJS, etc.
+
+Next Stage
+~~~~~~~~~~
+- Marketing => Customer Engagement
+- Client-side DEV, UX/UI => JavaScript heavily
+- Mobile Android/IoS => Maybe
+
+
+- NodeJs...? => Very Maybe
 
