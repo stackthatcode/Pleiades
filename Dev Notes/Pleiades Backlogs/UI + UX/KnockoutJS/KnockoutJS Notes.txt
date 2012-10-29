@@ -1,0 +1,47 @@
+KnockoutJS Notes
+~~~~~~~~~~~~~~~~
+- data-bind = "text: firstName"  => normal data-binding
+- data-bind="click: capitalizeLastName"  => triggers a function on the model
+- this.firstName = ko.observable("Bert");  => enables commutative flow of data
+- this.fullName = ko.computed(function() { ... } )  => dependency-chaining
+- data-bind="text: meal().price"  => use the method invokation to access observable members
+- data-bind="options: $root.availableMeals"  => $root uses the root of the object
+- data-bind="options: $root.availableMeals, value: meal, optionsText: 'mealName'"  => Auto-generates 
+- data-bind="click: $root.removeSeat" COMBINED WITH self.removeSeat = function(seat) { self.seats.remove(seat) } => the seat object is passed
+- self.seats.remove(seat); => DON'T BE FOOLED! REMOVE IS A KNOCKOUT ARRAY METHOD!
+MORE: http://knockoutjs.com/documentation/observableArrays.html
+- toFixed(2) is a nice function
+- observableArrays' objects' properties are not observable
+- seats() returns the array whereas seats.remove() invokes a method... interesting
+- $data is kind of like "get current row of data inside a for-each"
+
+- QUESTION: are there strict rules on when to use the .member() versus .member reference to properties...?
+- ANSWER: *** HOLY SHIT: this is because functions can have properties
+
+- RULE #1: invoke the .member() to get the current values
+- RULE #2: invoke .member.function1() to invoke an observable function like "Remove" or "Push"
+
+- html: allows HTML to be rendered as markup
+- ko.bindingHandlers should be registered before the applyBindings(...) event
+- The arguments are always what are passed to the binding function.
+
+- DON'T FORGET: the JQuery map() function
+
+
+Possible KO Bindings
+--------------------
+- click:
+- enable:
+- options: 
+
+
+Thoughts?  Questions
+--------------------
+- Is there an $index operator or something in the for-each loop...?
+- How can we use the bootstrap menu and data-bind them...?
+- What all events can we data-bind on...?
+- How do we handle Exceptions in KnockoutJS...?
+
+// TODO - read the knockout reference on ObservableArray
+// TODO - JavaScript apply(...) and call(...)
+

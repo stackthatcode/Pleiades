@@ -1,0 +1,29 @@
+Backlog
+-------
+=> IMPORTANT - find a decent DDD community
+=> IMPORTANT - sign-in to StackOverflow
+* http://www.hanselman.com/blog/NuGetPackageOfTheWeek5DebuggingASPNETMVCApplicationsWithGlimpse.aspx
+
+GIT RELATED
+~~~~~~~~~~~
+TRY: git clone XYZ (find some javascript library)
+TRY: git log (try all the varieties)
+TRY: git status
+TRY: git diff -- how to do it better...???
+TRY: git add --dry-run .
+TRY: git add --verbose
+TRY: git add --update
+
+* Play with git commit => TODO
+* Try some branching => TODO
+* Review the Git GUI tools => TODO
+* How do I git my current hashcode...? => TODO
+
+
+VALUABLE STUFF
+--------------
+http://thenounproject.com/3/ => USE THESE!!!
+http://web-kreation.com/demos/Sliding_login_panel_jquery/#
+http://tympanus.net/Tutorials/SlideDownBoxMenu/
+http://imcreator.com/?utm_source=Codrops&utm_medium=banner&utm_content=round_big&utm_campaign=design_your_website
+

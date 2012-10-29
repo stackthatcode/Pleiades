@@ -6,7 +6,9 @@ Burndown
 JQuery Sliding Drill Down Action
 - HTML Overflow => DONE
 - Motion/animation => DONE
+- Prototype is finished(!!!) => DONE
 - Scroll Position Save + Recovery => DONE
+- KnockoutJS tutorial => DONE
 
 
 Front Range
@@ -17,8 +19,21 @@ Front Range
 - Possibly create a separate Adapter class...  which can be mocked up so I can test my AJAX stuff separately => TODO
 
 
+Good Stuff
+----------
+- http://zeptojs.com/#download => whut...?
+- http://www.startuppack.org/ whut...?
+- https://github.com/websanova/jquery-url#url
+- http://news.ycombinator.com/item?id=4707903
+
+
 Sub-Category Editor
 -------------------
+AJAX Architecture => IN PROGRESS
+- How to map the JSON objects from MVVM to MVC => IN PROGRESS
+- Knockout.js => IN PROGRESS
+- Research Template Engine => IN PROGRESS
+- Find Template Engine => IN PROGRESS
 - Render Function - IN PROGRESS
 - Template for Heading - IN PROGRESS
 - Templates for Top and Sub - IN PROGRESS
@@ -36,15 +51,11 @@ Sub-Category Editor
 
 Category Editor - GROCERY LIST
 ------------------------------
-AJAX Architecture => IN PROGRESS
-- How to map the JSON objects from MVVM to MVC
-
 C# Controller
 - CRUD JSON Methods => TODO
 - C# + JQuery method which creates RESTful Actions => TODO - MAYBE
 
 Templates
-- Find Template Engine => TODO
 - Add New Template => TODO
 - Edit Template => TODO
 
@@ -69,12 +80,6 @@ Infrastructure
 Front-End Coding
 - How to include all these dependencies...? => We'll see
 
-MVVM Plumbing
-- Knockout.js => IN PROGRESS
-- Research Template Engine => TODO
-
-
-
 
 
 What about this...?
@@ -95,16 +100,28 @@ What about this...?
 
 Technology Backlog
 ------------------
-- JavaScript + tools => IN PROGRESS
-- JQuery => IN PROGRESS
-- Bootstrap.js => IN PROGRESS
-- Knockout.js => IN PROGRESS
-- Less => IN PROGRESS
-- Entity Framework => IN PROGRESS
+- Bootstrap.js => DONE
+- Knockout.js => DONE
+- JQuery => DONE
+- TDD => DONE
+- C# => DONE
+- ASP.NET MVC => DONE
+
+- Sammy.js => TODO
 - Razor View Engine => IN PROGRESS
+- CSS styling => IN PROGRESS
+- GZip encoding of my AJAX traffic...?
+- JSLint => TODO
+- JSFiddle => TODO
+- ZeptoJs => TODO
+- Mustache.js => TODO
+- JavaScript (protoypes) => TODO
+- Entity Framework => IN PROGRESS
+- Less => TODO
 - Git + GitHub => IN PROGRESS
 - Azure => EVENTUALLY
-- CSS styling => IN PROGRESS
+ 
+
  
 MORE BIG FISH
 -------------

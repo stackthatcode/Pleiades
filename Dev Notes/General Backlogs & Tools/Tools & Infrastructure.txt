@@ -1,0 +1,20 @@
+Software Tools List
+-------------------
+Windows File Locator
+Fiddler
+Resharper
+Chrome
+Firefox
+Filezilla
+Git
+Notepad++
+Gimp
+ILSpy
+Dotnet Peek
+Sys Internals
+LINQPad
+Expresso
+JSFiddle
+
+http://jsfiddle.net/rniemeyer/X9rRa/
+

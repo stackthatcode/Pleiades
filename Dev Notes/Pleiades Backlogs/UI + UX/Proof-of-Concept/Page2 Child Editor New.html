@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>pushmarket - edit categories</title>
+    
+	<!-- Dependencies -->
+	<script type="text/javascript" src="jquery-1.8.2.js"></script>
+	<script type="text/javascript" src="knockout-2.1.0.js"></script>
+    <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
+	
+	<!-- TODO: move this to central style sheet -->
+    <style type="text/css">	
+      body {
+		padding-top:135px; 
+		padding-bottom:40px;
+      }
+    </style>	
+	
+	<!-- Knock-out Templates -->
+	<script type="text/html" id="heading-template">
+	<div id="heading" class="container">
+		<div class="row">
+			<div class="span9">
+				<h1><a href="#" style="color:#999;">All Categories</a> &gt; <span data-bind="text: test"></span></h1>
+			</div>
+			<div class="span3" style="margin-top:15px; text-align:right;">
+				<a class="btn btn-primary btn-block"><i class="icon-plus icon-white"></i> Add New Sub-Category</a>
+			</div>
+		</div>
+	</div>
+	</script>	
+	<script type="text/html" id="grid-template">
+	<tr>
+		<td>
+			<span class="span9">
+				<h4 data-bind="text: name"></h4>
+			</span>
+			<span class="span3">
+			</span>
+		</td>
+	</tr>
+	<!-- ko foreach: myItems -->	
+	<tr>
+		<td>
+			<span class="span6">
+				<h4>&nbsp; &nbsp; &raquo; Ass-Kicking Shoes</h4>
+			</span>
+			<span class="span3">
+			</span>
+		</td>
+	</tr>			
+    <!-- /ko -->
+	</script>
+	<!-- /Knockout Templates -->
+	
+	<!-- Initialization Script -->
+	<script type="text/javascript">
+		// This comes back from the server
+		var MyViewModel = function() {
+			return
+			{
+				test: ko.observable("Do I Exist?"),
+				id: 2, 
+				name: "Shoes",
+				seo: "shoes",
+				subCategories: [
+					{ id: 3, name: "Ass-kicking Shoes", seo: "ass-kicking-shoes" },
+					{ id: 4, name: "Sport Casual", seo: "sport-casual" },
+					{ id: 5, name: "Boots", seo: "sport-casual" },
+					{ id: 6, name: "Mountaineering", seo: "mountaineering" },
+					{ id: 7, name: "Clubbing", seo: "clubbing" },
+					{ id: 8, name: "Tennis Shoes", seo: "tennis-shoes" }
+				]
+			};
+		};
+		
+		$(function() {
+			var myViewModel = new MyViewModel();
+			ko.applyBindings(myViewModel);
+			
+			myViewModel.data.test("ABC123");
+			// heading-template
+			// alert(mockReadMethod().subCategories[2].name);
+		});	
+	</script>
+	
+	
+	<!-- TODO: What's this for...?
+    <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet"> -->		
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+	<!-- What are these? 
+    <!-- Le fav and touch icons 
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+  </head>
+  
+  <body>
+	<!-- PushMarket code to render this -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <img src="webicon-2.png" style="float:left;" />
+		  <a class="brand" href="#" style="color:#08C;">pushmarket</a>
+          
+		  <div class="nav-collapse collapse">	
+            <ul class="nav">
+              <li class="active"><a href="#">Orders</a></li>
+              <li><a href="#about">Lists</a></li>
+              <li><a href="#contact">Products</a></li>
+              <li><a href="#contact">Customers</a></li>
+              <li><a href="#contact">Admins</a></li>
+			  
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Lists<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+				  
+                  <li class="divider"></li>
+                  
+				  <li class="nav-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+              </li>
+			</ul>
+			
+			<p class="navbar-text pull-right">Logged in as <a href="#" style="color:#08C;" class="navbar-link">aleksjones@gmail.com</a></p>						
+          </div>
+        </div>
+      </div>
+    </div>
+	
+	<!-- We'll repeat this concept everywhere -->
+	<div  style="position:fixed; padding-top:60px; top:0px; width:100%; height:75px; background-color:#FFF; border-bottom:1px dotted #CCC;">		
+		<div id="heading" class="container">
+			<div class="row">
+				<div class="span9">
+					<h1><a href="#" style="color:#999;">All Categories</a> &gt; <span data-bind="text: test"></span></h1>
+				</div>
+				<div class="span3" style="margin-top:15px; text-align:right;">
+					<a class="btn btn-primary btn-block"><i class="icon-plus icon-white"></i> Add New Sub-Category</a>
+				</div>
+			</div>
+		</div>		
+		
+		<!--<div data-bind="template: { name: 'heading-template', data: data }"></div> -->
+	</div>
+
+	
+	<!-- NOTES: what does a container do, exactly? -->
+    <div class="container">
+		<table class="table table-hover">
+			<tbody>
+			<tr>
+				<td>
+					<span class="span9">
+						<h4>Shoes</h4>
+					</span>
+					<span class="span3">
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="span6">
+						<h4>&nbsp; &nbsp; &raquo; Ass-Kicking Shoes</h4>
+					</span>
+					<span class="span3">
+					</span>
+				</td>
+			</tr>
+			<tr style="background-color:#EEE;">
+				<td>
+					<form>
+					<div>
+						<span class="span8" style="float:left;padding-top:5px;"><!-- why is this float:left?  thought that was automatic...? -->
+							<input id="entry" style="float:left; width:250px; margin-right:20px;" class="input-large" type="text" value="Sport Casual" placeholder="Enter Category Name" />
+							<input id="entry" style="float:left; width:250px;" class="input-large" type="text" value="sport-casual-seo-tag" placeholder="Enter SEO Tag" />
+						</span>
+						
+						<span class="span4" style="padding-top:5px; text-align:right;">
+							<a class="btn btn-primary" href="#"><i class="icon-ok icon-white"></i> Save</a>
+							<a class="btn btn-inverse" href="#"><i class="icon-remove icon-white"></i> Cancel</a>
+							<a class="btn btn-inverse" href="#"><i class="icon-search icon-white"></i> Products</a>
+						</span>
+					</div>
+					
+					<div style="clear:both; height:20px;width:1px;"></div>
+					</div>
+					
+					<div>
+						<span class="span9" style="float:left;">					
+							<a class="btn btn-primary" href="#"><i class="icon-trash icon-white"></i> Delete</a>
+							<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+								Change Parent Category...
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+							</ul>
+						</span>
+						
+						<span class="span3">
+						</span>
+					</div>
+					</form>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="span6">
+						<h4>&nbsp; &nbsp;  &raquo; Boots</h4>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="span6">
+						<h4>&nbsp; &nbsp;  &raquo; Mountaineering</h4>
+					</span>
+				</td>
+			</tr>			
+			<tr>
+				<td>
+					<span class="span6">
+						<h4>&nbsp; &nbsp;  &raquo; Clubbing</h4>
+					</span>
+					<span class="span3">
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="span6">
+						<h4>&nbsp; &nbsp;  &raquo; Tennis Shoes</h4>
+					</span>
+					<span class="span3">
+					</span>
+				</td>
+			</tr>
+			</tbody>
+		<table>
+
+    </div> <!-- /container -->
+
+	<div class="navbar navbar-fixed-bottom">
+		<div style="background-color:#FFF; height:30px; padding-top:10px;  border-top:1px dotted #CCC;">
+			<div class="container">
+			  <footer>
+				<p>&copy; Push Global Software Solutions - LLC 2012 | <a href="#">Company</a> | <a href="#">Contact Technical Support</a></p>
+			  </footer>
+			</div>
+		</div>
+	</div>
+	
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/bootstrap-transition.js"></script>
+    <script src="../assets/js/bootstrap-alert.js"></script>
+    <script src="../assets/js/bootstrap-modal.js"></script>
+    <script src="../assets/js/bootstrap-dropdown.js"></script>
+    <script src="../assets/js/bootstrap-scrollspy.js"></script>
+    <script src="../assets/js/bootstrap-tab.js"></script>
+    <script src="../assets/js/bootstrap-tooltip.js"></script>
+    <script src="../assets/js/bootstrap-popover.js"></script>
+    <script src="../assets/js/bootstrap-button.js"></script>
+    <script src="../assets/js/bootstrap-collapse.js"></script>
+    <script src="../assets/js/bootstrap-carousel.js"></script>
+    <script src="../assets/js/bootstrap-typeahead.js"></script>
+	-->
+	
+  </body>
+</html>

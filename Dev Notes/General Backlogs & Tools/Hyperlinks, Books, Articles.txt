@@ -1,0 +1,45 @@
+Book List
+---------
+- Dale Carnegies Win Friends and Influence People
+- Domain Driven Design
+- Entity Framework Book
+- JavaScript Patterns
+
+
+Interesting Stuff...
+--------------------
+- http://news.ycombinator.com/item?id=4684696
+
+
+
+Read this Stuff
+---------------
+- http://www.mail-archive.com/dri-devel@lists.sourceforge.net/msg39091.html
+- http://news.ycombinator.com/item?id=4444793
+- http://news.ycombinator.com/item?id=4648597
+- lefsetime.com 
+- http://www.youtube.com/watch?v=1p-1hKY-ol0
+
+ 
+What's in a Name...?
+--------------------
+- Push Commerce
+- Push Sell
+- Pick Commerce
+- Close
+- Shrewd Sale
+- Badger Sell
+- Slick Sell
+- Sly Sell
+- JSell
+- MasterSell
+- MasterSale
+- SaleMaster
+- pushcommerce.io
+- mastersale.io
+- fastersale.io
+- master-sell.io
+- FasterSale
+- pushmarket.io
+- cyclone.io
+

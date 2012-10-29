@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html>
+<head>	
+	<script type="text/javascript" src="jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="knockout-2.1.0.js"></script>	
+	<script type="text/javascript" src="sammy.js"></script>	
+	
+	<style>
+		ul.folders li.selected {
+			color:#F00;
+		}
+	</style>
+	
+	<script type="text/javascript">
+		function GetMail(folder) {
+			if (folder == null) 
+				return { mails: [] };
+			
+			return { mails: [ 
+				{ id: 123, folder: folder, from: 'Aleks 1', to: 'Klarissa 1', subject: 'Whats up ' + folder + '?', date: '10/1/2012', messageContent: "<p>well, llet me tell you a thing or <strong>two</strong></p>" },
+				{ id: 333, folder: folder, from: 'Aleks 2', to: 'Klarissa 2', subject: 'Whats up ' + folder + '?', date: '10/8/2012', messageContent: "<p>Finally a business I can believe in</p>" },
+				{ id: 456, folder: folder, from: 'Aleks 3', to: 'Klarissa 3', subject: 'Whats up ' + folder + '?', date: '10/15/2012', messageContent: "<p>Well this PCI compliance stuff is hot !!!</p>" },
+				{ id: 777, folder: folder, from: 'Aleks 4', to: 'Klarissa 4', subject: 'Whats up ' + folder + '?', date: '10/22/2012', messageContent: "<p>Another metsdgsgawerg</p>" }
+			]};
+		}
+		
+		function GetMailByFolderAndId(folder, id) {
+			var mails = GetMail(folder).mails;
+			for (var i = 0; i < mails.length; i++)
+			{
+				if (mails[i].id == id)
+					return mails[i];
+			}
+		}
+		
+		
+		function WebmailViewModel() {
+			// Data
+			var self = this;
+			self.folders = ['Inbox', 'Archive', 'Sent', 'Spam'];
+			self.chosenFolderId = ko.observable();
+			self.chosenFolderData = ko.observable();
+			self.chosenMailData = ko.observable();
+			
+			// These functions are 
+			self.goToFolder = function(folder) { location.hash = folder };
+			self.goToMail = function(mail) { location.hash = mail.folder + '/' + mail.id };
+
+			// Show inbox by default
+			//self.goToFolder('Inbox');
+			
+			// Client-side routes    
+			Sammy(function() {
+				this.get('#:folder', function() {
+					self.chosenFolderId(this.params.folder);
+					self.chosenMailData(null);					
+					self.chosenFolderData(GetMail(this.params.folder));
+					
+					console.log(this.params.folder);
+					//$.get("/mail", { folder: this.params.folder }, self.chosenFolderData);
+				});
+
+				this.get('#:folder/:mailId', function() {
+					self.chosenFolderId(this.params.folder);
+					self.chosenFolderData(null);
+					
+					var mail = GetMailByFolderAndId(this.params.folder, this.params.mailId);
+					self.chosenMailData(mail);
+					
+					console.log(this.params.folder);
+					// $.get("/mail", { mailId: this.params.mailId }, self.chosenMailData);
+				});
+				
+				//this.get('', function() { this.app.runRoute('get', '#Inbox') });
+				this.get('', function() { location.hash = "Inbox"; }); //this.app.runRoute('get', '#Inbox') });
+			}).run();
+		};
+		
+		$(function() {
+			ko.applyBindings(new WebmailViewModel());
+		});
+	</script>
+</head>
+
+<body>
+	<!-- Folders -->
+	<ul class="folders" data-bind="foreach: folders">
+		<li data-bind="text: $data, 
+					   css: { selected: $data == $root.chosenFolderId() },
+					   click: $root.goToFolder"></li>
+	</ul>
+	
+	<!-- Mails grid -->
+	<table class="mails" data-bind="with: chosenFolderData">
+		<thead><tr><th>From</th><th>To</th><th>Subject</th><th>Date</th></tr></thead>
+		<tbody data-bind="foreach: mails">
+			 <tr data-bind="click: $root.goToMail">
+				<td data-bind="text: from"></td>
+				<td data-bind="text: to"></td>
+				<td data-bind="text: subject"></td>
+				<td data-bind="text: date"></td>
+			</tr>     
+		</tbody>
+	</table>
+	
+	<div class="viewMail" data-bind="with: chosenMailData">
+		<div class="mailInfo">
+			<h1 data-bind="text: subject"></h1>
+			<p><label>From</label>: <span data-bind="text: from"></span></p>
+			<p><label>To</label>: <span data-bind="text: to"></span></p>
+			<p><label>Date</label>: <span data-bind="text: date"></span></p>
+		</div>
+		<p class="message" data-bind="html: messageContent" />
+	</div>
+</body>
+</html>

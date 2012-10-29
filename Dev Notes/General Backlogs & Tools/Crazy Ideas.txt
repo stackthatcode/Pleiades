@@ -1,0 +1,59 @@
+This Stage
+~~~~~~~~~~
+- C#, ASP.NET MVC, ORM, TDD, DDD, MVVM, JavaScript, JQuery, EF, Git, KnockoutJS, etc.
+
+
+Next Stage
+~~~~~~~~~~
+- Marketing + UX/UI + JavaScript => Customer Engagement
+- Mobile Android/iOS, Xamarin => Maybe
+- NodeJs...? Ruby...? => Maybe
+- New Data + MicroORM => Maybe
+
+
+The Crazier, The Better!
+~~~~~~~~~~~~~~~~~~~~~~~~
+- Create a consulting firm for Mobile + JavaScript + NodeJS-centric services
+- Create a consulting firm that focuses on using Alt.Net-centric development techniques
+- Attack mobile computing head-on - go after iOS development with a vengance
+
+
+Branding
+--------
+aleksjones.io => Blogging Outlet
+- Marketing
+- Tech
+- Brand
+push-software.io => Services
+pushmarket.biz => Live Site
+This guy is THE MAN => http://www.s3mobileapps.com/
+
+
+BLOG POSTS!
+~~~~~~~~~~~
+- KnockoutJS Cool
+- 2-way Authentication and identifying folks
+- .NET Security
+- 7 Javascript Tools You Need To Know About
+- Fluent Header Builder for MVC 
+- Composition versus Inheritance
+- Define Resuable for me.  Black box...?
+- HTTP Context Stub on steroids
+- JavaScript Monad
+- C# Currying Function
+- Prevent Logic Leakage i.e. Membership User Approval and Aggregate User
+- What ever happened to Agile == TDD ...?
+- Paean to the Bounded Context
+- Reactive Extensions
+
+
+10 JavaScript Tools You Absolutely Need
+---------------------------------------
+- JSLint
+- JSFiddle
+- ZeptoJs
+- JQuery => http://jqapi.ru/
+- KnockoutJs
+- Bootstrap
+- Less
+- Sammy.js

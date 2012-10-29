@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>pushmarket - edit categories</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+	<script type="text/javascript" src="jquery-1.8.2.js"></script>
+	
+    <!-- Le styles -->
+    <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
+	
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+	  
+	  .table td {
+		vertical-align:middle;
+	  }
+	  .table td span:nth-child(2) {
+		text-align:right;
+	  }
+	  h4 {
+		color: #666;
+	  }
+    </style>
+	
+	<!-- TODO: Fuck man!  Do we really need this...? -->
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+  </head>
+
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">		  
+          <img src="webicon-2.png" style="float:left;" />
+		  <a class="brand" href="#" style="color:#08C;">pushmarket</a>
+          
+		  <div class="nav-collapse collapse">	
+            <ul class="nav">
+              <li class="active"><a href="#">Orders</a></li>
+              <li><a href="#about">Lists</a></li>
+              <li><a href="#contact">Products</a></li>
+              <li><a href="#contact">Customers</a></li>
+              <li><a href="#contact">Admins</a></li>
+			  
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Lists<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+				  
+                  <li class="divider"></li>
+                  
+				  <li class="nav-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+              </li>
+			</ul>
+				<p class="navbar-text pull-right">Logged in as <a href="#" style="color:#08C;" class="navbar-link">aleksjones@gmail.com</a></p>
+			
+			
+			<!--
+            <form class="navbar-form pull-right">
+              <input class="span2" type="text" placeholder="Email">
+              <input class="span2" type="password" placeholder="Password">
+              <button type="submit" class="btn">Sign in</button>
+            </form>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+	
+	<!-- Top Workspace -->
+	<div  style="position:fixed; padding-top:60px; top:0px; width:100%; height:75px; background-color:#FFF; border-bottom:1px dotted #CCC; z-index:1029">
+		<!-- We'll repeat this concept everywhere -->
+		<div  style="position:fixed; padding-top:60px; top:0px; width:100%; height:75px; background-color:#FFF; border-bottom:1px dotted #CCC;">
+			<div class="container">
+				<div class="row-fluid">
+					<div class="span9">
+						<h1>All Categories</h1>
+					</div>
+					<div class="span3" style="margin-top:15px; text-align:right;">
+						<a class="btn btn-primary btn-block">Add New Category <i class="icon-arrow-right icon-white"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Central Containment -->
+    <div class="container" style="margin-top:75px; width:932px; height:1400px; overflow:hidden; position:relative;">
+		<div id="sleeve" style="left:0px; width:932px; position:absolute;">
+			<table class="table table-hover">			
+			<tbody>
+			<tr>
+				<td>
+					<span class="span9">
+						<h4>Shoes</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Ass-Kicking Shoes</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Golf Shoes</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Playah Shoes</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Mountain Shoes</h4>
+					</span>
+					<span class="span3">
+						<a class="btn" href="#"><i class="icon-chevron-up"></i></a>
+						<a class="btn btn-inverse">Edit Category<i class="icon-arrow-right icon-white"></i></a>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="span9">
+						<h4>Jiu-jitsu Gear</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Choke-proof Gis</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Belts</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Mouth Guards</h4>
+					</span>
+					<span class="span3">
+						<a class="btn" href="#"><i class="icon-chevron-up"></i></a>
+						<a class="btn btn-inverse">Edit Category<i class="icon-arrow-right icon-white"></i></a>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="span9">
+						<h4>Helmets</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Open Face</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Vintage</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Viking</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Samurai</h4>
+					</span>
+					<span class="span3">
+						<a class="btn" href="#"><i class="icon-chevron-up"></i></a>
+						<a class="btn btn-inverse">Edit Category<i class="icon-arrow-right icon-white"></i></a>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="span9">
+						<h4>Boxing</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Punching Bags</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Gloves</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Mouth Guards</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Shorts</h4>
+					</span>
+					<span class="span3">
+						<a class="btn" href="#"><i class="icon-chevron-up"></i></a>
+						<a class="btn btn-inverse">Edit Category<i class="icon-arrow-right icon-white"></i></a>
+					</span>
+				</td>
+			</tr>
+<tr>
+				<td>
+					<span class="span9">
+						<h4>Boxing</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Punching Bags</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Gloves</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Mouth Guards</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Shorts</h4>
+					</span>
+					<span class="span3">
+						<a class="btn" href="#"><i class="icon-chevron-up"></i></a>
+						<a class="btn btn-inverse">Edit Category<i class="icon-arrow-right icon-white"></i></a>
+					</span>
+				</td>
+			</tr>
+<tr>
+				<td>
+					<span class="span9">
+						<h4>Boxing</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Punching Bags</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Gloves</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Mouth Guards</h4>
+						<h4>&nbsp; &nbsp; &nbsp; &raquo; Shorts</h4>
+					</span>
+					<span class="span3">
+						<a class="btn" href="#"><i class="icon-chevron-up"></i></a>
+						<a class="btn btn-inverse">Edit Category<i class="icon-arrow-right icon-white"></i></a>
+					</span>
+				</td>
+			</tr>
+
+			</tbody>
+		<table>
+
+    </div> <!-- /sleeve -->
+
+    </div> <!-- /container -->
+
+	
+	<div class="navbar navbar-fixed-bottom">
+		<div style="background-color:#FFF; height:30px; padding-top:10px;  border-top:1px dotted #CCC;">
+			<div class="container">
+			  <footer>
+				<p>&copy; Push Global Software Solutions - LLC 2012 | <a href="#">Company</a> | <a href="#">Contact Technical Support</a></p>
+			  </footer>
+			</div>
+		</div>
+	</div>
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/bootstrap-transition.js"></script>
+    <script src="../assets/js/bootstrap-alert.js"></script>
+    <script src="../assets/js/bootstrap-modal.js"></script>
+    <script src="../assets/js/bootstrap-dropdown.js"></script>
+    <script src="../assets/js/bootstrap-scrollspy.js"></script>
+    <script src="../assets/js/bootstrap-tab.js"></script>
+    <script src="../assets/js/bootstrap-tooltip.js"></script>
+    <script src="../assets/js/bootstrap-popover.js"></script>
+    <script src="../assets/js/bootstrap-button.js"></script>
+    <script src="../assets/js/bootstrap-collapse.js"></script>
+    <script src="../assets/js/bootstrap-carousel.js"></script>
+    <script src="../assets/js/bootstrap-typeahead.js"></script>
+
+  </body>
+</html>
