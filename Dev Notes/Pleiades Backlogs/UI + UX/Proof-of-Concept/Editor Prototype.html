@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>pushmarket - edit categories</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">	
+	<script type="text/javascript" src="jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="knockout-2.1.0.js"></script>	
+    <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
+	
+    <style type="text/css">
+		body {
+			padding-top: 60px;
+			padding-bottom: 40px;
+		}
+		
+		.table td {
+			vertical-align:middle;
+		}
+		
+		h4 {
+			color: #666;
+		}
+		
+		.editorRow:hover {
+			background-color: #c4e3f3;
+		}
+		
+		.workspace-heading { 
+			position:fixed; 
+			margin-top:60px; 
+			top:0px; 
+			width:100%; 
+			height:75px; 
+			background-color:#FFF; 
+			border-bottom:1px dotted #CCC;
+		}
+    </style>	
+	
+	<!-- TODO: move these to a Partial View :-D -->
+	<script type="text/html" id="parent-editor-heading">
+	<div id="heading" class="container" data-bind="ifnot: $root.ChosenParentCategory">
+		<div class="row">
+			<div class="span9">
+				<h1>All Categories</h1>
+			</div>
+			<div class="span3" style="margin-top:15px; text-align:right;">
+				<a class="btn btn-primary btn-block">Add New Category <i class="icon-arrow-right icon-white"></i></a>
+			</div>
+		</div>
+	</div>
+	<div id="heading" class="container" data-bind="if: $root.ChosenParentCategory">
+		<div class="row" style="position:relative;">
+			<!-- TODO: centralize this style -->
+			<div style="left:-75px; margin-top:15px; position:absolute; text-align:right;">
+				<a class="btn btn-inverse"><i class="icon-arrow-left icon-white"></i> Back</a>
+			</div>
+			<div class="span9">
+				<h1><a href="#" style="color:#999;">All Categories</a> &gt; <span data-bind="text: $root.ChosenParentCategory().Name"></span></h1>
+			</div>
+			<div class="span3" style="margin-top:15px; text-align:right;">
+				<a class="btn btn-primary btn-block"><i class="icon-plus icon-white"></i> Add Sub-Category</a>
+			</div>
+		</div>
+	</div>
+	</script>
+	
+	<script type="text/html" id="parent-editor-workspace">
+	<table class="table table-hover">
+		<tbody data-bind="foreach: Categories">
+		<tr>
+			<td>
+				<span class="span9">
+					<h4 data-bind="text: Name"></h4>
+					<div data-bind="foreach: $data.ChildCategories">
+						<h4 style="padding-left:40px;">&raquo; <span data-bind="text: Name"></span></h4>
+					</div>
+				</span>
+				<span class="span3" style="text-align:right;">
+					<a class="btn" href="#"><i class="icon-chevron-up"></i></a>
+					<a class="btn btn-inverse" data-bind="click: $root.GotoCategory">Edit Category<i class="icon-arrow-right icon-white"></i></a>
+				</span>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+	</script>	
+	
+	<script type="text/html" id="child-editor-workspace">
+		<table class="table table-hover" style="margin-bottom:0px;">
+		<tr>
+			<td>
+				<span class="span9">
+					<h4 data-bind="text: $root.ChosenParentCategory().Name"></h4>
+						<span data-bind="text: $root.ChosenParentCategory().SEO"></span>
+				</span>
+				<span class="span3" style="text-align:right;">
+					<p>Touch Row to Edit</p>
+				</span>
+			</td>
+		</tr>
+		</table>
+		
+		<table class="table table-hover">
+			<tbody data-bind="foreach: $root.ChosenParentCategory().ChildCategories">
+			<tr data-bind="if: $root.ChosenCategoryToEdit() != $data, click: $root.EditCategory">
+				<td>
+					<span class="span9">
+						<h4 data-bind="text: '&raquo; ' + $data.Name"></h4>
+						<span data-bind="text: $data.SEO"></span>
+					</span>
+					<span class="span3" style="text-align:right;">
+						<p>Touch Row to Edit</p>
+					</span>
+				</td>
+			</tr>
+			<tr data-bind="if: $root.ChosenCategoryToEdit() == $data">
+				<td style="background-color:#EEE;">
+					<form>
+					<div>
+						<span class="span8" style="float:left;padding-top:5px;"><!-- TODO: why is this float:left?  thought that was automatic...? -->
+							<input id="entry" style="float:left; width:250px; margin-right:20px;" class="input-large" type="text" placeholder="Enter Category Name" data-bind="value: $data.EditName()" />
+							
+							<input id="entry" style="float:left; width:250px;" class="input-large" type="text" value="sport-casual-seo-tag" placeholder="Enter SEO Tag" data-bind="value: $data.EditSEO()" />
+						</span>
+						<span class="span4" style="padding-top:5px; text-align:right;">
+							<a class="btn btn-primary" href="#" data-bind="click: $root.SaveChosenCategoryToEdit"><i class="icon-ok icon-white"></i> Save</a>
+							<a class="btn btn-inverse" href="#" data-bind="click: $root.CancelChosenCategoryToEdit"><i class="icon-remove icon-white"></i> Cancel</a>
+							<a class="btn btn-inverse" href="#"><i class="icon-search icon-white"></i> Products</a>
+						</span>
+					</div>
+					
+					<div style="clear:both; height:20px;width:1px;"></div>
+					</div>
+					
+					<div>
+						<span class="span9" style="float:left;">					
+							<a class="btn btn-primary" href="#"><i class="icon-trash icon-white"></i> Delete</a>
+							<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+								Change Parent Category...
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+							</ul>
+						</span>
+						
+						<span class="span3">
+						</span>
+					</div>
+					</form>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</script>
+	
+	
+	<!-- TODO: move to my array library -->
+	<script type="text/javascript">
+		// TODO: how to add this to Array's prototype...?
+		function ArrayFirstOrNull(input, lambda) {
+			for (var arrayIndex = 0; arrayIndex < input.length; arrayIndex += 1) {
+				var element = input[arrayIndex];
+				if (lambda(element) === true) {
+					return element;
+				}
+			}
+			return null;
+		}
+		
+		// What does the "int" keyword do...?		
+		function IndexOf(input, lambda) {
+			for (var arrayIndex = 0; arrayIndex < input.length; arrayIndex += 1) {
+				if (lambda(input[arrayIndex]) === true) {
+					return arrayIndex;
+				}
+			}
+			return -1;
+		};
+		
+		function GliderWidget(glidingContainer, parentDiv, childDiv) {
+			var self = this;
+			self.LastParentScroll = 0;
+			
+			self.GlideToChild = function() {
+				// save the old scroll position and set the new
+				self.LastParentScroll = $(window).scrollTop();
+				window.scrollTo(0, 0);
+				
+				// REMOVE - should happen INSIDE the prepareTheEditor callback
+				// $("#sleeve2").find("h4").html("You selected: " + adjustedIndex);
+				
+				// prepare the editor
+				$(childDiv).css({ display: "block", left: "940px", top: "0px" });
+				
+				// open the curtains
+				$(parentDiv + ',' + childDiv).animate(
+					{ left: "-=940" }, 
+					{ 
+						complete: function() {
+							$(parentDiv).css({ display: "none" });
+							$(glidingContainer).css({ height: $(childDiv).height() }); 
+						},
+						duration: 200
+					});
+				
+				return false;
+			};
+			
+			self.GlideToParent = function () {	
+				// Should happen AFTER the prepareTheEditor callback						
+				//$("#sleeve2 a[id='editorBack']").bind("click", function(event) {
+				
+				$(parentDiv).css({ display: "block" });
+				$(glidingContainer).css({ height: $(parentDiv).height() });
+				
+				$(parentDiv + "," + childDiv).animate(
+					{ left: "+=940" }, 
+					{ duration: 200, complete: function() { window.scrollTo(0, oldScroll); } }
+				);
+			};
+		}		
+	</script>
+	
+	<!-- TODO: don't forget scroll spy, brah! -->	
+	<script type="text/javascript">
+		function DataAdapter() {
+			var self = this;
+			self.DataStore = [
+					{ 	Id: "3",
+						Name: "Shoes",
+						SEO: "sample-seo-text",
+						ChildCategories : [
+							{ Id: "4", Name: "Golf Shoes", SEO: "sample-seo-text-4" },
+							{ Id: "5", Name: "Playah Shoes", SEO: "sample-seo-text-5" },
+							{ Id: "6", Name: "Mountain Shoes", SEO: "sample-seo-text-6" },
+							{ Id: "7", Name: "Ass-Kicking Shoes", SEO: "sample-seo-text-7" }
+						]},
+					{ 	Id: "8",
+						Name: "Jiu-jitsu Gear",
+						SEO: "sample-seo-text-8",
+						ChildCategories : [
+							{ Id: "9", Name: "Choke-proof Gis", SEO: "sample-seo-text-9" },
+							{ Id: "10", Name: "Belts", SEO: "sample-seo-text-10" },
+							{ Id: "11", Name: "Mouth Guards", SEO: "sample-seo-text-11" }					
+						]},
+					{ 	Id: "12",
+						Name: "Helmets",
+						SEO: "sample-seo-text-12",
+						ChildCategories : [
+							{ Id: "13", Name: "Open Face", SEO: "sample-seo-text-13" },
+							{ Id: "14", Name: "Vintage", SEO: "sample-seo-text-14" },
+							{ Id: "15", Name: "Viking", SEO: "sample-seo-text-15" },
+							{ Id: "16", Name: "Samurai", SEO: "sample-seo-text-16" }
+						]},
+					{ 	Id: "17",
+						Name: "Boxing",
+						SEO: "sample-seo-text-17",
+						ChildCategories : [
+							{ Id: "18", Name: "Punching Bags", SEO: "sample-seo-text-18" },
+							{ Id: "19", Name: "Gloves", SEO: "sample-seo-text-19" },
+							{ Id: "20", Name: "Mouth Guards", SEO: "sample-seo-text-20" },
+							{ Id: "21", Name: "Shorts", SEO: "sample-seo-text-21" }
+						]},
+					{ 	Id: "22",
+						Name: "Paddy Cake",
+						SEO: "sample-seo-text-22",
+						ChildCategories : [
+							{ Id: "21", Name: "Tea", SEO: "sample-seo-text-22" },
+							{ Id: "22", Name: "Spice", SEO: "sample-seo-text-23" },
+							{ Id: "23", Name: "Everything Nice", SEO: "sample-seo-text-23" },
+							{ Id: "24", Name: "Crumpets", SEO: "sample-seo-text-24" }
+						]}
+				];
+			
+			self.GetAllCategories = function () {
+				return self.DataStore;
+			}
+			
+			self.GetSingleCategory = function (id) {
+				var index = IndexOf(self.DataStore, function(element) { return element.Id === id; });
+				return self.DataStore[index];
+			}
+			
+			self.SaveSingleCategory = function (category) {
+				var index = IndexOf(self.DataStore, function(element) { return element.Id === category.Id; });
+				
+			}
+		}
+		
+		// May be unnecessary....!
+		function KnockoutEnableParentCategory(category) {
+			category.Name = ko.observable(category.Name);
+			category.SEO = ko.observable(category.SEO);
+			
+			$.each(category.ChildCategories, function (index, element) {
+				console.log(element.Name + " " + element.SEO);
+				element.Name = ko.observable(element.Name);
+				element.SEO = ko.observable(element.SEO);
+			});
+		}
+		
+		
+		// TODO: add a collapse function
+		// TODO: after the Add function is invoked, fetch that from the server, insert at beginning of array
+		// TODO: how do we modify one of the array's entries...?
+		// REMEMBER: premature optimization is the root of all evil!
+		
+		function CategoryViewModel(dataAdapter) {	
+			var self = this;			
+			self.DataAdapter = dataAdapter;
+			
+			var data = self.DataAdapter.GetAllCategories();			
+			self.Categories = ko.observableArray(data);
+			self.ChosenParentCategory = ko.observable(null);
+			self.ChosenCategoryToEdit = ko.observable(null);
+			
+			self.Glider = new GliderWidget("#glidingContainer", "#parentEditor", "#childEditor");
+			self.ParentViewEnabled = true;
+			self.ChildViewEnabled = false;
+			
+			self.GotoCategory = function(category) {
+				if (self.ParentViewEnabled === false) {
+					return;
+				}				
+				self.ParentViewEnabled = false;
+				
+				// TODO: This is superfluous, for now.  Resolve later.
+				// var index = IndexOf(self.Categories(), function(item) { return item.Id === category.Id });
+				
+				var categoryFromServer = self.DataAdapter.GetSingleCategory(category.Id);
+				//KnockoutEnableParentCategory(categoryFromServer);
+				
+				// TODO: confirm existence, if not, throwup a message, reenable ParentView
+
+				self.ChosenParentCategory(categoryFromServer);				
+				self.Glider.GlideToChild();				
+				self.ChildViewEnabled = true;
+			}
+			
+			self.EditCategory = function(category) {
+				if (self.ChildViewEnabled === false) {
+					return;
+				}
+				
+				category.EditName = ko.observable(category.Name);
+				category.EditSEO = ko.observable(category.SEO);
+				self.ChosenCategoryToEdit(category);
+			}
+			
+			self.SaveChosenCategoryToEdit = function(category) {
+				category.Name = category.EditName();
+				category.SEO = category.EditSEO();
+				
+				// Actually! -- save it to the server and re-render
+			}
+			
+			self.CancelChosenCategoryToEdit = function() {
+				self.ChosenCategoryToEdit(null);
+			}
+			
+			self.AddCategory = function() {
+				
+				// TODO: Return from adding a new Category - scrollToTop, getNewCategory, InsertItIntoTheModel
+			}
+			
+			self.UpdateCategory = function(category) {
+				var index = IndexOf(self.Categories(), function(item) { return item.Id === category.Id });
+				var newList = self.Categories();
+				newList[index] = GetSingleCategory();
+				self.Categories(newList);
+			}			
+		}
+		
+		$(function() {			
+			ko.applyBindings(new CategoryViewModel(new DataAdapter()));
+		});
+	</script>
+	
+	<!-- TODO: Fuck man!  Do we really need this...? -->
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  
+  <body>
+	<!-- TODO: place this in a Partial View -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">		  
+          <img src="webicon-2.png" style="float:left;" />
+		  <a class="brand" href="#" style="color:#08C;">pushmarket</a>
+          
+		  <div class="nav-collapse collapse">	
+            <ul class="nav">
+              <li class="active"><a href="#">Orders</a></li>
+              <li><a href="#about">Lists</a></li>
+              <li><a href="#contact">Products</a></li>
+              <li><a href="#contact">Customers</a></li>
+              <li><a href="#contact">Admins</a></li>
+			  
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Lists<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+				  
+                  <li class="divider"></li>
+                  
+				  <li class="nav-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+              </li>
+			</ul>
+			<p class="navbar-text pull-right">Logged in as <a href="#" style="color:#08C;" class="navbar-link">aleksjones@gmail.com</a></p>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+	
+	<!-- Top Workspace -->
+	<!-- TODO: clean-up this CSS -->
+	<div style="position:fixed; top:0px; width:100%; height:75px; background-color:#FFF; border-bottom:1px dotted #CCC; z-index:1029">
+		<!-- We'll repeat this concept everywhere -->
+		<div class="workspace-heading" data-bind="template: { name: 'parent-editor-heading', data: null }"></div>
+	</div>	
+	
+	<!-- Gliding UI Container -->
+    <div id="glidingContainer" class="container" style="margin-top:75px; width:932px; height:1400px; overflow:hidden; position:relative;">		
+		<div id="parentEditor" style="left:0px; width:932px; position:absolute;">
+			<div data-bind="template: { name: 'parent-editor-workspace', data: $root }">
+			</div>
+		</div>
+		
+		<div data-bind="if: $root.ChosenParentCategory" id="childEditor" style="left:0px; width:932px; position:absolute; display:none;">
+			<div data-bind="template: { name: 'child-editor-workspace', data: $root }">
+			</div>
+		</div>
+    </div>
+	
+	<!-- TODO: move this to a Partial View -->
+	<div class="navbar navbar-fixed-bottom">
+		<div style="background-color:#FFF; height:30px; padding-top:10px;  border-top:1px dotted #CCC;">
+			<div class="container">
+			  <footer>
+				<p>&copy; Push Global Software Solutions - LLC 2012 | <a href="#">Company</a> | <a href="#">Contact Technical Support</a></p>
+			  </footer>
+			</div>
+		</div>
+	</div>
+	
+	
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/bootstrap-transition.js"></script>
+    <script src="../assets/js/bootstrap-alert.js"></script>
+    <script src="../assets/js/bootstrap-modal.js"></script>
+    <script src="../assets/js/bootstrap-dropdown.js"></script>
+    <script src="../assets/js/bootstrap-scrollspy.js"></script>
+    <script src="../assets/js/bootstrap-tab.js"></script>
+    <script src="../assets/js/bootstrap-tooltip.js"></script>
+    <script src="../assets/js/bootstrap-popover.js"></script>
+    <script src="../assets/js/bootstrap-button.js"></script>
+    <script src="../assets/js/bootstrap-collapse.js"></script>
+    <script src="../assets/js/bootstrap-carousel.js"></script>
+    <script src="../assets/js/bootstrap-typeahead.js"></script> -->
+
+  </body>
+</html>

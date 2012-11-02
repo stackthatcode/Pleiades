@@ -62,11 +62,7 @@
 					self.seats.remove(seat);	// DON'T BE FOOLED!  
 				}
 				
-				self.addSeat = function(input) {
-					alert(input);
-					alert(self.seats.unshift);
-					alert(self.seats);
-					
+				self.addSeat = function(input) {					
 					self.seats.unshift(new SeatReservation("Ralph", self.availableMeals[1]));
 				}
 				
