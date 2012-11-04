@@ -104,6 +104,7 @@ Technology Backlog
 - C# => DONE
 - ASP.NET MVC => DONE
 
+- Emberjs => TODO
 - Sammy.js => TODO
 - Razor View Engine => IN PROGRESS
 - CSS styling => IN PROGRESS
