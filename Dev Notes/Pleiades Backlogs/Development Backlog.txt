@@ -1,31 +1,14 @@
 FRONTRANGE - HOTZONE
 ====================
 
-Burndown
-~~~~~~~~
+Burndown - 11/4/2012
+~~~~~~~~~~~~~~~~~~~~
 JQuery Sliding Drill Down Action
 - HTML Overflow => DONE
 - Motion/animation => DONE
 - Prototype is finished(!!!) => DONE
 - Scroll Position Save + Recovery => DONE
 - KnockoutJS tutorial => DONE
-
-
-Front Range
------------
-- Create a JQuery plug-in - or at least a self-contained script => TODO
-- How to determine the height of the Div...?  Add a function to it or something...? => TODO
-- http://stackoverflow.com/questions/6237198/jquery-show-div-and-scroll-to-it-without-hashtag-in-url
-- Possibly create a separate Adapter class...  which can be mocked up so I can test my AJAX stuff separately => TODO
-
-
-Good Stuff
-----------
-- http://zeptojs.com/#download => whut...?
-- http://www.startuppack.org/ whut...?
-- https://github.com/websanova/jquery-url#url
-- http://news.ycombinator.com/item?id=4707903
-
 
 Sub-Category Editor
 -------------------
@@ -48,42 +31,49 @@ AJAX Architecture => IN PROGRESS
 - Add New Category Button
 - Go Back Button
 
-
-Category Editor - GROCERY LIST
-------------------------------
-C# Controller
-- CRUD JSON Methods => TODO
-- C# + JQuery method which creates RESTful Actions => TODO - MAYBE
-
 Templates
 - Add New Template => TODO
 - Edit Template => TODO
 
 Control Flow
 - Maintain State via closures wired to the  ???
-
-Interface Design Stuff
-- Change Parent Category => TODO
-- Collapse/Expand Button => TODO
-- AJAX Hourglass Design => TODO
-- Back Button interception Plumbing => TODO
+- Create a JQuery plug-in - or at least a self-contained script => DONE
+- How to determine the height of the Div...?  Add a function to it or something...? => DONE
+- C# + JQuery method which creates RESTful Actions => TODO - MAYBE
 - Bread Crumb Rendering
-- Design Category => Product Listing => TODO
-- Tooltips => TODO
+- Back Button interception Plumbing => OUT-OF-SCOPE FOR NOW
 
-Infrastructure
-- Error Handling 400 => TODO
-- Error Handling 500 => TODO
-- Timeout Error Handling => TODO
-- Server Side Error Logging => TODO
 
+
+Front Range - 11/4/2012 - RECAP
+-------------------------------
+- Good to create a solid DataAdapter mock - CHECK
+- Next Steps:
+1.) Rewire the new DataAdapter into templates
+2.) Global Error Handling w/ Pop-up
+3.) Products Pop-up
+4.) AJAX Hourglass
+5.) Collapse Button
+6.) Change Category
+7.) Validation
+
+- http://stackoverflow.com/questions/6237198/jquery-show-div-and-scroll-to-it-without-hashtag-in-url
+- Possibly create a separate Adapter class...  which can be mocked up so I can test my AJAX stuff separately => TODO
+
+
+Good Stuff
+----------
+- http://zeptojs.com/#download => whut...?
+- http://www.startuppack.org/ whut...?
+- https://github.com/websanova/jquery-url#url
+- http://news.ycombinator.com/item?id=4707903
+
+
+Category Editor - GROCERY LIST
+------------------------------
 Front-End Coding
 - How to include all these dependencies...? => We'll see
 
-What about this...?
-    <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
-	
 => Convert existing Pleiades stuff to Admin Interface/Bootstrap => TODO
 => Domain Modeling and Write User Stories - after reading through Shopify's API docs => TODO
 => Where did I put my fonts...?  What's a good resource for typography and fonts...? => TODO
@@ -104,19 +94,19 @@ Technology Backlog
 - C# => DONE
 - ASP.NET MVC => DONE
 
-- Emberjs => TODO
-- Sammy.js => TODO
 - Razor View Engine => IN PROGRESS
-- CSS styling => IN PROGRESS
-- GZip encoding of my AJAX traffic...?
-- JSLint => TODO
-- JSFiddle => TODO
-- ZeptoJs => TODO
-- Mustache.js => TODO
 - JavaScript (protoypes) => TODO
 - Entity Framework => IN PROGRESS
-- Less => TODO
 - Git + GitHub => IN PROGRESS
+- CSS styling => IN PROGRESS
+- GZip encoding of my AJAX traffic...?
+- JSLint => IN PROGRESS
+- JSFiddle => TODO
+- Emberjs => TODO
+- Sammy.js => TODO
+- ZeptoJs => TODO
+- Mustache.js => TODO
+- Less => TODO
 - Azure => EVENTUALLY
  
 
@@ -126,12 +116,11 @@ MORE BIG FISH
 => How do browsers handle caching of the Javascript Libraries...? => TODO
 => Category Editor using JKB development: MILESTONE
 => Entity Framework Code First
-=> Store Front Design
+=> Store Front Design - Q1/2013
 => Payment Processing Options, API's etc. => IN PROGRESS
 => Custom Caching solution...?
 => Find a good resource for Typography, Fonts, etc. => TODO
 => http://news.ycombinator.com/item?id=4669866 => IMPORTANT
-
 
 E-Commerce API's & Payment Processors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -144,6 +133,7 @@ E-Commerce API's & Payment Processors
 - PayPal
 - Wickedfire look-up payment processors...? => TODO
 - Authorize.NET
+
 
 
 Research Backlog
@@ -162,6 +152,7 @@ Research Backlog
 - RESEARCH a lighter-weight ORM => TODO
 
 
+
 Good Stuff
 ----------
 - http://fortawesome.github.com/Font-Awesome/
@@ -175,13 +166,10 @@ Development Backlog
 - How to deal with LastUpdated field => IN PROGRESS
 * Get Scott Hanselman's obj/bin cleaner utility => IN PROGRESS
 - Fluent Dependency Builder => TODO
-- TO BUILD => unobtrusive JQuery initialization stuff
 
 THE OTHER BACKLOG
 =================
-- CSS Selectors via JQuery => IMPORTANT
 * Security n Stuff
-* Research & Design
 - How to manage CSS files and dependencies from separate assemblies in ASP.NET MVC => IN PROGRESS
 - http://fluentvalidation.codeplex.com/ => TODO
 * Should we create IdentityUser Integration Tests? => TODO
@@ -189,7 +177,6 @@ THE OTHER BACKLOG
 - Logging Module
 - Email Service w/ Links (MSMQ?)
 * Pleiades Framework
-- Create generalized Pleiades Pop-up JQuery Library (OK, YES/NO dialogs)
 - Copy jqia2.support.js functions
 * General Fixes
-- Disable Caching for AJAX stuff => TODO
+- Disable Caching for AJAX stuff with ASP.NET MVC=> TODO

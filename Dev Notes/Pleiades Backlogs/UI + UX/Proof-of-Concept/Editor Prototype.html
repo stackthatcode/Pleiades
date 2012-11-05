@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>pushmarket - edit categories</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script type="text/javascript" src="jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="knockout-2.1.0.js"></script>	
     <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -40,27 +40,27 @@
 	
 	<!-- TODO: move these to a Partial View :-D -->
 	<script type="text/html" id="parent-editor-heading">
-		<div id="heading" class="container" data-bind="ifnot: $root.ChosenParentCategory">
+		<div id="heading" class="container" data-bind="ifnot: $root.ChildViewMasterRecord">
 			<div class="row">
 				<div class="span9">
 					<h1>All Categories</h1>
 				</div>
 				<div class="span3" style="margin-top:15px; text-align:right;">
-					<a class="btn btn-primary btn-block">Add New Category <i class="icon-arrow-right icon-white"></i></a>
+					<a class="btn btn-primary btn-block" data-bind="click: $root.AddChildViewMasterRecord">Add New Category <i class="icon-arrow-right icon-white"></i></a>
 				</div>
 			</div>
-		</div>
-		<div id="heading" class="container" data-bind="if: $root.ChosenParentCategory">
+		</div>		
+		<div id="heading" class="container" data-bind="if: $root.ChildViewMasterRecord">
 			<div class="row" style="position:relative;">
 				<!-- TODO: centralize this style -->
 				<div style="left:-75px; margin-top:15px; position:absolute; text-align:right;">
-					<a class="btn btn-inverse"><i class="icon-arrow-left icon-white"></i> Back</a>
+					<a class="btn btn-inverse" data-bind="click: $root.BackToParentView"><i class="icon-arrow-left icon-white"></i> Back</a>
 				</div>
 				<div class="span9">
-					<h1><a href="#" style="color:#999;">All Categories</a> &gt; <span data-bind="text: $root.ChosenParentCategory().Name"></span></h1>
+					<h1><span data-bind="text: $root.ChildViewMasterRecord().Name"></span></h1>
 				</div>
 				<div class="span3" style="margin-top:15px; text-align:right;">
-					<a class="btn btn-primary btn-block"><i class="icon-plus icon-white"></i> Add Sub-Category</a>
+					<a class="btn btn-primary btn-block" data-bind="click: $root.AddChildViewRecord"><i class="icon-plus icon-white"></i> Add Sub-Category</a>
 				</div>
 			</div>
 		</div>
@@ -68,18 +68,18 @@
 	
 	<script type="text/html" id="parent-editor-workspace">
 		<table class="table table-hover">
-			<tbody data-bind="foreach: Categories">
+			<tbody data-bind="foreach: $root.Categories">
 			<tr>
 				<td>
 					<span class="span9">
 						<h4 data-bind="text: Name"></h4>
-						<div data-bind="foreach: $data.ChildCategories">
+						<div data-bind="foreach: $data.Categories">
 							<h4 style="padding-left:40px;">&raquo; <span data-bind="text: Name"></span></h4>
 						</div>
 					</span>
 					<span class="span3" style="text-align:right;">
 						<a class="btn" href="#"><i class="icon-chevron-up"></i></a>
-						<a class="btn btn-inverse" data-bind="click: $root.GotoCategory">Edit Category<i class="icon-arrow-right icon-white"></i></a>
+						<a class="btn btn-inverse" data-bind="click: $root.GotoChildView">Edit Category<i class="icon-arrow-right icon-white"></i></a>
 					</span>
 				</td>
 			</tr>
@@ -88,68 +88,22 @@
 	</script>
 	
 	<script type="text/html" id="child-editor-workspace">
-		<!-- Parent Categories -->
-		<table class="table table-hover" style="margin-bottom:0px;">
-			<tbody data-bind="with: $root.ChosenParentCategory">
-			<tr data-bind="if: $root.ChosenCategoryToEdit() != $data, click: $root.EditCategoryChild">
-				<td>
-					<span class="span9">
-						<h4 data-bind="text: $data.Name"></h4>
-						<span data-bind="text: $data.SEO"></span>
-					</span>
-					<span class="span3" style="text-align:right;">
-						<p>Touch Row to Edit</p>
-					</span>
-				</td>
-			</tr>
-			<tr data-bind="if: $root.ChosenCategoryToEdit() == $data">
-				<td style="background-color:#EEE;">
-					<form>
-					<div>
-						<span class="span8" style="float:left;padding-top:5px;"><!-- TODO: why is this float:left?  thought that was automatic...? -->
-							<input id="entry" style="float:left; width:250px; margin-right:20px;" class="input-large" type="text" placeholder="Enter Category Name" data-bind="value: $data.EditName" />
-							
-							<input id="entry" style="float:left; width:250px;" class="input-large" type="text" value="sport-casual-seo-tag" placeholder="Enter SEO Tag" data-bind="value: $data.EditSEO" />
-						</span>
-						<span class="span4" style="padding-top:5px; text-align:right;">
-							<a class="btn btn-primary" href="#" data-bind="click: $root.SaveChosenCategoryToEdit"><i class="icon-ok icon-white"></i> Save</a>
-							<a class="btn btn-inverse" href="#" data-bind="click: $root.CancelChosenCategoryToEdit"><i class="icon-remove icon-white"></i> Cancel</a>
-							<a class="btn btn-inverse" href="#"><i class="icon-search icon-white"></i> Products</a>
-						</span>
-					</div>
-					
-					<div style="clear:both; height:20px;width:1px;"></div>
-					</div>
-					
-					<div>
-						<span class="span9" style="float:left;">					
-							<a class="btn btn-primary" href="#"><i class="icon-trash icon-white"></i> Delete</a>
-						</span>
-					</div>
-					</form>
-				</td>
-			</tr>
-			
-			</tbody>
-		</table>
-
-		
 		<!-- Child Categories -->
 		<table class="table table-hover">
-			<tbody data-bind="foreach: $root.ChosenParentCategory().ChildCategories">
-			<tr data-bind="if: $root.ChosenCategoryToEdit() != $data, click: $root.EditCategoryChild">
+			<tbody data-bind="foreach: $root.ChildViewMasterRecord().Categories">
+			<tr data-bind="if: $root.ChildViewRecordEditing() != $data, click: $root.EditChildViewRecord">
 				<td>
 					<span class="span9">
-						<h4 data-bind="text: '&raquo; ' + $data.Name()"></h4>
+						<h4 data-bind="if: $data.ParentId == null, text: $data.Name()"></h4>
+						<h4 data-bind="if: $data.ParentId != null, text: '&raquo; ' + $data.Name()"></h4>						
 						<span data-bind="text: $data.SEO()"></span>
 					</span>
 					<span class="span3" style="text-align:right;">
 						<p>Touch Row to Edit</p>
 					</span>
 				</td>
-			</tr>
-			
-			<tr data-bind="if: $root.ChosenCategoryToEdit() == $data">
+			</tr>			
+			<tr data-bind="if: $root.ChildViewRecordEditing() == $data">
 				<td style="background-color:#EEE;">
 					<form>
 					<div>
@@ -159,26 +113,24 @@
 							<input id="entry" style="float:left; width:250px;" class="input-large" type="text" value="sport-casual-seo-tag" placeholder="Enter SEO Tag" data-bind="value: $data.EditSEO" />
 						</span>
 						<span class="span4" style="padding-top:5px; text-align:right;">
-							<a class="btn btn-primary" href="#" data-bind="click: $root.SaveChosenCategoryToEdit"><i class="icon-ok icon-white"></i> Save</a>
-							<a class="btn btn-inverse" href="#" data-bind="click: $root.CancelChosenCategoryToEdit"><i class="icon-remove icon-white"></i> Cancel</a>
+							<a class="btn btn-primary" href="#" data-bind="click: $root.SaveRecord"><i class="icon-ok icon-white"></i> Save</a>
+							<a class="btn btn-inverse" href="#" data-bind="click: $root.CancelEdit"><i class="icon-remove icon-white"></i> Cancel</a>
 							<a class="btn btn-inverse" href="#"><i class="icon-search icon-white"></i> Products</a>
 						</span>
-					</div>
-					
+					</div>					
 					<div style="clear:both; height:20px;width:1px;"></div>
-					</div>
-					
+					</div>					
 					<div>
 						<span class="span9" style="float:left;">					
-							<a class="btn btn-primary" href="#"><i class="icon-trash icon-white"></i> Delete</a>
+							<a class="btn btn-primary" href="#"><i class="icon-trash icon-white"></i> Delete</a>							
+							<!-- TODO: wire this into the matrix -->
 							<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
 								Change Parent Category...
 								<span class="caret"></span>
-							</a>
+							</a>							
 							<ul class="dropdown-menu">
 							</ul>
-						</span>
-						
+						</span>						
 						<span class="span3">
 						</span>
 					</div>
@@ -189,194 +141,25 @@
 		</table>
 	</script>
 	
-	
-	<!-- TODO: move to my array library -->
-	<script type="text/javascript">
-		// TODO: how to add this to Array's prototype...?
-		function ArrayFirstOrNull(input, lambda) {
-			for (var arrayIndex = 0; arrayIndex < input.length; arrayIndex += 1) {
-				var element = input[arrayIndex];
-				if (lambda(element) === true) {
-					return element;
-				}
-			}
-			return null;
-		}
-		
-		// What does the "int" keyword do...?		
-		function IndexOf(input, lambda) {
-			for (var arrayIndex = 0; arrayIndex < input.length; arrayIndex += 1) {
-				if (lambda(input[arrayIndex]) === true) {
-					return arrayIndex;
-				}
-			}
-			return -1;
-		};
-		
-		function DeepClone(obj) {
-			// Handle the 3 simple types, and null or undefined
-			if (null == obj || "object" != typeof obj) return obj;
-			
-			// Handle Date
-			if (obj instanceof Date) {
-				var copy = new Date();
-				copy.setTime(obj.getTime());
-				return copy;
-			}
-			
-			// Handle Array
-			if (obj instanceof Array) {
-				var copy = [];
-				for (var i = 0, len = obj.length; i < len; ++i) {
-					copy[i] = DeepClone(obj[i]);
-				}
-				return copy;
-			}
-
-			// Handle Object
-			if (obj instanceof Object) {
-				var copy = {};
-				for (var attr in obj) {
-					if (obj.hasOwnProperty(attr)) copy[attr] = DeepClone(obj[attr]);
-				}
-				return copy;
-			}
-			
-			throw new Error("Unable to copy obj! Its type isn't supported.");
-		}
-		
-		function GliderWidget(glidingContainer, parentDiv, childDiv) {
-			var self = this;
-			self.LastParentScroll = 0;
-			
-			self.GlideToChild = function() {
-				// save the old scroll position and set the new
-				self.LastParentScroll = $(window).scrollTop();
-				window.scrollTo(0, 0);
-				
-				// REMOVE - should happen INSIDE the prepareTheEditor callback
-				// $("#sleeve2").find("h4").html("You selected: " + adjustedIndex);
-				
-				// prepare the editor
-				$(childDiv).css({ display: "block", left: "940px", top: "0px" });
-				
-				// open the curtains
-				$(parentDiv + ',' + childDiv).animate(
-					{ left: "-=940" }, 
-					{ 
-						complete: function() {
-							$(parentDiv).css({ display: "none" });
-							$(glidingContainer).css({ height: $(childDiv).height() }); 
-						},
-						duration: 200
-					});
-				
-				return false;
-			};
-			
-			self.GlideToParent = function () {	
-				// Should happen AFTER the prepareTheEditor callback						
-				//$("#sleeve2 a[id='editorBack']").bind("click", function(event) {
-				
-				$(parentDiv).css({ display: "block" });
-				$(glidingContainer).css({ height: $(parentDiv).height() });
-				
-				$(parentDiv + "," + childDiv).animate(
-					{ left: "+=940" }, 
-					{ duration: 200, complete: function() { window.scrollTo(0, oldScroll); } }
-				);
-			};
-		}		
-	</script>
-	
 	<!-- TODO: don't forget scroll spy, brah! -->	
-	<script type="text/javascript">
-		function MockDataAdapter() {
-			var self = this;
-			self.DataStore = [
-				{ 	Id: "3",
-					Name: "Shoes",
-					SEO: "sample-seo-text",
-					ChildCategories : [
-						{ Id: "4", Name: "Golf Shoes", SEO: "sample-seo-text-4" },
-						{ Id: "5", Name: "Playah Shoes", SEO: "sample-seo-text-5" },
-						{ Id: "6", Name: "Mountain Shoes", SEO: "sample-seo-text-6" },
-						{ Id: "7", Name: "Ass-Kicking Shoes", SEO: "sample-seo-text-7" }
-					]},
-				{ 	Id: "8",
-					Name: "Jiu-jitsu Gear",
-					SEO: "sample-seo-text-8",
-					ChildCategories : [
-						{ Id: "9", Name: "Choke-proof Gis", SEO: "sample-seo-text-9" },
-						{ Id: "10", Name: "Belts", SEO: "sample-seo-text-10" },
-						{ Id: "11", Name: "Mouth Guards", SEO: "sample-seo-text-11" }					
-					]},
-				{ 	Id: "12",
-					Name: "Helmets",
-					SEO: "sample-seo-text-12",
-					ChildCategories : [
-						{ Id: "13", Name: "Open Face", SEO: "sample-seo-text-13" },
-						{ Id: "14", Name: "Vintage", SEO: "sample-seo-text-14" },
-						{ Id: "15", Name: "Viking", SEO: "sample-seo-text-15" },
-						{ Id: "16", Name: "Samurai", SEO: "sample-seo-text-16" }
-					]},
-				{ 	Id: "17",
-					Name: "Boxing",
-					SEO: "sample-seo-text-17",
-					ChildCategories : [
-						{ Id: "18", Name: "Punching Bags", SEO: "sample-seo-text-18" },
-						{ Id: "19", Name: "Gloves", SEO: "sample-seo-text-19" },
-						{ Id: "20", Name: "Mouth Guards", SEO: "sample-seo-text-20" },
-						{ Id: "21", Name: "Shorts", SEO: "sample-seo-text-21" }
-					]},
-				{ 	Id: "22",
-					Name: "Paddy Cake",
-					SEO: "sample-seo-text-22",
-					ChildCategories : [
-						{ Id: "21", Name: "Tea", SEO: "sample-seo-text-22" },
-						{ Id: "22", Name: "Spice", SEO: "sample-seo-text-23" },
-						{ Id: "23", Name: "Everything Nice", SEO: "sample-seo-text-23" },
-						{ Id: "24", Name: "Crumpets", SEO: "sample-seo-text-24" }
-					]}
-			];
-			
-			self.RetrieveAllCategories = function () {
-				var output = [];
-				$.each(self.DataStore, function(index, element) { output.push(DeepClone(element)); });
-				return output;
-			}
-			
-			self.RetrieveParentCategory = function (id) {
-				var index = IndexOf(self.DataStore, function(element) { return element.Id === id; });
-				return DeepClone(self.DataStore[index]);
-			}
-			
-			self.SaveParentCategory = function (category) {
-				var index = IndexOf(self.DataStore, function(element) { return element.Id === category.Id; });				
-				self.DataStore[index] = category;
-			}
-		}
-		
-		// TODO: add a collapse function
-		// TODO: after the Add function is invoked, fetch that from the server, insert at beginning of array
-		// TODO: how do we modify one of the array's entries...?
-		// REMEMBER: premature optimization is the root of all evil!
-		
+	<script type="text/javascript">						
 		function CategoryViewModel(dataAdapter) {	
 			var self = this;
 			
 			// transformers
-			self.ToViewModelCategory = function(category) {
-				var viewModel = {
-					Id: category.Id,
-					Name: ko.observable(category.Name),
-					SEO: ko.observable(category.SEO),
-					ChildCategories: []
-				};
+			self.AllCategoriesToViewModel = function(data) {
+				var output = ko.observableArray();
+				$.each(data, function(index, category) { output.push(self.CategoryToViewModel(category)); });
+				return output;
+			}
+			
+			self.CategoryToViewModel = function(masterCategory) {
+				var viewModel = ko.observableArray();
 				
-				$.each(category.ChildCategories, function (index, element) {
-					viewModel.ChildCategories.push({
+				$.each(masterCategory.Categories, function (index, element) {
+					viewModel.push({
 						Id: element.Id,
+						ParentId: element.ParentId,
 						Name: ko.observable(element.Name),
 						SEO: ko.observable(element.SEO),
 					});
@@ -384,106 +167,123 @@
 				return viewModel;
 			}
 			
-			self.ToModelCategory = function(category) {
+			self.CategoryToServerModel = function(category) {
 				var model = {
 					Id: category.Id,
 					Name: category.Name(),
 					SEO: category.SEO(),
-					ChildCategories: []					
+					ParentId: category.ParentId
 				};
-				
-				$.each(category.ChildCategories, function (index, element) {
-					model.ChildCategories.push({
-						Id: element.Id,
-						Name: element.Name(),
-						SEO: element.SEO()
-					});
-				});
 				return model;
 			};
 			
 			// state management methods
-			self.GotoCategory = function(category) {
+			self.GotoSingleParentView = function(masterRecord) {
 				if (self.ParentViewEnabled === false) { return; }
 				self.ParentViewEnabled = false;
-								
-				var data = self.ToViewModelCategory(self.DataAdapter.RetrieveParentCategory(category.Id));
+				
+				if (masterRecord.Id != null) {
+					masterRecord = self.CategoryToViewModel(self.DataAdapter.RetrieveParentCategory(masterRecord.Id));
+				}
+				
 				// TODO: error handling for confirm existence, if not, throwup a message, reenable ParentView
 				
-				self.ChosenParentCategory(data);
+				self.ChildViewMasterRecord(masterRecord);
 				self.Glider.GlideToChild();				
 				self.ChildViewEnabled = true;
 			}
 			
-			self.EditCategory = function(childCategory) {
-				if (self.ChildViewEnabled === false) { return; }
-				
-				childCategory.EditName = ko.observable(childCategory.Name());
-				childCategory.EditSEO = ko.observable(childCategory.SEO());
-				self.ChosenCategoryToEdit(childCategory);
-			}
-			
-			self.EditCategoryChild = function(childCategory) {
-				if (self.ChildViewEnabled === false) { return; }
-				
-				childCategory.EditName = ko.observable(childCategory.Name());
-				childCategory.EditSEO = ko.observable(childCategory.SEO());
-				self.ChosenCategoryToEdit(childCategory);
-			}
-			
-			self.SaveChosenCategoryToEdit = function(childCategory) {
-				if (self.ChildViewEnabled === false) { return; }
-				
-				childCategory.Name(childCategory.EditName());
-				childCategory.SEO(childCategory.EditSEO());
-				
-				self.DataAdapter.SaveParentCategory(self.ToModelCategory(self.ChosenParentCategory()));
-				var data = self.DataAdapter.RetrieveParentCategory(self.ChosenParentCategory().Id);				
-				self.ChosenParentCategory(self.ToViewModelCategory(data));
-				self.ChosenCategoryToEdit(null);
-			}
-			
-			self.CancelChosenCategoryToEdit = function() {
-				if (self.ChildViewEnabled === false) { return; }
-				
-				self.ChosenCategoryToEdit(null);
-			}
-			
-			self.GoBack() = function() { 
+			self.BackToAllParentsView = function() { 
 				if (self.ChildViewEnabled === false) { return; }
 				self.ChildViewEnabled = false;
 				
-				var data = self.DataAdapter.RetrieveAllCategories();			
-				$.each(data, function(index, category) { data[index] = self.ToViewModelCategory(category); });			
-				self.Categories = ko.observableArray(data);
+				self.Categories(self.AllMasterCategoriesToViewModel(self.DataAdapter.RetrieveAllCategories()));
 				
-				self.Glide.GlideToParent();
+				self.Glider.GlideToParent();
+				self.ChildViewMasterRecord(null);
+				self.ChildViewRecordEditing(null);				
 				self.ParentViewEnabled = true;
 			}
 			
-			self.AddCategory = function() {				
-				// TODO: Return from adding a new Category - scrollToTop, getNewCategory, InsertItIntoTheModel
+			self.EditRecord = function(record) {
+				if (self.ChildViewEnabled === false) { return; }
+				
+				record.EditName = ko.observable(record.Name());
+				record.EditSEO = ko.observable(record.SEO());
+				
+				self.ChildViewRecordEditing(record);
 			}
 			
-			// view model data
-			self.DataAdapter = dataAdapter;
-			var data = self.DataAdapter.RetrieveAllCategories();			
-			$.each(data, function(index, category) { data[index] = self.ToViewModelCategory(category); });			
-			self.Categories = ko.observableArray(data);
+			self.SaveRecord = function(record) {
+				if (self.ChildViewEnabled === false) { return; }
+				
+				record.Name(record.EditName());
+				record.SEO(record.EditSEO());
+				
+				// TODO: get the Id from the server...!
+				self.DataAdapter.SaveCategory(self.CategoryToServerModel(record));
+				
+				///self.CategoryToServerModel(self.ChildViewMasterRecord()));				
+				//var data = self.DataAdapter.RetrieveParentCategory(self.ChildViewMasterRecord().Id);
+				
+				//self.ChildViewMasterRecord(self.CategoryToViewModel(data));
+				self.ChildViewRecordEditing(null);
+			}
 			
-			// UI state
-			self.ChosenParentCategory = ko.observable(null);
-			self.ChosenCategoryToEdit = ko.observable(null);
-			self.ParentViewEnabled = true;
-			self.ChildViewEnabled = false;	
-			self.Glider = new GliderWidget("#glidingContainer", "#parentEditor", "#childEditor");						
+			self.CancelEdit = function(record) {
+				if (self.ChildViewEnabled === false) { return; }
+				
+				self.ChildViewRecordEditing(null);
+			}
+						
+			self.AddParentRecord = function() {
+				if (self.ParentViewEnabled === false) { return; }
+
+				var newCategory = {
+					Id: null,	// TODO: remove this Id
+					Name: ko.observable("New Category"),
+					SEO: ko.observable("new-category"),
+					ChildCategories: ko.observableArray(),
+				};
+				self.Categories.unshift(newCategory);
+				self.GotoChildView(newCategory);
+			}
+			
+			self.AddChildRecord = function() {
+				if (self.ChildViewEnabled === false) { return; }
+				
+				var newCategory = {
+					Id: null,
+					Name: ko.observable("New Category"),
+					SEO: ko.observable("new-category")
+				};
+				
+				self.ChildViewMasterRecord().ChildCategories.unshift(newCategory);
+				self.EditChildViewRecord(newCategory);
+			}
+			
+			self.Initialize = function(dataAdapter) {
+				// Initialize UI state
+				self.ChildViewMasterRecord = ko.observable(null);
+				self.ChildViewRecordEditing = ko.observable(null);
+				self.ParentViewEnabled = true;
+				self.ChildViewEnabled = false;	
+				self.Glider = new GliderWidget("#glidingContainer", "#parentEditor", "#childEditor");						
+				
+				// Load view model data
+				self.DataAdapter = dataAdapter;
+				var data = self.DataAdapter.RetrieveAllCategories();
+				var viewModelData = self.AllMasterCategoriesToViewModel(data);
+				self.Categories = viewModelData;
+			}
+			
+			self.Initialize(dataAdapter);
 		}
 		
 		$(function() {
-			self.DataAdapter = new MockDataAdapter();
-			ko.applyBindings(new CategoryViewModel(self.DataAdapter));
+			ko.applyBindings(new CategoryViewModel(new MockDataAdapter()));
 		});
-	</script>	
+	</script>
   </head>
   
   <body>
@@ -537,7 +337,7 @@
 			</div>
 		</div>
 		
-		<div data-bind="if: $root.ChosenParentCategory" id="childEditor" style="left:0px; width:932px; position:absolute; display:none;">
+		<div data-bind="if: $root.ChildViewMasterRecord" id="childEditor" style="left:0px; width:932px; position:absolute; display:none;">
 			<div data-bind="template: { name: 'child-editor-workspace', data: $root }">
 			</div>
 		</div>
@@ -555,11 +355,7 @@
 	</div>
 	
 	
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster
-    <script src="../assets/js/jquery.js"></script>
-    <script src="../assets/js/bootstrap-transition.js"></script>
+	<!--<script src="../assets/js/bootstrap-transition.js"></script>
     <script src="../assets/js/bootstrap-alert.js"></script>
     <script src="../assets/js/bootstrap-modal.js"></script>
     <script src="../assets/js/bootstrap-dropdown.js"></script>
@@ -570,6 +366,5 @@
     <script src="../assets/js/bootstrap-collapse.js"></script>
     <script src="../assets/js/bootstrap-carousel.js"></script>
     <script src="../assets/js/bootstrap-typeahead.js"></script> -->
-
   </body>
 </html>

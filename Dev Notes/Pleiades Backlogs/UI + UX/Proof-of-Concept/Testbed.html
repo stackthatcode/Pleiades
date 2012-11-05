@@ -1,0 +1,286 @@
+
+<html>
+<head>
+	<script type="text/javascript" src="jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="knockout-2.1.0.js"></script>	
+
+	<!-- TODO: move to my array library -->
+	<script type="text/javascript">
+		// TODO: how to add this to Array's prototype...?
+		Array.prototype.firstOrNull = function(lambda) {
+			for (var arrayIndex = 0; arrayIndex < this.length; arrayIndex += 1) {
+				var element = this[arrayIndex];
+				if (lambda(element) === true) {
+					return element;
+				}
+			}
+			return null;
+		}
+		
+		// What does the "int" keyword do...?		
+		Array.prototype.indexOf = function(lambda) {
+			for (var arrayIndex = 0; arrayIndex < this.length; arrayIndex += 1) {
+				if (lambda(this[arrayIndex]) === true) {
+					return arrayIndex;
+				}
+			}
+			return -1;
+		};
+		
+		Array.prototype.removeByLambda = function(lambda) {
+			var index = this.indexOf(lambda);
+			this.remove(index, index + 1);
+		};
+		
+		Array.prototype.remove = function(from, to) {
+			var rest = this.slice((to || from) + 1 || this.length);
+			this.length = from < 0 ? this.length + from : from;
+			return this.push.apply(this, rest);
+		};
+		
+		function DeepClone(input) {
+			// Handle the 3 simple types, and null or undefined
+			if (null == input || "object" != typeof input) return input;
+			
+			// Handle Date
+			if (input instanceof Date) {
+				var copy = new Date();
+				copy.setTime(input.getTime());
+				return copy;
+			}
+			
+			// Handle Array
+			if (input instanceof Array) {
+				var copy = [];
+				for (var i = 0, len = input.length; i < len; ++i) {
+					copy[i] = DeepClone(input[i]);
+				}
+				return copy;
+			}
+
+			// Handle Object
+			if (input instanceof Object) {
+				var copy = {};
+				for (var attr in input) {
+					if (input.hasOwnProperty(attr)) copy[attr] = DeepClone(input[attr]);
+				}
+				return copy;
+			}
+			
+			throw new Error("Unable to copy input! Its type isn't supported.");
+		}
+		
+		function GliderWidget(glidingContainer, parentDiv, childDiv) {
+			var self = this;
+			self.LastParentScroll = 0;
+			
+			self.GlideToChild = function() {
+				// save the old scroll position and set the new
+				self.LastParentScroll = $(window).scrollTop();
+				window.scrollTo(0, 0);
+				
+				// REMOVE - should happen INSIDE the prepareTheEditor callback
+				// $("#sleeve2").find("h4").html("You selected: " + adjustedIndex);
+				
+				// prepare the editor
+				$(childDiv).css({ display: "block", left: "940px", top: "0px" });
+				
+				// open the curtains
+				$(parentDiv + ',' + childDiv).animate(
+					{ left: "-=940" }, 
+					{ 
+						complete: function() {
+							$(parentDiv).css({ display: "none" });
+							$(glidingContainer).css({ height: $(childDiv).height() }); 
+						},
+						duration: 200
+					});
+				
+				return false;
+			};
+			
+			self.GlideToParent = function () {	
+				// Should happen AFTER the prepareTheEditor callback						
+				//$("#sleeve2 a[id='editorBack']").bind("click", function(event) {
+				
+				$(parentDiv).css({ display: "block" });
+				$(glidingContainer).css({ height: $(parentDiv).height() });
+				
+				$(parentDiv + "," + childDiv).animate(
+					{ left: "+=940" }, 
+					{ duration: 200, complete: function() { window.scrollTo(0, self.LastParentScroll); } }
+				);
+			};
+		}
+		
+		// TODO: I strongly desire functions which allow me to iterate through an object graph
+		// TODO: keep, but deprecated for now
+		var ApplyVisitor = function(where, operation) {
+			$.each(self.DataStore, function(index, element) {
+				if (where(element)) {
+					operation(element);
+				}
+				
+				$.each(self.ChildCategories, function(index2, element2) {
+					if (where(element2)) {
+						operation(element2);
+					}
+				});
+			});
+		}		
+	</script>
+	
+	<!-- TODO: don't forget scroll spy, brah! -->	
+	<script type="text/javascript">		
+		// I WANT SYMMETRY!  I WANT TO MAKE ASSEMBLING STUFF EASY FOR THE SERVER.  <=== FUCK YOU!!!  BUILDING JSON IS TRIVIAL FOR C#
+		
+		function MockDataAdapter() {
+			var self = this;
+			self.Categories = [
+				{ 
+					Id: "3", Name: "Shoes", SEO: "sample-seo-text", 
+					Categories: [
+						{ ParentId: "3", Id: "4", Name: "Golf Shoes", SEO: "sample-seo-text-4" },
+						{ ParentId: "3", Id: "5", Name: "Playah Shoes", SEO: "sample-seo-text-5" },
+						{ ParentId: "3", Id: "6", Name: "Mountain Shoes", SEO: "sample-seo-text-6" },
+						{ ParentId: "3", Id: "7", Name: "Ass-Kicking Shoes", SEO: "sample-seo-text-7" },
+					]
+				},
+				{
+					Id: "8", Name: "Jiu-jitsu Gear", SEO: "sample-seo-text-8",
+					Categories: [
+						{ ParentId: "8", Id: "9", Name: "Choke-proof Gis", SEO: "sample-seo-text-9" },
+						{ ParentId: "8", Id: "10", Name: "Belts", SEO: "sample-seo-text-10" },
+						{ ParentId: "8", Id: "11", Name: "Mouth Guards", SEO: "sample-seo-text-11" } ,
+					]
+				},
+				{
+					Id: "12", Name: "Helmets", SEO: "sample-seo-text-12",
+					Categories: [
+						{ ParentId: "12", Id: "13", Name: "Open Face", SEO: "sample-seo-text-13" },
+						{ ParentId: "12", Id: "14", Name: "Vintage", SEO: "sample-seo-text-14" },
+						{ ParentId: "12", Id: "15", Name: "Viking", SEO: "sample-seo-text-15" },
+						{ ParentId: "12", Id: "16", Name: "Samurai", SEO: "sample-seo-text-16" },
+					],
+				},
+				{
+					Id: "17", Name: "Boxing", SEO: "sample-seo-text-17",
+					Categories: [
+						{ ParentId: "17", Id: "18", Name: "Punching Bags", SEO: "sample-seo-text-18" },
+						{ ParentId: "17", Id: "19", Name: "Gloves", SEO: "sample-seo-text-19" },
+						{ ParentId: "17", Id: "20", Name: "Mouth Guards", SEO: "sample-seo-text-20" },
+						{ ParentId: "17", Id: "21", Name: "Shorts", SEO: "sample-seo-text-21" },
+					],
+				},
+				{
+					Id: "22", Name: "Paddy Cake", SEO: "sample-seo-text-22",
+					Categories: [
+						{ ParentId: "22", Id: "21", Name: "Tea", SEO: "sample-seo-text-22" },
+						{ ParentId: "22", Id: "22", Name: "Spice", SEO: "sample-seo-text-23" },
+						{ ParentId: "22", Id: "23", Name: "Everything Nice", SEO: "sample-seo-text-23" },
+						{ ParentId: "22", Id: "24", Name: "Crumpets", SEO: "sample-seo-text-24" },
+					],
+				},
+			];
+			
+			self.Find = function(id) { 
+				var output = self.FindAll(function(node) { return node.Id === id });
+				return output[0];
+			}
+			
+			self.FindParent = function(id) {
+				var output = [];
+				var lambda = function(node) { 
+					if (node.Categories) {
+						var index = node.Categories.indexOf(function(node2) { return node2.Id === id; } );
+						return index != -1;  
+					} 
+					else {
+						return false;
+					}
+				};
+				self.FindWorker(self, lambda, output);
+				return output[0];
+			}
+			
+			self.FindAll = function(lambda) {
+				var output = [];
+				self.FindWorker(self, lambda, output);
+				return output;
+			};
+			
+			self.FindWorker = function(node, lambda, output) {
+				if (lambda(node)) {
+					output.push(node);
+				}
+				if (node.Categories) {
+					$.each(node.Categories, function(index, element) { self.FindWorker(element, lambda, output); });
+				}
+			};
+			
+			self.RetrieveAllCategories = function () {
+				var output = [];
+				$.each(self.DataStore, function(index, element) { output.push(DeepClone(element)); });
+				return output;
+			}
+			
+			self.RetrieveSingleCategory = function (id) {
+				return DeepClone(self.Find(id));
+			}
+			
+			self.Delete = function(id) {
+				var parent = self.FindParent(id);
+				if (parent) {
+					parent.Categories.removeByLambda( function(node) { return node.Id === id; });
+				}
+			}
+			
+			// To support out madness, it's necessary to make this more sophisticated.  Ok?  Ok.
+			self.SaveCategory = function (category) {				
+				if (category.Id == null) {
+					var newId = (100 + Math.floor(Math.random() * 11)).toString();
+					category.Id = newId;				
+					var parent = self.FindParent(category.ParentId);
+					parent.push(category);
+					return data.Id;
+				} 
+				else {
+					var existingCategory = self.Find(category.Id);
+					existingCategory.Name = category.Name;
+					existingCategory.SEO = category.SEO;
+					
+					if (existingCategory.ParentId !== category.ParentId) {
+						self.Delete(category.Id);
+						existingCategory.ParentId = category.ParentId;
+						var parent = self.Find(category.ParentId);
+						parent.Categories.push(existingCategory);
+					}
+				}
+			}
+		}
+	</script>
+	
+	<script type="text/javascript">
+		$(function() { 
+			var adapter = new MockDataAdapter();
+			var category = adapter.RetrieveSingleCategory("8");
+			var parent = adapter.FindParent("8");
+			console.log(JSON.stringify(category));
+			
+			category.Name = "modified";
+			adapter.SaveCategory(category);
+			category = adapter.RetrieveSingleCategory("8");
+			console.log(JSON.stringify(category));
+			
+			var category2 = adapter.RetrieveSingleCategory("14");
+			category2.ParentId = "3";			
+			adapter.SaveCategory(category2);
+			
+			var parent2 = adapter.FindParent("14");
+			console.log(JSON.stringify(parent2));			
+		});
+	</script>
+</head>
+
+<body></body>
+</html>
