@@ -2,7 +2,6 @@ This Stage
 ~~~~~~~~~~
 - C#, ASP.NET MVC, ORM, TDD, DDD, MVVM, JavaScript, JQuery, EF, Git, KnockoutJS, etc.
 
-
 Next Stage
 ~~~~~~~~~~
 - Marketing + UX/UI + JavaScript => Customer Engagement
@@ -10,13 +9,11 @@ Next Stage
 - NodeJs...? Ruby...? => Maybe
 - New Data + MicroORM => Maybe
 
-
 The Crazier, The Better!
 ~~~~~~~~~~~~~~~~~~~~~~~~
 - Create a consulting firm for Mobile + JavaScript + NodeJS-centric services
 - Create a consulting firm that focuses on using Alt.Net-centric development techniques
 - Attack mobile computing head-on - go after iOS development with a vengance
-
 
 Branding
 --------
@@ -28,9 +25,15 @@ push-software.io => Services
 pushmarket.biz => Live Site
 This guy is THE MAN => http://www.s3mobileapps.com/
 
+TO BLOGGING...
+--------------
+- Tumblr theme?  Is there a better WordPress theme?
+- Need an identity that can be consistent across social platforms
+
 
 BLOG POSTS!
 ~~~~~~~~~~~
+- You can't force it.  It's time will come - or, not.
 - KnockoutJS Cool
 - 2-way Authentication and identifying folks
 - .NET Security
@@ -45,7 +48,6 @@ BLOG POSTS!
 - What ever happened to Agile == TDD ...?
 - Paean to the Bounded Context
 - Reactive Extensions
-
 
 10 JavaScript Tools You Absolutely Need
 ---------------------------------------
