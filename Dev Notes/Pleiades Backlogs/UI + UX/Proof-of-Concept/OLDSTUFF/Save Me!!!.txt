@@ -1,0 +1,46 @@
+			<tr data-bind="if: $root.ChosenRecordToEdit() != $data, click: $root.EditRecord">
+				<td>
+					<span class="span9">
+						<h4 data-bind="if: $data.ParentId == null, text: $data.Name()"></h4>
+						<h4 data-bind="if: $data.ParentId != null, text: '&raquo; ' + $data.Name()"></h4>						
+						<span data-bind="text: $data.SEO()"></span>
+					</span>
+					<span class="span3" style="text-align:right;">
+						<p>Touch Row to Edit</p>
+					</span>
+				</td>
+			</tr>
+			
+			<tr data-bind="if: $root.ChosenRecordToEdit() == $data">
+				<td style="background-color:#EEE;">
+					<form>
+					<div>
+						<span class="span8" style="float:left;padding-top:5px;">
+							<input id="entry" style="float:left; width:250px; margin-right:20px;" class="input-large" type="text" placeholder="Enter Category Name" data-bind="value: $data.EditName" />
+							
+							<input id="entry" style="float:left; width:250px;" class="input-large" type="text" value="sport-casual-seo-tag" placeholder="Enter SEO Tag" data-bind="value: $data.EditSEO" />
+						</span>
+						<span class="span4" style="padding-top:5px; text-align:right;">
+							<a class="btn btn-primary" href="#" data-bind="click: $root.SaveRecord"><i class="icon-ok icon-white"></i> Save</a>
+							<a class="btn btn-inverse" href="#" data-bind="click: $root.CancelEdit"><i class="icon-remove icon-white"></i> Cancel</a>
+							<a class="btn btn-inverse" href="#"><i class="icon-search icon-white"></i> Products</a>
+						</span>
+					</div>					
+					<div style="clear:both; height:20px;width:1px;"></div>
+					</div>					
+					<div>
+						<span class="span9" style="float:left;">					
+							<a class="btn btn-primary" href="#"><i class="icon-trash icon-white"></i> Delete</a>							
+							<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+								Change Parent Category...
+								<span class="caret"></span>
+							</a>							
+							<ul class="dropdown-menu">
+							</ul>
+						</span>						
+						<span class="span3">
+						</span>
+					</div>
+					</form>
+				</td>
+			</tr>

@@ -1,0 +1,42 @@
+
+<html>
+<head>
+	<script type="text/javascript" src="jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="knockout-2.1.0.js"></script>
+	
+	<script type="text/javascript" src="PushMarketCommon.js"></script>
+	<script type="text/javascript" src="CategoryAdapter.js"></script>
+	
+	<script type="text/javascript">
+		$(function() { 
+			var adapter = new CategoryDataAdapter();
+			var category1 = adapter.RetrieveById("8");
+			console.log(JSON.stringify(category1));
+						
+			category1.Name = "Changed your Name";
+			adapter.Save(category1);
+			
+			var updatedCategory1 = adapter.RetrieveById("8");
+			console.log(JSON.stringify(updatedCategory1));
+			
+			var newCategoryId = adapter.Save({ 
+				ParentId: "8",
+				Name: "Another Category",
+				SEO: "sdgbkfgjdfklgjldg",
+			});
+			var updatedCategory2 = adapter.RetrieveById("8");
+			console.log(JSON.stringify(updatedCategory2));
+			
+			adapter.Delete(newCategoryId);
+
+			var updatedCategory3 = adapter.RetrieveById("8");
+			console.log(JSON.stringify(updatedCategory3));
+			
+			var allCategories = adapter.RetrieveAll();
+			console.log(JSON.stringify(allCategories));
+		});
+	</script>
+</head>
+
+<body></body>
+</html>

@@ -4,14 +4,6 @@ FRONTRANGE - HOTZONE
 Front Range - 11/4/2012 - RECAP
 -------------------------------
 - Good to create a solid DataAdapter mock - CHECK
-- Next Steps:
-1.) Rewire the new DataAdapter into templates
-2.) Global Error Handling w/ Pop-up
-3.) Products Pop-up
-4.) AJAX Hourglass
-5.) Collapse Button
-6.) Change Category
-7.) Validation
 
 - http://stackoverflow.com/questions/6237198/jquery-show-div-and-scroll-to-it-without-hashtag-in-url
 - Possibly create a separate Adapter class...  which can be mocked up so I can test my AJAX stuff separately => TODO
