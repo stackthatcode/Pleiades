@@ -8,6 +8,8 @@ Front Range - 11/4/2012 - RECAP
 - http://stackoverflow.com/questions/6237198/jquery-show-div-and-scroll-to-it-without-hashtag-in-url
 - Possibly create a separate Adapter class...  which can be mocked up so I can test my AJAX stuff separately => TODO
 
+- TODO KNOCKOUTJS: difference between http://knockoutjs.com/documentation/extenders.html AND custom binders
+
 
 Good Stuff
 ----------

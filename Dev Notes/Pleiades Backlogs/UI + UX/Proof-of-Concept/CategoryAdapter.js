@@ -31,8 +31,11 @@ function CategoryDataAdapter() {
 		{ ParentId: "22", Id: "24", Name: "Spice", SEO: "sample-seo-text-23" },
 		{ ParentId: "22", Id: "25", Name: "Everything Nice", SEO: "sample-seo-text-23" },
 		{ ParentId: "22", Id: "26", Name: "Crumpets", SEO: "sample-seo-text-24" },
+		{ ParentId: "22", Id: "27", Name: "Crumpets X", SEO: "sample-seo-text-24" },
+		{ ParentId: "22", Id: "28", Name: "Crumpets Y", SEO: "sample-seo-text-24" },
+		{ ParentId: "22", Id: "29", Name: "Crumpets Z", SEO: "sample-seo-text-24" },
 	];
-		
+	
 	// These belong in the Common library
 	self.FindById = function(id) { 
 		var output = self.FindAll(function(element) { return element.Id === id });
@@ -52,7 +55,7 @@ function CategoryDataAdapter() {
 		$.each(self.DataStore, function(index, element) { if (lambda(element) === true) { output.push(element); } });
 		return output;
 	};
-		
+	
 	self.RetrieveById = function (id) {
 		var category = DeepClone(self.FindById(id));
 		category.Categories = [];
@@ -76,6 +79,15 @@ function CategoryDataAdapter() {
 
 	self.RetrieveAll = function () {
 		return self.RetrieveByParentId(null);
+	}
+	
+	self.RetreiveProductsByCategoryId = function(id) {
+		return [
+			{ Id: "1", Name: "Black Beauty Gloves", Sku: "BBG-12346" },			
+			{ Id: "2", Name: "Red Sparring Gloves", Sku: "BBG-44801" },
+			{ Id: "3", Name: "White Gloves", Sku: "BBG-69892" },
+			{ Id: "4", Name: "Suede Leather Boxing Gloves", Sku: "BBG-77778" },
+		];
 	}
 	
 	self.Delete = function(id) {

@@ -62,6 +62,7 @@ function DeepClone(input) {
 	throw new Error("Unable to copy input! Its type isn't supported.");
 }
 
+
 function GliderWidget(glidingContainer, parentDiv, childDiv) {
 	var self = this;
 	self.LastParentScroll = 0;
@@ -70,10 +71,7 @@ function GliderWidget(glidingContainer, parentDiv, childDiv) {
 		// save the old scroll position and set the new
 		self.LastParentScroll = $(window).scrollTop();
 		window.scrollTo(0, 0);
-		
-		// REMOVE - should happen INSIDE the prepareTheEditor callback
-		// $("#sleeve2").find("h4").html("You selected: " + adjustedIndex);
-		
+
 		// prepare the editor
 		$(childDiv).css({ display: "block", left: "940px", top: "0px" });
 		
@@ -83,40 +81,19 @@ function GliderWidget(glidingContainer, parentDiv, childDiv) {
 			{ 
 				complete: function() {
 					$(parentDiv).css({ display: "none" });
-					$(glidingContainer).css({ height: $(childDiv).height() }); 
 				},
-				duration: 200
+				duration: 250
 			});
 		
 		return false;
 	};
 	
 	self.GlideToParent = function () {	
-		// Should happen AFTER the prepareTheEditor callback						
-		//$("#sleeve2 a[id='editorBack']").bind("click", function(event) {
-		
 		$(parentDiv).css({ display: "block" });
-		$(glidingContainer).css({ height: $(parentDiv).height() });
 		
 		$(parentDiv + "," + childDiv).animate(
 			{ left: "+=940" }, 
-			{ duration: 200, complete: function() { window.scrollTo(0, self.LastParentScroll); } }
+			{ duration: 250, complete: function() { /*window.scrollTo(0, self.LastParentScroll);*/ } }
 		);
 	};
 }
-
-// TODO: I strongly desire functions which allow me to iterate through an object graph
-// TODO: keep, but deprecated for now
-var ApplyVisitor = function(where, operation) {
-	$.each(self.DataStore, function(index, element) {
-		if (where(element)) {
-			operation(element);
-		}
-		
-		$.each(self.ChildCategories, function(index2, element2) {
-			if (where(element2)) {
-				operation(element2);
-			}
-		});
-	});
-}		

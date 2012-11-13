@@ -3,17 +3,188 @@
   <head>
     <meta charset="utf-8">
     <title>pushmarket - edit categories</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- What's this? -->
 	<script type="text/javascript" src="jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="knockout-2.1.0.js"></script>	
+	<script type="text/javascript" src="bootstrap-dropdown.js"></script>
+	<script type="text/javascript" src="bootstrap-modal.js"></script>
 	
 	<script type="text/javascript" src="PushMarketCommon.js"></script>
 	<script type="text/javascript" src="CategoryAdapter.js"></script>
     <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
 	<link href="./pushmarket.css" rel="stylesheet">
 	
-	<!-- Templates -->
-	<script type="text/html" id="parent-editor-heading">
+	<!-- TODO: don't forget scroll spy, brah! -->	
+	<script type="text/javascript">	
+		function CategoryViewModel(dataAdapter) {	
+			var self = this;
+			
+			// transformers
+			self.AllCategoriesToViewModel = function(data) {
+				var output = [];
+				$.each(data, function(index, category) { 
+					var knockedOutCategory = self.SingleCategoryToViewModel(category);
+					output.push(knockedOutCategory); 
+				});
+				return output;
+			}
+			
+			self.SingleCategoryToViewModel = function(category) {
+				var output = {
+					Id: ko.observable(category.Id),
+					ParentId: ko.observable(category.ParentId),
+					Name: ko.observable(category.Name),
+					SEO: ko.observable(category.SEO),
+					Categories: ko.observableArray()
+				}
+				
+				if (category.Categories) {
+					$.each(category.Categories, function (index, element) {
+						output.Categories.push(self.SingleCategoryToViewModel(element));
+					});
+				}
+				
+				return output;
+			}
+			
+			self.SingleCategoryToServerModel = function(category) {
+				var output = {
+					Id: category.Id(),
+					ParentId: category.ParentId(),
+					Name: category.Name(),
+					SEO: category.SEO(),
+				};
+				
+				return output;
+			};			
+			
+			// UI state management methods
+			self.ActiveView = function() {
+				if (self.SingleParentEditorRecordset() != null) 
+					return "SingleParentView";
+				else
+					return "AllParentsView";
+			}
+			
+			self.GotoSingleParentView = function(parentRecord) {
+				if (self.ActiveView() == "SingleParentView") return;
+				
+				if (parentRecord.Id() != null) {
+					var data = self.DataAdapter.RetrieveById(parentRecord.Id());
+					parentRecord = self.SingleCategoryToViewModel(data);
+				}
+				
+				self.SingleParentEditorRecordset(parentRecord);				
+				self.AllParentsGlider.GlideToChild();
+			}
+			
+			self.BackToAllParentsView = function() {
+				if (self.ActiveView() != "SingleParentView") return;
+				
+				var data = self.DataAdapter.RetrieveAll();
+				var viewModel = self.AllCategoriesToViewModel(data)
+				self.AllParentsEditorRecordset(viewModel);
+				
+				self.AllParentsGlider.GlideToParent();				
+				self.ScrollToIdTracker(self.SingleParentEditorRecordset().Id());
+				
+				self.SingleParentEditorRecordset(null);
+				self.ChosenRecordToEdit(null);
+			}
+			
+			self.ScrollToIdTracker = function(id) {
+				if (!id) return;
+				var offset = $('input[value="' + id + '"]').parent().offset().top - $("#glidingContainer").offset().top;				
+				$("body").scrollTop(offset);
+			}
+			
+			self.EditRecord = function(record) {
+				if (self.ActiveView() != "SingleParentView") return;
+				self.ClearNonPersistedRecord();
+				
+				record.EditName = ko.observable(record.Name());
+				record.EditSEO = ko.observable(record.SEO());				
+				self.ChosenRecordToEdit(record);
+			}
+			
+			self.CancelEdit = function(record) {
+				if (self.ActiveView() != "SingleParentView") return;
+				self.ClearNonPersistedRecord();
+				self.ChosenRecordToEdit(null);
+			}
+
+			self.ClearNonPersistedRecord = function() {
+				if (self.ChosenRecordToEdit() && self.ChosenRecordToEdit().Id() === null) {
+					self.SingleParentEditorRecordset().Categories.remove(self.ChosenRecordToEdit());
+				}
+			}
+			
+			
+			// CRUD operations			
+			self.SaveRecord = function(record) {
+				if (self.ActiveView() != "SingleParentView") return;
+				
+				record.Name(record.EditName());
+				record.SEO(record.EditSEO());
+				
+				var id = self.DataAdapter.Save(self.SingleCategoryToServerModel(record));
+				self.ChosenRecordToEdit().Id(id);				
+				self.ChosenRecordToEdit(null);
+			}
+			
+			self.AddParentRecord = function() {
+				if (self.ActiveView() == "SingleParentView") return;
+				
+				var newCategory = self.SingleCategoryToViewModel(
+						{ Id: null, ParentId: null, Name: "New Category", SEO: "new-category", Categories: null });
+				
+				self.AllParentsEditorRecordset.unshift(newCategory);
+				self.EditRecord(newCategory);
+				self.GotoSingleParentView(newCategory);
+			}
+			
+			self.AddChildRecord = function() {
+				if (self.ActiveView() != "SingleParentView") return;
+				
+				var newCategory = self.SingleCategoryToViewModel(
+						{ Id: null, ParentId: self.SingleParentEditorRecordset().Id(), Name: "New Category", SEO: "new-category", Categories: null });
+				
+				self.SingleParentEditorRecordset().Categories.unshift(newCategory);
+				self.EditRecord(newCategory);
+				window.scrollTo(0, 0);
+			}
+			
+			// initialization
+			self.Initialize = function(dataAdapter) {
+				// initialize UI state
+				self.AllParentsGlider = new GliderWidget("#glidingContainer", "#parentEditor", "#childEditor");
+				
+				// load ko.observables into view model				
+				self.AllParentsEditorRecordset = ko.observableArray(null);
+				self.SingleParentEditorRecordset = ko.observable(null); 
+				self.ChosenRecordToEdit = ko.observable(null);
+				
+				// save reference to data source
+				self.DataAdapter = dataAdapter;
+				var data = self.DataAdapter.RetrieveAll();
+				var model = self.AllCategoriesToViewModel(data);
+				self.AllParentsEditorRecordset(model);
+			}
+			
+			self.Initialize(dataAdapter);
+		}
+		
+		$(function() {
+			var datasource = new CategoryDataAdapter();
+			var model = new CategoryViewModel(datasource)
+			ko.applyBindings(model);
+		});
+	</script>
+	
+	
+	<!-- KNOCK TEMPLATE - TOP EDITOR HEADER -->
+	<script type="text/html" id="Top-Editor-Header">
 		<div id="heading" class="container" data-bind="ifnot: $root.SingleParentEditorRecordset()">
 			<div class="row">
 				<div class="span9">
@@ -34,19 +205,21 @@
 				<div class="span9">
 					<h1><span data-bind="text: $root.SingleParentEditorRecordset().Name"></span></h1>
 				</div>
-				<div class="span3" style="margin-top:15px; text-align:right;">
+				<div class="span3" style="margin-top:15px; text-align:right;" data-bind="visible: $root.SingleParentEditorRecordset().Id">
 					<a class="btn btn-primary btn-block" data-bind="click: $root.AddChildRecord"><i class="icon-plus icon-white"></i> Add Sub-Category</a>
 				</div>
 			</div>
 		</div>
 	</script>
 	
-	<script type="text/html" id="parent-editor-workspace">
-		<table class="table table-hover">
+	<!-- KNOCK TEMPLATE - ALL PARENTS EDITOR WORKSPACE -->
+	<script type="text/html" id="All-Parents-Editor-Workspace">
+		<table id="parent-editor-table" class="table table-hover">
 			<tbody data-bind="foreach: $root.AllParentsEditorRecordset()">
 			<tr>
 				<td>
 					<span class="span9">
+						<input type="hidden" data-bind="value: $data.Id" />
 						<h4 data-bind="text: Name"></h4>
 						<div data-bind="foreach: $data.Categories">
 							<h4 style="padding-left:40px;">&raquo; <span data-bind="text: Name"></span></h4>
@@ -62,234 +235,86 @@
 		</table>
 	</script>
 	
-	<script type="text/html" id="single-parent-editor-workspace">
-		<table class="table table-hover" style="margin-bottom:0px;">
-			<tbody data-bind="template: { name: 'editor-row-template', data: $root.SingleParentEditorRecordset() }">
+	<!-- KNOCK TEMPLATE - SINGLE PARENT EDITOR WORKSPACE -->
+	<script type="text/html" id="Single-Parent-Editor-Workspace">
+		<table id="single-parent-editor-toprow" class="table table-hover" style="margin-bottom:0px;">
+			<tbody data-bind="template: { name: 'Editor-Row-Template', data: $data }">
 			</tbody>
 		</table>
 		
-		<table class="table table-hover">
-			<tbody data-bind="template: { name: 'editor-row-template', foreach: $root.SingleParentEditorRecordset().Categories }">
+		<table id="single-parent-editor-otherrows" class="table table-hover">
+			<tbody data-bind="template: { name: 'Editor-Row-Template', foreach: $data.Categories }">
 			</tbody>
 		</table>
 	</script>
 	
-	<script type="text/html" id="editor-row-template">
+	<!-- KNOCK TEMPLATE - EDITOR ROW -->
+	<script type="text/html" id="Editor-Row-Template">
 		<tr data-bind="if: $root.ChosenRecordToEdit() != $data, click: $root.EditRecord">
-			<td>
-				<span class="span9">						
-					<div data-bind="if: $data.ParentId == null">
-						<h4 data-bind="text: $data.Name()"></h4>
-						<span data-bind="text: $data.SEO()"></span>
-					</div>
-					
-					<div data-bind="if: $data.ParentId != null" style="padding-left:20px;">
-						<h4 data-bind="text: '&raquo; ' + $data.Name()"></h4>
-						<span data-bind="text: $data.SEO()"></span>
-					</div>
-				</span>
-				<span class="span3" style="text-align:right;">
-					<p>Touch Row to Edit</p>
-				</span>
-			</td>
-		</tr>
-		
-		<tr data-bind="if: $root.ChosenRecordToEdit() == $data">
-			<td style="background-color:#EEE;">
-				<form>
-				<div>
-					<span class="span8" style="float:left;padding-top:5px;">
-						<input id="entry" style="float:left; width:250px; margin-right:20px;" class="input-large" type="text" placeholder="Enter Category Name" data-bind="value: $data.EditName" />
-						<input id="entry" style="float:left; width:250px;" class="input-large" type="text" value="sport-casual-seo-tag" placeholder="Enter SEO Tag" data-bind="value: $data.EditSEO" />
-					</span>
-					<span class="span4" style="padding-top:5px; text-align:right;">
-						<a class="btn btn-primary" href="#" data-bind="click: $root.SaveRecord"><i class="icon-ok icon-white"></i> Save</a>
-						<a class="btn btn-inverse" href="#" data-bind="click: $root.CancelEdit"><i class="icon-remove icon-white"></i> Cancel</a>
-						<a class="btn btn-inverse" href="#"><i class="icon-search icon-white"></i> Products</a>
-					</span>
+		<td>
+			<span class="span9">	
+				<input type="hidden" data-bind="value: $data.Id" />					
+				<div data-bind="if: $data.ParentId() == null">
+					<h4 data-bind="text: $data.Name()"></h4>
+					<span data-bind="text: $data.SEO()"></span>
 				</div>					
-				<div style="clear:both; height:20px;width:1px;"></div>
-				</div>					
-				<div>
-					<span class="span9" style="float:left;">					
-						<a class="btn btn-primary" href="#"><i class="icon-trash icon-white"></i> Delete</a>							
-						<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-							Change Parent Category...
-							<span class="caret"></span>
-						</a>							
-						<ul class="dropdown-menu">
-						</ul>
-					</span>						
-					<span class="span3">
-					</span>
+				<div data-bind="if: $data.ParentId() != null" style="padding-left:20px;">
+					<h4 data-bind="text: '&raquo; ' + $data.Name()"></h4>
+					<span data-bind="text: $data.SEO()"></span>
 				</div>
-				</form>
-			</td>
+			</span>				
+			<span class="span3" style="text-align:right;">
+				<p>Touch Row to Edit</p>
+			</span>
+		</td>
 		</tr>
-	</script>
-	
-	
-	<!-- TODO: don't forget scroll spy, brah! -->	
-	<script type="text/javascript">	
-		function CategoryViewModel(dataAdapter) {	
-			var self = this;
-			
-			// transformers - lesson learned: test your shit!
-			self.AllCategoriesToViewModel = function(data) {
-				var output = ko.observableArray();
-				$.each(data, function(index, category) { 
-					self.SingleCategoryToViewModel(category);
-					output.push(category); 
-				});
-				return output;
-			}
-			
-			self.SingleCategoryToViewModel = function(category) {
-				var output = {
-					Id: category.Id,
-					ParentId: category.ParentId,
-					Name: ko.observable(category.Name),
-					SEO: ko.observable(category.SEO),
-					Categories: ko.observableArray()
-				}
-				
-				if (category.Categories) {
-					$.each(category.Categories, function (index, element) {
-						output.Categories.push(self.SingleCategoryToViewModel(element));
-					});
-				}
-				
-				return output;
-			}
-			
-			self.SingleCategoryToServerModel = function(category) {
-				var output = {
-					Id: category.Id,
-					ParentId: category.ParentId,
-					Name: category.Name(),
-					SEO: category.SEO(),
-				};
-				
-				return output;
-			};			
-			
-			// state management methods
-			self.GotoSingleParentView = function(parentRecord) {
-				if (self.SingleParentEditorRecordset()) { return; }
-				
-				if (parentRecord.Id != null) {
-					var data = self.DataAdapter.RetrieveById(parentRecord.Id);
-					parentRecord = self.SingleCategoryToViewModel(data);
-				}
-				
-				self.SingleParentEditorRecordset(parentRecord);				
-				self.Glider.GlideToChild();
-			}
-			
-			self.BackToAllParentsView = function() {
-				if (self.SingleParentEditorRecordset() == false) { return; }
-				
-				var data = self.DataAdapter.RetrieveAll();
-				var viewModel = self.AllCategoriesToViewModel(data)
-				self.AllParentsEditorRecordset(viewModel);
-				
-				self.Glider.GlideToParent();
-				self.SingleParentEditorRecordset(null);
-				self.ChosenRecordToEdit(null);				
-			}
-			
-			self.EditRecord = function(record) {
-				if (self.SingleParentEditorRecordset() === false) { return; }
-				
-				self.ClearNonPersistedRecord();
-				record.EditName = ko.observable(record.Name());
-				record.EditSEO = ko.observable(record.SEO());
-				
-				self.ChosenRecordToEdit(record);
-			}
-			
-			self.SaveRecord = function(record) {
-				if (self.SingleParentEditorRecordset() == false) { return; }
-				
-				record.Name(record.EditName());
-				record.SEO(record.EditSEO());
-				
-				var id = self.DataAdapter.Save(self.SingleCategoryToServerModel(record));
-				self.ChosenRecordToEdit().Id = id;				
-				self.ChosenRecordToEdit(null);
-			}
-			
-			self.CancelEdit = function(record) {
-				if (self.SingleParentEditorRecordset() == false) { return; }
-				self.ClearNonPersistedRecord();
-				self.ChosenRecordToEdit(null);
-			}
-			
-			self.ClearNonPersistedRecord = function() {
-				if (self.ChosenRecordToEdit() && self.ChosenRecordToEdit().Id === null) {
-					self.SingleParentEditorRecordset().remove(self.ChosenRecordToEdit());
-				}
-			}
-			
-			self.AddParentRecord = function() {
-				if (self.SingleParentEditorRecordset() == false) { return; }
-				
-				var newCategory = {
-					Id: null,
-					ParentId: null,
-					Name: ko.observable("New Category"),
-					SEO: ko.observable("new-category"),
-					Categories: ko.observableArray(),
-				};
-				
-				self.AllParentsEditorRecordset.unshift(newCategory);
-				self.GotoSingleParentView(newCategory);
-			}
-			
-			self.AddChildRecord = function() {
-				if (self.SingleParentEditorRecordset() === false) { return; }
-				
-				var newCategory = {
-					ParentId: self.SingleParentEditorRecordset().Id,
-					Id: null,
-					Name: ko.observable("New Category"),
-					SEO: ko.observable("new-category"),
-					EditName: ko.observable("New Category"),
-					EditSEO: ko.observable("new-category"),
-				};
-				
-				self.SingleParentEditorRecordset().Categories.unshift(newCategory);
-				self.ChosenRecordToEdit(newCategory);
-			}
-			
-			self.Initialize = function(dataAdapter) {
-				// initialize UI state
-				self.Glider = new GliderWidget("#glidingContainer", "#parentEditor", "#childEditor");						
-				
-				// review data
-				self.DataAdapter = dataAdapter;
-				var data = self.DataAdapter.RetrieveAll();
-				var viewModelData = self.AllCategoriesToViewModel(data);
-				
-				// load data into the view model				
-				self.AllParentsEditorRecordset = viewModelData;
-				self.SingleParentEditorRecordset = ko.observable(null);
-				self.ChosenRecordToEdit = ko.observable(null);
-			}
-			
-			self.Initialize(dataAdapter);
-		}
 		
-		$(function() {
-			var datasource = new CategoryDataAdapter();
-			var model = new CategoryViewModel(datasource)
-			ko.applyBindings(model);
-		});
-	</script>
+		<tr data-bind="if: $root.ChosenRecordToEdit() == $data, singleParentFixHeight: $root.ChosenRecordToEdit() == $data">
+		<td style="background-color:#EEE;">
+			<form>
+			<div>
+				<span class="span8" style="float:left;padding-top:5px;">
+					<input id="entry" class="input-large" style="float:left; width:250px; margin-right:20px;" type="text" placeholder="Enter Category Name" data-bind="value: $data.EditName" />
+					<input id="entry" class="input-large" style="float:left; width:250px;" type="text" value="sport-casual-seo-tag" placeholder="Enter SEO Tag" data-bind="value: $data.EditSEO" />
+				</span>
+				<span class="span4" style="padding-top:5px; text-align:right;">
+					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveRecord"><i class="icon-ok icon-white"></i> Save</a>
+					<a class="btn btn-primary" href="#"><i class="icon-trash icon-white"></i> Delete</a>
+					<a class="btn btn-inverse" href="#" data-bind="click: $root.CancelEdit"><i class="icon-remove icon-white"></i> Cancel</a>
+				</span>
+			</div>					
+			<div style="clear:both; height:20px;width:1px;" />
+			<div>
+				<span class="span9" style="float:left;">					
+					<a class="btn btn-inverse" href="#" style="float:left; margin-right:5px;"><i class="icon-search icon-white"></i> Products</a>
+					
+					<div class="dropdown" style="float:left;">
+						<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+							Change Parent Category...<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+							<div data-bind="foreach: $root.AllParentsEditorRecordset()">	
+							<li data-bind="if: $data.Id() !== $root.SingleParentEditorRecordset().Id()">
+								<a tabindex="-1" data-bind="text: $data.Name()" href="#"></a>
+							</li>
+							</div>
+							
+							<li class="divider"></li>
+							<li><a tabindex="-1" href="#">Make this a Parent Category</a></li>
+						</ul>
+					</div>
+				</span>						
+				<span class="span3">
+				</span>
+			</div>
+			</form>
+		</td>
+		</tr>
+	</script>	
   </head>
   
   <body>
-	<!-- TODO: place this in a Partial View -->
+	<!-- TODO: place this in an ASP.NET MVC Partial View -->
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">		  
@@ -325,22 +350,18 @@
       </div>
     </div>
 	
-	<!-- Top Workspace -->
-	<!-- TODO: clean-up this CSS -->
-	<div style="position:fixed; top:0px; width:100%; height:75px; background-color:#FFF; border-bottom:1px dotted #CCC; z-index:1029">
-		<!-- We'll repeat this concept everywhere -->
-		<div class="workspace-heading" data-bind="template: { name: 'parent-editor-heading', data: $root }"></div>
-	</div>	
+	<div class="workspace-heading-parent">
+		<div class="workspace-heading" data-bind="template: { name: 'Top-Editor-Header', data: $root }"></div>
+	</div>
 	
-	<!-- Gliding UI Container -->
-    <div id="glidingContainer" class="container" style="margin-top:75px; width:932px; height:1400px; overflow:hidden; position:relative;">		
-		<div id="parentEditor" data-bind="if: $root.AllParentsEditorRecordset()" style="left:0px; width:932px; position:absolute;">
-			<div data-bind="template: { name: 'parent-editor-workspace', data: $root }">
+    <div id="glidingContainer" class="container" style="top:140px; width:932px; position:relative;">
+		<div id="parentEditor" style="left:0px; width:932px; position:absolute;">
+			<div style="margin-bottom:150px;" data-bind="template: { name: 'All-Parents-Editor-Workspace', data: $root.AllParentsEditorRecordset() }">
 			</div>
 		</div>
 		
-		<div id="childEditor" data-bind="if: $root.SingleParentEditorRecordset()" style="left:0px; width:932px; position:absolute; display:none;">
-			<div data-bind="template: { name: 'single-parent-editor-workspace', data: $root }">
+		<div id="childEditor" style="left:0px; width:932px; position:absolute; display:none;" data-bind="if: $root.SingleParentEditorRecordset()">
+			<div style="margin-bottom:150px;" data-bind="template: { name: 'Single-Parent-Editor-Workspace', data: $root.SingleParentEditorRecordset() }">
 			</div>
 		</div>
     </div>
@@ -355,18 +376,5 @@
 			</div>
 		</div>
 	</div>
-	
-	
-	<!--<script src="../assets/js/bootstrap-transition.js"></script>
-    <script src="../assets/js/bootstrap-alert.js"></script>
-    <script src="../assets/js/bootstrap-modal.js"></script>
-    <script src="../assets/js/bootstrap-dropdown.js"></script>
-    <script src="../assets/js/bootstrap-scrollspy.js"></script>
-    <script src="../assets/js/bootstrap-tooltip.js"></script>
-    <script src="../assets/js/bootstrap-popover.js"></script>
-    <script src="../assets/js/bootstrap-button.js"></script>
-    <script src="../assets/js/bootstrap-collapse.js"></script>
-    <script src="../assets/js/bootstrap-carousel.js"></script>
-    <script src="../assets/js/bootstrap-typeahead.js"></script> -->
   </body>
 </html>

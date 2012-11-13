@@ -21,7 +21,7 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
         public static SystemAuthorizationContext RestrictedStandardNonPaymentArea(IdentityProfile user)
         {
             return new SystemAuthorizationContext(null)
-            {
+            { 
                 AuthorizationZone = AuthorizationZone.Restricted,
                 AccountLevelRestriction = AccountLevel.Standard,
                 IsPaymentArea = false,
