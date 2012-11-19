@@ -19,6 +19,15 @@ Array.prototype.indexByLambda = function(lambda) {
 	return -1;
 };
 
+Array.prototype.arrayFirstIndexOf = function(predicate, predicateOwner) {
+    for (var i = 0, j = this.length; i < j; i++) {
+        if (predicate.call(predicateOwner, this[i])) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 Array.prototype.removeByLambda = function(lambda) {
 	var index = this.indexByLambda(lambda);
 	this.remove(index, index + 1);
