@@ -4,39 +4,56 @@
 // THEREFORE: refactor this and eliminate the tree structure bullshit in our mock data layer.
 
 
+// Another Update: 
+// 1.) problems if we use SectionId -- why does this bother me?
+//		A.) RetrieveByParentId has SectionId
+//		B.) Not beautiful abstract
+//		C.) How often will we repeat ourselves...?  In the database!  In queries!
+//		D.) Moving a Category to a new section is too much work
+
+
+// 2.) problems if we use ParentId... 
+//		A.) Query complexity... may have to run twice
+//		SELECT * FROM Category t1 WHERE t1.ParentId = "1001" AND t2.ParentId = t1.Id
+
+//  http://mikehillyer.com/articles/managing-hierarchical-data-in-mysql/
+
 function CategoryDataAdapter() {
 	var self = this;
 	self.DataStore = [
-		{ ParentId: null, Id: "3", Name: "Shoes", SEO: "sample-seo-text" },
-		{ ParentId: "3", Id: "4", Name: "Golf Shoes", SEO: "sample-seo-text-4" },
-		{ ParentId: "3", Id: "5", Name: "Playah Shoes", SEO: "sample-seo-text-5" },
-		{ ParentId: "3", Id: "6", Name: "Mountain Shoes", SEO: "sample-seo-text-6" },
-		{ ParentId: "3", Id: "7", Name: "Ass-Kicking Shoes", SEO: "sample-seo-text-7" },
-		{ ParentId: null, Id: "8", Name: "Jiu-jitsu Gear", SEO: "sample-seo-text-8" },
-		{ ParentId: "8", Id: "9", Name: "Choke-proof Gis", SEO: "sample-seo-text-9" },
-		{ ParentId: "8", Id: "10", Name: "Belts", SEO: "sample-seo-text-10" },
-		{ ParentId: "8", Id: "11", Name: "Mouth Guards", SEO: "sample-seo-text-11" } ,
-		{ ParentId: null, Id: "12", Name: "Helmets", SEO: "sample-seo-text-12" },
-		{ ParentId: "12", Id: "13", Name: "Open Face", SEO: "sample-seo-text-13" },
-		{ ParentId: "12", Id: "14", Name: "Vintage", SEO: "sample-seo-text-14" },
-		{ ParentId: "12", Id: "15", Name: "Viking", SEO: "sample-seo-text-15" },
-		{ ParentId: "12", Id: "16", Name: "Samurai", SEO: "sample-seo-text-16" },
-		{ ParentId: null, Id: "17", Name: "Boxing", SEO: "sample-seo-text-17" },
-		{ ParentId: "17", Id: "18", Name: "Punching Bags", SEO: "sample-seo-text-18" },
-		{ ParentId: "17", Id: "19", Name: "Gloves", SEO: "sample-seo-text-19" },
-		{ ParentId: "17", Id: "20", Name: "Mouth Guards", SEO: "sample-seo-text-20" },
-		{ ParentId: "17", Id: "21", Name: "Shorts", SEO: "sample-seo-text-21" },
-		{ ParentId: null, Id: "22", Name: "Paddy Cake", SEO: "sample-seo-text-22" },
-		{ ParentId: "22", Id: "23", Name: "Tea", SEO: "sample-seo-text-22" },
-		{ ParentId: "22", Id: "24", Name: "Spice", SEO: "sample-seo-text-23" },
-		{ ParentId: "22", Id: "25", Name: "Everything Nice", SEO: "sample-seo-text-23" },
-		{ ParentId: "22", Id: "26", Name: "Crumpets", SEO: "sample-seo-text-24" },
-		{ ParentId: "22", Id: "27", Name: "Crumpets X", SEO: "sample-seo-text-24" },
-		{ ParentId: "22", Id: "28", Name: "Crumpets Y", SEO: "sample-seo-text-24" },
-		{ ParentId: "22", Id: "29", Name: "Crumpets Z", SEO: "sample-seo-text-24" },
+		{ ParentId: null, Id: "1001", Name: "Good Gear Section", SEO: "Men's Section" },		
+			{ ParentId: "1001", Id: "3", Name: "Shoes", SEO: "sample-seo-text" },
+				{ ParentId: "3", Id: "4", Name: "Golf Shoes", SEO: "sample-seo-text-4" },
+				{ ParentId: "3", Id: "5", Name: "Playah Shoes", SEO: "sample-seo-text-5" },
+				{ ParentId: "3", Id: "6", Name: "Mountain Shoes", SEO: "sample-seo-text-6" },
+				{ ParentId: "3", Id: "7", Name: "Ass-Kicking Shoes", SEO: "sample-seo-text-7" },
+			{ ParentId: "1001", Id: "8", Name: "Jiu-jitsu Gear", SEO: "sample-seo-text-8" },
+				{ ParentId: "8", Id: "9", Name: "Choke-proof Gis", SEO: "sample-seo-text-9" },
+				{ ParentId: "8", Id: "10", Name: "Belts", SEO: "sample-seo-text-10" },
+				{ ParentId: "8", Id: "11", Name: "Mouth Guards", SEO: "sample-seo-text-11" } ,
+			{ ParentId: "1001", Id: "12", Name: "Helmets", SEO: "sample-seo-text-12" },
+				{ ParentId: "12", Id: "13", Name: "Open Face", SEO: "sample-seo-text-13" },
+				{ ParentId: "12", Id: "14", Name: "Vintage", SEO: "sample-seo-text-14" },
+				{ ParentId: "12", Id: "15", Name: "Viking", SEO: "sample-seo-text-15" },
+				{ ParentId: "12", Id: "16", Name: "Samurai", SEO: "sample-seo-text-16" },
+		
+		{ ParentId: null, Id: "1002", Name: "MMA Section", SEO: "Men's Section" },
+			{ ParentId: "1002", Id: "17", Name: "Boxing", SEO: "sample-seo-text-17" },
+				{ ParentId: "17", Id: "18", Name: "Punching Bags", SEO: "sample-seo-text-18" },
+				{ ParentId: "17", Id: "19", Name: "Gloves", SEO: "sample-seo-text-19" },
+				{ ParentId: "17", Id: "20", Name: "Mouth Guards", SEO: "sample-seo-text-20" },
+				{ ParentId: "17", Id: "21", Name: "Shorts", SEO: "sample-seo-text-21" },
+			{ ParentId: "1002", Id: "22", Name: "Paddy Cake", SEO: "sample-seo-text-22" },
+				{ ParentId: "22", Id: "23", Name: "Tea", SEO: "sample-seo-text-22" },
+				{ ParentId: "22", Id: "24", Name: "Spice", SEO: "sample-seo-text-23" },
+				{ ParentId: "22", Id: "25", Name: "Everything Nice", SEO: "sample-seo-text-23" },
+				{ ParentId: "22", Id: "26", Name: "Crumpets", SEO: "sample-seo-text-24" },
+				{ ParentId: "22", Id: "27", Name: "Crumpets X", SEO: "sample-seo-text-24" },
+				{ ParentId: "22", Id: "28", Name: "Crumpets Y", SEO: "sample-seo-text-24" },
+				{ ParentId: "22", Id: "29", Name: "Crumpets Z", SEO: "sample-seo-text-24" },
 	];
 	
-	// These belong in the Common library
+	// These belong in the Common library (???)
 	self.FindById = function(id) { 
 		var output = self.FindAll(function(element) { return element.Id === id });
 		if (output.length == 0)
@@ -45,16 +62,16 @@ function CategoryDataAdapter() {
 			return output[0];
 	}
 	
-	self.FindByParentId = function(parentId) {
-		var output = self.FindAll(function(element) { return element.ParentId === parentId });
-		return output;
-	}
-	
 	self.FindAll = function(lambda) {
 		var output = [];
 		$.each(self.DataStore, function(index, element) { if (lambda(element) === true) { output.push(element); } });
 		return output;
 	};
+	
+	self.FindByParentId = function(parentId) {
+		var output = self.FindAll(function(element) { return element.ParentId === parentId });
+		return output;
+	}
 	
 	self.RetrieveById = function (id) {
 		var category = DeepClone(self.FindById(id));
@@ -76,11 +93,21 @@ function CategoryDataAdapter() {
 		});
 		return output;
 	}
-
-	self.RetrieveAll = function () {
-		return self.RetrieveByParentId(null);
+	
+	self.RetrieveAllCategoriesBySection = function (sectionId) {
+		var section = self.RetrieveById(sectionId);
+		var output = [];
+		$.each(section.Categories, function(index, element) { 
+			output.push(element);
+		});
+		return output;
 	}
 	
+	self.RetrieveAllSections = function () {
+		return self.RetrieveByParentId(null);		
+	}
+	
+	// *** DEPRECATED *** //
 	self.RetreiveProductsByCategoryId = function(id) {
 		return [
 			{ Id: "1", Name: "Black Beauty Gloves", Sku: "BBG-12346" },			

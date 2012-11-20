@@ -1,42 +1,62 @@
 This Stage
 ~~~~~~~~~~
-- C#, ASP.NET MVC, ORM, TDD, DDD, MVVM, JavaScript, JQuery, EF, Git, KnockoutJS, etc.
+- C#, ASP.NET MVC, ORM, NUnit, Rhino, TDD, DDD, MVVM, JavaScript, JQuery, UX/UI, KnockoutJS, Bootstrap, Azure, SQL Server, EF, Git
+
 
 Next Stage
 ~~~~~~~~~~
-- Marketing + UX/UI + JavaScript => Customer Engagement
-- Mobile Android/iOS, Xamarin => Maybe
-- NodeJs...? Ruby...? => Maybe
-- New Data + MicroORM => Maybe
+- PushMarket => 2013 - YES
+- Create a Business + Marketing Plan => 2013 - YES
+- Mobile Android/iOS + Xamarin => 2013 - PROBABLY
+- NodeJs...? Ruby...? => Late 2013 - MAYBE, OR 2014
 
-The Crazier, The Better!
-~~~~~~~~~~~~~~~~~~~~~~~~
+
+Front Range Business Ideas
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Windows App Store
+- Intuit App Store
+- WordPress Plug-in
+- Sell Mobile Website Themes - it's gotta be hot, c'mon!
+- Straight Contracting
+- Freelance Back-fill
+- Automation on-demand
+- Performance Testing on-demand
+- Smoke Testing subscription
+- Maintenance Programming
+- Fix JavaScript Nightmares
+
+The Crazier, The Better! -- OLD
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Create a consulting firm for Mobile + JavaScript + NodeJS-centric services
 - Create a consulting firm that focuses on using Alt.Net-centric development techniques
 - Attack mobile computing head-on - go after iOS development with a vengance
 
 Branding
 --------
+- Website(s)
 aleksjones.io => Blogging Outlet
-- Marketing
-- Tech
-- Brand
 push-software.io => Services
-pushmarket.biz => Live Site
-This guy is THE MAN => http://www.s3mobileapps.com/
+pushmarket.io/pile14/home => Live Site
 
-TO BLOGGING...
---------------
+- Identity
+=> stackthatcode on SO and HN
+=> motivated on wickedfire
+=> aleksjones.com
+=> aleksjones@gmail.com
+=> pushthatcode
+
 - Tumblr theme?  Is there a better WordPress theme?
-- Need an identity that can be consistent across social platforms => stackthatcode
 
+Good stuff
+----------
+This guy is THE MAN => http://www.s3mobileapps.com/
 
 
 BLOG POSTS!
 ~~~~~~~~~~~
 - You can't force it.  It's time will come - or, not.
-- KnockoutJS Cool
 - 2-way Authentication and identifying folks
+- KnockoutJS Cool
 - .NET Security
 - 7 Javascript Tools You Need To Know About
 - Fluent Header Builder for MVC 
@@ -50,6 +70,7 @@ BLOG POSTS!
 - Paean to the Bounded Context
 - Reactive Extensions
 
+
 10 JavaScript Tools You Absolutely Need
 ---------------------------------------
 - JSLint
@@ -60,3 +81,4 @@ BLOG POSTS!
 - Bootstrap
 - Less
 - Sammy.js
+

@@ -1,18 +1,12 @@
 FRONTRANGE - HOTZONE
 ====================
 
-- TODO KNOCKOUTJS: difference between http://knockoutjs.com/documentation/extenders.html AND custom binders
-
-
-
-
 Good Stuff
 ----------
 - http://zeptojs.com/#download => whut...?
 - http://www.startuppack.org/ whut...?
 - https://github.com/websanova/jquery-url#url
 - http://news.ycombinator.com/item?id=4707903
-
 
 Category Editor - GROCERY LIST
 ------------------------------
@@ -22,11 +16,11 @@ Front-End Coding
 => Convert existing Pleiades stuff to Admin Interface/Bootstrap => TODO
 => Domain Modeling and Write User Stories - after reading through Shopify's API docs => TODO
 => Where did I put my fonts...?  What's a good resource for typography and fonts...? => TODO
+- TODO KNOCKOUTJS: difference between http://knockoutjs.com/documentation/extenders.html AND custom binders
 
 - Important: Create a separate Model for Editing Users => DONE
 - Fix the other Admin Editing Screens, including the Add User button => DONE
-- Add the window shade effect to the top Menu => TODO
-
+- Add the window shade effect to the top Menu => DONE
 
 
 
@@ -54,7 +48,6 @@ Technology Backlog
 - Less => TODO
 - Azure => EVENTUALLY
  
-
  
 MORE BIG FISH
 -------------
@@ -66,6 +59,7 @@ MORE BIG FISH
 => Custom Caching solution...?
 => Find a good resource for Typography, Fonts, etc. => TODO
 => http://news.ycombinator.com/item?id=4669866 => IMPORTANT
+
 
 E-Commerce API's & Payment Processors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

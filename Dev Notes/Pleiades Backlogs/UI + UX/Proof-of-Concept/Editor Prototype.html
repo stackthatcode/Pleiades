@@ -111,7 +111,7 @@
 				self.ClearNonPersistedRecord();
 				self.ChildViewSelectedRecord(null);
 			}
-
+			
 			self.ClearNonPersistedRecord = function() {
 				if (self.ChildViewSelectedRecord() && self.ChildViewSelectedRecord().Id() === null) {
 					self.ChildViewModel().Categories.remove(self.ChildViewSelectedRecord());
@@ -120,9 +120,10 @@
 			
 			// CRUD operations			
 			self.RefreshParentViewModel = function() {
-				var data = self.DataAdapter.RetrieveAll();
+				var sectionId = self.ParentViewModel.SelectedSection().Id;
+				var data = self.DataAdapter.RetrieveAllCategoriesBySection(sectionId);
 				
-				// 
+				// expand - add expand state to our observable dictionary if it's not *yet* added
 				$.each(data, function(index, elem) { 
 					if (!self.ParentViewModel.ExpandData.get(elem.Id)()) {
 						self.ParentViewModel.ExpandData.set(elem.Id, false);
@@ -135,7 +136,7 @@
 				
 				self.ParentViewModel.Data(data);
 			}
-
+			
 			self.SaveRecord = function(record) {
 				if (self.ActiveView() != "SingleParentView") return;
 				
@@ -169,16 +170,21 @@
 			
 			// initialization
 			self.Initialize = function(dataAdapter) {
+				// save reference to data source
+				self.DataAdapter = dataAdapter;
+				
 				// initialize UI state
 				self.Glider = new GliderWidget("#glidingContainer", "#parentEditor", "#childEditor");
 				
-				// load ko.observables into view model
-				self.ParentViewModel = { Data: ko.observableArray(), ExpandData: ko.observableDictionary() };
+				// load ko.observables into view model				
+				self.ParentViewModel = { 
+					Data: ko.observableArray(), ExpandData: ko.observableDictionary(), Sections: ko.observableArray(), SelectedSection: ko.observable(), };
 				self.ChildViewModel = ko.observable(); 
 				self.ChildViewSelectedRecord = ko.observable();
 				
-				// save reference to data source
-				self.DataAdapter = dataAdapter;
+				// load the Sections
+				self.ParentViewModel.Sections(self.DataAdapter.RetrieveAllSections());
+				self.ParentViewModel.SelectedSection(self.ParentViewModel.Sections()[0]);				
 				self.RefreshParentViewModel();
 			}
 			
@@ -199,7 +205,7 @@
 		<div id="heading" class="container" data-bind="ifnot: $root.ChildViewModel()">
 			<div class="row">
 				<div class="span9">
-					<h1>Men's Section &gt; All Categories</h1>
+					<h1><span data-bind="text:$root.ParentViewModel.SelectedSection().Name"></span> &gt; All Categories</h1>
 				</div>
 				<div class="span3" style="margin-top:15px; text-align:right;">
 					<a class="btn btn-primary btn-block" data-bind="click: $root.AddParentRecord">Add New Category <i class="icon-arrow-right icon-white"></i></a>
@@ -209,11 +215,11 @@
 					  <li class="dropdown">
 						<a class="dropdown-toggle" id="drop5" role="button" data-toggle="dropdown" href="#">Goto Another Section... <b class="caret"></b></a>
 						<ul id="menu3" class="dropdown-menu" role="menu" aria-labelledby="drop5">
-						  <li><a tabindex="-1" href="#">Women's Section</a></li>
-						  <li><a tabindex="-1" href="#">Supplements</a></li>
-						  <li><a tabindex="-1" href="#">Cage Gear</a></li>
+						  <div data-bind="foreach: $root.ParentViewModel.Sections()">
+						  <li><a tabindex="-1" href="#" data-bind="text: $data.Name"></a></li>
+						  </div>
 						  <li class="divider"></li>
-						  <li><a tabindex="-1" href="#">Goto Section Editor</a></li>
+						  <li><a tabindex="-1" href="#">Go to Section Editor...</a></li>
 						</ul>
 					  </li>
 					</ul>
