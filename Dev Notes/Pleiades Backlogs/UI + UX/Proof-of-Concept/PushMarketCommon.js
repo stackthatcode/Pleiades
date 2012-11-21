@@ -76,20 +76,25 @@ function GliderWidget(glidingContainer, parentDiv, childDiv) {
 	var self = this;
 	self.LastParentScroll = 0;
 	
-	self.GlideToChild = function() {
+	self.GlideToChild = function(completeFunc) {
 		// save the old scroll position and set the new
 		self.LastParentScroll = $(window).scrollTop();
 		window.scrollTo(0, 0);
-
+		
 		// prepare the editor
 		$(childDiv).css({ display: "block", left: "940px", top: "0px" });
 		
 		// open the curtains
-		$(parentDiv + ',' + childDiv).animate(
+		var set = $(parentDiv + "," + childDiv);
+		set.animate(
 			{ left: "-=940" }, 
 			{ 
 				complete: function() {
+					set.clearQueue();
 					$(parentDiv).css({ display: "none" });
+					if (completeFunc) { 
+						completeFunc();
+					}
 				},
 				duration: 250
 			});
@@ -97,12 +102,19 @@ function GliderWidget(glidingContainer, parentDiv, childDiv) {
 		return false;
 	};
 	
-	self.GlideToParent = function () {	
+	self.GlideToParent = function (completeFunc) {	
 		$(parentDiv).css({ display: "block" });
 		
-		$(parentDiv + "," + childDiv).animate(
+		var set = $(parentDiv + "," + childDiv);
+		set.animate(
 			{ left: "+=940" }, 
-			{ duration: 250, complete: function() { /*window.scrollTo(0, self.LastParentScroll);*/ } }
+			{ duration: 250, complete: function() {
+				set.clearQueue();
+				$(childDiv).css({ display: "none" });
+				if (completeFunc) { 
+					completeFunc();
+				}
+			} }
 		);
 	};
 }
