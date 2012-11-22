@@ -73,6 +73,8 @@ function CategoryDataAdapter() {
 		return output;
 	}
 	
+	
+	// *** Public Interface *** //	
 	self.RetrieveById = function (id) {
 		var category = DeepClone(self.FindById(id));
 		category.Categories = [];
@@ -107,18 +109,22 @@ function CategoryDataAdapter() {
 		return self.RetrieveByParentId(null);		
 	}
 	
-	// *** DEPRECATED *** //
-	self.RetreiveProductsByCategoryId = function(id) {
-		return [
-			{ Id: "1", Name: "Black Beauty Gloves", Sku: "BBG-12346" },			
-			{ Id: "2", Name: "Red Sparring Gloves", Sku: "BBG-44801" },
-			{ Id: "3", Name: "White Gloves", Sku: "BBG-69892" },
-			{ Id: "4", Name: "Suede Leather Boxing Gloves", Sku: "BBG-77778" },
-		];
-	}
-	
 	self.Delete = function(id) {
 		self.DataStore.removeByLambda(function(element) { return element.Id === id; });
+	}
+	
+	self.SwapParentChild = function(parent, child) {
+		child.ParentId = parent.ParentId;		
+		self.Save(child);
+		
+		parent.ParentId = child.Id;
+		self.Save(parent);
+		
+		var allOtherChildren = self.RetrieveByParentId(parent.Id);
+		$.each(allOtherChildren, function (index, elem) {
+			elem.ParentId = child.Id;
+			self.Save(elem);
+		});
 	}
 	
 	self.Save = function(category) {
@@ -148,5 +154,15 @@ function CategoryDataAdapter() {
 			return persistCategory.Id;
 		}
 	}
+	
+	
+	// *** DEPRECATED *** //
+	self.RetreiveProductsByCategoryId = function(id) {
+		return [
+			{ Id: "1", Name: "Black Beauty Gloves", Sku: "BBG-12346" },			
+			{ Id: "2", Name: "Red Sparring Gloves", Sku: "BBG-44801" },
+			{ Id: "3", Name: "White Gloves", Sku: "BBG-69892" },
+			{ Id: "4", Name: "Suede Leather Boxing Gloves", Sku: "BBG-77778" },
+		];
+	}
 }
-

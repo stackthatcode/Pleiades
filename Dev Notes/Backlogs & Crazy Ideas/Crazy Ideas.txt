@@ -2,13 +2,13 @@ This Stage
 ~~~~~~~~~~
 - C#, ASP.NET MVC, ORM, NUnit, Rhino, TDD, DDD, MVVM, JavaScript, JQuery, UX/UI, KnockoutJS, Bootstrap, Azure, SQL Server, EF, Git
 
-
 Next Stage
 ~~~~~~~~~~
 - PushMarket => 2013 - YES
 - Create a Business + Marketing Plan => 2013 - YES
 - Mobile Android/iOS + Xamarin => 2013 - PROBABLY
 - NodeJs...? Ruby...? => Late 2013 - MAYBE, OR 2014
+
 
 
 Front Range Business Ideas
@@ -25,8 +25,8 @@ Front Range Business Ideas
 - Maintenance Programming
 - Fix JavaScript Nightmares
 
-The Crazier, The Better! -- OLD
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The Crazier, The Better! -- OLD.  Not crazy.  Maybe Stupid
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Create a consulting firm for Mobile + JavaScript + NodeJS-centric services
 - Create a consulting firm that focuses on using Alt.Net-centric development techniques
 - Attack mobile computing head-on - go after iOS development with a vengance

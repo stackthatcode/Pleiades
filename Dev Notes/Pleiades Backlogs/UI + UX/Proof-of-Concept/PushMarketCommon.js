@@ -82,16 +82,26 @@ function GliderWidget(glidingContainer, parentDiv, childDiv) {
 		window.scrollTo(0, 0);
 		
 		// prepare the editor
-		$(childDiv).css({ display: "block", left: "940px", top: "0px" });
+		$(childDiv).css({ 
+			display: "block", left: "940px", top: "0px" 
+		});
 		
 		// open the curtains
-		var set = $(parentDiv + "," + childDiv);
-		set.animate(
-			{ left: "-=940" }, 
-			{ 
+		$(parentDiv).animate({ 	
+				left: "-=940" 
+			}, 
+			{ 	
 				complete: function() {
-					set.clearQueue();
 					$(parentDiv).css({ display: "none" });
+				},
+				duration: 250
+			});
+		
+		$(childDiv).animate({ 	
+				left: "-=940"
+			}, 
+			{ 	
+				complete: function() {
 					if (completeFunc) { 
 						completeFunc();
 					}
@@ -99,22 +109,35 @@ function GliderWidget(glidingContainer, parentDiv, childDiv) {
 				duration: 250
 			});
 		
+		
 		return false;
 	};
 	
 	self.GlideToParent = function (completeFunc) {	
 		$(parentDiv).css({ display: "block" });
 		
-		var set = $(parentDiv + "," + childDiv);
-		set.animate(
-			{ left: "+=940" }, 
-			{ duration: 250, complete: function() {
-				set.clearQueue();
-				$(childDiv).css({ display: "none" });
-				if (completeFunc) { 
-					completeFunc();
-				}
-			} }
+		$(childDiv).animate({ 	
+				left: "+=940" 
+			}, 
+			{ 	
+				complete: function() {
+					$(childDiv).css({ display: "none" });
+				},
+				duration: 250, 
+			}
 		);
+		$(parentDiv).animate({ 	
+				left: "+=940" 
+			}, 
+			{ 	
+				complete: function() {
+					if (completeFunc) { 
+						completeFunc();
+					}
+				},
+				duration: 250,
+			}
+		);
+		
 	};
 }
