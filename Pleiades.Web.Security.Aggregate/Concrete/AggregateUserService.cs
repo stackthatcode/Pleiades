@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Pleiades.Security;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
+using Pleiades.Web.Security.Providers;
 
 namespace Pleiades.Web.Security.Concrete
 {
@@ -17,18 +17,20 @@ namespace Pleiades.Web.Security.Concrete
         public IMembershipService MembershipService { get; set; }
         public IOwnerAuthorizationService OwnerAuthorizationService { get; set; }
         public IFormsAuthenticationService FormsService { get; set; }
-
+        public IHttpContextUserService HttpContextUserService { get; set; }
 
         public AggregateUserService(
                 IMembershipService membershipService, 
                 IAggregateUserRepository aggregateUserRepository,
                 IOwnerAuthorizationService ownerAuthorizationService,
-                IFormsAuthenticationService formsAuthenticationService)
+                IFormsAuthenticationService formsAuthenticationService,
+                IHttpContextUserService httpContextUserService)
         {
             this.MembershipService = membershipService;
             this.Repository = aggregateUserRepository;
             this.OwnerAuthorizationService = ownerAuthorizationService;
             this.FormsService = formsAuthenticationService;
+            this.HttpContextUserService = httpContextUserService;
         }
 
         public bool Authenticate(string username, string password, bool persistenceCookie, List<UserRole> expectedRoles)
@@ -53,6 +55,36 @@ namespace Pleiades.Web.Security.Concrete
             this.FormsService.SetAuthCookieForUser(membershipUser.UserName, persistenceCookie);
             return true;
         }
+
+        public AggregateUser GetAuthenticatedUser(HttpContextBase context)
+        {
+            var httpContextUser = this.HttpContextUserService.Get();
+            if (httpContextUser != null)
+            {
+                return httpContextUser;
+            }
+
+            var userName = context.MembershipUserName();
+            if (userName == null)
+            {
+                var user = AggregateUser.AnonymousFactory();
+                this.HttpContextUserService.Put(user);
+                return user;
+            }
+
+            var currentUser = this.Repository.RetrieveByMembershipUserName(userName);
+            if (currentUser == null)
+            {
+                var user = AggregateUser.AnonymousFactory();
+                this.FormsService.ClearAuthenticationCookie();
+                this.HttpContextUserService.Put(user);
+                return user;
+            }
+
+            this.HttpContextUserService.Put(currentUser);
+            this.MembershipService.Touch(userName);
+            return currentUser;
+        } 
 
         public AggregateUser Create(
                 CreateNewMembershipUserRequest membershipUserRequest, 
@@ -106,7 +138,7 @@ namespace Pleiades.Web.Security.Concrete
         public void UpdateIdentity(int aggregateUserId, CreateOrModifyIdentityRequest identityUserRequest)
         {
             var securityCode = this.OwnerAuthorizationService.Authorize(aggregateUserId);
-            if (securityCode != SecurityResponseCode.Allowed)
+            if (securityCode != SecurityCode.Allowed)
             {
                 throw new Exception("Current User does not have Authorization to do that: " + securityCode);
             }
@@ -123,7 +155,7 @@ namespace Pleiades.Web.Security.Concrete
         public void UpdateEmail(int aggregateUserId, string email)
         {
             var securityCode = this.OwnerAuthorizationService.Authorize(aggregateUserId);
-            if (securityCode != SecurityResponseCode.Allowed)
+            if (securityCode != SecurityCode.Allowed)
             {
                 throw new Exception("Current User does not have Authorization to do that: " + securityCode);
             }
@@ -142,7 +174,7 @@ namespace Pleiades.Web.Security.Concrete
         public void UpdateApproval(int aggregateUserId, bool approval)
         {
             var securityCode = this.OwnerAuthorizationService.Authorize(aggregateUserId);
-            if (securityCode != SecurityResponseCode.Allowed)
+            if (securityCode != SecurityCode.Allowed)
             {
                 throw new Exception("Current User does not have Authorization to do that: " + securityCode);
             }

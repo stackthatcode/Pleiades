@@ -48,21 +48,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aspect\SystemAuthorizeAttribute.cs" />
+    <Compile Include="Aspect\SecurityAttribute.cs" />
     <Compile Include="Concrete\AggregateUserService.cs" />
-    <Compile Include="Concrete\DefaultAuthorizationContextBuilder.cs" />
-    <Compile Include="Concrete\DefaultPostbackSecurityResponder.cs" />
+    <Compile Include="Default\AuthorizationContextFactory.cs" />
+    <Compile Include="Default\SecurityResponder.cs" />
     <Compile Include="Concrete\HttpContextUserService.cs" />
     <Compile Include="Concrete\OwnerAuthorizationService.cs" />
-    <Compile Include="Execution\Composites\SystemAuthorizationComposite.cs" />
-    <Compile Include="Execution\Step\AccountLevelAuthorizationStep.cs" />
-    <Compile Include="Execution\Step\AccountStatusAuthorizationStep.cs" />
-    <Compile Include="Execution\Step\GetUserFromHttpContextStep.cs" />
-    <Compile Include="Execution\Step\RoleAuthorizationStep.cs" />
+    <Compile Include="Model\SecurityCode.cs" />
+    <Compile Include="Rules\FluentSecurityMethods.cs" />
     <Compile Include="Interface\IHttpContextUserService.cs" />
     <Compile Include="Interface\IOwnerAuthorizationService.cs" />
-    <Compile Include="Interface\IPostbackSecurityResponder.cs" />
-    <Compile Include="Interface\ISystemAuthorizationContextBuilder.cs" />
+    <Compile Include="Interface\IHttpSecurityResponder.cs" />
+    <Compile Include="Interface\ISecurityContextFactory.cs" />
     <Compile Include="WebSecurityAggregateBroker.cs" />
     <Compile Include="WebSecurityAggregateModule.cs" />
     <Compile Include="Interface\IAggregateUserRepository.cs" />
@@ -74,7 +71,7 @@
     <Compile Include="Model\CreateOrModifyIdentityRequest.cs" />
     <Compile Include="Model\IdentityProfile.cs" />
     <Compile Include="Model\UserRole.cs" />
-    <Compile Include="Execution\Context\SystemAuthorizationContext.cs" />
+    <Compile Include="Rules\SecurityContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,4 @@
 ﻿using System;
-using Pleiades.Security;
 using Pleiades.Web.Security.Concrete;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
@@ -18,38 +17,38 @@ namespace Pleiades.Web.Security.Concrete
             this.HttpContextUserService = httpContextUserService;
         }
 
-        public SecurityResponseCode Authorize(int ownerUserId)
+        public SecurityCode Authorize(int ownerUserId)
         {
-            var requestingUser = this.HttpContextUserService.GetCurrentUserFromHttpContext();
+            var requestingUser = this.HttpContextUserService.Get();
             var ownerUser = this.AggregateUserRepository.RetrieveById(ownerUserId);
 
             return this.Authorize(requestingUser, ownerUser);
         }
 
-        public SecurityResponseCode Authorize(AggregateUser requestingUser, AggregateUser ownerUser)
+        public SecurityCode Authorize(AggregateUser requestingUser, AggregateUser ownerUser)
         {
             if (requestingUser.IdentityProfile.UserRole == UserRole.Admin &&
                 ownerUser.IdentityProfile.UserRole == UserRole.Supreme)
             {
-                return SecurityResponseCode.AccessDenied;
+                return SecurityCode.AccessDenied;
             }
 
             if (requestingUser.IdentityProfile.UserRole.IsAdministratorOrSupreme())
             {
-                return SecurityResponseCode.Allowed;
+                return SecurityCode.Allowed;
             }
 
             if (ownerUser == null)
             {
-                return SecurityResponseCode.Allowed;
+                return SecurityCode.Allowed;
             }
 
             if (requestingUser.IdentityProfile.ID == ownerUser.IdentityProfile.ID)
             {
-                return SecurityResponseCode.Allowed;
+                return SecurityCode.Allowed;
             }
 
-            return SecurityResponseCode.AccessDenied;
+            return SecurityCode.AccessDenied;
         }
     }
 }

@@ -52,17 +52,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Concrete\AggregateUserServiceAuthenticateTests.cs" />
-    <Compile Include="Concrete\AggregateUserServiceCreateTests.cs" />
-    <Compile Include="Concrete\AggregateUserServiceUpdateTests.cs" />
+    <Compile Include="Concrete\AggregateUserServiceAuthentionTests.cs" />
+    <Compile Include="Concrete\AggregateUserServiceCRUDTests.cs" />
     <Compile Include="Concrete\OwnerAuthorizationStepTests.cs" />
     <Compile Include="Provider\MembershipProviderTests.cs" />
-    <Compile Include="Step\AccountLevelAuthorizationStepTests.cs" />
-    <Compile Include="Step\AccountStatusAuthorizationStepTests.cs" />
-    <Compile Include="Step\GetUserFromHttpContextStepTests.cs" />
-    <Compile Include="Step\IdentityRequirementsGenerator.cs" />
-    <Compile Include="Step\RoleAuthorizationStepTests.cs" />
-    <Compile Include="Step\StubUserGenerator.cs" />
+    <Compile Include="Rules\AccountLevelCheckTests.cs" />
+    <Compile Include="Rules\AccountStatusCheckTests.cs" />
+    <Compile Include="Rules\IdentityRequirementsGenerator.cs" />
+    <Compile Include="Rules\UserRoleCheckTests.cs" />
+    <Compile Include="Rules\StubUserGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pleiades.Framework\Pleiades.Base.csproj">

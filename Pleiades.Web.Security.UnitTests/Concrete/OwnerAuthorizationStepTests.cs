@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Pleiades.Execution;
-using Pleiades.Security;
 using Pleiades.Web.Security.Concrete;
 using Pleiades.Web.Security.Model;
 
@@ -27,7 +25,7 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
             var result = service.Authorize(currentUser, resourceOwner);
 
             // Assert
-            Assert.AreEqual(SecurityResponseCode.Allowed, result);
+            Assert.AreEqual(SecurityCode.Allowed, result);
         }
 
         [Test]
@@ -42,7 +40,7 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
             var result = service.Authorize(currentUser, resourceOwner);
 
             // Assert
-            Assert.AreEqual(SecurityResponseCode.Allowed, result);
+            Assert.AreEqual(SecurityCode.Allowed, result);
         }
 
         [Test]
@@ -57,7 +55,7 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
             var result = service.Authorize(currentUser, resourceOwner);
 
             // Assert
-            Assert.AreEqual(SecurityResponseCode.AccessDenied, result);
+            Assert.AreEqual(SecurityCode.AccessDenied, result);
         }
 
         [Test]
@@ -72,7 +70,7 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
             var result = service.Authorize(currentUser, resourceOwner);
 
             // Assert
-            Assert.AreEqual(SecurityResponseCode.AccessDenied, result);
+            Assert.AreEqual(SecurityCode.AccessDenied, result);
         }
 
         [Test]
@@ -87,7 +85,7 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
             var result = service.Authorize(currentUser, resourceOwner);
 
             // Assert
-            Assert.AreEqual(SecurityResponseCode.Allowed, result);
+            Assert.AreEqual(SecurityCode.Allowed, result);
         }
 
         [Test]
@@ -103,7 +101,7 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
             var result = service.Authorize(currentUser, resourceOwner);
 
             // Assert
-            Assert.AreEqual(SecurityResponseCode.Allowed, result);
+            Assert.AreEqual(SecurityCode.Allowed, result);
         }
     }
 }

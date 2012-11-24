@@ -26,7 +26,7 @@ namespace Pleiades.TestHelpers.Web
         /// </summary>
         public static string GenerateOutboundUrl(RouteCollection routes, object outboundValues)
         {
-            var httpcontext = HttpContextStubFactory.Make(AppRelativeCurrentExecutionFilePath: null);
+            var httpcontext = HttpContextStubFactory.Create(AppRelativeCurrentExecutionFilePath: null);
             var requestcontext = new RequestContext(httpcontext, new RouteData());
 
             return UrlHelper.GenerateUrl(null, null, null,
@@ -41,7 +41,7 @@ namespace Pleiades.TestHelpers.Web
                 object expectedRouteValues = null, object expectedDataTokens = null)
         {
             // This passes
-            var httpcontext = HttpContextStubFactory.Make(
+            var httpcontext = HttpContextStubFactory.Create(
                 Url: currentApplicationPath, AppRelativeCurrentExecutionFilePath: inboundUrl);
 
             // Attempt to match the Route

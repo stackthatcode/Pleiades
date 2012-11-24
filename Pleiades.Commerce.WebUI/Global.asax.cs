@@ -60,7 +60,7 @@ namespace Commerce.WebUI
 
         public void RegisterGlobalFilters()
         {
-            GlobalFilters.Filters.Add(this.Container.Resolve<SystemAuthorizeAttribute>());
+            GlobalFilters.Filters.Add(this.Container.Resolve<SecurityAttribute>());
             
             // TODO: respond to this one
             // GlobalFilters.Filters.Add(new CustomErrorAttribute());

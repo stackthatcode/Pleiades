@@ -36,7 +36,7 @@ namespace Commerce.IntegrationTests.Security
             var membershipService = new MembershipService();
             var aggregateUserRepository = new AggregateUserRepository(dbContext2);
 
-            return new AggregateUserService(membershipService, aggregateUserRepository, null, null);
+            return new AggregateUserService(membershipService, aggregateUserRepository, null, null, null);
         }
 
         [Test]

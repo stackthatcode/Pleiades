@@ -5,10 +5,7 @@ using System.Web;
 using System.Web.Security;
 using System.Web.Mvc;
 using Commerce.WebUI.Areas.Admin.Models;
-using Pleiades.Execution;
 using Pleiades.Injection;
-using Pleiades.Web.Security.Execution.Context;
-using Pleiades.Web.Security.Execution.Composites;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 
@@ -116,10 +113,10 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             this.AggregateUserService.UpdateIdentity(id, 
                     new CreateOrModifyIdentityRequest { FirstName = userViewModel.FirstName, LastName = userViewModel.LastName });
 
-            // TODO: add Unit Test for this branch
             var user = this.AggregateUserRepository.RetrieveById(id);
             if (user.IdentityProfile.UserRole != UserRole.Supreme)
             {
+                // TODO: add Unit Test for this branch
                 this.AggregateUserService.UpdateEmail(id, userViewModel.Email);
                 this.AggregateUserService.UpdateApproval(id, userViewModel.IsApproved);
             }
@@ -143,6 +140,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
                 return View(model);
 
             // Execute
+            // TODO: add Error Handler
             this.AggregateUserService.ChangeUserPassword(id, model.OldPassword, model.NewPassword);
 
             // Respond
@@ -177,7 +175,8 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult DeleteConfirm(int id)
         {
-            this.AggregateUserRepository.Delete(id);
+            var user = this.AggregateUserRepository.RetrieveById(id);
+            this.AggregateUserRepository.Delete(user);
             return RedirectToAction("List");
         }
     }

@@ -100,8 +100,8 @@
     <Compile Include="Plumbing\Autofac\AutofacContainer.cs" />
     <Compile Include="Plumbing\ErrorHandling\CustomErrorAttribute.cs" />
     <Compile Include="Plumbing\Navigation\OutboundNavigation.cs" />
-    <Compile Include="Plumbing\Security\MySystemAuthContextBuilder.cs" />
-    <Compile Include="Plumbing\Security\MySecurityCodeResponder.cs" />
+    <Compile Include="Plumbing\Security\CommerceSecurityContextFactory.cs" />
+    <Compile Include="Plumbing\Security\CommerceSecurityResponder.cs" />
     <Compile Include="Plumbing\Security\MembershipRepositoryShim.cs" />
     <Compile Include="QuickForm\CSharp\QfButtonHelpers.cs" />
     <Compile Include="QuickForm\CSharp\PagingLinksBuilder_OLD.cs" />

@@ -41,13 +41,6 @@
     <Compile Include="Data\IPagedModel.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Data\QueryablePagedModel.cs" />
-    <Compile Include="Execution\BareContext.cs" />
-    <Compile Include="Execution\ConditionalStep.cs" />
-    <Compile Include="Execution\IStep.cs" />
-    <Compile Include="Execution\IStepContext.cs" />
-    <Compile Include="Execution\IStepObserver.cs" />
-    <Compile Include="Execution\Step.cs" />
-    <Compile Include="Execution\CompositeStep.cs" />
     <Compile Include="Helpers\EnumHelpers.cs" />
     <Compile Include="Helpers\ParsingExtensions.cs" />
     <Compile Include="Helpers\Linq.cs" />
@@ -62,8 +55,6 @@
     <Compile Include="Utility\EnumExtensions.cs" />
     <Compile Include="Utility\LinqExtensions.cs" />
     <Compile Include="Utility\PropertyReflection.cs" />
-    <Compile Include="Security\ISecurityContext.cs" />
-    <Compile Include="Security\SecurityResponseCode.cs" />
     <Compile Include="Utility\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

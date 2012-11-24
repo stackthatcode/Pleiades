@@ -1,9 +1,8 @@
 ﻿using System;
 using Autofac;
-using Pleiades.Execution;
 using Pleiades.Injection;
 using Pleiades.Web.Security.Concrete;
-using Pleiades.Web.Security.Execution.Step;
+using Pleiades.Web.Security.Default;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 
@@ -16,20 +15,20 @@ namespace Pleiades.Web.Security
 
         static WebSecurityAggregateBroker()
         {
-            WebSecurityAggregateBroker.RegisterAuthorizationContextBuilder<DefaultAuthorizationContextBuilder>();
-            WebSecurityAggregateBroker.RegisterPostbackResponder<DefaultPostbackSecurityResponder>();
+            WebSecurityAggregateBroker.RegisterSecurityContextFactory<AuthorizationContextFactory>();
+            WebSecurityAggregateBroker.RegisterSecurityResponder<SecurityResponder>();
         }
 
-        public static void RegisterAuthorizationContextBuilder<T>() where T : ISystemAuthorizationContextBuilder
+        public static void RegisterSecurityContextFactory<T>() where T : ISecurityContextFactory
         {
             AuthorizationRuleRegistrationAction = (builder) =>
-                builder.RegisterType<T>().As<ISystemAuthorizationContextBuilder>().InstancePerLifetimeScope();
+                builder.RegisterType<T>().As<ISecurityContextFactory>().InstancePerLifetimeScope();
         }
 
-        public static void RegisterPostbackResponder<T>() where T : IPostbackSecurityResponder
+        public static void RegisterSecurityResponder<T>() where T : IHttpSecurityResponder
         {
             ResponderRegistrationAction = (builder) =>
-                builder.RegisterType<T>().As<IPostbackSecurityResponder>().InstancePerLifetimeScope();
+                builder.RegisterType<T>().As<IHttpSecurityResponder>().InstancePerLifetimeScope();
         }
 
 
@@ -39,14 +38,14 @@ namespace Pleiades.Web.Security
             ResponderRegistrationAction.Invoke(builder);
         }
 
-        public static ISystemAuthorizationContextBuilder ResolveAuthorizationContextBuilder(this IServiceLocator injector)
+        public static ISecurityContextFactory ResolveSecurityContextFactory(this IServiceLocator injector)
         {
-            return injector.Resolve<ISystemAuthorizationContextBuilder>();
+            return injector.Resolve<ISecurityContextFactory>();
         }
 
-        public static IPostbackSecurityResponder ResolvePostbackResponder(this IServiceLocator injector)
+        public static IHttpSecurityResponder ResolveSecurityResponder(this IServiceLocator injector)
         {
-            return injector.Resolve<IPostbackSecurityResponder>();
+            return injector.Resolve<IHttpSecurityResponder>();
         }
     }
 }

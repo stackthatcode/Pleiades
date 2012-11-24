@@ -56,14 +56,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Execution\ContextStub.cs" />
-    <Compile Include="Execution\StepXYZ.cs" />
-    <Compile Include="Execution\TestFixtureForStepComposite.cs" />
-    <Compile Include="Execution\StepAlwaysKillWithLambda.cs" />
-    <Compile Include="Execution\StepAlwaysKill.cs" />
-    <Compile Include="Execution\StepOk.cs" />
-    <Compile Include="Execution\TestFixtureForStep.cs" />
-    <Compile Include="Execution\StepThatNotifies.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\HttpContext\HttpContextStubTests.cs" />
   </ItemGroup>

@@ -5,14 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Pleiades.Execution;
 using Pleiades.Injection;
 using Pleiades.TestHelpers;
 using Pleiades.TestHelpers.Web;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
-using Pleiades.Web.Security.Execution.Composites;
-using Pleiades.Web.Security.Execution.Context;
+using Pleiades.Web.Security.Rules;
 using Commerce.Domain.Interface;
 using Commerce.WebUI.Areas.Admin.Controllers;
 using Commerce.WebUI.Areas.Admin.Models;
@@ -143,12 +141,23 @@ namespace Commerce.WebUI.TestsControllers
         public void Verify_Edit_POST_ValidState()
         {
             // Arrange
+            var user = new AggregateUser
+            {
+                Membership = new MembershipUser { UserName = "123456" },
+                IdentityProfile = new IdentityProfile(),
+            };
+
+            var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
+            repository
+                .Expect(x => x.RetrieveById(888))
+                .Return(user);
+
             var service = MockRepository.GenerateMock<IAggregateUserService>();
             service.Expect(x => x.UpdateIdentity(888, null)).IgnoreArguments();
-            var controller = new ManagerController(null, service, null);
+            var controller = new ManagerController(repository, service, null);
             
             // Act
-            var result = controller.Edit(123, new EditUserModel());
+            var result = controller.Edit(888, new EditUserModel());
 
             // Assert
             result.ShouldBeRedirectionTo(new { action = "Details" });

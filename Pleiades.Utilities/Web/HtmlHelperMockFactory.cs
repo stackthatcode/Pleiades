@@ -12,7 +12,7 @@ namespace Pleiades.TestHelpers.Web
         public static HtmlHelper<T> Make<T>()
         {
             var mockViewContext = MockRepository.GenerateStub<ViewContext>();
-            mockViewContext.HttpContext = HttpContextStubFactory.Make();
+            mockViewContext.HttpContext = HttpContextStubFactory.Create();
             mockViewContext.RouteData = new RouteData();
             mockViewContext.ViewData = new ViewDataDictionary();
             mockViewContext.Controller = MockRepository.GenerateStub<ControllerBase>();

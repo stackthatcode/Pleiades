@@ -16,7 +16,7 @@ namespace Pleiades.TestHelpers.Web
     /// </summary>
 	public static class HttpContextStubFactory
     {
-        public static HttpContextBase Make(
+        public static HttpContextBase Create(
                 string Url = "http://go.com",
                 string AppRelativeCurrentExecutionFilePath = "",
                 string HttpMethod = "GET",

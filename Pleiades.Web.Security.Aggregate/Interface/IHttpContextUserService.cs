@@ -4,7 +4,7 @@ namespace Pleiades.Web.Security.Interface
 {
     public interface IHttpContextUserService
     {
-        AggregateUser GetCurrentUserFromHttpContext();
-        void PutCurrentUserInHttpContext(AggregateUser user);
+        AggregateUser Get();
+        void Put(AggregateUser user);
     }
 }

@@ -16,7 +16,7 @@ namespace Pleiades.Web.Tests.HttpContext
         public void PlayingWithMocksVerifyingStatusCodeSet()
         {
             // Mock the HttpContext object
-            var context = HttpContextStubFactory.Make();            
+            var context = HttpContextStubFactory.Create();            
 
             // The object which relies on this mock should set status code...
             context.Response.StatusCode = 500;
@@ -29,7 +29,7 @@ namespace Pleiades.Web.Tests.HttpContext
         public void PlayingWithMocksVerifyingSessionVariableSet()
         {
             // Mock the HttpContext object
-            var context = HttpContextStubFactory.Make();
+            var context = HttpContextStubFactory.Create();
 
             // Set the Session Variable
             context.Session["testa"] = "anna";
