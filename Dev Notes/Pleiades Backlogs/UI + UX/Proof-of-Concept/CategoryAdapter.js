@@ -51,6 +51,7 @@ function CategoryDataAdapter() {
 				{ ParentId: "22", Id: "27", Name: "Crumpets X", SEO: "sample-seo-text-24" },
 				{ ParentId: "22", Id: "28", Name: "Crumpets Y", SEO: "sample-seo-text-24" },
 				{ ParentId: "22", Id: "29", Name: "Crumpets Z", SEO: "sample-seo-text-24" },
+		{ ParentId: null, Id: "1000", Name: "Empty Section", SEO: "Empty Section" },
 	];
 	
 	// These belong in the Common library (???)

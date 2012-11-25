@@ -11,9 +11,9 @@
 	<script type="text/javascript" src="ko.observableDictionary.js"></script>	
 	<script type="text/javascript" src="bootstrap-dropdown.js"></script>
 	<script type="text/javascript" src="bootstrap-modal.js"></script>
-	<script type="text/javascript" src="bootstrap-alert.js"></script>
+		
 	<script type="text/javascript" src="PushMarketCommon.js"></script>
-	<script type="text/javascript" src="CategoryAdapter.js"></script>	
+	<script type="text/javascript" src="CategoryAdapter.js"></script>
     <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
 	<link href="./pushmarket.css" rel="stylesheet">
 	
@@ -106,14 +106,6 @@
 				self.ParentViewModel.ExpandData.set(record.Id, !current);
 			}
 			
-			self.IsChildViewParent = function(id) {
-				return id == self.ChildViewModel().Id();
-			}
-			
-			self.IsChildViewSection = function(id) {
-				return id == self.ChildViewModel().ParentId()
-			}
-			
 			self.ScrollToIdTracker = function(id) {
 				if (!id) return;
 				var offset = $('#tracker' + id).parent().offset().top - $("#glidingContainer").offset().top;
@@ -140,23 +132,6 @@
 				self.ChildViewSelectedRecord(record);
 			}
 			
-			self.AddParentRecord = function() {
-				var parentId = self.ParentViewModel.SelectedSection().Id;
-				var newCategory = { Id: null, ParentId: parentId, Name: "New Category", SEO: "new-category", Categories: null };
-				
-				self.GlideToChildView(newCategory);
-				self.EditRecord(self.ChildViewModel());
-			}
-			
-			self.AddChildRecord = function() {
-				var newCategory = self.KnockoutIfyCategory(
-					{ Id: null, ParentId: self.ChildViewModel().Id(), Name: "New Category", SEO: "new-category", Categories: null });
-				
-				self.ChildViewModel().Categories.unshift(newCategory);
-				self.EditRecord(newCategory);
-				window.scrollTo(0, 0);
-			}			
-			
 			self.CancelEdit = function(record) {
 				if (self.ActiveView() != "SingleParentView") return;
 				self.ClearNonPersistedRecord();
@@ -169,11 +144,9 @@
 				}
 			}
 			
-			// data access operations			
+			// CRUD operations			
 			self.RefreshParentViewModel = function() {
 				var sectionId = self.ParentViewModel.SelectedSection().Id;
-				
-				// *** Data Access *** //
 				var data = self.DataAdapter.RetrieveAllCategoriesBySection(sectionId);
 				
 				// expand - add expand state to our observable dictionary if it's not *yet* added
@@ -190,89 +163,84 @@
 				self.ParentViewModel.Data(data);
 			}
 			
-			self.SaveRecord = function() {				
+			self.SaveRecord = function() {
+				if (self.ActiveView() != "SingleParentView") return;
+				
 				var record = self.ChildViewSelectedRecord();
 				record.Name(record.EditName());
 				record.SEO(record.EditSEO());
 				
-				// *** Data Access *** //
 				var id = self.DataAdapter.Save(self.CategoryToServerJson(record));
-				
 				self.ChildViewSelectedRecord().Id(id);				
 				self.ChildViewSelectedRecord(null);
 			}
+			
+			self.AddParentRecord = function() {
+				if (self.ActiveView() == "SingleParentView") return;
+				
+				var parentId = self.ParentViewModel.SelectedSection().Id;
+				var newCategory = { Id: null, ParentId: parentId, Name: "New Category", SEO: "new-category", Categories: null };
+				
+				self.GlideToChildView(newCategory);
+				self.EditRecord(self.ChildViewModel());
+			}
+			
+			self.AddChildRecord = function() {
+				if (self.ActiveView() != "SingleParentView") return;
+				
+				var newCategory = self.KnockoutIfyCategory(
+					{ Id: null, ParentId: self.ChildViewModel().Id(), Name: "New Category", SEO: "new-category", Categories: null });
+				
+				self.ChildViewModel().Categories.unshift(newCategory);
+				self.EditRecord(newCategory);
+				window.scrollTo(0, 0);
+			}			
 			
 			self.SwapParentChild = function() {
 				var oldParent = self.CategoryToServerJson(self.ChildViewModel());
 				var newParent = self.CategoryToServerJson(self.ChildViewSelectedRecord());
 				
-				// *** Data Access *** //
 				self.DataAdapter.SwapParentChild(oldParent, newParent);
-				var refreshedChildData = self.DataAdapter.RetrieveById(newParent.Id);
 				
-				self.ChildViewModel(self.KnockoutIfyCategory(refreshedChildData));				
+				var refreshedChildData = self.DataAdapter.RetrieveById(newParent.Id);
+				var knockedoutData = self.KnockoutIfyCategory(refreshedChildData);				
+				self.ChildViewModel(knockedoutData);
+				
 				self.ScrollToIdTracker(newParent.Id);
 				self.HighlightByTrackerId(newParent.Id);
 			}
 			
 			self.ChangeParent = function(parentRecord) {				
 				var selectedRecordId = self.ChildViewSelectedRecord().Id();
-				var isTopLevelCategory = parentRecord.ParentId == null;
 				var newParentRecordId = parentRecord.Id;
+				var isTopLevelCategory = parentRecord.ParentId == null;
 				self.ChildViewSelectedRecord().ParentId(newParentRecordId);
 				
 				// push to persistence
-				
-				// *** Data Access *** //
 				self.SaveRecord(self.ChildViewSelectedRecord());
-				
+
 				// animate back
 				self.Glider.GlideToParent(function() {					
-					// make sure the right section is selected
+					// Make sure we're in the right section
 					if (isTopLevelCategory) {
 						self.ParentViewModel.SelectedSection(parentRecord);
 					}
 					
-					// *** Data Access *** //
+					self.RefreshParentViewModel();					
+					self.ChildViewModel(null);
+					
 					var updatedParentRecord = isTopLevelCategory ? 
 							self.DataAdapter.RetrieveById(selectedRecordId) : 
 							self.DataAdapter.RetrieveById(newParentRecordId);
 							
 					var knockedoutData = self.KnockoutIfyCategory(updatedParentRecord);
-					self.ChildViewModel(knockedoutData);					
+					self.ChildViewModel(knockedoutData);
+					
 					self.Glider.GlideToChild(function() {
 						self.ScrollToIdTracker(selectedRecordId);
 						self.HighlightByTrackerId(selectedRecordId);
 					});
 				});
-			}
-			
-			self.Delete = function() {
-				var record = self.ChildViewSelectedRecord();
-				if (!self.IsChildViewParent(record.Id())) {					
-					self.DataAdapter.Delete(record.Id());
-					
-					// *** data-access *** //
-					var parentRecord = self.DataAdapter.RetrieveById(self.ChildViewModel().Id());
-					self.ChildViewModel(self.KnockoutIfyCategory(parentRecord));
-				}
-				else {
-					self.ModalViewModel.Header("Delete " + self.ChildViewSelectedRecord().Name());
-					self.ModalViewModel.Message("Are you sure you want to do this?");
-					
-					$('#modal-parent').modal();
-					self.ModalViewModel.Action(function() {
-						$('#modal-parent').modal('hide');
-						return;
-						
-						// *** data-access *** //
-						self.DataAdapter.Delete(record.Id());
-						self.RefreshParentViewModel();
-						self.ChildViewModel(null);
-						self.ChildViewSelectedRecord(null);
-						self.Glider.GlideToParent();
-					});
-				}
 			}
 			
 			// initialization
@@ -286,16 +254,14 @@
 				// load ko.observables into view model				
 				self.ParentViewModel = { 
 					Data: ko.observableArray(), ExpandData: ko.observableDictionary(), Sections: ko.observableArray(), SelectedSection: ko.observable(), };
-				self.ChildViewModel = ko.observable(null); 
-				self.ChildViewSelectedRecord = ko.observable(null);
-				self.ModalViewModel = { Header: ko.observable(null), Message: ko.observable(null), Action: ko.observable(null) };
+				self.ChildViewModel = ko.observable(); 
+				self.ChildViewSelectedRecord = ko.observable();
 				
 				// load the Sections
 				self.ParentViewModel.Sections(self.DataAdapter.RetrieveAllSections());
 				self.ParentViewModel.SelectedSection(self.ParentViewModel.Sections()[0]);				
 				self.RefreshParentViewModel();
 			}
-			
 			
 			self.Initialize(dataAdapter);
 		}
@@ -324,19 +290,18 @@
 				<div class="span9">
 					<ul class="nav nav-pills">
 					  <li class="dropdown">
-						<a class="dropdown-toggle" id="drop5" role="button" data-toggle="dropdown" href="#">Go to Different Section... <b class="caret"></b></a>
-						
+						<a class="dropdown-toggle" id="drop5" role="button" data-toggle="dropdown" href="#">Go to different Section... <b class="caret"></b></a>
 						<ul id="menu3" class="dropdown-menu" role="menu" aria-labelledby="drop5">
 							<div data-bind="foreach: $root.ParentViewModel.Sections()">
-								<li data-bind="ifnot: $data.Id == $root.ParentViewModel.SelectedSection().Id">
-									<a tabindex="-1" href="#" data-bind="text: $data.Name, click: $root.SelectSectionFromParentView"></a>
-								</li>
-								<li data-bind="if: $data.Id == $root.ParentViewModel.SelectedSection().Id">
-									<a href="#"><span data-bind="text: $data.Name" href="#"></span> <i class="icon-ok icon-black"></i></a>
-								</li>
-							</div>
-							<li class="divider"></li>
-							<li><a tabindex="-1" href="#">Edit Sections...</a></li>
+							<li data-bind="ifnot: $data.Id == $root.ParentViewModel.SelectedSection().Id">
+								<a tabindex="-1" href="#" data-bind="text: $data.Name, click: $root.SelectSectionFromParentView"></a>
+							</li>
+							<li data-bind="if: $data.Id == $root.ParentViewModel.SelectedSection().Id">
+								<a href="#"><span data-bind="text: $data.Name" href="#"></span> <i class="icon-ok icon-black"></i></a>
+							</li>						  
+						  </div>
+						  <li class="divider"></li>
+						  <li><a tabindex="-1" href="#">Go to Section Editor...</a></li>
 						</ul>
 					  </li>
 					</ul>
@@ -345,77 +310,65 @@
 		</div>
 		
 		<div id="heading" class="container" data-bind="if: $root.ChildViewModel()">
-		<div class="row" style="position:relative;">
-			<!-- TODO: move to CSS file -->
-			<div style="left:-75px; margin-top:15px; position:absolute; text-align:right;">
-				<a class="btn btn-inverse" data-bind="click: $root.GlideToParentView"><i class="icon-arrow-left icon-white"></i> Back</a>
-			</div>
-			<div class="span9">
-				<h1><span data-bind="text:$root.ParentViewModel.SelectedSection().Name"></span> &gt; <span data-bind="text: $root.ChildViewModel().Name"></span></h1>
-			</div>
-			<div class="span3" style="margin-top:15px; text-align:right;" data-bind="visible: $root.ChildViewModel().Id">
-				<a class="btn btn-primary btn-block" data-bind="click: $root.AddChildRecord"><i class="icon-plus icon-white"></i> Add Sub-Category</a>
-			</div>
-			
-			<!-- SECTION DROP DOWN -->
-			<div class="span9">
-			<ul class="nav nav-pills">
-				<li class="dropdown">
-					<a class="dropdown-toggle" id="drop5" role="button" data-toggle="dropdown" href="#">Go to Different Section... <b class="caret"></b></a>
-					
-					<ul id="menu3" class="dropdown-menu" role="menu" aria-labelledby="drop5">
-						<div data-bind="foreach: $root.ParentViewModel.Sections()">
-							<li data-bind="ifnot: $data.Id == $root.ParentViewModel.SelectedSection().Id">
-								<a tabindex="-1" href="#" data-bind="text: $data.Name, click: $root.SelectSectionFromChildView"></a>
-							</li>
-							<li data-bind="if: $data.Id == $root.ParentViewModel.SelectedSection().Id">
-								<a href="#"><span data-bind="text: $data.Name" href="#"></span> <i class="icon-ok icon-black"></i></a>
-							</li>
-						</div>
-						
-						<li class="divider"></li>
-						<li><a tabindex="-1" href="#">Edit my Sections...</a></li>							
+			<div class="row" style="position:relative;">
+				<!-- TODO: move to CSS file -->
+				<div style="left:-75px; margin-top:15px; position:absolute; text-align:right;">
+					<a class="btn btn-inverse" data-bind="click: $root.GlideToParentView"><i class="icon-arrow-left icon-white"></i> Back</a>
+				</div>
+				<div class="span9">
+					<h1><span data-bind="text:$root.ParentViewModel.SelectedSection().Name"></span> &gt; <span data-bind="text: $root.ChildViewModel().Name"></span></h1>
+				</div>
+				<div class="span3" style="margin-top:15px; text-align:right;" data-bind="visible: $root.ChildViewModel().Id">
+					<a class="btn btn-primary btn-block" data-bind="click: $root.AddChildRecord"><i class="icon-plus icon-white"></i> Add Sub-Category</a>
+				</div>
+				
+				<!-- SECTION DROP DOWN -->
+				<div class="span9">
+					<ul class="nav nav-pills">
+					  <li class="dropdown">
+						<a class="dropdown-toggle" id="drop5" role="button" data-toggle="dropdown" href="#">Go to different Section... <b class="caret"></b></a>
+						<ul id="menu3" class="dropdown-menu" role="menu" aria-labelledby="drop5">
+						  <div data-bind="foreach: $root.ParentViewModel.Sections()">
+						  <li><a tabindex="-1" href="#" data-bind="text: $data.Name, click: $root.SelectSectionFromChildView"></a></li>
+						  </div>
+						  <li class="divider"></li>
+						  <li><a tabindex="-1" href="#">Go to Section Editor...</a></li>
+						</ul>
+					  </li>
 					</ul>
-				</li>
-			</ul>
+				</div>
 			</div>
-		</div>
 		</div>
 	</script>
-		
+	
 	<!-- KNOCKOUT TEMPLATE - PARENT EDITOR -->
 	<script type="text/html" id="Parent-Editor">
-		<div style="margin-top:40px; text-align:center;" class="alert alert-info" data-bind="visible: $data.Data().length == 0">
-			<!--<button type="button" class="close" data-dismiss="alert">x</button>-->
-			<strong>This Section is empty. Click "Add New Category" to start adding Categories.</strong>  
-		</div>
-		
-		<table id="parent-editor-table" class="table table-hover" data-bind="visible: $data.Data().length > 0">
-		<tbody data-bind="foreach: $data.Data()">
+		<table id="parent-editor-table" class="table table-hover">
+			<tbody data-bind="foreach: $data.Data()">
 			<tr>
-			<td>
-				<span class="span9">
-					<input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
-					<h4 data-bind="text: $data.Name"></h4>
+				<td>
+					<span class="span9">
+						<input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
+						<h4 data-bind="text: $data.Name"></h4>
+						
+						<!-- ko if: $data.Expanded() -->
+						<div data-bind="foreach: $data.Categories">
+							<h4 style="padding-left:40px;">&raquo; <span data-bind="text: Name"></span></h4>
+						</div>
+						<!-- /ko -->
+					</span>
 					
-					<!-- ko if: $data.Expanded() -->
-					<div data-bind="foreach: $data.Categories">
-						<h4 style="padding-left:40px;">&raquo; <span data-bind="text: Name"></span></h4>
-					</div>
-					<!-- /ko -->
-				</span>
-				
-				<span class="span3" style="text-align:right;">
-					<a class="btn" href="#" data-bind="click: $root.ExpandToggle">
-						<i class="icon-chevron-down" data-bind="visible: $data.Expanded()"></i>
-						<i class="icon-chevron-up" data-bind="visible: !$data.Expanded()"></i>
-					</a>
-					
-					<a class="btn btn-inverse" data-bind="click: $root.GlideToChildView">Edit Category<i class="icon-arrow-right icon-white"></i></a>
-				</span>
-			</td>
+					<span class="span3" style="text-align:right;">
+						<a class="btn" href="#" data-bind="click: $root.ExpandToggle">
+							<i class="icon-chevron-down" data-bind="visible: $data.Expanded()"></i>
+							<i class="icon-chevron-up" data-bind="visible: !$data.Expanded()"></i>
+						</a>
+						
+						<a class="btn btn-inverse" data-bind="click: $root.GlideToChildView">Edit Category<i class="icon-arrow-right icon-white"></i></a>
+					</span>
+				</td>
 			</tr>
-		</tbody>
+			</tbody>
 		</table>
 	</script>
 	
@@ -468,16 +421,18 @@
 				<!-- BUTTONS -->
 				<span class="span4" style="padding-top:5px; text-align:right;">
 					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveRecord"><i class="icon-ok icon-white"></i> Save</a>
-					<a class="btn btn-primary" href="#" data-bind="click: $root.Delete"><i class="icon-trash icon-white"></i> Delete</a>
+					<a class="btn btn-primary" href="#"><i class="icon-trash icon-white"></i> Delete</a>
 					<a class="btn btn-inverse" href="#" data-bind="click: $root.CancelEdit"><i class="icon-remove icon-white"></i> Cancel</a>
 				</span>
 			</div>					
 			<div style="clear:both; height:20px;width:1px;" />
 			<div>
 				<span class="span9" style="float:left;">					
+					<a class="btn btn-inverse" href="#" style="float:left; margin-right:5px;"><i class="icon-search icon-white"></i> Products</a>
+					
 					<!-- CHANGE PARENT CATEGORY DROP DOWN -->					
 					<div data-bind="template: { name: 'Change-Parent-Template', data: $data }">
-					</div>
+					</div>					
 				</span>						
 				<span class="span3">
 				</span>
@@ -490,44 +445,39 @@
 	<!-- KNOCKOUT TEMPLATE - CHANGE PARENT CATEGORY/SECTIION -->
 	<script type="text/html" id="Change-Parent-Template">
 		<!-- CHANGE PARENT CATEGORY DROP DOWN -->
-		<div data-bind="visible: $data.Id()">
-			<div data-bind="ifnot: $root.IsChildViewParent($data.Id())" class="dropdown" style="float:left;">
-				<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-					Put Under Different Parent Category...<span class="caret"></span>
-				</a>
+		<div data-bind="ifnot: $data.Id() == $root.ChildViewModel().Id()" class="dropdown" style="float:left;">
+			<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+				Move to different Parent Category...<span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+				<div data-bind="foreach: $root.ParentViewModel.Data">	
+				<li data-bind="if: $data.Id == $root.ChildViewModel().Id()">
+					<a href="#"><span data-bind="text: $data.Name" href="#"></span> <i class="icon-ok icon-black"></i></a>
+				</li>
+				<li data-bind="ifnot: $data.Id == $root.ChildViewModel().Id()">
+					<a tabindex="-1" data-bind="text: $data.Name, click: $root.ChangeParent" href="#"></a>
+				</li>
+				</div>
 				
-				<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-					<div data-bind="foreach: $root.ParentViewModel.Data">	
-						<li data-bind="if: $root.IsChildViewParent($data.Id)">
-							<a href="#"><span data-bind="text: $data.Name" href="#"></span> <i class="icon-ok icon-black"></i></a>
-						</li>
-						<li data-bind="ifnot: $root.IsChildViewParent($data.Id)">
-							<a tabindex="-1" data-bind="text: $data.Name, click: $root.ChangeParent" href="#"></a>
-						</li>
-					</div>
-					
-					<li class="divider"></li>
-					<li><a tabindex="-1" data-bind="click: $root.SwapParentChild" href="#">Make This the Parent Category</a></li>
-				</ul>
-			</div>
-			
-			<!-- CHANGE SECTION CATEGORY DROP DOWN -->
-			<div data-bind="if: $root.IsChildViewParent($data.Id())" class="dropdown" style="float:left;">
-				<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-					Put Under Different Section...<span class="caret"></span>
-				</a>
-				
-				<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-					<div data-bind="foreach: $root.ParentViewModel.Sections">	
-						<li data-bind="if: $root.IsChildViewSection($data.Id)">
-							<a href="#"><span data-bind="text: $data.Name" href="#"></span> <i class="icon-ok icon-black"></i></a>
-						</li>
-						<li data-bind="ifnot: $root.IsChildViewSection($data.Id)">
-							<a tabindex="-1" data-bind="text: $data.Name, click: $root.ChangeParent" href="#"></a>
-						</li>
-					</div>
-				</ul>
-			</div>
+				<li class="divider"></li>
+				<li><a tabindex="-1" data-bind="click: $root.SwapParentChild" href="#">Make this the Parent Category</a></li>
+			</ul>
+		</div>
+		
+		<div data-bind="if: $data.Id() == $root.ChildViewModel().Id()" class="dropdown" style="float:left;">
+			<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+				Move to different Section...<span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+				<div data-bind="foreach: $root.ParentViewModel.Sections">	
+					<li data-bind="if: $data.Id == $root.ChildViewModel().ParentId()">
+						<a href="#"><span data-bind="text: $data.Name" href="#"></span> <i class="icon-ok icon-black"></i></a>
+					</li>
+					<li data-bind="ifnot: $data.Id == $root.ChildViewModel().ParentId()">
+						<a tabindex="-1" data-bind="text: $data.Name, click: $root.ChangeParent" href="#"></a>
+					</li>
+				</div>
+			</ul>
 		</div>
 	</script>	
   </head>
@@ -538,7 +488,7 @@
       <div class="navbar-inner">
         <div class="container">		  
           <img src="webicon-2.png" style="float:left;" />
-		  <a class="brand" href="#" style="color:#FFF;">pushmarket</a>
+		  <a class="brand" href="#" style="color:#08C;">pushmarket</a>
           
 		  <div class="nav-collapse collapse">	
             <ul class="nav">
@@ -584,22 +534,6 @@
 			</div>
 		</div>
     </div>
-	
-	<div id="modal-enclave">
-		<div id="modal-parent" class="modal hide fade">
-		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<h3 data-bind="text: $root.ModalViewModel.Header()"></h3>
-		  </div>
-		  <div class="modal-body">
-			<p data-bind="text: $root.ModalViewModel.Message()"></p>			
-		  </div>
-		  <div class="modal-footer">
-			<a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
-			<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.ModalViewModel.Action()"><i class="icon-ok icon-white"></i> Ok</a>
-		  </div>
-		</div>
-	</div>
 	
 	<!-- TODO: move this to a Partial View -->
 	<div class="navbar navbar-fixed-bottom">

@@ -30,7 +30,7 @@ Array.prototype.arrayFirstIndexOf = function(predicate, predicateOwner) {
 
 Array.prototype.removeByLambda = function(lambda) {
 	var index = this.indexByLambda(lambda);
-	this.remove(index, index + 1);
+	this.remove(index, index);
 };
 
 Array.prototype.remove = function(from, to) {
