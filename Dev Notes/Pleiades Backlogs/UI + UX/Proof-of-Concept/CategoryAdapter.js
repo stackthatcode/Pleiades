@@ -75,7 +75,14 @@ function CategoryDataAdapter() {
 	}
 	
 	
-	// *** Public Interface *** //	
+	// *** Public Interface *** //
+	self.SetErrorState = function() {
+		var value = Math.floor((Math.random() * 10) + 1);
+		if (value > 8 && self.ErrorCallback) {
+			//self.ErrorCallback();
+		}
+	}
+	
 	self.RetrieveById = function (id) {
 		var category = DeepClone(self.FindById(id));
 		category.Categories = [];
@@ -85,6 +92,7 @@ function CategoryDataAdapter() {
 			category.Categories.push(self.RetrieveById(element.Id)); 
 		});
 		
+		self.SetErrorState();
 		return category;
 	}
 	
@@ -94,6 +102,8 @@ function CategoryDataAdapter() {
 		$.each(categories, function(index, element) {			
 			output.push(self.RetrieveById(element.Id)); 
 		});
+		
+		self.SetErrorState();
 		return output;
 	}
 	
@@ -103,14 +113,18 @@ function CategoryDataAdapter() {
 		$.each(section.Categories, function(index, element) { 
 			output.push(element);
 		});
+
+		self.SetErrorState();
 		return output;
 	}
 	
 	self.RetrieveAllSections = function () {
+		self.SetErrorState();
 		return self.RetrieveByParentId(null);		
 	}
 	
 	self.Delete = function(id) {
+		self.SetErrorState();
 		self.DataStore.removeByLambda(function(element) { return element.Id === id; });
 	}
 	
@@ -126,9 +140,11 @@ function CategoryDataAdapter() {
 			elem.ParentId = child.Id;
 			self.Save(elem);
 		});
+		
+		self.SetErrorState();
 	}
 	
-	self.Save = function(category) {
+	self.Save = function(category) {		
 		if (category.Id == null) {
 			// TODO: check for wrong ParentId 123
 			var newId = (100 + Math.floor(Math.random() * 11)).toString();
@@ -140,6 +156,7 @@ function CategoryDataAdapter() {
 				SEO: category.SEO,
 			});
 			
+			self.SetErrorState();
 			return newId;
 		}
 		else {
@@ -152,6 +169,7 @@ function CategoryDataAdapter() {
 			persistCategory.Name = category.Name;
 			persistCategory.SEO = category.SEO;
 			
+			self.SetErrorState();
 			return persistCategory.Id;
 		}
 	}

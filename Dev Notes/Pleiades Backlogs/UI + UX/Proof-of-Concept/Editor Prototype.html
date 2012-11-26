@@ -257,28 +257,33 @@
 					self.ChildViewModel(self.KnockoutIfyCategory(parentRecord));
 				}
 				else {
-					self.ModalViewModel.Header("Delete " + self.ChildViewSelectedRecord().Name());
-					self.ModalViewModel.Message("Are you sure you want to do this?");
-					
-					$('#modal-parent').modal();
-					self.ModalViewModel.Action(function() {
-						$('#modal-parent').modal('hide');
-						return;
-						
-						// *** data-access *** //
-						self.DataAdapter.Delete(record.Id());
-						self.RefreshParentViewModel();
-						self.ChildViewModel(null);
-						self.ChildViewSelectedRecord(null);
-						self.Glider.GlideToParent();
-					});
+					self.ModalViewModel("Delete");
+					$('#modal-delete').modal();
 				}
+			}
+			
+			self.DeleteConfirm = function() { 
+				$('#modal-delete').modal('hide');
+								
+				var record = self.ChildViewSelectedRecord();
+				self.DataAdapter.Delete(record.Id());
+				self.RefreshParentViewModel();
+				
+				self.ChildViewModel(null);
+				self.ChildViewSelectedRecord(null);
+				self.Glider.GlideToParent();				
+			}
+			
+			self.Error = function() {
+				$('#modal-error').modal();
+				return false;
 			}
 			
 			// initialization
 			self.Initialize = function(dataAdapter) {
 				// save reference to data source
-				self.DataAdapter = dataAdapter;
+				self.DataAdapter = new CategoryDataAdapter();
+				self.DataAdapter.ErrorCallback = function() { self.Error() };
 				
 				// initialize UI state
 				self.Glider = new GliderWidget("#glidingContainer", "#parentEditor", "#childEditor");
@@ -288,7 +293,7 @@
 					Data: ko.observableArray(), ExpandData: ko.observableDictionary(), Sections: ko.observableArray(), SelectedSection: ko.observable(), };
 				self.ChildViewModel = ko.observable(null); 
 				self.ChildViewSelectedRecord = ko.observable(null);
-				self.ModalViewModel = { Header: ko.observable(null), Message: ko.observable(null), Action: ko.observable(null) };
+				self.ModalViewModel = ko.observable(null);
 				
 				// load the Sections
 				self.ParentViewModel.Sections(self.DataAdapter.RetrieveAllSections());
@@ -301,8 +306,7 @@
 		}
 		
 		$(function() {
-			var datasource = new CategoryDataAdapter();
-			var model = new CategoryViewModel(datasource)
+			var model = new CategoryViewModel();
 			ko.applyBindings(model);
 			window.Model = model;			
 		});
@@ -487,6 +491,38 @@
 		</tr>
 	</script>
 	
+	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG -->
+	<script type="text/html" id="Modal-Dialog">
+		<div id="modal-delete" class="modal hide fade" data-bind="if: $root.ChildViewSelectedRecord()">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3>Delete <span data-bind="text: $root.ChildViewSelectedRecord().Name()"></span></h3>
+			</div>
+			<div class="modal-body">
+				<p>Are you sure you want to Delete this Category?</p>			
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.DeleteConfirm"><i class="icon-ok icon-white"></i> Ok</a>
+			</div>
+		</div>
+		
+		<div id="modal-error" class="modal hide fade">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3>Oh Noes!</h3>
+			</div>
+			<div class="modal-body">
+				<p><strong>Something went wrong with the system. Shall I reload this page?</strong></p>			
+				<p>Note: if this keeps happening, please contact Customer Support.</p>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> No, Thanks</a>
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: function() { location.reload(true); }"><i class="icon-ok icon-white"></i> Yes, Please</a>
+			</div>
+		</div>
+	</script>
+	
 	<!-- KNOCKOUT TEMPLATE - CHANGE PARENT CATEGORY/SECTIION -->
 	<script type="text/html" id="Change-Parent-Template">
 		<!-- CHANGE PARENT CATEGORY DROP DOWN -->
@@ -528,7 +564,7 @@
 					</div>
 				</ul>
 			</div>
-		</div>
+		</div>		
 	</script>	
   </head>
   
@@ -585,20 +621,7 @@
 		</div>
     </div>
 	
-	<div id="modal-enclave">
-		<div id="modal-parent" class="modal hide fade">
-		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<h3 data-bind="text: $root.ModalViewModel.Header()"></h3>
-		  </div>
-		  <div class="modal-body">
-			<p data-bind="text: $root.ModalViewModel.Message()"></p>			
-		  </div>
-		  <div class="modal-footer">
-			<a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
-			<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.ModalViewModel.Action()"><i class="icon-ok icon-white"></i> Ok</a>
-		  </div>
-		</div>
+	<div id="modal-enclave" data-bind="template: { name: 'Modal-Dialog' }">
 	</div>
 	
 	<!-- TODO: move this to a Partial View -->
