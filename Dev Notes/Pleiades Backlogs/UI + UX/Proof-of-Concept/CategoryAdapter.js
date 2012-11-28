@@ -1,23 +1,4 @@
 
-// I WANT SYMMETRY!  I WANT TO MAKE ASSEMBLING STUFF EASY FOR THE SERVER.  <=== FUCK YOU!!!  BUILDING JSON IS TRIVIAL FOR C#
-// UPDATE: everything was upside down.  This should store everything flat for ease-of-manipulation, then translate into JSON accordingly.
-// THEREFORE: refactor this and eliminate the tree structure bullshit in our mock data layer.
-
-
-// Another Update: 
-// 1.) problems if we use SectionId -- why does this bother me?
-//		A.) RetrieveByParentId has SectionId
-//		B.) Not beautiful abstract
-//		C.) How often will we repeat ourselves...?  In the database!  In queries!
-//		D.) Moving a Category to a new section is too much work
-
-
-// 2.) problems if we use ParentId... 
-//		A.) Query complexity... may have to run twice
-//		SELECT * FROM Category t1 WHERE t1.ParentId = "1001" AND t2.ParentId = t1.Id
-
-//  http://mikehillyer.com/articles/managing-hierarchical-data-in-mysql/
-
 function CategoryDataAdapter() {
 	var self = this;
 	self.DataStore = [
@@ -75,113 +56,162 @@ function CategoryDataAdapter() {
 	}
 	
 	
-	// *** Public Interface *** //
+	
+	//
+	// NOTE: this underscores the need to address asynchrony for ALL AJAX functions
+	//
 	self.SetErrorState = function() {
 		var value = Math.floor((Math.random() * 10) + 1);
 		if (value > 8 && self.ErrorCallback) {
 			//self.ErrorCallback();
 		}
+		
+		var wait = Math.floor((Math.random() * 10) + 1) * 1000;		
+		//var wait = 0;
+		if (self.ShowLoadingCallback && self.HideLoadingCallback) {
+			//self.ShowLoadingCallback();
+			//pausecomp(1000);
+			//self.HideLoadingCallback();
+		}
 	}
 	
-	self.RetrieveById = function (id) {
-		var category = DeepClone(self.FindById(id));
-		category.Categories = [];
-		
-		var children = self.FindByParentId(id);
-		$.each(children, function(index, element) { 
-			category.Categories.push(self.RetrieveById(element.Id)); 
-		});
-		
-		self.SetErrorState();
-		return category;
-	}
 	
-	self.RetrieveByParentId = function (parentId) {
-		var categories = self.FindByParentId(parentId);
-		var output = [];
-		$.each(categories, function(index, element) {			
-			output.push(self.RetrieveById(element.Id)); 
-		});
 		
-		self.SetErrorState();
-		return output;
-	}
+	// *** Public Interface *** //
+	self.ExecuteAjaxStub = function(action, ajaxCallback) {
+		var delay = 1000;
+		self.ShowLoadingCallback();
+		window.setTimeout(function() {
+			self.HideLoadingCallback();
+			action(ajaxCallback);
+		}, delay);
+	}	
 	
-	self.RetrieveAllCategoriesBySection = function (sectionId) {
-		var section = self.RetrieveById(sectionId);
-		var output = [];
-		$.each(section.Categories, function(index, element) { 
-			output.push(element);
-		});
+	self.ExecuteAjaxGet = function(url, payload, ajaxCallback) {
+		// TODO: stub out the JQuery Ajax stuff
+	}
 
-		self.SetErrorState();
-		return output;
+	self.ExecuteAjaxGet = function(url, payload, ajaxCallback) {
+		// TODO: stub out the JQuery Ajax stuff		
 	}
 	
-	self.RetrieveAllSections = function () {
-		self.SetErrorState();
-		return self.RetrieveByParentId(null);		
+	self.RetrieveById = function (id, callback) {
+		self.ExecuteAjaxStub(
+			function(ajaxCallback) {
+				var category = DeepClone(self.FindById(id));
+				category.Categories = [];
+				
+				var children = self.FindByParentId(id);
+				$.each(children, function(index, element) { 
+					category.Categories.push(self.RetrieveById(element.Id)); 
+				});				
+				ajaxCallback(category);
+			}, 
+			callback
+		);
 	}
 	
-	self.Delete = function(id) {
-		self.SetErrorState();
-		self.DataStore.removeByLambda(function(element) { return element.Id === id; });
+	self.RetrieveByParentId = function (parentId, callback) {
+		self.ExecuteAjaxStub(
+			function(ajaxCallback) {
+				var categories = self.FindByParentId(parentId);
+				var output = [];
+				$.each(categories, function(index, element) {			
+					output.push(self.RetrieveById(element.Id)); 
+				});				
+				ajaxCallback(output);
+			},
+			callback
+		);
 	}
 	
-	self.SwapParentChild = function(parent, child) {
-		child.ParentId = parent.ParentId;		
-		self.Save(child);
-		
-		parent.ParentId = child.Id;
-		self.Save(parent);
-		
-		var allOtherChildren = self.RetrieveByParentId(parent.Id);
-		$.each(allOtherChildren, function (index, elem) {
-			elem.ParentId = child.Id;
-			self.Save(elem);
-		});
-		
-		self.SetErrorState();
+	self.RetrieveAllCategoriesBySection = function (sectionId, callback) {
+		self.ExecuteAjaxStub(
+			function(ajaxCallback) {
+				var section = self.RetrieveById(sectionId);
+				var output = [];
+				$.each(section.Categories, function(index, element) { 
+					output.push(element);
+				});
+				
+				ajaxCallback(output);
+			},
+			callback
+		);
 	}
 	
-	self.Save = function(category) {		
-		if (category.Id == null) {
-			// TODO: check for wrong ParentId 123
-			var newId = (100 + Math.floor(Math.random() * 11)).toString();
-			
-			self.DataStore.push({
-				Id: newId,
-				ParentId: category.ParentId,
-				Name: category.Name,
-				SEO: category.SEO,
-			});
-			
-			self.SetErrorState();
-			return newId;
-		}
-		else {
-			if (category.Id === category.ParentId) {
-				throw "Oh noes! Infinite loop!";
-			}
-			
-			var persistCategory = self.FindById(category.Id);
-			persistCategory.ParentId = category.ParentId;
-			persistCategory.Name = category.Name;
-			persistCategory.SEO = category.SEO;
-			
-			self.SetErrorState();
-			return persistCategory.Id;
-		}
+	self.RetrieveAllSections = function (callback) {
+		self.ExecuteAjaxStub(
+			function(ajaxCallback) {
+				ajaxCallback(self.RetrieveByParentId(null));
+			},
+			callback
+		);
 	}
 	
-	
-	// *** DEPRECATED *** //
-	self.RetreiveProductsByCategoryId = function(id) {
-		return [
-			{ Id: "1", Name: "Black Beauty Gloves", Sku: "BBG-12346" },			
-			{ Id: "2", Name: "Red Sparring Gloves", Sku: "BBG-44801" },
-			{ Id: "3", Name: "White Gloves", Sku: "BBG-69892" },
-			{ Id: "4", Name: "Suede Leather Boxing Gloves", Sku: "BBG-77778" },
-		];
+	self.Delete = function(id, callback) {
+		self.ExecuteAjaxStub(
+			function(ajaxCallback) {
+				self.DataStore.removeByLambda(function(element) { return element.Id === id; });
+				ajaxCallback();
+			},
+			callback
+		);
 	}
+	
+	self.SwapParentChild = function(parent, child, callback) {
+		self.ExecuteAjaxStub(
+			function(ajaxCallback) {
+				child.ParentId = parent.ParentId;		
+				self.Save(child);
+				
+				parent.ParentId = child.Id;
+				self.Save(parent);
+				
+				var allOtherChildren = self.RetrieveByParentId(parent.Id);
+				$.each(allOtherChildren, function (index, elem) {
+					elem.ParentId = child.Id;
+					self.Save(elem);
+				});
+				
+				callback();
+			},
+			callback
+		);
+	}
+	
+	self.Save = function(category, callback) {		
+		self.ExecuteAjaxStub(
+			function(ajaxCallback) {
+				if (category.Id == null) {
+					// TODO: check for wrong ParentId 123
+					var newId = (100 + Math.floor(Math.random() * 11)).toString();
+					
+					self.DataStore.push({
+						Id: newId,
+						ParentId: category.ParentId,
+						Name: category.Name,
+						SEO: category.SEO,
+					});
+					
+					self.SetErrorState();
+					ajaxCallback(newId);
+				}
+				else {
+					if (category.Id === category.ParentId) {
+						throw "Oh noes! Infinite loop!";
+					}
+					
+					var persistCategory = self.FindById(category.Id);
+					persistCategory.ParentId = category.ParentId;
+					persistCategory.Name = category.Name;
+					persistCategory.SEO = category.SEO;
+					
+					self.SetErrorState();
+					ajaxCallback(persistCategory.Id);
+				}
+			},
+			callback
+		);
+	}	
 }

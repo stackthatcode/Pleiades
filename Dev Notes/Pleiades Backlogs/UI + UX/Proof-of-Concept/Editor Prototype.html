@@ -237,7 +237,7 @@
 					var updatedParentRecord = isTopLevelCategory ? 
 							self.DataAdapter.RetrieveById(selectedRecordId) : 
 							self.DataAdapter.RetrieveById(newParentRecordId);
-							
+					
 					var knockedoutData = self.KnockoutIfyCategory(updatedParentRecord);
 					self.ChildViewModel(knockedoutData);					
 					self.Glider.GlideToChild(function() {
@@ -250,10 +250,11 @@
 			self.Delete = function() {
 				var record = self.ChildViewSelectedRecord();
 				if (!self.IsChildViewParent(record.Id())) {					
-					self.DataAdapter.Delete(record.Id());
 					
 					// *** data-access *** //
+					self.DataAdapter.Delete(record.Id());
 					var parentRecord = self.DataAdapter.RetrieveById(self.ChildViewModel().Id());
+					
 					self.ChildViewModel(self.KnockoutIfyCategory(parentRecord));
 				}
 				else {
@@ -274,16 +275,28 @@
 				self.Glider.GlideToParent();				
 			}
 			
+			// cross-cutting UI
 			self.Error = function() {
 				$('#modal-error').modal();
 				return false;
 			}
 			
+			self.ShowLoading = function() {
+				$("#spinner-layer").show();
+			}
+			
+			self.HideLoading = function() {
+				$("#spinner-layer").hide();
+			}
+			
 			// initialization
 			self.Initialize = function(dataAdapter) {
-				// save reference to data source
-				self.DataAdapter = new CategoryDataAdapter();
-				self.DataAdapter.ErrorCallback = function() { self.Error() };
+				// save reference to data source				
+				var adapter = new CategoryDataAdapter();
+				adapter.ErrorCallback = function() { self.Error() };
+				adapter.ShowLoadingCallback = function() { self.ShowLoading() };
+				adapter.HideLoadingCallback = function() { self.HideLoading() };
+				self.DataAdapter = adapter;
 				
 				// initialize UI state
 				self.Glider = new GliderWidget("#glidingContainer", "#parentEditor", "#childEditor");
@@ -299,8 +312,7 @@
 				self.ParentViewModel.Sections(self.DataAdapter.RetrieveAllSections());
 				self.ParentViewModel.SelectedSection(self.ParentViewModel.Sections()[0]);				
 				self.RefreshParentViewModel();
-			}
-			
+			}			
 			
 			self.Initialize(dataAdapter);
 		}
@@ -570,7 +582,7 @@
   
   <body>
 	<!-- TODO: place this in an ASP.NET MVC Partial View -->
-    <div class="navbar navbar-inverse navbar-fixed-top" style="z-index:1040;">
+    <div id="top-menu-bar" class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">		  
           <img src="webicon-2.png" style="float:left;" />
@@ -605,28 +617,35 @@
       </div>
     </div>
 	
+	<div id="spinner-layer" class="spinner-layer" style="display:none;">
+		<div id="spinner" class="spinner">
+			<img id="img-spinner" src="ajax_loader.gif" alt="Loading"/>
+		</div>
+	</div>
+	
+	<div id="modal-enclave" data-bind="template: { name: 'Modal-Dialog' }">
+	</div>
+	
 	<div class="workspace-heading-parent">
 		<div class="workspace-heading" data-bind="template: { name: 'Top-Workspace', data: $root }"></div>
 	</div>
 	
-    <div id="glidingContainer" class="container" style="top:165px; width:932px; position:relative;">
-		<div id="parentEditor" style="left:0px; width:932px; position:absolute;">
+    <div id="gliding-container" class="container">
+		<div id="parent-editor">
 			<div style="margin-bottom:300px;" data-bind="template: { name: 'Parent-Editor', data: $root.ParentViewModel }">
 			</div>
 		</div>
 		
-		<div id="childEditor" style="left:0px; width:932px; position:absolute; display:none;" data-bind="if: $root.ChildViewModel()">
+		<div id="child-editor" style="display:none;" data-bind="if: $root.ChildViewModel()">
 			<div style="margin-bottom:300px;" data-bind="template: { name: 'Child-Editor', data: $root.ChildViewModel() }">
 			</div>
 		</div>
     </div>
 	
-	<div id="modal-enclave" data-bind="template: { name: 'Modal-Dialog' }">
-	</div>
-	
+
 	<!-- TODO: move this to a Partial View -->
 	<div class="navbar navbar-fixed-bottom">
-		<div style="background-color:#FFF; height:30px; padding-top:10px;  border-top:1px dotted #CCC;">
+		<div class="bottom-navbar-style">
 			<div class="container">
 			  <footer>
 				<p>&copy; Push Global Software Solutions - LLC 2012 | <a href="#">Company</a> | <a href="#">Contact Technical Support</a></p>
