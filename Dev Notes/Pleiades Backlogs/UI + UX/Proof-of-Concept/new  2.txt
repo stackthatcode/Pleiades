@@ -1,0 +1,37 @@
+<!-- CHILD VIEW HEADER -->
+		<div id="heading" class="container" data-bind="if: $root.ChildViewModel()">
+			<div class="row" style="position:relative;">
+				<div style="left:-75px; margin-top:15px; position:absolute; text-align:right;">
+					<a class="btn btn-inverse" data-bind="click: $root.GlideToParentView"><i class="icon-arrow-left icon-white"></i> Back</a>
+				</div>
+				<div class="span9">
+					<h1><span data-bind="text:$root.ParentViewModel.SelectedSection().Name"></span> &gt; <span data-bind="text: $root.ChildViewModel().Name"></span></h1>
+				</div>
+				<div class="span3" style="margin-top:15px; text-align:right;" data-bind="visible: $root.ChildViewModel().Id">
+					<a class="btn btn-primary btn-block" data-bind="click: $root.AddChildRecord"><i class="icon-plus icon-white"></i> Add Sub-Category</a>
+				</div>
+				
+				<!-- SECTION DROP DOWN -->
+				<div class="span9">
+				<ul class="nav nav-pills">
+					<li class="dropdown">
+						<a class="dropdown-toggle" id="drop5" role="button" data-toggle="dropdown" href="#">Go to Different Section... <b class="caret"></b></a>
+						
+						<ul id="menu3" class="dropdown-menu" role="menu" aria-labelledby="drop5">
+							<div data-bind="foreach: $root.ParentViewModel.Sections()">
+								<li data-bind="ifnot: $data.Id == $root.ParentViewModel.SelectedSection().Id">
+									<a tabindex="-1" href="#" data-bind="text: $data.Name, click: $root.SelectSectionFromChildView"></a>
+								</li>
+								<li data-bind="if: $data.Id == $root.ParentViewModel.SelectedSection().Id">
+									<a href="#"><span data-bind="text: $data.Name" href="#"></span> <i class="icon-ok icon-black"></i></a>
+								</li>
+							</div>
+							
+							<li class="divider"></li>
+							<li><a tabindex="-1" href="#">Edit my Sections...</a></li>							
+						</ul>
+					</li>
+				</ul>
+				</div>
+			</div>
+		</div>

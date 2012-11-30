@@ -39,6 +39,7 @@ function CategoryDataAdapter(errorCallback, showLoadingCallback, hideLoadingCall
 		{ ParentId: null, Id: "1000", Name: "Empty Section", SEO: "Empty Section" },
 	];
 	
+	
 	// These belong in the Common library (???)
 	self.FindById = function(id) { 
 		var output = self.FindAll(function(element) { return element.Id === id });
@@ -59,6 +60,18 @@ function CategoryDataAdapter(errorCallback, showLoadingCallback, hideLoadingCall
 		return output;
 	}
 	
+	self.FindByIdDeep = function(id) {
+		var category = DeepClone(self.FindById(id));
+		category.Categories = [];
+		
+		var children = self.FindByParentId(id);
+		$.each(children, function(index, element) { 
+			category.Categories.push(self.FindByIdDeep(element.Id)); 
+		});
+		return category;
+	}
+	
+
 	
 	
 	//
@@ -82,15 +95,18 @@ function CategoryDataAdapter(errorCallback, showLoadingCallback, hideLoadingCall
 	
 		
 	self.ExecuteAjaxStub = function(action, callback) {
-		flow.exec(function() {
-			var delay = 1000;
-			self.ShowLoadingCallback();	
-			window.setTimeout(this, delay);		
-		}, function() {
-			self.HideLoadingCallback();
-			result = action();
-			callback(result);
-		});
+		flow.exec(
+			function() {
+				var delay = 1000;
+				self.ShowLoadingCallback();	
+				window.setTimeout(this, delay);		
+			},
+			function() {
+				self.HideLoadingCallback();
+				result = action();
+				callback(result);
+			}
+		);
 	}
 	
 	self.ExecuteAjaxGet = function(url, payload, callback) {
@@ -105,22 +121,33 @@ function CategoryDataAdapter(errorCallback, showLoadingCallback, hideLoadingCall
 	
 	// *** Public Interface *** //
 	self.RetrieveAllSections = function (callback) {
-		self.ExecuteAjaxStub(
-			function() { self.RetrieveByParentId(null) },
-			callback,
-		);
+		self.RetrieveByParentId(null, callback);
 	}
 	
 	self.RetrieveAllCategoriesBySection = function (sectionId, callback) {
 		self.ExecuteAjaxStub(
-			function(callback) {
-				var section = self.RetrieveById(sectionId);
+			function() {
+				var section = self.FindByIdDeep(sectionId);
 				var output = [];
 				$.each(section.Categories, function(index, element) { 
 					output.push(element);
 				});
 				
-				ajaxCallback(output);
+				return output;
+			},
+			callback
+		);
+	}
+	
+	self.RetrieveByParentId = function (parentId, callback) {
+		self.ExecuteAjaxStub(
+			function() {
+				var categories = self.FindByParentId(parentId);
+				var output = [];
+				$.each(categories, function(index, element) {			
+					output.push(self.FindByIdDeep(element.Id)); 
+				});
+				return output;
 			},
 			callback
 		);
@@ -128,30 +155,16 @@ function CategoryDataAdapter(errorCallback, showLoadingCallback, hideLoadingCall
 	
 	self.RetrieveById = function (id, callback) {
 		self.ExecuteAjaxStub(
-			function(ajaxCallback) {
+			function() {
 				var category = DeepClone(self.FindById(id));
 				category.Categories = [];
 				
 				var children = self.FindByParentId(id);
 				$.each(children, function(index, element) { 
-					category.Categories.push(self.RetrieveById(element.Id)); 
-				});				
-				ajaxCallback(category);
+					category.Categories.push(self.FindByIdDeep(element.Id)); 
+				});
+				return category;
 			}, 
-			callback
-		);
-	}
-	
-	self.RetrieveByParentId = function (parentId, callback) {
-		self.ExecuteAjaxStub(
-			function(ajaxCallback) {
-				var categories = self.FindByParentId(parentId);
-				var output = [];
-				$.each(categories, function(index, element) {			
-					output.push(self.RetrieveById(element.Id)); 
-				});				
-				ajaxCallback(output);
-			},
 			callback
 		);
 	}

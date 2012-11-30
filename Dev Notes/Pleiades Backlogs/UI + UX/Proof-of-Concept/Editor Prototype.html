@@ -8,12 +8,14 @@
 	<script type="text/javascript" src="jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="jquery.animate-colors-min.js"></script>
 	<script type="text/javascript" src="knockout-2.1.0.js"></script>	
-	<script type="text/javascript" src="ko.observableDictionary.js"></script>	
+	<script type="text/javascript" src="ko.observableDictionary.js"></script>
+	<script type="text/javascript" src="flow.js"></script>
 	<script type="text/javascript" src="bootstrap-dropdown.js"></script>
 	<script type="text/javascript" src="bootstrap-modal.js"></script>
 	<script type="text/javascript" src="bootstrap-alert.js"></script>
+	
 	<script type="text/javascript" src="PushMarketCommon.js"></script>
-	<script type="text/javascript" src="CategoryAdapter.js"></script>	
+	<script type="text/javascript" src="category-service.js"></script>	
     <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
 	<link href="./pushmarket.css" rel="stylesheet">
 	
@@ -63,7 +65,7 @@
 				if (self.ActiveView() == "SingleParentView") return;
 				
 				if (parentRecord.Id != null) {
-					var parentRecord = self.DataAdapter.RetrieveById(parentRecord.Id);
+					var parentRecord = self.ServiceAdapter.RetrieveById(parentRecord.Id);
 				}
 				
 				var knockedoutData = self.KnockoutIfyCategory(parentRecord);				
@@ -133,7 +135,7 @@
 			
 			self.EditRecord = function(record) {
 				if (self.ActiveView() != "SingleParentView") return;
-				self.ClearNonPersistedRecord();
+				self.ClearUnsavedCategoryFromModel();
 				
 				record.EditName = ko.observable(record.Name());
 				record.EditSEO = ko.observable(record.SEO());				
@@ -159,35 +161,74 @@
 			
 			self.CancelEdit = function(record) {
 				if (self.ActiveView() != "SingleParentView") return;
-				self.ClearNonPersistedRecord();
+				self.ClearUnsavedCategoryFromModel();
 				self.ChildViewSelectedRecord(null);
 			}
 			
-			self.ClearNonPersistedRecord = function() {
+			self.ClearUnsavedCategoryFromModel = function() {
 				if (self.ChildViewSelectedRecord() && self.ChildViewSelectedRecord().Id() === null) {
 					self.ChildViewModel().Categories.remove(self.ChildViewSelectedRecord());
 				}
 			}
 			
-			// data access operations			
-			self.RefreshParentViewModel = function() {
-				var sectionId = self.ParentViewModel.SelectedSection().Id;
-				
-				// *** Data Access *** //
-				var data = self.DataAdapter.RetrieveAllCategoriesBySection(sectionId);
-				
-				// expand - add expand state to our observable dictionary if it's not *yet* added
-				$.each(data, function(index, elem) { 
-					if (!self.ParentViewModel.ExpandData.get(elem.Id)()) {
-						self.ParentViewModel.ExpandData.set(elem.Id, false);
+			
+			// cross-cutting UI
+			self.Error = function() {
+				$('#modal-error').modal();
+				return false;
+			}
+			
+			self.ShowLoading = function() {
+				$("#spinner-layer").show();
+			}
+			
+			self.HideLoading = function() {
+				$("#spinner-layer").hide();
+			}
+			
+			
+			// asynchronous, service-bound operations
+			self.RetrieveSections = function(callback) {
+				flow.exec(
+					function() {
+						self.ServiceAdapter.RetrieveAllSections(this);
+					}, 
+					function(sections) {
+						self.ParentViewModel.Sections(sections);
+						self.ParentViewModel.SelectedSection(self.ParentViewModel.Sections()[0]);
+						//self.RefreshParentViewModel(this);
+					}, 
+					function() {
+						console.log("phew, made it!");
+						if (callback) { 
+							callback();
+						}
 					}
-					
-					elem.Expanded = ko.computed(function() { 
-						return self.ParentViewModel.ExpandData.get(elem.Id)();
-					});
-				});
-				
-				self.ParentViewModel.Data(data);
+				);
+			}
+			
+			self.RefreshParentViewModel = function(callback) {
+				flow.exec(
+					function() {
+						var sectionId = self.ParentViewModel.SelectedSection().Id;						
+						self.ServiceAdapter.RetrieveAllCategoriesBySection(sectionId, this);						
+					},
+					function(data) {
+						// expand - add expand state to our observable dictionary if it's not *yet* added
+						$.each(data, function(index, elem) { 
+							if (!self.ParentViewModel.ExpandData.get(elem.Id)()) {
+								self.ParentViewModel.ExpandData.set(elem.Id, false);
+							}
+							
+							elem.Expanded = ko.computed(function() { 
+								return self.ParentViewModel.ExpandData.get(elem.Id)();
+							});
+						});
+						
+						self.ParentViewModel.Data(data);
+						callback();
+					}
+				);
 			}
 			
 			self.SaveRecord = function() {				
@@ -196,7 +237,7 @@
 				record.SEO(record.EditSEO());
 				
 				// *** Data Access *** //
-				var id = self.DataAdapter.Save(self.CategoryToServerJson(record));
+				var id = self.ServiceAdapter.Save(self.CategoryToServerJson(record));
 				
 				self.ChildViewSelectedRecord().Id(id);				
 				self.ChildViewSelectedRecord(null);
@@ -207,8 +248,8 @@
 				var newParent = self.CategoryToServerJson(self.ChildViewSelectedRecord());
 				
 				// *** Data Access *** //
-				self.DataAdapter.SwapParentChild(oldParent, newParent);
-				var refreshedChildData = self.DataAdapter.RetrieveById(newParent.Id);
+				self.ServiceAdapter.SwapParentChild(oldParent, newParent);
+				var refreshedChildData = self.ServiceAdapter.RetrieveById(newParent.Id);
 				
 				self.ChildViewModel(self.KnockoutIfyCategory(refreshedChildData));				
 				self.ScrollToIdTracker(newParent.Id);
@@ -235,8 +276,8 @@
 					
 					// *** Data Access *** //
 					var updatedParentRecord = isTopLevelCategory ? 
-							self.DataAdapter.RetrieveById(selectedRecordId) : 
-							self.DataAdapter.RetrieveById(newParentRecordId);
+							self.ServiceAdapter.RetrieveById(selectedRecordId) : 
+							self.ServiceAdapter.RetrieveById(newParentRecordId);
 					
 					var knockedoutData = self.KnockoutIfyCategory(updatedParentRecord);
 					self.ChildViewModel(knockedoutData);					
@@ -252,8 +293,8 @@
 				if (!self.IsChildViewParent(record.Id())) {					
 					
 					// *** data-access *** //
-					self.DataAdapter.Delete(record.Id());
-					var parentRecord = self.DataAdapter.RetrieveById(self.ChildViewModel().Id());
+					self.ServiceAdapter.Delete(record.Id());
+					var parentRecord = self.ServiceAdapter.RetrieveById(self.ChildViewModel().Id());
 					
 					self.ChildViewModel(self.KnockoutIfyCategory(parentRecord));
 				}
@@ -267,7 +308,7 @@
 				$('#modal-delete').modal('hide');
 								
 				var record = self.ChildViewSelectedRecord();
-				self.DataAdapter.Delete(record.Id());
+				self.ServiceAdapter.Delete(record.Id());
 				self.RefreshParentViewModel();
 				
 				self.ChildViewModel(null);
@@ -275,43 +316,32 @@
 				self.Glider.GlideToParent();				
 			}
 			
-			// cross-cutting UI
-			self.Error = function() {
-				$('#modal-error').modal();
-				return false;
-			}
-			
-			self.ShowLoading = function() {
-				$("#spinner-layer").show();
-			}
-			
-			self.HideLoading = function() {
-				$("#spinner-layer").hide();
-			}
 			
 			// initialization
-			self.Initialize = function(dataAdapter) {
-				// save reference to data source				
-				var adapter = new CategoryDataAdapter();
-				adapter.ErrorCallback = function() { self.Error() };
-				adapter.ShowLoadingCallback = function() { self.ShowLoading() };
-				adapter.HideLoadingCallback = function() { self.HideLoading() };
-				self.DataAdapter = adapter;
+			self.Initialize = function() {
+				// instantiate and configure the ServiceAdapter				
+				self.ServiceAdapter = new CategoryDataAdapter(
+					function() { self.Error() },
+					function() { self.ShowLoading() },
+					function() { self.HideLoading() }
+				);
 				
 				// initialize UI state
 				self.Glider = new GliderWidget("#glidingContainer", "#parentEditor", "#childEditor");
 				
 				// load ko.observables into view model				
 				self.ParentViewModel = { 
-					Data: ko.observableArray(), ExpandData: ko.observableDictionary(), Sections: ko.observableArray(), SelectedSection: ko.observable(), };
+					Data: ko.observableArray(), 
+					ExpandData: ko.observableDictionary(), 
+					Sections: ko.observableArray(), 
+					SelectedSection: ko.observable(),
+				};
 				self.ChildViewModel = ko.observable(null); 
 				self.ChildViewSelectedRecord = ko.observable(null);
 				self.ModalViewModel = ko.observable(null);
 				
 				// load the Sections
-				self.ParentViewModel.Sections(self.DataAdapter.RetrieveAllSections());
-				self.ParentViewModel.SelectedSection(self.ParentViewModel.Sections()[0]);				
-				self.RefreshParentViewModel();
+				self.RetrieveSections();
 			}			
 			
 			self.Initialize(dataAdapter);
@@ -327,10 +357,11 @@
 	
 	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE -->
 	<script type="text/html" id="Top-Workspace">
+		<!-- PARENT VIEW HEADER -->
 		<div id="heading" class="container" data-bind="ifnot: $root.ChildViewModel()">
-			<div class="row">
+			<div class="row" data-bind="if: $root.ParentViewModel.SelectedSection()">
 				<div class="span9">
-					<h1><span data-bind="text:$root.ParentViewModel.SelectedSection().Name"></span> &gt; All Categories</h1>
+					<h1><span data-bind="text: $root.ParentViewModel.SelectedSection().Name"></span> &gt; All Categories</h1>
 				</div>
 				<div class="span3" style="margin-top:15px; text-align:right;">
 					<a class="btn btn-primary btn-block" data-bind="click: $root.AddParentRecord">Add New Category <i class="icon-arrow-right icon-white"></i></a>
@@ -351,6 +382,7 @@
 									<a href="#"><span data-bind="text: $data.Name" href="#"></span> <i class="icon-ok icon-black"></i></a>
 								</li>
 							</div>
+							
 							<li class="divider"></li>
 							<li><a tabindex="-1" href="#">Edit Sections...</a></li>
 						</ul>
@@ -360,42 +392,42 @@
 			</div>
 		</div>
 		
+		<!-- CHILD VIEW HEADER -->
 		<div id="heading" class="container" data-bind="if: $root.ChildViewModel()">
-		<div class="row" style="position:relative;">
-			<!-- TODO: move to CSS file -->
-			<div style="left:-75px; margin-top:15px; position:absolute; text-align:right;">
-				<a class="btn btn-inverse" data-bind="click: $root.GlideToParentView"><i class="icon-arrow-left icon-white"></i> Back</a>
-			</div>
-			<div class="span9">
-				<h1><span data-bind="text:$root.ParentViewModel.SelectedSection().Name"></span> &gt; <span data-bind="text: $root.ChildViewModel().Name"></span></h1>
-			</div>
-			<div class="span3" style="margin-top:15px; text-align:right;" data-bind="visible: $root.ChildViewModel().Id">
-				<a class="btn btn-primary btn-block" data-bind="click: $root.AddChildRecord"><i class="icon-plus icon-white"></i> Add Sub-Category</a>
-			</div>
-			
-			<!-- SECTION DROP DOWN -->
-			<div class="span9">
-			<ul class="nav nav-pills">
-				<li class="dropdown">
-					<a class="dropdown-toggle" id="drop5" role="button" data-toggle="dropdown" href="#">Go to Different Section... <b class="caret"></b></a>
-					
-					<ul id="menu3" class="dropdown-menu" role="menu" aria-labelledby="drop5">
-						<div data-bind="foreach: $root.ParentViewModel.Sections()">
-							<li data-bind="ifnot: $data.Id == $root.ParentViewModel.SelectedSection().Id">
-								<a tabindex="-1" href="#" data-bind="text: $data.Name, click: $root.SelectSectionFromChildView"></a>
-							</li>
-							<li data-bind="if: $data.Id == $root.ParentViewModel.SelectedSection().Id">
-								<a href="#"><span data-bind="text: $data.Name" href="#"></span> <i class="icon-ok icon-black"></i></a>
-							</li>
-						</div>
+			<div class="row" data-bind="if: $root.ParentViewModel.SelectedSection()" style="position:relative;">
+				<div style="left:-75px; margin-top:15px; position:absolute; text-align:right;">
+					<a class="btn btn-inverse" data-bind="click: $root.GlideToParentView"><i class="icon-arrow-left icon-white"></i> Back</a>
+				</div>
+				<div class="span9">
+					<h1><span data-bind="text:$root.ParentViewModel.SelectedSection().Name"></span> &gt; <span data-bind="text: $root.ChildViewModel().Name"></span></h1>
+				</div>
+				<div class="span3" style="margin-top:15px; text-align:right;" data-bind="visible: $root.ChildViewModel().Id">
+					<a class="btn btn-primary btn-block" data-bind="click: $root.AddChildRecord"><i class="icon-plus icon-white"></i> Add Sub-Category</a>
+				</div>
+				
+				<!-- SECTION DROP DOWN -->
+				<div class="span9">
+				<ul class="nav nav-pills">
+					<li class="dropdown">
+						<a class="dropdown-toggle" id="drop5" role="button" data-toggle="dropdown" href="#">Go to Different Section... <b class="caret"></b></a>
 						
-						<li class="divider"></li>
-						<li><a tabindex="-1" href="#">Edit my Sections...</a></li>							
-					</ul>
-				</li>
-			</ul>
+						<ul id="menu3" class="dropdown-menu" role="menu" aria-labelledby="drop5">
+							<div data-bind="foreach: $root.ParentViewModel.Sections()">
+								<li data-bind="ifnot: $data.Id == $root.ParentViewModel.SelectedSection().Id">
+									<a tabindex="-1" href="#" data-bind="text: $data.Name, click: $root.SelectSectionFromChildView"></a>
+								</li>
+								<li data-bind="if: $data.Id == $root.ParentViewModel.SelectedSection().Id">
+									<a href="#"><span data-bind="text: $data.Name" href="#"></span> <i class="icon-ok icon-black"></i></a>
+								</li>
+							</div>
+							
+							<li class="divider"></li>
+							<li><a tabindex="-1" href="#">Edit my Sections...</a></li>							
+						</ul>
+					</li>
+				</ul>
+				</div>
 			</div>
-		</div>
 		</div>
 	</script>
 		
@@ -626,6 +658,8 @@
 	<div id="modal-enclave" data-bind="template: { name: 'Modal-Dialog' }">
 	</div>
 	
+	
+	<!-- Knockout Template hooks -->
 	<div class="workspace-heading-parent">
 		<div class="workspace-heading" data-bind="template: { name: 'Top-Workspace', data: $root }"></div>
 	</div>
@@ -642,7 +676,7 @@
 		</div>
     </div>
 	
-
+	
 	<!-- TODO: move this to a Partial View -->
 	<div class="navbar navbar-fixed-bottom">
 		<div class="bottom-navbar-style">
