@@ -1,5 +1,5 @@
 
-function CategoryDataAdapter(errorCallback, showLoadingCallback, hideLoadingCallback) {
+function CategoryService(errorCallback, showLoadingCallback, hideLoadingCallback) {
 	var self = this;
 	self.ErrorCallback = errorCallback;
 	self.ShowLoadingCallback = showLoadingCallback;
@@ -71,52 +71,57 @@ function CategoryDataAdapter(errorCallback, showLoadingCallback, hideLoadingCall
 		return category;
 	}
 	
-
 	
 	
 	//
 	// NOTE: this underscores the need to address asynchrony for ALL AJAX functions
 	//
-	self.SetErrorState = function() {
-		var value = Math.floor((Math.random() * 10) + 1);
-		if (value > 8 && self.ErrorCallback) {
-			//self.ErrorCallback();
-		}
-		
-		var wait = Math.floor((Math.random() * 10) + 1) * 1000;		
-		//var wait = 0;
-		if (self.ShowLoadingCallback && self.HideLoadingCallback) {
-			//self.ShowLoadingCallback();
-			//pausecomp(1000);
-			//self.HideLoadingCallback();
-		}
-	}
-	
-	
-		
+	// var value = Math.floor((Math.random() * 10) + 1);
+	// if (value > 8 && self.ErrorCallback) {	
+	//	
 	self.ExecuteAjaxStub = function(action, callback) {
 		flow.exec(
 			function() {
-				var delay = 1000;
-				self.ShowLoadingCallback();	
-				window.setTimeout(this, delay);		
+				self.ShowLoadingCallback();
+				self.ExecuteAjaxJQueryStub(action, this);
+			},
+			function(result, err) {
+				self.HideLoadingCallback();
+				if (err) {
+					self.ErrorCallback();
+				} else {
+					callback(result);
+				}
+			}
+		);
+	}
+		
+	self.ExecuteAjaxJQueryStub = function(action, callback) {
+		flow.exec(
+			function() {
+				var delay = 250;
+				window.setTimeout(this, delay);
 			},
 			function() {
-				self.HideLoadingCallback();
-				result = action();
-				callback(result);
+				// error simluation
+				var value = Math.floor((Math.random() * 20) + 1);
+				if (value > 19) {	
+					callback(null, "AJAX Error!");
+				} else {
+					var result = action();	
+					callback(result, null);
+				}
 			}
 		);
 	}
 	
+	// TODO: stub out the JQuery Ajax stuff
 	self.ExecuteAjaxGet = function(url, payload, callback) {
-		// TODO: stub out the JQuery Ajax stuff
 	}
 
-	self.ExecuteAjaxGet = function(url, payload, callback) {
-		// TODO: stub out the JQuery Ajax stuff		
-	}
-	
+	// TODO: stub out the JQuery Ajax stuff		
+	self.ExecuteAjaxPost = function(url, payload, callback) {
+	}	
 	
 	
 	// *** Public Interface *** //
@@ -167,14 +172,12 @@ function CategoryDataAdapter(errorCallback, showLoadingCallback, hideLoadingCall
 			}, 
 			callback
 		);
-	}
-	
+	}	
 	
 	self.Delete = function(id, callback) {
 		self.ExecuteAjaxStub(
-			function(ajaxCallback) {
+			function() {
 				self.DataStore.removeByLambda(function(element) { return element.Id === id; });
-				ajaxCallback();
 			},
 			callback
 		);
@@ -182,7 +185,7 @@ function CategoryDataAdapter(errorCallback, showLoadingCallback, hideLoadingCall
 	
 	self.SwapParentChild = function(parent, child, callback) {
 		self.ExecuteAjaxStub(
-			function(ajaxCallback) {
+			function() {
 				child.ParentId = parent.ParentId;		
 				self.Save(child);
 				
@@ -194,31 +197,29 @@ function CategoryDataAdapter(errorCallback, showLoadingCallback, hideLoadingCall
 					elem.ParentId = child.Id;
 					self.Save(elem);
 				});
-				
-				callback();
 			},
 			callback
 		);
 	}
 	
 	self.Save = function(category, callback) {		
-		self.ExecuteAjaxStub(
-			function(ajaxCallback) {
-				if (category.Id == null) {
-					// TODO: check for wrong ParentId 123
-					var newId = (100 + Math.floor(Math.random() * 11)).toString();
-					
+		if (category.Id == null) {
+			self.ExecuteAjaxStub(
+				function() {
+					var newId = (100 + Math.floor(Math.random() * 11)).toString();					
 					self.DataStore.push({
 						Id: newId,
 						ParentId: category.ParentId,
 						Name: category.Name,
 						SEO: category.SEO,
-					});
-					
-					self.SetErrorState(); // GET RID OFF!!!
-					ajaxCallback(newId);
-				}
-				else {
+					});					
+					return newId;
+				},
+				callback
+			);
+		} else {
+			self.ExecuteAjaxStub(
+				function() {
 					if (category.Id === category.ParentId) {
 						throw "Oh noes! Infinite loop!";
 					}
@@ -226,13 +227,11 @@ function CategoryDataAdapter(errorCallback, showLoadingCallback, hideLoadingCall
 					var persistCategory = self.FindById(category.Id);
 					persistCategory.ParentId = category.ParentId;
 					persistCategory.Name = category.Name;
-					persistCategory.SEO = category.SEO;
-					
-					self.SetErrorState(); // GET RID OFF!!!
-					ajaxCallback(persistCategory.Id);
-				}
-			},
-			callback
-		);
+					persistCategory.SEO = category.SEO;					
+					return persistCategory.Id;
+				},
+				callback
+			);
+		}
 	}	
 }
