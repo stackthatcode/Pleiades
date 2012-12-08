@@ -9,7 +9,7 @@ namespace Pleiades.Web.Security.Default
     /// <summary>
     /// Abstracts and enables composition of responses to Security Authorization attempts
     /// </summary>
-    public class SecurityResponder : IHttpSecurityResponder
+    public class SecurityResponderBase : ISecurityResponder
     {
         /// <summary>
         /// Based on the SecurityResponseCode

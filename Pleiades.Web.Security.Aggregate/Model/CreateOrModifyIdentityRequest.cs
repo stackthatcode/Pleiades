@@ -2,10 +2,13 @@
 {
     public class CreateOrModifyIdentityRequest
     {
+        public int Id { get; set; }
         public AccountStatus? AccountStatus { get; set; }
         public UserRole? UserRole { get; set; }
         public AccountLevel? AccountLevel { get; set;  }
         public string FirstName { get; set; }
         public string LastName { get; set;}
+        public string Email { get; set; }
+        public bool IsApproved { get; set; }
     }
 }

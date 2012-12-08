@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Security;
 using NUnit.Framework;
 using Pleiades.Data;
+using Pleiades.Data.EF;
 using Pleiades.Web.Security.Concrete;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
@@ -15,7 +16,7 @@ using Commerce.Persist.Security;
 namespace Commerce.IntegrationTests.Security
 {
     [TestFixture]
-    public class AggregateUserRepositoryTests
+    public class AggregateUserServiceTests
     {
         // TODO LATER: Verify_RetreiveByMembershipUserNamesAndUserRoles()
 
@@ -29,18 +30,20 @@ namespace Commerce.IntegrationTests.Security
             DatabasePriming.InitializeMembership(); 
         }
 
+
         public AggregateUserService CreateAggregateUserService()
         {            
             // Create the Aggregate User Service with a separate Database Context
             var dbContext2 = new PleiadesContext();
             var membershipService = new MembershipService();
             var aggregateUserRepository = new AggregateUserRepository(dbContext2);
+            var unitOfWork = new EFUnitOfWork(dbContext2);
 
-            return new AggregateUserService(membershipService, aggregateUserRepository, null, null, null);
+            return new AggregateUserService(membershipService, aggregateUserRepository, null, null, null, unitOfWork);
         }
 
         [Test]
-        public void Verify_Create_And_RetrieveByMembershipUserName()
+        public void Create_And_RetrieveByMembershipUserName()
         {
             // Arrange
             var context = new PleiadesContext();
@@ -94,7 +97,7 @@ namespace Commerce.IntegrationTests.Security
         }
 
         [Test]
-        public void Verify_UpdateIdentity_And_RetreiveByRetrieveById()
+        public void UpdateIdentity_And_RetreiveByRetrieveById()
         {
             // Arrange
             var context = new PleiadesContext();            
@@ -119,15 +122,16 @@ namespace Commerce.IntegrationTests.Security
             // Act
             var modificationRequeset = new CreateOrModifyIdentityRequest
             {
-                 AccountLevel = AccountLevel.Standard,
-                 AccountStatus = AccountStatus.PaymentRequired,
-                 UserRole = UserRole.Trusted,
-                 FirstName = "diane",
-                 LastName = "moon"
+                Id = result.ID,
+                AccountLevel = AccountLevel.Standard,
+                AccountStatus = AccountStatus.PaymentRequired,
+                UserRole = UserRole.Trusted,
+                FirstName = "diane",
+                LastName = "moon"
             };
 
             var aggregateUserRepository = new AggregateUserRepository(context);
-            aggregateUserRepository.UpdateIdentity(result.ID, modificationRequeset);
+            aggregateUserRepository.UpdateIdentity(modificationRequeset);
             var updatedResult = aggregateUserRepository.RetrieveById(result.ID);
 
             // Assert
@@ -139,7 +143,7 @@ namespace Commerce.IntegrationTests.Security
         }
 
         [Test]
-        public void Verify_RetrieveByUserRoles()
+        public void RetrieveByUserRoles()
         {
             // Arrange
             var context = new PleiadesContext();

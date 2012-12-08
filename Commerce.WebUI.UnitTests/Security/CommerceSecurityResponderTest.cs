@@ -5,8 +5,7 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using Pleiades.Web.Security.Model;
 using Pleiades.TestHelpers.Web;
-using Commerce.WebUI.Plumbing.Navigation;
-using Commerce.WebUI.Plumbing.Security;
+using Commerce.WebUI.Plumbing;
 
 namespace Commerce.WebUI.UnitTests.Security
 {
@@ -21,7 +20,7 @@ namespace Commerce.WebUI.UnitTests.Security
             context.HttpContext = HttpContextStubFactory.Create(Url: "http://go.com");
 
             // Act
-            var responder = new CommerceSecurityResponder();
+            var responder = new SecurityResponder();
             responder.Process(SecurityCode.AccessDeniedSolicitLogon, context);
 
             var expectedRouteDict = OutboundNavigation.AdminLogin();

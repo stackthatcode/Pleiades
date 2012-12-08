@@ -30,6 +30,7 @@ namespace Pleiades.IntegrationTests.DataEF
             // Arrange
             var context = new MyContext();
             var repository = new MyEntityRepository(context);
+            var unitOfWork = new EFUnitOfWork(context);
 
             // Act
             var entity1 = new MyEntity { Name = "George", Description = "It's like this and ah!", Amount = 900 };
@@ -37,8 +38,8 @@ namespace Pleiades.IntegrationTests.DataEF
             
             repository.Add(entity1);
             repository.Add(entity2);
-            repository.SaveChanges();
-
+            unitOfWork.Commit();
+            
             var entity1Fromdb = repository.FindFirstOrDefault(x => x.Id == entity1.Id);
             var entity2Fromdb = repository.FindFirstOrDefault(x => x.Id == entity2.Id);
 
@@ -59,7 +60,8 @@ namespace Pleiades.IntegrationTests.DataEF
             // First, initialize
             var context = new MyContext();
             var repository = new MyEntityRepository(context);            
-            
+            var unitOfWork = new EFUnitOfWork(context);
+
             // Arrange
             var entity1 = new MyEntity { Name = "Aleks", Description = "Pimping awaaaay", Amount = 222 };
             var entity2 = new MyEntity { Name = "Ayende", Description = "Representing the true commerce gangstas", Amount = 333 };
@@ -68,7 +70,7 @@ namespace Pleiades.IntegrationTests.DataEF
             repository.Add(entity1);
             repository.Add(entity2);
             repository.Add(entity3);
-            repository.SaveChanges();
+            unitOfWork.Commit();
 
             // Act & Assert
             var entity1FromDb = repository.FindBy(x => x.Name == "Aleks").FirstOrDefault();
@@ -92,11 +94,8 @@ namespace Pleiades.IntegrationTests.DataEF
                 var context1 = new MyContext();
                 var repository1 = new MyEntityRepository(context1);
                 var unitOfWork1 = new EFUnitOfWork(context1);
-                unitOfWork1.Execute(() =>
-                    {
-                        repository1.Add(entity1);
-                        repository1.SaveChanges();
-                    });
+                repository1.Add(entity1);
+                unitOfWork1.Commit();
             }
             finally
             {
@@ -108,16 +107,12 @@ namespace Pleiades.IntegrationTests.DataEF
                 var context2 = new MyContext();
                 var repository2 = new MyEntityRepository(context2); 
                 var unitOfWork2 = new EFUnitOfWork(context2);
-                unitOfWork2.Execute(() => 
-                {
-                    // Assert
-                    var entity2 = repository2.FindFirstOrDefault(x => x.Name == "Olga");
-                    Assert.IsTrue(entity2.StrungOutCompare(entity1));
+                // Assert
+                var entity2 = repository2.FindFirstOrDefault(x => x.Name == "Olga");
+                Assert.IsTrue(entity2.StrungOutCompare(entity1));
 
-                    entity2.Amount = 800;
-                    repository2.Edit(entity2);
-                    throw new Exception("If I can't have data, nobody can!!!");
-                });
+                entity2.Amount = 800;
+                throw new Exception("If I can't have data, nobody can!!!");
             }
             catch
             {
@@ -130,14 +125,10 @@ namespace Pleiades.IntegrationTests.DataEF
                 var context3 = new MyContext();
                 var repository3 = new MyEntityRepository(context3);
                 var unitOfWork3 = new EFUnitOfWork(context3);
-                unitOfWork3.Execute(() =>
-                {
-                    var entity3 = repository3.FindFirstOrDefault(x => x.Name == "Olga");
-                    Assert.AreEqual(777, entity3.Amount);
-
-                    entity3.Amount = 800;
-                    repository3.Edit(entity3);
-                });
+                var entity3 = repository3.FindFirstOrDefault(x => x.Name == "Olga");
+                Assert.AreEqual(777, entity3.Amount);
+                entity3.Amount = 800;
+                unitOfWork3.Commit();
 
                 var context4 = new MyContext();
                 var repository4 = new MyEntityRepository(context4);
@@ -158,7 +149,7 @@ namespace Pleiades.IntegrationTests.DataEF
             {
                 repository.Delete(entity);
             }
-            repository.SaveChanges();
+            context.SaveChanges();
 
             // More Assert
             Assert.AreEqual(0, repository.Count());

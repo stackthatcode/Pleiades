@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Security;
 using System.Web.Mvc;
 using Commerce.WebUI.Areas.Admin.Models;
+using Pleiades.Data;
 using Pleiades.Injection;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
@@ -41,8 +42,6 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
-            // TODO: what if the User is null...? => GOTO THE ERROR PAGE
-
             var user = AggregateUserRepository.RetrieveById(id);
             var userModel = new UserViewModel(user);
             return View(userModel);
@@ -110,16 +109,15 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             }
 
             // Execute
-            this.AggregateUserService.UpdateIdentity(id, 
-                    new CreateOrModifyIdentityRequest { FirstName = userViewModel.FirstName, LastName = userViewModel.LastName });
-
-            var user = this.AggregateUserRepository.RetrieveById(id);
-            if (user.IdentityProfile.UserRole != UserRole.Supreme)
-            {
-                // TODO: add Unit Test for this branch
-                this.AggregateUserService.UpdateEmail(id, userViewModel.Email);
-                this.AggregateUserService.UpdateApproval(id, userViewModel.IsApproved);
-            }
+            this.AggregateUserService.UpdateIdentity(
+                new CreateOrModifyIdentityRequest 
+                { 
+                    Id = id, 
+                    FirstName = userViewModel.FirstName, 
+                    LastName = userViewModel.LastName, 
+                    IsApproved = userViewModel.IsApproved,
+                    Email = userViewModel.Email,
+                });
 
             // Respond
             return RedirectToAction("Details", new { id = id });
@@ -140,13 +138,13 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
                 return View(model);
 
             // Execute
-            // TODO: add Error Handler
             this.AggregateUserService.ChangeUserPassword(id, model.OldPassword, model.NewPassword);
 
             // Respond
             return RedirectToAction("Details", new { id = id });
         }
 
+        // TODO: move this into atomic AggregateUserService method
         [HttpGet]
         public ActionResult Reset(int id)
         {
@@ -164,6 +162,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             return RedirectToAction("Details", new { id = id });
         }
 
+        // TODO: move this into atomic AggregateUserService method
         [HttpGet]
         public ActionResult Delete(int id)
         {
@@ -172,6 +171,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             return View(userModel);
         }
 
+        // TODO: move this into atomic AggregateUserService method
         [HttpPost]
         public ActionResult DeleteConfirm(int id)
         {

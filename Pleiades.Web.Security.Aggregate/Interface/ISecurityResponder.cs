@@ -6,7 +6,7 @@ namespace Pleiades.Web.Security.Interface
     /// <summary>
     /// Interface for responding to SecurityResponseCode's with HTTP postback
     /// </summary>
-    public interface IHttpSecurityResponder
+    public interface ISecurityResponder
     {
         void Process(SecurityCode securityResponseCode, AuthorizationContext filterContext);
     }

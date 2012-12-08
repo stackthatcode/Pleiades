@@ -62,11 +62,6 @@ namespace Pleiades.Data.EF
             this.Context.Entry(entity).State = System.Data.EntityState.Modified;
         }
 
-        public virtual void SaveChanges()
-        {
-            this.Context.SaveChanges();
-        }
-
         public virtual int Count()
         {
             return this.GetAll().Count();

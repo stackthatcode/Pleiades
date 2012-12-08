@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Commerce.WebUI.Plumbing.ErrorHandling
+namespace Commerce.WebUI.Plumbing
 {
     public class CustomErrorAttribute :  HandleErrorAttribute
     {
@@ -17,6 +17,7 @@ namespace Commerce.WebUI.Plumbing.ErrorHandling
         // Exceptions:
         //   System.ArgumentNullException:
         //     The filterContext parameter is null.
+        //
         public virtual void OnException(ExceptionContext filterContext)
         {
             Debug.WriteLine(filterContext.Exception.Message);

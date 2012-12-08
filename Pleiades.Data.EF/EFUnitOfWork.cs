@@ -14,17 +14,8 @@ namespace Pleiades.Data.EF
             this.Context = context;
         }
 
-        public void Execute(Action action)
+        public void Commit()
         {
-            bool success = false;
-
-            using (var scope = new TransactionScope(TransactionScopeOption.Required))
-            {
-                action.Invoke();
-                scope.Complete();
-                success = true;
-            }
-            
             this.Context.SaveChanges();
         }
     }

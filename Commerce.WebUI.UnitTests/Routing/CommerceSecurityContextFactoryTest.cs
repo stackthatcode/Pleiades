@@ -5,7 +5,7 @@ using Rhino.Mocks;
 using Pleiades.Web.Security.Model;
 using Commerce.WebUI.Areas.Admin.Controllers;
 using Commerce.WebUI.Areas.Public.Controllers;
-using Commerce.WebUI.Plumbing.Security;
+using Commerce.WebUI.Plumbing;
 
 namespace Commerce.WebUI.UnitTests.Security
 {
@@ -18,7 +18,7 @@ namespace Commerce.WebUI.UnitTests.Security
             // Arrange
             var context = MockRepository.GenerateStub<AuthorizationContext>();
             context.Controller = new AuthController(null, null);
-            var factory = new CommerceSecurityContextFactory();
+            var factory = new SecurityContextFactory();
             var user = new AggregateUser();
              
             // Act
@@ -37,7 +37,7 @@ namespace Commerce.WebUI.UnitTests.Security
             // Arrange
             var context = MockRepository.GenerateStub<AuthorizationContext>();
             context.Controller = new ProductsController();
-            var factory = new CommerceSecurityContextFactory();
+            var factory = new SecurityContextFactory();
             var user = new AggregateUser();
 
             // Act
@@ -56,7 +56,7 @@ namespace Commerce.WebUI.UnitTests.Security
             // Arrange
             var context = MockRepository.GenerateStub<AuthorizationContext>();
             context.Controller = new HomeController();
-            var factory = new CommerceSecurityContextFactory();
+            var factory = new SecurityContextFactory();
             var user = new AggregateUser();
 
             // Act

@@ -4,9 +4,10 @@ using Pleiades.Injection;
 using Pleiades.Web.Security;
 using Pleiades.Web.Security.Aspect;
 using Pleiades.Web.Security.Interface;
+using Autofac;
+using Autofac.Integration.Mvc;
 using Commerce.Persist;
-using Commerce.WebUI.Plumbing.Autofac;
-using Commerce.WebUI.Plumbing.Security;
+using Commerce.WebUI.Plumbing;
 
 namespace Commerce.WebUI
 {
@@ -15,16 +16,19 @@ namespace Commerce.WebUI
         protected override void Load(ContainerBuilder builder)
         {
             // Autofac
-            builder.RegisterType<AutofacContainer>().As<IServiceLocator>().InstancePerLifetimeScope();
+            builder.RegisterType<AutofacContainer>().As<IContainerAdapter>().InstancePerLifetimeScope();
 
             // External Modules
-            WebSecurityAggregateBroker.RegisterSecurityContextFactory<CommerceSecurityContextFactory>();
-            WebSecurityAggregateBroker.RegisterSecurityResponder<CommerceSecurityResponder>();
-
-            WebSecurityAggregateBroker.Build(builder);
-
             builder.RegisterModule<WebSecurityAggregateModule>();
             builder.RegisterModule<CommercePersistModule>();
+
+            // Aggregrate User Registration framework
+            WebSecurityAggregateBroker.RegisterSecurityContextFactory<SecurityContextFactory>();
+            WebSecurityAggregateBroker.RegisterSecurityResponder<SecurityResponder>();
+            WebSecurityAggregateBroker.Build(builder);
+
+            // Register Commerce Controllers
+            builder.RegisterControllers(typeof(CommerceHttpApplication).Assembly);
         }
     }
 }

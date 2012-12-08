@@ -76,11 +76,18 @@
 			}
 			
 			self.AddParentRecord = function() {
-				var parentId = self.ParentViewModel.SelectedSection().Id;
-				var newCategory = { Id: null, ParentId: parentId, Name: "New Category", SEO: "new-category", Categories: null };
-				
-				self.GlideToChildView(newCategory);
-				self.EditRecord(self.ChildViewModel());	// The ChildViewModel is the root of that category
+				flow.exec(
+					function() {
+						var parentId = self.ParentViewModel.SelectedSection().Id;
+						var newCategory = { Id: null, ParentId: parentId, Name: "New Category", SEO: "new-category", Categories: null };
+						var knockedoutData = self.KnockoutIfyCategory(newCategory);
+						self.ChildViewModel(knockedoutData);
+						self.Glider.GlideToChild(this);
+					},
+					function() {
+						self.EditRecord(self.ChildViewModel());	// The ChildViewModel is the root of that category
+					}
+				);
 			}
 			
 			self.AddChildRecord = function() {
@@ -148,11 +155,7 @@
 			self.GlideToChildView = function(parentRecord) {
 				flow.exec(
 					function() {
-						if (parentRecord.Id != null) {
-							self.ServiceAdapter.RetrieveById(parentRecord.Id, this);
-						} else {
-							this();
-						}
+						self.ServiceAdapter.RetrieveById(parentRecord.Id, this);
 					},
 					function(parentRecord) {
 						var knockedoutData = self.KnockoutIfyCategory(parentRecord);				
@@ -164,16 +167,17 @@
 			
 			self.GlideToParentView = function() {
 				var parentRecordId = self.ChildViewModel().Id();
+				$("#glideToParent").hide();
 				flow.exec(
 					function() {
 						self.RetrieveModelBySection(self.ParentViewModel.SelectedSection(), null, this);
 					},
 					function() {
 						// animate back
-						self.Glider.GlideToParent(this);
+						//self.Glider.GlideToParent(this);
+						self.ScrollToIdTracker(parentRecordId);
 					},
 					function() {
-						self.ScrollToIdTracker(parentRecordId);
 					}
 				);
 			}
@@ -237,7 +241,7 @@
 				flow.exec(
 					function() {
 						var record = self.ChildViewSelectedRecord();
-						if (record.EditName() == "" || record.EditSEO() == "") {
+						if ($.trim(record.EditName()) == "" || $.trim(record.EditSEO()) == "") {
 							$("#validation").show();
 							return;
 						}
@@ -400,7 +404,7 @@
 		<div id="heading" class="container" data-bind="if: $root.ChildViewModel()">
 			<div class="row" data-bind="if: $root.ParentViewModel.SelectedSection()" style="position:relative;">
 				<div style="left:-75px; margin-top:15px; position:absolute; text-align:right;">
-					<a class="btn btn-inverse" data-bind="click: $root.GlideToParentView"><i class="icon-arrow-left icon-white"></i> Back</a>
+					<a id="glideToParent" class="btn btn-inverse" data-bind="click: $root.GlideToParentView"><i class="icon-arrow-left icon-white"></i> Back</a>
 				</div>
 				<div class="span9">
 					<h1><span data-bind="text:$root.ParentViewModel.SelectedSection().Name"></span> &gt; <span data-bind="text: $root.ChildViewModel().Name"></span></h1>

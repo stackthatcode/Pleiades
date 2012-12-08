@@ -16,20 +16,20 @@ namespace Pleiades.Web.Security.Providers
         public virtual string ApplicationName { get; set; }
         public virtual string ProviderName { get; set; }
 
-        public virtual MachineKeySection MachineKey { get; protected set; }
-        public virtual string ConnectionString { get; protected set; }
+        public virtual MachineKeySection MachineKey { get; set; }
+        public virtual string ConnectionString { get; set; }
 
-        public virtual int MaxInvalidPasswordAttempts { get; protected set; }
-        public virtual int PasswordAttemptWindow { get; protected set; }
-        public virtual int MinRequiredPasswordLength { get; protected set; }
-        public virtual int MinRequiredNonAlphanumericCharacters { get; protected set; }
-        public virtual string PasswordStrengthRegularExpression { get; protected set; }
-        public virtual MembershipPasswordFormat PasswordFormat { get; protected set; }
-        public virtual bool EnablePasswordReset { get; protected set; }
-        public virtual bool EnablePasswordRetrieval { get; protected set; }
-        public virtual bool RequiresQuestionAndAnswer { get; protected set; }
-        public virtual bool RequiresUniqueEmail { get; protected set; }
-        public virtual TimeSpan UserIsOnlineTimeWindow { get; protected set; }
+        public virtual int MaxInvalidPasswordAttempts { get; set; }
+        public virtual int PasswordAttemptWindow { get; set; }
+        public virtual int MinRequiredPasswordLength { get; set; }
+        public virtual int MinRequiredNonAlphanumericCharacters { get; set; }
+        public virtual string PasswordStrengthRegularExpression { get; set; }
+        public virtual MembershipPasswordFormat PasswordFormat { get; set; }
+        public virtual bool EnablePasswordReset { get; set; }
+        public virtual bool EnablePasswordRetrieval { get; set; }
+        public virtual bool RequiresQuestionAndAnswer { get; set; }
+        public virtual bool RequiresUniqueEmail { get; set; }
+        public virtual TimeSpan UserIsOnlineTimeWindow { get; set; }
 
 
         public PfMembershipProviderSettings()

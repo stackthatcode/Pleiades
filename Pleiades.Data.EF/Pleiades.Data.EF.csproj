@@ -50,8 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EFGenericRepository.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EFUnitOfWork.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\AutoMapper.cs" />
   </ItemGroup>
   <ItemGroup>

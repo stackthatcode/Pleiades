@@ -6,9 +6,9 @@ using Pleiades.Web.Security.Rules;
 using Commerce.WebUI.Areas.Admin.Controllers;
 using Commerce.WebUI.Areas.Public.Controllers;
 
-namespace Commerce.WebUI.Plumbing.Security
+namespace Commerce.WebUI.Plumbing
 {
-    public class CommerceSecurityContextFactory : ISecurityContextFactory 
+    public class SecurityContextFactory : ISecurityContextFactory 
     {
         public SecurityContext Create(AuthorizationContext filterContext, AggregateUser user)
         {

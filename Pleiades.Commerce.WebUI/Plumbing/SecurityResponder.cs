@@ -2,11 +2,10 @@
 using System.Web.Security;
 using Pleiades.Web.Security.Default;
 using Pleiades.Web.Security.Interface;
-using Commerce.WebUI.Plumbing.Navigation;
 
-namespace Commerce.WebUI.Plumbing.Security
+namespace Commerce.WebUI.Plumbing
 {
-    public class CommerceSecurityResponder : SecurityResponder
+    public class SecurityResponder : SecurityResponderBase
     {
         protected override void AccessDeniedSolicitLogon(AuthorizationContext filterContext)
         {

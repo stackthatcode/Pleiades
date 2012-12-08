@@ -299,8 +299,9 @@ namespace Commerce.IntegrationTests.Security
             Assert.IsNotNull(result);
         }
 
+
         /// <summary>
-        /// REQUIRES CONFIGURATION SETTING MODIFICATION TO PASS
+        /// REQUIRES CONFIGURATION SETTING TO DEMAND QUESTION TO RESET PASSWORD
         /// </summary>
         [Test]
         [Ignore]
@@ -328,7 +329,7 @@ namespace Commerce.IntegrationTests.Security
         }
 
         /// <summary>
-        /// REQUIRES CONFIGURATION SETTING MODIFICATION TO PASS COMPLETELY
+        /// REQUIRES CONFIGURATION SETTING TO DEMAND QUESTION TO RESET PASSWORD
         /// </summary>
         [Test]
         public void ChangePasswordQuestionAndAnswerTest()

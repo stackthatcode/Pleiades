@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using Commerce.Domain.Interface;
 using Pleiades.Data;
 using Pleiades.Data.EF;
 using Pleiades.Web.Security.Interface;
@@ -81,9 +80,9 @@ namespace Commerce.Persist.Security
         /// <summary>
         /// Update existing Identity User - will only modify Identity User entities, not Membership!
         /// </summary>
-        public void UpdateIdentity(int aggregateUserID, CreateOrModifyIdentityRequest changes)
+        public void UpdateIdentity(CreateOrModifyIdentityRequest changes)
         {
-            var user = this.RetrieveByIdForWriting(aggregateUserID);
+            var user = this.RetrieveByIdForWriting(changes.Id);
             var identity = user.IdentityProfile;
             var membership = user.Membership;
 
@@ -99,14 +98,12 @@ namespace Commerce.Persist.Security
                 identity.LastName = changes.LastName;
 
             membership.LastModified = DateTime.Now;
-            this.Context.SaveChanges();
         }
 
         public void Delete(int aggregateUserID)
         {
             var user = this.RetrieveByIdForWriting(aggregateUserID);
             this.Delete(user);
-            this.Context.SaveChanges();
         }
     }
 }

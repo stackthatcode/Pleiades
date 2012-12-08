@@ -13,7 +13,7 @@ using Pleiades.Web.Security.Model;
 using Commerce.WebUI;
 using Commerce.WebUI.Areas.Admin.Controllers;
 using Commerce.WebUI.Areas.Admin.Models;
-using Commerce.WebUI.Plumbing.Navigation;
+using Commerce.WebUI.Plumbing;
 
 namespace Commerce.WebUI.TestsControllers
 {

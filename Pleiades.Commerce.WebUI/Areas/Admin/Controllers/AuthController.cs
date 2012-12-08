@@ -7,7 +7,7 @@ using System.Web.Routing;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 using Commerce.WebUI.Areas.Admin.Models;
-using Commerce.WebUI.Plumbing.Navigation;
+using Commerce.WebUI.Plumbing;
 
 namespace Commerce.WebUI.Areas.Admin.Controllers
 {

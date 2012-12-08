@@ -2,7 +2,7 @@
 using System.Web;
 using System.Web.Routing;
 
-namespace Commerce.WebUI.Plumbing.Navigation
+namespace Commerce.WebUI.Plumbing
 {
     // TODO: add ControllerObject.ToRoute() extension method
 

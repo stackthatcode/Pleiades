@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using Rhino.Mocks;
+using Pleiades.Data;
 using Pleiades.Web.Security.Concrete;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
@@ -11,14 +12,14 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
     [TestFixture]
     public class AggregateUserServiceCreateTests
     {
-        #region Create User method tests
+        #region CreateUser tests
         [Test]
         [ExpectedException(typeof(Exception))]
-        public void Verify_Cant_Add_More_Than_Maximum_Number_Of_Admins()
+        public void Cant_Add_More_Than_Maximum_Number_Of_Admins()
         {
             // Arrange
             var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
-            var aggregateUserService = new  AggregateUserService(null, repository, null, null, null);
+            var aggregateUserService = new  AggregateUserService(null, repository, null, null, null, null);
             repository.Expect(x => x.GetUserCountByRole(UserRole.Admin)).Return(AggregateUserService.MaxAdminUsers);
 
             // Act
@@ -33,11 +34,11 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
 
         [Test]
         [ExpectedException(typeof(Exception))]
-        public void Verify_Cant_Add_More_Than_Maximum_Number_Of_Supreme_Users()
+        public void Cant_Add_More_Than_Maximum_Number_Of_Supreme_Users()
         {
             // Arrange
             var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
-            var aggregateUserService = new AggregateUserService(null, repository, null, null, null);
+            var aggregateUserService = new AggregateUserService(null, repository, null, null, null, null);
             repository.Expect(x => x.GetUserCountByRole(UserRole.Admin)).Return(1);
             repository.Expect(x => x.GetUserCountByRole(UserRole.Supreme)).Return(AggregateUserService.MaxSupremeUsers);
 
@@ -53,7 +54,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
 
         [Test]
         [ExpectedException(typeof(Exception))]
-        public void Verify_Cant_Add_Anonymous_User()
+        public void Cant_Add_Anonymous_User()
         {
             // Arrange            
             var request = new CreateOrModifyIdentityRequest()
@@ -64,7 +65,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
                 FirstName = "Jon",
                 LastName = "Smith",
             };
-            var aggregateUserService = new AggregateUserService(null, null, null, null, null);
+            var aggregateUserService = new AggregateUserService(null, null, null, null, null, null);
 
             // Act
             PleiadesMembershipCreateStatus createStatus;
@@ -74,7 +75,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
         }
 
         [Test]
-        public void Verify_MembershipFailure_Create_Request()
+        public void MembershipFailure_Create_Request()
         {
             // Arrange            
             var request = new CreateOrModifyIdentityRequest()
@@ -94,7 +95,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
                 .IgnoreArguments()
                 .OutRef(PleiadesMembershipCreateStatus.DuplicateUserName);
 
-            var aggregateUserService = new AggregateUserService(membership, null, null, null, null);
+            var aggregateUserService = new AggregateUserService(membership, null, null, null, null, null);
 
             // Act
             var response =
@@ -110,7 +111,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
         }
 
         [Test]
-        public void Verify_Valid_Create_Request()
+        public void Valid_Create_Request_Passes()
         {
             // Arrange            
             var request = new CreateOrModifyIdentityRequest()
@@ -125,14 +126,16 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             // Arrange
             var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
             repository.Expect(x => x.Add(null)).IgnoreArguments();
-            repository.Expect(x => x.SaveChanges());
-            
+
+            var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
+            unitOfWork.Expect(x => x.Commit());
+
             PleiadesMembershipCreateStatus createStatus;
             var membership = MockRepository.GenerateMock<IMembershipService>();
             membership.Expect(x => x.CreateUser(null, out createStatus)).IgnoreArguments().OutRef(PleiadesMembershipCreateStatus.Success);
 
             // Act
-            var aggregateUserService = new AggregateUserService(membership, repository, null, null, null);
+            var aggregateUserService = new AggregateUserService(membership, repository, null, null, null, unitOfWork);
 
             var response = aggregateUserService.Create(
                     null,
@@ -147,198 +150,120 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             // Assert
             repository.VerifyAllExpectations();
             membership.VerifyAllExpectations();
+            unitOfWork.VerifyAllExpectations();
             Assert.IsNotNull(response);
         }
         #endregion
 
-
-        #region Update Identity method testing
+        #region Update  tests
         [Test]
-        public void Verify_Approved_Owners_Calling_UpdateIdentity_Successfully_Invokes_Services()
+        public void Authorized_Users_Calling_UpdateIdentity_Suceeds()
         {
             // Arrange
             var user = new AggregateUser()
             {
                 ID = 888,
-                IdentityProfile = new IdentityProfile()
-                {
-                    UserRole = UserRole.Admin,
-                },
-                Membership = new MembershipUser
-                {
-                    UserName = "12345678",
-                },
+                IdentityProfile = new IdentityProfile() { UserRole = UserRole.Admin, },
+                Membership = new MembershipUser { UserName = "12345678", },
             };
 
+            var modifyRequest = new CreateOrModifyIdentityRequest() 
+                    { Id = 888, FirstName = "Jospeh", LastName = "Lambert", Email = "abc@efe.com", IsApproved = true };
+
+            var aggrUserRepository = MockRepository.GenerateMock<IAggregateUserRepository>();
+            aggrUserRepository.Expect(x => x.RetrieveById(888)).Return(user);
+            aggrUserRepository.Expect(x => x.UpdateIdentity(modifyRequest));
+
             var ownerAuthorizationService = MockRepository.GenerateMock<IOwnerAuthorizationService>();
             ownerAuthorizationService.Expect(x => x.Authorize(888)).Return(SecurityCode.Allowed);
 
-            var aggregateUserRepository = MockRepository.GenerateMock<IAggregateUserRepository>();
-            aggregateUserRepository.Expect(x => x.UpdateIdentity(888, null)).IgnoreArguments();
+            var membershipService = MockRepository.GenerateMock<IMembershipService>();
+            membershipService.Expect(x => x.SetUserApproval("123456", true));
+            membershipService.Expect(x => x.ChangeEmailAddress("123456", "abc@efe.com"));
 
-            var aggregateService = new AggregateUserService(null, aggregateUserRepository, ownerAuthorizationService, null, null);
+            var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
+            unitOfWork.Expect(x => x.Commit());
+
+            var aggregateService =
+                new AggregateUserService(membershipService, aggrUserRepository, ownerAuthorizationService, null, null, unitOfWork);
 
             // Act
-            aggregateService.UpdateIdentity(888,
-                new CreateOrModifyIdentityRequest() { FirstName = "Jospeh", LastName = "Lambert" });
+            aggregateService.UpdateIdentity(modifyRequest);
 
             // Assert
             ownerAuthorizationService.VerifyAllExpectations();
-            aggregateUserRepository.VerifyAllExpectations();
+            aggrUserRepository.VerifyAllExpectations();
+            unitOfWork.VerifyAllExpectations();
         }
 
         [Test]
         [ExpectedException()]
-        public void Verify_Unapproved_Owners_Calling_UpdateIdentity_Throws()
+        public void Unauthorized_Owners_Calling_UpdateIdentity_Fails()
         {
             var ownerAuthorizationService = MockRepository.GenerateMock<IOwnerAuthorizationService>();
             ownerAuthorizationService.Expect(x => x.Authorize(888)).Return(SecurityCode.AccessDenied);
 
-            var aggregateService = new AggregateUserService(null, null, ownerAuthorizationService, null, null);
+            var aggregateService = new AggregateUserService(null, null, ownerAuthorizationService, null, null, null);
 
             // Act
-            aggregateService.UpdateIdentity(888,
-                new CreateOrModifyIdentityRequest() { FirstName = "Jospeh", LastName = "Lambert" });
+            aggregateService.UpdateIdentity(new CreateOrModifyIdentityRequest() 
+                    { Id = 888, FirstName = "Jospeh", LastName = "Lambert", Email = "abc@efe.com", IsApproved = true });
 
             // Assert
             ownerAuthorizationService.VerifyAllExpectations();
         }
+        #endregion
 
+        #region ChangePassword tests
         [Test]
-        public void Verify_Update_Email_Method_Pass()
-        {
-            // Arrange
-            var ownerAuthorizationService = MockRepository.GenerateMock<IOwnerAuthorizationService>();
-            ownerAuthorizationService.Expect(x => x.Authorize(888)).Return(SecurityCode.Allowed);
-
-            var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
-            repository
-                .Expect(x => x.RetrieveById(888))
-                .Return(new AggregateUser { Membership = new MembershipUser { UserName = "123456" } });
-
-            var memebrship = MockRepository.GenerateMock<IMembershipService>();
-            memebrship.Expect(x => x.ChangeEmailAddress("123456", "john@john.com"));
-
-            // Act
-            var aggregateService = new AggregateUserService(memebrship, repository, ownerAuthorizationService, null, null);
-            aggregateService.UpdateEmail(888, "john@john.com");
-
-            // Assert
-            ownerAuthorizationService.VerifyAllExpectations();
-            repository.VerifyAllExpectations();
-            memebrship.VerifyAllExpectations();
-        }
-
-        [Test]
-        [ExpectedException()]
-        public void Verify_Update_Email_Method_Throws_For_Unapproved_Users()
-        {
-            // Arrange
-            var ownerAuthorizationService = MockRepository.GenerateMock<IOwnerAuthorizationService>();
-            ownerAuthorizationService.Expect(x => x.Authorize(888)).Return(SecurityCode.AccessDenied);
-
-            // Act
-            var aggregateService = new AggregateUserService(null, null, ownerAuthorizationService, null, null);
-            aggregateService.UpdateEmail(888, "john@john.com");
-
-            // Assert
-        }
-
-        [Test]
-        [ExpectedException()]
-        public void Verify_Update_Email_Method_Throws_For_Null_Email_Address()
-        {
-            // Arrange
-            var ownerAuthorizationService = MockRepository.GenerateMock<IOwnerAuthorizationService>();
-            ownerAuthorizationService.Expect(x => x.Authorize(888)).Return(SecurityCode.AccessDenied);
-
-            // Act
-            var aggregateService = new AggregateUserService(null, null, ownerAuthorizationService, null, null);
-            aggregateService.UpdateEmail(888, null);
-
-            // Assert
-        }
-
-        [Test]
-        public void Verify_UpdateApproval_HappyPath()
-        {
-            // Arrange
-            var ownerAuthorizationService = MockRepository.GenerateMock<IOwnerAuthorizationService>();
-            ownerAuthorizationService.Expect(x => x.Authorize(888)).Return(SecurityCode.Allowed);
-
-            var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
-            repository
-                .Expect(x => x.RetrieveById(888))
-                .Return(new AggregateUser
-                {
-                    Membership = new MembershipUser { UserName = "123456" },
-                    IdentityProfile = new IdentityProfile { UserRole = UserRole.Trusted },
-                });
-
-            var memebrship = MockRepository.GenerateMock<IMembershipService>();
-            memebrship.Expect(x => x.SetUserApproval("123456", true));
-
-            // Act
-            var aggregateService = new AggregateUserService(memebrship, repository, ownerAuthorizationService, null, null);
-            aggregateService.UpdateApproval(888, true);
-
-            // Assert
-            ownerAuthorizationService.VerifyAllExpectations();
-            repository.VerifyAllExpectations();
-            memebrship.VerifyAllExpectations();
-        }
-
-        [Test]
-        public void Verify_UpdateApproval_Cannot_Update_SupremeUser()
-        {
-            // Arrange
-            var ownerAuthorizationService = MockRepository.GenerateMock<IOwnerAuthorizationService>();
-            ownerAuthorizationService.Expect(x => x.Authorize(888)).Return(SecurityCode.Allowed);
-
-            var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
-            repository
-                .Expect(x => x.RetrieveById(888))
-                .Return(new AggregateUser
-                {
-                    Membership = new MembershipUser { UserName = "123456" },
-                    IdentityProfile = new IdentityProfile { UserRole = UserRole.Supreme },
-                });
-
-            // Act
-            var aggregateService = new AggregateUserService(null, repository, ownerAuthorizationService, null, null);
-            aggregateService.UpdateApproval(888, true);
-
-            // Assert
-            ownerAuthorizationService.VerifyAllExpectations();
-            repository.VerifyAllExpectations();
-        }
-
-        [Test]
-        public void Verify_Update_Password_Properly_Invokes_Services()
+        public void Authorized_Users_Calling_Update_Password_Succeeds()
         {
             // Arrange
             var user = new AggregateUser()
             {
                 IdentityProfile = new IdentityProfile(),
-                Membership = new MembershipUser
-                {
-                    UserName = "12345678",
-                }
+                Membership = new MembershipUser { UserName = "12345678", }
             };
-
-            var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
-            repository.Expect(x => x.RetrieveById(888)).Return(user);
 
             var membershipService = MockRepository.GenerateMock<IMembershipService>();
             membershipService.Expect(x => x.ChangePassword("12345678", "12345678", "abcdef"));
+            
+            var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
+            repository.Expect(x => x.RetrieveById(888)).Return(user);
 
-            var service = new AggregateUserService(membershipService, repository, null, null, null);
+            var ownerAuthorizationService = MockRepository.GenerateMock<IOwnerAuthorizationService>();
+            ownerAuthorizationService.Expect(x => x.Authorize(888)).Return(SecurityCode.Allowed);
+
+            var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
+            unitOfWork.Expect(x => x.Commit());
+
+            var service = new AggregateUserService(membershipService, repository, ownerAuthorizationService, null, null, unitOfWork);
 
             // Act
             service.ChangeUserPassword(888, "12345678", "abcdef");
 
             // Assert
+            ownerAuthorizationService.VerifyAllExpectations();
+            repository.VerifyAllExpectations();
             membershipService.VerifyAllExpectations();
+            unitOfWork.VerifyAllExpectations();
+        }
+
+        [Test]
+        [ExpectedException()]
+        public void UnAuthorized_Users_Calling_Update_Password_Fails()
+        {
+            // Arrange
+            var ownerAuthorizationService = MockRepository.GenerateMock<IOwnerAuthorizationService>();
+            ownerAuthorizationService.Expect(x => x.Authorize(888)).Return(SecurityCode.AccessDenied);
+
+            var service = new AggregateUserService(null, null, ownerAuthorizationService, null, null, null);
+
+            // Act
+            service.ChangeUserPassword(888, "12345678", "abcdef");
+
+            // Assert
+            ownerAuthorizationService.VerifyAllExpectations();
         }
         #endregion
     }

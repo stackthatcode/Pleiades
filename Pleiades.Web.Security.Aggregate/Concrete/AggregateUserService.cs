@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Pleiades.Data;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Providers;
@@ -13,24 +14,30 @@ namespace Pleiades.Web.Security.Concrete
         public const int MaxSupremeUsers = 1;
         public const int MaxAdminUsers = 5;
 
+        private Guid _tracer = Guid.NewGuid();
+        public Guid Tracer { get { return _tracer; } }
+
         public IAggregateUserRepository Repository { get; set; }
         public IMembershipService MembershipService { get; set; }
         public IOwnerAuthorizationService OwnerAuthorizationService { get; set; }
         public IFormsAuthenticationService FormsService { get; set; }
         public IHttpContextUserService HttpContextUserService { get; set; }
+        public IUnitOfWork UnitOfWork { get; set; }
 
         public AggregateUserService(
                 IMembershipService membershipService, 
                 IAggregateUserRepository aggregateUserRepository,
                 IOwnerAuthorizationService ownerAuthorizationService,
                 IFormsAuthenticationService formsAuthenticationService,
-                IHttpContextUserService httpContextUserService)
+                IHttpContextUserService httpContextUserService,
+                IUnitOfWork unitOfWork)
         {
             this.MembershipService = membershipService;
             this.Repository = aggregateUserRepository;
             this.OwnerAuthorizationService = ownerAuthorizationService;
             this.FormsService = formsAuthenticationService;
             this.HttpContextUserService = httpContextUserService;
+            this.UnitOfWork = unitOfWork;
         }
 
         public bool Authenticate(string username, string password, bool persistenceCookie, List<UserRole> expectedRoles)
@@ -86,10 +93,8 @@ namespace Pleiades.Web.Security.Concrete
             return currentUser;
         } 
 
-        public AggregateUser Create(
-                CreateNewMembershipUserRequest membershipUserRequest, 
-                CreateOrModifyIdentityRequest identityUserRequest,
-                out PleiadesMembershipCreateStatus outStatus)
+        public AggregateUser Create(CreateNewMembershipUserRequest membershipUserRequest, 
+                CreateOrModifyIdentityRequest identityUserRequest, out PleiadesMembershipCreateStatus outStatus)
         {
             if (identityUserRequest.UserRole == UserRole.Anonymous)
             {
@@ -117,6 +122,7 @@ namespace Pleiades.Web.Security.Concrete
 
             // Get the Membership User
             var membershipUserThisContext = Repository.RetreiveMembershipUser(membershipUser.UserName);
+
             var aggegrateUser = new AggregateUser
             {
                 Membership = membershipUserThisContext,
@@ -131,67 +137,47 @@ namespace Pleiades.Web.Security.Concrete
             };
 
             this.Repository.Add(aggegrateUser);
-            this.Repository.SaveChanges();
+            this.UnitOfWork.Commit();
             return aggegrateUser;
         }
 
-        public void UpdateIdentity(int aggregateUserId, CreateOrModifyIdentityRequest identityUserRequest)
+        public void UpdateIdentity(CreateOrModifyIdentityRequest identityUserRequest)
         {
-            var securityCode = this.OwnerAuthorizationService.Authorize(aggregateUserId);
+            var securityCode = this.OwnerAuthorizationService.Authorize(identityUserRequest.Id);
             if (securityCode != SecurityCode.Allowed)
             {
                 throw new Exception("Current User does not have Authorization to do that: " + securityCode);
             }
-
-            this.Repository.UpdateIdentity(
-                        aggregateUserId,
-                        new CreateOrModifyIdentityRequest
-                        {
-                            FirstName = identityUserRequest.FirstName,
-                            LastName = identityUserRequest.LastName,
-                        });
-        }
-
-        public void UpdateEmail(int aggregateUserId, string email)
-        {
-            var securityCode = this.OwnerAuthorizationService.Authorize(aggregateUserId);
-            if (securityCode != SecurityCode.Allowed)
-            {
-                throw new Exception("Current User does not have Authorization to do that: " + securityCode);
-            }
-
-            if (email == null)
+            if (identityUserRequest.Email == null)
             {
                 throw new Exception("Cannot set email address to null");
             }
 
-            var userData = this.Repository.RetrieveById(aggregateUserId);
-            var membershipUserName = userData.Membership.UserName;
+            this.Repository.UpdateIdentity(identityUserRequest);
+            var user = this.Repository.RetrieveById(identityUserRequest.Id);
 
-            this.MembershipService.ChangeEmailAddress(membershipUserName, email);
+            // NOW: possibly create another Service method UpdateEmailAndApproval..
+            if (user.IdentityProfile.UserRole != UserRole.Supreme)
+            {
+                var membershipUserName = user.Membership.UserName;
+                this.MembershipService.ChangeEmailAddress(membershipUserName, identityUserRequest.Email);
+                this.MembershipService.SetUserApproval(membershipUserName, identityUserRequest.IsApproved);
+            }
+
+            this.UnitOfWork.Commit();
         }
 
-        public void UpdateApproval(int aggregateUserId, bool approval)
+        public void ChangeUserPassword(int targetUserId, string oldPassword, string newPassword)
         {
-            var securityCode = this.OwnerAuthorizationService.Authorize(aggregateUserId);
+            var securityCode = this.OwnerAuthorizationService.Authorize(targetUserId);
             if (securityCode != SecurityCode.Allowed)
             {
                 throw new Exception("Current User does not have Authorization to do that: " + securityCode);
             }
-            
-            var userData = this.Repository.RetrieveById(aggregateUserId);
-            var membershipUserName = userData.Membership.UserName;
 
-            if (userData.IdentityProfile.UserRole != UserRole.Supreme)
-            {
-                MembershipService.SetUserApproval(membershipUserName, approval);
-            }
-        }
-
-        public void ChangeUserPassword(int aggregateUserId, string oldPassword, string newPassword)
-        {
-            var user = this.Repository.RetrieveById(aggregateUserId);
+            var user = this.Repository.RetrieveById(targetUserId);
             this.MembershipService.ChangePassword(user.Membership.UserName, oldPassword, newPassword);
+            this.UnitOfWork.Commit();
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Web;
 using System.Web.Mvc;
 using Pleiades.Web.Security.Aspect;
 using Pleiades.Web.Security.Model;
-using Commerce.WebUI.Plumbing.Navigation;
+using Commerce.WebUI.Plumbing;
 
 namespace Commerce.WebUI.Areas.Admin.Controllers
 {

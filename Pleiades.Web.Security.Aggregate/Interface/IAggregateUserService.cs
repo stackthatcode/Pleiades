@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Collections.Generic;
 using Pleiades.Web.Security.Model;
 
@@ -12,6 +13,8 @@ namespace Pleiades.Web.Security.Interface
     //
     public interface IAggregateUserService
     {
+        Guid Tracer { get; }
+
         AggregateUser Create(
             CreateNewMembershipUserRequest membershipUser, 
             CreateOrModifyIdentityRequest identityUser,
@@ -21,11 +24,9 @@ namespace Pleiades.Web.Security.Interface
 
         AggregateUser GetAuthenticatedUser(HttpContextBase context);
 
-        void UpdateIdentity(int aggregateUserId, CreateOrModifyIdentityRequest identityUserRequest);
+        void UpdateIdentity(CreateOrModifyIdentityRequest identityUserRequest);
 
-        void UpdateEmail(int aggregateUserId, string email);
-
-        void UpdateApproval(int aggregateUserId, bool approval);
+        // void UpdateEmailAndApproval(int aggregateUserId, string email, bool approval);
 
         void ChangeUserPassword(int aggregateUserId, string oldPassword, string newPassword);
     }

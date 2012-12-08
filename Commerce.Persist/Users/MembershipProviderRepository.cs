@@ -11,9 +11,14 @@ namespace Commerce.Persist.Security
 {
     public class PfMembershipRepository : EFGenericRepository<MembershipUser>, IMembershipProviderRepository
     {
+        // QUESTION: how to get the applicationName into the Repository...?
+        // ANSWER: Autofac Registration
+        // TODO: either add database indexes, or craft a plan to eliminate ApplicationName -- don't need it.
+
+        [Obsolete]
         public string ApplicationName { get; set; }
 
-        public PfMembershipRepository(DbContext context, string applicationName)
+        public PfMembershipRepository(DbContext context, string applicationName = "/")
             : base(context)
         {
             this.ApplicationName = applicationName;

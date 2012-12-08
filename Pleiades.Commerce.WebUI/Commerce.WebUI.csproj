@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AuthController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerController.cs" />
     <Compile Include="Areas\Admin\Models\Manager\ChangePasswordModel.cs" />
@@ -97,12 +98,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Areas\Public\Models\ProductListModel.cs" />
-    <Compile Include="Plumbing\Autofac\AutofacContainer.cs" />
-    <Compile Include="Plumbing\ErrorHandling\CustomErrorAttribute.cs" />
-    <Compile Include="Plumbing\Navigation\OutboundNavigation.cs" />
-    <Compile Include="Plumbing\Security\CommerceSecurityContextFactory.cs" />
-    <Compile Include="Plumbing\Security\CommerceSecurityResponder.cs" />
-    <Compile Include="Plumbing\Security\MembershipRepositoryShim.cs" />
+    <Compile Include="Plumbing\AutofacContainer.cs" />
+    <Compile Include="Plumbing\CustomErrorAttribute.cs" />
+    <Compile Include="Plumbing\AutofacBootstrap.cs" />
+    <Compile Include="Plumbing\OutboundNavigation.cs" />
+    <Compile Include="Plumbing\SecurityContextFactory.cs" />
+    <Compile Include="Plumbing\SecurityResponder.cs" />
     <Compile Include="QuickForm\CSharp\QfButtonHelpers.cs" />
     <Compile Include="QuickForm\CSharp\PagingLinksBuilder_OLD.cs" />
     <Compile Include="QuickForm\CSharp\QfClearDiv.cs" />

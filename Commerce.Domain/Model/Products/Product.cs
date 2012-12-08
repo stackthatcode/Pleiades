@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Commerce.Domain.Model.Lists;
 
 namespace Commerce.Domain.Model.Products
 {
@@ -9,9 +8,9 @@ namespace Commerce.Domain.Model.Products
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string SKUNumber { get; set; }
+        public string BaseSKUNumber { get; set; }
 
-        public Color Color { get; set; }
-        public StandardSize Size { get; set; }
+        public Category Category { get; set; }
+        public List<Color> Colors { get; set; }
     }
 }

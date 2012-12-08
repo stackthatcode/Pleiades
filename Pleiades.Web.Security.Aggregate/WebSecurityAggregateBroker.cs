@@ -15,8 +15,8 @@ namespace Pleiades.Web.Security
 
         static WebSecurityAggregateBroker()
         {
-            WebSecurityAggregateBroker.RegisterSecurityContextFactory<AuthorizationContextFactory>();
-            WebSecurityAggregateBroker.RegisterSecurityResponder<SecurityResponder>();
+            WebSecurityAggregateBroker.RegisterSecurityContextFactory<SecurityContextFactoryBase>();
+            WebSecurityAggregateBroker.RegisterSecurityResponder<SecurityResponderBase>();
         }
 
         public static void RegisterSecurityContextFactory<T>() where T : ISecurityContextFactory
@@ -25,10 +25,10 @@ namespace Pleiades.Web.Security
                 builder.RegisterType<T>().As<ISecurityContextFactory>().InstancePerLifetimeScope();
         }
 
-        public static void RegisterSecurityResponder<T>() where T : IHttpSecurityResponder
+        public static void RegisterSecurityResponder<T>() where T : ISecurityResponder
         {
             ResponderRegistrationAction = (builder) =>
-                builder.RegisterType<T>().As<IHttpSecurityResponder>().InstancePerLifetimeScope();
+                builder.RegisterType<T>().As<ISecurityResponder>().InstancePerLifetimeScope();
         }
 
 
@@ -38,14 +38,14 @@ namespace Pleiades.Web.Security
             ResponderRegistrationAction.Invoke(builder);
         }
 
-        public static ISecurityContextFactory ResolveSecurityContextFactory(this IServiceLocator injector)
+        public static ISecurityContextFactory ResolveSecurityContextFactory(this IContainer injector)
         {
             return injector.Resolve<ISecurityContextFactory>();
         }
 
-        public static IHttpSecurityResponder ResolveSecurityResponder(this IServiceLocator injector)
+        public static ISecurityResponder ResolveSecurityResponder(this IContainer injector)
         {
-            return injector.Resolve<IHttpSecurityResponder>();
+            return injector.Resolve<ISecurityResponder>();
         }
     }
 }

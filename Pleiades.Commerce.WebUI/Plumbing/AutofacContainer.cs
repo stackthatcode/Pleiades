@@ -2,9 +2,9 @@
 using Autofac;
 using Pleiades.Injection;
 
-namespace Commerce.WebUI.Plumbing.Autofac
+namespace Commerce.WebUI.Plumbing
 {
-    public class AutofacContainer : IServiceLocator
+    public class AutofacContainer : IContainerAdapter
     {
         ILifetimeScope LifetimeScope { get; set; }
 

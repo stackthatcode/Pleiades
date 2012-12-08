@@ -1,5 +1,6 @@
 ﻿using System;
 using Autofac;
+using Autofac.Integration.Mvc;
 using Pleiades.Injection;
 using Pleiades.Web.Security.Aspect;
 using Pleiades.Web.Security.Concrete;

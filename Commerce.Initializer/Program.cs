@@ -2,29 +2,29 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Autofac;
 using Pleiades.Data;
+using Pleiades.Injection;
 using Pleiades.Utility;
 using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Interface;
-using Commerce.Domain.Interface;
+using Pleiades.Web.Security.Providers;
 using Commerce.Persist;
 using Commerce.Persist.Security;
 using Commerce.WebUI;
 
-namespace CommerceInitializer
+namespace Commerce.Initializer
 {
     class Program
     {
         static PleiadesContext DbContext { get; set; }
-        static ILifetimeScope LifetimeScope { get; set; }
+        static CommerceServiceLocator ServiceLocator { get; set; }
 
         static void Main(string[] args)
         {
             // Components
-            RegisterDIContainer();
-            MembershipRepositoryShim.SetFactory();
-
+            ServiceLocator = CommerceServiceLocator.Create();
+            PfMembershipRepositoryBroker.RegisterFactory(() => ServiceLocator.Resolve<IMembershipProviderRepository>());
+            
             // Data
             InitializeDatabase();
 
@@ -46,21 +46,17 @@ namespace CommerceInitializer
 
         public static void RegisterDIContainer()
         {
-            var builder = new ContainerBuilder();
-            builder.RegisterModule<CommerceWebUIModule>();
-            var container = builder.Build();
-            LifetimeScope = container.BeginLifetimeScope();
         }
 
         public static void CreateTheSupremeUser()
         {
-            var userService = LifetimeScope.Resolve<IAggregateUserService>();
-            var userRepository = LifetimeScope.Resolve<IAggregateUserRepository>();
+            var userService = ServiceLocator.Resolve<IAggregateUserService>();
+            var userRepository = ServiceLocator.Resolve<IAggregateUserRepository>();
             var users = userRepository.Retreive(new List<UserRole>() { UserRole.Supreme });
 
             if (users.ToList().Count() < 1)
             {
-                var membershipService = LifetimeScope.Resolve<IMembershipService>();
+                var membershipService = ServiceLocator.Resolve<IMembershipService>();
                 var membershipUserName = membershipService.GetUserNameByEmail("aleksjones@gmail.com");
                 if (membershipUserName != null)
                 {

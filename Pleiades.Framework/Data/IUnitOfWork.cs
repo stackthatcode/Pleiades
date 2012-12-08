@@ -4,6 +4,6 @@ namespace Pleiades.Data
 {
     public interface IUnitOfWork
     {
-        void Execute(Action action);
+        void Commit();
     }
 }

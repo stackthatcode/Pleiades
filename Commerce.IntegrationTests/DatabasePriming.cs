@@ -31,10 +31,7 @@ namespace Commerce.IntegrationTests
         public static void InitializeMembership()
         {
             // Prepare Membership Provider - YOU HAVE TO USE THIS, OTHERWISE YOUR REPOSITORY WILL NOT WORK!!!
-            PfMembershipRepositoryBroker.Register((settings) =>
-            {
-                return new PfMembershipRepository(new PleiadesContext(), settings.ApplicationName);
-            });
+            PfMembershipRepositoryBroker.RegisterFactory(() => new PfMembershipRepository(new PleiadesContext()));
         }
 
         public static void CleanOutTheDatabase()

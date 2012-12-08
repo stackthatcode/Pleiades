@@ -1,6 +1,6 @@
 ﻿namespace Pleiades.Injection
 {
-    public interface IServiceLocator
+    public interface IContainerAdapter
     {
         T Resolve<T>();
         T ResolveKeyed<T>(object key);

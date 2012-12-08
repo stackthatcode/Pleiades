@@ -11,7 +11,6 @@ using Pleiades.TestHelpers.Web;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Rules;
-using Commerce.Domain.Interface;
 using Commerce.WebUI.Areas.Admin.Controllers;
 using Commerce.WebUI.Areas.Admin.Models;
 
@@ -153,7 +152,7 @@ namespace Commerce.WebUI.TestsControllers
                 .Return(user);
 
             var service = MockRepository.GenerateMock<IAggregateUserService>();
-            service.Expect(x => x.UpdateIdentity(888, null)).IgnoreArguments();
+            service.Expect(x => x.UpdateIdentity(null)).IgnoreArguments();
             var controller = new ManagerController(repository, service, null);
             
             // Act

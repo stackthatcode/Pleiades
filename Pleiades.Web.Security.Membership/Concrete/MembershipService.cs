@@ -14,11 +14,6 @@ namespace Pleiades.Web.Security.Concrete
     /// </summary>
     public class MembershipService : IMembershipService
     {
-        public void ForceInitialize()
-        {
-            var name = Membership.ApplicationName;
-        }
-
         public Model.MembershipUser CreateUser(
                 CreateNewMembershipUserRequest request, out PleiadesMembershipCreateStatus outCreateStatus)
         {
