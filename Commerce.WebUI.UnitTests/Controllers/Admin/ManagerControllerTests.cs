@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using NUnit.Framework;
 using Rhino.Mocks;
+using Pleiades.Data;
 using Pleiades.Injection;
 using Pleiades.TestHelpers;
 using Pleiades.TestHelpers.Web;
@@ -46,7 +47,7 @@ namespace Commerce.WebUI.TestsControllers
         }
 
         [Test]
-        public void Verify_List_POST()
+        public void List_HttpPost()
         {
             // Arrange
             var aggregateUserRepository = MockRepository.GenerateMock<IAggregateUserRepository>();
@@ -59,7 +60,7 @@ namespace Commerce.WebUI.TestsControllers
                             AdminUserFactory()
                         });
 
-            var adminmgrController = new ManagerController(aggregateUserRepository, null, null);
+            var adminmgrController = new ManagerController(aggregateUserRepository, null, null, null);
 
             // Act
             var result = adminmgrController.List(1);
@@ -70,7 +71,7 @@ namespace Commerce.WebUI.TestsControllers
         }
 
         [Test]
-        public void Verify_Detail_GET()
+        public void Detail_HttpGet()
         {
             // Arrange
             var aggregateUserRepository = MockRepository.GenerateMock<IAggregateUserRepository>();
@@ -79,7 +80,7 @@ namespace Commerce.WebUI.TestsControllers
                 .Expect(x => x.RetrieveById(123))
                 .Return(AdminUserFactory());
             
-            var adminmgrController = new ManagerController(aggregateUserRepository, null, null);
+            var adminmgrController = new ManagerController(aggregateUserRepository, null, null, null);
 
 
             // Act
@@ -91,7 +92,7 @@ namespace Commerce.WebUI.TestsControllers
         }
 
         [Test]
-        public void Verify_Create_POST()
+        public void Create_HttpPost()
         {
             // Arrange
             var model = new CreateAdminModel
@@ -113,7 +114,7 @@ namespace Commerce.WebUI.TestsControllers
                 .Return(new AggregateUser() { ID = 123 })
                 .OutRef(PleiadesMembershipCreateStatus.Success);
 
-            var controller = new ManagerController(null, aggrService, null);
+            var controller = new ManagerController(null, aggrService, null, null);
 
             // Act
             var result = controller.Create(model);
@@ -123,10 +124,10 @@ namespace Commerce.WebUI.TestsControllers
         }
 
         [Test]
-        public void Verify_Edit_POST_TestEditInvalidState()
+        public void Edit_HttpPost_TestEditInvalidState()
         {
             // Arrange
-            var controller = new ManagerController(null, null, null);
+            var controller = new ManagerController(null, null, null, null);
             controller.ModelState.AddModelError("", "It's all messed up!");
 
             // Act
@@ -137,7 +138,7 @@ namespace Commerce.WebUI.TestsControllers
         }
 
         [Test]
-        public void Verify_Edit_POST_ValidState()
+        public void Edit_HttpPost_ValidState()
         {
             // Arrange
             var user = new AggregateUser
@@ -153,7 +154,7 @@ namespace Commerce.WebUI.TestsControllers
 
             var service = MockRepository.GenerateMock<IAggregateUserService>();
             service.Expect(x => x.UpdateIdentity(null)).IgnoreArguments();
-            var controller = new ManagerController(repository, service, null);
+            var controller = new ManagerController(repository, service, null, null);
             
             // Act
             var result = controller.Edit(888, new EditUserModel());
@@ -164,46 +165,46 @@ namespace Commerce.WebUI.TestsControllers
         }
 
         [Test]
-        public void Verify_Change_GET()
+        public void ChangePassword_HttpGet()
         {
             var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
             repository
                 .Expect(x => x.RetrieveById(888))
                 .Return(new AggregateUser { Membership = new MembershipUser { Email = "hull@hello.com" } });
-            var controller = new ManagerController(repository, null, null);
+            var controller = new ManagerController(repository, null, null, null);
 
-            var result = controller.Change(888);
+            var result = controller.ChangePassword(888);
 
             result.ShouldBeView();
             repository.VerifyAllExpectations();
         }
 
         [Test]
-        public void Verify_Change_POST_ValidState()
+        public void Change_HttpPost_ValidState()
         {
             var service = MockRepository.GenerateMock<IAggregateUserService>();
             service.Expect(x => x.ChangeUserPassword(888, "pass123", "pass456"));
-            var controller = new ManagerController(null, service, null);
+            var controller = new ManagerController(null, service, null, null);
 
-            var result = controller.Change(888, new ChangePasswordModel() { OldPassword = "pass123", NewPassword = "pass456" });
+            var result = controller.ChangePassword(888, new ChangePasswordModel() { OldPassword = "pass123", NewPassword = "pass456" });
 
             result.ShouldBeRedirectionTo(new { Action = "Details" });
             service.VerifyAllExpectations();
         }
 
         [Test]
-        public void Verify_Change_POST_InvalidState()
+        public void Change_HttpPost_InvalidState()
         {
-            var controller = new ManagerController(null, null, null);
+            var controller = new ManagerController(null, null, null, null);
             controller.ModelState.AddModelError("what", "don't type that in, son!");
             
-            var result = controller.Change(888, new ChangePasswordModel());
+            var result = controller.ChangePassword(888, new ChangePasswordModel());
 
             result.ShouldBeView();
         }
 
         [Test]
-        public void Verify_Reset_GET()
+        public void Reset_HttpPost()
         {
             var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
             repository
@@ -215,17 +216,21 @@ namespace Commerce.WebUI.TestsControllers
                 .Expect(x => x.ResetPassword("123456"))
                 .Return("seruifjk");
 
-            var controller = new ManagerController(repository, null, service);
+            var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
+            unitOfWork.Expect(x => x.Commit());
+
+            var controller = new ManagerController(repository, null, service, unitOfWork);
 
             var result = controller.Reset(888);
 
             result.ShouldBeView();
             repository.VerifyAllExpectations();
             service.VerifyAllExpectations();
+            unitOfWork.VerifyAllExpectations();
         }
 
         [Test]
-        public void Verify_Unlock_GET()
+        public void Unlock_HttpGet()
         {
             var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
             repository
@@ -235,17 +240,22 @@ namespace Commerce.WebUI.TestsControllers
             var service = MockRepository.GenerateMock<IMembershipService>();
             service.Expect(x => x.UnlockUser("123456"));
 
-            var controller = new ManagerController(repository, null, service);
+            var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
+            unitOfWork.Expect(x => x.Commit());
 
+            // Act
+            var controller = new ManagerController(repository, null, service, unitOfWork);
             var result = controller.Unlock(888);
 
+            // Assert
             result.ShouldBeRedirectionTo(new { Action = "Details" });
             repository.VerifyAllExpectations();
             service.VerifyAllExpectations();
+            unitOfWork.VerifyAllExpectations();
         }
 
         [Test]
-        public void Verify_Delete_GET()
+        public void Delete_HttpGet()
         {
             var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
             repository
@@ -256,7 +266,7 @@ namespace Commerce.WebUI.TestsControllers
                     IdentityProfile = new IdentityProfile(),
                 });
 
-            var controller = new ManagerController(repository, null, null);
+            var controller = new ManagerController(repository, null, null, null);
 
             var result = controller.Delete(888);
 
@@ -265,7 +275,7 @@ namespace Commerce.WebUI.TestsControllers
         }
 
         [Test]
-        public void Verify_DeleteConfirm_POST()
+        public void DeleteConfirm_HttpPost()
         {
             var user = new AggregateUser
             {
@@ -278,7 +288,10 @@ namespace Commerce.WebUI.TestsControllers
                 .Return(user);
             repository.Expect(x => x.Delete(user));
 
-            var controller = new ManagerController(repository, null, null);
+            var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
+            unitOfWork.Expect(x => x.Commit());
+
+            var controller = new ManagerController(repository, null, null, unitOfWork);
 
             // Act
             var result = controller.DeleteConfirm(888);
@@ -286,6 +299,7 @@ namespace Commerce.WebUI.TestsControllers
             // Assert
             result.ShouldBeRedirectionTo(new { Action = "List" });
             repository.VerifyAllExpectations();
+            unitOfWork.VerifyAllExpectations();
         }
     }
 }

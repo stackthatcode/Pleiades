@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Security;
 using SecurityMembershipUser = System.Web.Security.MembershipUser;
+using Pleiades.Data;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Providers;
@@ -14,18 +15,27 @@ namespace Pleiades.Web.Security.Concrete
     /// </summary>
     public class MembershipService : IMembershipService
     {
+        IMembershipProviderRepository Repository { get; set; }
+        IUnitOfWork UnitOfWork { get; set; }
+
+        public MembershipService(IMembershipProviderRepository repository, IUnitOfWork unitOfWork)
+        {
+            this.Repository = repository;
+            this.UnitOfWork = unitOfWork;
+        }
+
         public Model.MembershipUser CreateUser(
                 CreateNewMembershipUserRequest request, out PleiadesMembershipCreateStatus outCreateStatus)
         {
             MembershipCreateStatus createStatus;
             var generatedUserName = GenerateUserName();
-            var membershipuser = 
-                Membership.CreateUser(
-                    generatedUserName, request.Password, request.Email, request.PasswordQuestion,
-                    request.PasswordAnswer, request.IsApproved, out createStatus);
+            Membership.CreateUser(
+                generatedUserName, request.Password, request.Email, request.PasswordQuestion, request.PasswordAnswer, 
+                request.IsApproved, out createStatus);
+            this.UnitOfWork.Commit();   // I HATE THIS - THE SERVICES ARE MANAGING THE UNIT OF WORK TO WHICH THEY BELONG!!!
 
             outCreateStatus = (PleiadesMembershipCreateStatus)createStatus;
-            return membershipuser.ToModelMembershipUser();
+            return Repository.GetUser(generatedUserName);
         }
 
         /// <summary>
@@ -93,6 +103,7 @@ namespace Pleiades.Web.Security.Concrete
         /// <summary>
         /// Retrieves username by email address.  Returns null if User does not exist in Membership
         /// </summary>
+        // TODO: wire in the Repository directly - eliminate the legacy
         public string GetUserNameByEmail(string emailAddress)
         {
             var user = GetSingleUserByEmail(emailAddress);
@@ -103,6 +114,7 @@ namespace Pleiades.Web.Security.Concrete
             return user.UserName;
         }
 
+        // TODO: wire in the Repository directly - eliminate the legacy
         public List<Model.MembershipUser> GetAllUsers()
         {            
             int totalRecords;
@@ -116,6 +128,7 @@ namespace Pleiades.Web.Security.Concrete
             return output;
         }
 
+        // TODO: wire in the Repository directly - eliminate the legacy
         public Model.MembershipUser GetUserByUserName(string username)
         {
             var users = Membership.FindUsersByName(username);
@@ -135,6 +148,7 @@ namespace Pleiades.Web.Security.Concrete
         /// <summary>
         /// Get the current number of User Active online - "touched" in the last configurable period
         /// </summary>
+        // TODO: wire in the Repository directly - eliminate the legacy
         public int GetNumberOfUsersOnline()
         {
             return Membership.GetNumberOfUsersOnline();
@@ -143,6 +157,7 @@ namespace Pleiades.Web.Security.Concrete
         /// <summary>
         /// Unlock a User Account that's failed Validation too many times
         /// </summary>
+        // TODO: wire in the Repository directly - eliminate the legacy
         public void UnlockUser(string username)
         {
             var membershipUser = Membership.GetUser(username);
@@ -152,16 +167,18 @@ namespace Pleiades.Web.Security.Concrete
         /// <summary>
         /// Reset Password
         /// </summary>
+        // TODO: wire in the Repository directly - eliminate the legacy
         public string ResetPassword(string username)
         {
             var membershipUser = Membership.GetUser(username);
-            var resetPassword = membershipUser.ResetPassword();
+            var resetPassword = membershipUser.ResetPassword();     // How did I know to did this...???
             return resetPassword;
         }
 
         /// <summary>
         /// Reset Password with Answer for Password Question
         /// </summary>
+        // TODO: wire in the Repository directly - eliminate the legacy
         public string ResetPasswordWithAnswer(string username, string answer)
         {
             var membershipUser = Membership.GetUser(username);
@@ -172,12 +189,14 @@ namespace Pleiades.Web.Security.Concrete
         /// <summary>
         /// Retreive Password Question
         /// </summary>
+        // TODO: wire in the Repository directly - eliminate the legacy
         public string PasswordQuestion(string username)
         {
             var membershipUser = Membership.GetUser(username);
             return membershipUser.PasswordQuestion;
         }
 
+        // TODO: wire in the Repository directly - eliminate the legacy
         public void DeleteUser(string username)
         {
             Membership.DeleteUser(username);
@@ -186,6 +205,7 @@ namespace Pleiades.Web.Security.Concrete
         /// <summary>
         /// Change Membership User's Password
         /// </summary>
+        // TODO: wire in the Repository directly - eliminate the legacy
         public void ChangePassword(string username, string oldPassword, string newPassword)
         {
             var membershipUser = Membership.GetUser(username);
@@ -198,6 +218,7 @@ namespace Pleiades.Web.Security.Concrete
         /// <summary>
         /// Change Membership User's Password with Question and Answer
         /// </summary>
+        // TODO: wire in the Repository directly - eliminate the legacy
         public void ChangePasswordQuestionAndAnswer(string username, string password, string question, string answer)
         {
             var membershipUser = Membership.GetUser(username);
@@ -210,6 +231,7 @@ namespace Pleiades.Web.Security.Concrete
         /// <summary>
         /// Change Membership User's Email Address
         /// </summary>
+        // TODO: wire in the Repository directly - eliminate the legacy
         public void ChangeEmailAddress(string username, string emailAddress)
         {
             var membershipUser = Membership.GetUser(username);
@@ -220,6 +242,7 @@ namespace Pleiades.Web.Security.Concrete
         /// <summary>
         /// Change the User's Membership Approval
         /// </summary>
+        // TODO: wire in the Repository directly - eliminate the legacy
         public void SetUserApproval(string username, bool approved)
         {
             var membershipUser = Membership.GetUser(username);
@@ -231,6 +254,7 @@ namespace Pleiades.Web.Security.Concrete
         /// Signal User Activity has occured
         /// </summary>
         /// <param name="user"></param>
+        // TODO: wire in the Repository directly - eliminate the legacy
         public void Touch(string username)
         {
             var membershipUser = Membership.GetUser(username);

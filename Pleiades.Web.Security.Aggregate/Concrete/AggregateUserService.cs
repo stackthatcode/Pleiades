@@ -113,7 +113,7 @@ namespace Pleiades.Web.Security.Concrete
                 throw new Exception(String.Format("Maximum number of Supreme Users is 1", MaxSupremeUsers));
             }
             
-            // Create Membership User... does this belong here?
+            // Create Membership User... does this being here?
             var membershipUser = this.MembershipService.CreateUser(membershipUserRequest, out outStatus);
             if (outStatus != PleiadesMembershipCreateStatus.Success)
             {
@@ -125,7 +125,7 @@ namespace Pleiades.Web.Security.Concrete
 
             var aggegrateUser = new AggregateUser
             {
-                Membership = membershipUserThisContext,
+                Membership = membershipUser,
                 IdentityProfile =  new Model.IdentityProfile
                 {
                     AccountStatus = identityUserRequest.AccountStatus.Value,

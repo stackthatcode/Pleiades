@@ -11,19 +11,19 @@ using Pleiades.Web.Security.Providers;
 using Commerce.Persist;
 using Commerce.Persist.Security;
 using Commerce.WebUI;
+using Commerce.WebUI.Plumbing;
 
 namespace Commerce.Initializer
 {
     class Program
     {
         static PleiadesContext DbContext { get; set; }
-        static CommerceServiceLocator ServiceLocator { get; set; }
+        static IContainerAdapter ServiceLocator { get; set; }
 
         static void Main(string[] args)
         {
-            // Components
-            ServiceLocator = CommerceServiceLocator.Create();
-            PfMembershipRepositoryBroker.RegisterFactory(() => ServiceLocator.Resolve<IMembershipProviderRepository>());
+            // Components - leverage Commerce.WebUI
+            ServiceLocator = AutofacBootstrap.CreateContainer();
             
             // Data
             InitializeDatabase();
@@ -42,10 +42,6 @@ namespace Commerce.Initializer
                 // Build Database
                 Console.WriteLine("Creating Database for Pleiades");
             }
-        }
-
-        public static void RegisterDIContainer()
-        {
         }
 
         public static void CreateTheSupremeUser()

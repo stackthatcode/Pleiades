@@ -1,6 +1,7 @@
 ﻿using System;
 using Autofac;
 using Pleiades.Injection;
+using Pleiades.Web.Autofac;
 using Pleiades.Web.Security;
 using Pleiades.Web.Security.Aspect;
 using Pleiades.Web.Security.Interface;
@@ -18,6 +19,9 @@ namespace Commerce.WebUI
             // Autofac
             builder.RegisterType<AutofacContainer>().As<IContainerAdapter>().InstancePerLifetimeScope();
 
+            // Register Commerce Controllers
+            builder.RegisterControllers(typeof(CommerceHttpApplication).Assembly);
+
             // External Modules
             builder.RegisterModule<WebSecurityAggregateModule>();
             builder.RegisterModule<CommercePersistModule>();
@@ -26,9 +30,6 @@ namespace Commerce.WebUI
             WebSecurityAggregateBroker.RegisterSecurityContextFactory<SecurityContextFactory>();
             WebSecurityAggregateBroker.RegisterSecurityResponder<SecurityResponder>();
             WebSecurityAggregateBroker.Build(builder);
-
-            // Register Commerce Controllers
-            builder.RegisterControllers(typeof(CommerceHttpApplication).Assembly);
         }
     }
 }

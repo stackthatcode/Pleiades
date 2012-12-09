@@ -4,7 +4,9 @@ using System.Web.Security;
 using NUnit.Framework;
 using Commerce.Persist;
 using Commerce.Persist.Security;
-using Pleiades.Web.Security.Concrete;
+using Pleiades.Data;
+using Pleiades.Injection;
+using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Providers;
 using Pleiades.Utility;
@@ -14,17 +16,19 @@ namespace Commerce.IntegrationTests.Security
     [TestFixture]
     public class MembershipRepositoryTests
     {
+        IContainerAdapter _container;
+
         [TestFixtureSetUp]
         public void TestSetup()
         {
-            DatabasePriming.CleanOutTheDatabase();
-            DatabasePriming.InitializeMembership();
+            TestPrimer.CleanOutTheDatabase();
+            _container = IntegrationTestsModule.CreateContainer();
         }
 
         [Test]
         public void Create_MembershipUser_Pass()
         {
-            var service = new MembershipService();
+            var service = _container.Resolve<IMembershipService>();
             var request = new CreateNewMembershipUserRequest()
             {
                 Email = "aleksjones1@gmail.com",
@@ -45,7 +49,8 @@ namespace Commerce.IntegrationTests.Security
         [Test]
         public void Create_Approved_User_And_Authenticate_Pass()
         {
-            var service = new MembershipService();
+            var service = _container.Resolve<IMembershipService>();
+
             var request = new CreateNewMembershipUserRequest()
             {
                 Email = "aleksjones2@gmail.com",
@@ -67,7 +72,7 @@ namespace Commerce.IntegrationTests.Security
         [Test]
         public void Create_Approved_User_And_Authenticate_WithBadPassword_Should_Fail()
         {
-            var service = new MembershipService();
+            var service = _container.Resolve<IMembershipService>();
             var request = new CreateNewMembershipUserRequest()
             {
                 Email = "aleksjones3@gmail.com",
@@ -89,7 +94,7 @@ namespace Commerce.IntegrationTests.Security
         [Test]
         public void Create_Disapproved_User_And_Authenticate_WithGoodPassword_Should_Fail()
         {
-            var service = new MembershipService();
+            var service = _container.Resolve<IMembershipService>();
             var request = new CreateNewMembershipUserRequest()
             {
                 Email = "aleksjones4@gmail.com",
@@ -112,7 +117,7 @@ namespace Commerce.IntegrationTests.Security
         [Test]
         public void Create_User_And_Reset_Password_Fail_To_Authenticate_Then_Reset_Then_Authenticate_And_Pass()
         {
-            var service = new MembershipService();
+            var service = _container.Resolve<IMembershipService>();
             var request = new CreateNewMembershipUserRequest()
             {
                 Email = "aleksjones5@gmail.com",
@@ -146,7 +151,9 @@ namespace Commerce.IntegrationTests.Security
         [Test]
         public void Disapprove_User_And_Validate_Fails_Reapprove_And_Validate_Succeeds()
         {
-            var service = new MembershipService();
+            var service = _container.Resolve<IMembershipService>();
+            var unitOfWork = _container.Resolve<IUnitOfWork>();
+
             var request = new CreateNewMembershipUserRequest()
             {
                 Email = "aleksjones6@gmail.com",
@@ -162,6 +169,7 @@ namespace Commerce.IntegrationTests.Security
 
             // Disapprove User
             service.SetUserApproval(newUser.UserName, false);
+            unitOfWork.Commit();
 
             // Try to Authenticate - should fail
             var result1 = service.ValidateUserByEmailAddr(newUser.Email, "password123");
@@ -169,6 +177,7 @@ namespace Commerce.IntegrationTests.Security
 
             // Reapprove USer
             service.SetUserApproval(newUser.UserName, true);
+            unitOfWork.Commit();
 
             // Try to Authenticate - should succeed
             var result2 = service.ValidateUserByEmailAddr(newUser.Email, "password123");
@@ -178,7 +187,8 @@ namespace Commerce.IntegrationTests.Security
         [Test]
         public void Failed_Authentication_Locks_User_Out_And_Unlock_User_Enables_Validation()
         {
-            var service = new MembershipService();
+            var unitOfWork = _container.Resolve<IUnitOfWork>();
+            var service = _container.Resolve<IMembershipService>();
             var request = new CreateNewMembershipUserRequest()
             {
                 Email = "aleksjones7@gmail.com",
@@ -204,6 +214,7 @@ namespace Commerce.IntegrationTests.Security
 
             // Unlock the User
             service.UnlockUser(newUser.UserName);
+            unitOfWork.Commit();
 
             // Should be able to authenticated
             var result2 = service.ValidateUserByEmailAddr(newUser.Email, "password123");
@@ -213,7 +224,8 @@ namespace Commerce.IntegrationTests.Security
         [Test]
         public void Change_User_Email_And_Validate_Successfully()
         {
-            var service = new MembershipService();
+            var service = _container.Resolve<IMembershipService>();
+            var unitOfWork = _container.Resolve<IUnitOfWork>();
             var request = new CreateNewMembershipUserRequest()
             {
                 Email = "aleksjones8@gmail.com",
@@ -228,11 +240,11 @@ namespace Commerce.IntegrationTests.Security
             Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
 
             // Change the password
-            var membershipUserService = new MembershipService();
-            membershipUserService.ChangeEmailAddress(newUser.UserName, "bob4444@bob.com");
+            service.ChangeEmailAddress(newUser.UserName, "bob4444@bob.com");
+            unitOfWork.Commit();
 
             // Try authenticating with valid credentials
-            var result = service.ValidateUserByEmailAddr("bob4444@bob.com", "password123");
+            var result = service.ValidateUserByEmailAddr("bob4444@bob.com", "password123");            
             Assert.IsNotNull(result);
         }
 
@@ -240,7 +252,7 @@ namespace Commerce.IntegrationTests.Security
         [ExpectedException(typeof(ProviderException))]
         public void Change_User_Email_Address_To_Another_Users_Email_Address()
         {
-            var service = new MembershipService();
+            var service = _container.Resolve<IMembershipService>();
             var request1 = new CreateNewMembershipUserRequest()
             {
                 Email = "aleksjones9@gmail.com",
@@ -273,7 +285,9 @@ namespace Commerce.IntegrationTests.Security
         [Test]
         public void Reset_Password_With_Question_And_Answer_Test()
         {
-            var service = new MembershipService();
+            var service = _container.Resolve<IMembershipService>();
+            var unitOfWork = _container.Resolve<IUnitOfWork>();
+
             var request1 = new CreateNewMembershipUserRequest()
             {
                 Email = "aleksjones10@gmail.com",
@@ -292,6 +306,7 @@ namespace Commerce.IntegrationTests.Security
 
             // Try Reseting
             var resetPwd = service.ResetPasswordWithAnswer(newUser1.UserName, request1.PasswordAnswer);
+            unitOfWork.Commit();
 
             // Try authenticating with valid credentials
             var result = service.ValidateUserByEmailAddr(newUser1.Email, resetPwd);
@@ -308,7 +323,9 @@ namespace Commerce.IntegrationTests.Security
         [ExpectedException(typeof(MembershipPasswordException))]
         public void Reset_Password_With_Wrong_And_Answer_And_FAIL()
         {
-            var service = new MembershipService();
+            var service = _container.Resolve<IMembershipService>();
+            var unitOfWork = _container.Resolve<IUnitOfWork>();
+
             var request1 = new CreateNewMembershipUserRequest()
             {
                 Email = "aleksjones11@gmail.com",
@@ -324,6 +341,7 @@ namespace Commerce.IntegrationTests.Security
 
             // Reset the Password with WRONG answer
             var resetPwd = service.ResetPasswordWithAnswer(request1.Email, "Donald777");
+            unitOfWork.Commit();
 
             // Should've *thrown* an Exception
         }
@@ -334,7 +352,9 @@ namespace Commerce.IntegrationTests.Security
         [Test]
         public void ChangePasswordQuestionAndAnswerTest()
         {
-            var service = new MembershipService();
+            var service = _container.Resolve<IMembershipService>();
+            var unitOfWork = _container.Resolve<IUnitOfWork>();
+
             var request1 = new CreateNewMembershipUserRequest()
             {
                 Email = "aleksjones12@gmail.com",
@@ -350,13 +370,16 @@ namespace Commerce.IntegrationTests.Security
 
             // Change the question and answer
             service.ChangePasswordQuestionAndAnswer(newUser1.UserName, "password123", "New Question", "New Answer");
+            unitOfWork.Commit();
 
             // Test the question
             var question = service.PasswordQuestion(newUser1.UserName);
+            unitOfWork.Commit();
             Assert.AreEqual(question, "New Question");
 
             // Try Reseting
             var resetPwd = service.ResetPasswordWithAnswer(newUser1.UserName, "New Answer");
+            unitOfWork.Commit();
 
             // Try authenticating with valid credentials
             var result = service.ValidateUserByEmailAddr(newUser1.Email, resetPwd);

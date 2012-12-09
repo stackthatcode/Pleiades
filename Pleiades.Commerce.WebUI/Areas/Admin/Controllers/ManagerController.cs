@@ -20,15 +20,18 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         public IAggregateUserRepository AggregateUserRepository { get; set; }
         public IAggregateUserService AggregateUserService { get; set; }
         public IMembershipService MembershipService { get; set; }
+        public IUnitOfWork UnitOfWork { get; set; }
 
         public ManagerController(
                 IAggregateUserRepository aggregateUserRepository, 
                 IAggregateUserService aggregateUserService,
-                IMembershipService membershipService)
+                IMembershipService membershipService,
+                IUnitOfWork unitOfWork)
         {
             AggregateUserRepository = aggregateUserRepository;
             AggregateUserService = aggregateUserService;
             MembershipService = membershipService;
+            UnitOfWork = unitOfWork;
         }
 
         [HttpGet]
@@ -124,14 +127,14 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult Change(int id)
+        public ActionResult ChangePassword(int id)
         {
             var user = this.AggregateUserRepository.RetrieveById(id);
             return View(new ChangePasswordModel { Email = user.Membership.Email });
         }
 
         [HttpPost]
-        public ActionResult Change(int id, ChangePasswordModel model)
+        public ActionResult ChangePassword(int id, ChangePasswordModel model)
         {
             // Validate
             if (!this.ModelState.IsValid) 
@@ -150,24 +153,25 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         {
             var user = this.AggregateUserRepository.RetrieveById(id);
             var newpassword = this.MembershipService.ResetPassword(user.Membership.UserName);
-
+            this.UnitOfWork.Commit();
             return View(new ResetPasswordModel { Email = user.Membership.Email, NewPassword = newpassword });
         }
 
+        // TODO: move this into atomic AggregateUserService method
         [HttpGet]
         public ActionResult Unlock(int id)
         {
             var user = this.AggregateUserRepository.RetrieveById(id);
             MembershipService.UnlockUser(user.Membership.UserName);
+            this.UnitOfWork.Commit();
             return RedirectToAction("Details", new { id = id });
         }
 
-        // TODO: move this into atomic AggregateUserService method
         [HttpGet]
         public ActionResult Delete(int id)
         {
             var user = this.AggregateUserRepository.RetrieveById(id);
-            var userModel = new UserViewModel(user);    
+            var userModel = new UserViewModel(user);
             return View(userModel);
         }
 
@@ -177,6 +181,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         {
             var user = this.AggregateUserRepository.RetrieveById(id);
             this.AggregateUserRepository.Delete(user);
+            this.UnitOfWork.Commit();
             return RedirectToAction("List");
         }
     }

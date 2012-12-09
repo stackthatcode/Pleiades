@@ -7,6 +7,10 @@ namespace Pleiades.Data.EF
 {
     public class EFUnitOfWork : IUnitOfWork
     {
+        Guid _tracer = Guid.NewGuid();
+
+        public Guid Tracer { get { return _tracer; } }
+
         public DbContext Context { get; set; }
 
         public EFUnitOfWork(DbContext context)

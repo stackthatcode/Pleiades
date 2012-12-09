@@ -98,9 +98,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Areas\Public\Models\ProductListModel.cs" />
-    <Compile Include="Plumbing\AutofacContainer.cs" />
     <Compile Include="Plumbing\CustomErrorAttribute.cs" />
-    <Compile Include="Plumbing\AutofacBootstrap.cs" />
+    <Compile Include="AutofacBootstrap.cs" />
     <Compile Include="Plumbing\OutboundNavigation.cs" />
     <Compile Include="Plumbing\SecurityContextFactory.cs" />
     <Compile Include="Plumbing\SecurityResponder.cs" />
@@ -115,7 +114,7 @@
     <Content Include="Areas\Admin\Views\Auth\Login.aspx" />
     <Content Include="Areas\Admin\Views\Home\HeaderSummary.ascx" />
     <Content Include="Areas\Admin\Views\Home\Index.aspx" />
-    <Content Include="Areas\Admin\Views\Manager\Change.aspx" />
+    <Content Include="Areas\Admin\Views\Manager\ChangePassword.aspx" />
     <Content Include="Areas\Admin\Views\Manager\Create.aspx" />
     <Content Include="Areas\Admin\Views\Manager\Delete.aspx" />
     <Content Include="Areas\Admin\Views\Manager\Details.aspx" />

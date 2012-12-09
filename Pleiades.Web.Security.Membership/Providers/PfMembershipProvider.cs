@@ -202,11 +202,11 @@ namespace Pleiades.Web.Security.Providers
             {
                 // TODO - get my Logs(!!!)
                 System.Diagnostics.Debug.WriteLine(ex.Message);
-
                 status = MembershipCreateStatus.UserRejected;
+                return null;
             }
 
-            return GetUser(username, false);
+            return user.ToSecurityMembershipUser(this.Name);
         }
 
         public override bool ChangePasswordQuestionAndAnswer(string username, 

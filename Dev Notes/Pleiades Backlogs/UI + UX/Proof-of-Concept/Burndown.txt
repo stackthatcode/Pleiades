@@ -134,4 +134,23 @@ Resolution of Dependency Injection per Request
 5.) http://stackoverflow.com/questions/10027330/how-to-resolve-autofac-instanceperhttprequest => WATCH OUT!
 - Transaction Object => TODO
 
+12/8 (2??? Hours after 11pm)
+-------------------
+- Marked code in MembershipService which will be eliminated in refactoring
 
+12/9 (4.0 Hours)
+--------------
+- Fix broken Commerce Tests => DONE
+- Added UnitOfWork to ManagerController
+- Added UnitOfWork Commits to Unit Tests
+- Corrected issue in the Commerce Initializer App => DONE
+- Confirm AggrService Trace @ Controller Level => TODO
+AggrService => Tracer = {6abd51e3-d9f9-4600-8bb8-2c7c257cd20c}
+PleiadesContext => ContextId = {5ca9c077-0fed-4fe2-9ed2-2fb2cd91a85a}
+=> How do browsers handle caching of the Javascript Libraries...? => DONE
+=> Category Editor using JKB development: MILESTONE => DONE
+- Important: Create a separate Model for Editing Users => DONE
+- Fix the other Admin Editing Screens, including the Add User button => DONE
+- Add the window shade effect to the top Menu => DONE
+- Reorganized the Backlogs =>  DONE
+- Measured Test Coverage => DONE

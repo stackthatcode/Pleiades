@@ -28,7 +28,7 @@
         </tr>
         <tr>
             <td class="label-right">Change Password</td>
-            <td><%: Html.QfActionButton(QfButtonId.Change, "Change", route: new { id = Model.AggregateUserId })%></td>
+            <td><%: Html.QfActionButton(QfButtonId.Change, "ChangePassword", route: new { id = Model.AggregateUserId })%></td>
         </tr>
         <% if (this.Model.UserRole != UserRole.Supreme) { %>
         <tr>

@@ -20,7 +20,8 @@ namespace Pleiades.Web.Security.Providers
                     "RepositoryFactory factory has not been registered with PfMembershipRepositoryBroker.  Please use RegisterFactory()");
             }
 
-            return RepositoryFactory.Invoke();
+            var repository = RepositoryFactory.Invoke();
+            return repository;
         }
     }
 }

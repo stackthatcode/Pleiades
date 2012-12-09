@@ -17,6 +17,7 @@ namespace Commerce.WebUI
         protected void Application_Start()
         {
             // Routes
+            AreaRegistration.RegisterAllAreas();
             RegisterRoutes();
 
             // Components
@@ -34,7 +35,6 @@ namespace Commerce.WebUI
 
         public static void RegisterRoutes()
         {
-            AreaRegistration.RegisterAllAreas();
             RouteTable.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
         }
 

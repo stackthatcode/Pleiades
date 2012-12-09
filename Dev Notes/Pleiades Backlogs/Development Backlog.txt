@@ -1,64 +1,98 @@
 FRONTRANGE - HOTZONE
 ====================
 
-Good Stuff
-----------
-- http://zeptojs.com/#download => whut...?
-- http://www.startuppack.org/ whut...?
-- https://github.com/websanova/jquery-url#url
-- http://news.ycombinator.com/item?id=4707903
+Front Range
+-----------
 
-Category Editor - GROCERY LIST
-------------------------------
-Front-End Coding
-- How to include all these dependencies...? => We'll see
+Category Controller and Repository
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Category Service => IN PROGRESS
+- Soft Delete => IN PROGRESS
+- Repository => IN PROGRESS
+- Controller Methods => TODO
+- Models for JSON DTO's => TODO
+* Create
+* Edit
+* Change
+* DeleteConfirm
+- JQuery Library for AJAX => TODO
+- Logging Aspect => TODO
 
+
+- Post Mortem - inventory *everything* from UI
+- Razor View Engine => TODO
+- Navigation Menu
+- Master Page with Javascript includes
+- Bootstrap the Postback stuff
+- File Upload
+
+- Develop and/or Research Fluent Validation library => TODO
+
+*** MANDATE => after burndown of the goddamn backlog for Category Editor, every feature is weighed and estimated accordingly!  Make a feature Backlog.
+*** MANDATE => research HOW KnockoutJS actually works internally
+
+
+
+
+
+Admin MVP Big Feature List - 12/2/2012
+---------------------------------------
+- Category Editor => ALMOST DONE
+- Size Editor => IN PROGRESS
+- Brand Editor => IN PROGRESS
+- Section Editor => IN PROGRESS
+- Color Editor => IN PROGRESS
+
+- Product Search & Editor
+- Order Search & Editor
+- Customer Search & Editor
+- SKU Generator
+
+- Basic Analytic Tracker - Traffic Source, Landing Page => WORTH HASHING OUT
+- Image Upload & Processing Engine
+- Email Sending Engine
+- Server Logging
+- Barebones Console App
+
+
+
+
+Middle Range Log
+----------------
+=> How to include all these dependencies...? => We'll see
 => Convert existing Pleiades stuff to Admin Interface/Bootstrap => TODO
 => Domain Modeling and Write User Stories - after reading through Shopify's API docs => TODO
 => Where did I put my fonts...?  What's a good resource for typography and fonts...? => TODO
 - TODO KNOCKOUTJS: difference between http://knockoutjs.com/documentation/extenders.html AND custom binders
 
-- Important: Create a separate Model for Editing Users => DONE
-- Fix the other Admin Editing Screens, including the Add User button => DONE
-- Add the window shade effect to the top Menu => DONE
-
-
-
-Technology Backlog
-------------------
-- Bootstrap.js => DONE
-- Knockout.js => DONE
-- JQuery => DONE
-- TDD => DONE
-- C# => DONE
-- ASP.NET MVC => DONE
-
-- Razor View Engine => IN PROGRESS
-- JavaScript (protoypes) => TODO
-- Entity Framework => IN PROGRESS
-- Git + GitHub => IN PROGRESS
-- CSS styling => IN PROGRESS
-- GZip encoding of my AJAX traffic...?
-- JSLint => IN PROGRESS
-- JSFiddle => TODO
-- Emberjs => TODO
-- Sammy.js => TODO
-- ZeptoJs => TODO
-- Mustache.js => TODO
-- Less => TODO
-- Azure => EVENTUALLY
- 
- 
+  
 MORE BIG FISH
 -------------
-=> How do browsers handle caching of the Javascript Libraries...? => TODO
-=> Category Editor using JKB development: MILESTONE
-=> Entity Framework Code First
 => Store Front Design - Q1/2013
 => Payment Processing Options, API's etc. => IN PROGRESS
 => Custom Caching solution...?
 => Find a good resource for Typography, Fonts, etc. => TODO
 => http://news.ycombinator.com/item?id=4669866 => IMPORTANT
+=> Enable for Azure => TODO
+
+
+PENDING FEATURE BACKLOG
+-----------------------
+- Eliminate the MembershipProvider (WHOO-HOO!!!!!!!) => PENDING EVAL
+* Roll everything into the MembershipService, take back control of your objects and data access.  Done.  OVER! => PENDING EVAL
+
+NOTES ON THE HEGEMONY OF UNREASON (STATIC MEMBERSHIP)
+- UpdateSelf() invocations... this odd function is called... with tons of exception checking... as if, there are not transactions...?  Why don't you throw
+- What's the rigamorale about Updating shit...?  Why not try it and if it fails, throw an Exception???
+
+- Review order of Modal Ok/Cancel => PENDING EVAL
+- Show the number of Products under Category => PENDING EVAL
+- Modify Category Editor design i.e. Number of Categories, Products, etc. => PENDING EVAL
+- Rendering Adjustments for long Category Names et. al. => PENDING EVAL
+- TASK => cross-browser test Animation Stuff, mayhaps introduce method chaining => PENDING EVAL
+- Add Modal Pop-up - "Are You Sure?" Category Parent Change, etc. => PENDING EVAL
+- Add constraints on the number of records we can add => PENDING EVAL
+- View Products => Hot Link to a RESTful URL - TODO => PENDING EVAL
 
 
 E-Commerce API's & Payment Processors
@@ -90,8 +124,6 @@ Research Backlog
 - Look up Troy Hunt's article's, too
 - RESEARCH a lighter-weight ORM => TODO
 
-
-
 Good Stuff
 ----------
 - http://fortawesome.github.com/Font-Awesome/
@@ -119,3 +151,4 @@ THE OTHER BACKLOG
 - Copy jqia2.support.js functions
 * General Fixes
 - Disable Caching for AJAX stuff with ASP.NET MVC=> TODO
+

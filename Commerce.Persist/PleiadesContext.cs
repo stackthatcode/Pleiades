@@ -14,8 +14,6 @@ namespace Commerce.Persist
         public DbSet<MembershipUser> MembershipUsers { get; set; }
         public DbSet<IdentityProfile> IdentityProfiles { get; set; }
         
-        // public DbSet<AggregateUser> AggregateUsers { get; set; } -- todo: add Category
-
         public PleiadesContext() : base("PleiadesDb")
         {
         }

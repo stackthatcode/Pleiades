@@ -7,7 +7,7 @@
     <h1>Change Password For > <%: Model.Email %></h1>
 
     <div style="padding-top:30px;">
-        <% using (Html.BeginForm("Change", "Manager", FormMethod.Post, new { enctype = "multipart/form-data", autocomplete = "off" })) 
+        <% using (Html.BeginForm("ChangePassword", "Manager", FormMethod.Post, new { enctype = "multipart/form-data", autocomplete = "off" })) 
             { %>
             
             <div class="dottedline"></div>

@@ -2,12 +2,13 @@
 using System.Web;
 using System.Web.Mvc;
 using Pleiades.Injection;
+using Pleiades.Web.Autofac;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Providers;
 using Autofac;
 using Autofac.Integration.Mvc;
 
-namespace Commerce.WebUI.Plumbing
+namespace Commerce.WebUI
 {
     public class AutofacBootstrap
     {
@@ -18,11 +19,16 @@ namespace Commerce.WebUI.Plumbing
             builder.RegisterModule<CommerceWebUIModule>();
             var container = builder.Build();
 
+            // Register the factory which creates the IMembershipProviderRepository dependency
+            PfMembershipRepositoryBroker.RegisterFactory(() => 
+                {
+                    // This ensures that Membership gets dependencies tied to the current Request Lifetime Scope
+                    var _container = DependencyResolver.Current.GetService<IContainerAdapter>();
+                    return _container.Resolve<IMembershipProviderRepository>();
+                });
+
             // Wire container into ASP.NET MVC
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-
-            // Register the factory which creates the IMembershipProviderRepository dependency
-            PfMembershipRepositoryBroker.RegisterFactory(() => container.Resolve<IMembershipProviderRepository>());
 
             return new AutofacContainer(container);
         }

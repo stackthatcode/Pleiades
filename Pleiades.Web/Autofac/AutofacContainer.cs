@@ -2,7 +2,7 @@
 using Autofac;
 using Pleiades.Injection;
 
-namespace Commerce.WebUI.Plumbing
+namespace Pleiades.Web.Autofac
 {
     public class AutofacContainer : IContainerAdapter
     {

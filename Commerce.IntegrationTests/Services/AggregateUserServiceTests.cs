@@ -5,6 +5,7 @@ using System.Web.Security;
 using NUnit.Framework;
 using Pleiades.Data;
 using Pleiades.Data.EF;
+using Pleiades.Injection;
 using Pleiades.Web.Security.Concrete;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
@@ -20,34 +21,26 @@ namespace Commerce.IntegrationTests.Security
     {
         // TODO LATER: Verify_RetreiveByMembershipUserNamesAndUserRoles()
 
+        IContainerAdapter _container;
+
         [TestFixtureSetUp]
         public void Setup()
         {
-            // Empty the test data
-            DatabasePriming.CleanOutTheDatabase();
+            _container = IntegrationTestsModule.CreateContainer();
 
-            // When we create a new MembershipService, the Shim will inject the DbContext
-            DatabasePriming.InitializeMembership(); 
+            // Empty the test data
+            TestPrimer.CleanOutTheDatabase();
         }
 
-
-        public AggregateUserService CreateAggregateUserService()
-        {            
-            // Create the Aggregate User Service with a separate Database Context
-            var dbContext2 = new PleiadesContext();
-            var membershipService = new MembershipService();
-            var aggregateUserRepository = new AggregateUserRepository(dbContext2);
-            var unitOfWork = new EFUnitOfWork(dbContext2);
-
-            return new AggregateUserService(membershipService, aggregateUserRepository, null, null, null, unitOfWork);
+        public IAggregateUserService CreateAggregateUserService()
+        {
+            return _container.Resolve<IAggregateUserService>();
         }
 
         [Test]
         public void Create_And_RetrieveByMembershipUserName()
         {
             // Arrange
-            var context = new PleiadesContext();
-
             var identityuser1 = new CreateOrModifyIdentityRequest
                 {
                     AccountStatus = AccountStatus.Active,
@@ -84,10 +77,10 @@ namespace Commerce.IntegrationTests.Security
             service.Create(membershipuser2, identityuser2, out outstatus2);
 
             // Assert
-            var membershipService = new MembershipService();
+            var membershipService = _container.Resolve<IMembershipService>();
             var membershipUserName = membershipService.GetUserNameByEmail("anne@holtz.com");
 
-            var aggregateUserRepository = new AggregateUserRepository(context);
+            var aggregateUserRepository = _container.Resolve<IAggregateUserRepository>();
             var testUser = aggregateUserRepository.RetrieveByMembershipUserName(membershipUserName);
 
             Assert.IsNotNull(testUser);
@@ -100,7 +93,6 @@ namespace Commerce.IntegrationTests.Security
         public void UpdateIdentity_And_RetreiveByRetrieveById()
         {
             // Arrange
-            var context = new PleiadesContext();            
             var identityuser2 = new CreateOrModifyIdentityRequest
             {
                 AccountLevel = AccountLevel.Gold,
@@ -130,8 +122,12 @@ namespace Commerce.IntegrationTests.Security
                 LastName = "moon"
             };
 
-            var aggregateUserRepository = new AggregateUserRepository(context);
+            var aggregateUserRepository = _container.Resolve<IAggregateUserRepository>();
             aggregateUserRepository.UpdateIdentity(modificationRequeset);
+
+            var unitOfWork = _container.Resolve<IUnitOfWork>();
+            unitOfWork.Commit();
+
             var updatedResult = aggregateUserRepository.RetrieveById(result.ID);
 
             // Assert
@@ -146,7 +142,6 @@ namespace Commerce.IntegrationTests.Security
         public void RetrieveByUserRoles()
         {
             // Arrange
-            var context = new PleiadesContext();
             var identityuser2 = new CreateOrModifyIdentityRequest
             {
                 AccountLevel = AccountLevel.Gold,
@@ -182,7 +177,7 @@ namespace Commerce.IntegrationTests.Security
             var result2 = service.Create(membershipuser2, identityuser2, out outstatus);
 
             // Act
-            var repository = new AggregateUserRepository(context);
+            var repository = this._container.Resolve<IAggregateUserRepository>();
             var adminsOnly = repository.Retreive(new List<UserRole>() { UserRole.Admin });
             var trustedOnly = repository.Retreive(new List<UserRole>() { UserRole.Trusted });
             var bothUserTypes = repository.Retreive(new List<UserRole>() { UserRole.Admin, UserRole.Trusted });

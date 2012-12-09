@@ -8,11 +8,10 @@ using NUnit.Framework;
 
 namespace Commerce.IntegrationTests
 {
-    [TestFixture]
-    public class DatabasePriming
+    public class TestPrimer
     {
-        [Test]
-        [Ignore]    // Remove this line to refresh database schema
+
+
         public void CreateDatabaseHarness()
         {
             RecreateTheDatabase();
@@ -26,12 +25,6 @@ namespace Commerce.IntegrationTests
             // Build Database
             Console.WriteLine("Creating Database for Integration Testing of AggregateUserRepository");
             context.Database.Create();
-        }
-
-        public static void InitializeMembership()
-        {
-            // Prepare Membership Provider - YOU HAVE TO USE THIS, OTHERWISE YOUR REPOSITORY WILL NOT WORK!!!
-            PfMembershipRepositoryBroker.RegisterFactory(() => new PfMembershipRepository(new PleiadesContext()));
         }
 
         public static void CleanOutTheDatabase()

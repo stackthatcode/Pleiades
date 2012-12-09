@@ -5,10 +5,9 @@ This Stage
 Next Stage
 ~~~~~~~~~~
 - PushMarket => 2013 - YES
-- Create a Business + Marketing Plan => 2013 - YES
-- Mobile Android/iOS + Xamarin => 2013 - PROBABLY
-- NodeJs...? Ruby...? => Late 2013 - MAYBE, OR 2014
-
+- Create a Business => 2013 - YES
+- Mobile Android/iOS + Xamarin => 2013 - YES
+- NodeJs...? Ruby...? => 2014 - YES
 
 
 Front Range Business Ideas
@@ -54,10 +53,12 @@ This guy is THE MAN => http://www.s3mobileapps.com/
 
 BLOG POSTS!
 ~~~~~~~~~~~
+- Membership Provider Rant, reference Mark Seeman's post
+- Getting the MembershipProvider to play nice
 - You can't force it.  It's time will come - or, not.
 - 2-way Authentication and identifying folks
-- KnockoutJS Cool
-- .NET Security
+- KnockoutJS Very Cool
+- .NET Security...?
 - 7 Javascript Tools You Need To Know About
 - Fluent Header Builder for MVC 
 - Composition versus Inheritance
@@ -81,4 +82,36 @@ BLOG POSTS!
 - Bootstrap
 - Less
 - Sammy.js
+
+
+Good Stuff
+----------
+- http://zeptojs.com/#download => whut...?
+- http://www.startuppack.org/ whut...?
+- https://github.com/websanova/jquery-url#url
+- http://news.ycombinator.com/item?id=4707903
+
+Technology Backlog
+------------------
+- Bootstrap.js => DONE
+- Knockout.js => DONE
+- JQuery => DONE
+- TDD => DONE
+- C# => DONE
+- ASP.NET MVC => DONE
+- JSFiddle => DONE
+
+- Razor View Engine => IN PROGRESS
+- JavaScript (protoypes) => TODO
+- Entity Framework => IN PROGRESS
+- Git + GitHub => IN PROGRESS
+- CSS styling => IN PROGRESS
+- GZip encoding of my AJAX traffic...?
+- JSLint => IN PROGRESS
+- Emberjs => TODO
+- Sammy.js => TODO
+- ZeptoJs => TODO
+- Mustache.js => TODO
+- Less => TODO
+- Azure => EVENTUALLY
 

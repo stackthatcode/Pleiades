@@ -52,8 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Concrete\AggregateUserServiceAuthentionTests.cs" />
-    <Compile Include="Concrete\AggregateUserServiceCRUDTests.cs" />
+    <Compile Include="Concrete\AggregateUserServiceTests.cs" />
     <Compile Include="Concrete\OwnerAuthorizationStepTests.cs" />
     <Compile Include="Provider\MembershipProviderTests.cs" />
     <Compile Include="Rules\AccountLevelCheckTests.cs" />
