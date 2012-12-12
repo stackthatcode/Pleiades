@@ -38,7 +38,7 @@ namespace Pleiades.IntegrationTests.DataEF
             
             repository.Add(entity1);
             repository.Add(entity2);
-            unitOfWork.Commit();
+            unitOfWork.SaveChanges();
             
             var entity1Fromdb = repository.FindFirstOrDefault(x => x.Id == entity1.Id);
             var entity2Fromdb = repository.FindFirstOrDefault(x => x.Id == entity2.Id);
@@ -70,7 +70,7 @@ namespace Pleiades.IntegrationTests.DataEF
             repository.Add(entity1);
             repository.Add(entity2);
             repository.Add(entity3);
-            unitOfWork.Commit();
+            unitOfWork.SaveChanges();
 
             // Act & Assert
             var entity1FromDb = repository.FindBy(x => x.Name == "Aleks").FirstOrDefault();
@@ -95,7 +95,7 @@ namespace Pleiades.IntegrationTests.DataEF
                 var repository1 = new MyEntityRepository(context1);
                 var unitOfWork1 = new EFUnitOfWork(context1);
                 repository1.Add(entity1);
-                unitOfWork1.Commit();
+                unitOfWork1.SaveChanges();
             }
             finally
             {
@@ -128,7 +128,7 @@ namespace Pleiades.IntegrationTests.DataEF
                 var entity3 = repository3.FindFirstOrDefault(x => x.Name == "Olga");
                 Assert.AreEqual(777, entity3.Amount);
                 entity3.Amount = 800;
-                unitOfWork3.Commit();
+                unitOfWork3.SaveChanges();
 
                 var context4 = new MyContext();
                 var repository4 = new MyEntityRepository(context4);

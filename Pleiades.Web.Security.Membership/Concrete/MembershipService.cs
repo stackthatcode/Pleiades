@@ -32,7 +32,7 @@ namespace Pleiades.Web.Security.Concrete
             Membership.CreateUser(
                 generatedUserName, request.Password, request.Email, request.PasswordQuestion, request.PasswordAnswer, 
                 request.IsApproved, out createStatus);
-            this.UnitOfWork.Commit();   // I HATE THIS - THE SERVICES ARE MANAGING THE UNIT OF WORK TO WHICH THEY BELONG!!!
+            this.UnitOfWork.SaveChanges();   // I HATE THIS - THE SERVICES ARE MANAGING THE UNIT OF WORK TO WHICH THEY BELONG!!!
 
             outCreateStatus = (PleiadesMembershipCreateStatus)createStatus;
             return Repository.GetUser(generatedUserName);

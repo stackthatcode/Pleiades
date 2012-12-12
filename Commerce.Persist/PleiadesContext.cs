@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
 using Pleiades.Web.Security.Model;
+using Commerce.Domain.Model.Lists;
 
 namespace Commerce.Persist
 {
@@ -13,7 +14,9 @@ namespace Commerce.Persist
         public DbSet<AggregateUser> AggregateUsers { get; set; }
         public DbSet<MembershipUser> MembershipUsers { get; set; }
         public DbSet<IdentityProfile> IdentityProfiles { get; set; }
+        public DbSet<Category> Categories { get; set; }
         
+
         public PleiadesContext() : base("PleiadesDb")
         {
         }

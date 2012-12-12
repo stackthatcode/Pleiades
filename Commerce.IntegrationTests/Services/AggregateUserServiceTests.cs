@@ -26,10 +26,10 @@ namespace Commerce.IntegrationTests.Security
         [TestFixtureSetUp]
         public void Setup()
         {
-            _container = IntegrationTestsModule.CreateContainer();
+            _container = IntegrationTestsModule.Container();
 
             // Empty the test data
-            TestPrimer.CleanOutTheDatabase();
+            TestPrimer.CleanOutUserData();
         }
 
         public IAggregateUserService CreateAggregateUserService()
@@ -126,7 +126,7 @@ namespace Commerce.IntegrationTests.Security
             aggregateUserRepository.UpdateIdentity(modificationRequeset);
 
             var unitOfWork = _container.Resolve<IUnitOfWork>();
-            unitOfWork.Commit();
+            unitOfWork.SaveChanges();
 
             var updatedResult = aggregateUserRepository.RetrieveById(result.ID);
 

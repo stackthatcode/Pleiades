@@ -56,6 +56,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Xml.Linq" />
@@ -66,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IntegrationTestsModule.cs" />
+    <Compile Include="Repositories\CategoryRepositoryTests.cs" />
     <Compile Include="Repositories\MembershipRepositoryTests.cs" />
     <Compile Include="Services\AggregateUserServiceTests.cs" />
     <Compile Include="TestPrimer.cs" />

@@ -137,7 +137,7 @@ namespace Pleiades.Web.Security.Concrete
             };
 
             this.Repository.Add(aggegrateUser);
-            this.UnitOfWork.Commit();
+            this.UnitOfWork.SaveChanges();
             return aggegrateUser;
         }
 
@@ -164,7 +164,7 @@ namespace Pleiades.Web.Security.Concrete
                 this.MembershipService.SetUserApproval(membershipUserName, identityUserRequest.IsApproved);
             }
 
-            this.UnitOfWork.Commit();
+            this.UnitOfWork.SaveChanges();
         }
 
         public void ChangeUserPassword(int targetUserId, string oldPassword, string newPassword)
@@ -177,7 +177,7 @@ namespace Pleiades.Web.Security.Concrete
 
             var user = this.Repository.RetrieveById(targetUserId);
             this.MembershipService.ChangePassword(user.Membership.UserName, oldPassword, newPassword);
-            this.UnitOfWork.Commit();
+            this.UnitOfWork.SaveChanges();
         }
     }
 }

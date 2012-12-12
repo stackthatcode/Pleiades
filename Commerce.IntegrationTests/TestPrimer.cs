@@ -10,8 +10,6 @@ namespace Commerce.IntegrationTests
 {
     public class TestPrimer
     {
-
-
         public void CreateDatabaseHarness()
         {
             RecreateTheDatabase();
@@ -27,7 +25,7 @@ namespace Commerce.IntegrationTests
             context.Database.Create();
         }
 
-        public static void CleanOutTheDatabase()
+        public static void CleanOutUserData()
         {
             var context = new PleiadesContext();
             if (!context.Database.Exists())
@@ -43,5 +41,20 @@ namespace Commerce.IntegrationTests
             context.MembershipUsers.ForEach(x => context.MembershipUsers.Remove(x));
             context.SaveChanges();
         }
+
+        public static void CleanOutCategoryData()
+        {
+            var context = new PleiadesContext();
+            if (!context.Database.Exists())
+            {
+                // Build Database
+                Console.WriteLine("Creating Database for Integration Testing of AggregateUserRepository");
+                context.Database.Create();
+            }
+
+            context.Categories.ForEach(x => context.Categories.Remove(x));
+            context.SaveChanges();
+        }
+
     }
 }

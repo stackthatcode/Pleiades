@@ -21,8 +21,8 @@ namespace Commerce.IntegrationTests.Security
         [TestFixtureSetUp]
         public void TestSetup()
         {
-            TestPrimer.CleanOutTheDatabase();
-            _container = IntegrationTestsModule.CreateContainer();
+            TestPrimer.CleanOutUserData();
+            _container = IntegrationTestsModule.Container();
         }
 
         [Test]
@@ -169,7 +169,7 @@ namespace Commerce.IntegrationTests.Security
 
             // Disapprove User
             service.SetUserApproval(newUser.UserName, false);
-            unitOfWork.Commit();
+            unitOfWork.SaveChanges();
 
             // Try to Authenticate - should fail
             var result1 = service.ValidateUserByEmailAddr(newUser.Email, "password123");
@@ -177,7 +177,7 @@ namespace Commerce.IntegrationTests.Security
 
             // Reapprove USer
             service.SetUserApproval(newUser.UserName, true);
-            unitOfWork.Commit();
+            unitOfWork.SaveChanges();
 
             // Try to Authenticate - should succeed
             var result2 = service.ValidateUserByEmailAddr(newUser.Email, "password123");
@@ -214,7 +214,7 @@ namespace Commerce.IntegrationTests.Security
 
             // Unlock the User
             service.UnlockUser(newUser.UserName);
-            unitOfWork.Commit();
+            unitOfWork.SaveChanges();
 
             // Should be able to authenticated
             var result2 = service.ValidateUserByEmailAddr(newUser.Email, "password123");
@@ -241,7 +241,7 @@ namespace Commerce.IntegrationTests.Security
 
             // Change the password
             service.ChangeEmailAddress(newUser.UserName, "bob4444@bob.com");
-            unitOfWork.Commit();
+            unitOfWork.SaveChanges();
 
             // Try authenticating with valid credentials
             var result = service.ValidateUserByEmailAddr("bob4444@bob.com", "password123");            
@@ -306,7 +306,7 @@ namespace Commerce.IntegrationTests.Security
 
             // Try Reseting
             var resetPwd = service.ResetPasswordWithAnswer(newUser1.UserName, request1.PasswordAnswer);
-            unitOfWork.Commit();
+            unitOfWork.SaveChanges();
 
             // Try authenticating with valid credentials
             var result = service.ValidateUserByEmailAddr(newUser1.Email, resetPwd);
@@ -341,7 +341,7 @@ namespace Commerce.IntegrationTests.Security
 
             // Reset the Password with WRONG answer
             var resetPwd = service.ResetPasswordWithAnswer(request1.Email, "Donald777");
-            unitOfWork.Commit();
+            unitOfWork.SaveChanges();
 
             // Should've *thrown* an Exception
         }
@@ -370,16 +370,16 @@ namespace Commerce.IntegrationTests.Security
 
             // Change the question and answer
             service.ChangePasswordQuestionAndAnswer(newUser1.UserName, "password123", "New Question", "New Answer");
-            unitOfWork.Commit();
+            unitOfWork.SaveChanges();
 
             // Test the question
             var question = service.PasswordQuestion(newUser1.UserName);
-            unitOfWork.Commit();
+            unitOfWork.SaveChanges();
             Assert.AreEqual(question, "New Question");
 
             // Try Reseting
             var resetPwd = service.ResetPasswordWithAnswer(newUser1.UserName, "New Answer");
-            unitOfWork.Commit();
+            unitOfWork.SaveChanges();
 
             // Try authenticating with valid credentials
             var result = service.ValidateUserByEmailAddr(newUser1.Email, resetPwd);

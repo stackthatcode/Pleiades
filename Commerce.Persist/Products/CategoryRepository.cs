@@ -18,12 +18,20 @@ namespace Commerce.Persist.Products
 
         public List<Category> RetrieveAllSections()
         {
+            // Need to add the recursive...?
             return this.FindBy(x => x.ParentId == null && x.Deleted == false).ToList();
         }
 
         public List<Category> RetrieveAllCategoriesBySection(int sectionCategoryId)
         {
-            return this.FindBy(x => x.ParentId == sectionCategoryId && x.Deleted == false).ToList();
+            return this.ReadOnlyData()
+                .Join(
+                    this.ReadOnlyData(), 
+                    parent => parent.Id, 
+                    child => child.ParentId, 
+                    (parent, child) => new { parent, child })
+                .Where(x => x.parent.Id == sectionCategoryId || x.parent.ParentId == sectionCategoryId)
+                .Select(x => x.child).ToList();
         }
 
         public List<Category> RetrieveByParentId(int Id)
@@ -31,9 +39,21 @@ namespace Commerce.Persist.Products
             return this.FindBy(x => x.ParentId == Id && x.Deleted == false).ToList();
         }
 
+        public List<Category> RetrieveByParentIdDeep(int Id)
+        {
+            return this.FindBy(x => x.ParentId == Id && x.Deleted == false).ToList();
+        }
+
         public Category RetrieveById(int Id)
         {
             return this.FindFirstOrDefault(x => x.Id == Id);
+        }
+
+        public override void Add(Category category)
+        {
+            category.DateInserted = DateTime.Now;
+            category.DateUpdated = DateTime.Now;
+            base.Add(category);
         }
 
         public void Delete(int Id)
@@ -45,7 +65,10 @@ namespace Commerce.Persist.Products
 
         public void SwapParentChild(int parentId, int childId)
         {
-            throw new NotImplementedException();
+            var parent = this.RetrieveById(parentId);
+            var child = this.RetrieveById(childId);
+            child.ParentId = parent.ParentId;
+            parent.ParentId = child.Id;
         }
     }
 }

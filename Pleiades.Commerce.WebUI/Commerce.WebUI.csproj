@@ -185,6 +185,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Commerce.Domain\Commerce.Domain.csproj">
+      <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
+      <Name>Commerce.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Commerce.Persist\Commerce.Persist.csproj">
       <Project>{E616B84E-1830-4909-9A56-58A656EA9B5B}</Project>
       <Name>Commerce.Persist</Name>

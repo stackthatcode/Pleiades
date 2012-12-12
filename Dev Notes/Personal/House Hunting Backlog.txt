@@ -1,19 +1,21 @@
 House Hunting Backlog
 =====================
 
+Front Range
+-----------
+- Find Mortgage Broker => IN PROGRESS
+- Get Pre-Approved => IN PROGRESS
+- Call and meet Tad for lunch 312-810-2032 => DONE
+
+- Ask Jason, Jae, Michael about Buyer Representation => TODO
+- QUESTION: why use Buyer Representation?  Do we need it? => IN PROGRESS
+- Find Lawyer => IN PROGRESS
+
 Burndown
 --------
 - Called Mom (waiting for attorney)
 - Called Jeremy => DONE
 
-Front Range
------------
-- Find Mortgage Broker => IN PROGRESS
-- Get Pre-Approved => TODO
-- Call and meet Tad for lunch 312-810-2032 => TODO / LIST OF QUESTION
-- Ask Jason, Jae, Michael about Buyer Representation => TODO
-- QUESTION: why use Buyer Representation?  Do we need it? => IN PROGRESS
-- Find Lawyer => IN PROGRESS
 
 Questions for Tad
 -----------------

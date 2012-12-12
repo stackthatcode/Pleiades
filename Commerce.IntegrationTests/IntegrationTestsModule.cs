@@ -12,6 +12,8 @@ namespace Commerce.IntegrationTests
 {
     public class IntegrationTestsModule : Module
     {
+        static IContainerAdapter _containerAdapter = null;
+
         protected override void Load(ContainerBuilder builder)
         {
             // Autofac
@@ -22,19 +24,24 @@ namespace Commerce.IntegrationTests
             builder.RegisterModule<CommercePersistModule>();
         }
 
-        public static IContainerAdapter CreateContainer()
+        public static IContainerAdapter Container()
         {
+            if (_containerAdapter != null)
+            {
+                return _containerAdapter;
+            }
+
             var builder = new ContainerBuilder();
             builder.RegisterModule<IntegrationTestsModule>();
             var container = builder.Build();
 
-            var containerAdapter = new AutofacContainer(container.BeginLifetimeScope());
+            _containerAdapter = new AutofacContainer(container.BeginLifetimeScope());
 
-            PfMembershipRepositoryBroker.RegisterFactory(() => 
+            PfMembershipRepositoryBroker.RegisterFactory(() =>
                 {
-                    return containerAdapter.Resolve<IMembershipProviderRepository>();
+                    return _containerAdapter.Resolve<IMembershipProviderRepository>();
                 });
-            return containerAdapter;
+            return _containerAdapter;
         }
     }
 }

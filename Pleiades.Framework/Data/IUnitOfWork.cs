@@ -5,6 +5,6 @@ namespace Pleiades.Data
     public interface IUnitOfWork
     {
         Guid Tracer { get; }
-        void Commit();
+        void SaveChanges();
     }
 }

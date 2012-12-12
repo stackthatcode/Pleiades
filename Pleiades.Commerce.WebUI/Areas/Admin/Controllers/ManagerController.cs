@@ -153,7 +153,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         {
             var user = this.AggregateUserRepository.RetrieveById(id);
             var newpassword = this.MembershipService.ResetPassword(user.Membership.UserName);
-            this.UnitOfWork.Commit();
+            this.UnitOfWork.SaveChanges();
             return View(new ResetPasswordModel { Email = user.Membership.Email, NewPassword = newpassword });
         }
 
@@ -163,7 +163,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         {
             var user = this.AggregateUserRepository.RetrieveById(id);
             MembershipService.UnlockUser(user.Membership.UserName);
-            this.UnitOfWork.Commit();
+            this.UnitOfWork.SaveChanges();
             return RedirectToAction("Details", new { id = id });
         }
 
@@ -181,7 +181,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         {
             var user = this.AggregateUserRepository.RetrieveById(id);
             this.AggregateUserRepository.Delete(user);
-            this.UnitOfWork.Commit();
+            this.UnitOfWork.SaveChanges();
             return RedirectToAction("List");
         }
     }

@@ -18,7 +18,7 @@ namespace Pleiades.Data.EF
             this.Context = context;
         }
 
-        public void Commit()
+        public void SaveChanges()
         {
             this.Context.SaveChanges();
         }

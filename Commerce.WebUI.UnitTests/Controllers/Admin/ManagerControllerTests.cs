@@ -217,7 +217,7 @@ namespace Commerce.WebUI.TestsControllers
                 .Return("seruifjk");
 
             var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
-            unitOfWork.Expect(x => x.Commit());
+            unitOfWork.Expect(x => x.SaveChanges());
 
             var controller = new ManagerController(repository, null, service, unitOfWork);
 
@@ -241,7 +241,7 @@ namespace Commerce.WebUI.TestsControllers
             service.Expect(x => x.UnlockUser("123456"));
 
             var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
-            unitOfWork.Expect(x => x.Commit());
+            unitOfWork.Expect(x => x.SaveChanges());
 
             // Act
             var controller = new ManagerController(repository, null, service, unitOfWork);
@@ -289,7 +289,7 @@ namespace Commerce.WebUI.TestsControllers
             repository.Expect(x => x.Delete(user));
 
             var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
-            unitOfWork.Expect(x => x.Commit());
+            unitOfWork.Expect(x => x.SaveChanges());
 
             var controller = new ManagerController(repository, null, null, unitOfWork);
 

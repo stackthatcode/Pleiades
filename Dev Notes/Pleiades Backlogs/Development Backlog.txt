@@ -1,8 +1,18 @@
 FRONTRANGE - HOTZONE
 ====================
 
+Vision - Phase 2?
+--------------------
+- Traffic Source { PPC/PPM, SEO, Email } => Landing Page w/ Tracking => ??? => Conversion
+- Exclusive Squeeze Page => Email => Campaigns => ??? => Conversion
+- NOTE: must find focus and aim to achieve immediate goals
+
+
 Front Range
 -----------
+- TRIPLE CHECK YOUR BACKUPS, DUDE => TODO
+- REVIEW MY GITHUB HISTORY => TODO
+- Clean-up my Chrome Bookmarks
 
 Category Controller and Repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -18,6 +28,7 @@ Category Controller and Repository
 - JQuery Library for AJAX => TODO
 - Logging Aspect => TODO
 
+- Performance - just how horrible is the EF code...? => TODO     
 
 - Post Mortem - inventory *everything* from UI
 - Razor View Engine => TODO
@@ -32,6 +43,7 @@ Category Controller and Repository
 *** MANDATE => research HOW KnockoutJS actually works internally
 
 
+- INTELLIGENCE - start reverse-engineering Frank and Oak's process => TODO
 
 
 

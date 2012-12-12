@@ -6,9 +6,9 @@ using Pleiades.Injection;
 using Pleiades.Data;
 using Pleiades.Data.EF;
 using Pleiades.Web.Security.Interface;
-using Pleiades.Web.Security.Interface;
-using Pleiades.Web.Security.Interface;
+using Commerce.Domain.Interfaces;
 using Commerce.Persist.Security;
+using Commerce.Persist.Products;
 
 namespace Commerce.Persist
 {
@@ -25,6 +25,7 @@ namespace Commerce.Persist
             builder.RegisterType<PfMembershipRepository>().As<IMembershipProviderRepository>().InstancePerLifetimeScope();
 
             // TODO: add the Products Repository, Category Repository
+            builder.RegisterType<CategoryRepository>().As<ICategoryRepository>().InstancePerLifetimeScope();
         }
     }
 }

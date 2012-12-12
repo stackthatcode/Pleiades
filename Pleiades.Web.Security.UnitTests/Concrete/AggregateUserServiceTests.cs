@@ -310,7 +310,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             repository.Expect(x => x.Add(null)).IgnoreArguments();
 
             var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
-            unitOfWork.Expect(x => x.Commit());
+            unitOfWork.Expect(x => x.SaveChanges());
 
             PleiadesMembershipCreateStatus createStatus;
             var membership = MockRepository.GenerateMock<IMembershipService>();
@@ -364,7 +364,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             membershipService.Expect(x => x.ChangeEmailAddress("123456", "abc@efe.com"));
 
             var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
-            unitOfWork.Expect(x => x.Commit());
+            unitOfWork.Expect(x => x.SaveChanges());
 
             var aggregateService =
                 new AggregateUserService(membershipService, aggrUserRepository, ownerAuthorizationService, null, null, unitOfWork);
@@ -417,7 +417,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             ownerAuthorizationService.Expect(x => x.Authorize(888)).Return(SecurityCode.Allowed);
 
             var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
-            unitOfWork.Expect(x => x.Commit());
+            unitOfWork.Expect(x => x.SaveChanges());
 
             var service = new AggregateUserService(membershipService, repository, ownerAuthorizationService, null, null, unitOfWork);
 

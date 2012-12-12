@@ -1,21 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Pleiades.Data;
+using Commerce.Domain.Interfaces;
+using Commerce.Domain.Model.Lists;
 
 namespace Pleiades.Commerce.WebUI.Areas.Admin.Controllers
 {
     public class CategoryController : Controller
     {
-        public const int PageSize = 5;
-        //public ICategoryService CategoryService { get; set; }
+        ICategoryRepository Repository { get; set; }
+        IUnitOfWork UnitOfWork { get; set; }
 
-        public CategoryController()
+        public CategoryController(ICategoryRepository repository, IUnitOfWork unitOfWork)
         {
-            //CategoryService = new CategoryService();
+            this.Repository = repository;
+            this.UnitOfWork = unitOfWork;
+        }
+
+        public JsonResult RetrieveAllSections()
+        {
+            var result = this.Repository.RetrieveAllSections();
+            return Json(result);
         }
 
 
+        // Should we use this Newtonsoft.Json.dll...? => TODO
     }
 }
