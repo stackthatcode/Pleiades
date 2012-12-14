@@ -6,10 +6,12 @@ using Pleiades.Data;
 using Pleiades.Data.EF;
 using Pleiades.Injection;
 using Pleiades.Utility;
+using Commerce.Domain.Dto;
 using Commerce.Domain.Interfaces;
 using Commerce.Domain.Model.Lists;
 using Commerce.Persist;
 using Commerce.Persist.Security;
+using Newtonsoft.Json;
 
 namespace Commerce.IntegrationTests.Repositories
 {
@@ -97,7 +99,7 @@ namespace Commerce.IntegrationTests.Repositories
         }
 
         [Test]
-        public void DoStuff()
+        public void DoStuffWithCategoriesAndBeHappy()
         {
             _container = IntegrationTestsModule.Container();
 
@@ -105,13 +107,33 @@ namespace Commerce.IntegrationTests.Repositories
             var unitOfWork = this._container.Resolve<IUnitOfWork>();
 
             Console.WriteLine("Displaying All Sections");
-            repository.RetrieveAllSections().ForEach(x => Console.WriteLine(x.Id + " " + x.Name + " " + x.SEO));
+            var allSections = repository.RetrieveAllSections();
+            allSections.ForEach(x => Console.WriteLine(x.Id + " " + x.Name + " " + x.SEO));
             Console.WriteLine();
 
-            Console.WriteLine("Displaying All Sections Under Good Gear");
-            repository.RetrieveAllCategoriesBySection(162).ForEach(x => Console.WriteLine(x.Id + " " + x.Name + " " + x.SEO));
+            Console.WriteLine("Displaying All Categories under Section[0]");
+            var categoriesUnderSection = repository.RetrieveAllCategoriesBySection(allSections[0].Id);
+            categoriesUnderSection.ForEach(x => Console.WriteLine(x.Id + " " + x.ParentId + " " + x.Name + " " + x.SEO));
             Console.WriteLine();
 
+            Console.WriteLine("Displaying All Categories under Section[0] Category[0]");
+            var categories = repository.RetrieveCategoriesByCategory(categoriesUnderSection[0].Id);
+            categories.ForEach(x => Console.WriteLine(x.Id + " " + x.ParentId + " " + x.Name + " " + x.SEO));
+            Console.WriteLine();
+
+            Console.WriteLine("Updating Category");
+            var category = repository.RetrieveByIdWriteable(categories[0].Id);
+            category.Name = "HEllo" + new Random().Next(100);
+            unitOfWork.SaveChanges();
+
+            Console.WriteLine("Displaying All Categories under Section[0] Category[0] AGAIN");
+            var categories2 = repository.RetrieveCategoriesByCategory(categoriesUnderSection[0].Id);
+            categories2.ForEach(x => Console.WriteLine(x.Id + " " + x.ParentId + " " + x.Name + " " + x.SEO));
+            Console.WriteLine();
+
+            var model = JsonCategory.FromCategoryByParentId(categoriesUnderSection, allSections[0].Id);
+            Console.WriteLine("JSON Representation of Object");
+            Console.WriteLine(JsonConvert.SerializeObject(model));
         }
     }
 }

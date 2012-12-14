@@ -16,15 +16,20 @@ namespace Commerce.Persist.Products
         {
         }
 
+        protected IQueryable<Category> NotDeletedData()
+        {
+            return this.ReadOnlyData().Where(x => x.Deleted == false);
+        }
+
         public List<Category> RetrieveAllSections()
         {
-            // Need to add the recursive...?
-            return this.FindBy(x => x.ParentId == null && x.Deleted == false).ToList();
+            return NotDeletedData().Where(x => x.ParentId == null && x.Deleted == false).ToList();
         }
 
         public List<Category> RetrieveAllCategoriesBySection(int sectionCategoryId)
         {
-            return this.ReadOnlyData()
+            return this
+                .NotDeletedData()
                 .Join(
                     this.ReadOnlyData(), 
                     parent => parent.Id, 
@@ -34,17 +39,13 @@ namespace Commerce.Persist.Products
                 .Select(x => x.child).ToList();
         }
 
-        public List<Category> RetrieveByParentId(int Id)
+        public List<Category> RetrieveCategoriesByCategory(int categoryId)
         {
-            return this.FindBy(x => x.ParentId == Id && x.Deleted == false).ToList();
+            return this.NotDeletedData()
+                .Where(x => x.ParentId == categoryId || x.Id == categoryId).ToList();
         }
 
-        public List<Category> RetrieveByParentIdDeep(int Id)
-        {
-            return this.FindBy(x => x.ParentId == Id && x.Deleted == false).ToList();
-        }
-
-        public Category RetrieveById(int Id)
+        public Category RetrieveByIdWriteable(int Id)
         {
             return this.FindFirstOrDefault(x => x.Id == Id);
         }
@@ -58,15 +59,15 @@ namespace Commerce.Persist.Products
 
         public void Delete(int Id)
         {
-            var category = this.RetrieveById(Id);
+            var category = this.RetrieveByIdWriteable(Id);
             category.ParentId = null;
             category.Deleted = true;
         }
 
         public void SwapParentChild(int parentId, int childId)
         {
-            var parent = this.RetrieveById(parentId);
-            var child = this.RetrieveById(childId);
+            var parent = this.RetrieveByIdWriteable(parentId);
+            var child = this.RetrieveByIdWriteable(childId);
             child.ParentId = parent.ParentId;
             parent.ParentId = child.Id;
         }

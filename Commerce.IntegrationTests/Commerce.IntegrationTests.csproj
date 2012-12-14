@@ -47,6 +47,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
@@ -93,6 +96,10 @@
     <ProjectReference Include="..\Commerce.Persist\Commerce.Persist.csproj">
       <Project>{E616B84E-1830-4909-9A56-58A656EA9B5B}</Project>
       <Name>Commerce.Persist</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pleiades.Commerce.WebUI\Commerce.WebUI.csproj">
+      <Project>{EC92BFF1-A3ED-4A02-B5EC-833E55830967}</Project>
+      <Name>Commerce.WebUI</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pleiades.Web.Security.Membership\Pleiades.Web.Security.Membership.csproj">
       <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
