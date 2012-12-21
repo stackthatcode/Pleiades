@@ -8,10 +8,12 @@ namespace Pleiades.Web.MvcHelpers
 {
     public static class StyleTagGenerator
     {
+        public static string BasePath = "~/Content/";
+
         public static MvcHtmlString Stylesheet(this HtmlHelper html, string filePath)
         {
             var urlHelper = new UrlHelper(html.ViewContext.RequestContext);
-            var absoluteUrl = urlHelper.Content(filePath);
+            var absoluteUrl = urlHelper.Content(BasePath + filePath);
 
             var styleTag = new TagBuilder("link");
             styleTag.Attributes["rel"] = "Stylesheet";

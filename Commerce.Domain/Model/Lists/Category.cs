@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Commerce.Domain.Model.Lists
 {
@@ -12,5 +14,10 @@ namespace Commerce.Domain.Model.Lists
         public bool Deleted { get; set; }
         public DateTime DateUpdated { get; set; }
         public DateTime DateInserted { get; set; }
+
+        public void Touch()
+        {
+            this.DateUpdated = DateTime.Now;
+        }
     }
 }

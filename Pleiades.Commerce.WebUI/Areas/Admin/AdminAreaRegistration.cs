@@ -17,37 +17,18 @@ namespace Commerce.WebUI.Areas.Admin
             context.MapRoute(
                 "Home Route",
                 "Admin/",
-                new { controller = "Home", action = "Index" }
-            );
+                new { controller = "Category", action = "RetrieveAllSections" });
 
             context.MapRoute(
-                "Category Table With Pages and Sorting",
-                "Admin/Category/{action}/Page{page}/Sort/{sortIndex}",
-                new { controller = "Category", action = "Rows" }
-            );
-
-            context.MapRoute(
-                "Category Page Sorting",
-                "Admin/Category/PageById/{id}/Sort/{sortIndex}",
-                new { controller = "Category", action = "PageById" }
-            );
-
-            context.MapRoute(
-                "Category Table With Pages",
-                "Admin/Category/{action}/Page{page}",
-                new { controller = "Category", action = "Rows", sortIndex = 1 }
+                "Category Action w/ Parent Id, Child Id",
+                "Admin/Category/{action}/{parentId}/{childId}",
+                new { controller = "Category" }
             );
 
             context.MapRoute(
                 "Category Action w/ Id",
                 "Admin/Category/{action}/{id}",
                 new { controller = "Category" }
-            );
-
-            context.MapRoute(
-                "Admin List With Pages",
-                "Admin/AdminManager/List/Page{page}",
-                new { controller = "AdminManager", action = "List" }
             );
 
             context.MapRoute(
@@ -59,7 +40,7 @@ namespace Commerce.WebUI.Areas.Admin
             context.MapRoute(
                 "Admin Default",
                 "Admin/{controller}/{action}",
-                new { controller = "Home", action = "Index" }
+                new { controller = "Category", action = "RetrieveAllSections" }
             );
         }
     }

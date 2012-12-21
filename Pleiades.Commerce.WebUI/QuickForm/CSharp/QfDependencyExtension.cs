@@ -27,8 +27,8 @@ namespace Commerce.WebUI.QuickForm.CSharp
         {
             return
                 html.Stylesheet(CssVirtualPath + "QfStyle.css").ToString() + Environment.NewLine +
-                html.Stylesheet(CssVirtualPath + "QfButtons.css").ToString() + Environment.NewLine +
-                html.Javascript(JQueryDependency).ToString() + Environment.NewLine;
+                html.Stylesheet(CssVirtualPath + "QfButtons.css").ToString() + Environment.NewLine + "";
+               // html.Javascript(JQueryDependency).ToString() + Environment.NewLine;
         }
     }
 }

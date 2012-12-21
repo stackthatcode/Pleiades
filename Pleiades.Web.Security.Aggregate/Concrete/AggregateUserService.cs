@@ -136,7 +136,7 @@ namespace Pleiades.Web.Security.Concrete
                 }
             };
 
-            this.Repository.Add(aggegrateUser);
+            this.Repository.Insert(aggegrateUser);
             this.UnitOfWork.SaveChanges();
             return aggegrateUser;
         }

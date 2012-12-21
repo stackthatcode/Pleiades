@@ -49,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dto\JsonCategory.cs" />
     <Compile Include="Interfaces\ICategoryRepository.cs" />
     <Compile Include="Model\Lists\Brand.cs">
       <SubType>Code</SubType>
@@ -60,6 +59,7 @@
     <Compile Include="Model\Lists\Color.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Lists\JsonCategory.cs" />
     <Compile Include="Model\Resources\Image.cs">
       <SubType>Code</SubType>
     </Compile>

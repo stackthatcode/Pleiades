@@ -7,7 +7,6 @@ Vision - Phase 2?
 - Exclusive Squeeze Page => Email => Campaigns => ??? => Conversion
 - NOTE: must find focus and aim to achieve immediate goals
 
-
 Front Range
 -----------
 - TRIPLE CHECK YOUR BACKUPS, DUDE => TODO
@@ -16,34 +15,22 @@ Front Range
 
 Category Controller and Repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Category Service => IN PROGRESS
-- Soft Delete => IN PROGRESS
-- Repository => IN PROGRESS
-- Controller Methods => TODO
-- Models for JSON DTO's => TODO
-* Create
-* Edit
-* Change
-* DeleteConfirm
-- JQuery Library for AJAX => TODO
-- Logging Aspect => TODO
-
-- Performance - just how horrible is the EF code...? => TODO     
-
-- Post Mortem - inventory *everything* from UI
-- Razor View Engine => TODO
 - Navigation Menu
 - Master Page with Javascript includes
 - Bootstrap the Postback stuff
+- Refactor UI to share code in Prototype
+- Razor View Engine => IN PROGRESS
 - File Upload
+
+- Post Mortem - inventory *everything* from UI => IN PROGRESS
+- Performance - just how horrible is the EF code...? => IN PROGRESS
 
 - Develop and/or Research Fluent Validation library => TODO
 
+
+
 *** MANDATE => after burndown of the goddamn backlog for Category Editor, every feature is weighed and estimated accordingly!  Make a feature Backlog.
 *** MANDATE => research HOW KnockoutJS actually works internally
-
-
-- INTELLIGENCE - start reverse-engineering Frank and Oak's process => TODO
 
 
 
@@ -142,7 +129,6 @@ Good Stuff
 
 Development Backlog
 -------------------
-- Add new commands to the Commerce Initializer i.e. Delete all Users => TODO
 - Upgrade to ASP.NET MVC 4.0 (4.5?) => TODO
 - Web Optimization Toolkit => TODO
 * Fix the web.config with assembly references => IN PROGRESS
@@ -152,6 +138,7 @@ Development Backlog
 
 THE OTHER BACKLOG
 =================
+- INTELLIGENCE - start reverse-engineering Frank and Oak's process => TODO
 * Security n Stuff
 - How to manage CSS files and dependencies from separate assemblies in ASP.NET MVC => IN PROGRESS
 - http://fluentvalidation.codeplex.com/ => TODO

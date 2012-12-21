@@ -195,7 +195,7 @@ namespace Pleiades.Web.Security.Providers
 
             try
             {
-                repository.Add(user);
+                repository.Insert(user);
                 status = MembershipCreateStatus.Success;
             }
             catch(Exception ex)

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Data.Entity;
 using Pleiades.Data;
 
 namespace Pleiades.Data.EF
@@ -30,7 +30,7 @@ namespace Pleiades.Data.EF
             return this.Context.Set<T>().AsNoTracking<T>();
         }
 
-        public virtual void Add(T entity)
+        public virtual void Insert(T entity)
         {
             this.Context.Set<T>().Add(entity);
         }

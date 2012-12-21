@@ -53,7 +53,7 @@ namespace Commerce.WebUI.UnitTests.Security
         [Test]
         public void AdminHomeIsAdminstrativeZone()
         {
-            // Arrange
+            //// Arrange
             var context = MockRepository.GenerateStub<AuthorizationContext>();
             context.Controller = new HomeController();
             var factory = new SecurityContextFactory();

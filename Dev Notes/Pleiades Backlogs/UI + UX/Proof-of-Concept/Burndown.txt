@@ -154,3 +154,40 @@ PleiadesContext => ContextId = {5ca9c077-0fed-4fe2-9ed2-2fb2cd91a85a}
 - Add the window shade effect to the top Menu => DONE
 - Reorganized the Backlogs =>  DONE
 - Measured Test Coverage => DONE
+
+12/12 & 12/13 (3.0 Hours)
+-------------------------
+- Soft Delete => DONE
+- Repository => DONE
+- Models for JSON DTO's => DONE
+* Create => DONE
+
+12/15 - 1 hour
+--------------
+- Built Controller methods
+
+12/16 - 3 hours
+---------------
+- Troubleshoot routing 
+- Complete End-to-End Integration
+- Category Service => DONE
+- Repository/Domain => JSON => ViewModel/Knockout => Template => DONE
+- Controller Methods => DONE
+* Edit => DONE
+* Change => DONE
+* DeleteConfirm => DONE
+- JQuery Library for AJAX => THE MOMENT IS NOW!
+- Logging Aspect => DONE
+
+12/20 - 3 hours late night
+--------------------------
+* BUG: Save Category twice => FIXED
+* BUG: Delete Parent Category => FIXED
+* Bug fixes => IN PROGRESS
+* BUG: Swap Categories => DONE!!
+CRITICAL - refactoring of the Repository to handle complexity of creating JsonCategories... well done, chap!
+- Added Touch to DateTime stamp
+- Add new commands to the Commerce Initializer i.e. Delete all Users => DONE
+
+
+

@@ -307,7 +307,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
 
             // Arrange
             var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
-            repository.Expect(x => x.Add(null)).IgnoreArguments();
+            repository.Expect(x => x.Insert(null)).IgnoreArguments();
 
             var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
             unitOfWork.Expect(x => x.SaveChanges());

@@ -26,9 +26,6 @@ namespace Commerce.WebUI
             // Filters
             RegisterGlobalFilters();
 
-            // Model Binders
-            // ModelBinders.Binders.Add(typeof(DomainUser), new DomainUserBinder());
-
             // Phil Haack's Tool => ***SAVE***
             //RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
         }

@@ -7,9 +7,12 @@ using Commerce.WebUI.Plumbing;
 
 namespace Commerce.WebUI.Areas.Admin.Controllers
 {
-    //[CommerceAuthorize(AuthorizationZone = AuthorizationZone.Administrative)]
     public class HomeController : Controller
     {
+        public HomeController()
+        {
+        }
+
         [HttpGet]
         public ActionResult Index()
         {
