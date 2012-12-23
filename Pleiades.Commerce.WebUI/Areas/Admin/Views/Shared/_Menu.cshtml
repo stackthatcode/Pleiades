@@ -1,0 +1,31 @@
+﻿
+    <div id="top-menu-bar" class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">  
+          <img src="@Url.Content("~/content/Images/webicon-2.png")" style="float:left;" />
+		  <a class="brand" href="#" style="color:#FFF;">pushmarket</a>
+
+          <div class="nav-collapse">
+            <ul class="nav">              
+              <li><a href="#">Orders</a></li> <!-- class="active" -->
+              <li><a href="#contact">Customers</a></li>
+              <li><a href="#contact">Products</a></li>              
+              <li class="dropdown">  
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Lists  <b class="caret"></b>  
+                </a>
+                <ul class="dropdown-menu">  
+                    <li><a href="#">Sections</a></li>  
+                    <li><a href="@Url.RouteUrl(AdminNavigation.CategoryList())">Categories</a></li>  
+                    <li><a href="#">Brands</a></li>  
+                    <li><a href="#">Sizes</a></li>  
+                    <li><a href="#">Colors</a></li>  
+                </ul>  
+              </li>  
+              <li><a href="@Url.RouteUrl(AdminNavigation.ManagerList())">Admins</a></li>			  
+			</ul>
+
+			<p class="navbar-text pull-right">Logged in as <a href="#" style="color:#08C;" class="navbar-link">aleksjones@gmail.com</a></p>
+          </div>
+        </div>
+      </div>
+    </div>

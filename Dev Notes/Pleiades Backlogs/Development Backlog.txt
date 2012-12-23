@@ -7,36 +7,31 @@ Vision - Phase 2?
 - Exclusive Squeeze Page => Email => Campaigns => ??? => Conversion
 - NOTE: must find focus and aim to achieve immediate goals
 
+
+
 Front Range
 -----------
 - TRIPLE CHECK YOUR BACKUPS, DUDE => TODO
 - REVIEW MY GITHUB HISTORY => TODO
-- Clean-up my Chrome Bookmarks
-
-Category Controller and Repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Navigation Menu
-- Master Page with Javascript includes
-- Bootstrap the Postback stuff
-- Refactor UI to share code in Prototype
-- Razor View Engine => IN PROGRESS
-- File Upload
-
+- Clean-up my Chrome Bookmarks => TODO
 - Post Mortem - inventory *everything* from UI => IN PROGRESS
-- Performance - just how horrible is the EF code...? => IN PROGRESS
 
+...work...
+
+- Finish the Bootstrap + Razor conversion => TODO
+- Fix Tests => TODO
+- File Upload =>  TODO
+
+- Performance - just how horrible is the EF code...? => IN PROGRESS
 - Develop and/or Research Fluent Validation library => TODO
 
-
-
+*** TODO: what is the function of "nav-collapse collapse"?
 *** MANDATE => after burndown of the goddamn backlog for Category Editor, every feature is weighed and estimated accordingly!  Make a feature Backlog.
 *** MANDATE => research HOW KnockoutJS actually works internally
 
 
-
 Admin MVP Big Feature List - 12/2/2012
 ---------------------------------------
-- Category Editor => ALMOST DONE
 - Size Editor => IN PROGRESS
 - Brand Editor => IN PROGRESS
 - Section Editor => IN PROGRESS

@@ -112,11 +112,11 @@ namespace Commerce.IntegrationTests.Repositories
             allSections.ForEach(x => Console.WriteLine(x.Id + " " + x.Name + " " + x.SEO));
             Console.WriteLine();
 
-            var sectionId = allSections[0].Id;
-            Console.WriteLine("Displaying All Categories under Section {0}", sectionId);
-            var categoriesUnderSection = repository.RetrieveJsonBySection(sectionId );
-            categoriesUnderSection.ForEach(x => Console.WriteLine(x.Id + " " + x.ParentId + " " + x.Name + " " + x.SEO));
-            Console.WriteLine();
+            //var sectionId = allSections[0].Id;
+            //Console.WriteLine("Displaying All Categories under Section {0}", sectionId);
+            //var categoriesUnderSection = repository.RetrieveJsonBySection(sectionId );
+            //categoriesUnderSection.ForEach(x => Console.WriteLine(x.Id + " " + x.ParentId + " " + x.Name + " " + x.SEO));
+            //Console.WriteLine();
 
             // Replace this fluff with the JSON method
 

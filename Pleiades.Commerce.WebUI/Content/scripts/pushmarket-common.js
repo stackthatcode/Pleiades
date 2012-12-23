@@ -71,6 +71,23 @@ function DeepClone(input) {
 	throw new Error("Unable to copy input! Its type isn't supported.");
 }
 
+function CrossCuttingUI() {
+	var self = this;
+
+	self.Error = function() {
+		$('#modal-error').modal();
+		return false;
+	}
+			
+	self.ShowLoading = function() {
+		$("#spinner-layer").show();
+	}
+			
+	self.HideLoading = function() {
+		$("#spinner-layer").hide();
+	}
+}
+
 
 function GliderWidget(glidingContainer, parentDiv, childDiv) {
 	var self = this;

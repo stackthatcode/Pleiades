@@ -23,7 +23,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         // TODO: write a custom Model Binder to map parentId and childId to Id
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Editor()
         {
             return View();
         }

@@ -107,27 +107,11 @@
     <Compile Include="Plumbing\OutboundNavigation.cs" />
     <Compile Include="Plumbing\SecurityContextFactory.cs" />
     <Compile Include="Plumbing\SecurityResponder.cs" />
-    <Compile Include="QuickForm\CSharp\QfButtonHelpers.cs" />
-    <Compile Include="QuickForm\CSharp\PagingLinksBuilder_OLD.cs" />
-    <Compile Include="QuickForm\CSharp\QfClearDiv.cs" />
-    <Compile Include="QuickForm\CSharp\QfDependencyExtension.cs" />
-    <Compile Include="QuickForm\CSharp\QfHtmlHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Auth\Login.aspx" />
-    <Content Include="Areas\Admin\Views\Home\HeaderSummary.ascx" />
-    <Content Include="Areas\Admin\Views\Home\Index.aspx" />
-    <Content Include="Areas\Admin\Views\Manager\ChangePassword.aspx" />
-    <Content Include="Areas\Admin\Views\Manager\Create.aspx" />
-    <Content Include="Areas\Admin\Views\Manager\Delete.aspx" />
-    <Content Include="Areas\Admin\Views\Manager\Details.aspx" />
-    <Content Include="Areas\Admin\Views\Manager\Edit.aspx" />
-    <Content Include="Areas\Admin\Views\Manager\List.aspx" />
     <Content Include="Areas\Admin\Views\Manager\Reset.aspx" />
-    <Content Include="Areas\Admin\Views\Shared\Admin.Master" />
-    <Content Include="Areas\Admin\Views\Shared\AdminUserDetails.ascx" />
-    <Content Include="Areas\Admin\Views\Web.config" />
     <Content Include="Content\bootstrap\css\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap\css\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap\css\bootstrap.css" />
@@ -146,31 +130,11 @@
     <Content Include="Content\knockout\knockout-2.1.0.js" />
     <Content Include="Content\knockout\ko.observableDictionary.js" />
     <Content Include="Content\Scripts\category-service.js" />
+    <Content Include="Content\Scripts\ajax-service.js" />
     <Content Include="Content\Scripts\flow.js" />
-    <Content Include="Content\Scripts\GenericUtil.js" />
     <Content Include="Content\Scripts\pushmarket-common.js" />
-    <Content Include="Content\Style\Main.css" />
     <Content Include="Content\Style\pushmarket.css" />
-    <Content Include="QuickForm\Images\addnewbutton.png" />
-    <Content Include="QuickForm\Images\ajax-loader.gif" />
-    <Content Include="QuickForm\Images\arrow-right.png" />
-    <Content Include="QuickForm\Images\arrow-rightOVER.png" />
-    <Content Include="QuickForm\Images\backarrow-left.png" />
-    <Content Include="QuickForm\Images\cancelbutton.png" />
-    <Content Include="QuickForm\Images\changebutton.png" />
-    <Content Include="QuickForm\Images\deletebutton.png" />
-    <Content Include="QuickForm\Images\donebutton.png" />
-    <Content Include="QuickForm\Images\editbutton.png" />
-    <Content Include="QuickForm\Images\nobutton.png" />
-    <Content Include="QuickForm\Images\okbutton.png" />
-    <Content Include="QuickForm\Images\resetbutton.png" />
-    <Content Include="QuickForm\Images\savebutton.png" />
-    <Content Include="QuickForm\Images\unlockbutton.png" />
-    <Content Include="QuickForm\Images\yesbutton.png" />
-    <Content Include="QuickForm\Images\body-background.gif" />
-    <Content Include="QuickForm\Style\QfButtons.css" />
     <Content Include="Global.asax" />
-    <Content Include="QuickForm\Style\QfStyle.css" />
     <Content Include="Areas\Public\Views\Products\List.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -233,7 +197,46 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Editor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Shared\_Menu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\_viewstart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Shared\_Footer.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Shared\_CrossCutting.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Manager\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Manager\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Manager\_AdminUserDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Manager\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Manager\Delete.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Manager\ChangePassword.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Manager\Edit.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

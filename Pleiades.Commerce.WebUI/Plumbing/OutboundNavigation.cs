@@ -6,7 +6,7 @@ namespace Commerce.WebUI.Plumbing
 {
     // TODO: add ControllerObject.ToRoute() extension method
 
-    public class OutboundNavigation
+    public class AdminNavigation
     {
         public static RouteValueDictionary PublicHome()
         {
@@ -14,30 +14,35 @@ namespace Commerce.WebUI.Plumbing
                 new { area = "Public", controller = "Products", action = "List", category = (string)null, });
         }
 
-        public static RouteValueDictionary AdminHome()
+        public static RouteValueDictionary Home()
         {
-            return new RouteValueDictionary(
-                new { area = "Admin", controller = "Home", action = "Index", });
+            return new RouteValueDictionary( new { area = "Admin", controller = "Home", action = "Index", });
         }
 
-        public static RouteValueDictionary AdminLogin()
+        public static RouteValueDictionary Login()
         {
             return new RouteValueDictionary(new { area = "Admin", controller = "Auth", action = "Login", });
         }
 
-        public static RouteValueDictionary AdminLogout()
+        public static RouteValueDictionary Logout()
         {
             return new RouteValueDictionary(new { area = "Admin", controller = "Auth", action = "Logout", });
         }
 
-        public static RouteValueDictionary AdminManagerList()
+        public static RouteValueDictionary ManagerList()
         {
             return new RouteValueDictionary(new { area = "Admin", controller = "Manager", action = "List", });
         }
 
-        public static RouteValueDictionary AdminManagerDetails(object id)
+        public static RouteValueDictionary ManagerDetails(object id)
         {
             return new RouteValueDictionary(new { area = "Admin", controller = "Manager", action = "Details", id = id });
         }
+
+        public static RouteValueDictionary CategoryList()
+        {
+            return new RouteValueDictionary(new { area = "Admin", controller = "Category", action = "Editor", });
+        }
+
     }
 }

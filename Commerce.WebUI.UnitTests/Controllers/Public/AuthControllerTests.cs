@@ -67,7 +67,7 @@ namespace Commerce.WebUI.TestsControllers
 
             // Assert
             service.VerifyAllExpectations();
-            result.ShouldBeRedirectionTo(OutboundNavigation.AdminHome());
+            result.ShouldBeRedirectionTo(AdminNavigation.Home());
         }
 
         [Test]
@@ -106,7 +106,7 @@ namespace Commerce.WebUI.TestsControllers
             
             // Assert
             service.VerifyAllExpectations();
-            result.ShouldBeRedirectionTo(OutboundNavigation.PublicHome());
+            result.ShouldBeRedirectionTo(AdminNavigation.PublicHome());
         }
     }
 }

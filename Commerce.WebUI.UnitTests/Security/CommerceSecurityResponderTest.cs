@@ -23,7 +23,7 @@ namespace Commerce.WebUI.UnitTests.Security
             var responder = new SecurityResponder();
             responder.Process(SecurityCode.AccessDeniedSolicitLogon, context);
 
-            var expectedRouteDict = OutboundNavigation.AdminLogin();
+            var expectedRouteDict = AdminNavigation.Login();
             // expectedRouteDict["returlUrl"] = "http://go.com";  TODO => Figure out how to mock Server.UrlEncode
 
             // Assesrt

@@ -37,6 +37,12 @@ h4 {
 	z-index: 800;
 }
 
+#body-container {
+	top: 165px; 
+	width: 932px; 
+	position: relative;
+}
+
 #gliding-container {
 	top: 165px; 
 	width: 932px; 
@@ -84,6 +90,13 @@ h4 {
 	height: 30px; 
 	padding-top: 10px;  
 	border-top: 1px dotted #CCC;
-}s
+}
 
+.recordgrid 
+{
+}
 
+.recordgrid tr
+{
+    line-height: 40px;
+}

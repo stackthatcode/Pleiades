@@ -57,14 +57,14 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
                 return Redirect(returnUrl);
             }
 
-            return new RedirectToRouteResult(OutboundNavigation.AdminHome());
+            return new RedirectToRouteResult(AdminNavigation.Home());
         }
 
         [HttpGet]
         public ActionResult Logout()
         {
             this.FormsAuthenticationService.ClearAuthenticationCookie();
-            return new RedirectToRouteResult(OutboundNavigation.PublicHome());
+            return new RedirectToRouteResult(AdminNavigation.PublicHome());
         }
     }
 }

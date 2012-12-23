@@ -1,0 +1,25 @@
+﻿
+	<!-- Cross-cutting stuff - spinner layer -->
+    <div id="cross-cutting">
+        <div id="spinner-layer" class="spinner-layer" style="display:none;">
+		    <div id="spinner" class="spinner">
+			    <img id="img-spinner" src="@Url.Content("~/Content/images/ajax_loader.gif")" alt="Loading"/>
+		    </div>
+	    </div>	
+	    
+	    <!-- Cross-cutting stuff - modal layer -->
+		<div id="modal-error" class="modal hide fade">
+			<div class="modal-header">
+				<!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+				<h3>Oh Noes!</h3>
+			</div>
+			<div class="modal-body">
+				<p><strong>Something went wrong with the system.</strong></p>			
+				<p>Note: if this keeps happening, please contact Customer Support.</p>
+			</div>
+			<div class="modal-footer">
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: function() { location.reload(true); }"><i class="icon-ok icon-white"></i> Ok, Reload Page</a>
+			</div>
+		</div>
+    </div>
+	

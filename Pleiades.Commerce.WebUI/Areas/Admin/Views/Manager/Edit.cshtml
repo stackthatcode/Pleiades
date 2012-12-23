@@ -1,0 +1,68 @@
+﻿@model Commerce.WebUI.Areas.Admin.Models.EditUserModel
+
+    <div class="workspace-heading-parent">
+        <div class="workspace-heading">
+            <div id="heading" class="container">
+                <div class="row" style="position:relative">
+                <div style="left:-75px; margin-top:15px; position:absolute; text-align:right;">
+					<a class="btn btn-inverse" href="@Url.RouteUrl(AdminNavigation.ManagerList())"><i class="icon-arrow-left icon-white"></i> Back</a>
+				</div>
+                <div class="span9">
+                    <h1>Edit Admin User &gt; @Model.Email</h1>
+				</div>
+                <div class="span3" style="margin-top:15px; text-align:right;">
+				</div>
+		        </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div style="padding-top:30px;">
+        @using (Html.BeginForm("Edit", "Manager", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+            <div class="dottedline"></div>
+
+            <table class="recordgrid" cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="label-right" style="width:170px;">First Name:</td>
+                <td>@Html.TextBoxFor(x => x.FirstName, 25)</td>
+            </tr>
+            <tr>
+                <td class="label-right">Last Name:</td>
+                <td>@Html.TextBoxFor(x => x.LastName, 25)</td>
+            </tr>
+            <tr>
+                <td class="label-right">Email:</td>
+                <td>
+                @if (this.Model.UserRole != UserRole.Supreme) {
+                    @Html.TextBoxFor(x => x.Email, new { maxlength = "50" })
+                } else {
+                    <strong>@Model.Email</strong>
+                    @Html.HiddenFor(x => x.Email)
+                }
+                </td>
+            </tr>
+            <tr>
+                <td class="label-right">Is Approved?:</td>
+                <td>
+                    @if (this.Model.UserRole != UserRole.Supreme) {
+                        <label style="float:left;">No @Html.RadioButtonFor(x => x.IsApproved, "false")</label>                        
+                    }
+                    <label style="float:left;">Yes @Html.RadioButtonFor(x => x.IsApproved, "true")</label>                        
+                    <div class="clr" />
+                    @Html.ValidationMessageFor(x => x.IsApproved)
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td align="left">
+                    <%: Html.QfRouteButton(QfButtonId.Cancel, 
+                        "Details", OutboundNavigation.AdminManagerDetails(this.RouteData.Values["id"]), style: "float:left;")%>
+
+                    <%: Html.QfSubmitButton(QfButtonId.Save, "save", style: "float:left;")
+                </td>
+            </tr>
+            </table>
+        <% }
+    </div>
+</asp:Content>

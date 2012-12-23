@@ -21,14 +21,17 @@ namespace Commerce.Persist.Products
         }
 
         // TODO: this actually belongs in another Repository
-        public List<Category> RetrieveAllSectionCategories()
-        {
-            return this.ReadOnlyData().Where(x => x.ParentId == null && x.Deleted == false).ToList();
-        }
-
         protected override IQueryable<Category> ReadOnlyData()
         {
             return base.ReadOnlyData().Where(x => x.Deleted == false);
+        }
+
+        public List<JsonCategory> RetrieveAllSectionCategories()
+        {
+            return this.ReadOnlyData()
+                .Where(x => x.ParentId == null && x.Deleted == false)
+                .ToList()
+                .ToJsonCategoryList(null);
         }
 
         public List<JsonCategory> RetrieveJsonBySection(int sectionCategoryId)

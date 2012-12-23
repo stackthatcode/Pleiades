@@ -1,0 +1,50 @@
+﻿@model List<UserViewModel>
+
+@section _Body {
+    <div class="workspace-heading-parent">
+        <div class="workspace-heading">
+            <div id="heading" class="container">
+                <div class="row">
+                <div class="span9">
+                    <h1>Manage Existing Admins</h1>
+				</div>
+				<div class="span3" style="margin-top:15px; text-align:right;">
+                    @Html.ActionLink("Add New User", "Create", null, new { @class = "btn btn-primary btn-block" })
+				</div>
+		        </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="body-container" class="container" style="margin-top:30px;">
+        <table cellpadding="0" cellspacing="0" class="datagrid">
+        <thead>
+            <tr>
+                <td style="width:75px;">Type</td>
+                <td style="width:200px;">Email</td>
+                <td style="width:175px;">Name</td>
+                <td style="width:175px;">Date Created</td>
+                <td align="center" style="width:100px;">Approved</td>
+                <td align="center" style="width:100px;">Online</td>
+                <td align="center" style="width:100px;">Locked Out</td>
+                <td style="width:75px; text-align:right;">Action</td>
+            </tr>
+        </thead>
+        
+        <tbody>
+        @foreach (var user in this.Model) {
+           <tr>
+                <td>@user.UserRole</td>
+                <td>@user.Email.TruncateAfter(20)</td>
+                <td>@user.FullName.TruncateAfter(20)</td>
+                <td>@user.CreationDate</td>
+                <td align="center">@user.IsApproved</td>
+                <td align="center">@user.IsOnline</td>
+                <td align="center">@user.IsLockedOut</td>
+                <td align="right">@Html.RouteLink("View", AdminNavigation.ManagerDetails(user.AggregateUserId))</td>
+           </tr>
+        } 
+        </tbody>
+        </table>
+    </div>
+}
