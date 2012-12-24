@@ -188,8 +188,8 @@ CRITICAL - refactoring of the Repository to handle complexity of creating JsonCa
 - Add new commands to the Commerce Initializer i.e. Delete all Users => DONE
 - Category Editor => DONE
 
-12/23
-------------
+12/23 4.0 Hours
+---------------
 - Master Page with Javascript includes => DONE
 - Tested everything AGAIN => DONE
 - Fixed the Menu => DONE
@@ -197,5 +197,11 @@ CRITICAL - refactoring of the Repository to handle complexity of creating JsonCa
 - Razor View Engine => DONE
 - Bootstrap the Postback stuff => TODO
 - Refactor UI to share code in Prototype => TODO
+
+12/23 (DRUNK CODING) 4 Hours
+----------------------------
+- Finished fixing the Postback stuff for Admin => DONE
+- Finish the Bootstrap + Razor conversion => TODO
+- Fix Integration Tests => DONE
 
 

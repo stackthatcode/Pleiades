@@ -30,11 +30,11 @@ namespace Commerce.Initializer
             DbContext = new PleiadesContext();
             
             // Database Destruction and Creation
-            //DestroyDatabase();
-            //CreateDatabase();
+            DestroyDatabase();
+            CreateDatabase();
 
             // Application Data Initialization
-            //CreateTheSupremeUser();
+            CreateTheSupremeUser();
             CreateTheCategoryList();
         }
 

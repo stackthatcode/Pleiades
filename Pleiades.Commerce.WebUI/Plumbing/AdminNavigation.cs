@@ -8,12 +8,6 @@ namespace Commerce.WebUI.Plumbing
 
     public class AdminNavigation
     {
-        public static RouteValueDictionary PublicHome()
-        {
-            return new RouteValueDictionary(
-                new { area = "Public", controller = "Products", action = "List", category = (string)null, });
-        }
-
         public static RouteValueDictionary Home()
         {
             return new RouteValueDictionary( new { area = "Admin", controller = "Home", action = "Index", });

@@ -64,7 +64,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         public ActionResult Logout()
         {
             this.FormsAuthenticationService.ClearAuthenticationCookie();
-            return new RedirectToRouteResult(AdminNavigation.PublicHome());
+            return new RedirectToRouteResult(PublicNavigation.Home());
         }
     }
 }

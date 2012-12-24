@@ -17,7 +17,7 @@ namespace Commerce.WebUI.Areas.Admin
             context.MapRoute(
                 "Home Route",
                 "Admin/",
-                new { controller = "Category", action = "RetrieveAllSections" });
+                new { controller = "Home", action = "Index" });
 
             context.MapRoute(
                 "Category Action w/ Parent Id, Child Id",

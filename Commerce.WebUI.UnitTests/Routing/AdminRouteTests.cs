@@ -67,22 +67,5 @@ namespace Commerce.WebUI.UnitTests.Routing
                 new { area = "Admin", controller = "TestController", action = "TestAction" });
             url.ShouldEqual("/Admin/TestController/TestAction");
         }
-
-        [Test]
-        public void VerifyListWithPaging()
-        {
-            // Inbound 
-            var routeData2 = RoutingHelper.VerifyInboundRoute(
-                RouteTable.Routes,
-                inboundUrl: "~/Admin/AdminManager/List",
-                expectedRouteValues: new { controller = "AdminManager", action = "List" },
-                expectedDataTokens: new { area = "Admin" });
-
-            // Outbound
-            string url = RoutingHelper.GenerateOutboundUrl(
-                RouteTable.Routes,
-                new { area = "Admin", controller = "AdminManager", action = "List", page = "3" });
-            url.ShouldEqual("/Admin/AdminManager/List/Page3");
-        }
     }
 }

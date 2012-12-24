@@ -106,7 +106,7 @@ namespace Commerce.WebUI.TestsControllers
             
             // Assert
             service.VerifyAllExpectations();
-            result.ShouldBeRedirectionTo(AdminNavigation.PublicHome());
+            result.ShouldBeRedirectionTo(PublicNavigation.Home());
         }
     }
 }

@@ -112,33 +112,26 @@ namespace Commerce.IntegrationTests.Repositories
             allSections.ForEach(x => Console.WriteLine(x.Id + " " + x.Name + " " + x.SEO));
             Console.WriteLine();
 
-            //var sectionId = allSections[0].Id;
-            //Console.WriteLine("Displaying All Categories under Section {0}", sectionId);
-            //var categoriesUnderSection = repository.RetrieveJsonBySection(sectionId );
-            //categoriesUnderSection.ForEach(x => Console.WriteLine(x.Id + " " + x.ParentId + " " + x.Name + " " + x.SEO));
-            //Console.WriteLine();
+            var sectionId = allSections[0].Id;
+            Console.WriteLine("Displaying All Categories under Section {0}", sectionId);
+            var categoriesUnderSection = repository.RetrieveJsonBySection(sectionId.Value);
+            categoriesUnderSection.ForEach(x => Console.WriteLine(x.Id + " " + x.ParentId + " " + x.Name + " " + x.SEO));
+            Console.WriteLine();
 
-            // Replace this fluff with the JSON method
+            var categoryId = categoriesUnderSection[0].Id;
+            Console.WriteLine("Displaying All Categories under SectionId {0} and CategoryId {1}", sectionId, categoryId);
+            var category = repository.RetrieveJsonById(categoriesUnderSection[0].Id.Value);
+            Console.WriteLine();
 
-            //var categoryId = categoriesUnderSection[0].Id;
-            //Console.WriteLine("Displaying All Categories under SectionId {0} and CategoryId {1}", sectionId, categoryId);
-            //var categories = repository.RetrieveCategoryDeep(categoriesUnderSection[0].Id);
-            //categories.ForEach(x => Console.WriteLine(x.Id + " " + x.ParentId + " " + x.Name + " " + x.SEO));
-            //Console.WriteLine();
+            Console.WriteLine("Updating Category");
+            var categoryWriteable = repository.RetrieveWriteable(category.Id.Value);
+            categoryWriteable.Name = "HEllo" + new Random().Next(100);
+            unitOfWork.SaveChanges();
 
-            //Console.WriteLine("Updating Category");
-            //var category = repository.RetrieveWriteable(categories[0].Id);
-            //category.Name = "HEllo" + new Random().Next(100);
-            //unitOfWork.SaveChanges();
-
-            //Console.WriteLine("Displaying All Categories under SectionId {0} and CategoryId {1}", sectionId, categoryId);
-            //var categories2 = repository.RetrieveCategoryDeep(categoriesUnderSection[0].Id);
-            //categories2.ForEach(x => Console.WriteLine(x.Id + " " + x.ParentId + " " + x.Name + " " + x.SEO));
-            //Console.WriteLine();
-
-            //var model = categoriesUnderSection.ToJsonCategoryList(allSections[0].Id);
-            //Console.WriteLine("JSON Representation of Object");
-            //Console.WriteLine(JsonConvert.SerializeObject(model));
+            Console.WriteLine("Displaying All Categories under SectionId {0} and CategoryId {1}", sectionId, categoryId);
+            var categories2 = repository.RetrieveJsonBySection(categoriesUnderSection[0].Id.Value);
+            categories2.ForEach(x => Console.WriteLine(x.Id + " " + x.ParentId + " " + x.Name + " " + x.SEO));
+            Console.WriteLine();
         }
     }
 }

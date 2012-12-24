@@ -18,8 +18,9 @@ Front Range
 
 ...work...
 
-- Finish the Bootstrap + Razor conversion => TODO
-- Fix Tests => TODO
+- Fix Route Unit Tests => TODO
+- Logged-In User => TODO
+- The other 4 Lists => TODO
 - File Upload =>  TODO
 
 - Performance - just how horrible is the EF code...? => IN PROGRESS

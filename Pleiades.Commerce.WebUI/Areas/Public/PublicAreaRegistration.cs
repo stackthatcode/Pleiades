@@ -19,6 +19,12 @@ namespace Commerce.WebUI.Areas.Public
                 "Products - 'default route'",
                 String.Empty,
                 new { controller = "Products", action = "List" });
+
+            context.MapRoute(
+                "Products - 'default route'",
+                "Public/{controller}/{action}",
+                new { controller = "Products", action = "List" });
+
         }
     }
 }
