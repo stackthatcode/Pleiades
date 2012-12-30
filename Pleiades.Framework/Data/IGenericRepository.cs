@@ -7,11 +7,9 @@ namespace Pleiades.Data
     public interface IGenericRepository<T> where T : class
     {
         IQueryable<T> GetAll();
-        IQueryable<T> FindBy(Expression<Func<T, bool>> predicate);
-        T FindFirstOrDefault(Expression<Func<T, bool>> predicate);
+        IQueryable<T> Where(Expression<Func<T, bool>> predicate);
+        T FirstOrDefault(Expression<Func<T, bool>> predicate);
         void Insert(T entity);
         void Delete(T entity);
-        int Count();
-        int Count(Expression<Func<T, bool>> predicate);
     }
 }

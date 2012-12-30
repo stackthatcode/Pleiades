@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Commerce.Domain.Model.Lists
 {
     [JsonObject]
-    public class Brand
+    public class JsonSize
     {
         [JsonProperty]
         public int Id { get; set; }
@@ -13,6 +13,9 @@ namespace Commerce.Domain.Model.Lists
         public string Name { get; set; }
 
         [JsonProperty]
-        public string Description { get; set; }
+        public string SEO { get; set; }
+
+        [JsonProperty]
+        public string SkuCode { get; set; }
     }
 }

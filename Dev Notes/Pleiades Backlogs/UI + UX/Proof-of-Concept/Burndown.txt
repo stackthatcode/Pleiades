@@ -203,5 +203,31 @@ CRITICAL - refactoring of the Repository to handle complexity of creating JsonCa
 - Finished fixing the Postback stuff for Admin => DONE
 - Finish the Bootstrap + Razor conversion => TODO
 - Fix Integration Tests => DONE
+- Fix Route Unit Tests => TODO
 
+12/26 2 Hours
+-------------
+- Make this Parent Category BUG => FIX
+- DeleteConfirm - finish it => DONE
+
+- REVIEW MY GITHUB HISTORY => DONE
+- Clean-up my Chrome Bookmarks => DONE
+
+- Last sweep over MakeThisParent => DONE - STICK WITH IT, FOR NOW
+- Refactored Integration Tests => DONE
+- Refactored Commerce Initializer Application => DONE
+- Fixed Integration Tests => DONE
+
+12/28 3.5 Hours
+---------------
+- Wrangling with Autofac Instance Lifetime Scope
+- Fixed the Integration Tests, refactored to share code from the Commerce Initializer program
+
+12/29 3.5 Hours
+-------------
+TODO: how to stop repeating Date Inserted and Date Updated => DONE - CAN'T BE DONE
+- Tussled with Repository Pattern and ORM Design issues => DONE - FUCK, MAN!!!
+* Create functions that populate Test data in Initializer => IN PROGRESS
+* Create Integration Tests that play with the data => IN PROGRESS
+* Verify proper JSON (de)serialization => IN PROGRESS
 

@@ -63,6 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutofacBootstrap.cs" />
+    <Compile Include="Builders\CategoryBuilder.cs" />
+    <Compile Include="Builders\SizeBuilder.cs" />
+    <Compile Include="Builders\RootUserBuilder.cs" />
     <Compile Include="CommerceInitializerModules.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -107,6 +110,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

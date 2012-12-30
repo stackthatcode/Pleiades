@@ -4,10 +4,10 @@ using Commerce.Domain.Model.Lists;
 
 namespace Commerce.Domain.Interfaces
 {
-    public interface IColorRepository : IGenericRepository<Color>
+    public interface ISizeGroupRepository : IGenericRepository<SizeGroup>
     {
-        List<Color> GetAll();
-        Color RetrieveWriteable(int Id);
+        List<JsonSizeGroup> GetAllJson();
+        SizeGroup RetrieveWriteable(int Id);
         void DeleteSoft(int Id);
     }
 }

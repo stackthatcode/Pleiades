@@ -12,6 +12,9 @@ namespace Commerce.Initializer
 {
     public class AutofacBootstrap
     {
+        /// <summary>
+        /// TODO: fix this when the Jihad against the static Membership class is complete
+        /// </summary>
         public static IContainerAdapter CreateContainer()
         {
             var builder = new ContainerBuilder();

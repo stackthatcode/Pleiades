@@ -5,7 +5,7 @@ using Pleiades.Web.Autofac;
 using Pleiades.Web.Security;
 using Commerce.Persist;
 
-namespace Commerce.WebUI
+namespace Commerce.Initializer
 {
     public class CommerceInitializerModules : Autofac.Module
     {

@@ -9,11 +9,11 @@ Front Range
 
 - Ask Jason, Jae, Michael about Buyer Representation => TODO
 - QUESTION: why use Buyer Representation?  Do we need it? => IN PROGRESS
-- Find Lawyer => IN PROGRESS
+- Find Lawyer => DONE
 
 Burndown
 --------
-- Called Mom (waiting for attorney)
+- Called Mom (waiting for attorney) => DONE
 - Called Jeremy => DONE
 
 
@@ -25,7 +25,7 @@ Questions for Tad
 
 Lawyer
 ------
-Steven E Silverman 4080 commercial ave northbrook, il   60062
+Steven E Silverman 4080 commercial ave northbrook, il   60062 => TALKED TO HIM - ALL GOOD
 telephone:  847 562 4514 fax:  847  562 4515  email:  ssilverman@stonegrp.com
 
 Mortage Broker

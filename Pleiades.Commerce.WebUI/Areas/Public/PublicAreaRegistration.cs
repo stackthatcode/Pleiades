@@ -16,7 +16,7 @@ namespace Commerce.WebUI.Areas.Public
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "Products - 'default route'",
+                "Products - 'Public no Id route'",
                 String.Empty,
                 new { controller = "Products", action = "List" });
 

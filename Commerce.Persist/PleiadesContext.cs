@@ -15,6 +15,10 @@ namespace Commerce.Persist
         public DbSet<MembershipUser> MembershipUsers { get; set; }
         public DbSet<IdentityProfile> IdentityProfiles { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<SizeGroup> SizeGroups { get; set; }
+        public DbSet<Size> Sizes { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Color> Colors { get; set; }
         
 
         public PleiadesContext() : base("PleiadesDb")

@@ -1,11 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Commerce.Domain.Model.Lists
 {
     [JsonObject]
-    public class Brand
+    public class JsonSizeGroup
     {
+        public JsonSizeGroup()
+        {
+            this.Sizes = new List<JsonSize>();
+        }
+
         [JsonProperty]
         public int Id { get; set; }
 
@@ -13,6 +19,6 @@ namespace Commerce.Domain.Model.Lists
         public string Name { get; set; }
 
         [JsonProperty]
-        public string Description { get; set; }
+        public List<JsonSize> Sizes { get; set; }
     }
 }

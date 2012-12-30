@@ -2,15 +2,10 @@
 
 namespace Commerce.Domain.Model.Lists
 {
-    public class Size
+    public class SizeGroup
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public string SEO { get; set; }
-        public string SkuCode { get; set; }
-        public SizeGroup SizeGroup { get; set; }
-
         public bool Deleted { get; set; }
         public DateTime DateUpdated { get; set; }
         public DateTime DateInserted { get; set; }

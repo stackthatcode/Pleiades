@@ -49,7 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\ISizeGroupRepository.cs" />
+    <Compile Include="Interfaces\IBrandRepository.cs" />
     <Compile Include="Interfaces\ICategoryRepository.cs" />
+    <Compile Include="Interfaces\ISectionRepository.cs" />
+    <Compile Include="Interfaces\ISizeRepository.cs" />
     <Compile Include="Model\Lists\Brand.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -60,6 +64,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Lists\JsonCategory.cs" />
+    <Compile Include="Model\Lists\JsonSize.cs" />
+    <Compile Include="Model\Lists\JsonSizeGroup.cs" />
+    <Compile Include="Model\Lists\SizeGroup.cs" />
     <Compile Include="Model\Resources\Image.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -77,8 +84,8 @@
     <Compile Include="DomainModule.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Concrete\" />
     <Folder Include="Model\System\" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pleiades.Web.Security.Membership\Pleiades.Web.Security.Membership.csproj">

@@ -44,14 +44,6 @@
 				return categoryId == self.ChildViewModel().Id();
 			}
 			
-			self.IsSectionForChildView = function(sectionId) {
-				return sectionId == self.ChildViewModel().ParentId()
-			}
-			
-            self.SectionClick = function(record, event) {
-                self.RetrieveModelBySection(record, null);
-            }
-
 			self.EditRecord = function(record) {
 				self.ClearUnsavedCategoryFromModel();				
 				record.EditName = ko.observable(record.Name());
@@ -95,15 +87,7 @@
 			}
 			
 
-		    // asynchronous, service-bound operations
-			self.SelectSectionFromChildView = function(record) {				
-				self.Glider.GlideToParent(function() {
-					self.ChildViewModel(null);
-					self.ChildViewSelectedRecord(null);
-					self.RetrieveModelBySection(record);
-				});
-			}
-			
+		    // asynchronous, service-bound operations			
 			self.GlideToChildView = function(parentRecord) {
 				flow.exec(
 					function() {
@@ -130,23 +114,6 @@
 						self.ScrollToIdTracker(parentRecordId);
 					},
 					function() {
-					}
-				);
-			}
-			
-			self.RetrieveSections = function(callback) {
-				flow.exec(
-					function() {
-						self.ServiceAdapter.RetrieveAllSections(this);
-					}, 
-					function(sections) {
-						self.ParentViewModel.Sections(sections);
-						self.RetrieveModelBySection(self.ParentViewModel.Sections()[0], this);
-					},
-					function() {
-						if (callback) {
-							callback();
-						}
 					}
 				);
 			}
@@ -205,59 +172,6 @@
 					function(data) {						
 						self.ChildViewSelectedRecord().Id(data.Id);				
 						self.ChildViewSelectedRecord(null);
-					}
-				);
-			}
-			
-			self.SwapParentChild = function() {
-				var oldParent = self.CategoryToServerJson(self.ChildViewModel());
-				var newParent = self.CategoryToServerJson(self.ChildViewSelectedRecord());
-					
-				flow.exec(
-					function() {
-						self.ServiceAdapter.SwapParentChild(oldParent, newParent, this);
-					},
-					function() {
-                        self.RetrieveModelBySection(self.ParentViewModel.SelectedSection(), this);
-						self.ServiceAdapter.RetrieveById(newParent.Id, this);
-					},
-					function(refreshedChildData) {
-						self.ChildViewModel(self.KnockoutIfyCategory(refreshedChildData));				
-						self.ScrollToIdTracker(newParent.Id);
-						self.HighlightByTrackerId(newParent.Id);
-					}
-				);
-			}
-			
-			self.ChangeParent = function(parentRecord) {	
-				var newParentRecordId = parentRecord.Id;
-				var selectedRecordId = self.ChildViewSelectedRecord().Id();
-				flow.exec(
-					function() {
-						self.ChildViewSelectedRecord().ParentId(newParentRecordId);				
-						self.ServiceAdapter.Save(self.CategoryToServerJson(self.ChildViewSelectedRecord()), this);
-					},
-					function() {
-						self.Glider.GlideToParent(this);
-					},
-					function() {
-						var isTopLevelCategory = parentRecord.ParentId == null;
-						if (isTopLevelCategory) {
-							self.ParentViewModel.SelectedSection(parentRecord);
-							self.ServiceAdapter.RetrieveById(selectedRecordId, this);
-						}
-						else {
-							self.ServiceAdapter.RetrieveById(newParentRecordId, this);
-						}
-					},
-					function(updatedParentRecord) {
-						var knockedoutData = self.KnockoutIfyCategory(updatedParentRecord);
-						self.ChildViewModel(knockedoutData);					
-						self.Glider.GlideToChild(this);
-					}, 
-					function() {
-						self.ScrollToIdTracker(selectedRecordId);
-						self.HighlightByTrackerId(selectedRecordId);
 					}
 				);
 			}

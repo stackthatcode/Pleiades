@@ -40,8 +40,8 @@ namespace Pleiades.IntegrationTests.DataEF
             repository.Insert(entity2);
             unitOfWork.SaveChanges();
             
-            var entity1Fromdb = repository.FindFirstOrDefault(x => x.Id == entity1.Id);
-            var entity2Fromdb = repository.FindFirstOrDefault(x => x.Id == entity2.Id);
+            var entity1Fromdb = repository.FirstOrDefault(x => x.Id == entity1.Id);
+            var entity2Fromdb = repository.FirstOrDefault(x => x.Id == entity2.Id);
 
             // Assert
             Assert.IsTrue(entity1.StrungOutCompare(entity1Fromdb));
@@ -73,10 +73,10 @@ namespace Pleiades.IntegrationTests.DataEF
             unitOfWork.SaveChanges();
 
             // Act & Assert
-            var entity1FromDb = repository.FindBy(x => x.Name == "Aleks").FirstOrDefault();
+            var entity1FromDb = repository.Where(x => x.Name == "Aleks").FirstOrDefault();
             Assert.IsTrue(entity1.StrungOutCompare(entity1FromDb));
 
-            var howManyGangstas = repository.Count(x => x.Description.Contains("gangsta"));
+            var howManyGangstas = repository.Where(x => x.Description.Contains("gangsta")).Count();
             Assert.AreEqual(2, howManyGangstas);
         }
 
@@ -108,7 +108,7 @@ namespace Pleiades.IntegrationTests.DataEF
                 var repository2 = new MyEntityRepository(context2); 
                 var unitOfWork2 = new EFUnitOfWork(context2);
                 // Assert
-                var entity2 = repository2.FindFirstOrDefault(x => x.Name == "Olga");
+                var entity2 = repository2.FirstOrDefault(x => x.Name == "Olga");
                 Assert.IsTrue(entity2.StrungOutCompare(entity1));
 
                 entity2.Amount = 800;
@@ -125,14 +125,14 @@ namespace Pleiades.IntegrationTests.DataEF
                 var context3 = new MyContext();
                 var repository3 = new MyEntityRepository(context3);
                 var unitOfWork3 = new EFUnitOfWork(context3);
-                var entity3 = repository3.FindFirstOrDefault(x => x.Name == "Olga");
+                var entity3 = repository3.FirstOrDefault(x => x.Name == "Olga");
                 Assert.AreEqual(777, entity3.Amount);
                 entity3.Amount = 800;
                 unitOfWork3.SaveChanges();
 
                 var context4 = new MyContext();
                 var repository4 = new MyEntityRepository(context4);
-                var entity4 = repository4.FindFirstOrDefault(x => x.Name == "Olga");
+                var entity4 = repository4.FirstOrDefault(x => x.Name == "Olga");
                 Assert.AreEqual(800, entity4.Amount);
             }
             finally
@@ -152,7 +152,7 @@ namespace Pleiades.IntegrationTests.DataEF
             context.SaveChanges();
 
             // More Assert
-            Assert.AreEqual(0, repository.Count());
+            Assert.AreEqual(0, repository.GetAll().Count());
         }
     }
 }

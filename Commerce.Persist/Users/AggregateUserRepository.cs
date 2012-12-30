@@ -64,7 +64,7 @@ namespace Commerce.Persist.Security
 
         public AggregateUser RetrieveByIdForWriting(int aggregateUserId)
         {
-            return this.TrackableData()
+            return this.Data()
                 .Include(x => x.IdentityProfile)
                 .Include(x => x.Membership)
                 .FirstOrDefault(x => x.ID == aggregateUserId);

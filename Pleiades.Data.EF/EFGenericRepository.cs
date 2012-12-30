@@ -7,8 +7,14 @@ using Pleiades.Data;
 
 namespace Pleiades.Data.EF
 {
-    public class EFGenericRepository<T> : IGenericRepository<T>
-            where T : class
+    /// <summary>
+    /// Er, what's the value of this whole thing...? 
+    /// 1.) It's an attempt to leverage persistence ignorance
+    /// 2.) Defiles the concept of composition over inheritance
+    /// 
+    /// CONCLUSION: it minially provides a base level of reuse, so keep it for now
+    /// </summary>
+    public class EFGenericRepository<T> : IGenericRepository<T> where T : class
     {
         protected DbContext Context { get; set; }
 
@@ -20,14 +26,29 @@ namespace Pleiades.Data.EF
         /// <summary>
         /// All queryable operations should work directly with this
         /// </summary>
-        protected virtual IQueryable<T> TrackableData()
+        protected virtual IQueryable<T> Data()
         {
             return this.Context.Set<T>();
         }
 
         protected virtual IQueryable<T> ReadOnlyData()
         {
-            return this.Context.Set<T>().AsNoTracking<T>();
+            return this.Data().AsNoTracking<T>();
+        }
+
+        public virtual IQueryable<T> Where(Expression<Func<T, bool>> predicate)
+        {
+            return this.Data().Where(predicate);            
+        }
+
+        public virtual T FirstOrDefault(Expression<Func<T, bool>> predicate)
+        {
+            return this.Data().FirstOrDefault(predicate);
+        }
+
+        public virtual IQueryable<T> GetAll()
+        {
+            return this.Data();
         }
 
         public virtual void Insert(T entity)
@@ -35,41 +56,9 @@ namespace Pleiades.Data.EF
             this.Context.Set<T>().Add(entity);
         }
 
-        public virtual IQueryable<T> FindBy(Expression<Func<T, bool>> predicate)
-        {
-            var query = this.TrackableData().Where(predicate);
-            return query;
-        }
-
-        public virtual T FindFirstOrDefault(Expression<Func<T, bool>> predicate)
-        {
-            return this.TrackableData().FirstOrDefault(predicate);
-        }
-
-        public virtual IQueryable<T> GetAll()
-        {
-            var query = this.TrackableData();
-            return query;
-        }
-
         public virtual void Delete(T entity)
         {
             this.Context.Set<T>().Remove(entity);
-        }
-
-        public virtual void Edit(T entity)
-        {
-            this.Context.Entry(entity).State = System.Data.EntityState.Modified;
-        }
-
-        public virtual int Count()
-        {
-            return this.GetAll().Count();
-        }
-
-        public virtual int Count(Expression<Func<T, bool>> predicate)
-        {
-            return this.FindBy(predicate).Count();
         }
     }
 }

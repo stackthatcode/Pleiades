@@ -9,19 +9,21 @@ using Pleiades.Data.EF;
 
 namespace Commerce.Persist.Products
 {
-    public class ColorRepository : EFGenericRepository<Color>, IColorRepository
+    public class SectionRepository : EFGenericRepository<Category>, ISectionRepository
     {
-        public ColorRepository(DbContext context)
+        public SectionRepository(DbContext context)
             : base(context)
         {
         }
 
-        public List<Color> GetAll()
+
+        public List<JsonCategory> GetAll()
         {
             throw new NotImplementedException();
+            //return this.Data().
         }
 
-        public Color RetrieveWriteable(int Id)
+        public Category RetrieveWriteable(int Id)
         {
             throw new NotImplementedException();
         }

@@ -20,12 +20,17 @@ namespace Commerce.Persist
             builder.RegisterType<PleiadesContext>().As<DbContext>().InstancePerLifetimeScope();
             builder.RegisterType<EFUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
 
-            // Domain-serving Repositories
+            // User Repositories
             builder.RegisterType<AggregateUserRepository>().As<IAggregateUserRepository>().InstancePerLifetimeScope();
             builder.RegisterType<PfMembershipRepository>().As<IMembershipProviderRepository>().InstancePerLifetimeScope();
 
-            // TODO: add the Products Repository, Category Repository
+            // List Repositories
             builder.RegisterType<CategoryRepository>().As<ICategoryRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<SectionRepository>().As<ISectionRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<SizeGroupRepository>().As<ISizeGroupRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<SizeRepository>().As<ISizeRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<ColorRepository>().As<IColorRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<BrandRepository>().As<IBrandRepository>().InstancePerLifetimeScope();
         }
     }
 }

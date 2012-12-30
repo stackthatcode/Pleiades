@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration.Provider;
 using System.Web.Security;
+using Autofac;
 using NUnit.Framework;
 using Commerce.Persist;
 using Commerce.Persist.Security;
@@ -13,22 +14,23 @@ using Pleiades.Utility;
 
 namespace Commerce.IntegrationTests.Security
 {
+    /// <summary>
+    /// Big fucking awful TODO - fix the lifetime scope stuff after killing the Membership Provider
+    /// </summary>
     [TestFixture]
     public class MembershipRepositoryTests
     {
-        IContainerAdapter _container;
-
         [TestFixtureSetUp]
         public void TestSetup()
         {
-            TestPrimer.CleanOutUserData();
-            _container = IntegrationTestsModule.Container();
+            FixtureBase.CleanOutUserData();
         }
 
         [Test]
         public void Create_MembershipUser_Pass()
         {
-            var service = _container.Resolve<IMembershipService>();
+            var lifetime = TestContainer.LifetimeScope();
+            var service = lifetime.Resolve<IMembershipService>();
             var request = new CreateNewMembershipUserRequest()
             {
                 Email = "aleksjones1@gmail.com",
@@ -49,8 +51,8 @@ namespace Commerce.IntegrationTests.Security
         [Test]
         public void Create_Approved_User_And_Authenticate_Pass()
         {
-            var service = _container.Resolve<IMembershipService>();
-
+            var lifetime = TestContainer.LifetimeScope();
+            var service = lifetime.Resolve<IMembershipService>();
             var request = new CreateNewMembershipUserRequest()
             {
                 Email = "aleksjones2@gmail.com",
@@ -72,7 +74,8 @@ namespace Commerce.IntegrationTests.Security
         [Test]
         public void Create_Approved_User_And_Authenticate_WithBadPassword_Should_Fail()
         {
-            var service = _container.Resolve<IMembershipService>();
+            var lifetime = TestContainer.LifetimeScope();
+            var service = lifetime.Resolve<IMembershipService>();
             var request = new CreateNewMembershipUserRequest()
             {
                 Email = "aleksjones3@gmail.com",
@@ -94,14 +97,15 @@ namespace Commerce.IntegrationTests.Security
         [Test]
         public void Create_Disapproved_User_And_Authenticate_WithGoodPassword_Should_Fail()
         {
-            var service = _container.Resolve<IMembershipService>();
+            var lifetime = TestContainer.LifetimeScope();
+            var service = lifetime.Resolve<IMembershipService>();
             var request = new CreateNewMembershipUserRequest()
             {
                 Email = "aleksjones4@gmail.com",
                 IsApproved = false,
                 Password = "password123",
                 PasswordAnswer = "You",
-                PasswordQuestion = "Who dat?",                
+                PasswordQuestion = "Who dat?",
             };
 
             PleiadesMembershipCreateStatus statusResponse;
@@ -117,7 +121,8 @@ namespace Commerce.IntegrationTests.Security
         [Test]
         public void Create_User_And_Reset_Password_Fail_To_Authenticate_Then_Reset_Then_Authenticate_And_Pass()
         {
-            var service = _container.Resolve<IMembershipService>();
+            var lifetime = TestContainer.LifetimeScope();
+            var service = lifetime.Resolve<IMembershipService>();
             var request = new CreateNewMembershipUserRequest()
             {
                 Email = "aleksjones5@gmail.com",
@@ -151,8 +156,9 @@ namespace Commerce.IntegrationTests.Security
         [Test]
         public void Disapprove_User_And_Validate_Fails_Reapprove_And_Validate_Succeeds()
         {
-            var service = _container.Resolve<IMembershipService>();
-            var unitOfWork = _container.Resolve<IUnitOfWork>();
+            var lifetime = TestContainer.LifetimeScope();
+            var service = lifetime.Resolve<IMembershipService>();
+            var unitOfWork = lifetime.Resolve<IUnitOfWork>();
 
             var request = new CreateNewMembershipUserRequest()
             {
@@ -187,8 +193,9 @@ namespace Commerce.IntegrationTests.Security
         [Test]
         public void Failed_Authentication_Locks_User_Out_And_Unlock_User_Enables_Validation()
         {
-            var unitOfWork = _container.Resolve<IUnitOfWork>();
-            var service = _container.Resolve<IMembershipService>();
+            var lifetime = TestContainer.LifetimeScope();
+            var unitOfWork = lifetime.Resolve<IUnitOfWork>();
+            var service = lifetime.Resolve<IMembershipService>();
             var request = new CreateNewMembershipUserRequest()
             {
                 Email = "aleksjones7@gmail.com",
@@ -224,8 +231,9 @@ namespace Commerce.IntegrationTests.Security
         [Test]
         public void Change_User_Email_And_Validate_Successfully()
         {
-            var service = _container.Resolve<IMembershipService>();
-            var unitOfWork = _container.Resolve<IUnitOfWork>();
+            var lifetime = TestContainer.LifetimeScope();
+            var service = lifetime.Resolve<IMembershipService>();
+            var unitOfWork = lifetime.Resolve<IUnitOfWork>();
             var request = new CreateNewMembershipUserRequest()
             {
                 Email = "aleksjones8@gmail.com",
@@ -244,7 +252,7 @@ namespace Commerce.IntegrationTests.Security
             unitOfWork.SaveChanges();
 
             // Try authenticating with valid credentials
-            var result = service.ValidateUserByEmailAddr("bob4444@bob.com", "password123");            
+            var result = service.ValidateUserByEmailAddr("bob4444@bob.com", "password123");
             Assert.IsNotNull(result);
         }
 
@@ -252,7 +260,8 @@ namespace Commerce.IntegrationTests.Security
         [ExpectedException(typeof(ProviderException))]
         public void Change_User_Email_Address_To_Another_Users_Email_Address()
         {
-            var service = _container.Resolve<IMembershipService>();
+            var lifetime = TestContainer.LifetimeScope();
+            var service = lifetime.Resolve<IMembershipService>();
             var request1 = new CreateNewMembershipUserRequest()
             {
                 Email = "aleksjones9@gmail.com",
@@ -285,8 +294,9 @@ namespace Commerce.IntegrationTests.Security
         [Test]
         public void Reset_Password_With_Question_And_Answer_Test()
         {
-            var service = _container.Resolve<IMembershipService>();
-            var unitOfWork = _container.Resolve<IUnitOfWork>();
+            var lifetime = TestContainer.LifetimeScope();
+            var service = lifetime.Resolve<IMembershipService>();
+            var unitOfWork = lifetime.Resolve<IUnitOfWork>();
 
             var request1 = new CreateNewMembershipUserRequest()
             {
@@ -323,8 +333,9 @@ namespace Commerce.IntegrationTests.Security
         [ExpectedException(typeof(MembershipPasswordException))]
         public void Reset_Password_With_Wrong_And_Answer_And_FAIL()
         {
-            var service = _container.Resolve<IMembershipService>();
-            var unitOfWork = _container.Resolve<IUnitOfWork>();
+            var lifetime = TestContainer.LifetimeScope();
+            var service = lifetime.Resolve<IMembershipService>();
+            var unitOfWork = lifetime.Resolve<IUnitOfWork>();
 
             var request1 = new CreateNewMembershipUserRequest()
             {
@@ -352,8 +363,9 @@ namespace Commerce.IntegrationTests.Security
         [Test]
         public void ChangePasswordQuestionAndAnswerTest()
         {
-            var service = _container.Resolve<IMembershipService>();
-            var unitOfWork = _container.Resolve<IUnitOfWork>();
+            var lifetime = TestContainer.LifetimeScope();
+            var service = lifetime.Resolve<IMembershipService>();
+            var unitOfWork = lifetime.Resolve<IUnitOfWork>();
 
             var request1 = new CreateNewMembershipUserRequest()
             {

@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContextExtensionMethods.cs" />
     <Compile Include="EFGenericRepository.cs" />
     <Compile Include="EFUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

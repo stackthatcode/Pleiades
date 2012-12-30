@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Security;
+using Autofac;
 using NUnit.Framework;
 using Pleiades.Data;
 using Pleiades.Data.EF;
@@ -21,25 +22,18 @@ namespace Commerce.IntegrationTests.Security
     {
         // TODO LATER: Verify_RetreiveByMembershipUserNamesAndUserRoles()
 
-        IContainerAdapter _container;
-
         [TestFixtureSetUp]
         public void Setup()
         {
-            _container = IntegrationTestsModule.Container();
-
             // Empty the test data
-            TestPrimer.CleanOutUserData();
-        }
-
-        public IAggregateUserService CreateAggregateUserService()
-        {
-            return _container.Resolve<IAggregateUserService>();
+            FixtureBase.CleanOutUserData();
         }
 
         [Test]
         public void Create_And_RetrieveByMembershipUserName()
         {
+            var lifetime = TestContainer.LifetimeScope();
+
             // Arrange
             var identityuser1 = new CreateOrModifyIdentityRequest
                 {
@@ -72,15 +66,15 @@ namespace Commerce.IntegrationTests.Security
             // Act
             PleiadesMembershipCreateStatus outstatus1, outstatus2;
 
-            var service = this.CreateAggregateUserService();
+            var service = lifetime.Resolve<IAggregateUserService>();
             service.Create(membershipuser1, identityuser1, out outstatus1);
             service.Create(membershipuser2, identityuser2, out outstatus2);
 
             // Assert
-            var membershipService = _container.Resolve<IMembershipService>();
+            var membershipService = lifetime.Resolve<IMembershipService>();
             var membershipUserName = membershipService.GetUserNameByEmail("anne@holtz.com");
 
-            var aggregateUserRepository = _container.Resolve<IAggregateUserRepository>();
+            var aggregateUserRepository = lifetime.Resolve<IAggregateUserRepository>();
             var testUser = aggregateUserRepository.RetrieveByMembershipUserName(membershipUserName);
 
             Assert.IsNotNull(testUser);
@@ -92,6 +86,8 @@ namespace Commerce.IntegrationTests.Security
         [Test]
         public void UpdateIdentity_And_RetreiveByRetrieveById()
         {
+            var lifetime = TestContainer.LifetimeScope();
+
             // Arrange
             var identityuser2 = new CreateOrModifyIdentityRequest
             {
@@ -108,7 +104,7 @@ namespace Commerce.IntegrationTests.Security
             };
 
             PleiadesMembershipCreateStatus outstatus2;
-            var service = this.CreateAggregateUserService();
+            var service = lifetime.Resolve<IAggregateUserService>();
             var result = service.Create(membershipuser2, identityuser2, out outstatus2);
 
             // Act
@@ -122,10 +118,10 @@ namespace Commerce.IntegrationTests.Security
                 LastName = "moon"
             };
 
-            var aggregateUserRepository = _container.Resolve<IAggregateUserRepository>();
+            var aggregateUserRepository = lifetime.Resolve<IAggregateUserRepository>();
             aggregateUserRepository.UpdateIdentity(modificationRequeset);
 
-            var unitOfWork = _container.Resolve<IUnitOfWork>();
+            var unitOfWork = lifetime.Resolve<IUnitOfWork>();
             unitOfWork.SaveChanges();
 
             var updatedResult = aggregateUserRepository.RetrieveById(result.ID);
@@ -141,6 +137,8 @@ namespace Commerce.IntegrationTests.Security
         [Test]
         public void RetrieveByUserRoles()
         {
+            var lifetime = TestContainer.LifetimeScope();
+
             // Arrange
             var identityuser2 = new CreateOrModifyIdentityRequest
             {
@@ -172,12 +170,12 @@ namespace Commerce.IntegrationTests.Security
             };
 
             PleiadesMembershipCreateStatus outstatus;
-            var service = this.CreateAggregateUserService();
+            var service = lifetime.Resolve<IAggregateUserService>();
             var result1 = service.Create(membershipuser1, identityuser1, out outstatus);
             var result2 = service.Create(membershipuser2, identityuser2, out outstatus);
 
             // Act
-            var repository = this._container.Resolve<IAggregateUserRepository>();
+            var repository = lifetime.Resolve<IAggregateUserRepository>();
             var adminsOnly = repository.Retreive(new List<UserRole>() { UserRole.Admin });
             var trustedOnly = repository.Retreive(new List<UserRole>() { UserRole.Trusted });
             var bothUserTypes = repository.Retreive(new List<UserRole>() { UserRole.Admin, UserRole.Trusted });

@@ -4,9 +4,9 @@ using Commerce.Domain.Model.Lists;
 
 namespace Commerce.Domain.Interfaces
 {
-    public interface IColorRepository : IGenericRepository<Color>
+    public interface ISizeRepository : IGenericRepository<Size>
     {
-        List<Color> GetAll();
+        List<Brand> RetrieveAllByGroup(int groupId);
         Color RetrieveWriteable(int Id);
         void DeleteSoft(int Id);
     }

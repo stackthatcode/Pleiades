@@ -1,6 +1,6 @@
 ﻿namespace Commerce.Persist.Products
 {
-    public class ProductRepository
+    public class ProductRepository 
     {
     }
 }

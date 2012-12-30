@@ -12,15 +12,28 @@ Vision - Phase 2?
 Front Range
 -----------
 - TRIPLE CHECK YOUR BACKUPS, DUDE => TODO
-- REVIEW MY GITHUB HISTORY => TODO
-- Clean-up my Chrome Bookmarks => TODO
 - Post Mortem - inventory *everything* from UI => IN PROGRESS
 
 ...work...
 
-- Fix Route Unit Tests => TODO
+- The other 4 Lists => IN PROGRESS
+* Create functions that populate Test data in Initializer => IN PROGRESS
+* Create Integration Tests that play with the data => IN PROGRESS
+* Verify proper JSON (de)serialization => IN PROGRESS
+* Wire into Controllers
+* Copy the View Model from Category for Size => IN PROGRESS
+
+- Oh Shites! - experiencing major architectural break down with the Repositories... Please sit down and spell things out => TODO
+* OK: so maybe the rule of thumb is that each AggregateRoot or class equals a single Repository
+* SHIT: I've been sleeping thinking that I didn't have any beef with my Repository model... but I do!
+
+
+- Check Sanderson for advanced Model Binding => TODO
+- Change Menu for Login Screen => TODO
 - Logged-In User => TODO
-- The other 4 Lists => TODO
+
+- AJAX File Upload / Bootstrap => TODO
+- IsONline - Check How This Functions => TODO
 - File Upload =>  TODO
 
 - Performance - just how horrible is the EF code...? => IN PROGRESS
@@ -29,6 +42,9 @@ Front Range
 *** TODO: what is the function of "nav-collapse collapse"?
 *** MANDATE => after burndown of the goddamn backlog for Category Editor, every feature is weighed and estimated accordingly!  Make a feature Backlog.
 *** MANDATE => research HOW KnockoutJS actually works internally
+*** MANDATE => more play with Autofac 
+- http://nblumhardt.com/2011/01/an-autofac-lifetime-primer/
+- http://code.google.com/p/autofac/wiki/MvcIntegration
 
 
 Admin MVP Big Feature List - 12/2/2012
