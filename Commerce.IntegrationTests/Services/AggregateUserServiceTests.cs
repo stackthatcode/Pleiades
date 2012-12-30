@@ -18,7 +18,7 @@ using Commerce.Persist.Security;
 namespace Commerce.IntegrationTests.Security
 {
     [TestFixture]
-    public class AggregateUserServiceTests
+    public class AggregateUserServiceTests : FixtureBase
     {
         // TODO LATER: Verify_RetreiveByMembershipUserNamesAndUserRoles()
 

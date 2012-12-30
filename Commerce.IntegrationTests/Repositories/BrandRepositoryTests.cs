@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Commerce.IntegrationTests.Repositories
 {
     [TestFixture]
-    public class BrandRepositoryTests
+    public class BrandRepositoryTests : FixtureBase
     {
         [Test]
         public void sdsg()

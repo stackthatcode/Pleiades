@@ -4,13 +4,13 @@ using System.Data.Entity;
 using System.Linq;
 using Commerce.Domain.Interfaces;
 using Commerce.Domain.Model.Lists;
+using Commerce.Domain.Model.Lists.Json;
 using Pleiades.Data;
 using Pleiades.Data.EF;
 
-namespace Commerce.Persist.Products
+namespace Commerce.Persist.Products.Json
 {
-
-    public static class CategoryToJsonExtensions
+    public static class CategoryExtensions
     {
         public static List<JsonCategory> ToJsonCategoryList(this List<Category> domainCategoryList, int? parentId)
         {
@@ -34,6 +34,17 @@ namespace Commerce.Persist.Products
                 Name = domainCategory.Name,
                 SEO = domainCategory.SEO,
                 Categories = ToJsonCategoryList(domainCategoryList, domainCategory.Id),
+            };
+        }
+
+        public static JsonCategory ToJsonCategory(this Category category)
+        {
+            return new JsonCategory
+            {
+                Id = category.Id,
+                ParentId = category.ParentId,
+                Name = category.Name,
+                SEO = category.SEO,
             };
         }
     }

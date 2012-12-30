@@ -17,26 +17,45 @@ using Newtonsoft.Json;
 namespace Commerce.IntegrationTests.Repositories
 {
     [TestFixture]
-    public class SizeAndSizeGroupRepositoryTests
+    public class SizeAndSizeGroupRepositoryTests : FixtureBase
     {       
         [Test]
         public void DoStuffWithCategoriesAndBeHappy()
         {
-            // Gotta do this
-            FixtureBase.TriggerMe();
-
-            // Empty + populate data using the Initializer Builder
-            var container = TestContainer.LifetimeScope().Resolve<IContainerAdapter>();
-            SizeBuilder.EmptyAndRepopulate(container);
-
             using (var lifetime = TestContainer.LifetimeScope())
             {
-                var repository = lifetime.Resolve<ISizeGroupRepository>();
-                var unitOfWork = lifetime.Resolve<IUnitOfWork>();
+                // Empty + populate data using the Initializer Builder
+                var container = lifetime.Resolve<IContainerAdapter>();
+                SizeBuilder.EmptyAndRepopulate(container);
 
-                var results = repository.GetAllJson();
-                var sz = JsonConvert.SerializeObject(results);
-                Console.WriteLine(sz);
+                var repository = container.Resolve<IJsonSizeRepository>();
+                var unitOfWork = container.Resolve<IUnitOfWork>();
+
+                // All Size Groups to JSON
+                var allSizeGroups = repository.RetrieveAll();
+                Console.WriteLine(Environment.NewLine + "All Size Groups to JSON");
+                Console.WriteLine(JsonConvert.SerializeObject(allSizeGroups, Formatting.Indented));
+
+                // One Size Group to JSON
+                var sizeGroupId1 = allSizeGroups[0].Id;
+                var sizeGroup = repository.RetrieveByGroup(sizeGroupId1);
+                Console.WriteLine(Environment.NewLine + "One Size Group to JSON");
+                Console.WriteLine(JsonConvert.SerializeObject(sizeGroup, Formatting.Indented));
+
+                // Update a Size
+                var size = sizeGroup[0].Sizes[1];
+                size.Name = size.Name + "333";
+                repository.Update(size);
+                sizeGroup = repository.RetrieveByGroup(sizeGroupId1);
+                Console.WriteLine(Environment.NewLine + "One Size Group to JSON - after UPDATE");
+                Console.WriteLine(JsonConvert.SerializeObject(sizeGroup, Formatting.Indented));
+
+                // Delete a Size Group
+                repository.DeleteSoft(allSizeGroups[0]);
+                unitOfWork.SaveChanges();
+                allSizeGroups = repository.RetrieveAll();
+                Console.WriteLine(Environment.NewLine + "All Size Groups to JSON after Delete");
+                Console.WriteLine(JsonConvert.SerializeObject(allSizeGroups, Formatting.Indented));
             }
         }
     }

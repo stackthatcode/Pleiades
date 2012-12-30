@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Commerce.Domain.Model.Lists
+namespace Commerce.Domain.Model.Lists.Json
 {
     [JsonObject]
     public class JsonSize
@@ -10,7 +10,13 @@ namespace Commerce.Domain.Model.Lists
         public int Id { get; set; }
 
         [JsonProperty]
+        public int ParentGroupId { get; set; }
+
+        [JsonProperty]
         public string Name { get; set; }
+
+        [JsonProperty]
+        public string Description { get; set; }
 
         [JsonProperty]
         public string SEO { get; set; }

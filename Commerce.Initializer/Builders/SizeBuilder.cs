@@ -11,7 +11,8 @@ using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Providers;
 using Commerce.Domain.Interfaces;
 using Commerce.Domain.Model.Lists;
-using Commerce.Persist;
+using Commerce.Domain.Model.Lists.Json;
+using Commerce.Persist.Products;
 using Commerce.Persist.Security;
 using Commerce.WebUI;
 using Commerce.WebUI.Plumbing;
@@ -26,37 +27,39 @@ namespace Commerce.Initializer.Builders
             {
                 Console.WriteLine("Create the default Size Groups and Sizes");
 
-                var sizeRepository = ServiceLocator.Resolve<ISizeRepository>();
-                var sizeGroupRepository = ServiceLocator.Resolve<ISizeGroupRepository>();
-
                 // Clear everything out
+                var sizeRepository = ServiceLocator.Resolve<IGenericRepository<Size>>();
+                var sizeGroupRepository = ServiceLocator.Resolve<IGenericRepository<SizeGroup>>();
                 sizeRepository.GetAll().ForEach(x => sizeRepository.Delete(x));
                 sizeGroupRepository.GetAll().ForEach(x => sizeGroupRepository.Delete(x));
 
                 var unitOfWork = ServiceLocator.Resolve<IUnitOfWork>();
                 unitOfWork.SaveChanges();
 
-                // Create size groups
-                var sizeGroup1 = new SizeGroup { Name = "Default Clothing" };
-                var sizeGroup2 = new SizeGroup { Name = "Men's Shoes" };
+                // Create the JSON Repos
+                var jsonSizeRepository = ServiceLocator.Resolve<IJsonSizeRepository>();
 
-                sizeGroupRepository.Insert(sizeGroup1);
-                sizeGroupRepository.Insert(sizeGroup2);
+                // Create size groups
+                var result1 = jsonSizeRepository.Insert(new JsonSizeGroup { Name = "Default Clothing" });
+                var result2 = jsonSizeRepository.Insert(new JsonSizeGroup { Name = "Men's Shoes" });
                 unitOfWork.SaveChanges();
 
-                // Create sizes
-                sizeRepository.Insert(new Size { Name = "S", Description = "Small", SkuCode = "SM", SizeGroup = sizeGroup1 });
-                sizeRepository.Insert(new Size { Name = "M", Description = "Medium", SkuCode = "MD", SizeGroup = sizeGroup1 });
-                sizeRepository.Insert(new Size { Name = "L", Description = "Large", SkuCode = "LG", SizeGroup = sizeGroup1 });
-                sizeRepository.Insert(new Size { Name = "XL", Description = "X-Large", SkuCode = "XL", SizeGroup = sizeGroup1 });
-                sizeRepository.Insert(new Size { Name = "XXL", Description = "XX-Large", SkuCode = "XXL", SizeGroup = sizeGroup1 });
+                var sizeGroup1 = result1();
+                var sizeGroup2 = result2();
 
-                sizeRepository.Insert(new Size { Name = "8", Description = "Size 8", SkuCode = "SZ8", SizeGroup = sizeGroup2 });
-                sizeRepository.Insert(new Size { Name = "9", Description = "Size 9", SkuCode = "SZ9", SizeGroup = sizeGroup2 });
-                sizeRepository.Insert(new Size { Name = "10", Description = "Size 10", SkuCode = "SZ10", SizeGroup = sizeGroup2 });
-                sizeRepository.Insert(new Size { Name = "11", Description = "Size 11", SkuCode = "SZ11", SizeGroup = sizeGroup2 });
-                sizeRepository.Insert(new Size { Name = "12", Description = "Size 12", SkuCode = "SZ12", SizeGroup = sizeGroup2 });
-                sizeRepository.Insert(new Size { Name = "13", Description = "Size 13", SkuCode = "SZ13", SizeGroup = sizeGroup2 });
+                // Create sizes
+                jsonSizeRepository.Insert(new JsonSize { Name = "S", Description = "Small", SkuCode = "SM", ParentGroupId = sizeGroup1.Id });
+                jsonSizeRepository.Insert(new JsonSize { Name = "M", Description = "Medium", SkuCode = "MD", ParentGroupId = sizeGroup1.Id });
+                jsonSizeRepository.Insert(new JsonSize { Name = "L", Description = "Large", SkuCode = "LG", ParentGroupId = sizeGroup1.Id });
+                jsonSizeRepository.Insert(new JsonSize { Name = "XL", Description = "X-Large", SkuCode = "XL", ParentGroupId = sizeGroup1.Id });
+                jsonSizeRepository.Insert(new JsonSize { Name = "XXL", Description = "XX-Large", SkuCode = "XXL", ParentGroupId = sizeGroup1.Id });
+
+                jsonSizeRepository.Insert(new JsonSize { Name = "8", Description = "Size 8", SkuCode = "SZ8", ParentGroupId = sizeGroup2.Id});
+                jsonSizeRepository.Insert(new JsonSize { Name = "9", Description = "Size 9", SkuCode = "SZ9", ParentGroupId = sizeGroup2.Id});
+                jsonSizeRepository.Insert(new JsonSize { Name = "10", Description = "Size 10", SkuCode = "SZ10", ParentGroupId = sizeGroup2.Id});
+                jsonSizeRepository.Insert(new JsonSize { Name = "11", Description = "Size 11", SkuCode = "SZ11", ParentGroupId = sizeGroup2.Id});
+                jsonSizeRepository.Insert(new JsonSize { Name = "12", Description = "Size 12", SkuCode = "SZ12", ParentGroupId = sizeGroup2.Id});
+                jsonSizeRepository.Insert(new JsonSize { Name = "13", Description = "Size 13", SkuCode = "SZ13", ParentGroupId = sizeGroup2.Id});
 
                 unitOfWork.SaveChanges();
                 tx.Complete();

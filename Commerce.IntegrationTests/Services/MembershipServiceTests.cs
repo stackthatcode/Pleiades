@@ -18,7 +18,7 @@ namespace Commerce.IntegrationTests.Security
     /// Big fucking awful TODO - fix the lifetime scope stuff after killing the Membership Provider
     /// </summary>
     [TestFixture]
-    public class MembershipRepositoryTests
+    public class MembershipRepositoryTests : FixtureBase
     {
         [TestFixtureSetUp]
         public void TestSetup()

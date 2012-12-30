@@ -4,33 +4,46 @@ using System.Data.Entity;
 using System.Linq;
 using Commerce.Domain.Interfaces;
 using Commerce.Domain.Model.Lists;
+using Commerce.Domain.Model.Lists.Json;
 using Pleiades.Data;
 using Pleiades.Data.EF;
 
-namespace Commerce.Persist.Products
+namespace Commerce.Persist.Products.Json
 {
     /// <summary>
     /// Due to the complexity of storing the hierarchical data in SQL whilst transposing to hierarchial structures,
-    /// this Repository hides the SqlCategory object and uses Category object to communicate with the upper layers.
+    /// this Repository exposes the JsonCategory object for representing hierarchical data.
     /// </summary>
-    public class CategoryRepository : EFGenericRepository<Category>, ICategoryRepository
+    public class JsonCategoryRepository : IJsonCategoryRepository
     {
-        public CategoryRepository(DbContext context)
-            : base(context)
+        DbContext Context { get; set; }
+
+        public JsonCategoryRepository(DbContext context)
         {
+            this.Context = context;
         }
 
-        protected override IQueryable<Category> Data()
+        protected IQueryable<Category> Data()
         {
-            return base.Data().Where(x => x.Deleted == false);
+            return Context.Set<Category>().Where(x => x.Deleted == false);
         }
 
+        protected IQueryable<Category> ReadOnlyData()
+        {
+            return this.Data().AsNoTracking();
+        }
+
+        protected Category Retrieve(int id)
+        {
+            return this.Data().FirstOrDefault(x => x.Id == id);
+        }
 
         public List<JsonCategory> RetrieveAllSectionCategories()
         {
-            return this.ReadOnlyData()
+            return this
+                .ReadOnlyData()
                 .Where(x => x.ParentId == null && x.Deleted == false)
-                .ToList()
+                .ToList()                
                 .ToJsonCategoryList(null);
         }
 
@@ -61,39 +74,48 @@ namespace Commerce.Persist.Products
             return categoryData.ToJsonCategory(categoryId);
         }
 
-
-
-        public Category RetrieveWriteable(int categoryId)
+        public Func<JsonCategory> Insert(JsonCategory jsonCategory)
         {
-            return this.FirstOrDefault(x => x.Id == categoryId);
-        }
-        
-        public override void Insert(Category category)
-        {
+            var category = new Category()
+              {
+                  Name = jsonCategory.Name,
+                  SEO = jsonCategory.SEO,
+                  ParentId = jsonCategory.ParentId,
+              };
+
             category.DateInserted = DateTime.Now;
             category.DateUpdated = DateTime.Now;
-            base.Insert(category);
+            Context.Set<Category>().Add(category);
+
+            return () => category.ToJsonCategory();
+        }
+
+        public void Update(JsonCategory jsonCategory)
+        {
+            var category = this.Retrieve(jsonCategory.Id.Value);
+            category.Name = jsonCategory.Name;
+            category.SEO = jsonCategory.SEO;
+            category.ParentId = jsonCategory.ParentId;
         }
 
         public void DeleteSoft(int categoryId)
         {
-            var categories = this.Where(x => x.ParentId == categoryId || x.Id == categoryId).ToList();
+            var categories = this.Data().Where(x => x.ParentId == categoryId || x.Id == categoryId).ToList();
 
             foreach (var category in categories)
             {
-                category.ParentId = null;
+                //category.ParentId = null;
                 category.Deleted = true;
                 category.Touch();
             }
         }
 
-        // This is broken -- must fix
         public void SwapParentChild(int parentId, int newParentId)
         {
-            var newParent = this.RetrieveWriteable(newParentId);
-            var parent = this.RetrieveWriteable(parentId);
+            var newParent = this.Retrieve(newParentId);
+            var parent = this.Retrieve(parentId);
 
-            foreach (var child in this.Where(x => x.ParentId == parentId))
+            foreach (var child in this.Data().Where(x => x.ParentId == parentId))
             {
                 child.ParentId = newParentId;
                 child.Touch();

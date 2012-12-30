@@ -56,16 +56,12 @@
   <ItemGroup>
     <Compile Include="PleiadesContext.cs" />
     <Compile Include="CommercePersistModule.cs" />
-    <Compile Include="Products\CategoryToJsonExtensions.cs" />
-    <Compile Include="Products\CategoryRepository.cs" />
-    <Compile Include="Products\SectionRepository.cs" />
-    <Compile Include="Products\SizeRepository.cs" />
-    <Compile Include="Products\SizeGroupRepository.cs" />
+    <Compile Include="Products\Json\CategoryExtensions.cs" />
+    <Compile Include="Products\Json\SizeExtensions.cs" />
+    <Compile Include="Products\Json\JsonCategoryRepository.cs" />
+    <Compile Include="Products\Json\JsonSizeRepository.cs" />
     <Compile Include="Users\AggregateUserRepository.cs" />
-    <Compile Include="Products\BrandRepository.cs" />
-    <Compile Include="Products\ColorRepository.cs" />
     <Compile Include="Users\MembershipProviderRepository.cs" />
-    <Compile Include="Products\ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

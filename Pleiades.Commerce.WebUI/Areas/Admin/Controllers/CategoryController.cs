@@ -6,15 +6,16 @@ using Pleiades.Data;
 using Pleiades.Web;
 using Commerce.Domain.Interfaces;
 using Commerce.Domain.Model.Lists;
+using Commerce.Domain.Model.Lists.Json;
 
 namespace Commerce.WebUI.Areas.Admin.Controllers
 {
     public class CategoryController : Controller
     {
-        ICategoryRepository Repository { get; set; }
+        IJsonCategoryRepository Repository { get; set; }
         IUnitOfWork UnitOfWork { get; set; }
 
-        public CategoryController(ICategoryRepository repository, IUnitOfWork unitOfWork)
+        public CategoryController(IJsonCategoryRepository repository, IUnitOfWork unitOfWork)
         {
             this.Repository = repository;
             this.UnitOfWork = unitOfWork;
@@ -52,31 +53,16 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Insert(JsonCategory jsonCategory)
         {
-            var category = 
-                new Category()
-                {
-                    Name = jsonCategory.Name,
-                    SEO = jsonCategory.SEO,
-                    ParentId = jsonCategory.ParentId,
-                };
-
-            this.Repository.Insert(category);
+            var saveResult = this.Repository.Insert(jsonCategory);
             this.UnitOfWork.SaveChanges();
-
-            jsonCategory.Id = category.Id;
-            return new JsonNetResult(jsonCategory);
+            return new JsonNetResult(saveResult());
         }
 
         [HttpPost]
         public ActionResult Update(JsonCategory jsonCategory)
         {
-            var category = this.Repository.RetrieveWriteable(jsonCategory.Id.Value);
-
-            category.ParentId = jsonCategory.ParentId;
-            category.Name = jsonCategory.Name;
-            category.SEO = jsonCategory.SEO;
+            this.Repository.Update(jsonCategory);
             this.UnitOfWork.SaveChanges();
-
             return new JsonNetResult(jsonCategory);
         }
 

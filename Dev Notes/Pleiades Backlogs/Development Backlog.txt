@@ -16,16 +16,15 @@ Front Range
 
 ...work...
 
-- The other 4 Lists => IN PROGRESS
+- The other 4 Lists Backend => IN PROGRESS
 * Create functions that populate Test data in Initializer => IN PROGRESS
 * Create Integration Tests that play with the data => IN PROGRESS
 * Verify proper JSON (de)serialization => IN PROGRESS
-* Wire into Controllers
+
+- The other 4 Lists Backend UI => IN PROGRESS
+* Wire into Controllers => TODO
 * Copy the View Model from Category for Size => IN PROGRESS
 
-- Oh Shites! - experiencing major architectural break down with the Repositories... Please sit down and spell things out => TODO
-* OK: so maybe the rule of thumb is that each AggregateRoot or class equals a single Repository
-* SHIT: I've been sleeping thinking that I didn't have any beef with my Repository model... but I do!
 
 
 - Check Sanderson for advanced Model Binding => TODO
@@ -49,6 +48,9 @@ Front Range
 
 Admin MVP Big Feature List - 12/2/2012
 ---------------------------------------
+- Login Screen => DONE
+- Admin User Manager => DONE
+- Category Editor => DONE
 - Size Editor => IN PROGRESS
 - Brand Editor => IN PROGRESS
 - Section Editor => IN PROGRESS
@@ -63,7 +65,7 @@ Admin MVP Big Feature List - 12/2/2012
 - Image Upload & Processing Engine
 - Email Sending Engine
 - Server Logging
-- Barebones Console App
+- Barebones Console App => IN PROGRESS
 
 
 

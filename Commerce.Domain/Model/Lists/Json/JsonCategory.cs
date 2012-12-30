@@ -4,7 +4,7 @@ using Commerce.Domain.Model.Lists;
 using Newtonsoft.Json;
 using DomainCategory = Commerce.Domain.Model.Lists.Category;
 
-namespace Commerce.Domain.Model.Lists
+namespace Commerce.Domain.Model.Lists.Json
 {
     [JsonObject]
     public class JsonCategory

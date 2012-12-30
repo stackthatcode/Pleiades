@@ -223,11 +223,32 @@ CRITICAL - refactoring of the Repository to handle complexity of creating JsonCa
 - Wrangling with Autofac Instance Lifetime Scope
 - Fixed the Integration Tests, refactored to share code from the Commerce Initializer program
 
-12/29 3.5 Hours
--------------
+12/29 4.0 Hours
+---------------
 TODO: how to stop repeating Date Inserted and Date Updated => DONE - CAN'T BE DONE
 - Tussled with Repository Pattern and ORM Design issues => DONE - FUCK, MAN!!!
 * Create functions that populate Test data in Initializer => IN PROGRESS
 * Create Integration Tests that play with the data => IN PROGRESS
 * Verify proper JSON (de)serialization => IN PROGRESS
+- Oh Shites! - experiencing major architectural break down with the Repositories... Please sit down and spell things out => TODO
+* OK: so maybe the rule of thumb is that each AggregateRoot or class equals a single Repository
+* SHIT: I've been sleeping thinking that I didn't have any beef with my Repository model... but I do!
+
+12/30 4.5 Hours
+---------------
+- Divorced JsonCategoryRepo from GenericRepo <= that guy is kind of evil => DONE
+- Refactored Category Integration Tests => DONE
+- Closed of "bounded context" with JsonCategory and Category => DONE
+// COMMENT: isn't this absurd...???  Why use a Repository like this...??? => UPDATE: AMENDED
+- Eliminated many redundant Repositories => DONE
+- Established the base-line Repository architecture with Json-grams => DONE
+- Finished building JsonSizeRepository =>DONE
+
+TAKEAWAYS FROM REPOSITORY ISSUES
+--------------------------------
+- The base class as a concept is very limited.  Stop forcing yourself to inherit from it and expect things to work.  Break away from the influence.
+
+- TODO: do we need to remove objects from hierarchy on Soft Delete?  Maybe not => TODO
+
+
 

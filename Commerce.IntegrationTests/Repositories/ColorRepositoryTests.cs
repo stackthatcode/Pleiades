@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Commerce.IntegrationTests.Repositories
 {
     [TestFixture]
-    public class ColorRepositoryTests
+    public class ColorRepositoryTests : FixtureBase
     {
         [Test]
         public void sdsg()
