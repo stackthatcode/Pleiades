@@ -20,7 +20,7 @@ namespace Commerce.IntegrationTests.Repositories
     public class SizeAndSizeGroupRepositoryTests : FixtureBase
     {       
         [Test]
-        public void DoStuffWithCategoriesAndBeHappy()
+        public void Empty_And_Repopulate_And_Update_Sizes()
         {
             using (var lifetime = TestContainer.LifetimeScope())
             {
@@ -28,7 +28,7 @@ namespace Commerce.IntegrationTests.Repositories
                 var container = lifetime.Resolve<IContainerAdapter>();
                 SizeBuilder.EmptyAndRepopulate(container);
 
-                var repository = container.Resolve<IJsonSizeRepository>();
+                var repository = container.Resolve<ISizeRepository>();
                 var unitOfWork = container.Resolve<IUnitOfWork>();
 
                 // All Size Groups to JSON
@@ -43,7 +43,7 @@ namespace Commerce.IntegrationTests.Repositories
                 Console.WriteLine(JsonConvert.SerializeObject(sizeGroup, Formatting.Indented));
 
                 // Update a Size
-                var size = sizeGroup[0].Sizes[1];
+                var size = sizeGroup.Sizes[1];
                 size.Name = size.Name + "333";
                 repository.Update(size);
                 sizeGroup = repository.RetrieveByGroup(sizeGroupId1);

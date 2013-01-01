@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using Pleiades.Data;
-using Commerce.Domain.Model.Lists.Json;
+using Commerce.Domain.Model.Lists;
 
 namespace Commerce.Domain.Interfaces
 {
-    public interface IJsonCategoryRepository
+    public interface ICategoryRepository
     {
-        List<JsonCategory> RetrieveAllSectionCategories();
-        List<JsonCategory> RetrieveJsonBySection(int sectionCategoryId);
-        JsonCategory RetrieveJsonById(int Id);
+        List<JsonCategory> RetrieveAllSectionsOnlyJson();
+        List<JsonCategory> RetrieveBySectionIdJson(int sectionCategoryId);
+        JsonCategory RetrieveByCategoryIdJson(int Id);
         Func<JsonCategory> Insert(JsonCategory category);
         void Update(JsonCategory category);
         void DeleteSoft(int Id);

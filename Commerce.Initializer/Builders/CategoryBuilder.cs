@@ -11,7 +11,6 @@ using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Providers;
 using Commerce.Domain.Interfaces;
 using Commerce.Domain.Model.Lists;
-using Commerce.Domain.Model.Lists.Json;
 using Commerce.Persist;
 using Commerce.Persist.Security;
 using Commerce.WebUI;
@@ -35,7 +34,7 @@ namespace Commerce.Initializer.Builders
                 all.ForEach(x => repository.Delete(x));
                 unitOfWork.SaveChanges();
 
-                var jsonRepository = ServiceLocator.Resolve<IJsonCategoryRepository>();
+                var jsonRepository = ServiceLocator.Resolve<ICategoryRepository>();
 
                 var result1 = jsonRepository.Insert(
                     new JsonCategory() { ParentId = null, Name = "Good Gear Section", SEO = "Men's Section" });

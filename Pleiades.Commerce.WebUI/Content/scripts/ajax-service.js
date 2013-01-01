@@ -1,7 +1,11 @@
 
 function AjaxService(errorCallback, showLoadingCallback, hideLoadingCallback) {
 	var self = this;
+	
+    // Configurable Settings
     self.Timeout = 15000;
+    self.BaseUrl = "/Pleiades"; // TODO: move this into dynamic code
+
 	self.ShowLoadingCallback = showLoadingCallback;
 	self.HideLoadingCallback = hideLoadingCallback;
 	self.ErrorCallback = function() {
@@ -15,7 +19,7 @@ function AjaxService(errorCallback, showLoadingCallback, hideLoadingCallback) {
                 self.ShowLoadingCallback();
                 $.ajax({
                     type: 'GET',
-                    url: url,
+                    url: self.BaseUrl + url,
                     timeout: self.Timeout,  
                     error: self.ErrorCallback,
                     success: this
@@ -34,7 +38,7 @@ function AjaxService(errorCallback, showLoadingCallback, hideLoadingCallback) {
                 self.ShowLoadingCallback();
                 $.ajax({
                     type: 'POST',
-                    url: url,
+                    url: self.BaseUrl + url,
                     data: data,
                     timeout: self.Timeout,
                     error: self.ErrorCallback,

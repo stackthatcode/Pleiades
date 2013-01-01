@@ -12,11 +12,11 @@ Vision - Phase 2?
 Front Range
 -----------
 - TRIPLE CHECK YOUR BACKUPS, DUDE => TODO
-- Post Mortem - inventory *everything* from UI => IN PROGRESS
+- Post Mortem - inventory *everything* from UI => TODO AFTER 4 LISTS
 
 ...work...
 
-- The other 4 Lists Backend => IN PROGRESS
+- The other 4 Lists Backend (Sizes, Sections, Brand, Color) => IN PROGRESS
 * Create functions that populate Test data in Initializer => IN PROGRESS
 * Create Integration Tests that play with the data => IN PROGRESS
 * Verify proper JSON (de)serialization => IN PROGRESS
@@ -91,6 +91,7 @@ MORE BIG FISH
 
 PENDING FEATURE BACKLOG
 -----------------------
+- Add a way to execute the DDL which adds SQL Foreign Keys to Categories, etc. => PENDING EVAL
 - Eliminate the MembershipProvider (WHOO-HOO!!!!!!!) => PENDING EVAL
 * Roll everything into the MembershipService, take back control of your objects and data access.  Done.  OVER! => PENDING EVAL
 
@@ -106,6 +107,7 @@ NOTES ON THE HEGEMONY OF UNREASON (STATIC MEMBERSHIP)
 - Add Modal Pop-up - "Are You Sure?" Category Parent Change, etc. => PENDING EVAL
 - Add constraints on the number of records we can add => PENDING EVAL
 - View Products => Hot Link to a RESTful URL - TODO => PENDING EVAL
+
 
 
 E-Commerce API's & Payment Processors
@@ -148,7 +150,6 @@ Development Backlog
 * Fix the web.config with assembly references => IN PROGRESS
 - How to deal with LastUpdated field => IN PROGRESS
 * Get Scott Hanselman's obj/bin cleaner utility => IN PROGRESS
-- Fluent Dependency Builder => TODO
 
 THE OTHER BACKLOG
 =================
@@ -156,12 +157,9 @@ THE OTHER BACKLOG
 * Security n Stuff
 - How to manage CSS files and dependencies from separate assemblies in ASP.NET MVC => IN PROGRESS
 - http://fluentvalidation.codeplex.com/ => TODO
-* Should we create IdentityUser Integration Tests? => TODO
 - Error Handler Module
 - Logging Module
 - Email Service w/ Links (MSMQ?)
-* Pleiades Framework
 - Copy jqia2.support.js functions
-* General Fixes
 - Disable Caching for AJAX stuff with ASP.NET MVC=> TODO
 

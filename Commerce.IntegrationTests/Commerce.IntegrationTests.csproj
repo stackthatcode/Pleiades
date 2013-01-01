@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Repositories\SmallIdeaTests.cs" />
     <Compile Include="TestContainer.cs" />
     <Compile Include="Repositories\BrandRepositoryTests.cs" />
     <Compile Include="Repositories\CategoryRepositoryTests.cs" />

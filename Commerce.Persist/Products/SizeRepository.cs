@@ -4,17 +4,16 @@ using System.Linq;
 using System.Data.Entity;
 using Commerce.Domain.Interfaces;
 using Commerce.Domain.Model.Lists;
-using Commerce.Domain.Model.Lists.Json;
 using Pleiades.Data;
 using Pleiades.Data.EF;
 
-namespace Commerce.Persist.Products.Json
+namespace Commerce.Persist.Products
 {
-    public class JsonSizeRepository : IJsonSizeRepository
+    public class SizeRepository : ISizeRepository
     {
         DbContext Context { get; set; }
 
-        public JsonSizeRepository(DbContext context)
+        public SizeRepository(DbContext context)
         {
             this.Context = context;
         }
@@ -26,37 +25,14 @@ namespace Commerce.Persist.Products.Json
 
         protected IQueryable<SizeGroup> SizeGroupData()
         {
-            return this.Context.Set<SizeGroup>().Where(x => x.Deleted == false);
+            return this.Context.Set<SizeGroup>().Include(x => x.Sizes).Where(x => x.Deleted == false);
         }
 
-        public List<JsonSizeGroup> RetrieveAll()
-        {
-            var sizes = this
-                .SizeData()
-                .Include(x => x.SizeGroup)
-                .ToList();
-
-            return sizes.ToJsonSizeGroup();
-        }
-
-        public List<JsonSizeGroup> RetrieveByGroup(int groupId)
-        {
-            var sizes = this
-                .SizeData()
-                .Where(x => x.SizeGroup.ID == groupId)
-                .Include(x => x.SizeGroup)
-                .ToList();
-
-            return sizes.ToJsonSizeGroup();
-        }
 
         public Func<JsonSize> Insert(JsonSize jsonSize)
         {
-            var sizeGroup = this.SizeGroupData().First(x => x.ID == jsonSize.ParentGroupId);
-
             var size = new Size
             {
-                SizeGroup = sizeGroup,
                 Name = jsonSize.Name,
                 Description = jsonSize.Description,
                 SkuCode = jsonSize.SkuCode,
@@ -64,22 +40,9 @@ namespace Commerce.Persist.Products.Json
                 DateInserted = DateTime.Now,
                 DateUpdated = DateTime.Now,
             };
-
-            this.Context.Set<Size>().Add(size);
-            return () => size.ToJsonSize();
-        }
-
-        public Func<JsonSizeGroup> Insert(JsonSizeGroup jsonSize)
-        {
-            var size = new SizeGroup
-            {
-                Name = jsonSize.Name,                
-                DateInserted = DateTime.Now,
-                DateUpdated = DateTime.Now,
-            };
-
-            this.Context.Set<SizeGroup>().Add(size);
-            return () => size.ToJsonSizeGroup();
+            var sizeGroup = this.SizeGroupData().First(x => x.ID == jsonSize.ParentGroupId);
+            sizeGroup.Sizes.Add(size);
+            return () => size.ToJsonSize(sizeGroup.ID);
         }
 
         public void Update(JsonSize jsonSize)
@@ -92,6 +55,31 @@ namespace Commerce.Persist.Products.Json
             size.DateUpdated = DateTime.Now;
         }
 
+        public void DeleteSoft(JsonSize jsonSize)
+        {
+            var size = this.SizeData().FirstOrDefault(x => x.ID == jsonSize.Id);
+            size.Deleted = true;
+            size.DateUpdated = DateTime.Now;
+        }
+
+
+        public List<JsonSizeGroup> RetrieveAll()
+        {
+            return this
+                .SizeGroupData()
+                .ToList()
+                .Select(x => x.ToJsonSizeGroup())
+                .ToList();
+        }
+
+        public JsonSizeGroup RetrieveByGroup(int groupId)
+        {
+            return this
+                .SizeGroupData()
+                .FirstOrDefault(x => x.ID == groupId)
+                .ToJsonSizeGroup();
+        }
+
         public void Update(JsonSizeGroup jsonSizeGroup)
         {
             var sizeGroup = this.SizeGroupData().FirstOrDefault(x => x.ID == jsonSizeGroup.Id);
@@ -99,19 +87,24 @@ namespace Commerce.Persist.Products.Json
             sizeGroup.DateUpdated = DateTime.Now;
         }
 
-        public void DeleteSoft(JsonSize jsonSize)
+        public Func<JsonSizeGroup> Insert(JsonSizeGroup jsonSize)
         {
-            var size = this.SizeData().FirstOrDefault(x => x.ID == jsonSize.Id);
-            size.Deleted = true;
-            //size.SizeGroup = null;
-            size.DateUpdated = DateTime.Now;
+            var size = new SizeGroup
+            {
+                Name = jsonSize.Name,
+                DateInserted = DateTime.Now,
+                DateUpdated = DateTime.Now,
+            };
+
+            this.Context.Set<SizeGroup>().Add(size);
+            return () => size.ToJsonSizeGroup();
         }
 
         public void DeleteSoft(JsonSizeGroup jsonSizeGroup)
         {
             var sizeGroup = this.SizeGroupData().FirstOrDefault(x => x.ID == jsonSizeGroup.Id);
 
-            foreach (var size in this.SizeData().Where(x => x.SizeGroup.ID == jsonSizeGroup.Id))
+            foreach (var size in sizeGroup.Sizes)
             {
                 size.Deleted = true;
                 //size.SizeGroup = null;

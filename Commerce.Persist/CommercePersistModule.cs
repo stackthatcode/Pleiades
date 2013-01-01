@@ -9,7 +9,7 @@ using Pleiades.Web.Security.Interface;
 using Commerce.Domain.Interfaces;
 using Commerce.Domain.Model.Lists;
 using Commerce.Persist.Products;
-using Commerce.Persist.Products.Json;
+using Commerce.Persist.Products;
 using Commerce.Persist.Security;
 
 namespace Commerce.Persist
@@ -27,8 +27,8 @@ namespace Commerce.Persist
             builder.RegisterType<PfMembershipRepository>().As<IMembershipProviderRepository>().InstancePerLifetimeScope();
 
             // List Repositories
-            builder.RegisterType<JsonCategoryRepository>().As<IJsonCategoryRepository>().InstancePerLifetimeScope();
-            builder.RegisterType<JsonSizeRepository>().As<IJsonSizeRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<CategoryRepository>().As<ICategoryRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<SizeRepository>().As<ISizeRepository>().InstancePerLifetimeScope();
 
             // Generic Domain-serving Repositories
             builder.RegisterType<EFGenericRepository<Category>>().As<IGenericRepository<Category>>().InstancePerLifetimeScope();

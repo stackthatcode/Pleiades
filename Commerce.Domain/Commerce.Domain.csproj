@@ -49,21 +49,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IJsonSizeRepository.cs" />
-    <Compile Include="Interfaces\IJsonCategoryRepository.cs" />
+    <Compile Include="Interfaces\ISizeRepository.cs" />
+    <Compile Include="Interfaces\ICategoryRepository.cs" />
     <Compile Include="Model\Lists\Brand.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Lists\Category.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Lists\CategoryExtensions.cs" />
     <Compile Include="Model\Lists\Color.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Lists\Json\JsonCategory.cs" />
-    <Compile Include="Model\Lists\Json\JsonSize.cs" />
-    <Compile Include="Model\Lists\Json\JsonSizeGroup.cs" />
+    <Compile Include="Model\Lists\JsonCategory.cs" />
+    <Compile Include="Model\Lists\JsonSize.cs" />
+    <Compile Include="Model\Lists\JsonSizeGroup.cs" />
+    <Compile Include="Model\Lists\SizeExtensions.cs" />
     <Compile Include="Model\Lists\SizeGroup.cs" />
+    <Compile Include="Model\Lists\SmallIdea.cs" />
     <Compile Include="Model\Resources\Image.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -79,10 +82,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DomainModule.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\System\" />
-    <Folder Include="Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Pleiades.Web.Security.Membership\Pleiades.Web.Security.Membership.csproj">
       <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>

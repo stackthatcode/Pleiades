@@ -53,6 +53,8 @@ This guy is THE MAN => http://www.s3mobileapps.com/
 
 BLOG POSTS!
 ~~~~~~~~~~~
+- You Won't Notice The Benefits of Your Post Mortem (it's unconscious)
+- Know What You Give a Damn About
 - Membership Provider Rant, reference Mark Seeman's post
 - Getting the MembershipProvider to play nice
 - You can't force it.  It's time will come - or, not.
@@ -65,7 +67,7 @@ BLOG POSTS!
 - Define Resuable for me.  Black box...?
 - HTTP Context Stub on steroids
 - JavaScript Monad
-- C# Currying Function
+- C# Currying Function w/ Autofac
 - Prevent Logic Leakage i.e. Membership User Approval and Aggregate User
 - What ever happened to Agile == TDD ...?
 - Paean to the Bounded Context
@@ -100,12 +102,12 @@ Technology Backlog
 - C# => DONE
 - ASP.NET MVC => DONE
 - JSFiddle => DONE
-
-- Razor View Engine => IN PROGRESS
+- Razor View Engine => DONE
 - JavaScript (protoypes) => TODO
 - Entity Framework => IN PROGRESS
 - Git + GitHub => IN PROGRESS
 - CSS styling => IN PROGRESS
+
 - GZip encoding of my AJAX traffic...?
 - JSLint => IN PROGRESS
 - Emberjs => TODO

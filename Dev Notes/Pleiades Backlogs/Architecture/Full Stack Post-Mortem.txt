@@ -1,0 +1,80 @@
+Post Mortem of the Full-Stack AJAX to SQL Development
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Action Items for Improvement
+----------------------------
+- Believe that it is possible to get better and continually improve.  Strive to find those improvements.
+- Entity Framework - need to learn more about how to use it.  Ask the "how can I make this better?" question.  Ask: "how can I query this better", etc.
+- Draw shit out on paper.  It may be CRUD, but precious time is getting lost while building things.  Get the whole picture on paper.
+- Stop spending these late nights!!!  Morning efficiency is far, far, higher.  Believe it.
+- Work smarter.  Invest time in examining the process.  "What's holding me back?  How can we increase our velocity?  Should I draw a picture?  Should I read something?  What am I missing?  Have I properly defined the problem?"
+- Continue to embrace simplicity.
+- Research first, code second.
+
+IDEA => Consider using Dapper ORM to get the Hierarchical stuff, use EF for the CRUD stuff
+
+IDEA => Measured Impact Analysis - do the MIA for each proposed architecture
+
+
+Mystery of the Parent Id in Category
+------------------------------------
+- All of the methods which would change the Parent Id don't pass the entire object
+- For Categories, can we write a LINQ join without storing the Id...???  If so, we could use collections
+
+
+Random Thoughts & some Questions
+--------------------------------
+- AJAX/JSON diffgrams are sent to Controller => transposed by Repositories into changes to SQL.  I'm OK with this.
+- What are the limitations of this setup?   It's Bounded Context, and that's fine... 
+- Something nags me.  Maybe it's the apparent repetition of things.
+- The needs of the UI with its JSON are very different from the data layer stuff.
+- QUESTION: do we want messages from the UI to be consolidated with our Data objects...?  Can we handle that? 
+- ANSWER: the Controllers will get a bit fatter, but that's all.
+- Trying to represent hierarchical using EF was painful.  I could've checked with the communities.
+
+
+##########################################
+Developing a Full-Stack Feature Check List
+##########################################
+- Design the UI on paper.  Take inventory of all data-driven actions.
+- Create the Entity Framework-aware objects.
+- Define the Repository interface.
+- Create a Builder in the Initializer.
+- Create the JSON-gram objects.
+- Implement the Repository.
+- Stub out the Controller Actions based on UI flow - use the JSON-gram to Repository model.  It works.
+- Create "servicename-service.js" - write methods that match the Controller Actions
+- Create the View Model - start by writing ToKnockout() and ToServerJson methods
+- Test the AJAX client-to-server communication
+
+- Return to the UI and define the View Models.
+- Leveraging existing components, build the UI - HTML + EcmaScript + KnockoutJS.
+- Break Test.
+- ???
+- Profit!
+
+
+Successes
+---------
+- Our Controllers are exceptionally trim.  The Repositories truly bear the onus of complexity.
+- The JSON Serialization stuff and integration with JQuery happened seamlessly.
+- Our basic model of interaction is through these JSON-grams.
+- Can still enforce Ref Integrity via DDL.
+- The Unit of Work was played brilliantly.  This is reflected in our Controller stuff.
+- More or less corrected my Dependency Injection nightmare.  Learned to love Autofac and the Scope'd Unit of Work.
+- Real time and effort have been spent on keeping stuff simple.
+- MAJOR POINTS => the bit of functional programming for Repository inserts was very well played.
+
+
+Major Beefs
+-----------
+- Feel that I've fallen into the trap of "must code and finish", which is making my time less smart. 
+- Feels like getting things done takes a loooooong amount of time.  How can we become faster?
+- Translating between SQL and JSON feel laborious.  A lot of time has been exhausted on this.
+- The KnockOut interface is ok, although the Templates are substantially complex.  Wish it could be easier to work with.
+- The Membership static stuff is still a huge thorn in my side
+- How can we make the SQL to JSON translation more expedient?  Kind of hurts, right now.
+- I feel very ignorant of Entity Framework and know that time was lost due to this ignorance.
+
+

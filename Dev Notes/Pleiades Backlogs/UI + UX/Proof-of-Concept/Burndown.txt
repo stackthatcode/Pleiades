@@ -243,12 +243,22 @@ TODO: how to stop repeating Date Inserted and Date Updated => DONE - CAN'T BE DO
 - Eliminated many redundant Repositories => DONE
 - Established the base-line Repository architecture with Json-grams => DONE
 - Finished building JsonSizeRepository =>DONE
+- Fluent Dependency Builder => DONE
+- TODO: do we need to remove objects from hierarchy on Soft Delete?  Maybe not => TODO
+* Should we create IdentityUser Integration Tests? => TODO - NOPE, DONE
 
 TAKEAWAYS FROM REPOSITORY ISSUES
 --------------------------------
 - The base class as a concept is very limited.  Stop forcing yourself to inherit from it and expect things to work.  Break away from the influence.
 
-- TODO: do we need to remove objects from hierarchy on Soft Delete?  Maybe not => TODO
+12/31/2012 =>  1/1/2013 3.0 Hour
+--------------------------------
+- Post Mortem on Full-stack AJAX to SQL Dev
+- Played with refactoring the Size and SizeGroup stuff
+- ORM Enlightenment
 
-
-
+1/1/2013
+--------
+- Size Group Design and Analysis 0.5 Hours
+- SizeController - 5 minutes
+- size-service.js - 25 minutes

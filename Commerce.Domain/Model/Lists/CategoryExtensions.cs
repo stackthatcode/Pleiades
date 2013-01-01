@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using Commerce.Domain.Interfaces;
-using Commerce.Domain.Model.Lists;
-using Commerce.Domain.Model.Lists.Json;
 using Pleiades.Data;
-using Pleiades.Data.EF;
 
-namespace Commerce.Persist.Products.Json
+namespace Commerce.Domain.Model.Lists
 {
     public static class CategoryExtensions
     {

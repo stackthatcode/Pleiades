@@ -6,16 +6,15 @@ using Pleiades.Data;
 using Pleiades.Web;
 using Commerce.Domain.Interfaces;
 using Commerce.Domain.Model.Lists;
-using Commerce.Domain.Model.Lists.Json;
 
 namespace Commerce.WebUI.Areas.Admin.Controllers
 {
     public class CategoryController : Controller
     {
-        IJsonCategoryRepository Repository { get; set; }
+        ICategoryRepository Repository { get; set; }
         IUnitOfWork UnitOfWork { get; set; }
 
-        public CategoryController(IJsonCategoryRepository repository, IUnitOfWork unitOfWork)
+        public CategoryController(ICategoryRepository repository, IUnitOfWork unitOfWork)
         {
             this.Repository = repository;
             this.UnitOfWork = unitOfWork;
@@ -32,21 +31,21 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Sections()
         {
-            var result = this.Repository.RetrieveAllSectionCategories();
+            var result = this.Repository.RetrieveAllSectionsOnlyJson();
             return new JsonNetResult(result);
         }
 
         [HttpGet]
         public ActionResult CategoriesBySection(int id)
         {
-            var result = this.Repository.RetrieveJsonBySection(id);
+            var result = this.Repository.RetrieveBySectionIdJson(id);
             return new JsonNetResult(result);
         }
 
         [HttpGet]
         public ActionResult Category(int id)
         {
-            var result = this.Repository.RetrieveJsonById(id);
+            var result = this.Repository.RetrieveByCategoryIdJson(id);
             return new JsonNetResult(result);
         }
 
@@ -72,7 +71,6 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             this.Repository.DeleteSoft(id);
             this.UnitOfWork.SaveChanges();
 
-            // What do we return...?
             return new JsonNetResult();
         }
 

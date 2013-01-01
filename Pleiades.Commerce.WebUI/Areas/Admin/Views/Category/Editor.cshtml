@@ -119,9 +119,9 @@
 			
 			self.GlideToParentView = function() {
 				var parentRecordId = self.ChildViewModel().Id();
-				$("#glideToParent").hide();
 				flow.exec(
 					function() {
+				        $("#glideToParent").hide();
 						self.RetrieveModelBySection(self.ParentViewModel.SelectedSection(), this);
 					},
 					function() {
@@ -404,7 +404,7 @@
 					</div>
 					
 					<li class="divider"></li>
-					<li><a tabindex="-1" href="#">Edit Sections...</a></li>
+					<li><a tabindex="-1" href="@Url.RouteUrl(AdminNavigation.SizeEditor())">Edit Sections...</a></li>
 				</ul>
 			  </li>
 			</ul>
@@ -449,12 +449,12 @@
 	
 	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR -->
 	<script type="text/html" id="Child-Editor">
-		<table id="single-parent-editor-toprow" class="table table-hover" style="margin-bottom:0px;">
+		<table class="table table-hover" style="margin-bottom:0px;">
 			<tbody data-bind="template: { name: 'Editor-Row-Template', data: $data }">
 			</tbody>
 		</table>
 		
-		<table id="single-parent-editor-otherrows" class="table table-hover">
+		<table class="table table-hover">
 			<tbody data-bind="template: { name: 'Editor-Row-Template', foreach: $data.Categories }">
 			</tbody>
 		</table>
@@ -484,8 +484,8 @@
 		</tr>
 		
 		<!-- EDITOR TEMPLATE -->
-		<tr data-bind="if: $root.ChildViewSelectedRecord() == $data, singleParentFixHeight: $root.ChildViewSelectedRecord() == $data">
-		<td>
+		<tr data-bind="if: $root.ChildViewSelectedRecord() == $data">
+        <td>
 			<form>
 			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-info">
 				<!--<button type="button" class="close" data-dismiss="alert">x</button> -->

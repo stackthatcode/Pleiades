@@ -11,7 +11,6 @@ using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Providers;
 using Commerce.Domain.Interfaces;
 using Commerce.Domain.Model.Lists;
-using Commerce.Domain.Model.Lists.Json;
 using Commerce.Persist.Products;
 using Commerce.Persist.Security;
 using Commerce.WebUI;
@@ -37,7 +36,7 @@ namespace Commerce.Initializer.Builders
                 unitOfWork.SaveChanges();
 
                 // Create the JSON Repos
-                var jsonSizeRepository = ServiceLocator.Resolve<IJsonSizeRepository>();
+                var jsonSizeRepository = ServiceLocator.Resolve<ISizeRepository>();
 
                 // Create size groups
                 var result1 = jsonSizeRepository.Insert(new JsonSizeGroup { Name = "Default Clothing" });

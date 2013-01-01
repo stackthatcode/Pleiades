@@ -4,21 +4,20 @@ using System.Data.Entity;
 using System.Linq;
 using Commerce.Domain.Interfaces;
 using Commerce.Domain.Model.Lists;
-using Commerce.Domain.Model.Lists.Json;
 using Pleiades.Data;
 using Pleiades.Data.EF;
 
-namespace Commerce.Persist.Products.Json
+namespace Commerce.Persist.Products
 {
     /// <summary>
     /// Due to the complexity of storing the hierarchical data in SQL whilst transposing to hierarchial structures,
     /// this Repository exposes the JsonCategory object for representing hierarchical data.
     /// </summary>
-    public class JsonCategoryRepository : IJsonCategoryRepository
+    public class CategoryRepository : ICategoryRepository
     {
         DbContext Context { get; set; }
 
-        public JsonCategoryRepository(DbContext context)
+        public CategoryRepository(DbContext context)
         {
             this.Context = context;
         }
@@ -33,12 +32,8 @@ namespace Commerce.Persist.Products.Json
             return this.Data().AsNoTracking();
         }
 
-        protected Category Retrieve(int id)
-        {
-            return this.Data().FirstOrDefault(x => x.Id == id);
-        }
-
-        public List<JsonCategory> RetrieveAllSectionCategories()
+        // These are earmarked for porting into Dapper ORM
+        public List<JsonCategory> RetrieveAllSectionsOnlyJson()
         {
             return this
                 .ReadOnlyData()
@@ -47,7 +42,7 @@ namespace Commerce.Persist.Products.Json
                 .ToJsonCategoryList(null);
         }
 
-        public List<JsonCategory> RetrieveJsonBySection(int sectionCategoryId)
+        public List<JsonCategory> RetrieveBySectionIdJson(int sectionCategoryId)
         {
             // Get the SQL data
             var categoryData =
@@ -65,13 +60,20 @@ namespace Commerce.Persist.Products.Json
             return categoryData.ToJsonCategoryList(sectionCategoryId);
         }
 
-        public JsonCategory RetrieveJsonById(int categoryId)
+        public JsonCategory RetrieveByCategoryIdJson(int categoryId)
         {
             // Get the SQL data
             var categoryData = this.ReadOnlyData().Where(x => x.ParentId == categoryId || x.Id == categoryId).ToList();
 
             // Transpose to JSON data
             return categoryData.ToJsonCategory(categoryId);
+        }
+
+
+        // EF is fine for your everyday CRUD operations
+        protected Category Retrieve(int id)
+        {
+            return this.Data().FirstOrDefault(x => x.Id == id);
         }
 
         public Func<JsonCategory> Insert(JsonCategory jsonCategory)

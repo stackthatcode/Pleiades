@@ -19,7 +19,7 @@ namespace Commerce.Persist
         public DbSet<Size> Sizes { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Color> Colors { get; set; }
-        
+        public DbSet<SmallIdea> SmallIdeas { get; set; }
 
         public PleiadesContext() : base("PleiadesDb")
         {

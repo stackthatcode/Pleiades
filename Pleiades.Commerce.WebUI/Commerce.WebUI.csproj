@@ -131,6 +131,7 @@
     <Content Include="Content\knockout\ko.observableDictionary.js" />
     <Content Include="Content\Scripts\category-service.js" />
     <Content Include="Content\Scripts\ajax-service.js" />
+    <Content Include="Content\Scripts\size-service.js" />
     <Content Include="Content\Scripts\flow.js" />
     <Content Include="Content\Scripts\pushmarket-common.js" />
     <Content Include="Content\Style\pushmarket.css" />
@@ -185,8 +186,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Admin\Models\Category\" />
-    <Folder Include="Areas\Admin\Models\Home\" />
     <Folder Include="Areas\Public\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

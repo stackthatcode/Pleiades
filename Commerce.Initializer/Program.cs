@@ -26,17 +26,22 @@ namespace Commerce.Initializer
 
         static void Main(string[] args)
         {
-            // Components Initialization
-            ServiceLocator = AutofacBootstrap.CreateContainer();
             DbContext = new PleiadesContext();
-            
+
+            Console.WriteLine("\nPushMarket Commerce Version v1.0 Prototype Initializer");
+            Console.WriteLine("Push Global LLC - All Rights Reserved");
+            Console.WriteLine("...");
             // Database Destruction and Creation
             DestroyDatabase();
             CreateDatabase();
 
+            // Components Initialization
+            var serviceLocator = AutofacBootstrap.CreateContainer();
+
             // Application Data Initialization
-            CategoryBuilder.EmptyAndRepopulate(ServiceLocator);
-            RootUserBuilder.CreateTheSupremeUser(ServiceLocator);
+            RootUserBuilder.CreateTheSupremeUser(serviceLocator);
+            CategoryBuilder.EmptyAndRepopulate(serviceLocator);
+            SizeBuilder.EmptyAndRepopulate(serviceLocator);
         }
 
         public static void DestroyDatabase()
