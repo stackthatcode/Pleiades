@@ -34,8 +34,8 @@ namespace Commerce.IntegrationTests.Repositories
                 // Show all the parent Sections
                 Console.WriteLine("Displaying All Sections");
 
-                var allSections = repository.RetrieveAllSectionsOnlyJson();
-                allSections.ForEach(x => Console.WriteLine(x.Id + " " + x.Name + " " + x.SEO));
+                var allSections = repository.RetrieveSectionsOnlyJson();
+                allSections.ForEach(x => Console.WriteLine(x.Id + " " + x.Name + " " + x.SEO + " " + x.NumberOfCategories));
                 Console.WriteLine();
 
 

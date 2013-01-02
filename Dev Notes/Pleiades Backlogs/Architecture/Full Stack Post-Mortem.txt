@@ -34,6 +34,8 @@ Random Thoughts & some Questions
 - Trying to represent hierarchical using EF was painful.  I could've checked with the communities.
 
 
+
+
 ##########################################
 Developing a Full-Stack Feature Check List
 ##########################################

@@ -3,7 +3,7 @@
       <div class="navbar-inner">
         <div class="container">  
           <img src="@Url.Content("~/content/Images/webicon-2.png")" style="float:left;" />
-		  <a class="brand" href="#" style="color:#FFF;">pushmarket</a>
+		  <a class="brand" href="@Url.RouteUrl(AdminNavigation.Home())" style="color:#FFF;">pushmarket</a>
 
           <div class="nav-collapse">
             <ul class="nav">              
@@ -14,7 +14,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Lists  <b class="caret"></b>  
                 </a>
                 <ul class="dropdown-menu">  
-                    <li><a href="#">Sections</a></li>  
+                    <li><a href="@Url.RouteUrl(AdminNavigation.SectionEditor())">Sections</a></li>  
                     <li><a href="@Url.RouteUrl(AdminNavigation.CategoryEditor())">Categories</a></li>  
                     <li><a href="#">Brands</a></li>  
                     <li><a href="@Url.RouteUrl(AdminNavigation.SizeEditor())">Sizes</a></li>  

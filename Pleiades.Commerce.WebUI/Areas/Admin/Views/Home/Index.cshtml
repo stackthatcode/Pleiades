@@ -4,7 +4,10 @@
         <div style="clear:both; height:20px;"></div>
 
         <p>This is a temporary placeholder until more content is developed!</p>
-        @Html.RouteLink("Manage Admin Users", AdminNavigation.ManagerList())
+        @Html.RouteLink("Manage Admin Users", AdminNavigation.ManagerList())<br />
+        @Html.RouteLink("Manage Sections", AdminNavigation.SectionEditor())<br />
+        @Html.RouteLink("Manage Categories", AdminNavigation.CategoryEditor())<br />
+        @Html.RouteLink("Manage Sizes", AdminNavigation.SizeEditor())<br />
 
         <br />
     </div>

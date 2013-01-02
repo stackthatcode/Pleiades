@@ -101,7 +101,6 @@ namespace Commerce.Initializer.Builders
                 jsonRepository.Insert(new JsonCategory { ParentId = parent2_2.Id, Name = "Crumpets X", SEO = "sample-seo-text-24" });
                 jsonRepository.Insert(new JsonCategory { ParentId = parent2_2.Id, Name = "Crumpets Y", SEO = "sample-seo-text-24" });
                 jsonRepository.Insert(new JsonCategory { ParentId = parent2_2.Id, Name = "Crumpets Z", SEO = "sample-seo-text-24" });
-                jsonRepository.Insert(new JsonCategory { ParentId = parent2_2.Id, Name = "Empty Section", SEO = "Empty Section" });
                 unitOfWork.SaveChanges();
 
                 var section3 = jsonRepository.Insert(

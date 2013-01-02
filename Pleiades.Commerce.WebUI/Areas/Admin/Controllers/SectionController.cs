@@ -9,18 +9,16 @@ using Commerce.Domain.Model.Lists;
 
 namespace Commerce.WebUI.Areas.Admin.Controllers
 {
-    public class CategoryController : Controller
+    public class SectionController : Controller
     {
         ICategoryRepository Repository { get; set; }
         IUnitOfWork UnitOfWork { get; set; }
 
-        public CategoryController(ICategoryRepository repository, IUnitOfWork unitOfWork)
+        public SectionController(ICategoryRepository repository, IUnitOfWork unitOfWork)
         {
             this.Repository = repository;
             this.UnitOfWork = unitOfWork;
         }
-
-        // TODO: write a custom Model Binder to map parentId and childId to Id
 
         [HttpGet]
         public ActionResult Editor()
@@ -32,20 +30,6 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         public ActionResult Sections()
         {
             var result = this.Repository.RetrieveSectionsOnlyJson();
-            return new JsonNetResult(result);
-        }
-
-        [HttpGet]
-        public ActionResult CategoriesBySection(int id)
-        {
-            var result = this.Repository.RetrieveBySectionIdJson(id);
-            return new JsonNetResult(result);
-        }
-
-        [HttpGet]
-        public ActionResult Category(int id)
-        {
-            var result = this.Repository.RetrieveByCategoryIdJson(id);
             return new JsonNetResult(result);
         }
 
@@ -66,18 +50,9 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(JsonCategory jsonCategory)
         {
-            this.Repository.DeleteCategorySoft(id);
-            this.UnitOfWork.SaveChanges();
-
-            return new JsonNetResult();
-        }
-
-        [HttpPost]
-        public ActionResult SwapParentChild(int parentId, int childId)
-        {
-            this.Repository.SwapParentChild(parentId, childId);
+            this.Repository.DeleteSectionSoft(jsonCategory.Id.Value);
             this.UnitOfWork.SaveChanges();
             return new JsonNetResult();
         }

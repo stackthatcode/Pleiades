@@ -1,7 +1,6 @@
 ﻿@using Pleiades.Web.MvcHelpers
 
 @section _Scripts {
-    <!-- put all this in the "Scripts" section -->
 	@Html.Javascript("/scripts/size-service.js")
     
     <script type="text/javascript">
@@ -311,7 +310,7 @@
 		<div id="heading" class="container" data-bind="ifnot: $root.ChildViewModel()">
 			<div class="row">
 				<div class="span9">
-					<h1>Size Editor</h1>
+					<h1>Sizes > All</h1>
 				</div>
 				<div class="span3" style="margin-top:15px; text-align:right;">
 					<a class="btn btn-primary btn-block" data-bind="click: $root.AddParentRecord">Add New Size Group <i class="icon-arrow-right icon-white"></i></a>
@@ -339,7 +338,7 @@
 	<script type="text/html" id="Parent-Editor">
 		<div style="margin-top:40px; text-align:center;" class="alert alert-info" data-bind="visible: $data.Data().length == 0">
 			<!--<button type="button" class="close" data-dismiss="alert">x</button>-->
-			<strong>This Section is empty. Click "Add New Category" to start adding Categories.</strong>  
+			<strong>There are no Size Groups.  Click "Add New Size Group" to create a new one.</strong>  
 		</div>
 		
 		<table id="parent-editor-table" class="table table-hover" data-bind="visible: $data.Data().length > 0">
@@ -382,6 +381,11 @@
 			<tbody data-bind="template: { name: 'Editor-Row-Template-Size', foreach: $data.Sizes }">
 			</tbody>
 		</table>
+
+        <div style="margin-top:40px; text-align:center;" class="alert alert-info" data-bind="visible: $data.Id() && $data.Sizes().length == 0">
+			<strong>This Group has no Sizes.  Click "Add New Size" to start adding new ones.</strong>  
+	    </div>
+
 	</script>
 	
 	<!-- KNOCKOUT TEMPLATE - EDITOR ROW - SIZE GROUP -->
@@ -431,7 +435,11 @@
 		<td>
 			<span class="span9">	
 				<input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id() }" />
-                <h4>&raquo; <span data-bind="text: $data.Name()"></span> - <span data-bind="text: $data.Description()"></span></h4>	
+                <h4>&raquo; 
+                    <span data-bind="text: $data.Name()"></span> - 
+                    <span data-bind="text: $data.Description()"></span> - 
+                    <span data-bind="text: $data.SkuCode()"></span> 
+                </h4>	
 			</span>
 			<span class="span3" style="text-align:right;">
 				<p>Touch Row to Edit</p>

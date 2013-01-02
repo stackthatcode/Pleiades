@@ -16,15 +16,8 @@ Front Range
 
 ...work...
 
-- The other 4 Lists Backend (Sizes, Sections, Brand, Color) => IN PROGRESS
-* Create functions that populate Test data in Initializer => IN PROGRESS
-* Create Integration Tests that play with the data => IN PROGRESS
-* Verify proper JSON (de)serialization => IN PROGRESS
-
-- The other 4 Lists Backend UI => IN PROGRESS
-* Wire into Controllers => TODO
-* Copy the View Model from Category for Size => IN PROGRESS
-
+- The other 3 Lists Backend (Brand, Color) => IN PROGRESS
+- The other 3 Lists UI => IN PROGRESS
 
 
 - Check Sanderson for advanced Model Binding => TODO
@@ -39,7 +32,6 @@ Front Range
 - Develop and/or Research Fluent Validation library => TODO
 
 *** TODO: what is the function of "nav-collapse collapse"?
-*** MANDATE => after burndown of the goddamn backlog for Category Editor, every feature is weighed and estimated accordingly!  Make a feature Backlog.
 *** MANDATE => research HOW KnockoutJS actually works internally
 *** MANDATE => more play with Autofac 
 - http://nblumhardt.com/2011/01/an-autofac-lifetime-primer/

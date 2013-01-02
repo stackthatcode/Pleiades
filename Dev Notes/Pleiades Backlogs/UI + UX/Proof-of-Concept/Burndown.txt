@@ -257,8 +257,25 @@ TAKEAWAYS FROM REPOSITORY ISSUES
 - Played with refactoring the Size and SizeGroup stuff
 - ORM Enlightenment
 
-1/1/2013
---------
+1/1/2013 - 4.5 Hours
+------------------
 - Size Group Design and Analysis 0.5 Hours
 - SizeController - 5 minutes
 - size-service.js - 25 minutes
+- Finished the Size Editor - another 3 Hours => GOOD JOB!!!
+* Create functions that populate Test data in Initializer => DONE
+* Create Integration Tests that play with the data => DONE
+* Verify proper JSON (de)serialization => DONE
+* Wire into Controllers => TODO
+* Copy the View Model from Category for Size => DONE
+
+1/2/2013
+--------
+*** MANDATE => after burndown of the goddamn backlog for Category Editor, every feature is weighed and estimated accordingly!  Make a feature Backlog. => DONE
+Section Editor => DONE
+- List all Sections, which includes a count of the Categories under each => DONE
+- Add a new Section => DONE
+- Update a Section => DONE
+- Delete a Section => DONE
+
+

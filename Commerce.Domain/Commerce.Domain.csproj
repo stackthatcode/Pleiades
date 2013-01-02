@@ -49,8 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\ISizeRepository.cs" />
     <Compile Include="Interfaces\ICategoryRepository.cs" />
+    <Compile Include="Interfaces\ISizeRepository.cs" />
     <Compile Include="Model\Lists\Brand.cs">
       <SubType>Code</SubType>
     </Compile>

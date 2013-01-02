@@ -23,5 +23,8 @@ namespace Commerce.Domain.Model.Lists
 
         [JsonProperty]
         public string SEO { get; set; }
+
+        [JsonProperty]
+        public int? NumberOfCategories { get; set; }
     }
 }

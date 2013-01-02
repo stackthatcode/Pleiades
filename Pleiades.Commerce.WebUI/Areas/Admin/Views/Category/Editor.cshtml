@@ -1,7 +1,6 @@
 ﻿@using Pleiades.Web.MvcHelpers
 
 @section _Scripts {
-    <!-- put all this in the "Scripts" section -->
 	@Html.Javascript("/scripts/category-service.js")
     
 	<script type="text/javascript">	
@@ -404,7 +403,7 @@
 					</div>
 					
 					<li class="divider"></li>
-					<li><a tabindex="-1" href="@Url.RouteUrl(AdminNavigation.SizeEditor())">Edit Sections...</a></li>
+					<li><a tabindex="-1" href="@Url.RouteUrl(AdminNavigation.SectionEditor())">Edit Sections...</a></li>
 				</ul>
 			  </li>
 			</ul>
@@ -414,7 +413,6 @@
 	<!-- KNOCKOUT TEMPLATE - PARENT EDITOR -->
 	<script type="text/html" id="Parent-Editor">
 		<div style="margin-top:40px; text-align:center;" class="alert alert-info" data-bind="visible: $data.Data().length == 0">
-			<!--<button type="button" class="close" data-dismiss="alert">x</button>-->
 			<strong>This Section is empty. Click "Add New Category" to start adding Categories.</strong>  
 		</div>
 		
@@ -458,6 +456,10 @@
 			<tbody data-bind="template: { name: 'Editor-Row-Template', foreach: $data.Categories }">
 			</tbody>
 		</table>
+
+        <div style="margin-top:40px; text-align:center;" class="alert alert-info" data-bind="visible: $data.Id() && $data.Categories().length == 0">
+			<strong>This Category has no Sub-Categories.  Click "Add New Sub Category" to start adding new ones.</strong>  
+	    </div>
 	</script>
 	
 	<!-- KNOCKOUT TEMPLATE - EDITOR ROW -->

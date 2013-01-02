@@ -32,32 +32,47 @@ namespace Commerce.Persist.Products
             return this.Data().AsNoTracking();
         }
 
-        // These are earmarked for porting into Dapper ORM
-        public List<JsonCategory> RetrieveAllSectionsOnlyJson()
+        protected IQueryable<Category> CategoriesBySection(int sectionId)
         {
-            return this
-                .ReadOnlyData()
-                .Where(x => x.ParentId == null && x.Deleted == false)
-                .ToList()                
-                .ToJsonCategoryList(null);
+            return
+                this.ReadOnlyData()
+                    .Join(
+                        this.ReadOnlyData(),
+                        parent => parent.Id,
+                        child => child.ParentId,
+                        (parent, child) => new { parent, child })
+                    .Where(x => x.parent.Id == sectionId || x.parent.ParentId == sectionId)
+                    .Select(x => x.child);
+        }
+
+
+        // These should be earmarked for porting into Dapper ORM
+        public List<JsonCategory> RetrieveSectionsOnlyJson()
+        {
+            var output = this.Data().Where(x => x.ParentId == null).ToList().Select(x => x.ToJson()).ToList();
+
+            var parentChildPairs = this.ReadOnlyData()
+                    .Join(
+                        this.ReadOnlyData(),
+                        parent => parent.Id,
+                        child => child.ParentId,
+                        (Parent, Child) => new { Parent, Child })
+                    .ToList();
+                    
+            foreach (var section in output)
+            {
+                section.NumberOfCategories =
+                    parentChildPairs.Count(x => x.Parent.Id == section.Id || x.Parent.ParentId == section.Id);
+            }
+
+            return output.ToList(); 
         }
 
         public List<JsonCategory> RetrieveBySectionIdJson(int sectionCategoryId)
         {
-            // Get the SQL data
-            var categoryData =
-                this.ReadOnlyData()
-                    .Join(
-                        this.ReadOnlyData(), 
-                        parent => parent.Id, 
-                        child => child.ParentId, 
-                        (parent, child) => new { parent, child })
-                    .Where(x => x.parent.Id == sectionCategoryId || x.parent.ParentId == sectionCategoryId)
-                    .Select(x => x.child)
-                    .ToList();
-
-            // Transpose to JSON data
-            return categoryData.ToJsonCategoryList(sectionCategoryId);
+            return this.CategoriesBySection(sectionCategoryId)
+                .ToList()
+                .ToJsonListWithChildren(sectionCategoryId);
         }
 
         public JsonCategory RetrieveByCategoryIdJson(int categoryId)
@@ -66,7 +81,7 @@ namespace Commerce.Persist.Products
             var categoryData = this.ReadOnlyData().Where(x => x.ParentId == categoryId || x.Id == categoryId).ToList();
 
             // Transpose to JSON data
-            return categoryData.ToJsonCategory(categoryId);
+            return categoryData.ToJsonWithChildren(categoryId);
         }
 
 
@@ -89,7 +104,7 @@ namespace Commerce.Persist.Products
             category.DateUpdated = DateTime.Now;
             Context.Set<Category>().Add(category);
 
-            return () => category.ToJsonCategory();
+            return () => category.ToJson();
         }
 
         public void Update(JsonCategory jsonCategory)
@@ -100,16 +115,30 @@ namespace Commerce.Persist.Products
             category.ParentId = jsonCategory.ParentId;
         }
 
-        public void DeleteSoft(int categoryId)
+        public void DeleteCategorySoft(int categoryId)
         {
             var categories = this.Data().Where(x => x.ParentId == categoryId || x.Id == categoryId).ToList();
 
             foreach (var category in categories)
             {
-                //category.ParentId = null;
                 category.Deleted = true;
                 category.Touch();
             }
+        }
+
+        public void DeleteSectionSoft(int sectionId)
+        {
+            var categories = this.CategoriesBySection(sectionId);
+            
+            foreach (var category in categories)
+            {
+                category.Deleted = true;
+                category.Touch();
+            }
+
+            var section = this.Retrieve(sectionId);
+            section.Deleted = true;
+            section.Touch();
         }
 
         public void SwapParentChild(int parentId, int newParentId)
