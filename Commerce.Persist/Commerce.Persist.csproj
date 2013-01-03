@@ -45,8 +45,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,10 +56,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Resources\FileResourceRepository.cs" />
+    <Compile Include="Resources\ImageBundleRepository.cs" />
+    <Compile Include="Resources\ImageProcessor.cs" />
     <Compile Include="PleiadesContext.cs" />
     <Compile Include="CommercePersistModule.cs" />
-    <Compile Include="Products\CategoryRepository.cs" />
-    <Compile Include="Products\SizeRepository.cs" />
+    <Compile Include="Lists\CategoryRepository.cs" />
+    <Compile Include="Lists\BrandRepository.cs" />
+    <Compile Include="Lists\ColorRepository.cs" />
+    <Compile Include="Lists\SizeRepository.cs" />
     <Compile Include="Users\AggregateUserRepository.cs" />
     <Compile Include="Users\MembershipProviderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,6 +97,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Products\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

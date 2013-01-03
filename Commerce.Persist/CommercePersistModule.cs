@@ -8,8 +8,8 @@ using Pleiades.Data.EF;
 using Pleiades.Web.Security.Interface;
 using Commerce.Domain.Interfaces;
 using Commerce.Domain.Model.Lists;
-using Commerce.Persist.Products;
-using Commerce.Persist.Products;
+using Commerce.Persist.Lists;
+using Commerce.Persist.Resources;
 using Commerce.Persist.Security;
 
 namespace Commerce.Persist
@@ -29,6 +29,12 @@ namespace Commerce.Persist
             // List Repositories
             builder.RegisterType<CategoryRepository>().As<ICategoryRepository>().InstancePerLifetimeScope();
             builder.RegisterType<SizeRepository>().As<ISizeRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<BrandRepository>().As<IBrandRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<ColorRepository>().As<IColorRepository>().InstancePerLifetimeScope();
+
+            // Resource Repositories
+            builder.RegisterType<ImageBundleRepository>().As<IImageBundleRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<FileResourceRepository>().As<IFileResourceRepository>().InstancePerLifetimeScope();
 
             // Generic Domain-serving Repositories
             builder.RegisterType<EFGenericRepository<Category>>().As<IGenericRepository<Category>>().InstancePerLifetimeScope();

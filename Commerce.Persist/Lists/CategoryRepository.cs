@@ -7,7 +7,7 @@ using Commerce.Domain.Model.Lists;
 using Pleiades.Data;
 using Pleiades.Data.EF;
 
-namespace Commerce.Persist.Products
+namespace Commerce.Persist.Lists
 {
     /// <summary>
     /// Due to the complexity of storing the hierarchical data in SQL whilst transposing to hierarchial structures,

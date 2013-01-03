@@ -5,16 +5,21 @@ using Commerce.Domain.Model.Resources;
 namespace Commerce.Domain.Model.Lists
 {
     [JsonObject]
-    public class Brand
+    public class JsonBrand
     {
+        [JsonProperty]
         public int Id { get; set; }
+
+        [JsonProperty]
         public string Name { get; set; }
+
+        [JsonProperty]
         public string Description { get; set; }
+
+        [JsonProperty]
         public string SkuCode { get; set; }
+
+        [JsonProperty]
         public string SEO { get; set; }
-        public ImageBundle ImageBundle { get; set; }
-        public bool Deleted { get; set; }
-        public DateTime DateUpdated { get; set; }
-        public DateTime DateInserted { get; set; }
     }
 }

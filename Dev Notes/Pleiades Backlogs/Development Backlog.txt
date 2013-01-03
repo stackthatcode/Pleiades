@@ -8,27 +8,43 @@ Vision - Phase 2?
 - NOTE: must find focus and aim to achieve immediate goals
 
 
-
 Front Range
 -----------
 - TRIPLE CHECK YOUR BACKUPS, DUDE => TODO
-- Post Mortem - inventory *everything* from UI => TODO AFTER 4 LISTS
+- Post Mortem - inventory *everything* from UI => IN PROGRESS
 
 ...work...
 
-- The other 3 Lists Backend (Brand, Color) => IN PROGRESS
-- The other 3 Lists UI => IN PROGRESS
+- The other 2 Lists Backend (Brand, Color) => IN PROGRESS
+- The other 2 Lists UI => IN PROGRESS
+- AJAX File Upload / Bootstrap => IN PROGRESS
+- File Upload => IN PROGRESS
+
+
+Image Service Concerns
+----------------------
+- How do we store multiple sizes of same image?  How do we reference them?  How do we discover the reference?
+- How do we create the different sizes?
+- What happens to the original?
+- How do images store their authorization?  How do we cache images?
+- When we save an image in the ImageRepository, does it issue the new file name for us?
+- Where do we place the physical storage...?
+- How do we reuse the Image object across difference Domain objects...?
+
+
+
+USE THIS ON THE UI SIDE OF THINGS
+---------------------------------
+- http://fineuploader.com/#demo
+- https://github.com/valums/file-uploader/tree/master/server/ASP.NET%20MVC%20C%23
+
 
 
 - Check Sanderson for advanced Model Binding => TODO
 - Change Menu for Login Screen => TODO
 - Logged-In User => TODO
 
-- AJAX File Upload / Bootstrap => TODO
 - IsONline - Check How This Functions => TODO
-- File Upload =>  TODO
-
-- Performance - just how horrible is the EF code...? => IN PROGRESS
 - Develop and/or Research Fluent Validation library => TODO
 
 *** TODO: what is the function of "nav-collapse collapse"?
@@ -43,9 +59,9 @@ Admin MVP Big Feature List - 12/2/2012
 - Login Screen => DONE
 - Admin User Manager => DONE
 - Category Editor => DONE
-- Size Editor => IN PROGRESS
+- Size Editor => DONE
 - Brand Editor => IN PROGRESS
-- Section Editor => IN PROGRESS
+- Section Editor => DONE
 - Color Editor => IN PROGRESS
 
 - Product Search & Editor
@@ -83,6 +99,7 @@ MORE BIG FISH
 
 PENDING FEATURE BACKLOG
 -----------------------
+- What about virus scan for file uploads, etc.? => PENDING EVALUATION
 - Add a way to execute the DDL which adds SQL Foreign Keys to Categories, etc. => PENDING EVAL
 - Eliminate the MembershipProvider (WHOO-HOO!!!!!!!) => PENDING EVAL
 * Roll everything into the MembershipService, take back control of your objects and data access.  Done.  OVER! => PENDING EVAL

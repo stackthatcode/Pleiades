@@ -269,13 +269,21 @@ TAKEAWAYS FROM REPOSITORY ISSUES
 * Wire into Controllers => TODO
 * Copy the View Model from Category for Size => DONE
 
-1/2/2013
---------
+1/2/2013 - 5.5 Hours
+--------------------
 *** MANDATE => after burndown of the goddamn backlog for Category Editor, every feature is weighed and estimated accordingly!  Make a feature Backlog. => DONE
 Section Editor => DONE
 - List all Sections, which includes a count of the Categories under each => DONE
 - Add a new Section => DONE
 - Update a Section => DONE
 - Delete a Section => DONE
+- Color Backend Programming => DONE
+- Brand Backend Programming => DONE
+- Performance - just how horrible is the EF code...? => DONE - FUCK PERFORMANCE, IT'S A SHIT MATCH
 
+1/3/2013 - 3.0 Hours
+--------------------
+- Built ImageBundle, FileResource Repositories => DONE
+- Research File Upload - found JQuery + Bootstrap plug-ins => DONE
+- Stubbed-out Image Processor => DONE
 

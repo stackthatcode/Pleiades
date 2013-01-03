@@ -10,7 +10,7 @@ namespace Commerce.IntegrationTests.Repositories
     public class BrandRepositoryTests : FixtureBase
     {
         [Test]
-        public void sdsg()
+        public void Empty_And_Repopulate_And_Update_Sizes()
         {
         }
     }

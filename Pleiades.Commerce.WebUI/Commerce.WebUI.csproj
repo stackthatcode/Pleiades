@@ -84,7 +84,9 @@
   <ItemGroup>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AuthController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BrandController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ColorController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerController.cs" />
@@ -189,6 +191,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Brand\" />
+    <Folder Include="Areas\Admin\Views\Color\" />
     <Folder Include="Areas\Public\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
