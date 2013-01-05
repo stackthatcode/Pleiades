@@ -1,0 +1,34 @@
+Life Story of a File Resource
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.1.) User uploads File Resource
+1.2.) File is processors and stored in the Resource Storage
+1.3.) Controller returns External Resource Id
+2.) ???
+3.1.) User saves a record which references the  External Resource Id
+3.2.) Repository gets the image Id by ERId
+3.3.) Reposttory saves the Brand/Color/Product Record, with the Resource associated to the parent record
+
+
+Clean-up Process
+----------------
+* Can be run periodically
+* Can be run against blocks of 100x Records
+* Can be triggered with each Upload based on orphans with a certain lifespan (30 minutes or more...)
+
+1.) Remove all Files which have IsDeleted == true
+2.) Remove all Files which are not linked to anything
+
+
+
+
+
+Image Service Concerns - SAVE FOR LATER
+---------------------------------------
+- How do we store multiple sizes of same image?  How do we reference them?  How do we discover the reference?
+- How do we create the different sizes?
+- What happens to the original?
+- How do images store their authorization?  How do we cache images?
+- When we save an image in the ImageRepository, does it issue the new file name for us?
+- Where do we place the physical storage...?
+- How do we reuse the Image object across difference Domain objects...?

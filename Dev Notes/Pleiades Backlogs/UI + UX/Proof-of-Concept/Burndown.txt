@@ -287,3 +287,8 @@ Section Editor => DONE
 - Research File Upload - found JQuery + Bootstrap plug-ins => DONE
 - Stubbed-out Image Processor => DONE
 
+1/4/2013 - 5.0 Hours
+--------------------
+- Exceptional! Finished back-end coding for Brand => DONE
+- Built Brand Controller, Brand Repository =>  DONE
+- Tweaked the ImageBundleRepository and so forth => DONE

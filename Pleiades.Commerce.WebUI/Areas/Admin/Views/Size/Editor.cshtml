@@ -106,7 +106,7 @@
 			
 			self.ClearUnsavedRecordFromModel = function() {
 				if (self.ChildViewSelectedRecord() && self.ChildViewSelectedRecord().Id() === null) {
-					self.ChildViewModel().Categories.remove(self.ChildViewSelectedRecord());
+					self.ChildViewModel().Sizes.remove(self.ChildViewSelectedRecord());
 				}
 			}
 
@@ -345,7 +345,7 @@
 		<tbody data-bind="foreach: $data.Data()">
 			<tr>
 			<td>
-				<span class="span9">
+				<span class="span8">
 					<input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
 					<h4 data-bind="text: $data.Name"></h4>
 					
@@ -356,13 +356,13 @@
 					<!-- /ko -->
 				</span>
 				
-				<span class="span3" style="text-align:right;">
+				<span class="span4" style="text-align:right;">
 					<a class="btn" href="#" data-bind="click: $root.ExpandToggle">
 						<i class="icon-chevron-down" data-bind="visible: $data.Expanded()"></i>
 						<i class="icon-chevron-up" data-bind="visible: !$data.Expanded()"></i>
 					</a>
 					
-					<a class="btn btn-inverse" data-bind="click: $root.GlideToChildView">Edit Category<i class="icon-arrow-right icon-white"></i></a>
+					<a class="btn btn-inverse" data-bind="click: $root.GlideToChildView">Edit Group of Sizes<i class="icon-arrow-right icon-white"></i></a>
 				</span>
 			</td>
 			</tr>

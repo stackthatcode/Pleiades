@@ -18,7 +18,7 @@ namespace Commerce.Persist.Security
         [Obsolete]
         public string ApplicationName { get; set; }
 
-        public PfMembershipRepository(DbContext context, string applicationName = "/")
+        public PfMembershipRepository(PleiadesContext context, string applicationName = "/")
             : base(context)
         {
             this.ApplicationName = applicationName;

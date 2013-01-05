@@ -11,9 +11,9 @@ namespace Commerce.Persist.Lists
 {
     public class SizeRepository : ISizeRepository
     {
-        DbContext Context { get; set; }
+        PleiadesContext Context { get; set; }
 
-        public SizeRepository(DbContext context)
+        public SizeRepository(PleiadesContext context)
         {
             this.Context = context;
         }

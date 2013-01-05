@@ -36,10 +36,6 @@ namespace Commerce.Persist
         {
         }
 
-        public PleiadesContext(string conn) : base(conn)
-        {
-        }
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //modelBuilder.Entity<AggregateUser>().

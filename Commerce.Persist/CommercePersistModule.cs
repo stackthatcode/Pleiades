@@ -19,7 +19,10 @@ namespace Commerce.Persist
         protected override void Load(ContainerBuilder builder)
         {
             // Context and Unit of Work
-            builder.RegisterType<PleiadesContext>().As<DbContext>().InstancePerLifetimeScope();
+            builder.RegisterType<PleiadesContext>()
+                .As<PleiadesContext>()
+                .As<DbContext>()
+                .InstancePerLifetimeScope();
             builder.RegisterType<EFUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
 
             // User Repositories
@@ -33,8 +36,9 @@ namespace Commerce.Persist
             builder.RegisterType<ColorRepository>().As<IColorRepository>().InstancePerLifetimeScope();
 
             // Resource Repositories
-            builder.RegisterType<ImageBundleRepository>().As<IImageBundleRepository>().InstancePerLifetimeScope();
             builder.RegisterType<FileResourceRepository>().As<IFileResourceRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<ImageBundleRepository>().As<IImageBundleRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<ImageProcessor>().As<IImageProcessor>().InstancePerLifetimeScope();
 
             // Generic Domain-serving Repositories
             builder.RegisterType<EFGenericRepository<Category>>().As<IGenericRepository<Category>>().InstancePerLifetimeScope();

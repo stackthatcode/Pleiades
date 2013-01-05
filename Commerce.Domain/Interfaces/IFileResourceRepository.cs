@@ -11,5 +11,6 @@ namespace Commerce.Domain.Interfaces
         FileResource AddNew(byte[] bytes);
         byte[] RetrieveBytes(Guid externalId);
         void Delete(int Id);
+        string PhysicalFilePath(Guid externalId);
     }
 }

@@ -15,28 +15,31 @@ Front Range
 
 ...work...
 
-- The other 2 Lists Backend (Brand, Color) => IN PROGRESS
+- The other 2 Lists Backend (Brand, Color) => MOSTLY DONE
+- File Upload Backend => IN PROGRESS
+
 - The other 2 Lists UI => IN PROGRESS
 - AJAX File Upload / Bootstrap => IN PROGRESS
-- File Upload => IN PROGRESS
 
-
-Image Service Concerns
-----------------------
-- How do we store multiple sizes of same image?  How do we reference them?  How do we discover the reference?
-- How do we create the different sizes?
-- What happens to the original?
-- How do images store their authorization?  How do we cache images?
-- When we save an image in the ImageRepository, does it issue the new file name for us?
-- Where do we place the physical storage...?
-- How do we reuse the Image object across difference Domain objects...?
-
-
-
-USE THIS ON THE UI SIDE OF THINGS
----------------------------------
+*** USE THIS ON THE UI SIDE OF THINGS
 - http://fineuploader.com/#demo
 - https://github.com/valums/file-uploader/tree/master/server/ASP.NET%20MVC%20C%23
+
+
+Notes on Brand State
+--------------------
+#1.) Adding a new Record
+- The Brand data is empty
+- The External Id is NOT present
+
+#2.) Adding a new Record After File Upload
+- The Brand data is empty
+- The External Id is present
+
+#3.) Editing an Existing Record
+- The Brand data is populated
+- The External Id is present
+
 
 
 

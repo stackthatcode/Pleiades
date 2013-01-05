@@ -7,9 +7,10 @@ namespace Commerce.Domain.Interfaces
 {
     public interface IBrandRepository
     {
-        List<Brand> RetrieveAll();
-        Func<Brand> Insert(Brand brand);
-        void Update(Brand brand);
-        void DeleteSoft(Brand brand);
+        List<JsonBrand> RetrieveAll();
+        JsonBrand Retrieve(int id);
+        Func<JsonBrand> Insert(JsonBrand brand);
+        void Update(JsonBrand brand);
+        void DeleteSoft(JsonBrand brand);
     }
 }

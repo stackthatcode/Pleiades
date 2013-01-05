@@ -4,6 +4,9 @@ using Commerce.Domain.Model.Resources;
 
 namespace Commerce.Domain.Model.Lists
 {
+    // Ok, this works for Retrieval?
+    // What about Update/Insert/Delete
+
     [JsonObject]
     public class JsonBrand
     {
@@ -21,5 +24,8 @@ namespace Commerce.Domain.Model.Lists
 
         [JsonProperty]
         public string SEO { get; set; }
+
+        [JsonProperty]
+        public Guid ImageBundleExternalResourceId { get; set; }
     }
 }

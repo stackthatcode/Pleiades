@@ -60,6 +60,7 @@
     <Compile Include="Model\Lists\Brand.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Lists\BrandExtensions.cs" />
     <Compile Include="Model\Lists\Category.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -67,10 +68,10 @@
     <Compile Include="Model\Lists\Color.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Lists\JsonBrand.cs" />
     <Compile Include="Model\Lists\JsonCategory.cs" />
     <Compile Include="Model\Lists\JsonSize.cs" />
     <Compile Include="Model\Lists\JsonSizeGroup.cs" />
+    <Compile Include="Model\Lists\JsonBrand.cs" />
     <Compile Include="Model\Lists\SizeExtensions.cs" />
     <Compile Include="Model\Lists\SizeGroup.cs" />
     <Compile Include="Model\Lists\SmallIdea.cs" />
@@ -85,8 +86,8 @@
     </Compile>
     <Compile Include="Model\Resources\FileResource.cs" />
     <Compile Include="Model\Resources\ImageBundle.cs" />
+    <Compile Include="Model\Resources\JsonImageBundle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DomainModule.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

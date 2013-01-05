@@ -11,9 +11,9 @@ namespace Commerce.Persist.Lists
 {
     public class ColorRepository : IColorRepository
     {
-        DbContext Context { get; set; }
+        PleiadesContext Context { get; set; }
 
-        public ColorRepository(DbContext context)
+        public ColorRepository(PleiadesContext context)
         {
             this.Context = context;
         }

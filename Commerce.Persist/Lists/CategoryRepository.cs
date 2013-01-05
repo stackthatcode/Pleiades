@@ -15,9 +15,9 @@ namespace Commerce.Persist.Lists
     /// </summary>
     public class CategoryRepository : ICategoryRepository
     {
-        DbContext Context { get; set; }
+        PleiadesContext Context { get; set; }
 
-        public CategoryRepository(DbContext context)
+        public CategoryRepository(PleiadesContext context)
         {
             this.Context = context;
         }

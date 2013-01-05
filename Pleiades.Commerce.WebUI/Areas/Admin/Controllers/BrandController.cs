@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Pleiades.Data;
@@ -26,9 +27,6 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             return View();
         }
 
-
-        // TODO: create Model for Brands
-        
         [HttpGet]
         public ActionResult Brands()
         {
@@ -36,39 +34,30 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             return new JsonNetResult(result);
         }
 
-
-        // TODO: create a data entry Model for Insert
-
-        // STEP #1 - create the Brand record
         [HttpPost]
-        public ActionResult Insert(Brand brand)
+        public ActionResult Insert(JsonBrand brand)
         {
             var saveResult = this.Repository.Insert(brand);
             this.UnitOfWork.SaveChanges();
             return new JsonNetResult(saveResult());
         }
 
-        // STEP #2 - upload the image file
         [HttpPost]
         public ActionResult AddImageBundle(Brand brand)
         {
             throw new NotImplementedException();
         }
 
-
-        // TODO: create a data entry Model for Update
         [HttpPost]
-        public ActionResult Update(Brand brand)
+        public ActionResult Update(JsonBrand brand)
         {
             this.Repository.Update(brand);
             this.UnitOfWork.SaveChanges();
             return new JsonNetResult(brand);
         }
 
-
-        // TODO: create a data entry Model for Delete
         [HttpPost]
-        public ActionResult Delete(Brand brand)
+        public ActionResult Delete(JsonBrand brand)
         {
             this.Repository.DeleteSoft(brand);
             this.UnitOfWork.SaveChanges();

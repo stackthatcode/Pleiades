@@ -11,7 +11,7 @@ namespace Commerce.Persist.Security
 {
     public class AggregateUserRepository : EFGenericRepository<AggregateUser>, IAggregateUserRepository
     {
-        public AggregateUserRepository(DbContext context) : base(context)
+        public AggregateUserRepository(PleiadesContext context) : base(context)
         {
         }
 

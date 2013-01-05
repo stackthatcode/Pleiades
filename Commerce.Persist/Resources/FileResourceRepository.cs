@@ -21,24 +21,29 @@ namespace Commerce.Persist.Resources
         public FileResourceRepository(PleiadesContext context)
         {
             this.Context = context;
+
+            // TODO: see if we want to 
             this.ResourceStorage = ConfigurationManager.AppSettings["ResourceStorage"] ?? @"C:\ResourceStorage";
         }
 
         public FileResource AddNew(Bitmap bitmap)
         {
-            var externalId = Guid.NewGuid();
-            var physicalRelativeStorage = Path.Combine(externalId.ToString(), "file.jpg");
-
+            var externalId = Guid.NewGuid();            
             var fileResource = new FileResource()
             {
                 ExternalId = externalId,
                 Name = "(untitled)",
-                PhysicalRelativeStorage = physicalRelativeStorage,
                 DateInserted = DateTime.Now,
                 DateUpdated = DateTime.Now,
             };
 
-            bitmap.Save(this.FilePath(physicalRelativeStorage), ImageFormat.Jpeg);
+            var relativePath = RelativeFilePath(externalId);
+            var fullFilePath = PhysicalFilePath(externalId);
+            var directory = StorageDirectory(externalId);
+            
+            Directory.CreateDirectory(directory);
+            bitmap.Save(fullFilePath, ImageFormat.Jpeg);
+
             this.Context.FileResources.Add(fileResource);
             return fileResource; 
         }
@@ -54,7 +59,8 @@ namespace Commerce.Persist.Resources
             // #2.) Check the File cache
 
             var fileResource = this.Context.FileResources.First(x => x.ExternalId == externalId);
-            return File.ReadAllBytes(this.FilePath(fileResource.PhysicalRelativeStorage));
+            var fullFilePath = PhysicalFilePath(externalId);
+            return File.ReadAllBytes(fullFilePath);
         }
 
         public void Delete(int Id)
@@ -63,9 +69,20 @@ namespace Commerce.Persist.Resources
             dataFileResource.Deleted = true;
         }
 
-        private string FilePath(string relativePath)
+
+        public string RelativeFilePath(Guid externalId)
         {
-            return Path.Combine(this.ResourceStorage, relativePath);
+            return Path.Combine(externalId.ToString(), "image.jpg");
+        }
+
+        public string PhysicalFilePath(Guid externalId)
+        {
+            return Path.Combine(this.ResourceStorage, RelativeFilePath(externalId));
+        }
+
+        public string StorageDirectory(Guid externalId)
+        {
+            return Path.Combine(this.ResourceStorage, externalId.ToString());
         }
     }
 }
