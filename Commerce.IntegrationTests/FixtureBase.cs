@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Configuration;
 using Pleiades.Data;
 using Pleiades.Web.Security.Providers;
 using Pleiades.Utility;
@@ -11,15 +13,17 @@ namespace Commerce.IntegrationTests
     [TestFixture]
     public class FixtureBase
     {
-        public static bool recreatedDatabase = false;
+        public static bool recreateDatabaseAndResources = false;
         public static PleiadesContext context = new PleiadesContext();
 
         public FixtureBase()
         {
-            if (!FixtureBase.recreatedDatabase)
+            // Clean-out the Database
+            if (!FixtureBase.recreateDatabaseAndResources)
             {
                 FixtureBase.RecreateDatabase();
-                FixtureBase.recreatedDatabase = true;
+                FixtureBase.DestroyResourceFiles();
+                FixtureBase.recreateDatabaseAndResources = true;
             }
         }
 
@@ -33,6 +37,16 @@ namespace Commerce.IntegrationTests
 
             Console.WriteLine("Creating Database for Integration Testing");
             context.Database.Create();
+        }
+
+        public static void DestroyResourceFiles()
+        {
+            // Clean-out the Resource Directory
+            Console.WriteLine("Deleting Resource Files for Integration Testing");
+            var resourceDirectory = ConfigurationManager.AppSettings["ResourceStorage"];
+            var directoryInfo = new DirectoryInfo(resourceDirectory);
+            directoryInfo.GetFiles("*.*", SearchOption.AllDirectories).ForEach(x => x.Delete());
+            directoryInfo.GetDirectories().ForEach(x => x.Delete());
         }
 
         public static void CleanOutUserData()

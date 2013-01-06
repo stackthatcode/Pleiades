@@ -43,7 +43,7 @@ namespace Commerce.Persist.Lists
         public void Update(JsonBrand brandDiff)
         {
             var imageBundle = 
-                this.ImageBundleRepository.Retrieve(brandDiff.ImageBundleExternalResourceId);
+                this.ImageBundleRepository.Retrieve(brandDiff.ImageBundleExternalId);
 
             var brand = this.Data().FirstOrDefault(x => x.Id == brandDiff.Id);
             brand.Name = brandDiff.Name;
@@ -57,7 +57,7 @@ namespace Commerce.Persist.Lists
         public Func<JsonBrand> Insert(JsonBrand brandDiff)
         {
             var imageBundle = 
-                this.ImageBundleRepository.Retrieve(brandDiff.ImageBundleExternalResourceId);
+                this.ImageBundleRepository.Retrieve(brandDiff.ImageBundleExternalId);
 
             var brand = new Brand
             {

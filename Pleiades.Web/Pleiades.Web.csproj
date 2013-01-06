@@ -63,7 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Autofac\AutofacContainer.cs" />
-    <Compile Include="JsonNetResult.cs" />
+    <Compile Include="FineUploader\FineUpload.cs" />
+    <Compile Include="FineUploader\FineUploadResult.cs" />
+    <Compile Include="Json\JsonNetResult.cs" />
     <Compile Include="MvcHelpers\StyleTagGenerator.cs" />
     <Compile Include="MvcHelpers\ScriptTagGenerator.cs" />
     <Compile Include="MvcHelpers\TagIfNotEmpty.cs" />

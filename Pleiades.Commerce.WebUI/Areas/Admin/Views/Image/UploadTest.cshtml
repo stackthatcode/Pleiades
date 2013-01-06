@@ -1,0 +1,131 @@
+﻿@using Pleiades.Web.MvcHelpers
+
+@section _Scripts { 
+    @Html.Partial("_FineUploader")
+
+    <style>
+      .qq-upload-list {
+       text-align: left;
+      }
+ 
+      li.alert-success {
+        background-color: #DFF0D8;
+      }
+       
+      li.alert-error {
+        background-color: #F2DEDE;
+      }
+        
+      .alert-error .qq-upload-failed-text {
+        display: inline;
+      }
+    </style>
+    
+    <script type="text/javascript">        
+		// KO enabling/disabling of server JSON
+        var ImageBundleToKnockout = function(section) {
+			return {
+				Id: ko.observable(section.Id),
+				Name: ko.observable(section.Name),
+				SEO: ko.observable(section.SEO)
+            };
+        }
+    </script>
+
+	<script type="text/javascript">
+        var imageControllerEndpoint = "UploadFile";
+
+	    function UploadViewModel(serviceAdapter) {
+	        var self = this;
+
+	        // Initialization
+	        self.ServiceAdapter = serviceAdapter;
+	        self.Data = ko.observable(null);
+            self.ModalViewModel = ko.observable(null);
+	        self.RetrieveSections();
+	    }
+
+	    $(function () {
+	        var crosscuttingUI = new CrossCuttingUI();
+	        // var serviceAdapter = new SectionService(crosscuttingUI.Error, crosscuttingUI.ShowLoading, crosscuttingUI.HideLoading);
+	        // var model = new SectionViewModel(serviceAdapter);
+	        // ko.applyBindings(model);
+
+            // TODO: move this to pushmkt-common, or another file
+            $('#bootstrapped-fine-uploader').fineUploader({
+                element: document.getElementById('bootstrapped-fine-uploader'),
+                request: {
+                endpoint: imageControllerEndpoint,
+                },
+                text: {
+                uploadButton: '<i class="icon-upload icon-white"></i> Upload a file'
+                },
+                template: '<div class="qq-uploader span3">' +
+                            '<pre class="qq-upload-drop-area span3"><span>{dragZoneText}</span></pre>' +
+                            '<div class="qq-upload-button btn btn-success" style="width: auto;">{uploadButtonText}</div>' +
+                            '<span class="qq-drop-processing"><span>{dropProcessingText}</span><span class="qq-drop-processing-spinner"></span></span>' +
+                            '<ul class="qq-upload-list" style="margin-top: 10px; text-align: center;"></ul>' +
+                        '</div>',
+                classes: {
+                    success: 'alert alert-success',
+                    fail: 'alert alert-error'
+                },
+                callbacks: {
+                    onSubmit: function(id, fileName){}, // return false to cancel submit
+                    onComplete: function(id, fileName, responseJSON){
+                        alert(responseJSON);
+                    },
+                },
+                debug: true,
+            });
+	    });
+	</script>
+}
+
+@section _Templates {
+	
+	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR -->
+	<script type="text/html" id="Main-Editor">
+        
+	</script>
+	
+	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG -->
+	<script type="text/html" id="Modal-Dialog">
+		<div id="modal-delete" class="modal hide fade" data-bind="if: $root.SelectedRecord()">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3>Delete <span data-bind="text: $root.SelectedRecord().Name()"></span></h3>
+			</div>
+			<div class="modal-body">
+				<p>Are you sure you want to Delete this Section?</p>			
+				<p><strong>Warning: all <span data-bind="text: $root.SelectedRecord().NumberOfCategories()"></span> Categories and Sub-Categories will be Deleted, too.</strong></p>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.DeleteConfirm"><i class="icon-ok icon-white"></i> Ok</a>
+			</div>
+		</div>		
+	</script>
+}
+
+@section _Body {
+    <div class="workspace-heading-parent">
+		<div class="workspace-heading">
+            <div id="heading" class="container">
+                <div class="row">
+				    <div class="span9">
+					    <h1>Image Upload Test Page</h1>
+				    </div>
+			    </div>
+		    </div>
+        </div>
+	</div>
+	
+	<div id="gliding-container" class="container">
+		<div id="row">
+            <div id="bootstrapped-fine-uploader" class="span3"></div>
+		</div>
+    </div>
+
+    <div id="modal-enclave" data-bind="template: { name: 'Modal-Dialog' }"></div>    
+}

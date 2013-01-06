@@ -7,5 +7,6 @@ namespace Commerce.Domain.Interfaces
     {
         Bitmap CreateThumbnail(Bitmap original);
         Bitmap CreateLarge(Bitmap original);
+        Bitmap CreateSmall(Bitmap original);
     }
 }

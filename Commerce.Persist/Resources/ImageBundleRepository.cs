@@ -28,6 +28,7 @@ namespace Commerce.Persist.Resources
         {
             var thumbnail = this.ImageProcessor.CreateThumbnail(original);
             var large = this.ImageProcessor.CreateLarge(original);
+            var small = this.ImageProcessor.CreateSmall(original);
 
             var bundle = new ImageBundle()
             {
@@ -35,6 +36,7 @@ namespace Commerce.Persist.Resources
                 Large = this.FileResourceRepository.AddNew(large),
                 Original = this.FileResourceRepository.AddNew(original),
                 Thumbnail = this.FileResourceRepository.AddNew(thumbnail),
+                Small = this.FileResourceRepository.AddNew(small),
                 DateInserted = DateTime.Now,
                 DateUpdated = DateTime.Now,
             };
@@ -59,11 +61,13 @@ namespace Commerce.Persist.Resources
             imageBundle.Original.Deleted = true;
             imageBundle.Thumbnail.Deleted = true;
             imageBundle.Large.Deleted = true;
+            imageBundle.Small.Deleted = true;
             imageBundle.Deleted = true;
 
             imageBundle.Original.DateUpdated = DateTime.Now;
             imageBundle.Thumbnail.DateUpdated = DateTime.Now;
             imageBundle.Large.DateUpdated = DateTime.Now;
+            imageBundle.Small.DateUpdated = DateTime.Now;
             imageBundle.DateUpdated = DateTime.Now;
         }
     }

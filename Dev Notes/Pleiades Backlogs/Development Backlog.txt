@@ -16,37 +16,26 @@ Front Range
 ...work...
 
 - The other 2 Lists Backend (Brand, Color) => MOSTLY DONE
-- File Upload Backend => IN PROGRESS
-
 - The other 2 Lists UI => IN PROGRESS
+
 - AJAX File Upload / Bootstrap => IN PROGRESS
+- http://fineuploader.com/#demo =>  DONE
+* Copy the script => DONE
+* Test on the Test Upload page => DONE
+* Backend Script / File Upload Backend => DONE
 
-*** USE THIS ON THE UI SIDE OF THINGS
-- http://fineuploader.com/#demo
-- https://github.com/valums/file-uploader/tree/master/server/ASP.NET%20MVC%20C%23
-
-
-Notes on Brand State
---------------------
-#1.) Adding a new Record
-- The Brand data is empty
-- The External Id is NOT present
-
-#2.) Adding a new Record After File Upload
-- The Brand data is empty
-- The External Id is present
-
-#3.) Editing an Existing Record
-- The Brand data is populated
-- The External Id is present
-
-
+- Capture the OnCompletion event and pull data from Image Bundle => TODO
+- Fix the Bootstrap styling => TODO
+- Create the Thumbnail View => TODO
+- Create the Click for Larger Image View => TODO
+- Disable Uploads while in progress => TODO
+- Donate $20 to FineUploader upon successful integration => TODO
+- Centralize Upload Code => TODO
 
 
 - Check Sanderson for advanced Model Binding => TODO
 - Change Menu for Login Screen => TODO
 - Logged-In User => TODO
-
 - IsONline - Check How This Functions => TODO
 - Develop and/or Research Fluent Validation library => TODO
 
@@ -57,23 +46,23 @@ Notes on Brand State
 - http://code.google.com/p/autofac/wiki/MvcIntegration
 
 
-Admin MVP Big Feature List - 12/2/2012
----------------------------------------
+Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/6/2013
+------------------------------------------------------------
 - Login Screen => DONE
 - Admin User Manager => DONE
 - Category Editor => DONE
 - Size Editor => DONE
-- Brand Editor => IN PROGRESS
 - Section Editor => DONE
 - Color Editor => IN PROGRESS
+- Brand Editor => IN PROGRESS
 
 - Product Search & Editor
 - Order Search & Editor
 - Customer Search & Editor
-- SKU Generator
+- SKU Generator => UPDATE: shouldn't this be automatic...?
 
 - Basic Analytic Tracker - Traffic Source, Landing Page => WORTH HASHING OUT
-- Image Upload & Processing Engine
+- Image Upload & Processing Engine => DONE
 - Email Sending Engine
 - Server Logging
 - Barebones Console App => IN PROGRESS

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Pleiades.Data;
 using Pleiades.Web;
+using Pleiades.Web.FineUploader;
 using Commerce.Domain.Interfaces;
 using Commerce.Domain.Model.Lists;
 using Commerce.Domain.Model.Resources;
@@ -28,6 +30,12 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             this.UnitOfWork = unitOfWork;
         }
 
+        [HttpGet]
+        public ActionResult UploadTest()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase file)
         {
@@ -36,6 +44,22 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             var imageBundle = this.ImageBundleRepository.Add(bitmap);
 
             return new JsonNetResult(imageBundle);
+        }
+
+        [HttpPost]
+        public FineUploaderResult UploadFile(FineUpload upload)
+        {
+            try
+            {
+                var bitmap = new Bitmap(upload.InputStream);
+                var imageBundle = this.ImageBundleRepository.Add(bitmap);
+                return new FineUploaderResult(true, new { extraInformation = imageBundle });
+            }
+            catch (Exception ex)
+            {
+                // TODO: dump this to logs and handle AJAX errors appropriately 
+                return new FineUploaderResult(false, error: ex.Message);
+            }
         }
 
         [HttpGet]
@@ -47,6 +71,8 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
                 fileResource = imageBundle.Thumbnail;
             else if (size == "large")
                 fileResource = imageBundle.Large;
+            else if (size == "small")
+                fileResource = imageBundle.Small;
             else 
                 fileResource = imageBundle.Original;
 

@@ -11,7 +11,7 @@
                 SEO = brand.SEO,
                 SkuCode = brand.SkuCode,
                 Description = brand.Description,
-                ImageBundleExternalResourceId = brand.ImageBundle.ExternalId,
+                ImageBundleExternalId = brand.ImageBundle.ExternalId,
             };
         }
     }

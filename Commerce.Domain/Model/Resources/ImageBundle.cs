@@ -12,6 +12,7 @@ namespace Commerce.Domain.Model.Resources
         public FileResource Original { get; set; }
         public FileResource Thumbnail { get; set; }
         public FileResource Large { get; set; }
+        public FileResource Small { get; set; }
         public bool Deleted { get; set; }
         public DateTime DateInserted { get; set; }
         public DateTime DateUpdated { get; set; }

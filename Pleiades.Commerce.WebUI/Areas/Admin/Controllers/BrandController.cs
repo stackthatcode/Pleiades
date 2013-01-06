@@ -43,12 +43,6 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddImageBundle(Brand brand)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost]
         public ActionResult Update(JsonBrand brand)
         {
             this.Repository.Update(brand);

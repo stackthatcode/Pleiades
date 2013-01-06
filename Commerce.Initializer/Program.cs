@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Transactions;
 using Pleiades.Data;
@@ -31,8 +33,10 @@ namespace Commerce.Initializer
             Console.WriteLine("\nPushMarket Commerce Version v1.0 Prototype Initializer");
             Console.WriteLine("Push Global LLC - All Rights Reserved");
             Console.WriteLine("...");
-            // Database Destruction and Creation
+
+            // Database Destruction, Resource Directory too
             DestroyDatabase();
+            DestroyResourceFiles();
             CreateDatabase();
 
             // Components Initialization
@@ -42,11 +46,22 @@ namespace Commerce.Initializer
             RootUserBuilder.CreateTheSupremeUser(serviceLocator);
             CategoryBuilder.EmptyAndRepopulate(serviceLocator);
             SizeBuilder.EmptyAndRepopulate(serviceLocator);
+            BrandBuilder.EmptyAndRepopulate(serviceLocator);
         }
 
         public static void DestroyDatabase()
         {
             DbContext.Database.Delete();
+        }
+
+        public static void DestroyResourceFiles()
+        {
+            // Clean-out the Resource Directory
+            var resourceDirectory = ConfigurationManager.AppSettings["ResourceStorage"];
+            Console.WriteLine("Cleaning out Resource Directory: " + resourceDirectory);
+            var directoryInfo = new DirectoryInfo(resourceDirectory);
+            directoryInfo.GetFiles("*.*", SearchOption.AllDirectories).ForEach(x => x.Delete());
+            directoryInfo.GetDirectories().ForEach(x => x.Delete());
         }
 
         public static void CreateDatabase()

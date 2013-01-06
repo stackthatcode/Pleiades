@@ -26,6 +26,6 @@ namespace Commerce.Domain.Model.Lists
         public string SEO { get; set; }
 
         [JsonProperty]
-        public Guid ImageBundleExternalResourceId { get; set; }
+        public Guid ImageBundleExternalId { get; set; }
     }
 }

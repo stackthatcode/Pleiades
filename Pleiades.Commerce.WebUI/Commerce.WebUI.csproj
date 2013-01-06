@@ -127,6 +127,19 @@
     <Content Include="Content\bootstrap\js\bootstrap-modal.js" />
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\fineuploader\fineuploader.css" />
+    <Content Include="Content\fineuploader\js\button.js" />
+    <Content Include="Content\fineuploader\js\dnd.js" />
+    <Content Include="Content\fineuploader\js\handler.base.js" />
+    <Content Include="Content\fineuploader\js\handler.form.js" />
+    <Content Include="Content\fineuploader\js\handler.xhr.js" />
+    <Content Include="Content\fineuploader\js\header.js" />
+    <Content Include="Content\fineuploader\js\jquery-plugin.js" />
+    <Content Include="Content\fineuploader\js\uploader.basic.js" />
+    <Content Include="Content\fineuploader\js\uploader.js" />
+    <Content Include="Content\fineuploader\js\util.js" />
+    <Content Include="Content\fineuploader\loading.gif" />
+    <Content Include="Content\fineuploader\processing.gif" />
     <Content Include="Content\Images\ajax_loader.gif" />
     <Content Include="Content\Images\webicon-2.png" />
     <Content Include="Content\jquery\jquery-1.8.2.min.js" />
@@ -135,6 +148,9 @@
     <Content Include="Content\knockout\ko.observableDictionary.js" />
     <Content Include="Content\Scripts\category-service.js" />
     <Content Include="Content\Scripts\ajax-service.js" />
+    <Content Include="Content\Scripts\brand-service.js" />
+    <Content Include="Content\Scripts\fineupload-init.js" />
+    <Content Include="Content\Scripts\image-service.js" />
     <Content Include="Content\Scripts\section-service.js" />
     <Content Include="Content\Scripts\size-service.js" />
     <Content Include="Content\Scripts\flow.js" />
@@ -254,6 +270,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Section\Editor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Image\UploadTest.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Shared\_FineUploader.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

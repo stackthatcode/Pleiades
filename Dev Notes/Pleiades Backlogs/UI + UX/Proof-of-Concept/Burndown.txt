@@ -292,3 +292,24 @@ Section Editor => DONE
 - Exceptional! Finished back-end coding for Brand => DONE
 - Built Brand Controller, Brand Repository =>  DONE
 - Tweaked the ImageBundleRepository and so forth => DONE
+
+1/6/2013 - 3.25 Hours
+--------------------
+Notes on Brand State => DONE
+#1.) Adding a new Record
+- The Brand data is empty
+- The External Id is NOT present
+#2.) Adding a new Record After File Upload
+- The Brand data is empty
+- The External Id is present
+#3.) Editing an Existing Record
+- The Brand data is populated
+- The External Id is present
+
+- https://github.com/valums/file-uploader/tree/master/server/ASP.NET%20MVC%20C%23 => INTEGRATED WITH CODEBASE
+
+
+
+
+
+
