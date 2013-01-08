@@ -1,0 +1,60 @@
+Compliance Management Tools
+---------------------------
+
+Backlog/TODO
+------------
+- Github Repository
+- Read the Parntership Agreement
+
+
+
+Scope Areas
+- Location, business-lines, parts of the computer network, software
+
+Assets
+- Physical systems, personnel, facilities, computers, applications, data, credit card
+
+
+Asset 1 to N => Scope Areas
+
+E.g.: Credit Card information stored in multiple areas
+
+
+
+Object Storm
+------------
+Task
+Controls
+Assets
+Scope Areas
+Audit Questions
+Guidance
+
+
+User Roles
+----------
+- Executive Visitor
+* View Reports, Audit Results, Progress Reports
+
+- Global Admin
+* ALL Scope Areas
+* sets everybody up
+* Creates Assets
+* Creates Users
+* Defines which Controls are applicable to that Area
+
+- Compliance Manager / Scope Area Admin 
+* One to Many Scope Areas
+* By Scope Area
+* Defines which Controls are applicable to that Area
+* Creates a task list/questionaires
+
+- Auditor
+* One to Many Scope Areas
+* Read/Modify assessments in a Scope Area
+* Capabilities similar to Scope Area Admin
+
+- General User Role
+* Answers questionaires and updates Tasks status
+
+

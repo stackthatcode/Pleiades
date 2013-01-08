@@ -15,6 +15,11 @@ namespace Commerce.WebUI.Areas.Admin
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
+                "Image Download",
+                "Admin/Image/Download/{externalResourceId}",
+                new { controller = "Image", action = "Download", size = "small" });
+
+            context.MapRoute(
                 "Home Route",
                 "Admin/",
                 new { controller = "Home", action = "Index" });

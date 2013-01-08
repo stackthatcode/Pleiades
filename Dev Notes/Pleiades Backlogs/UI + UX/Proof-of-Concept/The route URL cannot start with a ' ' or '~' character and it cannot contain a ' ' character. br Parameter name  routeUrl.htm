@@ -1,0 +1,127 @@
+
+<!-- saved from url=(0095)http://localhost/Pleiades/Admin/Image?exRID=ac8cce09-76bd-42ea-9681-849bb82116d1&size=thumbnail -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>The route URL cannot start with a '/' or '~' character and it cannot contain a '?' character.&lt;br&gt;Parameter name: routeUrl</title>
+        <style>
+         body {font-family:"Verdana";font-weight:normal;font-size: .7em;color:black;} 
+         p {font-family:"Verdana";font-weight:normal;color:black;margin-top: -5px}
+         b {font-family:"Verdana";font-weight:bold;color:black;margin-top: -5px}
+         H1 { font-family:"Verdana";font-weight:normal;font-size:18pt;color:red }
+         H2 { font-family:"Verdana";font-weight:normal;font-size:14pt;color:maroon }
+         pre {font-family:"Lucida Console";font-size: .9em}
+         .marker {font-weight: bold; color: black;text-decoration: none;}
+         .version {color: gray;}
+         .error {margin-bottom: 10px;}
+         .expandable { text-decoration:underline; font-weight:bold; color:navy; cursor:hand; }
+        </style>
+    </head>
+
+    <body bgcolor="white">
+
+            <span><h1>Server Error in '/Pleiades' Application.<hr width="100%" size="1" color="silver"></h1>
+
+            <h2> <i>The route URL cannot start with a '/' or '~' character and it cannot contain a '?' character.<br>Parameter name: routeUrl</i> </h2></span>
+
+            <font face="Arial, Helvetica, Geneva, SunSans-Regular, sans-serif ">
+
+            <b> Description: </b>An unhandled exception occurred during the execution of the current web request. Please review the stack trace for more information about the error and where it originated in the code.
+
+            <br><br>
+
+            <b> Exception Details: </b>System.ArgumentException: The route URL cannot start with a '/' or '~' character and it cannot contain a '?' character.<br>Parameter name: routeUrl<br><br>
+
+            <b>Source Error:</b> <br><br>
+
+            <table width="100%" bgcolor="#ffffcc">
+               <tbody><tr>
+                  <td>
+                      <code><pre>
+Line 15:         public override void RegisterArea(AreaRegistrationContext context)
+Line 16:         {
+<font color="red">Line 17:             context.MapRoute(
+</font>Line 18:                 "Image Download",
+Line 19:                 "Admin/Image/Download/{externalResourceId}",</pre></code>
+
+                  </td>
+               </tr>
+            </tbody></table>
+
+            <br>
+
+            <b> Source File: </b> C:\DEV\Pleiades\Pleiades.Commerce.WebUI\Areas\Admin\AdminAreaRegistration.cs<b> &nbsp;&nbsp; Line: </b> 17
+            <br><br>
+
+            <b>Stack Trace:</b> <br><br>
+
+            <table width="100%" bgcolor="#ffffcc">
+               <tbody><tr>
+                  <td>
+                      <code><pre>
+[ArgumentException: The route URL cannot start with a '/' or '~' character and it cannot contain a '?' character.
+Parameter name: routeUrl]
+   System.Web.Routing.RouteParser.Parse(String routeUrl) +2337062
+   System.Web.Mvc.RouteCollectionExtensions.MapRoute(RouteCollection routes, String name, String url, Object defaults, Object constraints, String[] namespaces) +63
+   System.Web.Mvc.AreaRegistrationContext.MapRoute(String name, String url, Object defaults, Object constraints, String[] namespaces) +59
+   System.Web.Mvc.AreaRegistrationContext.MapRoute(String name, String url, Object defaults) +17
+   Commerce.WebUI.Areas.Admin.AdminAreaRegistration.RegisterArea(AreaRegistrationContext context) in C:\DEV\Pleiades\Pleiades.Commerce.WebUI\Areas\Admin\AdminAreaRegistration.cs:17
+   System.Web.Mvc.AreaRegistration.CreateContextAndRegister(RouteCollection routes, Object state) +105
+   System.Web.Mvc.AreaRegistration.RegisterAllAreas(RouteCollection routes, IBuildManager buildManager, Object state) +199
+   System.Web.Mvc.AreaRegistration.RegisterAllAreas(Object state) +45
+   System.Web.Mvc.AreaRegistration.RegisterAllAreas() +6
+   Commerce.WebUI.CommerceHttpApplication.Application_Start() in C:\DEV\Pleiades\Pleiades.Commerce.WebUI\Global.asax.cs:20
+
+[HttpException (0x80004005): The route URL cannot start with a '/' or '~' character and it cannot contain a '?' character.
+Parameter name: routeUrl]
+   System.Web.HttpApplicationFactory.EnsureAppStartCalledForIntegratedMode(HttpContext context, HttpApplication app) +9171773
+   System.Web.HttpApplication.RegisterEventSubscriptionsWithIIS(IntPtr appContext, HttpContext context, MethodInfo[] handlers) +131
+   System.Web.HttpApplication.InitSpecial(HttpApplicationState state, MethodInfo[] handlers, IntPtr appContext, HttpContext context) +194
+   System.Web.HttpApplicationFactory.GetSpecialApplicationInstance(IntPtr appContext, HttpContext context) +339
+   System.Web.Hosting.PipelineRuntime.InitializeApplication(IntPtr appContext) +253
+
+[HttpException (0x80004005): The route URL cannot start with a '/' or '~' character and it cannot contain a '?' character.
+Parameter name: routeUrl]
+   System.Web.HttpRuntime.FirstRequestInit(HttpContext context) +9090876
+   System.Web.HttpRuntime.EnsureFirstRequestInit(HttpContext context) +97
+   System.Web.HttpRuntime.ProcessRequestNotificationPrivate(IIS7WorkerRequest wr, HttpContext context) +256
+</pre></code>
+
+                  </td>
+               </tr>
+            </tbody></table>
+
+            <br>
+
+            <hr width="100%" size="1" color="silver">
+
+            <b>Version Information:</b>&nbsp;Microsoft .NET Framework Version:4.0.30319; ASP.NET Version:4.0.30319.272
+
+            </font>
+
+    
+
+<!-- 
+[ArgumentException]: The route URL cannot start with a &#39;/&#39; or &#39;~&#39; character and it cannot contain a &#39;?&#39; character.
+Parameter name: routeUrl
+   at System.Web.Routing.RouteParser.Parse(String routeUrl)
+   at System.Web.Mvc.RouteCollectionExtensions.MapRoute(RouteCollection routes, String name, String url, Object defaults, Object constraints, String[] namespaces)
+   at System.Web.Mvc.AreaRegistrationContext.MapRoute(String name, String url, Object defaults, Object constraints, String[] namespaces)
+   at System.Web.Mvc.AreaRegistrationContext.MapRoute(String name, String url, Object defaults)
+   at Commerce.WebUI.Areas.Admin.AdminAreaRegistration.RegisterArea(AreaRegistrationContext context) in C:\DEV\Pleiades\Pleiades.Commerce.WebUI\Areas\Admin\AdminAreaRegistration.cs:line 17
+   at System.Web.Mvc.AreaRegistration.CreateContextAndRegister(RouteCollection routes, Object state)
+   at System.Web.Mvc.AreaRegistration.RegisterAllAreas(RouteCollection routes, IBuildManager buildManager, Object state)
+   at System.Web.Mvc.AreaRegistration.RegisterAllAreas(Object state)
+   at System.Web.Mvc.AreaRegistration.RegisterAllAreas()
+   at Commerce.WebUI.CommerceHttpApplication.Application_Start() in C:\DEV\Pleiades\Pleiades.Commerce.WebUI\Global.asax.cs:line 20
+[HttpException]: The route URL cannot start with a &#39;/&#39; or &#39;~&#39; character and it cannot contain a &#39;?&#39; character.
+Parameter name: routeUrl
+   at System.Web.HttpApplicationFactory.EnsureAppStartCalledForIntegratedMode(HttpContext context, HttpApplication app)
+   at System.Web.HttpApplication.RegisterEventSubscriptionsWithIIS(IntPtr appContext, HttpContext context, MethodInfo[] handlers)
+   at System.Web.HttpApplication.InitSpecial(HttpApplicationState state, MethodInfo[] handlers, IntPtr appContext, HttpContext context)
+   at System.Web.HttpApplicationFactory.GetSpecialApplicationInstance(IntPtr appContext, HttpContext context)
+   at System.Web.Hosting.PipelineRuntime.InitializeApplication(IntPtr appContext)
+[HttpException]: The route URL cannot start with a &#39;/&#39; or &#39;~&#39; character and it cannot contain a &#39;?&#39; character.
+Parameter name: routeUrl
+   at System.Web.HttpRuntime.FirstRequestInit(HttpContext context)
+   at System.Web.HttpRuntime.EnsureFirstRequestInit(HttpContext context)
+   at System.Web.HttpRuntime.ProcessRequestNotificationPrivate(IIS7WorkerRequest wr, HttpContext context)
+--></body></html>

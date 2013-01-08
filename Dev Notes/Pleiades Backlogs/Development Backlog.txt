@@ -19,15 +19,8 @@ Front Range
 - The other 2 Lists UI => IN PROGRESS
 
 - AJAX File Upload / Bootstrap => IN PROGRESS
-- http://fineuploader.com/#demo =>  DONE
-* Copy the script => DONE
-* Test on the Test Upload page => DONE
-* Backend Script / File Upload Backend => DONE
-
-- Capture the OnCompletion event and pull data from Image Bundle => TODO
-- Fix the Bootstrap styling => TODO
-- Create the Thumbnail View => TODO
-- Create the Click for Larger Image View => TODO
+- Create the Thumbnail View => IN PROGRESS
+- Create the Click for Larger Image View => IN PROGRESS
 - Disable Uploads while in progress => TODO
 - Donate $20 to FineUploader upon successful integration => TODO
 - Centralize Upload Code => TODO
@@ -53,6 +46,7 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/6/2013
 - Category Editor => DONE
 - Size Editor => DONE
 - Section Editor => DONE
+
 - Color Editor => IN PROGRESS
 - Brand Editor => IN PROGRESS
 
@@ -64,7 +58,7 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/6/2013
 - Basic Analytic Tracker - Traffic Source, Landing Page => WORTH HASHING OUT
 - Image Upload & Processing Engine => DONE
 - Email Sending Engine
-- Server Logging
+- Server Logging => 
 - Barebones Console App => IN PROGRESS
 
 

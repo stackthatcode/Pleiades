@@ -2,24 +2,7 @@
 
 @section _Scripts { 
     @Html.Partial("_FineUploader")
-
-    <style>
-      .qq-upload-list {
-       text-align: left;
-      }
- 
-      li.alert-success {
-        background-color: #DFF0D8;
-      }
-       
-      li.alert-error {
-        background-color: #F2DEDE;
-      }
-        
-      .alert-error .qq-upload-failed-text {
-        display: inline;
-      }
-    </style>
+    @Html.Javascript("/scripts/fineupload-init.js")    
     
     <script type="text/javascript">        
 		// KO enabling/disabling of server JSON
@@ -47,37 +30,7 @@
 
 	    $(function () {
 	        var crosscuttingUI = new CrossCuttingUI();
-	        // var serviceAdapter = new SectionService(crosscuttingUI.Error, crosscuttingUI.ShowLoading, crosscuttingUI.HideLoading);
-	        // var model = new SectionViewModel(serviceAdapter);
-	        // ko.applyBindings(model);
-
-            // TODO: move this to pushmkt-common, or another file
-            $('#bootstrapped-fine-uploader').fineUploader({
-                element: document.getElementById('bootstrapped-fine-uploader'),
-                request: {
-                endpoint: imageControllerEndpoint,
-                },
-                text: {
-                uploadButton: '<i class="icon-upload icon-white"></i> Upload a file'
-                },
-                template: '<div class="qq-uploader span3">' +
-                            '<pre class="qq-upload-drop-area span3"><span>{dragZoneText}</span></pre>' +
-                            '<div class="qq-upload-button btn btn-success" style="width: auto;">{uploadButtonText}</div>' +
-                            '<span class="qq-drop-processing"><span>{dropProcessingText}</span><span class="qq-drop-processing-spinner"></span></span>' +
-                            '<ul class="qq-upload-list" style="margin-top: 10px; text-align: center;"></ul>' +
-                        '</div>',
-                classes: {
-                    success: 'alert alert-success',
-                    fail: 'alert alert-error'
-                },
-                callbacks: {
-                    onSubmit: function(id, fileName){}, // return false to cancel submit
-                    onComplete: function(id, fileName, responseJSON){
-                        alert(responseJSON);
-                    },
-                },
-                debug: true,
-            });
+	        var fileUploader = new CommerceFileUploader();
 	    });
 	</script>
 }
@@ -123,7 +76,10 @@
 	
 	<div id="gliding-container" class="container">
 		<div id="row">
-            <div id="bootstrapped-fine-uploader" class="span3"></div>
+            <div id="fine-uploader-basic" class="btn btn-success">
+                <i class="icon-upload icon-white"></i> Click to upload
+            </div>
+            <div id="messages"></div>
 		</div>
     </div>
 

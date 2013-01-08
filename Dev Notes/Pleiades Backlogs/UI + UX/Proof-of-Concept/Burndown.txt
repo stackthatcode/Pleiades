@@ -308,8 +308,13 @@ Notes on Brand State => DONE
 
 - https://github.com/valums/file-uploader/tree/master/server/ASP.NET%20MVC%20C%23 => INTEGRATED WITH CODEBASE
 
-
-
-
-
+1/8/2013
+--------
+- What's the FineUploadBasic vs. Not? => DONE
+- Capture the OnCompletion event and pull data from Image Bundle => DONE
+- Fix the Bootstrap styling => DONE
+- http://fineuploader.com/#demo =>  DONE
+* Copy the script => DONE
+* Test on the Test Upload page => DONE
+* Backend Script / File Upload Backend => DONE
 
