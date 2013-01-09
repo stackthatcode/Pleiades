@@ -18,12 +18,12 @@ Front Range
 - The other 2 Lists Backend (Brand, Color) => MOSTLY DONE
 - The other 2 Lists UI => IN PROGRESS
 
-- AJAX File Upload / Bootstrap => IN PROGRESS
+- AJAX File Upload / Bootstrap => IN PROGRESS - ALMOST THERE, BRUTHA!
+
 - Create the Thumbnail View => IN PROGRESS
 - Create the Click for Larger Image View => IN PROGRESS
-- Disable Uploads while in progress => TODO
 - Donate $20 to FineUploader upon successful integration => TODO
-- Centralize Upload Code => TODO
+
 
 
 - Check Sanderson for advanced Model Binding => TODO

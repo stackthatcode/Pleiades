@@ -17,7 +17,7 @@ namespace Commerce.WebUI.Areas.Admin
             context.MapRoute(
                 "Image Download",
                 "Admin/Image/Download/{externalResourceId}",
-                new { controller = "Image", action = "Download", size = "small" });
+                new { controller = "Image", action = "Download" });
 
             context.MapRoute(
                 "Home Route",

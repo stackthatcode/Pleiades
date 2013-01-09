@@ -308,8 +308,8 @@ Notes on Brand State => DONE
 
 - https://github.com/valums/file-uploader/tree/master/server/ASP.NET%20MVC%20C%23 => INTEGRATED WITH CODEBASE
 
-1/8/2013
---------
+1/8/2013 1.25 Hours
+-------------------
 - What's the FineUploadBasic vs. Not? => DONE
 - Capture the OnCompletion event and pull data from Image Bundle => DONE
 - Fix the Bootstrap styling => DONE
@@ -318,3 +318,10 @@ Notes on Brand State => DONE
 * Test on the Test Upload page => DONE
 * Backend Script / File Upload Backend => DONE
 
+1/9/2013 ~2.0 Hours
+-------------------
+- Disable Uploads while in progress => DONE
+- Centralize Upload Code => DONE
+- Added Close Button to Upload Alert => DONE
+- Finished coding the ImageBundle Repository => DONE
+- Finished coding the Image Download => DONE

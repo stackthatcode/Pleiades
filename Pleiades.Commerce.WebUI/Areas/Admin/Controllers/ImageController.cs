@@ -54,7 +54,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
                 var bitmap = new Bitmap(upload.InputStream);
                 var imageBundle = this.ImageBundleRepository.Add(bitmap);
                 this.UnitOfWork.SaveChanges();
-                return new FineUploaderResult(true, new { extraInformation = imageBundle });
+                return new FineUploaderResult(true, new { ImageBundle = imageBundle });
             }
             catch (Exception ex)
             {

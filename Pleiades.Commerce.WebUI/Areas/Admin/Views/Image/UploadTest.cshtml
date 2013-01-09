@@ -30,7 +30,7 @@
 
 	    $(function () {
 	        var crosscuttingUI = new CrossCuttingUI();
-	        var fileUploader = new CommerceFileUploader();
+	        var fileUploader = new CommerceFileUploader(crosscuttingUI.Error);
 	    });
 	</script>
 }
@@ -40,24 +40,6 @@
 	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR -->
 	<script type="text/html" id="Main-Editor">
         
-	</script>
-	
-	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG -->
-	<script type="text/html" id="Modal-Dialog">
-		<div id="modal-delete" class="modal hide fade" data-bind="if: $root.SelectedRecord()">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h3>Delete <span data-bind="text: $root.SelectedRecord().Name()"></span></h3>
-			</div>
-			<div class="modal-body">
-				<p>Are you sure you want to Delete this Section?</p>			
-				<p><strong>Warning: all <span data-bind="text: $root.SelectedRecord().NumberOfCategories()"></span> Categories and Sub-Categories will be Deleted, too.</strong></p>
-			</div>
-			<div class="modal-footer">
-				<a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
-				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.DeleteConfirm"><i class="icon-ok icon-white"></i> Ok</a>
-			</div>
-		</div>		
 	</script>
 }
 
@@ -75,13 +57,22 @@
 	</div>
 	
 	<div id="gliding-container" class="container">
+        <!-- TODO: package this in a Partial View -->
 		<div id="row">
+            <div id="thumbNailImage">
+                
+            </div>
+
             <div id="fine-uploader-basic" class="btn btn-success">
                 <i class="icon-upload icon-white"></i> Click to upload
             </div>
+            <a id="fine-uploader-basic-busy" class="btn btn-success disabled" style="display:none;">
+                <i class="icon-upload icon-white"></i> Click to upload
+            </a>
             <div id="messages"></div>
 		</div>
     </div>
 
-    <div id="modal-enclave" data-bind="template: { name: 'Modal-Dialog' }"></div>    
+    <div id="modal-enclave" data-bind="template: { name: 'Modal-Dialog' }">
+    </div>    
 }

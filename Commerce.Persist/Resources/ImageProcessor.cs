@@ -75,7 +75,7 @@ namespace Commerce.Persist.Resources
             var targetAspectRatio = AspectRatio(targetWidth, targetHeight);
             var bitmapAspectRatio = AspectRatio(bitmap);
 
-            if (targetAspectRatio > bitmapAspectRatio)
+            if (targetAspectRatio < bitmapAspectRatio)
             {
                 var factor = (decimal)targetWidth / (decimal)bitmap.Width;
                 var newWidth = targetWidth;

@@ -24,6 +24,16 @@ namespace Commerce.Persist.Resources
             this.ImageProcessor = imageProcessor;
         }
 
+        protected IQueryable<ImageBundle> Data()
+        {
+            return this.Context.ImageBundles
+                .Where(x => x.Deleted == false)
+                .Include(x => x.Large)
+                .Include(x => x.Original)
+                .Include(x => x.Thumbnail)
+                .Include(x => x.Small);
+        }
+
         public ImageBundle Add(Bitmap original)
         {
             var thumbnail = this.ImageProcessor.CreateThumbnail(original);
@@ -47,12 +57,12 @@ namespace Commerce.Persist.Resources
 
         public ImageBundle Retrieve(int Id)
         {
-            return Context.ImageBundles.FirstOrDefault(x => x.Id == Id);
+            return this.Data().FirstOrDefault(x => x.Id == Id);
         }
 
         public ImageBundle Retrieve(Guid externalId)
         {
-            return Context.ImageBundles.FirstOrDefault(x => x.ExternalId == externalId);
+            return this.Data().FirstOrDefault(x => x.ExternalId == externalId);
         }
 
         public void Delete(int Id)
