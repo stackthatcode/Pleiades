@@ -4,9 +4,6 @@ using Commerce.Domain.Model.Resources;
 
 namespace Commerce.Domain.Model.Lists
 {
-    // Ok, this works for Retrieval?
-    // What about Update/Insert/Delete
-
     [JsonObject]
     public class JsonBrand
     {

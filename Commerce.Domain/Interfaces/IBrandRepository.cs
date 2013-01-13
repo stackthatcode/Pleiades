@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Commerce.Domain.Interfaces;
 using Commerce.Domain.Model.Lists;
 
 namespace Commerce.Domain.Interfaces

@@ -1,10 +1,8 @@
 ﻿using System;
-using Newtonsoft.Json;
 using Commerce.Domain.Model.Resources;
 
 namespace Commerce.Domain.Model.Lists
 {
-    [JsonObject]
     public class Brand
     {
         public int Id { get; set; }

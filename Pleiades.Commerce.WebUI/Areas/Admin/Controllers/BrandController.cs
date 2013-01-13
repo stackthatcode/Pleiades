@@ -34,6 +34,13 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             return new JsonNetResult(result);
         }
 
+        [HttpGet]
+        public ActionResult Brand(int Id)
+        {
+            var result = this.Repository.Retrieve(Id);
+            return new JsonNetResult(result);
+        }
+
         [HttpPost]
         public ActionResult Insert(JsonBrand brand)
         {

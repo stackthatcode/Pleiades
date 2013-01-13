@@ -55,6 +55,34 @@ namespace Commerce.Persist.Resources
             return bundle;
         }
 
+        public ImageBundle Add(Color color, int width, int height)
+        {
+            var original = new Bitmap(width, height);
+            using (Graphics gfx = Graphics.FromImage(original))
+            using (SolidBrush brush = new SolidBrush(color))
+            {
+                gfx.FillRectangle(brush, 0, 0, width, height);
+            };
+
+            var thumbnail = this.ImageProcessor.CreateThumbnail(original);
+            var small = this.ImageProcessor.CreateSmall(original);
+            var large = this.ImageProcessor.CreateLarge(original);
+
+            var bundle = new ImageBundle()
+            {
+                ExternalId = Guid.NewGuid(),
+                Large = this.FileResourceRepository.AddNew(large),
+                Original = this.FileResourceRepository.AddNew(original),
+                Thumbnail = this.FileResourceRepository.AddNew(thumbnail),
+                Small = this.FileResourceRepository.AddNew(small),
+                DateInserted = DateTime.Now,
+                DateUpdated = DateTime.Now,
+            };
+
+            this.Context.ImageBundles.Add(bundle);
+            return bundle;
+        }
+
         public ImageBundle Retrieve(int Id)
         {
             return this.Data().FirstOrDefault(x => x.Id == Id);

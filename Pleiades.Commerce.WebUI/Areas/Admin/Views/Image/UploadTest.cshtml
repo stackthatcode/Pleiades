@@ -2,44 +2,27 @@
 
 @section _Scripts { 
     @Html.Partial("_FineUploader")
-    @Html.Javascript("/scripts/fineupload-init.js")    
-    
-    <script type="text/javascript">        
-		// KO enabling/disabling of server JSON
-        var ImageBundleToKnockout = function(section) {
-			return {
-				Id: ko.observable(section.Id),
-				Name: ko.observable(section.Name),
-				SEO: ko.observable(section.SEO)
-            };
-        }
-    </script>
+	@Html.Partial("_ImageBundleViewer")
 
-	<script type="text/javascript">
-        var imageControllerEndpoint = "UploadFile";
-
-	    function UploadViewModel(serviceAdapter) {
+    <script type="text/javascript">
+	    function UploadViewModel() {
 	        var self = this;
+	        self.ImageBundle = ko.observable(null);
+	        self.ModalViewModel = ko.observable(null);
 
-	        // Initialization
-	        self.ServiceAdapter = serviceAdapter;
-	        self.Data = ko.observable(null);
-            self.ModalViewModel = ko.observable(null);
-	        self.RetrieveSections();
+            // This is the bit of glue that bridges FineUploader and the Image Gallery stuff
+	        self.OnFileUpload = function (imageBundleData) {
+	            //console.log("OnFileUpload: " + imageBundleData.ExternalId);
+	            self.ImageBundle(imageBundleData);
+	        };
 	    }
 
 	    $(function () {
 	        var crosscuttingUI = new CrossCuttingUI();
-	        var fileUploader = new CommerceFileUploader(crosscuttingUI.Error);
+	        var model = new UploadViewModel();
+	        ko.applyBindings(model);
+	        var fileUploader = new CommerceFileUploader(crosscuttingUI.Error, model.OnFileUpload);
 	    });
-	</script>
-}
-
-@section _Templates {
-	
-	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR -->
-	<script type="text/html" id="Main-Editor">
-        
 	</script>
 }
 
@@ -57,22 +40,12 @@
 	</div>
 	
 	<div id="gliding-container" class="container">
-        <!-- TODO: package this in a Partial View -->
 		<div id="row">
-            <div id="thumbNailImage">
-                
-            </div>
+			<div style="margin-bottom:20px; margin-top:20px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: $root.ImageBundle.ExternalId }">
+			</div>
 
-            <div id="fine-uploader-basic" class="btn btn-success">
-                <i class="icon-upload icon-white"></i> Click to upload
-            </div>
-            <a id="fine-uploader-basic-busy" class="btn btn-success disabled" style="display:none;">
-                <i class="icon-upload icon-white"></i> Click to upload
-            </a>
-            <div id="messages"></div>
+			<div style="margin-bottom:20px; margin-top:20px;" data-bind="template: { name: 'Fine-Uploader', data: $root }">
+			</div>
 		</div>
     </div>
-
-    <div id="modal-enclave" data-bind="template: { name: 'Modal-Dialog' }">
-    </div>    
 }

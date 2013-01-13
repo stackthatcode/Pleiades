@@ -1,3 +1,10 @@
+String.prototype.koTrunc = function(n, useWordBoundary){
+    var toLong = 
+        this.length > n, s_ = toLong ? this.substr(0,n-1) : this;
+        s_ = useWordBoundary && toLong ? s_.substr(0,s_.lastIndexOf(' ')) : s_;
+    return toLong ? s_ + '...' : s_;
+}
+
 // TODO: how to add this to Array's prototype...?
 Array.prototype.firstOrNull = function(lambda) {
 	for (var arrayIndex = 0; arrayIndex < this.length; arrayIndex += 1) {
@@ -71,7 +78,7 @@ function DeepClone(input) {
 	throw new Error("Unable to copy input! Its type isn't supported.");
 }
 
-function CrossCuttingUI() {
+function CrossCuttingUI(containerDiv) {
 	var self = this;
 
 	self.Error = function() {
@@ -86,8 +93,29 @@ function CrossCuttingUI() {
 	self.HideLoading = function() {
 		$("#spinner-layer").hide();
 	}
-}
 
+    // Scroll Tracking - TODO: how to make this cross-cutting...?
+    self.ScrollToIdTracker = function(id) {
+		if (!id) {
+            return;
+        }
+		var offset = $('#tracker' + id).parent().offset().top - $(containerDiv).offset().top;
+		$("body").scrollTop(offset);
+	}
+
+	self.HighlightByTrackerId = function(id) {
+		var set = $('#tracker' + id).closest("td");
+		set.animate({ backgroundColor: "#AAA" }, { duration: 1000 });
+		set.animate({ 
+                backgroundColor: "#FFF" 
+            }, 
+			{ 
+				duration: 1000, 
+				complete: function() { set.css({ backgroundColor: "" }); 
+            } 
+		});
+	}
+}
 
 function GliderWidget(glidingContainer, parentDiv, childDiv) {
 	var self = this;

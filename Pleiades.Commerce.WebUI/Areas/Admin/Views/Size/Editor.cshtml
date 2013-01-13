@@ -50,7 +50,7 @@
 		};
     </script>
 	<script type="text/javascript">	
-		function SizeViewModel(serviceAdapter) {	
+       function SizeViewModel(serviceAdapter, crossCuttingUI, gliderWidget) {	
 			var self = this;
 
 			// UI state management
@@ -90,8 +90,8 @@
 			
 			self.AddChildRecord = function() {
 				var size = SizeToKnockout({ 
-                    Id: null, ParentGroupId: self.ChildViewModel().Id(), Name: "SIZE", SkuCode: "SKU123", 
-                    Description: "Size Description" 
+                    Id: null, ParentGroupId: self.ChildViewModel().Id(), Name: "", SkuCode: "", 
+                    Description: "" 
                 });
 				
 				self.ChildViewModel().Sizes.unshift(size);
@@ -136,7 +136,7 @@
 					},
 					function() {
 						// animate back
-						self.ScrollToIdTracker(parentRecordId);
+						self.CrossCuttingUI.ScrollToIdTracker(parentRecordId);
 					}
 				);
 			}
@@ -253,33 +253,12 @@
                 );
 			}
 
-            // Scroll Tracking - TODO: how to make this cross-cutting...?
-            self.ScrollToIdTracker = function(id) {
-		        if (!id) {
-                    return;
-                }
-		        var offset = $('#tracker' + id).parent().offset().top - $("#gliding-container").offset().top;
-		        $("body").scrollTop(offset);
-	        }
-			
-	        self.HighlightByTrackerId = function(id) {
-		        var set = $('#tracker' + id).closest("td");
-		        set.animate({ backgroundColor: "#AAA" }, { duration: 1000 });
-		        set.animate({ 
-                        backgroundColor: "#FFF" 
-                    }, 
-			        { 
-				        duration: 1000, 
-				        complete: function() { set.css({ backgroundColor: "" }); 
-                    } 
-		        });
-	        }
-
 
 			// Initialization
 			self.ServiceAdapter = serviceAdapter;
-            self.Glider = new GliderWidget("#gliding-container", "#parent-editor", "#child-editor");
-			
+            self.CrossCuttingUI = crossCuttingUI;
+            self.Glider = gliderWidget;
+
 			// load ko.observables into view model				
 			self.ParentViewModel = { 
 				Data: ko.observableArray(), 
@@ -294,9 +273,10 @@
 		}
 		
 		$(function() {
-            var crosscuttingUI = new CrossCuttingUI();
-            var serviceAdapter = new SizeService(crosscuttingUI.Error, crosscuttingUI.ShowLoading, crosscuttingUI.HideLoading);
-			var model = new SizeViewModel(serviceAdapter);
+            var crossCuttingUI = new CrossCuttingUI("#gliding-container");
+            var gliderWidget = new GliderWidget("#gliding-container", "#parent-editor", "#child-editor");			
+            var serviceAdapter = new SizeService(crossCuttingUI.Error, crossCuttingUI.ShowLoading, crossCuttingUI.HideLoading);
+			var model = new SizeViewModel(serviceAdapter, crossCuttingUI, gliderWidget);
 
 			ko.applyBindings(model);
 		});
@@ -406,8 +386,9 @@
         <tr data-bind="if: $root.ChildViewSelectedRecord() == $data">
         <td>
 			<form>
-			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-info">
-				<strong>Please enter the Size Group Name.</strong>  
+			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
+				<a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Please enter the Size Group Name.</strong>
 			</div>
 		
 			<div>
@@ -451,13 +432,14 @@
         <tr data-bind="if: $root.ChildViewSelectedRecord() == $data">
         <td>
 			<form>
-			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-info">
-				<strong>Please enter all information for this Size.</strong>  
+			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
+				<a href="#" class="close" data-dismiss="alert">&times;</a>
+				<strong>Please fill in all the fields for this Size.</strong>  
 			</div>		    
 			<div>
 				<!-- EDITOR FIELDS -->
 				<span class="span8" style="float:left;padding-top:5px;">
-					<input id="entry" class="input-large" style="float:left; width:50px; margin-right:20px;" type="text" placeholder="Enter Size Abbreviation" data-bind="value: $data.EditName" maxlength="6" />
+					<input id="entry" class="input-large" style="float:left; width:100px; margin-right:20px;" type="text" placeholder="Enter Abbreviation" data-bind="value: $data.EditName" maxlength="6" />
 					<input id="entry" class="input-large" style="float:left; width:250px; margin-right:20px;" type="text" placeholder="Enter Size Description" data-bind="value: $data.EditDescription" maxlength="20" />
 					<input id="entry" class="input-large" style="float:left; width:125px; margin-right:20px;" type="text" placeholder="Enter Sku Code" data-bind="value: $data.EditSkuCode" maxlength="6" />
 				</span>

@@ -325,3 +325,35 @@ Notes on Brand State => DONE
 - Added Close Button to Upload Alert => DONE
 - Finished coding the ImageBundle Repository => DONE
 - Finished coding the Image Download => DONE
+
+1/10/2013 1.5 Hours
+-------------------
+- Create the Thumbnail View => DONE
+- Create the Click for Larger Image View => DONE
+- Finished all Image Upload stuff => DONE
+
+1/11/2013 1.5 Hours
+-------------------
+- Centralized CrossCuttingUI => DONE
+- Fix BrandIntegrationTests => DONE
+- Copied SizeEditor for Brand => DONE
+- Finished Mocking Parent Interface => DONE
+
+1/12/2013 3.5 Hours
+-------------------
+- MAJOR HTML correction => DONE
+- Wired Brand Editor Upload => DONE
+ 
+1/13/2013 5.5 Hours
+------------------
+- Fix Size to Brand on drill-down => DONE
+- Cancel Button => DONE
+- Add New Button => DONE
+- Empty Add New Size Group Textbox => DONE
+- Done with all things Brands => DONE
+- Validation => DONE
+- Save Button => DONE
+- Brand - Delete => DONE
+- Thumbnail Viewier Fix => DONE
+- Fixed Brand Name Field => DONE
+- Rapid, rapid Development of the Color Editor 

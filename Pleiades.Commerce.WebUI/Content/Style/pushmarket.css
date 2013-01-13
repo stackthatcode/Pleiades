@@ -38,26 +38,26 @@ h4 {
 
 #body-container {
 	top: 165px; 
-	width: 932px; 
+	width: 940px; 
 	position: relative;
     margin-top:30px;
 }
 
 #gliding-container {
 	top: 165px; 
-	width: 932px; 
+	width: 940px; 
 	position: relative;
 }
 
 #parent-editor { 
 	left: 0px; 
-	width: 932px; 
+	width: 940px; 
 	position: absolute;
 }
 
 #child-editor { 
 	left: 0px; 
-	width: 932px; 
+	width: 940px; 
 	position: absolute; 
 }
 

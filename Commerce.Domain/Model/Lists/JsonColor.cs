@@ -1,17 +1,25 @@
 ﻿using System;
+using Newtonsoft.Json;
 using Commerce.Domain.Model.Resources;
 
 namespace Commerce.Domain.Model.Lists
 {
-    public class Color
+    [JsonObject]
+    public class JsonColor
     {
+        [JsonProperty]
         public int Id { get; set; }
+
+        [JsonProperty]
         public string Name { get; set; }
+
+        [JsonProperty]
         public string SkuCode { get; set; }
+
+        [JsonProperty]
         public string SEO { get; set; }
-        public ImageBundle ImageBundle { get; set; }
-        public bool Deleted { get; set; }
-        public DateTime DateUpdated { get; set; }
-        public DateTime DateInserted { get; set; }
+
+        [JsonProperty]
+        public Guid ImageBundleExternalId { get; set; }
     }
 }

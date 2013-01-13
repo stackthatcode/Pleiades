@@ -62,7 +62,7 @@
 				flow.exec(
 					function() {
 						var parentId = self.ParentViewModel.SelectedSection().Id;
-						var newCategory = { Id: null, ParentId: parentId, Name: "New Category", SEO: "new-category", Categories: null };
+						var newCategory = { Id: null, ParentId: parentId, Name: "", SEO: "", Categories: null };
 						var knockedoutData = self.KnockoutIfyCategory(newCategory);
 						self.ChildViewModel(knockedoutData);
 						self.Glider.GlideToChild(this);
@@ -75,7 +75,7 @@
 			
 			self.AddChildRecord = function() {
 				var newCategory = self.KnockoutIfyCategory(
-					{ Id: null, ParentId: self.ChildViewModel().Id(), Name: "New Category", SEO: "new-category", Categories: null });
+					{ Id: null, ParentId: self.ChildViewModel().Id(), Name: "", SEO: "", Categories: null });
 				
 				self.ChildViewModel().Categories.unshift(newCategory);
 				self.EditRecord(newCategory);
@@ -489,8 +489,8 @@
 		<tr data-bind="if: $root.ChildViewSelectedRecord() == $data">
         <td>
 			<form>
-			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-info">
-				<!--<button type="button" class="close" data-dismiss="alert">x</button> -->
+			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
+				<button type="button" class="close" data-dismiss="alert">x</button>
 				<strong>Please enter a Category Name and SEO slug.</strong>  
 			</div>
 		

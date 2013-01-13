@@ -1,0 +1,72 @@
+﻿    @Html.Javascript("/bootstrap-lightbox/bootstrap-lightbox.js")
+    @Html.Stylesheet("/bootstrap-lightbox/bootstrap-lightbox.css")
+
+	<script type="text/javascript">
+        // TODO: roll these into JQuery plug-ins for manageability of global namespace
+	    var ImageBundleDownloadUrl = function (data, size) {            
+            // CLIENT-SIDE CONFIGURABLE DATA
+	        $downloadEndpoint = '/Pleiades/Admin/Image/Download/{exRID}?size={size}';
+            return $downloadEndpoint
+                .replace("{exRID}", data.ExternalResourceId)
+                .replace("{size}", size);
+        }
+
+        var LightBoxElementId = function (data) {
+            return 'lightBox-' + data.ExternalResourceId + '-' + data.LightboxSuffixId;
+        }
+
+        var ShowLightBox = function (data) {
+            var lightboxid = '#' + LightBoxElementId(data);
+            var wrappedset = $(lightboxid);
+            wrappedset.lightbox();
+        }
+	</script>
+	<script type="text/html" id="Image-Bundle-Small-Viewer">
+        <!-- $data contains: { ExternalResourceId: "(some guid)", LightboxSuffixId: "" } -->
+        <table>
+            <tr>
+            <td style="height:150px; border:1px dotted #CCC; width:150px; text-align:center;">
+                <div data-bind="if: $data.ExternalResourceId">
+                    <a href="#" data-bind="click: function(data, event) { ShowLightBox(data) }">
+                        <img data-bind="attr: { src: ImageBundleDownloadUrl($data, 'small') }" />
+                    </a>
+
+                    <div data-bind="template: { name: 'Image-Bundle-Lightbox', data: $data }">
+			        </div>
+                </div>
+                <div data-bind="ifnot: $data.ExternalResourceId">
+                    <img src="@Url.Content("~/content/Images/150x150.gif")" />
+                </div>
+            </td>
+            </tr>
+        </table>
+	</script>
+	<script type="text/html" id="Image-Bundle-Thumbnail-Viewer">
+        <table>
+        <tr>
+            <td style="height:75px; border:1px dotted #CCC; width:75px; text-align:center;">
+                <div data-bind="if: $data">
+                    <a href="#" data-bind="click: function(data, event) { ShowLightBox(data) }">
+                        <img data-bind="attr: { src: ImageBundleDownloadUrl($data, 'thumbnail') }" />
+                    </a>
+
+                    <div data-bind="template: { name: 'Image-Bundle-Lightbox', data: $data }">
+			        </div>
+                </div>
+                <div data-bind="ifnot: $data">
+                    <img src="@Url.Content("~/content/Images/75x75.gif")" />
+                </div>
+            </td>
+        </tr>
+        </table>
+	</script>
+    <script type="text/html" id="Image-Bundle-Lightbox">
+        <div data-bind="attr: { id: LightBoxElementId($data) }"  class="lightbox hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+	        <div class='lightbox-header'>
+		        <button type="button" class="close" data-dismiss="lightbox" aria-hidden="true">&times;</button>
+	        </div>
+	        <div class='lightbox-content'>
+		        <img data-bind="attr: { src: ImageBundleDownloadUrl($data, 'large') }" />
+	        </div>
+        </div>
+    </script>

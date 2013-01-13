@@ -15,22 +15,40 @@ Front Range
 
 ...work...
 
-- The other 2 Lists Backend (Brand, Color) => MOSTLY DONE
-- The other 2 Lists UI => IN PROGRESS
-
-- AJAX File Upload / Bootstrap => IN PROGRESS - ALMOST THERE, BRUTHA!
-
-- Create the Thumbnail View => IN PROGRESS
-- Create the Click for Larger Image View => IN PROGRESS
-- Donate $20 to FineUploader upon successful integration => TODO
+- The last List - Color - Backend + UI => IN PROGRESS
+- Require an Image Upload for Color and Brand - Server/Client => TODO
+- Optimize the Lightbox to Lazy Load => TODO
 
 
+- Start Designing Product Screen => TODO
+* List View => TODO
+* List View Search => TODO
+* Product Name, Description, Base Sku
+* Brand => TODO
+* Category => TODO
 
+* Sizes => TODO
+* Colors => TODO
+* Images => TODO
+
+http://www.ww2helmets.com/products-page/checkout/ => Hmmmmm...?????
+
+
+
+Backlog
+-------
+
+- Change out the Back Buttons => TODO
+- PREVENT DELETION OF LAST SECTION => TODO
+- Add the Number of Products in a Brand => TODO
+- Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING)
 - Check Sanderson for advanced Model Binding => TODO
 - Change Menu for Login Screen => TODO
 - Logged-In User => TODO
 - IsONline - Check How This Functions => TODO
 - Develop and/or Research Fluent Validation library => TODO
+- Donate $20 to FineUploader upon successful integration => TODO
+
 
 *** TODO: what is the function of "nav-collapse collapse"?
 *** MANDATE => research HOW KnockoutJS actually works internally

@@ -1,20 +1,24 @@
-function SectionService(errorCallback, showLoadingCallback, hideLoadingCallback) {
+function BrandService(errorCallback, showLoadingCallback, hideLoadingCallback) {
     var self = new AjaxService(errorCallback, showLoadingCallback, hideLoadingCallback);
 
-    self.RetrieveAllSections = function (callback) {
-        self.AjaxGet("/Admin/Section/Sections", callback);
+    self.RetrieveAll = function (callback) {
+        self.AjaxGet("/Admin/Brand/Brands", callback);
     };
 
-    self.Insert = function (section, callback) {
-	    self.AjaxPost("/Admin/Section/Insert", section, callback);
+    self.Retrieve = function (id, callback) {
+        self.AjaxGet("/Admin/Brand/Brand/" + id, callback);
+    };
+
+    self.Insert = function (brand, callback) {
+        self.AjaxPost("/Admin/Brand/Insert", brand, callback);
 	};
 
-	self.Update = function (section, callback) {
-	    self.AjaxPost("/Admin/Section/Update", section, callback);
+    self.Update = function (brand, callback) {
+        self.AjaxPost("/Admin/Brand/Update", brand, callback);
 	}
 
-	self.Delete = function (section, callback) {
-	    self.AjaxPost("/Admin/Section/Delete", section, callback);
+    self.Delete = function (brand, callback) {
+        self.AjaxPost("/Admin/Brand/Delete", brand, callback);
 	};
 
 	return self;

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using Commerce.Domain.Interfaces;
 using Commerce.Domain.Model.Lists;
 
 namespace Commerce.Domain.Interfaces
 {
     public interface IColorRepository
     {
-        List<Color> RetrieveAll();
-        Func<Color> Insert(Color color);
-        void Update(Color color);
-        void DeleteSoft(Color color);
+        List<JsonColor> RetrieveAll();
+        JsonColor Retrieve(int id);
+        Func<JsonColor> Insert(JsonColor brand);
+        void Update(JsonColor brand);
+        void DeleteSoft(JsonColor brand);
     }
 }

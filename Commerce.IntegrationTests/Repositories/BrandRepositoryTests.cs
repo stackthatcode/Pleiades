@@ -25,10 +25,13 @@ namespace Commerce.IntegrationTests.Repositories
             using (var lifetime = TestContainer.LifetimeScope())
             {
                 var container = lifetime.Resolve<IContainerAdapter>();
+                var brandRepository = lifetime.Resolve<IBrandRepository>();
+                    
                 BrandBuilder.EmptyAndRepopulate(container);
-
-
-                //var brand1Retrieve = brandRepository.Retrieve(result1().Id);
+                var allBrands = brandRepository.RetrieveAll();
+                
+                Console.WriteLine("\n");
+                Console.WriteLine(JsonConvert.SerializeObject(allBrands, Formatting.Indented));
             }
         }
     }

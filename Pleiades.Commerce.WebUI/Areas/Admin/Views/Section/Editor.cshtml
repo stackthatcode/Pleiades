@@ -34,7 +34,7 @@
 			}
 			
 			self.AddRecord = function() {
-			    var section = SectionToKnockout({ Id: null, ParentGroupId: null, Name: "New Section", SEO: "new-section", NumberOfCategories: 0 });				
+			    var section = SectionToKnockout({ Id: null, ParentGroupId: null, Name: "", SEO: "", NumberOfCategories: 0 });				
 				self.Data.unshift(section);
 				self.EditRecord(section);
 				window.scrollTo(0, 0);
@@ -153,11 +153,10 @@
         <!--
         <div style="margin-top:40px; text-align:center;" class="alert alert-info" data-bind="visible: $data.Data.length == 0">
 			<strong>There are no Sections.  Click "Add New Section" to start adding a new one.</strong>  
-	    </div>
-        -->
+	    </div>-->
 	</script>
 	
-	<!-- KNOCKOUT TEMPLATE - EDITOR ROW - SIZE -->
+	<!-- KNOCKOUT TEMPLATE - EDITOR ROW -->
 	<script type="text/html" id="Editor-Row">
 		<tr data-bind="if: $root.SelectedRecord() != $data, click: $root.EditRecord">
 		<td>
@@ -167,7 +166,7 @@
                     <span data-bind="text: $data.Name()"></span> - 
                     <span data-bind="text: $data.SEO()"></span>
                 </h4>	
-                    <span data-bind="text: $data.NumberOfCategories()"></span> Categories &amp; Sub-Categories
+                 <span data-bind="text: $data.NumberOfCategories()"></span> Categories &amp; Sub-Categories
 			</span>
 			<span class="span3" style="text-align:right;">
 				<p>Touch Row to Edit</p>
@@ -179,8 +178,9 @@
         <tr data-bind="if: $root.SelectedRecord() == $data">
         <td>
 			<form>
-			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-info">
-				<strong>Please enter all information for this Size.</strong>  
+			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
+				<a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Please enter all information for this Section.</strong>  
 			</div>		    
 			<div>
 				<!-- EDITOR FIELDS -->

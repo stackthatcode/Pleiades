@@ -12,45 +12,64 @@ namespace Commerce.Persist.Lists
     public class ColorRepository : IColorRepository
     {
         PleiadesContext Context { get; set; }
+        IImageBundleRepository ImageBundleRepository { get; set; }
 
-        public ColorRepository(PleiadesContext context)
+        public ColorRepository(PleiadesContext context, IImageBundleRepository imageBundleRepository)
         {
             this.Context = context;
+            this.ImageBundleRepository = imageBundleRepository;
         }
 
         protected IQueryable<Color> Data()
         {
-            return this.Context.Set<Color>().Where(x => x.Deleted == false);
+            return this.Context.Colors
+                .Where(x => x.Deleted == false)
+                .Include(x => x.ImageBundle);
         }
 
-        public List<Color> RetrieveAll()
+        public List<JsonColor> RetrieveAll()
         {
-            return this.Data().ToList();
+            var data = this.Data().ToList();
+            return data.Select(x => x.ToJson()).ToList();
         }
 
-        public void Update(Color ColorDiff)
+        public JsonColor Retrieve(int id)
         {
-            var Color = this.Data().FirstOrDefault(x => x.Id == ColorDiff.Id);
-            Color.Name = ColorDiff.Name;
-            Color.SkuCode = ColorDiff.SkuCode;
-            Color.DateUpdated = DateTime.Now;
+            var color = this.Data().First(x => x.Id == id);
+            return color.ToJson();
         }
 
-        public Func<Color> Insert(Color ColorDiff)
+        public void Update(JsonColor colorDiff)
         {
-            var Color = new Color
+            var imageBundle = this.ImageBundleRepository.Retrieve(colorDiff.ImageBundleExternalId);
+
+            var color = this.Data().FirstOrDefault(x => x.Id == colorDiff.Id);
+            color.Name = colorDiff.Name;
+            color.SkuCode = colorDiff.SkuCode;
+            color.SEO = colorDiff.SEO;
+            color.ImageBundle = imageBundle;
+            color.DateUpdated = DateTime.Now;
+        }
+
+        public Func<JsonColor> Insert(JsonColor brandDiff)
+        {
+            var imageBundle = this.ImageBundleRepository.Retrieve(brandDiff.ImageBundleExternalId);
+
+            var color = new Color
             {
-                Name = ColorDiff.Name,
-                SkuCode = ColorDiff.SkuCode,
+                Name = brandDiff.Name,
+                SkuCode = brandDiff.SkuCode,
+                SEO = brandDiff.SEO,
+                ImageBundle = imageBundle,
                 DateInserted = DateTime.Now,
                 DateUpdated = DateTime.Now,
             };
 
-            this.Context.Set<Color>().Add(Color);
-            return () => Color;
+            this.Context.Colors.Add(color);
+            return () => color.ToJson();
         }
 
-        public void DeleteSoft(Color ColorDiff)
+        public void DeleteSoft(JsonColor ColorDiff)
         {
             var Color = this.Data().FirstOrDefault(x => x.Id == ColorDiff.Id);
             Color.Deleted = true;

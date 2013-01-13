@@ -68,6 +68,8 @@
     <Compile Include="Model\Lists\Color.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Lists\ColorExtensions.cs" />
+    <Compile Include="Model\Lists\JsonColor.cs" />
     <Compile Include="Model\Lists\JsonCategory.cs" />
     <Compile Include="Model\Lists\JsonSize.cs" />
     <Compile Include="Model\Lists\JsonSizeGroup.cs" />

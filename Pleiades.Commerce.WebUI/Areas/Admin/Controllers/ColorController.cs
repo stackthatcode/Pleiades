@@ -33,8 +33,15 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             return new JsonNetResult(result);
         }
 
+        [HttpGet]
+        public ActionResult Color(int Id)
+        {
+            var result = this.Repository.Retrieve(Id);
+            return new JsonNetResult(result);
+        }
+
         [HttpPost]
-        public ActionResult Insert(Color color)
+        public ActionResult Insert(JsonColor color)
         {
             var saveResult = this.Repository.Insert(color);
             this.UnitOfWork.SaveChanges();
@@ -42,7 +49,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(Color color)
+        public ActionResult Update(JsonColor color)
         {
             this.Repository.Update(color);
             this.UnitOfWork.SaveChanges();
@@ -50,7 +57,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(Color color)
+        public ActionResult Delete(JsonColor color)
         {
             this.Repository.DeleteSoft(color);
             this.UnitOfWork.SaveChanges();

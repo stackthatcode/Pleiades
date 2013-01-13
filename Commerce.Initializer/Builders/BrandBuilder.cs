@@ -45,12 +45,13 @@ namespace Commerce.Initializer.Builders
                 var brand1 = new JsonBrand()
                 {
                     Name = "Affliction",
-                    Description = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt"+
+                    Description = 
+                        @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
                     SEO = "afflication-mma",
                     SkuCode = "AFFL",
                     ImageBundleExternalId = imageBundle1.ExternalId,
-                };                
+                };
                 var result1 = brandRepository.Insert(brand1);
                 unitOfWork.SaveChanges();
 
@@ -64,7 +65,7 @@ namespace Commerce.Initializer.Builders
                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
                     SEO = "bad-boy-mma",
                     SkuCode = "BBOY",
-                    ImageBundleExternalId = imageBundle1.ExternalId,
+                    ImageBundleExternalId = imageBundle2.ExternalId,
                 };
                 var result2 = brandRepository.Insert(brand2);
                 unitOfWork.SaveChanges();
@@ -79,12 +80,12 @@ namespace Commerce.Initializer.Builders
                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
                     SEO = "dethrone-mma",
                     SkuCode = "DETHRONE",
-                    ImageBundleExternalId = imageBundle1.ExternalId,
+                    ImageBundleExternalId = imageBundle3.ExternalId,
                 };
                 var result3 = brandRepository.Insert(brand3);
                 unitOfWork.SaveChanges();
 
-                // *** Dethrone *** //
+                // *** Fuji *** //
                 var imageBundle4 = imageBundleRepository.Add(new Bitmap(Path.Combine(BrandLogoDirectory(), "fuji.jpg")));
                 unitOfWork.SaveChanges();
                 var brand4 = new JsonBrand()
@@ -94,11 +95,15 @@ namespace Commerce.Initializer.Builders
                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
                     SEO = "fuji-mma",
                     SkuCode = "FUJI",
-                    ImageBundleExternalId = imageBundle1.ExternalId,
+                    ImageBundleExternalId = imageBundle4.ExternalId,
                 };
                 var result4 = brandRepository.Insert(brand4);
                 unitOfWork.SaveChanges();
+
+
+                tx.Complete();
             }
+
         }
 
         public static string BrandLogoDirectory()

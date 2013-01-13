@@ -116,6 +116,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-lightbox\bootstrap-lightbox.css" />
+    <Content Include="Content\bootstrap-lightbox\bootstrap-lightbox.js" />
+    <Content Include="Content\bootstrap-lightbox\bootstrap-lightbox.min.css" />
+    <Content Include="Content\bootstrap-lightbox\bootstrap-lightbox.min.js" />
     <Content Include="Content\bootstrap\css\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap\css\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap\css\bootstrap.css" />
@@ -127,6 +131,11 @@
     <Content Include="Content\bootstrap\js\bootstrap-modal.js" />
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\farbtastic\farbtastic.css" />
+    <Content Include="Content\farbtastic\farbtastic.js" />
+    <Content Include="Content\farbtastic\marker.png" />
+    <Content Include="Content\farbtastic\mask.png" />
+    <Content Include="Content\farbtastic\wheel.png" />
     <Content Include="Content\fineuploader\fineuploader.css" />
     <Content Include="Content\fineuploader\js\button.js" />
     <Content Include="Content\fineuploader\js\dnd.js" />
@@ -140,21 +149,23 @@
     <Content Include="Content\fineuploader\js\util.js" />
     <Content Include="Content\fineuploader\loading.gif" />
     <Content Include="Content\fineuploader\processing.gif" />
+    <Content Include="Content\Images\150x150.gif" />
+    <Content Include="Content\Images\75x75.gif" />
     <Content Include="Content\Images\ajax_loader.gif" />
     <Content Include="Content\Images\webicon-2.png" />
     <Content Include="Content\jquery\jquery-1.8.2.min.js" />
     <Content Include="Content\jquery\jquery.animate-colors-min.js" />
     <Content Include="Content\knockout\knockout-2.1.0.js" />
     <Content Include="Content\knockout\ko.observableDictionary.js" />
-    <Content Include="Content\Scripts\category-service.js" />
-    <Content Include="Content\Scripts\ajax-service.js" />
-    <Content Include="Content\Scripts\brand-service.js" />
-    <Content Include="Content\Scripts\fineupload-init.js" />
-    <Content Include="Content\Scripts\image-service.js" />
-    <Content Include="Content\Scripts\section-service.js" />
-    <Content Include="Content\Scripts\size-service.js" />
-    <Content Include="Content\Scripts\flow.js" />
-    <Content Include="Content\Scripts\pushmarket-common.js" />
+    <Content Include="Content\scripts\category-service.js" />
+    <Content Include="Content\scripts\ajax-service.js" />
+    <Content Include="Content\scripts\brand-service.js" />
+    <Content Include="Content\scripts\color-service.js" />
+    <Content Include="Content\scripts\image-service.js" />
+    <Content Include="Content\scripts\section-service.js" />
+    <Content Include="Content\scripts\size-service.js" />
+    <Content Include="Content\scripts\flow.js" />
+    <Content Include="Content\scripts\pushmarket-common.js" />
     <Content Include="Content\Style\pushmarket.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
@@ -207,8 +218,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Admin\Views\Brand\" />
-    <Folder Include="Areas\Admin\Views\Color\" />
     <Folder Include="Areas\Public\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
@@ -276,6 +285,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Shared\_FineUploader.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Shared\_ImageBundleViewer.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Brand\Editor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Color\Editor.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
