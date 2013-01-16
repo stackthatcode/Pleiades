@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -66,6 +67,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Download(Guid externalResourceId, string size)
         {
+            Debug.WriteLine("Image => Download: " + externalResourceId + " " + size);
             var imageBundle = this.ImageBundleRepository.Retrieve(externalResourceId);
             FileResource fileResource;
             if (size == "thumbnail")

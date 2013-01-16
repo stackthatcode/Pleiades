@@ -17,6 +17,10 @@ function ColorService(errorCallback, showLoadingCallback, hideLoadingCallback) {
         self.AjaxPost("/Admin/Color/Update", color, callback);
 	}
 
+	self.CreateBitmap = function (createRequest, callback) {
+	    self.AjaxPost("/Admin/Color/CreateBitmap", createRequest, callback);        
+	}
+
     self.Delete = function (color, callback) {
         self.AjaxPost("/Admin/Color/Delete", color, callback);
 	};

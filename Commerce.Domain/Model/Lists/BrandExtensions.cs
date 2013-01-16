@@ -11,7 +11,7 @@
                 SEO = brand.SEO,
                 SkuCode = brand.SkuCode,
                 Description = brand.Description,
-                ImageBundleExternalId = brand.ImageBundle.ExternalId,
+                ImageBundleExternalId = brand.ImageBundle != null ? brand.ImageBundle.ExternalId.ToString() : null,
             };
         }
     }

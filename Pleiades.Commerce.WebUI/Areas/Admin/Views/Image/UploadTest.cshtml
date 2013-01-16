@@ -12,9 +12,14 @@
 
             // This is the bit of glue that bridges FineUploader and the Image Gallery stuff
 	        self.OnFileUpload = function (imageBundleData) {
-	            //console.log("OnFileUpload: " + imageBundleData.ExternalId);
+	            console.log("OnFileUpload: " + imageBundleData.ExternalId);
 	            self.ImageBundle(imageBundleData);
 	        };
+
+	        self.LightboxParameters = ko.computed(function () {
+	            var externalResourceId = self.ImageBundle() ? self.ImageBundle().ExternalId : null;
+	            return { ExternalResourceId: externalResourceId, LightboxSuffixId: 'Main' };
+	        });
 	    }
 
 	    $(function () {
@@ -41,8 +46,8 @@
 	
 	<div id="gliding-container" class="container">
 		<div id="row">
-			<div style="margin-bottom:20px; margin-top:20px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: $root.ImageBundle.ExternalId }">
-			</div>
+            <div style="margin-bottom:20px; margin-top:20px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: $root.LightboxParameters }">
+            </div>
 
 			<div style="margin-bottom:20px; margin-top:20px;" data-bind="template: { name: 'Fine-Uploader', data: $root }">
 			</div>

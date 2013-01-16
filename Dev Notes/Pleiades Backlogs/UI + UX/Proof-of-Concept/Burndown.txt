@@ -357,3 +357,21 @@ Notes on Brand State => DONE
 - Thumbnail Viewier Fix => DONE
 - Fixed Brand Name Field => DONE
 - Rapid, rapid Development of the Color Editor 
+
+1/14/2013 1.0 Hour
+------------------
+- Require an Image Upload for Color and Brand - Server/Client => DONE
+- Optimize the Lightbox to Lazy Load => DONE
+
+1/14/2013 0.75 Hour
+------------------
+- Lightbox Doublehits - Optimize/Fix => DONE
+- Farbtastic Color Picker => DONE
+
+1/14/2013 1.5 Hour
+------------------
+- The last List - Color - Backend + UI => DONE
+- Change color of the Upload Button for File => DONE
+- Finish the Color Picker integration => DONE
+
+

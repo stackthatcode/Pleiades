@@ -10,7 +10,7 @@
                 Name = color.Name,
                 SEO = color.SEO,
                 SkuCode = color.SkuCode,
-                ImageBundleExternalId = color.ImageBundle.ExternalId,
+                ImageBundleExternalId = color.ImageBundle != null ? color.ImageBundle.ExternalId.ToString() : null,
             };
         }
     }

@@ -17,12 +17,15 @@
 
         var ShowLightBox = function (data) {
             var lightboxid = '#' + LightBoxElementId(data);
-            var wrappedset = $(lightboxid);
-            wrappedset.lightbox();
+            var lightboxImgId = lightboxid + " img";
+
+            console.log(lightboxImgId + ' ' + $(lightboxImgId).attr("data-image"));
+            $(lightboxImgId).attr("src", $(lightboxImgId).attr("data-image"));
+            $(lightboxImgId).load(function () { $(lightboxid).lightbox(); });            
         }
 	</script>
 	<script type="text/html" id="Image-Bundle-Small-Viewer">
-        <!-- $data contains: { ExternalResourceId: "(some guid)", LightboxSuffixId: "" } -->
+        <!-- $data contains: { ExternalResourceId: "(some guid)", LightboxSuffixId: "Main, Child or Parent, etc." } -->
         <table>
             <tr>
             <td style="height:150px; border:1px dotted #CCC; width:150px; text-align:center;">
@@ -66,7 +69,7 @@
 		        <button type="button" class="close" data-dismiss="lightbox" aria-hidden="true">&times;</button>
 	        </div>
 	        <div class='lightbox-content'>
-		        <img data-bind="attr: { src: ImageBundleDownloadUrl($data, 'large') }" />
+		        <img data-bind="attr: { 'data-image': ImageBundleDownloadUrl($data, 'large') }" />
 	        </div>
         </div>
     </script>

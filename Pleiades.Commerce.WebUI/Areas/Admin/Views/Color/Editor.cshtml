@@ -1,9 +1,11 @@
 ﻿@using Pleiades.Web.MvcHelpers
 
 @section _Scripts {
+    <!-- TODO: make another Partial -->
+    @Html.Javascript("/scripts/color-service.js")
+    @Html.Partial("_ColorPicker")
     @Html.Partial("_FineUploader")
 	@Html.Partial("_ImageBundleViewer")	
-	@Html.Javascript("/scripts/color-service.js")
     
     <script type="text/javascript">
 		// KO enabling/disabling of server JSON        
@@ -57,6 +59,7 @@
 					},
 					function(data) {
 						var knockedoutData = ColorToKnockout(data);
+                        self.ShowUpload(true);
 						self.SelectedRecord(knockedoutData);
                         self.Glider.GlideToChild();
                         var fileUploader = new CommerceFileUploader(this.CrossCuttingUI, self.OnFileUpload);
@@ -74,6 +77,7 @@
 					function() {
                         self.SelectedRecord(null);
                         self.SelectedIndex = null;
+                        self.ShowUpload(true);
                         self.CrossCuttingUI.ScrollToIdTracker(recordId);
 					}
 				);
@@ -98,19 +102,37 @@
 			}
 			
 			self.SaveColor = function() {
+			    var record = self.SelectedRecord();
 				flow.exec(
 					function() {
-						var record = self.SelectedRecord();
 						if ($.trim(record.EditName()) == "" || $.trim(record.EditSEO()) == "" || 
-                            $.trim(record.EditSkuCode()) == "" || !record.ImageBundleExternalId())
+                            $.trim(record.EditSkuCode()) == "")
                         {
                         	$("#validation").show();
 							return;
 						}
+
+                        if (self.ShowUpload() == false && record.ImageBundleExternalId() == null) {
+                        	$("#validation").show();
+							return;
+                        }
+
 						record.Name(record.EditName());
 						record.SEO(record.EditSEO());
 						record.SkuCode(record.EditSkuCode());
 
+                        if (self.ShowUpload() == false) {
+                            var farbtasticColor = GetSelectedColor();                
+                            var color = { Rgb: farbtasticColor, Width: "150", Height: "150" };
+                            self.ServiceAdapter.CreateBitmap(color, this);
+                        }
+                        else {
+                            this( { ExternalId: record.ImageBundleExternalId() });
+                        }
+                    },
+                    function(data) {
+                        console.log("Image Bundle Data: " + data);
+                        record.ImageBundleExternalId(data.ExternalId);
                         var serverRecord = ColorToServerJson(record);
                         if (serverRecord.Id) {
 						    self.ServiceAdapter.Update(serverRecord, this);
@@ -147,7 +169,16 @@
                     }
                 );
 			}
+
+            self.UploadSwatchToggle = function() {
+                self.ShowUpload(true);
+            }
             
+            self.PickColorToggle = function() {
+                self.ShowUpload(false);
+                CreateColorPicker();
+            }
+
 			// Initialization
 			self.ServiceAdapter = serviceAdapter;
             self.CrossCuttingUI = crossCuttingUI;
@@ -157,6 +188,7 @@
             self.Data = ko.observableArray();
 			self.SelectedRecord = ko.observable(null);
             self.SelectedRecordName = ko.computed(function() { return self.SelectedRecord() && self.SelectedRecord().Name() || "(New Color)" }, this);
+            self.ShowUpload = ko.observable(true);
 			self.ModalViewModel = ko.observable(null);
 			
 			// load the Colors
@@ -240,18 +272,41 @@
         <div style="margin-top:40px">
         <form>
 			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
-				<a href="#" class="close" data-dismiss="alert">&times;</a>
                 <strong>Please enter all the required fields.</strong>
 			</div>
 
             <div class="row">
-                <div class="span3">   
-                    <label>Color Swatch</label>                 
-                    <div style="margin-bottom:20px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId(), LightboxSuffixId: 'Child' } }">
-			        </div>
-			        <div style="margin-bottom:20px; margin-top:20px;" data-bind="template: { name: 'Fine-Uploader', data: $root }">
-			        </div>
-                </div>
+                <div class="span3">
+                    <div data-bind="if: $root.ShowUpload">
+                        <ul class="nav nav-pills">
+                            <li class="active">
+                                <a href="#">Upload Swatch</a>
+                            </li>
+                            <li>
+                                <a href="#" data-bind="click: $root.PickColorToggle">Pick Color</a>
+                            </li>
+                        </ul>
+
+                        <label>Color Swatch</label>
+                        <div style="margin-bottom:20px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId(), LightboxSuffixId: 'Child' } }">
+			            </div>
+			            <div style="margin-bottom:20px; margin-top:20px;" data-bind="template: { name: 'Fine-Uploader', data: $root }">
+			            </div>
+                    </div>
+
+                    <div data-bind="ifnot: $root.ShowUpload">
+                        <ul class="nav nav-pills">
+                            <li>
+                                <a href="#" data-bind="click: $root.UploadSwatchToggle">Upload Swatch</a>
+                            </li>
+                            <li class="active">
+                                <a href="#">Pick Color</a>
+                            </li>
+                        </ul>
+
+                        <div id="color-picker" data-bind="template: { name: 'Color-Picker' }"></div>    
+                    </div>
+                  </div>
                 <div class="span9">
                     <div class="row">
                         <div class="span3">

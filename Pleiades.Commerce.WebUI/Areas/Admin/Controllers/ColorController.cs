@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
@@ -6,17 +7,21 @@ using Pleiades.Data;
 using Pleiades.Web;
 using Commerce.Domain.Interfaces;
 using Commerce.Domain.Model.Lists;
+using Commerce.WebUI.Areas.Admin.Models.Color;
 
 namespace Commerce.WebUI.Areas.Admin.Controllers
 {
     public class ColorController : Controller
     {
-        IColorRepository Repository { get; set; }
+        IColorRepository ColorRepository { get; set; }
+        IImageBundleRepository ImageRepository { get; set; }
         IUnitOfWork UnitOfWork { get; set; }
 
-        public ColorController(IColorRepository repository, IUnitOfWork unitOfWork)
+        public ColorController(IColorRepository colorRepository, 
+                IImageBundleRepository imageRepository, IUnitOfWork unitOfWork)
         {
-            this.Repository = repository;
+            this.ColorRepository = colorRepository;
+            this.ImageRepository = imageRepository;
             this.UnitOfWork = unitOfWork;
         }
 
@@ -29,21 +34,31 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Colors()
         {
-            var result = this.Repository.RetrieveAll();
+            var result = this.ColorRepository.RetrieveAll();
             return new JsonNetResult(result);
         }
 
         [HttpGet]
         public ActionResult Color(int Id)
         {
-            var result = this.Repository.Retrieve(Id);
+            var result = this.ColorRepository.Retrieve(Id);
             return new JsonNetResult(result);
+        }
+
+        [HttpPost]
+        public ActionResult CreateBitmap(CreateColorBitmap request)
+        {
+            string rgb = request.Rgb;
+            var color = ColorTranslator.FromHtml(rgb);
+            var imageBundle = this.ImageRepository.Add(color, 150, 150);
+            UnitOfWork.SaveChanges();
+            return new JsonNetResult(imageBundle);
         }
 
         [HttpPost]
         public ActionResult Insert(JsonColor color)
         {
-            var saveResult = this.Repository.Insert(color);
+            var saveResult = this.ColorRepository.Insert(color);
             this.UnitOfWork.SaveChanges();
             return new JsonNetResult(saveResult());
         }
@@ -51,7 +66,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Update(JsonColor color)
         {
-            this.Repository.Update(color);
+            this.ColorRepository.Update(color);
             this.UnitOfWork.SaveChanges();
             return new JsonNetResult(color);
         }
@@ -59,7 +74,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(JsonColor color)
         {
-            this.Repository.DeleteSoft(color);
+            this.ColorRepository.DeleteSoft(color);
             this.UnitOfWork.SaveChanges();
             return new JsonNetResult();
         }

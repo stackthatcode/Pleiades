@@ -50,7 +50,7 @@ namespace Commerce.Initializer.Builders
                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
                     SEO = "afflication-mma",
                     SkuCode = "AFFL",
-                    ImageBundleExternalId = imageBundle1.ExternalId,
+                    ImageBundleExternalId = imageBundle1.ExternalId.ToString(),
                 };
                 var result1 = brandRepository.Insert(brand1);
                 unitOfWork.SaveChanges();
@@ -65,7 +65,7 @@ namespace Commerce.Initializer.Builders
                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
                     SEO = "bad-boy-mma",
                     SkuCode = "BBOY",
-                    ImageBundleExternalId = imageBundle2.ExternalId,
+                    ImageBundleExternalId = imageBundle2.ExternalId.ToString(),
                 };
                 var result2 = brandRepository.Insert(brand2);
                 unitOfWork.SaveChanges();
@@ -80,7 +80,7 @@ namespace Commerce.Initializer.Builders
                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
                     SEO = "dethrone-mma",
                     SkuCode = "DETHRONE",
-                    ImageBundleExternalId = imageBundle3.ExternalId,
+                    ImageBundleExternalId = imageBundle3.ExternalId.ToString(),
                 };
                 var result3 = brandRepository.Insert(brand3);
                 unitOfWork.SaveChanges();
@@ -95,7 +95,7 @@ namespace Commerce.Initializer.Builders
                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
                     SEO = "fuji-mma",
                     SkuCode = "FUJI",
-                    ImageBundleExternalId = imageBundle4.ExternalId,
+                    ImageBundleExternalId = imageBundle4.ExternalId.ToString(),
                 };
                 var result4 = brandRepository.Insert(brand4);
                 unitOfWork.SaveChanges();

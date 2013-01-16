@@ -15,11 +15,6 @@ Front Range
 
 ...work...
 
-- The last List - Color - Backend + UI => IN PROGRESS
-- Require an Image Upload for Color and Brand - Server/Client => TODO
-- Optimize the Lightbox to Lazy Load => TODO
-
-
 - Start Designing Product Screen => TODO
 * List View => TODO
 * List View Search => TODO
@@ -37,7 +32,6 @@ http://www.ww2helmets.com/products-page/checkout/ => Hmmmmm...?????
 
 Backlog
 -------
-
 - Change out the Back Buttons => TODO
 - PREVENT DELETION OF LAST SECTION => TODO
 - Add the Number of Products in a Brand => TODO
@@ -64,14 +58,15 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/6/2013
 - Category Editor => DONE
 - Size Editor => DONE
 - Section Editor => DONE
+- Color Editor => DONE
+- Brand Editor => DONE
 
-- Color Editor => IN PROGRESS
-- Brand Editor => IN PROGRESS
 
 - Product Search & Editor
 - Order Search & Editor
 - Customer Search & Editor
 - SKU Generator => UPDATE: shouldn't this be automatic...?
+
 
 - Basic Analytic Tracker - Traffic Source, Landing Page => WORTH HASHING OUT
 - Image Upload & Processing Engine => DONE

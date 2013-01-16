@@ -92,6 +92,7 @@
     <Compile Include="Areas\Admin\Controllers\ManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\SectionController.cs" />
     <Compile Include="Areas\Admin\Controllers\SizeController.cs" />
+    <Compile Include="Areas\Admin\Models\Color\CreateBitmap.cs" />
     <Compile Include="Areas\Admin\Models\Manager\ChangePasswordModel.cs" />
     <Compile Include="Areas\Admin\Models\Manager\EditUserModel.cs" />
     <Compile Include="Areas\Admin\Models\Manager\CreateAdminModel.cs" />
@@ -131,8 +132,8 @@
     <Content Include="Content\bootstrap\js\bootstrap-modal.js" />
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
-    <Content Include="Content\farbtastic\farbtastic.css" />
-    <Content Include="Content\farbtastic\farbtastic.js" />
+    <Content Include="Content\farbtastic\farbtasticSecure.css" />
+    <Content Include="Content\farbtastic\farbtasticSecure.js" />
     <Content Include="Content\farbtastic\marker.png" />
     <Content Include="Content\farbtastic\mask.png" />
     <Content Include="Content\farbtastic\wheel.png" />
@@ -294,6 +295,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Color\Editor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Shared\_ColorPicker.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

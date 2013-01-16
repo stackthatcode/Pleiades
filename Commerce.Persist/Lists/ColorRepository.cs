@@ -41,7 +41,7 @@ namespace Commerce.Persist.Lists
 
         public void Update(JsonColor colorDiff)
         {
-            var imageBundle = this.ImageBundleRepository.Retrieve(colorDiff.ImageBundleExternalId);
+            var imageBundle = this.ImageBundleRepository.Retrieve(Guid.Parse(colorDiff.ImageBundleExternalId));
 
             var color = this.Data().FirstOrDefault(x => x.Id == colorDiff.Id);
             color.Name = colorDiff.Name;
@@ -53,7 +53,7 @@ namespace Commerce.Persist.Lists
 
         public Func<JsonColor> Insert(JsonColor brandDiff)
         {
-            var imageBundle = this.ImageBundleRepository.Retrieve(brandDiff.ImageBundleExternalId);
+            var imageBundle = this.ImageBundleRepository.Retrieve(Guid.Parse(brandDiff.ImageBundleExternalId));
 
             var color = new Color
             {

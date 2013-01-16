@@ -49,7 +49,7 @@ namespace Commerce.Initializer.Builders
                     Name = "Red",
                     SkuCode = "RED",
                     SEO = "red",
-                    ImageBundleExternalId = imageBundle1.ExternalId,
+                    ImageBundleExternalId = imageBundle1.ExternalId.ToString(),
                 };
                 colorRepository.Insert(red);
                 unitOfWork.SaveChanges();
@@ -63,7 +63,7 @@ namespace Commerce.Initializer.Builders
                     Name = "White",
                     SkuCode = "WHITE",
                     SEO = "white",
-                    ImageBundleExternalId = imageBundle2.ExternalId,
+                    ImageBundleExternalId = imageBundle2.ExternalId.ToString(),
                 };
                 colorRepository.Insert(white);
                 unitOfWork.SaveChanges();
@@ -77,7 +77,7 @@ namespace Commerce.Initializer.Builders
                     Name = "Blue",
                     SkuCode = "BLUE",
                     SEO = "blue",
-                    ImageBundleExternalId = imageBundle3.ExternalId,
+                    ImageBundleExternalId = imageBundle3.ExternalId.ToString(),
                 };
                 colorRepository.Insert(blue);
                 unitOfWork.SaveChanges();
@@ -91,7 +91,7 @@ namespace Commerce.Initializer.Builders
                     Name = "Black",
                     SkuCode = "BLACK",
                     SEO = "black",
-                    ImageBundleExternalId = imageBundle4.ExternalId,
+                    ImageBundleExternalId = imageBundle4.ExternalId.ToString(),
                 };
                 colorRepository.Insert(black);
                 unitOfWork.SaveChanges();
@@ -105,7 +105,7 @@ namespace Commerce.Initializer.Builders
                     Name = "Green",
                     SkuCode = "GREEN",
                     SEO = "green",
-                    ImageBundleExternalId = imageBundle5.ExternalId,
+                    ImageBundleExternalId = imageBundle5.ExternalId.ToString(),
                 };
                 colorRepository.Insert(green);
                 unitOfWork.SaveChanges();
