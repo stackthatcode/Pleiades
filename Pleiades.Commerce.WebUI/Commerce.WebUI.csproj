@@ -90,6 +90,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\SectionController.cs" />
     <Compile Include="Areas\Admin\Controllers\SizeController.cs" />
     <Compile Include="Areas\Admin\Models\Color\CreateBitmap.cs" />

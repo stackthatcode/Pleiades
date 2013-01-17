@@ -68,6 +68,8 @@
     <Compile Include="Builders\BrandBuilder.cs" />
     <Compile Include="Builders\CategoryBuilder.cs" />
     <Compile Include="Builders\ColorBuilder.cs" />
+    <Compile Include="Builders\OrderBuilder.cs" />
+    <Compile Include="Builders\ProductBuilder.cs" />
     <Compile Include="Builders\SizeBuilder.cs" />
     <Compile Include="Builders\RootUserBuilder.cs" />
     <Compile Include="CommerceInitializerModules.cs" />

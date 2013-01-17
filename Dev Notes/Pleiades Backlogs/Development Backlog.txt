@@ -15,16 +15,30 @@ Front Range
 
 ...work...
 
-- Start Designing Product Screen => TODO
+- Start Designing Product Screen => IN PROGRESS
+
+TABS
+----
+=> Product Search 
+=> Info - Product Name, Description, Base Sku, Brand & Category => SAVE BUTTON
+=> Size Group => DRILL-DOWN STATEFUL
+=> Colors => DRILL-DOWN STATEFUL
+=> Images => DRILL-DOWN STATEFUL
+
+
 * List View => TODO
 * List View Search => TODO
-* Product Name, Description, Base Sku
 * Brand => TODO
 * Category => TODO
-
 * Sizes => TODO
-* Colors => TODO
-* Images => TODO
+
+- Colors Tab => TODO
+* Show selected Colors w/ Delete
+* Add new Colors... => drill-down, mayhaps?
+
+How to associate Colors to Images... easily...?
+
+
 
 http://www.ww2helmets.com/products-page/checkout/ => Hmmmmm...?????
 
@@ -32,6 +46,7 @@ http://www.ww2helmets.com/products-page/checkout/ => Hmmmmm...?????
 
 Backlog
 -------
+- Create a Product and simulate Creation of a Product followed by deletion of Colors, Categories, Brands, etc. => TODO
 - Change out the Back Buttons => TODO
 - PREVENT DELETION OF LAST SECTION => TODO
 - Add the Number of Products in a Brand => TODO
@@ -42,6 +57,8 @@ Backlog
 - IsONline - Check How This Functions => TODO
 - Develop and/or Research Fluent Validation library => TODO
 - Donate $20 to FineUploader upon successful integration => TODO
+- ReturnUrl on Login
+- There's some edge-case bug in Color... so, test the hell out of it => TODO
 
 
 *** TODO: what is the function of "nav-collapse collapse"?
@@ -62,16 +79,15 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/6/2013
 - Brand Editor => DONE
 
 
-- Product Search & Editor
-- Order Search & Editor
-- Customer Search & Editor
+- Product Search & Editor => IN PROGRESS
+- Order Search & Editor => IN PROGRESS
+- Customer Search & Editor => IN PROGRESS
 - SKU Generator => UPDATE: shouldn't this be automatic...?
-
 
 - Basic Analytic Tracker - Traffic Source, Landing Page => WORTH HASHING OUT
 - Image Upload & Processing Engine => DONE
-- Email Sending Engine
-- Server Logging => 
+- Email Sending Engine => TODO
+- Server Logging => TODO
 - Barebones Console App => IN PROGRESS
 
 
@@ -80,7 +96,6 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/6/2013
 Middle Range Log
 ----------------
 => How to include all these dependencies...? => We'll see
-=> Convert existing Pleiades stuff to Admin Interface/Bootstrap => TODO
 => Domain Modeling and Write User Stories - after reading through Shopify's API docs => TODO
 => Where did I put my fonts...?  What's a good resource for typography and fonts...? => TODO
 - TODO KNOCKOUTJS: difference between http://knockoutjs.com/documentation/extenders.html AND custom binders

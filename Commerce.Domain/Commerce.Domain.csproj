@@ -57,6 +57,7 @@
     <Compile Include="Interfaces\IImageProcessor.cs" />
     <Compile Include="Interfaces\IImageBundleRepository.cs" />
     <Compile Include="Interfaces\ISizeRepository.cs" />
+    <Compile Include="Model\Customers\Customer.cs" />
     <Compile Include="Model\Lists\Brand.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -77,15 +78,17 @@
     <Compile Include="Model\Lists\SizeExtensions.cs" />
     <Compile Include="Model\Lists\SizeGroup.cs" />
     <Compile Include="Model\Lists\SmallIdea.cs" />
-    <Compile Include="Model\Products\InventoryCounter.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Model\Orders\Order.cs" />
+    <Compile Include="Model\Orders\OrderLine.cs" />
+    <Compile Include="Model\Products\Image.cs" />
+    <Compile Include="Model\Products\JsonProductInfo.cs" />
     <Compile Include="Model\Products\Product.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Lists\Size.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Products\Sku.cs" />
     <Compile Include="Model\Resources\FileResource.cs" />
     <Compile Include="Model\Resources\ImageBundle.cs" />
     <Compile Include="Model\Resources\JsonImageBundle.cs" />
