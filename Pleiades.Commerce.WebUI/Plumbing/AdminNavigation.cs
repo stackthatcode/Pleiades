@@ -63,5 +63,10 @@ namespace Commerce.WebUI.Plumbing
             return new RouteValueDictionary(new { area = "Admin", controller = "Image", action = "UploadTest", });
         }
 
+        public static RouteValueDictionary ProductEditor()
+        {
+            return new RouteValueDictionary(new { area = "Admin", controller = "Product", action = "Editor", });
+        }
+
     }
 }

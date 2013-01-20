@@ -33,7 +33,7 @@ namespace Commerce.Initializer.Builders
 
                 var unitOfWork = ServiceLocator.Resolve<IUnitOfWork>();
                 var genericRepository = ServiceLocator.Resolve<IGenericRepository<Brand>>();
-                var brandRepository = ServiceLocator.Resolve<IBrandRepository>();
+                var brandRepository = ServiceLocator.Resolve<IJsonBrandRepository>();
                 var imageBundleRepository = ServiceLocator.Resolve<IImageBundleRepository>();
 
                 genericRepository.GetAll().ForEach(x => genericRepository.Delete(x));
@@ -100,6 +100,20 @@ namespace Commerce.Initializer.Builders
                 var result4 = brandRepository.Insert(brand4);
                 unitOfWork.SaveChanges();
 
+                // *** Tatami *** //
+                var imageBundle5 = imageBundleRepository.Add(new Bitmap(Path.Combine(BrandLogoDirectory(), "tatami.jpg")));
+                unitOfWork.SaveChanges();
+                var brand5 = new JsonBrand()
+                {
+                    Name = "Tatami",
+                    Description = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                        @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                    SEO = "tatami-mma",
+                    SkuCode = "TATAMI",
+                    ImageBundleExternalId = imageBundle5.ExternalId.ToString(),
+                };
+                var result5 = brandRepository.Insert(brand5);
+                unitOfWork.SaveChanges();
 
                 tx.Complete();
             }

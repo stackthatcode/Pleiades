@@ -9,6 +9,11 @@ namespace Commerce.Domain.Model.Lists
     [JsonObject]
     public class JsonCategory
     {
+        public JsonCategory()
+        {
+            this.Categories = new List<JsonCategory>();
+        }
+
         [JsonProperty]
         public int? Id { get; set; }
 

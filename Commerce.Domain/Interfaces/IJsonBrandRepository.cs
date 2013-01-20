@@ -4,7 +4,7 @@ using Commerce.Domain.Model.Lists;
 
 namespace Commerce.Domain.Interfaces
 {
-    public interface IBrandRepository
+    public interface IJsonBrandRepository
     {
         List<JsonBrand> RetrieveAll();
         JsonBrand Retrieve(int id);

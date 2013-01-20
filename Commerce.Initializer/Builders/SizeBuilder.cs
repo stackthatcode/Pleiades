@@ -35,7 +35,7 @@ namespace Commerce.Initializer.Builders
                 unitOfWork.SaveChanges();
 
                 // Create the JSON Repos
-                var jsonSizeRepository = ServiceLocator.Resolve<ISizeRepository>();
+                var jsonSizeRepository = ServiceLocator.Resolve<IJsonSizeRepository>();
 
                 // Create size groups
                 var result1 = jsonSizeRepository.Insert(new JsonSizeGroup { Name = "Default Clothing" });

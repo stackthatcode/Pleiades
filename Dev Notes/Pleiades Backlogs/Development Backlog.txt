@@ -1,13 +1,6 @@
 FRONTRANGE - HOTZONE
 ====================
 
-Vision - Phase 2?
---------------------
-- Traffic Source { PPC/PPM, SEO, Email } => Landing Page w/ Tracking => ??? => Conversion
-- Exclusive Squeeze Page => Email => Campaigns => ??? => Conversion
-- NOTE: must find focus and aim to achieve immediate goals
-
-
 Front Range
 -----------
 - TRIPLE CHECK YOUR BACKUPS, DUDE => TODO
@@ -19,25 +12,19 @@ Front Range
 
 TABS
 ----
-=> Product Search 
-=> Info - Product Name, Description, Base Sku, Brand & Category => SAVE BUTTON
+=> Product Search => ADD BUTTON
+* List View => IN PROGRESS
+* List View Search => IN PROGRESS
+
+Product Synopsis = Id, Name, Synopsis, Sku, Main Image
+
+=> Info - Product Name, Description, Base Sku, DELETE BUTTON
+=> Brand & Category => SAVE BUTTON
 => Size Group => DRILL-DOWN STATEFUL
 => Colors => DRILL-DOWN STATEFUL
 => Images => DRILL-DOWN STATEFUL
 
-
-* List View => TODO
-* List View Search => TODO
-* Brand => TODO
-* Category => TODO
-* Sizes => TODO
-
-- Colors Tab => TODO
-* Show selected Colors w/ Delete
-* Add new Colors... => drill-down, mayhaps?
-
-How to associate Colors to Images... easily...?
-
+BIG QUESTION => how to associate Colors to Images... easily...? => DRAG AND DROP, BIYATCH
 
 
 http://www.ww2helmets.com/products-page/checkout/ => Hmmmmm...?????
@@ -113,6 +100,9 @@ MORE BIG FISH
 
 PENDING FEATURE BACKLOG
 -----------------------
+- Traffic Source { PPC/PPM, SEO, Email } => Landing Page w/ Tracking => ??? => Conversion
+- Exclusive Squeeze Page => Email => Campaigns => ??? => Conversion
+- NOTE: must find focus and aim to achieve immediate goals
 - What about virus scan for file uploads, etc.? => PENDING EVALUATION
 - Add a way to execute the DDL which adds SQL Foreign Keys to Categories, etc. => PENDING EVAL
 - Eliminate the MembershipProvider (WHOO-HOO!!!!!!!) => PENDING EVAL
@@ -135,13 +125,13 @@ NOTES ON THE HEGEMONY OF UNREASON (STATIC MEMBERSHIP)
 
 E-Commerce API's & Payment Processors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Stripe
+- PayPal
 - Shopify
 - Cheddar Getter
 - Braintree
 - Google Wallet / Google Check-out
 - WePay
-- Stripe
-- PayPal
 - Wickedfire look-up payment processors...? => TODO
 - Authorize.NET
 

@@ -28,13 +28,13 @@ namespace Commerce.IntegrationTests.Repositories
                 CategoryBuilder.EmptyAndRepopulate(container);
 
                 Console.WriteLine();
-                var repository = lifetime.Resolve<ICategoryRepository>();
+                var repository = lifetime.Resolve<IJsonCategoryRepository>();
                 var unitOfWork = lifetime.Resolve<IUnitOfWork>();
 
                 // Show all the parent Sections
                 Console.WriteLine("Displaying All Sections");
 
-                var allSections = repository.RetrieveSectionsOnlyJson();
+                var allSections = repository.RetrieveAllSectionsNoCategories();
                 allSections.ForEach(x => Console.WriteLine(x.Id + " " + x.Name + " " + x.SEO + " " + x.NumberOfCategories));
                 Console.WriteLine();
 
@@ -43,7 +43,7 @@ namespace Commerce.IntegrationTests.Repositories
                 var sectionId = allSections[0].Id;
                 Console.WriteLine("Displaying All Categories under Section {0}", sectionId);
 
-                var categoriesUnderSection = repository.RetrieveBySectionIdJson(sectionId.Value);
+                var categoriesUnderSection = repository.RetrieveAllCategoriesBySectionId(sectionId.Value);
                 categoriesUnderSection.ForEach(x => Console.WriteLine(x.Id + " " + x.ParentId + " " + x.Name + " " + x.SEO));                
                 Console.WriteLine();
 
@@ -58,7 +58,7 @@ namespace Commerce.IntegrationTests.Repositories
                 var categoryId = categoriesUnderSection[0].Id;
                 Console.WriteLine("Displaying All Categories under SectionId {0} and CategoryId {1}", sectionId, categoryId);
                 
-                var category = repository.RetrieveByCategoryIdJson(categoriesUnderSection[0].Id.Value);
+                var category = repository.RetrieveCategoryAndChildrenById(categoriesUnderSection[0].Id.Value);
                 Console.WriteLine();
 
 
@@ -71,7 +71,7 @@ namespace Commerce.IntegrationTests.Repositories
 
                 // Show all the Categories in the first child Categor in the first Section, again
                 Console.WriteLine("Displaying All Categories under SectionId {0} and CategoryId {1}", sectionId, categoryId);
-                var categories2 = repository.RetrieveBySectionIdJson(categoriesUnderSection[0].Id.Value);
+                var categories2 = repository.RetrieveAllCategoriesBySectionId(categoriesUnderSection[0].Id.Value);
                 categories2.ForEach(x => Console.WriteLine(x.Id + " " + x.ParentId + " " + x.Name + " " + x.SEO));
                 Console.WriteLine();
             }

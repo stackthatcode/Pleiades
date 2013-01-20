@@ -56,16 +56,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Products\ProductSearchRepository.cs" />
     <Compile Include="Products\ProductRepository.cs" />
     <Compile Include="Resources\FileResourceRepository.cs" />
     <Compile Include="Resources\ImageBundleRepository.cs" />
     <Compile Include="Resources\ImageProcessor.cs" />
     <Compile Include="PleiadesContext.cs" />
     <Compile Include="CommercePersistModule.cs" />
-    <Compile Include="Lists\CategoryRepository.cs" />
-    <Compile Include="Lists\BrandRepository.cs" />
-    <Compile Include="Lists\ColorRepository.cs" />
-    <Compile Include="Lists\SizeRepository.cs" />
+    <Compile Include="Lists\JsonCategoryRepository.cs" />
+    <Compile Include="Lists\JsonBrandRepository.cs" />
+    <Compile Include="Lists\JsonColorRepository.cs" />
+    <Compile Include="Lists\JsonSizeRepository.cs" />
     <Compile Include="Users\AggregateUserRepository.cs" />
     <Compile Include="Users\MembershipProviderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

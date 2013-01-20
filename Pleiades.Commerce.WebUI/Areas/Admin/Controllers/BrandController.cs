@@ -12,10 +12,10 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
 {
     public class BrandController : Controller
     {
-        IBrandRepository Repository { get; set; }
+        IJsonBrandRepository Repository { get; set; }
         IUnitOfWork UnitOfWork { get; set; }
 
-        public BrandController(IBrandRepository repository, IUnitOfWork unitOfWork)
+        public BrandController(IJsonBrandRepository repository, IUnitOfWork unitOfWork)
         {
             this.Repository = repository;
             this.UnitOfWork = unitOfWork;

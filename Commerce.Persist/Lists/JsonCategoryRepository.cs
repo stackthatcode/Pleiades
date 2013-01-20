@@ -13,11 +13,11 @@ namespace Commerce.Persist.Lists
     /// Due to the complexity of storing the hierarchical data in SQL whilst transposing to hierarchial structures,
     /// this Repository exposes the JsonCategory object for representing hierarchical data.
     /// </summary>
-    public class CategoryRepository : ICategoryRepository
+    public class JsonCategoryRepository : IJsonCategoryRepository
     {
         PleiadesContext Context { get; set; }
 
-        public CategoryRepository(PleiadesContext context)
+        public JsonCategoryRepository(PleiadesContext context)
         {
             this.Context = context;
         }
@@ -45,11 +45,16 @@ namespace Commerce.Persist.Lists
                     .Select(x => x.child);
         }
 
+        protected IQueryable<Category> Sections()
+        {
+            return this.Data().Where(x => x.ParentId == null);
+        }
+
 
         // These should be earmarked for porting into Dapper ORM
-        public List<JsonCategory> RetrieveSectionsOnlyJson()
+        public List<JsonCategory> RetrieveAllSectionsNoCategories()
         {
-            var output = this.Data().Where(x => x.ParentId == null).ToList().Select(x => x.ToJson()).ToList();
+            var output = this.Sections().ToList().Select(x => x.ToJson()).ToList();
 
             var parentChildPairs = this.ReadOnlyData()
                     .Join(
@@ -68,14 +73,29 @@ namespace Commerce.Persist.Lists
             return output.ToList(); 
         }
 
-        public List<JsonCategory> RetrieveBySectionIdJson(int sectionCategoryId)
+        public List<JsonCategory> RetrieveAllSectionsWithCategories()
+        {
+            var allCategories = this.ReadOnlyData().ToList();
+            var output = new List<JsonCategory>();
+
+            foreach (var section in allCategories.Where(x => x.ParentId == null))
+            {
+                var jsonSection = section.ToJson();
+                output.Add(jsonSection);
+                jsonSection.Categories.AddRange(allCategories.ToJsonListWithChildren(section.Id));
+            }
+
+            return output;
+        }
+
+        public List<JsonCategory> RetrieveAllCategoriesBySectionId(int sectionCategoryId)
         {
             return this.CategoriesBySection(sectionCategoryId)
                 .ToList()
                 .ToJsonListWithChildren(sectionCategoryId);
         }
 
-        public JsonCategory RetrieveByCategoryIdJson(int categoryId)
+        public JsonCategory RetrieveCategoryAndChildrenById(int categoryId)
         {
             // Get the SQL data
             var categoryData = this.ReadOnlyData().Where(x => x.ParentId == categoryId || x.Id == categoryId).ToList();
@@ -83,7 +103,6 @@ namespace Commerce.Persist.Lists
             // Transpose to JSON data
             return categoryData.ToJsonWithChildren(categoryId);
         }
-
 
         // EF is fine for your everyday CRUD operations
         protected Category Retrieve(int id)
@@ -115,7 +134,7 @@ namespace Commerce.Persist.Lists
             category.ParentId = jsonCategory.ParentId;
         }
 
-        public void DeleteCategorySoft(int categoryId)
+        public void DeleteCategory(int categoryId)
         {
             var categories = this.Data().Where(x => x.ParentId == categoryId || x.Id == categoryId).ToList();
 
@@ -126,7 +145,7 @@ namespace Commerce.Persist.Lists
             }
         }
 
-        public void DeleteSectionSoft(int sectionId)
+        public void DeleteSection(int sectionId)
         {
             var categories = this.CategoriesBySection(sectionId);
             

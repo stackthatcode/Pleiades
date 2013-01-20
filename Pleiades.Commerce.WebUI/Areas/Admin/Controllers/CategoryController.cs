@@ -11,10 +11,10 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
 {
     public class CategoryController : Controller
     {
-        ICategoryRepository Repository { get; set; }
+        IJsonCategoryRepository Repository { get; set; }
         IUnitOfWork UnitOfWork { get; set; }
 
-        public CategoryController(ICategoryRepository repository, IUnitOfWork unitOfWork)
+        public CategoryController(IJsonCategoryRepository repository, IUnitOfWork unitOfWork)
         {
             this.Repository = repository;
             this.UnitOfWork = unitOfWork;
@@ -31,21 +31,21 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Sections()
         {
-            var result = this.Repository.RetrieveSectionsOnlyJson();
+            var result = this.Repository.RetrieveAllSectionsNoCategories();
             return new JsonNetResult(result);
         }
 
         [HttpGet]
         public ActionResult CategoriesBySection(int id)
         {
-            var result = this.Repository.RetrieveBySectionIdJson(id);
+            var result = this.Repository.RetrieveAllCategoriesBySectionId(id);
             return new JsonNetResult(result);
         }
 
         [HttpGet]
         public ActionResult Category(int id)
         {
-            var result = this.Repository.RetrieveByCategoryIdJson(id);
+            var result = this.Repository.RetrieveCategoryAndChildrenById(id);
             return new JsonNetResult(result);
         }
 
@@ -68,7 +68,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            this.Repository.DeleteCategorySoft(id);
+            this.Repository.DeleteCategory(id);
             this.UnitOfWork.SaveChanges();
 
             return new JsonNetResult();

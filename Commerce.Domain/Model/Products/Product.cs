@@ -7,26 +7,35 @@ namespace Commerce.Domain.Model.Products
 {
     public class Product
     {
+        public Product()
+        {
+            Colors = new List<ProductColor>();
+            Images = new List<ProductImage>();
+            DateCreated = DateTime.Now;
+            LastModified = DateTime.Now;
+        }
+
         // Info Tab
         public int Id { get; set; }
         public string Name { get; set; }
         public string SkuCode { get; set; }
+        public string SEO { get; set; }
         public string Synopsis { get; set; }
         public string Description { get; set; }
-        public Brand Brand { get; set; }
-        public Category Category { get; set; }
         public decimal UnitPrice { get; set; }
-        public decimal UnitCost { get; set; }
+        public decimal UnitCost { get; set; }        
+        public Brand Brand { get; set; }
+
+        // Category and Size Tab
+        public Category Category { get; set; }
+        public SizeGroup SizeGroup { get; set; }
         public bool Active { get; set; }
 
-        // Colors & Sizes
-        public List<Color> Colors { get; set; }
-        public Color MainColor { get; set; }
-        public SizeGroup SizeGroup { get; set; }
+        // Colors Tab
+        public List<ProductColor> Colors { get; set; }
 
-        // Image Tab
-        public List<Image> Images { get; set; }
-        public Image MainImage { get; set; }
+        // Images Tab
+        public List<ProductImage> Images { get; set; }
 
         // back-end
         public bool IsDeleted { get; set; }

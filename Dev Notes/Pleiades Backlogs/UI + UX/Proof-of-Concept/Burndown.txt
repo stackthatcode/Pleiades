@@ -378,3 +378,13 @@ Notes on Brand State => DONE
 -------------------
 - => Convert existing Pleiades stuff to Admin Interface/Bootstrap => DONE
 - Hardcode Product Domain Modeling => DONE
+
+1/19/2013 1.0 Hour
+------------------
+- Domain modelling and stubbing out => DONE
+
+1/20/2013 3.25 Hours
+--------------------
+- 
+
+

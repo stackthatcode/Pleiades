@@ -9,12 +9,12 @@ using Pleiades.Data.EF;
 
 namespace Commerce.Persist.Lists
 {
-    public class ColorRepository : IColorRepository
+    public class JsonColorRepository : IJsonColorRepository
     {
         PleiadesContext Context { get; set; }
         IImageBundleRepository ImageBundleRepository { get; set; }
 
-        public ColorRepository(PleiadesContext context, IImageBundleRepository imageBundleRepository)
+        public JsonColorRepository(PleiadesContext context, IImageBundleRepository imageBundleRepository)
         {
             this.Context = context;
             this.ImageBundleRepository = imageBundleRepository;

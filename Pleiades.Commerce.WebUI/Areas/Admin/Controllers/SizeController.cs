@@ -11,10 +11,10 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
 {
     public class SizeController : Controller
     {
-        ISizeRepository Repository { get; set; }
+        IJsonSizeRepository Repository { get; set; }
         IUnitOfWork UnitOfWork { get; set; }
 
-        public SizeController(ISizeRepository repository, IUnitOfWork unitOfWork)
+        public SizeController(IJsonSizeRepository repository, IUnitOfWork unitOfWork)
         {
             this.Repository = repository;
             this.UnitOfWork = unitOfWork;

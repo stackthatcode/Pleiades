@@ -34,7 +34,7 @@ namespace Commerce.Initializer.Builders
 
                 var unitOfWork = ServiceLocator.Resolve<IUnitOfWork>();
                 var genericRepository = ServiceLocator.Resolve<IGenericRepository<DomainColor>>();
-                var colorRepository = ServiceLocator.Resolve<IColorRepository>();
+                var colorRepository = ServiceLocator.Resolve<IJsonColorRepository>();
                 var imageBundleRepository = ServiceLocator.Resolve<IImageBundleRepository>();
 
                 genericRepository.GetAll().ForEach(x => genericRepository.Delete(x));

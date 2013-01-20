@@ -1,0 +1,376 @@
+﻿@using Pleiades.Web.MvcHelpers
+
+@section _Scripts {
+    <!-- TODO: make another Partial -->
+    @Html.Javascript("/scripts/product-service.js")
+    @Html.Partial("_ColorPicker")
+    @Html.Partial("_FineUploader")
+	@Html.Partial("_ImageBundleViewer")	
+    
+    <script type="text/javascript">
+		// KO enabling/disabling of server JSON        
+        var ProductInfoToKnockout = function(product) {
+			return {
+				Id: ko.observable(product.Id),
+				Name: ko.observable(product.Name),
+				SEO: ko.observable(product.SEO),
+				SkuCode: ko.observable(product.SkuCode),
+				Synopsis: ko.observable(product.Synopsis),
+                Description: ko.observable(product.Description),
+
+                EditName: ko.observable(product.Name),
+                EditSEO: ko.observable(product.SEO),
+                EditSkuCode: ko.observable(product.SkuCode),
+                EditSynopsis: ko.observable(product.Synopsis),
+                EditDescription: ko.observable(product.Description),
+
+                //ImageBundleExternalId: ko.observable(color.ImageBundleExternalId),
+			};
+		}
+
+        var ProductInfoToServerJson = function(product) {
+			return {
+				Id: product.Id(),
+				Name: product.Name(),
+                SEO: product.SEO(),
+                SkuCode: product.SkuCode(),
+                Synopsis: product.Synopsis(),
+                Description: product.Description(),
+
+                // ImageBundleExternalId: color.ImageBundleExternalId(),
+			};
+		}
+	</script>
+    <script type="text/javascript">
+        var ProductUIMediator = function (serviceAdapter) {
+            var self = this;
+            this.ProductServiceAdapter = serviceAdapter;
+
+            self.RetrieveCategories = function (callback) {
+                flow.exec(
+                    function () {
+                        self.ProductServiceAdapter.Categories(this);
+                    },
+                    function (data) {
+                        var searchCategory = $("#SearchCategory");
+                        searchCategory.find('option').remove().end();
+                        searchCategory.append($("<option/>", { value: null, text: "Search by Category" }));
+                        searchCategory.append($("<option/>", { value: null, text: "" }));
+
+                        var addCategory = function (category, indent) {
+                            searchCategory.append($("<option/>", {
+                                value: category.Id,
+                                text: indent + category.Name
+                            }));
+
+                            $.each(category.Categories, function (index, elem) { addCategory(elem, indent + '....'); });
+                        }
+
+                        $.each(data, function (index, elem) { addCategory(elem, ''); });
+
+                        //console.log(output);
+                        if (callback) callback();
+                    }
+                );
+            }
+
+            self.RetrieveBrands = function (callback) {
+                flow.exec(
+                    function () {
+                        self.ProductServiceAdapter.Brands(this);
+                    },
+                    function (data) {
+                        var searchBrand = $("#SearchBrand");
+                        searchBrand.find('option').remove().end();
+                        searchBrand.append($("<option/>", { value: null, text: "Search by Brand" }));
+                        searchBrand.append($("<option/>", { value: null, text: "" }));
+
+                        $.each(data, function (index, elem) { searchBrand.append($("<option/>", { value: elem.Id, text: elem.Name })) });
+
+                        //console.log(output);
+                        if (callback) callback();
+                    }
+                );
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        var ProductViewModel = function (productServiceAdapter, crossCuttingUI, gliderWidget) {
+            var self = this;
+
+            // asynchronous, service-bound operations            
+            self.GlideToChildView = function (colorRecord) {
+                flow.exec(
+					function () {
+					    self.SelectedIndex = self.Data.indexOf(colorRecord);
+					    self.ServiceAdapter.Retrieve(colorRecord.Id, this);
+					},
+					function (data) {
+					    var knockedoutData = ColorToKnockout(data);
+					    self.ShowUpload(true);
+					    self.SelectedRecord(knockedoutData);
+					    self.Glider.GlideToChild();
+					    var fileUploader = new CommerceFileUploader(this.CrossCuttingUI, self.OnFileUpload);
+					}
+				);
+            }
+
+            self.GlideToParentView = function () {
+                var recordId = self.SelectedRecord().Id();
+                flow.exec(
+                    function () {
+                        $("#glideToParent").hide();
+                        self.Glider.GlideToParent(this);
+                    },
+					function () {
+					    self.SelectedRecord(null);
+					    self.SelectedIndex = null;
+					    self.ShowUpload(true);
+					    self.CrossCuttingUI.ScrollToIdTracker(recordId);
+					}
+				);
+            }
+
+            self.DeleteColor = function (color) {
+                self.ModalViewModel(color);
+                $('#modal-delete').modal();
+            }
+
+            self.DeleteConfirm = function () {
+                var record = self.ModalViewModel();
+                flow.exec(
+                    function () {
+                        $('#modal-delete').modal('hide');
+                        self.ServiceAdapter.Delete(record, this);
+                    },
+                    function (data) {
+                        self.Data.remove(function (item) { return item.Id == record.Id; });
+                        self.ModalViewModel(null);
+                    }
+                );
+            }
+
+
+            // Initialization
+            self.ProductServiceAdapter = productServiceAdapter;
+            self.CrossCuttingUI = crossCuttingUI;
+            self.Glider = gliderWidget;
+
+            // load ko.observables into view model
+            self.SearchData = ko.observableArray();
+            self.SelectedProduct = ko.observable(null);
+            self.ModalViewModel = ko.observable(null);
+
+            // ko.computed's
+            self.SelectedProductName = ko.computed(
+                function () {
+                    return self.SelectedProduct() && self.SelectedProduct().Name() || "(New Product)"
+                }, this);
+
+
+            // Start loading...
+            var log = function (data) { console.log(data); }
+
+            // TODO: load all of the Categories
+            // TODO: load all of the Brands
+        }
+
+        $(function () {
+            var crosscuttingUI = new CrossCuttingUI("#gliding-container");
+            var parentGliderWidget = new GliderWidget("#gliding-container", "#parent-editor", "#child-editor");
+            var chilldGliderWidget = new GliderWidget("#gliding-container", "#child-editor", "#sub-child-editor");
+
+            var serviceAdapter = new ProductService(crosscuttingUI.Error, crosscuttingUI.ShowLoading, crosscuttingUI.HideLoading);
+            var model = new ProductViewModel(serviceAdapter, crosscuttingUI, parentGliderWidget);
+            ko.applyBindings(model);
+
+            var mediator = new ProductUIMediator(serviceAdapter);
+            mediator.RetrieveCategories();
+            mediator.RetrieveBrands();
+        });
+	</script>
+}	
+
+@section _Templates {
+	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE -->
+	<script type="text/html" id="Top-Workspace">
+		<!-- PARENT VIEW HEADER -->
+		<div id="heading" class="container" data-bind="ifnot: $root.SelectedProduct()">
+			<div class="row">
+				<div class="span9">
+					<h1>Products > All</h1>
+				</div>
+				<div class="span3" style="margin-top:15px; text-align:right;">
+					<a class="btn btn-primary btn-block" data-bind="click: $root.AddColor">Add New Product <i class="icon-arrow-right icon-white"></i></a>
+				</div>
+			</div>
+
+            <div style="height:30px;"></div>
+            
+            <div class="row">
+				<div class="span3">
+                    <select id="SearchCategory"></select>
+                </div>
+				<div class="span3">
+                    <select id="SearchBrand"></select>
+                </div>
+                <div class="span3">
+                    <input type="text" class="input-large search-query" style="width:200px;" placeholder="Description, Name, Sku..." />
+                </div>
+				<div class="span3">
+					<a class="btn btn-inverse btn-block" data-bind="click: $root.AddColor">Search <i class="icon-search icon-white"></i></a>
+                </div>
+            </div>
+		</div>
+		
+		<!-- CHILD VIEW HEADER -->
+		<div id="heading" class="container" data-bind="if: $root.SelectedProduct()">
+			<div class="row" style="position:relative;">
+				<div style="left:-75px; margin-top:15px; position:absolute; text-align:right;">
+					<a id="glideToParent" class="btn btn-inverse" data-bind="click: $root.GlideToParentView"><i class="icon-arrow-left icon-white"></i> Back</a>
+				</div>
+				<div class="span9">
+					<h1>Colors &gt; <span data-bind="text: $root.SelectedRecordName"></span></h1>
+				</div>                
+			</div>
+		</div>
+	</script>
+	
+	<!-- KNOCKOUT TEMPLATE - PARENT EDITOR -->
+	<script type="text/html" id="Parent-Editor">
+		<div style="margin-top:75px; text-align:center;" class="alert alert-info" data-bind="visible: $data.SearchData().length == 0">
+			<button type="button" class="close" data-dismiss="alert">x</button>
+			<strong>There are no Products in your current search.  Click "Search" to run a search or click "Add New Product" to create a new one.</strong>  
+		</div>
+		
+		<table id="parent-editor-table" class="table table-hover" data-bind="visible: $data.SearchData().length > 0">
+		<tbody data-bind="foreach: $data.SearchData()">
+			<tr>
+			<td>
+				<span class="span2">
+                	<div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+			        </div>
+                </span>
+            </td>
+            <td>
+				<span class="span7">
+					<input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
+					<p><strong data-bind="text: $data.Name"></strong> - <span data-bind="text: $data.SkuCode"></span></p>
+				</span>
+            </td>
+			<td>
+				<span class="span3" style="text-align:right;">					
+					<a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteColor($data) }"><i class="icon-trash icon-white"></i> Delete</a>
+					<a class="btn btn-inverse" style="width:70px;" data-bind="click: $root.GlideToChildView">Edit <i class="icon-arrow-right icon-white"></i></a>
+				</span>
+			</td>
+			</tr>
+		</tbody>
+		</table>
+	</script>
+	
+	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR -->
+	<script type="text/html" id="Child-Editor">
+        <div style="margin-top:40px">
+        <form>
+			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
+                <strong>Please enter all the required fields.</strong>
+			</div>
+
+            <div class="row">
+                <div class="span3">
+                    <div data-bind="if: $root.ShowUpload">
+                        <ul class="nav nav-pills">
+                            <li class="active">
+                                <a href="#">Upload Swatch</a>
+                            </li>
+                            <li>
+                                <a href="#" data-bind="click: $root.PickColorToggle">Pick Color</a>
+                            </li>
+                        </ul>
+
+                        <label>Color Swatch</label>
+                        <div style="margin-bottom:20px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId(), LightboxSuffixId: 'Child' } }">
+			            </div>
+			            <div style="margin-bottom:20px; margin-top:20px;" data-bind="template: { name: 'Fine-Uploader', data: $root }">
+			            </div>
+                    </div>
+
+                    <div data-bind="ifnot: $root.ShowUpload">
+                        <ul class="nav nav-pills">
+                            <li>
+                                <a href="#" data-bind="click: $root.UploadSwatchToggle">Upload Swatch</a>
+                            </li>
+                            <li class="active">
+                                <a href="#">Pick Color</a>
+                            </li>
+                        </ul>
+
+                        <div id="color-picker" data-bind="template: { name: 'Color-Picker' }"></div>    
+                    </div>
+                  </div>
+                <div class="span9">
+                    <div class="row">
+                        <div class="span3">
+                            <label>Color Name<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Color Name" data-bind="value: $data.EditName" maxlength="50" />
+                            </label>
+                        </div>
+                        <div class="span3">
+                            <label>SKU Code<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Sku Code" data-bind="value: $data.EditSkuCode" maxlength="6" />
+				            </label>
+                        </div>
+                        <div class="span3">
+                            <label>SEO<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter SEO Tag" data-bind="value: $data.EditSEO" maxlength="50" />
+				            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="span9" style="text-align:right;">
+					<a class="btn btn-inverse" href="#" data-bind="click: $root.GlideToParentView"><i class="icon-remove icon-white"></i> Cancel</a>                    
+					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveColor"><i class="icon-ok icon-white"></i> Save</a>
+                </div>
+            </div>
+            
+        </form>
+        </div>
+	</script>
+	
+	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG -->
+	<script type="text/html" id="Modal-Dialog">
+		<div id="modal-delete" class="modal hide fade" data-bind="if: $root.ModalViewModel()">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3>Delete <span data-bind="text: $root.ModalViewModel().Name"></span></h3>
+			</div>
+			<div class="modal-body">
+				<p>Are you sure you want to Delete this Color?</p>			
+				<p>All Products that use it will not have a Color</p>			
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.DeleteConfirm"><i class="icon-ok icon-white"></i> Ok</a>
+			</div>
+		</div>
+	</script>
+}
+
+@section _Body {	
+    <div class="workspace-heading-parent">
+        <!-- This is a 35px increase for the Search Page -->
+		<div class="workspace-heading" style="height:140px;" data-bind="template: { name: 'Top-Workspace', data: $root }"></div>
+	</div>
+	
+	<div id="gliding-container" class="container">
+		<div id="parent-editor">
+			<div style="margin-bottom:200px;" data-bind="template: { name: 'Parent-Editor', data: $root }">
+			</div>
+		</div>
+		
+		<div id="child-editor" data-bind="if: $root.SelectedProduct()">
+			<div style="margin-bottom:200px;" data-bind="template: { name: 'Child-Editor', data: $root.SelectedProduct() }">
+			</div>
+		</div>
+    </div>
+
+    <div id="modal-enclave" data-bind="template: { name: 'Modal-Dialog' }"></div>    
+}

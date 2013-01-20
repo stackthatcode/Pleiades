@@ -50,13 +50,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IColorRepository.cs" />
-    <Compile Include="Interfaces\IBrandRepository.cs" />
-    <Compile Include="Interfaces\ICategoryRepository.cs" />
+    <Compile Include="Interfaces\IProductSearchRepository.cs" />
+    <Compile Include="Interfaces\IProductRepository.cs" />
+    <Compile Include="Interfaces\IJsonColorRepository.cs" />
+    <Compile Include="Interfaces\IJsonBrandRepository.cs" />
+    <Compile Include="Interfaces\IJsonCategoryRepository.cs" />
     <Compile Include="Interfaces\IFileResourceRepository.cs" />
     <Compile Include="Interfaces\IImageProcessor.cs" />
     <Compile Include="Interfaces\IImageBundleRepository.cs" />
-    <Compile Include="Interfaces\ISizeRepository.cs" />
+    <Compile Include="Interfaces\IJsonSizeRepository.cs" />
     <Compile Include="Model\Customers\Customer.cs" />
     <Compile Include="Model\Lists\Brand.cs">
       <SubType>Code</SubType>
@@ -80,7 +82,11 @@
     <Compile Include="Model\Lists\SmallIdea.cs" />
     <Compile Include="Model\Orders\Order.cs" />
     <Compile Include="Model\Orders\OrderLine.cs" />
-    <Compile Include="Model\Products\Image.cs" />
+    <Compile Include="Model\Products\JsonProductColors.cs" />
+    <Compile Include="Model\Products\JsonProductImages.cs" />
+    <Compile Include="Model\Products\JsonProductSynopsis.cs" />
+    <Compile Include="Model\Products\ProductColor.cs" />
+    <Compile Include="Model\Products\JsonProduct.cs" />
     <Compile Include="Model\Products\JsonProductInfo.cs" />
     <Compile Include="Model\Products\Product.cs">
       <SubType>Code</SubType>
@@ -88,6 +94,7 @@
     <Compile Include="Model\Lists\Size.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Products\ProductImage.cs" />
     <Compile Include="Model\Products\Sku.cs" />
     <Compile Include="Model\Resources\FileResource.cs" />
     <Compile Include="Model\Resources\ImageBundle.cs" />

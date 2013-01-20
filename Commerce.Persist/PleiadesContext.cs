@@ -32,7 +32,8 @@ namespace Commerce.Persist
         
         // Products
         public DbSet<Product> Products { get; set; }
-        public DbSet<Image> ProductImages { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<ProductColor> ProductColors { get; set; }
         public DbSet<Sku> ProductSkus { get; set; }
 
         // Orders

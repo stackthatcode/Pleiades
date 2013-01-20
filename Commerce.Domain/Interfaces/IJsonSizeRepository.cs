@@ -5,7 +5,7 @@ using Commerce.Domain.Model.Lists;
 
 namespace Commerce.Domain.Interfaces
 {
-    public interface ISizeRepository
+    public interface IJsonSizeRepository
     {
         List<JsonSizeGroup> RetrieveAll();
         JsonSizeGroup RetrieveByGroup(int groupId);

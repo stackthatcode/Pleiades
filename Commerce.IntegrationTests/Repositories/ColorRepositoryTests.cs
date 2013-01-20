@@ -25,7 +25,7 @@ namespace Commerce.IntegrationTests.Repositories
             using (var lifetime = TestContainer.LifetimeScope())
             {
                 var container = lifetime.Resolve<IContainerAdapter>();
-                var colorRepository = lifetime.Resolve<IColorRepository>();
+                var colorRepository = lifetime.Resolve<IJsonColorRepository>();
 
                 ColorBuilder.EmptyAndRepopulate(container);
                 var colors = colorRepository.RetrieveAll();

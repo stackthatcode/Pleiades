@@ -9,11 +9,11 @@ using Pleiades.Data.EF;
 
 namespace Commerce.Persist.Lists
 {
-    public class SizeRepository : ISizeRepository
+    public class JsonSizeRepository : IJsonSizeRepository
     {
         PleiadesContext Context { get; set; }
 
-        public SizeRepository(PleiadesContext context)
+        public JsonSizeRepository(PleiadesContext context)
         {
             this.Context = context;
         }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Commerce.Domain.Model.Products
 {
-    public class JsonProductInfo
+    public class JsonProductSynopsis
     {
     }
 }

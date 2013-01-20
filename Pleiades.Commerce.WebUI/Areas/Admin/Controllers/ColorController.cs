@@ -13,11 +13,11 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
 {
     public class ColorController : Controller
     {
-        IColorRepository ColorRepository { get; set; }
+        IJsonColorRepository ColorRepository { get; set; }
         IImageBundleRepository ImageRepository { get; set; }
         IUnitOfWork UnitOfWork { get; set; }
 
-        public ColorController(IColorRepository colorRepository, 
+        public ColorController(IJsonColorRepository colorRepository, 
                 IImageBundleRepository imageRepository, IUnitOfWork unitOfWork)
         {
             this.ColorRepository = colorRepository;

@@ -28,7 +28,7 @@ namespace Commerce.IntegrationTests.Repositories
                 var container = lifetime.Resolve<IContainerAdapter>();
                 SizeBuilder.EmptyAndRepopulate(container);
 
-                var repository = container.Resolve<ISizeRepository>();
+                var repository = container.Resolve<IJsonSizeRepository>();
                 var unitOfWork = container.Resolve<IUnitOfWork>();
 
                 // All Size Groups to JSON

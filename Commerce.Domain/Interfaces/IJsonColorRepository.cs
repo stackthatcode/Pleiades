@@ -4,7 +4,7 @@ using Commerce.Domain.Model.Lists;
 
 namespace Commerce.Domain.Interfaces
 {
-    public interface IColorRepository
+    public interface IJsonColorRepository
     {
         List<JsonColor> RetrieveAll();
         JsonColor Retrieve(int id);
