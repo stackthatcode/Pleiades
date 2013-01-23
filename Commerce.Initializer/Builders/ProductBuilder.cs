@@ -58,11 +58,9 @@ namespace Commerce.Initializer.Builders
                     Description = "The Tatami Fightwear Estilo Premier BJJ GI range is designed for the BJJ athlete who is looking for a " +
                         "BJJ GI that is built to the highest quality and craftsmanship but also with cutting edge style and detailing. " +
                         "The Estilo BJJ GI is constructed using only the best quality materials and is a must for any serious BJJ athletes.",
-                    Synopsis = "The Tatami Fightwear Estilo Premier BJJ GI range is designed for the BJJ athlete who is looking for a " +
-                        "BJJ GI that is built to the highest quality and craftsmanship but also with cutting edge style and detailing. " +
-                        "The Estilo BJJ GI is constructed using only the best quality materials and is a must for any serious BJJ athletes.",
+                    Synopsis = "The Tatami Fightwear Estilo Premier BJJ GI range is designed for the BJJ athlete that's tough!",
                     SEO = "tatmi-estilo",
-                    SkuCode = "tat-1010",
+                    SkuCode = "TAT-1010",
                     Active = true,
                     UnitPrice = 130.00m,
                     UnitCost = 45.00m,

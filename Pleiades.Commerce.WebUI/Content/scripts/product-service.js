@@ -1,7 +1,6 @@
 function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback) {
     var self = new AjaxService(errorCallback, showLoadingCallback, hideLoadingCallback);
-
-    self.Categories = function (callback) {
+        self.Categories = function (callback) {
         self.AjaxGet("/Admin/Product/Categories", callback);
     };
 
@@ -9,8 +8,13 @@ function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback)
         self.AjaxGet("/Admin/Product/Brands", callback);
     };
 
-    self.Retrieve = function (id, callback) {
-        self.AjaxGet("/Admin/Product/Color/" + id, callback);
+    self.Search = function (brandId, categoryId, searchText, callback) {
+        self.AjaxGet("/Admin/Product/Search" +
+            "?brandId=" + brandId + "&categoryId=" + categoryId + "&searchText=" + searchText, callback);
+    };
+
+    self.Retrieve = function (productId, callback) {
+        self.AjaxGet("/Admin/Product/Retrieve/" + productId, callback);
     };
 
     self.Insert = function (color, callback) {

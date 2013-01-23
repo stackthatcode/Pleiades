@@ -224,13 +224,15 @@
 		<!-- CHILD VIEW HEADER -->
 		<div id="heading" class="container" data-bind="if: $root.SelectedRecord()">
 			<div class="row" style="position:relative;">
-				<div style="left:-75px; margin-top:15px; position:absolute; text-align:right;">
-					<a id="glideToParent" class="btn btn-inverse" data-bind="click: $root.GlideToParentView"><i class="icon-arrow-left icon-white"></i> Back</a>
-				</div>
 				<div class="span9">
 					<h1>Colors &gt; <span data-bind="text: $root.SelectedRecordName"></span></h1>
 				</div>                
 			</div>
+            <div class="row">
+                <div class="span2">
+				    <a id="glideToParent" class="btn btn-inverse btn-block btn-small" data-bind="click: $root.GlideToParentView"><i class="icon-arrow-left icon-white"></i> Back</a>
+                </div>
+		    </div>
 		</div>
 	</script>
 	

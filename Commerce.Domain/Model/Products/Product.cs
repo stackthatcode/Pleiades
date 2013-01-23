@@ -22,14 +22,15 @@ namespace Commerce.Domain.Model.Products
         public string SEO { get; set; }
         public string Synopsis { get; set; }
         public string Description { get; set; }
-        public decimal UnitPrice { get; set; }
-        public decimal UnitCost { get; set; }        
-        public Brand Brand { get; set; }
 
-        // Category and Size Tab
+        public decimal UnitPrice { get; set; }
+        public decimal UnitCost { get; set; }     
+        
+        public Brand Brand { get; set; }
         public Category Category { get; set; }
         public SizeGroup SizeGroup { get; set; }
         public bool Active { get; set; }
+
 
         // Colors Tab
         public List<ProductColor> Colors { get; set; }

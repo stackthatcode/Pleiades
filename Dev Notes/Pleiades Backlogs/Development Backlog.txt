@@ -26,7 +26,6 @@ Product Synopsis = Id, Name, Synopsis, Sku, Main Image
 
 BIG QUESTION => how to associate Colors to Images... easily...? => DRAG AND DROP, BIYATCH
 
-
 http://www.ww2helmets.com/products-page/checkout/ => Hmmmmm...?????
 
 

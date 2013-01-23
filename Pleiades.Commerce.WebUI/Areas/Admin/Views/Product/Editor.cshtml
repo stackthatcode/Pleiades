@@ -17,6 +17,7 @@
 				SkuCode: ko.observable(product.SkuCode),
 				Synopsis: ko.observable(product.Synopsis),
                 Description: ko.observable(product.Description),
+                UnitPrice: ko.observable(product.UnitPrice),
 
                 EditName: ko.observable(product.Name),
                 EditSEO: ko.observable(product.SEO),
@@ -24,7 +25,12 @@
                 EditSynopsis: ko.observable(product.Synopsis),
                 EditDescription: ko.observable(product.Description),
 
-                //ImageBundleExternalId: ko.observable(color.ImageBundleExternalId),
+                EditUnitPrice: ko.observable(product.UnitPrice),
+                EditUnitCost: ko.observable(product.UnitCost),
+
+
+
+                ImageBundleExternalId: ko.observable(product.ImageBundleExternalId),
 			};
 		}
 
@@ -36,15 +42,43 @@
                 SkuCode: product.SkuCode(),
                 Synopsis: product.Synopsis(),
                 Description: product.Description(),
-
-                // ImageBundleExternalId: color.ImageBundleExternalId(),
+                ImageBundleExternalId: product.ImageBundleExternalId(),
 			};
 		}
 	</script>
     <script type="text/javascript">
-        var ProductUIMediator = function (serviceAdapter) {
+        var ProductViewModel = function (productServiceAdapter, crossCuttingUI, gliderWidget) {
             var self = this;
-            this.ProductServiceAdapter = serviceAdapter;
+
+            // asynchronous, service-bound operations            
+            self.GlideToChildView = function (product) {
+                flow.exec(
+					function () {
+					    self.SelectedIndex = self.SearchData.indexOf(product);
+					    self.ProductServiceAdapter.Retrieve(product.Id, this);
+					},
+					function (product) {
+					    var knockedoutData = ProductInfoToKnockout(product);
+					    self.SelectedProduct(knockedoutData);
+					    self.Glider.GlideToChild();
+					}
+				);
+            }
+
+            self.GlideToParentView = function () {
+                var recordId = self.SelectedProduct().Id();
+                flow.exec(
+                    function () {
+                        $("#glideToParent").hide();
+                        self.Glider.GlideToParent(this);
+                    },
+					function () {
+					    self.SelectedProduct(null);
+					    self.SelectedIndex = null;
+					    self.CrossCuttingUI.ScrollToIdTracker(recordId);
+					}
+				);
+            }
 
             self.RetrieveCategories = function (callback) {
                 flow.exec(
@@ -52,24 +86,17 @@
                         self.ProductServiceAdapter.Categories(this);
                     },
                     function (data) {
-                        var searchCategory = $("#SearchCategory");
-                        searchCategory.find('option').remove().end();
-                        searchCategory.append($("<option/>", { value: null, text: "Search by Category" }));
-                        searchCategory.append($("<option/>", { value: null, text: "" }));
+                        self.CategoryArray.removeAll();
+                        self.CategoryArray.push({ value: null, text: "(Select a Category)" });
 
                         var addCategory = function (category, indent) {
-                            searchCategory.append($("<option/>", {
-                                value: category.Id,
-                                text: indent + category.Name
-                            }));
-
+                            self.CategoryArray.push({ value: category.Id, text: indent + category.Name });
                             $.each(category.Categories, function (index, elem) { addCategory(elem, indent + '....'); });
                         }
-
                         $.each(data, function (index, elem) { addCategory(elem, ''); });
-
-                        //console.log(output);
-                        if (callback) callback();
+                        if (callback) {
+                            callback();
+                        }
                     }
                 );
             }
@@ -80,55 +107,18 @@
                         self.ProductServiceAdapter.Brands(this);
                     },
                     function (data) {
-                        var searchBrand = $("#SearchBrand");
-                        searchBrand.find('option').remove().end();
-                        searchBrand.append($("<option/>", { value: null, text: "Search by Brand" }));
-                        searchBrand.append($("<option/>", { value: null, text: "" }));
+                        self.BrandArray.removeAll();
+                        self.BrandArray.push({ value: null, text: "(Select a Brands)" });
 
-                        $.each(data, function (index, elem) { searchBrand.append($("<option/>", { value: elem.Id, text: elem.Name })) });
+                        $.each(data, function (index, elem) {
+                            self.BrandArray.push({ value: elem.Id, text: elem.Name });
+                        });
 
-                        //console.log(output);
-                        if (callback) callback();
+                        if (callback) {
+                            callback();
+                        }
                     }
                 );
-            }
-        }
-    </script>
-    <script type="text/javascript">
-        var ProductViewModel = function (productServiceAdapter, crossCuttingUI, gliderWidget) {
-            var self = this;
-
-            // asynchronous, service-bound operations            
-            self.GlideToChildView = function (colorRecord) {
-                flow.exec(
-					function () {
-					    self.SelectedIndex = self.Data.indexOf(colorRecord);
-					    self.ServiceAdapter.Retrieve(colorRecord.Id, this);
-					},
-					function (data) {
-					    var knockedoutData = ColorToKnockout(data);
-					    self.ShowUpload(true);
-					    self.SelectedRecord(knockedoutData);
-					    self.Glider.GlideToChild();
-					    var fileUploader = new CommerceFileUploader(this.CrossCuttingUI, self.OnFileUpload);
-					}
-				);
-            }
-
-            self.GlideToParentView = function () {
-                var recordId = self.SelectedRecord().Id();
-                flow.exec(
-                    function () {
-                        $("#glideToParent").hide();
-                        self.Glider.GlideToParent(this);
-                    },
-					function () {
-					    self.SelectedRecord(null);
-					    self.SelectedIndex = null;
-					    self.ShowUpload(true);
-					    self.CrossCuttingUI.ScrollToIdTracker(recordId);
-					}
-				);
             }
 
             self.DeleteColor = function (color) {
@@ -146,10 +136,21 @@
                     function (data) {
                         self.Data.remove(function (item) { return item.Id == record.Id; });
                         self.ModalViewModel(null);
-                    }
-                );
+                    });
             }
 
+            self.SearchClick = function () {
+                flow.exec(
+                    function () {
+                        var brandId = $("#SearchBrand").val();
+                        var categoryId = $("#SearchCategory").val();
+                        var searchText = $("#SearchText").val();
+                        self.ProductServiceAdapter.Search(brandId, categoryId, searchText, this);
+                    },
+                    function (data) {
+                        self.SearchData(data);
+                    });
+            }
 
             // Initialization
             self.ProductServiceAdapter = productServiceAdapter;
@@ -157,6 +158,8 @@
             self.Glider = gliderWidget;
 
             // load ko.observables into view model
+            self.CategoryArray = ko.observableArray();
+            self.BrandArray = ko.observableArray();
             self.SearchData = ko.observableArray();
             self.SelectedProduct = ko.observable(null);
             self.ModalViewModel = ko.observable(null);
@@ -164,15 +167,24 @@
             // ko.computed's
             self.SelectedProductName = ko.computed(
                 function () {
-                    return self.SelectedProduct() && self.SelectedProduct().Name() || "(New Product)"
+                    return self.SelectedProduct() && self.SelectedProduct().SkuCode() || "(New Product)"
                 }, this);
 
+            self.WorkspaceHeadingStyle = ko.computed(
+                function () {
+                    return self.SelectedProduct() ? "height:105px;" : "height:130px;";
+                }, this);
+
+            self.GlidingContainerStyle = ko.computed(
+                function () {
+                    return self.SelectedProduct() ? "top:165px;" : "top:190px;";
+                }, this);
 
             // Start loading...
             var log = function (data) { console.log(data); }
 
-            // TODO: load all of the Categories
-            // TODO: load all of the Brands
+            self.RetrieveCategories();
+            self.RetrieveBrands();            
         }
 
         $(function () {
@@ -183,10 +195,6 @@
             var serviceAdapter = new ProductService(crosscuttingUI.Error, crosscuttingUI.ShowLoading, crosscuttingUI.HideLoading);
             var model = new ProductViewModel(serviceAdapter, crosscuttingUI, parentGliderWidget);
             ko.applyBindings(model);
-
-            var mediator = new ProductUIMediator(serviceAdapter);
-            mediator.RetrieveCategories();
-            mediator.RetrieveBrands();
         });
 	</script>
 }	
@@ -201,44 +209,50 @@
 					<h1>Products > All</h1>
 				</div>
 				<div class="span3" style="margin-top:15px; text-align:right;">
-					<a class="btn btn-primary btn-block" data-bind="click: $root.AddColor">Add New Product <i class="icon-arrow-right icon-white"></i></a>
+					<a class="btn btn-primary btn-block" data-bind="click: $root.AddProduct">Add New Product <i class="icon-arrow-right icon-white"></i></a>
 				</div>
 			</div>
 
-            <div style="height:30px;"></div>
+            <div style="height:10px;"></div>
             
             <div class="row">
 				<div class="span3">
-                    <select id="SearchCategory"></select>
+                    <select id="SearchCategory" data-bind="foreach: $root.CategoryArray">
+                        <option data-bind="value: $data.value, text: $data.text"  />
+                    </select>
                 </div>
 				<div class="span3">
-                    <select id="SearchBrand"></select>
+                    <select id="SearchBrand" data-bind="foreach: $root.BrandArray">
+                        <option data-bind="value: $data.value, text: $data.text"  />
+                    </select>
                 </div>
                 <div class="span3">
-                    <input type="text" class="input-large search-query" style="width:200px;" placeholder="Description, Name, Sku..." />
+                    <input id="SearchText" type="text" class="input-large search-query" style="width:200px;" placeholder="Description, Name, Sku..." />
                 </div>
 				<div class="span3">
-					<a class="btn btn-inverse btn-block" data-bind="click: $root.AddColor">Search <i class="icon-search icon-white"></i></a>
+					<a class="btn btn-inverse btn-block" data-bind="click: $root.SearchClick">Search <i class="icon-search icon-white"></i></a>
                 </div>
             </div>
 		</div>
 		
 		<!-- CHILD VIEW HEADER -->
 		<div id="heading" class="container" data-bind="if: $root.SelectedProduct()">
-			<div class="row" style="position:relative;">
-				<div style="left:-75px; margin-top:15px; position:absolute; text-align:right;">
-					<a id="glideToParent" class="btn btn-inverse" data-bind="click: $root.GlideToParentView"><i class="icon-arrow-left icon-white"></i> Back</a>
+			<div class="row" style="position:relative;">				
+				<div class="span12">
+					<h1>Products &gt; <span data-bind="text: $root.SelectedProductName"></span></h1>
 				</div>
-				<div class="span9">
-					<h1>Colors &gt; <span data-bind="text: $root.SelectedRecordName"></span></h1>
-				</div>                
 			</div>
+            <div class="row">
+                <div class="span2">
+				    <a id="glideToParent" class="btn btn-inverse btn-block btn-small" data-bind="click: $root.GlideToParentView"><i class="icon-backward icon-white"></i> Back</a>
+                </div>
+		    </div>
 		</div>
 	</script>
 	
 	<!-- KNOCKOUT TEMPLATE - PARENT EDITOR -->
 	<script type="text/html" id="Parent-Editor">
-		<div style="margin-top:75px; text-align:center;" class="alert alert-info" data-bind="visible: $data.SearchData().length == 0">
+		<div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $data.SearchData().length == 0">
 			<button type="button" class="close" data-dismiss="alert">x</button>
 			<strong>There are no Products in your current search.  Click "Search" to run a search or click "Add New Product" to create a new one.</strong>  
 		</div>
@@ -255,7 +269,12 @@
             <td>
 				<span class="span7">
 					<input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
-					<p><strong data-bind="text: $data.Name"></strong> - <span data-bind="text: $data.SkuCode"></span></p>
+					<p>
+                        <h4 data-bind="text: $data.Name" style="margin-bottom:5px;"></h4>
+                        <span data-bind="text: 'Sku: ' + $data.SkuCode"></span><br />
+                        <span data-bind="text: 'Brand: ' + $data.BrandName"></span><br />
+                        <span data-bind="text: 'Price: $' + $data.UnitPrice"></span>
+                    </p>
 				</span>
             </td>
 			<td>
@@ -271,52 +290,35 @@
 	
 	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR -->
 	<script type="text/html" id="Child-Editor">
-        <div style="margin-top:40px">
+        <div style="margin-top:20px">
         <form>
-			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
+            <ul class="nav nav-pills">
+                <li class="active">
+                    <a href="#">Information</a>
+                </li>
+                <li>
+                    <a href="#" data-bind="click: $root.PickColorToggle">Sizes &amp; Colors</a>
+                </li>
+                <li>
+                    <a href="#" data-bind="click: $root.PickColorToggle">Images</a>
+                </li>
+            </ul>
+
+			<div id="validation" style="text-align:center; clear:both; display:none;" class="alert alert-error">
                 <strong>Please enter all the required fields.</strong>
 			</div>
 
             <div class="row">
-                <div class="span3">
-                    <div data-bind="if: $root.ShowUpload">
-                        <ul class="nav nav-pills">
-                            <li class="active">
-                                <a href="#">Upload Swatch</a>
-                            </li>
-                            <li>
-                                <a href="#" data-bind="click: $root.PickColorToggle">Pick Color</a>
-                            </li>
-                        </ul>
-
-                        <label>Color Swatch</label>
-                        <div style="margin-bottom:20px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId(), LightboxSuffixId: 'Child' } }">
-			            </div>
-			            <div style="margin-bottom:20px; margin-top:20px;" data-bind="template: { name: 'Fine-Uploader', data: $root }">
-			            </div>
-                    </div>
-
-                    <div data-bind="ifnot: $root.ShowUpload">
-                        <ul class="nav nav-pills">
-                            <li>
-                                <a href="#" data-bind="click: $root.UploadSwatchToggle">Upload Swatch</a>
-                            </li>
-                            <li class="active">
-                                <a href="#">Pick Color</a>
-                            </li>
-                        </ul>
-
-                        <div id="color-picker" data-bind="template: { name: 'Color-Picker' }"></div>    
-                    </div>
-                  </div>
-                <div class="span9">
+                <div class="span6">
                     <div class="row">
-                        <div class="span3">
-                            <label>Color Name<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Color Name" data-bind="value: $data.EditName" maxlength="50" />
+                        <div class="span6">
+                            <label>Product Name<br /><input class="input-large" style="width:440px;" type="text" placeholder="Enter Brand Name" data-bind="value: $data.EditName" maxlength="50" />
                             </label>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="span3">
-                            <label>SKU Code<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Sku Code" data-bind="value: $data.EditSkuCode" maxlength="6" />
+                            <label>SKU Code<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Sku Code" data-bind="value: $data.EditSkuCode" maxlength="10" />
 				            </label>
                         </div>
                         <div class="span3">
@@ -324,13 +326,62 @@
 				            </label>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="span6">
+                            <label>Synopsis (short desc.)<br/>
+                                <textarea id="entry" type="text" class="input-large" style="width:440px;" rows="2" 
+                                    placeholder="Enter Synopsis" data-bind="value: $data.EditSynopsis" maxlength="200" />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span6">
+                            <label>Description<br/>
+                                <textarea id="entry" type="text" class="input-large" style="width:440px;" rows="6" 
+                                    placeholder="Enter Description" data-bind="value: $data.EditDescription" maxlength="500" />
+                            </label>
+                        </div>
+                    </div>
                 </div>
-                <div class="span9" style="text-align:right;">
+
+                <div class="span3">
+                    <div class="row">
+				        <div class="span3">
+                            <label>Brand<br />
+                            <select id="SearchBrand" data-bind="foreach: $root.BrandArray">
+                                <option data-bind="value: $data.value, text: $data.text"  />
+                            </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span3">
+                            <label>Category<br />
+                            <select id="SearchCategory" data-bind="foreach: $root.CategoryArray">
+                                <option data-bind="value: $data.value, text: $data.text"  />
+                            </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span3">
+                            <label>Unit Price<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Unit Price" data-bind="value: $data.EditUnitPrice" maxlength="12" />
+				            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span3">
+                            <label>Unit Cost<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Unit Cost" data-bind="value: $data.EditUnitCost" maxlength="12" />
+				            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="span3" style="text-align:right;">
 					<a class="btn btn-inverse" href="#" data-bind="click: $root.GlideToParentView"><i class="icon-remove icon-white"></i> Cancel</a>                    
-					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveColor"><i class="icon-ok icon-white"></i> Save</a>
+					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveBrand"><i class="icon-ok icon-white"></i> Save</a>
                 </div>
-            </div>
-            
+            </div>            
         </form>
         </div>
 	</script>
@@ -357,10 +408,10 @@
 @section _Body {	
     <div class="workspace-heading-parent">
         <!-- This is a 35px increase for the Search Page -->
-		<div class="workspace-heading" style="height:140px;" data-bind="template: { name: 'Top-Workspace', data: $root }"></div>
+		<div class="workspace-heading" data-bind="template: { name: 'Top-Workspace', data: $root }, attr: { style: $root.WorkspaceHeadingStyle }"></div>
 	</div>
 	
-	<div id="gliding-container" class="container">
+	<div id="gliding-container" class="container" data-bind="attr: { style: $root.GlidingContainerStyle }">
 		<div id="parent-editor">
 			<div style="margin-bottom:200px;" data-bind="template: { name: 'Parent-Editor', data: $root }">
 			</div>

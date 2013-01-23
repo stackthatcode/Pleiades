@@ -13,15 +13,17 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
     {
         IJsonCategoryRepository CategoryRepository { get; set; }
         IJsonBrandRepository BrandRepository { get; set; }
+        IProductSearchRepository ProductSearchRepository { get; set; }
         IUnitOfWork UnitOfWork { get; set; }
 
-        public ProductController(IJsonCategoryRepository categoryRepository, IJsonBrandRepository brandRepository, IUnitOfWork unitOfWork)
+        public ProductController(IJsonCategoryRepository categoryRepository, 
+                IJsonBrandRepository brandRepository, IProductSearchRepository productSearchRepository, IUnitOfWork unitOfWork)
         {
             this.CategoryRepository = categoryRepository;
             this.BrandRepository = brandRepository;
+            this.ProductSearchRepository = productSearchRepository;
             this.UnitOfWork = unitOfWork;
         }
-
 
         [HttpGet]   
         public ActionResult Editor()
@@ -42,17 +44,19 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             var result = this.BrandRepository.RetrieveAll();
             return new JsonNetResult(result);
         }
-
+        
         [HttpGet]
-        public ActionResult Retreive()
+        public ActionResult Search(int? brandId, int? categoryId, string searchText)
         {
-            throw new NotImplementedException();
+            var result = this.ProductSearchRepository.FindProducts(categoryId, brandId, searchText);
+            return new JsonNetResult(result);
         }
 
         [HttpGet]
-        public ActionResult Retreive(int id)
+        public ActionResult Retrieve(int id)
         {
-            throw new NotImplementedException();
+            var result = this.ProductSearchRepository.Retrieve(id);
+            return new JsonNetResult(result);
         }
 
         [HttpPost]

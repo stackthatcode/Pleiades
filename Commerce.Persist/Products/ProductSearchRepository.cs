@@ -22,10 +22,14 @@ namespace Commerce.Persist.Products
 
         public IQueryable<Product> Data()
         {
-            return this.Context.Products.Where(x => x.IsDeleted == false);
+            return this.Context.Products
+                .Where(x => x.IsDeleted == false)
+                .Include(x => x.Brand)
+                .Include(x => x.Images)
+                .Include(x => x.Images.Select(img => img.ImageBundle));
         }
 
-        public List<Product> FindProducts(int? categoryId, int? brandId, string searchText)
+        public List<JsonProductSynopsis> FindProducts(int? categoryId, int? brandId, string searchText)
         {
             var query = this.Data();
             if (categoryId != null)
@@ -46,7 +50,12 @@ namespace Commerce.Persist.Products
                     SqlFunctions.PatIndex(searchText, x.Description) > 0);
             }
 
-            return query.ToList();
+            return query.ToList().Select(x => x.ToSynopsis()).ToList();
+        }
+
+        public JsonProductSynopsis Retrieve(int productId)
+        {
+            return this.Data().FirstOrDefault(x => x.Id == productId).ToSynopsis();
         }
     }
 }

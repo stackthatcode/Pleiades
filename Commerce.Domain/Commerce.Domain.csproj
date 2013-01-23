@@ -94,6 +94,7 @@
     <Compile Include="Model\Lists\Size.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Products\ProductExtensions.cs" />
     <Compile Include="Model\Products\ProductImage.cs" />
     <Compile Include="Model\Products\Sku.cs" />
     <Compile Include="Model\Resources\FileResource.cs" />
