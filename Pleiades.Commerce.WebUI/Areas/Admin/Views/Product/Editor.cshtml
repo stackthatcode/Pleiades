@@ -18,17 +18,20 @@
 				Synopsis: ko.observable(product.Synopsis),
                 Description: ko.observable(product.Description),
                 UnitPrice: ko.observable(product.UnitPrice),
+                BrandId: ko.observable(product.BrandId),
+                BrandName: ko.observable(product.BrandName),
+                CategoryId: ko.observable(product.CategoryId),
+                CategoryName: ko.observable(product.CategoryName),
 
                 EditName: ko.observable(product.Name),
                 EditSEO: ko.observable(product.SEO),
                 EditSkuCode: ko.observable(product.SkuCode),
                 EditSynopsis: ko.observable(product.Synopsis),
                 EditDescription: ko.observable(product.Description),
-
                 EditUnitPrice: ko.observable(product.UnitPrice),
                 EditUnitCost: ko.observable(product.UnitCost),
-
-
+                EditBrandId: ko.observable(product.BrandId),
+                EditCategoryId: ko.observable(product.CategoryId),
 
                 ImageBundleExternalId: ko.observable(product.ImageBundleExternalId),
 			};
@@ -108,7 +111,7 @@
                     },
                     function (data) {
                         self.BrandArray.removeAll();
-                        self.BrandArray.push({ value: null, text: "(Select a Brands)" });
+                        self.BrandArray.push({ value: null, text: "(Select a Brand)" });
 
                         $.each(data, function (index, elem) {
                             self.BrandArray.push({ value: elem.Id, text: elem.Name });
@@ -158,8 +161,8 @@
             self.Glider = gliderWidget;
 
             // load ko.observables into view model
-            self.CategoryArray = ko.observableArray();
             self.BrandArray = ko.observableArray();
+            self.CategoryArray = ko.observableArray();
             self.SearchData = ko.observableArray();
             self.SelectedProduct = ko.observable(null);
             self.ModalViewModel = ko.observable(null);
@@ -253,7 +256,6 @@
 	<!-- KNOCKOUT TEMPLATE - PARENT EDITOR -->
 	<script type="text/html" id="Parent-Editor">
 		<div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $data.SearchData().length == 0">
-			<button type="button" class="close" data-dismiss="alert">x</button>
 			<strong>There are no Products in your current search.  Click "Search" to run a search or click "Add New Product" to create a new one.</strong>  
 		</div>
 		
@@ -348,18 +350,14 @@
                     <div class="row">
 				        <div class="span3">
                             <label>Brand<br />
-                            <select id="SearchBrand" data-bind="foreach: $root.BrandArray">
-                                <option data-bind="value: $data.value, text: $data.text"  />
-                            </select>
+                                <select id="SelectedBrand" data-bind="options: $root.BrandArray, optionsText: 'text', optionsValue:'value', value: $data.EditBrandId" />
                             </label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="span3">
                             <label>Category<br />
-                            <select id="SearchCategory" data-bind="foreach: $root.CategoryArray">
-                                <option data-bind="value: $data.value, text: $data.text"  />
-                            </select>
+                                <select id="SelectedCategory" data-bind="options: $root.CategoryArray, optionsText: 'text', optionsValue:'value', value: $data.EditCategoryId" />
                             </label>
                         </div>
                     </div>

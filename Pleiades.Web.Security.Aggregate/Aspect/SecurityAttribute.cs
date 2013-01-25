@@ -19,17 +19,18 @@ namespace Pleiades.Web.Security.Aspect
 
             var _container = DependencyResolver.Current.GetService<IContainerAdapter>();
 
-            var contextFactory = _container.Resolve<ISecurityContextFactory>();
-            var httpSecurityResponder = _container.Resolve<ISecurityResponder>();
+            var contextFactory = _container.Resolve<ISecurityContextBuilder>();
+            var httpSecurityResponder = _container.Resolve<ISecurityHttpResponder>();
             var aggregateUserService = _container.Resolve<IAggregateUserService>();
             Debug.WriteLine("AggrUserService Id: " + aggregateUserService.Tracer);
 
             var user = aggregateUserService.GetAuthenticatedUser(filterContext.HttpContext);
 
-            var context = contextFactory.Create(filterContext, user);
-            context.AccountLevelCheck();
-            context.AccountStatusCheck();
-            context.UserRoleCheck();
+            var context = 
+                contextFactory.Create(filterContext, user)
+                    .AccountLevelCheck()
+                    .AccountStatusCheck()
+                    .UserRoleCheck();
             
             httpSecurityResponder.Process(context.SecurityCode, filterContext);
         }

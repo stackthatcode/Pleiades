@@ -8,7 +8,7 @@ using Commerce.WebUI.Areas.Public.Controllers;
 
 namespace Commerce.WebUI.Plumbing
 {
-    public class SecurityContextFactory : ISecurityContextFactory 
+    public class SecurityContextFactory : ISecurityContextBuilder 
     {
         public SecurityContext Create(AuthorizationContext filterContext, AggregateUser user)
         {

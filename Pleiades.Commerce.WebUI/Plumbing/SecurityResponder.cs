@@ -5,7 +5,7 @@ using Pleiades.Web.Security.Interface;
 
 namespace Commerce.WebUI.Plumbing
 {
-    public class SecurityResponder : SecurityResponderBase
+    public class SecurityResponder : DefaultSecurityHttpResponder
     {
         protected override void AccessDeniedSolicitLogon(AuthorizationContext filterContext)
         {

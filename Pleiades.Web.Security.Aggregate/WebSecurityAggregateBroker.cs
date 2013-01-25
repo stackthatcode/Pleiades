@@ -15,20 +15,20 @@ namespace Pleiades.Web.Security
 
         static WebSecurityAggregateBroker()
         {
-            WebSecurityAggregateBroker.RegisterSecurityContextFactory<SecurityContextFactoryBase>();
-            WebSecurityAggregateBroker.RegisterSecurityResponder<SecurityResponderBase>();
+            WebSecurityAggregateBroker.RegisterSecurityContextFactory<DefaultSecurityContextBuilder>();
+            WebSecurityAggregateBroker.RegisterSecurityResponder<DefaultSecurityHttpResponder>();
         }
 
-        public static void RegisterSecurityContextFactory<T>() where T : ISecurityContextFactory
+        public static void RegisterSecurityContextFactory<T>() where T : ISecurityContextBuilder
         {
             AuthorizationRuleRegistrationAction = (builder) =>
-                builder.RegisterType<T>().As<ISecurityContextFactory>().InstancePerLifetimeScope();
+                builder.RegisterType<T>().As<ISecurityContextBuilder>().InstancePerLifetimeScope();
         }
 
-        public static void RegisterSecurityResponder<T>() where T : ISecurityResponder
+        public static void RegisterSecurityResponder<T>() where T : ISecurityHttpResponder
         {
             ResponderRegistrationAction = (builder) =>
-                builder.RegisterType<T>().As<ISecurityResponder>().InstancePerLifetimeScope();
+                builder.RegisterType<T>().As<ISecurityHttpResponder>().InstancePerLifetimeScope();
         }
 
 
@@ -38,14 +38,14 @@ namespace Pleiades.Web.Security
             ResponderRegistrationAction.Invoke(builder);
         }
 
-        public static ISecurityContextFactory ResolveSecurityContextFactory(this IContainer injector)
+        public static ISecurityContextBuilder ResolveSecurityContextFactory(this IContainer injector)
         {
-            return injector.Resolve<ISecurityContextFactory>();
+            return injector.Resolve<ISecurityContextBuilder>();
         }
 
-        public static ISecurityResponder ResolveSecurityResponder(this IContainer injector)
+        public static ISecurityHttpResponder ResolveSecurityResponder(this IContainer injector)
         {
-            return injector.Resolve<ISecurityResponder>();
+            return injector.Resolve<ISecurityHttpResponder>();
         }
     }
 }

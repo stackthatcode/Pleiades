@@ -6,10 +6,7 @@ using Pleiades.Web.Security.Model;
 
 namespace Pleiades.Web.Security.Default
 {
-    /// <summary>
-    /// Abstracts and enables composition of responses to Security Authorization attempts
-    /// </summary>
-    public class SecurityResponderBase : ISecurityResponder
+    public class DefaultSecurityHttpResponder : ISecurityHttpResponder
     {
         /// <summary>
         /// Based on the SecurityResponseCode

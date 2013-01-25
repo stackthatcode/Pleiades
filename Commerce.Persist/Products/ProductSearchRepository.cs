@@ -25,6 +25,7 @@ namespace Commerce.Persist.Products
             return this.Context.Products
                 .Where(x => x.IsDeleted == false)
                 .Include(x => x.Brand)
+                .Include(x => x.Category)
                 .Include(x => x.Images)
                 .Include(x => x.Images.Select(img => img.ImageBundle));
         }

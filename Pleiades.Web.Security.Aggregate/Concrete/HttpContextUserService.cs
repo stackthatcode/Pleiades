@@ -8,12 +8,12 @@ namespace Pleiades.Web.Security.Concrete
     {
         public AggregateUser Get()
         {
-            return HttpContext.Current.Items["CurrentUserCache"] as AggregateUser;
+            return HttpContext.Current.Items["AggregateUserCache"] as AggregateUser;
         }
 
         public void Put(AggregateUser user)
         {
-            HttpContext.Current.Items["CurrentUserCache"] = user;
+            HttpContext.Current.Items["AggregateUserCache"] = user;
         }
     }
 }

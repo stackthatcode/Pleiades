@@ -5,7 +5,7 @@ using Pleiades.Web.Security.Model;
 
 namespace Pleiades.Web.Security.Default
 {
-    public class SecurityContextFactoryBase : ISecurityContextFactory
+    public class DefaultSecurityContextBuilder : ISecurityContextBuilder
     {        
         public virtual SecurityContext Create(AuthorizationContext filterContext, AggregateUser user)
         {

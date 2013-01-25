@@ -387,4 +387,16 @@ Notes on Brand State => DONE
 --------------------
 - Product Editor work in progress - very good gains => DONE
 
+1/22/2013 1.25 Hours
+1/23/2013 1.5 Hours
+-------------------
+* List View => DONE
+* List View Search => DONE
+Product Synopsis = Id, Name, Synopsis, Sku, Main Image => DONE
+=> Info - Product Name, Description, Base Sku, DELETE BUTTON => DONE
+=> Brand & Category => DONE
+
+1/24/2013 1.0 Hours
+-------------------
+- Architectural Review of Security stuff =>  DONE
 

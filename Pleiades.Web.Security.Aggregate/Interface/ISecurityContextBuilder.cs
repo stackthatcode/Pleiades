@@ -4,7 +4,7 @@ using Pleiades.Web.Security.Rules;
 
 namespace Pleiades.Web.Security.Interface
 {
-    public interface ISecurityContextFactory
+    public interface ISecurityContextBuilder
     {
         SecurityContext Create(System.Web.Mvc.AuthorizationContext filterContext, AggregateUser user);
     }

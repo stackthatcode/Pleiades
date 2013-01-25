@@ -21,13 +21,9 @@ namespace Pleiades.Web.Security.Interface
             out PleiadesMembershipCreateStatus outStatus);
 
         bool Authenticate(string username, string password, bool persistenceCookie, List<UserRole> expectedRoles);
-
         AggregateUser GetAuthenticatedUser(HttpContextBase context);
-
         void UpdateIdentity(CreateOrModifyIdentityRequest identityUserRequest);
-
         // void UpdateEmailAndApproval(int aggregateUserId, string email, bool approval);
-
         void ChangeUserPassword(int aggregateUserId, string oldPassword, string newPassword);
     }
 }

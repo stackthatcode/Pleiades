@@ -8,32 +8,40 @@ Front Range
 
 ...work...
 
+
+Product Editor
+~~~~~~~~~~~~~~
 - Start Designing Product Screen => IN PROGRESS
+- Add Money Editor binding magic + Money formatting functionality => TODO
+- Find a decent validation library (not JQuery) => TODO
 
-TABS
-----
 => Product Search => ADD BUTTON
-* List View => IN PROGRESS
-* List View Search => IN PROGRESS
-
-Product Synopsis = Id, Name, Synopsis, Sku, Main Image
-
-=> Info - Product Name, Description, Base Sku, DELETE BUTTON
-=> Brand & Category => SAVE BUTTON
 => Size Group => DRILL-DOWN STATEFUL
 => Colors => DRILL-DOWN STATEFUL
 => Images => DRILL-DOWN STATEFUL
 
-BIG QUESTION => how to associate Colors to Images... easily...? => DRAG AND DROP, BIYATCH
+- Change out the Back Buttons => IN PROGRESS
 
+BIG QUESTION => how to associate Colors to Images... easily...? => DRAG AND DROP, BIYATCH
 http://www.ww2helmets.com/products-page/checkout/ => Hmmmmm...?????
 
+
+
+ARCHITECTURAL REVIEW 1/24/2013
+------------------------------
+- Flatten the Membership Provider object graph stuff
+- Copy from the Dot Net Framework into MembershipService
+- Create a separate Authentication Service - Aggregate User Service should deal with CRUD only
+- Owner Authorization Service overlaps with Aggregate User Services... eliminate this method Authorize(int ownerUserId)
+- Determine how to delegate User Authorization to Aggregate User Service... if at all!  Maybe that shit goes in the Controller?  Hmm....
+- Consider using OnActionExecuting instead of the Attribute... maybe.
+- Ultimately, should Pleiades be separate from Commerce...?  Nah, but move that Attribute out of Pleiades.  Fuck Security Context factory.
+- Move Owner Auth Service under Rules
 
 
 Backlog
 -------
 - Create a Product and simulate Creation of a Product followed by deletion of Colors, Categories, Brands, etc. => TODO
-- Change out the Back Buttons => TODO
 - PREVENT DELETION OF LAST SECTION => TODO
 - Add the Number of Products in a Brand => TODO
 - Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING)
