@@ -5,38 +5,75 @@
     @Html.Javascript("/scripts/product-service.js")
     @Html.Partial("_ColorPicker")
     @Html.Partial("_FineUploader")
-	@Html.Partial("_ImageBundleViewer")	
+	@Html.Partial("_ImageBundleViewer")
     
     <script type="text/javascript">
 		// KO enabling/disabling of server JSON        
         var ProductInfoToKnockout = function(product) {
-			return {
+			var output = {
 				Id: ko.observable(product.Id),
-				Name: ko.observable(product.Name),
-				SEO: ko.observable(product.SEO),
-				SkuCode: ko.observable(product.SkuCode),
-				Synopsis: ko.observable(product.Synopsis),
-                Description: ko.observable(product.Description),
-                UnitPrice: ko.observable(product.UnitPrice),
+				Name: ko.observable(product.Name || ""),
+				SEO: ko.observable(product.SEO || ""),
+				SkuCode: ko.observable(product.SkuCode || ""),
+				Synopsis: ko.observable(product.Synopsis || ""),
+                Description: ko.observable(product.Description || ""),
                 BrandId: ko.observable(product.BrandId),
                 BrandName: ko.observable(product.BrandName),
                 CategoryId: ko.observable(product.CategoryId),
                 CategoryName: ko.observable(product.CategoryName),
 
+                // TODO: do we need this...?
                 EditName: ko.observable(product.Name),
                 EditSEO: ko.observable(product.SEO),
                 EditSkuCode: ko.observable(product.SkuCode),
                 EditSynopsis: ko.observable(product.Synopsis),
                 EditDescription: ko.observable(product.Description),
-                EditUnitPrice: ko.observable(product.UnitPrice),
-                EditUnitCost: ko.observable(product.UnitCost),
                 EditBrandId: ko.observable(product.BrandId),
                 EditCategoryId: ko.observable(product.CategoryId),
+                EditUnitPrice: ko.observable(product.UnitPrice),
+                EditUnitCost: ko.observable(product.UnitCost),
 
                 ImageBundleExternalId: ko.observable(product.ImageBundleExternalId),
+                UnitPrice: ko.observable(product.UnitPrice),
+                UnitCost: ko.observable(product.UnitCost),
+                
 			};
-		}
+            
+            // TODO: figure out how to glue this together via prototypes
+            output.EditUnitPriceFormatted = 
+                ko.computed({
+                    read: function () {
+                        var readValue = '$' + output.EditUnitPrice().toFixed(2);
+                        //console.log("Reading to EditUnitPrice: " + readValue);
+                        return readValue;
+                    },
+                    write: function (value) {
+                        //console.log("Writing to EditUnitPrice: " + value);
+                        // Strip out unwanted characters, parse as float, then write the raw data back to the underlying "price" observable
+                        value = parseFloat(value.replace(/[^\.\d]/g, ""));
+                        output.EditUnitPrice(isNaN(value) ? 0 : value); // Write to underlying storage
+                        output.EditUnitPrice.notifySubscribers();
+                    },
+                    owner: output
+                });
 
+            output.EditUnitCostFormatted = 
+                ko.computed({
+                    read: function () {
+                        return '$' + output.EditUnitCost().toFixed(2);
+                    },
+                    write: function (value) {
+                        // Strip out unwanted characters, parse as float, then write the raw data back to the underlying "price" observable
+                        value = parseFloat(value.replace(/[^\.\d]/g, ""));
+                        output.EditUnitCost(isNaN(value) ? 0 : value); // Write to underlying storage
+                        output.EditUnitCost.notifySubscribers();
+                    },
+                    owner: output
+                });
+
+            return output;
+		}
+        
         var ProductInfoToServerJson = function(product) {
 			return {
 				Id: product.Id(),
@@ -45,16 +82,25 @@
                 SkuCode: product.SkuCode(),
                 Synopsis: product.Synopsis(),
                 Description: product.Description(),
+                CategoryId: product.CategoryId(),
+                BrandId: product.BrandId(),
+                UnitPrice: product.UnitPrice(),
+                UnitCost: product.UnitCost(),
+
                 ImageBundleExternalId: product.ImageBundleExternalId(),
 			};
 		}
+
+        var ToMoney = function(input) {
+            return "$" + input.toFixed(2);
+        }
 	</script>
     <script type="text/javascript">
         var ProductViewModel = function (productServiceAdapter, crossCuttingUI, gliderWidget) {
             var self = this;
 
             // asynchronous, service-bound operations            
-            self.GlideToChildView = function (product) {
+            self.EditProduct = function (product) {
                 flow.exec(
 					function () {
 					    self.SelectedIndex = self.SearchData.indexOf(product);
@@ -66,6 +112,12 @@
 					    self.Glider.GlideToChild();
 					}
 				);
+            }
+
+            self.AddProduct = function () {
+                var knockedoutData = ProductInfoToKnockout({ UnitPrice: 0, UnitCost: 0 });
+                self.SelectedProduct(knockedoutData);
+                self.Glider.GlideToChild();
             }
 
             self.GlideToParentView = function () {
@@ -152,7 +204,51 @@
                     },
                     function (data) {
                         self.SearchData(data);
+                    }
+                );
+            }
+
+            self.SaveClick = function () {
+                var product = self.SelectedProduct();
+                var errors = [];
+                errors.push({ controlGroup: "#ProductName", invalid: product.EditName().trim() == "" });
+                errors.push({ controlGroup: "#SkuCode", invalid: product.EditSkuCode().trim() == "" });
+                errors.push({ controlGroup: "#SEO", invalid: product.EditSEO().trim() == "" });
+                errors.push({ controlGroup: "#Synopsis", invalid: product.EditSynopsis().trim() == "" });
+                errors.push({ controlGroup: "#Description", invalid: product.EditDescription().trim() == "" });
+                errors.push({ controlGroup: "#Brand", invalid: product.EditBrandId() == null });
+                errors.push({ controlGroup: "#Category", invalid: product.EditCategoryId() == null });
+
+                var validationMessage = $("#validation");
+                validationMessage.hide();
+                $.each(errors, function (index, elem) {
+                    if (elem.invalid) {
+                        $(elem.controlGroup).addClass("error");
+                        validationMessage.show();
+                    }
+                    else {
+                        $(elem.controlGroup).removeClass("error");
+                    }
+                });
+
+                if (validationMessage.is(":visible")) return;
+
+                product.Name(product.EditName());
+                product.SkuCode(product.EditSkuCode());
+                product.SEO(product.EditSEO());
+                product.Synopsis(product.EditSynopsis());
+                product.Description(product.EditDescription());
+                product.BrandId(product.EditBrandId());
+                product.CategoryId(product.EditCategoryId());
+                product.UnitPrice(product.EditUnitPrice());
+                product.UnitCost(product.EditUnitCost());
+
+                flow.exec(
+                    function () {
+                        self.ProductServiceAdapter.Update(ProductInfoToServerJson(product), this);
                     });
+                // Do this last!
+                //self.SearchData.replace(self.SearchData()[self.SelectedIndex], product);
             }
 
             // Initialization
@@ -187,7 +283,7 @@
             var log = function (data) { console.log(data); }
 
             self.RetrieveCategories();
-            self.RetrieveBrands();            
+            self.RetrieveBrands();
         }
 
         $(function () {
@@ -230,7 +326,7 @@
                     </select>
                 </div>
                 <div class="span3">
-                    <input id="SearchText" type="text" class="input-large search-query" style="width:200px;" placeholder="Description, Name, Sku..." />
+                    <input id="SearchText" type="text" class="input-large" placeholder="Description, Name, Sku..." />
                 </div>
 				<div class="span3">
 					<a class="btn btn-inverse btn-block" data-bind="click: $root.SearchClick">Search <i class="icon-search icon-white"></i></a>
@@ -247,7 +343,11 @@
 			</div>
             <div class="row">
                 <div class="span2">
-				    <a id="glideToParent" class="btn btn-inverse btn-block btn-small" data-bind="click: $root.GlideToParentView"><i class="icon-backward icon-white"></i> Back</a>
+                    <ul class="nav nav-pills">
+                        <li class="active">
+				            <a id="glideToParent" data-bind="click: $root.GlideToParentView"><i class="icon-backward icon-white"></i> Back</a>
+                        </li>
+                    </ul
                 </div>
 		    </div>
 		</div>
@@ -275,14 +375,14 @@
                         <h4 data-bind="text: $data.Name" style="margin-bottom:5px;"></h4>
                         <span data-bind="text: 'Sku: ' + $data.SkuCode"></span><br />
                         <span data-bind="text: 'Brand: ' + $data.BrandName"></span><br />
-                        <span data-bind="text: 'Price: $' + $data.UnitPrice"></span>
+                        <span data-bind="text: 'Price: ' + ToMoney($data.UnitPrice)"></span>
                     </p>
 				</span>
             </td>
 			<td>
 				<span class="span3" style="text-align:right;">					
 					<a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteColor($data) }"><i class="icon-trash icon-white"></i> Delete</a>
-					<a class="btn btn-inverse" style="width:70px;" data-bind="click: $root.GlideToChildView">Edit <i class="icon-arrow-right icon-white"></i></a>
+					<a class="btn btn-inverse" style="width:70px;" data-bind="click: $root.EditProduct">Edit <i class="icon-arrow-right icon-white"></i></a>
 				</span>
 			</td>
 			</tr>
@@ -313,23 +413,24 @@
             <div class="row">
                 <div class="span6">
                     <div class="row">
-                        <div class="span6">
-                            <label>Product Name<br /><input class="input-large" style="width:440px;" type="text" placeholder="Enter Brand Name" data-bind="value: $data.EditName" maxlength="50" />
+                        <div id="ProductName" class="span6 control-group">
+                            <label>Product Name<br /><input class="input-large" style="width:440px;" type="text" placeholder="Enter Product Name" data-bind="value: $data.EditName" maxlength="50" />
                             </label>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="span3">
+                        <div id="SkuCode" class="span3 control-group">
                             <label>SKU Code<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Sku Code" data-bind="value: $data.EditSkuCode" maxlength="10" />
 				            </label>
                         </div>
-                        <div class="span3">
+                        <div id="SEO" class="span3 control-group">
                             <label>SEO<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter SEO Tag" data-bind="value: $data.EditSEO" maxlength="50" />
 				            </label>
                         </div>
                     </div>
+
                     <div class="row">
-                        <div class="span6">
+                        <div id="Synopsis" class="span6 control-group">
                             <label>Synopsis (short desc.)<br/>
                                 <textarea id="entry" type="text" class="input-large" style="width:440px;" rows="2" 
                                     placeholder="Enter Synopsis" data-bind="value: $data.EditSynopsis" maxlength="200" />
@@ -337,7 +438,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="span6">
+                        <div id="Description" class="span6 control-group">
                             <label>Description<br/>
                                 <textarea id="entry" type="text" class="input-large" style="width:440px;" rows="6" 
                                     placeholder="Enter Description" data-bind="value: $data.EditDescription" maxlength="500" />
@@ -348,14 +449,14 @@
 
                 <div class="span3">
                     <div class="row">
-				        <div class="span3">
+				        <div id="Brand" class="span3 control-group">
                             <label>Brand<br />
                                 <select id="SelectedBrand" data-bind="options: $root.BrandArray, optionsText: 'text', optionsValue:'value', value: $data.EditBrandId" />
                             </label>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="span3">
+                        <div id="Category" class="span3 control-group">
                             <label>Category<br />
                                 <select id="SelectedCategory" data-bind="options: $root.CategoryArray, optionsText: 'text', optionsValue:'value', value: $data.EditCategoryId" />
                             </label>
@@ -363,13 +464,13 @@
                     </div>
                     <div class="row">
                         <div class="span3">
-                            <label>Unit Price<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Unit Price" data-bind="value: $data.EditUnitPrice" maxlength="12" />
+                            <label>Unit Price<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Unit Price" data-bind="value: $data.EditUnitPriceFormatted" maxlength="12" />
 				            </label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="span3">
-                            <label>Unit Cost<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Unit Cost" data-bind="value: $data.EditUnitCost" maxlength="12" />
+                            <label>Unit Cost<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Unit Cost" data-bind="value: $data.EditUnitCostFormatted" maxlength="12" />
 				            </label>
                         </div>
                     </div>
@@ -377,7 +478,7 @@
 
                 <div class="span3" style="text-align:right;">
 					<a class="btn btn-inverse" href="#" data-bind="click: $root.GlideToParentView"><i class="icon-remove icon-white"></i> Cancel</a>                    
-					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveBrand"><i class="icon-ok icon-white"></i> Save</a>
+					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveClick"><i class="icon-ok icon-white"></i> Save</a>
                 </div>
             </div>            
         </form>

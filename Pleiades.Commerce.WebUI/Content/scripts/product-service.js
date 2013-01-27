@@ -17,20 +17,16 @@ function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback)
         self.AjaxGet("/Admin/Product/Retrieve/" + productId, callback);
     };
 
-    self.Insert = function (color, callback) {
-        self.AjaxPost("/Admin/Product/Insert", color, callback);
+    self.Insert = function (product, callback) {
+        self.AjaxPost("/Admin/Product/Insert", product, callback);
 	};
 
-	self.Update = function (color, callback) {
-	    self.AjaxPost("/Admin/Product/Update", color, callback);
+    self.Update = function (product, callback) {
+        self.AjaxPost("/Admin/Product/Update", product, callback);
 	};
 
-	self.CreateBitmap = function (createRequest, callback) {
-	    self.AjaxPost("/Admin/Product/CreateBitmap", createRequest, callback);
-	};
-
-    self.Delete = function (color, callback) {
-        self.AjaxPost("/Admin/Product/Delete", color, callback);
+    self.Delete = function (product, callback) {
+        self.AjaxPost("/Admin/Product/Delete", product, callback);
 	};
 
 	return self;

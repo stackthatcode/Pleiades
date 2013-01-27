@@ -61,6 +61,13 @@ h4 {
 	position: absolute; 
 }
 
+#glideToParent 
+{
+    width:65px;
+    text-align:center;
+    cursor:pointer;
+}
+
 .spinner-layer {
     position: fixed;
     top: 0%;

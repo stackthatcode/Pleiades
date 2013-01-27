@@ -398,5 +398,11 @@ Product Synopsis = Id, Name, Synopsis, Sku, Main Image => DONE
 
 1/24/2013 1.0 Hours
 -------------------
-- Architectural Review of Security stuff =>  DONE
+- Architectural Review of Security stuff => DONE
 
+1/25/2013 0.5
+-------------
+
+1/25/2013
+---------
+Finished Validation logic =>DONE

@@ -12,10 +12,8 @@ Front Range
 Product Editor
 ~~~~~~~~~~~~~~
 - Start Designing Product Screen => IN PROGRESS
-- Add Money Editor binding magic + Money formatting functionality => TODO
-- Find a decent validation library (not JQuery) => TODO
 
-=> Product Search => ADD BUTTON
+=> ADD BUTTON
 => Size Group => DRILL-DOWN STATEFUL
 => Colors => DRILL-DOWN STATEFUL
 => Images => DRILL-DOWN STATEFUL
@@ -37,10 +35,15 @@ ARCHITECTURAL REVIEW 1/24/2013
 - Consider using OnActionExecuting instead of the Attribute... maybe.
 - Ultimately, should Pleiades be separate from Commerce...?  Nah, but move that Attribute out of Pleiades.  Fuck Security Context factory.
 - Move Owner Auth Service under Rules
+- Roll Pleiades.UnitTests and Security Tests into Pleiades.Web.UnitTests
+- Roll Pleiades Base, Data EF, and TestHelpers into Pleiades.Web.Foundation
+- Move ProductSearchRepository stuff into the Controller.  Yup!  Try it!
+
 
 
 Backlog
 -------
+- Improve the quality of client-side Error Logging => TODO
 - Create a Product and simulate Creation of a Product followed by deletion of Colors, Categories, Brands, etc. => TODO
 - PREVENT DELETION OF LAST SECTION => TODO
 - Add the Number of Products in a Brand => TODO

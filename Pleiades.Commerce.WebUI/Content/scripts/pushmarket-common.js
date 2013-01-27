@@ -5,6 +5,11 @@ String.prototype.koTrunc = function(n, useWordBoundary){
     return toLong ? s_ + '...' : s_;
 }
 
+// Why did this fail...?
+//String.prototype.toMoney = function() {
+//    return "$" + this.toFixed(2);
+//}
+
 // TODO: how to add this to Array's prototype...?
 Array.prototype.firstOrNull = function(lambda) {
 	for (var arrayIndex = 0; arrayIndex < this.length; arrayIndex += 1) {
@@ -45,6 +50,14 @@ Array.prototype.remove = function(from, to) {
 	this.length = from < 0 ? this.length + from : from;
 	return this.push.apply(this, rest);
 };
+String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g, '');};
+
+String.prototype.ltrim=function(){return this.replace(/^\s+/,'');};
+
+String.prototype.rtrim=function(){return this.replace(/\s+$/,'');};
+
+String.prototype.fulltrim=function(){return this.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,'').replace(/\s+/g,' ');};
+
 
 function DeepClone(input) {
 	// Handle the 3 simple types, and null or undefined
