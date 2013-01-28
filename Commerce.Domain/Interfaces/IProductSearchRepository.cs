@@ -8,7 +8,9 @@ namespace Commerce.Domain.Interfaces
 {
     public interface IProductSearchRepository
     {
-        List<JsonProductSynopsis> FindProducts(int? categoryId, int? brandId, string searchText);
-        JsonProductSynopsis Retrieve(int productId);
+        List<JsonProductInfo> FindProducts(int? categoryId, int? brandId, string searchText);
+        JsonProductInfo RetrieveInfo(int productId);
+        List<JsonProductColor> RetreieveColors(int productId);
+
     }
 }

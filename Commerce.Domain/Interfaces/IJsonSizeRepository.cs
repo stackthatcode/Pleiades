@@ -7,7 +7,7 @@ namespace Commerce.Domain.Interfaces
 {
     public interface IJsonSizeRepository
     {
-        List<JsonSizeGroup> RetrieveAll();
+        List<JsonSizeGroup> RetrieveAll(bool includeDefault);
         JsonSizeGroup RetrieveByGroup(int groupId);
         Func<JsonSizeGroup> Insert(JsonSizeGroup SizeGroup);
         void Update(JsonSizeGroup SizeGroup);

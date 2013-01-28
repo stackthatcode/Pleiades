@@ -11,7 +11,7 @@ namespace Commerce.Persist.Products
 {
     public class ProductRepository : IProductRepository
     {
-        public List<JsonProductSynopsis> RetrieveAll()
+        public List<JsonProductInfo> RetrieveAll()
         {
             throw new NotImplementedException();
         }

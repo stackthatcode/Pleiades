@@ -1,12 +1,11 @@
 ﻿@using Pleiades.Web.MvcHelpers
 
 @section _Scripts {
-    <!-- TODO: make another Partial -->
     @Html.Javascript("/scripts/product-service.js")
     @Html.Partial("_ColorPicker")
     @Html.Partial("_FineUploader")
 	@Html.Partial("_ImageBundleViewer")
-    
+
     <script type="text/javascript">
 		// KO enabling/disabling of server JSON        
         var ProductInfoToKnockout = function(product) {
@@ -17,33 +16,22 @@
 				SkuCode: ko.observable(product.SkuCode || ""),
 				Synopsis: ko.observable(product.Synopsis || ""),
                 Description: ko.observable(product.Description || ""),
+                SizeGroupId: ko.observable(product.SizeGroupId),
+                SizeGroupName: ko.observable(product.SizeGroupName),
                 BrandId: ko.observable(product.BrandId),
                 BrandName: ko.observable(product.BrandName),
                 CategoryId: ko.observable(product.CategoryId),
                 CategoryName: ko.observable(product.CategoryName),
-
-                // TODO: do we need this...?
-                EditName: ko.observable(product.Name),
-                EditSEO: ko.observable(product.SEO),
-                EditSkuCode: ko.observable(product.SkuCode),
-                EditSynopsis: ko.observable(product.Synopsis),
-                EditDescription: ko.observable(product.Description),
-                EditBrandId: ko.observable(product.BrandId),
-                EditCategoryId: ko.observable(product.CategoryId),
-                EditUnitPrice: ko.observable(product.UnitPrice),
-                EditUnitCost: ko.observable(product.UnitCost),
-
+                UnitPrice: ko.observable(product.UnitPrice || 0),
+                UnitCost: ko.observable(product.UnitCost || 0),                
                 ImageBundleExternalId: ko.observable(product.ImageBundleExternalId),
-                UnitPrice: ko.observable(product.UnitPrice),
-                UnitCost: ko.observable(product.UnitCost),
-                
 			};
             
             // TODO: figure out how to glue this together via prototypes
-            output.EditUnitPriceFormatted = 
+            output.UnitPriceFormatted = 
                 ko.computed({
                     read: function () {
-                        var readValue = '$' + output.EditUnitPrice().toFixed(2);
+                        var readValue = '$' + output.UnitPrice().toFixed(2);
                         //console.log("Reading to EditUnitPrice: " + readValue);
                         return readValue;
                     },
@@ -51,22 +39,22 @@
                         //console.log("Writing to EditUnitPrice: " + value);
                         // Strip out unwanted characters, parse as float, then write the raw data back to the underlying "price" observable
                         value = parseFloat(value.replace(/[^\.\d]/g, ""));
-                        output.EditUnitPrice(isNaN(value) ? 0 : value); // Write to underlying storage
-                        output.EditUnitPrice.notifySubscribers();
+                        output.UnitPrice(isNaN(value) ? 0 : value); // Write to underlying storage
+                        output.UnitPrice.notifySubscribers();
                     },
                     owner: output
                 });
 
-            output.EditUnitCostFormatted = 
+            output.UnitCostFormatted = 
                 ko.computed({
                     read: function () {
-                        return '$' + output.EditUnitCost().toFixed(2);
+                        return '$' + output.UnitCost().toFixed(2);
                     },
                     write: function (value) {
                         // Strip out unwanted characters, parse as float, then write the raw data back to the underlying "price" observable
                         value = parseFloat(value.replace(/[^\.\d]/g, ""));
-                        output.EditUnitCost(isNaN(value) ? 0 : value); // Write to underlying storage
-                        output.EditUnitCost.notifySubscribers();
+                        output.UnitCost(isNaN(value) ? 0 : value); // Write to underlying storage
+                        output.UnitCost.notifySubscribers();
                     },
                     owner: output
                 });
@@ -84,9 +72,9 @@
                 Description: product.Description(),
                 CategoryId: product.CategoryId(),
                 BrandId: product.BrandId(),
+                SizeGroupId: product.SizeGroupId(),
                 UnitPrice: product.UnitPrice(),
                 UnitCost: product.UnitCost(),
-
                 ImageBundleExternalId: product.ImageBundleExternalId(),
 			};
 		}
@@ -96,7 +84,7 @@
         }
 	</script>
     <script type="text/javascript">
-        var ProductViewModel = function (productServiceAdapter, crossCuttingUI, gliderWidget) {
+        var ProductViewModel = function (productServiceAdapter, crossCuttingUI, parentGliderWidget, childGliderWidget) {
             var self = this;
 
             // asynchronous, service-bound operations            
@@ -104,33 +92,78 @@
                 flow.exec(
 					function () {
 					    self.SelectedIndex = self.SearchData.indexOf(product);
-					    self.ProductServiceAdapter.Retrieve(product.Id, this);
+					    self.ProductServiceAdapter.Info(product.Id, this);
 					},
 					function (product) {
 					    var knockedoutData = ProductInfoToKnockout(product);
 					    self.SelectedProduct(knockedoutData);
-					    self.Glider.GlideToChild();
-					}
+					    self.InfoTabClick();
+					    self.ParentGlider.GlideToChild(this);
+					},
+                    function () {
+                        self.ActiveView("Product");
+                    }
 				);
             }
 
-            self.AddProduct = function () {
-                var knockedoutData = ProductInfoToKnockout({ UnitPrice: 0, UnitCost: 0 });
-                self.SelectedProduct(knockedoutData);
-                self.Glider.GlideToChild();
+            self.ColorsTabClick = function () {
+                flow.exec(
+                    function () {
+                        self.ProductServiceAdapter.Colors(self.SelectedProduct().Id(), this);
+                    },
+                    function (colors) {
+                        self.SelectedColors(colors);
+                        self.SelectedChildView("Child-Editor-Colors");
+                    }
+                );
             }
 
-            self.GlideToParentView = function () {
+            self.InfoTabClick = function () {
+                self.SelectedChildView("Child-Editor-Info");
+            }
+
+            self.ImagesTabClick = function () {
+                self.SelectedChildView("Child-Editor-Images");
+            }
+
+            self.AddProduct = function () {
+                flow.exec(
+                    function () {
+                        var knockedoutData = ProductInfoToKnockout({});
+                        self.SelectedProduct(knockedoutData);
+                        self.ParentGlider.GlideToChild(this);
+                    },
+                    function () {
+                        self.ActiveView("Product");
+                        self.InfoTabClick();
+                    }
+                );
+            }
+
+            self.GlideToSearchView = function () {
                 var recordId = self.SelectedProduct().Id();
                 flow.exec(
                     function () {
                         $("#glideToParent").hide();
-                        self.Glider.GlideToParent(this);
+                        self.ParentGlider.GlideToParent(this);
                     },
 					function () {
+					    self.ActiveView("Search");
 					    self.SelectedProduct(null);
 					    self.SelectedIndex = null;
 					    self.CrossCuttingUI.ScrollToIdTracker(recordId);
+					}
+				);
+            }
+
+            self.GlideToProductView = function () {
+                flow.exec(
+                    function () {
+                        $("#glideToParent").hide();
+                        self.ActiveView("Product");
+                        self.ChildGlider.GlideToParent(this);
+                    },
+					function () {
 					}
 				);
             }
@@ -176,6 +209,26 @@
                 );
             }
 
+            self.RetrieveSizeGroups = function (callback) {
+                flow.exec(
+                    function () {
+                        self.ProductServiceAdapter.SizeGroups(this);
+                    },
+                    function (data) {
+                        self.SizeGroupArray.removeAll();
+                        self.SizeGroupArray.push({ value: null, text: "(Select a Size Group)" });
+
+                        $.each(data, function (index, elem) {
+                            self.SizeGroupArray.push({ value: elem.Id, text: elem.Name });
+                        });
+
+                        if (callback) {
+                            callback();
+                        }
+                    }
+                );
+            }
+
             self.DeleteColor = function (color) {
                 self.ModalViewModel(color);
                 $('#modal-delete').modal();
@@ -208,16 +261,28 @@
                 );
             }
 
+            self.AddColorFromList = function () {
+                flow.exec(
+                    function () {
+                        self.ChildGlider.GlideToChild(this);
+                    },
+                    function () {
+                        self.ActiveView("Color-SubView");
+                    }
+                );
+            }
+
             self.SaveClick = function () {
                 var product = self.SelectedProduct();
                 var errors = [];
-                errors.push({ controlGroup: "#ProductName", invalid: product.EditName().trim() == "" });
-                errors.push({ controlGroup: "#SkuCode", invalid: product.EditSkuCode().trim() == "" });
-                errors.push({ controlGroup: "#SEO", invalid: product.EditSEO().trim() == "" });
-                errors.push({ controlGroup: "#Synopsis", invalid: product.EditSynopsis().trim() == "" });
-                errors.push({ controlGroup: "#Description", invalid: product.EditDescription().trim() == "" });
-                errors.push({ controlGroup: "#Brand", invalid: product.EditBrandId() == null });
-                errors.push({ controlGroup: "#Category", invalid: product.EditCategoryId() == null });
+                errors.push({ controlGroup: "#ProductName", invalid: product.Name().trim() == "" });
+                errors.push({ controlGroup: "#SkuCode", invalid: product.SkuCode().trim() == "" });
+                errors.push({ controlGroup: "#SEO", invalid: product.SEO().trim() == "" });
+                errors.push({ controlGroup: "#Synopsis", invalid: product.Synopsis().trim() == "" });
+                errors.push({ controlGroup: "#Description", invalid: product.Description().trim() == "" });
+                errors.push({ controlGroup: "#Brand", invalid: product.BrandId() == null });
+                errors.push({ controlGroup: "#Category", invalid: product.CategoryId() == null });
+                errors.push({ controlGroup: "#SizeGroup", invalid: product.SizeGroupId() == null });
 
                 var validationMessage = $("#validation");
                 validationMessage.hide();
@@ -231,36 +296,38 @@
                     }
                 });
 
-                if (validationMessage.is(":visible")) return;
-
-                product.Name(product.EditName());
-                product.SkuCode(product.EditSkuCode());
-                product.SEO(product.EditSEO());
-                product.Synopsis(product.EditSynopsis());
-                product.Description(product.EditDescription());
-                product.BrandId(product.EditBrandId());
-                product.CategoryId(product.EditCategoryId());
-                product.UnitPrice(product.EditUnitPrice());
-                product.UnitCost(product.EditUnitCost());
+                if (validationMessage.is(":visible")) {
+                    return;
+                }
 
                 flow.exec(
                     function () {
                         self.ProductServiceAdapter.Update(ProductInfoToServerJson(product), this);
                     });
-                // Do this last!
+
+                // TODO: what to do here?
                 //self.SearchData.replace(self.SearchData()[self.SelectedIndex], product);
             }
 
             // Initialization
             self.ProductServiceAdapter = productServiceAdapter;
             self.CrossCuttingUI = crossCuttingUI;
-            self.Glider = gliderWidget;
+            self.ParentGlider = parentGliderWidget;
+            self.ChildGlider = childGliderWidget
 
             // load ko.observables into view model
+            self.SizeGroupArray = ko.observableArray();
             self.BrandArray = ko.observableArray();
             self.CategoryArray = ko.observableArray();
             self.SearchData = ko.observableArray();
+
             self.SelectedProduct = ko.observable(null);
+            self.SelectedColors = ko.observableArray();
+            self.SelectedImage = ko.observableArray();
+            self.SelectedChildView = ko.observable(null);
+            self.SelectedSubChildView = ko.observable(null);
+
+            self.ActiveView = ko.observable("Search");
             self.ModalViewModel = ko.observable(null);
 
             // ko.computed's
@@ -269,14 +336,9 @@
                     return self.SelectedProduct() && self.SelectedProduct().SkuCode() || "(New Product)"
                 }, this);
 
-            self.WorkspaceHeadingStyle = ko.computed(
-                function () {
-                    return self.SelectedProduct() ? "height:105px;" : "height:130px;";
-                }, this);
-
             self.GlidingContainerStyle = ko.computed(
                 function () {
-                    return self.SelectedProduct() ? "top:165px;" : "top:190px;";
+                    return self.ActiveView() == "Search" ? "top:190px;" : "top:165px;";
                 }, this);
 
             // Start loading...
@@ -284,6 +346,7 @@
 
             self.RetrieveCategories();
             self.RetrieveBrands();
+            self.RetrieveSizeGroups();
         }
 
         $(function () {
@@ -292,68 +355,95 @@
             var chilldGliderWidget = new GliderWidget("#gliding-container", "#child-editor", "#sub-child-editor");
 
             var serviceAdapter = new ProductService(crosscuttingUI.Error, crosscuttingUI.ShowLoading, crosscuttingUI.HideLoading);
-            var model = new ProductViewModel(serviceAdapter, crosscuttingUI, parentGliderWidget);
+            var model = new ProductViewModel(serviceAdapter, crosscuttingUI, parentGliderWidget, chilldGliderWidget);
             ko.applyBindings(model);
         });
 	</script>
 }	
 
 @section _Templates {
-	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE -->
-	<script type="text/html" id="Top-Workspace">
-		<!-- PARENT VIEW HEADER -->
-		<div id="heading" class="container" data-bind="ifnot: $root.SelectedProduct()">
-			<div class="row">
-				<div class="span9">
-					<h1>Products > All</h1>
-				</div>
-				<div class="span3" style="margin-top:15px; text-align:right;">
-					<a class="btn btn-primary btn-block" data-bind="click: $root.AddProduct">Add New Product <i class="icon-arrow-right icon-white"></i></a>
-				</div>
-			</div>
+	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE SEARCH -->
+	<script type="text/html" id="Top-Workspace-Search">
+        <div class="workspace-heading" style="height:130px;">
+		    <div id="heading" class="container" data-bind="ifnot: $root.SelectedProduct()">
+			    <div class="row">
+				    <div class="span9">
+					    <h1>Products > All</h1>
+				    </div>
+				    <div class="span3" style="margin-top:15px; text-align:right;">
+					    <a class="btn btn-primary btn-block" data-bind="click: $root.AddProduct">Add New Product <i class="icon-arrow-right icon-white"></i></a>
+				    </div>
+			    </div>
 
-            <div style="height:10px;"></div>
+                <div style="height:10px;"></div>
             
-            <div class="row">
-				<div class="span3">
-                    <select id="SearchCategory" data-bind="foreach: $root.CategoryArray">
-                        <option data-bind="value: $data.value, text: $data.text"  />
-                    </select>
+                <div class="row">
+				    <div class="span3">
+                        <select id="SearchCategory" data-bind="foreach: $root.CategoryArray">
+                            <option data-bind="value: $data.value, text: $data.text"  />
+                        </select>
+                    </div>
+				    <div class="span3">
+                        <select id="SearchBrand" data-bind="foreach: $root.BrandArray">
+                            <option data-bind="value: $data.value, text: $data.text"  />
+                        </select>
+                    </div>
+                    <div class="span3">
+                        <input id="SearchText" type="text" class="input-large" placeholder="Description, Name, Sku..." />
+                    </div>
+				    <div class="span3">
+					    <a class="btn btn-inverse btn-block" data-bind="click: $root.SearchClick">Search <i class="icon-search icon-white"></i></a>
+                    </div>
                 </div>
-				<div class="span3">
-                    <select id="SearchBrand" data-bind="foreach: $root.BrandArray">
-                        <option data-bind="value: $data.value, text: $data.text"  />
-                    </select>
-                </div>
-                <div class="span3">
-                    <input id="SearchText" type="text" class="input-large" placeholder="Description, Name, Sku..." />
-                </div>
-				<div class="span3">
-					<a class="btn btn-inverse btn-block" data-bind="click: $root.SearchClick">Search <i class="icon-search icon-white"></i></a>
-                </div>
-            </div>
-		</div>
+		    </div>
+        </div>
+    </script>
 		
-		<!-- CHILD VIEW HEADER -->
-		<div id="heading" class="container" data-bind="if: $root.SelectedProduct()">
-			<div class="row" style="position:relative;">				
-				<div class="span12">
-					<h1>Products &gt; <span data-bind="text: $root.SelectedProductName"></span></h1>
-				</div>
-			</div>
-            <div class="row">
-                <div class="span2">
-                    <ul class="nav nav-pills">
-                        <li class="active">
-				            <a id="glideToParent" data-bind="click: $root.GlideToParentView"><i class="icon-backward icon-white"></i> Back</a>
-                        </li>
-                    </ul
-                </div>
+	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE PRODUCT -->
+	<script type="text/html" id="Top-Workspace-Product">
+        <div class="workspace-heading" style="height:105px;">
+		    <div id="heading" class="container" data-bind="if: $root.SelectedProduct()">
+			    <div class="row" style="position:relative;">				
+				    <div class="span12">
+					    <h1>Products &gt; <span data-bind="text: $root.SelectedProductName"></span></h1>
+				    </div>
+			    </div>
+                <div class="row">
+                    <div class="span2">
+                        <ul class="nav nav-pills">
+                            <li class="active">
+				                <a id="glideToParent" data-bind="click: $root.GlideToSearchView"><i class="icon-backward icon-white"></i> Back to Search</a>
+                            </li>
+                        </ul
+                    </div>
+		        </div>
+		    </div>
+		</div>
+    </script>
+
+	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE COLOR-SUBVIEW -->
+	<script type="text/html" id="Top-Workspace-Color-SubView">
+        <div class="workspace-heading" style="height:105px;">
+		    <div id="heading" class="container" data-bind="if: $root.SelectedProduct()">
+			    <div class="row" style="position:relative;">				
+				    <div class="span12">
+					    <h1>Products &gt; <span data-bind="text: $root.SelectedProductName"></span></h1>
+				    </div>
+			    </div>
+                <div class="row">
+                    <div class="span3">
+                        <ul class="nav nav-pills">
+                            <li class="active">
+				                <a id="glideToParent" data-bind="click: $root.GlideToProductView"><i class="icon-backward icon-white"></i> Back to Product</a>
+                            </li>
+                        </ul
+                    </div>
+		        </div>
 		    </div>
 		</div>
 	</script>
 	
-	<!-- KNOCKOUT TEMPLATE - PARENT EDITOR -->
+	<!-- KNOCKOUT TEMPLATE - PARENT EDITOR (SEARCH) -->
 	<script type="text/html" id="Parent-Editor">
 		<div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $data.SearchData().length == 0">
 			<strong>There are no Products in your current search.  Click "Search" to run a search or click "Add New Product" to create a new one.</strong>  
@@ -390,21 +480,30 @@
 		</table>
 	</script>
 	
-	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR -->
-	<script type="text/html" id="Child-Editor">
+	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR INFO TAB -->
+	<script type="text/html" id="Child-Editor-Info">
         <div style="margin-top:20px">
         <form>
-            <ul class="nav nav-pills">
-                <li class="active">
-                    <a href="#">Information</a>
-                </li>
-                <li>
-                    <a href="#" data-bind="click: $root.PickColorToggle">Sizes &amp; Colors</a>
-                </li>
-                <li>
-                    <a href="#" data-bind="click: $root.PickColorToggle">Images</a>
-                </li>
-            </ul>
+            <div class="row">
+                <div class="span9">
+                    <ul class="nav nav-pills">
+                        <li class="active">
+                            <a href="#">Information</a>
+                        </li>
+                        <li data-bind="if: $root.SelectedProduct().Id()">
+                            <a href="#" data-bind="click: $root.ColorsTabClick">Colors</a>
+                        </li>
+                        <li data-bind="if: $root.SelectedProduct().Id()">
+                            <a href="#" data-bind="click: $root.ImagesTabClick">Images</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="span3" style="text-align:right;">
+					<a class="btn btn-inverse" href="#" data-bind="click: $root.GlideToSearchView"><i class="icon-remove icon-white"></i> Cancel</a>                    
+					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveClick"><i class="icon-ok icon-white"></i> Save</a>
+                </div>
+            </div>
 
 			<div id="validation" style="text-align:center; clear:both; display:none;" class="alert alert-error">
                 <strong>Please enter all the required fields.</strong>
@@ -414,17 +513,17 @@
                 <div class="span6">
                     <div class="row">
                         <div id="ProductName" class="span6 control-group">
-                            <label>Product Name<br /><input class="input-large" style="width:440px;" type="text" placeholder="Enter Product Name" data-bind="value: $data.EditName" maxlength="50" />
+                            <label>Product Name<br /><input class="input-large" style="width:440px;" type="text" placeholder="Enter Product Name" data-bind="value: $data.Name" maxlength="50" />
                             </label>
                         </div>
                     </div>
                     <div class="row">
                         <div id="SkuCode" class="span3 control-group">
-                            <label>SKU Code<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Sku Code" data-bind="value: $data.EditSkuCode" maxlength="10" />
+                            <label>SKU Code<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Sku Code" data-bind="value: $data.SkuCode" maxlength="10" />
 				            </label>
                         </div>
                         <div id="SEO" class="span3 control-group">
-                            <label>SEO<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter SEO Tag" data-bind="value: $data.EditSEO" maxlength="50" />
+                            <label>SEO<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter SEO Tag" data-bind="value: $data.SEO" maxlength="50" />
 				            </label>
                         </div>
                     </div>
@@ -433,7 +532,7 @@
                         <div id="Synopsis" class="span6 control-group">
                             <label>Synopsis (short desc.)<br/>
                                 <textarea id="entry" type="text" class="input-large" style="width:440px;" rows="2" 
-                                    placeholder="Enter Synopsis" data-bind="value: $data.EditSynopsis" maxlength="200" />
+                                    placeholder="Enter Synopsis" data-bind="value: $data.Synopsis" maxlength="200" />
                             </label>
                         </div>
                     </div>
@@ -441,7 +540,7 @@
                         <div id="Description" class="span6 control-group">
                             <label>Description<br/>
                                 <textarea id="entry" type="text" class="input-large" style="width:440px;" rows="6" 
-                                    placeholder="Enter Description" data-bind="value: $data.EditDescription" maxlength="500" />
+                                    placeholder="Enter Description" data-bind="value: $data.Description" maxlength="500" />
                             </label>
                         </div>
                     </div>
@@ -449,42 +548,122 @@
 
                 <div class="span3">
                     <div class="row">
+                        <div class="span3 control-group">
+                            <label>Unit Price<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Unit Price" data-bind="value: $data.UnitPriceFormatted" maxlength="12" />
+				            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span3 control-group">
+                            <label>Unit Cost<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Unit Cost" data-bind="value: $data.UnitCostFormatted" maxlength="12" />
+				            </label>
+                        </div>
+                    </div>
+                    <div class="row">
 				        <div id="Brand" class="span3 control-group">
                             <label>Brand<br />
-                                <select id="SelectedBrand" data-bind="options: $root.BrandArray, optionsText: 'text', optionsValue:'value', value: $data.EditBrandId" />
+                                <select id="SelectedBrand" data-bind="options: $root.BrandArray, optionsText: 'text', optionsValue:'value', value: $data.BrandId" />
                             </label>
                         </div>
                     </div>
                     <div class="row">
                         <div id="Category" class="span3 control-group">
                             <label>Category<br />
-                                <select id="SelectedCategory" data-bind="options: $root.CategoryArray, optionsText: 'text', optionsValue:'value', value: $data.EditCategoryId" />
+                                <select id="SelectedCategory" data-bind="options: $root.CategoryArray, optionsText: 'text', optionsValue:'value', value: $data.CategoryId" />
                             </label>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="span3">
-                            <label>Unit Price<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Unit Price" data-bind="value: $data.EditUnitPriceFormatted" maxlength="12" />
-				            </label>
+                        <div id="SizeGroup" class="span3 control-group">
+                            <label>Size Group<br />
+                                <select id="SelectedSizeGroup" data-bind="options: $root.SizeGroupArray, optionsText: 'text', optionsValue:'value', value: $data.SizeGroupId" />
+                            </label>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="span3">
-                            <label>Unit Cost<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Unit Cost" data-bind="value: $data.EditUnitCostFormatted" maxlength="12" />
-				            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="span3" style="text-align:right;">
-					<a class="btn btn-inverse" href="#" data-bind="click: $root.GlideToParentView"><i class="icon-remove icon-white"></i> Cancel</a>                    
-					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveClick"><i class="icon-ok icon-white"></i> Save</a>
                 </div>
             </div>            
         </form>
         </div>
 	</script>
 	
+	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB -->
+    <script type="text/html" id="Child-Editor-Colors">
+    <div style="margin-top:20px">
+        <form>
+            <div class="row">
+                <div class="span7">
+                    <ul class="nav nav-pills">
+                        <li>
+                            <a href="#" data-bind="click: $root.InfoTabClick">Information</a>
+                        </li>
+                        <li class="active">
+                            <a href="#">Colors</a>
+                        </li>
+                        <li>
+                            <a href="#" data-bind="click: $root.ImagesTabClick">Images</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="span5" style="text-align:right;">
+					<a class="btn btn-primary" href="#" data-bind="click: $root.AddColorFromList"><i class="icon-white icon-search"></i> Add Color from Lists</a>
+					<a class="btn btn-primary" href="#" data-bind="click: $root.CreateNewColor"><i class="icon-white icon-pencil"></i> Create New Color</a>
+                </div>
+            </div>
+
+		    <table id="color-table" class="table table-hover">
+		    <tbody data-bind="foreach: $root.SelectedColors()">
+			    <tr>
+			    <td>
+				    <span class="span2">
+                	    <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+			            </div>
+                    </span>
+                </td>
+                <td>
+				    <span class="span7">
+					    <input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
+					    <p><strong data-bind="text: $data.Name"></strong> - <span data-bind="text: $data.SkuCode"></span></p>
+				    </span>
+                </td>
+			    <td>
+				    <span class="span3" style="text-align:right;">					
+					    <a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteColor($data) }"><i class="icon-trash icon-white"></i> Delete</a>
+				    </span>
+			    </td>
+			    </tr>
+		    </tbody>
+		    </table>
+        </form>
+    </div>
+    </script>
+
+    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR IMAGES TAB -->
+    <script type="text/html" id="Child-Editor-Images">
+    <div style="margin-top:20px">
+        <form>
+            <div class="row">
+                <div class="span8">
+                    <ul class="nav nav-pills">
+                        <li>
+                            <a href="#" data-bind="click: $root.InfoTabClick">Information</a>
+                        </li>
+                        <li>
+                            <a href="#" data-bind="click: $root.ColorsTabClick">Colors</a>
+                        </li>
+                        <li class="active">
+                            <a href="#">Images</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="span4">
+					<a class="btn btn-inverse" href="#" data-bind="click: $root.GlideToSearchView"><i class="icon-remove icon-white"></i> Cancel</a>                    
+					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveClick"><i class="icon-ok icon-white"></i> Save</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    </script>
+
 	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG -->
 	<script type="text/html" id="Modal-Dialog">
 		<div id="modal-delete" class="modal hide fade" data-bind="if: $root.ModalViewModel()">
@@ -493,8 +672,7 @@
 				<h3>Delete <span data-bind="text: $root.ModalViewModel().Name"></span></h3>
 			</div>
 			<div class="modal-body">
-				<p>Are you sure you want to Delete this Color?</p>			
-				<p>All Products that use it will not have a Color</p>			
+				<p>Are you sure you want to Delete this Product?</p>			
 			</div>
 			<div class="modal-footer">
 				<a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
@@ -504,10 +682,8 @@
 	</script>
 }
 
-@section _Body {	
-    <div class="workspace-heading-parent">
-        <!-- This is a 35px increase for the Search Page -->
-		<div class="workspace-heading" data-bind="template: { name: 'Top-Workspace', data: $root }, attr: { style: $root.WorkspaceHeadingStyle }"></div>
+@section _Body {
+    <div class="workspace-heading-parent" data-bind="template: { name: 'Top-Workspace-' + $root.ActiveView(), data: $root }">
 	</div>
 	
 	<div id="gliding-container" class="container" data-bind="attr: { style: $root.GlidingContainerStyle }">
@@ -516,9 +692,15 @@
 			</div>
 		</div>
 		
-		<div id="child-editor" data-bind="if: $root.SelectedProduct()">
-			<div style="margin-bottom:200px;" data-bind="template: { name: 'Child-Editor', data: $root.SelectedProduct() }">
+		<div id="child-editor" data-bind="if: $root.ActiveView() == 'Product'">
+			<div style="margin-bottom:200px;" data-bind="template: { name: $root.SelectedChildView(), data: $root.SelectedProduct() }">
 			</div>
+		</div>
+
+        <div id="sub-child-editor" data-bind="if: $root.ActiveView() == 'Color-SubView'">
+            <h1>Color Sub Editor</h1>
+			<!--<div style="margin-bottom:200px;" data-bind="template: { name: $root.SelectedChildView(), data: $root.SelectedProduct() }">
+			</div> -->
 		</div>
     </div>
 

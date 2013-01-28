@@ -17,16 +17,19 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
     {
         IJsonCategoryRepository CategoryRepository { get; set; }
         IJsonBrandRepository BrandRepository { get; set; }
+        IJsonSizeRepository SizeRepository { get; set; }
         IProductSearchRepository ProductSearchRepository { get; set; }
         IUnitOfWork UnitOfWork { get; set; }
         PleiadesContext Context { get; set; } 
 
         public ProductController(
                 IJsonCategoryRepository categoryRepository, IJsonBrandRepository brandRepository, 
-                IProductSearchRepository productSearchRepository, PleiadesContext context)
+                IProductSearchRepository productSearchRepository, IJsonSizeRepository sizeRepository,
+                PleiadesContext context)
         {
             this.CategoryRepository = categoryRepository;
             this.BrandRepository = brandRepository;
+            this.SizeRepository = sizeRepository;
             this.ProductSearchRepository = productSearchRepository;
             this.Context = context;
         }
@@ -50,6 +53,13 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             var result = this.BrandRepository.RetrieveAll();
             return new JsonNetResult(result);
         }
+
+        [HttpGet]
+        public ActionResult SizeGroups()
+        {
+            var result = this.SizeRepository.RetrieveAll(true);
+            return new JsonNetResult(result);
+        }
         
         [HttpGet]
         public ActionResult Search(int? brandId, int? categoryId, string searchText)
@@ -59,18 +69,50 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult Retrieve(int id)
+        public ActionResult Info(int id)
         {
-            var result = this.ProductSearchRepository.Retrieve(id);
+            var result = this.ProductSearchRepository.RetrieveInfo(id);
             return new JsonNetResult(result);
         }
 
         [HttpPost]
-        public ActionResult Update(JsonProductSynopsis product)
+        public ActionResult Insert(JsonProductInfo product)
+        {
+            return Save(product);
+        }
+
+        [HttpPost]
+        public ActionResult Update(JsonProductInfo product)
+        {
+            return Save(product);
+        }
+
+        [HttpGet]
+        public ActionResult Colors(int id)
+        {
+            var result = this.ProductSearchRepository.RetreieveColors(id);
+            return new JsonNetResult(result);
+        }
+
+        [HttpGet]
+        public ActionResult Images(int id)
+        {
+            var result = this.ProductSearchRepository.RetrieveInfo(id);
+            return new JsonNetResult(result);
+        }
+
+        private ActionResult Save(JsonProductInfo product)
         {
             Product result;
-            
-            result = this.Context.Products.First(x => x.Id == product.Id);
+            if (product.Id == null) 
+            {
+                result = new Product();
+                this.Context.Products.Add(result);
+            }
+            else
+            {
+                result = this.Context.Products.First(x => x.Id == product.Id);
+            }
             result.Name = product.Name;
             result.Description = product.Description;
             result.Synopsis = product.Synopsis;
@@ -80,7 +122,9 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             result.UnitPrice = product.UnitPrice;
             result.Brand = this.Context.Brands.First(x => x.Id == product.BrandId);
             result.Category = this.Context.Categories.First(x => x.Id == product.CategoryId);
+            result.SizeGroup = this.Context.SizeGroups.FirstOrDefault(x => x.ID == product.SizeGroupId);
             this.Context.SaveChanges();
+
             return new JsonNetResult(result);
         }
 

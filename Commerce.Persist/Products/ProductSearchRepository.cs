@@ -26,11 +26,12 @@ namespace Commerce.Persist.Products
                 .Where(x => x.IsDeleted == false)
                 .Include(x => x.Brand)
                 .Include(x => x.Category)
+                .Include(x => x.SizeGroup)
                 .Include(x => x.Images)
                 .Include(x => x.Images.Select(img => img.ImageBundle));
         }
 
-        public List<JsonProductSynopsis> FindProducts(int? categoryId, int? brandId, string searchText)
+        public List<JsonProductInfo> FindProducts(int? categoryId, int? brandId, string searchText)
         {
             var query = this.Data();
             if (categoryId != null)
@@ -51,12 +52,25 @@ namespace Commerce.Persist.Products
                     SqlFunctions.PatIndex(searchText, x.Description) > 0);
             }
 
-            return query.ToList().Select(x => x.ToSynopsis()).ToList();
+            return query.ToList().Select(x => x.ToJson()).ToList();
         }
 
-        public JsonProductSynopsis Retrieve(int productId)
+        public JsonProductInfo RetrieveInfo(int productId)
         {
-            return this.Data().FirstOrDefault(x => x.Id == productId).ToSynopsis();
+            return this.Data().FirstOrDefault(x => x.Id == productId).ToJson();
+        }
+
+        public List<JsonProductColor> RetreieveColors(int productId)
+        {
+            var product = this.Context.Products
+                .Include(x => x.Colors)
+                .Include(x => x.Colors.Select(prodcolor => prodcolor.Color))
+                .Include(x => x.Colors.Select(prodcolor => prodcolor.Color.ImageBundle))
+                .FirstOrDefault(x => x.Id == productId);
+
+            var output = new List<JsonProductColor>();
+            product.Colors.ForEach(x => output.Add(x.ToJson()));
+            return output;
         }
     }
 }

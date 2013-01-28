@@ -30,6 +30,7 @@ namespace Commerce.Domain.Model.Lists
             {
                 Id = sizeGroup.ID,
                 Name = sizeGroup.Name,
+                Default = sizeGroup.Default,
                 Sizes = sizeGroup.Sizes
                     .Where(x => x.Deleted == false)
                     .Select(x => x.ToJsonSize(sizeGroup.ID)).ToList(),

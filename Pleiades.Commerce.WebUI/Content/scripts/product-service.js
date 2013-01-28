@@ -1,6 +1,7 @@
 function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback) {
     var self = new AjaxService(errorCallback, showLoadingCallback, hideLoadingCallback);
-        self.Categories = function (callback) {
+    
+    self.Categories = function (callback) {
         self.AjaxGet("/Admin/Product/Categories", callback);
     };
 
@@ -8,13 +9,21 @@ function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback)
         self.AjaxGet("/Admin/Product/Brands", callback);
     };
 
+    self.SizeGroups = function (callback) {
+        self.AjaxGet("/Admin/Product/SizeGroups", callback);
+    };
+
     self.Search = function (brandId, categoryId, searchText, callback) {
         self.AjaxGet("/Admin/Product/Search" +
             "?brandId=" + brandId + "&categoryId=" + categoryId + "&searchText=" + searchText, callback);
     };
 
-    self.Retrieve = function (productId, callback) {
-        self.AjaxGet("/Admin/Product/Retrieve/" + productId, callback);
+    self.Info = function (productId, callback) {
+        self.AjaxGet("/Admin/Product/Info/" + productId, callback);
+    };
+
+    self.Colors = function (productId, callback) {
+        self.AjaxGet("/Admin/Product/Colors/" + productId, callback);
     };
 
     self.Insert = function (product, callback) {
@@ -24,6 +33,7 @@ function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback)
     self.Update = function (product, callback) {
         self.AjaxPost("/Admin/Product/Update", product, callback);
 	};
+
 
     self.Delete = function (product, callback) {
         self.AjaxPost("/Admin/Product/Delete", product, callback);

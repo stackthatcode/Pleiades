@@ -13,6 +13,7 @@ namespace Commerce.Domain.Model.Lists
         public int ID { get; set; }
         public string Name { get; set; }
         public List<Size> Sizes { get; set; }
+        public bool Default { get; set; }
         public bool Deleted { get; set; }        
         public DateTime DateUpdated { get; set; }
         public DateTime DateInserted { get; set; }

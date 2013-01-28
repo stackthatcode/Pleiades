@@ -12,16 +12,33 @@ Front Range
 Product Editor
 ~~~~~~~~~~~~~~
 - Start Designing Product Screen => IN PROGRESS
+=> SizeGroup Save => IN PROGRESS
+=> SizeGroup "0" versus null => IN PROGRESS
 
-=> ADD BUTTON
-=> Size Group => DRILL-DOWN STATEFUL
-=> Colors => DRILL-DOWN STATEFUL
-=> Images => DRILL-DOWN STATEFUL
+=> Colors => TODO - EXECUTE DESIGN
+=> Images => TODO - EXECUTE DESIGN
 
 - Change out the Back Buttons => IN PROGRESS
-
-BIG QUESTION => how to associate Colors to Images... easily...? => DRAG AND DROP, BIYATCH
+BIG QUESTION => how to associate Colors to Images... easily...? => DRAG AND DROP, BIYATCH => YES, DON'T CALL ME A BITCH
 http://www.ww2helmets.com/products-page/checkout/ => Hmmmmm...?????
+
+Backlog
+-------
+- Double clicking a link while it's loading the AJAX causes JQuery to beef => TODO
+- Improve the quality of client-side Error Logging => TODO
+- Create a Product and simulate Creation of a Product followed by deletion of Colors, Categories, Brands, etc. => TODO
+- PREVENT DELETION OF LAST SECTION => TODO
+- Add the Number of Products in a Brand => TODO
+- Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING)
+- Check Sanderson for advanced Model Binding => TODO
+- Change Menu for Login Screen => TODO
+- Logged-In User => TODO
+- IsONline - Check How This Functions => TODO
+- Develop and/or Research Fluent Validation library => TODO
+- Donate $20 to FineUploader upon successful integration => TODO
+- ReturnUrl on Login
+
+
 
 
 
@@ -38,24 +55,7 @@ ARCHITECTURAL REVIEW 1/24/2013
 - Roll Pleiades.UnitTests and Security Tests into Pleiades.Web.UnitTests
 - Roll Pleiades Base, Data EF, and TestHelpers into Pleiades.Web.Foundation
 - Move ProductSearchRepository stuff into the Controller.  Yup!  Try it!
-
-
-
-Backlog
--------
-- Improve the quality of client-side Error Logging => TODO
-- Create a Product and simulate Creation of a Product followed by deletion of Colors, Categories, Brands, etc. => TODO
-- PREVENT DELETION OF LAST SECTION => TODO
-- Add the Number of Products in a Brand => TODO
-- Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING)
-- Check Sanderson for advanced Model Binding => TODO
-- Change Menu for Login Screen => TODO
-- Logged-In User => TODO
-- IsONline - Check How This Functions => TODO
-- Develop and/or Research Fluent Validation library => TODO
-- Donate $20 to FineUploader upon successful integration => TODO
-- ReturnUrl on Login
-- There's some edge-case bug in Color... so, test the hell out of it => TODO
+- Compbine Domain and Persist assemblies.  They're not separate, dude!!!
 
 
 *** TODO: what is the function of "nav-collapse collapse"?
@@ -65,7 +65,7 @@ Backlog
 - http://code.google.com/p/autofac/wiki/MvcIntegration
 
 
-Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/6/2013
+Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/27/2013
 ------------------------------------------------------------
 - Login Screen => DONE
 - Admin User Manager => DONE
@@ -74,18 +74,18 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/6/2013
 - Section Editor => DONE
 - Color Editor => DONE
 - Brand Editor => DONE
-
+- Image Upload & Processing Engine => DONE
 
 - Product Search & Editor => IN PROGRESS
-- Order Search & Editor => IN PROGRESS
-- Customer Search & Editor => IN PROGRESS
-- SKU Generator => UPDATE: shouldn't this be automatic...?
+- Barebones Console App => IN PROGRESS
 
-- Basic Analytic Tracker - Traffic Source, Landing Page => WORTH HASHING OUT
-- Image Upload & Processing Engine => DONE
+- SKU Generator => UPDATE: shouldn't this be automatic...? => TODO
+- Order Search & Editor => TODO
+- Customer Search & Editor => TODO
 - Email Sending Engine => TODO
 - Server Logging => TODO
-- Barebones Console App => IN PROGRESS
+
+- Basic Analytic Tracker - Traffic Source, Landing Page => WORTH HASHING OUT
 
 
 

@@ -69,20 +69,33 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         {
             Debug.WriteLine("Image => Download: " + externalResourceId + " " + size);
             var imageBundle = this.ImageBundleRepository.Retrieve(externalResourceId);
-            FileResource fileResource;
-            if (size == "thumbnail")
-                fileResource = imageBundle.Thumbnail;
-            else if (size == "large")
-                fileResource = imageBundle.Large;
-            else if (size == "small")
-                fileResource = imageBundle.Small;
-            else 
-                fileResource = imageBundle.Original;
 
-            var path = this.FileResourceRepository.PhysicalFilePath(fileResource.ExternalId);
-            
-            // TODO: add more MIME-types?
-            return base.File(path, "image/jpeg");
+            if (externalResourceId == Guid.Empty)
+            {
+                string path;
+                if (size == "thumbnail")
+                    path = Server.MapPath("~/Content/Images/75x75.gif");
+                else 
+                    path = Server.MapPath("~/Content/Images/150x150.gif");
+                return base.File(path, "image/gif");
+            }
+            else
+            {
+                FileResource fileResource;
+                if (size == "thumbnail")
+                    fileResource = imageBundle.Thumbnail;
+                else if (size == "large")
+                    fileResource = imageBundle.Large;
+                else if (size == "small")
+                    fileResource = imageBundle.Small;
+                else
+                    fileResource = imageBundle.Original;
+
+                var path = this.FileResourceRepository.PhysicalFilePath(fileResource.ExternalId);
+
+                // TODO: add more MIME-types?
+                return base.File(path, "image/jpeg");
+            }
         }
     }
 }

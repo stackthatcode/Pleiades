@@ -29,7 +29,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult SizeGroups()
         {
-            var result = this.Repository.RetrieveAll();
+            var result = this.Repository.RetrieveAll(false);
             return new JsonNetResult(result);
         }
 

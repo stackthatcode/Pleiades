@@ -7,7 +7,7 @@ namespace Commerce.Domain.Interfaces
 {
     public interface IProductRepository
     {
-        List<JsonProductSynopsis> RetrieveAll();
+        List<JsonProductInfo> RetrieveAll();
         JsonProductInfo Retrieve(int id);
         Func<JsonProductInfo> Insert(JsonProductInfo brand);
         void Update(JsonProductInfo brand);

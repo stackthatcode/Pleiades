@@ -16,6 +16,9 @@ namespace Commerce.Domain.Model.Lists
         public int Id { get; set; }
 
         [JsonProperty]
+        public bool Default { get; set; }
+
+        [JsonProperty]
         public string Name { get; set; }
 
         [JsonProperty]

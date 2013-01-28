@@ -25,9 +25,10 @@ namespace Commerce.Persist.Lists
 
         protected IQueryable<SizeGroup> SizeGroupData()
         {
-            return this.Context.Set<SizeGroup>().Include(x => x.Sizes).Where(x => x.Deleted == false);
+            return this.Context.Set<SizeGroup>()
+                .Include(x => x.Sizes)
+                .Where(x => x.Deleted == false);
         }
-
 
         public Func<JsonSize> Insert(JsonSize jsonSize)
         {
@@ -63,13 +64,16 @@ namespace Commerce.Persist.Lists
         }
 
 
-        public List<JsonSizeGroup> RetrieveAll()
+        public List<JsonSizeGroup> RetrieveAll(bool includeDefault)
         {
-            return this
+            var query = this
                 .SizeGroupData()
                 .ToList()
-                .Select(x => x.ToJsonSizeGroup())
-                .ToList();
+                .Select(x => x.ToJsonSizeGroup());
+            if (!includeDefault)
+                query = query.Where(x => x.Default == false);
+
+            return query.ToList();
         }
 
         public JsonSizeGroup RetrieveByGroup(int groupId)
@@ -92,6 +96,7 @@ namespace Commerce.Persist.Lists
             var size = new SizeGroup
             {
                 Name = jsonSize.Name,
+                Default = jsonSize.Default,
                 DateInserted = DateTime.Now,
                 DateUpdated = DateTime.Now,
             };

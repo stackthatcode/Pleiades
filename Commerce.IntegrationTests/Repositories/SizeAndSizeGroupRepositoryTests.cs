@@ -32,7 +32,7 @@ namespace Commerce.IntegrationTests.Repositories
                 var unitOfWork = container.Resolve<IUnitOfWork>();
 
                 // All Size Groups to JSON
-                var allSizeGroups = repository.RetrieveAll();
+                var allSizeGroups = repository.RetrieveAll(false);
                 Console.WriteLine(Environment.NewLine + "All Size Groups to JSON");
                 Console.WriteLine(JsonConvert.SerializeObject(allSizeGroups, Formatting.Indented));
 
@@ -53,7 +53,7 @@ namespace Commerce.IntegrationTests.Repositories
                 // Delete a Size Group
                 repository.DeleteSoft(allSizeGroups[0]);
                 unitOfWork.SaveChanges();
-                allSizeGroups = repository.RetrieveAll();
+                allSizeGroups = repository.RetrieveAll(false);
                 Console.WriteLine(Environment.NewLine + "All Size Groups to JSON after Delete");
                 Console.WriteLine(JsonConvert.SerializeObject(allSizeGroups, Formatting.Indented));
             }

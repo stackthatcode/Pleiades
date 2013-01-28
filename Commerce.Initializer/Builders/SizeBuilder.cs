@@ -38,8 +38,9 @@ namespace Commerce.Initializer.Builders
                 var jsonSizeRepository = ServiceLocator.Resolve<IJsonSizeRepository>();
 
                 // Create size groups
-                var result1 = jsonSizeRepository.Insert(new JsonSizeGroup { Name = "Default Clothing" });
-                var result2 = jsonSizeRepository.Insert(new JsonSizeGroup { Name = "Men's Shoes" });
+                var result0 = jsonSizeRepository.Insert(new JsonSizeGroup { Name = "N/A", Default = true });
+                var result1 = jsonSizeRepository.Insert(new JsonSizeGroup { Name = "Default Clothing", Default = false });
+                var result2 = jsonSizeRepository.Insert(new JsonSizeGroup { Name = "Men's Shoes", Default = false });
                 unitOfWork.SaveChanges();
 
                 var sizeGroup1 = result1();
