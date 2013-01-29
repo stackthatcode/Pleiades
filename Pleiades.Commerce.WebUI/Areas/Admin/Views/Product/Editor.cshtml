@@ -2,6 +2,7 @@
 
 @section _Scripts {
     @Html.Javascript("/scripts/product-service.js")
+    @Html.Javascript("/scripts/color-service.js")
     @Html.Partial("_ColorPicker")
     @Html.Partial("_FineUploader")
 	@Html.Partial("_ImageBundleViewer")
@@ -97,11 +98,10 @@
 					function (product) {
 					    var knockedoutData = ProductInfoToKnockout(product);
 					    self.SelectedProduct(knockedoutData);
-					    self.InfoTabClick();
 					    self.ParentGlider.GlideToChild(this);
 					},
                     function () {
-                        self.ActiveView("Product");
+                        self.InfoTabClick();
                     }
 				);
             }
@@ -112,18 +112,18 @@
                         self.ProductServiceAdapter.Colors(self.SelectedProduct().Id(), this);
                     },
                     function (colors) {
-                        self.SelectedColors(colors);
-                        self.SelectedChildView("Child-Editor-Colors");
+                        self.SelectedProductColors(colors);
+                        self.ActiveView({ Level: "Child", Template: "Colors" });
                     }
                 );
             }
 
             self.InfoTabClick = function () {
-                self.SelectedChildView("Child-Editor-Info");
+                self.ActiveView({ Level: "Child", Template: "Info" });
             }
 
             self.ImagesTabClick = function () {
-                self.SelectedChildView("Child-Editor-Images");
+                self.ActiveView({ Level: "Child", Template: "Images" });
             }
 
             self.AddProduct = function () {
@@ -134,7 +134,6 @@
                         self.ParentGlider.GlideToChild(this);
                     },
                     function () {
-                        self.ActiveView("Product");
                         self.InfoTabClick();
                     }
                 );
@@ -148,7 +147,7 @@
                         self.ParentGlider.GlideToParent(this);
                     },
 					function () {
-					    self.ActiveView("Search");
+					    self.ActiveView({ Level: "Parent", Template: "Search" });
 					    self.SelectedProduct(null);
 					    self.SelectedIndex = null;
 					    self.CrossCuttingUI.ScrollToIdTracker(recordId);
@@ -160,15 +159,15 @@
                 flow.exec(
                     function () {
                         $("#glideToParent").hide();
-                        self.ActiveView("Product");
                         self.ChildGlider.GlideToParent(this);
                     },
 					function () {
+					    self.ActiveView({ Level: "Child", Template: "Colors" });
 					}
 				);
             }
 
-            self.RetrieveCategories = function (callback) {
+            self.RetrieveCategoriesList = function (callback) {
                 flow.exec(
                     function () {
                         self.ProductServiceAdapter.Categories(this);
@@ -189,7 +188,7 @@
                 );
             }
 
-            self.RetrieveBrands = function (callback) {
+            self.RetrieveBrandsList = function (callback) {
                 flow.exec(
                     function () {
                         self.ProductServiceAdapter.Brands(this);
@@ -209,7 +208,7 @@
                 );
             }
 
-            self.RetrieveSizeGroups = function (callback) {
+            self.RetrieveSizeGroupsList = function (callback) {
                 flow.exec(
                     function () {
                         self.ProductServiceAdapter.SizeGroups(this);
@@ -229,7 +228,7 @@
                 );
             }
 
-            self.DeleteColor = function (color) {
+            self.DeleteProduct = function (color) {
                 self.ModalViewModel(color);
                 $('#modal-delete').modal();
             }
@@ -264,12 +263,21 @@
             self.AddColorFromList = function () {
                 flow.exec(
                     function () {
+                        self.ProductServiceAdapter.ColorsList(this);
+                    },
+                    function (data) {
+                        self.ColorArray(data);
+                        $.each(data, function (index, elem) { elem.Selected = ko.observable(false); });
                         self.ChildGlider.GlideToChild(this);
                     },
                     function () {
-                        self.ActiveView("Color-SubView");
+                        self.ActiveView({ Level: "Sub-Child", Template: "AddColorsFromList" });
                     }
                 );
+            }
+
+            self.SelectColor = function (data) {
+                data.Selected(!data.Selected());
             }
 
             self.SaveClick = function () {
@@ -319,15 +327,14 @@
             self.SizeGroupArray = ko.observableArray();
             self.BrandArray = ko.observableArray();
             self.CategoryArray = ko.observableArray();
+            self.ColorArray = ko.observableArray();
             self.SearchData = ko.observableArray();
 
             self.SelectedProduct = ko.observable(null);
-            self.SelectedColors = ko.observableArray();
+            self.SelectedProductColors = ko.observableArray();
             self.SelectedImage = ko.observableArray();
-            self.SelectedChildView = ko.observable(null);
-            self.SelectedSubChildView = ko.observable(null);
 
-            self.ActiveView = ko.observable("Search");
+            self.ActiveView = ko.observable({ Level: "Parent", Template: "Search" });
             self.ModalViewModel = ko.observable(null);
 
             // ko.computed's
@@ -338,15 +345,15 @@
 
             self.GlidingContainerStyle = ko.computed(
                 function () {
-                    return self.ActiveView() == "Search" ? "top:190px;" : "top:165px;";
+                    return self.ActiveView().Level == "Parent" ? "top:180px;" : "top:165px;";
                 }, this);
 
             // Start loading...
             var log = function (data) { console.log(data); }
 
-            self.RetrieveCategories();
-            self.RetrieveBrands();
-            self.RetrieveSizeGroups();
+            self.RetrieveCategoriesList();
+            self.RetrieveBrandsList();
+            self.RetrieveSizeGroupsList();
         }
 
         $(function () {
@@ -363,8 +370,8 @@
 
 @section _Templates {
 	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE SEARCH -->
-	<script type="text/html" id="Top-Workspace-Search">
-        <div class="workspace-heading" style="height:130px;">
+	<script type="text/html" id="Top-Workspace-Parent">
+        <div class="workspace-heading" style="height:120px;">
 		    <div id="heading" class="container" data-bind="ifnot: $root.SelectedProduct()">
 			    <div class="row">
 				    <div class="span9">
@@ -376,7 +383,7 @@
 			    </div>
 
                 <div style="height:10px;"></div>
-            
+                
                 <div class="row">
 				    <div class="span3">
                         <select id="SearchCategory" data-bind="foreach: $root.CategoryArray">
@@ -400,7 +407,7 @@
     </script>
 		
 	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE PRODUCT -->
-	<script type="text/html" id="Top-Workspace-Product">
+	<script type="text/html" id="Top-Workspace-Child">
         <div class="workspace-heading" style="height:105px;">
 		    <div id="heading" class="container" data-bind="if: $root.SelectedProduct()">
 			    <div class="row" style="position:relative;">				
@@ -422,30 +429,40 @@
     </script>
 
 	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE COLOR-SUBVIEW -->
-	<script type="text/html" id="Top-Workspace-Color-SubView">
-        <div class="workspace-heading" style="height:105px;">
-		    <div id="heading" class="container" data-bind="if: $root.SelectedProduct()">
+	<script type="text/html" id="Top-Workspace-Sub-Child">
+        <div class="workspace-heading" style="height:155px;">
+		    <div class="container" data-bind="if: $root.SelectedProduct()">
 			    <div class="row" style="position:relative;">				
 				    <div class="span12">
 					    <h1>Products &gt; <span data-bind="text: $root.SelectedProductName"></span></h1>
 				    </div>
 			    </div>
                 <div class="row">
-                    <div class="span3">
+                    <div class="span9">
                         <ul class="nav nav-pills">
-                            <li class="active">
+                            <li class="active" style="height:30px;">
 				                <a id="glideToParent" data-bind="click: $root.GlideToProductView"><i class="icon-backward icon-white"></i> Back to Product</a>
                             </li>
                         </ul
                     </div>
 		        </div>
+
+                <div class="row">
+                    <div class="span7" style="padding-left:20px;">
+                        <p class="lead">Select Colors to add to your Product</p>
+                    </div>
+                    <div class="span5" style="text-align:right;">
+					    <a class="btn btn-inverse" href="#" data-bind="click: $root.GlideToProductView"><i class="icon-remove icon-white"></i> Cancel</a>                    
+					    <a class="btn btn-primary" href="#" data-bind="click: $root.AddColorsToProduct"><i class="icon-ok icon-white"></i> Add Colors</a>
+                    </div>
+                </div>
 		    </div>
 		</div>
 	</script>
 	
 	<!-- KNOCKOUT TEMPLATE - PARENT EDITOR (SEARCH) -->
 	<script type="text/html" id="Parent-Editor">
-		<div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $data.SearchData().length == 0">
+		<div style="margin-top:20px; text-align:center;" class="alert alert-info" data-bind="visible: $data.SearchData().length == 0">
 			<strong>There are no Products in your current search.  Click "Search" to run a search or click "Add New Product" to create a new one.</strong>  
 		</div>
 		
@@ -471,7 +488,7 @@
             </td>
 			<td>
 				<span class="span3" style="text-align:right;">					
-					<a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteColor($data) }"><i class="icon-trash icon-white"></i> Delete</a>
+					<a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteProduct($data) }"><i class="icon-trash icon-white"></i> Delete</a>
 					<a class="btn btn-inverse" style="width:70px;" data-bind="click: $root.EditProduct">Edit <i class="icon-arrow-right icon-white"></i></a>
 				</span>
 			</td>
@@ -611,7 +628,7 @@
             </div>
 
 		    <table id="color-table" class="table table-hover">
-		    <tbody data-bind="foreach: $root.SelectedColors()">
+		    <tbody data-bind="foreach: $root.SelectedProductColors()">
 			    <tr>
 			    <td>
 				    <span class="span2">
@@ -627,7 +644,46 @@
                 </td>
 			    <td>
 				    <span class="span3" style="text-align:right;">					
-					    <a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteColor($data) }"><i class="icon-trash icon-white"></i> Delete</a>
+					    <a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteProduct($data) }"><i class="icon-trash icon-white"></i> Delete</a>
+				    </span>
+			    </td>
+			    </tr>
+		    </tbody>
+		    </table>
+        </form>
+    </div>
+    </script>
+    
+    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB -->
+    <script type="text/html" id="Sub-Child-Editor-AddColorsFromList">
+    <div>
+        <form>    
+		    <table id="color-table" class="table table-hover" style="margin-top:50px;">
+		    <tbody data-bind="foreach: $root.ColorArray()">
+			    <tr>
+			    <td>
+				    <span class="span2">
+                	    <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+			            </div>
+                    </span>
+                </td>
+                <td>
+				    <span class="span7">
+					    <input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
+					    <p><strong data-bind="text: $data.Name"></strong> - <span data-bind="text: $data.SkuCode"></span></p>
+				    </span>
+                </td>
+			    <td>
+				    <span class="span3" style="text-align:right;">					
+                        <div data-bind="if: $data.Selected() == false">
+					        <a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.SelectColor($data) }">
+                                <i class="icon-plus icon-white"></i> Select</a>
+                        </div>
+                        <div data-bind="if: $data.Selected() == true">
+					        <a class="btn btn-white" style="width:70px;" href="#" data-bind="click: function() { $root.SelectColor($data) }">
+                                <i class="icon-minus icon-black"></i> Remove</a>
+                                <span class="label label-info">Selected!</span>
+                        </div>
 				    </span>
 			    </td>
 			    </tr>
@@ -683,24 +739,23 @@
 }
 
 @section _Body {
-    <div class="workspace-heading-parent" data-bind="template: { name: 'Top-Workspace-' + $root.ActiveView(), data: $root }">
+    <div class="workspace-heading-parent" data-bind="template: { name: 'Top-Workspace-' + $root.ActiveView().Level, data: $root }">
 	</div>
 	
 	<div id="gliding-container" class="container" data-bind="attr: { style: $root.GlidingContainerStyle }">
-		<div id="parent-editor">
+		<div id="parent-editor" data-bind="if: $root.ActiveView().Level == 'Parent'">
 			<div style="margin-bottom:200px;" data-bind="template: { name: 'Parent-Editor', data: $root }">
 			</div>
 		</div>
 		
-		<div id="child-editor" data-bind="if: $root.ActiveView() == 'Product'">
-			<div style="margin-bottom:200px;" data-bind="template: { name: $root.SelectedChildView(), data: $root.SelectedProduct() }">
+		<div id="child-editor" data-bind="if: $root.ActiveView().Level == 'Child'">
+			<div style="margin-bottom:200px;" data-bind="template: { name: 'Child-Editor-' + $root.ActiveView().Template, data: $root.SelectedProduct() }">
 			</div>
 		</div>
 
-        <div id="sub-child-editor" data-bind="if: $root.ActiveView() == 'Color-SubView'">
-            <h1>Color Sub Editor</h1>
-			<!--<div style="margin-bottom:200px;" data-bind="template: { name: $root.SelectedChildView(), data: $root.SelectedProduct() }">
-			</div> -->
+        <div id="sub-child-editor" data-bind="if: $root.ActiveView().Level == 'Sub-Child'">
+			<div style="margin-bottom:200px;" data-bind="template: { name: 'Sub-Child-Editor-' + $root.ActiveView().Template, data: $root.SelectedProduct() }">
+			</div>
 		</div>
     </div>
 

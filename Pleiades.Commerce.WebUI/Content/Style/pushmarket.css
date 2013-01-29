@@ -61,6 +61,14 @@ h4 {
 	position: absolute; 
 }
 
+#sub-child-editor 
+{
+	left: 0px; 
+	width: 940px; 
+	position: absolute; 
+}
+
+
 #glideToParent 
 {
     text-align:center;

@@ -416,3 +416,10 @@ Finished Save Logic
 -------------------
 - Colors Tab, Refactoring for Active Views, => DONE
 - Double-drill-down Logic => DONE
+=> SizeGroup Save => DONE
+=> SizeGroup "0" versus null => DONE
+
+1/28/2013 1.0 Hour
+------------------
+- Refactored Views to greatly, greatly Gliding logic => DONE
+

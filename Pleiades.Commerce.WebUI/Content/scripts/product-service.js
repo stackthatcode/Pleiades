@@ -26,6 +26,10 @@ function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback)
         self.AjaxGet("/Admin/Product/Colors/" + productId, callback);
     };
 
+    self.ColorsList = function (callback) {
+        self.AjaxGet("/Admin/Color/Colors", callback);
+    };
+
     self.Insert = function (product, callback) {
         self.AjaxPost("/Admin/Product/Insert", product, callback);
 	};

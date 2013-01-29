@@ -12,18 +12,20 @@ Front Range
 Product Editor
 ~~~~~~~~~~~~~~
 - Start Designing Product Screen => IN PROGRESS
-=> SizeGroup Save => IN PROGRESS
-=> SizeGroup "0" versus null => IN PROGRESS
-
-=> Colors => TODO - EXECUTE DESIGN
+=> Colors => TODO - EXECUTE DESIGN - IN PROGRESS
 => Images => TODO - EXECUTE DESIGN
-
 - Change out the Back Buttons => IN PROGRESS
+
+
+AddColorsToProduct +function
+
 BIG QUESTION => how to associate Colors to Images... easily...? => DRAG AND DROP, BIYATCH => YES, DON'T CALL ME A BITCH
 http://www.ww2helmets.com/products-page/checkout/ => Hmmmmm...?????
 
+
 Backlog
 -------
+- When I delete a SizeGroup, Color, Category or Brand, gotta set the Product's == N/A => TODO
 - Double clicking a link while it's loading the AJAX causes JQuery to beef => TODO
 - Improve the quality of client-side Error Logging => TODO
 - Create a Product and simulate Creation of a Product followed by deletion of Colors, Categories, Brands, etc. => TODO

@@ -18,6 +18,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         IJsonCategoryRepository CategoryRepository { get; set; }
         IJsonBrandRepository BrandRepository { get; set; }
         IJsonSizeRepository SizeRepository { get; set; }
+        IJsonColorRepository ColorRepository { get; set; }
         IProductSearchRepository ProductSearchRepository { get; set; }
         IUnitOfWork UnitOfWork { get; set; }
         PleiadesContext Context { get; set; } 
@@ -93,6 +94,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             var result = this.ProductSearchRepository.RetreieveColors(id);
             return new JsonNetResult(result);
         }
+
 
         [HttpGet]
         public ActionResult Images(int id)
