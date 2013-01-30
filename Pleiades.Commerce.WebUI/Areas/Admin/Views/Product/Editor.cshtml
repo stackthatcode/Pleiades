@@ -228,13 +228,32 @@
                 );
             }
 
-            self.DeleteProduct = function (color) {
-                self.ModalViewModel(color);
+
+            self.DeleteProductColor = function (color) {
+                self.ModalViewModel({ Template: "Modal-Dialog-ProductColor", Data: color });
                 $('#modal-delete').modal();
             }
 
-            self.DeleteConfirm = function () {
-                var record = self.ModalViewModel();
+            self.DeleteProductColorConfirm = function () {
+                var record = self.ModalViewModel().Data;
+                flow.exec(
+                function () {
+                        $('#modal-delete').modal('hide');
+                        self.ServiceAdapter.Delete(record, this);
+                    },
+                function (data) {
+                        self.Data.remove(function (item) { return item.Id == record.Id; });
+                        self.ModalViewModel({ Template: null });
+                    });
+            }
+
+            self.DeleteProduct = function (product) {
+                self.ModalViewModel({ Template: "Modal-Dialog-Product", Data: product });
+                $('#modal-delete').modal();
+            }
+
+            self.DeleteProductConfirm = function () {
+                var record = self.ModalViewModel().Data;
                 flow.exec(
                     function () {
                         $('#modal-delete').modal('hide');
@@ -274,6 +293,37 @@
                         self.ActiveView({ Level: "Sub-Child", Template: "AddColorsFromList" });
                     }
                 );
+            }
+
+            self.AddColorsToProduct = function () {
+                var colorIdList = [];
+                $.each(self.ColorArray(), function (index, elem) {
+                    if (elem.Selected()) {
+                        colorIdList.push(elem.Id);
+                    }
+                });
+
+                var iterator = function (callback) {
+                    if (colorIdList.length == 0) {
+                        flow.exec(
+                            function () {
+                                self.ProductServiceAdapter.Colors(self.SelectedProduct().Id(), this);
+                            },
+                            function (colors) {
+                                self.SelectedProductColors(colors);
+                                self.ChildGlider.GlideToParent(this);
+                            },
+                            function () {
+                                self.ActiveView({ Level: "Child", Template: "Colors" });
+                            }
+                        );
+                        return;
+                    }
+
+                    var nextColorId = colorIdList.pop();
+                    self.ProductServiceAdapter.AddProductColor(self.SelectedProduct().Id(), nextColorId, iterator);
+                };
+                iterator();
             }
 
             self.SelectColor = function (data) {
@@ -335,7 +385,7 @@
             self.SelectedImage = ko.observableArray();
 
             self.ActiveView = ko.observable({ Level: "Parent", Template: "Search" });
-            self.ModalViewModel = ko.observable(null);
+            self.ModalViewModel = ko.observable({ Template: null });
 
             // ko.computed's
             self.SelectedProductName = ko.computed(
@@ -644,7 +694,7 @@
                 </td>
 			    <td>
 				    <span class="span3" style="text-align:right;">					
-					    <a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteProduct($data) }"><i class="icon-trash icon-white"></i> Delete</a>
+					    <a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteProductColor($data) }"><i class="icon-trash icon-white"></i> Delete</a>
 				    </span>
 			    </td>
 			    </tr>
@@ -680,9 +730,9 @@
                                 <i class="icon-plus icon-white"></i> Select</a>
                         </div>
                         <div data-bind="if: $data.Selected() == true">
+                            <span class="label label-info">Selected!</span>
 					        <a class="btn btn-white" style="width:70px;" href="#" data-bind="click: function() { $root.SelectColor($data) }">
                                 <i class="icon-minus icon-black"></i> Remove</a>
-                                <span class="label label-info">Selected!</span>
                         </div>
 				    </span>
 			    </td>
@@ -720,19 +770,36 @@
     </div>
     </script>
 
-	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG -->
-	<script type="text/html" id="Modal-Dialog">
-		<div id="modal-delete" class="modal hide fade" data-bind="if: $root.ModalViewModel()">
+	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG PRODUCT -->
+	<script type="text/html" id="Modal-Dialog-Product">
+		<div id="modal-delete" class="modal hide fade">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h3>Delete <span data-bind="text: $root.ModalViewModel().Name"></span></h3>
+				<h3>Delete <span data-bind="text: $root.ModalViewModel().Data.Name"></span></h3>
 			</div>
 			<div class="modal-body">
 				<p>Are you sure you want to Delete this Product?</p>			
 			</div>
 			<div class="modal-footer">
 				<a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
-				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.DeleteConfirm"><i class="icon-ok icon-white"></i> Ok</a>
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.DeleteProductConfirm"><i class="icon-ok icon-white"></i> Ok</a>
+			</div>
+		</div>
+    </script>
+
+	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG PRODUCT COLOR -->
+	<script type="text/html" id="Modal-Dialog-ProductColor">
+        <div id="modal-delete" class="modal hide fade">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3>Delete <span data-bind="text: $root.ModalViewModel().Data.Name"></span></h3>
+			</div>
+			<div class="modal-body">
+				<p>Are you sure you want to Delete this Color from the Product?</p>			
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.DeleteProductColorConfirm"><i class="icon-ok icon-white"></i> Ok</a>
 			</div>
 		</div>
 	</script>
@@ -759,5 +826,8 @@
 		</div>
     </div>
 
-    <div id="modal-enclave" data-bind="template: { name: 'Modal-Dialog' }"></div>    
+    <div id="modal-enclave" data-bind="if: $root.ModalViewModel().Template">
+        <div data-bind="template: { name: $root.ModalViewModel().Template }">
+        </div>
+    </div>    
 }

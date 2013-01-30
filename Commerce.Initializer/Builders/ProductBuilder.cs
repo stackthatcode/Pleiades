@@ -38,6 +38,7 @@ namespace Commerce.Initializer.Builders
                 var brandRepository = ServiceLocator.Resolve<IGenericRepository<Brand>>();
                 var imageRepository = ServiceLocator.Resolve<IImageBundleRepository>();
                 var productRepository = ServiceLocator.Resolve<IProductRepository>();
+                var productColorRepository = ServiceLocator.Resolve<IProductRepository>();
                 var unitOfWork = ServiceLocator.Resolve<IUnitOfWork>();
 
                 // Clear everything out
@@ -46,7 +47,7 @@ namespace Commerce.Initializer.Builders
 
                 // Get reference data
                 var brandTatami = brandRepository.GetAll().ToList()[4];     // TATAMI
-                var sizeGroup = sizeGroupRepository.GetAll().ToList()[0];   // SIZE GROUP
+                var sizeGroup = sizeGroupRepository.GetAll().ToList()[1];   // SIZE GROUP
                 var black = colorRepository.FirstOrDefault(x => x.SkuCode == "BLACK");
                 var blue = colorRepository.FirstOrDefault(x => x.SkuCode == "BLUE");
                 var category1 = categoryRepository.FirstOrDefault(x => x.Name == "Choke-proof Gis");
@@ -69,11 +70,8 @@ namespace Commerce.Initializer.Builders
                     SizeGroup = sizeGroup,
                 };
 
-                var productColor11 = new ProductColor { Color = black, Order = 1 };
-                var productColor12 = new ProductColor { Color = blue, Order = 2 };
-
-                product1.Colors.Add(productColor11);
-                product1.Colors.Add(productColor12);
+                var productColor11 = new ProductColor { Color = black, Product = product1, Order = 1 };
+                var productColor12 = new ProductColor { Color = blue, Product = product1, Order = 2 };
 
                 var bundle11 = imageRepository.Add(ImageHelper("tat-1010_black_01_xl.jpg"));
                 var bundle12 = imageRepository.Add(ImageHelper("tat-1010_black_02_xl.jpg"));

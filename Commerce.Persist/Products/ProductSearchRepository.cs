@@ -62,15 +62,38 @@ namespace Commerce.Persist.Products
 
         public List<JsonProductColor> RetreieveColors(int productId)
         {
-            var product = this.Context.Products
-                .Include(x => x.Colors)
-                .Include(x => x.Colors.Select(prodcolor => prodcolor.Color))
-                .Include(x => x.Colors.Select(prodcolor => prodcolor.Color.ImageBundle))
-                .FirstOrDefault(x => x.Id == productId);
+            return this.Context.ProductColors
+                .Include(x => x.Color)
+                .Include(x => x.Color.ImageBundle)
+                .Where(x => x.Product.Id == productId)
+                .ToList()
+                .Select(x => x.ToJson())
+                .ToList();
+        }
 
-            var output = new List<JsonProductColor>();
-            product.Colors.ForEach(x => output.Add(x.ToJson()));
-            return output;
+        // Two sequences
+        // 1.) Choose an existing Color
+        // 2.) Create a new Color, add it to the global Color List, then run this method
+        
+        public JsonProductColor AddProductColor(int productId, int colorId)
+        {
+            var color = this.Context.Colors.First(x => x.Deleted == false && x.Id == colorId);
+            var product = this.Context.Products.First(x => x.Id == productId);
+
+            var productColor = 
+                this.Context.ProductColors.Add(new ProductColor
+                {
+                    Color = color,
+                    Product = product,
+                });
+
+            return productColor.ToJson();
+        }
+
+        public void DeleteProductColor(int productId, int colorId)
+        {
+            var productColor = this.Context.ProductColors.First(x => x.Product.Id == productId && x.Color.Id == colorId);
+            this.Context.ProductColors.Remove(productColor);
         }
     }
 }

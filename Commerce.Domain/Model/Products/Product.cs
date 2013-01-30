@@ -9,7 +9,6 @@ namespace Commerce.Domain.Model.Products
     {
         public Product()
         {
-            Colors = new List<ProductColor>();
             Images = new List<ProductImage>();
             DateCreated = DateTime.Now;
             LastModified = DateTime.Now;
@@ -31,11 +30,7 @@ namespace Commerce.Domain.Model.Products
         public SizeGroup SizeGroup { get; set; }
         public bool Active { get; set; }
 
-
-        // Colors Tab
-        public List<ProductColor> Colors { get; set; }
-
-        // Images Tab
+        // Images
         public List<ProductImage> Images { get; set; }
 
         // back-end

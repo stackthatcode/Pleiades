@@ -34,14 +34,21 @@ function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback)
         self.AjaxPost("/Admin/Product/Insert", product, callback);
 	};
 
+	self.AddProductColor = function (productId, colorId, callback) {
+	    self.AjaxPost("/Admin/Product/AddProductColor/" + productId + "?colorId=" + colorId, {}, callback);
+	};
+
     self.Update = function (product, callback) {
         self.AjaxPost("/Admin/Product/Update", product, callback);
 	};
 
-
     self.Delete = function (product, callback) {
         self.AjaxPost("/Admin/Product/Delete", product, callback);
 	};
+
+    self.DeleteProductColor = function (product, callback) {
+        self.AjaxPost("/Admin/Product/DeleteProductColor/" + productId + "?colorId=" + colorId, {}, callback);
+    };
 
 	return self;
 }

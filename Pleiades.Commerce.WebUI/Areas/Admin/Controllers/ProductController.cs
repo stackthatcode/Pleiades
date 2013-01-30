@@ -20,7 +20,6 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         IJsonSizeRepository SizeRepository { get; set; }
         IJsonColorRepository ColorRepository { get; set; }
         IProductSearchRepository ProductSearchRepository { get; set; }
-        IUnitOfWork UnitOfWork { get; set; }
         PleiadesContext Context { get; set; } 
 
         public ProductController(
@@ -131,9 +130,19 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create()
+        public ActionResult AddProductColor(int id, int colorId)
         {
-            throw new NotImplementedException();
+            var newColor = this.ProductSearchRepository.AddProductColor(id, colorId);
+            this.Context.SaveChanges();
+            return new JsonNetResult(newColor);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteProductColor(int id, int colorId)
+        {
+            this.ProductSearchRepository.DeleteProductColor(id, colorId);
+            this.Context.SaveChanges();
+            return new JsonNetResult();
         }
     }
 }

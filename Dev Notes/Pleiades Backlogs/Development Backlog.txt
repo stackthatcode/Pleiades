@@ -18,6 +18,9 @@ Product Editor
 
 
 AddColorsToProduct +function
+DeleteColorFromProduct +function
+SelectColor +function
+
 
 BIG QUESTION => how to associate Colors to Images... easily...? => DRAG AND DROP, BIYATCH => YES, DON'T CALL ME A BITCH
 http://www.ww2helmets.com/products-page/checkout/ => Hmmmmm...?????
