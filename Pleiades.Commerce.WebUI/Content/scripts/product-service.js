@@ -38,6 +38,10 @@ function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback)
 	    self.AjaxPost("/Admin/Product/AddProductColor/" + productId + "?colorId=" + colorId, {}, callback);
 	};
 
+	self.CreateBitmap = function (createRequest, callback) {
+	    self.AjaxPost("/Admin/Product/CreateBitmap", createRequest, callback);
+	}
+
     self.Update = function (product, callback) {
         self.AjaxPost("/Admin/Product/Update", product, callback);
 	};
@@ -46,8 +50,8 @@ function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback)
         self.AjaxPost("/Admin/Product/Delete", product, callback);
 	};
 
-    self.DeleteProductColor = function (product, callback) {
-        self.AjaxPost("/Admin/Product/DeleteProductColor/" + productId + "?colorId=" + colorId, {}, callback);
+    self.DeleteProductColor = function (productId, productColorId, callback) {
+        self.AjaxPost("/Admin/Product/DeleteProductColor/" + productId + "?productColorId=" + productColorId, {}, callback);
     };
 
 	return self;

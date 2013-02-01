@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,6 +11,7 @@ using Commerce.Domain.Interfaces;
 using Commerce.Domain.Model.Lists;
 using Commerce.Domain.Model.Products;
 using Commerce.Persist;
+using Commerce.WebUI.Areas.Admin.Models.Color;
 
 namespace Commerce.WebUI.Areas.Admin.Controllers
 {
@@ -20,17 +22,19 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         IJsonSizeRepository SizeRepository { get; set; }
         IJsonColorRepository ColorRepository { get; set; }
         IProductSearchRepository ProductSearchRepository { get; set; }
+        IImageBundleRepository ImageBundleRepository { get; set; }
         PleiadesContext Context { get; set; } 
 
         public ProductController(
                 IJsonCategoryRepository categoryRepository, IJsonBrandRepository brandRepository, 
                 IProductSearchRepository productSearchRepository, IJsonSizeRepository sizeRepository,
-                PleiadesContext context)
+                IImageBundleRepository imageBundleRepository, PleiadesContext context)
         {
             this.CategoryRepository = categoryRepository;
             this.BrandRepository = brandRepository;
             this.SizeRepository = sizeRepository;
             this.ProductSearchRepository = productSearchRepository;
+            this.ImageBundleRepository = imageBundleRepository;
             this.Context = context;
         }
 
@@ -138,11 +142,22 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteProductColor(int id, int colorId)
+        public ActionResult DeleteProductColor(int id, int productColorId)
         {
-            this.ProductSearchRepository.DeleteProductColor(id, colorId);
+            this.ProductSearchRepository.DeleteProductColor(id, productColorId);
             this.Context.SaveChanges();
             return new JsonNetResult();
+        }
+
+
+        [HttpPost]
+        public ActionResult CreateBitmap(CreateColorBitmap request)
+        {
+            string rgb = request.Rgb;
+            var color = ColorTranslator.FromHtml(rgb);
+            var imageBundle = this.ImageBundleRepository.Add(color, 150, 150);
+            this.Context.SaveChanges();
+            return new JsonNetResult(imageBundle);
         }
     }
 }

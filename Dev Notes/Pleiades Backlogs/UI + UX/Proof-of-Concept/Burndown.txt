@@ -423,3 +423,39 @@ Finished Save Logic
 ------------------
 - Refactored Views to greatly, greatly Gliding logic => DONE
 
+1/29/2013 1.75 Hours
+-------------------
+- Product Colors work in progress => DONE
+
+1/30/2013
+---------
+1.0 Hours
+
+
+productColorId
+
+he DELETE statement conflicted with the REFERENCE constraint \"FK_ProductImages_ProductColors_Color_Id\". The conflict occurred in database \"CommerceUI\", table \"dbo.ProductImages\", column 'Color_Id'.\r\nThe statement has been terminated."}
+
+
+
+
+$root.ShowUpload
+$data.ImageBundleExternalId(), 
+$data.EditName
+$data.EditSkuCode
+$data.EditSEO 
+
+ 
+name: 'Fine-Uploader', data: $root }"
+
+$root.PickColorToggle = method
+$root.UploadSwatchToggle = method
+
+$root.GlideToParentView = method
+$root.SaveColor = method
+
+
+
+
+
+

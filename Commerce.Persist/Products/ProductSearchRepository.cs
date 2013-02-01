@@ -65,7 +65,7 @@ namespace Commerce.Persist.Products
             return this.Context.ProductColors
                 .Include(x => x.Color)
                 .Include(x => x.Color.ImageBundle)
-                .Where(x => x.Product.Id == productId)
+                .Where(x => x.Product.Id == productId && x.IsDeleted == false)
                 .ToList()
                 .Select(x => x.ToJson())
                 .ToList();
@@ -90,10 +90,12 @@ namespace Commerce.Persist.Products
             return productColor.ToJson();
         }
 
-        public void DeleteProductColor(int productId, int colorId)
+        public void DeleteProductColor(int productId, int productColorId)
         {
-            var productColor = this.Context.ProductColors.First(x => x.Product.Id == productId && x.Color.Id == colorId);
-            this.Context.ProductColors.Remove(productColor);
+            // TODO: add logic for addressing Product Images attached to a Color
+
+            var productColor = this.Context.ProductColors.First(x => x.Product.Id == productId && x.Id == productColorId);
+            productColor.IsDeleted = true;
         }
     }
 }

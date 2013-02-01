@@ -235,16 +235,16 @@
             }
 
             self.DeleteProductColorConfirm = function () {
-                var record = self.ModalViewModel().Data;
+                var color = self.ModalViewModel().Data;
                 flow.exec(
                 function () {
-                        $('#modal-delete').modal('hide');
-                        self.ServiceAdapter.Delete(record, this);
-                    },
+                    $('#modal-delete').modal('hide');
+                    self.ProductServiceAdapter.DeleteProductColor(self.SelectedProduct().Id(), color.Id, this);
+                },
                 function (data) {
-                        self.Data.remove(function (item) { return item.Id == record.Id; });
-                        self.ModalViewModel({ Template: null });
-                    });
+                    self.SelectedProductColors.remove(color);
+                    self.ModalViewModel({ Template: null });
+                });
             }
 
             self.DeleteProduct = function (product) {
@@ -295,6 +295,41 @@
                 );
             }
 
+            self.CreateNewColor = function () {
+                flow.exec(
+                    function () {
+                        var input = {
+                            ShowUpload: ko.observable(true),
+                            ImageBundleExternalId: ko.observable(null),
+                            EditName: ko.observable(null),
+                            EditSkuCode: ko.observable(null),
+                            EditSEO: ko.observable(null),
+                        };
+                        self.NewColorInput(input);
+                        self.ChildGlider.GlideToChild(this);
+                    },
+                    function () {
+                        self.ActiveView({ Level: "Sub-Child", Template: "CreateColor" });
+                        var fileUploader = new CommerceFileUploader(this.CrossCuttingUI, self.OnColorUpload);
+                    }
+                );
+            }
+
+            self.PickColorToggle = function() {
+                self.NewColorInput().ShowUpload(false);
+                CreateColorPicker();
+            }
+
+            self.UploadSwatchToggle = function() {
+                self.NewColorInput().ShowUpload(true);
+            }
+
+            self.OnColorUpload = function(data) {
+                console.log(data);
+                self.NewColorInput().ImageBundleExternalId(data.ExternalId);
+            }
+
+
             self.AddColorsToProduct = function () {
                 var colorIdList = [];
                 $.each(self.ColorArray(), function (index, elem) {
@@ -325,6 +360,47 @@
                 };
                 iterator();
             }
+
+            
+			self.SaveColor = function() {
+			    var record = self.NewColorInput();
+				flow.exec(
+					function() {
+						if ($.trim(record.EditName()) == "" || $.trim(record.EditSEO()) == "" || 
+                            $.trim(record.EditSkuCode()) == "")
+                        {
+                        	$("#validation").show();
+							return;
+						}
+
+                        if (record.ShowUpload() == true && record.ImageBundleExternalId() == null) {
+                        	$("#validation").show();
+							return;
+                        }
+
+                        if (record.ShowUpload() == false) {
+                            var farbtasticColor = GetSelectedColor();                
+                            var color = { Rgb: farbtasticColor, Width: "150", Height: "150" };
+                            self.ProductServiceAdapter.CreateBitmap(color, this);
+                        }
+                        else {
+                            this( { ExternalId: record.ImageBundleExternalId() });
+                        }
+                    },
+                    function(data) {
+                        console.log("Image Bundle Data: " + data);
+                        record.ImageBundleExternalId(data.ExternalId);
+                        return;
+
+                        var serverRecord = ColorToServerJson(record);
+						self.ProductServiceAdapter.Insert(serverRecord, this);                        
+					},
+					function(data) {                        
+                        self.GlideToParentView();
+					}
+				);
+			}
+			
 
             self.SelectColor = function (data) {
                 data.Selected(!data.Selected());
@@ -383,6 +459,8 @@
             self.SelectedProduct = ko.observable(null);
             self.SelectedProductColors = ko.observableArray();
             self.SelectedImage = ko.observableArray();
+
+            self.NewColorInput = ko.observable(null);
 
             self.ActiveView = ko.observable({ Level: "Parent", Template: "Search" });
             self.ModalViewModel = ko.observable({ Template: null });
@@ -496,14 +574,21 @@
                         </ul
                     </div>
 		        </div>
-
-                <div class="row">
+                
+                <div class="row" data-bind="if: $root.ActiveView().Template == 'AddColorsFromList'">
                     <div class="span7" style="padding-left:20px;">
                         <p class="lead">Select Colors to add to your Product</p>
                     </div>
+
                     <div class="span5" style="text-align:right;">
 					    <a class="btn btn-inverse" href="#" data-bind="click: $root.GlideToProductView"><i class="icon-remove icon-white"></i> Cancel</a>                    
 					    <a class="btn btn-primary" href="#" data-bind="click: $root.AddColorsToProduct"><i class="icon-ok icon-white"></i> Add Colors</a>
+                    </div>
+                </div>
+
+                <div class="row" data-bind="if: $root.ActiveView().Template == 'CreateColor'">
+                    <div class="span12" style="padding-left:20px;">
+                        <p class="lead">Create a Color to add to your Product</p>
                     </div>
                 </div>
 		    </div>
@@ -742,6 +827,73 @@
         </form>
     </div>
     </script>
+
+    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR CREATE COLOR TAB -->
+    <script type="text/html" id="Sub-Child-Editor-CreateColor">
+        <div style="margin-top:70px" data-bind="with: $root.NewColorInput">
+        <form>
+			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
+                <strong>Please enter all the required fields.</strong>
+			</div>
+
+            <div class="row">
+                <div class="span3">
+                    <div data-bind="if: $data.ShowUpload">
+                        <ul class="nav nav-pills">
+                            <li class="active">
+                                <a href="#">Upload Swatch</a>
+                            </li>
+                            <li>
+                                <a href="#" data-bind="click: $root.PickColorToggle">Pick Color</a>
+                            </li>
+                        </ul>
+
+                        <label>Color Swatch</label>
+                        <div style="margin-bottom:20px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId(), LightboxSuffixId: 'Child' } }">
+			            </div>
+			            <div style="margin-bottom:20px; margin-top:20px;" data-bind="template: { name: 'Fine-Uploader', data: $data }">
+			            </div>
+                    </div>
+
+                    <div data-bind="ifnot: $data.ShowUpload">
+                        <ul class="nav nav-pills">
+                            <li>
+                                <a href="#" data-bind="click: $root.UploadSwatchToggle">Upload Swatch</a>
+                            </li>
+                            <li class="active">
+                                <a href="#">Pick Color</a>
+                            </li>
+                        </ul>
+
+                        <div id="color-picker" data-bind="template: { name: 'Color-Picker' }"></div>    
+                    </div>
+                  </div>
+                <div class="span9">
+                    <div class="row">
+                        <div class="span3">
+                            <label>Color Name<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Color Name" data-bind="value: $data.EditName" maxlength="50" />
+                            </label>
+                        </div>
+                        <div class="span3">
+                            <label>SKU Code<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Sku Code" data-bind="value: $data.EditSkuCode" maxlength="6" />
+				            </label>
+                        </div>
+                        <div class="span3">
+                            <label>SEO<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter SEO Tag" data-bind="value: $data.EditSEO" maxlength="50" />
+				            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="span9" style="text-align:right;">
+					<a class="btn btn-inverse" href="#" data-bind="click: $root.GlideToParentView"><i class="icon-remove icon-white"></i> Cancel</a>                    
+					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveColor"><i class="icon-ok icon-white"></i> Save</a>
+                </div>
+            </div>
+            
+        </form>
+        </div>
+	</script>
+
 
     <!-- KNOCKOUT TEMPLATE - CHILD EDITOR IMAGES TAB -->
     <script type="text/html" id="Child-Editor-Images">
