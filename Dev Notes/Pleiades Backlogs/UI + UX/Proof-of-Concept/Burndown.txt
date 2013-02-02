@@ -423,6 +423,7 @@ Finished Save Logic
 ------------------
 - Refactored Views to greatly, greatly Gliding logic => DONE
 
+
 1/29/2013 1.75 Hours
 -------------------
 - Product Colors work in progress => DONE
@@ -431,11 +432,18 @@ Finished Save Logic
 ---------
 1.0 Hours
 
+2/1/2013 1.5 Hours
+------------------
+=> Colors => TODO - EXECUTE DESIGN - DONE
+AddColorsToProduct DONE
+DeleteColorFromProduct DONE
+SelectColor DONE
+BIG QUESTION => how to associate Colors to Images... easily...? => DONE
 
-productColorId
 
-he DELETE statement conflicted with the REFERENCE constraint \"FK_ProductImages_ProductColors_Color_Id\". The conflict occurred in database \"CommerceUI\", table \"dbo.ProductImages\", column 'Color_Id'.\r\nThe statement has been terminated."}
-
+2/2/2013
+--------
+- TRIPLE CHECK YOUR BACKUPS, DUDE => DONE
 
 
 

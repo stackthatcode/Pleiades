@@ -3,8 +3,8 @@ FRONTRANGE - HOTZONE
 
 Front Range
 -----------
-- TRIPLE CHECK YOUR BACKUPS, DUDE => TODO
 - Post Mortem - inventory *everything* from UI => IN PROGRESS
+- TextPad + Resharper => TODO
 
 ...work...
 
@@ -12,17 +12,14 @@ Front Range
 Product Editor
 ~~~~~~~~~~~~~~
 - Start Designing Product Screen => IN PROGRESS
-=> Colors => TODO - EXECUTE DESIGN - IN PROGRESS
+
+- Finish Add Color => TODO
 => Images => TODO - EXECUTE DESIGN
+
+- Create Screen for ordering Colors & Images
 - Change out the Back Buttons => IN PROGRESS
+- Fix the Scroll Tracker - take it to the top => TODO
 
-
-AddColorsToProduct +function
-DeleteColorFromProduct +function
-SelectColor +function
-
-
-BIG QUESTION => how to associate Colors to Images... easily...? => DRAG AND DROP, BIYATCH => YES, DON'T CALL ME A BITCH
 http://www.ww2helmets.com/products-page/checkout/ => Hmmmmm...?????
 
 
