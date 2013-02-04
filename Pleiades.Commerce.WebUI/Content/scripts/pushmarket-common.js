@@ -91,7 +91,7 @@ function DeepClone(input) {
 	throw new Error("Unable to copy input! Its type isn't supported.");
 }
 
-function CrossCuttingUI(containerDiv) {
+function CommonUI(containerDiv) {
 	var self = this;
 
 	self.Error = function() {
@@ -102,7 +102,7 @@ function CrossCuttingUI(containerDiv) {
 	self.ShowLoading = function() {
 		$("#spinner-layer").show();
 	}
-			
+	
 	self.HideLoading = function() {
 		$("#spinner-layer").hide();
 	}

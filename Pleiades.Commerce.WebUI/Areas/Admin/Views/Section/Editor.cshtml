@@ -119,7 +119,7 @@
 		}
 		
 		$(function() {
-            var crosscuttingUI = new CrossCuttingUI();
+            var crosscuttingUI = new CommonUI();
             var serviceAdapter = new SectionService(crosscuttingUI.Error, crosscuttingUI.ShowLoading, crosscuttingUI.HideLoading);
 			var model = new SectionViewModel(serviceAdapter);
 

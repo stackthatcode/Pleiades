@@ -136,7 +136,7 @@
 					},
 					function() {
 						// animate back
-						self.CrossCuttingUI.ScrollToIdTracker(parentRecordId);
+						self.CommonUI.ScrollToIdTracker(parentRecordId);
 					}
 				);
 			}
@@ -256,7 +256,7 @@
 
 			// Initialization
 			self.ServiceAdapter = serviceAdapter;
-            self.CrossCuttingUI = crossCuttingUI;
+            self.CommonUI = crossCuttingUI;
             self.Glider = gliderWidget;
 
 			// load ko.observables into view model				
@@ -273,7 +273,7 @@
 		}
 		
 		$(function() {
-            var crossCuttingUI = new CrossCuttingUI("#gliding-container");
+            var crossCuttingUI = new CommonUI("#gliding-container");
             var gliderWidget = new GliderWidget("#gliding-container", "#parent-editor", "#child-editor");			
             var serviceAdapter = new SizeService(crossCuttingUI.Error, crossCuttingUI.ShowLoading, crossCuttingUI.HideLoading);
 			var model = new SizeViewModel(serviceAdapter, crossCuttingUI, gliderWidget);

@@ -84,21 +84,21 @@
         var ToMoney = function(input) {
             return "$" + input.toFixed(2);
         }
-	</script>
+	</script>    
     
-    <!-- ProductColorViewModel -->
+    <!-- Color View Model -->
     <script type="text/javascript">
-        var ProductColorViewModel = function (productServiceAdapter, masterViewModel)
-            var self = this;
-            self.MasterViewModel =  masterViewModel;
-            self.ProductServiceAdapter = masterViewModel.ServiceAdapter;
+        var ColorFunctions = function (rootModel) {
+            var self = rootModel;
+
             self.SelectedProductColors = ko.observableArray();
             self.NewColorInput = ko.observable(null);
+            self.ColorArray = ko.observableArray();
 
             self.AddColorFromList = function () {
                 flow.exec(
                     function () {
-                        self.ProductServiceAdapter.ColorsList(this);
+                        self.ProductService.ColorsList(this);
                     },
                     function (data) {
                         self.ColorArray(data);
@@ -126,7 +126,7 @@
                     },
                     function () {
                         self.ActiveView({ Level: "Sub-Child", Template: "CreateColor" });
-                        var fileUploader = new CommerceFileUploader(this.CrossCuttingUI, self.OnColorUpload);
+                        var fileUploader = new CommerceFileUploader(this.CommonUI, self.OnColorUpload);
                     }
                 );
             }
@@ -172,7 +172,7 @@
                     }
 
                     var nextColorId = colorIdList.pop();
-                    self.ProductServiceAdapter.AddProductColor(self.SelectedProduct().Id(), nextColorId, iterator);
+                    self.ProductService.AddProductColor(self.SelectedProduct().Id(), nextColorId, iterator);
                 };
                 iterator();
             }
@@ -180,7 +180,7 @@
             self.GlideBackToColorsTabWithRefresh = function() {
                 flow.exec(
                     function () {
-                        self.ProductServiceAdapter.Colors(self.SelectedProduct().Id(), this);
+                        self.ProductService.Colors(self.SelectedProduct().Id(), this);
                     },
                     function (colors) {
                         self.SelectedProductColors(colors);
@@ -212,7 +212,7 @@
                         if (colorInput.ShowUpload() == false) {
                             var farbtasticColor = GetSelectedColor();                
                             var createColorJson = { Rgb: farbtasticColor, Width: "150", Height: "150" };
-                            self.ProductServiceAdapter.CreateBitmap(createColorJson, this);
+                            self.ProductService.CreateBitmap(createColorJson, this);
                         }
                         else {
                             this( { ExternalId: colorInput.ImageBundleExternalId() });
@@ -230,10 +230,10 @@
                             ImageBundleExternalId: data.ExternalId, 
                         };
 
-						self.ProductServiceAdapter.AddColorToColorList(serverRecord, this);                        
+						self.ProductService.AddColorToColorList(serverRecord, this);                        
 					},
 					function(data) {
-                        self.ProductServiceAdapter.AddProductColor(self.SelectedProduct().Id(), data.Id, this);
+                        self.ProductService.AddProductColor(self.SelectedProduct().Id(), data.Id, this);
                     },
 					function() {
                         self.GlideBackToColorsTabWithRefresh();
@@ -255,7 +255,7 @@
                 flow.exec(
                     function () {
                         $('#modal-delete').modal('hide');
-                        self.ProductServiceAdapter.DeleteProductColor(self.SelectedProduct().Id(), color.Id, this);
+                        self.ProductService.DeleteProductColor(self.SelectedProduct().Id(), color.Id, this);
                     },
                     function (data) {
                         self.SelectedProductColors.remove(color);
@@ -265,85 +265,19 @@
             }
         }
 	</script>
-
-    <!-- ProductViewModel -->
+    
+    <!-- List Model -->
     <script type="text/javascript">
-        var ProductViewModel = function (productServiceAdapter, masterViewModel)
-            var self = this;
-            self.MasterViewModel =  masterViewModel;
-            self.ProductServiceAdapter = masterViewModel.ServiceAdapter;
-
-            // asynchronous, service-bound operations            
-            self.EditProduct = function (product) {
-                flow.exec(
-					function () {
-					    self.SelectedIndex = self.SearchData.indexOf(product);
-					    self.ProductServiceAdapter.Info(product.Id, this);
-					},
-					function (product) {
-					    var knockedoutData = ProductInfoToKnockout(product);
-					    self.SelectedProduct(knockedoutData);
-					    self.ParentGlider.GlideToChild(this);
-					},
-                    function () {
-                        self.InfoTabClick();
-                    }
-				);
-            }
-
-            self.ColorsTabClick = function () {
-                flow.exec(
-                    function () {
-                        self.ProductServiceAdapter.Colors(self.SelectedProduct().Id(), this);
-                    },
-                    function (colors) {
-                        self.SelectedProductColors(colors);
-                        self.ActiveView({ Level: "Child", Template: "Colors" });
-                    }
-                );
-            }
-
-            self.InfoTabClick = function () {
-                self.ActiveView({ Level: "Child", Template: "Info" });
-            }
-
-            self.ImagesTabClick = function () {
-                self.ActiveView({ Level: "Child", Template: "Images" });
-            }
-
-            self.AddProduct = function () {
-                flow.exec(
-                    function () {
-                        var knockedoutData = ProductInfoToKnockout({});
-                        self.SelectedProduct(knockedoutData);
-                        self.ParentGlider.GlideToChild(this);
-                    },
-                    function () {
-                        self.InfoTabClick();
-                    }
-                );
-            }
-
-            self.GlideToSearchView = function () {
-                var recordId = self.SelectedProduct().Id();
-                flow.exec(
-                    function () {
-                        $("#glideToParent").hide();
-                        self.ParentGlider.GlideToParent(this);
-                    },
-					function () {
-					    self.ActiveView({ Level: "Parent", Template: "Search" });
-					    self.SelectedProduct(null);
-					    self.SelectedIndex = null;
-					    self.CrossCuttingUI.ScrollToIdTracker(recordId);
-					}
-				);
-            }
+        var ListModel = function (rootModel) {
+            var self = rootModel;
+            self.BrandArray = ko.observableArray();
+            self.CategoryArray = ko.observableArray();
+            self.SizeGroupArray = ko.observableArray();
 
             self.RetrieveCategoriesList = function (callback) {
                 flow.exec(
                     function () {
-                        self.ProductServiceAdapter.Categories(this);
+                        self.ProductService.Categories(this);
                     },
                     function (data) {
                         self.CategoryArray.removeAll();
@@ -364,7 +298,7 @@
             self.RetrieveBrandsList = function (callback) {
                 flow.exec(
                     function () {
-                        self.ProductServiceAdapter.Brands(this);
+                        self.ProductService.Brands(this);
                     },
                     function (data) {
                         self.BrandArray.removeAll();
@@ -384,7 +318,7 @@
             self.RetrieveSizeGroupsList = function (callback) {
                 flow.exec(
                     function () {
-                        self.ProductServiceAdapter.SizeGroups(this);
+                        self.ProductService.SizeGroups(this);
                     },
                     function (data) {
                         self.SizeGroupArray.removeAll();
@@ -400,6 +334,74 @@
                     }
                 );
             }
+        }
+    </script>
+
+    <!-- Search View Model -->
+    <script type="text/javascript">
+        var SearchFunctions = function (rootModel) {
+            var self = rootModel;
+
+            // asynchronous, service-bound operations            
+            self.EditProduct = function (product) {
+                flow.exec(
+					function () {
+					    self.SelectedIndex = self.SearchData.indexOf(product);
+					    self.ProductService.Info(product.Id, this);
+					},
+					function (product) {
+					    var knockedoutData = ProductInfoToKnockout(product);
+					    self.SelectedProduct(knockedoutData);
+					    self.ParentGlider.GlideToChild(this);
+					},
+                    function () {
+                        self.InfoTabClick();
+                    }
+				);
+            }
+
+            self.AddProduct = function () {
+                flow.exec(
+                    function () {
+                        var knockedoutData = ProductInfoToKnockout({});
+                        self.SelectedProduct(knockedoutData);
+                        self.ParentGlider.GlideToChild(this);
+                    },
+                    function () {
+                        self.InfoTabClick();
+                    }
+                );
+            }
+
+            self.SearchClick = function () {
+                flow.exec(
+                    function () {
+                        var brandId = $("#SearchBrand").val();
+                        var categoryId = $("#SearchCategory").val();
+                        var searchText = $("#SearchText").val();
+                        self.ProductService.Search(brandId, categoryId, searchText, this);
+                    },
+                    function (data) {
+                        self.SearchData(data);
+                    }
+                );
+            }
+
+            self.GlideToSearchView = function () {
+                var recordId = self.SelectedProduct().Id();
+                flow.exec(
+                    function () {
+                        $("#glideToParent").hide();
+                        self.ParentGlider.GlideToParent(this);
+                    },
+					function () {
+					    self.ActiveView({ Level: "Parent", Template: "Search" });
+					    self.SelectedProduct(null);
+					    self.SelectedIndex = null;
+					    self.CommonUI.ScrollToIdTracker(recordId);
+					}
+				);
+            }
 
             self.DeleteProduct = function (product) {
                 self.ModalViewModel({ Template: "Modal-Dialog-Product", Data: product });
@@ -411,26 +413,12 @@
                 flow.exec(
                     function () {
                         $('#modal-delete').modal('hide');
-                        self.ServiceAdapter.Delete(record, this);
+                        self.ProductService.Delete(record, this);
                     },
                     function (data) {
                         self.Data.remove(function (item) { return item.Id == record.Id; });
                         self.ModalViewModel(null);
                     });
-            }
-
-            self.SearchClick = function () {
-                flow.exec(
-                    function () {
-                        var brandId = $("#SearchBrand").val();
-                        var categoryId = $("#SearchCategory").val();
-                        var searchText = $("#SearchText").val();
-                        self.ProductServiceAdapter.Search(brandId, categoryId, searchText, this);
-                    },
-                    function (data) {
-                        self.SearchData(data);
-                    }
-                );
             }
 
             self.SaveClick = function () {
@@ -463,60 +451,80 @@
 
                 flow.exec(
                     function () {
-                        self.ProductServiceAdapter.Update(ProductInfoToServerJson(product), this);
+                        self.ProductService.Update(ProductInfoToServerJson(product), this);
                     });
 
                 // TODO: what to do here?
                 //self.SearchData.replace(self.SearchData()[self.SelectedIndex], product);
             }
 
-            // load ko.observables into view model
-            self.SizeGroupArray = ko.observableArray();
-            self.BrandArray = ko.observableArray();
+            return self;
+        }
+    </script> 
+       
+    <!-- Root View Model -->
+    <script type="text/javascript">
+        var RootModel = function () {
+            var self = this;
+
+            self.ActiveView = ko.observable({ Level: "Parent", Template: "Search" });
+            self.ModalViewModel = ko.observable({ Data: null, Template: null });
+
+            self.CommonUI = new CommonUI("#gliding-container");
+            self.ParentGlider = new GliderWidget("#gliding-container", "#parent-editor", "#child-editor");
+            self.ChildGlider = new GliderWidget("#gliding-container", "#child-editor", "#sub-child-editor");
+            self.GlidingContainerStyle = ko.computed(
+                function () {
+                    return self.ActiveView().Level == "Parent" ? "top:180px;" : "top:165px;";
+                }, this);
+
+            self.ProductService = new ProductService(self.CommonUI.Error, self.CommonUI.ShowLoading, self.CommonUI.HideLoading);
+
+            SearchFunctions(self);
+            ListModel(self);
+            ColorFunctions(self);
+            
+            self.RetrieveCategoriesList();
+            self.RetrieveBrandsList();
+            self.RetrieveSizeGroupsList();
+
             self.SearchData = ko.observableArray();
-            self.CategoryArray = ko.observableArray();
 
+            // Move these to the Product View Model
             self.SelectedProduct = ko.observable(null);
-            self.SelectedImage = ko.observableArray();
-
-            // ko.computed's
             self.SelectedProductName = ko.computed(
                 function () {
                     return self.SelectedProduct() && self.SelectedProduct().SkuCode() || "(New Product)"
                 }, this);
 
-            self.RetrieveCategoriesList();
-            self.RetrieveBrandsList();
-            self.RetrieveSizeGroupsList();
+            // Tab Functions
+            self.ColorsTabClick = function () {
+                flow.exec(
+                    function () {
+                        self.ProductService.Colors(self.SelectedProduct().Id(), this);
+                    },
+                    function (colors) {
+                        self.SelectedProductColors(colors);
+                        self.ActiveView({ Level: "Child", Template: "Colors" });
+                    }
+                );
+            }
+
+            self.InfoTabClick = function () {
+                self.ActiveView({ Level: "Child", Template: "Info" });
+            }
+
+            self.ImagesTabClick = function () {
+                self.ActiveView({ Level: "Child", Template: "Images" });
+            }
         }
     </script>
-    
-    <!-- Inialization -->
+
+    <!-- Initialization -->
     <script type="text/javascript">
         $(function () {
-            var crosscuttingUI = new CrossCuttingUI("#gliding-container");
-            var parentGliderWidget = new GliderWidget("#gliding-container", "#parent-editor", "#child-editor");
-            var childGliderWidget = new GliderWidget("#gliding-container", "#child-editor", "#sub-child-editor");
-            var serviceAdapter = new ProductService(crosscuttingUI.Error, crosscuttingUI.ShowLoading, crosscuttingUI.HideLoading);
-            
-            var masterViewModel = {
-                ActiveViewModel: ko.observable({ Template: null }),
-                ModalViewModel: ko.observable({ Level: "Parent", Template: "Search" }),
-                ParentViewModel: ko.observable(productViewModel),
-                ChildViewModel: ko.observable(null),
-                GlidingContainerStyle: ko.computed(
-                    function () {
-                        return activeViewModel().Level == "Parent" ? "top:180px;" : "top:165px;";
-                    }, this), 
-                CrossCuttingUI: crosscuttingUI,
-                ParentGliderWidget: parentGliderWidget,
-                ChildGliderWidget: childGliderWidget,
-                ServiceAdapter: new ProductService(crosscuttingUI.Error, crosscuttingUI.ShowLoading, crosscuttingUI.HideLoading),            
-            };
-
-            var productViewModel = new ProductViewModel(serviceAdapter, masterViewModel);
-            var colorViewModel = new ProductColorViewModel(serviceAdapter, masterViewModel);
-            ko.applyBindings(masterViewModel);
+            var rootModel = new RootModel();
+            ko.applyBindings(rootModel);
         });
 	</script>
 }
@@ -558,7 +566,7 @@
 		    </div>
         </div>
     </script>
-	
+
 	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE PRODUCT -->
 	<script type="text/html" id="Top-Workspace-Child">
         <div class="workspace-heading" style="height:105px;">
@@ -620,14 +628,14 @@
 		</div>
 	</script>
 	
-	<!-- KNOCKOUT TEMPLATE - PARENT EDITOR (SEARCH) - always works with $root.ParentViewModel AKA SEARCH -->
-	<script type="text/html" id="Parent-Editor">
-		<div style="margin-top:20px; text-align:center;" class="alert alert-info" data-bind="visible: $data.SearchData().length == 0">
+    <!-- KNOCKOUT TEMPLATE - PARENT EDITOR SEARCH -->
+	<script type="text/html" id="Parent-Editor-Search">
+		<div style="margin-top:20px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SearchData().length == 0">
 			<strong>There are no Products in your current search.  Click "Search" to run a search or click "Add New Product" to create a new one.</strong>  
 		</div>
 		
-		<table id="parent-editor-table" class="table table-hover" data-bind="visible: $data.SearchData().length > 0">
-		<tbody data-bind="foreach: $data.SearchData()">
+		<table id="parent-editor-table" class="table table-hover" data-bind="visible: $root.SearchData().length > 0">
+		<tbody data-bind="foreach: $root.SearchData()">
 			<tr>
 			<td>
 				<span class="span2">
@@ -656,10 +664,10 @@
 		</tbody>
 		</table>
 	</script>
-	
+
 	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR INFO TAB - always works with $root.ProductInfoViewModel -->
 	<script type="text/html" id="Child-Editor-Info">
-        <div style="margin-top:20px">
+        <div style="margin-top:20px" data-bind="with: $root.SelectedProduct()">
         <form>
             <div class="row">
                 <div class="span9">
@@ -667,18 +675,18 @@
                         <li class="active">
                             <a href="#">Information</a>
                         </li>
-                        <li data-bind="if: $data.SelectedProduct().Id()">
-                            <a href="#" data-bind="click: $data.ColorsTabClick">Colors</a>
+                        <li data-bind="if: $data.Id()">
+                            <a href="#" data-bind="click: $root.ColorsTabClick">Colors</a>
                         </li>
-                        <li data-bind="if: $data.SelectedProduct().Id()">
-                            <a href="#" data-bind="click: $data.ImagesTabClick">Images</a>
+                        <li data-bind="if: $data.Id()">
+                            <a href="#" data-bind="click: $root.ImagesTabClick">Images</a>
                         </li>
                     </ul>
                 </div>
 
                 <div class="span3" style="text-align:right;">
-					<a class="btn btn-inverse" href="#" data-bind="click: $data.GlideToSearchView"><i class="icon-remove icon-white"></i> Cancel</a>                    
-					<a class="btn btn-primary" href="#" data-bind="click: $data.SaveClick"><i class="icon-ok icon-white"></i> Save</a>
+					<a class="btn btn-inverse" href="#" data-bind="click: $root.GlideToSearchView"><i class="icon-remove icon-white"></i> Cancel</a>                    
+					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveClick"><i class="icon-ok icon-white"></i> Save</a>
                 </div>
             </div>
 
@@ -763,7 +771,7 @@
         </div>
 	</script>
 	
-	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB - always works with $root.ProductColorViewModel -->
+	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB - always works with $root.ProductColorFunctions -->
     <script type="text/html" id="Child-Editor-Colors">
     <div style="margin-top:20px">
         <form>
@@ -814,7 +822,7 @@
     </div>
     </script>
     
-    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB - always works with $root.ProductColorViewModel -->
+    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB - always works with $root.ProductColorFunctions -->
     <script type="text/html" id="Sub-Child-Editor-AddColorsFromList">
     <div>
         <form>    
@@ -853,7 +861,7 @@
     </div>
     </script>
 
-    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR CREATE COLOR TAB - always works with $root.ProductColorViewModel -->
+    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR CREATE COLOR TAB - always works with $root.ProductColorFunctions -->
     <script type="text/html" id="Sub-Child-Editor-CreateColor">
         <div style="margin-top:70px" data-bind="with: $root.NewColorInput">
         <form>
@@ -983,33 +991,20 @@
 }
 
 @section _Body {
-    <div data-bind="if: $root.ActiveViewModel().Level == 'Parent'">
-        <div class="workspace-heading-parent" data-bind="template: { name: 'Top-Workspace-Parent', data: $root.ParentViewModel }">
-	    </div>
+    <div class="workspace-heading-parent" data-bind="template: { name: 'Top-Workspace-' + $root.ActiveView().Level }">
 	</div>
-    <div data-bind="if: $root.ActiveViewModel().Level == 'Child'">
-        <div class="workspace-heading-parent" data-bind="template: { name: 'Top-Workspace-Child', data: $root.ChildViewModel }">
-	    </div>
-	</div>
-    <div data-bind="if: $root.ActiveViewModel().Level == 'Sub-Child'">
-        <div class="workspace-heading-parent" data-bind="template: { name: 'Top-Workspace-Sub-Child', data: $root.ChildViewModel }">
-	    </div>
-	</div>
-
     
 	<div id="gliding-container" class="container" data-bind="attr: { style: $root.GlidingContainerStyle }">
-		<div id="parent-editor" data-bind="if: $root.ActiveViewModel().Level == 'Parent'">
-			<div style="margin-bottom:200px;" data-bind="template: { name: 'Parent-Editor', data: $root.ParentViewModel }">
+		<div id="parent-editor" data-bind="if: $root.ActiveView().Level == 'Parent'">
+			<div style="margin-bottom:200px;" data-bind="template: { name: 'Parent-Editor-' + $root.ActiveView().Template }">
+			</div>
+		</div>		
+		<div id="child-editor" data-bind="if: $root.ActiveView().Level == 'Child'">
+			<div style="margin-bottom:200px;" data-bind="template: { name: 'Child-Editor-' + $root.ActiveView().Template  }">
 			</div>
 		</div>
-		
-		<div id="child-editor" data-bind="if: $root.ActiveViewModel().Level == 'Child'">
-			<div style="margin-bottom:200px;" data-bind="template: { name: 'Child-Editor-' + $root.ActiveView().Template, data: $root.ChildViewModel() }">
-			</div>
-		</div>
-
-        <div id="sub-child-editor" data-bind="if: $root.ActiveViewModel().Level == 'Sub-Child'">
-			<div style="margin-bottom:200px;" data-bind="template: { name: 'Sub-Child-Editor-' + $root.ActiveView().Template, data: $root.SelectedProduct() }">
+        <div id="sub-child-editor" data-bind="if: $root.ActiveView().Level == 'Sub-Child'">
+			<div style="margin-bottom:200px;" data-bind="template: { name: 'Sub-Child-Editor-' + $root.ActiveView().Template }">
 			</div>
 		</div>
     </div>

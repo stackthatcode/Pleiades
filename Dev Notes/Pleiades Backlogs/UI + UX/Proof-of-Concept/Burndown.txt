@@ -440,30 +440,26 @@ DeleteColorFromProduct DONE
 SelectColor DONE
 BIG QUESTION => how to associate Colors to Images... easily...? => DONE
 
-
-2/2/2013
---------
+2/2/2013 1.5 Hours
+------------------
 - TRIPLE CHECK YOUR BACKUPS, DUDE => DONE
+- Finished coding Colors
 
+2/3/2013 3.0 Hours
+------------------
+- Finished major refactoring of Product Screen - which was a failure: back to hard-coding => DONE
 
-
-$root.ShowUpload
-$data.ImageBundleExternalId(), 
-$data.EditName
-$data.EditSkuCode
-$data.EditSEO 
-
- 
-name: 'Fine-Uploader', data: $root }"
-
-$root.PickColorToggle = method
-$root.UploadSwatchToggle = method
-
-$root.GlideToParentView = method
-$root.SaveColor = method
-
-
-
-
+backlog cleaning
+----------------
+- http://fluentvalidation.codeplex.com/ => TODO
+* Fix the web.config with assembly references => IN PROGRESS
+- How to deal with LastUpdated field => IN PROGRESS
+- Copy jqia2.support.js functions
+- EntityFramework - how to perform basic CRUD stuff - Damn Brutha! => TODO
+- EntityFramework Transactions and ASP.NET MVC Concurrency => TODO
+- Start adding Logging stuff - you won't be sorry! => TODO
+- RESEARCH a lighter-weight ORM => TODO
+- TASK => cross-browser test Animation Stuff, mayhaps introduce method chaining => PENDING EVAL
+- Review order of Modal Ok/Cancel => PENDING EVAL
 
 

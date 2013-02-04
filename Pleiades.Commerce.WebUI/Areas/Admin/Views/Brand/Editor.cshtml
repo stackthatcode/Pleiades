@@ -46,7 +46,7 @@
                         self.SelectedIndex = -1;
 						self.SelectedRecord(knockedoutData);
 						self.Glider.GlideToChild(this);
-                        var fileUploader = new CommerceFileUploader(this.CrossCuttingUI, self.OnFileUpload);
+                        var fileUploader = new CommerceFileUploader(this.CommonUI, self.OnFileUpload);
 					}
 				);
 			}
@@ -62,7 +62,7 @@
 						var knockedoutData = BrandToKnockout(data);
 						self.SelectedRecord(knockedoutData);
                         self.Glider.GlideToChild();
-                        var fileUploader = new CommerceFileUploader(this.CrossCuttingUI, self.OnFileUpload);
+                        var fileUploader = new CommerceFileUploader(this.CommonUI, self.OnFileUpload);
 					}
 				);
 			}
@@ -77,7 +77,7 @@
 					function() {
                         self.SelectedRecord(null);
                         self.SelectedIndex = null;
-                        self.CrossCuttingUI.ScrollToIdTracker(recordId);
+                        self.CommonUI.ScrollToIdTracker(recordId);
 					}
 				);
 			}
@@ -154,7 +154,7 @@
             
 			// Initialization
 			self.ServiceAdapter = serviceAdapter;
-            self.CrossCuttingUI = crossCuttingUI;
+            self.CommonUI = crossCuttingUI;
             self.Glider = gliderWidget;
             
 			// load ko.observables into view model
@@ -168,7 +168,7 @@
 		}
 		
 		$(function() {
-            var crosscuttingUI = new CrossCuttingUI("#gliding-container");
+            var crosscuttingUI = new CommonUI("#gliding-container");
             var gliderWidget = new GliderWidget("#gliding-container", "#parent-editor", "#child-editor");			
             var serviceAdapter = new BrandService(crosscuttingUI.Error, crosscuttingUI.ShowLoading, crosscuttingUI.HideLoading);
 			var model = new BrandViewModel(serviceAdapter, crosscuttingUI, gliderWidget);

@@ -23,7 +23,7 @@
 	    }
 
 	    $(function () {
-	        var crosscuttingUI = new CrossCuttingUI();
+	        var crosscuttingUI = new CommonUI();
 	        var model = new UploadViewModel();
 	        ko.applyBindings(model);
 	        var fileUploader = new CommerceFileUploader(crosscuttingUI.Error, model.OnFileUpload);

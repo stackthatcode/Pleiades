@@ -13,15 +13,19 @@ Product Editor
 ~~~~~~~~~~~~~~
 - Start Designing Product Screen => IN PROGRESS
 
-- Finish Add Color => TODO
 => Images => TODO - EXECUTE DESIGN
+=> Screen for ordering Colors & Images => TODO
 
-- Create Screen for ordering Colors & Images
-- Change out the Back Buttons => IN PROGRESS
+- Update Product in Search after Adding & Editing
 - Fix the Scroll Tracker - take it to the top => TODO
+- Change out the Back Buttons => IN PROGRESS
 
+Please Research
+~~~~~~~~~~~~~~~
+https://github.com/danderson00/knockout.composite/tree/master/Examples
+http://news.ycombinator.com/item?id=3265625
+http://twitter.github.com/flight/
 http://www.ww2helmets.com/products-page/checkout/ => Hmmmmm...?????
-
 
 Backlog
 -------
@@ -40,10 +44,6 @@ Backlog
 - Donate $20 to FineUploader upon successful integration => TODO
 - ReturnUrl on Login
 
-
-
-
-
 ARCHITECTURAL REVIEW 1/24/2013
 ------------------------------
 - Flatten the Membership Provider object graph stuff
@@ -59,13 +59,11 @@ ARCHITECTURAL REVIEW 1/24/2013
 - Move ProductSearchRepository stuff into the Controller.  Yup!  Try it!
 - Compbine Domain and Persist assemblies.  They're not separate, dude!!!
 
-
 *** TODO: what is the function of "nav-collapse collapse"?
 *** MANDATE => research HOW KnockoutJS actually works internally
 *** MANDATE => more play with Autofac 
 - http://nblumhardt.com/2011/01/an-autofac-lifetime-primer/
 - http://code.google.com/p/autofac/wiki/MvcIntegration
-
 
 Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/27/2013
 ------------------------------------------------------------
@@ -80,35 +78,24 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/27/2013
 
 - Product Search & Editor => IN PROGRESS
 - Barebones Console App => IN PROGRESS
+- Server Logging => TODO
 
 - SKU Generator => UPDATE: shouldn't this be automatic...? => TODO
 - Order Search & Editor => TODO
 - Customer Search & Editor => TODO
 - Email Sending Engine => TODO
-- Server Logging => TODO
-
 - Basic Analytic Tracker - Traffic Source, Landing Page => WORTH HASHING OUT
 
 
 
-
-Middle Range Log
-----------------
-=> How to include all these dependencies...? => We'll see
-=> Domain Modeling and Write User Stories - after reading through Shopify's API docs => TODO
-=> Where did I put my fonts...?  What's a good resource for typography and fonts...? => TODO
-- TODO KNOCKOUTJS: difference between http://knockoutjs.com/documentation/extenders.html AND custom binders
-
-  
 MORE BIG FISH
 -------------
-=> Store Front Design - Q1/2013
+=> Store Front Design - 3/1/2013
 => Payment Processing Options, API's etc. => IN PROGRESS
 => Custom Caching solution...?
 => Find a good resource for Typography, Fonts, etc. => TODO
 => http://news.ycombinator.com/item?id=4669866 => IMPORTANT
 => Enable for Azure => TODO
-
 
 PENDING FEATURE BACKLOG
 -----------------------
@@ -123,17 +110,12 @@ PENDING FEATURE BACKLOG
 NOTES ON THE HEGEMONY OF UNREASON (STATIC MEMBERSHIP)
 - UpdateSelf() invocations... this odd function is called... with tons of exception checking... as if, there are not transactions...?  Why don't you throw
 - What's the rigamorale about Updating shit...?  Why not try it and if it fails, throw an Exception???
-
-- Review order of Modal Ok/Cancel => PENDING EVAL
 - Show the number of Products under Category => PENDING EVAL
 - Modify Category Editor design i.e. Number of Categories, Products, etc. => PENDING EVAL
 - Rendering Adjustments for long Category Names et. al. => PENDING EVAL
-- TASK => cross-browser test Animation Stuff, mayhaps introduce method chaining => PENDING EVAL
 - Add Modal Pop-up - "Are You Sure?" Category Parent Change, etc. => PENDING EVAL
 - Add constraints on the number of records we can add => PENDING EVAL
 - View Products => Hot Link to a RESTful URL - TODO => PENDING EVAL
-
-
 
 E-Commerce API's & Payment Processors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -147,22 +129,22 @@ E-Commerce API's & Payment Processors
 - Wickedfire look-up payment processors...? => TODO
 - Authorize.NET
 
-
-
 Research Backlog
 ----------------
+----------------
+=> How to include all these dependencies...? => We'll see
+=> Domain Modeling and Write User Stories - after reading through Shopify's API docs => TODO
+=> Where did I put my fonts...?  What's a good resource for typography and fonts...? => TODO
+- TODO KNOCKOUTJS: difference between http://knockoutjs.com/documentation/extenders.html AND custom binders
 - ToHtmlString() => TODO
 - What's the benefit of <: stuff again...? => TODO
 - difference between PartialViews, USerControls, etc.
 - difference between <%: and <%=
 - Model Binding, how it all works - REVIEW
 - Custom Validation
-- EntityFramework - how to perform basic CRUD stuff - Damn Brutha! => TODO
-- EntityFramework Transactions and ASP.NET MVC Concurrency => TODO
-- Start adding Logging stuff - you won't be sorry! => TODO
 - Easily the most important security article evar => - http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
 - Look up Troy Hunt's article's, too
-- RESEARCH a lighter-weight ORM => TODO
+
 
 Good Stuff
 ----------
@@ -172,19 +154,13 @@ Development Backlog
 -------------------
 - Upgrade to ASP.NET MVC 4.0 (4.5?) => TODO
 - Web Optimization Toolkit => TODO
-* Fix the web.config with assembly references => IN PROGRESS
-- How to deal with LastUpdated field => IN PROGRESS
 * Get Scott Hanselman's obj/bin cleaner utility => IN PROGRESS
 
 THE OTHER BACKLOG
 =================
 - INTELLIGENCE - start reverse-engineering Frank and Oak's process => TODO
-* Security n Stuff
-- How to manage CSS files and dependencies from separate assemblies in ASP.NET MVC => IN PROGRESS
-- http://fluentvalidation.codeplex.com/ => TODO
 - Error Handler Module
 - Logging Module
 - Email Service w/ Links (MSMQ?)
-- Copy jqia2.support.js functions
 - Disable Caching for AJAX stuff with ASP.NET MVC=> TODO
 

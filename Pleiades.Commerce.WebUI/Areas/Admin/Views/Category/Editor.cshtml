@@ -338,7 +338,7 @@
 		}
 		
 		$(function() {
-            var crosscuttingUI = new CrossCuttingUI();
+            var crosscuttingUI = new CommonUI();
             var serviceAdapter = new CategoryService(crosscuttingUI.Error, crosscuttingUI.ShowLoading, crosscuttingUI.HideLoading);
 			var model = new CategoryViewModel(serviceAdapter);
 			ko.applyBindings(model);
