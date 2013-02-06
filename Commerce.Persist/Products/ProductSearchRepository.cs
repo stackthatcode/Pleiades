@@ -67,6 +67,7 @@ namespace Commerce.Persist.Products
                 .Include(x => x.Color.ImageBundle)
                 .Where(x => x.Product.Id == productId && x.IsDeleted == false)
                 .ToList()
+                .OrderBy(x => x.Order)
                 .Select(x => x.ToJson())
                 .ToList();
         }
@@ -96,6 +97,56 @@ namespace Commerce.Persist.Products
 
             var productColor = this.Context.ProductColors.First(x => x.Product.Id == productId && x.Id == productColorId);
             productColor.IsDeleted = true;
+        }
+
+        public void UpdateProductColors(int productId, string sortedIds)
+        {
+            var colors = this.Context.ProductColors
+                .Where(x => x.IsDeleted == false && x.Product.Id == productId)
+                .ToList();
+            var idList = sortedIds.Split(',').Select(x => Int32.Parse(x)).ToList();
+
+            for (var index = 0; index < idList.Count(); index++)
+            {
+                var color = colors.FirstOrDefault(x => x.Id == idList[index]);
+                color.Order = index;
+            }
+
+            this.Context.SaveChanges();
+        }
+
+        public List<JsonProductImage> RetrieveImages(int productId)
+        {
+            return this.Context.Products
+                .Include(x => x.Images)
+                .Include(x => x.Images.Select(img => img.ImageBundle))
+                .Include(x => x.Images.Select(img => img.ProductColor))
+                .FirstOrDefault(x => x.Id == productId)
+                .Images
+                .Select(x => x.ToJson())
+                .ToList();
+        }
+
+        public Func<JsonProductImage> AddProductImage(int productId, JsonProductImage image)
+        {
+            var externalId = Guid.Parse(image.ImageBundleExternalId);
+            var imageBundle = this.Context.ImageBundles.First(x => x.ExternalId == externalId);
+            var product = this.Context.Products.Include(x => x.Images).First(x => x.Id == productId);
+            var order = product.Images.Select(x => x.Order).Max() + 1;
+            
+            var productImage = new ProductImage()
+            {
+                ImageBundle = imageBundle,
+                Order = order,
+                ProductColor = null
+            };
+            product.Images.Add(productImage);
+            return () => productImage.ToJson();
+        }
+
+        public void DeleteProductImage(int productId, int imageId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

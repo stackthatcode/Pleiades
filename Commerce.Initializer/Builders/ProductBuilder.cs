@@ -79,11 +79,11 @@ namespace Commerce.Initializer.Builders
                 var bundle14 = imageRepository.Add(ImageHelper("tat-1010_black_04_xl.jpg"));
                 var bundle15 = imageRepository.Add(ImageHelper("tat-1010_black_05_xl.jpg"));
 
-                var productImage11 = new ProductImage { Color = productColor11, ImageBundle = bundle11, Order = 1 };
-                var productImage12 = new ProductImage { Color = productColor11, ImageBundle = bundle12, Order = 2 };
-                var productImage13 = new ProductImage { Color = productColor11, ImageBundle = bundle13, Order = 3 };
-                var productImage14 = new ProductImage { Color = productColor11, ImageBundle = bundle14, Order = 4 };
-                var productImage15 = new ProductImage { Color = productColor11, ImageBundle = bundle15, Order = 5 };
+                var productImage11 = new ProductImage { ProductColor = productColor11, ImageBundle = bundle11, Order = 1 };
+                var productImage12 = new ProductImage { ProductColor = productColor11, ImageBundle = bundle12, Order = 2 };
+                var productImage13 = new ProductImage { ProductColor = productColor11, ImageBundle = bundle13, Order = 3 };
+                var productImage14 = new ProductImage { ProductColor = productColor11, ImageBundle = bundle14, Order = 4 };
+                var productImage15 = new ProductImage { ProductColor = productColor11, ImageBundle = bundle15, Order = 5 };
 
                 product1.Images.Add(productImage11);
                 product1.Images.Add(productImage12);
@@ -97,11 +97,11 @@ namespace Commerce.Initializer.Builders
                 var bundle19 = imageRepository.Add(ImageHelper("tat-1010_blue_04_xl.jpg"));
                 var bundle110 = imageRepository.Add(ImageHelper("tat-1010_blue_05_xl.jpg"));
 
-                var productImage16 = new ProductImage { Color = productColor12, ImageBundle = bundle16, Order = 1 };
-                var productImage17 = new ProductImage { Color = productColor12, ImageBundle = bundle17, Order = 2 };
-                var productImage18 = new ProductImage { Color = productColor12, ImageBundle = bundle18, Order = 3 };
-                var productImage19 = new ProductImage { Color = productColor12, ImageBundle = bundle19, Order = 4 };
-                var productImage110 = new ProductImage { Color = productColor12, ImageBundle = bundle110, Order = 5 };
+                var productImage16 = new ProductImage { ProductColor = productColor12, ImageBundle = bundle16, Order = 1 };
+                var productImage17 = new ProductImage { ProductColor = productColor12, ImageBundle = bundle17, Order = 2 };
+                var productImage18 = new ProductImage { ProductColor = productColor12, ImageBundle = bundle18, Order = 3 };
+                var productImage19 = new ProductImage { ProductColor = productColor12, ImageBundle = bundle19, Order = 4 };
+                var productImage110 = new ProductImage { ProductColor = productColor12, ImageBundle = bundle110, Order = 5 };
 
                 product1.Images.Add(productImage16);
                 product1.Images.Add(productImage17);

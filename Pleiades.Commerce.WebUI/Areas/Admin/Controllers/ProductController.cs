@@ -98,12 +98,15 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             return new JsonNetResult(result);
         }
 
-
         [HttpGet]
         public ActionResult Images(int id)
         {
-            var result = this.ProductSearchRepository.RetrieveInfo(id);
-            return new JsonNetResult(result);
+            var result = this.ProductSearchRepository.RetrieveImages(id);
+            return new JsonNetResult()
+            {
+                Data = result,
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+            };
         }
 
         private ActionResult Save(JsonProductInfo product)
@@ -149,6 +152,12 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             return new JsonNetResult();
         }
 
+        [HttpPost]
+        public ActionResult UpdateColorOrder(int id, string sorted)
+        {
+            this.ProductSearchRepository.UpdateProductColors(id, sorted);
+            return new JsonNetResult();
+        }
 
         [HttpPost]
         public ActionResult CreateBitmap(CreateColorBitmap request)
@@ -158,6 +167,14 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             var imageBundle = this.ImageBundleRepository.Add(color, 150, 150);
             this.Context.SaveChanges();
             return new JsonNetResult(imageBundle);
+        }
+
+        [HttpPost]
+        public ActionResult AddProductImage(int id, JsonProductImage image)
+        {
+            var result = this.ProductSearchRepository.AddProductImage(id, image);
+            this.Context.SaveChanges();
+            return new JsonNetResult(result());
         }
     }
 }

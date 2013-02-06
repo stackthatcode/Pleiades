@@ -106,15 +106,7 @@ h4 {
 	border-top: 1px dotted #CCC;
 }
 
-.recordgrid 
-{
-}
-
-.recordgrid tr
-{
-    line-height: 40px;
-}
-.recordgrid thead tr
-{
-    font-weight:bold;
+/* This doesn't work right now - revisit */
+.ui-state-highlight {
+    height: 110px; background-color:#99BBFF; 
 }

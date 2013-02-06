@@ -156,6 +156,7 @@
     <Content Include="Content\Images\ajax_loader.gif" />
     <Content Include="Content\Images\webicon-2.png" />
     <Content Include="Content\jquery\jquery-1.8.2.min.js" />
+    <Content Include="Content\jquery\jquery-ui-1.10.0.custom.min.js" />
     <Content Include="Content\jquery\jquery.animate-colors-min.js" />
     <Content Include="Content\knockout\knockout-2.1.0.js" />
     <Content Include="Content\knockout\ko.observableDictionary.js" />
@@ -169,6 +170,7 @@
     <Content Include="Content\scripts\size-service.js" />
     <Content Include="Content\scripts\flow.js" />
     <Content Include="Content\scripts\pushmarket-common.js" />
+    <Content Include="Content\Style\jquery-ui-1.10.0.custom.min.css" />
     <Content Include="Content\Style\pushmarket.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">

@@ -2,7 +2,7 @@
 
 @section _Scripts {
     @Html.Javascript("/scripts/product-service.js")
-    @Html.Javascript("/scripts/color-service.js")
+    @Html.Javascript("/jquery/jquery-ui-1.10.0.custom.min.js")
     @Html.Partial("_ColorPicker")
     @Html.Partial("_FineUploader")
 	@Html.Partial("_ImageBundleViewer")
@@ -86,9 +86,74 @@
         }
 	</script>    
     
+    <!-- Images View Model -->
+    <script type="text/javascript">
+        var AddImageFunctions = function (rootModel) {
+            var self = rootModel;
+
+            self.SelectedProductImages = ko.observableArray();
+            self.NewImageInput = ko.observable();
+
+            self.ImagesTabClick = function () {
+                flow.exec(
+                    function () {
+                        self.ProductService.Images(self.SelectedProduct().Id(), this);
+                    },
+                    function (images) {
+                        self.SelectedProductImages(images);
+                        self.ActiveView({ Level: "Child", Template: "Images" });
+                    }
+                );
+            }
+
+            self.GlideBackToImages = function () {
+                flow.exec(
+                    function () {
+                        $("#glideToParent").hide();
+                        self.ChildGlider.GlideToParent(this);
+                    },
+					function () {
+					    self.ActiveView({ Level: "Child", Template: "Images" });
+					}
+				);
+            }
+
+            self.AddNewImage = function () {
+                flow.exec(
+                    function () {
+                        var input = {
+                            ImageBundleExternalId: ko.observable(null),
+                            Description: ko.observable(null),
+                        };
+                        self.NewImageInput(input);
+                        self.ChildGlider.GlideToChild(this);
+                    },
+                    function () {
+                        self.ActiveView({ Level: "Sub-Child", Template: "AddImage" });
+                        var fileUploader = new CommerceFileUploader(this.CommonUI, self.OnImageUpload);
+                    }
+                );
+            }
+
+            self.SaveImage = function () {
+                var newImage = self.NewImageInput();
+                var input = {
+                    ImageBundleExternalId: newImage.ImageBundleExternalId(),
+                    Description: newImage.Description(),
+                };
+                self.ProductService.AddProductImage(self.SelectedProduct().Id(), input);
+            }
+            
+            self.OnImageUpload = function(data) {
+                console.log(data);
+                self.NewImageInput().ImageBundleExternalId(data.ExternalId);
+            }
+        }
+    </script>
+
     <!-- Color View Model -->
     <script type="text/javascript">
-        var ColorFunctions = function (rootModel) {
+        var AddColorFunctions = function (rootModel) {
             var self = rootModel;
 
             self.SelectedProductColors = ko.observableArray();
@@ -131,7 +196,7 @@
                 );
             }
             
-            self.GlideToProductView = function () {
+            self.GlideBackToColors = function () {
                 flow.exec(
                     function () {
                         $("#glideToParent").hide();
@@ -188,6 +253,7 @@
                     },
                     function () {
                         self.ActiveView({ Level: "Child", Template: "Colors" });
+                        self.MakeColorsSortable();
                     }
                 );
             }
@@ -263,12 +329,44 @@
                     }
                 );
             }
+            
+            self.ColorsTabClick = function () {
+                flow.exec(
+                    function () {
+                        self.ProductService.Colors(self.SelectedProduct().Id(), this);
+                    },
+                    function (colors) {
+                        self.SelectedProductColors(colors);
+                        self.ActiveView({ Level: "Child", Template: "Colors" });
+                        self.MakeColorsSortable();
+                    }
+                );
+            }
+
+            self.MakeColorsSortable = function () {
+                $(".sortable").sortable({
+                    placeholder: "ui-state-highlight",
+                    update: self.UpdateColorSortOrder,
+                    delay: 300
+                });
+                $(".sortable").disableSelection();
+            }
+
+            self.UpdateColorSortOrder = function () {
+                var sortOutput = [];
+                $.each($("#colors > div"), function (index, elem) { 
+                    sortOutput.push($(elem).attr('id').replace('sorted', '')); 
+                });
+                var sortedIds = sortOutput.join(",");
+                self.ProductService.UpdateColorOrder(self.SelectedProduct().Id(), sortedIds);
+            };
+
         }
 	</script>
     
     <!-- List Model -->
     <script type="text/javascript">
-        var ListModel = function (rootModel) {
+        var AddListModel = function (rootModel) {
             var self = rootModel;
             self.BrandArray = ko.observableArray();
             self.CategoryArray = ko.observableArray();
@@ -339,7 +437,7 @@
 
     <!-- Search View Model -->
     <script type="text/javascript">
-        var SearchFunctions = function (rootModel) {
+        var AddSearchFunctions = function (rootModel) {
             var self = rootModel;
 
             // asynchronous, service-bound operations            
@@ -385,6 +483,10 @@
                         self.SearchData(data);
                     }
                 );
+            }
+
+            self.InfoTabClick = function () {
+                self.ActiveView({ Level: "Child", Template: "Info" });
             }
 
             self.GlideToSearchView = function () {
@@ -461,7 +563,7 @@
             return self;
         }
     </script> 
-       
+    
     <!-- Root View Model -->
     <script type="text/javascript">
         var RootModel = function () {
@@ -477,13 +579,13 @@
                 function () {
                     return self.ActiveView().Level == "Parent" ? "top:180px;" : "top:165px;";
                 }, this);
-
             self.ProductService = new ProductService(self.CommonUI.Error, self.CommonUI.ShowLoading, self.CommonUI.HideLoading);
 
-            SearchFunctions(self);
-            ListModel(self);
-            ColorFunctions(self);
-            
+            AddSearchFunctions(self);
+            AddListModel(self);
+            AddColorFunctions(self);
+            AddImageFunctions(self);
+
             self.RetrieveCategoriesList();
             self.RetrieveBrandsList();
             self.RetrieveSizeGroupsList();
@@ -496,37 +598,13 @@
                 function () {
                     return self.SelectedProduct() && self.SelectedProduct().SkuCode() || "(New Product)"
                 }, this);
-
-            // Tab Functions
-            self.ColorsTabClick = function () {
-                flow.exec(
-                    function () {
-                        self.ProductService.Colors(self.SelectedProduct().Id(), this);
-                    },
-                    function (colors) {
-                        self.SelectedProductColors(colors);
-                        self.ActiveView({ Level: "Child", Template: "Colors" });
-                    }
-                );
-            }
-
-            self.InfoTabClick = function () {
-                self.ActiveView({ Level: "Child", Template: "Info" });
-            }
-
-            self.ImagesTabClick = function () {
-                self.ActiveView({ Level: "Child", Template: "Images" });
-            }
         }
-    </script>
 
-    <!-- Initialization -->
-    <script type="text/javascript">
         $(function () {
             var rootModel = new RootModel();
             ko.applyBindings(rootModel);
         });
-	</script>
+    </script>
 }
 
 @section _Templates {
@@ -576,13 +654,14 @@
 					    <h1>Products &gt; <span data-bind="text: $root.SelectedProductName"></span></h1>
 				    </div>
 			    </div>
+
                 <div class="row">
-                    <div class="span2">
+                    <div class="span3">
                         <ul class="nav nav-pills">
                             <li class="active">
 				                <a id="glideToParent" data-bind="click: $root.GlideToSearchView"><i class="icon-backward icon-white"></i> Back to Search</a>
                             </li>
-                        </ul
+                        </ul>
                     </div>
 		        </div>
 		    </div>
@@ -601,8 +680,12 @@
                 <div class="row">
                     <div class="span9">
                         <ul class="nav nav-pills">
-                            <li class="active" style="height:30px;">
-				                <a id="glideToParent" data-bind="click: $root.GlideToProductView"><i class="icon-backward icon-white"></i> Back to Product</a>
+                            <li class="active" style="height:30px;" data-bind="ifnot: $root.ActiveView().Template == 'AddImage'">
+				                <a id="glideToParent" data-bind="click: $root.GlideBackToColors"><i class="icon-backward icon-white"></i> Back to Product</a>
+                            </li>
+
+                            <li class="active" style="height:30px;" data-bind="if: $root.ActiveView().Template == 'AddImage'">
+				                <a id="glideToParent" data-bind="click: $root.GlideBackToImages"><i class="icon-backward icon-white"></i> Back to Product</a>                                
                             </li>
                         </ul
                     </div>
@@ -614,7 +697,7 @@
                     </div>
 
                     <div class="span5" style="text-align:right;">
-					    <a class="btn btn-inverse" href="#" data-bind="click: $root.GlideToProductView"><i class="icon-remove icon-white"></i> Cancel</a>                    
+					    <a class="btn btn-inverse" href="#" data-bind="click: $root.GlideBackToColors"><i class="icon-remove icon-white"></i> Cancel</a>                    
 					    <a class="btn btn-primary" href="#" data-bind="click: $root.AddColorsToProduct"><i class="icon-ok icon-white"></i> Add Colors</a>
                     </div>
                 </div>
@@ -624,13 +707,19 @@
                         <p class="lead">Create a Color to add to your Product</p>
                     </div>
                 </div>
+
+                <div class="row" data-bind="if: $root.ActiveView().Template == 'AddImage'">
+                    <div class="span12" style="padding-left:20px;">
+                        <p class="lead">Upload an Image of your Product</p>
+                    </div>
+                </div>
 		    </div>
 		</div>
 	</script>
 	
     <!-- KNOCKOUT TEMPLATE - PARENT EDITOR SEARCH -->
 	<script type="text/html" id="Parent-Editor-Search">
-		<div style="margin-top:20px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SearchData().length == 0">
+		<div style="margin-top:24px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SearchData().length == 0">
 			<strong>There are no Products in your current search.  Click "Search" to run a search or click "Add New Product" to create a new one.</strong>  
 		</div>
 		
@@ -665,7 +754,7 @@
 		</table>
 	</script>
 
-	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR INFO TAB - always works with $root.ProductInfoViewModel -->
+	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR INFO TAB -->
 	<script type="text/html" id="Child-Editor-Info">
         <div style="margin-top:20px" data-bind="with: $root.SelectedProduct()">
         <form>
@@ -771,7 +860,7 @@
         </div>
 	</script>
 	
-	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB - always works with $root.ProductColorFunctions -->
+	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB -->
     <script type="text/html" id="Child-Editor-Colors">
     <div style="margin-top:20px">
         <form>
@@ -795,34 +884,43 @@
                 </div>
             </div>
 
-		    <table id="color-table" class="table table-hover">
-		    <tbody data-bind="foreach: $root.SelectedProductColors()">
-			    <tr>
-			    <td>
-				    <span class="span2">
-                	    <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
-			            </div>
-                    </span>
-                </td>
-                <td>
-				    <span class="span7">
-					    <input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
-					    <p><strong data-bind="text: $data.Name"></strong> - <span data-bind="text: $data.SkuCode"></span></p>
-				    </span>
-                </td>
-			    <td>
-				    <span class="span3" style="text-align:right;">					
-					    <a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteProductColor($data) }"><i class="icon-trash icon-white"></i> Delete</a>
-				    </span>
-			    </td>
-			    </tr>
-		    </tbody>
-		    </table>
+            <div style="margin-top:10px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SelectedProductColors().length == 0">
+			    <strong>There are no Colors for this Product.  Add a Color from the existing list, or Create a new one.</strong>  
+		    </div>
+		    
+            <div id="colors" class="sortable" data-bind="foreach: $root.SelectedProductColors()">
+                <div class="draggable" data-bind="attr: { id: 'sorted' + $data.Id }">
+		        <table class="table table-hover" style="margin-bottom:0px;">
+		            <tbody>
+			            <tr>
+			            <td>
+				            <span class="span2">
+                	            <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+			                    </div>
+                            </span>
+                        </td>
+                        <td>
+				            <span class="span5">
+					            <input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
+					            <p><strong data-bind="text: $data.Name"></strong> - <span data-bind="text: $data.SkuCode"></span></p>
+				            </span>
+                        </td>
+			            <td>
+				            <span class="span5" style="text-align:right;">
+                                <a href="#" class="btn btn-inverse disabled"><i class="icon-screenshot icon-white"></i> Drag Me!</a>
+					            <a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteProductColor($data) }"><i class="icon-trash icon-white"></i> Delete</a>
+				            </span>
+			            </td>
+			            </tr>
+		            </tbody>
+		        </table>
+                </div>
+            </div>
         </form>
     </div>
     </script>
     
-    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB - always works with $root.ProductColorFunctions -->
+    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB - ADD FROM LIST SUB -->
     <script type="text/html" id="Sub-Child-Editor-AddColorsFromList">
     <div>
         <form>    
@@ -861,7 +959,7 @@
     </div>
     </script>
 
-    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR CREATE COLOR TAB - always works with $root.ProductColorFunctions -->
+    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB - CREATE SUB -->
     <script type="text/html" id="Sub-Child-Editor-CreateColor">
         <div style="margin-top:70px" data-bind="with: $root.NewColorInput">
         <form>
@@ -932,7 +1030,7 @@
     <div style="margin-top:20px">
         <form>
             <div class="row">
-                <div class="span8">
+                <div class="span6">
                     <ul class="nav nav-pills">
                         <li>
                             <a href="#" data-bind="click: $root.InfoTabClick">Information</a>
@@ -945,14 +1043,58 @@
                         </li>
                     </ul>
                 </div>
-                <div class="span4">
-					<a class="btn btn-inverse" href="#" data-bind="click: $root.GlideToSearchView"><i class="icon-remove icon-white"></i> Cancel</a>                    
-					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveClick"><i class="icon-ok icon-white"></i> Save</a>
+                <div class="span6" style="text-align:right;">
+					<a class="btn btn-primary" href="#" data-bind="click: $root.AddNewImage"><i class="icon-plus icon-white"></i> Add Image</a>
+
+					<!-- <a class="btn btn-primary" href="#" data-bind="click: $root.SaveClick"><i class="icon-white icon-ban-circle"></i> Don't Assign To Color</a> -->
+					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveClick"><i class="icon-white icon-share"></i> Assign To Color</a>
                 </div>
             </div>
+
+            <!-- NOT ASSIGNED TO COLOR ORGANIZATION -->
+            <div style="clear:both;">
+            <ul data-bind="foreach: $root.SelectedProductImages()" style="list-style-type:none;">
+                <li style="display: list-item; float: left; padding:5px; text-align:center;">
+                    <div data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+                    </div>
+                    <a class="btn btn-primary btn-small" style="width:70px; margin-top:5px;" href="#" data-bind="click: function() { $root.DeleteProductColor($data) }"><i class="icon-trash icon-white"></i> Delete</a>			
+			    </li>
+            </ul>
         </form>
     </div>
     </script>
+    
+    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR IMAGES COLOR TAB -->
+    <script type="text/html" id="Sub-Child-Editor-AddImage">
+        <div style="margin-top:70px" data-bind="with: $root.NewImageInput">
+        <form>
+			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
+                <strong>Please enter all the required fields.</strong>
+			</div>
+
+            <div class="row">
+                <div class="span3">
+                    <div style="margin-bottom:20px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId(), LightboxSuffixId: 'Child' } }">
+			        </div>
+			        <div style="margin-bottom:20px; margin-top:20px;" data-bind="template: { name: 'Fine-Uploader', data: $data }">
+			        </div>
+                </div>
+                <div class="span9">
+                    <div class="row">
+                        <div class="span6">
+                            <label>Image Description<br /><input class="input-large" style="width:300px;" type="text" placeholder="Enter Image Description" data-bind="value: $data.Description" maxlength="100" />
+                            </label>
+                        </div>
+                        <div class="span3">
+					        <a class="btn btn-inverse" href="#" data-bind="click: $root.GlideBackToImages"><i class="icon-remove icon-white"></i> Cancel</a>                    
+					        <a class="btn btn-primary" href="#" data-bind="click: $root.SaveImage"><i class="icon-ok icon-white"></i> Save</a>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </form>
+        </div>
+	</script>
 
 
 	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG PRODUCT -->

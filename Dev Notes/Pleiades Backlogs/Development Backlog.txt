@@ -14,11 +14,18 @@ Product Editor
 - Start Designing Product Screen => IN PROGRESS
 
 => Images => TODO - EXECUTE DESIGN
-=> Screen for ordering Colors & Images => TODO
+=> Screen for ordering Colors & Images => IN PROGRESS
 
+
+- When I delete a SizeGroup, Color, Category or Brand, gotta set the Product's == N/A => TODO
+- Double clicking a link while it's loading the AJAX causes JQuery to beef => TODO
+- Create a Product and simulate Creation of a Product followed by deletion of Colors, Categories, Brands, etc. => TODO
+- Add the Number of Products in a Brand => TODO
+- PREVENT DELETION OF LAST SECTION => TODO
 - Update Product in Search after Adding & Editing
 - Fix the Scroll Tracker - take it to the top => TODO
 - Change out the Back Buttons => IN PROGRESS
+
 
 Please Research
 ~~~~~~~~~~~~~~~
@@ -29,16 +36,12 @@ http://www.ww2helmets.com/products-page/checkout/ => Hmmmmm...?????
 
 Backlog
 -------
-- When I delete a SizeGroup, Color, Category or Brand, gotta set the Product's == N/A => TODO
-- Double clicking a link while it's loading the AJAX causes JQuery to beef => TODO
 - Improve the quality of client-side Error Logging => TODO
-- Create a Product and simulate Creation of a Product followed by deletion of Colors, Categories, Brands, etc. => TODO
-- PREVENT DELETION OF LAST SECTION => TODO
-- Add the Number of Products in a Brand => TODO
 - Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING)
 - Check Sanderson for advanced Model Binding => TODO
 - Change Menu for Login Screen => TODO
 - Logged-In User => TODO
+- 150 Magic Number(!!!) => TODO - FIX
 - IsONline - Check How This Functions => TODO
 - Develop and/or Research Fluent Validation library => TODO
 - Donate $20 to FineUploader upon successful integration => TODO

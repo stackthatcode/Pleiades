@@ -54,6 +54,7 @@ namespace Commerce.Initializer
         public static void DestroyDatabase()
         {
             DbContext.Database.Delete();
+            Console.WriteLine("Deleted Database");
         }
 
         public static void DestroyResourceFiles()

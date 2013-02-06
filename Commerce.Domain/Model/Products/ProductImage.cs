@@ -9,7 +9,8 @@ namespace Commerce.Domain.Model.Products
     {
         public int Id { get; set; }
         public ImageBundle ImageBundle { get; set; }
+        public string Description { get; set; }
         public int Order { get; set; }
-        public ProductColor Color { get; set; }
+        public ProductColor ProductColor { get; set; }
     }
 }

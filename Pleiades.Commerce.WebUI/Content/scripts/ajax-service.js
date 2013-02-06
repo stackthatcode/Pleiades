@@ -13,28 +13,30 @@ function AjaxService(errorCallback, showLoadingCallback, hideLoadingCallback) {
         errorCallback();
     }
 
-    self.AjaxGet = function(url, successFunc) {
+    self.AjaxGet = function (url, successFunc) {
         flow.exec(
-            function() {
+            function () {
                 self.ShowLoadingCallback();
                 $.ajax({
                     type: 'GET',
                     url: self.BaseUrl + url,
-                    timeout: self.Timeout,  
+                    timeout: self.Timeout,
                     error: self.ErrorCallback,
                     success: this
                 });
             },
-            function(data, textStatus, jqXHR) {
+            function (data, textStatus, jqXHR) {
                 self.HideLoadingCallback();
-                successFunc(data, textStatus, jqXHR);
+                if (successFunc) {
+                    successFunc(data, textStatus, jqXHR);
+                }
             }
         );
     }
 
-    self.AjaxPost = function(url, data, successFunc) {
+    self.AjaxPost = function (url, data, successFunc) {
         flow.exec(
-            function() {
+            function () {
                 self.ShowLoadingCallback();
                 $.ajax({
                     type: 'POST',
@@ -45,9 +47,11 @@ function AjaxService(errorCallback, showLoadingCallback, hideLoadingCallback) {
                     success: this
                 });
             },
-            function(data, textStatus, jqXHR) {
+            function (data, textStatus, jqXHR) {
                 self.HideLoadingCallback();
-                successFunc(data, textStatus, jqXHR);
+                if (successFunc) {
+                    successFunc(data, textStatus, jqXHR);
+                }
             }
         );
     }    	

@@ -45,5 +45,17 @@ namespace Commerce.Domain.Model.Products
                 Order = color.Order,
             };
         }
+
+        public static JsonProductImage ToJson(this ProductImage image)
+        {
+            return new JsonProductImage
+            {
+                Id = image.Id,
+                ImageBundleExternalId = image.ImageBundle.ExternalId.ToString(),
+                Order = image.Order,
+                ProductColorId = image.ProductColor != null ? image.ProductColor.Id : (int?)null,
+                Description = image.Description,
+            };
+        }
     }
 }

@@ -30,6 +30,10 @@ function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback)
         self.AjaxGet("/Admin/Color/Colors", callback);
     };
 
+    self.Images = function (productId, callback) {
+        self.AjaxGet("/Admin/Product/Images/" + productId, callback);
+    };
+
     self.AddColorToColorList = function (color, callback) {
         self.AjaxPost("/Admin/Color/Insert", color, callback);
     };
@@ -42,9 +46,17 @@ function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback)
 	    self.AjaxPost("/Admin/Product/AddProductColor/" + productId + "?colorId=" + colorId, {}, callback);
 	};
 
+	self.UpdateColorOrder = function (productId, sorted, callback) {
+	    self.AjaxPost("/Admin/Product/UpdateColorOrder/" + productId + "?sorted=" + sorted, callback);
+	};
+
+	self.AddProductImage = function (productId, image, callback) {
+	    self.AjaxPost("/Admin/Product/AddProductImage/" + productId, image, callback);
+	};
+
 	self.CreateBitmap = function (createRequest, callback) {
 	    self.AjaxPost("/Admin/Product/CreateBitmap", createRequest, callback);
-	}
+	};
 
     self.Update = function (product, callback) {
         self.AjaxPost("/Admin/Product/Update", product, callback);
