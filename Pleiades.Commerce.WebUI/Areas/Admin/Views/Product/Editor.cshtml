@@ -102,9 +102,28 @@
                     function (images) {
                         self.SelectedProductImages(images);
                         self.ActiveView({ Level: "Child", Template: "Images" });
+                        self.MakeImagesSortable();
                     }
                 );
             }
+            
+            self.MakeImagesSortable = function () {
+                $(".sortable").sortable({
+                    placeholder: "ui-state-highlight",
+                    update: self.UpdateImageSortOrder,
+                    delay: 300
+                });
+                $(".sortable").disableSelection();
+            }
+            
+            self.UpdateImageSortOrder = function () {
+                var sortOutput = [];
+                $.each($("#images > li"), function (index, elem) { 
+                    sortOutput.push($(elem).attr('id').replace('sorted', '')); 
+                });
+                var sortedIds = sortOutput.join(",");
+                self.ProductService.UpdateImageOrder(self.SelectedProduct().Id(), sortedIds);
+            };
 
             self.GlideBackToImages = function () {
                 flow.exec(
@@ -116,6 +135,17 @@
 					    self.ActiveView({ Level: "Child", Template: "Images" });
 					}
 				);
+            }
+
+            self.DeleteProductImage = function(image) {
+                flow.exec(
+                    function () {
+                        self.ProductService.DeleteProductImage(self.SelectedProduct().Id(), image.Id, this);
+                    },
+                    function (data) {
+                        self.SelectedProductImages.remove(image);
+                    }
+                );
             }
 
             self.AddNewImage = function () {
@@ -137,11 +167,24 @@
 
             self.SaveImage = function () {
                 var newImage = self.NewImageInput();
+                if (!newImage.ImageBundleExternalId()) {
+                    $("#validation").show();
+                    return;
+                }
                 var input = {
                     ImageBundleExternalId: newImage.ImageBundleExternalId(),
                     Description: newImage.Description(),
                 };
-                self.ProductService.AddProductImage(self.SelectedProduct().Id(), input);
+
+                flow.exec(
+                    function() {
+                        self.ProductService.AddProductImage(self.SelectedProduct().Id(), input, this);
+                    },
+                    function(data) {
+                        self.SelectedProductImages().push(data);
+                        self.GlideBackToImages();
+                    }
+                );
             }
             
             self.OnImageUpload = function(data) {
@@ -196,17 +239,6 @@
                 );
             }
             
-            self.GlideBackToColors = function () {
-                flow.exec(
-                    function () {
-                        $("#glideToParent").hide();
-                        self.ChildGlider.GlideToParent(this);
-                    },
-					function () {
-					    self.ActiveView({ Level: "Child", Template: "Colors" });
-					}
-				);
-            }
 
             self.PickColorToggle = function() {
                 self.NewColorInput().ShowUpload(false);
@@ -256,6 +288,19 @@
                         self.MakeColorsSortable();
                     }
                 );
+            }
+            
+            self.GlideBackToColors = function () {
+                flow.exec(
+                    function () {
+                        $("#glideToParent").hide();
+                        self.ChildGlider.GlideToParent(this);
+                    },
+					function () {
+					    self.ActiveView({ Level: "Child", Template: "Colors" });
+                        self.MakeColorsSortable();
+					}
+				);
             }
             
 			self.SaveColor = function() {
@@ -574,11 +619,7 @@
 
             self.CommonUI = new CommonUI("#gliding-container");
             self.ParentGlider = new GliderWidget("#gliding-container", "#parent-editor", "#child-editor");
-            self.ChildGlider = new GliderWidget("#gliding-container", "#child-editor", "#sub-child-editor");
-            self.GlidingContainerStyle = ko.computed(
-                function () {
-                    return self.ActiveView().Level == "Parent" ? "top:180px;" : "top:165px;";
-                }, this);
+            self.ChildGlider = new GliderWidget("#gliding-container", "#child-editor", "#sub-child-editor");            
             self.ProductService = new ProductService(self.CommonUI.Error, self.CommonUI.ShowLoading, self.CommonUI.HideLoading);
 
             AddSearchFunctions(self);
@@ -596,7 +637,7 @@
             self.SelectedProduct = ko.observable(null);
             self.SelectedProductName = ko.computed(
                 function () {
-                    return self.SelectedProduct() && self.SelectedProduct().SkuCode() || "(New Product)"
+                    return self.SelectedProduct() && self.SelectedProduct().Name() && self.SelectedProduct().Name().koTrunc(50, true) || "(New Product)"
                 }, this);
         }
 
@@ -610,7 +651,7 @@
 @section _Templates {
 	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE SEARCH -->
 	<script type="text/html" id="Top-Workspace-Parent">
-        <div class="workspace-heading" style="height:120px;">
+        <div class="workspace-heading" style="height:125px;">
 		    <div id="heading" class="container">
 			    <div class="row">
 				    <div class="span9">
@@ -621,7 +662,7 @@
 				    </div>
 			    </div>
 
-                <div style="height:10px;"></div>
+                <div style="height:20px;"></div>
                 
                 <div class="row">
 				    <div class="span3">
@@ -647,21 +688,62 @@
 
 	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE PRODUCT -->
 	<script type="text/html" id="Top-Workspace-Child">
-        <div class="workspace-heading" style="height:105px;">
+        <div class="workspace-heading" style="height:125px;">
 		    <div id="heading" class="container" data-bind="if: $root.SelectedProduct()">
 			    <div class="row" style="position:relative;">				
 				    <div class="span12">
 					    <h1>Products &gt; <span data-bind="text: $root.SelectedProductName"></span></h1>
 				    </div>
 			    </div>
-
+                
+                <div style="height:20px;"></div>
+                
                 <div class="row">
-                    <div class="span3">
+                    <div class="span6">
                         <ul class="nav nav-pills">
-                            <li class="active">
-				                <a id="glideToParent" data-bind="click: $root.GlideToSearchView"><i class="icon-backward icon-white"></i> Back to Search</a>
+                            <li style="width:140px;">
+				                <a id="glideToParent" class="backbutton" data-bind="click: $root.GlideToSearchView">&laquo; Back to Search</a>
+                                &nbsp;
                             </li>
+                            
+                            <li data-bind="if: $root.ActiveView().Template == 'Info'" class="active">
+                                <a href="#">Info</a>
+                            </li>
+                            <li data-bind="if: $root.ActiveView().Template != 'Info'">
+                                <a href="#" data-bind="click: $root.InfoTabClick">Info</a>
+                            </li>
+
+                            <!-- ko if: $root.SelectedProduct().Id() -->
+                            <li data-bind="if: $root.ActiveView().Template == 'Colors'" class="active">
+                                <a href="#">Colors</a>
+                            </li>
+                            <li data-bind="if: $root.ActiveView().Template != 'Colors'">
+                                <a href="#" data-bind="click: $root.ColorsTabClick">Colors</a>
+                            </li>
+
+                            <li data-bind="if: $root.ActiveView().Template == 'Images'" class="active">
+                                <a href="#">Images</a>
+                            </li>
+                            <li data-bind="if: $root.ActiveView().Template != 'Images'">
+                                <a href="#" data-bind="click: $root.ImagesTabClick">Images</a>
+                            </li>
+                            <!-- /ko -->
                         </ul>
+                    </div>
+
+                    <div class="span6" style="text-align:right;" data-bind="if: $root.ActiveView().Template == 'Info'">
+					    <a class="btn btn-inverse" href="#" data-bind="click: $root.GlideToSearchView"><i class="icon-remove icon-white"></i> Cancel</a>                    
+					    <a class="btn btn-primary" href="#" data-bind="click: $root.SaveClick"><i class="icon-ok icon-white"></i> Save</a>
+                    </div>
+
+                    <div class="span6" style="text-align:right;" data-bind="if: $root.ActiveView().Template == 'Colors'">
+					    <a class="btn btn-primary" href="#" data-bind="click: $root.AddColorFromList"><i class="icon-white icon-search"></i> Add Color from Lists</a>
+					    <a class="btn btn-primary" href="#" data-bind="click: $root.CreateNewColor"><i class="icon-white icon-pencil"></i> Create New Color</a>
+                    </div>
+
+                    <div class="span6" style="text-align:right;" data-bind="if: $root.ActiveView().Template == 'Images'">
+				        <a class="btn btn-primary" href="#" data-bind="click: $root.AddNewImage"><i class="icon-plus icon-white"></i> Add Image</a>
+				        <a class="btn btn-primary" href="#" data-bind="click: $root.SaveClick"><i class="icon-white icon-share"></i> Assign Images To Colors</a>
                     </div>
 		        </div>
 		    </div>
@@ -670,49 +752,68 @@
 
 	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE COLOR-SUBVIEW -->
 	<script type="text/html" id="Top-Workspace-Sub-Child">
-        <div class="workspace-heading" style="height:155px;">
+        <div class="workspace-heading" style="height:125px;">
 		    <div class="container" data-bind="if: $root.SelectedProduct()">
 			    <div class="row" style="position:relative;">				
 				    <div class="span12">
 					    <h1>Products &gt; <span data-bind="text: $root.SelectedProductName"></span></h1>
 				    </div>
 			    </div>
-                <div class="row">
-                    <div class="span9">
-                        <ul class="nav nav-pills">
-                            <li class="active" style="height:30px;" data-bind="ifnot: $root.ActiveView().Template == 'AddImage'">
-				                <a id="glideToParent" data-bind="click: $root.GlideBackToColors"><i class="icon-backward icon-white"></i> Back to Product</a>
-                            </li>
-
-                            <li class="active" style="height:30px;" data-bind="if: $root.ActiveView().Template == 'AddImage'">
-				                <a id="glideToParent" data-bind="click: $root.GlideBackToImages"><i class="icon-backward icon-white"></i> Back to Product</a>                                
-                            </li>
-                        </ul
-                    </div>
-		        </div>
                 
-                <div class="row" data-bind="if: $root.ActiveView().Template == 'AddColorsFromList'">
-                    <div class="span7" style="padding-left:20px;">
-                        <p class="lead">Select Colors to add to your Product</p>
-                    </div>
+                <div style="height:20px;"></div>
 
+                <!-- ko if: $root.ActiveView().Template == 'AddImage' -->
+                <div class="row">
+                    <div class="span2">
+                        <ul class="nav nav-pills">
+                            <li style="width:140px;">
+				                <a id="glideToParent" data-bind="click: $root.GlideBackToImages">&laquo; Back to Product</a>
+                                &nbsp;
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="span7" style="padding-left:20px;">
+                        <p class="lead" style="color:#999;">Upload an Image of your Product</p>
+                    </div>
+                </div>
+                <!-- /ko -->
+
+                <!-- ko if: $root.ActiveView().Template == 'AddColorsFromList' -->
+                <div class="row">
+                     <div class="span2">
+                        <ul class="nav nav-pills">
+                            <li style="width:140px;" data-bind="ifnot: $root.ActiveView().Template == 'AddImage'">
+				                <a id="glideToParent" data-bind="click: $root.GlideBackToColors">&laquo; Back to Product</a>
+                                &nbsp;
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="span5">
+                        <p class="lead" style="color:#999;">Select Colors to add to your Product</p>
+                    </div>
                     <div class="span5" style="text-align:right;">
 					    <a class="btn btn-inverse" href="#" data-bind="click: $root.GlideBackToColors"><i class="icon-remove icon-white"></i> Cancel</a>                    
 					    <a class="btn btn-primary" href="#" data-bind="click: $root.AddColorsToProduct"><i class="icon-ok icon-white"></i> Add Colors</a>
                     </div>
                 </div>
+                <!-- /ko -->
 
-                <div class="row" data-bind="if: $root.ActiveView().Template == 'CreateColor'">
-                    <div class="span12" style="padding-left:20px;">
-                        <p class="lead">Create a Color to add to your Product</p>
+                <!-- ko if: $root.ActiveView().Template == 'CreateColor' -->
+                <div class="row">
+                    <div class="span2">
+                        <ul class="nav nav-pills">
+                            <li style="width:140px;">
+				                <a id="glideToParent" data-bind="click: $root.GlideBackToColors">&laquo; Back to Product</a>
+                                &nbsp;
+                            </li>
+                        </ul>
+                    </div>                    
+                    <div class="span5">
+                        <p class="lead" style="color:#999;">Create a Color to add to your Product</p>
                     </div>
                 </div>
+                <!-- /ko -->
 
-                <div class="row" data-bind="if: $root.ActiveView().Template == 'AddImage'">
-                    <div class="span12" style="padding-left:20px;">
-                        <p class="lead">Upload an Image of your Product</p>
-                    </div>
-                </div>
 		    </div>
 		</div>
 	</script>
@@ -756,29 +857,8 @@
 
 	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR INFO TAB -->
 	<script type="text/html" id="Child-Editor-Info">
-        <div style="margin-top:20px" data-bind="with: $root.SelectedProduct()">
+        <div style="margin-top:20px;" data-bind="with: $root.SelectedProduct()">
         <form>
-            <div class="row">
-                <div class="span9">
-                    <ul class="nav nav-pills">
-                        <li class="active">
-                            <a href="#">Information</a>
-                        </li>
-                        <li data-bind="if: $data.Id()">
-                            <a href="#" data-bind="click: $root.ColorsTabClick">Colors</a>
-                        </li>
-                        <li data-bind="if: $data.Id()">
-                            <a href="#" data-bind="click: $root.ImagesTabClick">Images</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="span3" style="text-align:right;">
-					<a class="btn btn-inverse" href="#" data-bind="click: $root.GlideToSearchView"><i class="icon-remove icon-white"></i> Cancel</a>                    
-					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveClick"><i class="icon-ok icon-white"></i> Save</a>
-                </div>
-            </div>
-
 			<div id="validation" style="text-align:center; clear:both; display:none;" class="alert alert-error">
                 <strong>Please enter all the required fields.</strong>
 			</div>
@@ -862,29 +942,9 @@
 	
 	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB -->
     <script type="text/html" id="Child-Editor-Colors">
-    <div style="margin-top:20px">
+    <div style="margin-top:0px;">
         <form>
-            <div class="row">
-                <div class="span7">
-                    <ul class="nav nav-pills">
-                        <li>
-                            <a href="#" data-bind="click: $root.InfoTabClick">Information</a>
-                        </li>
-                        <li class="active">
-                            <a href="#">Colors</a>
-                        </li>
-                        <li>
-                            <a href="#" data-bind="click: $root.ImagesTabClick">Images</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="span5" style="text-align:right;">
-					<a class="btn btn-primary" href="#" data-bind="click: $root.AddColorFromList"><i class="icon-white icon-search"></i> Add Color from Lists</a>
-					<a class="btn btn-primary" href="#" data-bind="click: $root.CreateNewColor"><i class="icon-white icon-pencil"></i> Create New Color</a>
-                </div>
-            </div>
-
-            <div style="margin-top:10px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SelectedProductColors().length == 0">
+            <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SelectedProductColors().length == 0">
 			    <strong>There are no Colors for this Product.  Add a Color from the existing list, or Create a new one.</strong>  
 		    </div>
 		    
@@ -924,7 +984,7 @@
     <script type="text/html" id="Sub-Child-Editor-AddColorsFromList">
     <div>
         <form>    
-		    <table id="color-table" class="table table-hover" style="margin-top:50px;">
+		    <table id="color-table" class="table table-hover">
 		    <tbody data-bind="foreach: $root.ColorArray()">
 			    <tr>
 			    <td>
@@ -961,8 +1021,10 @@
 
     <!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB - CREATE SUB -->
     <script type="text/html" id="Sub-Child-Editor-CreateColor">
-        <div style="margin-top:70px" data-bind="with: $root.NewColorInput">
+        <div data-bind="with: $root.NewColorInput">
         <form>
+            <div style="height:20px;"></div>
+
 			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
                 <strong>Please enter all the required fields.</strong>
 			</div>
@@ -1027,49 +1089,29 @@
 
     <!-- KNOCKOUT TEMPLATE - CHILD EDITOR IMAGES TAB -->
     <script type="text/html" id="Child-Editor-Images">
-    <div style="margin-top:20px">
-        <form>
-            <div class="row">
-                <div class="span6">
-                    <ul class="nav nav-pills">
-                        <li>
-                            <a href="#" data-bind="click: $root.InfoTabClick">Information</a>
-                        </li>
-                        <li>
-                            <a href="#" data-bind="click: $root.ColorsTabClick">Colors</a>
-                        </li>
-                        <li class="active">
-                            <a href="#">Images</a>
-                        </li>
-                    </ul>
+    <div style="margin-top:20px; padding-bottom:0px; display: block; left:0px; bottom:0px;">
+        <ul id="images" class="sortable" data-bind="foreach: $root.SelectedProductImages()">
+            <li data-bind="attr: { id: 'sorted' + $data.Id }">
+                <div style="width:160px; padding-bottom:5px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
                 </div>
-                <div class="span6" style="text-align:right;">
-					<a class="btn btn-primary" href="#" data-bind="click: $root.AddNewImage"><i class="icon-plus icon-white"></i> Add Image</a>
+                <a href="#" style="width:55px;" class="btn btn-inverse btn-small disabled"><i class="icon-screenshot icon-white"></i> Drag!</a>
+                <a class="btn btn-primary btn-small" style="width:55px;" href="#" data-bind="click: function() { $root.DeleteProductImage($data) }"><i class="icon-trash icon-white"></i> Delete</a>			
+            </li>
+        </ul>
+        <div style="display:block; margin-bottom:200px; clear:both;">
+        </div>
 
-					<!-- <a class="btn btn-primary" href="#" data-bind="click: $root.SaveClick"><i class="icon-white icon-ban-circle"></i> Don't Assign To Color</a> -->
-					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveClick"><i class="icon-white icon-share"></i> Assign To Color</a>
-                </div>
-            </div>
-
-            <!-- NOT ASSIGNED TO COLOR ORGANIZATION -->
-            <div style="clear:both;">
-            <ul data-bind="foreach: $root.SelectedProductImages()" style="list-style-type:none;">
-                <li style="display: list-item; float: left; padding:5px; text-align:center;">
-                    <div data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
-                    </div>
-                    <a class="btn btn-primary btn-small" style="width:70px; margin-top:5px;" href="#" data-bind="click: function() { $root.DeleteProductColor($data) }"><i class="icon-trash icon-white"></i> Delete</a>			
-			    </li>
-            </ul>
-        </form>
     </div>
     </script>
     
     <!-- KNOCKOUT TEMPLATE - CHILD EDITOR IMAGES COLOR TAB -->
     <script type="text/html" id="Sub-Child-Editor-AddImage">
-        <div style="margin-top:70px" data-bind="with: $root.NewImageInput">
+        <div style="height:20px;"></div>
+
+        <div data-bind="with: $root.NewImageInput">
         <form>
 			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
-                <strong>Please enter all the required fields.</strong>
+                <strong>Please Upload an Image.</strong>
 			</div>
 
             <div class="row">
@@ -1136,17 +1178,17 @@
     <div class="workspace-heading-parent" data-bind="template: { name: 'Top-Workspace-' + $root.ActiveView().Level }">
 	</div>
     
-	<div id="gliding-container" class="container" data-bind="attr: { style: $root.GlidingContainerStyle }">
-		<div id="parent-editor" data-bind="if: $root.ActiveView().Level == 'Parent'">
-			<div style="margin-bottom:200px;" data-bind="template: { name: 'Parent-Editor-' + $root.ActiveView().Template }">
+	<div id="gliding-container" class="container" style="top:185px;">
+    	<div id="parent-editor" data-bind="if: $root.ActiveView().Level == 'Parent'">
+			<div style="margin-bottom:100px;" data-bind="template: { name: 'Parent-Editor-' + $root.ActiveView().Template }">
 			</div>
 		</div>		
 		<div id="child-editor" data-bind="if: $root.ActiveView().Level == 'Child'">
-			<div style="margin-bottom:200px;" data-bind="template: { name: 'Child-Editor-' + $root.ActiveView().Template  }">
+			<div style="margin-bottom:100px;" data-bind="template: { name: 'Child-Editor-' + $root.ActiveView().Template  }">
 			</div>
 		</div>
         <div id="sub-child-editor" data-bind="if: $root.ActiveView().Level == 'Sub-Child'">
-			<div style="margin-bottom:200px;" data-bind="template: { name: 'Sub-Child-Editor-' + $root.ActiveView().Template }">
+			<div style="margin-bottom:100px;" data-bind="template: { name: 'Sub-Child-Editor-' + $root.ActiveView().Template }">
 			</div>
 		</div>
     </div>

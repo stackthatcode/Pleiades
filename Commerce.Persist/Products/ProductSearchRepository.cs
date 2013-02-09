@@ -72,10 +72,6 @@ namespace Commerce.Persist.Products
                 .ToList();
         }
 
-        // Two sequences
-        // 1.) Choose an existing Color
-        // 2.) Create a new Color, add it to the global Color List, then run this method
-        
         public JsonProductColor AddProductColor(int productId, int colorId)
         {
             var color = this.Context.Colors.First(x => x.Deleted == false && x.Id == colorId);
@@ -99,7 +95,7 @@ namespace Commerce.Persist.Products
             productColor.IsDeleted = true;
         }
 
-        public void UpdateProductColors(int productId, string sortedIds)
+        public void UpdateProductColorSort(int productId, string sortedIds)
         {
             var colors = this.Context.ProductColors
                 .Where(x => x.IsDeleted == false && x.Product.Id == productId)
@@ -115,6 +111,24 @@ namespace Commerce.Persist.Products
             this.Context.SaveChanges();
         }
 
+        public void UpdateProductImageSort(int productId, string sortedIds)
+        {
+            var images = this.Context.Products
+                .Include(x => x.Images)
+                .FirstOrDefault(x => x.Id == productId)
+                .Images
+                .ToList();
+            var idList = sortedIds.Split(',').Select(x => Int32.Parse(x)).ToList();
+
+            for (var index = 0; index < idList.Count(); index++)
+            {
+                var image = images.FirstOrDefault(x => x.Id == idList[index]);
+                image.Order = index;
+            }
+
+            this.Context.SaveChanges();
+        }
+
         public List<JsonProductImage> RetrieveImages(int productId)
         {
             return this.Context.Products
@@ -123,6 +137,7 @@ namespace Commerce.Persist.Products
                 .Include(x => x.Images.Select(img => img.ProductColor))
                 .FirstOrDefault(x => x.Id == productId)
                 .Images
+                .OrderBy(x => x.Order)
                 .Select(x => x.ToJson())
                 .ToList();
         }
@@ -146,7 +161,10 @@ namespace Commerce.Persist.Products
 
         public void DeleteProductImage(int productId, int imageId)
         {
-            throw new NotImplementedException();
+            var product = this.Context.Products.Include(x => x.Images).FirstOrDefault(x => x.Id == productId);
+            var image = product.Images.FirstOrDefault(x => x.Id == imageId);
+            if (image != null)
+                product.Images.Remove(image);
         }
     }
 }

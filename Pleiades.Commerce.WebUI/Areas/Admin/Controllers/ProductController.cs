@@ -155,7 +155,22 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult UpdateColorOrder(int id, string sorted)
         {
-            this.ProductSearchRepository.UpdateProductColors(id, sorted);
+            this.ProductSearchRepository.UpdateProductColorSort(id, sorted);
+            return new JsonNetResult();
+        }
+
+        [HttpPost]
+        public ActionResult UpdateImageOrder(int id, string sorted)
+        {
+            this.ProductSearchRepository.UpdateProductImageSort(id, sorted);
+            return new JsonNetResult();
+        }
+        
+        [HttpPost]
+        public ActionResult DeleteProductImage(int id, int productImageId)
+        {
+            this.ProductSearchRepository.DeleteProductImage(id, productImageId);
+            this.Context.SaveChanges();
             return new JsonNetResult();
         }
 

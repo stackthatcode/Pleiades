@@ -14,10 +14,11 @@ namespace Commerce.Domain.Interfaces
         List<JsonProductColor> RetreieveColors(int productId);
         JsonProductColor AddProductColor(int productId, int colorId);
         void DeleteProductColor(int productId, int colorId);
-        void UpdateProductColors(int productId, string sortedIds);
+        void UpdateProductColorSort(int productId, string sortedIds);
 
         List<JsonProductImage> RetrieveImages(int productId);
         Func<JsonProductImage> AddProductImage(int productId, JsonProductImage image);
-        void DeleteProductImage(int productId, int imageId);        
+        void DeleteProductImage(int productId, int imageId);
+        void UpdateProductImageSort(int productId, string sortedIds);
     }
 }

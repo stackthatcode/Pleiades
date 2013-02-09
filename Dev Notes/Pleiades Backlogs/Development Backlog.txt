@@ -8,12 +8,28 @@ Front Range
 
 ...work...
 
+http://fortawesome.github.com/Font-Awesome/
+
 
 Product Editor
 ~~~~~~~~~~~~~~
 - Start Designing Product Screen => IN PROGRESS
 
-=> Images => TODO - EXECUTE DESIGN
+=> Images => IN PROGRESS - EXECUTE DESIGN
+- Upload Validation => DONE
+- Add New Image optimization to List on Save => DONE
+- Save Image Order Event => DONE
+- Adding a New Color should Update Sort on server => DONE
+- Adding a New Image should Update Sort on server => DONE
+
+- Delete Image
+
+
+- Assign Images to Colors Button
+- Choose Color Drop Down
+- Delete Color Repository modification
+
+
 => Screen for ordering Colors & Images => IN PROGRESS
 
 
