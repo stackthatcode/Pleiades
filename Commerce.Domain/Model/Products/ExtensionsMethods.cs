@@ -30,6 +30,7 @@ namespace Commerce.Domain.Model.Products
                 UnitPrice = product.UnitPrice,
                 UnitCost = product.UnitCost,
                 ImageBundleExternalId = bundleID ?? Guid.Empty.ToString(),
+                AssignImagesToColors = product.AssignImagesToColors,
             };
         }
 

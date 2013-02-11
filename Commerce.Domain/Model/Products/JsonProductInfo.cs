@@ -53,5 +53,8 @@ namespace Commerce.Domain.Model.Products
 
         [JsonProperty]
         public string ImageBundleExternalId { get; set; }
+
+        [JsonProperty]
+        public bool AssignImagesToColors { get; set; }
     }
 }

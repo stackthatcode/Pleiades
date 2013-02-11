@@ -89,10 +89,22 @@ namespace Commerce.Persist.Products
 
         public void DeleteProductColor(int productId, int productColorId)
         {
-            // TODO: add logic for addressing Product Images attached to a Color
-
             var productColor = this.Context.ProductColors.First(x => x.Product.Id == productId && x.Id == productColorId);
             productColor.IsDeleted = true;
+
+            var images = this.Context.Products
+                .Include(x => x.Images)
+                .Include(x => x.Images.Select(img => img.ProductColor))
+                .First(x => x.Id == productId)
+                .Images;
+
+            foreach (var image in images)
+            {
+                if (image.ProductColor.Id == productColorId)
+                {
+                    image.ProductColor = null;
+                }
+            }
         }
 
         public void UpdateProductColorSort(int productId, string sortedIds)
@@ -165,6 +177,38 @@ namespace Commerce.Persist.Products
             var image = product.Images.FirstOrDefault(x => x.Id == imageId);
             if (image != null)
                 product.Images.Remove(image);
+        }
+
+        public void AssignImagesToColor(int productId)
+        {
+            var product = this.Context.Products
+                .Include(x => x.Images)
+                .First(x => x.Id == productId);
+
+            // Idempotence
+            if (product.AssignImagesToColors == true)
+                return;
+
+            var colors = this.Context.ProductColors.Where(x => x.Product.Id == productId);
+            if (colors.Count() == 0)
+                return;
+        }
+
+        public void UnassignImagesFromColor(int productId)
+        {
+            var product = this.Context.Products
+               .Include(x => x.Images)
+               .First(x => x.Id == productId);
+
+            // Idempotence
+            if (product.AssignImagesToColors == false)
+                return;
+
+            // Break the old association
+            foreach (var image in product.Images)
+            {
+                image.ProductColor = null;
+            }
         }
     }
 }

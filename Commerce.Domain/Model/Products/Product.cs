@@ -31,6 +31,7 @@ namespace Commerce.Domain.Model.Products
         public bool Active { get; set; }
 
         // Images
+        public bool AssignImagesToColors { get; set; }
         public List<ProductImage> Images { get; set; }
 
         // back-end

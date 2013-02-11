@@ -20,5 +20,8 @@ namespace Commerce.Domain.Interfaces
         Func<JsonProductImage> AddProductImage(int productId, JsonProductImage image);
         void DeleteProductImage(int productId, int imageId);
         void UpdateProductImageSort(int productId, string sortedIds);
+
+        void AssignImagesToColor(int productId);
+        void UnassignImagesFromColor(int productId);
     }
 }

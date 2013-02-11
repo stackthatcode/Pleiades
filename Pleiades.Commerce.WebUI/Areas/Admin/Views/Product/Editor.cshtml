@@ -25,7 +25,8 @@
                 CategoryId: ko.observable(product.CategoryId),
                 CategoryName: ko.observable(product.CategoryName),
                 UnitPrice: ko.observable(product.UnitPrice || 0),
-                UnitCost: ko.observable(product.UnitCost || 0),                
+                UnitCost: ko.observable(product.UnitCost || 0),
+                AssignImagesToColors: ko.observable(product.AssignImagesToColors),             
                 ImageBundleExternalId: ko.observable(product.ImageBundleExternalId),
 			};
             
@@ -78,6 +79,7 @@
                 UnitPrice: product.UnitPrice(),
                 UnitCost: product.UnitCost(),
                 ImageBundleExternalId: product.ImageBundleExternalId(),
+                AssignImagesToColors: product.AssignImagesToColors(),
 			};
 		}
 
@@ -85,7 +87,6 @@
             return "$" + input.toFixed(2);
         }
 	</script>    
-    
     <!-- Images View Model -->
     <script type="text/javascript">
         var AddImageFunctions = function (rootModel) {
@@ -94,35 +95,94 @@
             self.SelectedProductImages = ko.observableArray();
             self.NewImageInput = ko.observable();
 
-            self.ImagesTabClick = function () {
-                flow.exec(
-                    function () {
-                        self.ProductService.Images(self.SelectedProduct().Id(), this);
-                    },
-                    function (images) {
-                        self.SelectedProductImages(images);
-                        self.ActiveView({ Level: "Child", Template: "Images" });
-                        self.MakeImagesSortable();
+            self.ProductColorById = function(id) {
+                for (i = 0; i < self.SelectedProductColors().length; i++) {
+                    var color = self.SelectedProductColors()[i];
+                    if (color.Id == id) {
+                        return color;
                     }
-                );
+                }
             }
-            
+
+            self.ImagesTabClick = function () {
+                if (self.SelectedProduct().AssignImagesToColors()) {
+                    flow.exec(
+                        function() { 
+                            self.ProductService.Colors(self.SelectedProduct().Id(), this);
+                        },
+                        function (colors) {
+                            $.each(colors, function(index, elem) { 
+                                colors.Images = [];
+                            });
+                            self.SelectedProductColors(colors);
+                            self.ProductService.Images(self.SelectedProduct().Id(), this);
+                        },
+                        function (images) {                            
+                            $.each(images, function(index, elem) {
+                                console.log(elem); 
+                                color = self.ProductColorById(elem.ProductColor.Id);
+                                color.Images.push(elem);
+                            });
+
+                            self.SelectedProductImages(images);
+                            self.ActiveView({ Level: "Child", Template: "Images" });
+                            self.MakeImagesSortable();
+                        }
+                    );
+                } else {
+                    flow.exec(
+                        function() { 
+                            self.ProductService.Images(self.SelectedProduct().Id(), this);
+                        },
+                        function (images) {
+                            self.SelectedProductImages(images);
+                            self.ActiveView({ Level: "Child", Template: "Images" });
+                            self.MakeImagesSortable();
+                        }
+                    );
+                }
+            }
+
             self.MakeImagesSortable = function () {
-                $(".sortable").sortable({
-                    placeholder: "ui-state-highlight",
-                    update: self.UpdateImageSortOrder,
-                    delay: 300
+                $(".colorDrop").droppable({
+                    drop: function( event, ui ) {
+                        var originalColorId = $(event.srcElement).closest("table.colorDrop").attr("id").replace('color', '');
+                        var newColorId = event.target.id.replace("color", "");
+                        var imageId = $(event.srcElement).closest("li").attr("id").replace("sorted", "");
+                        self.UpdateImageToColorAssignment(originalColorId, newColorId, imageId);
+                    }
                 });
-                $(".sortable").disableSelection();
+
+                $.each($(".sortable"), function(index, elem) {
+                    $(elem).sortable({
+                        placeholder: "ui-state-highlight",
+                        update: function() { 
+                            self.UpdateImageSortOrder(elem) 
+                        },
+                        delay: 300
+                    }).disableSelection();
+                });
+            }
+
+            self.UpdateImageToColorAssignment = function(originalColorId, newColorId, imageId) { 
+                if (originalColorId == newColorId) {
+                    return;
+                }
+                
+                console.log("Original Color Id: " + originalColorId);
+                console.log("New Color Id: " + newColorId);
+                console.log("Image Id: " + imageId);
             }
             
-            self.UpdateImageSortOrder = function () {
+            self.UpdateImageSortOrder = function (element) {
                 var sortOutput = [];
-                $.each($("#images > li"), function (index, elem) { 
+                var sortedElements = $(element).find    ("li");
+                $.each(sortedElements, function (index, elem) { 
                     sortOutput.push($(elem).attr('id').replace('sorted', '')); 
                 });
                 var sortedIds = sortOutput.join(",");
-                self.ProductService.UpdateImageOrder(self.SelectedProduct().Id(), sortedIds);
+                console.log("Sort Event: " + sortedIds);
+                //self.ProductService.UpdateImageOrder(self.SelectedProduct().Id(), sortedIds);
             };
 
             self.GlideBackToImages = function () {
@@ -133,6 +193,7 @@
                     },
 					function () {
 					    self.ActiveView({ Level: "Child", Template: "Images" });
+                        self.MakeImagesSortable();
 					}
 				);
             }
@@ -191,9 +252,27 @@
                 console.log(data);
                 self.NewImageInput().ImageBundleExternalId(data.ExternalId);
             }
+
+            self.AssignImagesToColor = function() {
+                // If they don't have any Colors, then show a message -- hey add some Colors first, boss!
+
+                // Invoke this method
+
+                self.SelectedProduct().AssignImagesToColors(true);
+                self.MakeImagesSortable();
+                // Set AssignImagesToColors in the Secl
+
+                // Display message "Drag Images into a Color"
+
+                // Reload the data
+            };
+
+            self.UnassignImagesFromColor = function() {
+                self.SelectedProduct().AssignImagesToColors(false);
+                self.MakeImagesSortable();
+            };
         }
     </script>
-
     <!-- Color View Model -->
     <script type="text/javascript">
         var AddColorFunctions = function (rootModel) {
@@ -408,7 +487,6 @@
 
         }
 	</script>
-    
     <!-- List Model -->
     <script type="text/javascript">
         var AddListModel = function (rootModel) {
@@ -479,7 +557,6 @@
             }
         }
     </script>
-
     <!-- Search View Model -->
     <script type="text/javascript">
         var AddSearchFunctions = function (rootModel) {
@@ -608,7 +685,6 @@
             return self;
         }
     </script> 
-    
     <!-- Root View Model -->
     <script type="text/javascript">
         var RootModel = function () {
@@ -685,7 +761,6 @@
 		    </div>
         </div>
     </script>
-
 	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE PRODUCT -->
 	<script type="text/html" id="Top-Workspace-Child">
         <div class="workspace-heading" style="height:125px;">
@@ -743,13 +818,19 @@
 
                     <div class="span6" style="text-align:right;" data-bind="if: $root.ActiveView().Template == 'Images'">
 				        <a class="btn btn-primary" href="#" data-bind="click: $root.AddNewImage"><i class="icon-plus icon-white"></i> Add Image</a>
-				        <a class="btn btn-primary" href="#" data-bind="click: $root.SaveClick"><i class="icon-white icon-share"></i> Assign Images To Colors</a>
+                        
+                        <!-- ko ifnot: $root.SelectedProduct().AssignImagesToColors() -->
+				        <a class="btn btn-primary" href="#" data-bind="click: $root.AssignImagesToColor"><i class="icon-white icon-share"></i> Assign Images To Colors</a>
+                        <!-- /ko -->
+
+                        <!-- ko if: $root.SelectedProduct().AssignImagesToColors() -->
+				        <a class="btn btn-primary" href="#" data-bind="click: $root.UnassignImagesFromColor"><i class="icon-white icon-ban-circle"></i> Don't Assign Images To Colors</a>
+                        <!-- /ko -->
                     </div>
 		        </div>
 		    </div>
 		</div>
     </script>
-
 	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE COLOR-SUBVIEW -->
 	<script type="text/html" id="Top-Workspace-Sub-Child">
         <div class="workspace-heading" style="height:125px;">
@@ -817,7 +898,6 @@
 		    </div>
 		</div>
 	</script>
-	
     <!-- KNOCKOUT TEMPLATE - PARENT EDITOR SEARCH -->
 	<script type="text/html" id="Parent-Editor-Search">
 		<div style="margin-top:24px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SearchData().length == 0">
@@ -854,7 +934,6 @@
 		</tbody>
 		</table>
 	</script>
-
 	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR INFO TAB -->
 	<script type="text/html" id="Child-Editor-Info">
         <div style="margin-top:20px;" data-bind="with: $root.SelectedProduct()">
@@ -939,7 +1018,6 @@
         </form>
         </div>
 	</script>
-	
 	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB -->
     <script type="text/html" id="Child-Editor-Colors">
     <div style="margin-top:0px;">
@@ -979,7 +1057,6 @@
         </form>
     </div>
     </script>
-    
     <!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB - ADD FROM LIST SUB -->
     <script type="text/html" id="Sub-Child-Editor-AddColorsFromList">
     <div>
@@ -1018,7 +1095,6 @@
         </form>
     </div>
     </script>
-
     <!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB - CREATE SUB -->
     <script type="text/html" id="Sub-Child-Editor-CreateColor">
         <div data-bind="with: $root.NewColorInput">
@@ -1086,11 +1162,44 @@
         </form>
         </div>
 	</script>
-
     <!-- KNOCKOUT TEMPLATE - CHILD EDITOR IMAGES TAB -->
     <script type="text/html" id="Child-Editor-Images">
-    <div style="margin-top:20px; padding-bottom:0px; display: block; left:0px; bottom:0px;">
-        <ul id="images" class="sortable" data-bind="foreach: $root.SelectedProductImages()">
+    <div data-bind="if: $root.SelectedProduct().AssignImagesToColors">
+        <!-- ko foreach: $root.SelectedProductColors() -->
+        <div>
+        <table class="table-hover colorDrop" data-bind="attr: { id: 'color' + $data.Id }">
+            <tr>
+                <td valign="top" style="padding-top:20px;">
+                    <div style="width:712px;">
+                        <ul class="sortable" data-bind="attr: { id: 'images' + $data.Id }, foreach: $root.SelectedProductImages()">
+                            <li data-bind="attr: { id: 'sorted' + $data.Id }">
+                                <div style="width:160px; padding-bottom:5px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+                                </div>
+                                <a href="#" style="width:55px;" class="btn btn-inverse btn-small disabled"><i class="icon-screenshot icon-white"></i> Drag!</a>
+                                <a class="btn btn-primary btn-small" style="width:55px;" href="#" data-bind="click: function() { $root.DeleteProductImage($data) }"><i class="icon-trash icon-white"></i> Delete</a>			
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+                <td valign="top" style="width:220px; text-align:left; vertical-align:top; padding-top:20px;">
+                    <div style="width:80px; margin-bottom:5px;" data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+			        </div>
+				    <p>
+                        <strong data-bind="text: $data.Name"></strong > - <span data-bind="text: $data.SkuCode"></span>
+                    </p>
+                    <h4>Drag images from other colors into this list to assign to this color</h4>
+                </td>
+            </tr>
+        </table>
+        </div>
+        <!-- /ko -->
+
+        <div style="display:block; margin-bottom:200px; clear:both;">
+        </div>
+    </div>
+
+    <div data-bind="ifnot: $root.SelectedProduct().AssignImagesToColors" style="margin-top:20px;">
+        <ul class="sortable" data-bind="foreach: $root.SelectedProductImages()">
             <li data-bind="attr: { id: 'sorted' + $data.Id }">
                 <div style="width:160px; padding-bottom:5px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
                 </div>
@@ -1100,10 +1209,8 @@
         </ul>
         <div style="display:block; margin-bottom:200px; clear:both;">
         </div>
-
     </div>
     </script>
-    
     <!-- KNOCKOUT TEMPLATE - CHILD EDITOR IMAGES COLOR TAB -->
     <script type="text/html" id="Sub-Child-Editor-AddImage">
         <div style="height:20px;"></div>
@@ -1137,8 +1244,6 @@
         </form>
         </div>
 	</script>
-
-
 	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG PRODUCT -->
 	<script type="text/html" id="Modal-Dialog-Product">
 		<div id="modal-delete" class="modal hide fade">
@@ -1155,7 +1260,6 @@
 			</div>
 		</div>
     </script>
-
 	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG PRODUCT COLOR -->
 	<script type="text/html" id="Modal-Dialog-ProductColor">
         <div id="modal-delete" class="modal hide fade">

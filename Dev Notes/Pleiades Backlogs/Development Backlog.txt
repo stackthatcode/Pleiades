@@ -16,21 +16,17 @@ Product Editor
 - Start Designing Product Screen => IN PROGRESS
 
 => Images => IN PROGRESS - EXECUTE DESIGN
-- Upload Validation => DONE
-- Add New Image optimization to List on Save => DONE
-- Save Image Order Event => DONE
-- Adding a New Color should Update Sort on server => DONE
-- Adding a New Image should Update Sort on server => DONE
-
-- Delete Image
-
-
-- Assign Images to Colors Button
-- Choose Color Drop Down
-- Delete Color Repository modification
-
 
 => Screen for ordering Colors & Images => IN PROGRESS
+- Render Images to Colors => TODO
+
+
+- Fix the Color to Image Sorting => TODO
+- Choose Color Drop Down => TODO
+
+- Unassign Images Button => DONE
+- Delete Color Repository modification => DONE
+- Assign Images to Colors Button => DONE
 
 
 - When I delete a SizeGroup, Color, Category or Brand, gotta set the Product's == N/A => TODO
@@ -41,6 +37,7 @@ Product Editor
 - Update Product in Search after Adding & Editing
 - Fix the Scroll Tracker - take it to the top => TODO
 - Change out the Back Buttons => IN PROGRESS
+
 
 
 Please Research

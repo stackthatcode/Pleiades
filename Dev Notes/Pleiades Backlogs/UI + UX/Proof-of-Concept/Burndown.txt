@@ -462,4 +462,23 @@ backlog cleaning
 - TASK => cross-browser test Animation Stuff, mayhaps introduce method chaining => PENDING EVAL
 - Review order of Modal Ok/Cancel => PENDING EVAL
 
+2/4 1.5 Hours
+2/5 1.0 Hours
+2/6 1.75 Hours
+2/7 1.0 Hours
+2/8 1.5 Hours
+2/9 1.0 Hours
+2/10 3.0 Hours
+--------------
+- Upload Validation => DONE
+- Add New Image optimization to List on Save => DONE
+- Save Image Order Event => DONE
+- Adding a New Color should Update Sort on server => DONE
+- Adding a New Image should Update Sort on server => DONE
+- Delete Image => DONE
+- Rebuild Schema => DONE
+
+2/11 1.0 Hours
+--------------
+- 
 

@@ -68,6 +68,10 @@ namespace Commerce.Initializer.Builders
                     Brand = brandTatami,
                     Category = category1,
                     SizeGroup = sizeGroup,
+                    AssignImagesToColors = true,
+                    IsDeleted = false,
+                    DateCreated = DateTime.Now,
+                    LastModified = DateTime.Now,
                 };
 
                 var productColor11 = new ProductColor { Color = black, Product = product1, Order = 1 };

@@ -191,5 +191,21 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             this.Context.SaveChanges();
             return new JsonNetResult(result());
         }
+
+        [HttpPost]
+        public ActionResult AssignImagesToColor(int id)
+        {
+            this.ProductSearchRepository.AssignImagesToColor(id);
+            this.Context.SaveChanges();
+            return new JsonNetResult();
+        }
+
+        [HttpPost]
+        public ActionResult UnassignImagesFromColor(int id)
+        {
+            this.ProductSearchRepository.UnassignImagesFromColor(id);
+            this.Context.SaveChanges();
+            return new JsonNetResult();
+        }
     }
 }

@@ -86,7 +86,6 @@
     <Compile Include="Model\Products\JsonProductImages.cs" />
     <Compile Include="Model\Products\JsonProductInfo.cs" />
     <Compile Include="Model\Products\ProductColor.cs" />
-    <Compile Include="Model\Products\JsonProduct.cs" />
     <Compile Include="Model\Products\Product.cs">
       <SubType>Code</SubType>
     </Compile>
