@@ -100,7 +100,7 @@ namespace Commerce.Persist.Products
 
             foreach (var image in images)
             {
-                if (image.ProductColor.Id == productColorId)
+                if (image.ProductColor != null && image.ProductColor.Id == productColorId)
                 {
                     image.ProductColor = null;
                 }

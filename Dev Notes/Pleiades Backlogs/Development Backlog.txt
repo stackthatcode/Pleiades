@@ -15,18 +15,17 @@ Product Editor
 ~~~~~~~~~~~~~~
 - Start Designing Product Screen => IN PROGRESS
 
-=> Images => IN PROGRESS - EXECUTE DESIGN
-
 => Screen for ordering Colors & Images => IN PROGRESS
-- Render Images to Colors => TODO
 
-
-- Fix the Color to Image Sorting => TODO
 - Choose Color Drop Down => TODO
-
-- Unassign Images Button => DONE
-- Delete Color Repository modification => DONE
+- Unassign Images Button => TODO
 - Assign Images to Colors Button => DONE
+- Unassigned Images => TODO
+
+- Render Images to Colors => DONE
+- Fix the Color to Image Sorting => DONE
+- Delete Color Repository modification => DONE
+- Server method for changing Assigned => DONE
 
 
 - When I delete a SizeGroup, Color, Category or Brand, gotta set the Product's == N/A => TODO

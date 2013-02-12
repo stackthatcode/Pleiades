@@ -92,12 +92,13 @@
         var AddImageFunctions = function (rootModel) {
             var self = rootModel;
 
+            self.SelectedColorsWithImages = ko.observableArray();
             self.SelectedProductImages = ko.observableArray();
             self.NewImageInput = ko.observable();
 
             self.ProductColorById = function(id) {
-                for (i = 0; i < self.SelectedProductColors().length; i++) {
-                    var color = self.SelectedProductColors()[i];
+                for (i = 0; i < self.SelectedColorsWithImages().length; i++) {
+                    var color = self.SelectedColorsWithImages()[i];
                     if (color.Id == id) {
                         return color;
                     }
@@ -110,21 +111,21 @@
                         function() { 
                             self.ProductService.Colors(self.SelectedProduct().Id(), this);
                         },
-                        function (colors) {
-                            $.each(colors, function(index, elem) { 
-                                colors.Images = [];
+                        function (colorJson) {
+                            $.each(colorJson, function(index, elem) { 
+                                elem.Images = ko.observableArray();
                             });
-                            self.SelectedProductColors(colors);
+
+                            self.SelectedColorsWithImages(colorJson);
+                            self.SelectedColorsWithImages().unshift({ Id: null, Name: "Unassigned", Images: ko.observableArray() });
                             self.ProductService.Images(self.SelectedProduct().Id(), this);
                         },
-                        function (images) {                            
-                            $.each(images, function(index, elem) {
-                                console.log(elem); 
-                                color = self.ProductColorById(elem.ProductColor.Id);
+                        function (imagesJson) {                            
+                            $.each(imagesJson, function(index, elem) {
+                                color = self.ProductColorById(elem.ProductColorId);
                                 color.Images.push(elem);
                             });
 
-                            self.SelectedProductImages(images);
                             self.ActiveView({ Level: "Child", Template: "Images" });
                             self.MakeImagesSortable();
                         }
@@ -182,7 +183,7 @@
                 });
                 var sortedIds = sortOutput.join(",");
                 console.log("Sort Event: " + sortedIds);
-                //self.ProductService.UpdateImageOrder(self.SelectedProduct().Id(), sortedIds);
+                self.ProductService.UpdateImageOrder(self.SelectedProduct().Id(), sortedIds);
             };
 
             self.GlideBackToImages = function () {
@@ -254,22 +255,21 @@
             }
 
             self.AssignImagesToColor = function() {
-                // If they don't have any Colors, then show a message -- hey add some Colors first, boss!
-
-                // Invoke this method
-
+                self.SelectedColorsWithImages.removeAll();
+                self.SelectedProductImages.removeAll();
                 self.SelectedProduct().AssignImagesToColors(true);
-                self.MakeImagesSortable();
-                // Set AssignImagesToColors in the Secl
+                self.ImagesTabClick();
 
-                // Display message "Drag Images into a Color"
-
-                // Reload the data
+                // TODO: create method on server to save this
             };
 
             self.UnassignImagesFromColor = function() {
+                self.SelectedColorsWithImages.removeAll();
+                self.SelectedProductImages.removeAll();
                 self.SelectedProduct().AssignImagesToColors(false);
-                self.MakeImagesSortable();
+                self.ImagesTabClick();
+                
+                // TODO: create method on server to save this
             };
         }
     </script>
@@ -1165,13 +1165,13 @@
     <!-- KNOCKOUT TEMPLATE - CHILD EDITOR IMAGES TAB -->
     <script type="text/html" id="Child-Editor-Images">
     <div data-bind="if: $root.SelectedProduct().AssignImagesToColors">
-        <!-- ko foreach: $root.SelectedProductColors() -->
+        <!-- ko foreach: $root.SelectedColorsWithImages() -->
         <div>
         <table class="table-hover colorDrop" data-bind="attr: { id: 'color' + $data.Id }">
             <tr>
                 <td valign="top" style="padding-top:20px;">
                     <div style="width:712px;">
-                        <ul class="sortable" data-bind="attr: { id: 'images' + $data.Id }, foreach: $root.SelectedProductImages()">
+                        <ul class="sortable" data-bind="attr: { id: 'images' + $data.Id }, foreach: $data.Images()">
                             <li data-bind="attr: { id: 'sorted' + $data.Id }">
                                 <div style="width:160px; padding-bottom:5px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
                                 </div>
@@ -1182,12 +1182,18 @@
                     </div>
                 </td>
                 <td valign="top" style="width:220px; text-align:left; vertical-align:top; padding-top:20px;">
-                    <div style="width:80px; margin-bottom:5px;" data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
-			        </div>
-				    <p>
-                        <strong data-bind="text: $data.Name"></strong > - <span data-bind="text: $data.SkuCode"></span>
-                    </p>
-                    <h4>Drag images from other colors into this list to assign to this color</h4>
+                    <div data-bind="if: $data.Name == 'Unassigned'">
+				        <p><strong>Unassigned Images</strong></p>
+                        <h4>Drag images from this region onto Color to assign</h4>
+                    </div>
+                    <div data-bind="ifnot: $data.Name == 'Unassigned'">
+                        <div style="width:80px; margin-bottom:5px;" data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+			            </div>
+				        <p>
+                            <strong data-bind="text: $data.Name"></strong > - <span data-bind="text: $data.SkuCode"></span>
+                        </p>
+                        <h4>Drag images from other colors into this list to assign to this color</h4>
+                    </div>
                 </td>
             </tr>
         </table>
