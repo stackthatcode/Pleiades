@@ -11,6 +11,7 @@ String.prototype.koTrunc = function(n, useWordBoundary){
 //}
 
 // TODO: how to add this to Array's prototype...?
+
 Array.prototype.firstOrNull = function(lambda) {
 	for (var arrayIndex = 0; arrayIndex < this.length; arrayIndex += 1) {
 		var element = this[arrayIndex];

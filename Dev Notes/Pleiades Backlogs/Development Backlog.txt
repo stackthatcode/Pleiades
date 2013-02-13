@@ -121,6 +121,7 @@ PENDING FEATURE BACKLOG
 - Add a way to execute the DDL which adds SQL Foreign Keys to Categories, etc. => PENDING EVAL
 - Eliminate the MembershipProvider (WHOO-HOO!!!!!!!) => PENDING EVAL
 * Roll everything into the MembershipService, take back control of your objects and data access.  Done.  OVER! => PENDING EVAL
+- Ability to change the Order of Sizes => PENDING
 
 NOTES ON THE HEGEMONY OF UNREASON (STATIC MEMBERSHIP)
 - UpdateSelf() invocations... this odd function is called... with tons of exception checking... as if, there are not transactions...?  Why don't you throw

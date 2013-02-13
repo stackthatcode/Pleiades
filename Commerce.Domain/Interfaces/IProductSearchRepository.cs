@@ -23,5 +23,6 @@ namespace Commerce.Domain.Interfaces
 
         void AssignImagesToColor(int productId);
         void UnassignImagesFromColor(int productId);
+        void ChangeImageColor(int productId, int productImageId, int newColor);
     }
 }

@@ -54,7 +54,7 @@ namespace Commerce.Domain.Model.Products
                 Id = image.Id,
                 ImageBundleExternalId = image.ImageBundle.ExternalId.ToString(),
                 Order = image.Order,
-                ProductColorId = image.ProductColor != null ? image.ProductColor.Id : (int?)null,
+                ProductColorId = image.ProductColor != null ? image.ProductColor.Id : 0,
                 Description = image.Description,
             };
         }

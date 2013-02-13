@@ -78,5 +78,11 @@ function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback)
         self.AjaxPost("/Admin/Product/DeleteProductImage/" + productId + "?productImageId=" + productImageId, {}, callback);
     };
 
+    self.ChangeImageColor = function (productId, productImageId, newColorId, callback) {
+        self.AjaxPost(
+                "/Admin/Product/ChangeImageColor/" + productId +
+                    "?productImageId=" + productImageId + "&newColorId=" + newColorId, {}, callback);
+    };
+
 	return self;
 }

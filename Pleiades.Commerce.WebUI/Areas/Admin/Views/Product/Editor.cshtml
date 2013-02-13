@@ -96,7 +96,7 @@
             self.SelectedProductImages = ko.observableArray();
             self.NewImageInput = ko.observable();
 
-            self.ProductColorById = function(id) {
+            self.ProductColorWithImagesById = function(id) {
                 for (i = 0; i < self.SelectedColorsWithImages().length; i++) {
                     var color = self.SelectedColorsWithImages()[i];
                     if (color.Id == id) {
@@ -107,6 +107,7 @@
 
             self.ImagesTabClick = function () {
                 if (self.SelectedProduct().AssignImagesToColors()) {
+                    var unassignedColor = { Id: 0, Name: "Unassigned", Images: ko.observableArray() };
                     flow.exec(
                         function() { 
                             self.ProductService.Colors(self.SelectedProduct().Id(), this);
@@ -117,14 +118,18 @@
                             });
 
                             self.SelectedColorsWithImages(colorJson);
-                            self.SelectedColorsWithImages().unshift({ Id: null, Name: "Unassigned", Images: ko.observableArray() });
+                            self.SelectedColorsWithImages().unshift(unassignedColor);
                             self.ProductService.Images(self.SelectedProduct().Id(), this);
                         },
                         function (imagesJson) {                            
                             $.each(imagesJson, function(index, elem) {
-                                color = self.ProductColorById(elem.ProductColorId);
+                                color = self.ProductColorWithImagesById(elem.ProductColorId);
                                 color.Images.push(elem);
                             });
+
+                            if (unassignedColor.Images.length == 0) {
+                                self.SelectedColorsWithImages.remove(unassignedColor);
+                            }
 
                             self.ActiveView({ Level: "Child", Template: "Images" });
                             self.MakeImagesSortable();
@@ -170,9 +175,24 @@
                     return;
                 }
                 
-                console.log("Original Color Id: " + originalColorId);
-                console.log("New Color Id: " + newColorId);
-                console.log("Image Id: " + imageId);
+                flow.exec(
+                    function() {
+                        self.ProductService.ChangeImageColor(self.SelectedProduct().Id(), imageId, newColorId, this);
+                    },
+                    function() {
+                        var newColor = self.ProductColorWithImagesById(newColorId);
+                        var originalColor = self.ProductColorWithImagesById(originalColorId);
+                        var index = originalColor.Images().arrayFirstIndexOf(function(x) { return x.Id == imageId; });
+                        var image = originalColor.Images()[index];
+                        originalColor.Images.remove(image);
+                        newColor.Images.push(image);
+
+                        // Update Empty Unassigned
+                        if (originalColor.Id == "0" && originalColor.Images.length == 0) {
+                            self.SelectedColorsWithImages.remove(originalColor);
+                        }
+                    }
+                );
             }
             
             self.UpdateImageSortOrder = function (element) {

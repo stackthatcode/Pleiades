@@ -179,6 +179,18 @@ namespace Commerce.Persist.Products
                 product.Images.Remove(image);
         }
 
+        public void ChangeImageColor(int productId, int productImageId, int newColor)
+        {
+            var product = this.Context.Products
+                    .Include(x => x.Images)
+                    .Include(x => x.Images.Select(img => img.ProductColor))
+                    .First(x => x.Id == productId);
+            var image = product.Images.First(x => x.Id == productImageId);
+            var color = this.Context.ProductColors.First(x => x.Product.Id == productId && x.Id == newColor);
+            var order = product.Images.Select(x => x.Order).Max() + 1;
+            image.ProductColor = color;
+        }
+
         public void AssignImagesToColor(int productId)
         {
             var product = this.Context.Products
