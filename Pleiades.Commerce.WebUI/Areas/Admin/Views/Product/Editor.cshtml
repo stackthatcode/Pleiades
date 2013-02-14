@@ -94,6 +94,7 @@
 
             self.SelectedColorsWithImages = ko.observableArray();
             self.SelectedProductImages = ko.observableArray();
+            self.SelectedProductColorForImage = ko.observable();             
             self.NewImageInput = ko.observable();
 
             self.ProductColorWithImagesById = function(id) {
@@ -155,6 +156,7 @@
                         var originalColorId = $(event.srcElement).closest("table.colorDrop").attr("id").replace('color', '');
                         var newColorId = event.target.id.replace("color", "");
                         var imageId = $(event.srcElement).closest("li").attr("id").replace("sorted", "");
+                        console.log("originalColorId: " + originalColorId + " " + " newColorId: " + newColorId + " imageId: " + imageId);
                         self.UpdateImageToColorAssignment(originalColorId, newColorId, imageId);
                     }
                 });
@@ -165,7 +167,6 @@
                         update: function() { 
                             self.UpdateImageSortOrder(elem) 
                         },
-                        delay: 300
                     }).disableSelection();
                 });
             }
@@ -201,9 +202,24 @@
                 $.each(sortedElements, function (index, elem) { 
                     sortOutput.push($(elem).attr('id').replace('sorted', '')); 
                 });
+
                 var sortedIds = sortOutput.join(",");
-                console.log("Sort Event: " + sortedIds);
+                console.log("DOM Ids: " + sortedIds);
                 self.ProductService.UpdateImageOrder(self.SelectedProduct().Id(), sortedIds);
+
+                // Update the Knockout model
+                var myColorId = $(element).closest("table.colorDrop").attr("id").replace('color', '');
+                var color = self.ProductColorWithImagesById(myColorId);
+                
+                var newImageArray = [];
+                $.each(sortOutput, function (index, elem) {
+                    var index = color.Images().arrayFirstIndexOf(function(x) { return x.Id == elem; });
+                    var image = color.Images()[index];
+                    newImageArray.push(image);
+                });
+
+                color.Images.removeAll();
+                color.Images(newImageArray);
             };
 
             self.GlideBackToImages = function () {
@@ -228,9 +244,19 @@
                         self.SelectedProductImages.remove(image);
                     }
                 );
-            }
+            };
+
+            self.AddNewImageForColor = function(data) {
+                self.SelectedProductColorForImage(data);
+                self.SlideToImageUpload();
+            };
 
             self.AddNewImage = function () {
+                self.SelectedProductColorForImage(null);
+                self.SlideToImageUpload();
+            };
+
+            self.SlideToImageUpload = function() {
                 flow.exec(
                     function () {
                         var input = {
@@ -262,7 +288,9 @@
                     function() {
                         self.ProductService.AddProductImage(self.SelectedProduct().Id(), input, this);
                     },
-                    function(data) {
+                    function(data) {                        
+                        // Move it into the colr
+
                         self.SelectedProductImages().push(data);
                         self.GlideBackToImages();
                     }
@@ -737,8 +765,9 @@
                 }, this);
         }
 
+        var rootModel;
         $(function () {
-            var rootModel = new RootModel();
+            rootModel = new RootModel();
             ko.applyBindings(rootModel);
         });
     </script>
@@ -836,11 +865,10 @@
 					    <a class="btn btn-primary" href="#" data-bind="click: $root.CreateNewColor"><i class="icon-white icon-pencil"></i> Create New Color</a>
                     </div>
 
-                    <div class="span6" style="text-align:right;" data-bind="if: $root.ActiveView().Template == 'Images'">
-				        <a class="btn btn-primary" href="#" data-bind="click: $root.AddNewImage"><i class="icon-plus icon-white"></i> Add Image</a>
-                        
+                    <div class="span6" style="text-align:right;" data-bind="if: $root.ActiveView().Template == 'Images'">				        
                         <!-- ko ifnot: $root.SelectedProduct().AssignImagesToColors() -->
-				        <a class="btn btn-primary" href="#" data-bind="click: $root.AssignImagesToColor"><i class="icon-white icon-share"></i> Assign Images To Colors</a>
+				        <a class="btn btn-primary" href="#" data-bind="click: $root.AddNewImage"><i class="icon-plus icon-white"></i> Add Image</a>
+                        <a class="btn btn-primary" href="#" data-bind="click: $root.AssignImagesToColor"><i class="icon-white icon-share"></i> Assign Images To Colors</a>
                         <!-- /ko -->
 
                         <!-- ko if: $root.SelectedProduct().AssignImagesToColors() -->
@@ -1212,7 +1240,7 @@
 				        <p>
                             <strong data-bind="text: $data.Name"></strong > - <span data-bind="text: $data.SkuCode"></span>
                         </p>
-                        <h4>Drag images from other colors into this list to assign to this color</h4>
+                        <a class="btn btn-primary" href="#" data-bind="click: $root.AddNewImageForColor"><i class="icon-plus icon-white"></i> Add Image</a>
                     </div>
                 </td>
             </tr>
@@ -1263,6 +1291,21 @@
                         <div class="span3">
 					        <a class="btn btn-inverse" href="#" data-bind="click: $root.GlideBackToImages"><i class="icon-remove icon-white"></i> Cancel</a>                    
 					        <a class="btn btn-primary" href="#" data-bind="click: $root.SaveImage"><i class="icon-ok icon-white"></i> Save</a>
+                        </div>
+                    </div>
+                    <div class="row" data-bind="if: $root.SelectedProductColorForImage()">
+                        <div class="span6">
+                        </div>
+                        <div class="span3">
+                            <label>Assigned Color<br />
+                                <div style="width:80px; margin-bottom:5px;" 
+                                    data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $root.SelectedProductColorForImage().ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+			                    </div>
+				                <p>
+                                    <strong data-bind="text: $root.SelectedProductColorForImage().Name"></strong > - 
+                                    <span data-bind="text: $root.SelectedProductColorForImage().SkuCode"></span>
+                                </p>
+                            </label>
                         </div>
                     </div>
                 </div>
