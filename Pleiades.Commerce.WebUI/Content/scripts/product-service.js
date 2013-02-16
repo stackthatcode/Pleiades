@@ -38,8 +38,8 @@ function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback)
         self.AjaxPost("/Admin/Color/Insert", color, callback);
     };
 
-    self.Insert = function (product, callback) {
-        self.AjaxPost("/Admin/Product/Insert", product, callback);
+    self.Save = function (product, callback) {
+        self.AjaxPost("/Admin/Product/Save", product, callback);
 	};
 
 	self.AddProductColor = function (productId, colorId, callback) {
@@ -66,8 +66,8 @@ function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback)
         self.AjaxPost("/Admin/Product/Update", product, callback);
 	};
 
-    self.Delete = function (product, callback) {
-        self.AjaxPost("/Admin/Product/Delete", product, callback);
+	self.Delete = function (id, callback) {
+	    self.AjaxPost("/Admin/Product/Delete/" + id, {}, callback);
 	};
 
     self.DeleteProductColor = function (productId, productColorId, callback) {

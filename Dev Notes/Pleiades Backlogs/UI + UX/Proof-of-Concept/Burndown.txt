@@ -503,5 +503,15 @@ backlog cleaning
 - Assign Images to Colors Button => DONE
 - Add Copy Image Method to Repository => DONE
 - Change ProductColor To Belong to Product => DONE
+- Fix the Thumbnail by Sort Order => DONE
+=> Screen for ordering Colors & Images => DONE
+- Update Product in Search after Adding & Editing=> DONE
+- Start Designing Product Screen => DONE
+- Product Images and Colors IsDeleted - do we need it? => DONE
+* Sku's/Stock will be wiped when we delete Colors and Sizes, right? => TRUE
+* Orders will still maintain the Sku Code and Description for tracing => TRUE
+* So, remove IsDeleted from ProductColors? => DONE
+- Product Search Add/Delete => DONE
+
 
 

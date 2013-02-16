@@ -21,19 +21,19 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         IJsonBrandRepository BrandRepository { get; set; }
         IJsonSizeRepository SizeRepository { get; set; }
         IJsonColorRepository ColorRepository { get; set; }
-        IProductRepository ProductSearchRepository { get; set; }
+        IProductRepository ProductRepository { get; set; }
         IImageBundleRepository ImageBundleRepository { get; set; }
         PleiadesContext Context { get; set; } 
 
         public ProductController(
                 IJsonCategoryRepository categoryRepository, IJsonBrandRepository brandRepository, 
-                IProductRepository productSearchRepository, IJsonSizeRepository sizeRepository,
+                IProductRepository productRepository, IJsonSizeRepository sizeRepository,
                 IImageBundleRepository imageBundleRepository, PleiadesContext context)
         {
             this.CategoryRepository = categoryRepository;
             this.BrandRepository = brandRepository;
             this.SizeRepository = sizeRepository;
-            this.ProductSearchRepository = productSearchRepository;
+            this.ProductRepository = productRepository;
             this.ImageBundleRepository = imageBundleRepository;
             this.Context = context;
         }
@@ -68,51 +68,22 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Search(int? brandId, int? categoryId, string searchText)
         {
-            var result = this.ProductSearchRepository.FindProducts(categoryId, brandId, searchText);
+            var result = this.ProductRepository.FindProducts(categoryId, brandId, searchText);
             return new JsonNetResult(result);
         }
 
         [HttpGet]
         public ActionResult Info(int id)
         {
-            var result = this.ProductSearchRepository.RetrieveInfo(id);
+            var result = this.ProductRepository.RetrieveInfo(id);
             return new JsonNetResult(result);
         }
 
         [HttpPost]
-        public ActionResult Insert(JsonProductInfo product)
-        {
-            return Save(product);
-        }
-
-        [HttpPost]
-        public ActionResult Update(JsonProductInfo product)
-        {
-            return Save(product);
-        }
-
-        [HttpGet]
-        public ActionResult Colors(int id)
-        {
-            var result = this.ProductSearchRepository.RetreiveColors(id);
-            return new JsonNetResult(result);
-        }
-
-        [HttpGet]
-        public ActionResult Images(int id)
-        {
-            var result = this.ProductSearchRepository.RetrieveImages(id);
-            return new JsonNetResult()
-            {
-                Data = result,
-                Formatting = Newtonsoft.Json.Formatting.Indented,
-            };
-        }
-
-        private ActionResult Save(JsonProductInfo product)
+        public ActionResult Save(JsonProductInfo product)
         {
             Product result;
-            if (product.Id == null) 
+            if (product.Id == null)
             {
                 result = new Product();
                 this.Context.Products.Add(result);
@@ -130,16 +101,41 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             result.UnitPrice = product.UnitPrice;
             result.Brand = this.Context.Brands.First(x => x.Id == product.BrandId);
             result.Category = this.Context.Categories.First(x => x.Id == product.CategoryId);
-            result.SizeGroup = this.Context.SizeGroups.FirstOrDefault(x => x.ID == product.SizeGroupId);
             this.Context.SaveChanges();
 
             return new JsonNetResult(result);
         }
 
         [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            this.ProductRepository.Delete(id);
+            this.Context.SaveChanges();
+            return new JsonNetResult();
+        }
+
+        [HttpGet]
+        public ActionResult Colors(int id)
+        {
+            var result = this.ProductRepository.RetreiveColors(id);
+            return new JsonNetResult(result);
+        }
+
+        [HttpGet]
+        public ActionResult Images(int id)
+        {
+            var result = this.ProductRepository.RetrieveImages(id);
+            return new JsonNetResult()
+            {
+                Data = result,
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+            };
+        }
+
+        [HttpPost]
         public ActionResult AddProductColor(int id, int colorId)
         {
-            var newColor = this.ProductSearchRepository.AddProductColor(id, colorId);
+            var newColor = this.ProductRepository.AddProductColor(id, colorId);
             this.Context.SaveChanges();
             return new JsonNetResult(newColor);
         }
@@ -147,7 +143,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult DeleteProductColor(int id, int productColorId)
         {
-            this.ProductSearchRepository.DeleteProductColor(id, productColorId);
+            this.ProductRepository.DeleteProductColor(id, productColorId);
             this.Context.SaveChanges();
             return new JsonNetResult();
         }
@@ -155,21 +151,21 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult UpdateColorOrder(int id, string sorted)
         {
-            this.ProductSearchRepository.UpdateProductColorSort(id, sorted);
+            this.ProductRepository.UpdateProductColorSort(id, sorted);
             return new JsonNetResult();
         }
 
         [HttpPost]
         public ActionResult UpdateImageOrder(int id, string sorted)
         {
-            this.ProductSearchRepository.UpdateProductImageSort(id, sorted);
+            this.ProductRepository.UpdateProductImageSort(id, sorted);
             return new JsonNetResult();
         }
 
         [HttpPost]
         public ActionResult ChangeImageColor(int id, int productImageId, int newColorId)
         {
-            this.ProductSearchRepository.ChangeImageColor(id, productImageId, newColorId);
+            this.ProductRepository.ChangeImageColor(id, productImageId, newColorId);
             this.Context.SaveChanges();
             return new JsonNetResult();
         }
@@ -177,7 +173,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult DeleteProductImage(int id, int productImageId)
         {
-            this.ProductSearchRepository.DeleteProductImage(id, productImageId);
+            this.ProductRepository.DeleteProductImage(id, productImageId);
             this.Context.SaveChanges();
             return new JsonNetResult();
         }
@@ -195,7 +191,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult AddProductImage(int id, JsonProductImage image)
         {
-            var result = this.ProductSearchRepository.AddProductImage(id, image);
+            var result = this.ProductRepository.AddProductImage(id, image);
             this.Context.SaveChanges();
             return new JsonNetResult(result());
         }
@@ -203,7 +199,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult AssignImagesToColor(int id)
         {
-            this.ProductSearchRepository.AssignImagesToColor(id);
+            this.ProductRepository.AssignImagesToColor(id);
             this.Context.SaveChanges();
             return new JsonNetResult();
         }
@@ -211,7 +207,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult UnassignImagesFromColor(int id)
         {
-            this.ProductSearchRepository.UnassignImagesFromColor(id);
+            this.ProductRepository.UnassignImagesFromColor(id);
             this.Context.SaveChanges();
             return new JsonNetResult();
         }

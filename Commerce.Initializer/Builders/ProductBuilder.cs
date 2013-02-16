@@ -67,7 +67,6 @@ namespace Commerce.Initializer.Builders
                     UnitCost = 45.00m,
                     Brand = brandTatami,
                     Category = category1,
-                    SizeGroup = sizeGroup,
                     AssignImagesToColors = true,
                     IsDeleted = false,
                     DateCreated = DateTime.Now,
@@ -106,12 +105,12 @@ namespace Commerce.Initializer.Builders
                 });
                 productRepository.AddProductImage(product1Id, new JsonProductImage
                 {
-                    ImageBundleExternalId = bundle13.ExternalId.ToString(),
+                    ImageBundleExternalId = bundle14.ExternalId.ToString(),
                     ProductColorId = productColor11Result().Id,
                 });
                 productRepository.AddProductImage(product1Id, new JsonProductImage
                 {
-                    ImageBundleExternalId = bundle14.ExternalId.ToString(),
+                    ImageBundleExternalId = bundle15.ExternalId.ToString(),
                     ProductColorId = productColor11Result().Id,
                 });
 

@@ -28,9 +28,9 @@ namespace Commerce.Persist.Products
                 .Where(x => x.IsDeleted == false)
                 .Include(x => x.Brand)
                 .Include(x => x.Category)
-                .Include(x => x.SizeGroup)
                 .Include(x => x.Images)
-                .Include(x => x.Images.Select(img => img.ImageBundle));
+                .Include(x => x.Images.Select(img => img.ImageBundle))
+                .Include(x => x.Images.Select(img => img.ProductColor));
         }
 
         public List<JsonProductInfo> FindProducts(int? categoryId, int? brandId, string searchText)
@@ -60,6 +60,12 @@ namespace Commerce.Persist.Products
         public JsonProductInfo RetrieveInfo(int productId)
         {
             return this.Data().FirstOrDefault(x => x.Id == productId).ToJson();
+        }
+
+        public void Delete(int productId)
+        {
+            var product = this.Context.Products.First(x => x.Id == productId);
+            product.IsDeleted = true;
         }
 
         public List<JsonProductColor> RetreiveColors(int productId)
@@ -93,6 +99,7 @@ namespace Commerce.Persist.Products
                 Name = color.Name,
                 SEO = color.SEO,
                 SkuCode = color.SkuCode,
+                Order = product.Colors.Count() + 1,
             };
 
             product.Colors.Add(productColor);
@@ -108,7 +115,6 @@ namespace Commerce.Persist.Products
                .First(x => x.Id == productId && x.IsDeleted == false);
 
             var productColor = this.Context.ProductColors.First(x => x.Id == productColorId);
-            productColor.IsDeleted = true;
             
             foreach (var image in product.Images)
             {

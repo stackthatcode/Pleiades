@@ -18,8 +18,6 @@
 				SkuCode: ko.observable(product.SkuCode || ""),
 				Synopsis: ko.observable(product.Synopsis || ""),
                 Description: ko.observable(product.Description || ""),
-                SizeGroupId: ko.observable(product.SizeGroupId),
-                SizeGroupName: ko.observable(product.SizeGroupName),
                 BrandId: ko.observable(product.BrandId),
                 BrandName: ko.observable(product.BrandName),
                 CategoryId: ko.observable(product.CategoryId),
@@ -75,7 +73,6 @@
                 Description: product.Description(),
                 CategoryId: product.CategoryId(),
                 BrandId: product.BrandId(),
-                SizeGroupId: product.SizeGroupId(),
                 UnitPrice: product.UnitPrice(),
                 UnitCost: product.UnitCost(),
                 ImageBundleExternalId: product.ImageBundleExternalId(),
@@ -565,8 +562,7 @@
             var self = rootModel;
             self.BrandArray = ko.observableArray();
             self.CategoryArray = ko.observableArray();
-            self.SizeGroupArray = ko.observableArray();
-
+            
             self.RetrieveCategoriesList = function (callback) {
                 flow.exec(
                     function () {
@@ -608,25 +604,6 @@
                 );
             }
 
-            self.RetrieveSizeGroupsList = function (callback) {
-                flow.exec(
-                    function () {
-                        self.ProductService.SizeGroups(this);
-                    },
-                    function (data) {
-                        self.SizeGroupArray.removeAll();
-                        self.SizeGroupArray.push({ value: null, text: "(Select a Size Group)" });
-
-                        $.each(data, function (index, elem) {
-                            self.SizeGroupArray.push({ value: elem.Id, text: elem.Name });
-                        });
-
-                        if (callback) {
-                            callback();
-                        }
-                    }
-                );
-            }
         }
     </script>
     <!-- Search View Model -->
@@ -688,6 +665,15 @@
                 flow.exec(
                     function () {
                         $("#glideToParent").hide();
+                        self.ProductService.Info(recordId, this);
+                    },
+                    function (data) {
+                        var index = self.SearchData().arrayFirstIndexOf(function (x) { return x.Id == recordId; });
+                        if (index == -1) {
+                            self.SearchData.unshift(data);
+                        } else {
+                            self.SearchData.replace(self.SearchData()[index], data);
+                        }
                         self.ParentGlider.GlideToParent(this);
                     },
 					function () {
@@ -709,11 +695,11 @@
                 flow.exec(
                     function () {
                         $('#modal-delete').modal('hide');
-                        self.ProductService.Delete(record, this);
+                        self.ProductService.Delete(record.Id, this);
                     },
                     function (data) {
-                        self.Data.remove(function (item) { return item.Id == record.Id; });
-                        self.ModalViewModel(null);
+                        self.SearchData.remove(record); //function (item) { return item.Id == record.Id; });
+                        self.ModalViewModel({ Data: null, Template: null });
                     });
             }
 
@@ -727,8 +713,7 @@
                 errors.push({ controlGroup: "#Description", invalid: product.Description().trim() == "" });
                 errors.push({ controlGroup: "#Brand", invalid: product.BrandId() == null });
                 errors.push({ controlGroup: "#Category", invalid: product.CategoryId() == null });
-                errors.push({ controlGroup: "#SizeGroup", invalid: product.SizeGroupId() == null });
-
+                
                 var validationMessage = $("#validation");
                 validationMessage.hide();
                 $.each(errors, function (index, elem) {
@@ -747,11 +732,13 @@
 
                 flow.exec(
                     function () {
-                        self.ProductService.Update(ProductInfoToServerJson(product), this);
-                    });
-
-                // TODO: what to do here?
-                //self.SearchData.replace(self.SearchData()[self.SelectedIndex], product);
+                        self.ProductService.Save(ProductInfoToServerJson(product), this);
+                    },
+                    function (product) {
+                        var knockedoutData = ProductInfoToKnockout(product);
+                        self.SelectedProduct(knockedoutData);
+                    }
+                );
             }
 
             return self;
@@ -776,9 +763,7 @@
             AddImageFunctions(self);
 
             self.RetrieveCategoriesList();
-            self.RetrieveBrandsList();
-            self.RetrieveSizeGroupsList();
-
+            self.RetrieveBrandsList();            
             self.SearchData = ko.observableArray();
 
             // Move these to the Product View Model
@@ -847,7 +832,7 @@
                 <div style="height:20px;"></div>
                 
                 <div class="row">
-                    <div class="span6">
+                    <div class="span7">
                         <ul class="nav nav-pills">
                             <li style="width:140px;">
 				                <a id="glideToParent" class="backbutton" data-bind="click: $root.GlideToSearchView">&laquo; Back to Search</a>
@@ -869,27 +854,41 @@
                                 <a href="#" data-bind="click: $root.ColorsTabClick">Colors</a>
                             </li>
 
+                            <li data-bind="if: $root.ActiveView().Template == 'Sizes'" class="active">
+                                <a href="#">Sizes</a>
+                            </li>
+                            <li data-bind="if: $root.ActiveView().Template != 'Sizes'">
+                                <a href="#" data-bind="click: $root.SizesTabClick">Sizes</a>
+                            </li>
+
                             <li data-bind="if: $root.ActiveView().Template == 'Images'" class="active">
                                 <a href="#">Images</a>
                             </li>
                             <li data-bind="if: $root.ActiveView().Template != 'Images'">
                                 <a href="#" data-bind="click: $root.ImagesTabClick">Images</a>
                             </li>
+                            
+                            <li data-bind="if: $root.ActiveView().Template == 'Inventory'" class="active">
+                                <a href="#">Inventory</a>
+                            </li>
+                            <li data-bind="if: $root.ActiveView().Template != 'Inventory'">
+                                <a href="#" data-bind="click: $root.InventoryTabClick">Inventory</a>
+                            </li>
                             <!-- /ko -->
                         </ul>
                     </div>
 
-                    <div class="span6" style="text-align:right;" data-bind="if: $root.ActiveView().Template == 'Info'">
+                    <div class="span5" style="text-align:right;" data-bind="if: $root.ActiveView().Template == 'Info'">
 					    <a class="btn btn-inverse" href="#" data-bind="click: $root.GlideToSearchView"><i class="icon-remove icon-white"></i> Cancel</a>                    
 					    <a class="btn btn-primary" href="#" data-bind="click: $root.SaveClick"><i class="icon-ok icon-white"></i> Save</a>
                     </div>
 
-                    <div class="span6" style="text-align:right;" data-bind="if: $root.ActiveView().Template == 'Colors'">
+                    <div class="span5" style="text-align:right;" data-bind="if: $root.ActiveView().Template == 'Colors'">
 					    <a class="btn btn-primary" href="#" data-bind="click: $root.AddColorFromList"><i class="icon-white icon-search"></i> Add Color from Lists</a>
 					    <a class="btn btn-primary" href="#" data-bind="click: $root.CreateNewColor"><i class="icon-white icon-pencil"></i> Create New Color</a>
                     </div>
 
-                    <div class="span6" style="text-align:right;" data-bind="if: $root.ActiveView().Template == 'Images'">				        
+                    <div class="span5" style="text-align:right;" data-bind="if: $root.ActiveView().Template == 'Images'">				        
                         <!-- ko ifnot: $root.SelectedProduct().AssignImagesToColors() -->
 				        <a class="btn btn-primary" href="#" data-bind="click: $root.AddNewImage"><i class="icon-plus icon-white"></i> Add Image</a>
                         <a class="btn btn-primary" href="#" data-bind="click: $root.AssignImagesToColorClick"><i class="icon-white icon-share"></i> Assign Images To Colors</a>
@@ -1075,13 +1074,6 @@
                         <div id="Category" class="span3 control-group">
                             <label>Category<br />
                                 <select id="SelectedCategory" data-bind="options: $root.CategoryArray, optionsText: 'text', optionsValue:'value', value: $data.CategoryId" />
-                            </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div id="SizeGroup" class="span3 control-group">
-                            <label>Size Group<br />
-                                <select id="SelectedSizeGroup" data-bind="options: $root.SizeGroupArray, optionsText: 'text', optionsValue:'value', value: $data.SizeGroupId" />
                             </label>
                         </div>
                     </div>

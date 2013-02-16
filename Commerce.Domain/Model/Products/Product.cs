@@ -27,7 +27,6 @@ namespace Commerce.Domain.Model.Products
         
         public Brand Brand { get; set; }
         public Category Category { get; set; }
-        public SizeGroup SizeGroup { get; set; }
         public bool Active { get; set; }
 
         public List<ProductColor> Colors { get; set; }

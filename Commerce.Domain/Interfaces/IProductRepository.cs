@@ -10,6 +10,7 @@ namespace Commerce.Domain.Interfaces
     {
         List<JsonProductInfo> FindProducts(int? categoryId, int? brandId, string searchText);
         JsonProductInfo RetrieveInfo(int productId);
+        void Delete(int productId);
         
         List<JsonProductColor> RetreiveColors(int productId);
         Func<JsonProductColor> AddProductColor(int productId, int colorId);

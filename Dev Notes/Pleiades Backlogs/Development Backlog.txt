@@ -13,25 +13,37 @@ http://fortawesome.github.com/Font-Awesome/
 
 Product Editor
 ~~~~~~~~~~~~~~
-- Start Designing Product Screen => IN PROGRESS
-
-=> Screen for ordering Colors & Images => IN PROGRESS
-
-- Product Images and Colors IsDeleted - do we need it? => TODO
-* Sku's/Stock will be wiped when we delete Colors and Sizes, right? => TRUE
-* Orders will still maintain the Sku Code and Description for tracing => TRUE
-* So, remove IsDeleted from ProductColors?
-
-- Fix the Thumbnail by Sort Order => TODO
-- Update Product in Search after Adding & Editing=> TODO
-
-- Create a Product and simulate Creation of a Product followed by deletion of Colors, Categories, Brands, etc. => TODO
-- When I delete a SizeGroup, Color, Category or Brand, gotta set the Product's == N/A => TODO
-- Test *EVERYTHING* => TODO
+- Test *EVERYTHING* => create a Product and simulate Creation of a Product followed by deletion of Colors, Categories, Brands, etc. => IN PROGRESS
+- When I delete a Category or Brand, gotta set the Product's == N/A => TODO
+- Create Category and Brand "N/A" => TODO
+- Fix bug on Back to Search => TODO
 
 - Size copying interface => TODO
+* Remove Size Group
+* Add Size Group List
 
-- Double clicking a link while it's loading the AJAX causes JQuery to beef => TODO
+self.RetrieveSizeGroupsList = function (callback) {
+	flow.exec(
+		function () {
+			self.ProductService.SizeGroups(this);
+		},
+		function (data) {
+			self.SizeGroupArray.removeAll();
+			self.SizeGroupArray.push({ value: null, text: "(Select a Size Group)" });
+
+			$.each(data, function (index, elem) {
+				self.SizeGroupArray.push({ value: elem.Id, text: elem.Name });
+			});
+
+			if (callback) {
+				callback();
+			}
+		}
+	);
+}
+
+- SKU and Order Generator => TODO
+- Clicking a link while it's loading the AJAX causes JQuery to beef => TODO
 - Add the Number of Products in a Brand screen => TODO
 - PREVENT DELETION OF LAST SECTION => TODO
 - Change out the Back Buttons => IN PROGRESS

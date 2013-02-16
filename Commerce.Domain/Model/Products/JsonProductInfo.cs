@@ -34,12 +34,6 @@ namespace Commerce.Domain.Model.Products
         public string SEO { get; set; }
 
         [JsonProperty]
-        public int? SizeGroupId { get; set; }
-
-        [JsonProperty]
-        public string SizeGroupName { get; set; }
-
-        [JsonProperty]
         public int? BrandId { get; set; }
 
         [JsonProperty]

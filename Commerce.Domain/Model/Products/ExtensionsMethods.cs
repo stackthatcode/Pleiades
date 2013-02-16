@@ -9,8 +9,17 @@ namespace Commerce.Domain.Model.Products
     {
         public static JsonProductInfo ToJson(this Product product)
         {
+            var images = product.Images
+                    .OrderBy(x => x.ProductColor.Order)
+                    .ThenBy(x => x.Order)
+                    .ToList();
+            
             var bundleID = product.Images.Any() ? 
-                product.Images.OrderBy(x => x.Order).First().ImageBundle.ExternalId.ToString() : 
+                product.Images
+                    .OrderBy(x => x.ProductColor.Order)
+                    .ThenBy(x => x.Order)
+                    .First()
+                    .ImageBundle.ExternalId.ToString() : 
                 (string)null;
 
             return new JsonProductInfo
@@ -25,8 +34,6 @@ namespace Commerce.Domain.Model.Products
                 BrandName = product.Brand == null ? "" : product.Brand.Name,
                 CategoryId = product.Category == null ? (int?)null : product.Category.Id,
                 CategoryName = product.Category == null ? "" : product.Category.Name,
-                SizeGroupId = product.SizeGroup == null ? (int?)null : product.SizeGroup.ID,
-                SizeGroupName = product.SizeGroup == null ? "" : product.SizeGroup.Name,
                 UnitPrice = product.UnitPrice,
                 UnitCost = product.UnitCost,
                 ImageBundleExternalId = bundleID ?? Guid.Empty.ToString(),
