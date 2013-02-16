@@ -39,10 +39,10 @@ namespace Commerce.Domain.Model.Products
             return new JsonProductColor
             {
                 Id = color.Id,
-                Name = color.Color.Name,
-                SEO = color.Color.SEO,
-                SkuCode = color.Color.SkuCode,
-                ImageBundleExternalId = color.Color.ImageBundle != null ? color.Color.ImageBundle.ExternalId.ToString() : null,
+                Name = color.Name,
+                SEO = color.SEO,
+                SkuCode = color.SkuCode,
+                ImageBundleExternalId = color.ImageBundle != null ? color.ImageBundle.ExternalId.ToString() : null,
                 Order = color.Order,
             };
         }

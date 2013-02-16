@@ -109,11 +109,19 @@ function CommonUI(containerDiv) {
 	}
 
     // Scroll Tracking - TODO: how to make this cross-cutting...?
+    
     self.ScrollToIdTracker = function(id) {
 		if (!id) {
             return;
         }
-		var offset = $('#tracker' + id).parent().offset().top - $(containerDiv).offset().top;
+		self.ScrollToTracker('tracker' + id);
+	}
+    
+    self.ScrollToTracker = function(trackerId) {
+		if (!trackerId) {
+            return;
+        }
+		var offset = $("#" + trackerId).parent().offset().top - $(containerDiv).offset().top;
 		$("body").scrollTop(offset);
 	}
 

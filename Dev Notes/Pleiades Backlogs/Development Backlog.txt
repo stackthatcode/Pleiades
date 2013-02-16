@@ -17,25 +17,25 @@ Product Editor
 
 => Screen for ordering Colors & Images => IN PROGRESS
 
-- Choose Color Drop Down => TODO
-- Unassign Images Button => TODO
-- Assign Images to Colors Button => DONE
-- Unassigned Images => TODO
+- Product Images and Colors IsDeleted - do we need it? => TODO
+* Sku's/Stock will be wiped when we delete Colors and Sizes, right? => TRUE
+* Orders will still maintain the Sku Code and Description for tracing => TRUE
+* So, remove IsDeleted from ProductColors?
 
-- Render Images to Colors => DONE
-- Fix the Color to Image Sorting => DONE
-- Delete Color Repository modification => DONE
-- Server method for changing Assigned => DONE
+- Fix the Thumbnail by Sort Order => TODO
+- Update Product in Search after Adding & Editing=> TODO
 
-
-- When I delete a SizeGroup, Color, Category or Brand, gotta set the Product's == N/A => TODO
-- Double clicking a link while it's loading the AJAX causes JQuery to beef => TODO
 - Create a Product and simulate Creation of a Product followed by deletion of Colors, Categories, Brands, etc. => TODO
-- Add the Number of Products in a Brand => TODO
+- When I delete a SizeGroup, Color, Category or Brand, gotta set the Product's == N/A => TODO
+- Test *EVERYTHING* => TODO
+
+- Size copying interface => TODO
+
+- Double clicking a link while it's loading the AJAX causes JQuery to beef => TODO
+- Add the Number of Products in a Brand screen => TODO
 - PREVENT DELETION OF LAST SECTION => TODO
-- Update Product in Search after Adding & Editing
-- Fix the Scroll Tracker - take it to the top => TODO
 - Change out the Back Buttons => IN PROGRESS
+
 
 
 

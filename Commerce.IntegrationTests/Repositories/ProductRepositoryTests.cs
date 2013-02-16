@@ -31,7 +31,7 @@ namespace Commerce.IntegrationTests.Repositories
                 var genericProductRepository = lifetime.Resolve<IGenericRepository<Product>>();
                 var categoryRepository = lifetime.Resolve<IGenericRepository<Category>>();
                 var productRepository = lifetime.Resolve<IProductRepository>();
-                var productSearchRepository = lifetime.Resolve<IProductSearchRepository>();
+                var productSearchRepository = lifetime.Resolve<IProductRepository>();
 
                 BrandBuilder.EmptyAndRepopulate(container);
                 ColorBuilder.EmptyAndRepopulate(container);

@@ -30,7 +30,9 @@ namespace Commerce.Domain.Model.Products
         public SizeGroup SizeGroup { get; set; }
         public bool Active { get; set; }
 
-        // Images
+        public List<ProductColor> Colors { get; set; }
+        public List<ProductSize> Sizes { get; set; }
+
         public bool AssignImagesToColors { get; set; }
         public List<ProductImage> Images { get; set; }
 

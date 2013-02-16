@@ -128,10 +128,6 @@
                                 color.Images.push(elem);
                             });
 
-                            if (unassignedColor.Images.length == 0) {
-                                self.SelectedColorsWithImages.remove(unassignedColor);
-                            }
-
                             self.ActiveView({ Level: "Child", Template: "Images" });
                             self.MakeImagesSortable();
                         }
@@ -167,6 +163,7 @@
                         update: function() { 
                             self.UpdateImageSortOrder(elem) 
                         },
+                        distance: 5,
                     }).disableSelection();
                 });
             }
@@ -187,11 +184,6 @@
                         var image = originalColor.Images()[index];
                         originalColor.Images.remove(image);
                         newColor.Images.push(image);
-
-                        // Update Empty Unassigned
-                        if (originalColor.Id == "0" && originalColor.Images.length == 0) {
-                            self.SelectedColorsWithImages.remove(originalColor);
-                        }
                     }
                 );
             }
@@ -222,7 +214,7 @@
                 color.Images(newImageArray);
             };
 
-            self.GlideBackToImages = function () {
+            self.GlideBackToImages = function (callback) {
                 flow.exec(
                     function () {
                         $("#glideToParent").hide();
@@ -231,6 +223,9 @@
 					function () {
 					    self.ActiveView({ Level: "Child", Template: "Images" });
                         self.MakeImagesSortable();
+                        if (callback) {
+                            callback();
+                        }
 					}
 				);
             }
@@ -241,7 +236,13 @@
                         self.ProductService.DeleteProductImage(self.SelectedProduct().Id(), image.Id, this);
                     },
                     function (data) {
-                        self.SelectedProductImages.remove(image);
+                        console.log(image);
+                        if (self.SelectedProduct().AssignImagesToColors()) {
+                            var color = self.ProductColorWithImagesById(image.ProductColorId);
+                            color.Images.remove(image);
+                        } else {
+                            self.SelectedProductImages.remove(image);
+                        }
                     }
                 );
             };
@@ -279,20 +280,31 @@
                     $("#validation").show();
                     return;
                 }
+
                 var input = {
                     ImageBundleExternalId: newImage.ImageBundleExternalId(),
                     Description: newImage.Description(),
                 };
 
+                if (self.SelectedProductColorForImage()) {
+                    input.ProductColorId = self.SelectedProductColorForImage().Id;
+                }
+
                 flow.exec(
                     function() {
                         self.ProductService.AddProductImage(self.SelectedProduct().Id(), input, this);
                     },
-                    function(data) {                        
-                        // Move it into the colr
-
-                        self.SelectedProductImages().push(data);
-                        self.GlideBackToImages();
+                    function(data) {
+                        // Move it into the color
+                        var newId = data.Id;
+                        if (self.SelectedProductColorForImage()) {
+                            self.SelectedProductColorForImage().Images.push(data);
+                        } else {
+                            self.SelectedProductImages().push(data);
+                        }
+                        self.GlideBackToImages(function() {
+                            self.CommonUI.ScrollToTracker("sorted" + newId);
+                        });
                     }
                 );
             }
@@ -302,22 +314,34 @@
                 self.NewImageInput().ImageBundleExternalId(data.ExternalId);
             }
 
-            self.AssignImagesToColor = function() {
-                self.SelectedColorsWithImages.removeAll();
-                self.SelectedProductImages.removeAll();
-                self.SelectedProduct().AssignImagesToColors(true);
-                self.ImagesTabClick();
-
-                // TODO: create method on server to save this
+            self.AssignImagesToColorClick = function() {
+                flow.exec(
+                    function () {
+                        var id = self.SelectedProduct().Id();
+                        self.ProductService.AssignImagesToColor(id, this);                        
+                    },
+                    function () { 
+                        self.SelectedColorsWithImages.removeAll();
+                        self.SelectedProductImages.removeAll();
+                        self.SelectedProduct().AssignImagesToColors(true);
+                        self.ImagesTabClick();
+                    }
+                );
             };
-
-            self.UnassignImagesFromColor = function() {
-                self.SelectedColorsWithImages.removeAll();
-                self.SelectedProductImages.removeAll();
-                self.SelectedProduct().AssignImagesToColors(false);
-                self.ImagesTabClick();
-                
-                // TODO: create method on server to save this
+            
+            self.UnassignImagesFromColorClick = function() {
+                flow.exec(
+                    function () {
+                        var id = self.SelectedProduct().Id();
+                        self.ProductService.UnassignImagesFromColor(id, this);
+                    },
+                    function () { 
+                        self.SelectedColorsWithImages.removeAll();
+                        self.SelectedProductImages.removeAll();
+                        self.SelectedProduct().AssignImagesToColors(false);
+                        self.ImagesTabClick();
+                    }
+                );
             };
         }
     </script>
@@ -868,11 +892,11 @@
                     <div class="span6" style="text-align:right;" data-bind="if: $root.ActiveView().Template == 'Images'">				        
                         <!-- ko ifnot: $root.SelectedProduct().AssignImagesToColors() -->
 				        <a class="btn btn-primary" href="#" data-bind="click: $root.AddNewImage"><i class="icon-plus icon-white"></i> Add Image</a>
-                        <a class="btn btn-primary" href="#" data-bind="click: $root.AssignImagesToColor"><i class="icon-white icon-share"></i> Assign Images To Colors</a>
+                        <a class="btn btn-primary" href="#" data-bind="click: $root.AssignImagesToColorClick"><i class="icon-white icon-share"></i> Assign Images To Colors</a>
                         <!-- /ko -->
 
                         <!-- ko if: $root.SelectedProduct().AssignImagesToColors() -->
-				        <a class="btn btn-primary" href="#" data-bind="click: $root.UnassignImagesFromColor"><i class="icon-white icon-ban-circle"></i> Don't Assign Images To Colors</a>
+				        <a class="btn btn-primary" href="#" data-bind="click: $root.UnassignImagesFromColorClick"><i class="icon-white icon-ban-circle"></i> Don't Assign Images To Colors</a>
                         <!-- /ko -->
                     </div>
 		        </div>
@@ -1219,9 +1243,14 @@
             <tr>
                 <td valign="top" style="padding-top:20px;">
                     <div style="width:712px;">
+                        <div data-bind="ifnot: $data.Images().length">
+                            <h2 style="text-align:center; padding-top:50px; color:#CCC;">No Images Assigned</h2>
+                        </div>
+
                         <ul class="sortable" data-bind="attr: { id: 'images' + $data.Id }, foreach: $data.Images()">
                             <li data-bind="attr: { id: 'sorted' + $data.Id }">
-                                <div style="width:160px; padding-bottom:5px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+                                <div style="width:160px; padding-bottom:5px;" 
+                                    data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
                                 </div>
                                 <a href="#" style="width:55px;" class="btn btn-inverse btn-small disabled"><i class="icon-screenshot icon-white"></i> Drag!</a>
                                 <a class="btn btn-primary btn-small" style="width:55px;" href="#" data-bind="click: function() { $root.DeleteProductImage($data) }"><i class="icon-trash icon-white"></i> Delete</a>			
@@ -1231,7 +1260,7 @@
                 </td>
                 <td valign="top" style="width:220px; text-align:left; vertical-align:top; padding-top:20px;">
                     <div data-bind="if: $data.Name == 'Unassigned'">
-				        <p><strong>Unassigned Images</strong></p>
+				        <p><strong>No Color</strong></p>
                         <h4>Drag images from this region onto Color to assign</h4>
                     </div>
                     <div data-bind="ifnot: $data.Name == 'Unassigned'">
@@ -1240,8 +1269,9 @@
 				        <p>
                             <strong data-bind="text: $data.Name"></strong > - <span data-bind="text: $data.SkuCode"></span>
                         </p>
-                        <a class="btn btn-primary" href="#" data-bind="click: $root.AddNewImageForColor"><i class="icon-plus icon-white"></i> Add Image</a>
-                    </div>
+                    </div>                    
+                    <a class="btn btn-primary" href="#" data-bind="click: $root.AddNewImageForColor"><i class="icon-plus icon-white"></i> Add Image</a>
+                    <div style="clear:both; height:30px;"></div>
                 </td>
             </tr>
         </table>
@@ -1265,7 +1295,7 @@
         </div>
     </div>
     </script>
-    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR IMAGES COLOR TAB -->
+    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR IMAGES - ADD IMAGE SUB-->
     <script type="text/html" id="Sub-Child-Editor-AddImage">
         <div style="height:20px;"></div>
 
@@ -1297,7 +1327,8 @@
                         <div class="span6">
                         </div>
                         <div class="span3">
-                            <label>Assigned Color<br />
+                            <!-- ko if:  $root.SelectedProductColorForImage().Id -->
+                                <label>Assigned Color<br />
                                 <div style="width:80px; margin-bottom:5px;" 
                                     data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $root.SelectedProductColorForImage().ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
 			                    </div>
@@ -1305,7 +1336,15 @@
                                     <strong data-bind="text: $root.SelectedProductColorForImage().Name"></strong > - 
                                     <span data-bind="text: $root.SelectedProductColorForImage().SkuCode"></span>
                                 </p>
-                            </label>
+                                </label>
+                            <!-- /ko -->
+                            <!-- ko ifnot:  $root.SelectedProductColorForImage().Id -->
+                                <label>Assigned Color<br />
+                                <p>
+                                    <strong>No Color Assigned</strong>
+                                </p>
+                                </label>
+                            <!-- /ko -->
                         </div>
                     </div>
                 </div>
@@ -1337,7 +1376,10 @@
 				<h3>Delete <span data-bind="text: $root.ModalViewModel().Data.Name"></span></h3>
 			</div>
 			<div class="modal-body">
-				<p>Are you sure you want to Delete this Color from the Product?</p>			
+				<p>
+                    <strong>Are you sure you want to Delete this Color from the Product?</strong><br />
+				    Any Inventory associated with Product will be destroyed
+                </p>			
 			</div>
 			<div class="modal-footer">
 				<a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>

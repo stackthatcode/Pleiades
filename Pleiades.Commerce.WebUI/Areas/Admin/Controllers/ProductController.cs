@@ -21,13 +21,13 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         IJsonBrandRepository BrandRepository { get; set; }
         IJsonSizeRepository SizeRepository { get; set; }
         IJsonColorRepository ColorRepository { get; set; }
-        IProductSearchRepository ProductSearchRepository { get; set; }
+        IProductRepository ProductSearchRepository { get; set; }
         IImageBundleRepository ImageBundleRepository { get; set; }
         PleiadesContext Context { get; set; } 
 
         public ProductController(
                 IJsonCategoryRepository categoryRepository, IJsonBrandRepository brandRepository, 
-                IProductSearchRepository productSearchRepository, IJsonSizeRepository sizeRepository,
+                IProductRepository productSearchRepository, IJsonSizeRepository sizeRepository,
                 IImageBundleRepository imageBundleRepository, PleiadesContext context)
         {
             this.CategoryRepository = categoryRepository;
@@ -94,7 +94,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Colors(int id)
         {
-            var result = this.ProductSearchRepository.RetreieveColors(id);
+            var result = this.ProductSearchRepository.RetreiveColors(id);
             return new JsonNetResult(result);
         }
 

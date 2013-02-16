@@ -56,7 +56,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Products\ProductSearchRepository.cs" />
     <Compile Include="Products\ProductRepository.cs" />
     <Compile Include="Resources\FileResourceRepository.cs" />
     <Compile Include="Resources\ImageBundleRepository.cs" />

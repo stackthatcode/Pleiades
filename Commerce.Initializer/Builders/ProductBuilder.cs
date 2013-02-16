@@ -73,47 +73,82 @@ namespace Commerce.Initializer.Builders
                     DateCreated = DateTime.Now,
                     LastModified = DateTime.Now,
                 };
+                genericProductRepository.Insert(product1);
+                unitOfWork.SaveChanges();
+                var product1Id = product1.Id;
 
-                var productColor11 = new ProductColor { Color = black, Product = product1, Order = 1 };
-                var productColor12 = new ProductColor { Color = blue, Product = product1, Order = 2 };
-
+                var productColor12Result = productRepository.AddProductColor(product1Id, blue.Id);
+                var productColor11Result = productRepository.AddProductColor(product1Id, black.Id);
+                unitOfWork.SaveChanges();
+                
                 var bundle11 = imageRepository.Add(ImageHelper("tat-1010_black_01_xl.jpg"));
                 var bundle12 = imageRepository.Add(ImageHelper("tat-1010_black_02_xl.jpg"));
                 var bundle13 = imageRepository.Add(ImageHelper("tat-1010_black_03_xl.jpg"));
                 var bundle14 = imageRepository.Add(ImageHelper("tat-1010_black_04_xl.jpg"));
                 var bundle15 = imageRepository.Add(ImageHelper("tat-1010_black_05_xl.jpg"));
+                unitOfWork.SaveChanges();
 
-                var productImage11 = new ProductImage { ProductColor = productColor11, ImageBundle = bundle11, Order = 1 };
-                var productImage12 = new ProductImage { ProductColor = productColor11, ImageBundle = bundle12, Order = 2 };
-                var productImage13 = new ProductImage { ProductColor = productColor11, ImageBundle = bundle13, Order = 3 };
-                var productImage14 = new ProductImage { ProductColor = productColor11, ImageBundle = bundle14, Order = 4 };
-                var productImage15 = new ProductImage { ProductColor = productColor11, ImageBundle = bundle15, Order = 5 };
-
-                product1.Images.Add(productImage11);
-                product1.Images.Add(productImage12);
-                product1.Images.Add(productImage13);
-                product1.Images.Add(productImage14);
-                product1.Images.Add(productImage15);
+                productRepository.AddProductImage(product1Id, new JsonProductImage
+                {
+                    ImageBundleExternalId = bundle11.ExternalId.ToString(),
+                    ProductColorId = productColor11Result().Id,
+                    Order = 1
+                });
+                productRepository.AddProductImage(product1Id, new JsonProductImage
+                {
+                    ImageBundleExternalId = bundle12.ExternalId.ToString(),
+                    ProductColorId = productColor11Result().Id,
+                });
+                productRepository.AddProductImage(product1Id, new JsonProductImage
+                {
+                    ImageBundleExternalId = bundle13.ExternalId.ToString(),
+                    ProductColorId = productColor11Result().Id,
+                });
+                productRepository.AddProductImage(product1Id, new JsonProductImage
+                {
+                    ImageBundleExternalId = bundle13.ExternalId.ToString(),
+                    ProductColorId = productColor11Result().Id,
+                });
+                productRepository.AddProductImage(product1Id, new JsonProductImage
+                {
+                    ImageBundleExternalId = bundle14.ExternalId.ToString(),
+                    ProductColorId = productColor11Result().Id,
+                });
 
                 var bundle16 = imageRepository.Add(ImageHelper("tat-1010_blue_01_xl.jpg"));
                 var bundle17 = imageRepository.Add(ImageHelper("tat-1010_blue_02_xl.jpg"));
                 var bundle18 = imageRepository.Add(ImageHelper("tat-1010_blue_03_xl.jpg"));
                 var bundle19 = imageRepository.Add(ImageHelper("tat-1010_blue_04_xl.jpg"));
                 var bundle110 = imageRepository.Add(ImageHelper("tat-1010_blue_05_xl.jpg"));
+                unitOfWork.SaveChanges();
 
-                var productImage16 = new ProductImage { ProductColor = productColor12, ImageBundle = bundle16, Order = 1 };
-                var productImage17 = new ProductImage { ProductColor = productColor12, ImageBundle = bundle17, Order = 2 };
-                var productImage18 = new ProductImage { ProductColor = productColor12, ImageBundle = bundle18, Order = 3 };
-                var productImage19 = new ProductImage { ProductColor = productColor12, ImageBundle = bundle19, Order = 4 };
-                var productImage110 = new ProductImage { ProductColor = productColor12, ImageBundle = bundle110, Order = 5 };
+                productRepository.AddProductImage(product1Id, new JsonProductImage
+                {
+                    ImageBundleExternalId = bundle16.ExternalId.ToString(),
+                    ProductColorId = productColor12Result().Id,
+                });
+                productRepository.AddProductImage(product1Id, new JsonProductImage
+                {
+                    ImageBundleExternalId = bundle17.ExternalId.ToString(),
+                    ProductColorId = productColor12Result().Id,
+                });
+                productRepository.AddProductImage(product1Id, new JsonProductImage
+                {
+                    ImageBundleExternalId = bundle18.ExternalId.ToString(),
+                    ProductColorId = productColor12Result().Id,
+                });
+                productRepository.AddProductImage(product1Id, new JsonProductImage
+                {
+                    ImageBundleExternalId = bundle19.ExternalId.ToString(),
+                    ProductColorId = productColor12Result().Id,
+                });
 
-                product1.Images.Add(productImage16);
-                product1.Images.Add(productImage17);
-                product1.Images.Add(productImage18);
-                product1.Images.Add(productImage19);
-                product1.Images.Add(productImage110);
+                productRepository.AddProductImage(product1Id, new JsonProductImage
+                {
+                    ImageBundleExternalId = bundle110.ExternalId.ToString(),
+                    ProductColorId = productColor12Result().Id,
+                });
 
-                genericProductRepository.Insert(product1);
                 unitOfWork.SaveChanges();
                 tx.Complete();
             }

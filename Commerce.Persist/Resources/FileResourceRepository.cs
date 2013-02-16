@@ -37,7 +37,7 @@ namespace Commerce.Persist.Resources
                 DateUpdated = DateTime.Now,
             };
 
-            var relativePath = RelativeFilePath(externalId);
+            //var relativePath = RelativeFilePath(externalId);    // DO WE EVEN USE THIS...?
             var fullFilePath = PhysicalFilePath(externalId);
             var directory = StorageDirectory(externalId);
             
@@ -69,6 +69,29 @@ namespace Commerce.Persist.Resources
             dataFileResource.Deleted = true;
         }
 
+        public FileResource Copy(FileResource original)
+        {
+            var originalFilePath = PhysicalFilePath(original.ExternalId);
+            var newExternalId = Guid.NewGuid();
+
+            var fileResource = new FileResource()
+            {
+                ExternalId = newExternalId,
+                Name = "(untitled)",
+                DateInserted = DateTime.Now,
+                DateUpdated = DateTime.Now,
+            };
+
+            //var relativePath = RelativeFilePath(externalId);    // DO WE EVEN USE THIS...?
+            var newFilePath = PhysicalFilePath(newExternalId);
+            var directory = StorageDirectory(newExternalId);
+
+            Directory.CreateDirectory(directory);
+            File.Copy(originalFilePath, newFilePath);
+
+            this.Context.FileResources.Add(fileResource);
+            return fileResource; 
+        }
 
         public string RelativeFilePath(Guid externalId)
         {

@@ -84,5 +84,13 @@ function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback)
                     "?productImageId=" + productImageId + "&newColorId=" + newColorId, {}, callback);
     };
 
+    self.AssignImagesToColor = function (productId, callback) {
+        self.AjaxPost("/Admin/Product/AssignImagesToColor/" + productId, {}, callback);
+    };
+
+    self.UnassignImagesFromColor = function (productId, callback) {
+        self.AjaxPost("/Admin/Product/UnassignImagesFromColor/" + productId, {}, callback);
+    };
+
 	return self;
 }

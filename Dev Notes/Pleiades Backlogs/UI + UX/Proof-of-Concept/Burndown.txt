@@ -479,6 +479,29 @@ backlog cleaning
 - Rebuild Schema => DONE
 
 2/11 1.0 Hours
+2/12 1.0 Hours
+2/13 1.5 Hours
+2/14 1.5 Hours
+2/15 1.5 Hours
 --------------
-- 
+- Fix the Delete Color Function => DONE - BUT: FIX THE MODAL TEXT => DONE
+- Fix the Order on assign to Color => DONE
+- Upload Image Add To List => DONE
+- Delete Image Function => DONE
+- Unassigned Images => DONE
+- Choose Color Drop Down => DONE
+- Render Images to Colors => DONE
+- Fix the Color to Image Sorting => DONE
+- Delete Color Repository modification => DONE
+- Server method for changing Assigned => DONE
+
+2/16
+----
+- Fix the Scroll Tracker - take it to the top => DONE
+- Scroll Tracking on Add => DONE
+- Unassign Images Button => DONE
+- Assign Images to Colors Button => DONE
+- Add Copy Image Method to Repository => DONE
+- Change ProductColor To Belong to Product => DONE
+
 

@@ -1,16 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using Commerce.Domain.Interfaces;
+using Commerce.Domain.Model.Lists;
 using Commerce.Domain.Model.Products;
 
 namespace Commerce.Domain.Interfaces
 {
     public interface IProductRepository
     {
-        List<JsonProductInfo> RetrieveAll();
-        JsonProductInfo Retrieve(int id);
-        Func<JsonProductInfo> Insert(JsonProductInfo brand);
-        void Update(JsonProductInfo brand);
-        void DeleteSoft(JsonProductInfo brand);
+        List<JsonProductInfo> FindProducts(int? categoryId, int? brandId, string searchText);
+        JsonProductInfo RetrieveInfo(int productId);
+        
+        List<JsonProductColor> RetreiveColors(int productId);
+        Func<JsonProductColor> AddProductColor(int productId, int colorId);
+        void DeleteProductColor(int productId, int colorId);
+        void UpdateProductColorSort(int productId, string sortedIds);
+
+        List<JsonProductImage> RetrieveImages(int productId);
+        Func<JsonProductImage> AddProductImage(int productId, JsonProductImage image);
+        void DeleteProductImage(int productId, int imageId);
+        void UpdateProductImageSort(int productId, string sortedIds);
+
+        void AssignImagesToColor(int productId);
+        void UnassignImagesFromColor(int productId);
+        void ChangeImageColor(int productId, int productImageId, int newColor);
     }
 }

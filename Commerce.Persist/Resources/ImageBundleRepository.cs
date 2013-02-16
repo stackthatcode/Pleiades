@@ -83,6 +83,24 @@ namespace Commerce.Persist.Resources
             return bundle;
         }
 
+        public ImageBundle Copy(int Id)
+        {
+            var original = this.Retrieve(Id);
+            var copy = new ImageBundle()
+            {
+                ExternalId = Guid.NewGuid(),
+                Large = this.FileResourceRepository.Copy(original.Large),
+                Small = this.FileResourceRepository.Copy(original.Small),
+                Original = this.FileResourceRepository.Copy(original.Original),
+                Thumbnail = this.FileResourceRepository.Copy(original.Thumbnail),
+                DateInserted = DateTime.Now,
+                DateUpdated = DateTime.Now,
+            };
+
+            this.Context.ImageBundles.Add(copy);
+            return copy;
+        }
+
         public ImageBundle Retrieve(int Id)
         {
             return this.Data().FirstOrDefault(x => x.Id == Id);

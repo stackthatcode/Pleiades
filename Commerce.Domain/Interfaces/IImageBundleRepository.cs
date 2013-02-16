@@ -11,6 +11,7 @@ namespace Commerce.Domain.Interfaces
         ImageBundle Add(Color color, int width, int height);
         ImageBundle Retrieve(int Id);
         ImageBundle Retrieve(Guid externalId);
+        ImageBundle Copy(int Id);
         void Delete(int Id);
     }
 }
