@@ -32,8 +32,9 @@ namespace Commerce.Domain.Model.Products
         public List<ProductColor> Colors { get; set; }
         public List<ProductSize> Sizes { get; set; }
 
-        public bool AssignImagesToColors { get; set; }
         public List<ProductImage> Images { get; set; }
+        public bool AssignImagesToColors { get; set; }
+        public ProductImage ThumbnailImage { get; set; }
 
         // back-end
         public bool IsDeleted { get; set; }

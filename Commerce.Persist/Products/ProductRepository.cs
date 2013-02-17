@@ -33,6 +33,9 @@ namespace Commerce.Persist.Products
                 .Include(x => x.Images.Select(img => img.ProductColor));
         }
 
+
+
+        // Info + Search
         public List<JsonProductInfo> FindProducts(int? categoryId, int? brandId, string searchText)
         {
             var query = this.Data();
@@ -68,6 +71,8 @@ namespace Commerce.Persist.Products
             product.IsDeleted = true;
         }
 
+
+        // Colors
         public List<JsonProductColor> RetreiveColors(int productId)
         {
             var product = this.Context.Products
@@ -106,6 +111,27 @@ namespace Commerce.Persist.Products
             return () => productColor.ToJson();
         }
 
+        public void UpdateProductColorSort(int productId, string sortedIds)
+        {
+            var product = this.Context.Products
+                  .Include(x => x.Colors)
+                  .Include(x => x.Images)
+                  .Include(x => x.Images.Select(image =>  image.ProductColor))
+                  .First(x => x.Id == productId);
+
+            var colors = product.Colors;
+            var idList = sortedIds.Split(',').Select(x => Int32.Parse(x)).ToList();
+
+            for (var index = 0; index < idList.Count(); index++)
+            {
+                var color = colors.FirstOrDefault(x => x.Id == idList[index]);
+                color.Order = index;
+            }
+
+            product.ThumbnailImage = GetThumbnailImage(product);
+            this.Context.SaveChanges();
+        }
+
         public void DeleteProductColor(int productId, int productColorId)
         {
             var product = this.Context.Products
@@ -126,42 +152,67 @@ namespace Commerce.Persist.Products
             product.Colors.Remove(productColor);
         }
 
-        public void UpdateProductColorSort(int productId, string sortedIds)
+
+        // Sizes
+        private Product RetrieveProductForSizes(int productId)
         {
             var product = this.Context.Products
-                  .Include(x => x.Colors)
-                  .First(x => x.Id == productId);
-
-            var colors = product.Colors;
-            var idList = sortedIds.Split(',').Select(x => Int32.Parse(x)).ToList();
-
-            for (var index = 0; index < idList.Count(); index++)
-            {
-                var color = colors.FirstOrDefault(x => x.Id == idList[index]);
-                color.Order = index;
-            }
-
-            this.Context.SaveChanges();
+                .Include(x => x.Sizes)
+                .First(x => x.Id == productId && x.IsDeleted == false);
+            return product;
         }
 
-        public void UpdateProductImageSort(int productId, string sortedIds)
-        {
-            var images = this.Context.Products
-                .Include(x => x.Images)
-                .FirstOrDefault(x => x.Id == productId)
-                .Images
+        public List<ProductSize> RetrieveSizes(int productId)
+        {            
+            return this.RetrieveProductForSizes(productId)
+                .Sizes
+                .OrderBy(x => x.Order)
                 .ToList();
+        }
+
+        public Func<ProductSize> AddProductSize(int productId, int sizeId)
+        {
+            var product = this.RetrieveProductForSizes(productId);
+            var size = this.Context.Sizes.First(x => x.ID == sizeId);
+            var productSize = new ProductSize
+                {
+                    Abbr = size.Name,
+                    Name = size.Description,
+                    SkuCode = size.SkuCode,
+                };
+            product.Sizes.Add(productSize);
+            return () => productSize;
+        }
+
+        public Func<ProductSize> CreateProductSize(int productId, ProductSize productSize)
+        {
+            var product = this.RetrieveProductForSizes(productId);
+            product.Sizes.Add(productSize);
+            return () => productSize;
+        }
+
+        public void DeleteProductSize(int productId, int sizeId)
+        {
+            var product = this.RetrieveProductForSizes(productId);
+            product.Sizes.Remove(product.Sizes.First(x => x.Id == sizeId));
+        }
+
+        public void UpdateSizeOrder(int productId, string sortedIds)
+        {
+            var sizes = this.RetrieveProductForSizes(productId).Sizes;
             var idList = sortedIds.Split(',').Select(x => Int32.Parse(x)).ToList();
 
             for (var index = 0; index < idList.Count(); index++)
             {
-                var image = images.FirstOrDefault(x => x.Id == idList[index]);
-                image.Order = index;
+                var size = sizes.FirstOrDefault(x => x.Id == idList[index]);
+                size.Order = index;
             }
 
             this.Context.SaveChanges();
         }
 
+
+        // Images
         public List<JsonProductImage> RetrieveImages(int productId)
         {
             return this.Context.Products
@@ -194,12 +245,40 @@ namespace Commerce.Persist.Products
                 ProductColor = color
             };
             product.Images.Add(productImage);
+
+            if (product.ThumbnailImage == null)
+            {
+                product.ThumbnailImage = productImage;
+            }
+
             return () => productImage.ToJson();
+        }
+
+        public void UpdateProductImageSort(int productId, string sortedIds)
+        {
+            var product = this.Context.Products
+                .Include(x => x.Images)
+                .Include(x => x.Images.Select(image => image.ProductColor))
+                .FirstOrDefault(x => x.Id == productId);
+
+            var idList = sortedIds.Split(',').Select(x => Int32.Parse(x)).ToList();
+
+            for (var index = 0; index < idList.Count(); index++)
+            {
+                var image = product.Images.FirstOrDefault(x => x.Id == idList[index]);
+                image.Order = index;
+            }
+
+            product.ThumbnailImage = GetThumbnailImage(product);
+            this.Context.SaveChanges();
         }
 
         public void DeleteProductImage(int productId, int imageId)
         {
-            var product = this.Context.Products.Include(x => x.Images).FirstOrDefault(x => x.Id == productId);
+            var product = this.Context
+                .Products.Include(x => x.Images)
+                .FirstOrDefault(x => x.Id == productId);
+
             var image = product.Images.FirstOrDefault(x => x.Id == imageId);
             if (image != null)
                 product.Images.Remove(image);
@@ -214,7 +293,7 @@ namespace Commerce.Persist.Products
                     .First(x => x.Id == productId);
 
             var image = product.Images.First(x => x.Id == productImageId);
-            var color = product.Colors.First(x => x.Id == newColor);
+            var color = product.Colors.FirstOrDefault(x => x.Id == newColor);
             var order = product.Images.Select(x => x.Order).Max() + 1;
             image.ProductColor = color;
             image.Order = order;
@@ -224,13 +303,47 @@ namespace Commerce.Persist.Products
         {
             var product = this.Context.Products.First(x => x.Id == productId);
             product.AssignImagesToColors = true;
-
+            product.ThumbnailImage = GetThumbnailImage(product);
         }
 
+        // TODO: "Are you sure you want to do that?"
         public void UnassignImagesFromColor(int productId)
         {
-            var product = this.Context.Products.First(x => x.Id == productId);
+            var product = this.Context.Products
+                    .Include(x => x.Images)
+                    .Include(x => x.Images.Select(image => image.ProductColor))
+                    .First(x => x.Id == productId);
+
             product.AssignImagesToColors = false;
+            product.Images.ForEach(x => x.ProductColor = null);
+            product.ThumbnailImage = GetThumbnailImage(product);
+        }
+
+        public static ProductImage GetThumbnailImage(Product product)
+        {
+            if (product.AssignImagesToColors == true)
+            {
+                if (product.Images.Any(x => x.ProductColor != null)) 
+                {
+                    return product.Images
+                        .Where(x => x.ProductColor != null)
+                        .OrderBy(x => x.ProductColor.Order)
+                        .ThenBy(x => x.Order)
+                        .FirstOrDefault();
+                }
+                else
+                {
+                    return product.Images
+                        .OrderBy(x => x.Order)
+                        .FirstOrDefault();
+                }
+            }
+            else
+            {
+                return product.Images
+                    .OrderBy(x => x.Order)
+                    .FirstOrDefault();
+            }
         }
     }
 }

@@ -9,18 +9,8 @@ namespace Commerce.Domain.Model.Products
     {
         public static JsonProductInfo ToJson(this Product product)
         {
-            var images = product.Images
-                    .OrderBy(x => x.ProductColor.Order)
-                    .ThenBy(x => x.Order)
-                    .ToList();
-            
-            var bundleID = product.Images.Any() ? 
-                product.Images
-                    .OrderBy(x => x.ProductColor.Order)
-                    .ThenBy(x => x.Order)
-                    .First()
-                    .ImageBundle.ExternalId.ToString() : 
-                (string)null;
+            var externalId = product.ThumbnailImage == null ? 
+                Guid.Empty : product.ThumbnailImage.ImageBundle.ExternalId;
 
             return new JsonProductInfo
             {
@@ -36,7 +26,7 @@ namespace Commerce.Domain.Model.Products
                 CategoryName = product.Category == null ? "" : product.Category.Name,
                 UnitPrice = product.UnitPrice,
                 UnitCost = product.UnitCost,
-                ImageBundleExternalId = bundleID ?? Guid.Empty.ToString(),
+                ImageBundleExternalId = externalId.ToString(),
                 AssignImagesToColors = product.AssignImagesToColors,
             };
         }

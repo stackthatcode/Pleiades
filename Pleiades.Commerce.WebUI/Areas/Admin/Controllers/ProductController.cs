@@ -114,22 +114,13 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             return new JsonNetResult();
         }
 
+
+        // Colors
         [HttpGet]
         public ActionResult Colors(int id)
         {
             var result = this.ProductRepository.RetreiveColors(id);
             return new JsonNetResult(result);
-        }
-
-        [HttpGet]
-        public ActionResult Images(int id)
-        {
-            var result = this.ProductRepository.RetrieveImages(id);
-            return new JsonNetResult()
-            {
-                Data = result,
-                Formatting = Newtonsoft.Json.Formatting.Indented,
-            };
         }
 
         [HttpPost]
@@ -153,6 +144,62 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         {
             this.ProductRepository.UpdateProductColorSort(id, sorted);
             return new JsonNetResult();
+        }
+
+
+
+        // Sizes
+        [HttpGet]
+        public ActionResult Sizes(int id)
+        {
+            var result = this.ProductRepository.RetrieveSizes(id);
+            return new JsonNetResult(result);
+        }
+
+        [HttpPost]
+        public ActionResult AddProductSize(int id, int sizeId)
+        {
+            var newColor = this.ProductRepository.AddProductSize(id, sizeId);
+            this.Context.SaveChanges();
+            return new JsonNetResult(newColor);
+        }
+
+        // TODO: make size JSON object
+        [HttpPost]
+        public ActionResult CreateProductSize(int id, ProductSize size)
+        {
+            var result = this.ProductRepository.CreateProductSize(id, size);
+            this.Context.SaveChanges();
+            return new JsonNetResult(result());
+        }
+
+        [HttpPost]
+        public ActionResult DeleteProductSize(int id, int sizeId)
+        {
+            this.ProductRepository.DeleteProductColor(id, sizeId);
+            this.Context.SaveChanges();
+            return new JsonNetResult();
+        }
+
+        [HttpPost]
+        public ActionResult UpdateSizeOrder(int id, string sorted)
+        {
+            this.ProductRepository.UpdateProductColorSort(id, sorted);
+            return new JsonNetResult();
+        }
+
+
+
+        // Images
+        [HttpGet]
+        public ActionResult Images(int id)
+        {
+            var result = this.ProductRepository.RetrieveImages(id);
+            return new JsonNetResult()
+            {
+                Data = result,
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+            };
         }
 
         [HttpPost]

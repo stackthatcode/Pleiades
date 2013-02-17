@@ -9,18 +9,28 @@ Front Range
 ...work...
 
 http://fortawesome.github.com/Font-Awesome/
+http://pcottle.github.com/learnGitBranching/
 
 
 Product Editor
 ~~~~~~~~~~~~~~
-- Test *EVERYTHING* => create a Product and simulate Creation of a Product followed by deletion of Colors, Categories, Brands, etc. => IN PROGRESS
-- When I delete a Category or Brand, gotta set the Product's == N/A => TODO
-- Create Category and Brand "N/A" => TODO
-- Fix bug on Back to Search => TODO
-
 - Size copying interface => TODO
 * Remove Size Group
 * Add Size Group List
+
+self.SelectedProductSizes = ko.observableArray();
+self.NewSizeInput = ko.observable(null);
+self.SizeReferenceData = ko.observableArray();
+self.ActiveView({ Level: "Sub-Child", Template: "AddSizesFromList" });
+self.GlideBackToSizes = function () {
+self.GlideBackToSizesTabWithRefresh 
+self.SaveSize
+
+self.ProductService.SizeList(this);
+self.ProductService.AddProductSize(self.SelectedProduct().Id(), nextSizeId, iterator);
+self.ProductService.Sizes(self.SelectedProduct().Id(), this);
+self.ProductService.DeleteProductSize(self.SelectedProduct().Id(), size.Id, this);
+self.ProductService.UpdateSizeOrder(self.SelectedProduct().Id(), sortedIds);
 
 self.RetrieveSizeGroupsList = function (callback) {
 	flow.exec(
@@ -42,7 +52,13 @@ self.RetrieveSizeGroupsList = function (callback) {
 	);
 }
 
+
+- When I delete a Category or Brand, gotta set the Product's == N/A => TODO
+- Create Category and Brand "N/A" => TODO
 - SKU and Order Generator => TODO
+
+
+- Test *EVERYTHING* => create a Product and simulate Creation of a Product followed by deletion of Colors, Categories, Brands, etc. => IN PROGRESS
 - Clicking a link while it's loading the AJAX causes JQuery to beef => TODO
 - Add the Number of Products in a Brand screen => TODO
 - PREVENT DELETION OF LAST SECTION => TODO

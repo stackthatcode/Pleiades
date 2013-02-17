@@ -495,8 +495,8 @@ backlog cleaning
 - Delete Color Repository modification => DONE
 - Server method for changing Assigned => DONE
 
-2/16
-----
+2/16 5 Hours
+------------
 - Fix the Scroll Tracker - take it to the top => DONE
 - Scroll Tracking on Add => DONE
 - Unassign Images Button => DONE
@@ -512,6 +512,11 @@ backlog cleaning
 * Orders will still maintain the Sku Code and Description for tracing => TRUE
 * So, remove IsDeleted from ProductColors? => DONE
 - Product Search Add/Delete => DONE
-
-
+- Fix bug on Back to Search => TODO
+*** WRETCHED DEATH MARCH *** fixed the image thumbnail B-Logic => DONE
+- Use xhr replay to repro a nasty fricking bug - bravo! => DONE - FIXED A NASTY BUG THANKS TO CHROME
+- Options for Thumbnail
+* Implicit selection.. confusing and bullshitty =>DONE
+- Checked the Color glideback Ko vs. Sortable - clean =>DONE
+- ALSO: improved performance tremendously with new Thumbnail approach => DONE
 

@@ -83,7 +83,7 @@
     <Compile Include="Model\Orders\OrderLine.cs" />
     <Compile Include="Model\Products\ProductSize.cs" />
     <Compile Include="Model\Products\JsonProductColor.cs" />
-    <Compile Include="Model\Products\JsonProductImages.cs" />
+    <Compile Include="Model\Products\JsonProductImage.cs" />
     <Compile Include="Model\Products\JsonProductInfo.cs" />
     <Compile Include="Model\Products\ProductColor.cs" />
     <Compile Include="Model\Products\Product.cs">

@@ -103,9 +103,8 @@
                 }
             }
 
-            self.ImagesTabClick = function () {
+            self.ImagesTabClick = function () {                
                 if (self.SelectedProduct().AssignImagesToColors()) {
-                    var unassignedColor = { Id: 0, Name: "Unassigned", Images: ko.observableArray() };
                     flow.exec(
                         function() { 
                             self.ProductService.Colors(self.SelectedProduct().Id(), this);
@@ -116,6 +115,8 @@
                             });
 
                             self.SelectedColorsWithImages(colorJson);
+
+                            var unassignedColor = { Id: 0, Name: "Unassigned", Images: ko.observableArray() };
                             self.SelectedColorsWithImages().unshift(unassignedColor);
                             self.ProductService.Images(self.SelectedProduct().Id(), this);
                         },
@@ -125,6 +126,7 @@
                                 color.Images.push(elem);
                             });
 
+                            self.RemoveAssignedColorAsNeeded();
                             self.ActiveView({ Level: "Child", Template: "Images" });
                             self.MakeImagesSortable();
                         }
@@ -143,10 +145,27 @@
                 }
             }
 
+            self.RemoveAssignedColorAsNeeded = function() {
+                var index = self.SelectedColorsWithImages().arrayFirstIndexOf(function(x) { return x.Id == 0; });
+                if (index == -1) {
+                    return;
+                }
+                var unassignedColor = self.SelectedColorsWithImages()[index];
+                if (!unassignedColor.Images().length) {
+                    self.SelectedColorsWithImages.remove(unassignedColor);
+                }
+            }
+
             self.MakeImagesSortable = function () {
                 $(".colorDrop").droppable({
                     drop: function( event, ui ) {
-                        var originalColorId = $(event.srcElement).closest("table.colorDrop").attr("id").replace('color', '');
+                        var colorDropElem = $(event.srcElement).closest("table.colorDrop");
+                        if (colorDropElem.length == 0) {
+                            console.log("missed drop!");
+                            console.log(event.srcElement);
+                            return;
+                        }                        
+                        originalColorId = colorDropElem.attr("id").replace('color', '');
                         var newColorId = event.target.id.replace("color", "");
                         var imageId = $(event.srcElement).closest("li").attr("id").replace("sorted", "");
                         console.log("originalColorId: " + originalColorId + " " + " newColorId: " + newColorId + " imageId: " + imageId);
@@ -181,6 +200,7 @@
                         var image = originalColor.Images()[index];
                         originalColor.Images.remove(image);
                         newColor.Images.push(image);
+                        self.RemoveAssignedColorAsNeeded()
                     }
                 );
             }
@@ -556,6 +576,190 @@
 
         }
 	</script>
+    <!-- Size View Model -->
+    <script type="text/javascript">
+        var AddSizeFunctions = function (rootModel) {
+            var self = rootModel;
+            self.SelectedProductSizes = ko.observableArray();
+            self.NewSizeInput = ko.observable(null);
+            self.SizeReferenceData = ko.observableArray();
+
+            self.AddSizeFromList = function () {
+                flow.exec(
+                    function () {
+                        // TODO: add AJAX function
+                        self.ProductService.ColorsList(this);
+                    },
+                    function (data) {
+                        self.SizeReferenceData(data);
+                        $.each(data, function (index, elem) { elem.Selected = ko.observable(false); });
+                        self.ChildGlider.GlideToChild(this);
+                    },
+                    function () {
+                        self.ActiveView({ Level: "Sub-Child", Template: "AddSizesFromList" });
+                    }
+                );
+            }
+
+            // TODO: create Template
+            self.CreateNewSize = function () {
+                var input = {
+                    EditAbbreviation: ko.observable(null),
+                    EditName: ko.observable(null),
+                    EditSkuCode: ko.observable(null),
+                };
+                self.NewSizeInput(input);                
+            }
+            
+            self.AddSizesToProduct = function () {
+                var sizeIdList = [];
+                $.each(self.SizeReferenceData(), function (index, elem) {
+                    if (elem.Selected()) {
+                        sizeIdList.push(elem.Id);
+                    }
+                });
+
+                var iterator = function (callback) {
+                    if (colorIdList.length == 0) {
+                        self.GlideBackToSizesTabWithRefresh();
+                        return;
+                    }
+
+                    var nextSizeId = sizeIdList.pop();
+                    self.ProductService.AddProductSize(self.SelectedProduct().Id(), nextSizeId, iterator);
+                };
+                iterator();
+            }
+
+            self.GlideBackToSizesTabWithRefresh = function() {
+                flow.exec(
+                    function () {
+                        self.ProductService.Sizes(self.SelectedProduct().Id(), this);
+                    },
+                    function (sizes) {
+                        self.SelectedProductSizes(sizes);
+                        self.ChildGlider.GlideToParent(this);
+                    },
+                    function () {
+                        self.ActiveView({ Level: "Child", Template: "Sizes" });
+                        self.MakeSizesSortable();
+                    }
+                );
+            }
+            
+            self.GlideBackToSizes = function () {
+                flow.exec(
+                    function () {
+                        $("#glideToParent").hide();
+                        self.ChildGlider.GlideToParent(this);
+                    },
+					function () {
+					    self.ActiveView({ Level: "Child", Template: "Colors" });
+                        self.MakeColorsSortable();
+					}
+				);
+            }
+            
+			self.SaveSize = function() {
+			    var colorInput = self.NewColorInput();
+				flow.exec(
+					function() {
+                        var test = colorInput;
+						if ($.trim(colorInput.EditName()) == "" || $.trim(colorInput.EditSEO()) == "" || 
+                            $.trim(colorInput.EditSkuCode()) == "")
+                        {
+                        	$("#validation").show();
+							return;
+						}
+
+                        if (colorInput.ShowUpload() == true && colorInput.ImageBundleExternalId() == null) {
+                        	$("#validation").show();
+							return;
+                        }
+
+                        if (colorInput.ShowUpload() == false) {
+                            var farbtasticColor = GetSelectedColor();                
+                            var createColorJson = { Rgb: farbtasticColor, Width: "150", Height: "150" };
+                            self.ProductService.CreateBitmap(createColorJson, this);
+                        }
+                        else {
+                            this( { ExternalId: colorInput.ImageBundleExternalId() });
+                        }
+                    },
+                    function(data) {
+                        console.log("Image Bundle Data: " + data);
+                        colorInput.ImageBundleExternalId(data.ExternalId);
+
+                        // Next, create a Color
+                        var serverRecord = {
+                            Name: colorInput.EditName(),
+                            SkuCode: colorInput.EditSkuCode(),
+                            SEO: colorInput.EditSEO(),
+                            ImageBundleExternalId: data.ExternalId, 
+                        };
+
+						self.ProductService.AddColorToColorList(serverRecord, this);                        
+					},
+					function(data) {
+                        self.ProductService.AddProductColor(self.SelectedProduct().Id(), data.Id, this);
+                    },
+					function() {
+                        self.GlideBackToColorsTabWithRefresh();
+                    }
+				);
+			}			
+
+            self.DeleteProductSize = function (size) {
+                self.ModalViewModel({ Template: "Modal-Dialog-ProductSize", Data: size });
+                $('#modal-delete').modal();
+            }
+
+            self.DeleteProductSizeConfirm = function () {
+                var size = self.ModalViewModel().Data;
+                flow.exec(
+                    function () {
+                        $('#modal-delete').modal('hide');
+                        self.ProductService.DeleteProductSize(self.SelectedProduct().Id(), size.Id, this);
+                    },
+                    function (data) {
+                        self.SelectedProductSizes.remove(size);
+                        self.ModalViewModel({ Template: null });
+                    }
+                );
+            }
+            
+            self.SizesTabClick = function () {
+                flow.exec(
+                    function () {
+                        self.ProductService.Sizes(self.SelectedProduct().Id(), this);
+                    },
+                    function (sizes) {
+                        self.SelectedProductSizes(sizes);
+                        self.ActiveView({ Level: "Child", Template: "Sizes" });
+                        self.MakeSizesSortable();
+                    }
+                );
+            }
+
+            self.MakeSizesSortable = function () {
+                $(".sortable").sortable({
+                    placeholder: "ui-state-highlight",
+                    update: self.UpdateSizeSortOrder,
+                    delay: 300
+                });
+                $(".sortable").disableSelection();
+            }
+
+            self.UpdateSizeSortOrder = function () {
+                var sortOutput = [];
+                $.each($("#sizes > div"), function (index, elem) { 
+                    sortOutput.push($(elem).attr('id').replace('sorted', '')); 
+                });
+                var sortedIds = sortOutput.join(",");
+                self.ProductService.UpdateSizeOrder(self.SelectedProduct().Id(), sortedIds);
+            };
+        }
+	</script>
     <!-- List Model -->
     <script type="text/javascript">
         var AddListModel = function (rootModel) {
@@ -665,14 +869,20 @@
                 flow.exec(
                     function () {
                         $("#glideToParent").hide();
-                        self.ProductService.Info(recordId, this);
+                        if (recordId) {
+                            self.ProductService.Info(recordId, this);
+                        } else {
+                            this();
+                        }
                     },
                     function (data) {
-                        var index = self.SearchData().arrayFirstIndexOf(function (x) { return x.Id == recordId; });
-                        if (index == -1) {
-                            self.SearchData.unshift(data);
-                        } else {
-                            self.SearchData.replace(self.SearchData()[index], data);
+                        if (data) {
+                            var index = self.SearchData().arrayFirstIndexOf(function (x) { return x.Id == recordId; });
+                            if (index == -1) {
+                                self.SearchData.unshift(data);
+                            } else {
+                                self.SearchData.replace(self.SearchData()[index], data);
+                            }
                         }
                         self.ParentGlider.GlideToParent(this);
                     },
@@ -713,7 +923,7 @@
                 errors.push({ controlGroup: "#Description", invalid: product.Description().trim() == "" });
                 errors.push({ controlGroup: "#Brand", invalid: product.BrandId() == null });
                 errors.push({ controlGroup: "#Category", invalid: product.CategoryId() == null });
-                
+
                 var validationMessage = $("#validation");
                 validationMessage.hide();
                 $.each(errors, function (index, elem) {
@@ -854,6 +1064,13 @@
                                 <a href="#" data-bind="click: $root.ColorsTabClick">Colors</a>
                             </li>
 
+                            <li data-bind="if: $root.ActiveView().Template == 'Images'" class="active">
+                                <a href="#">Images</a>
+                            </li>
+                            <li data-bind="if: $root.ActiveView().Template != 'Images'">
+                                <a href="#" data-bind="click: $root.ImagesTabClick">Images</a>
+                            </li>
+                                                        
                             <li data-bind="if: $root.ActiveView().Template == 'Sizes'" class="active">
                                 <a href="#">Sizes</a>
                             </li>
@@ -861,13 +1078,6 @@
                                 <a href="#" data-bind="click: $root.SizesTabClick">Sizes</a>
                             </li>
 
-                            <li data-bind="if: $root.ActiveView().Template == 'Images'" class="active">
-                                <a href="#">Images</a>
-                            </li>
-                            <li data-bind="if: $root.ActiveView().Template != 'Images'">
-                                <a href="#" data-bind="click: $root.ImagesTabClick">Images</a>
-                            </li>
-                            
                             <li data-bind="if: $root.ActiveView().Template == 'Inventory'" class="active">
                                 <a href="#">Inventory</a>
                             </li>
@@ -1236,7 +1446,7 @@
                 <td valign="top" style="padding-top:20px;">
                     <div style="width:712px;">
                         <div data-bind="ifnot: $data.Images().length">
-                            <h2 style="text-align:center; padding-top:50px; color:#CCC;">No Images Assigned</h2>
+                            <h2 style="text-align:center; padding-top:50px; color:#CCC;">No Images For This Color</h2>
                         </div>
 
                         <ul class="sortable" data-bind="attr: { id: 'images' + $data.Id }, foreach: $data.Images()">
@@ -1250,10 +1460,10 @@
                         </ul>
                     </div>
                 </td>
-                <td valign="top" style="width:220px; text-align:left; vertical-align:top; padding-top:20px;">
+                <td valign="top" style="width:220px; text-align:left; vertical-align:top; padding-top:20px; padding-right:20px; height:200px;">
                     <div data-bind="if: $data.Name == 'Unassigned'">
 				        <p><strong>No Color</strong></p>
-                        <h4>Drag images from this region onto Color to assign</h4>
+                        <h5>Drag Images from this Region to assign them to a Color and make them visible.</h5>
                     </div>
                     <div data-bind="ifnot: $data.Name == 'Unassigned'">
                         <div style="width:80px; margin-bottom:5px;" data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
@@ -1261,8 +1471,10 @@
 				        <p>
                             <strong data-bind="text: $data.Name"></strong > - <span data-bind="text: $data.SkuCode"></span>
                         </p>
-                    </div>                    
-                    <a class="btn btn-primary" href="#" data-bind="click: $root.AddNewImageForColor"><i class="icon-plus icon-white"></i> Add Image</a>
+                    </div>
+                    <div data-bind="ifnot: $data.Name == 'Unassigned'">           
+                        <a class="btn btn-primary" href="#" data-bind="click: $root.AddNewImageForColor"><i class="icon-plus icon-white"></i> Add Image</a>
+                    </div>
                     <div style="clear:both; height:30px;"></div>
                 </td>
             </tr>
