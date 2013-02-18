@@ -149,6 +149,13 @@ namespace Commerce.Initializer.Builders
                 });
 
                 unitOfWork.SaveChanges();
+
+                foreach (var size in sizeGroup.Sizes)
+                {
+                    productRepository.AddProductSize(product1.Id, size.ID);
+                }
+
+                unitOfWork.SaveChanges();
                 tx.Complete();
             }
         }

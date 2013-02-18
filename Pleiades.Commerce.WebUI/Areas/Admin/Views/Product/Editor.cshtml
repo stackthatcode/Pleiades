@@ -581,18 +581,21 @@
         var AddSizeFunctions = function (rootModel) {
             var self = rootModel;
             self.SelectedProductSizes = ko.observableArray();
-            self.NewSizeInput = ko.observable(null);
             self.SizeReferenceData = ko.observableArray();
-
+            self.NewSizeInput = ko.observable(null);
+            
             self.AddSizeFromList = function () {
                 flow.exec(
                     function () {
-                        // TODO: add AJAX function
-                        self.ProductService.ColorsList(this);
+                        self.ProductService.SizeGroups(this);
                     },
                     function (data) {
                         self.SizeReferenceData(data);
-                        $.each(data, function (index, elem) { elem.Selected = ko.observable(false); });
+                        $.each(data, function (index, elem) { 
+                            $.each(elem.Sizes, function (index, subElem) {
+                                subElem.Selected = ko.observable(false); 
+                            });
+                        });
                         self.ChildGlider.GlideToChild(this);
                     },
                     function () {
@@ -601,7 +604,6 @@
                 );
             }
 
-            // TODO: create Template
             self.CreateNewSize = function () {
                 var input = {
                     EditAbbreviation: ko.observable(null),
@@ -611,21 +613,27 @@
                 self.NewSizeInput(input);                
             }
             
+            self.CancelCreateNewSize = function () {
+                self.NewSizeInput(null);
+            }
+
             self.AddSizesToProduct = function () {
                 var sizeIdList = [];
                 $.each(self.SizeReferenceData(), function (index, elem) {
-                    if (elem.Selected()) {
-                        sizeIdList.push(elem.Id);
-                    }
+                    $.each(elem.Sizes, function (index, subElem) {
+                        if (subElem.Selected()) {
+                            sizeIdList.push(subElem.Id);
+                        }
+                    });
                 });
 
                 var iterator = function (callback) {
-                    if (colorIdList.length == 0) {
+                    if (sizeIdList.length == 0) {
                         self.GlideBackToSizesTabWithRefresh();
                         return;
                     }
 
-                    var nextSizeId = sizeIdList.pop();
+                    var nextSizeId = sizeIdList.shift();
                     self.ProductService.AddProductSize(self.SelectedProduct().Id(), nextSizeId, iterator);
                 };
                 iterator();
@@ -654,60 +662,39 @@
                         self.ChildGlider.GlideToParent(this);
                     },
 					function () {
-					    self.ActiveView({ Level: "Child", Template: "Colors" });
+					    self.ActiveView({ Level: "Child", Template: "Sizes" });
                         self.MakeColorsSortable();
 					}
 				);
-            }
+            }            
             
-			self.SaveSize = function() {
-			    var colorInput = self.NewColorInput();
-				flow.exec(
-					function() {
-                        var test = colorInput;
-						if ($.trim(colorInput.EditName()) == "" || $.trim(colorInput.EditSEO()) == "" || 
-                            $.trim(colorInput.EditSkuCode()) == "")
-                        {
-                        	$("#validation").show();
-							return;
-						}
+            // This is entirely on hold, for now! - TODO: determine if it's needed
+//            self.SaveSize = function() {
+//			    var sizeInput = self.NewColNewSizeInputorInput();
+//				flow.exec(
+//					function() {
+//						if ($.trim(sizeInput.EditAbbreviation()) == "" || $.trim(sizeInput.EditName()) == "" || 
+//                            $.trim(sizeInput.EditSkuCode()) == "")
+//                        {
+//                        	$("#validation").show();
+//							return;
+//						}
 
-                        if (colorInput.ShowUpload() == true && colorInput.ImageBundleExternalId() == null) {
-                        	$("#validation").show();
-							return;
-                        }
+//                        // Next, create a Color
+//                        var serverRecord = {
+//                            Abbreviation: sizeInput.EditAbbreviation(),
+//                            Name: sizeInput.EditName(),
+//                            SkuCode: sizeInput.EditSkuCode(),
+//                        };
 
-                        if (colorInput.ShowUpload() == false) {
-                            var farbtasticColor = GetSelectedColor();                
-                            var createColorJson = { Rgb: farbtasticColor, Width: "150", Height: "150" };
-                            self.ProductService.CreateBitmap(createColorJson, this);
-                        }
-                        else {
-                            this( { ExternalId: colorInput.ImageBundleExternalId() });
-                        }
-                    },
-                    function(data) {
-                        console.log("Image Bundle Data: " + data);
-                        colorInput.ImageBundleExternalId(data.ExternalId);
-
-                        // Next, create a Color
-                        var serverRecord = {
-                            Name: colorInput.EditName(),
-                            SkuCode: colorInput.EditSkuCode(),
-                            SEO: colorInput.EditSEO(),
-                            ImageBundleExternalId: data.ExternalId, 
-                        };
-
-						self.ProductService.AddColorToColorList(serverRecord, this);                        
-					},
-					function(data) {
-                        self.ProductService.AddProductColor(self.SelectedProduct().Id(), data.Id, this);
-                    },
-					function() {
-                        self.GlideBackToColorsTabWithRefresh();
-                    }
-				);
-			}			
+//                        self.ProductService.CreateProductSize(self.SelectedProduct().Id(), serverRecord, this);
+//                    },
+//					function(data) {
+//                        self.SelectedProductSizes().push(data);
+//                        self.NewSizeInput(null);
+//                    }
+//				);
+//			}			
 
             self.DeleteProductSize = function (size) {
                 self.ModalViewModel({ Template: "Modal-Dialog-ProductSize", Data: size });
@@ -721,7 +708,7 @@
                         $('#modal-delete').modal('hide');
                         self.ProductService.DeleteProductSize(self.SelectedProduct().Id(), size.Id, this);
                     },
-                    function (data) {
+                    function () {
                         self.SelectedProductSizes.remove(size);
                         self.ModalViewModel({ Template: null });
                     }
@@ -954,6 +941,11 @@
             return self;
         }
     </script> 
+    <!-- Inventory View Model -->
+    <script type="text/javascript">
+        var AddInventoryFunctions = function (rootModel) {
+        }
+    </script>
     <!-- Root View Model -->
     <script type="text/javascript">
         var RootModel = function () {
@@ -964,16 +956,18 @@
 
             self.CommonUI = new CommonUI("#gliding-container");
             self.ParentGlider = new GliderWidget("#gliding-container", "#parent-editor", "#child-editor");
-            self.ChildGlider = new GliderWidget("#gliding-container", "#child-editor", "#sub-child-editor");            
+            self.ChildGlider = new GliderWidget("#gliding-container", "#child-editor", "#sub-child-editor");
             self.ProductService = new ProductService(self.CommonUI.Error, self.CommonUI.ShowLoading, self.CommonUI.HideLoading);
 
             AddSearchFunctions(self);
             AddListModel(self);
             AddColorFunctions(self);
             AddImageFunctions(self);
+            AddSizeFunctions(self);
+            AddInventoryFunctions(self);
 
             self.RetrieveCategoriesList();
-            self.RetrieveBrandsList();            
+            self.RetrieveBrandsList();
             self.SearchData = ko.observableArray();
 
             // Move these to the Product View Model
@@ -1108,6 +1102,10 @@
 				        <a class="btn btn-primary" href="#" data-bind="click: $root.UnassignImagesFromColorClick"><i class="icon-white icon-ban-circle"></i> Don't Assign Images To Colors</a>
                         <!-- /ko -->
                     </div>
+                    
+                    <div class="span5" style="text-align:right;" data-bind="if: $root.ActiveView().Template == 'Sizes'">
+					    <a class="btn btn-primary" href="#" data-bind="click: $root.AddSizeFromList"><i class="icon-white icon-search"></i> Add Size from Lists</a>
+                    </div>
 		        </div>
 		    </div>
 		</div>
@@ -1144,7 +1142,7 @@
                 <div class="row">
                      <div class="span2">
                         <ul class="nav nav-pills">
-                            <li style="width:140px;" data-bind="ifnot: $root.ActiveView().Template == 'AddImage'">
+                            <li style="width:140px;">
 				                <a id="glideToParent" data-bind="click: $root.GlideBackToColors">&laquo; Back to Product</a>
                                 &nbsp;
                             </li>
@@ -1159,6 +1157,27 @@
                     </div>
                 </div>
                 <!-- /ko -->
+
+                <!-- ko if: $root.ActiveView().Template == 'AddSizesFromList' -->
+                <div class="row">
+                     <div class="span2">
+                        <ul class="nav nav-pills">
+                            <li style="width:140px;">
+				                <a id="glideToParent" data-bind="click: $root.GlideBackToSizes">&laquo; Back to Product</a>
+                                &nbsp;
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="span5">
+                        <p class="lead" style="color:#999;">Select Sizes to add to your Product</p>
+                    </div>
+                    <div class="span5" style="text-align:right;">
+					    <a class="btn btn-inverse" href="#" data-bind="click: $root.GlideBackToSizes"><i class="icon-remove icon-white"></i> Cancel</a>                    
+					    <a class="btn btn-primary" href="#" data-bind="click: $root.AddSizesToProduct"><i class="icon-ok icon-white"></i> Add Sizes</a>
+                    </div>
+                </div>
+                <!-- /ko -->
+
 
                 <!-- ko if: $root.ActiveView().Template == 'CreateColor' -->
                 <div class="row">
@@ -1179,9 +1198,10 @@
 		    </div>
 		</div>
 	</script>
+    
     <!-- KNOCKOUT TEMPLATE - PARENT EDITOR SEARCH -->
 	<script type="text/html" id="Parent-Editor-Search">
-		<div style="margin-top:24px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SearchData().length == 0">
+		<div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SearchData().length == 0">
 			<strong>There are no Products in your current search.  Click "Search" to run a search or click "Add New Product" to create a new one.</strong>  
 		</div>
 		
@@ -1215,7 +1235,8 @@
 		</tbody>
 		</table>
 	</script>
-	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR INFO TAB -->
+	
+    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR INFO TAB -->
 	<script type="text/html" id="Child-Editor-Info">
         <div style="margin-top:20px;" data-bind="with: $root.SelectedProduct()">
         <form>
@@ -1292,6 +1313,7 @@
         </form>
         </div>
 	</script>
+
 	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB -->
     <script type="text/html" id="Child-Editor-Colors">
     <div style="margin-top:0px;">
@@ -1334,7 +1356,11 @@
     <!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB - ADD FROM LIST SUB -->
     <script type="text/html" id="Sub-Child-Editor-AddColorsFromList">
     <div>
-        <form>    
+        <form>
+            <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.ColorArray().length == 0">
+			    <strong>There are no pre-defined Colors.  Go to Lists &gt; Color to add pre-defined Colors.</strong>  
+		    </div>
+
 		    <table id="color-table" class="table table-hover">
 		    <tbody data-bind="foreach: $root.ColorArray()">
 			    <tr>
@@ -1436,6 +1462,91 @@
         </form>
         </div>
 	</script>
+    
+	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR SIZES TAB -->
+    <script type="text/html" id="Child-Editor-Sizes">
+    <div style="margin-top:0px;">
+        <form>
+            <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SelectedProductSizes().length == 0">
+			    <strong>There are no Sizes for this Product.  Add a Size from the existing list.</strong>  
+		    </div>
+
+            <div id="sizes" class="sortable" data-bind="foreach: $root.SelectedProductSizes()">
+                <div class="draggable" data-bind="attr: { id: 'sorted' + $data.Id }">
+		        <table class="table table-hover" style="margin-bottom:0px;">
+		            <tbody>
+			            <tr>
+			            <td>
+				            <span class="span7">
+					            <input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
+					            <h4><span data-bind="text: $data.Name"></span></h4>
+                                <p>Abbreviation: <span data-bind="text: $data.Abbr"></span>                                
+                                - Sku Code: <span data-bind="text: $data.SkuCode"></span>
+                                </p>
+				            </span>
+                        </td>
+			            <td>
+				            <span class="span5" style="text-align:right;">
+                                <a href="#" class="btn btn-inverse disabled"><i class="icon-screenshot icon-white"></i> Drag Me!</a>
+					            <a class="btn btn-primary" style="width:70px;" href="#" 
+                                    data-bind="click: function() { $root.DeleteProductSize($data) }"><i class="icon-trash icon-white"></i> Delete</a>
+				            </span>
+			            </td>
+			            </tr>
+		            </tbody>
+		        </table>
+                </div>
+            </div>
+        </form>
+    </div>
+    </script>
+	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR SIZES - ADD SIZE SUB -->
+    <script type="text/html" id="Sub-Child-Editor-AddSizesFromList">
+        <form>
+            <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SizeReferenceData().length == 0">
+			    <strong>There are no Size Groups.  Go to Lists &gt; Sizes to add pre-defined Sizes.</strong>  
+		    </div>
+		    
+		    <table class="table table-hover" data-bind="visible: $root.SizeReferenceData().length > 0">
+		    <tbody data-bind="foreach: $root.SizeReferenceData()">
+			    <tr>
+                    <td colspan="2">
+				        <span class="span12">
+					        <input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
+					        <h4 data-bind="text: $data.Name"></h4>			    
+				        </span>
+                    </td>
+                </tr>
+                <!-- ko foreach: $data.Sizes-->
+                <tr>
+                    <td>
+				        <span class="span8" style="padding-left:40px;">
+						   <h4>&raquo; <span data-bind="text: Description"></span></h4>
+                           <span>Abbreviation:</span> <span data-bind="text: Name"></span> - 
+                           <span>Sku Code:</span> <span data-bind="text: SkuCode"></span>
+				        </span>
+                    </td>
+                    
+                    <td>
+                       <span class="span4" style="text-align:right;">					
+                        <div data-bind="if: $data.Selected() == false">
+					        <a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.SelectColor($data) }">
+                                <i class="icon-plus icon-white"></i> Select</a>
+                        </div>
+                        <div data-bind="if: $data.Selected() == true">
+                            <span class="label label-info">Selected!</span>
+					        <a class="btn btn-white" style="width:70px;" href="#" data-bind="click: function() { $root.SelectColor($data) }">
+                                <i class="icon-minus icon-black"></i> Remove</a>
+                        </div>
+				    </span>
+                    </td>
+                </tr>
+                <!-- /ko -->
+            </tbody>
+            </table>
+        </form>
+	</script>
+
     <!-- KNOCKOUT TEMPLATE - CHILD EDITOR IMAGES TAB -->
     <script type="text/html" id="Child-Editor-Images">
     <div data-bind="if: $root.SelectedProduct().AssignImagesToColors">
@@ -1556,6 +1667,7 @@
         </form>
         </div>
 	</script>
+
 	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG PRODUCT -->
 	<script type="text/html" id="Modal-Dialog-Product">
 		<div id="modal-delete" class="modal hide fade">
@@ -1581,13 +1693,36 @@
 			</div>
 			<div class="modal-body">
 				<p>
-                    <strong>Are you sure you want to Delete this Color from the Product?</strong><br />
-				    Any Inventory associated with Product will be destroyed
+                    <strong>Are you sure you want to Delete this Color from the Product?</strong>
+                </p>			
+				<p>
+				    Any Inventory associated with this Color will be Deleted.
                 </p>			
 			</div>
 			<div class="modal-footer">
 				<a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
 				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.DeleteProductColorConfirm"><i class="icon-ok icon-white"></i> Ok</a>
+			</div>
+		</div>
+	</script>
+	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG PRODUCT COLOR -->
+	<script type="text/html" id="Modal-Dialog-ProductSize">
+        <div id="modal-delete" class="modal hide fade">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3>Delete <span data-bind="text: $root.ModalViewModel().Data.Name"></span></h3>
+			</div>
+			<div class="modal-body">
+				<p>
+                    <strong>Are you sure you want to Delete this Size from the Product?</strong>
+                </p>			
+				<p>
+				    Any Inventory associated with this Size will be Deleted.
+                </p>			
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.DeleteProductSizeConfirm"><i class="icon-ok icon-white"></i> Ok</a>
 			</div>
 		</div>
 	</script>

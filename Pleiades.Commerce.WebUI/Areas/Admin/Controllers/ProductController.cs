@@ -65,6 +65,9 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             return new JsonNetResult(result);
         }
         
+
+
+        // Info
         [HttpGet]
         public ActionResult Search(int? brandId, int? categoryId, string searchText)
         {
@@ -113,6 +116,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             this.Context.SaveChanges();
             return new JsonNetResult();
         }
+
 
 
         // Colors
@@ -164,7 +168,6 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             return new JsonNetResult(newColor);
         }
 
-        // TODO: make size JSON object
         [HttpPost]
         public ActionResult CreateProductSize(int id, ProductSize size)
         {
@@ -174,17 +177,17 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteProductSize(int id, int sizeId)
+        public ActionResult UpdateSizeOrder(int id, string sorted)
         {
-            this.ProductRepository.DeleteProductColor(id, sizeId);
-            this.Context.SaveChanges();
+            this.ProductRepository.UpdateSizeOrder(id, sorted);
             return new JsonNetResult();
         }
 
         [HttpPost]
-        public ActionResult UpdateSizeOrder(int id, string sorted)
+        public ActionResult DeleteProductSize(int id, int sizeId)
         {
-            this.ProductRepository.UpdateProductColorSort(id, sorted);
+            this.ProductRepository.DeleteProductSize(id, sizeId);
+            this.Context.SaveChanges();
             return new JsonNetResult();
         }
 

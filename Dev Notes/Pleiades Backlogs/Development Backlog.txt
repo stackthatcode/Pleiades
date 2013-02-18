@@ -14,55 +14,17 @@ http://pcottle.github.com/learnGitBranching/
 
 Product Editor
 ~~~~~~~~~~~~~~
-- Size copying interface => TODO
-* Remove Size Group
-* Add Size Group List
-
-self.SelectedProductSizes = ko.observableArray();
-self.NewSizeInput = ko.observable(null);
-self.SizeReferenceData = ko.observableArray();
-self.ActiveView({ Level: "Sub-Child", Template: "AddSizesFromList" });
-self.GlideBackToSizes = function () {
-self.GlideBackToSizesTabWithRefresh 
-self.SaveSize
-
-self.ProductService.SizeList(this);
-self.ProductService.AddProductSize(self.SelectedProduct().Id(), nextSizeId, iterator);
-self.ProductService.Sizes(self.SelectedProduct().Id(), this);
-self.ProductService.DeleteProductSize(self.SelectedProduct().Id(), size.Id, this);
-self.ProductService.UpdateSizeOrder(self.SelectedProduct().Id(), sortedIds);
-
-self.RetrieveSizeGroupsList = function (callback) {
-	flow.exec(
-		function () {
-			self.ProductService.SizeGroups(this);
-		},
-		function (data) {
-			self.SizeGroupArray.removeAll();
-			self.SizeGroupArray.push({ value: null, text: "(Select a Size Group)" });
-
-			$.each(data, function (index, elem) {
-				self.SizeGroupArray.push({ value: elem.Id, text: elem.Name });
-			});
-
-			if (callback) {
-				callback();
-			}
-		}
-	);
-}
-
-
 - When I delete a Category or Brand, gotta set the Product's == N/A => TODO
 - Create Category and Brand "N/A" => TODO
 - SKU and Order Generator => TODO
 
-
 - Test *EVERYTHING* => create a Product and simulate Creation of a Product followed by deletion of Colors, Categories, Brands, etc. => IN PROGRESS
-- Clicking a link while it's loading the AJAX causes JQuery to beef => TODO
 - Add the Number of Products in a Brand screen => TODO
 - PREVENT DELETION OF LAST SECTION => TODO
 - Change out the Back Buttons => IN PROGRESS
+
+
+- Inventory Editor => TODO
 
 
 
@@ -76,6 +38,7 @@ http://www.ww2helmets.com/products-page/checkout/ => Hmmmmm...?????
 
 Backlog
 -------
+- Clicking a link while it's loading the AJAX causes JQuery to beef => TODO
 - Improve the quality of client-side Error Logging => TODO
 - Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING)
 - Check Sanderson for advanced Model Binding => TODO
@@ -120,14 +83,15 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/27/2013
 - Image Upload & Processing Engine => DONE
 
 - Product Search & Editor => IN PROGRESS
+- SKU Generator + Inventory Tracker => IN PROGRESS
 - Barebones Console App => IN PROGRESS
-- Server Logging => TODO
 
-- SKU Generator => UPDATE: shouldn't this be automatic...? => TODO
+- Server Logging => TODO
 - Order Search & Editor => TODO
 - Customer Search & Editor => TODO
 - Email Sending Engine => TODO
-- Basic Analytic Tracker - Traffic Source, Landing Page => WORTH HASHING OUT
+
+- Basic Analytic Tracker - Traffic Source, Landing Page => WORTH HASHING OUT, IF TIME PERMITS
 
 
 
@@ -165,18 +129,15 @@ E-Commerce API's & Payment Processors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Stripe
 - PayPal
-- Shopify
+- Shopify => COMPETITIVE ANALYSIS
 - Cheddar Getter
 - Braintree
-- Google Wallet / Google Check-out
 - WePay
-- Wickedfire look-up payment processors...? => TODO
 - Authorize.NET
 
 Research Backlog
 ----------------
-----------------
-=> How to include all these dependencies...? => We'll see
+=> How to include all these dependencies...? => We'll see => DONE FOR NOW
 => Domain Modeling and Write User Stories - after reading through Shopify's API docs => TODO
 => Where did I put my fonts...?  What's a good resource for typography and fonts...? => TODO
 - TODO KNOCKOUTJS: difference between http://knockoutjs.com/documentation/extenders.html AND custom binders

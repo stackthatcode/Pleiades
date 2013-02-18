@@ -238,7 +238,7 @@
 	
 	<!-- KNOCKOUT TEMPLATE - PARENT EDITOR -->
 	<script type="text/html" id="Parent-Editor">
-		<div style="margin-top:40px; text-align:center;" class="alert alert-info" data-bind="visible: $data.Data().length == 0">
+		<div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $data.Data().length == 0">
 			<button type="button" class="close" data-dismiss="alert">x</button>
 			<strong>There are no Colors.  Click "Add New Colors" to create a new one.</strong>  
 		</div>
@@ -271,7 +271,7 @@
 	
 	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR -->
 	<script type="text/html" id="Child-Editor">
-        <div style="margin-top:40px">
+        <div style="margin-top:30px">
         <form>
 			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
                 <strong>Please enter all the required fields.</strong>
@@ -344,7 +344,6 @@
 			</div>
 			<div class="modal-body">
 				<p>Are you sure you want to Delete this Color?</p>			
-				<p>All Products that use it will not have a Color</p>			
 			</div>
 			<div class="modal-footer">
 				<a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
