@@ -366,11 +366,10 @@
     <script type="text/javascript">
         var AddColorFunctions = function (rootModel) {
             var self = rootModel;
-
             self.SelectedProductColors = ko.observableArray();
             self.NewColorInput = ko.observable(null);
             self.ColorArray = ko.observableArray();
-
+            
             self.AddColorFromList = function () {
                 flow.exec(
                     function () {
@@ -407,7 +406,6 @@
                 );
             }
             
-
             self.PickColorToggle = function() {
                 self.NewColorInput().ShowUpload(false);
                 CreateColorPicker();
@@ -430,9 +428,11 @@
                     }
                 });
 
-                var iterator = function (callback) {
+                var callback = (self.SelectedProductColors().length == 0) ? self.ShowAddColorsInventoryDialog : null;
+
+                var iterator = function () {
                     if (colorIdList.length == 0) {
-                        self.GlideBackToColorsTabWithRefresh();
+                        self.GlideBackToColorsTabWithRefresh(callback);
                         return;
                     }
 
@@ -442,7 +442,7 @@
                 iterator();
             }
 
-            self.GlideBackToColorsTabWithRefresh = function() {
+            self.GlideBackToColorsTabWithRefresh = function(callback) {
                 flow.exec(
                     function () {
                         self.ProductService.Colors(self.SelectedProduct().Id(), this);
@@ -454,6 +454,9 @@
                     function () {
                         self.ActiveView({ Level: "Child", Template: "Colors" });
                         self.MakeColorsSortable();
+                        if (callback) {
+                            callback();
+                        }
                     }
                 );
             }
@@ -515,7 +518,8 @@
                         self.ProductService.AddProductColor(self.SelectedProduct().Id(), data.Id, this);
                     },
 					function() {
-                        self.GlideBackToColorsTabWithRefresh();
+                        var callback = (self.SelectedProductColors().length == 0) ? self.ShowAddColorsInventoryDialog : null;
+                        self.GlideBackToColorsTabWithRefresh(callback);
                     }
 				);
 			}			
@@ -541,6 +545,15 @@
                         self.ModalViewModel({ Template: null });
                     }
                 );
+            }
+            
+            self.ShowAddColorsInventoryDialog = function () {
+                self.ModalViewModel({ Data: null, Template: "Modal-Dialog-ProductColorInventory" });
+                $('#modal-dialog').modal('show');
+            }
+
+            self.HideAddColorsInventoryDialog = function () {
+               $('#modal-dialog').modal('hide');
             }
             
             self.ColorsTabClick = function () {
@@ -591,6 +604,7 @@
                     },
                     function (data) {
                         self.SizeReferenceData(data);
+                        
                         $.each(data, function (index, elem) { 
                             $.each(elem.Sizes, function (index, subElem) {
                                 subElem.Selected = ko.observable(false); 
@@ -600,6 +614,7 @@
                     },
                     function () {
                         self.ActiveView({ Level: "Sub-Child", Template: "AddSizesFromList" });
+
                     }
                 );
             }
@@ -616,30 +631,8 @@
             self.CancelCreateNewSize = function () {
                 self.NewSizeInput(null);
             }
-
-            self.AddSizesToProduct = function () {
-                var sizeIdList = [];
-                $.each(self.SizeReferenceData(), function (index, elem) {
-                    $.each(elem.Sizes, function (index, subElem) {
-                        if (subElem.Selected()) {
-                            sizeIdList.push(subElem.Id);
-                        }
-                    });
-                });
-
-                var iterator = function (callback) {
-                    if (sizeIdList.length == 0) {
-                        self.GlideBackToSizesTabWithRefresh();
-                        return;
-                    }
-
-                    var nextSizeId = sizeIdList.shift();
-                    self.ProductService.AddProductSize(self.SelectedProduct().Id(), nextSizeId, iterator);
-                };
-                iterator();
-            }
-
-            self.GlideBackToSizesTabWithRefresh = function() {
+            
+            self.GlideBackToSizesTabWithRefresh = function(callback) {
                 flow.exec(
                     function () {
                         self.ProductService.Sizes(self.SelectedProduct().Id(), this);
@@ -651,6 +644,9 @@
                     function () {
                         self.ActiveView({ Level: "Child", Template: "Sizes" });
                         self.MakeSizesSortable();
+                        if (callback) {
+                            callback();
+                        }
                     }
                 );
             }
@@ -666,35 +662,40 @@
                         self.MakeColorsSortable();
 					}
 				);
-            }            
+            }
             
-            // This is entirely on hold, for now! - TODO: determine if it's needed
-//            self.SaveSize = function() {
-//			    var sizeInput = self.NewColNewSizeInputorInput();
-//				flow.exec(
-//					function() {
-//						if ($.trim(sizeInput.EditAbbreviation()) == "" || $.trim(sizeInput.EditName()) == "" || 
-//                            $.trim(sizeInput.EditSkuCode()) == "")
-//                        {
-//                        	$("#validation").show();
-//							return;
-//						}
+            self.ShowAddSizesDialog = function () {
+                self.ModalViewModel({ Data: null, Template: "Modal-Dialog-ProductSizeInventory" });
+                $('#modal-dialog').modal('show');
+            }
 
-//                        // Next, create a Color
-//                        var serverRecord = {
-//                            Abbreviation: sizeInput.EditAbbreviation(),
-//                            Name: sizeInput.EditName(),
-//                            SkuCode: sizeInput.EditSkuCode(),
-//                        };
+            self.HideAddSizesDialog = function () {
+               $('#modal-dialog').modal('hide');
+            }
+            
+            self.AddSizesToProduct = function () {                
+                var sizeIdList = [];
+                $.each(self.SizeReferenceData(), function (index, elem) {
+                    $.each(elem.Sizes, function (index, subElem) {
+                        if (subElem.Selected()) {
+                            sizeIdList.push(subElem.Id);
+                        }
+                    });
+                });
 
-//                        self.ProductService.CreateProductSize(self.SelectedProduct().Id(), serverRecord, this);
-//                    },
-//					function(data) {
-//                        self.SelectedProductSizes().push(data);
-//                        self.NewSizeInput(null);
-//                    }
-//				);
-//			}			
+                var callback = (self.SelectedProductSizes().length == 0) ? self.ShowAddSizesDialog : null;
+                
+                var iterator = function () {
+                    if (sizeIdList.length == 0) {
+                        self.GlideBackToSizesTabWithRefresh(callback);
+                        return;
+                    }
+
+                    var nextSizeId = sizeIdList.shift();
+                    self.ProductService.AddProductSize(self.SelectedProduct().Id(), nextSizeId, iterator);
+                };
+                iterator();
+            }
 
             self.DeleteProductSize = function (size) {
                 self.ModalViewModel({ Template: "Modal-Dialog-ProductSize", Data: size });
@@ -944,6 +945,11 @@
     <!-- Inventory View Model -->
     <script type="text/javascript">
         var AddInventoryFunctions = function (rootModel) {
+            var self = rootModel;
+
+            self.SelectedProductInventory = ko.observableArray();
+            self.SelectedSku = ko.observable(null);
+            
         }
     </script>
     <!-- Root View Model -->
@@ -1454,7 +1460,7 @@
                     </div>
                 </div>
                 <div class="span9" style="text-align:right;">
-					<a class="btn btn-inverse" href="#" data-bind="click: $root.GlideToParentView"><i class="icon-remove icon-white"></i> Cancel</a>                    
+					<a class="btn btn-inverse" href="#" data-bind="click: $root.GlideBackToColors"><i class="icon-remove icon-white"></i> Cancel</a>                    
 					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveColor"><i class="icon-ok icon-white"></i> Save</a>
                 </div>
             </div>
@@ -1668,6 +1674,10 @@
         </div>
 	</script>
 
+    <!-- KNOCKOUT TEMPLATE - INVENTORY -->
+	<script type="text/html" id="Child-Editor-Inventory">
+    </script>
+
 	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG PRODUCT -->
 	<script type="text/html" id="Modal-Dialog-Product">
 		<div id="modal-delete" class="modal hide fade">
@@ -1723,6 +1733,38 @@
 			<div class="modal-footer">
 				<a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
 				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.DeleteProductSizeConfirm"><i class="icon-ok icon-white"></i> Ok</a>
+			</div>
+		</div>
+	</script>
+	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG PRODUCT ADD SIZE -->
+	<script type="text/html" id="Modal-Dialog-ProductSizeInventory">
+        <div id="modal-dialog" class="modal hide fade">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3>Add Sizes to Product</h3>
+			</div>
+			<div class="modal-body">
+				<p><strong>You will now be tracking Sizes in Inventory.</strong></p>
+                <p>Old Inventory without Size will be destroyed.  Please update your Inventory</p>
+			</div>
+			<div class="modal-footer">                
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.HideAddSizesDialog"><i class="icon-ok icon-white"></i> Ok</a>
+			</div>
+		</div>
+	</script>
+	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG PRODUCT ADD COLOR -->
+	<script type="text/html" id="Modal-Dialog-ProductColorInventory">
+        <div id="modal-dialog" class="modal hide fade">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3>Add Color to Product</h3>
+			</div>
+			<div class="modal-body">
+				<p><strong>You will now be tracking Colors in Inventory.</strong></p>
+                <p>Old Inventory without Colors will be destroyed.  Please update your Inventory.</p>
+			</div>
+			<div class="modal-footer">
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.HideAddColorsInventoryDialog"><i class="icon-ok icon-white"></i> Ok</a>
 			</div>
 		</div>
 	</script>

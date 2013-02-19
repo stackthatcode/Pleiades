@@ -4,14 +4,21 @@
     <div class="workspace-heading-parent">
         <div class="workspace-heading">
             <div id="heading" class="container">
-                <div class="row" style="position:relative">
-                    <div style="left:-75px; margin-top:15px; position:absolute; text-align:right;">
-					    <a class="btn btn-inverse" href="@Url.RouteUrl(AdminNavigation.ManagerList())"><i class="icon-arrow-left icon-white"></i> Back</a>
-				    </div>
+                <div class="row">
                     <div class="span12">
                         <h1>Edit Admin User &gt; @Model.Email</h1>
 				    </div>
-		        </div>
+                </div>
+                <div class="row">
+                    <div class="span12">
+                        <ul class="nav nav-pills">
+                            <li style="width:140px;">
+				                <a id="glideToParent" class="backbutton"  href="@Url.RouteUrl(AdminNavigation.ManagerList())">&laquo; Back to Admins</a>
+                                &nbsp;
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

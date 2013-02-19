@@ -6,7 +6,7 @@ namespace Commerce.Domain.Model.Orders
     public class OrderLine
     {
         public int Id { get; set; }
-        public Sku Sku { get; set; }
+        public ProductSku Sku { get; set; }
         public string OriginalSkuCode { get; set; }
 
         public int Quantity { get; set; }

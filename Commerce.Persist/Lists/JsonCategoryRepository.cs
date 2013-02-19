@@ -147,6 +147,11 @@ namespace Commerce.Persist.Lists
 
         public void DeleteSection(int sectionId)
         {
+            if (this.Sections().Count() <= 1)
+            {
+                return;
+            }
+
             var categories = this.CategoriesBySection(sectionId);
             
             foreach (var category in categories)

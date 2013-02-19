@@ -300,10 +300,7 @@
 		
 		<!-- CHILD VIEW HEADER -->
 		<div id="heading" class="container" data-bind="if: $root.ChildViewModel()">
-			<div class="row" style="position:relative;">
-				<div style="left:-75px; margin-top:15px; position:absolute; text-align:right;">
-					<a id="glideToParent" class="btn btn-inverse" data-bind="click: $root.GlideToParentView"><i class="icon-arrow-left icon-white"></i> Back</a>
-				</div>
+			<div class="row" style="position:relative;">				
 				<div class="span9">
 					<h1>Sizes &gt; <span data-bind="text: $root.ChildViewModel().Name"></span></h1>
 				</div>
@@ -311,13 +308,22 @@
 					<a class="btn btn-primary btn-block" data-bind="click: $root.AddChildRecord"><i class="icon-plus icon-white"></i> Add Size</a>
 				</div>
 			</div>
+            <div class="row">
+                <div class="span9">
+                    <ul class="nav nav-pills">
+                        <li style="width:140px;">
+				            <a id="glideToParent" class="backbutton" data-bind="click: $root.GlideToParentView">&laquo; Back to Sizes</a>
+                            &nbsp;
+                        </li>
+                    </ul>
+                </div>
+             </div>
 		</div>
 	</script>
 	
 	<!-- KNOCKOUT TEMPLATE - PARENT EDITOR -->
 	<script type="text/html" id="Parent-Editor">
 		<div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $data.Data().length == 0">
-			<!--<button type="button" class="close" data-dismiss="alert">x</button>-->
 			<strong>There are no Size Groups.  Click "Add New Size Group" to create a new one.</strong>  
 		</div>
 		

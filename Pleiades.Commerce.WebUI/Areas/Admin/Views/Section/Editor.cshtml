@@ -192,7 +192,9 @@
 				<!-- BUTTONS -->
 				<span class="span4" style="padding-top:5px; text-align:right;">
 					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveSection"><i class="icon-ok icon-white"></i> Save</a>
+                    <!-- ko if: $root.Data().length > 1 -->
 					<a class="btn btn-primary" href="#" data-bind="click: $root.DeleteSection"><i class="icon-trash icon-white"></i> Delete</a>
+                    <!-- /ko -->
 					<a class="btn btn-inverse" href="#" data-bind="click: $root.CancelEdit"><i class="icon-remove icon-white"></i> Cancel</a>
 				</span>
 			</div>					

@@ -520,7 +520,7 @@ backlog cleaning
 - Checked the Color glideback Ko vs. Sortable - clean =>DONE
 - ALSO: improved performance tremendously with new Thumbnail approach => DONE
 
-2/18 - 2.5 Hours
+2/18 - 3.0 Hours
 ----------------
 self.ProductService.SizeList(this); => DONE
 self.ProductService.AddProductSize(self.SelectedProduct().Id(), nextSizeId, iterator); => DONE
@@ -540,5 +540,14 @@ AddSizeFromList - TODO
 - Size copying interface => DONE
 * Add Size Group List => DONE
 CreateNewSize - TODO - BACKLOGGED - DON'T NEED IT
+
+2/18 - Part 2 - 2.0 Hours
+-------------------------
+- PREVENT DELETION OF LAST SECTION => DONE
+-- SO, ONLY IF THEY HAVE NON-ZERO INVENTORY IN SIZES, RIGHT? => DONE
+=> "You will now be tracking Colors.  Old Inventory without Colors will be destroyed.  Please update your Inventory"
+-- SO, ONLY IF THEY HAVE NON-ZERO INVENTORY, RIGHT?
+=> "You will now be tracking Sizes.  Old Inventory without Sizes will be destroyed.  Please update your Inventory"
+- Change out the Back Buttons => IN PROGRESS
 
 

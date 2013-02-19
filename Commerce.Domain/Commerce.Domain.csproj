@@ -79,6 +79,7 @@
     <Compile Include="Model\Lists\SizeExtensions.cs" />
     <Compile Include="Model\Lists\SizeGroup.cs" />
     <Compile Include="Model\Lists\SmallIdea.cs" />
+    <Compile Include="Model\Orders\Address.cs" />
     <Compile Include="Model\Orders\Order.cs" />
     <Compile Include="Model\Orders\OrderLine.cs" />
     <Compile Include="Model\Products\ProductSize.cs" />
@@ -94,7 +95,7 @@
     </Compile>
     <Compile Include="Model\Products\ExtensionsMethods.cs" />
     <Compile Include="Model\Products\ProductImage.cs" />
-    <Compile Include="Model\Products\Sku.cs" />
+    <Compile Include="Model\Products\ProductSku.cs" />
     <Compile Include="Model\Resources\FileResource.cs" />
     <Compile Include="Model\Resources\ImageBundle.cs" />
     <Compile Include="Model\Resources\JsonImageBundle.cs" />
