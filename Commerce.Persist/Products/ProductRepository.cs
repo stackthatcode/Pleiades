@@ -108,6 +108,11 @@ namespace Commerce.Persist.Products
             };
 
             product.Colors.Add(productColor);
+
+            if (product.Colors.Count() == 1)
+                WipeSkus(product);
+            GenerateSkus(product);
+
             return () => productColor.ToJson();
         }
 
@@ -306,7 +311,6 @@ namespace Commerce.Persist.Products
             product.ThumbnailImage = GetThumbnailImage(product);
         }
 
-        // TODO: "Are you sure you want to do that?"
         public void UnassignImagesFromColor(int productId)
         {
             var product = this.Context.Products
@@ -343,6 +347,50 @@ namespace Commerce.Persist.Products
                 return product.Images
                     .OrderBy(x => x.Order)
                     .FirstOrDefault();
+            }
+        }
+
+
+        // Inventory
+        public void WipeSkus(Product product)
+        {
+
+        }
+
+        public void GenerateSkus(Product product)
+        {
+            var skus = this.Context.ProductSkus.Where(x => x.Id == product.Id && x.IsDeleted == false);
+            foreach (var sku in skus)
+            {
+                sku.IsDeleted = true;
+            }
+            if (!product.Sizes.Any() && !product.Colors.Any())
+            {
+                this.Context.ProductSkus.Add(ProductSku.Factory(product, null, null));
+                return;
+            }
+
+            if (product.Sizes.Any() && !product.Colors.Any())
+            {
+                product.Sizes.ForEach(size => this.Context.ProductSkus.Add(ProductSku.Factory(product, null, size)));
+                return;
+            }
+
+            if (!product.Sizes.Any() && product.Colors.Any())
+            {
+                product.Colors.ForEach(color => this.Context.ProductSkus.Add(ProductSku.Factory(product, color, null)));
+                return;
+            }
+
+            foreach (var color in product.Colors)
+            {
+                foreach (var size in product.Sizes)
+                {
+                    if (!skus.Any(x => x.Size == size && x.Color == color))
+                    {
+                        this.Context.ProductSkus.Add(ProductSku.Factory(product, color, size));
+                    }
+                }
             }
         }
     }

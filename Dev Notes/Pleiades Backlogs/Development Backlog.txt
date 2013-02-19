@@ -16,20 +16,20 @@ Product Editor
 ~~~~~~~~~~~~~~
 - When I delete a Category or Brand, gotta set the Product's == N/A => TODO
 - Create Category and Brand "N/A" => TODO
+- Empty Images indicator + Upload Image to empty images EXCEPTION => TODO
 
 - SKU and Order Generator => IN PROGRESS
 
 WHEN TO CHANGE SKUS => IN PROGRESS
-
 - Add First Color to Product => If there are sizes / or not, then => Rebuild all Sku's 
 - Add First Size to Product => If there are colors / or not, then => Rebuild all Sku's 
 - Delete All Colors => Rebuild all Sku's - already have warnings - DONE 
 - Delete All Sizes => Rebuild all Sku's - already have warnings = DONE
+
 - +1 Delete Color from Product => Remove those Sku's - already have warnings - DONE
 - +1 Delete Size from Product => Remove those Sku's - already have warnings - DONE
 - +1 Add New Color to Product => Add more Skus
 - +1 Add New Size to Product => Add more Skus
-
 
 - Add the Number of Products in a Brand screen => TODO
 - Inventory Editor => TODO
