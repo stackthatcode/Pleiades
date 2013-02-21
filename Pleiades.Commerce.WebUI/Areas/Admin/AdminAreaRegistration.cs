@@ -14,6 +14,18 @@ namespace Commerce.WebUI.Areas.Admin
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
+            // TODO: fix my RESTful URI's, fuck with these wierd Routes
+
+            context.MapRoute(
+                "Inventory Total",
+                "Admin/Product/{id}/InventoryTotal",
+                new { controller = "Product", action = "InventoryTotal" });
+
+            context.MapRoute(
+                "Inventory",
+                "Admin/Product/{id}/Inventory",
+                new { controller = "Product", action = "Inventory" });
+
             context.MapRoute(
                 "Image Download",
                 "Admin/Image/Download/{externalResourceId}",
@@ -27,12 +39,6 @@ namespace Commerce.WebUI.Areas.Admin
             context.MapRoute(
                 "Category Action w/ Parent Id, Child Id",
                 "Admin/Category/{action}/{parentId}/{childId}",
-                new { controller = "Category" }
-            );
-
-            context.MapRoute(
-                "Category Action w/ Id",
-                "Admin/Category/{action}/{id}",
                 new { controller = "Category" }
             );
 

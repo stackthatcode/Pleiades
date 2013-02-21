@@ -20,6 +20,7 @@ function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback)
     };
 
 
+
     // Info
     self.Info = function (productId, callback) {
         self.AjaxGet("/Admin/Product/Info/" + productId, callback);
@@ -36,6 +37,7 @@ function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback)
     self.Save = function (product, callback) {
         self.AjaxPost("/Admin/Product/Save", product, callback);
     };
+
 
 
     // Sizes
@@ -101,6 +103,7 @@ function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback)
 	};
 
 
+
     // Images
 	self.Images = function (productId, callback) {
 	    self.AjaxGet("/Admin/Product/Images/" + productId, callback);
@@ -120,6 +123,17 @@ function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback)
 
     self.DeleteProductImage = function (productId, productImageId, callback) {
         self.AjaxPost("/Admin/Product/DeleteProductImage/" + productId + "?productImageId=" + productImageId, {}, callback);
+    };
+
+
+
+    // Inventory
+    self.InventoryTotal = function (productId, callback) {
+        return self.AjaxGet("/Admin/Product/" + productId + "/InventoryTotal", callback);
+    };
+
+    self.Inventory = function (productId, callback) {
+        return self.AjaxGet("/Admin/Product/" + productId + "/Inventory?regenerate=true", callback);
     };
 
 	return self;

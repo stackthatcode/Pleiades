@@ -41,12 +41,12 @@ namespace Commerce.Domain.Model.Products
 
             var productSku = new ProductSku
             {
+                OriginalSkuCode = skuCode,
                 SkuCode = skuCode,
                 Name = name,
                 Product = product,
                 Color = color,
                 Size = size,
-                OriginalSkuCode = skuCode,
                 ReservedInventory = 0,
                 TotalInventory = 0,
                 IsDeleted = false,

@@ -370,7 +370,7 @@
             self.NewColorInput = ko.observable(null);
             self.ColorArray = ko.observableArray();
             
-            self.AddColorFromList = function () {
+            self.SlideToColorList = function () {
                 flow.exec(
                     function () {
                         self.ProductService.ColorsList(this);
@@ -386,7 +386,7 @@
                 );
             }
 
-            self.CreateNewColor = function () {
+            self.SlideToCreateNewColor = function () {
                 flow.exec(
                     function () {
                         var input = {
@@ -420,7 +420,13 @@
                 self.NewColorInput().ImageBundleExternalId(data.ExternalId);
             }
 
-            self.AddColorsToProduct = function () {
+            self.AddColorsToProductClick = function () {
+                self.ColorInventoryCheck(self.AddColorsToProductAction);
+            }
+
+            self.AddColorsToProductAction = function () {
+                $('#modal-dialog').modal('hide');
+                
                 var colorIdList = [];
                 $.each(self.ColorArray(), function (index, elem) {
                     if (elem.Selected()) {
@@ -428,11 +434,9 @@
                     }
                 });
 
-                var callback = (self.SelectedProductColors().length == 0) ? self.ShowAddColorsInventoryDialog : null;
-
                 var iterator = function () {
                     if (colorIdList.length == 0) {
-                        self.GlideBackToColorsTabWithRefresh(callback);
+                        self.GlideBackToColorsTabWithRefresh();
                         return;
                     }
 
@@ -441,56 +445,50 @@
                 };
                 iterator();
             }
-
-            self.GlideBackToColorsTabWithRefresh = function(callback) {
+            
+            // If there is Inventory, and this is the first Color, it will wipe the Inventory
+            self.ColorInventoryCheck = function(action) {
                 flow.exec(
-                    function () {
-                        self.ProductService.Colors(self.SelectedProduct().Id(), this);
+                    function() {
+                         self.ProductService.InventoryTotal(self.SelectedProduct().Id(), this);
                     },
-                    function (colors) {
-                        self.SelectedProductColors(colors);
-                        self.ChildGlider.GlideToParent(this);
-                    },
-                    function () {
-                        self.ActiveView({ Level: "Child", Template: "Colors" });
-                        self.MakeColorsSortable();
-                        if (callback) {
-                            callback();
+                    function(inventoryTotal) {
+                        if (self.SelectedProductColors().length == 0 && inventoryTotal.Total > 0) {
+                            self.ShowAddColorsInventoryDialog(action);
+                        } else {
+                            action();
                         }
                     }
                 );
-            }
+            };
             
-            self.GlideBackToColors = function () {
+            self.ShowAddColorsInventoryDialog = function (action) {
+                self.ModalViewModel({ Action: action, Template: "Modal-Dialog-ProductColorInventory" });
+                $('#modal-dialog').modal('show');
+            }
+
+            self.SaveColorClick = function () {
+                var colorInput = self.NewColorInput();
+                if ($.trim(colorInput.EditName()) == "" || $.trim(colorInput.EditSEO()) == "" || 
+                    $.trim(colorInput.EditSkuCode()) == "")
+                {
+                    $("#validation").show();
+					return;
+				}
+
+                if (colorInput.ShowUpload() == true && colorInput.ImageBundleExternalId() == null) {
+                    $("#validation").show();
+					return;
+                }
+
+                self.ColorInventoryCheck(self.SaveColorAction);
+            }
+
+			self.SaveColorAction = function() {
+			    $('#modal-dialog').modal('hide');
+				var colorInput = self.NewColorInput();
                 flow.exec(
-                    function () {
-                        $("#glideToParent").hide();
-                        self.ChildGlider.GlideToParent(this);
-                    },
-					function () {
-					    self.ActiveView({ Level: "Child", Template: "Colors" });
-                        self.MakeColorsSortable();
-					}
-				);
-            }
-            
-			self.SaveColor = function() {
-			    var colorInput = self.NewColorInput();
-				flow.exec(
-					function() {
-                        var test = colorInput;
-						if ($.trim(colorInput.EditName()) == "" || $.trim(colorInput.EditSEO()) == "" || 
-                            $.trim(colorInput.EditSkuCode()) == "")
-                        {
-                        	$("#validation").show();
-							return;
-						}
-
-                        if (colorInput.ShowUpload() == true && colorInput.ImageBundleExternalId() == null) {
-                        	$("#validation").show();
-							return;
-                        }
-
+					function() {                        
                         if (colorInput.ShowUpload() == false) {
                             var farbtasticColor = GetSelectedColor();                
                             var createColorJson = { Rgb: farbtasticColor, Width: "150", Height: "150" };
@@ -518,8 +516,7 @@
                         self.ProductService.AddProductColor(self.SelectedProduct().Id(), data.Id, this);
                     },
 					function() {
-                        var callback = (self.SelectedProductColors().length == 0) ? self.ShowAddColorsInventoryDialog : null;
-                        self.GlideBackToColorsTabWithRefresh(callback);
+                        self.GlideBackToColorsTabWithRefresh();
                     }
 				);
 			}			
@@ -545,15 +542,6 @@
                         self.ModalViewModel({ Template: null });
                     }
                 );
-            }
-            
-            self.ShowAddColorsInventoryDialog = function () {
-                self.ModalViewModel({ Data: null, Template: "Modal-Dialog-ProductColorInventory" });
-                $('#modal-dialog').modal('show');
-            }
-
-            self.HideAddColorsInventoryDialog = function () {
-               $('#modal-dialog').modal('hide');
             }
             
             self.ColorsTabClick = function () {
@@ -587,6 +575,39 @@
                 self.ProductService.UpdateColorOrder(self.SelectedProduct().Id(), sortedIds);
             };
 
+            
+
+            self.GlideBackToColorsTabWithRefresh = function(callback) {
+                flow.exec(
+                    function () {
+                        self.ProductService.Colors(self.SelectedProduct().Id(), this);
+                    },
+                    function (colors) {
+                        self.SelectedProductColors(colors);
+                        self.ChildGlider.GlideToParent(this);
+                    },
+                    function () {
+                        self.ActiveView({ Level: "Child", Template: "Colors" });
+                        self.MakeColorsSortable();
+                        if (callback) {
+                            callback();
+                        }
+                    }
+                );
+            }
+            
+            self.GlideBackToColors = function () {
+                flow.exec(
+                    function () {
+                        $("#glideToParent").hide();
+                        self.ChildGlider.GlideToParent(this);
+                    },
+					function () {
+					    self.ActiveView({ Level: "Child", Template: "Colors" });
+                        self.MakeColorsSortable();
+					}
+				);
+            }
         }
 	</script>
     <!-- Size View Model -->
@@ -663,17 +684,34 @@
 					}
 				);
             }
+                        
+            // If there is Inventory, and this is the first Size, it will wipe the Inventory
+            self.SizeInventoryCheck = function(action) {
+                flow.exec(
+                    function() {
+                         self.ProductService.InventoryTotal(self.SelectedProduct().Id(), this);
+                    },
+                    function(inventoryTotal) {
+                        if (self.SelectedProductSizes().length == 0 && inventoryTotal.Total > 0) {
+                            self.ShowAddSizesInventoryDialog(action);
+                        } else {
+                            action();
+                        }
+                    }
+                );
+            };
             
-            self.ShowAddSizesDialog = function () {
-                self.ModalViewModel({ Data: null, Template: "Modal-Dialog-ProductSizeInventory" });
+            self.ShowAddSizesInventoryDialog = function (action) {
+                self.ModalViewModel({ Action: action, Template: "Modal-Dialog-ProductSizeInventory" });
                 $('#modal-dialog').modal('show');
             }
-
-            self.HideAddSizesDialog = function () {
-               $('#modal-dialog').modal('hide');
-            }
             
-            self.AddSizesToProduct = function () {                
+            self.AddSizesToProductClick = function () {
+                self.SizeInventoryCheck(self.AddSizesToProductAction);
+            }
+
+            self.AddSizesToProductAction = function () {   
+                $('#modal-dialog').modal('hide');             
                 var sizeIdList = [];
                 $.each(self.SizeReferenceData(), function (index, elem) {
                     $.each(elem.Sizes, function (index, subElem) {
@@ -949,7 +987,23 @@
 
             self.SelectedProductInventory = ko.observableArray();
             self.SelectedSku = ko.observable(null);
-            
+
+            self.InventoryTabClick = function () {
+                flow.exec(
+                    function () {
+                        self.ProductService.Inventory(self.SelectedProduct().Id(), this);
+                    },
+                    function (inventory) {
+                        alert(inventory);
+                        self.SelectedProductInventory(inventory);
+                        self.ActiveView({ Level: "Child", Template: "Inventory" });
+                    }
+                );
+            }
+
+            // Edit Click - TODO
+            // Cancel Click - TODO
+            // Save Click - TODO
         }
     </script>
     <!-- Root View Model -->
@@ -1094,8 +1148,8 @@
                     </div>
 
                     <div class="span5" style="text-align:right;" data-bind="if: $root.ActiveView().Template == 'Colors'">
-					    <a class="btn btn-primary" href="#" data-bind="click: $root.AddColorFromList"><i class="icon-white icon-search"></i> Add Color from Lists</a>
-					    <a class="btn btn-primary" href="#" data-bind="click: $root.CreateNewColor"><i class="icon-white icon-pencil"></i> Create New Color</a>
+					    <a class="btn btn-primary" href="#" data-bind="click: $root.SlideToColorList"><i class="icon-white icon-search"></i> Add Color from Lists</a>
+					    <a class="btn btn-primary" href="#" data-bind="click: $root.SlideToCreateNewColor"><i class="icon-white icon-pencil"></i> Create New Color</a>
                     </div>
 
                     <div class="span5" style="text-align:right;" data-bind="if: $root.ActiveView().Template == 'Images'">				        
@@ -1159,7 +1213,7 @@
                     </div>
                     <div class="span5" style="text-align:right;">
 					    <a class="btn btn-inverse" href="#" data-bind="click: $root.GlideBackToColors"><i class="icon-remove icon-white"></i> Cancel</a>                    
-					    <a class="btn btn-primary" href="#" data-bind="click: $root.AddColorsToProduct"><i class="icon-ok icon-white"></i> Add Colors</a>
+					    <a class="btn btn-primary" href="#" data-bind="click: $root.AddColorsToProductClick"><i class="icon-ok icon-white"></i> Add Colors</a>
                     </div>
                 </div>
                 <!-- /ko -->
@@ -1179,7 +1233,7 @@
                     </div>
                     <div class="span5" style="text-align:right;">
 					    <a class="btn btn-inverse" href="#" data-bind="click: $root.GlideBackToSizes"><i class="icon-remove icon-white"></i> Cancel</a>                    
-					    <a class="btn btn-primary" href="#" data-bind="click: $root.AddSizesToProduct"><i class="icon-ok icon-white"></i> Add Sizes</a>
+					    <a class="btn btn-primary" href="#" data-bind="click: $root.AddSizesToProductClick"><i class="icon-ok icon-white"></i> Add Sizes</a>
                     </div>
                 </div>
                 <!-- /ko -->
@@ -1461,7 +1515,7 @@
                 </div>
                 <div class="span9" style="text-align:right;">
 					<a class="btn btn-inverse" href="#" data-bind="click: $root.GlideBackToColors"><i class="icon-remove icon-white"></i> Cancel</a>                    
-					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveColor"><i class="icon-ok icon-white"></i> Save</a>
+					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveColorClick"><i class="icon-ok icon-white"></i> Save</a>
                 </div>
             </div>
             
@@ -1676,6 +1730,27 @@
 
     <!-- KNOCKOUT TEMPLATE - INVENTORY -->
 	<script type="text/html" id="Child-Editor-Inventory">
+        <div id="inventory" data-bind="foreach: $root.SelectedProductInventory()">            
+		    <table class="table table-hover" style="margin-bottom:0px;">
+		        <tbody>
+			        <tr>
+			        <td>
+				        <span class="span9">
+					        <h4><span data-bind="text: $data.SkuCode"></span></h4>
+                            <p>Name: <span data-bind="text: $data.Name"></span> <br/>
+                            Original Sku Code: <span data-bind="text: $data.OriginalSkuCode"></span>
+                            </p>
+				        </span>
+                    </td>
+			        <td>
+				        <span class="span3" style="text-align:right;">
+                            <a class="btn btn-primary" style="width:70px;" href="#"><i class="icon-trash icon-white"></i> Delete</a>
+				        </span>
+			        </td>
+			        </tr>
+		        </tbody>
+		    </table>
+        </div>
     </script>
 
 	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG PRODUCT -->
@@ -1747,8 +1822,9 @@
 				<p><strong>You will now be tracking Sizes in Inventory.</strong></p>
                 <p>Old Inventory without Size will be destroyed.  Please update your Inventory</p>
 			</div>
-			<div class="modal-footer">                
-				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.HideAddSizesDialog"><i class="icon-ok icon-white"></i> Ok</a>
+			<div class="modal-footer">    
+                <a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.ModalViewModel().Action"><i class="icon-ok icon-white"></i> Ok</a>
 			</div>
 		</div>
 	</script>
@@ -1764,7 +1840,8 @@
                 <p>Old Inventory without Colors will be destroyed.  Please update your Inventory.</p>
 			</div>
 			<div class="modal-footer">
-				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.HideAddColorsInventoryDialog"><i class="icon-ok icon-white"></i> Ok</a>
+                <a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.ModalViewModel().Action"><i class="icon-ok icon-white"></i> Ok</a>
 			</div>
 		</div>
 	</script>

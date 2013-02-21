@@ -94,6 +94,7 @@ namespace Commerce.Persist.Products
 
             var product = this.Context.Products
                 .Include(x => x.Colors)
+                //.Include(x => x.Sizes)
                 .First(x => x.Id == productId);
 
             var imageBundle = this.ImageBundleRepository.Copy(color.ImageBundle.Id);
@@ -107,11 +108,12 @@ namespace Commerce.Persist.Products
                 Order = product.Colors.Count() + 1,
             };
 
+            // *** Wipe Inventory if this is the first Color
+            if (product.Colors.Count() == 0)
+            {
+                this.WipeInventory(product.Id);
+            }
             product.Colors.Add(productColor);
-
-            if (product.Colors.Count() == 1)
-                WipeSkus(product);
-            GenerateSkus(product);
 
             return () => productColor.ToJson();
         }
@@ -154,6 +156,12 @@ namespace Commerce.Persist.Products
                     image.ProductColor = null;
                 }
             }
+
+            this.ActiveInventory(productId)
+                    .Where(x => x.Color.Id == productColorId)
+                    .ToList()
+                    .ForEach(sku => sku.IsDeleted = true);
+
             product.Colors.Remove(productColor);
         }
 
@@ -162,6 +170,7 @@ namespace Commerce.Persist.Products
         private Product RetrieveProductForSizes(int productId)
         {
             var product = this.Context.Products
+                .Include(x => x.Colors)
                 .Include(x => x.Sizes)
                 .First(x => x.Id == productId && x.IsDeleted == false);
             return product;
@@ -185,20 +194,47 @@ namespace Commerce.Persist.Products
                     Name = size.Description,
                     SkuCode = size.SkuCode,
                 };
+
             product.Sizes.Add(productSize);
+
+            // Is this the first Size?
+            if (product.Sizes.Count() == 1)
+            {
+                this.WipeInventory(product.Id);
+            }
+            else
+            {
+                var inventoryTotal = this.InventoryTotal(product.Id);
+                if (inventoryTotal > 0) // There is Inventory!
+                {
+                    // TODO: add for every Size / or no Size
+                }
+            }
+
             return () => productSize;
         }
 
         public Func<ProductSize> CreateProductSize(int productId, ProductSize productSize)
         {
             var product = this.RetrieveProductForSizes(productId);
+            if (product.Sizes.Count() == 0)
+            {
+                this.WipeInventory(product.Id);
+            } 
             product.Sizes.Add(productSize);
+            
             return () => productSize;
         }
 
         public void DeleteProductSize(int productId, int sizeId)
         {
             var product = this.RetrieveProductForSizes(productId);
+
+            this.ActiveInventory(productId)
+                    .Where(x => x.Size.Id == sizeId)
+                    .ToList()
+                    .ForEach(sku => sku.IsDeleted = true);
+
             product.Sizes.Remove(product.Sizes.First(x => x.Id == sizeId));
         }
 
@@ -352,18 +388,42 @@ namespace Commerce.Persist.Products
 
 
         // Inventory
-        public void WipeSkus(Product product)
+        private List<ProductSku> ActiveInventory(int id)
         {
-
+            return this.Context.ProductSkus
+                .Include(x => x.Size)
+                .Include(x => x.Color)
+                .Where(x => x.Product.Id == id && x.IsDeleted == false).ToList();
         }
 
-        public void GenerateSkus(Product product)
+        public List<ProductSku> Inventory(int id)
         {
-            var skus = this.Context.ProductSkus.Where(x => x.Id == product.Id && x.IsDeleted == false);
-            foreach (var sku in skus)
+            return this.ActiveInventory(id);
+        }
+
+        public int InventoryTotal(int productId)
+        {
+            var total = this.ActiveInventory(productId).Sum(x => x.TotalInventory);
+            return total;
+        }
+
+        public void WipeInventory(int productId)
+        {
+            foreach (var sku in this.ActiveInventory(productId))
             {
                 sku.IsDeleted = true;
             }
+        }
+
+        // Only call this WHEN they visit the Inventory tab - TODO
+        public void GenerateInventory(int productId)
+        {
+            var skus = this.ActiveInventory(productId);
+            var product = this.Context.Products
+                .Include(x => x.Sizes)
+                .Include(x => x.Colors)
+                .First(x => x.Id == productId && x.IsDeleted == false);
+
             if (!product.Sizes.Any() && !product.Colors.Any())
             {
                 this.Context.ProductSkus.Add(ProductSku.Factory(product, null, null));

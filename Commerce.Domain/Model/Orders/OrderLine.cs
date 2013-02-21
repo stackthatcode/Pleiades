@@ -9,7 +9,6 @@ namespace Commerce.Domain.Model.Orders
         public ProductSku Sku { get; set; }
         public string OriginalSkuCode { get; set; }
         public string Description { get; set; }
-
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
 

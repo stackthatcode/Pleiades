@@ -261,5 +261,32 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             this.Context.SaveChanges();
             return new JsonNetResult();
         }
+
+
+    
+        // Inventory
+        [HttpGet]
+        public ActionResult InventoryTotal(int id)
+        {
+            var result = this.ProductRepository.InventoryTotal(id);
+            return new JsonNetResult(new { Total = 0 }); //result
+        }
+
+        [HttpGet]
+        public ActionResult Inventory(int id, bool regenerate = true)
+        {
+            if (regenerate)
+            {
+                var total = this.ProductRepository.InventoryTotal(id);
+                if (total == 0)
+                {
+                    this.ProductRepository.GenerateInventory(id);
+                    this.Context.SaveChanges();
+                }
+            }
+
+            var inventory = this.ProductRepository.Inventory(id);
+            return new JsonNetResult(inventory); 
+        }
     }
 }
