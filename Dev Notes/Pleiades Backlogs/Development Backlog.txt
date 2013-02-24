@@ -20,8 +20,10 @@ Front Range
 
 
 
+
 Some Clean-up
 ~~~~~~~~~~~~~
+- Product - Add In-Stock flag => TODO
 - Fix bug in Save Info => TODO
 - Add Category and Brand "0" for defaults => TODO
 - Fix Repositories for these, too => TODO

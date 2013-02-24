@@ -593,5 +593,5 @@ Banana Republic
 - Fix empty Inventory Total bug => DONE
 - Fixed URL Decoding on ReturnUrl => DONE
 - Order Menu item => DONE
-
-
+- ** MAJOR ** perpetual gliding => DONE
+- Created scaffolding for Order Editor => DONE

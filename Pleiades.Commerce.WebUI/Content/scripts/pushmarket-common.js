@@ -60,6 +60,10 @@ String.prototype.rtrim=function(){return this.replace(/\s+$/,'');};
 String.prototype.fulltrim=function(){return this.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,'').replace(/\s+/g,' ');};
 
 
+var ToMoney = function(input) {
+    return "$" + input.toFixed(2);
+}
+
 function DeepClone(input) {
 	// Handle the 3 simple types, and null or undefined
 	if (null == input || "object" != typeof input) return input;
