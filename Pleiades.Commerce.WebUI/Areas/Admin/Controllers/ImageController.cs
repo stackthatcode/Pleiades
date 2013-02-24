@@ -9,9 +9,9 @@ using System.Web.Mvc;
 using Pleiades.Data;
 using Pleiades.Web;
 using Pleiades.Web.FineUploader;
-using Commerce.Domain.Interfaces;
-using Commerce.Domain.Model.Lists;
-using Commerce.Domain.Model.Resources;
+using Commerce.Persist.Interfaces;
+using Commerce.Persist.Model.Lists;
+using Commerce.Persist.Model.Resources;
 
 namespace Commerce.WebUI.Areas.Admin.Controllers
 {

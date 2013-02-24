@@ -12,12 +12,12 @@ using Pleiades.Utility;
 using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Providers;
-using Commerce.Domain.Interfaces;
-using Commerce.Domain.Model.Lists;
-using DomainColor = Commerce.Domain.Model.Lists.Color;
-using Commerce.Domain.Model.Resources;
+using Commerce.Persist.Concrete;
+using Commerce.Persist.Interfaces;
+using Commerce.Persist.Model.Lists;
+using DomainColor = Commerce.Persist.Model.Lists.Color;
+using Commerce.Persist.Model.Resources;
 using Commerce.Persist;
-using Commerce.Persist.Security;
 using Commerce.WebUI;
 using Commerce.WebUI.Plumbing;
 

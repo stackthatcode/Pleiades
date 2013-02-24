@@ -70,10 +70,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Commerce.Persist\Commerce.Persist.csproj">
-      <Project>{E616B84E-1830-4909-9A56-58A656EA9B5B}</Project>
-      <Name>Commerce.Persist</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Web.Security.Membership\Pleiades.Web.Security.Membership.csproj">
       <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
       <Name>Pleiades.Web.Security.Membership</Name>

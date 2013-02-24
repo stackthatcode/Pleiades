@@ -90,6 +90,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\SectionController.cs" />
     <Compile Include="Areas\Admin\Controllers\SizeController.cs" />
@@ -189,12 +190,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Commerce.Domain\Commerce.Domain.csproj">
+    <ProjectReference Include="..\Commerce.Domain\Commerce.Persist.csproj">
       <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
-      <Name>Commerce.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Commerce.Persist\Commerce.Persist.csproj">
-      <Project>{E616B84E-1830-4909-9A56-58A656EA9B5B}</Project>
       <Name>Commerce.Persist</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pleiades.Data.EF\Pleiades.Data.EF.csproj">
@@ -235,7 +232,7 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Shared\_Menu.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_HeaderWithMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\_viewstart.cshtml" />
@@ -305,6 +302,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Product\Editor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Shared\_Header.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Order\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Order\Manage.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

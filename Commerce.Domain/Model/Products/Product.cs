@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Commerce.Domain.Model.Lists;
-using Commerce.Domain.Model.Resources;
+using Commerce.Persist.Model.Lists;
+using Commerce.Persist.Model.Resources;
 
-namespace Commerce.Domain.Model.Products
+namespace Commerce.Persist.Model.Products
 {
     public class Product
     {

@@ -5,8 +5,8 @@ using System.IO;
 using Autofac;
 using NUnit.Framework;
 using Pleiades.Data;
-using Commerce.Domain.Interfaces;
-using Commerce.Domain.Model.Resources;
+using Commerce.Persist.Interfaces;
+using Commerce.Persist.Model.Resources;
 
 
 namespace Commerce.IntegrationTests.Resources

@@ -98,6 +98,7 @@ namespace Commerce.Persist.Products
                 .First(x => x.Id == productId);
 
             var imageBundle = this.ImageBundleRepository.Copy(color.ImageBundle.Id);
+            var order = product.Colors.Count() == 0 ? 1 : product.Colors.Max(x => x.Order) + 1;
 
             var productColor = new ProductColor
             {
@@ -105,7 +106,7 @@ namespace Commerce.Persist.Products
                 Name = color.Name,
                 SEO = color.SEO,
                 SkuCode = color.SkuCode,
-                Order = product.Colors.Count() + 1,
+                Order = order,
             };
 
             // *** Wipe Inventory if this is the first Color
@@ -188,11 +189,14 @@ namespace Commerce.Persist.Products
         {
             var product = this.RetrieveProductForSizes(productId);
             var size = this.Context.Sizes.First(x => x.ID == sizeId);
+
+            var order = product.Sizes.Count() == 0 ? 1 : product.Sizes.Max(x => x.Order) + 1;
             var productSize = new ProductSize
                 {
                     Abbr = size.Name,
                     Name = size.Description,
                     SkuCode = size.SkuCode,
+                    Order = order,
                 };
 
             product.Sizes.Add(productSize);
@@ -202,15 +206,7 @@ namespace Commerce.Persist.Products
             {
                 this.WipeInventory(product.Id);
             }
-            else
-            {
-                var inventoryTotal = this.InventoryTotal(product.Id);
-                if (inventoryTotal > 0) // There is Inventory!
-                {
-                    // TODO: add for every Size / or no Size
-                }
-            }
-
+            
             return () => productSize;
         }
 
@@ -388,12 +384,50 @@ namespace Commerce.Persist.Products
 
 
         // Inventory
+        private Product ProductWithColorsAndSizes(int id)
+        {
+            return 
+                this.Context.Products
+                    .Include(x => x.Sizes)
+                    .Include(x => x.Colors)
+                    .First(x => x.Id == id && x.IsDeleted == false);
+        }
+
         private List<ProductSku> ActiveInventory(int id)
         {
-            return this.Context.ProductSkus
-                .Include(x => x.Size)
-                .Include(x => x.Color)
-                .Where(x => x.Product.Id == id && x.IsDeleted == false).ToList();
+            var product = this.ProductWithColorsAndSizes(id);
+            return this.ActiveInventory(product);
+        }
+
+        private List<ProductSku> ActiveInventory(Product product)
+        {
+            if (!product.Colors.Any() && product.Sizes.Any())
+            {
+                return this.Context.ProductSkus
+                    .Include(x => x.Size)
+                    .OrderBy(x => x.Size.Order)
+                    .Where(x => x.Product.Id == product.Id && x.IsDeleted == false).ToList();
+            }
+
+            if (product.Colors.Any() && !product.Sizes.Any())
+            {
+                return this.Context.ProductSkus
+                    .Include(x => x.Color)
+                    .OrderBy(x => x.Color.Order)
+                    .Where(x => x.Product.Id == product.Id && x.IsDeleted == false).ToList();
+            }
+
+            if (product.Colors.Any() && product.Sizes.Any())
+            {
+                return this.Context.ProductSkus
+                    .Include(x => x.Size)
+                    .Include(x => x.Color)
+                    .OrderBy(x => x.Color.Order)
+                    .ThenBy(x => x.Size.Order)
+                    .Where(x => x.Product.Id == product.Id && x.IsDeleted == false).ToList();
+            }
+
+            return this.Context.ProductSkus.Where(x => x.Product.Id == product.Id && x.IsDeleted == false).ToList();
         }
 
         public List<ProductSku> Inventory(int id)
@@ -403,7 +437,9 @@ namespace Commerce.Persist.Products
 
         public int InventoryTotal(int productId)
         {
-            var total = this.ActiveInventory(productId).Sum(x => x.TotalInventory);
+            var total = this.Context.ProductSkus
+                    .Where(x => x.Product.Id == productId && x.IsDeleted == false)
+                    .Sum(x => x.TotalInventory);
             return total;
         }
 
@@ -418,27 +454,39 @@ namespace Commerce.Persist.Products
         // Only call this WHEN they visit the Inventory tab - TODO
         public void GenerateInventory(int productId)
         {
+            var product = this.ProductWithColorsAndSizes(productId);
             var skus = this.ActiveInventory(productId);
-            var product = this.Context.Products
-                .Include(x => x.Sizes)
-                .Include(x => x.Colors)
-                .First(x => x.Id == productId && x.IsDeleted == false);
 
             if (!product.Sizes.Any() && !product.Colors.Any())
             {
-                this.Context.ProductSkus.Add(ProductSku.Factory(product, null, null));
+                if (!skus.Any(x => x.Size == null && x.Color == null))
+                {
+                    this.Context.ProductSkus.Add(ProductSku.Factory(product, null, null));
+                }
                 return;
             }
 
             if (product.Sizes.Any() && !product.Colors.Any())
             {
-                product.Sizes.ForEach(size => this.Context.ProductSkus.Add(ProductSku.Factory(product, null, size)));
+                foreach (var size in product.Sizes)
+                {
+                    if (!skus.Any(x => x.Size == size))
+                    {
+                        this.Context.ProductSkus.Add(ProductSku.Factory(product, null, size));
+                    }
+                }
                 return;
             }
 
             if (!product.Sizes.Any() && product.Colors.Any())
             {
-                product.Colors.ForEach(color => this.Context.ProductSkus.Add(ProductSku.Factory(product, color, null)));
+                foreach (var color in product.Colors)
+                {
+                    if (!skus.Any(x => x.Color == color))
+                    {
+                        this.Context.ProductSkus.Add(ProductSku.Factory(product, color, null));
+                    }
+                }
                 return;
             }
 

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Commerce.Domain.Model.Lists;
+using Commerce.Persist.Model.Lists;
 
-namespace Commerce.Domain.Interfaces
+namespace Commerce.Persist.Interfaces
 {
     public interface IJsonColorRepository
     {

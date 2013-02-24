@@ -67,9 +67,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Commerce.Domain\Commerce.Domain.csproj">
+    <ProjectReference Include="..\Commerce.Domain\Commerce.Persist.csproj">
       <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
-      <Name>Commerce.Domain</Name>
+      <Name>Commerce.Persist</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pleiades.Commerce.WebUI\Commerce.WebUI.csproj">
       <Project>{EC92BFF1-A3ED-4A02-B5EC-833E55830967}</Project>

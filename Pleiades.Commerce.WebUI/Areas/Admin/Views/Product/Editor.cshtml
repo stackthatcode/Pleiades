@@ -994,16 +994,23 @@
                         self.ProductService.Inventory(self.SelectedProduct().Id(), this);
                     },
                     function (inventory) {
-                        alert(inventory);
                         self.SelectedProductInventory(inventory);
                         self.ActiveView({ Level: "Child", Template: "Inventory" });
                     }
                 );
             }
 
-            // Edit Click - TODO
-            // Cancel Click - TODO
-            // Save Click - TODO
+            self.InventoryEditClick = function (data) {
+                self.SelectedSku(data);
+            }
+
+            self.InventoryCancelClick = function (data) {
+                self.SelectedSku(null);
+            }
+
+            self.InventorySaveClick = function (data) {
+                self.SelectedSku(null);
+            }
         }
     </script>
     <!-- Root View Model -->
@@ -1053,7 +1060,7 @@
 		    <div id="heading" class="container">
 			    <div class="row">
 				    <div class="span9">
-					    <h1>Products > All</h1>
+					    <h1>Products > Search</h1>
 				    </div>
 				    <div class="span3" style="margin-top:15px; text-align:right;">
 					    <a class="btn btn-primary btn-block" data-bind="click: $root.AddProduct">Add New Product <i class="icon-arrow-right icon-white"></i></a>
@@ -1096,7 +1103,7 @@
                 <div style="height:20px;"></div>
                 
                 <div class="row">
-                    <div class="span7">
+                    <div class="span7" style="height:48px;">
                         <ul class="nav nav-pills">
                             <li style="width:140px;">
 				                <a id="glideToParent" class="backbutton" data-bind="click: $root.GlideToSearchView">&laquo; Back to Search</a>
@@ -1730,21 +1737,53 @@
 
     <!-- KNOCKOUT TEMPLATE - INVENTORY -->
 	<script type="text/html" id="Child-Editor-Inventory">
-        <div id="inventory" data-bind="foreach: $root.SelectedProductInventory()">            
-		    <table class="table table-hover" style="margin-bottom:0px;">
+        <div id="inventory" data-bind="foreach: $root.SelectedProductInventory()">
+		    <table class="table table-hover" style="margin-bottom:0px;" data-bind="if: $data == $root.SelectedSku()">
 		        <tbody>
 			        <tr>
-			        <td>
-				        <span class="span9">
-					        <h4><span data-bind="text: $data.SkuCode"></span></h4>
-                            <p>Name: <span data-bind="text: $data.Name"></span> <br/>
-                            Original Sku Code: <span data-bind="text: $data.OriginalSkuCode"></span>
-                            </p>
+			        <td valign="top">
+				        <span class="span5">
+                            <h4 style="float:left;">Sku Code </h4><input class="input-large" style="width:220px; margin-top:4px; margin-left:5px;" type="text" placeholder="Enter Sku Code" data-bind="value: $data.SkuCode" maxlength="20" />
+                            <p style="color:#999; clear:both;">Name: <span data-bind="text: $data.Name"></span> <br/>
+                                Original Sku Code: <span data-bind="text: $data.OriginalSkuCode"></span></p>
+				        </span>
+                    </td>
+			        <td style="vertical-align:top;">
+				        <span class="span4">
+					        <h4 style="float:left;">Total Stock </h4><input class="input-large" style="width:100px; margin:4px 0px 0px 5px;" type="text" placeholder="Enter Sku Code" data-bind="value: $data.TotalInventory" maxlength="5" />
+                            <h4 style="color:#999;"> Reserved Stock: <span data-bind="text: $data.ReservedInventory"></span></h4>
 				        </span>
                     </td>
 			        <td>
 				        <span class="span3" style="text-align:right;">
-                            <a class="btn btn-primary" style="width:70px;" href="#"><i class="icon-trash icon-white"></i> Delete</a>
+                            <a class="btn btn-inverse" style="width:70px;" data-bind="click: $root.InventoryCancelClick" href="#"><i class="icon-remove icon-white"></i> Cancel</a>
+                            <a class="btn btn-primary" style="width:70px;" data-bind="click: $root.InventorySaveClick" href="#"><i class="icon-ok icon-white"></i> Save</a>
+				        </span>
+			        </td>
+			        </tr>
+		        </tbody>
+		    </table>
+
+		    <table class="table table-hover" style="margin-bottom:0px;" data-bind="click: $root.InventoryEditClick, ifnot: $data == $root.SelectedSku()">
+		        <tbody>
+			        <tr>
+			        <td valign="top">
+				        <span class="span5">
+					        <h4>Sku Code: <span data-bind="text: $data.SkuCode"></span></h4>
+                            <p style="color:#999; clear:both;">Name: <span data-bind="text: $data.Name"></span> <br/>
+                            Original Sku Code: <span data-bind="text: $data.OriginalSkuCode"></span>
+                            </p>
+				        </span>
+                    </td>
+			        <td style="vertical-align:top">
+				        <span class="span4">
+					        <h4>Total Stock: <span data-bind="text: $data.TotalInventory"></span></h4>
+                            <h4 style="color:#999;"> Reserved Stock: <span data-bind="text: $data.ReservedInventory"></span></h4>
+				        </span>
+                    </td>
+			        <td>
+				        <span class="span3" style="text-align:right;">
+                            <a class="btn btn-primary" style="width:70px;" data-bind="click: $root.InventoryEditClick" href="#"><i class="icon-pencil icon-white"></i> Edit</a>
 				        </span>
 			        </td>
 			        </tr>

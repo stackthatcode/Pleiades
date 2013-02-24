@@ -7,11 +7,11 @@ using Pleiades.Data;
 using Pleiades.Data.EF;
 using Pleiades.Injection;
 using Pleiades.Utility;
-using Commerce.Domain.Interfaces;
-using Commerce.Domain.Model.Lists;
 using Commerce.Initializer.Builders;
 using Commerce.Persist;
-using Commerce.Persist.Security;
+using Commerce.Persist.Concrete;
+using Commerce.Persist.Interfaces;
+using Commerce.Persist.Model.Lists;
 using Newtonsoft.Json;
 
 namespace Commerce.IntegrationTests.Repositories

@@ -4,8 +4,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using Commerce.Persist;
-using Commerce.Domain.Model.Lists;
+using Commerce.Persist.Concrete;
+using Commerce.Persist.Model.Lists;
 
 namespace Commerce.IntegrationTests
 {

@@ -11,11 +11,11 @@ using Pleiades.Utility;
 using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Providers;
-using Commerce.Domain.Interfaces;
-using Commerce.Domain.Model.Lists;
-using Commerce.Initializer.Builders;
 using Commerce.Persist;
-using Commerce.Persist.Security;
+using Commerce.Persist.Concrete;
+using Commerce.Persist.Interfaces;
+using Commerce.Persist.Model.Lists;
+using Commerce.Initializer.Builders;
 using Commerce.WebUI;
 using Commerce.WebUI.Plumbing;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Commerce.Domain.Interfaces
+namespace Commerce.Persist.Interfaces
 {
     public interface IImageProcessor
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Commerce.Domain.Interfaces;
+using Commerce.Persist.Interfaces;
 using Pleiades.Data;
 
-namespace Commerce.Domain.Model.Lists
+namespace Commerce.Persist.Model.Lists
 {
     /// <summary>
     /// Glue to bond stuff between the bounded contexts of EF and Json-grams

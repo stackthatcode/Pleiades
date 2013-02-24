@@ -551,3 +551,47 @@ CreateNewSize - TODO - BACKLOGGED - DON'T NEED IT
 - Change out the Back Buttons => IN PROGRESS
 
 
+2/19 - 1.5 Hours
+2/20 - 1.25 Hours
+2/21 - 1.25 Hours
+2/22 - 1.0 Hours
+2/22 - 0.75 Hours
+~~~~~~~~~~~~~~~~
+- When I delete a Category or Brand, gotta set the Product's == N/A => DONE
+- Create Category and Brand "N/A" => DONE
+- Empty Images indicator + Upload Image to empty images EXCEPTION => DONE
+
+- SKU and Order Generator => DONE
+
+WHEN TO CHANGE SKUS => DONE
+- Add First Color to Product => If there are sizes / or not, then => Rebuild all Sku's 
+- Add First Size to Product => If there are colors / or not, then => Rebuild all Sku's 
+- Delete All Colors => Rebuild all Sku's - already have warnings - DONE 
+- Delete All Sizes => Rebuild all Sku's - already have warnings = DONE
+
+- +1 Delete Color from Product => Remove those Sku's - already have warnings - DONE
+- +1 Delete Size from Product => Remove those Sku's - already have warnings - DONE
+- +1 Add New Color to Product => Add more Skus
+- +1 Add New Size to Product => Add more Skus
+
+2/23 1.0 Hours
+--------------
+- JQuery Validation research =>DONE
+
+2/24
+-----------
+- Change Menu for Login Screen => DONE
+
+Banana Republic 
+~~~~~~~~~~~~~~~
+- Lets you modify the Order while checking out - albeit with postback
+- Automatically copies Shipping Address to Billing Address
+- Review the Order before submission
+
+- ReturnUrl on Login => DONE
+- Fix the Delete User sequence and fix the Security process (IsDeleted == true) => DONE
+- Fix empty Inventory Total bug => DONE
+- Fixed URL Decoding on ReturnUrl => DONE
+- Order Menu item => DONE
+
+

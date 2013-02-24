@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Commerce.Domain.Model.Lists
+namespace Commerce.Persist.Model.Lists
 {
     [JsonObject]
     public class JsonSize

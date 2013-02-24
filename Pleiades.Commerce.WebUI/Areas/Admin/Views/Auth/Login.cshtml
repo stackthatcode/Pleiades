@@ -10,12 +10,12 @@
       <div class="hero-unit">
         <h1 style="margin-bottom:20px;">admin sign-in</h1>
 		
-        @using (Html.BeginForm("Login", "Auth", "POST")) {
+        @using (Html.BeginForm()) {
 		    <div style="float:left; margin-right:20px;">
 			    <label>Enter your User Id</label>
                 @Html.TextBoxFor(x => x.UserName)
 		    </div>
-		
+		    
 		    <div style="float:left; margin-right:20px;">
 				<label>Enter your Password</label>	
 				@Html.PasswordFor(x => x.Password)

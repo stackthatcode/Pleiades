@@ -25,10 +25,17 @@
   </head>
   
   <body>
-    @Html.Partial("_Menu")
-    @Html.Partial("_CrossCutting")
-    @RenderSection("_Body")	
+    @if (ViewContext.RouteData.GetRequiredString("action") == "Login")
+    {
+        @Html.Partial("_Header")
+    }
+    else
+    {
+        @Html.Partial("_HeaderWithMenu")
+    }
     
+    @Html.Partial("_CrossCutting")
+    @RenderSection("_Body")	    
     @Html.Partial("_Footer")
   </body>
 </html>

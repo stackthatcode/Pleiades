@@ -1,7 +1,7 @@
 ﻿using System;
-using Commerce.Domain.Model.Resources;
+using Commerce.Persist.Model.Resources;
 
-namespace Commerce.Domain.Model.Lists
+namespace Commerce.Persist.Model.Lists
 {
     public class Brand
     {

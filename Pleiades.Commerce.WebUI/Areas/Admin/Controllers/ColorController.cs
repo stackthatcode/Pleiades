@@ -5,8 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Pleiades.Data;
 using Pleiades.Web;
-using Commerce.Domain.Interfaces;
-using Commerce.Domain.Model.Lists;
+using Commerce.Persist.Interfaces;
+using Commerce.Persist.Model.Lists;
 using Commerce.WebUI.Areas.Admin.Models.Color;
 
 namespace Commerce.WebUI.Areas.Admin.Controllers

@@ -12,7 +12,7 @@ namespace Commerce.WebUI.Plumbing
             filterContext.HttpContext.Response.StatusCode = 302;
             var route = AdminNavigation.Login();
             route["returnUrl"] = filterContext.HttpContext.Server.UrlEncode(filterContext.HttpContext.Request.RawUrl);
-            filterContext.Result = new RedirectToRouteResult(AdminNavigation.Login());
+            filterContext.Result = new RedirectToRouteResult(route);
         }
     }
 }

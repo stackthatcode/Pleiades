@@ -5,7 +5,7 @@ using Pleiades.Data;
 using Pleiades.Web.Security.Providers;
 using Pleiades.Utility;
 using Commerce.Persist;
-using Commerce.Persist.Security;
+using Commerce.Persist.Concrete;
 using NUnit.Framework;
 
 namespace Commerce.IntegrationTests

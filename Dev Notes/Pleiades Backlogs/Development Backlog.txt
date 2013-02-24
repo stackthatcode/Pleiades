@@ -3,38 +3,46 @@ FRONTRANGE - HOTZONE
 
 Front Range
 -----------
-- Post Mortem - inventory *everything* from UI => IN PROGRESS
-- TextPad + Resharper => TODO
+- Inventory Editor => IN PROGRESS
+* Write the Save Function and add the KO Binding customization => TODO
 
-...work...
+- Order Entry Flow
+* Splash Screen
+* Search for Product and Add to Queue
+* Enter Email Address + Shipping Info + Shipping method
+* Enter Billing Info
 
-http://fortawesome.github.com/Font-Awesome/
-http://pcottle.github.com/learnGitBranching/
+
+- Order Entry Stuff
+* Perpetual Glide
+* Numbers up top
+* Use the complete hard coding approach
 
 
-Product Editor
-~~~~~~~~~~~~~~
-- When I delete a Category or Brand, gotta set the Product's == N/A => TODO
-- Create Category and Brand "N/A" => TODO
-- Empty Images indicator + Upload Image to empty images EXCEPTION => TODO
 
-- SKU and Order Generator => IN PROGRESS
-
-WHEN TO CHANGE SKUS => IN PROGRESS
-- Add First Color to Product => If there are sizes / or not, then => Rebuild all Sku's 
-- Add First Size to Product => If there are colors / or not, then => Rebuild all Sku's 
-- Delete All Colors => Rebuild all Sku's - already have warnings - DONE 
-- Delete All Sizes => Rebuild all Sku's - already have warnings = DONE
-
-- +1 Delete Color from Product => Remove those Sku's - already have warnings - DONE
-- +1 Delete Size from Product => Remove those Sku's - already have warnings - DONE
-- +1 Add New Color to Product => Add more Skus
-- +1 Add New Size to Product => Add more Skus
-
+Some Clean-up
+~~~~~~~~~~~~~
+- Fix bug in Save Info => TODO
+- Add Category and Brand "0" for defaults => TODO
+- Fix Repositories for these, too => TODO
 - Add the Number of Products in a Brand screen => TODO
-- Inventory Editor => TODO
+- Test *EVERYTHING* => create a Product and simulate Creation of a Product followed by deletion of  Categories, Brands, etc. => IN PROGRESS
 
-- Test *EVERYTHING* => create a Product and simulate Creation of a Product followed by deletion of Colors, Categories, Brands, etc. => IN PROGRESS
+
+Backlog
+-------
+- Clicking a link while it's loading the AJAX causes JQuery to beef => TODO
+- Improve the quality of client-side Error Logging => TODO
+- Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING)
+- Check Sanderson for advanced Model Binding => TODO
+- Logged-In User => TODO
+- 150 Magic Number(!!!) => TODO - FIX
+- IsONline - Check How This Functions => TODO
+- Develop and/or Research Fluent Validation library => TODO
+- Donate $20 to FineUploader upon successful integration => TODO
+
+- Post Mortem - inventory *everything* from UI => IN PROGRESS
+
 
 
 Please Research
@@ -43,21 +51,12 @@ https://github.com/danderson00/knockout.composite/tree/master/Examples
 http://news.ycombinator.com/item?id=3265625
 http://twitter.github.com/flight/
 http://www.ww2helmets.com/products-page/checkout/ => Hmmmmm...?????
+http://fortawesome.github.com/Font-Awesome/
+http://pcottle.github.com/learnGitBranching/
+TextPad + Resharper => TODO
 
-Backlog
--------
-- Clicking a link while it's loading the AJAX causes JQuery to beef => TODO
-- Improve the quality of client-side Error Logging => TODO
-- Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING)
-- Check Sanderson for advanced Model Binding => TODO
-- Change Menu for Login Screen => TODO
-- Logged-In User => TODO
-- 150 Magic Number(!!!) => TODO - FIX
-- IsONline - Check How This Functions => TODO
-- Develop and/or Research Fluent Validation library => TODO
-- Donate $20 to FineUploader upon successful integration => TODO
-- ReturnUrl on Login
-- Fix the Delete User sequence => TODO
+
+
 
 ARCHITECTURAL REVIEW 1/24/2013
 ------------------------------
@@ -90,17 +89,16 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/27/2013
 - Color Editor => DONE
 - Brand Editor => DONE
 - Image Upload & Processing Engine => DONE
+- Product Search & Editor => DONE
 
-- Product Search & Editor => IN PROGRESS
 - SKU Generator + Inventory Tracker => IN PROGRESS
+- Order Create, Search & Manage => IN PROGRESS
 - Barebones Console App => IN PROGRESS
 
 - Server Logging => TODO
-- Order Search & Editor => TODO
-- Customer Search & Editor => TODO
+- Basic Analytic Tracker - Sales Graph, Traffic Source, Landing Page => TODO
 - Email Sending Engine => TODO
 
-- Basic Analytic Tracker - Traffic Source, Landing Page => WORTH HASHING OUT, IF TIME PERMITS
 
 
 
@@ -115,9 +113,10 @@ MORE BIG FISH
 
 PENDING FEATURE BACKLOG
 -----------------------
+- Add more Logging to the Security check => PENDING EVAL
+- AccessDenied versus + SolicitLogin => PENDING EVAL
 - Traffic Source { PPC/PPM, SEO, Email } => Landing Page w/ Tracking => ??? => Conversion
 - Exclusive Squeeze Page => Email => Campaigns => ??? => Conversion
-- NOTE: must find focus and aim to achieve immediate goals
 - What about virus scan for file uploads, etc.? => PENDING EVALUATION
 - Add a way to execute the DDL which adds SQL Foreign Keys to Categories, etc. => PENDING EVAL
 - Eliminate the MembershipProvider (WHOO-HOO!!!!!!!) => PENDING EVAL
@@ -146,7 +145,7 @@ E-Commerce API's & Payment Processors
 
 Research Backlog
 ----------------
-=> How to include all these dependencies...? => We'll see => DONE FOR NOW
+=> require.js? => We'll see => DONE FOR NOW
 => Domain Modeling and Write User Stories - after reading through Shopify's API docs => TODO
 => Where did I put my fonts...?  What's a good resource for typography and fonts...? => TODO
 - TODO KNOCKOUTJS: difference between http://knockoutjs.com/documentation/extenders.html AND custom binders
@@ -155,7 +154,7 @@ Research Backlog
 - difference between PartialViews, USerControls, etc.
 - difference between <%: and <%=
 - Model Binding, how it all works - REVIEW
-- Custom Validation
+- JQuery Validate => TODO
 - Easily the most important security article evar => - http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
 - Look up Troy Hunt's article's, too
 

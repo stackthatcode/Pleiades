@@ -6,5 +6,6 @@
         Disabled = 1,
         Active = 2,
         PaymentRequired = 3,
+        Deleted = 4,
     }
 }

@@ -12,13 +12,13 @@ using Pleiades.Utility;
 using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Providers;
-using Commerce.Domain.Interfaces;
-using Commerce.Domain.Model.Lists;
-using Commerce.Domain.Model.Products;
-using Commerce.Persist.Security;
+using Commerce.Persist.Concrete;
+using Commerce.Persist.Interfaces;
+using Commerce.Persist.Model.Lists;
+using Commerce.Persist.Model.Products;
 using Commerce.WebUI;
 using Commerce.WebUI.Plumbing;
-using Color = Commerce.Domain.Model.Lists.Color;
+using Color = Commerce.Persist.Model.Lists.Color;
 
 namespace Commerce.Initializer.Builders
 {

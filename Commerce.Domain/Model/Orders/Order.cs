@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Commerce.Domain.Model.Customers;
 
-namespace Commerce.Domain.Model.Orders
+namespace Commerce.Persist.Model.Orders
 {
     public class Order
     {
         public int Id { get; set; }
-        public Customer Customer { get; set; }
+        // public Customer Customer { get; set; }
         public List<OrderLine> OrderLines { get; set; }
         public decimal TaxRate { get; set; }
 

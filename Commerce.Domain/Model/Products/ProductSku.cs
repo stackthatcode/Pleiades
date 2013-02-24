@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Commerce.Domain.Model.Lists;
+using Commerce.Persist.Model.Lists;
 
-namespace Commerce.Domain.Model.Products
+namespace Commerce.Persist.Model.Products
 {
     public class ProductSku
     {

@@ -99,7 +99,7 @@ namespace Pleiades.Web.Security.Rules
             if (context.AuthorizationZone == AuthorizationZone.Administrative && 
                 context.User.IdentityProfile.UserRole.IsNotAdministratorOrSupreme())
             {
-                return context.Fail(SecurityCode.AccessDenied);
+                return context.Fail(SecurityCode.AccessDeniedSolicitLogon);
             }
 
             // Reject anyone that's not Trusted in a Trusted area; solicit for Logon

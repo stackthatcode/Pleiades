@@ -7,10 +7,10 @@ using System.Web;
 using System.Web.Mvc;
 using Pleiades.Data;
 using Pleiades.Web;
-using Commerce.Domain.Interfaces;
-using Commerce.Domain.Model.Lists;
-using Commerce.Domain.Model.Products;
-using Commerce.Persist;
+using Commerce.Persist.Concrete;
+using Commerce.Persist.Interfaces;
+using Commerce.Persist.Model.Lists;
+using Commerce.Persist.Model.Products;
 using Commerce.WebUI.Areas.Admin.Models.Color;
 
 namespace Commerce.WebUI.Areas.Admin.Controllers
@@ -163,9 +163,9 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult AddProductSize(int id, int sizeId)
         {
-            var newColor = this.ProductRepository.AddProductSize(id, sizeId);
+            var size = this.ProductRepository.AddProductSize(id, sizeId);
             this.Context.SaveChanges();
-            return new JsonNetResult(newColor);
+            return new JsonNetResult(size);
         }
 
         [HttpPost]

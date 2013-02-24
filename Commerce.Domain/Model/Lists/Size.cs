@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Commerce.Domain.Model.Lists
+namespace Commerce.Persist.Model.Lists
 {
     public class Size
     {

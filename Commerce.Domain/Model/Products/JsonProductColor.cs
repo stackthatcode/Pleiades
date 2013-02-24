@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace Commerce.Domain.Model.Products
+namespace Commerce.Persist.Model.Products
 {
     [JsonObject]
     public class JsonProductColor

@@ -28,6 +28,12 @@ namespace Commerce.WebUI.Plumbing
             return new RouteValueDictionary(new { area = "Admin", controller = "Manager", action = "List", });
         }
 
+        public static RouteValueDictionary ConfirmDeleteUser(int id)
+        {
+            return new RouteValueDictionary(new { area = "Admin", controller = "Manager", action = "DeleteConfirm", id = id });
+        }
+
+
         public static RouteValueDictionary ManagerDetails(object id)
         {
             return new RouteValueDictionary(new { area = "Admin", controller = "Manager", action = "Details", id = id });
@@ -68,5 +74,15 @@ namespace Commerce.WebUI.Plumbing
             return new RouteValueDictionary(new { area = "Admin", controller = "Product", action = "Editor", });
         }
 
+
+        public static RouteValueDictionary CreateNewOrder()
+        {
+            return new RouteValueDictionary(new { area = "Admin", controller = "Order", action = "Create", });
+        }
+
+        public static RouteValueDictionary ManageOrders()
+        {
+            return new RouteValueDictionary(new { area = "Admin", controller = "Order", action = "Manage", });
+        }
     }
 }

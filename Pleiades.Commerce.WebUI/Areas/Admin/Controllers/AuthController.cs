@@ -54,7 +54,8 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
 
             if (returnUrl != null)
             {
-                return Redirect(returnUrl);
+                var url = HttpContext.Server.UrlDecode(returnUrl);
+                return Redirect(url);
             }
 
             return new RedirectToRouteResult(AdminNavigation.Home());

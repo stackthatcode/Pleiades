@@ -179,8 +179,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult DeleteConfirm(int id)
         {
-            var user = this.AggregateUserRepository.RetrieveById(id);
-            this.AggregateUserRepository.Delete(user);
+            this.AggregateUserRepository.Delete(id);
             this.UnitOfWork.SaveChanges();
             return RedirectToAction("List");
         }

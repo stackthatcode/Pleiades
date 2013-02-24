@@ -1,4 +1,4 @@
-﻿namespace Commerce.Domain.Model.Lists
+﻿namespace Commerce.Persist.Model.Lists
 {
     public static class ColorExtensions
     {

@@ -12,8 +12,7 @@ using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Providers;
 using Pleiades.Utility;
-using Commerce.Persist;
-using Commerce.Persist.Security;
+using Commerce.Persist.Concrete;
 
 namespace Commerce.IntegrationTests.Security
 {

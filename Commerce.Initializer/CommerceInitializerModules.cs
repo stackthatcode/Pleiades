@@ -16,7 +16,7 @@ namespace Commerce.Initializer
 
             // External Modules
             builder.RegisterModule<WebSecurityAggregateModule>();
-            builder.RegisterModule<CommercePersistModule>();
+            builder.RegisterModule<CommerceDomainModule>();
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Commerce.Domain.Model.Orders
+namespace Commerce.Persist.Model.Orders
 {
     public class Address
     {

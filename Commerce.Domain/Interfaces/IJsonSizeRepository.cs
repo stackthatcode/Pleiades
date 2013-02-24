@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Commerce.Domain.Interfaces;
-using Commerce.Domain.Model.Lists;
+using Commerce.Persist.Interfaces;
+using Commerce.Persist.Model.Lists;
 
-namespace Commerce.Domain.Interfaces
+namespace Commerce.Persist.Interfaces
 {
     public interface IJsonSizeRepository
     {

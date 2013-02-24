@@ -1,8 +1,8 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Commerce.Domain.Model.Resources;
+using Commerce.Persist.Model.Resources;
 
-namespace Commerce.Domain.Model.Lists
+namespace Commerce.Persist.Model.Lists
 {
     [JsonObject]
     public class JsonColor
