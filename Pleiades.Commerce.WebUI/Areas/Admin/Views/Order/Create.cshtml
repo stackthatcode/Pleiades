@@ -307,18 +307,18 @@
 
                     <div data-bind="if: $data.ExpandInventory">
                         <!-- ko foreach: $data.Inventory -->
-                        <div style="clear:both;">
-				            <div style="width:300px;float:left;">
+                        <div style="clear:both; color:#666;">
+				            <div style="width:425px;float:left;">
 					            <p>Sku Code: <span data-bind="text: $data.SkuCode"></span></o>
                             </div>
-                            <div style="width:150px;float:left; text-align:right;">
-                                <p>Total Stock: <span data-bind="text: $data.TotalInventory"></span></p>
+                            <div style="width:125px;float:left; text-align:right;">
+                                <p>In Stock: <span data-bind="text: $data.TotalInventory"></span></p>
                             </div>
-                            <div style="width:150px;float:left; text-align:right;">
-                                <p>Reserved Stock: <span data-bind="text: $data.ReservedInventory"></span></p>
+                            <div style="width:125px;float:left; text-align:right;">
+                                <p>Reserved: <span data-bind="text: $data.ReservedInventory"></span></p>
 				            </div>
-                            <div style="width:200px;float:left; text-align:right;">
-                                <a href="#">Add <i class="icon-shopping-cart icon-blue"></i></a>
+                            <div style="width:125px;float:left; text-align:right;">
+                                <a href="#" style="color:#333;"><i class="icon-shopping-cart icon-blue"></i> Add to Cart</a>
                             </div>
                         </div>
                         <!-- /ko -->
