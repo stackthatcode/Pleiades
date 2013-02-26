@@ -106,7 +106,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             result.Category = this.Context.Categories.First(x => x.Id == product.CategoryId);
             this.Context.SaveChanges();
 
-            return new JsonNetResult(result);
+            return new JsonNetResult(result.ToJson());
         }
 
         [HttpPost]
@@ -288,5 +288,8 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             var inventory = this.ProductRepository.Inventory(id);
             return new JsonNetResult(inventory); 
         }
+
+        [HttpPost]
+        public ActionResult 
     }
 }

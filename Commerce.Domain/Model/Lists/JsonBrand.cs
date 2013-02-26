@@ -24,5 +24,8 @@ namespace Commerce.Persist.Model.Lists
 
         [JsonProperty]
         public string ImageBundleExternalId { get; set; }
+
+        [JsonProperty]
+        public int ProductCount { get; set; }
     }
 }

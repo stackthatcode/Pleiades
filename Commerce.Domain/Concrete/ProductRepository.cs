@@ -435,6 +435,15 @@ namespace Commerce.Persist.Concrete
             return this.ActiveInventory(id);
         }
 
+        public void UpdateSku(ProductSku inputSku)
+        {
+            var sku = this.Context.ProductSkus.FirstOrDefault(x => x.IsDeleted == false && x.Id == inputSku.Id);
+            if (sku != null)
+            {
+                sku.TotalInventory = inputSku.TotalInventory;
+            }
+        }
+
         public int InventoryTotal(int productId)
         {
             var inventory = this.Context.ProductSkus

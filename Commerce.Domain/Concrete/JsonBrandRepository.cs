@@ -20,18 +20,43 @@ namespace Commerce.Persist.Concrete
             this.ImageBundleRepository = imageBundleRepository;
         }
 
-        protected IQueryable<Brand> Data()
+
+        internal class ProductsPerBrand
         {
-            return 
+            public Brand Brand { get; set; }
+            public int Count { get; set; }
+        }
+
+        internal IQueryable<ProductsPerBrand> ProductCountQuery()
+        {
+            return
+                this.Context.Products
+                    .Include(x => x.Brand)
+                    .Where(x => x.IsDeleted == false)
+                    .GroupBy(x => x.Brand)
+                    .Select(x => new ProductsPerBrand { Brand = x.Key, Count = x.Count() });
+        }
+
+        protected IQueryable<Brand> Data()
+        {            
+            var result =
                 this.Context.Brands
                     .Where(x => x.Deleted == false)
                     .Include(x => x.ImageBundle);
+
+            return result;
         }
 
         public List<JsonBrand> RetrieveAll()
         {
             var data = this.Data().ToList();
-            return data.Select(x => x.ToJson()).ToList();
+            var result = data.Select(x => x.ToJson()).ToList();
+            var productCount = ProductCountQuery().ToList();
+
+            result.ForEach(x => x.ProductCount = 
+                    productCount.Any(pcount => pcount.Brand.Id == x.Id) 
+                        ? productCount.First(pcount => pcount.Brand.Id == x.Id).Count : 0);
+            return result;
         }
 
         public JsonBrand Retrieve(int id)

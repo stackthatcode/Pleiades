@@ -578,8 +578,8 @@ WHEN TO CHANGE SKUS => DONE
 --------------
 - JQuery Validation research =>DONE
 
-2/24
------------
+2/24 5.5 Hours + 0.5 Hours
+--------------------------
 - Change Menu for Login Screen => DONE
 
 Banana Republic 
@@ -595,3 +595,21 @@ Banana Republic
 - Order Menu item => DONE
 - ** MAJOR ** perpetual gliding => DONE
 - Created scaffolding for Order Editor => DONE
+- Order Product Search => DONE
+- Get Inventory on Create Order => DONE
+* Perpetual Glide => DONE
+
+2/25 0.75 Hours
+---------------
+* Splash Screen => NOPE!
+* Search for Product => DONE
+* Use the complete hard coding approach => DONE
+
+2/26 1.0 Hours
+--------------
+- Add Category and Brand "0" for defaults => DONE
+- Fix Repositories for these, too => DONE
+- Fix bug in Save Info => DONE
+- Add the Number of Products in a Brand screen => DONE
+- Added Inventory Update method to Repo => DONE
+* Swap in a practical grid, son => DONE

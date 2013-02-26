@@ -3,41 +3,39 @@ FRONTRANGE - HOTZONE
 
 Front Range
 -----------
+* Update Inventory method in Product Editor => TODO
+
 - Inventory Editor => IN PROGRESS
+* Add Toop Tips to clear-up the clutter => TODO
 * Write the Save Function and add the KO Binding customization => TODO
 
 - Order Entry Flow
-* Splash Screen
-* Search for Product and Add to Queue
-* Enter Email Address + Shipping Info + Shipping method
-* Enter Billing Info
+* Create Shopping Cart => TODO
+* Write Add to Cart Method => TODO
 
+* Enter Email Address + Shipping Info + Shipping method => TODO
+* Enter Billing Info => TODO
 
 - Order Entry Stuff
-* Perpetual Glide
 * Numbers up top
-* Use the complete hard coding approach
-
-
 
 
 Some Clean-up
 ~~~~~~~~~~~~~
 - Product - Add In-Stock flag => TODO
-- Fix bug in Save Info => TODO
-- Add Category and Brand "0" for defaults => TODO
-- Fix Repositories for these, too => TODO
-- Add the Number of Products in a Brand screen => TODO
 - Test *EVERYTHING* => create a Product and simulate Creation of a Product followed by deletion of  Categories, Brands, etc. => IN PROGRESS
 
 
 Backlog
 -------
+- Logged-In User => TODO
+- Cache the AggregateUser stuff in a static Dictionary (I mean, seriously, man) => IMPORTANT
+- Cache the Image Bundles too...? => IMPORTANT
+- Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING)
+
 - Clicking a link while it's loading the AJAX causes JQuery to beef => TODO
 - Improve the quality of client-side Error Logging => TODO
-- Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING)
 - Check Sanderson for advanced Model Binding => TODO
-- Logged-In User => TODO
 - 150 Magic Number(!!!) => TODO - FIX
 - IsONline - Check How This Functions => TODO
 - Develop and/or Research Fluent Validation library => TODO
@@ -92,12 +90,12 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/27/2013
 - Brand Editor => DONE
 - Image Upload & Processing Engine => DONE
 - Product Search & Editor => DONE
+- SKU Generator + Inventory Tracker => DONE
 
-- SKU Generator + Inventory Tracker => IN PROGRESS
 - Order Create, Search & Manage => IN PROGRESS
 - Barebones Console App => IN PROGRESS
-
 - Server Logging => TODO
+
 - Basic Analytic Tracker - Sales Graph, Traffic Source, Landing Page => TODO
 - Email Sending Engine => TODO
 

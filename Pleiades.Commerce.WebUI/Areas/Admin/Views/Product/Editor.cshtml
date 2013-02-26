@@ -796,7 +796,7 @@
                     },
                     function (data) {
                         self.CategoryArray.removeAll();
-                        self.CategoryArray.push({ value: null, text: "(Select a Category)" });
+                        self.CategoryArray.push({ value: null, text: "(No Category)" });
 
                         var addCategory = function (category, indent) {
                             self.CategoryArray.push({ value: category.Id, text: indent + category.Name });
@@ -817,7 +817,7 @@
                     },
                     function (data) {
                         self.BrandArray.removeAll();
-                        self.BrandArray.push({ value: null, text: "(Select a Brand)" });
+                        self.BrandArray.push({ value: null, text: "(No Brand)" });
 
                         $.each(data, function (index, elem) {
                             self.BrandArray.push({ value: elem.Id, text: elem.Name });
@@ -943,8 +943,8 @@
                 errors.push({ controlGroup: "#SEO", invalid: product.SEO().trim() == "" });
                 errors.push({ controlGroup: "#Synopsis", invalid: product.Synopsis().trim() == "" });
                 errors.push({ controlGroup: "#Description", invalid: product.Description().trim() == "" });
-                errors.push({ controlGroup: "#Brand", invalid: product.BrandId() == null });
-                errors.push({ controlGroup: "#Category", invalid: product.CategoryId() == null });
+                //errors.push({ controlGroup: "#Brand", invalid: product.BrandId() == null });
+                //errors.push({ controlGroup: "#Category", invalid: product.CategoryId() == null });
 
                 var validationMessage = $("#validation");
                 validationMessage.hide();

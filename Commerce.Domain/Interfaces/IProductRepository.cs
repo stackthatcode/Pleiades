@@ -40,5 +40,6 @@ namespace Commerce.Persist.Interfaces
         int InventoryTotal(int productId);
         void WipeInventory(int productId);
         void GenerateInventory(int productId);
+        void UpdateSku(ProductSku inputSku);
     }
 }
