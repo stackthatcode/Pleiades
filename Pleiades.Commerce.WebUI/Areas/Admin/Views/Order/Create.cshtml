@@ -133,7 +133,6 @@
                     }
                 );
             }
-
         }
     </script>
     <!-- Search Functions -->
@@ -142,6 +141,14 @@
 	        self = model;
 
 	        self.QuantityArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+	        self.CartItems = ko.observableArray();
+	        self.NumberOfCartItems = ko.computed(function () {
+	            var quantity = 0;
+	            $.each(self.CartItems(), function (index, elem) {
+	                quantity = quantity + elem.SelectedQuantity();
+	            });
+	            return quantity;
+	        });
 
 	        self.SearchClick = function () {
 	            flow.exec(
@@ -156,11 +163,18 @@
                         $.each(data, function (index, elem) {
                             elem.ExpandInventory = ko.observable(false);
                             elem.Inventory = ko.observableArray(null);
-                            elem.Quantity = ko.observable(1);
                         });
                         self.SearchData(data);
                     }
                 );
+	        }
+
+	        self.AddToCart = function (data) {
+	            console.log(data);
+	            if (!data.SelectedQuantity()) {
+	                return;
+	            }
+	            self.CartItems.push(data);
 	        }
 
 	        self.ShowInventory = function (data) {
@@ -170,6 +184,9 @@
                     },
                     function (inventory) {
                         data.ExpandInventory(true);
+                        $.each(inventory, function (index, elem) {
+                            elem.SelectedQuantity = ko.observable(0);
+                        });
                         data.Inventory(inventory);
                     }
                 );
@@ -266,8 +283,11 @@
 					    <h1>Create Order &gt; Select Products</h1>
 				    </div>
 				    <div class="span4" style="margin-top:15px; text-align:right;">
-					    <a class="btn btn-inverse" style="width:100px;" data-bind="click: $root.ShowCart">Show Cart <i class="icon-shopping-cart icon-white"></i></a>
-					    <a class="btn btn-primary" style="width:100px;" data-bind="click: $root.NextSteps1">Next <i class="icon-arrow-right icon-white"></i></a>
+                        <!--
+					    <a class="btn btn-inverse" style="width:100px;" data-bind="click: $root.ShowCart">View Cart <i class="icon-shopping-cart icon-white"></i></a>
+                        -->
+					    <a class="btn btn-primary" style="width:190px;" 
+                            data-bind="click: $root.NextSteps1">View Cart (<span data-bind="text: $root.NumberOfCartItems"></span> Items) <i class="icon-shopping-cart icon-white"></i></a>
 				    </div>
 			    </div>
 
@@ -346,8 +366,8 @@
                             <td><span data-bind="text: $data.SkuCode"></span></td>
                             <td><span data-bind="text: $data.ReservedInventory"></span></td>
                             <td><span data-bind="text: $data.TotalInventory"></span></td>
-                            <td><select style="width:125px; margin-bottom:0px;" data-bind='options: $root.QuantityArray, optionsCaption: "How many...", value: TotalInventory'></select></td>
-                            <td><a href="#" style="color:#333;"><i class="icon-shopping-cart icon-blue"></i> Add to Cart</a></td>
+                            <td><select style="width:125px; margin-bottom:0px;" data-bind='options: $root.QuantityArray, optionsCaption: "How many...", value: SelectedQuantity'></select></td>
+                            <td><a href="#" data-bind="click: $root.AddToCart" style="color:#333;"><i class="icon-shopping-cart icon-blue"></i> Add to Cart</a></td>
                         </tr>
                         </tbody>
                         </table>

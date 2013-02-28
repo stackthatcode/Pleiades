@@ -269,7 +269,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         public ActionResult InventoryTotal(int id)
         {
             var result = this.ProductRepository.InventoryTotal(id);
-            return new JsonNetResult(new { Total = 0 }); //result
+            return new JsonNetResult(new { Total = result }); 
         }
 
         [HttpGet]
@@ -290,6 +290,11 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult 
+        public ActionResult Inventory(int id, int inventoryTotal)
+        {
+            this.ProductRepository.UpdateInventoryTotal(id, inventoryTotal);
+            this.Context.SaveChanges();
+            return new JsonNetResult();
+        }
     }
 }

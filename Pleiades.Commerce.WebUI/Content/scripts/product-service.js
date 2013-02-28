@@ -136,5 +136,9 @@ function ProductService(errorCallback, showLoadingCallback, hideLoadingCallback)
         return self.AjaxGet("/Admin/Product/" + productId + "/Inventory?regenerate=true", callback);
     };
 
+    self.UpdateInventory = function (productId, total, callback) {
+        return self.AjaxPost("/Admin/Product/" + productId + "/Inventory?inventoryTotal=" + total, {}, callback);
+    };
+
 	return self;
 }

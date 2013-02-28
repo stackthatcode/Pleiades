@@ -3,16 +3,35 @@ FRONTRANGE - HOTZONE
 
 Front Range
 -----------
-* Update Inventory method in Product Editor => TODO
-
-- Inventory Editor => IN PROGRESS
-* Add Toop Tips to clear-up the clutter => TODO
-* Write the Save Function and add the KO Binding customization => TODO
-
 - Order Entry Flow
-* Create Shopping Cart => TODO
+* Create Shopping Cart Screen => TODO
 * Write Add to Cart Method => TODO
+* Write an Add to Cart Visual Feedback => TODO
+* Fix Quantity Knockout Binding => TODO
 
+- Cart Screen spec
+	* Top Header
+		* Next Button
+		* Add More Items
+	* Body Grid (each row)
+		* Image
+		* Item Name
+		* Sku Code
+		* Color
+		* Size
+		* Unit Price
+		* Qty
+		* Edit Button
+		* Delete Button
+	* Body Grid Edit State
+		* (SAME FIELDS)
+		* Quantity Drop Down
+		* Save Button
+		* Cancel Button
+	* Subtotal Row
+		* Order Sub Total Before Tax
+
+		
 * Enter Email Address + Shipping Info + Shipping method => TODO
 * Enter Billing Info => TODO
 
@@ -93,9 +112,10 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/27/2013
 - SKU Generator + Inventory Tracker => DONE
 
 - Order Create, Search & Manage => IN PROGRESS
+- Shopping Cart => IN PROGRESS
 - Barebones Console App => IN PROGRESS
-- Server Logging => TODO
 
+- Server Logging => TODO
 - Basic Analytic Tracker - Sales Graph, Traffic Source, Landing Page => TODO
 - Email Sending Engine => TODO
 
@@ -113,15 +133,14 @@ MORE BIG FISH
 
 PENDING FEATURE BACKLOG
 -----------------------
+- Add Toop Tips to clear-up the clutter in Inventory Editor => TODO
 - Add more Logging to the Security check => PENDING EVAL
-- AccessDenied versus + SolicitLogin => PENDING EVAL
 - Traffic Source { PPC/PPM, SEO, Email } => Landing Page w/ Tracking => ??? => Conversion
 - Exclusive Squeeze Page => Email => Campaigns => ??? => Conversion
 - What about virus scan for file uploads, etc.? => PENDING EVALUATION
 - Add a way to execute the DDL which adds SQL Foreign Keys to Categories, etc. => PENDING EVAL
 - Eliminate the MembershipProvider (WHOO-HOO!!!!!!!) => PENDING EVAL
 * Roll everything into the MembershipService, take back control of your objects and data access.  Done.  OVER! => PENDING EVAL
-- Ability to change the Order of Sizes => PENDING
 
 NOTES ON THE HEGEMONY OF UNREASON (STATIC MEMBERSHIP)
 - UpdateSelf() invocations... this odd function is called... with tons of exception checking... as if, there are not transactions...?  Why don't you throw

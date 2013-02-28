@@ -39,7 +39,7 @@ namespace Commerce.Persist.Interfaces
         List<ProductSku> Inventory(int productId);
         int InventoryTotal(int productId);
         void WipeInventory(int productId);
+        void UpdateInventoryTotal(int productId, int inventoryTotal);
         void GenerateInventory(int productId);
-        void UpdateSku(ProductSku inputSku);
     }
 }

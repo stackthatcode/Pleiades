@@ -982,6 +982,28 @@
             var self = rootModel;
 
             self.SelectedProductInventory = ko.observableArray();
+
+            self.AddInventoryConstraint = function (inventoryRow) {
+                inventoryRow.TotalObservable = ko.observable(inventoryRow.TotalInventory);
+                inventoryRow.EditTotalObservable = ko.observable(inventoryRow.TotalInventory);
+
+                inventoryRow.EditTotalFormatted =
+                    ko.computed({
+                        read: function () {
+                            return inventoryRow.EditTotalObservable().toFixed(0);
+                        },
+                        // Could we move this to a currying function?
+                        write: function (value) {
+                            // Strip out unwanted characters, parse as float, then write the raw data back to the underlying "price" observable
+                            value = parseFloat(value.replace(/[^\d]/g, ""));
+                            inventoryRow.EditTotalObservable(isNaN(value) ? 0 : value);  // Write to underlying storage
+                            inventoryRow.EditTotalObservable.notifySubscribers();
+                        },
+                        // Parent object
+                        owner: inventoryRow
+                    });
+            }
+
             self.SelectedSku = ko.observable(null);
 
             self.InventoryTabClick = function () {
@@ -990,6 +1012,9 @@
                         self.ProductService.Inventory(self.SelectedProduct().Id(), this);
                     },
                     function (inventory) {
+                        $.each(inventory, function (index, elem) {
+                            self.AddInventoryConstraint(elem);
+                        });
                         self.SelectedProductInventory(inventory);
                         self.ActiveView({ Level: "Child", Template: "Inventory" });
                     }
@@ -997,6 +1022,7 @@
             }
 
             self.InventoryEditClick = function (data) {
+                data.EditTotalObservable(data.TotalObservable());
                 self.SelectedSku(data);
             }
 
@@ -1005,7 +1031,14 @@
             }
 
             self.InventorySaveClick = function (data) {
-                self.SelectedSku(null);
+                flow.exec(
+                    function () {
+                        data.TotalObservable(data.EditTotalObservable());
+                        self.ProductService.UpdateInventory(data.Id, data.TotalObservable(), this);
+                    },
+                    function () {
+                        self.SelectedSku(null);
+                    });
             }
         }
     </script>
@@ -1661,6 +1694,9 @@
     </div>
 
     <div data-bind="ifnot: $root.SelectedProduct().AssignImagesToColors" style="margin-top:20px;">
+        <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SelectedProductImages().length == 0">
+			    <strong>There are no images for this Product.  Click "Add Image" to Upload an image.</strong>  
+		    </div>
         <ul class="sortable" data-bind="foreach: $root.SelectedProductImages()">
             <li data-bind="attr: { id: 'sorted' + $data.Id }">
                 <div style="width:160px; padding-bottom:5px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
@@ -1739,15 +1775,20 @@
 			        <tr>
 			        <td valign="top">
 				        <span class="span4">
-                            <h4 style="float:left; height:24px;">Sku Code </h4><input class="input-large" style="width:180px; margin-top:4px; margin-left:5px;" type="text" placeholder="Enter Sku Code" data-bind="value: $data.SkuCode" maxlength="20" />
+                            <h4 style="float:left; height:24px;">Sku Code </h4>
+                            <input class="input-large" style="width:180px; margin-top:4px; margin-left:5px;" type="text" placeholder="Enter Sku Code" data-bind="value: $data.SkuCode" maxlength="20" />
                             <p style="color:#999; font-size:11px; line-height:15px; clear:both;">Original Sku Code: <span data-bind="text: $data.OriginalSkuCode"></span><br/>
                                 Name: <span data-bind="text: $data.Name"></span></p>
 				        </span>
                     </td>
 			        <td style="vertical-align:top;">
 				        <span class="span5">
-					        <h4 style="height:24px; float:left;">In Stock </h4><input class="input-large" style="width:50px; margin:4px 0px 0px 5px;" type="text" placeholder="Enter Sku Code" data-bind="value: $data.TotalInventory" maxlength="5" />
+					        <h4 style="height:24px; float:left;">In Stock </h4>
+                                <input class="input-large" style="width:50px; margin:4px 0px 0px 5px;" type="text" 
+                                    placeholder="Enter Sku Code" data-bind="value: $data.EditTotalFormatted" maxlength="5" />
+                            
                             <div style="clear:both;"></div>
+
                             <span style="color:#999; font-weight:bold;">Reserved: <span data-bind="text: $data.ReservedInventory"></span></span>
 				        </span>
                     </td>
@@ -1773,7 +1814,7 @@
                     </td>
 			        <td style="vertical-align:top">
 				        <span class="span5">
-					        <h4 style="height:24px;">In Stock: <span data-bind="text: $data.TotalInventory"></span></h4>
+					        <h4 style="height:24px;">In Stock: <span data-bind="text: $data.TotalObservable"></span></h4>
                             <span style="color:#999; font-weight:bold;">Reserved: <span data-bind="text: $data.ReservedInventory"></span></span>
 				        </span>
                     </td>
@@ -1888,7 +1929,7 @@
     	<div id="parent-editor" data-bind="if: $root.ActiveView().Level == 'Parent'">
 			<div style="margin-bottom:100px;" data-bind="template: { name: 'Parent-Editor-' + $root.ActiveView().Template }">
 			</div>
-		</div>		
+		</div>
 		<div id="child-editor" data-bind="if: $root.ActiveView().Level == 'Child'">
 			<div style="margin-bottom:100px;" data-bind="template: { name: 'Child-Editor-' + $root.ActiveView().Template  }">
 			</div>

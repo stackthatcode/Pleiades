@@ -435,12 +435,12 @@ namespace Commerce.Persist.Concrete
             return this.ActiveInventory(id);
         }
 
-        public void UpdateSku(ProductSku inputSku)
+        public void UpdateInventoryTotal(int id, int inventoryTotal)
         {
-            var sku = this.Context.ProductSkus.FirstOrDefault(x => x.IsDeleted == false && x.Id == inputSku.Id);
+            var sku = this.Context.ProductSkus.FirstOrDefault(x => x.IsDeleted == false && x.Id == id);
             if (sku != null)
             {
-                sku.TotalInventory = inputSku.TotalInventory;
+                sku.TotalInventory = inventoryTotal;
             }
         }
 

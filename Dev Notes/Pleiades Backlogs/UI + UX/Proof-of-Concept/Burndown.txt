@@ -613,3 +613,21 @@ Banana Republic
 - Add the Number of Products in a Brand screen => DONE
 - Added Inventory Update method to Repo => DONE
 * Swap in a practical grid, son => DONE
+
+2/27 1.25 Hours
+---------------
+* Write the Save Function and add the KO Binding customization => DONE
+* Update Inventory method in Product Editor => DONE
+- Inventory Editor => DONE
+- AccessDenied versus + SolicitLogin => DONE
+- Ability to change the Order of Sizes => DONE
+
+2/28 1.5 Hours
+--------------
+- Fix bug in Inventory Editor => DONE
+- Sizes Breaking Inventory Notification => DONE
+- Empty Image UI => DONE
+* Fix Quantity Knockout Binding => DONE
+- Shopping Cart Design => DONE
+
+
