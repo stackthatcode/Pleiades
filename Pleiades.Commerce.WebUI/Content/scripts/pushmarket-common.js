@@ -185,7 +185,7 @@ function GliderWidget(glidingContainer, parentDiv, childDiv) {
 	};
 	
 	self.GlideToParent = function (completeFunc) {	
-		$(parentDiv).css({ display: "block" });
+		$(parentDiv).css({ display: "block", left: "-940px", top: "0px"  });
 		
 		$(childDiv).animate({ 	
 				left: "+=940" 

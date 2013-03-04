@@ -3,27 +3,10 @@
 @section _Scripts {   
 	@Html.Partial("_ImageBundleViewer")
     
-    <script type="text/javascript">
-		// KO enabling/disabling of server JSON
-        var SectionToKnockout = function(section) {
-			return {
-				Id: ko.observable(section.Id),
-            };
-        }
-
-		var SectionToServerJson = function(section) {
-			return {
-			    Id: section.Id(),
-			};
-		};
-    </script>
     <!-- Endless Glider -->
     <script type="text/javascript">
         var EndlessGlider = function (container, divId1, divId2) {
             var self = this;
-
-            self.Glider1 = new GliderWidget(container, divId1, divId2);
-            self.Glider2 = new GliderWidget(container, divId2, divId1);
 
             self.WorkspaceTemplate = ko.observable(null);
             self.EditorTemplate1 = ko.observable(null);
@@ -34,7 +17,7 @@
                 self.ActiveEditor = 1;
                 self.WorkspaceTemplate(workspaceTemplate);
                 self.EditorTemplate1(editorTemplate);
-                $("#divId2").hide();
+                $(divId2).hide();
             }
 
             self.GlideToRight = function (workspaceTemplate, editorTemplate) {
@@ -45,47 +28,79 @@
                 self.Glide(workspaceTemplate, editorTemplate, "LEFT");
             }
 
-            self.Glide = function (workspaceTemplate, editorTemplate, direction) {
-                var activeGlider = self.ActiveEditor == 1 ? self.Glider1 : self.Glider2;
-                var nextEditorTemplate = self.ActiveEditor == 1 ? self.EditorTemplate2 : self.EditorTemplate1;
+            self.Glide = function (workspaceTemplate, editorTemplate, direction, callback) {
+                var prevDiv, nextDiv, nextEditorTemplate;
+                if (self.ActiveEditor == 1) {
+                    prevDiv = divId1;
+                    nextDiv = divId2;
+                    nextEditorTemplate = self.EditorTemplate2;
+                } else {
+                    prevDiv = divId2;
+                    nextDiv = divId1;
+                    nextEditorTemplate = self.EditorTemplate1;
+                }
+
+                var glideLeftFunction = function (callback) {
+                    $(nextDiv).css({ display: "block", left: "-940px", top: "0px"  });
+		
+	                $(prevDiv).animate({ 
+                            left: "+=940" 
+		                }, 
+		                { 	
+			                complete: function() { $(prevDiv).css({ display: "none" }); },
+			                duration: 250, 
+		                }
+	                );
+	                $(nextDiv).animate({ 	
+			                left: "+=940" 
+		                }, 
+		                { 	
+			                complete:callback,
+			                duration: 250,
+		                }
+	                );
+                }
+                
+                var glideRightFunction = function (callback) {
+                    $(nextDiv).css({ display: "block", left: "+940px", top: "0px"  });
+		
+	                $(prevDiv).animate({ 
+                            left: "-=940" 
+		                }, 
+		                { 	
+			                complete: function() { $(prevDiv).css({ display: "none" }); },
+			                duration: 250, 
+		                }
+	                );
+	                $(nextDiv).animate({ 	
+			                left: "-=940" 
+		                }, 
+		                {
+			                complete: callback,
+			                duration: 250,
+		                }
+	                );
+                }
 
                 flow.exec(
                     function () {
+                        nextEditorTemplate(editorTemplate);
                         if (direction == "LEFT") {
-                            activeGlider.GlideToParent(this);
+                            glideLeftFunction(this);
                         } else {
-                            activeGlider.GlideToChild(this);
+                            glideRightFunction(this);
                         }
                     },
                     function () {
                         self.ActiveEditor = self.ActiveEditor == 1 ? 2 : 1;
-                        nextEditorTemplate(editorTemplate);
+
                         self.WorkspaceTemplate(workspaceTemplate);
                     }
                 );
             }
         }
     </script>
-    <!-- Select Products Functions -->
-	<script type="text/javascript">
-        var AddSelectProductsFunctions = function (model) {
-            var self = model;
 
-            self.NextSteps1 = function() {
-                self.GlideRight("ReviewProducts");
-            }
-        }
-    </script>
-    <!-- Review Products Functions -->
-	<script type="text/javascript">
-	    var AddReviewProductsFunctions = function (model) {
-	        var self = model;
-
-	        self.NextSteps2 = function () {
-	            self.GlideRight("SelectProducts");
-            }
-        }
-    </script>
     <!-- List Model Functions -->
     <script type="text/javascript">
         var AddListFunctions = function (model) {
@@ -135,22 +150,37 @@
             }
         }
     </script>
+
     <!-- Search Functions -->
 	<script type="text/javascript">
 	    var AddSearchFunctions = function (model) {
 	        self = model;
 
+	        self.SearchData = ko.observableArray();
 	        self.QuantityArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 	        self.CartItems = ko.observableArray();
+
 	        self.NumberOfCartItems = ko.computed(function () {
 	            var quantity = 0;
 	            $.each(self.CartItems(), function (index, elem) {
-	                quantity = quantity + elem.SelectedQuantity();
+	                quantity = quantity + elem.Quantity();
 	            });
 	            return quantity;
 	        });
 
-	        self.SearchClick = function () {
+	        self.ViewCart = function () {
+	            if (self.CartItems().length == 0) {
+	                self.ShowModal("Notification", {
+	                    Header: "The Shopping Cart is Empty",
+	                    Body: "Add Items to the Order"
+	                });
+	            } else {
+	                $("btn-view-cart").hide();
+	                self.GlideRight("ReviewProducts");
+	            }
+	        }
+
+	        self.SearchClick = function (callback) {
 	            flow.exec(
                     function () {
                         var brandId = $("#SearchBrand").val();
@@ -162,19 +192,51 @@
                     function (data) {
                         $.each(data, function (index, elem) {
                             elem.ExpandInventory = ko.observable(false);
-                            elem.Inventory = ko.observableArray(null);
+                            elem.Inventory = ko.observableArray([]);
                         });
                         self.SearchData(data);
+                        if (callback) {
+                            callback();
+                        }
                     }
                 );
 	        }
 
-	        self.AddToCart = function (data) {
-	            console.log(data);
-	            if (!data.SelectedQuantity()) {
+	        self.AddToCart = function (item, product) {
+	            if (!item.SelectedQuantity()) {
 	                return;
 	            }
-	            self.CartItems.push(data);
+	            if (self.CartItems().length == 20) {
+	                self.ShowModal("Notification", {
+	                    Header: "The Shopping Cart is Full",
+	                    Body: "You can only add 20 distinct Skus per Order"
+	                });
+	            }
+
+	            var itemInCart = self.CartItems().firstOrNull(function (x) { return x.Item.SkuCode == item.Item.SkuCode; });
+	            if (itemInCart) {
+	                if (itemInCart.Quantity() + item.SelectedQuantity() > 99) {
+	                    self.ShowModal("Notification", {
+	                        Header: "Maximum Number of Items",
+	                        Body: "You can only add 99 of the same Item"
+	                    });
+	                    return;
+	                }
+	                itemInCart.Quantity(itemInCart.Quantity() + item.SelectedQuantity());
+	            } else {
+	                if (self.CartItems.length == 100) {
+	                    self.ShowModal("Notification", {
+	                        Header: "Maximum Number of Distinct Items",
+	                        Body: "You can only add 99 of the same Sku per Order"
+	                    });
+	                    return;
+	                }
+
+	                self.CartItems.push({ Quantity: ko.observable(item.SelectedQuantity()), Item: item.Item, Product: product });
+	            }
+	            $("#AddFeedback").show();
+	            $("#AddFeedback").fadeOut({ duration: 1000 });
+	            item.SelectedQuantity(null);
 	        }
 
 	        self.ShowInventory = function (data) {
@@ -185,9 +247,8 @@
                     function (inventory) {
                         data.ExpandInventory(true);
                         $.each(inventory, function (index, elem) {
-                            elem.SelectedQuantity = ko.observable(0);
+                            data.Inventory.push({ SelectedQuantity: ko.observable(0), Item: elem });
                         });
-                        data.Inventory(inventory);
                     }
                 );
 	        }
@@ -198,43 +259,107 @@
 
 	    }
     </script>
+    
+    <!-- Review Products Functions -->
+	<script type="text/javascript">
+	    var AddReviewProductsFunctions = function (model) {
+	        var self = model;
+
+	        self.SelectedCartItem = ko.observable(null);
+
+	        self.BackToProductSearch = function () {
+	            $("[name='glideToSearch']").hide();
+	            self.GlideLeft("SelectProducts");
+	        }
+
+	        self.CartItemClick = function (data) {
+	            flow.exec(
+                    function () {
+                        self.Service.AjaxGet("/Admin/Product/Colors/" + data.Product.Id, this);
+                    },
+                    function (colors) {
+                        console.log(colors);
+                        self.Service.AjaxGet("/Admin/Product/Sizes/" + data.Product.Id, this);
+                    },
+                    function (sizes) {
+                        console.log(sizes);
+                        self.Service.AjaxGet("/Admin/Product/Inventory/" + data.Product.Id + "?regenerate=false", this);
+                    },
+                    function (inventory) {
+                        console.log(inventory);
+
+                        data.EditQuantity = ko.observable(data.Quantity());
+                        self.SelectedCartItem(data);
+                        //console.log(data.Item);
+                        //console.log(data.Product);
+                    }
+                );
+	        }
+
+	        self.CartItemCancel = function () {
+	            self.SelectedCartItem(null);
+	        }
+
+	        self.CartItemDelete = function (data) {
+	            self.CartItems.remove(data);
+	        }
+
+	        self.CartItemOk = function () {
+	            self.SelectedCartItem(null);
+	        }
+
+	        self.PerpetualGlideTest = function () {
+	            $("[name='glideToSearch']").hide();
+	            self.GlideRight("SelectProducts");
+	        }
+	    }
+    </script>
+
     <!-- View Model Functions -->
 	<script type="text/javascript">
-	    var CreateOrderViewModel = function() {
+	    var CreateOrderViewModel = function () {
 	        var self = this;
 
-            // Model
-			self.Input = ko.observable(null);
-			self.SearchData = ko.observableArray();
+	        // Service + Cross-cutting Stuff
+	        var commonUI = new CommonUI();
+	        self.Service = new AjaxService(commonUI.Error, commonUI.ShowLoading, commonUI.HideLoading);
 
-			// View concerns
-			var commonUI = new CommonUI();
-			self.Service = new AjaxService(commonUI.Error, commonUI.ShowLoading, commonUI.HideLoading);
-			self.ModalViewModel = ko.observable({ Template: null, Data: null });
+	        // Modal state + functions
+	        self.ModalViewModel = ko.observable({ Template: null, Data: null });
 
-            // Glider functions
-			var glider = new EndlessGlider("#gliding-container", "#glider1", "#glider2");
-            glider.Init("Top-Workspace-SelectProducts", "Main-Editor-SelectProducts");
-            self.EndlessGlider = glider;
+	        self.ShowModal = function (template, data) {
+	            self.ModalViewModel({ Template: "Modal-Dialog-" + template, Data: data });
+	            $('#modal-dialog').modal('show');
+	        };
 
-            self.GlideLeft = function(template) {
-                 self.EndlessGlider.GlideToLefts("Top-Workspace-" + template, "Main-Editor-" + template);
-            }
+	        self.HideModal = function () {
+	            $('#modal-dialog').modal('hide');
+	        }
 
-            self.GlideRight = function (template) {
-                 self.EndlessGlider.GlideToRight("Top-Workspace-" + template, "Main-Editor-" + template);
-            }
-        }
+	        // Glider functions
+	        var glider = new EndlessGlider("#gliding-container", "#glider1", "#glider2");
+	        glider.Init("Top-Workspace-SelectProducts", "Main-Editor-SelectProducts");
+	        self.EndlessGlider = glider;
+
+	        self.GlideLeft = function (template) {
+	            self.EndlessGlider.GlideToLeft("Top-Workspace-" + template, "Main-Editor-" + template);
+	        }
+
+	        self.GlideRight = function (template) {
+	            self.EndlessGlider.GlideToRight("Top-Workspace-" + template, "Main-Editor-" + template);
+	        }
+	    }
     </script>
-    <!-- Root View Model Functions -->
+
+    <!-- document.ready() Functions -->
 	<script type="text/javascript">
 	    $(function () {
 	        var model = new CreateOrderViewModel();
-	        AddSelectProductsFunctions(model);
-	        AddReviewProductsFunctions(model);
 	        AddListFunctions(model);
 	        AddSearchFunctions(model);
+	        AddReviewProductsFunctions(model);
 	        ko.applyBindings(model);
+
 	        flow.exec(
                 function () {
                     model.RetrieveCategoriesList(this);
@@ -243,6 +368,39 @@
                     model.RetrieveBrandsList(this);
                 }
             );
+
+	        window.Automation = function () {
+	            flow.exec(
+                    function () {
+                        model.SearchClick(this);
+                    },
+                    function () {
+                        model.ShowInventory(model.SearchData()[1]);
+                        window.setTimeout(this, 1000);
+                    },
+                    function () {
+                        var addToCart = $("a[name='add-to-cart']")[6];
+                        var product = model.SearchData()[1];
+                        var inventory = product.Inventory();
+                        var item = inventory[6];
+                        item.SelectedQuantity(3);
+                        model.AddToCart(item, product);
+                        this();
+                    },
+                    function () {
+                        model.ShowInventory(model.SearchData()[0]);
+                        window.setTimeout(this, 1000);
+                    },
+                    function () {
+                        var addToCart = $("a[name='add-to-cart']")[6];
+                        var product = model.SearchData()[0];
+                        var inventory = product.Inventory();
+                        var item = inventory[1];
+                        item.SelectedQuantity(2);
+                        model.AddToCart(item, product);
+                    }
+                );
+	        }
 	    });
 	</script>
 }
@@ -272,6 +430,10 @@
         {
             width:150px;
             text-align: right;
+        }        
+        table.editcart tr td
+        {
+            border-top: none; 
         }
     </style>
 	<!-- KNOCKOUT TEMPLATES - Select Products -->
@@ -279,15 +441,18 @@
         <div class="workspace-heading" style="height:125px;">
 		    <div id="heading" class="container">
                 <div class="row">
-				    <div class="span8">
-					    <h1>Create Order &gt; Select Products</h1>
+				    <div class="span7">
+					    <h1>Create Order &gt; Add Items</h1>
 				    </div>
-				    <div class="span4" style="margin-top:15px; text-align:right;">
-                        <!--
-					    <a class="btn btn-inverse" style="width:100px;" data-bind="click: $root.ShowCart">View Cart <i class="icon-shopping-cart icon-white"></i></a>
-                        -->
-					    <a class="btn btn-primary" style="width:190px;" 
-                            data-bind="click: $root.NextSteps1">View Cart (<span data-bind="text: $root.NumberOfCartItems"></span> Items) <i class="icon-shopping-cart icon-white"></i></a>
+                    <div class="span2" style="margin-top:20px; text-align:right;">
+                        <div id="AddFeedback" style="display:none;">
+                            <span class="label label-info"> <i class="icon-star icon-white"></i>Item Added! &nbsp;</span>
+                        </div>
+                    </div>
+				    <div class="span3" style="margin-top:15px; text-align:right;">
+					    <a id="btn-view-cart" class="btn btn-primary" style="width:190px;" data-bind="click: $root.ViewCart">
+                            <i class="icon-shopping-cart icon-white"></i> View Cart (<span data-bind="text: $root.NumberOfCartItems"></span> Items) &nbsp;
+                            <i class="icon-arrow-right icon-white"></i></a>
 				    </div>
 			    </div>
 
@@ -308,7 +473,7 @@
                         <input id="SearchText" type="text" class="input-large" placeholder="Description, Name, Sku..." />
                     </div>
 				    <div class="span3">
-					    <a class="btn btn-inverse btn-block" data-bind="click: $data.SearchClick">Search <i class="icon-search icon-white"></i></a>
+					    <a class="btn btn-inverse btn-block" data-bind="click: function() { $data.SearchClick(); }">Search <i class="icon-search icon-white"></i></a>
                     </div>
                 </div>
 		    </div>
@@ -329,6 +494,7 @@
 			            </div>
                     </div>
                 </td>
+
                 <td style="vertical-align:top; padding-top:20px;">
                     <div style="width:808px;">
                         <div style="width:604px;float:left;">
@@ -339,9 +505,10 @@
                                 <span data-bind="text: 'Price: ' + ToMoney($data.UnitPrice)"></span>
                             </p>
                         </div>
+
                         <div style="width:204px;float:left; text-align:right;">
 					        <div data-bind="ifnot: $data.ExpandInventory">
-                                <a class="btn btn-white" href="#" data-bind="click: function() { $root.ShowInventory($data) }">
+                                <a name="btn-expand-inventory" class="btn btn-white" href="#" data-bind="click: function() { $root.ShowInventory($data) }">
                                 <i class="icon-chevron-up icon-black"></i> Show Inventory</a>
                             </div>
 
@@ -352,7 +519,7 @@
                         </div>
                     </div>
 
-                    <div data-bind="if: $data.ExpandInventory">
+                    <div name="expanded-inventory" data-bind="if: $data.ExpandInventory">
                         <table class="skutable table-striped table-hover table-condensed">
                         <thead>
                             <th>Sku Code</th>
@@ -363,11 +530,11 @@
                         </thead>
                         <tbody data-bind="foreach: $data.Inventory">
                         <tr>
-                            <td><span data-bind="text: $data.SkuCode"></span></td>
-                            <td><span data-bind="text: $data.ReservedInventory"></span></td>
-                            <td><span data-bind="text: $data.TotalInventory"></span></td>
-                            <td><select style="width:125px; margin-bottom:0px;" data-bind='options: $root.QuantityArray, optionsCaption: "How many...", value: SelectedQuantity'></select></td>
-                            <td><a href="#" data-bind="click: $root.AddToCart" style="color:#333;"><i class="icon-shopping-cart icon-blue"></i> Add to Cart</a></td>
+                            <td><span data-bind="text: $data.Item.SkuCode"></span></td>
+                            <td><span data-bind="text: $data.Item.ReservedInventory"></span></td>
+                            <td><span data-bind="text: $data.Item.TotalInventory"></span></td>
+                            <td><select name="quantity-select" style="width:125px; margin-bottom:0px;" data-bind='options: $root.QuantityArray, optionsCaption: "How many...", value: $data.SelectedQuantity'></select></td>
+                            <td><a name="add-to-cart" href="#" data-bind="click: function() { $root.AddToCart($data, $parent); }" style="color:#333;"><i class="icon-shopping-cart icon-blue"></i> Add to Cart</a></td>
                         </tr>
                         </tbody>
                         </table>
@@ -383,40 +550,120 @@
 	<script type="text/html" id="Top-Workspace-ReviewProducts">
 		<div id="heading" class="container">
             <div class="row">
-				<div class="span10">
-					<h1>Create Order &gt; Review Products</h1>
+				<div class="span9">
+					<h1>Create Order &gt; Review Cart</h1>
 				</div>
-				<div class="span2" style="margin-top:15px; text-align:right;">
-					<a class="btn btn-primary btn-block" data-bind="click: $root.NextSteps2">Next <i class="icon-arrow-right icon-white"></i></a>
+				<div class="span3" style="margin-top:15px; text-align:right;">
+                    <a id="btn-view-cart" class="btn btn-primary" style="width:190px;" data-bind="click: $root.PerpetualGlideTest">
+                        Add Shipping Address <i class="icon-arrow-right icon-white"></i>
+                    </a>
 				</div>
 			</div>
+
+            <div class="row">
+                <div class="span7" style="height:48px;">
+                    <ul class="nav nav-pills">
+                        <li style="width:200px;">
+				            <a name="glideToSearch" href="#" class="backbutton" data-bind="click: $root.BackToProductSearch">&laquo; Add More Items To Cart</a>
+                            &nbsp;
+                        </li>
+                    </ul
+                </div>
+            </div>
 		</div>
 	</script>
 	<script type="text/html" id="Main-Editor-ReviewProducts">
-        <div style="margin-top:20px; margin-bottom:200px;">
-            <h1>Editor #2 - Review Products</h1>
-
+        <div style="margin-bottom:200px;">
 		    <table class="table table-hover">
-			    <tbody data-bind="">
+			    <tbody data-bind="foreach: $root.CartItems">
+                    <tr data-bind="ifnot: $root.SelectedCartItem() == $data, click: $root.CartItemClick">
+                        <td style="width:100px">
+                	        <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $data.Product.ImageBundleExternalId, LightboxSuffixId: 'Review' } }">
+			                </div>
+                        </td>
+                        <td style="width:800px;">
+                            <div style="width:250px; vertical-align:top; float:left;">
+                                <strong data-bind="text: $data.Product.Name"></strong><br/>
+                                <span>Sku Code: </span> <span data-bind="text: $data.Item.SkuCode"></span><br/>
+                                <span data-bind="if: $data.Item.Color">Color: <span data-bind="text: $data.Item.Color.Name"></span></span><br/>
+                                <span data-bind="if: $data.Item.Size">Size: <span data-bind="text: $data.Item.Size.Name"></span></span><br/>
+                            </div>
+                            <div style="width:150px; vertical-align:top; float:left; text-align:left;">
+                                <br />
+                                <span>Unit Price:</span> <span data-bind="text: ToMoney($data.Product.UnitPrice)"></span>
+                            </div>
+                            <div style="width:100px; vertical-align:top; float:left; text-align:right;">
+                                <br />
+                                <span>Quantity:</span> <span data-bind="text: $data.Quantity"></span>
+                            </div>
+                            <div style="width:300px; text-align:right; float:left; padding-top:30px;">
+                                <a class="btn btn-primary" style="width:75px;" href="#" data-bind="click: $root.CartItemClick"><i class="icon-pencil icon-white"></i> Edit</a>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr data-bind="if: $root.SelectedCartItem() == $data">
+                        <td style="width:100px; vertical-align:top;">
+                	        <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $data.Product.ImageBundleExternalId, LightboxSuffixId: 'Review' } }">
+			                </div>
+                        </td>
+                        <td style="width:800px;">
+                              <div style="width:250px; vertical-align:top; float:left;">
+                                <strong data-bind="text: $data.Product.Name"></strong><br/>
+                                <span>Sku Code: </span> <span data-bind="text: $data.Item.SkuCode"></span><br/>
+                                <span data-bind="if: $data.Item.Color">Color: <span data-bind="text: $data.Item.Color.Name"></span></span><br/>
+                                <span data-bind="if: $data.Item.Size">Size: <span data-bind="text: $data.Item.Size.Name"></span></span><br/>
+                                
+                            </div>
+                            <div style="width:150px; vertical-align:top; float:left; text-align:left;">
+                                <br />
+                                <span>Unit Price:</span> <span data-bind="text: ToMoney($data.Product.UnitPrice)"></span>
+                            </div>
+                            <div style="width:100px; vertical-align:top; float:left; padding-top:15px; text-align:right;">
+                                <select name="quantity-select" style="width:90px; margin-bottom:0px;" data-bind='options: $root.QuantityArray, optionsCaption: "How many...", value: $data.EditQuantity'></select>                             
+                            </div>
+                            <div style="width:300px; text-align:right; float:left; padding-top:30px;">
+                                <a class="btn btn-primary" href="#" data-bind="click: $root.CartItemOk"><i class="icon-ok icon-white"></i> Ok</a>
+					            <a class="btn btn-primary" href="#" data-bind="click: $root.CartItemDelete"><i class="icon-trash icon-white"></i> Delete</a>
+					            <a class="btn btn-inverse" href="#" data-bind="click: $root.CartItemCancel"><i class="icon-remove icon-white"></i> Cancel</a>
+                            </div>
+                            </table>
+                        </td>
+                    </tr>
 			    </tbody>
 		    </table>
         </div>
 	</script>
 
-	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG -->
-	<script type="text/html" id="Modal-Dialog">
-		<div id="modal-delete" class="modal hide fade" data-bind="if: $root.SelectedRecord()">
+    <!-- KNOCKOUT TEMPLATE - Shopping Cart Editor Rows -->
+
+    <!-- Load the Product & Images -->
+
+    <!-- Product Options - if Colors choose these -->
+    <!-- Product Options - if Sizes choose these -->
+
+    <!-- Product Skus - computed - if (SelectedColor), if (SelectedSize) ... filter SkuList -->
+
+    <script type="text/html" id="Main-Editor-CartItem-NoSizeNoColor">
+    </script>
+    <script type="text/html" id="Main-Editor-CartItem-NoSizes">
+    </script>
+    <script type="text/html" id="Main-Editor-CartItem-NoColor">
+    </script>
+
+
+	<!-- KNOCKOUT TEMPLATE - Modal Dialogs -->
+	<script type="text/html" id="Modal-Dialog-Notification">
+		<div id="modal-dialog" class="modal hide fade">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h3>Delete <span data-bind="text: $root.SelectedRecord().Name()"></span></h3>
+				<h3><span data-bind="text: $data.Header"></span></h3>
 			</div>
 			<div class="modal-body">
-				<p>Are you sure you want to Delete this Section?</p>			
-				<p><strong>Warning: all <span data-bind="text: $root.SelectedRecord().NumberOfCategories()"></span> Categories and Sub-Categories will be Deleted, too.</strong></p>
+				<p><span data-bind="text: $data.Body"></span></p>
 			</div>
 			<div class="modal-footer">
-				<a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
-				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.DeleteConfirm"><i class="icon-ok icon-white"></i> Ok</a>
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.HideModal"><i class="icon-ok icon-white"></i> Ok</a>
 			</div>
 		</div>		
 	</script>
@@ -431,5 +678,7 @@
 		<div id="glider1" class="glider" data-bind="template: { name: $root.EndlessGlider.EditorTemplate1() }"></div>		
 		<div id="glider2" class="glider" data-bind="template: { name: $root.EndlessGlider.EditorTemplate2() }"></div>
     </div>
-    <div id="modal-enclave" data-bind="template: { name: $root.ModalViewModel().Template }"></div>    
+    <div id="modal-enclave" 
+        data-bind="template: { name: $root.ModalViewModel().Template, data: $root.ModalViewModel().Data }">
+    </div>    
 }

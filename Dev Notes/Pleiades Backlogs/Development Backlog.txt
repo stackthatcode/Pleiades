@@ -4,25 +4,20 @@ FRONTRANGE - HOTZONE
 Front Range
 -----------
 - Order Entry Flow
+
 * Create Shopping Cart Screen => TODO
-* Write Add to Cart Method => TODO
-* Write an Add to Cart Visual Feedback => TODO
-* Fix Quantity Knockout Binding => TODO
 
 - Cart Screen spec
 	* Top Header
-		* Next Button
-		* Add More Items
+		* Next Button => TODO
 	* Body Grid (each row)
-		* Image
-		* Item Name
-		* Sku Code
+		* Image => DONE
+		* Item Name => DONE
+		* Sku Code => DONE
 		* Color
 		* Size
-		* Unit Price
-		* Qty
-		* Edit Button
-		* Delete Button
+		* Qty => IN PROGRESS
+		* Edit Button => IN PROGRESS
 	* Body Grid Edit State
 		* (SAME FIELDS)
 		* Quantity Drop Down
@@ -31,12 +26,17 @@ Front Range
 	* Subtotal Row
 		* Order Sub Total Before Tax
 
+- On Edit CartItem
+* Get the ProductColors and ProductSizes from Server => NOPE
+* EditCartItem 
+
+* On the StoreFront "Wrong Size or Color? Click Here" - and Navigate to Product => TODO
+- Add Next Constraint for Empty Cart
 		
 * Enter Email Address + Shipping Info + Shipping method => TODO
 * Enter Billing Info => TODO
 
-- Order Entry Stuff
-* Numbers up top
+
 
 
 Some Clean-up

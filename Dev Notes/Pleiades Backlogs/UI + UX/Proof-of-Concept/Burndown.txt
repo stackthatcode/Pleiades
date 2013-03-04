@@ -630,4 +630,32 @@ Banana Republic
 * Fix Quantity Knockout Binding => DONE
 - Shopping Cart Design => DONE
 
+3/1 1.5 Hours
+-------------
+- Fixed Quantity observable bug => DONE
+- Write Add to Cart Method => DONE
+- Write an Add to Cart Visual Feedback => DONE
+* Create Add Constraint => DONE
+* Created Modal function => DONE
+- Order Entry Stuff * Numbers up top =>  DONE
+
+3/3 4.0 Hours
+-------------
+- Maximum Quantity is 99 => DONE
+- Add Quantity to Existing Sku => DONE
+- Max Items types per Cart => DONE
+- Fixed gthe Perpetual Glider stuff => DONE
+* Add More Items Link => DONE
+- Added Product reference to Shopping Cart =>DONE
+- Add Cart Automation => DONE
+- Fixed Lightbox bug => DONE
+
+3/4 1.5 Hours
+-------------
+- Finalized Edit Cart interface layout => DONE
+* Unit Price => DONE
+* Delete Button => DONE
+* Item Name => DONE
+* Sku Code => DONE
+- Loaded Colors, Sizes and Inventory => DONE
 
