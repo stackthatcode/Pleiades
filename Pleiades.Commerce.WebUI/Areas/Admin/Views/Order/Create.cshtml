@@ -7,7 +7,7 @@
     <script type="text/javascript">
         var EndlessGlider = function (container, divId1, divId2) {
             var self = this;
-
+            
             self.WorkspaceTemplate = ko.observable(null);
             self.EditorTemplate1 = ko.observable(null);
             self.EditorTemplate2 = ko.observable(null);
@@ -267,6 +267,14 @@
 
 	        self.SelectedCartItem = ko.observable(null);
 
+	        // Do we need this?
+	        self.SelectedCartItemColor = ko.observable(null);
+	        self.SelectedCartItemSize = ko.observable(null);
+
+	        self.SelectedAllColors = ko.observableArray([]);
+	        self.SelectedAllSizes = ko.observableArray([]);
+	        self.SelectedAllInventory = ko.observableArray([]);
+
 	        self.BackToProductSearch = function () {
 	            $("[name='glideToSearch']").hide();
 	            self.GlideLeft("SelectProducts");
@@ -278,20 +286,22 @@
                         self.Service.AjaxGet("/Admin/Product/Colors/" + data.Product.Id, this);
                     },
                     function (colors) {
-                        console.log(colors);
+                        self.SelectedAllColors(colors);
                         self.Service.AjaxGet("/Admin/Product/Sizes/" + data.Product.Id, this);
                     },
                     function (sizes) {
-                        console.log(sizes);
+                        self.SelectedAllSizes(sizes);
                         self.Service.AjaxGet("/Admin/Product/Inventory/" + data.Product.Id + "?regenerate=false", this);
                     },
                     function (inventory) {
-                        console.log(inventory);
-
+                        self.SelectedAllInventory(inventory);
                         data.EditQuantity = ko.observable(data.Quantity());
                         self.SelectedCartItem(data);
-                        //console.log(data.Item);
-                        //console.log(data.Product);
+
+                        console.log(self.SelectedAllColors());
+                        console.log(self.SelectedAllSizes());
+                        console.log(data.Item);
+                        console.log(data.Product);
                     }
                 );
 	        }
@@ -608,26 +618,50 @@
 			                </div>
                         </td>
                         <td style="width:800px;">
-                              <div style="width:250px; vertical-align:top; float:left;">
-                                <strong data-bind="text: $data.Product.Name"></strong><br/>
-                                <span>Sku Code: </span> <span data-bind="text: $data.Item.SkuCode"></span><br/>
-                                <span data-bind="if: $data.Item.Color">Color: <span data-bind="text: $data.Item.Color.Name"></span></span><br/>
-                                <span data-bind="if: $data.Item.Size">Size: <span data-bind="text: $data.Item.Size.Name"></span></span><br/>
+                            <div style="width:800px;">
+                                <div style="width:250px; vertical-align:top; float:left;">
+                                    <strong data-bind="text: $data.Product.Name"></strong><br/>
+                                    <span>Sku Code: </span> <span data-bind="text: $data.Item.SkuCode"></span><br/>
+                                </div>
+                                <div style="width:150px; vertical-align:top; float:left; text-align:left;">
+                                    <br />
+                                    <span>Unit Price:</span> <span data-bind="text: ToMoney($data.Product.UnitPrice)"></span>
+                                </div>
+                                <div style="width:100px; vertical-align:top; float:left; padding-top:15px; text-align:right;">
+                                    <select name="quantity-select" style="width:90px; margin-bottom:0px;" data-bind='options: $root.QuantityArray, optionsCaption: "How many...", value: $data.EditQuantity'></select>                             
+                                </div>
+                                <div style="width:300px; text-align:right; float:left; padding-top:30px;">
+                                    <a class="btn btn-primary" href="#" data-bind="click: $root.CartItemOk"><i class="icon-ok icon-white"></i> Ok</a>
+					                <a class="btn btn-primary" href="#" data-bind="click: $root.CartItemDelete"><i class="icon-trash icon-white"></i> Delete</a>
+					                <a class="btn btn-inverse" href="#" data-bind="click: $root.CartItemCancel"><i class="icon-remove icon-white"></i> Cancel</a>
+                                </div>
+                            </div>
+                            <div style="clear:both; width:800px;">
                                 
+                                <div style="width:800px; padding-top:20px; padding-bottom:20px;">
+                                    <strong>Select a Color</strong>
+                                    
+                                    <div style="margin-top:10px;" data-bind="foreach: $root.SelectedAllColors">
+                	                    <div style="float:left;" 
+                                            data-bind="template: { name: 'Image-Bundle-Thumbnail-Tiny-NoLightbox', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Colors' } }">
+			                            </div>
+                                    </div>
+
+                                    <br />
+                                    <span data-bind="if: $data.Item.Color">Selected Color: <span data-bind="text: $data.Item.Color.Name"></span></span><br/>
+                                </div>
+
+                                <div style="width:800px; clear:both; padding-top:20px; padding-bottom:20px;">
+                                    <strong>Select a Sizes</strong>
+                                    
+                                    <div style="margin-top:10px;" data-bind="foreach: $root.SelectedAllSizes">
+                                        <span class="label" data-bind="text: $data.Abbr + ' - ' + $data.Name"></span>
+                                    </div>
+
+                                    <br />
+                                    <span data-bind="if: $data.Item.Size">Selected Size: <span data-bind="text: $data.Item.Size.Name"></span></span><br/>
+                                </div>
                             </div>
-                            <div style="width:150px; vertical-align:top; float:left; text-align:left;">
-                                <br />
-                                <span>Unit Price:</span> <span data-bind="text: ToMoney($data.Product.UnitPrice)"></span>
-                            </div>
-                            <div style="width:100px; vertical-align:top; float:left; padding-top:15px; text-align:right;">
-                                <select name="quantity-select" style="width:90px; margin-bottom:0px;" data-bind='options: $root.QuantityArray, optionsCaption: "How many...", value: $data.EditQuantity'></select>                             
-                            </div>
-                            <div style="width:300px; text-align:right; float:left; padding-top:30px;">
-                                <a class="btn btn-primary" href="#" data-bind="click: $root.CartItemOk"><i class="icon-ok icon-white"></i> Ok</a>
-					            <a class="btn btn-primary" href="#" data-bind="click: $root.CartItemDelete"><i class="icon-trash icon-white"></i> Delete</a>
-					            <a class="btn btn-inverse" href="#" data-bind="click: $root.CartItemCancel"><i class="icon-remove icon-white"></i> Cancel</a>
-                            </div>
-                            </table>
                         </td>
                     </tr>
 			    </tbody>

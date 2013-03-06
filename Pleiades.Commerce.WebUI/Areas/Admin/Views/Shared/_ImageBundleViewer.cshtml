@@ -44,6 +44,29 @@
             </tr>
         </table>
 	</script>
+
+    <script type="text/html" id="Image-Bundle-Thumbnail-Tiny-NoLightbox">
+        <table>
+        <tr>
+            <td style="height:37px; border:1px dotted #CCC; width:37px; text-align:center; overflow:hidden;">
+                <div data-bind="if: $data">
+                    <a>
+                    <!-- href="#" data-bind="click: function(data, event) { ShowLightBox(data) }"> -->
+                        <img data-bind="attr: { src: ImageBundleDownloadUrl($data, 'thumbnail') }" />
+                    </a>
+
+                    <!--
+                    <div data-bind="template: { name: 'Image-Bundle-Lightbox', data: $data }">
+			        </div> -->
+                </div>
+                <div data-bind="ifnot: $data">
+                    <img src="@Url.Content("~/content/Images/75x75.gif")" />
+                </div>
+            </td>
+        </tr>
+        </table>
+    </script>
+
 	<script type="text/html" id="Image-Bundle-Thumbnail-Viewer">
         <table>
         <tr>

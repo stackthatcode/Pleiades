@@ -11,7 +11,8 @@ namespace Commerce.Persist.Model.Products
         public string Name { get; set; }
         public string SkuCode { get; set; }
         public string SEO { get; set; }
-        public ImageBundle ImageBundle { get; set; }
+        public ImageBundle ColorImageBundle { get; set; }
+        public ImageBundle ProductImageBundle { get; set; }
         public int Order { get; set; }
     }
 }

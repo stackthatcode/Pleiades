@@ -2,20 +2,35 @@
 using System.Collections.Generic;
 using System.Linq;
 using Commerce.Persist.Model.Lists;
+using Commerce.Persist.Model.Resources;
 
 namespace Commerce.Persist.Model.Products
 {
     public class ProductSku
     {
-        public int Id { get; set; }
-        
+        public int Id { get; set; }        
         public string SkuCode { get; set; }
         public string Name { get; set; }
 
+        public string OriginalSkuCode { get; set; }
         public Product Product { get; set; }
         public ProductColor Color { get; set; }
         public ProductSize Size { get; set; }
-        public string OriginalSkuCode { get; set; }
+        public ImageBundle ImageBundle
+        {
+            get
+            {
+                if (this.Product.AssignImagesToColors == true)
+                {
+                    return Color.ProductImageBundle;
+                }
+                else
+                {
+                    return Product.ThumbnailImageBundle;
+                }
+            }
+        }
+
 
         public int TotalInventory { get; set; }
         public int ReservedInventory { get; set; }

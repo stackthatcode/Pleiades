@@ -9,8 +9,8 @@ namespace Commerce.Persist.Model.Products
     {
         public static JsonProductInfo ToJson(this Product product)
         {
-            var externalId = product.ThumbnailImage == null ? 
-                Guid.Empty : product.ThumbnailImage.ImageBundle.ExternalId;
+            var externalId = product.ThumbnailImageBundle == null ? 
+                Guid.Empty : product.ThumbnailImageBundle.ExternalId;
 
             return new JsonProductInfo
             {
@@ -39,7 +39,7 @@ namespace Commerce.Persist.Model.Products
                 Name = color.Name,
                 SEO = color.SEO,
                 SkuCode = color.SkuCode,
-                ImageBundleExternalId = color.ImageBundle != null ? color.ImageBundle.ExternalId.ToString() : null,
+                ImageBundleExternalId = color.ColorImageBundle != null ? color.ColorImageBundle.ExternalId.ToString() : null,
                 Order = color.Order,
             };
         }

@@ -3,6 +3,11 @@ FRONTRANGE - HOTZONE
 
 Front Range
 -----------
+* Design Options for StoreFront
+http://designmodo.com/square/
+http://designmodo.github.com/Flat-UI/
+
+
 - Order Entry Flow
 
 * Create Shopping Cart Screen => TODO
@@ -11,11 +16,9 @@ Front Range
 	* Top Header
 		* Next Button => TODO
 	* Body Grid (each row)
-		* Image => DONE
-		* Item Name => DONE
-		* Sku Code => DONE
-		* Color
-		* Size
+		* Image => IN PROGRESS
+		* Color => IN PROGRESS
+		* Size => IN PROGRESS
 		* Qty => IN PROGRESS
 		* Edit Button => IN PROGRESS
 	* Body Grid Edit State
@@ -27,12 +30,16 @@ Front Range
 		* Order Sub Total Before Tax
 
 - On Edit CartItem
-* Get the ProductColors and ProductSizes from Server => NOPE
-* EditCartItem 
+* EditCartItem => IN PROGRESS
+* Make the Edit Cart more well-mannered => TODO
+
+
+* When I submit my Order, the Sku Image literally gets COPIED and tied to the Order Line => TODO
+
+- THE GREAT FLOW - Tieing it All Together (!!!)
+* What happens if a Product/Color/Size/Image is Deleted?  What happens to Carts?  What happens to Orders?
 
 * On the StoreFront "Wrong Size or Color? Click Here" - and Navigate to Product => TODO
-- Add Next Constraint for Empty Cart
-		
 * Enter Email Address + Shipping Info + Shipping method => TODO
 * Enter Billing Info => TODO
 
@@ -66,6 +73,7 @@ Backlog
 
 Please Research
 ~~~~~~~~~~~~~~~
+https://github.com/MatthewMueller/array
 https://github.com/danderson00/knockout.composite/tree/master/Examples
 http://news.ycombinator.com/item?id=3265625
 http://twitter.github.com/flight/

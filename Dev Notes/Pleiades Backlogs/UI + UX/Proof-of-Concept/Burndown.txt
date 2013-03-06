@@ -659,3 +659,33 @@ Banana Republic
 * Sku Code => DONE
 - Loaded Colors, Sizes and Inventory => DONE
 
+3/5 1.75 Hours
+--------------
+* Get the ProductColors and ProductSizes from Server => DONE
+- Add Next Constraint for Empty Cart => DONE
+
+3/6 1.5 Hours
+-------------
+~~~ Heavy duty DDD stuff (see below)
+
+- STUFF TO BUILD
+* Product Color Thumbnail Image property => DONE
+* Fix the Image Delete - it doesn't manage the Product Thumbnail correctly => DONE
+* When I add an Image, the Product Color gets updated => DONE
+* When I change Image order, the Product Color get updated => DONE
+* When I change Image Assignment, the Product Colors get updated => DONE
+* When I delete an Image, the Product Color get updated => DONE
+* Looking at Product Detail => Show Product Colors => DONE
+* View Contents of My Cart => show the Product Item Thumbnail, or if I chose a Color, show the Color Thumbnail => DONE
+ASSERTION => if we always store the Image with the Product Color, then we're covered. => DONE
+Two flows: 
+1.) Assign Images to Color - Sku shows its Product Color => DONE
+2.) Don't assign Images to Color - Sku shows Product Thumbnail => DONE
+1.) Update Product Color Thumbnail => DONE
+2.) Update Product Thumbnail => DONE
+- THINK IT THROUGH
+* Browsing Products => Product Thumbnail => DONE
+
+- EXCEPTIONAL JOB, ALEKS!
+
+

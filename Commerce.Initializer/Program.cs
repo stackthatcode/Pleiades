@@ -31,7 +31,7 @@ namespace Commerce.Initializer
             DbContext = new PleiadesContext();
 
             Console.WriteLine("\nPushMarket Commerce Version v1.0 Prototype Initializer");
-            Console.WriteLine("Push Global LLC - All Rights Reserved");
+            Console.WriteLine("Push Cloud Global - All Rights Reserved");
             Console.WriteLine("...");
 
             // Database Destruction, Resource Directory too

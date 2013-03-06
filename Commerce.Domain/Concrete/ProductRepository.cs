@@ -6,6 +6,7 @@ using System.Data.Objects.SqlClient;
 using Commerce.Persist.Interfaces;
 using Commerce.Persist.Model.Lists;
 using Commerce.Persist.Model.Products;
+using Commerce.Persist.Model.Resources;
 using Pleiades.Data;
 using Pleiades.Data.EF;
 
@@ -22,7 +23,9 @@ namespace Commerce.Persist.Concrete
             this.ImageBundleRepository = imageBundleRepository;
         }
 
-        public IQueryable<Product> Data()
+
+        // Query bases
+        private IQueryable<Product> Data()
         {
             return this.Context.Products
                 .Where(x => x.IsDeleted == false)
@@ -33,6 +36,25 @@ namespace Commerce.Persist.Concrete
                 .Include(x => x.Images.Select(img => img.ProductColor));
         }
 
+        private Product ProductWithColorsAndSizes(int id)
+        {
+            return
+                this.Context.Products
+                    .Include(x => x.Sizes)
+                    .Include(x => x.Colors)
+                    .First(x => x.Id == id && x.IsDeleted == false);
+        }
+
+        private Product ProductWithColorsAndImages(int id)
+        {
+            var product = this.Context.Products
+                   .Include(x => x.Colors)
+                   .Include(x => x.Images)
+                   .Include(x => x.Images.Select(img => img.ProductColor))
+                   .Include(x => x.Images.Select(img => img.ImageBundle))
+                   .FirstOrDefault(x => x.Id == id);
+            return product;
+        }
 
 
         // Info + Search
@@ -77,7 +99,7 @@ namespace Commerce.Persist.Concrete
         {
             var product = this.Context.Products
                 .Include(x => x.Colors)
-                .Include(x => x.Colors.Select(color => color.ImageBundle))
+                .Include(x => x.Colors.Select(color => color.ColorImageBundle))
                 .First(x => x.Id == productId && x.IsDeleted == false);
 
             return product.Colors
@@ -102,7 +124,7 @@ namespace Commerce.Persist.Concrete
 
             var productColor = new ProductColor
             {
-                ImageBundle = imageBundle,
+                ColorImageBundle = imageBundle,
                 Name = color.Name,
                 SEO = color.SEO,
                 SkuCode = color.SkuCode,
@@ -124,7 +146,8 @@ namespace Commerce.Persist.Concrete
             var product = this.Context.Products
                   .Include(x => x.Colors)
                   .Include(x => x.Images)
-                  .Include(x => x.Images.Select(image =>  image.ProductColor))
+                  .Include(x => x.Images.Select(image => image.ProductColor))
+                  .Include(x => x.Images.Select(image => image.ImageBundle))
                   .First(x => x.Id == productId);
 
             var colors = product.Colors;
@@ -136,7 +159,7 @@ namespace Commerce.Persist.Concrete
                 color.Order = index;
             }
 
-            product.ThumbnailImage = GetThumbnailImage(product);
+            product.SetThumbnailImages();
             this.Context.SaveChanges();
         }
 
@@ -145,7 +168,7 @@ namespace Commerce.Persist.Concrete
             var product = this.Context.Products
                .Include(x => x.Images)
                .Include(x => x.Colors)
-               .Include(x => x.Colors.Select(color => color.ImageBundle))
+               .Include(x => x.Colors.Select(color => color.ColorImageBundle))
                .First(x => x.Id == productId && x.IsDeleted == false);
 
             var productColor = this.Context.ProductColors.First(x => x.Id == productColorId);
@@ -164,6 +187,7 @@ namespace Commerce.Persist.Concrete
                     .ForEach(sku => sku.IsDeleted = true);
 
             product.Colors.Remove(productColor);
+            product.SetThumbnailImages();
         }
 
 
@@ -210,6 +234,20 @@ namespace Commerce.Persist.Concrete
             return () => productSize;
         }
 
+        public void UpdateSizeOrder(int productId, string sortedIds)
+        {
+            var sizes = this.RetrieveProductForSizes(productId).Sizes;
+            var idList = sortedIds.Split(',').Select(x => Int32.Parse(x)).ToList();
+
+            for (var index = 0; index < idList.Count(); index++)
+            {
+                var size = sizes.FirstOrDefault(x => x.Id == idList[index]);
+                size.Order = index;
+            }
+
+            this.Context.SaveChanges();
+        }
+
         public Func<ProductSize> CreateProductSize(int productId, ProductSize productSize)
         {
             var product = this.RetrieveProductForSizes(productId);
@@ -234,29 +272,12 @@ namespace Commerce.Persist.Concrete
             product.Sizes.Remove(product.Sizes.First(x => x.Id == sizeId));
         }
 
-        public void UpdateSizeOrder(int productId, string sortedIds)
-        {
-            var sizes = this.RetrieveProductForSizes(productId).Sizes;
-            var idList = sortedIds.Split(',').Select(x => Int32.Parse(x)).ToList();
-
-            for (var index = 0; index < idList.Count(); index++)
-            {
-                var size = sizes.FirstOrDefault(x => x.Id == idList[index]);
-                size.Order = index;
-            }
-
-            this.Context.SaveChanges();
-        }
-
 
         // Images
         public List<JsonProductImage> RetrieveImages(int productId)
         {
-            return this.Context.Products
-                .Include(x => x.Images)
-                .Include(x => x.Images.Select(img => img.ImageBundle))
-                .Include(x => x.Images.Select(img => img.ProductColor))
-                .FirstOrDefault(x => x.Id == productId)
+            return this
+                .ProductWithColorsAndImages(productId)
                 .Images
                 .OrderBy(x => x.Order)
                 .Select(x => x.ToJson())
@@ -268,11 +289,8 @@ namespace Commerce.Persist.Concrete
             var externalId = Guid.Parse(image.ImageBundleExternalId);
             var imageBundle = this.Context.ImageBundles.First(x => x.ExternalId == externalId);
 
-            var product = this.Context.Products
-                .Include(x => x.Images)
-                .First(x => x.Id == productId);
-
-            var color = this.Context.ProductColors.FirstOrDefault(x => x.Id == image.ProductColorId);
+            var product = this.ProductWithColorsAndImages(productId);            
+            var color = product.Colors.FirstOrDefault(x => x.Id == image.ProductColorId);
             var order = product.Images.Select(x => x.Order).Count() + 1;
             
             var productImage = new ProductImage()
@@ -282,22 +300,19 @@ namespace Commerce.Persist.Concrete
                 ProductColor = color
             };
             product.Images.Add(productImage);
-
-            if (product.ThumbnailImage == null)
+            
+            if (product.ThumbnailImageBundle == null)
             {
-                product.ThumbnailImage = productImage;
+                product.ThumbnailImageBundle = imageBundle;
             }
 
+            product.SetThumbnailImages();
             return () => productImage.ToJson();
         }
 
         public void UpdateProductImageSort(int productId, string sortedIds)
         {
-            var product = this.Context.Products
-                .Include(x => x.Images)
-                .Include(x => x.Images.Select(image => image.ProductColor))
-                .FirstOrDefault(x => x.Id == productId);
-
+            var product = this.ProductWithColorsAndImages(productId);
             var idList = sortedIds.Split(',').Select(x => Int32.Parse(x)).ToList();
 
             for (var index = 0; index < idList.Count(); index++)
@@ -306,93 +321,51 @@ namespace Commerce.Persist.Concrete
                 image.Order = index;
             }
 
-            product.ThumbnailImage = GetThumbnailImage(product);
+            product.SetThumbnailImages();
             this.Context.SaveChanges();
         }
 
         public void DeleteProductImage(int productId, int imageId)
         {
-            var product = this.Context
-                .Products.Include(x => x.Images)
-                .FirstOrDefault(x => x.Id == productId);
-
+            var product = this.ProductWithColorsAndImages(productId);
             var image = product.Images.FirstOrDefault(x => x.Id == imageId);
             if (image != null)
+            {
+                image.ImageBundle.Deleted = true;
                 product.Images.Remove(image);
+            }
+
+            product.SetThumbnailImages();
         }
 
         public void ChangeImageColor(int productId, int productImageId, int newColor)
         {
-            var product = this.Context.Products
-                    .Include(x => x.Colors)
-                    .Include(x => x.Images)
-                    .Include(x => x.Images.Select(img => img.ProductColor))
-                    .First(x => x.Id == productId);
-
+            var product = this.ProductWithColorsAndImages(productId);
             var image = product.Images.First(x => x.Id == productImageId);
             var color = product.Colors.FirstOrDefault(x => x.Id == newColor);
             var order = product.Images.Select(x => x.Order).Max() + 1;
             image.ProductColor = color;
             image.Order = order;
+            product.SetThumbnailImages();
         }
 
         public void AssignImagesToColor(int productId)
         {
-            var product = this.Context.Products.First(x => x.Id == productId);
+            var product = this.ProductWithColorsAndImages(productId);
             product.AssignImagesToColors = true;
-            product.ThumbnailImage = GetThumbnailImage(product);
+            product.SetThumbnailImages();
         }
 
         public void UnassignImagesFromColor(int productId)
         {
-            var product = this.Context.Products
-                    .Include(x => x.Images)
-                    .Include(x => x.Images.Select(image => image.ProductColor))
-                    .First(x => x.Id == productId);
-
+            var product = this.ProductWithColorsAndImages(productId);
             product.AssignImagesToColors = false;
             product.Images.ForEach(x => x.ProductColor = null);
-            product.ThumbnailImage = GetThumbnailImage(product);
-        }
-
-        public static ProductImage GetThumbnailImage(Product product)
-        {
-            if (product.AssignImagesToColors == true)
-            {
-                if (product.Images.Any(x => x.ProductColor != null)) 
-                {
-                    return product.Images
-                        .Where(x => x.ProductColor != null)
-                        .OrderBy(x => x.ProductColor.Order)
-                        .ThenBy(x => x.Order)
-                        .FirstOrDefault();
-                }
-                else
-                {
-                    return product.Images
-                        .OrderBy(x => x.Order)
-                        .FirstOrDefault();
-                }
-            }
-            else
-            {
-                return product.Images
-                    .OrderBy(x => x.Order)
-                    .FirstOrDefault();
-            }
+            product.SetThumbnailImages();
         }
 
 
-        // Inventory
-        private Product ProductWithColorsAndSizes(int id)
-        {
-            return 
-                this.Context.Products
-                    .Include(x => x.Sizes)
-                    .Include(x => x.Colors)
-                    .First(x => x.Id == id && x.IsDeleted == false);
-        }
-
+        // Inventory      
         private List<ProductSku> ActiveInventory(int id)
         {
             var product = this.ProductWithColorsAndSizes(id);
@@ -446,15 +419,19 @@ namespace Commerce.Persist.Concrete
 
         public int InventoryTotal(int productId)
         {
-            var inventory = this.Context.ProductSkus
-                    .Where(x => x.Product.Id == productId && x.IsDeleted == false);
+            var inventory = this.Context.ProductSkus.Where(x => x.Product.Id == productId && x.IsDeleted == false);
+
             if (inventory.Count() == 0)
             {
                 return 0;
             }
+
             var total = inventory.Sum(x => x.TotalInventory);
             return total;
         }
+
+
+        // TODO: be sure to wipe any Carts that have this Inventory
 
         public void WipeInventory(int productId)
         {
@@ -464,7 +441,9 @@ namespace Commerce.Persist.Concrete
             }
         }
 
+
         // Only call this WHEN they visit the Inventory tab - TODO
+
         public void GenerateInventory(int productId)
         {
             var product = this.ProductWithColorsAndSizes(productId);

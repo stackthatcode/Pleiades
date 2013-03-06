@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Commerce.Persist.Model.Lists;
 using Commerce.Persist.Model.Resources;
 
@@ -34,11 +35,83 @@ namespace Commerce.Persist.Model.Products
 
         public List<ProductImage> Images { get; set; }
         public bool AssignImagesToColors { get; set; }
-        public ProductImage ThumbnailImage { get; set; }
+        public ImageBundle ThumbnailImageBundle { get; set; }
 
         // back-end
         public bool IsDeleted { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime LastModified { get; set; }
+
+
+        public ImageBundle GetProductThumbnail()
+        {
+            if (!this.Images.Any())
+            {
+                return null;
+            }
+
+            if (this.AssignImagesToColors == true)
+            {
+                if (this.Images.Any(x => x.ProductColor != null))
+                {
+                    var image = this.Images
+                        .Where(x => x.ProductColor != null)
+                        .OrderBy(x => x.ProductColor.Order)
+                        .ThenBy(x => x.Order)
+                        .FirstOrDefault()
+                        .ImageBundle;
+                    return image;
+                }
+                else
+                {
+                    var image = this.Images
+                        .OrderBy(x => x.Order)
+                        .FirstOrDefault()
+                        .ImageBundle;
+                    return image;
+                }
+            }
+            else
+            {
+                var image = this.Images
+                    .OrderBy(x => x.Order)
+                    .FirstOrDefault()
+                    .ImageBundle;
+                return image;
+            }
+        }
+
+        public void SetThumbnailImages()
+        {
+            this.ThumbnailImageBundle = this.GetProductThumbnail();
+
+            if (this.AssignImagesToColors)
+            {
+                foreach (var color in this.Colors)
+                {
+                    var image = this.Images
+                        .Where(x => x.ProductColor != null && x.ProductColor.Id == color.Id)
+                        .OrderBy(x => x.Order)
+                        .FirstOrDefault();
+
+                    if (image == null)
+                    {
+                        color.ProductImageBundle = this.ThumbnailImageBundle;
+                    }
+                    else
+                    {
+                        color.ProductImageBundle = image.ImageBundle;
+                    }
+                }
+            }
+            else
+            {
+                var image = this.GetProductThumbnail();
+                foreach (var color in this.Colors)
+                {
+                    color.ProductImageBundle = this.ThumbnailImageBundle;
+                }
+            }
+        }
     }
 }
