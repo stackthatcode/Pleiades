@@ -42,6 +42,7 @@ namespace Commerce.Persist.Concrete
                 this.Context.Products
                     .Include(x => x.Sizes)
                     .Include(x => x.Colors)
+                    .Include(x => x.Colors.Select(color => color.ProductImageBundle))
                     .First(x => x.Id == id && x.IsDeleted == false);
         }
 
@@ -143,13 +144,7 @@ namespace Commerce.Persist.Concrete
 
         public void UpdateProductColorSort(int productId, string sortedIds)
         {
-            var product = this.Context.Products
-                  .Include(x => x.Colors)
-                  .Include(x => x.Images)
-                  .Include(x => x.Images.Select(image => image.ProductColor))
-                  .Include(x => x.Images.Select(image => image.ImageBundle))
-                  .First(x => x.Id == productId);
-
+            var product = this.ProductWithColorsAndImages(productId);
             var colors = product.Colors;
             var idList = sortedIds.Split(',').Select(x => Int32.Parse(x)).ToList();
 
@@ -165,12 +160,7 @@ namespace Commerce.Persist.Concrete
 
         public void DeleteProductColor(int productId, int productColorId)
         {
-            var product = this.Context.Products
-               .Include(x => x.Images)
-               .Include(x => x.Colors)
-               .Include(x => x.Colors.Select(color => color.ColorImageBundle))
-               .First(x => x.Id == productId && x.IsDeleted == false);
-
+            var product = this.ProductWithColorsAndImages(productId);
             var productColor = this.Context.ProductColors.First(x => x.Id == productColorId);
             
             foreach (var image in product.Images)
@@ -378,6 +368,8 @@ namespace Commerce.Persist.Concrete
             {
                 return this.Context.ProductSkus
                     .Include(x => x.Size)
+                    .Include(x => x.Product.ThumbnailImageBundle)
+                    .Include(x => x.Color.ColorImageBundle)
                     .OrderBy(x => x.Size.Order)
                     .Where(x => x.Product.Id == product.Id && x.IsDeleted == false).ToList();
             }
@@ -386,6 +378,8 @@ namespace Commerce.Persist.Concrete
             {
                 return this.Context.ProductSkus
                     .Include(x => x.Color)
+                    .Include(x => x.Product.ThumbnailImageBundle)
+                    .Include(x => x.Color.ColorImageBundle)
                     .OrderBy(x => x.Color.Order)
                     .Where(x => x.Product.Id == product.Id && x.IsDeleted == false).ToList();
             }
@@ -394,7 +388,9 @@ namespace Commerce.Persist.Concrete
             {
                 return this.Context.ProductSkus
                     .Include(x => x.Size)
+                    .Include(x => x.Product.ThumbnailImageBundle)
                     .Include(x => x.Color)
+                    .Include(x => x.Color.ColorImageBundle)
                     .OrderBy(x => x.Color.Order)
                     .ThenBy(x => x.Size.Order)
                     .Where(x => x.Product.Id == product.Id && x.IsDeleted == false).ToList();

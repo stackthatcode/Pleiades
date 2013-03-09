@@ -256,7 +256,6 @@
 	        self.HideInventory = function (data) {
 	            data.ExpandInventory(false);
 	        }
-
 	    }
     </script>
     
@@ -267,15 +266,80 @@
 
 	        self.SelectedCartItem = ko.observable(null);
 
-	        // Do we need this?
-	        self.SelectedCartItemColor = ko.observable(null);
-	        self.SelectedCartItemSize = ko.observable(null);
+	        self.SelectedCartItemSkuCode = ko.computed(
+                function () {
+                    return self.SelectedCartItem() ? self.SelectedCartItem().Item.SkuCode : null;
+                }
+            );
+
+	        self.SelectedCartItemColor = ko.computed(
+                function () {
+                    if (self.SelectedCartItem()) {
+                        return self.SelectedAllColors().firstOrNull(function (elem) {
+                            return (elem.Id == self.SelectedCartItem().Item.Color.Id);
+                        });
+                    } else {
+                        return null;
+                    }
+                });
+
+	        self.SelectedCartItemSize = ko.computed(
+                function () {
+                    if (self.SelectedCartItem()) {
+                        return self.SelectedAllSizes().firstOrNull(function (elem) {
+                            return (elem.Id == self.SelectedCartItem().Item.Size.Id);
+                        });
+                    } else {
+                        return null;
+                    }
+                });
+
+	        self.SelectedItemSkuImageBXId = ko.computed(
+                function () {
+                    if (self.SelectedCartItem()) {
+                        return self.SelectedCartItem().Item.ImageBundle.ExternalId;
+                    }
+                    else {
+                        return null;
+                    }
+                }
+            );
 
 	        self.SelectedAllColors = ko.observableArray([]);
 	        self.SelectedAllSizes = ko.observableArray([]);
 	        self.SelectedAllInventory = ko.observableArray([]);
 
+	        self.CartItemColorSelectorClass = function (color) {
+	            console.log("CartItemColorSelectorClass invoked");
+	            return (color == self.SelectedCartItemColor()) ? "color-chooser selected" : "color-chooser";
+	        }
+
+	        self.CartItemSizeSelectorClass = function (size) {
+	            return (size == self.SelectedCartItemSize()) ? "label label-info" : "label";
+	        }
+
+	        self.CartItemImageExternalId = function (item) {
+	            return (item && item.ImageBundle) ? item.ImageBundle.ExternalId : null;
+	        }
+
+	        self.CartItemColorSelectorClick = function (color) {
+	            console.log(color);
+	            self.SelectedCartItemColor(color);
+	        }
+
+	        self.CartItemSizeSelectorClick = function (size) {
+	            self.SelectedCartItemSize(size);
+	        }
+
+	        self.FindInventory = function (color, size) {
+	            var item = self.SelectedAllInventory.firstOrNull(function (elem) {
+	                console.log(elem.Color);
+	                console.log(elem.Size);
+	            });
+	        }
+
 	        self.BackToProductSearch = function () {
+	            self.CartItemCancel();
 	            $("[name='glideToSearch']").hide();
 	            self.GlideLeft("SelectProducts");
 	        }
@@ -283,6 +347,7 @@
 	        self.CartItemClick = function (data) {
 	            flow.exec(
                     function () {
+                        self.CartItemCancel();
                         self.Service.AjaxGet("/Admin/Product/Colors/" + data.Product.Id, this);
                     },
                     function (colors) {
@@ -297,17 +362,16 @@
                         self.SelectedAllInventory(inventory);
                         data.EditQuantity = ko.observable(data.Quantity());
                         self.SelectedCartItem(data);
-
-                        console.log(self.SelectedAllColors());
-                        console.log(self.SelectedAllSizes());
-                        console.log(data.Item);
-                        console.log(data.Product);
+                        console.log(self.SelectedCartItem());
                     }
                 );
 	        }
 
 	        self.CartItemCancel = function () {
 	            self.SelectedCartItem(null);
+	            self.SelectedAllColors([]);
+	            self.SelectedAllSizes([]);
+	            self.SelectedAllInventory([]);
 	        }
 
 	        self.CartItemDelete = function (data) {
@@ -385,17 +449,17 @@
                         model.SearchClick(this);
                     },
                     function () {
-                        model.ShowInventory(model.SearchData()[1]);
+                        model.ShowInventory(model.SearchData()[0]);
                         window.setTimeout(this, 1000);
                     },
                     function () {
                         var addToCart = $("a[name='add-to-cart']")[6];
-                        var product = model.SearchData()[1];
+                        var product = model.SearchData()[0];
                         var inventory = product.Inventory();
                         var item = inventory[6];
                         item.SelectedQuantity(3);
                         model.AddToCart(item, product);
-                        this();
+                        //this();
                     },
                     function () {
                         model.ShowInventory(model.SearchData()[0]);
@@ -445,8 +509,27 @@
         {
             border-top: none; 
         }
+        div.color-chooser
+        {
+            float:left; 
+            margin-right:10px; 
+            height:37px; 
+            padding:3px; 
+            width:37px; 
+            text-align:center; 
+            overflow:hidden;
+        }
+        .selected
+        {
+            border: 2px solid #F00;
+        }
+        .label
+        {
+            cursor: pointer;
+        }
     </style>
-	<!-- KNOCKOUT TEMPLATES - Select Products -->
+	
+    <!-- KNOCKOUT TEMPLATES - Select Products -->
 	<script type="text/html" id="Top-Workspace-SelectProducts">
         <div class="workspace-heading" style="height:125px;">
 		    <div id="heading" class="container">
@@ -588,7 +671,7 @@
 			    <tbody data-bind="foreach: $root.CartItems">
                     <tr data-bind="ifnot: $root.SelectedCartItem() == $data, click: $root.CartItemClick">
                         <td style="width:100px">
-                	        <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $data.Product.ImageBundleExternalId, LightboxSuffixId: 'Review' } }">
+                	        <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $root.CartItemImageExternalId($data.Item), LightboxSuffixId: 'Review' } }">
 			                </div>
                         </td>
                         <td style="width:800px;">
@@ -614,22 +697,24 @@
 
                     <tr data-bind="if: $root.SelectedCartItem() == $data">
                         <td style="width:100px; vertical-align:top;">
-                	        <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $data.Product.ImageBundleExternalId, LightboxSuffixId: 'Review' } }">
+                	        <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $root.SelectedItemSkuImageBXId(), LightboxSuffixId: 'Review' } }">
 			                </div>
                         </td>
                         <td style="width:800px;">
                             <div style="width:800px;">
                                 <div style="width:250px; vertical-align:top; float:left;">
-                                    <strong data-bind="text: $data.Product.Name"></strong><br/>
-                                    <span>Sku Code: </span> <span data-bind="text: $data.Item.SkuCode"></span><br/>
+                                    <strong data-bind="text: $data.Product.Name"></strong><br/>                                    
+                                    <span>Sku Code: </span> <span data-bind="text: $root.SelectedCartItemSkuCode"></span><br/>
                                 </div>
                                 <div style="width:150px; vertical-align:top; float:left; text-align:left;">
                                     <br />
                                     <span>Unit Price:</span> <span data-bind="text: ToMoney($data.Product.UnitPrice)"></span>
                                 </div>
+
                                 <div style="width:100px; vertical-align:top; float:left; padding-top:15px; text-align:right;">
                                     <select name="quantity-select" style="width:90px; margin-bottom:0px;" data-bind='options: $root.QuantityArray, optionsCaption: "How many...", value: $data.EditQuantity'></select>                             
                                 </div>
+
                                 <div style="width:300px; text-align:right; float:left; padding-top:30px;">
                                     <a class="btn btn-primary" href="#" data-bind="click: $root.CartItemOk"><i class="icon-ok icon-white"></i> Ok</a>
 					                <a class="btn btn-primary" href="#" data-bind="click: $root.CartItemDelete"><i class="icon-trash icon-white"></i> Delete</a>
@@ -638,28 +723,25 @@
                             </div>
                             <div style="clear:both; width:800px;">
                                 
-                                <div style="width:800px; padding-top:20px; padding-bottom:20px;">
+                                <div data-bind="if: $root.SelectedAllColors().length > 0" style="width:800px; padding-top:20px; padding-bottom:20px;">
                                     <strong>Select a Color</strong>
                                     
+                                    <a href="#">
                                     <div style="margin-top:10px;" data-bind="foreach: $root.SelectedAllColors">
-                	                    <div style="float:left;" 
-                                            data-bind="template: { name: 'Image-Bundle-Thumbnail-Tiny-NoLightbox', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Colors' } }">
+                                        <div data-bind="click: $root.CartItemColorSelectorClick, attr: { 'class' : $root.CartItemColorSelectorClass($data) }">
+                                            <img data-bind="attr: { src: ImageBundleDownloadUrl($data.ImageBundleExternalId, 'thumbnail') }" />
 			                            </div>
                                     </div>
-
-                                    <br />
-                                    <span data-bind="if: $data.Item.Color">Selected Color: <span data-bind="text: $data.Item.Color.Name"></span></span><br/>
+                                    </a>
                                 </div>
 
-                                <div style="width:800px; clear:both; padding-top:20px; padding-bottom:20px;">
-                                    <strong>Select a Sizes</strong>
+                                <div data-bind="if: $root.SelectedAllSizes().length > 0" style="width:800px; clear:both; padding-top:20px; padding-bottom:20px;">
+                                    <strong>Select a Size</strong>
                                     
                                     <div style="margin-top:10px;" data-bind="foreach: $root.SelectedAllSizes">
-                                        <span class="label" data-bind="text: $data.Abbr + ' - ' + $data.Name"></span>
+                                        <span data-bind="click: $root.CartItemSizeSelectorClick, attr: { 'class' : $root.CartItemSizeSelectorClass($data) }, text: $data.Abbr + ' - ' + $data.Name"
+                                            class="label"></span>
                                     </div>
-
-                                    <br />
-                                    <span data-bind="if: $data.Item.Size">Selected Size: <span data-bind="text: $data.Item.Size.Name"></span></span><br/>
                                 </div>
                             </div>
                         </td>
@@ -668,23 +750,6 @@
 		    </table>
         </div>
 	</script>
-
-    <!-- KNOCKOUT TEMPLATE - Shopping Cart Editor Rows -->
-
-    <!-- Load the Product & Images -->
-
-    <!-- Product Options - if Colors choose these -->
-    <!-- Product Options - if Sizes choose these -->
-
-    <!-- Product Skus - computed - if (SelectedColor), if (SelectedSize) ... filter SkuList -->
-
-    <script type="text/html" id="Main-Editor-CartItem-NoSizeNoColor">
-    </script>
-    <script type="text/html" id="Main-Editor-CartItem-NoSizes">
-    </script>
-    <script type="text/html" id="Main-Editor-CartItem-NoColor">
-    </script>
-
 
 	<!-- KNOCKOUT TEMPLATE - Modal Dialogs -->
 	<script type="text/html" id="Modal-Dialog-Notification">

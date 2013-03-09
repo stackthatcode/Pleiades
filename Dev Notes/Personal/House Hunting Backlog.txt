@@ -3,8 +3,8 @@ House Hunting Backlog
 
 Front Range
 -----------
-- Find Mortgage Broker => IN PROGRESS
-- Get Pre-Approved => IN PROGRESS
+- Find Mortgage Broker => DONE
+- Get Pre-Approved => DONE
 - Call and meet Tad for lunch 312-810-2032 => DONE
 
 - Ask Jason, Jae, Michael about Buyer Representation => TODO
@@ -25,7 +25,7 @@ Questions for Tad
 
 Lawyer
 ------
-Steven E Silverman 4080 commercial ave northbrook, il   60062 => TALKED TO HIM - ALL GOOD
+Steven E Silverman 4080 commercial ave northbrook, il   60062 => TALKED TO HIM - ALL GOOD => DONE
 telephone:  847 562 4514 fax:  847  562 4515  email:  ssilverman@stonegrp.com
 
 Mortage Broker
@@ -47,7 +47,6 @@ Possible Nightmare Backlog
 - Flood
 - Mold
 - Insect infestation
-
 
 Leads
 -----

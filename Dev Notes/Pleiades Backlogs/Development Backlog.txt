@@ -10,22 +10,22 @@ http://designmodo.github.com/Flat-UI/
 
 - Order Entry Flow
 
-* Create Shopping Cart Screen => TODO
-
+* Create Shopping Cart Screen => IN PROGRESS
 - Cart Screen spec
 	* Top Header
-		* Next Button => TODO
+		* Next Button (to Shipping) => TODO
 	* Body Grid (each row)
 		* Image => IN PROGRESS
 		* Color => IN PROGRESS
 		* Size => IN PROGRESS
 		* Qty => IN PROGRESS
 		* Edit Button => IN PROGRESS
+		
 	* Body Grid Edit State
 		* (SAME FIELDS)
 		* Quantity Drop Down
 		* Save Button
-		* Cancel Button
+		* Cancel Button =>  DONE
 	* Subtotal Row
 		* Order Sub Total Before Tax
 
@@ -33,11 +33,11 @@ http://designmodo.github.com/Flat-UI/
 * EditCartItem => IN PROGRESS
 * Make the Edit Cart more well-mannered => TODO
 
-
 * When I submit my Order, the Sku Image literally gets COPIED and tied to the Order Line => TODO
 
 - THE GREAT FLOW - Tieing it All Together (!!!)
 * What happens if a Product/Color/Size/Image is Deleted?  What happens to Carts?  What happens to Orders?
+* Why are there Product Color orphans in the database? => TODO
 
 * On the StoreFront "Wrong Size or Color? Click Here" - and Navigate to Product => TODO
 * Enter Email Address + Shipping Info + Shipping method => TODO
