@@ -1,0 +1,9 @@
+Mortgage Comparo
+~~~~~~~~~~~~~~~~
+
+Analyze Betsy's
+---------------
+- What is the Estimate Cost a sum of?  The two lines above it don't add up to its total
+- Are we correct in assuming lender origination fees = $990.00 
+- 
+

@@ -32,8 +32,16 @@ namespace Commerce.Persist.Model.Products
         }
 
 
-        public int TotalInventory { get; set; }
-        public int ReservedInventory { get; set; }
+        public int InStock { get; set; }
+        public int Reserved { get; set; }
+
+        public int Available
+        {
+            get
+            {
+                return Reserved > InStock ? 0 : InStock - Reserved;
+            }
+        }
 
         public bool IsDeleted { get; set; }
         public DateTime DateInserted { get; set; }
@@ -62,8 +70,8 @@ namespace Commerce.Persist.Model.Products
                 Product = product,
                 Color = color,
                 Size = size,
-                ReservedInventory = 0,
-                TotalInventory = 0,
+                Reserved = 0,
+                InStock = 0,
                 IsDeleted = false,
                 DateInserted = DateTime.Now,
                 LastModified = DateTime.Now,

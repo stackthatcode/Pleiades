@@ -3,6 +3,7 @@
 @section _Scripts {
     @Html.Javascript("/scripts/product-service.js")
     @Html.Javascript("/jquery/jquery-ui-1.10.0.custom.min.js")
+    
     @Html.Partial("_ColorPicker")
     @Html.Partial("_FineUploader")
 	@Html.Partial("_ImageBundleViewer")
@@ -984,8 +985,8 @@
             self.SelectedProductInventory = ko.observableArray();
 
             self.AddInventoryConstraint = function (inventoryRow) {
-                inventoryRow.TotalObservable = ko.observable(inventoryRow.TotalInventory);
-                inventoryRow.EditTotalObservable = ko.observable(inventoryRow.TotalInventory);
+                inventoryRow.TotalObservable = ko.observable(inventoryRow.InStock);
+                inventoryRow.EditTotalObservable = ko.observable(inventoryRow.InStock);
 
                 inventoryRow.EditTotalFormatted =
                     ko.computed({
@@ -1667,16 +1668,18 @@
                         </ul>
                     </div>
                 </td>
+
                 <td valign="top" style="width:220px; text-align:left; vertical-align:top; padding-top:20px; padding-right:20px; height:200px;">
                     <div data-bind="if: $data.Name == 'Unassigned'">
 				        <p><strong>No Color</strong></p>
                         <h5>Drag Images from this Region to assign them to a Color and make them visible.</h5>
                     </div>
                     <div data-bind="ifnot: $data.Name == 'Unassigned'">
-                        <div style="width:80px; margin-bottom:5px;" data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+                        <div style="width:80px; margin-bottom:5px;" 
+                                data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
 			            </div>
 				        <p>
-                            <strong data-bind="text: $data.Name"></strong > - <span data-bind="text: $data.SkuCode"></span>
+                            <strong data-bind="text: $data.Name"></strong> - <span data-bind="text: $data.SkuCode"></span>
                         </p>
                     </div>
                     <div data-bind="ifnot: $data.Name == 'Unassigned'">           
@@ -1789,7 +1792,7 @@
                             
                             <div style="clear:both;"></div>
 
-                            <span style="color:#999; font-weight:bold;">Reserved: <span data-bind="text: $data.ReservedInventory"></span></span>
+                            <span style="color:#999; font-weight:bold;">Reserved: <span data-bind="text: $data.Reserved"></span></span>
 				        </span>
                     </td>
 			        <td>
@@ -1815,7 +1818,7 @@
 			        <td style="vertical-align:top">
 				        <span class="span5">
 					        <h4 style="height:24px;">In Stock: <span data-bind="text: $data.TotalObservable"></span></h4>
-                            <span style="color:#999; font-weight:bold;">Reserved: <span data-bind="text: $data.ReservedInventory"></span></span>
+                            <span style="color:#999; font-weight:bold;">Reserved: <span data-bind="text: $data.Reserved"></span></span>
 				        </span>
                     </td>
 			        <td>

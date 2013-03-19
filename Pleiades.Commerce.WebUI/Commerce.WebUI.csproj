@@ -119,6 +119,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\aquery\aQuery-1.0-min.js" />
+    <Content Include="Content\aquery\aQuery-1.0.js" />
     <Content Include="Content\bootstrap-lightbox\bootstrap-lightbox.css" />
     <Content Include="Content\bootstrap-lightbox\bootstrap-lightbox.js" />
     <Content Include="Content\bootstrap-lightbox\bootstrap-lightbox.min.css" />

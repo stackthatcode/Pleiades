@@ -3,12 +3,82 @@ FRONTRANGE - HOTZONE
 
 Front Range
 -----------
+Jeremy Meeting 2013/03/17
+- Box Cryptor => TODO
+- Send last meeting notes => TODO
+
+
 * Design Options for StoreFront
 http://designmodo.com/square/
 http://designmodo.github.com/Flat-UI/
 
 
 - Order Entry Flow
+
+20130313 UPDATE
+---------------
+
+cartItem
+{
+	Quantity: ko.observable(3),
+	Item: ko.observable(inventoryItem),
+	Product: product,
+}
+
+inventoryItem
+{
+	Available: 1,
+	SelectedQuantity: observable[]
+	Size: {}
+	Color: {}
+	SkuCode: "",
+	ComputedAvailable: observable()
+	ImageBundle.ExternalId,
+	QuantityOptions
+}
+
+var selectedCartItem = {
+	CartItem: ko.observable(cartItem),
+	Colors: ko.observableArray(),
+	Sizes: ko.observableArray(),
+	Inventory: ko.observableArray(),
+
+	EditQuantity: ko.observable(), 	// DONE
+	EditColor: ko.observable(),		// DONE
+	EditSize: ko.observable(),		// DONE
+	EditSku: ko.observable(),
+};
+				
+
+
+
+- Update the Cart with Inventory Available and CartItem Quantity javascript function => TODO
+- Notify - "Hey, we had to remove some items from your Cart, as Inventory is changing.  Hurry up and check-out!" => TODO
+- Quantity to add should reflect Available - QuantityInCartBySku => TODO
+- Write a separate QuantityInCartBySku function => TODO
+
+- Review Step - Copy the SKU to an Edit State => TODO
+- Update the SKU when a valid Color and Size combo is selected => TODO
+- Determine how to filter the Sizes / Colors based on Available Inventory => TODO
+
+
+Concerns
+--------
+- Isolate the Current Sku Code => DONE
+- Isolate Current Color and Size => DONE
+
+- Inventory Check
+* WHEN: I click on Expand Item, and when I Edit the Cart => TODO
+* WHAT: If Available < my Quantity, notify and adjust Quantity. If Available = 0, remove and notify
+
+- When selected, check the Available Quantity and maybe render (Out-of-Stock)
+- Current Selected Color => TODO
+- Current Selected Size => TODO
+- Determine when to show Size/Color, when not => TODO
+- Aligned Columns => TODO
+
+
+- ALSO: when doing Inventory Item check, adjust Quantities based on CURRENT Availability, and show a notification when things have adjusted => TODO
 
 * Create Shopping Cart Screen => IN PROGRESS
 - Cart Screen spec
@@ -19,8 +89,7 @@ http://designmodo.github.com/Flat-UI/
 		* Color => IN PROGRESS
 		* Size => IN PROGRESS
 		* Qty => IN PROGRESS
-		* Edit Button => IN PROGRESS
-		
+		* Edit Button => IN PROGRESS		
 	* Body Grid Edit State
 		* (SAME FIELDS)
 		* Quantity Drop Down
@@ -31,7 +100,6 @@ http://designmodo.github.com/Flat-UI/
 
 - On Edit CartItem
 * EditCartItem => IN PROGRESS
-* Make the Edit Cart more well-mannered => TODO
 
 * When I submit my Order, the Sku Image literally gets COPIED and tied to the Order Line => TODO
 

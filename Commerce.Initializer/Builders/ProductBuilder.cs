@@ -147,14 +147,23 @@ namespace Commerce.Initializer.Builders
                     ImageBundleExternalId = bundle110.ExternalId.ToString(),
                     ProductColorId = productColor12Result().Id,
                 });
-
                 unitOfWork.SaveChanges();
 
                 foreach (var size in sizeGroup.Sizes)
                 {
                     productRepository.AddProductSize(product1.Id, size.ID);
                 }
+                unitOfWork.SaveChanges();
 
+                productRepository.GenerateInventory(product1.Id);
+                unitOfWork.SaveChanges();
+
+                var random = new Random();
+                foreach (var sku in productRepository.Inventory(product1.Id))
+                {
+                    sku.Reserved = 0;
+                    sku.InStock = random.Next(0, 4);
+                }
                 unitOfWork.SaveChanges();
                 tx.Complete();
             }

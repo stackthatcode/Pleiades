@@ -409,7 +409,7 @@ namespace Commerce.Persist.Concrete
             var sku = this.Context.ProductSkus.FirstOrDefault(x => x.IsDeleted == false && x.Id == id);
             if (sku != null)
             {
-                sku.TotalInventory = inventoryTotal;
+                sku.InStock = inventoryTotal;
             }
         }
 
@@ -422,7 +422,7 @@ namespace Commerce.Persist.Concrete
                 return 0;
             }
 
-            var total = inventory.Sum(x => x.TotalInventory);
+            var total = inventory.Sum(x => x.InStock);
             return total;
         }
 

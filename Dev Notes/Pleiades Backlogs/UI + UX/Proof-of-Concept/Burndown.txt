@@ -688,4 +688,19 @@ Two flows:
 
 - EXCEPTIONAL JOB, ALEKS!
 
+3/9 3.25 Hours
+--------------
+- Hard work on the Edit Cart functionality => DONE
+
+3/12 1.0 Hours
+--------------
+- More work on Edit Cart => dONE
+* ReservedInventory => DONE
+* TotalInventory => DONE
+* Make the Edit Cart more well-mannered => DONE
+
+3/17 6.0 Hours
+--------------
+* Clearing technical debts
+* More intensive work on Cart
 

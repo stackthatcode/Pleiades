@@ -1,8 +1,8 @@
 ﻿@using Pleiades.Web.MvcHelpers
 
 @section _Scripts {   
-	@Html.Partial("_ImageBundleViewer")
-    
+	@Html.Javascript("/aquery/aQuery-1.0-min.js")
+    @Html.Partial("_ImageBundleViewer")    
     <!-- Endless Glider -->
     <script type="text/javascript">
         var EndlessGlider = function (container, divId1, divId2) {
@@ -100,7 +100,6 @@
             }
         }
     </script>
-
     <!-- List Model Functions -->
     <script type="text/javascript">
         var AddListFunctions = function (model) {
@@ -150,7 +149,6 @@
             }
         }
     </script>
-
     <!-- Search Functions -->
 	<script type="text/javascript">
 	    var AddSearchFunctions = function (model) {
@@ -170,12 +168,13 @@
 
 	        self.ViewCart = function () {
 	            if (self.CartItems().length == 0) {
-	                self.ShowModal("Notification", {
-	                    Header: "The Shopping Cart is Empty",
-	                    Body: "Add Items to the Order"
-	                });
+	                self.ShowModal("Notification", "The Shopping Cart is Empty", "Add Items to the Order");
 	            } else {
 	                $("btn-view-cart").hide();
+	                $.each(self.SearchData(), function (index, elem) {
+	                    elem.ExpandInventory(false);
+	                    elem.Inventory.removeAll();
+	                });
 	                self.GlideRight("ReviewProducts");
 	            }
 	        }
@@ -202,41 +201,46 @@
                 );
 	        }
 
-	        self.AddToCart = function (item, product) {
-	            if (!item.SelectedQuantity()) {
+	        self.CartItemBySkuCode = function (skucode) {
+	            return self.CartItems().firstOrNull(function (x) { return x.Sku().SkuCode == skucode; });
+	        };
+
+	        self.AddToCart = function (inventoryItem, product) {
+	            if (!inventoryItem.SelectedQuantity()) {
 	                return;
 	            }
+
 	            if (self.CartItems().length == 20) {
-	                self.ShowModal("Notification", {
-	                    Header: "The Shopping Cart is Full",
-	                    Body: "You can only add 20 distinct Skus per Order"
-	                });
+	                self.ShowModal("Notification", "The Shopping Cart is Full", "You can only add 20 distinct Skus per Order");
 	            }
 
-	            var itemInCart = self.CartItems().firstOrNull(function (x) { return x.Item.SkuCode == item.Item.SkuCode; });
+	            var itemInCart = self.CartItemBySkuCode(inventoryItem.SkuCode);
 	            if (itemInCart) {
-	                if (itemInCart.Quantity() + item.SelectedQuantity() > 99) {
-	                    self.ShowModal("Notification", {
-	                        Header: "Maximum Number of Items",
-	                        Body: "You can only add 99 of the same Item"
-	                    });
+	                if (itemInCart.Quantity() + inventoryItem.SelectedQuantity() > inventoryItem.Available) {
+	                    self.ShowModal("Notification", "Stock Availability", "Adding are only " + inventoryItem.Available + " of that item available for purchase");
 	                    return;
 	                }
-	                itemInCart.Quantity(itemInCart.Quantity() + item.SelectedQuantity());
+
+	                itemInCart.Quantity(itemInCart.Quantity() + inventoryItem.SelectedQuantity());
+	                self.GenerateQuantityOptions(inventoryItem);
 	            } else {
 	                if (self.CartItems.length == 100) {
-	                    self.ShowModal("Notification", {
-	                        Header: "Maximum Number of Distinct Items",
-	                        Body: "You can only add 99 of the same Sku per Order"
-	                    });
+	                    self.ShowModal("Notification", "Maximum Number of Distinct Items", "You can only add 99 of the same Sku per Order");
 	                    return;
 	                }
 
-	                self.CartItems.push({ Quantity: ko.observable(item.SelectedQuantity()), Item: item.Item, Product: product });
+	                var cartItem = {
+	                    Quantity: ko.observable(inventoryItem.SelectedQuantity()),
+	                    Sku: ko.observable(inventoryItem),
+	                    Product: product
+	                };
+	                self.CartItems.push(cartItem);
+	                self.GenerateQuantityOptions(inventoryItem);
 	            }
+
 	            $("#AddFeedback").show();
 	            $("#AddFeedback").fadeOut({ duration: 1000 });
-	            item.SelectedQuantity(null);
+	            inventoryItem.SelectedQuantity(null);
 	        }
 
 	        self.ShowInventory = function (data) {
@@ -246,19 +250,40 @@
                     },
                     function (inventory) {
                         data.ExpandInventory(true);
-                        $.each(inventory, function (index, elem) {
-                            data.Inventory.push({ SelectedQuantity: ko.observable(0), Item: elem });
+
+                        $.each(inventory, function (index, inventoryItem) {
+                            inventoryItem.SelectedQuantity = ko.observable(0);
+                            inventoryItem.ComputedAvailable = ko.computed(
+                                function () {
+                                    var cartItem = self.CartItemBySkuCode(inventoryItem.SkuCode);
+                                    if (cartItem) {
+                                        return inventoryItem.Available - cartItem.Quantity();
+                                    } else {
+                                        return inventoryItem.Available;
+                                    }
+                                }
+                            );
+                            inventoryItem.QuantityOptions = ko.observableArray();
+                            self.GenerateQuantityOptions(inventoryItem);
+                            data.Inventory.push(inventoryItem);
                         });
                     }
                 );
 	        }
 
+	        self.GenerateQuantityOptions = function (inventoryItem) {
+	            inventoryItem.QuantityOptions.removeAll();
+	            for (var quantity = 1; quantity <= inventoryItem.ComputedAvailable(); quantity++) {
+	                inventoryItem.QuantityOptions.push(quantity);
+	            }
+	        }
+
 	        self.HideInventory = function (data) {
 	            data.ExpandInventory(false);
+	            data.Inventory.removeAll();
 	        }
 	    }
-    </script>
-    
+    </script>    
     <!-- Review Products Functions -->
 	<script type="text/javascript">
 	    var AddReviewProductsFunctions = function (model) {
@@ -266,69 +291,20 @@
 
 	        self.SelectedCartItem = ko.observable(null);
 
-	        self.SelectedCartItemSkuCode = ko.computed(
-                function () {
-                    return self.SelectedCartItem() ? self.SelectedCartItem().Item.SkuCode : null;
-                }
-            );
-
-	        self.SelectedCartItemColor = ko.computed(
-                function () {
-                    if (self.SelectedCartItem()) {
-                        return self.SelectedAllColors().firstOrNull(function (elem) {
-                            return (elem.Id == self.SelectedCartItem().Item.Color.Id);
-                        });
-                    } else {
-                        return null;
-                    }
-                });
-
-	        self.SelectedCartItemSize = ko.computed(
-                function () {
-                    if (self.SelectedCartItem()) {
-                        return self.SelectedAllSizes().firstOrNull(function (elem) {
-                            return (elem.Id == self.SelectedCartItem().Item.Size.Id);
-                        });
-                    } else {
-                        return null;
-                    }
-                });
-
-	        self.SelectedItemSkuImageBXId = ko.computed(
-                function () {
-                    if (self.SelectedCartItem()) {
-                        return self.SelectedCartItem().Item.ImageBundle.ExternalId;
-                    }
-                    else {
-                        return null;
-                    }
-                }
-            );
-
-	        self.SelectedAllColors = ko.observableArray([]);
-	        self.SelectedAllSizes = ko.observableArray([]);
-	        self.SelectedAllInventory = ko.observableArray([]);
-
-	        self.CartItemColorSelectorClass = function (color) {
-	            console.log("CartItemColorSelectorClass invoked");
-	            return (color == self.SelectedCartItemColor()) ? "color-chooser selected" : "color-chooser";
+	        self.ColorSelectorClass = function (color) {
+	            return (color == self.SelectedCartItem().EditColor()) ? "color-chooser selected" : "color-chooser not-selected";
 	        }
 
-	        self.CartItemSizeSelectorClass = function (size) {
-	            return (size == self.SelectedCartItemSize()) ? "label label-info" : "label";
+	        self.SizeSelectorClass = function (size) {
+	            return (size == self.SelectedCartItem().EditSize()) ? "label label-info" : "label";
 	        }
 
-	        self.CartItemImageExternalId = function (item) {
-	            return (item && item.ImageBundle) ? item.ImageBundle.ExternalId : null;
+	        self.ColorSelectorClick = function (color) {
+	            self.SelectedCartItem().EditColor(color);
 	        }
 
-	        self.CartItemColorSelectorClick = function (color) {
-	            console.log(color);
-	            self.SelectedCartItemColor(color);
-	        }
-
-	        self.CartItemSizeSelectorClick = function (size) {
-	            self.SelectedCartItemSize(size);
+	        self.SizeSelectorClick = function (size) {
+	            self.SelectedCartItem().EditSize(size);
 	        }
 
 	        self.FindInventory = function (color, size) {
@@ -344,34 +320,96 @@
 	            self.GlideLeft("SelectProducts");
 	        }
 
-	        self.CartItemClick = function (data) {
+	        self.CartItemClick = function (cartItem) {
+                var selectedCartItem = {
+                    CartItem: ko.observable(cartItem),
+                    Colors: ko.observableArray(),
+                    Sizes: ko.observableArray(),
+                    Inventory: ko.observableArray(),
+
+                    EditQuantity: ko.observable(),
+                    EditColor: ko.observable(),
+                    EditSize: ko.observable(),
+                    EditSku: ko.observable(),
+                };
+
 	            flow.exec(
                     function () {
                         self.CartItemCancel();
-                        self.Service.AjaxGet("/Admin/Product/Colors/" + data.Product.Id, this);
-                    },
-                    function (colors) {
-                        self.SelectedAllColors(colors);
-                        self.Service.AjaxGet("/Admin/Product/Sizes/" + data.Product.Id, this);
-                    },
-                    function (sizes) {
-                        self.SelectedAllSizes(sizes);
-                        self.Service.AjaxGet("/Admin/Product/Inventory/" + data.Product.Id + "?regenerate=false", this);
+                        self.Service.AjaxGet("/Admin/Product/Inventory/" + cartItem.Product.Id + "?regenerate=false", this);
                     },
                     function (inventory) {
-                        self.SelectedAllInventory(inventory);
-                        data.EditQuantity = ko.observable(data.Quantity());
-                        self.SelectedCartItem(data);
-                        console.log(self.SelectedCartItem());
+                        selectedCartItem.Inventory(inventory);
+                        var editSku = selectedCartItem.Inventory().firstOrNull(
+                            function(x) { return x.SkuCode == cartItem.Sku().SkuCode; }
+                        );
+                        selectedCartItem.EditSku(editSku);
+                        selectedCartItem.EditQuantity = ko.observable(cartItem.Quantity());
+
+                        console.log(editSku.Available);
+                        if (editSku.Available == 0) {
+                            self.ShowModal("Notification",  "Item Out-Of-Stock", 
+                                "Item: " + editSku.SkuCode + " is no longer in stock", 
+                                function() {
+                                    self.CartItems.remove(cartItem);
+                                });
+                            return;
+                        }
+                        if (editSku.Available < cartItem.Quantity()) {
+                            cartItem.Quantity(editSku.Available);
+                            self.ShowModal("Notification",  
+                                "Reduction in Stock", "Due to changes in available stock items were removed from Cart", this);
+                            return;
+                        }
+                        this();
+                    },
+                    function() {
+                        console.log("FIN!" + selectedCartItem);
+                        self.SelectedCartItem(selectedCartItem);
+
+                        if (cartItem.Sku().Color) {
+                            self.Service.AjaxGet("/Admin/Product/Colors/" + cartItem.Product.Id, this);
+                        } else {
+                            this([]);
+                        }
+                    },
+                    function (colors) {
+                        // FACT: I'm always going to load all available Colors 
+                        // FACT: Selected Colors 
+
+                        selectedCartItem.Colors(colors);
+                        if (cartItem.Sku().Size) {
+                            self.Service.AjaxGet("/Admin/Product/Sizes/" + cartItem.Product.Id, this);
+                        } else {
+                            this([]);
+                        }
+                    },
+                    function (sizes) {
+                        // FACT: I'm always going to load all available Sizes from Server
+                        // FACT: If I have Colors
+                        selectedCartItem.Sizes(sizes);
+
+                        // Select Current Color and Size
+                        var editColor = selectedCartItem.Colors().firstOrNull(
+                            function(x) { return x.Id == cartItem.Sku().Color.Id; }
+                        );
+                        var editSize = selectedCartItem.Sizes().firstOrNull(
+                            function(x) { return x.Id == cartItem.Sku().Size.Id; }
+                        );
+                        selectedCartItem.EditColor(editColor);
+                        selectedCartItem.EditSize(editSize);
                     }
                 );
 	        }
 
+            self.SkuByColorAndSize = function(inventory, color, size) {
+//                if (color && size) {
+//                    return inventory.firstOrNull(function(x) { });
+//                }
+            }
+            
 	        self.CartItemCancel = function () {
 	            self.SelectedCartItem(null);
-	            self.SelectedAllColors([]);
-	            self.SelectedAllSizes([]);
-	            self.SelectedAllInventory([]);
 	        }
 
 	        self.CartItemDelete = function (data) {
@@ -388,7 +426,6 @@
 	        }
 	    }
     </script>
-
     <!-- View Model Functions -->
 	<script type="text/javascript">
 	    var CreateOrderViewModel = function () {
@@ -401,8 +438,20 @@
 	        // Modal state + functions
 	        self.ModalViewModel = ko.observable({ Template: null, Data: null });
 
-	        self.ShowModal = function (template, data) {
-	            self.ModalViewModel({ Template: "Modal-Dialog-" + template, Data: data });
+	        self.ShowModal = function (template, header, body, callback) {
+	            self.ModalViewModel({
+	                Template: "Modal-Dialog-" + template,
+	                Data: {
+	                    Header: header,
+	                    Body: body,
+	                    OkButton: function () {
+	                        self.HideModal();
+	                        if (callback) {
+	                            callback();
+	                        }
+	                    }
+	                }
+	            });
 	            $('#modal-dialog').modal('show');
 	        };
 
@@ -424,7 +473,6 @@
 	        }
 	    }
     </script>
-
     <!-- document.ready() Functions -->
 	<script type="text/javascript">
 	    $(function () {
@@ -453,12 +501,11 @@
                         window.setTimeout(this, 1000);
                     },
                     function () {
-                        var addToCart = $("a[name='add-to-cart']")[6];
                         var product = model.SearchData()[0];
                         var inventory = product.Inventory();
-                        var item = inventory[6];
-                        item.SelectedQuantity(3);
-                        model.AddToCart(item, product);
+                        var sku = inventory[3];
+                        sku.SelectedQuantity(2);
+                        model.AddToCart(sku, product);
                         //this();
                     },
                     function () {
@@ -466,7 +513,6 @@
                         window.setTimeout(this, 1000);
                     },
                     function () {
-                        var addToCart = $("a[name='add-to-cart']")[6];
                         var product = model.SearchData()[0];
                         var inventory = product.Inventory();
                         var item = inventory[1];
@@ -523,12 +569,11 @@
         {
             border: 2px solid #F00;
         }
-        .label
+        .not-selected
         {
-            cursor: pointer;
+            border: 2px solid #EEE;
         }
-    </style>
-	
+    </style>	
     <!-- KNOCKOUT TEMPLATES - Select Products -->
 	<script type="text/html" id="Top-Workspace-SelectProducts">
         <div class="workspace-heading" style="height:125px;">
@@ -613,21 +658,32 @@
                     </div>
 
                     <div name="expanded-inventory" data-bind="if: $data.ExpandInventory">
-                        <table class="skutable table-striped table-hover table-condensed">
+                        <table style="width:800px;" class="skutable table-striped table-hover table-condensed">
                         <thead>
                             <th>Sku Code</th>
                             <th style="text-align:right;">Reserved</th>
                             <th style="text-align:right;">In Stock</th>
+                            <th style="text-align:right;">Available</th>
                             <th style="text-align:right;">Quantity</th>
                             <th style="text-align:right;">Add to Cart</th>
                         </thead>
                         <tbody data-bind="foreach: $data.Inventory">
-                        <tr>
-                            <td><span data-bind="text: $data.Item.SkuCode"></span></td>
-                            <td><span data-bind="text: $data.Item.ReservedInventory"></span></td>
-                            <td><span data-bind="text: $data.Item.TotalInventory"></span></td>
-                            <td><select name="quantity-select" style="width:125px; margin-bottom:0px;" data-bind='options: $root.QuantityArray, optionsCaption: "How many...", value: $data.SelectedQuantity'></select></td>
-                            <td><a name="add-to-cart" href="#" data-bind="click: function() { $root.AddToCart($data, $parent); }" style="color:#333;"><i class="icon-shopping-cart icon-blue"></i> Add to Cart</a></td>
+                        <tr style="height:40px;">
+                            <td style="width:200px;"><span data-bind="text: $data.SkuCode"></span></td>
+                            <td style="width:100px;"><span data-bind="text: $data.Reserved"></span></td>
+                            <td style="width:100px;"><span data-bind="text: $data.InStock"></span></td>
+                            <td style="width:100px;"><span data-bind="text: $data.ComputedAvailable"></span></td>
+                            <td style="width:150px;">
+                                <div data-bind="if: $data.QuantityOptions().length">
+                                    <select name="quantity-select" style="width:125px; margin-bottom:0px;" 
+                                        data-bind='options: $data.QuantityOptions, optionsCaption: "How many...", value: $data.SelectedQuantity'>
+                                    </select>
+                                </div>
+                                <div data-bind="ifnot: $data.QuantityOptions().length">
+                                    <span style="margin-right:10px;">N/A</span>
+                                </div>
+                            </td>
+                            <td style="width:100px; text-align:right;"><a name="add-to-cart" href="#" data-bind="click: function() { $root.AddToCart($data, $parent); }" style="color:#333;"><i class="icon-shopping-cart icon-blue"></i> Add to Cart</a></td>
                         </tr>
                         </tbody>
                         </table>
@@ -637,8 +693,7 @@
 		    </tbody>
 		    </table>
         </div>
-	</script>
-	
+	</script>	
 	<!-- KNOCKOUT TEMPLATES - Review Products -->
 	<script type="text/html" id="Top-Workspace-ReviewProducts">
 		<div id="heading" class="container">
@@ -647,9 +702,11 @@
 					<h1>Create Order &gt; Review Cart</h1>
 				</div>
 				<div class="span3" style="margin-top:15px; text-align:right;">
-                    <a id="btn-view-cart" class="btn btn-primary" style="width:190px;" data-bind="click: $root.PerpetualGlideTest">
-                        Add Shipping Address <i class="icon-arrow-right icon-white"></i>
-                    </a>
+                    <div data-bind="if: $root.CartItems().length">
+                        <a id="btn-view-cart" class="btn btn-primary" style="width:190px;" data-bind="click: $root.PerpetualGlideTest">
+                            Add Shipping Address <i class="icon-arrow-right icon-white"></i>
+                        </a>
+                    </div>
 				</div>
 			</div>
 
@@ -657,7 +714,7 @@
                 <div class="span7" style="height:48px;">
                     <ul class="nav nav-pills">
                         <li style="width:200px;">
-				            <a name="glideToSearch" href="#" class="backbutton" data-bind="click: $root.BackToProductSearch">&laquo; Add More Items To Cart</a>
+				            <a name="glideToSearch" href="#" class="backbutton" data-bind="click: $root.BackToProductSearch">&laquo; Add Items To Cart</a>
                             &nbsp;
                         </li>
                     </ul
@@ -667,19 +724,24 @@
 	</script>
 	<script type="text/html" id="Main-Editor-ReviewProducts">
         <div style="margin-bottom:200px;">
+            <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.CartItems().length == 0">
+			    <strong>There are no Items in your Cart.  Click "Add Items to Cart".</strong>  
+		    </div>
+
 		    <table class="table table-hover">
 			    <tbody data-bind="foreach: $root.CartItems">
-                    <tr data-bind="ifnot: $root.SelectedCartItem() == $data, click: $root.CartItemClick">
+                    <tr data-bind="ifnot: $root.SelectedCartItem() &&  $root.SelectedCartItem().CartItem() == $data, click: $root.CartItemClick">
                         <td style="width:100px">
-                	        <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $root.CartItemImageExternalId($data.Item), LightboxSuffixId: 'Review' } }">
+                	        <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundle: $data.Sku().ImageBundle, LightboxSuffixId: 'Review' } }">
 			                </div>
                         </td>
+
                         <td style="width:800px;">
                             <div style="width:250px; vertical-align:top; float:left;">
                                 <strong data-bind="text: $data.Product.Name"></strong><br/>
-                                <span>Sku Code: </span> <span data-bind="text: $data.Item.SkuCode"></span><br/>
-                                <span data-bind="if: $data.Item.Color">Color: <span data-bind="text: $data.Item.Color.Name"></span></span><br/>
-                                <span data-bind="if: $data.Item.Size">Size: <span data-bind="text: $data.Item.Size.Name"></span></span><br/>
+                                <span>Sku Code: </span> <span data-bind="text: $data.Sku().SkuCode"></span><br/>
+                                <span data-bind="if: $data.Sku().Color">Color: <span data-bind="text: $data.Sku().Color.Name"></span></span><br/>
+                                <span data-bind="if: $data.Sku().Size">Size: <span data-bind="text: $data.Sku().Size.Name"></span></span><br/>
                             </div>
                             <div style="width:150px; vertical-align:top; float:left; text-align:left;">
                                 <br />
@@ -690,25 +752,25 @@
                                 <span>Quantity:</span> <span data-bind="text: $data.Quantity"></span>
                             </div>
                             <div style="width:300px; text-align:right; float:left; padding-top:30px;">
-                                <a class="btn btn-primary" style="width:75px;" href="#" data-bind="click: $root.CartItemClick"><i class="icon-pencil icon-white"></i> Edit</a>
+                                <a class="btn btn-primary" style="width:75px;" href="#"><i class="icon-pencil icon-white"></i> Edit</a>
                             </div>
                         </td>
                     </tr>
-
-                    <tr data-bind="if: $root.SelectedCartItem() == $data">
+                    
+                    <tr data-bind="if: $root.SelectedCartItem() && $root.SelectedCartItem().CartItem() == $data">
                         <td style="width:100px; vertical-align:top;">
-                	        <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $root.SelectedItemSkuImageBXId(), LightboxSuffixId: 'Review' } }">
+                            <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundle: $root.SelectedCartItem().EditSku().ImageBundle, LightboxSuffixId: 'Review' } }">
 			                </div>
                         </td>
                         <td style="width:800px;">
                             <div style="width:800px;">
                                 <div style="width:250px; vertical-align:top; float:left;">
                                     <strong data-bind="text: $data.Product.Name"></strong><br/>                                    
-                                    <span>Sku Code: </span> <span data-bind="text: $root.SelectedCartItemSkuCode"></span><br/>
+                                    <span>Sku Code: </span> <span data-bind="text: $root.SelectedCartItem().EditSku().SkuCode"></span><br/>
                                 </div>
                                 <div style="width:150px; vertical-align:top; float:left; text-align:left;">
                                     <br />
-                                    <span>Unit Price:</span> <span data-bind="text: ToMoney($data.Product.UnitPrice)"></span>
+                                    <span>Unit Price:</span> <span data-bind="text: ToMoney($root.SelectedCartItem().CartItem().Product.UnitPrice)"></span>
                                 </div>
 
                                 <div style="width:100px; vertical-align:top; float:left; padding-top:15px; text-align:right;">
@@ -721,25 +783,25 @@
 					                <a class="btn btn-inverse" href="#" data-bind="click: $root.CartItemCancel"><i class="icon-remove icon-white"></i> Cancel</a>
                                 </div>
                             </div>
+
                             <div style="clear:both; width:800px;">
-                                
-                                <div data-bind="if: $root.SelectedAllColors().length > 0" style="width:800px; padding-top:20px; padding-bottom:20px;">
+                                <div data-bind="if: $root.SelectedCartItem().Colors().length > 0" style="width:800px; padding-top:20px; padding-bottom:20px;">
                                     <strong>Select a Color</strong>
                                     
                                     <a href="#">
-                                    <div style="margin-top:10px;" data-bind="foreach: $root.SelectedAllColors">
-                                        <div data-bind="click: $root.CartItemColorSelectorClick, attr: { 'class' : $root.CartItemColorSelectorClass($data) }">
-                                            <img data-bind="attr: { src: ImageBundleDownloadUrl($data.ImageBundleExternalId, 'thumbnail') }" />
+                                    <div style="margin-top:10px;" data-bind="foreach:  $root.SelectedCartItem().Colors()">
+                                        <div data-bind="click: $root.ColorSelectorClick, attr: { 'class' : $root.ColorSelectorClass($data) }">
+                                            <img data-bind="attr: { src: BundleViewer.ImageBundleDownloadUrl({ ExternalResourceId: $data.ImageBundleExternalId }, 'thumbnail') }" />
 			                            </div>
                                     </div>
                                     </a>
                                 </div>
 
-                                <div data-bind="if: $root.SelectedAllSizes().length > 0" style="width:800px; clear:both; padding-top:20px; padding-bottom:20px;">
+                                <div data-bind="if: $root.SelectedCartItem().Sizes().length > 0" style="width:800px; clear:both; padding-top:20px; padding-bottom:20px;">
                                     <strong>Select a Size</strong>
                                     
-                                    <div style="margin-top:10px;" data-bind="foreach: $root.SelectedAllSizes">
-                                        <span data-bind="click: $root.CartItemSizeSelectorClick, attr: { 'class' : $root.CartItemSizeSelectorClass($data) }, text: $data.Abbr + ' - ' + $data.Name"
+                                    <div style="margin-top:10px;" data-bind="foreach: $root.SelectedCartItem().Sizes()">
+                                        <span data-bind="click: $root.SizeSelectorClick, attr: { 'class' : $root.SizeSelectorClass($data) }, text: $data.Abbr + ' - ' + $data.Name"
                                             class="label"></span>
                                     </div>
                                 </div>
@@ -750,7 +812,6 @@
 		    </table>
         </div>
 	</script>
-
 	<!-- KNOCKOUT TEMPLATE - Modal Dialogs -->
 	<script type="text/html" id="Modal-Dialog-Notification">
 		<div id="modal-dialog" class="modal hide fade">
@@ -762,7 +823,7 @@
 				<p><span data-bind="text: $data.Body"></span></p>
 			</div>
 			<div class="modal-footer">
-				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.HideModal"><i class="icon-ok icon-white"></i> Ok</a>
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $data.OkButton"><i class="icon-ok icon-white"></i> Ok</a>
 			</div>
 		</div>		
 	</script>
