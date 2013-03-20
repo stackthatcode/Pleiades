@@ -291,22 +291,6 @@
 
 	        self.SelectedCartItem = ko.observable(null);
 
-	        self.ColorSelectorClass = function (color) {
-	            return (color == self.SelectedCartItem().EditColor()) ? "color-chooser selected" : "color-chooser not-selected";
-	        }
-
-	        self.SizeSelectorClass = function (size) {
-	            return (size == self.SelectedCartItem().EditSize()) ? "label label-info" : "label";
-	        }
-
-	        self.ColorSelectorClick = function (color) {
-	            self.SelectedCartItem().EditColor(color);
-	        }
-
-	        self.SizeSelectorClick = function (size) {
-	            self.SelectedCartItem().EditSize(size);
-	        }
-
 	        self.FindInventory = function (color, size) {
 	            var item = self.SelectedAllInventory.firstOrNull(function (elem) {
 	                console.log(elem.Color);
@@ -346,7 +330,6 @@
                         selectedCartItem.EditSku(editSku);
                         selectedCartItem.EditQuantity = ko.observable(cartItem.Quantity());
 
-                        console.log(editSku.Available);
                         if (editSku.Available == 0) {
                             self.ShowModal("Notification",  "Item Out-Of-Stock", 
                                 "Item: " + editSku.SkuCode + " is no longer in stock", 
@@ -361,10 +344,7 @@
                                 "Reduction in Stock", "Due to changes in available stock items were removed from Cart", this);
                             return;
                         }
-                        this();
-                    },
-                    function() {
-                        console.log("FIN!" + selectedCartItem);
+
                         self.SelectedCartItem(selectedCartItem);
 
                         if (cartItem.Sku().Color) {
@@ -374,40 +354,95 @@
                         }
                     },
                     function (colors) {
-                        // FACT: I'm always going to load all available Colors 
-                        // FACT: Selected Colors 
-
                         selectedCartItem.Colors(colors);
-                        if (cartItem.Sku().Size) {
-                            self.Service.AjaxGet("/Admin/Product/Sizes/" + cartItem.Product.Id, this);
-                        } else {
-                            this([]);
-                        }
-                    },
-                    function (sizes) {
-                        // FACT: I'm always going to load all available Sizes from Server
-                        // FACT: If I have Colors
-                        selectedCartItem.Sizes(sizes);
-
-                        // Select Current Color and Size
                         var editColor = selectedCartItem.Colors().firstOrNull(
                             function(x) { return x.Id == cartItem.Sku().Color.Id; }
                         );
+                        selectedCartItem.EditColor(editColor);
+
+                        if (cartItem.Sku().Size) {
+                            self.Service.AjaxGet("/Admin/Product/Sizes/" + cartItem.Product.Id, this);
+                        }
+                        // else, terminate
+                    },
+                    function (sizes) {
+                        // Experiment
+                        var inventory = self.SelectedCartItem().Inventory();
+                        var color = self.SelectedCartItem().EditColor();
+                        
+                        var filteredSizes = self.FilterSizeByColorAndAvaililty(inventory, sizes, color);
+                        selectedCartItem.Sizes(filteredSizes);
+
                         var editSize = selectedCartItem.Sizes().firstOrNull(
                             function(x) { return x.Id == cartItem.Sku().Size.Id; }
                         );
-                        selectedCartItem.EditColor(editColor);
                         selectedCartItem.EditSize(editSize);
                     }
                 );
 	        }
 
-            self.SkuByColorAndSize = function(inventory, color, size) {
-//                if (color && size) {
-//                    return inventory.firstOrNull(function(x) { });
-//                }
+            self.FilterSizeByColorAndAvaililty = function(inventory, sizes, selectedColor) {
+                var output = [];
+                $.each(sizes, function (index, size) {
+                    var sku = self.FilterSkuByColorAndSize(inventory, selectedColor, size);
+                    if (sku[0].Available > 0) {
+                        output.push(size);
+                    }
+                });
+                return output;
             }
+
+            self.FilterSkuByColorAndSize = function(inventory, color, size) {
+                if (color && size) {
+                    return AQ(inventory)
+                        .where(function(x) { return x.Color.Id == color.Id && x.Size.Id == size.Id; })
+                        .toArray();
+                }
+                if (color) {
+                    return AQ(inventory)
+                        .where(function(x) { return x.Color.Id == color.Id; })
+                        .toArray();                    
+                }
+                if (size) {
+                    return AQ(inventory)
+                        .where(function(x) { return x.Size.Id == size.Id; })
+                        .toArray();                    
+                }
+                return inventory;
+            }
+                        
+	        self.ColorSelectorClass = function (color) {                
+	            return (color && self.SelectedCartItem().EditColor() && color.Id == self.SelectedCartItem().EditColor().Id) ? 
+                    "color-chooser selected" : 
+                    "color-chooser not-selected";
+	        }
+
+	        self.SizeSelectorClass = function (size) {
+	            return (size && self.SelectedCartItem().EditSize() && size.Id == self.SelectedCartItem().EditSize().Id) ? 
+                    "label label-info" : 
+                    "label";
+	        }
+
+	        self.ColorSelectorClick = function (color) {
+	            self.SelectedCartItem().EditColor(color);
+                if (self.SelectedCartItem().Sizes().length) {
+                    
+                }
+	        }
             
+	        self.SizeSelectorClick = function (size) {
+	            self.SelectedCartItem().EditSize(size);
+	        }
+
+            self.SelectedCartItemQuantity = ko.computed(function() {
+//	        self.GenerateQuantityOptions = function (inventoryItem) {
+//	            inventoryItem.QuantityOptions.removeAll();
+//	            for (var quantity = 1; quantity <= inventoryItem.ComputedAvailable(); quantity++) {
+//	                inventoryItem.QuantityOptions.push(quantity);
+//	            }
+//	        }
+            });
+
 	        self.CartItemCancel = function () {
 	            self.SelectedCartItem(null);
 	        }

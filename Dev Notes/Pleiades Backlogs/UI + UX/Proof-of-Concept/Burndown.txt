@@ -704,3 +704,6 @@ Two flows:
 * Clearing technical debts
 * More intensive work on Cart
 
+3/19 2.0 Hours
+--------------
+* Near completion of the Cart Editor
