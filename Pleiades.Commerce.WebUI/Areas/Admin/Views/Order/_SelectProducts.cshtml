@@ -1,0 +1,305 @@
+﻿    <!-- List Model Functions -->
+<script type="text/javascript">
+    var AddListFunctions = function (model) {
+        var self = model;
+        self.BrandArray = ko.observableArray();
+        self.CategoryArray = ko.observableArray();
+
+        self.RetrieveCategoriesList = function (callback) {
+            flow.exec(
+                function () {
+                    self.Service.AjaxGet("/Admin/Product/Categories", this);
+                },
+                function (data) {
+                    self.CategoryArray.removeAll();
+                    self.CategoryArray.push({ value: null, text: "(Select a Category)" });
+
+                    var addCategory = function (category, indent) {
+                        self.CategoryArray.push({ value: category.Id, text: indent + category.Name });
+                        $.each(category.Categories, function (index, elem) { addCategory(elem, indent + '....'); });
+                    }
+                    $.each(data, function (index, elem) { addCategory(elem, ''); });
+                    if (callback) {
+                        callback();
+                    }
+                }
+            );
+        }
+
+        self.RetrieveBrandsList = function (callback) {
+            flow.exec(
+                function () {
+                    self.Service.AjaxGet("/Admin/Product/Brands", this);
+                },
+                function (data) {
+                    self.BrandArray.removeAll();
+                    self.BrandArray.push({ value: null, text: "(Select a Brand)" });
+
+                    $.each(data, function (index, elem) {
+                        self.BrandArray.push({ value: elem.Id, text: elem.Name });
+                    });
+
+                    if (callback) {
+                        callback();
+                    }
+                }
+            );
+        }
+    }
+</script>
+<!-- Search Functions -->   
+<script type="text/javascript">
+	var AddSearchFunctions = function (model) {
+	    self = model;
+
+	    self.SearchData = ko.observableArray();
+	    self.QuantityArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+	    self.CartItems = ko.observableArray();
+
+	    self.NumberOfCartItems = ko.computed(function () {
+	        var quantity = 0;
+	        $.each(self.CartItems(), function (index, elem) {
+	            quantity = quantity + elem.Quantity();
+	        });
+	        return quantity;
+	    });
+
+	    self.ViewCart = function () {
+	        if (self.CartItems().length == 0) {
+	            self.ShowModal("Notification", "The Shopping Cart is Empty", "Add Items to the Order");
+	        } else {
+	            $("btn-view-cart").hide();
+	            $.each(self.SearchData(), function (index, elem) {
+	                elem.ExpandInventory(false);
+	                elem.Inventory.removeAll();
+	            });
+	            self.GlideRight("ReviewProducts");
+	        }
+	    }
+
+	    self.SearchClick = function (callback) {
+	        flow.exec(
+                function () {
+                    var brandId = $("#SearchBrand").val();
+                    var categoryId = $("#SearchCategory").val();
+                    var searchText = $("#SearchText").val();
+                    self.Service.AjaxGet("/Admin/Product/Search" +
+                        "?brandId=" + brandId + "&categoryId=" + categoryId + "&searchText=" + searchText, this);
+                },
+                function (data) {
+                    $.each(data, function (index, elem) {
+                        elem.ExpandInventory = ko.observable(false);
+                        elem.Inventory = ko.observableArray([]);
+                    });
+                    self.SearchData(data);
+                    if (callback) {
+                        callback();
+                    }
+                }
+            );
+	    }
+
+	    self.CartItemBySkuCode = function (skucode) {
+	        return self.CartItems().firstOrNull(function (x) { return x.Sku().SkuCode == skucode; });
+	    };
+
+	    self.AddToCart = function (inventoryItem, product) {
+	        if (!inventoryItem.SelectedQuantity()) {
+	            return;
+	        }
+
+	        if (self.CartItems().length == 20) {
+	            self.ShowModal("Notification", "The Shopping Cart is Full", "You can only add 20 distinct Skus per Order");
+	        }
+
+	        var itemInCart = self.CartItemBySkuCode(inventoryItem.SkuCode);
+	        if (itemInCart) {
+	            if (itemInCart.Quantity() + inventoryItem.SelectedQuantity() > inventoryItem.Available) {
+	                self.ShowModal("Notification", "Stock Availability", "Adding are only " + inventoryItem.Available + " of that item available for purchase");
+	                return;
+	            }
+
+	            itemInCart.Quantity(itemInCart.Quantity() + inventoryItem.SelectedQuantity());
+	            self.GenerateQuantityOptions(inventoryItem);
+	        } else {
+	            if (self.CartItems.length == 100) {
+	                self.ShowModal("Notification", "Maximum Number of Distinct Items", "You can only add 99 of the same Sku per Order");
+	                return;
+	            }
+
+	            var cartItem = {
+	                Quantity: ko.observable(inventoryItem.SelectedQuantity()),
+	                Sku: ko.observable(inventoryItem),
+	                Product: product
+	            };
+	            self.CartItems.push(cartItem);
+	            self.GenerateQuantityOptions(inventoryItem);
+	        }
+
+	        $("#AddFeedback").show();
+	        $("#AddFeedback").fadeOut({ duration: 1000 });
+	        inventoryItem.SelectedQuantity(null);
+	    }
+
+	    self.ShowInventory = function (data) {
+	        flow.exec(
+                function () {
+                    self.Service.AjaxGet("/Admin/Product/Inventory/" + data.Id, this);
+                },
+                function (inventory) {
+                    data.ExpandInventory(true);
+
+                    $.each(inventory, function (index, inventoryItem) {
+                        inventoryItem.SelectedQuantity = ko.observable(0);
+                        inventoryItem.ComputedAvailable = ko.computed(
+                            function () {
+                                var cartItem = self.CartItemBySkuCode(inventoryItem.SkuCode);
+                                if (cartItem) {
+                                    return inventoryItem.Available - cartItem.Quantity();
+                                } else {
+                                    return inventoryItem.Available;
+                                }
+                            }
+                        );
+                        inventoryItem.QuantityOptions = ko.observableArray();
+                        self.GenerateQuantityOptions(inventoryItem);
+                        data.Inventory.push(inventoryItem);
+                    });
+                }
+            );
+	    }
+
+	    self.GenerateQuantityOptions = function (inventoryItem) {
+	        inventoryItem.QuantityOptions.removeAll();
+	        for (var quantity = 1; quantity <= inventoryItem.ComputedAvailable(); quantity++) {
+	            inventoryItem.QuantityOptions.push(quantity);
+	        }
+	    }
+
+	    self.HideInventory = function (data) {
+	        data.ExpandInventory(false);
+	        data.Inventory.removeAll();
+	    }
+	}
+</script>    
+<!-- KNOCKOUT TEMPLATES - Select Products -->
+<script type="text/html" id="Top-Workspace-SelectProducts">
+    <div class="workspace-heading" style="height:125px;">
+		<div id="heading" class="container">
+            <div class="row">
+				<div class="span7">
+					<h1>Create Order &gt; Add Items</h1>
+				</div>
+                <div class="span2" style="margin-top:20px; text-align:right;">
+                    <div id="AddFeedback" style="display:none;">
+                        <span class="label label-info"> <i class="icon-star icon-white"></i>Item Added! &nbsp;</span>
+                    </div>
+                </div>
+				<div class="span3" style="margin-top:15px; text-align:right;">
+					<a id="btn-view-cart" class="btn btn-primary" style="width:190px;" data-bind="click: $root.ViewCart">
+                        <i class="icon-shopping-cart icon-white"></i> View Cart (<span data-bind="text: $root.NumberOfCartItems"></span> Items) &nbsp;
+                        <i class="icon-arrow-right icon-white"></i></a>
+				</div>
+			</div>
+
+            <div style="height:20px;"></div>
+                
+            <div class="row">
+				<div class="span3">
+                    <select id="SearchCategory" data-bind="foreach: $data.CategoryArray">
+                        <option data-bind="value: $data.value, text: $data.text"  />
+                    </select>
+                </div>
+				<div class="span3">
+                    <select id="SearchBrand" data-bind="foreach: $data.BrandArray">
+                        <option data-bind="value: $data.value, text: $data.text"  />
+                    </select>
+                </div>
+                <div class="span3">
+                    <input id="SearchText" type="text" class="input-large" placeholder="Description, Name, Sku..." />
+                </div>
+				<div class="span3">
+					<a class="btn btn-inverse btn-block" data-bind="click: function() { $data.SearchClick(); }">Search <i class="icon-search icon-white"></i></a>
+                </div>
+            </div>
+		</div>
+    </div>
+</script>
+<script type="text/html" id="Main-Editor-SelectProducts">
+    <div style="margin-top:20px; margin-bottom:200px;">
+        <div style="margin-top:50px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SearchData().length == 0">
+			<strong>There are no Products in your current search.  Click "Search" to run a search or click "Add New Product" to create a new one.</strong>  
+		</div>
+		    
+		<table id="parent-editor-table" class="table" data-bind="visible: $root.SearchData().length > 0">
+		<tbody data-bind="foreach: $root.SearchData()">
+			<tr>
+			<td style="vertical-align:top;">
+				<div style="width:100px">
+                	<div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+			        </div>
+                </div>
+            </td>
+
+            <td style="vertical-align:top; padding-top:20px;">
+                <div style="width:808px;">
+                    <div style="width:604px;float:left;">
+					    <p>
+                            <h4 data-bind="text: $data.Name" style="margin-bottom:5px;"></h4>
+                            <span style="margin-right:10px;" data-bind="text: 'Brand: ' + $data.BrandName"></span>
+                            <span style="margin-right:10px;" data-bind="text: 'Cost: ' + ToMoney($data.UnitPrice)"></span>
+                            <span data-bind="text: 'Price: ' + ToMoney($data.UnitPrice)"></span>
+                        </p>
+                    </div>
+
+                    <div style="width:204px;float:left; text-align:right;">
+					    <div data-bind="ifnot: $data.ExpandInventory">
+                            <a name="btn-expand-inventory" class="btn btn-white" href="#" data-bind="click: function() { $root.ShowInventory($data) }">
+                            <i class="icon-chevron-up icon-black"></i> Show Inventory</a>
+                        </div>
+
+					    <div data-bind="if: $data.ExpandInventory">
+                            <a class="btn btn-white" href="#" data-bind="click: function() { $root.HideInventory($data) }">
+                            <i class="icon-chevron-down icon-black"></i> Hide Inventory</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div name="expanded-inventory" data-bind="if: $data.ExpandInventory">
+                    <table style="width:800px;" class="skutable table-striped table-hover table-condensed">
+                    <thead>
+                        <th>Sku Code</th>
+                        <th style="text-align:right;">Reserved</th>
+                        <th style="text-align:right;">In Stock</th>
+                        <th style="text-align:right;">Available</th>
+                        <th style="text-align:right;">Quantity</th>
+                        <th style="text-align:right;">Add to Cart</th>
+                    </thead>
+                    <tbody data-bind="foreach: $data.Inventory">
+                    <tr style="height:40px;">
+                        <td style="width:200px;"><span data-bind="text: $data.SkuCode"></span></td>
+                        <td style="width:100px;"><span data-bind="text: $data.Reserved"></span></td>
+                        <td style="width:100px;"><span data-bind="text: $data.InStock"></span></td>
+                        <td style="width:100px;"><span data-bind="text: $data.ComputedAvailable"></span></td>
+                        <td style="width:150px;">
+                            <div data-bind="if: $data.QuantityOptions().length">
+                                <select name="quantity-select" style="width:125px; margin-bottom:0px;" 
+                                    data-bind='options: $data.QuantityOptions, optionsCaption: "How many...", value: $data.SelectedQuantity'>
+                                </select>
+                            </div>
+                            <div data-bind="ifnot: $data.QuantityOptions().length">
+                                <span style="margin-right:10px;">N/A</span>
+                            </div>
+                        </td>
+                        <td style="width:100px; text-align:right;"><a name="add-to-cart" href="#" data-bind="click: function() { $root.AddToCart($data, $parent); }" style="color:#333;"><i class="icon-shopping-cart icon-blue"></i> Add to Cart</a></td>
+                    </tr>
+                    </tbody>
+                    </table>
+                </div>
+			</td>
+			</tr>
+		</tbody>
+		</table>
+    </div>
+</script>	
+

@@ -12,8 +12,11 @@ Jeremy Meeting 2013/03/17
 http://designmodo.com/square/
 http://designmodo.github.com/Flat-UI/
 
+FONTS => https://news.ycombinator.com/item?id=5407499
 
 - Order Entry Flow
+
+- The ExternalResourceId boondoggle debt
 
 20130313 UPDATE
 ---------------
