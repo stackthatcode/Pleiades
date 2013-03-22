@@ -32,7 +32,7 @@
                 EditSize: ko.observable(),
                 EditSku: ko.observable(),
             };
-                
+            
 	        flow.exec(
                 function () {
                     self.CartItemCancel();
@@ -73,7 +73,7 @@
                 },
                 function (colors) {
                     selectedCartItem.Colors(colors);
-                        
+                    
                     console.log(colors);
 
                     if (cartItem.Sku().Size) {
@@ -95,6 +95,9 @@
                     selectedCartItem.EditSize(editSize);
 
                     self.UpdateCartItemFilteredSizes();
+                },
+                function () {
+                    
                 }
             );
 	    }
@@ -105,6 +108,11 @@
             var sizes = self.SelectedCartItem().Sizes();
             var filteredSizes = self.FilterSizeByColorAndAvaililty(inventory, sizes, color);
             self.SelectedCartItem().FilteredSizes(filteredSizes);
+        }
+
+        self.UpdateCartItemEditQuantity = function() {
+            var selectedCartItem = self.SelectedCartItem();
+
         }
 
         self.FilterSizeByColorAndAvaililty = function(inventory, sizes, selectedColor) {
@@ -168,6 +176,11 @@
                 return sku.ImageBundle;
             }
         };
+
+        self.CartTotalBySkuCode = function () { 
+            
+        }
+
 
 	    self.ColorSelectorClass = function (color) {                
 	        return (color && self.SelectedCartItem().EditColor() && color.Id == self.SelectedCartItem().EditColor().Id) ? 
@@ -290,7 +303,6 @@
                             </div>
 
                             <div style="width:100px; vertical-align:top; float:left; padding-top:15px; text-align:right;">
-                                <select name="quantity-select" style="width:90px; margin-bottom:0px;" data-bind='options: $root.QuantityArray, optionsCaption: "How many...", value: $data.EditQuantity'></select>                             
                             </div>
 
                             <div style="width:300px; text-align:right; float:left; padding-top:30px;">
@@ -300,25 +312,35 @@
                             </div>
                         </div>
 
-                        <div style="clear:both; width:800px;">
-                            <div data-bind="if: $root.SelectedCartItem().Colors().length > 0" style="width:800px; padding-top:20px; padding-bottom:20px;">
+                        <div style="clear:both; heigth:10px; width:800px;"></div>
+
+                        <div style="width:800px;">
+                            <div data-bind="if: $root.SelectedCartItem().Colors().length > 0" style="width:150px; float:left;">
                                 <strong>Select a Color</strong>
-                                    
-                                <a href="#">
-                                <div style="margin-top:10px;" data-bind="foreach:  $root.SelectedCartItem().Colors()">
-                                    <div data-bind="click: $root.ColorSelectorClick, attr: { 'class' : $root.ColorSelectorClass($data) }">
-                                        <img data-bind="attr: { src: BundleViewer.ImageBundleDownloadUrl({ ExternalResourceId: $data.ImageBundleExternalId }, 'thumbnail') }" />
-			                        </div>
+                                <div data-bind="foreach:  $root.SelectedCartItem().Colors()">
+                                    <div style="padding-top:10px; clear:both;">
+                                        <div style="float:left;" data-bind="click: $root.ColorSelectorClick, attr: { 'class' : $root.ColorSelectorClass($data) }">
+                                            <img data-bind="attr: { src: BundleViewer.ImageBundleDownloadUrl({ ExternalResourceId: $data.ImageBundleExternalId }, 'thumbnail') }" />
+			                            </div>
+                                        <div style="float:left; padding-top:10px; display:block;" data-bind="text: $data.Name"></div>
+                                    </div>
                                 </div>
-                                </a>
                             </div>
 
-                            <div data-bind="if: $root.SelectedCartItem().FilteredSizes().length > 0" style="width:800px; clear:both; padding-top:20px; padding-bottom:20px;">
+                            <div data-bind="if: $root.SelectedCartItem().FilteredSizes().length > 0" style="width:200px; float:left;">
                                 <strong>Select a Size</strong>
-                                    
+                                
                                 <div style="margin-top:10px;" data-bind="foreach: $root.SelectedCartItem().FilteredSizes()">
-                                    <span data-bind="click: $root.SizeSelectorClick, attr: { 'class' : $root.SizeSelectorClass($data) }, text: $data.Abbr + ' - ' + $data.Name"
-                                        class="label"></span>
+                                    <div data-bind="click: $root.SizeSelectorClick, attr: { 'class' : $root.SizeSelectorClass($data) }, text: $data.Abbr + ' - ' + $data.Name"
+                                        class="label" style="clear:both; padding:5px; margin-bottom:10px; width:150px;"></div>
+                                </div>
+                            </div>
+
+                            <div style="float:left;">
+                                <strong>Select How Many</strong>
+                                
+                                <div style="clear:both;"> 
+                                    <select name="quantity-select" style="width:120px; margin-top:10px;" data-bind='options: $root.QuantityArray, optionsCaption: "How many...", value: $data.EditQuantity'></select>                             
                                 </div>
                             </div>
                         </div>

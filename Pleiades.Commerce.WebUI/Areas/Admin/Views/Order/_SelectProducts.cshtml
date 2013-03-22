@@ -49,36 +49,36 @@
 </script>
 <!-- Search Functions -->   
 <script type="text/javascript">
-	var AddSearchFunctions = function (model) {
-	    self = model;
+    var AddSearchFunctions = function (model) {
+        self = model;
 
-	    self.SearchData = ko.observableArray();
-	    self.QuantityArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-	    self.CartItems = ko.observableArray();
+        self.SearchData = ko.observableArray();
+        self.QuantityArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        self.CartItems = ko.observableArray();
 
-	    self.NumberOfCartItems = ko.computed(function () {
-	        var quantity = 0;
-	        $.each(self.CartItems(), function (index, elem) {
-	            quantity = quantity + elem.Quantity();
-	        });
-	        return quantity;
-	    });
+        self.NumberOfCartItems = ko.computed(function () {
+            var quantity = 0;
+            $.each(self.CartItems(), function (index, elem) {
+                quantity = quantity + elem.Quantity();
+            });
+            return quantity;
+        });
 
-	    self.ViewCart = function () {
-	        if (self.CartItems().length == 0) {
-	            self.ShowModal("Notification", "The Shopping Cart is Empty", "Add Items to the Order");
-	        } else {
-	            $("btn-view-cart").hide();
-	            $.each(self.SearchData(), function (index, elem) {
-	                elem.ExpandInventory(false);
-	                elem.Inventory.removeAll();
-	            });
-	            self.GlideRight("ReviewProducts");
-	        }
-	    }
+        self.ViewCart = function () {
+            if (self.CartItems().length == 0) {
+                self.ShowModal("Notification", "The Shopping Cart is Empty", "Add Items to the Order");
+            } else {
+                $("btn-view-cart").hide();
+                $.each(self.SearchData(), function (index, elem) {
+                    elem.ExpandInventory(false);
+                    elem.Inventory.removeAll();
+                });
+                self.GlideRight("ReviewProducts");
+            }
+        }
 
-	    self.SearchClick = function (callback) {
-	        flow.exec(
+        self.SearchClick = function (callback) {
+            flow.exec(
                 function () {
                     var brandId = $("#SearchBrand").val();
                     var categoryId = $("#SearchCategory").val();
@@ -97,52 +97,59 @@
                     }
                 }
             );
-	    }
+        }
 
-	    self.CartItemBySkuCode = function (skucode) {
-	        return self.CartItems().firstOrNull(function (x) { return x.Sku().SkuCode == skucode; });
-	    };
+        self.CartItemBySkuCode = function (skucode) {
+            return self.CartItems().firstOrNull(function (x) { return x.Sku().SkuCode == skucode; });
+        };
 
-	    self.AddToCart = function (inventoryItem, product) {
-	        if (!inventoryItem.SelectedQuantity()) {
-	            return;
-	        }
+        self.CartTotalBySkuCode = function (skucode) {
+            return AQ(self.CartItems())
+                .where(function (x) { return x.Sku().SkuCode == skucode; })
+                .sum(function (x) { return x.Quantity(); })
+                .toArray();
+        }
 
-	        if (self.CartItems().length == 20) {
-	            self.ShowModal("Notification", "The Shopping Cart is Full", "You can only add 20 distinct Skus per Order");
-	        }
+        self.AddToCart = function (inventoryItem, product) {
+            if (!inventoryItem.SelectedQuantity()) {
+                return;
+            }
 
-	        var itemInCart = self.CartItemBySkuCode(inventoryItem.SkuCode);
-	        if (itemInCart) {
-	            if (itemInCart.Quantity() + inventoryItem.SelectedQuantity() > inventoryItem.Available) {
-	                self.ShowModal("Notification", "Stock Availability", "Adding are only " + inventoryItem.Available + " of that item available for purchase");
-	                return;
-	            }
+            if (self.CartItems().length == 20) {
+                self.ShowModal("Notification", "The Shopping Cart is Full", "You can only add 20 distinct Skus per Order");
+            }
 
-	            itemInCart.Quantity(itemInCart.Quantity() + inventoryItem.SelectedQuantity());
-	            self.GenerateQuantityOptions(inventoryItem);
-	        } else {
-	            if (self.CartItems.length == 100) {
-	                self.ShowModal("Notification", "Maximum Number of Distinct Items", "You can only add 99 of the same Sku per Order");
-	                return;
-	            }
+            var itemInCart = self.CartItemBySkuCode(inventoryItem.SkuCode);
+            if (itemInCart) {
+                if (itemInCart.Quantity() + inventoryItem.SelectedQuantity() > inventoryItem.Available) {
+                    self.ShowModal("Notification", "Stock Availability", "Adding are only " + inventoryItem.Available + " of that item available for purchase");
+                    return;
+                }
 
-	            var cartItem = {
-	                Quantity: ko.observable(inventoryItem.SelectedQuantity()),
-	                Sku: ko.observable(inventoryItem),
-	                Product: product
-	            };
-	            self.CartItems.push(cartItem);
-	            self.GenerateQuantityOptions(inventoryItem);
-	        }
+                itemInCart.Quantity(itemInCart.Quantity() + inventoryItem.SelectedQuantity());
+                self.GenerateQuantityOptions(inventoryItem);
+            } else {
+                if (self.CartItems.length == 100) {
+                    self.ShowModal("Notification", "Maximum Number of Distinct Items", "You can only add 99 of the same Sku per Order");
+                    return;
+                }
 
-	        $("#AddFeedback").show();
-	        $("#AddFeedback").fadeOut({ duration: 1000 });
-	        inventoryItem.SelectedQuantity(null);
-	    }
+                var cartItem = {
+                    Quantity: ko.observable(inventoryItem.SelectedQuantity()),
+                    Sku: ko.observable(inventoryItem),
+                    Product: product
+                };
+                self.CartItems.push(cartItem);
+                self.GenerateQuantityOptions(inventoryItem);
+            }
 
-	    self.ShowInventory = function (data) {
-	        flow.exec(
+            $("#AddFeedback").show();
+            $("#AddFeedback").fadeOut({ duration: 1000 });
+            inventoryItem.SelectedQuantity(null);
+        }
+
+        self.ShowInventory = function (data) {
+            flow.exec(
                 function () {
                     self.Service.AjaxGet("/Admin/Product/Inventory/" + data.Id, this);
                 },
@@ -167,20 +174,20 @@
                     });
                 }
             );
-	    }
+        }
 
-	    self.GenerateQuantityOptions = function (inventoryItem) {
-	        inventoryItem.QuantityOptions.removeAll();
-	        for (var quantity = 1; quantity <= inventoryItem.ComputedAvailable(); quantity++) {
-	            inventoryItem.QuantityOptions.push(quantity);
-	        }
-	    }
+        self.GenerateQuantityOptions = function (inventoryItem) {
+            inventoryItem.QuantityOptions.removeAll();
+            for (var quantity = 1; quantity <= inventoryItem.ComputedAvailable(); quantity++) {
+                inventoryItem.QuantityOptions.push(quantity);
+            }
+        }
 
-	    self.HideInventory = function (data) {
-	        data.ExpandInventory(false);
-	        data.Inventory.removeAll();
-	    }
-	}
+        self.HideInventory = function (data) {
+            data.ExpandInventory(false);
+            data.Inventory.removeAll();
+        }
+    }
 </script>    
 <!-- KNOCKOUT TEMPLATES - Select Products -->
 <script type="text/html" id="Top-Workspace-SelectProducts">

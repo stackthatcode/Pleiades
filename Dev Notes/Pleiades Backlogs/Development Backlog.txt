@@ -54,44 +54,39 @@ var selectedCartItem = {
 				
 
 
-
-- Update the Cart with Inventory Available and CartItem Quantity javascript function => TODO
-- Notify - "Hey, we had to remove some items from your Cart, as Inventory is changing.  Hurry up and check-out!" => TODO
-- Quantity to add should reflect Available - QuantityInCartBySku => TODO
-- Write a separate QuantityInCartBySku function => TODO
-
-- Review Step - Copy the SKU to an Edit State => TODO
 - Update the SKU when a valid Color and Size combo is selected => TODO
-- Determine how to filter the Sizes / Colors based on Available Inventory => TODO
+
+
+- Update the Cart with Inventory Available and CartItem Quantity javascript function => DONE
+- Notify - "Hey, we had to remove some items from your Cart, as Inventory is changing.  Hurry up and check-out!" => DONE
+- Review Step - Copy the SKU to an Edit State => DONE
+- Determine how to filter the Sizes / Colors based on Available Inventory => DONE
+- Isolate the Current Sku Code => DONE
+- Isolate Current Color and Size => DONE
+* WHEN: I click on Expand Item, and when I Edit the Cart => DONE
+* WHAT: If Available < my Quantity, notify and adjust Quantity. If Available = 0, remove and notify => DONE
+- Current Selected Color => DONE
+- Current Selected Size => DONE
+- Determine when to show Size/Color, when not => DONE
+- Aligned Columns => DONE
+- Quantity to add should reflect Available - QuantityInCartBySku => DONE
+- Write a separate QuantityInCartBySku function => DONE
+- ALSO: when doing Inventory Item check, adjust Quantities based on CURRENT Availability, and show a notification when things have adjusted => DONE
 
 
 Concerns
 --------
-- Isolate the Current Sku Code => DONE
-- Isolate Current Color and Size => DONE
-
-- Inventory Check
-* WHEN: I click on Expand Item, and when I Edit the Cart => TODO
-* WHAT: If Available < my Quantity, notify and adjust Quantity. If Available = 0, remove and notify
-
 - When selected, check the Available Quantity and maybe render (Out-of-Stock)
-- Current Selected Color => TODO
-- Current Selected Size => TODO
-- Determine when to show Size/Color, when not => TODO
-- Aligned Columns => TODO
-
-
-- ALSO: when doing Inventory Item check, adjust Quantities based on CURRENT Availability, and show a notification when things have adjusted => TODO
 
 * Create Shopping Cart Screen => IN PROGRESS
 - Cart Screen spec
 	* Top Header
 		* Next Button (to Shipping) => TODO
 	* Body Grid (each row)
-		* Image => IN PROGRESS
-		* Color => IN PROGRESS
-		* Size => IN PROGRESS
-		* Qty => IN PROGRESS
+		* Image => DONE
+		* Color => DONE
+		* Size => DONE
+		* Qty => DONE
 		* Edit Button => IN PROGRESS		
 	* Body Grid Edit State
 		* (SAME FIELDS)
@@ -109,6 +104,7 @@ Concerns
 - THE GREAT FLOW - Tieing it All Together (!!!)
 * What happens if a Product/Color/Size/Image is Deleted?  What happens to Carts?  What happens to Orders?
 * Why are there Product Color orphans in the database? => TODO
+
 
 * On the StoreFront "Wrong Size or Color? Click Here" - and Navigate to Product => TODO
 * Enter Email Address + Shipping Info + Shipping method => TODO
