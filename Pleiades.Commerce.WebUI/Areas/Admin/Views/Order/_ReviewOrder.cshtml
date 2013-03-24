@@ -4,35 +4,51 @@
 	    var self = model;
 
 	    self.SelectedCartItem = ko.observable(null);
-
-	    self.FindInventory = function (color, size) {
-	        var item = self.SelectedAllInventory.firstOrNull(function (elem) {
-	            console.log(elem.Color);
-	            console.log(elem.Size);
-	        });
-	    }
-
+        
 	    self.BackToProductSearch = function () {
 	        self.CartItemCancel();
 	        $("[name='glideToSearch']").hide();
 	        self.GlideLeft("SelectProducts");
 	    }
 
-	    self.CartItemClick = function (cartItem) {
+	    self.SelectedCartItemFactory = function (cartItem) {
             var selectedCartItem = {
                 CartItem: ko.observable(cartItem),
                 Colors: ko.observableArray(),
                 Sizes: ko.observableArray(),
                 FilteredSizes: ko.observableArray(),
                 Inventory: ko.observableArray(),
-                Image: ko.computed( self.SelectedCartItemImageBundle ),
-
-                EditQuantity: ko.observable(),
+                Quantity: ko.observableArray(),
+	            
                 EditColor: ko.observable(),
                 EditSize: ko.observable(),
                 EditSku: ko.observable(),
+                EditQuantity: ko.observable(),
             };
+
+            selectedCartItem.Image = ko.computed(
+                function() { 
+                    if (selectedCartItem.Colors()) {
+                        if (!selectedCartItem.EditColor()) {
+                            return null;
+                        } else {
+                            var sku = self.FilterSkuByColorAndSize(
+                                selectedCartItem.Inventory(), selectedCartItem.EditColor(), null)[0];
+                    
+                            return sku.ImageBundle;
+                        }
+                    } else {
+                        var sku = selectedCartItem.Inventory()[0];
+                        return sku.ImageBundle;
+                    }
+                });
             
+            return selectedCartItem;
+        }
+
+	    self.CartItemClick = function (cartItem) {
+            var selectedCartItem = self.CartItemFactory(cartItem);
+                    
 	        flow.exec(
                 function () {
                     self.CartItemCancel();
@@ -46,7 +62,7 @@
                         
                     console.log(inventory);
 
-                    // *** Real-time Cart Corrections ***
+                    // *** Real-time Inventory Corrections *** //
                     if (editSku == null || editSku.Available == 0) {
                         self.ShowModal("Notification",  "Item Out-Of-Stock", "Item: " + editSku.SkuCode + " is no longer in stock", 
                             function() {
@@ -54,13 +70,15 @@
                             });
                         return;
                     }
+
+                    // TODO: gotta fix this
                     if (editSku.Available < cartItem.Quantity()) {
                         cartItem.Quantity(editSku.Available);
                         self.ShowModal("Notification",  
                             "Reduction in Stock", "Due to changes in available stock items were removed from Cart", this);
                         return;
                     }
-                        
+
                     selectedCartItem.EditSku(editSku);
                     selectedCartItem.EditQuantity = ko.observable(cartItem.Quantity());
                     self.SelectedCartItem(selectedCartItem);
@@ -92,9 +110,10 @@
                         function(x) { return x.Id == cartItem.Sku().Color.Id; }
                     );
                     selectedCartItem.EditColor(editColor);
+                    self.UpdateCartItemFilteredSizes();
+
                     selectedCartItem.EditSize(editSize);
 
-                    self.UpdateCartItemFilteredSizes();
                 },
                 function () {
                     
@@ -111,9 +130,37 @@
         }
 
         self.UpdateCartItemEditQuantity = function() {
-            var selectedCartItem = self.SelectedCartItem();
+//            if (!self.SelectedCartItem().EditSku()) {
+//                self.SelectedCartItem().Quantity([]);
+//            } else { 
+//                self.Available
+//            }
 
+//            if (selected.Colors && selected.Sizes) 
+//            {
+//                if (!selected.EditSize()) {
+//                    return ko.observable([]);
+//                } else {
+//                    
+//                }
+//            }
+//            if (selected.Colors) {
+//            }
+//            if (selected.Sizes) {
+//            }
+
+//            var sku = self.SelectedCartItem().EditSku()            
         }
+
+        
+        self.SelectedCartItemQuantity = ko.computed(function() {
+//	        self.GenerateQuantityOptions = function (inventoryItem) {
+//	            inventoryItem.QuantityOptions.removeAll();
+//	            for (var quantity = 1; quantity <= inventoryItem.ComputedAvailable(); quantity++) {
+//	                inventoryItem.QuantityOptions.push(quantity);
+//	            }
+//	        }
+        });
 
         self.FilterSizeByColorAndAvaililty = function(inventory, sizes, selectedColor) {
             var output = [];
@@ -144,44 +191,7 @@
             }
             return inventory;
         }
-
-            
-        self.SelectedCartItemQuantity = ko.computed(function() {
-//	        self.GenerateQuantityOptions = function (inventoryItem) {
-//	            inventoryItem.QuantityOptions.removeAll();
-//	            for (var quantity = 1; quantity <= inventoryItem.ComputedAvailable(); quantity++) {
-//	                inventoryItem.QuantityOptions.push(quantity);
-//	            }
-//	        }
-        });
-
-        self.SelectedCartItemImageBundle = function() { 
-            if (!self.SelectedCartItem()) {
-                return null;
-            }
-            var selectedCartItem = self.SelectedCartItem();
-            console.log(selectedCartItem);
-
-            if (selectedCartItem.Colors()) {
-                if (!selectedCartItem.EditColor()) {
-                    return null;
-                } else {
-                    var sku = self.FilterSkuByColorAndSize(
-                        selectedCartItem.Inventory(), selectedCartItem.EditColor(), null)[0];
-                    
-                    return sku.ImageBundle;
-                }
-            } else {
-                var sku = selectedCartItem.Inventory()[0];
-                return sku.ImageBundle;
-            }
-        };
-
-        self.CartTotalBySkuCode = function () { 
-            
-        }
-
-
+        
 	    self.ColorSelectorClass = function (color) {                
 	        return (color && self.SelectedCartItem().EditColor() && color.Id == self.SelectedCartItem().EditColor().Id) ? 
                 "color-chooser selected" : 
@@ -200,7 +210,7 @@
                 self.UpdateCartItemFilteredSizes();
             }
 	    }
-            
+
 	    self.SizeSelectorClick = function (size) {
 	        self.SelectedCartItem().EditSize(size);
 	    }

@@ -3,106 +3,10 @@
 @section _Scripts {   
 	@Html.Javascript("/aquery/aQuery-1.0-min.js")
     @Html.Partial("_ImageBundleViewer")   
+    @Html.Partial("_EndlessGlider") 
     @Html.Partial("_SelectProducts") 
-    @Html.Partial("_ReviewOrder") 
+    <!--@Html.Partial("_ReviewOrder")-->
 
-    <!-- Endless Glider -->
-    <script type="text/javascript">
-        var EndlessGlider = function (container, divId1, divId2) {
-            var self = this;
-            
-            self.WorkspaceTemplate = ko.observable(null);
-            self.EditorTemplate1 = ko.observable(null);
-            self.EditorTemplate2 = ko.observable(null);
-            self.ActiveEditor = null;
-
-            self.Init = function (workspaceTemplate, editorTemplate) {
-                self.ActiveEditor = 1;
-                self.WorkspaceTemplate(workspaceTemplate);
-                self.EditorTemplate1(editorTemplate);
-                $(divId2).hide();
-            }
-
-            self.GlideToRight = function (workspaceTemplate, editorTemplate) {
-                self.Glide(workspaceTemplate, editorTemplate, "RIGHT");
-            }
-
-            self.GlideToLeft = function (workspaceTemplate, editorTemplate) {
-                self.Glide(workspaceTemplate, editorTemplate, "LEFT");
-            }
-
-            self.Glide = function (workspaceTemplate, editorTemplate, direction, callback) {
-                var prevDiv, nextDiv, nextEditorTemplate;
-                if (self.ActiveEditor == 1) {
-                    prevDiv = divId1;
-                    nextDiv = divId2;
-                    nextEditorTemplate = self.EditorTemplate2;
-                } else {
-                    prevDiv = divId2;
-                    nextDiv = divId1;
-                    nextEditorTemplate = self.EditorTemplate1;
-                }
-
-                var glideLeftFunction = function (callback) {
-                    $(nextDiv).css({ display: "block", left: "-940px", top: "0px"  });
-		
-	                $(prevDiv).animate({ 
-                            left: "+=940" 
-		                }, 
-		                { 	
-			                complete: function() { $(prevDiv).css({ display: "none" }); },
-			                duration: 250, 
-		                }
-	                );
-	                $(nextDiv).animate({ 	
-			                left: "+=940" 
-		                }, 
-		                { 	
-			                complete:callback,
-			                duration: 250,
-		                }
-	                );
-                }
-                
-                var glideRightFunction = function (callback) {
-                    $(nextDiv).css({ display: "block", left: "+940px", top: "0px"  });
-		
-	                $(prevDiv).animate({ 
-                            left: "-=940" 
-		                }, 
-		                { 	
-			                complete: function() { $(prevDiv).css({ display: "none" }); },
-			                duration: 250, 
-		                }
-	                );
-	                $(nextDiv).animate({ 	
-			                left: "-=940" 
-		                }, 
-		                {
-			                complete: callback,
-			                duration: 250,
-		                }
-	                );
-                }
-
-                flow.exec(
-                    function () {
-                        nextEditorTemplate(editorTemplate);
-                        if (direction == "LEFT") {
-                            glideLeftFunction(this);
-                        } else {
-                            glideRightFunction(this);
-                        }
-                    },
-                    function () {
-                        self.ActiveEditor = self.ActiveEditor == 1 ? 2 : 1;
-
-                        self.WorkspaceTemplate(workspaceTemplate);
-                    }
-                );
-            }
-        }
-    </script>    
     <!-- View Model Functions -->
 	<script type="text/javascript">
 	    var CreateOrderViewModel = function () {
@@ -156,7 +60,7 @@
 	        var model = new CreateOrderViewModel();
 	        AddListFunctions(model);
 	        AddSearchFunctions(model);
-	        AddReviewProductsFunctions(model);
+	        //AddReviewProductsFunctions(model);
 	        ko.applyBindings(model);
 
 	        flow.exec(
@@ -168,6 +72,7 @@
                 }
             );
 
+            // ### TESTING SCRIPT
 	        window.Automation = function () {
 	            flow.exec(
                     function () {

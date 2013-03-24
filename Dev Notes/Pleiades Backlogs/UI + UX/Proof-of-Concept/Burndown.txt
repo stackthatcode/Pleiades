@@ -707,3 +707,30 @@ Two flows:
 3/19 2.0 Hours
 --------------
 * Near completion of the Cart Editor
+
+3/20 1.5 Hours
+--------------
+* Continuation of Cart Editor
+
+cartItem {
+	Sku ko.observable
+	Quantity ko.observable
+}
+
+	var selectedCartItem = {
+		CartItem: ko.observable(cartItem),
+		Colors: ko.observableArray(),
+		Sizes: ko.observableArray(),
+		Inventory: ko.observableArray(),
+
+		EditQuantity: ko.observable(),
+		EditColor: ko.observable(),
+		EditSize: ko.observable(),
+		EditSku: ko.observable(),
+	};
+
+3/21 2.5 Hours
+--------------
+* Continuation of Cart Editor	
+
+
