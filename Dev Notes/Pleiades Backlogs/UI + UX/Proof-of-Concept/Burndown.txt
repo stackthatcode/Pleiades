@@ -712,25 +712,15 @@ Two flows:
 --------------
 * Continuation of Cart Editor
 
-cartItem {
-	Sku ko.observable
-	Quantity ko.observable
-}
-
-	var selectedCartItem = {
-		CartItem: ko.observable(cartItem),
-		Colors: ko.observableArray(),
-		Sizes: ko.observableArray(),
-		Inventory: ko.observableArray(),
-
-		EditQuantity: ko.observable(),
-		EditColor: ko.observable(),
-		EditSize: ko.observable(),
-		EditSku: ko.observable(),
-	};
-
 3/21 2.5 Hours
 --------------
 * Continuation of Cart Editor	
 
+3/23 1.0 Hours
+--------------
+More hacking
+
+3/24 2.0 Hours
+--------------
+* Cleared a massive technical debt I was incurring on the ShoppingCart
 

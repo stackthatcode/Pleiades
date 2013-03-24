@@ -1,6 +1,7 @@
-﻿    <!-- List Model Functions -->
+﻿<!-- List Model Functions -->
 <script type="text/javascript">
-    var AddListFunctions = function (model) {
+    var PushMkt = PushMkt || {};
+    PushMkt.AddListFunctions = function (model) {
         var self = model;
         self.BrandArray = ko.observableArray();
         self.CategoryArray = ko.observableArray();
@@ -12,10 +13,16 @@
                 },
                 function (data) {
                     self.CategoryArray.removeAll();
-                    self.CategoryArray.push({ value: null, text: "(Select a Category)" });
+                    self.CategoryArray.push({
+                        value: null,
+                        text: "(Select a Category)" 
+                    });
 
                     var addCategory = function (category, indent) {
-                        self.CategoryArray.push({ value: category.Id, text: indent + category.Name });
+                        self.CategoryArray.push({
+                            value: category.Id,
+                            text: indent + category.Name 
+                        });
                         $.each(category.Categories, function (index, elem) { addCategory(elem, indent + '....'); });
                     }
                     $.each(data, function (index, elem) { addCategory(elem, ''); });
@@ -47,50 +54,23 @@
         }
     }
 
-    var CartFactory = function () {
-        var cart = {
-            Items: ko.observableArray()
-        };
-
-        cart.NumberOfDistinctItems = ko.computed(function () {
-            return cart.Items().length;
-        });
-
-        cart.TotalQuantity = ko.computed(function () {
-            return AQ(cart.Items()).sum(function (x) { return x.Quantity; });
-        });
-
-        cart.QuantityBySkuCode = function (skucode) {
-            return AQ(cart.Items())
-                .where(function (x) { return x.Sku.SkuCode == skucode; })
-                .sum(function (x) { return x.Quanity; });
-        }
-
-        cart.ItemBySkuCode = function (skucode) {
-            return AQ(cart.Items())
-                .firstOrDefault(function (x) { return x.Sku().SkuCode == skucode; });
-        };
-
-        return cart;
-    }
-
-    var AddSearchFunctions = function (model) {
+    PushMkt.AddSearchFunctions = function (model) {
         self = model;
-
         self.SearchData = ko.observableArray();
-        self.Cart = ko.observable(CartFactory());
+        self.Cart = ko.observable(new PushMkt.Cart());
 
         self.ViewCart = function () {
-            if (self.NumberOfRows() == 0) {
+            if (self.Cart().NumberOfDistinctItems() == 0) {
                 self.ShowModal("Notification", "The Shopping Cart is Empty", "Add Items to the Order");
-            } else {
-                $("btn-view-cart").hide();
-                $.each(self.SearchData(), function (index, elem) {
-                    elem.ExpandInventory(false);
-                    elem.Inventory.removeAll();
-                });
-                self.GlideRight("ReviewProducts");
-            }
+                return;
+            };
+            
+            $("btn-view-cart").hide();
+            $.each(self.SearchData(), function (index, elem) {
+                elem.ExpandInventory(false);
+                elem.Inventory.removeAll();
+            });
+            self.GlideRight("ReviewProducts");
         }
 
         self.SearchClick = function (callback) {
@@ -113,43 +93,6 @@
                     }
                 }
             );
-        }
-
-        self.AddToCart = function (inventoryItem, product) {
-            var selectedQuantity = inventoryItem.SelectedQuantity();
-            var skuCode = inventoryItem.SkuCode;
-            var quantityInCart = self.Cart().QuantityBySkuCode(skuCode);
-
-            if (!selectedQuantity) {
-                return;
-            }
-            if (self.Cart().NumberOfDistinctItems() >= 20) {
-                self.ShowModal("Notification", "The Shopping Cart is Full", "You can only add 20 distinct Skus per Order");
-                return;
-            }
-            if (quantityInCart) {
-                if (quantityInCart + inventoryItem.SelectedQuantity() > inventoryItem.Available) {
-                    self.ShowModal("Notification", "Stock Availability", "Adding are only " + inventoryItem.Available + " of that item available for purchase");
-                    return;
-                }
-
-                var itemInCart = cart.ItemBySkuCode(skuCode);
-                itemInCart.Quantity(itemInCart.Quantity() + selectedQuantity);
-                inventoryItem.GenerateQuantityOptions();
-
-            } else {                
-                var newCartItem = {
-                    Quantity: ko.observable(inventoryItem.SelectedQuantity()),
-                    Sku: ko.observable(inventoryItem),
-                    Product: product
-                };
-                self.CartItems.push(newCartItem);
-                self.GenerateQuantityOptions(inventoryItem);
-            }
-
-            $("#AddFeedback").show();
-            $("#AddFeedback").fadeOut({ duration: 1000 });
-            inventoryItem.SelectedQuantity(null);
         }
 
         self.ShowInventory = function (data) {
@@ -177,6 +120,7 @@
                                 inventoryItem.QuantityOptions.push(quantity);
                             }
                         };
+                        inventoryItem.GenerateQuantityOptions();
 
                         data.Inventory.push(inventoryItem);
                     });
@@ -188,8 +132,42 @@
             data.ExpandInventory(false);
             data.Inventory.removeAll();
         }
+
+        self.AddToCart = function (inventoryItem, product) {
+            var selectedQuantity = inventoryItem.SelectedQuantity();
+            var skuCode = inventoryItem.SkuCode;
+            var quantityInCart = self.Cart().QuantityBySkuCode(skuCode);
+
+            if (!selectedQuantity) {
+                return;
+            }
+            if (self.Cart().NumberOfDistinctItems() >= 20) {
+                self.ShowModal("Notification", "The Shopping Cart is Full", "You can only add 20 distinct Skus per Order");
+                return;
+            }
+            if (quantityInCart + selectedQuantity > inventoryItem.Available) {
+                self.ShowModal("Notification",
+                        "Stock Availability", "Only " + inventoryItem.Available + " of that item available for purchase. Adjusting quantity.");
+                return;
+            }
+
+            if (quantityInCart) {                
+                var itemInCart = self.Cart().ItemBySkuCode(skuCode);
+                itemInCart.Quantity(itemInCart.Quantity() + selectedQuantity);
+
+            } else {
+                var newCartItem = new PushMkt.CartItem(product, inventoryItem, selectedQuantity);
+                self.Cart().Items.push(newCartItem);
+            }
+
+            inventoryItem.GenerateQuantityOptions();
+            inventoryItem.SelectedQuantity(null);
+
+            $("#AddFeedback").show();
+            $("#AddFeedback").fadeOut({ duration: 1000 });
+        }
     }
-</script>    
+</script>
 <!-- KNOCKOUT TEMPLATES - Select Products -->
 <script type="text/html" id="Top-Workspace-SelectProducts">
     <div class="workspace-heading" style="height:125px;">
@@ -205,7 +183,7 @@
                 </div>
 				<div class="span3" style="margin-top:15px; text-align:right;">
 					<a id="btn-view-cart" class="btn btn-primary" style="width:190px;" data-bind="click: $root.ViewCart">
-                        <i class="icon-shopping-cart icon-white"></i> View Cart (<span data-bind="text: $root.TotalQuantity"></span> Items) &nbsp;
+                        <i class="icon-shopping-cart icon-white"></i> View Cart (<span data-bind="text: $root.Cart().TotalQuantity()"></span> Items) &nbsp;
                         <i class="icon-arrow-right icon-white"></i></a>
 				</div>
 			</div>
@@ -309,5 +287,4 @@
 		</tbody>
 		</table>
     </div>
-</script>	
-
+</script>

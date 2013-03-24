@@ -47,7 +47,8 @@ var selectedCartItem = {
 	FilteredSizes: ko.observableArray(),
 	Inventory: ko.observableArray(),
 	Image: ko.computed( self.SelectedCartItemImageBundle ),
-
+	Quantity: ko.observableArray(),
+	
 	EditQuantity: ko.observable(),
 	EditColor: ko.observable(),
 	EditSize: ko.observable(),

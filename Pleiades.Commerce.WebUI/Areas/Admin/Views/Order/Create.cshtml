@@ -3,65 +3,22 @@
 @section _Scripts {   
 	@Html.Javascript("/aquery/aQuery-1.0-min.js")
     @Html.Partial("_ImageBundleViewer")   
-    @Html.Partial("_EndlessGlider") 
+    @Html.Partial("_EndlessGlider")
+    @Html.Partial("_CartFactory")    
+    @Html.Partial("_BaseViewModel") 
     @Html.Partial("_SelectProducts") 
-    <!--@Html.Partial("_ReviewOrder")-->
+    @Html.Partial("_ReviewOrder")
 
-    <!-- View Model Functions -->
-	<script type="text/javascript">
-	    var CreateOrderViewModel = function () {
-	        var self = this;
-
-	        // Service + Cross-cutting Stuff
-	        var commonUI = new CommonUI();
-	        self.Service = new AjaxService(commonUI.Error, commonUI.ShowLoading, commonUI.HideLoading);
-
-	        // Modal state + functions
-	        self.ModalViewModel = ko.observable({ Template: null, Data: null });
-
-	        self.ShowModal = function (template, header, body, callback) {
-	            self.ModalViewModel({
-	                Template: "Modal-Dialog-" + template,
-	                Data: {
-	                    Header: header,
-	                    Body: body,
-	                    OkButton: function () {
-	                        self.HideModal();
-	                        if (callback) {
-	                            callback();
-	                        }
-	                    }
-	                }
-	            });
-	            $('#modal-dialog').modal('show');
-	        };
-
-	        self.HideModal = function () {
-	            $('#modal-dialog').modal('hide');
-	        }
-
-	        // Glider functions
-	        var glider = new EndlessGlider("#gliding-container", "#glider1", "#glider2");
-	        glider.Init("Top-Workspace-SelectProducts", "Main-Editor-SelectProducts");
-	        self.EndlessGlider = glider;
-
-	        self.GlideLeft = function (template) {
-	            self.EndlessGlider.GlideToLeft("Top-Workspace-" + template, "Main-Editor-" + template);
-	        }
-
-	        self.GlideRight = function (template) {
-	            self.EndlessGlider.GlideToRight("Top-Workspace-" + template, "Main-Editor-" + template);
-	        }
-	    }
-    </script>
     <!-- document.ready() Functions -->
 	<script type="text/javascript">
+	    var tmp;
 	    $(function () {
-	        var model = new CreateOrderViewModel();
-	        AddListFunctions(model);
-	        AddSearchFunctions(model);
-	        //AddReviewProductsFunctions(model);
+	        var model = new PushMkt.CreateOrderViewModel();
+	        PushMkt.AddListFunctions(model);
+	        PushMkt.AddSearchFunctions(model);
+	        PushMkt.AddReviewProductsFunctions(model);
 	        ko.applyBindings(model);
+	        tmp = model;
 
 	        flow.exec(
                 function () {
@@ -72,7 +29,9 @@
                 }
             );
 
-            // ### TESTING SCRIPT
+	        // ### TESTING SCRIPTS ###
+	        // ### TESTING SCRIPTS ###
+	        // ### TESTING SCRIPTS ###
 	        window.Automation = function () {
 	            flow.exec(
                     function () {
@@ -161,21 +120,6 @@
         }
     </style>
 
-	<!-- KNOCKOUT TEMPLATE - Modal Dialogs -->
-	<script type="text/html" id="Modal-Dialog-Notification">
-		<div id="modal-dialog" class="modal hide fade">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h3><span data-bind="text: $data.Header"></span></h3>
-			</div>
-			<div class="modal-body">
-				<p><span data-bind="text: $data.Body"></span></p>
-			</div>
-			<div class="modal-footer">
-				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $data.OkButton"><i class="icon-ok icon-white"></i> Ok</a>
-			</div>
-		</div>		
-	</script>
 }
 
 @section _Body {
