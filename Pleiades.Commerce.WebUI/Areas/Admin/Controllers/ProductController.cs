@@ -277,12 +277,11 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         {
             if (regenerate)
             {
-                var total = this.ProductRepository.InventoryTotal(id);
-                if (total == 0)
-                {
-                    this.ProductRepository.GenerateInventory(id);
-                    this.Context.SaveChanges();
-                }
+                //var total = this.ProductRepository.InventoryTotal(id);
+                //if (total == 0)
+
+                this.ProductRepository.GenerateInventory(id);
+                this.Context.SaveChanges();
             }
 
             var inventory = this.ProductRepository.Inventory(id);

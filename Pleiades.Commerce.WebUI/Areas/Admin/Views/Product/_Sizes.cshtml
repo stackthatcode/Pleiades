@@ -1,0 +1,84 @@
+﻿
+	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR SIZES TAB -->
+    <script type="text/html" id="Child-Editor-Sizes">
+    <div style="margin-top:0px;">
+        <form>
+            <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SelectedProductSizes().length == 0">
+			    <strong>There are no Sizes for this Product.  Add a Size from the existing list.</strong>  
+		    </div>
+
+            <div id="sizes" class="sortable" data-bind="foreach: $root.SelectedProductSizes()">
+                <div class="draggable" data-bind="attr: { id: 'sorted' + $data.Id }">
+		        <table class="table table-hover" style="margin-bottom:0px;">
+		            <tbody>
+			            <tr>
+			            <td>
+				            <span class="span7">
+					            <input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
+					            <h4><span data-bind="text: $data.Name"></span></h4>
+                                <p>Abbreviation: <span data-bind="text: $data.Abbr"></span>                                
+                                - Sku Code: <span data-bind="text: $data.SkuCode"></span>
+                                </p>
+				            </span>
+                        </td>
+			            <td>
+				            <span class="span5" style="text-align:right;">
+                                <a href="#" class="btn btn-inverse disabled"><i class="icon-screenshot icon-white"></i> Drag Me!</a>
+					            <a class="btn btn-primary" style="width:70px;" href="#" 
+                                    data-bind="click: function() { $root.DeleteProductSize($data) }"><i class="icon-trash icon-white"></i> Delete</a>
+				            </span>
+			            </td>
+			            </tr>
+		            </tbody>
+		        </table>
+                </div>
+            </div>
+        </form>
+    </div>
+    </script>
+	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR SIZES - ADD SIZE SUB -->
+    <script type="text/html" id="Sub-Child-Editor-AddSizesFromList">
+        <form>
+            <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SizeReferenceData().length == 0">
+			    <strong>There are no Size Groups.  Go to Lists &gt; Sizes to add pre-defined Sizes.</strong>  
+		    </div>
+		    
+		    <table class="table table-hover" data-bind="visible: $root.SizeReferenceData().length > 0">
+		    <tbody data-bind="foreach: $root.SizeReferenceData()">
+			    <tr>
+                    <td colspan="2">
+				        <span class="span12">
+					        <input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
+					        <h4 data-bind="text: $data.Name"></h4>			    
+				        </span>
+                    </td>
+                </tr>
+                <!-- ko foreach: $data.Sizes-->
+                <tr>
+                    <td>
+				        <span class="span8" style="padding-left:40px;">
+						   <h4>&raquo; <span data-bind="text: Description"></span></h4>
+                           <span>Abbreviation:</span> <span data-bind="text: Name"></span> - 
+                           <span>Sku Code:</span> <span data-bind="text: SkuCode"></span>
+				        </span>
+                    </td>
+                    
+                    <td>
+                       <span class="span4" style="text-align:right;">					
+                        <div data-bind="if: $data.Selected() == false">
+					        <a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.SelectColor($data) }">
+                                <i class="icon-plus icon-white"></i> Select</a>
+                        </div>
+                        <div data-bind="if: $data.Selected() == true">
+                            <span class="label label-info">Selected!</span>
+					        <a class="btn btn-white" style="width:70px;" href="#" data-bind="click: function() { $root.SelectColor($data) }">
+                                <i class="icon-minus icon-black"></i> Remove</a>
+                        </div>
+				    </span>
+                    </td>
+                </tr>
+                <!-- /ko -->
+            </tbody>
+            </table>
+        </form>
+	</script>

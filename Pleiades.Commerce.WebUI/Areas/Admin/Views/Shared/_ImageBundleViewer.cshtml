@@ -28,7 +28,7 @@
         }
 
         BundleViewer.ShowLightBox = function (data) {
-            var lightboxid = '#' + LightBoxElementId(data);
+            var lightboxid = '#' + BundleViewer.LightBoxElementId(data);
             var lightboxImgId = lightboxid + " img";
 
             console.log(lightboxImgId + ' ' + $(lightboxImgId).attr("data-image"));
@@ -80,7 +80,7 @@
         <tr>
             <td style="height:75px; border:1px dotted #CCC; width:75px; text-align:center;">
                 <div data-bind="if: $data">
-                    <a href="#" data-bind="click: function(data, event) { ShowLightBox(data) }">
+                    <a href="#" data-bind="click: function(data, event) { BundleViewer.ShowLightBox(data) }">
                         <img data-bind="attr: { src: BundleViewer.ImageBundleDownloadUrl($data, 'thumbnail') }" />
                     </a>
 

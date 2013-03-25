@@ -724,3 +724,47 @@ More hacking
 --------------
 * Cleared a massive technical debt I was incurring on the ShoppingCart
 
+3/25 8.0 + Hours
+----------------
+- The ExternalResourceId boondoggle debt
+- Update the SKU when a valid Color and Size combo is selected => DONE
+- Update the Cart with Inventory Available and CartItem Quantity javascript function => DONE
+- Notify - "Hey, we had to remove some items from your Cart, as Inventory is changing.  Hurry up and check-out!" => DONE
+- Review Step - Copy the SKU to an Edit State => DONE
+- Determine how to filter the Sizes / Colors based on Available Inventory => DONE
+- Isolate the Current Sku Code => DONE
+- Isolate Current Color and Size => DONE
+* WHEN: I click on Expand Item, and when I Edit the Cart => DONE
+* WHAT: If Available < my Quantity, notify and adjust Quantity. If Available = 0, remove and notify => DONE
+- Current Selected Color => DONE
+- Current Selected Size => DONE
+- Determine when to show Size/Color, when not => DONE
+- Aligned Columns => DONE
+- Quantity to add should reflect Available - QuantityInCartBySku => DONE
+- Write a separate QuantityInCartBySku function => DONE
+- ALSO: when doing Inventory Item check, adjust Quantities based on CURRENT Availability, and show a notification when things have adjusted => DONE
+- When selected, check the Available Quantity and maybe render (Out-of-Stock) =>DONE
+
+* Create Shopping Cart Screen => IN PROGRESS
+- Cart Screen spec
+	* Top Header
+		* Next Button (to Shipping) => DONE
+	* Body Grid (each row)
+		* Image => DONE
+		* Color => DONE
+		* Size => DONE
+		* Qty => DONE
+		* Edit Button => IN PROGRESS		
+	* Body Grid Edit State
+		* (SAME FIELDS)
+		* Quantity Drop Down
+		* Save Button
+		* Cancel Button =>  DONE
+
+- On Edit CartItem
+* EditCartItem => DONE
+* When I submit my Order, the Sku Image literally gets COPIED and tied to the Order Line => DONE
+- Product - Add In-Stock flag => DONE
+
+
+

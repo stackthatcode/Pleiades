@@ -14,9 +14,10 @@
         }
 
         self.CartItemClick = function (cartItem) {
+            console.log(cartItem);
+
             var selectedCartItem = new PushMkt.SelectedCartItem(cartItem, self.Cart());
             var currentSku = cartItem.Sku();
-            self.Cart().ConsolidateBySkuCode(currentSku.SkuCode);
 
             flow.exec(
                 function () {
@@ -26,13 +27,14 @@
                 function (inventory) {
                     selectedCartItem.Inventory(inventory);
                     var quantityInCart = self.Cart().QuantityBySkuCode(currentSku.SkuCode);
-                    var editSku = AQ(inventory).firstOrDefault(function (x) { return x.SkuCode == currentSku.SkuCode; });
+                    var editSku = AQ(inventory)
+                        .firstOrDefault(function (x) { return x.SkuCode == currentSku.SkuCode; });
 
                     // refresh
                     selectedCartItem.CartItem().Sku(editSku);
-                    selectedCartItem.EditSku(editSku);
+                    selectedCartItem.Sku(editSku);
 
-                    // ### inventory corrections ### //
+                    // ### inventory corrections ### //                    
                     if (editSku == null || editSku.Available == 0) {
                         self.ShowModal(
                             "Notification",
@@ -43,6 +45,7 @@
                             });
                         return;
                     }
+
                     if (editSku.Available < quantityInCart) {
                         cartItem.Quantity(editSku.Available);
                         self.ShowModal(
@@ -55,7 +58,6 @@
                     this();
                 },
                 function () {
-                    selectedCartItem.EditQuantity(cartItem.Quantity());
                     if (selectedCartItem.HasColor()) {
                         self.Service.AjaxGet("/Admin/Product/Colors/" + cartItem.Product.Id, this);
                     } else {
@@ -73,18 +75,19 @@
                 function (sizes) {
                     selectedCartItem.Sizes(sizes);
 
-                    // Move this to the Selected Cart Item...?
-                    // TODO: test that deleted Colors work fine
                     var editSize = selectedCartItem.Sizes().firstOrNull(
-                        function (x) { return x.Id == selectedCartItem.EditSku().Size.Id; }
+                        function (x) { return x.Id == selectedCartItem.Sku().Size.Id; }
                     );
                     var editColor = selectedCartItem.Colors().firstOrNull(
-                        function (x) { return x.Id == selectedCartItem.EditSku().Color.Id; }
+                        function (x) { return x.Id == selectedCartItem.Sku().Color.Id; }
                     );
 
                     selectedCartItem.EditColor(editColor);
                     selectedCartItem.UpdateFilteredSizes();
                     selectedCartItem.EditSize(editSize);
+                    selectedCartItem.UpdateQuantityOptions();
+                    selectedCartItem.EditQuantity(cartItem.Quantity());
+
                     self.SelectedCartItem(selectedCartItem);
                 }
             );
@@ -121,10 +124,16 @@
         }
 
         self.CartItemDelete = function (data) {
-            self.CartItems.remove(data);
+            self.Cart().Items.remove(data);
         }
 
         self.CartItemOk = function () {
+            if (!self.SelectedCartItem().HasValidSelection() || !self.SelectedCartItem().EditQuantity()) {
+                $("#quantity-validation").show();
+                return;
+            }
+
+            self.SelectedCartItem().AcceptChanges();
             self.SelectedCartItem(null);
         }
 
@@ -202,11 +211,11 @@
                         <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundle: $root.SelectedCartItem().Image(), LightboxSuffixId: 'Review' } }">
 			            </div>
                     </td>
-                    <td style="width:800px;">
+                    <td style="width:800px;">                        
                         <div style="width:800px;">
                             <div style="width:250px; vertical-align:top; float:left;">
                                 <strong data-bind="text: $data.Product.Name"></strong><br/>                                    
-                                <span>Sku Code: </span> <span data-bind="text: $root.SelectedCartItem().EditSku().SkuCode"></span><br/>
+                                <span>Sku Code: </span> <span data-bind="text: $root.SelectedCartItem().Sku().SkuCode"></span><br/>
                             </div>
                             <div style="width:150px; vertical-align:top; float:left; text-align:left;">
                                 <br />
@@ -223,8 +232,13 @@
                             </div>
                         </div>
 
+
                         <div style="clear:both; heigth:10px; width:800px;"></div>
 
+                        <div id="quantity-validation" style="margin-top:20px; text-align:center; clear:both; display:none;" class="alert alert-info">
+			                    <strong>Please make all your selections before hitting OK.</strong>  
+		                </div>
+		                
                         <div style="width:800px;">
                             <div data-bind="if: $root.SelectedCartItem().HasColor()" style="width:150px; float:left;">
                                 <strong>Select a Color</strong>
@@ -239,20 +253,26 @@
                             </div>
 
                             <div data-bind="if: $root.SelectedCartItem().HasSize()" style="width:200px; float:left;">
-                                <strong>Select a Size</strong>
+                                <div data-bind="if: $root.SelectedCartItem().FilteredSizes().length">
+                                    <strong>Select a Size</strong>
                                 
-                                <div style="margin-top:10px;" data-bind="foreach: $root.SelectedCartItem().FilteredSizes()">
-                                    <div data-bind="click: $root.SizeSelectorClick, attr: { 'class' : $root.SizeSelectorClass($data) }, text: $data.Abbr + ' - ' + $data.Name"
-                                        class="label" style="clear:both; padding:5px; margin-bottom:10px; width:150px;"></div>
+                                    <div style="margin-top:10px;" data-bind="foreach: $root.SelectedCartItem().FilteredSizes()">
+                                        <div data-bind="click: $root.SizeSelectorClick, attr: { 'class' : $root.SizeSelectorClass($data) }, text: $data.Abbr + ' - ' + $data.Name"
+                                            class="label" style="clear:both; padding:5px; margin-bottom:10px; width:150px;"></div>
+                                    </div>
+                                </div>
+                                <div data-bind="ifnot: $root.SelectedCartItem().FilteredSizes().length">
+                                    <strong>Select a Size</strong>
+                                    <p style="margin-top:10px;"><i class="icon icon-ban-circle"></i> Out-of-Stock</p>
                                 </div>
                             </div>
 
                             <div data-bind="if: $root.SelectedCartItem().HasValidSelection()" style="float:left;">
-                                <strong>Select How Many</strong>
+                                <strong>How Many?</strong>
                                 
                                 <div style="clear:both;"> 
                                     <select name="quantity-select" style="width:120px; margin-top:10px;" 
-                                        data-bind='options: $root.SelectedCartItem().QuantityOptions, optionsCaption: "How many...", value: $data.EditQuantity'></select>
+                                        data-bind="options: $root.SelectedCartItem().QuantityOptions, optionsText: 'text', optionsValue: 'value', optionsCaption: 'How many...', value: $root.SelectedCartItem().EditQuantity"></select>
                                 </div>
                             </div>
                         </div>

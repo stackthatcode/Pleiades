@@ -1,0 +1,150 @@
+﻿
+	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB -->
+    <script type="text/html" id="Child-Editor-Colors">
+    <div style="margin-top:0px;">
+        <form>
+            <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SelectedProductColors().length == 0">
+			    <strong>There are no Colors for this Product.  Add a Color from the existing list, or Create a new one.</strong>  
+		    </div>
+		    
+            <div id="colors" class="sortable" data-bind="foreach: $root.SelectedProductColors()">
+                <div class="draggable" data-bind="attr: { id: 'sorted' + $data.Id }">
+		        <table class="table table-hover" style="margin-bottom:0px;">
+		            <tbody>
+			            <tr>
+			            <td>
+				            <span class="span2">
+                	            <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+			                    </div>
+                            </span>
+                        </td>
+                        <td>
+				            <span class="span5">
+					            <input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
+					            <p><strong data-bind="text: $data.Name"></strong> - <span data-bind="text: $data.SkuCode"></span></p>
+				            </span>
+                        </td>
+			            <td>
+				            <span class="span5" style="text-align:right;">
+                                <a href="#" class="btn btn-inverse disabled"><i class="icon-screenshot icon-white"></i> Drag Me!</a>
+					            <a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteProductColor($data) }"><i class="icon-trash icon-white"></i> Delete</a>
+				            </span>
+			            </td>
+			            </tr>
+		            </tbody>
+		        </table>
+                </div>
+            </div>
+        </form>
+    </div>
+    </script>
+    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB - ADD FROM LIST SUB -->
+    <script type="text/html" id="Sub-Child-Editor-AddColorsFromList">
+    <div>
+        <form>
+            <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.ColorArray().length == 0">
+			    <strong>There are no pre-defined Colors.  Go to Lists &gt; Color to add pre-defined Colors.</strong>  
+		    </div>
+
+		    <table id="color-table" class="table table-hover">
+		    <tbody data-bind="foreach: $root.ColorArray()">
+			    <tr>
+			    <td>
+				    <span class="span2">
+                	    <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+			            </div>
+                    </span>
+                </td>
+                <td>
+				    <span class="span7">
+					    <input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
+					    <p><strong data-bind="text: $data.Name"></strong> - <span data-bind="text: $data.SkuCode"></span></p>
+				    </span>
+                </td>
+			    <td>
+				    <span class="span3" style="text-align:right;">					
+                        <div data-bind="if: $data.Selected() == false">
+					        <a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.SelectColor($data) }">
+                                <i class="icon-plus icon-white"></i> Select</a>
+                        </div>
+                        <div data-bind="if: $data.Selected() == true">
+                            <span class="label label-info">Selected!</span>
+					        <a class="btn btn-white" style="width:70px;" href="#" data-bind="click: function() { $root.SelectColor($data) }">
+                                <i class="icon-minus icon-black"></i> Remove</a>
+                        </div>
+				    </span>
+			    </td>
+			    </tr>
+		    </tbody>
+		    </table>
+        </form>
+    </div>
+    </script>
+    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB - CREATE SUB -->
+    <script type="text/html" id="Sub-Child-Editor-CreateColor">
+        <div data-bind="with: $root.NewColorInput">
+        <form>
+            <div style="height:20px;"></div>
+
+			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
+                <strong>Please enter all the required fields.</strong>
+			</div>
+
+            <div class="row">
+                <div class="span3">
+                    <div data-bind="if: $data.ShowUpload">
+                        <ul class="nav nav-pills">
+                            <li class="active">
+                                <a href="#">Upload Swatch</a>
+                            </li>
+                            <li>
+                                <a href="#" data-bind="click: $root.PickColorToggle">Pick Color</a>
+                            </li>
+                        </ul>
+
+                        <label>Color Swatch</label>
+                        <div style="margin-bottom:20px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId(), LightboxSuffixId: 'Child' } }">
+			            </div>
+			            <div style="margin-bottom:20px; margin-top:20px;" data-bind="template: { name: 'Fine-Uploader', data: $data }">
+			            </div>
+                    </div>
+
+                    <div data-bind="ifnot: $data.ShowUpload">
+                        <ul class="nav nav-pills">
+                            <li>
+                                <a href="#" data-bind="click: $root.UploadSwatchToggle">Upload Swatch</a>
+                            </li>
+                            <li class="active">
+                                <a href="#">Pick Color</a>
+                            </li>
+                        </ul>
+
+                        <div id="color-picker" data-bind="template: { name: 'Color-Picker' }"></div>    
+                    </div>
+                  </div>
+                <div class="span9">
+                    <div class="row">
+                        <div class="span3">
+                            <label>Color Name<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Color Name" data-bind="value: $data.EditName" maxlength="50" />
+                            </label>
+                        </div>
+                        <div class="span3">
+                            <label>SKU Code<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Sku Code" data-bind="value: $data.EditSkuCode" maxlength="6" />
+				            </label>
+                        </div>
+                        <div class="span3">
+                            <label>SEO<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter SEO Tag" data-bind="value: $data.EditSEO" maxlength="50" />
+				            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="span9" style="text-align:right;">
+					<a class="btn btn-inverse" href="#" data-bind="click: $root.GlideBackToColors"><i class="icon-remove icon-white"></i> Cancel</a>                    
+					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveColorClick"><i class="icon-ok icon-white"></i> Save</a>
+                </div>
+            </div>
+            
+        </form>
+        </div>
+	</script>
+    

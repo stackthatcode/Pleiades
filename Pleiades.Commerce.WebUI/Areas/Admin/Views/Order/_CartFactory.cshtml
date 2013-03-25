@@ -38,33 +38,21 @@
                     .where(function(x) { return x.Sku().SkuCode == skucode; })
                     .each(function(x) { self.Items.remove(x); });
             };
-
-            self.ConsolidateBySkuCode = function (skucode) {
-                var masterItem = self.ItemBySkuCode(skucode);
-
-                AQ(self.Items())
-                    .where(function(x) { return x.Sku().SkuCode == skucode && x != masterItem; })
-                    .each(function(x) { 
-                        var newQuantity = x.Quantity() + masterItem.Quantity();
-                        masterItem.Quantity(newQuantity);
-                        self.Items.remove(x); 
-                    });
-            };
         };
 
         PushMkt.SelectedCartItem = function (cartItem, cart) {
             var self = this;
             self.CartItem = ko.observable(cartItem);
             self.Cart = ko.observable(cart);
+
             self.Colors = ko.observableArray();
             self.Sizes = ko.observableArray();
-            self.FilteredSizes = ko.observableArray();
             self.Inventory = ko.observableArray();
+            self.Sku = ko.observable();
+            self.FilteredSizes = ko.observableArray();
             self.QuantityOptions = ko.observableArray();
-
             self.EditColor = ko.observable();
             self.EditSize = ko.observable();
-            self.EditSku = ko.observable();
             self.EditQuantity = ko.observable();
 
             self.CurrentAvailableSizes = function () {
@@ -76,23 +64,14 @@
                 }
 
                 var inventory = self.InventoryByColorAndSize(self.EditColor(), null);
+
                 var availableSizeInventory =
                     AQ(inventory)
-                        .where(function (x) { return self.AvailableQuantityBySkuCode(x.SkuCode) > 0; })
+                        .where(function (x) { return x.Available > 0; })
                         .select(function (x) { return x.Size })
                         .toArray();
 
-                // console.log(availableSizeInventory);
                 return availableSizeInventory;
-            };
-
-            self.AvailableQuantityBySkuCode = function (skuCode) {
-                var sku = AQ(self.Inventory())
-                    .firstOrDefault(function (x) { return x.SkuCode == skuCode });
-                var available = sku.Available;
-                var quantityInCart = self.Cart().QuantityBySkuCode(skuCode);
-
-                return (available < quantityInCart) ? 0 : available - quantityInCart;
             };
 
             self.UpdateFilteredSizes = function () {
@@ -100,17 +79,19 @@
             };
 
             self.UpdateQuantityOptions = function () {
-                self.QuantityOptions.removeAll();
                 if (!self.HasValidSelection()) {
                     return;
                 }
 
+                var oldQuantity = self.EditQuantity();
                 var sku = self.InventoryByColorAndSize(self.EditColor(), self.EditSize())[0];
-                var quantity = self.AvailableQuantityBySkuCode(sku.SkuCode);
 
-                for (var count = 1; count <= quantity; count++) {
-                    self.QuantityOptions.push(count);
+                self.QuantityOptions.removeAll();
+                for (var count = 1; count <= sku.Available; count++) {
+                    self.QuantityOptions.push({ value: count, text: count });
                 }
+
+                self.EditQuantity(oldQuantity > sku.Available ? sku.Available : oldQuantity);
             };
 
             self.InventoryByColorAndSize = function (color, size) {
@@ -153,19 +134,39 @@
                 return true;
             };
 
+            self.AcceptChanges = function () {
+                var finalSku = self.SelectedSku();
+                var finalQuantity = self.EditQuantity()
+
+                // Get all the other items in the Cart...
+                var items = AQ(self.Cart().Items())
+                    .where(function (x) { return x.Sku().SkuCode == finalSku.SkuCode; })
+                    .where(function (x) { return x != self.CartItem(); });
+
+                // ... and consolidate their quantity with mine
+                items.each(function (x) {
+                    self.Cart().Items.remove(x);
+                    finalQuantity += x.Quantity();
+                });
+
+                self.CartItem().Sku(finalSku);
+                self.CartItem().Quantity(finalQuantity > finalSku.Available ? finalSku.Available : finalQuantity);
+            };
+
+            self.SelectedSku = ko.computed(
+                function () {
+                    if (!self.HasValidSelection()) {
+                        return null;
+                    }
+                    var sku = self.InventoryByColorAndSize(self.EditColor(), self.EditSize())[0];
+                    return sku;
+                }
+            );
+
             self.Image = ko.computed(
                 function () {
-                    if (self.Colors()) {
-                        var skusByColor = self.InventoryByColorAndSize(self.EditColor(), null);
-                        if (skusByColor.length) {
-                            return skusByColor[0].ImageBundle;
-                        } else {
-                            return null;
-                        }
-                    } else {
-                        var sku = self.Inventory()[0];
-                        return sku.ImageBundle;
-                    }
+                    var skus = self.InventoryByColorAndSize(self.EditColor(), null);
+                    return skus.length ? skus[0].ImageBundle : null;
                 }
             );
         }

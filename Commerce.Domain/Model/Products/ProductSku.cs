@@ -16,6 +16,7 @@ namespace Commerce.Persist.Model.Products
         public Product Product { get; set; }
         public ProductColor Color { get; set; }
         public ProductSize Size { get; set; }
+
         public ImageBundle ImageBundle
         {
             get

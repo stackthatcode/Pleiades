@@ -1,0 +1,126 @@
+﻿    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR IMAGES TAB -->
+    <script type="text/html" id="Child-Editor-Images">
+    <div data-bind="if: $root.SelectedProduct().AssignImagesToColors">
+        <!-- ko foreach: $root.SelectedColorsWithImages() -->
+        <div>
+        <table class="table-hover colorDrop" data-bind="attr: { id: 'color' + $data.Id }">
+            <tr>
+                <td valign="top" style="padding-top:20px;">
+                    <div style="width:712px;">
+                        <div data-bind="ifnot: $data.Images().length">
+                            <h2 style="text-align:center; padding-top:50px; color:#CCC;">No Images For This Color</h2>
+                        </div>
+
+                        <ul class="sortable" data-bind="attr: { id: 'images' + $data.Id }, foreach: $data.Images()">
+                            <li data-bind="attr: { id: 'sorted' + $data.Id }">
+                                <div style="width:160px; padding-bottom:5px;" 
+                                    data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+                                </div>
+                                <a href="#" style="width:55px;" class="btn btn-inverse btn-small disabled"><i class="icon-screenshot icon-white"></i> Drag!</a>
+                                <a class="btn btn-primary btn-small" style="width:55px;" href="#" data-bind="click: function() { $root.DeleteProductImage($data) }"><i class="icon-trash icon-white"></i> Delete</a>			
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+
+                <td valign="top" style="width:220px; text-align:left; vertical-align:top; padding-top:20px; padding-right:20px; height:200px;">
+                    <div data-bind="if: $data.Name == 'Unassigned'">
+				        <p><strong>No Color</strong></p>
+                        <h5>Drag Images from this Region to assign them to a Color and make them visible.</h5>
+                    </div>
+                    <div data-bind="ifnot: $data.Name == 'Unassigned'">
+                        <div style="width:80px; margin-bottom:5px;" 
+                                data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+			            </div>
+				        <p>
+                            <strong data-bind="text: $data.Name"></strong> - <span data-bind="text: $data.SkuCode"></span>
+                        </p>
+                    </div>
+                    <div data-bind="ifnot: $data.Name == 'Unassigned'">           
+                        <a class="btn btn-primary" href="#" data-bind="click: $root.AddNewImageForColor"><i class="icon-plus icon-white"></i> Add Image</a>
+                    </div>
+                    <div style="clear:both; height:30px;"></div>
+                </td>
+            </tr>
+        </table>
+        </div>
+        <!-- /ko -->
+
+        <div style="display:block; margin-bottom:200px; clear:both;">
+        </div>
+    </div>
+
+    <div data-bind="ifnot: $root.SelectedProduct().AssignImagesToColors" style="margin-top:20px;">
+        <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SelectedProductImages().length == 0">
+			    <strong>There are no images for this Product.  Click "Add Image" to Upload an image.</strong>  
+		    </div>
+        <ul class="sortable" data-bind="foreach: $root.SelectedProductImages()">
+            <li data-bind="attr: { id: 'sorted' + $data.Id }">
+                <div style="width:160px; padding-bottom:5px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+                </div>
+                <a href="#" style="width:55px;" class="btn btn-inverse btn-small disabled"><i class="icon-screenshot icon-white"></i> Drag!</a>
+                <a class="btn btn-primary btn-small" style="width:55px;" href="#" data-bind="click: function() { $root.DeleteProductImage($data) }"><i class="icon-trash icon-white"></i> Delete</a>			
+            </li>
+        </ul>
+        <div style="display:block; margin-bottom:200px; clear:both;">
+        </div>
+    </div>
+    </script>
+    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR IMAGES - ADD IMAGE SUB-->
+    <script type="text/html" id="Sub-Child-Editor-AddImage">
+        <div style="height:20px;"></div>
+
+        <div data-bind="with: $root.NewImageInput">
+        <form>
+			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
+                <strong>Please Upload an Image.</strong>
+			</div>
+
+            <div class="row">
+                <div class="span3">
+                    <div style="margin-bottom:20px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId(), LightboxSuffixId: 'Child' } }">
+			        </div>
+			        <div style="margin-bottom:20px; margin-top:20px;" data-bind="template: { name: 'Fine-Uploader', data: $data }">
+			        </div>
+                </div>
+                <div class="span9">
+                    <div class="row">
+                        <div class="span6">
+                            <label>Image Description<br /><input class="input-large" style="width:300px;" type="text" placeholder="Enter Image Description" data-bind="value: $data.Description" maxlength="100" />
+                            </label>
+                        </div>
+                        <div class="span3">
+					        <a class="btn btn-inverse" href="#" data-bind="click: $root.GlideBackToImages"><i class="icon-remove icon-white"></i> Cancel</a>                    
+					        <a class="btn btn-primary" href="#" data-bind="click: $root.SaveImage"><i class="icon-ok icon-white"></i> Save</a>
+                        </div>
+                    </div>
+                    <div class="row" data-bind="if: $root.SelectedProductColorForImage()">
+                        <div class="span6">
+                        </div>
+                        <div class="span3">
+                            <!-- ko if:  $root.SelectedProductColorForImage().Id -->
+                                <label>Assigned Color<br />
+                                <div style="width:80px; margin-bottom:5px;" 
+                                    data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $root.SelectedProductColorForImage().ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+			                    </div>
+				                <p>
+                                    <strong data-bind="text: $root.SelectedProductColorForImage().Name"></strong > - 
+                                    <span data-bind="text: $root.SelectedProductColorForImage().SkuCode"></span>
+                                </p>
+                                </label>
+                            <!-- /ko -->
+                            <!-- ko ifnot:  $root.SelectedProductColorForImage().Id -->
+                                <label>Assigned Color<br />
+                                <p>
+                                    <strong>No Color Assigned</strong>
+                                </p>
+                                </label>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </form>
+        </div>
+	</script>
+

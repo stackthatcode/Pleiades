@@ -8,126 +8,66 @@ Jeremy Meeting 2013/03/17
 - Send last meeting notes => TODO
 
 
-* Design Options for StoreFront
-http://designmodo.com/square/
+### Design Options for StoreFront
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 http://designmodo.github.com/Flat-UI/
-
 FONTS => https://news.ycombinator.com/item?id=5407499
 
-- Order Entry Flow
 
-- The ExternalResourceId boondoggle debt
-
-20130313 UPDATE
----------------
-
-cartItem
-{
-	Quantity: ko.observable(3),
-	Sku: ko.observable(inventoryItem),
-	Product: product,
-}
-
-inventoryItem
-{
-	Available: 1,
-	SelectedQuantity: observable[]
-	Size: {}
-	Color: {}
-	SkuCode: "",
-	ComputedAvailable: observable()
-	ImageBundle.ExternalId,
-	QuantityOptions
-}
-
-var selectedCartItem = {
-	CartItem: ko.observable(cartItem),
-	Colors: ko.observableArray(),
-	Sizes: ko.observableArray(),
-	FilteredSizes: ko.observableArray(),
-	Inventory: ko.observableArray(),
-	Image: ko.computed( self.SelectedCartItemImageBundle ),
-	Quantity: ko.observableArray(),
-	
-	EditQuantity: ko.observable(),
-	EditColor: ko.observable(),
-	EditSize: ko.observable(),
-	EditSku: ko.observable(),
-};
-
-
-
-- Update the SKU when a valid Color and Size combo is selected => TODO
-
-
-- Update the Cart with Inventory Available and CartItem Quantity javascript function => DONE
-- Notify - "Hey, we had to remove some items from your Cart, as Inventory is changing.  Hurry up and check-out!" => DONE
-- Review Step - Copy the SKU to an Edit State => DONE
-- Determine how to filter the Sizes / Colors based on Available Inventory => DONE
-- Isolate the Current Sku Code => DONE
-- Isolate Current Color and Size => DONE
-* WHEN: I click on Expand Item, and when I Edit the Cart => DONE
-* WHAT: If Available < my Quantity, notify and adjust Quantity. If Available = 0, remove and notify => DONE
-- Current Selected Color => DONE
-- Current Selected Size => DONE
-- Determine when to show Size/Color, when not => DONE
-- Aligned Columns => DONE
-- Quantity to add should reflect Available - QuantityInCartBySku => DONE
-- Write a separate QuantityInCartBySku function => DONE
-- ALSO: when doing Inventory Item check, adjust Quantities based on CURRENT Availability, and show a notification when things have adjusted => DONE
-
-
-Concerns
---------
-- When selected, check the Available Quantity and maybe render (Out-of-Stock)
-
-* Create Shopping Cart Screen => IN PROGRESS
-- Cart Screen spec
-	* Top Header
-		* Next Button (to Shipping) => TODO
-	* Body Grid (each row)
-		* Image => DONE
-		* Color => DONE
-		* Size => DONE
-		* Qty => DONE
-		* Edit Button => IN PROGRESS		
-	* Body Grid Edit State
-		* (SAME FIELDS)
-		* Quantity Drop Down
-		* Save Button
-		* Cancel Button =>  DONE
-	* Subtotal Row
-		* Order Sub Total Before Tax
-
-- On Edit CartItem
-* EditCartItem => IN PROGRESS
-
-* When I submit my Order, the Sku Image literally gets COPIED and tied to the Order Line => TODO
-
-- THE GREAT FLOW - Tieing it All Together (!!!)
-* What happens if a Product/Color/Size/Image is Deleted?  What happens to Carts?  What happens to Orders?
-* Why are there Product Color orphans in the database? => TODO
-
-
+CreateNew Order Leftovers
+~~~~~~~~~~~~~~~~~~~~~~~~~
+* Fix the bugs with the Images when we have no Color => TODO
 * On the StoreFront "Wrong Size or Color? Click Here" - and Navigate to Product => TODO
+* Subtotal Row
+* Order Sub Total Before Tax
 * Enter Email Address + Shipping Info + Shipping method => TODO
 * Enter Billing Info => TODO
 
 
 
 
-Some Clean-up
-~~~~~~~~~~~~~
-- Product - Add In-Stock flag => TODO
-- Test *EVERYTHING* => create a Product and simulate Creation of a Product followed by deletion of  Categories, Brands, etc. => IN PROGRESS
+
+Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/27/2013
+------------------------------------------------------------
+- Login Screen => DONE
+- Admin User Manager => DONE
+- Category Editor => DONE
+- Size Editor => DONE
+- Section Editor => DONE
+- Color Editor => DONE
+- Brand Editor => DONE
+- Image Upload & Processing Engine => DONE
+- Product Search & Editor => DONE
+- SKU Generator + Inventory Tracker => DONE
+
+- Admin Order Create => IN PROGRESS
+- Shopping Cart => IN PROGRESS
+
+- Barebones Console App => IN PROGRESS
+
+- High-touch Store Front => TODO
+- Search & Manage Orders => TODO
+- Server Logging => TODO
+- Email Sending Engine => TODO
+
+PHASE 2
+-------
+- Basic Analytic Tracker - Sales Graph, Traffic Source, Landing Page => 
+
+
 
 
 Backlog
 -------
+- Post Mortem - inventory *everything* from UI => IN PROGRESS
+- SUPER IMPORTANT - post mortem my approach to the designing the UI.  How to improve my speed? => TODO
+
+- Bundle Image technical debt => TODO
 - Logged-In User => TODO
 - Cache the AggregateUser stuff in a static Dictionary (I mean, seriously, man) => IMPORTANT
 - Cache the Image Bundles too...? => MAYBE
 - Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING)
+- Test *EVERYTHING* => create a Product and simulate Creation of a Product followed by deletion of  Categories, Brands, etc. => IN PROGRESS
 
 - Clicking a link while it's loading the AJAX causes JQuery to beef => TODO
 - Improve the quality of client-side Error Logging => TODO
@@ -137,20 +77,9 @@ Backlog
 - Develop and/or Research Fluent Validation library => TODO
 - Donate $20 to FineUploader upon successful integration => TODO
 
-- Post Mortem - inventory *everything* from UI => IN PROGRESS
-- SUPER IMPORTANT - post mortem my approach to the designing the UI.  How to improve my speed? => TODO
-
-
-Please Research
-~~~~~~~~~~~~~~~
-https://github.com/MatthewMueller/array
-https://github.com/danderson00/knockout.composite/tree/master/Examples
-http://news.ycombinator.com/item?id=3265625
-http://twitter.github.com/flight/
-http://www.ww2helmets.com/products-page/checkout/ => Hmmmmm...?????
-http://fortawesome.github.com/Font-Awesome/
-http://pcottle.github.com/learnGitBranching/
-TextPad + Resharper => TODO
+- THE GREAT FLOW - Tieing it All Together (!!!)
+* What happens if a Product/Color/Size/Image is Deleted?  What happens to Carts?  What happens to Orders? => TODO
+* Why are there Product Color orphans in the database? => TODO
 
 
 
@@ -176,29 +105,6 @@ ARCHITECTURAL REVIEW 1/24/2013
 - http://nblumhardt.com/2011/01/an-autofac-lifetime-primer/
 - http://code.google.com/p/autofac/wiki/MvcIntegration
 
-Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/27/2013
-------------------------------------------------------------
-- Login Screen => DONE
-- Admin User Manager => DONE
-- Category Editor => DONE
-- Size Editor => DONE
-- Section Editor => DONE
-- Color Editor => DONE
-- Brand Editor => DONE
-- Image Upload & Processing Engine => DONE
-- Product Search & Editor => DONE
-- SKU Generator + Inventory Tracker => DONE
-
-- Order Create, Search & Manage => IN PROGRESS
-- Shopping Cart => IN PROGRESS
-- Barebones Console App => IN PROGRESS
-
-- Server Logging => TODO
-- Basic Analytic Tracker - Sales Graph, Traffic Source, Landing Page => TODO
-- Email Sending Engine => TODO
-
-
-
 
 MORE BIG FISH
 -------------
@@ -209,26 +115,9 @@ MORE BIG FISH
 => http://news.ycombinator.com/item?id=4669866 => IMPORTANT
 => Enable for Azure => TODO
 
-PENDING FEATURE BACKLOG
------------------------
-- Add Toop Tips to clear-up the clutter in Inventory Editor => TODO
-- Add more Logging to the Security check => PENDING EVAL
-- Traffic Source { PPC/PPM, SEO, Email } => Landing Page w/ Tracking => ??? => Conversion
-- Exclusive Squeeze Page => Email => Campaigns => ??? => Conversion
-- What about virus scan for file uploads, etc.? => PENDING EVALUATION
-- Add a way to execute the DDL which adds SQL Foreign Keys to Categories, etc. => PENDING EVAL
-- Eliminate the MembershipProvider (WHOO-HOO!!!!!!!) => PENDING EVAL
-* Roll everything into the MembershipService, take back control of your objects and data access.  Done.  OVER! => PENDING EVAL
+- Web Optimization Toolkit / Bundle Thingy => TODO
 
-NOTES ON THE HEGEMONY OF UNREASON (STATIC MEMBERSHIP)
-- UpdateSelf() invocations... this odd function is called... with tons of exception checking... as if, there are not transactions...?  Why don't you throw
-- What's the rigamorale about Updating shit...?  Why not try it and if it fails, throw an Exception???
-- Show the number of Products under Category => PENDING EVAL
-- Modify Category Editor design i.e. Number of Categories, Products, etc. => PENDING EVAL
-- Rendering Adjustments for long Category Names et. al. => PENDING EVAL
-- Add Modal Pop-up - "Are You Sure?" Category Parent Change, etc. => PENDING EVAL
-- Add constraints on the number of records we can add => PENDING EVAL
-- View Products => Hot Link to a RESTful URL - TODO => PENDING EVAL
+
 
 E-Commerce API's & Payment Processors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -255,6 +144,16 @@ Research Backlog
 - Easily the most important security article evar => - http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
 - Look up Troy Hunt's article's, too
 
+Please Research
+~~~~~~~~~~~~~~~
+https://github.com/MatthewMueller/array
+https://github.com/danderson00/knockout.composite/tree/master/Examples
+http://news.ycombinator.com/item?id=3265625
+http://twitter.github.com/flight/
+http://www.ww2helmets.com/products-page/checkout/ => Hmmmmm...?????
+http://fortawesome.github.com/Font-Awesome/
+http://pcottle.github.com/learnGitBranching/
+TextPad + Resharper => TODO
 
 Good Stuff
 ----------
@@ -263,14 +162,31 @@ Good Stuff
 Development Backlog
 -------------------
 - Upgrade to ASP.NET MVC 4.0 (4.5?) => TODO
-- Web Optimization Toolkit => TODO
 * Get Scott Hanselman's obj/bin cleaner utility => IN PROGRESS
 
 THE OTHER BACKLOG
 =================
 - INTELLIGENCE - start reverse-engineering Frank and Oak's process => TODO
-- Error Handler Module
-- Logging Module
-- Email Service w/ Links (MSMQ?)
-- Disable Caching for AJAX stuff with ASP.NET MVC=> TODO
+- Disable Caching for AJAX stuff with ASP.NET MVC => TODO
+
+PENDING FEATURE BACKLOG
+-----------------------
+- Add Toop Tips to clear-up the clutter in Inventory Editor => TODO
+- Add more Logging to the Security check => PENDING EVAL
+- Traffic Source { PPC/PPM, SEO, Email } => Landing Page w/ Tracking => ??? => Conversion
+- Exclusive Squeeze Page => Email => Campaigns => ??? => Conversion
+- What about virus scan for file uploads, etc.? => PENDING EVALUATION
+- Add a way to execute the DDL which adds SQL Foreign Keys to Categories, etc. => PENDING EVAL
+- Eliminate the MembershipProvider (WHOO-HOO!!!!!!!) => PENDING EVAL
+* Roll everything into the MembershipService, take back control of your objects and data access.  Done.  OVER! => PENDING EVAL
+
+NOTES ON THE HEGEMONY OF UNREASON (STATIC MEMBERSHIP)
+- UpdateSelf() invocations... this odd function is called... with tons of exception checking... as if, there are not transactions...?  Why don't you throw
+- What's the rigamorale about Updating shit...?  Why not try it and if it fails, throw an Exception???
+- Show the number of Products under Category => PENDING EVAL
+- Modify Category Editor design i.e. Number of Categories, Products, etc. => PENDING EVAL
+- Rendering Adjustments for long Category Names et. al. => PENDING EVAL
+- Add Modal Pop-up - "Are You Sure?" Category Parent Change, etc. => PENDING EVAL
+- Add constraints on the number of records we can add => PENDING EVAL
+- View Products => Hot Link to a RESTful URL - TODO => PENDING EVAL
 

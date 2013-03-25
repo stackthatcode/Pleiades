@@ -85,6 +85,11 @@ namespace Commerce.Persist.Model.Products
         {
             this.ThumbnailImageBundle = this.GetProductThumbnail();
 
+            if (this.AssignImagesToColors && this.Colors.Count() == 0)
+            {
+                this.AssignImagesToColors = false;
+            }
+
             if (this.AssignImagesToColors)
             {
                 foreach (var color in this.Colors)
