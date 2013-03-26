@@ -44,7 +44,7 @@
                     function () {
                         var product = model.SearchData()[0];
                         var inventory = product.Inventory();
-                        var sku = inventory[3];
+                        var sku = inventory[1];
                         sku.SelectedQuantity(2);
                         model.AddToCart(sku, product);
                         //this();

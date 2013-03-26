@@ -226,7 +226,7 @@
 			<tr>
 			<td>
 				<span class="span3">
-                	<div data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+                	<div data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
 			        </div>
                 </span>
             </td>
@@ -261,7 +261,7 @@
             <div class="row">
                 <div class="span3">   
                     <label>Brand Logo</label>                 
-                    <div style="margin-bottom:20px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId(), LightboxSuffixId: 'Child' } }">
+                    <div style="margin-bottom:20px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId(), LightboxSuffixId: 'Child' } }">
 			        </div>
 			        <div style="margin-bottom:20px; margin-top:20px;" data-bind="template: { name: 'Fine-Uploader', data: $root }">
 			        </div>

@@ -9,7 +9,7 @@ using Pleiades.Web.Security.Model;
 
 namespace Commerce.Persist.Concrete
 {
-    public class PfMembershipRepository : EFGenericRepository<MembershipUser>, IMembershipProviderRepository
+    public class PfMembershipRepository : EFGenericRepository<PfMembershipUser>, IMembershipProviderRepository
     {
         // QUESTION: how to get the applicationName into the Repository...?
         // ANSWER: Autofac Registration
@@ -24,17 +24,17 @@ namespace Commerce.Persist.Concrete
             this.ApplicationName = applicationName;
         }
 
-        protected override IQueryable<MembershipUser> Data()
+        protected override IQueryable<PfMembershipUser> Data()
         {
             return base.Data().Where(x => x.ApplicationName == this.ApplicationName);
         }
 
-        public MembershipUser GetUser(string username)
+        public PfMembershipUser GetUser(string username)
         {
             return this.FirstOrDefault(x => x.UserName == username);
         }
 
-        public MembershipUser GetUserByProviderKey(object providerKey)
+        public PfMembershipUser GetUserByProviderKey(object providerKey)
         {
             return this.FirstOrDefault(x => x.ProviderUserKey == providerKey.ToString());
         }
@@ -54,13 +54,13 @@ namespace Commerce.Persist.Concrete
             return true;
         }
 
-        public IList<MembershipUser> GetAllUsers(int pageIndex, int pageSize, out int totalRecords)
+        public IList<PfMembershipUser> GetAllUsers(int pageIndex, int pageSize, out int totalRecords)
         {
             totalRecords = this.GetAll().Count();
             return this.Data().Page(pageIndex, pageSize).ToList();
         }
 
-        public IList<MembershipUser> FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
+        public IList<PfMembershipUser> FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
             var results = 
                 (from u in this.Data()
@@ -72,7 +72,7 @@ namespace Commerce.Persist.Concrete
             return results.ToList();
         }
 
-        public IList<MembershipUser> FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
+        public IList<PfMembershipUser> FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
             var results =
                 (from u in this.Data()

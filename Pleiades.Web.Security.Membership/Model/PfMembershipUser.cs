@@ -9,7 +9,7 @@ namespace Pleiades.Web.Security.Model
     /// <summary>
     /// Membership User maps ASP.NET Membership Provider concerns to a seperate object
     /// </summary>
-    public class MembershipUser
+    public class PfMembershipUser
     {
         // For EF's sake
         public int Id { get; set; }

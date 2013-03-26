@@ -18,7 +18,7 @@
 
 	        self.LightboxParameters = ko.computed(function () {
 	            var externalResourceId = self.ImageBundle() ? self.ImageBundle().ExternalId : null;
-	            return { ExternalResourceId: externalResourceId, LightboxSuffixId: 'Main' };
+	            return { ImageBundleExternalId: externalResourceId, LightboxSuffixId: 'Main' };
 	        });
 	    }
 

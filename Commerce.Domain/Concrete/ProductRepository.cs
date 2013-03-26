@@ -40,6 +40,7 @@ namespace Commerce.Persist.Concrete
         {
             return
                 this.Context.Products
+                    .Include(x => x.ThumbnailImageBundle)
                     .Include(x => x.Sizes)
                     .Include(x => x.Colors)
                     .Include(x => x.Colors.Select(color => color.ProductImageBundle))
@@ -49,6 +50,7 @@ namespace Commerce.Persist.Concrete
         private Product ProductWithColorsAndImages(int id)
         {
             var product = this.Context.Products
+                   .Include(x => x.ThumbnailImageBundle)
                    .Include(x => x.Colors)
                    .Include(x => x.Images)
                    .Include(x => x.Images.Select(img => img.ProductColor))

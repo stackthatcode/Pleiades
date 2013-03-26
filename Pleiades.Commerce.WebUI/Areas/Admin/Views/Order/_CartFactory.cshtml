@@ -13,7 +13,7 @@
             var self = this;
 
             self.Items = ko.observableArray(); // array of CartItem objects
-            
+
             self.NumberOfDistinctItems = ko.computed(function () {
                 return self.Items().length;
             });
@@ -28,15 +28,21 @@
                     .sum(function (x) { return x.Quantity(); });
             };
 
+            self.SubTotal = ko.computed(function () {
+                var result = AQ(self.Items())
+                    .sum(function (x) { return x.Quantity() * x.Product.UnitPrice; });
+                return ToMoney(result);
+            });
+
             self.ItemBySkuCode = function (skucode) {
                 return AQ(self.Items())
                     .firstOrDefault(function (x) { return x.Sku().SkuCode == skucode; });
             };
 
-            self.RemoveBySkuCode =  function (skucode) {
+            self.RemoveBySkuCode = function (skucode) {
                 AQ(self.Items())
-                    .where(function(x) { return x.Sku().SkuCode == skucode; })
-                    .each(function(x) { self.Items.remove(x); });
+                    .where(function (x) { return x.Sku().SkuCode == skucode; })
+                    .each(function (x) { self.Items.remove(x); });
             };
         };
 

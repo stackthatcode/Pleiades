@@ -153,7 +153,7 @@
 			<div class="span3" style="margin-top:15px; text-align:right;">
                 <div data-bind="if: $root.Cart().TotalQuantity()">
                     <a id="btn-view-cart" class="btn btn-primary" style="width:190px;" data-bind="click: $root.PerpetualGlideTest">
-                        Add Shipping Address <i class="icon-arrow-right icon-white"></i>
+                        <i class="icon-plane icon-white"></i> Add Shipping <i class="icon-arrow-right icon-white"></i>
                     </a>
                 </div>
 			</div>
@@ -162,7 +162,7 @@
         <div class="row">
             <div class="span7" style="height:48px;">
                 <ul class="nav nav-pills">
-                    <li style="width:200px;">
+                    <li style="width:160px;">
 				        <a name="glideToSearch" href="#" class="backbutton" data-bind="click: $root.BackToProductSearch">&laquo; Add Items To Cart</a>
                         &nbsp;
                     </li>
@@ -245,7 +245,7 @@
                                 <div data-bind="foreach:  $root.SelectedCartItem().Colors()">
                                     <div style="padding-top:10px; clear:both;">
                                         <div style="float:left;" data-bind="click: $root.ColorSelectorClick, attr: { 'class' : $root.ColorSelectorClass($data) }">
-                                            <img data-bind="attr: { src: BundleViewer.ImageBundleDownloadUrl({ ExternalResourceId: $data.ImageBundleExternalId }, 'thumbnail') }" />
+                                            <img data-bind="attr: { src: BundleViewer.ImageBundleDownloadUrl({ ImageBundleExternalId: $data.ImageBundleExternalId }, 'thumbnail') }" />
 			                            </div>
                                         <div style="float:left; padding-top:10px; display:block;" data-bind="text: $data.Name"></div>
                                     </div>
@@ -280,5 +280,18 @@
                 </tr>
 			</tbody>
 		</table>
+
+        
+		<table class="table table-hover">
+			<tbody>
+                <tr>
+                    <td style="width:100px">
+                    </td>
+                    <td style="width:800px">
+                        <h1>Subtotal <span data-bind="text: $root.Cart().SubTotal"></span><h1> 
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </script>

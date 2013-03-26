@@ -169,7 +169,7 @@ namespace Pleiades.Web.Security.Providers
             }
 
             var createDate = DateTime.Now;
-            var user = new Model.MembershipUser 
+            var user = new Model.PfMembershipUser 
             {
                 ProviderUserKey = (Guid)providerUserKey,
                 UserName = username,

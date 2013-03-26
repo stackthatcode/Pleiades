@@ -8,7 +8,7 @@ namespace Pleiades.Web.Security.Interface
     {
         AggregateUser RetrieveByMembershipUserName(string username);
         AggregateUser RetrieveById(int Id);
-        MembershipUser RetreiveMembershipUser(string username);
+        PfMembershipUser RetreiveMembershipUser(string username);
         IEnumerable<AggregateUser> Retreive(List<UserRole> role);
         IEnumerable<AggregateUser> Retreive(List<string> membershipUserNames, List<UserRole> role);
         int GetUserCountByRole(UserRole role);

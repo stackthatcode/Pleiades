@@ -11,7 +11,7 @@ namespace Pleiades.Web.Security.Providers
         /// </summary>
         /// <param name="user">user object containing the user data retrieved from database</param>
         /// <returns>membership user object</returns>
-        public static WebSecurity.MembershipUser ToSecurityMembershipUser(this Model.MembershipUser user, string providerName)
+        public static WebSecurity.MembershipUser ToSecurityMembershipUser(this Model.PfMembershipUser user, string providerName)
         {
             return new
                 WebSecurity.MembershipUser(
@@ -35,11 +35,11 @@ namespace Pleiades.Web.Security.Providers
         /// 
         /// TODO: replace this entirely with AutoMapper
         /// </summary>
-        public static Model.MembershipUser ToModelMembershipUser(this System.Web.Security.MembershipUser user)
+        public static Model.PfMembershipUser ToModelMembershipUser(this System.Web.Security.MembershipUser user)
         {
             if (user == null) return null;
             
-            return new Model.MembershipUser
+            return new Model.PfMembershipUser
             {
                 UserName = user.UserName,
                 ProviderUserKey = user.ProviderUserKey,

@@ -43,14 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Concrete\PfMembershipService.cs" />
     <Compile Include="Concrete\FormsAuthenticationService.cs" />
     <Compile Include="Concrete\MembershipService.cs" />
     <Compile Include="Interface\IFormsAuthenticationService.cs" />
     <Compile Include="Interface\IMembershipProviderRepository.cs" />
     <Compile Include="Interface\IMembershipService.cs" />
+    <Compile Include="Interface\IPfMembershipService.cs" />
     <Compile Include="Model\CreateNewMembershipUserRequest.cs" />
     <Compile Include="Model\PleiadesMembershipCreateStatus.cs" />
-    <Compile Include="Model\MembershipUser.cs" />
+    <Compile Include="Model\PfMembershipUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\HttpContextExtensions.cs" />
     <Compile Include="Providers\MembershipExtensions.cs" />

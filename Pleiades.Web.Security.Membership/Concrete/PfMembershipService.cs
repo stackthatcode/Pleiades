@@ -13,12 +13,12 @@ namespace Pleiades.Web.Security.Concrete
     /// <summary>
     /// Wrapper around common Membership functions - enables testability of Membership-related functions
     /// </summary>
-    public class MembershipService : IMembershipService
+    public class PfMembershipService : IPfMembershipService
     {
         IMembershipProviderRepository Repository { get; set; }
         IUnitOfWork UnitOfWork { get; set; }
 
-        public MembershipService(IMembershipProviderRepository repository, IUnitOfWork unitOfWork)
+        public PfMembershipService(IMembershipProviderRepository repository, IUnitOfWork unitOfWork)
         {
             this.Repository = repository;
             this.UnitOfWork = unitOfWork;
@@ -28,15 +28,100 @@ namespace Pleiades.Web.Security.Concrete
                 CreateNewMembershipUserRequest request, out PleiadesMembershipCreateStatus outCreateStatus)
         {
             MembershipCreateStatus createStatus;
+
             var generatedUserName = GenerateUserName();
             Membership.CreateUser(
                 generatedUserName, request.Password, request.Email, request.PasswordQuestion, request.PasswordAnswer, 
                 request.IsApproved, out createStatus);
+
+            //// Validate username/password
+
+            // *** TODO: add service or utility that validates password complexity
+            var complexEnough = true;
+            if (!complexEnough)
+            {
+                outCreateStatus = PleiadesMembershipCreateStatus.InvalidPassword;
+                return null;
+            }
+
+
+
+            //if (RequiresUniqueEmail && GetUserNameByEmail(email) != "")
+            //{
+            //    status = MembershipCreateStatus.DuplicateEmail;
+            //    return null;
+            //}
+
+            //// Check whether user with passed username already exists
+            //var repository = PfMembershipRepositoryBroker.Create();
+            //var membershipUser = repository.GetUser(username);
+
+            //if (membershipUser != null)
+            //{
+            //    status = MembershipCreateStatus.DuplicateUserName;
+            //    return null;
+            //}
+
+
+            //if (providerUserKey == null)
+            //{
+            //    providerUserKey = Guid.NewGuid();
+            //}
+            //else
+            //{
+            //    if (!(providerUserKey is Guid))
+            //    {
+            //        status = MembershipCreateStatus.InvalidProviderUserKey;
+            //        return null;
+            //    }
+            //}
+
+            //var createDate = DateTime.Now;
+            //var user = new Model.PfMembershipUser
+            //{
+            //    ProviderUserKey = (Guid)providerUserKey,
+            //    UserName = username,
+            //    ApplicationName = this.ApplicationName,
+            //    Email = email,
+            //    Password = EncodePassword(password),
+            //    PasswordQuestion = passwordQuestion,
+            //    PasswordAnswer = passwordAnswer,
+            //    IsApproved = isApproved,
+            //    LastActivityDate = createDate,
+            //    LastLoginDate = createDate,
+            //    LastPasswordChangedDate = createDate,
+            //    CreationDate = createDate,
+            //    IsOnline = false,
+            //    IsLockedOut = false,
+            //    LastLockedOutDate = createDate,
+            //    FailedPasswordAttemptCount = 0,
+            //    FailedPasswordAttemptWindowStart = createDate,
+            //    FailedPasswordAnswerAttemptCount = 0,
+            //    FailedPasswordAnswerAttemptWindowStart = createDate,
+            //    LastModified = createDate,
+            //};
+
+            //try
+            //{
+            //    repository.Insert(user);
+            //    status = MembershipCreateStatus.Success;
+            //}
+            //catch (Exception ex)
+            //{
+            //    // TODO - get my Logs(!!!)
+            //    System.Diagnostics.Debug.WriteLine(ex.Message);
+            //    status = MembershipCreateStatus.UserRejected;
+            //    return null;
+            //}
+
+            //return user.ToSecurityMembershipUser(this.Name);
+
             this.UnitOfWork.SaveChanges();   // I HATE THIS - THE SERVICES ARE MANAGING THE UNIT OF WORK TO WHICH THEY BELONG!!!
 
             outCreateStatus = (PleiadesMembershipCreateStatus)createStatus;
             return Repository.GetUser(generatedUserName);
         }
+
 
         /// <summary>
         /// Creates a random 7-digit number for User Name (since we authenticate by email addy)

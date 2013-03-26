@@ -766,5 +766,20 @@ More hacking
 * When I submit my Order, the Sku Image literally gets COPIED and tied to the Order Line => DONE
 - Product - Add In-Stock flag => DONE
 
+3/27 2.0 Hours
+--------------
+- CRITICAL => began the final pass on pwnage of the Membership Provider
+* Fix the bugs with the Images when we have no Color => DONE - GOOD JOB
+* Take a peek at EF's inefficiency => DONE - PRETTY BAD, OPTIMIZATION WOULD BE WITH DAPPER
+* Fix the Quantity Dropdown => DONE
 
+- Bundle Image technical debt => DONE - FANTASTIK!
+ImageBundle => ExternalId
+JsonProductInfo =>  ImageBundleExternalId
+Product => ImageBundle
+ProductSku => ImageBundle
+ProductImage => ImageBundle
+ProductColor => ImageBundle(2x)
+
+- Fixed the ugly ass Inventory layout => DONE
 

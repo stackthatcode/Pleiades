@@ -16,16 +16,16 @@ namespace Commerce.Persist.Concrete
         }
 
         // Exists to patch the Membership User's isolated Database Context issues
-        public MembershipUser RetreiveMembershipUser(string membershipUsername)
+        public PfMembershipUser RetreiveMembershipUser(string membershipUsername)
         {
             return this.Context
-                .Set<MembershipUser>()
+                .Set<PfMembershipUser>()
                 .FirstOrDefault(x => x.UserName == membershipUsername);
         }
 
         public AggregateUser RetrieveByMembershipUserName(string membershipUsername)
         {
-            this.Context.Set<MembershipUser>();
+            this.Context.Set<PfMembershipUser>();
 
             var output = this.ReadOnlyData()
                 .Include(x => x.IdentityProfile)

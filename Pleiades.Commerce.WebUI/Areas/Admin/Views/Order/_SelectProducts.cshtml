@@ -64,7 +64,7 @@
                 self.ShowModal("Notification", "The Shopping Cart is Empty", "Add Items to the Order");
                 return;
             };
-            
+
             $("btn-view-cart").hide();
             $.each(self.SearchData(), function (index, elem) {
                 elem.ExpandInventory(false);
@@ -109,13 +109,15 @@
 
                         inventoryItem.ComputedAvailable = ko.computed(
                             function () {
-                                var quantity = inventoryItem.Available - self.Cart().QuantityBySkuCode(inventoryItem.SkuCode);
-                                return quantity < 0 ? 0 : quantity;
+                                var quantityInCart = self.Cart().QuantityBySkuCode(inventoryItem.SkuCode);
+                                //var available = inventoryItem.Available > 10 ? 10 : inventoryItem.Available;
+                                return inventoryItem.Available - quantityInCart;
                             }
                         );
 
                         inventoryItem.GenerateQuantityOptions = function () {
                             inventoryItem.QuantityOptions.removeAll();
+
                             for (var quantity = 1; quantity <= inventoryItem.ComputedAvailable(); quantity++) {
                                 inventoryItem.QuantityOptions.push(quantity);
                             }
@@ -151,7 +153,7 @@
                 return;
             }
 
-            if (quantityInCart) {                
+            if (quantityInCart) {
                 var itemInCart = self.Cart().ItemBySkuCode(skuCode);
                 itemInCart.Quantity(itemInCart.Quantity() + selectedQuantity);
 
@@ -222,7 +224,7 @@
 			<tr>
 			<td style="vertical-align:top;">
 				<div style="width:100px">
-                	<div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ExternalResourceId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+                	<div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
 			        </div>
                 </div>
             </td>

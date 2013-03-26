@@ -16,7 +16,7 @@ namespace Commerce.Persist.Concrete
         
         // Users
         public DbSet<AggregateUser> AggregateUsers { get; set; }
-        public DbSet<MembershipUser> MembershipUsers { get; set; }
+        public DbSet<PfMembershipUser> MembershipUsers { get; set; }
         public DbSet<IdentityProfile> IdentityProfiles { get; set; }
 
         // Lists

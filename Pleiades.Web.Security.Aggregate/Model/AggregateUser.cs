@@ -7,7 +7,7 @@ namespace Pleiades.Web.Security.Model
     {
         public int ID { get; set; }
         public IdentityProfile IdentityProfile { get; set; }
-        public MembershipUser Membership { get; set; }
+        public PfMembershipUser Membership { get; set; }
 
         public static AggregateUser AnonymousFactory()
         {
@@ -18,7 +18,7 @@ namespace Pleiades.Web.Security.Model
                     {
                         UserRole = UserRole.Anonymous
                     },
-                    Membership = new MembershipUser
+                    Membership = new PfMembershipUser
                     {
                     }
                 };

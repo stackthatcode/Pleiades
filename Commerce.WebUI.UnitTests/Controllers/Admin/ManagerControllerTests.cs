@@ -34,7 +34,7 @@ namespace Commerce.WebUI.TestsControllers
                     LastName = "Fathers",
                     UserRole = UserRole.Admin,
                 },
-                Membership = new MembershipUser
+                Membership = new PfMembershipUser
                 {
                     CreationDate = DateTime.Now.AddDays(-7),
                     Email = "john@gmail.com",
@@ -143,7 +143,7 @@ namespace Commerce.WebUI.TestsControllers
             // Arrange
             var user = new AggregateUser
             {
-                Membership = new MembershipUser { UserName = "123456" },
+                Membership = new PfMembershipUser { UserName = "123456" },
                 IdentityProfile = new IdentityProfile(),
             };
 
@@ -170,7 +170,7 @@ namespace Commerce.WebUI.TestsControllers
             var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
             repository
                 .Expect(x => x.RetrieveById(888))
-                .Return(new AggregateUser { Membership = new MembershipUser { Email = "hull@hello.com" } });
+                .Return(new AggregateUser { Membership = new PfMembershipUser { Email = "hull@hello.com" } });
             var controller = new ManagerController(repository, null, null, null);
 
             var result = controller.ChangePassword(888);
@@ -209,7 +209,7 @@ namespace Commerce.WebUI.TestsControllers
             var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
             repository
                 .Expect(x => x.RetrieveById(888))
-                .Return(new AggregateUser { Membership = new MembershipUser { UserName = "123456" } });
+                .Return(new AggregateUser { Membership = new PfMembershipUser { UserName = "123456" } });
 
             var service = MockRepository.GenerateMock<IMembershipService>();
             service
@@ -235,7 +235,7 @@ namespace Commerce.WebUI.TestsControllers
             var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
             repository
                 .Expect(x => x.RetrieveById(888))
-                .Return(new AggregateUser { Membership = new MembershipUser { UserName = "123456" } });
+                .Return(new AggregateUser { Membership = new PfMembershipUser { UserName = "123456" } });
 
             var service = MockRepository.GenerateMock<IMembershipService>();
             service.Expect(x => x.UnlockUser("123456"));
@@ -262,7 +262,7 @@ namespace Commerce.WebUI.TestsControllers
                 .Expect(x => x.RetrieveById(888))
                 .Return(new AggregateUser 
                 { 
-                    Membership = new MembershipUser { UserName = "123456" },
+                    Membership = new PfMembershipUser { UserName = "123456" },
                     IdentityProfile = new IdentityProfile(),
                 });
 
@@ -279,7 +279,7 @@ namespace Commerce.WebUI.TestsControllers
         {
             var user = new AggregateUser
             {
-                Membership = new MembershipUser { UserName = "123456" },
+                Membership = new PfMembershipUser { UserName = "123456" },
                 IdentityProfile = new IdentityProfile(),
             };
             var repository = MockRepository.GenerateMock<IAggregateUserRepository>();

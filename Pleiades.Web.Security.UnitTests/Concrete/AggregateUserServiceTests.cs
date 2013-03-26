@@ -39,7 +39,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
         public void Valid_Credentials_With_The_Wrong_UserRole_Returns_Bad_Execution_State_And_Clears_Cookie()
         {
             // Arrange
-            var membershipUser = new MembershipUser() { UserName = "12345678" };
+            var membershipUser = new PfMembershipUser() { UserName = "12345678" };
 
             var membership = MockRepository.GenerateMock<IMembershipService>();
             membership.Expect(x => x.ValidateUserByEmailAddr("admin", "123")).Return(membershipUser);
@@ -71,7 +71,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
         public void Valid_Credentials_With_The_Right_UserRole_Returns_Good_Execution_State()
         {
             // Arrange
-            var membershipUser = new MembershipUser() { UserName = "12345678" };
+            var membershipUser = new PfMembershipUser() { UserName = "12345678" };
 
             var membership = MockRepository.GenerateMock<IMembershipService>();
             membership.Expect(x => x.ValidateUserByEmailAddr("admin", "123")).Return(membershipUser);
@@ -346,7 +346,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             {
                 ID = 888,
                 IdentityProfile = new IdentityProfile() { UserRole = UserRole.Admin, },
-                Membership = new MembershipUser { UserName = "12345678", },
+                Membership = new PfMembershipUser { UserName = "12345678", },
             };
 
             var modifyRequest = new CreateOrModifyIdentityRequest() 
@@ -404,7 +404,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             var user = new AggregateUser()
             {
                 IdentityProfile = new IdentityProfile(),
-                Membership = new MembershipUser { UserName = "12345678", }
+                Membership = new PfMembershipUser { UserName = "12345678", }
             };
 
             var membershipService = MockRepository.GenerateMock<IMembershipService>();

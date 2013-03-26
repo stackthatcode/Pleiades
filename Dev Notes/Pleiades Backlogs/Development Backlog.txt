@@ -3,9 +3,10 @@ FRONTRANGE - HOTZONE
 
 Front Range
 -----------
-Jeremy Meeting 2013/03/17
+* Jeremy Meeting 2013/03/17
 - Box Cryptor => TODO
 - Send last meeting notes => TODO
+
 
 
 ### Design Options for StoreFront
@@ -16,13 +17,12 @@ FONTS => https://news.ycombinator.com/item?id=5407499
 
 CreateNew Order Leftovers
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-* Fix the bugs with the Images when we have no Color => TODO
-* On the StoreFront "Wrong Size or Color? Click Here" - and Navigate to Product => TODO
-* Subtotal Row
-* Order Sub Total Before Tax
-* Enter Email Address + Shipping Info + Shipping method => TODO
-* Enter Billing Info => TODO
+* Subtotal Row => IN PROGRESS
 
+* Enter Email Address + Shipping Info + Shipping method => TODO
+* Shipping Charges
+* Order Sub Total Before Tax
+* Enter Billing Info => TODO
 
 
 
@@ -62,7 +62,7 @@ Backlog
 - Post Mortem - inventory *everything* from UI => IN PROGRESS
 - SUPER IMPORTANT - post mortem my approach to the designing the UI.  How to improve my speed? => TODO
 
-- Bundle Image technical debt => TODO
+* On the StoreFront "Wrong Size or Color? Click Here" - and Navigate to Product => TODO
 - Logged-In User => TODO
 - Cache the AggregateUser stuff in a static Dictionary (I mean, seriously, man) => IMPORTANT
 - Cache the Image Bundles too...? => MAYBE

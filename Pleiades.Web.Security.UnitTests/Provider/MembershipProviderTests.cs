@@ -59,7 +59,7 @@ namespace Pleiades.UnitTests.Membership.Provider
 
             var repository = ProviderRepositoryInjector(provider);
             repository.Expect(x => x.GetUserNameByEmail(null)).IgnoreArguments().Return("");
-            repository.Expect(x => x.GetUser(username)).Return(new Model.MembershipUser());
+            repository.Expect(x => x.GetUser(username)).Return(new Model.PfMembershipUser());
 
             // Act
             MembershipCreateStatus statusOutput;
@@ -109,7 +109,7 @@ namespace Pleiades.UnitTests.Membership.Provider
             repository.Expect(x => x.GetUser(username)).Return(null);
             repository
                     .Expect(x => x.Insert(null)).IgnoreArguments()
-                    .Do((Action<Model.MembershipUser>)((x) => { this.Throw(); }));
+                    .Do((Action<Model.PfMembershipUser>)((x) => { this.Throw(); }));
 
             // Act
             MembershipCreateStatus statusOutput;
@@ -136,7 +136,7 @@ namespace Pleiades.UnitTests.Membership.Provider
             repository.Expect(x => x.GetUser(username)).Return(null).Repeat.Once();
             repository.Expect(x => x.Insert(null)).IgnoreArguments();
             repository.Expect(x => x.GetUser(username))
-                .Return(new Model.MembershipUser()
+                .Return(new Model.PfMembershipUser()
                 {
                     ProviderUserKey = Guid.NewGuid(),
                 }).Repeat.Once();

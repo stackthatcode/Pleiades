@@ -5,16 +5,16 @@
 	    var BundleViewer = BundleViewer || {};
 
 	    BundleViewer.ContainsValidImage = function (data) {
-	        return (data.ExternalResourceId || (data.ImageBundle && data.ImageBundle.ExternalId));
+	        return (data.ImageBundleExternalId || (data.ImageBundle && data.ImageBundle.ExternalId));
 	    }
 
-        // $data contains: { ImageBundle, which may contain ExternalResourceId, or ExternalResourceId: "(some guid)", 
+	    // $data contains: { ImageBundle which will contain ExternalId, or ImageBundleExternalId: "(some guid)", 
         // LightboxSuffixId: "Main, Child or Parent, etc." } 
 
 	    BundleViewer.ImageBundleDownloadUrl = function (data, size) {
 	        var imageBundleExternalId = 
-                data.ExternalResourceId ? 
-                    data.ExternalResourceId :
+                data.ImageBundleExternalId ? 
+                    data.ImageBundleExternalId :
                     (data.ImageBundle && data.ImageBundle.ExternalId);
 
             $downloadEndpoint = '/Pleiades/Admin/Image/Download/{exRID}?size={size}';
@@ -24,7 +24,7 @@
         }
 
         BundleViewer.LightBoxElementId = function (data) {
-            return 'lightBox-' + data.ExternalResourceId + '-' + data.LightboxSuffixId;
+            return 'lightBox-' + data.ImageBundleExternalId + '-' + data.LightboxSuffixId;
         }
 
         BundleViewer.ShowLightBox = function (data) {

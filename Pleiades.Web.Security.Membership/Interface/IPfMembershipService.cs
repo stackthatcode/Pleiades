@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using MembershipCreateStatus = System.Web.Security.MembershipCreateStatus;
 using Pleiades.Web.Security.Model;
 
 namespace Pleiades.Web.Security.Interface
@@ -8,7 +7,7 @@ namespace Pleiades.Web.Security.Interface
     /// <summary>
     /// Contains all Membership Provider-related operations for managing Membership User objects -- root Entity Aggregates
     /// </summary>
-    public interface IMembershipService
+    public interface IPfMembershipService
     {
         PfMembershipUser CreateUser(CreateNewMembershipUserRequest request, out PleiadesMembershipCreateStatus outCreateStatus);
         string GenerateUserName();
