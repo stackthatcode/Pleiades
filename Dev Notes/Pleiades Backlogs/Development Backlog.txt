@@ -17,13 +17,18 @@ FONTS => https://news.ycombinator.com/item?id=5407499
 
 CreateNew Order Leftovers
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-* Subtotal Row => IN PROGRESS
+* Enter Email Address + Shipping Info + Shipping method => IN PROGRESS
+* Add Validation for fields => TODO
+* Add Shipping View Model
 
-* Enter Email Address + Shipping Info + Shipping method => TODO
-* Shipping Charges
-* Order Sub Total Before Tax
 * Enter Billing Info => TODO
 
+* Create Email Exists service => TODO
+* Create Shipping Service => TODO
+* Create Order service => TODO
+
+- Fix the bug in choosing a color in the Product Editor => TODO
+* Upgrade MVC to version 4.0 / start using the Web API => TODO
 
 
 
@@ -42,10 +47,10 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/27/2013
 
 - Admin Order Create => IN PROGRESS
 - Shopping Cart => IN PROGRESS
+- High-touch Store Front => TODO
 
 - Barebones Console App => IN PROGRESS
 
-- High-touch Store Front => TODO
 - Search & Manage Orders => TODO
 - Server Logging => TODO
 - Email Sending Engine => TODO

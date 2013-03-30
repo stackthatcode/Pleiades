@@ -716,15 +716,15 @@ Two flows:
 --------------
 * Continuation of Cart Editor	
 
-3/23 1.0 Hours
+3/22 1.0 Hours
 --------------
 More hacking
 
-3/24 2.0 Hours
+3/23 2.0 Hours
 --------------
 * Cleared a massive technical debt I was incurring on the ShoppingCart
 
-3/25 8.0 + Hours
+3/24 8.0 + Hours
 ----------------
 - The ExternalResourceId boondoggle debt
 - Update the SKU when a valid Color and Size combo is selected => DONE
@@ -766,7 +766,7 @@ More hacking
 * When I submit my Order, the Sku Image literally gets COPIED and tied to the Order Line => DONE
 - Product - Add In-Stock flag => DONE
 
-3/27 2.0 Hours
+3/26 2.0 Hours
 --------------
 - CRITICAL => began the final pass on pwnage of the Membership Provider
 * Fix the bugs with the Images when we have no Color => DONE - GOOD JOB
@@ -782,4 +782,13 @@ ProductImage => ImageBundle
 ProductColor => ImageBundle(2x)
 
 - Fixed the ugly ass Inventory layout => DONE
+
+3/27 1.5 Hours
+--------------
+* Subtotal Row => DONE
+* Thrashing around with Product Management on the Checkout process => IN PROGRESS
+
+3/28 1.0 Hours
+--------------
+* Cart comparison between MMA, BR and Amazon
 

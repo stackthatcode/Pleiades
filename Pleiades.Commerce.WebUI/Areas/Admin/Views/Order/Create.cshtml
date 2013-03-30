@@ -8,6 +8,8 @@
     @Html.Partial("_BaseViewModel") 
     @Html.Partial("_SelectProducts") 
     @Html.Partial("_ReviewOrder")
+    @Html.Partial("_States")
+    @Html.Partial("_Shipping")
 
     <!-- document.ready() Functions -->
 	<script type="text/javascript">
@@ -17,6 +19,7 @@
 	        PushMkt.AddListFunctions(model);
 	        PushMkt.AddSearchFunctions(model);
 	        PushMkt.AddReviewProductsFunctions(model);
+	        PushMkt.AddShippingFunctions(model);
 	        ko.applyBindings(model);
 	        tmp = model;
 

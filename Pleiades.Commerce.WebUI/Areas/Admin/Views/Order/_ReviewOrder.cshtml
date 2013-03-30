@@ -137,9 +137,9 @@
             self.SelectedCartItem(null);
         }
 
-        self.PerpetualGlideTest = function () {
+        self.GlideToShipping = function () {
             $("[name='glideToSearch']").hide();
-            self.GlideRight("SelectProducts");
+            self.GlideRight("Shipping");
         }
     }
 </script>
@@ -152,7 +152,7 @@
 			</div>
 			<div class="span3" style="margin-top:15px; text-align:right;">
                 <div data-bind="if: $root.Cart().TotalQuantity()">
-                    <a id="btn-view-cart" class="btn btn-primary" style="width:190px;" data-bind="click: $root.PerpetualGlideTest">
+                    <a id="btn-view-cart" class="btn btn-primary" style="width:190px;" data-bind="click: $root.GlideToShipping">
                         <i class="icon-plane icon-white"></i> Add Shipping <i class="icon-arrow-right icon-white"></i>
                     </a>
                 </div>
@@ -177,7 +177,7 @@
 			<strong>There are no Items in your Cart.  Click "Add Items to Cart".</strong>  
 		</div>
 
-		<table class="table table-hover">
+		<table class="table table-hover" style="margin-bottom:0px;">
 			<tbody data-bind="foreach: $root.Cart().Items">
                 <tr data-bind="ifnot: $root.SelectedCartItem() &&  $root.SelectedCartItem().CartItem() == $data, click: $root.CartItemClick">
                     <td style="width:100px">
@@ -279,16 +279,17 @@
                     </td>
                 </tr>
 			</tbody>
-		</table>
-
-        
-		<table class="table table-hover">
+		</table>        
+		<table class="table table-hover" data-bind="visible: $root.Cart().TotalQuantity()">
 			<tbody>
                 <tr>
                     <td style="width:100px">
                     </td>
-                    <td style="width:800px">
-                        <h1>Subtotal <span data-bind="text: $root.Cart().SubTotal"></span><h1> 
+                    <td style="width:400px; text-align:left;">
+                        <h3 style="color:#666;">Before-Tax Subtotal:</h3> 
+                    </td>
+                    <td style="width:400px; text-align:right;">
+                        <h3 style="color:#666;"><span data-bind="text: $root.Cart().SubTotal"></span></h3>
                     </td>
                 </tr>
             </tbody>

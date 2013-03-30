@@ -25,15 +25,17 @@
             }
 
             self.Glide = function (workspaceTemplate, editorTemplate, direction, callback) {
-                var prevDiv, nextDiv, nextEditorTemplate;
+                var prevDiv, nextDiv, nextEditorTemplate, prevEditorTemplate;
                 if (self.ActiveEditor == 1) {
                     prevDiv = divId1;
                     nextDiv = divId2;
                     nextEditorTemplate = self.EditorTemplate2;
+                    prevEditorTemplate = self.EditorTemplate1;
                 } else {
                     prevDiv = divId2;
                     nextDiv = divId1;
                     nextEditorTemplate = self.EditorTemplate1;
+                    prevEditorTemplate = self.EditorTemplate2;
                 }
 
                 var glideLeftFunction = function (callback) {
@@ -89,8 +91,8 @@
                     },
                     function () {
                         self.ActiveEditor = self.ActiveEditor == 1 ? 2 : 1;
-
                         self.WorkspaceTemplate(workspaceTemplate);
+                        prevEditorTemplate(null);
                     }
                 );
             }

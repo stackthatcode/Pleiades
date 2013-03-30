@@ -14,6 +14,10 @@
 
             self.Items = ko.observableArray(); // array of CartItem objects
 
+            self.Shipping = ko.observable(7.95);
+            self.Taxes = ko.observable(0.00);
+            self.GrandTotal = ko.observable();
+
             self.NumberOfDistinctItems = ko.computed(function () {
                 return self.Items().length;
             });
