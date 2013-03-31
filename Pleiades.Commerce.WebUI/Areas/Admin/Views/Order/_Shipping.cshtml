@@ -13,38 +13,88 @@
             self.GlideLeft("ReviewProducts");
         }
 
-        self.EnableShippingValidation = function () {
+        self.InitializeShippingForms = function () {
+            $("#emailForm").validate({
+                rules: {
+                    emailAddress: {
+                        required: true,
+                        email: true
+                    },
+                },
+                highlight: function(element) {
+                    $(element)
+                        .closest('.control-group')
+                        .addClass('error');
+                },
+                unhighlight:  function(element) {
+                    $(element)
+                        .closest('.control-group')
+                        .removeClass('error');
+                },
+                errorPlacement: function(error,element) {
+                    return true;
+                },
+                errorContainer: $("#emailValidationErrors"),
+            });
+
+            $("#addressForm").validate({
+                rules: {
+                    firstName: {
+                        required: true,
+                    },
+                    lastName: { 
+                        required: true,
+                    },
+                    address1: { 
+                        required: true,
+                    },
+                    city: { 
+                        required: true,
+                    },
+                    zipCode: { 
+                        required: true,
+                    },
+                    state: {
+                        required: true,
+                    },                    
+                    phone: { 
+                        required: true,
+                    },
+                },
+                highlight: function(element) {
+                    $(element)
+                        .closest('.control-group')
+                        .addClass('error');
+                },
+                unhighlight:  function(element) {
+                    $(element)
+                        .closest('.control-group')
+                        .removeClass('error');
+                },
+                errorPlacement: function(error,element) {
+                    return true;
+                },
+                errorContainer: $("#addressValidationErrors"),
+            });
+        }
+
+        self.GotoBilling = function () {
+            var failed = false;
+            if (!self.Cart().ShippingInfo.ShippingOption()) {
+                $("#shippingValidationErrors").show();
+                failed = true;
+            } else {
+                $("#shippingValidationErrors").hide();
+            }
+            failed = (! $("#emailForm").valid()) || failed;
+            failed = (! $("#addressForm").valid()) || failed;
             
+            if (!failed) {
+                console.log("success!");
+            }
+            // DO IT!
         }
     }
-</script>
-<!-- KNOCKOUT TEMPLATES - Shipping -->
-<script type="text/html" id="Top-Workspace-Shipping">
-	<div id="heading" class="container">
-        <div class="row">
-			<div class="span9">
-				<h1>Create Order &gt; Shipping</h1>
-			</div>
-			<div class="span3" style="margin-top:15px; text-align:right;">
-                <div data-bind="if: $root.Cart().TotalQuantity()">
-                    <a id="btn-view-cart" class="btn btn-primary" style="width:190px;" data-bind="click: $root.PerpetualGlideTest">
-                        <i class="icon-thumbs-up icon-white"></i> Proceed to Checkout <i class="icon-arrow-right icon-white"></i>
-                    </a>
-                </div>
-			</div>
-		</div>
-
-        <div class="row">
-            <div class="span7" style="height:48px;">
-                <ul class="nav nav-pills">
-                    <li style="width:190px; text-align:center;">
-				        <a name="glideToReview" href="#" class="backbutton" data-bind="click: $root.BackToReviewOrder">&laquo; Make Changes to Cart</a>
-                        &nbsp;
-                    </li>
-                </ul
-            </div>
-        </div>
-	</div>
 </script>
 <style>  
     .checkout-form1 .control-group .control-label
@@ -72,77 +122,111 @@
         line-height: 14px;
     }    
 </style>
-<script type="text/html" id="Main-Editor-Shipping">
-    <div style="margin-bottom:200px;">       
-        <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.Cart().TotalQuantity() == 0">
-			<strong>Please enter the required fields</strong>  
+<!-- KNOCKOUT TEMPLATES - Shipping -->
+<script type="text/html" id="Top-Workspace-Shipping">
+	<div id="heading" class="container">
+        <div class="row">
+			<div class="span9">
+				<h1>Create Order &gt; Shipping</h1>
+			</div>
+			<div class="span3" style="margin-top:15px; text-align:right;">
+                <div data-bind="if: $root.Cart().TotalQuantity()">
+                    <a id="btn-goto-billing" class="btn btn-primary" style="width:190px;" data-bind="click: $root.GotoBilling">
+                        $ Proceed to Billing <i class="icon-arrow-right icon-white"></i>
+                    </a>
+                </div>
+			</div>
 		</div>
 
-        <div style="float:left; width:690px;">
+        <div class="row">
+            <div class="span7" style="height:48px;">
+                <ul class="nav nav-pills">
+                    <li style="width:190px; text-align:center;">
+				        <a name="glideToReview" href="#" class="backbutton" data-bind="click: $root.BackToReviewOrder">&laquo; Make Changes to Cart</a>
+                        &nbsp;
+                    </li>
+                </ul
+            </div>
+        </div>
+	</div>
+</script>
+<script type="text/html" id="Main-Editor-Shipping">
+    <div style="margin-bottom:200px;">                
+        <div style="float:left; width:690px;" data-bind="with: $root.Cart().ShippingInfo">
             <h4 style="margin-bottom:10px; margin-top:20px;">Customer's Email Address</h4>
-            <form class="form-horizontal checkout-form1">
+            
+            <div id="emailValidationErrors" style="width:570px; text-align:center;" class="alert alert-error hide">
+                <strong>Please enter a valid Email Address</strong>  
+		    </div>
+
+            <form id="emailForm" class="form-horizontal checkout-form1">
                 <div class="control-group">
                     <label class="control-label" for="emailAddress">Email Addr.</label>
                     <div class="controls">
-                        <input type="text" id="emailAddress" placeholder="Email Address" maxlength="50">
+                        <input type="text" name="emailAddress" data-bind="value: $data.EmailAddress" placeholder="Email Address" maxlength="50">
                     </div>
                 </div>                
             </form>
             
             <h4 style="margin-bottom:10px; margin-top:40px;">Customer's Shipping Address</h4>
-            <form class="form-horizontal checkout-form1">
+            
+            <div id="addressValidationErrors" style="width:570px; text-align:center;" class="alert alert-error hide">
+                <strong>Please enter a valid Shipping Address information</strong>  
+		    </div>
+
+            <form id="addressForm" class="form-horizontal checkout-form1">
                 <div style="height:180px;">
                     <div style="float:left; width:300px;">
                         <div class="control-group">
                             <label class="control-label" for="firstName">First Name</label>
                             <div class="controls">
-                                <input type="text" id="firstName" placeholder="First Name" maxlength="50">
+                                <input type="text" name="firstName" data-bind="value: $data.FirstName" placeholder="First Name" maxlength="50">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="lastName">Last Name</label>
                             <div class="controls">
-                                <input type="text" id="lastName" placeholder="Last Name" maxlength="50">
+                                <input type="text" name="lastName" data-bind="value: $data.LastName" placeholder="Last Name" maxlength="50">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="address1">Address 1</label>
                             <div class="controls">
-                                <input type="text" id="address1" placeholder="Address Line 1" maxlength="50">
+                                <input type="text" name="address1" data-bind="value: $data.Address1" placeholder="Address Line 1" maxlength="50">
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="address1">Address 2</label>
+                            <label class="control-label" for="address2">Address 2</label>
                             <div class="controls">
-                                <input type="text" id="address2" placeholder="Address Line 2" maxlength="50">
+                                <input type="text" name="address2" data-bind="value: $data.Address2" placeholder="Address Line 2" maxlength="50">
                             </div>
                         </div>
                     </div>
 
                     <div style="float:left; width:300px; margin-left:20px;">
                         <div class="control-group">
-                            <label class="control-label" for="state">State</label>
+                            <label class="control-label" for="city">City</label>
                             <div class="controls">
-                                <select id="state" 
-                                    data-bind="options: PushMkt.StatesOfAmerica, optionsText: 'name', optionsValue: 'abbreviation', value: $data.BrandId" />
+                                <input type="text" name="city" data-bind="value: $data.City" placeholder="City" maxlength="25">
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="state">City</label>
+                            <label class="control-label" for="state">State</label>
                             <div class="controls">
-                                <input type="text" id="city" placeholder="City" maxlength="50">
+                                <select id="state" name="state"
+                                    data-bind="options: PushMkt.StatesOfAmerica, optionsText: 'name', optionsValue: 'abbreviation', value: $data.State, optionsCaption:'Choose a State' " />
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="state">Zip Code</label>
                             <div class="controls">
-                                <input type="text" id="zipCode" placeholder="Zip Code" maxlength="50">
+                                <input type="text" name="zipCode" data-bind="value: $data.ZipCode" placeholder="Zip Code" maxlength="5">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="state">Phone</label>
                             <div class="controls">
-                                <input type="text" id="phone" placeholder="Phone" maxlength="50">
+                                <input type="text" name="phone" data-bind="value: $data.Phone" placeholder="Phone" maxlength="15">
                             </div>
                         </div>
                     </div>
@@ -150,72 +234,27 @@
             </form>
 
             <h4 style="margin-bottom:10px; margin-top:40px;">Shipping Method</h4>
+
+            <div id="shippingValidationErrors" style="width:570px; text-align:center;" class="alert alert-error hide">
+                <strong>Please choose a Shipping Option</strong>  
+		    </div>
+
             <div style="margin-bottom:80px;">
-                <form class="form-horizontal checkout-form1">
-                    <div style="clear:both; width:300px;">
-                        <label><input type="radio" name="shippingSelect" value="1" /> UPS Ground: $7.95 (7-10 days)</label>
-                    </div>
-                    <div style="clear:both; width:300px;">
-                        <label><input type="radio" name="shippingSelect" value="2" /> UPS Ground 2: $14.95  (3-5 days)</label>
-                    </div>
-                    <div style="clear:both; width:300px;">
-                        <label><input type="radio" name="shippingSelect" value="3" /> UPS Ground 3: $7.95 (Next Day)</label>
+                <form id="shipping" class="form-horizontal checkout-form1">                    
+                    <div data-bind="foreach: PushMkt.ShippingOptions">
+                        <div style="clear:both; width:300px;">
+                            <label>
+                                <input type="radio" name="shippingSelect" data-bind="value: $data.Id, checked: $parent.ShippingOption" /> 
+                                <span data-bind="text: $data.Name"></span>
+                                <span data-bind="text: ToMoney($data.Cost)"></span>
+                            </label>
+                        </div>
                     </div>
                 </form>
             </div>            
         </div>
 
-        <div style="float:left; width:250px;">
-            <h4 style="margin-bottom:20px; margin-top:20px; float:left;">Order Summary</h4>
-            <a href="#" name="glideToReview" data-bind="click:$root.BackToReviewOrder" style="margin-top:20px; margin-left:10px; float:left;">(Edit Order)</a>
-
-            <!-- Move this to another template -->
-            <table>
-            <tbody data-bind="foreach: $root.Cart().Items">
-                <tr>
-                    <td valign="top" style="width:100px; padding-bottom:10px;">
-                	    <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundle: $data.Sku().ImageBundle, LightboxSuffixId: 'Review' } }">
-			            </div>
-                    </td>
-
-                    <td valign="top" style="width:150px;">
-                        <div class="order-summary-item" style="width:150px; vertical-align:top; float:left;">
-                            <div style="font-weight:bold" data-bind="text: $data.Product.Name"></div>                            
-                            <div data-bind="if: $data.Sku().Color || $data.Sku().Size">
-                                <span data-bind="if: $data.Sku().Color">Color: </span><span data-bind="text: $data.Sku().Color.Name"></span>
-                                <span data-bind="if: $data.Sku().Size">Size: <span data-bind="text: $data.Sku().Size.Name"></span>
-                            </div>
-                            <div>
-                                <span>Quantity:</span> <span data-bind="text: $data.Quantity"></span>
-                            </div>
-                            <div>
-                                <span>Price per Item:</span> <span data-bind="text: ToMoney($data.Product.UnitPrice)"></span>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-            <table>
-
-            <!-- Add the items from my Order -->
-            <table style="margin-top:10px;" id="order-summary">
-                <tr>
-                    <td>Order Subtotal:</td>
-                    <td><span data-bind="text: $root.Cart().SubTotal"></span></td>
-                </tr>
-                <tr>
-                    <td>Shipping:</td>
-                    <td><span data-bind="text: ToMoney($root.Cart().Shipping())"></span></td>
-                </tr>
-                <tr>
-                    <td>Sales Tax:</td>
-                    <td><span data-bind="text: ToMoney($root.Cart().Taxes())"></span></td>
-                </tr>
-                <tr>
-                    <td>Order Total:</td>
-                    <td><span data-bind="text: $root.Cart().Total"></span></td>
-                </tr>
-            </table>
+        <div style="float:left; width:250px;" data-bind="template: { name: 'Order-Summary' }">
         </div>
     </div>
 </script>

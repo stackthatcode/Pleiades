@@ -42,7 +42,7 @@
                     },
                     function () {
                         model.ShowInventory(model.SearchData()[0]);
-                        window.setTimeout(this, 1000);
+                        window.setTimeout(this, 1500);
                     },
                     function () {
                         var product = model.SearchData()[0];
@@ -50,18 +50,15 @@
                         var sku = inventory[1];
                         sku.SelectedQuantity(2);
                         model.AddToCart(sku, product);
-                        //this();
-                    },
-                    function () {
-                        model.ShowInventory(model.SearchData()[0]);
+
+                        var sku2 = inventory[6];
+                        sku2.SelectedQuantity(1);
+                        model.AddToCart(sku2, product);
+                        model.ViewCart();
                         window.setTimeout(this, 1000);
                     },
                     function () {
-                        var product = model.SearchData()[0];
-                        var inventory = product.Inventory();
-                        var item = inventory[1];
-                        item.SelectedQuantity(2);
-                        model.AddToCart(item, product);
+                        model.GlideToShipping();
                     }
                 );
 	        }

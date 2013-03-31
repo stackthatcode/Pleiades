@@ -791,4 +791,17 @@ ProductColor => ImageBundle(2x)
 3/28 1.0 Hours
 --------------
 * Cart comparison between MMA, BR and Amazon
+* Order Sub Total Before Tax => DONE
+
+3/30 2.5 Hours + 2.0 Hours
+--------------------------
+* Shipping Information
+
+3/31 2.5 Hours
+--------------
+* Enter Email Address + Shipping Info + Shipping method => DONE
+* Add Validation for fields => DONE
+* Add Shipping View Model => DONE
+* Create Email Exists service => DONE - PHASE 2 w/ User Accounts
+
 

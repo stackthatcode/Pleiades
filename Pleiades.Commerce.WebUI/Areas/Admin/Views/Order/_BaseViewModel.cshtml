@@ -50,12 +50,12 @@
 	        glider.Init("Top-Workspace-SelectProducts", "Main-Editor-SelectProducts");
 	        self.EndlessGlider = glider;
 
-	        self.GlideLeft = function (template) {
-	            self.EndlessGlider.GlideToLeft("Top-Workspace-" + template, "Main-Editor-" + template);
+	        self.GlideLeft = function (template, userCallback) {
+	            self.EndlessGlider.GlideToLeft("Top-Workspace-" + template, "Main-Editor-" + template, userCallback);
 	        }
 
-	        self.GlideRight = function (template) {
-	            self.EndlessGlider.GlideToRight("Top-Workspace-" + template, "Main-Editor-" + template);
+	        self.GlideRight = function (template, userCallback) {
+	            self.EndlessGlider.GlideToRight("Top-Workspace-" + template, "Main-Editor-" + template, userCallback);
 	        }
 	    }
     </script>

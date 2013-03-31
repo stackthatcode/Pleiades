@@ -1,4 +1,4 @@
-﻿<!-- Cart & CartItem -->
+﻿    <!-- Cart & CartItem -->
     <script type="text/javascript">
         var PushMkt = PushMkt || {};
 
@@ -9,14 +9,77 @@
             self.Product = product;
         }
 
+        PushMkt.ShippingOptions = [
+            { Id: "1", Name: "UPS Ground (7-10 days)", Cost: 7.95 },
+            { Id: "2", Name: "UPS Ground Quicker (3-5 days)", Cost: 14.95 },
+            { Id: "3", Name: "UPS Ground Express (next day)", Cost: 21.95 },
+        ];
+
+        PushMkt.ShippingInfo = function () {
+            var self = this;
+            self.EmailAddress = ko.observable();
+            self.FirstName = ko.observable();
+            self.LastName = ko.observable();
+            self.Address1 = ko.observable();
+            self.Address2 = ko.observable();
+            self.City = ko.observable();
+            self.State = ko.observable();
+            self.ZipCode = ko.observable();
+            self.Phone = ko.observable();
+            self.ShippingOption = ko.observable();
+
+            self.ShippingCost = ko.computed(function () {
+                if (!self.ShippingOption()) {
+                    return 0;
+                }
+                var option = AQ(PushMkt.ShippingOptions)
+                    .first(function (x) { return x.Id == self.ShippingOption(); });
+                return option.Cost;
+            });
+        }
+
+        // ### TESTING FUNCTION, RIGHT? ### //
+        PushMkt.ShippingInfo = function () {
+            var self = this;
+            self.EmailAddress = ko.observable("aleksjones@gmail.com");
+            self.FirstName = ko.observable("Aleksandr");
+            self.LastName = ko.observable("Jones");
+            self.Address1 = ko.observable("123 Test Street");
+            self.Address2 = ko.observable("Suite 100");
+            self.City = ko.observable("Mount Prospect");
+            self.State = ko.observable("IL");
+            self.ZipCode = ko.observable("60013");
+            self.Phone = ko.observable("510-717-8112");
+            self.ShippingOption = ko.observable();
+            
+            self.ShippingCost = ko.computed(function () {
+                if (!self.ShippingOption()) {
+                    return 0;
+                }
+                var option = AQ(PushMkt.ShippingOptions)
+                    .first(function (x) { return x.Id == self.ShippingOption(); });
+                return option.Cost;
+            });
+        }
+
+        PushMkt.BillingInfo = function () {
+            var self = this;
+            self.FirstName = ko.observable();
+            self.LastName = ko.observable();
+            self.Address1 = ko.observable();
+            self.Address2 = ko.observable();
+            self.City = ko.observable();
+            self.State = ko.observable();
+            self.ZipCode = ko.observable();
+            self.Phone = ko.observable();
+        }
+
         PushMkt.Cart = function () {
             var self = this;
 
             self.Items = ko.observableArray(); // array of CartItem objects
-
-            self.Shipping = ko.observable(7.95);
-            self.Taxes = ko.observable(0.00);
-            self.GrandTotal = ko.observable();
+            self.ShippingInfo = new PushMkt.ShippingInfo();
+            self.BillingInfo = new PushMkt.BillingInfo();
 
             self.NumberOfDistinctItems = ko.computed(function () {
                 return self.Items().length;
@@ -32,12 +95,6 @@
                     .sum(function (x) { return x.Quantity(); });
             };
 
-            self.SubTotal = ko.computed(function () {
-                var result = AQ(self.Items())
-                    .sum(function (x) { return x.Quantity() * x.Product.UnitPrice; });
-                return ToMoney(result);
-            });
-
             self.ItemBySkuCode = function (skucode) {
                 return AQ(self.Items())
                     .firstOrDefault(function (x) { return x.Sku().SkuCode == skucode; });
@@ -48,6 +105,18 @@
                     .where(function (x) { return x.Sku().SkuCode == skucode; })
                     .each(function (x) { self.Items.remove(x); });
             };
+
+            // monies
+            self.SubTotal = ko.computed(function () {
+                var result = AQ(self.Items())
+                    .sum(function (x) { return x.Quantity() * x.Product.UnitPrice; });
+                return result;
+            });
+
+            self.Taxes = ko.observable(0.00);
+            self.GrandTotal = ko.computed(function () {
+                return self.SubTotal() + self.Taxes() + self.ShippingInfo.ShippingCost();
+            });
         };
 
         PushMkt.SelectedCartItem = function (cartItem, cart) {
@@ -180,4 +249,57 @@
                 }
             );
         }
+    </script>
+    <script type="text/html" id="Order-Summary">
+        <div style="float:left; width:250px;">
+            <h4 style="margin-bottom:20px; margin-top:20px; float:left;">Order Summary</h4>
+            <a href="#" name="glideToReview" data-bind="click:$root.BackToReviewOrder" style="margin-top:20px; margin-left:10px; float:left;">(Edit Order)</a>
+
+            <table>
+            <tbody data-bind="foreach: $root.Cart().Items">
+                <tr>
+                    <td valign="top" style="width:100px; padding-bottom:10px;">
+                	    <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundle: $data.Sku().ImageBundle, LightboxSuffixId: 'Review' } }">
+			            </div>
+                    </td>
+
+                    <td valign="top" style="width:150px;">
+                        <div class="order-summary-item" style="width:150px; vertical-align:top; float:left;">
+                            <div style="font-weight:bold" data-bind="text: $data.Product.Name"></div>                            
+                            <div data-bind="if: $data.Sku().Color || $data.Sku().Size">
+                                <span data-bind="if: $data.Sku().Color">Color: </span><span data-bind="text: $data.Sku().Color.Name"></span>
+                                <span data-bind="if: $data.Sku().Size">Size: <span data-bind="text: $data.Sku().Size.Name"></span>
+                            </div>
+                            <div>
+                                <span>Quantity:</span> <span data-bind="text: $data.Quantity"></span>
+                            </div>
+                            <div>
+                                <span>Price per Item:</span> <span data-bind="text: ToMoney($data.Product.UnitPrice)"></span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <table>
+
+            <!-- Add the items from my Order -->
+            <table style="margin-top:10px;" id="order-summary">
+                <tr>
+                    <td>Order Subtotal:</td>
+                    <td><span data-bind="text: ToMoney($root.Cart().SubTotal())"></span></td>
+                </tr>
+                <tr>
+                    <td>Shipping:</td>
+                    <td><span data-bind="text: ToMoney($root.Cart().ShippingInfo.ShippingCost())"></span></td>
+                </tr>
+                <tr>
+                    <td>Sales Tax:</td>
+                    <td><span data-bind="text: ToMoney($root.Cart().Taxes())"></span></td>
+                </tr>
+                <tr>
+                    <td><span style="font-weight:bold; color:#444;">Order Total:</span></td>
+                    <td><span style="font-weight:bold; color:#444;" data-bind="text: ToMoney($root.Cart().GrandTotal())"></span></td>
+                </tr>
+            </table>
+        </div>
     </script>

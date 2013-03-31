@@ -944,9 +944,7 @@
                 errors.push({ controlGroup: "#SEO", invalid: product.SEO().trim() == "" });
                 errors.push({ controlGroup: "#Synopsis", invalid: product.Synopsis().trim() == "" });
                 errors.push({ controlGroup: "#Description", invalid: product.Description().trim() == "" });
-                //errors.push({ controlGroup: "#Brand", invalid: product.BrandId() == null });
-                //errors.push({ controlGroup: "#Category", invalid: product.CategoryId() == null });
-
+                
                 var validationMessage = $("#validation");
                 validationMessage.hide();
                 $.each(errors, function (index, elem) {

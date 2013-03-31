@@ -139,7 +139,7 @@
 
         self.GlideToShipping = function () {
             $("[name='glideToSearch']").hide();
-            self.GlideRight("Shipping");
+            self.GlideRight("Shipping", self.InitializeShippingForms);
         }
     }
 </script>
@@ -152,8 +152,8 @@
 			</div>
 			<div class="span3" style="margin-top:15px; text-align:right;">
                 <div data-bind="if: $root.Cart().TotalQuantity()">
-                    <a id="btn-view-cart" class="btn btn-primary" style="width:190px;" data-bind="click: $root.GlideToShipping">
-                        <i class="icon-plane icon-white"></i> Add Shipping <i class="icon-arrow-right icon-white"></i>
+                    <a id="btn-goto-shipping" class="btn btn-primary" style="width:190px;" data-bind="click: $root.GlideToShipping">
+                        <i class="icon-plane icon-white"></i> Shipping &amp; Billing <i class="icon-arrow-right icon-white"></i>
                     </a>
                 </div>
 			</div>
@@ -286,10 +286,10 @@
                     <td style="width:100px">
                     </td>
                     <td style="width:400px; text-align:left;">
-                        <h3 style="color:#666;">Before-Tax Subtotal:</h3> 
+                        <h3 style="color:#666;">Order Subtotal:</h3> 
                     </td>
                     <td style="width:400px; text-align:right;">
-                        <h3 style="color:#666;"><span data-bind="text: $root.Cart().SubTotal"></span></h3>
+                        <h3 style="color:#666;"><span data-bind="text: ToMoney($root.Cart().SubTotal())"></span></h3>
                     </td>
                 </tr>
             </tbody>

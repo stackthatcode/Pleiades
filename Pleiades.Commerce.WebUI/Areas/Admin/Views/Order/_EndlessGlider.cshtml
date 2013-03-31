@@ -16,15 +16,15 @@
                 $(divId2).hide();
             }
 
-            self.GlideToRight = function (workspaceTemplate, editorTemplate) {
-                self.Glide(workspaceTemplate, editorTemplate, "RIGHT");
+            self.GlideToRight = function (workspaceTemplate, editorTemplate, userCallback) {
+                self.Glide(workspaceTemplate, editorTemplate, "RIGHT", userCallback);
             }
 
-            self.GlideToLeft = function (workspaceTemplate, editorTemplate) {
-                self.Glide(workspaceTemplate, editorTemplate, "LEFT");
+            self.GlideToLeft = function (workspaceTemplate, editorTemplate, userCallback) {
+                self.Glide(workspaceTemplate, editorTemplate, "LEFT", userCallback);
             }
 
-            self.Glide = function (workspaceTemplate, editorTemplate, direction, callback) {
+            self.Glide = function (workspaceTemplate, editorTemplate, direction, userCallback) {
                 var prevDiv, nextDiv, nextEditorTemplate, prevEditorTemplate;
                 if (self.ActiveEditor == 1) {
                     prevDiv = divId1;
@@ -37,7 +37,7 @@
                     nextEditorTemplate = self.EditorTemplate1;
                     prevEditorTemplate = self.EditorTemplate2;
                 }
-
+                    
                 var glideLeftFunction = function (callback) {
                     $(nextDiv).css({ display: "block", left: "-940px", top: "0px"  });
 		
@@ -53,7 +53,7 @@
 			                left: "+=940" 
 		                }, 
 		                { 	
-			                complete:callback,
+			                complete: callback,
 			                duration: 250,
 		                }
 	                );
@@ -93,6 +93,9 @@
                         self.ActiveEditor = self.ActiveEditor == 1 ? 2 : 1;
                         self.WorkspaceTemplate(workspaceTemplate);
                         prevEditorTemplate(null);
+                        if (userCallback) {
+                            userCallback();
+                        }
                     }
                 );
             }

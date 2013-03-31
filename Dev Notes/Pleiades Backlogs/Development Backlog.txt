@@ -17,17 +17,15 @@ FONTS => https://news.ycombinator.com/item?id=5407499
 
 CreateNew Order Leftovers
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-* Enter Email Address + Shipping Info + Shipping method => IN PROGRESS
-* Add Validation for fields => TODO
-* Add Shipping View Model
-
 * Enter Billing Info => TODO
 
-* Create Email Exists service => TODO
-* Create Shipping Service => TODO
+* Create Shipping Service for Shipping Options => TODO
 * Create Order service => TODO
 
 - Fix the bug in choosing a color in the Product Editor => TODO
+- Fix the bug with Image pop-up on Create Order screen => TODO
+- Fix the double-link-click bug => TODO
+
 * Upgrade MVC to version 4.0 / start using the Web API => TODO
 
 
@@ -44,20 +42,30 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/27/2013
 - Image Upload & Processing Engine => DONE
 - Product Search & Editor => DONE
 - SKU Generator + Inventory Tracker => DONE
+- Admin Order Create => DONE
 
-- Admin Order Create => IN PROGRESS
 - Shopping Cart => IN PROGRESS
-- High-touch Store Front => TODO
-
 - Barebones Console App => IN PROGRESS
 
+- High-touch Store Front => TODO
+- One Completely Solid Landing Page => TODO
+
+- Sales Graph => TODO
 - Search & Manage Orders => TODO
 - Server Logging => TODO
 - Email Sending Engine => TODO
+- Revamped Membership Provider => TODO
+
+
 
 PHASE 2
 -------
-- Basic Analytic Tracker - Sales Graph, Traffic Source, Landing Page => 
+- Analytics Integration - KISS, Mixpanel, whatevs
+- Automated Traffic Management
+- Email Marketing w/ User Management
+- Offer Engine
+- Mobile Storefront + Cart
+- Shipping API's
 
 
 
