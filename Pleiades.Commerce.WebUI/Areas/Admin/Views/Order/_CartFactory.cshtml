@@ -28,39 +28,22 @@
             self.Phone = ko.observable();
             self.ShippingOption = ko.observable();
 
-            self.ShippingCost = ko.computed(function () {
-                if (!self.ShippingOption()) {
-                    return 0;
-                }
-                var option = AQ(PushMkt.ShippingOptions)
-                    .first(function (x) { return x.Id == self.ShippingOption(); });
-                return option.Cost;
-            });
+            // ### TESTING FUNCTION, RIGHT? ### //
+            self.EmailAddress("aleksjones@gmail.com");
+            self.FirstName("Aleksandr");
+            self.LastName("Jones");
+            self.Address1("123 Test Street");
+            self.Address2("Suite 100");
+            self.City("Mount Prospect");
+            self.State("IL");
+            self.ZipCode("60013");
+            self.Phone("510-717-8112");
+            self.ShippingOption("1");
         }
 
-        // ### TESTING FUNCTION, RIGHT? ### //
-        PushMkt.ShippingInfo = function () {
-            var self = this;
-            self.EmailAddress = ko.observable("aleksjones@gmail.com");
-            self.FirstName = ko.observable("Aleksandr");
-            self.LastName = ko.observable("Jones");
-            self.Address1 = ko.observable("123 Test Street");
-            self.Address2 = ko.observable("Suite 100");
-            self.City = ko.observable("Mount Prospect");
-            self.State = ko.observable("IL");
-            self.ZipCode = ko.observable("60013");
-            self.Phone = ko.observable("510-717-8112");
-            self.ShippingOption = ko.observable();
-            
-            self.ShippingCost = ko.computed(function () {
-                if (!self.ShippingOption()) {
-                    return 0;
-                }
-                var option = AQ(PushMkt.ShippingOptions)
-                    .first(function (x) { return x.Id == self.ShippingOption(); });
-                return option.Cost;
-            });
-        }
+
+        PushMkt.ExpirationMonths = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+        PushMkt.ExpirationYears = AQ.range(2013, 2030).toArray();
 
         PushMkt.BillingInfo = function () {
             var self = this;
@@ -71,7 +54,23 @@
             self.City = ko.observable();
             self.State = ko.observable();
             self.ZipCode = ko.observable();
-            self.Phone = ko.observable();
+
+            self.CardNumber = ko.observable();
+            self.ExpirationMonth = ko.observable();
+            self.ExpirationYear = ko.observable();
+            self.CVV = ko.observable();
+
+            self.FirstName("Aleks");
+            self.LastName("Jones");
+            self.Address1("777 On The Way");
+            self.Address2("Suite 999");
+            self.City("Mount Prospect");
+            self.State("IL");
+            self.ZipCode("60013");
+            self.CardNumber("5247405514068983");
+            self.ExpirationMonth("03");
+            self.ExpirationYear("2014");
+            self.CVV("666");
         }
 
         PushMkt.Cart = function () {
@@ -80,6 +79,16 @@
             self.Items = ko.observableArray(); // array of CartItem objects
             self.ShippingInfo = new PushMkt.ShippingInfo();
             self.BillingInfo = new PushMkt.BillingInfo();
+
+            self.CopyShippingToBilling = function () {
+                self.BillingInfo.FirstName(self.ShippingInfo.FirstName());
+                self.BillingInfo.LastName(self.ShippingInfo.LastName());
+                self.BillingInfo.Address1(self.ShippingInfo.Address1());
+                self.BillingInfo.Address2(self.ShippingInfo.Address2());
+                self.BillingInfo.City(self.ShippingInfo.City());
+                self.BillingInfo.State(self.ShippingInfo.State());
+                self.BillingInfo.ZipCode(self.ShippingInfo.ZipCode());
+            }
 
             self.NumberOfDistinctItems = ko.computed(function () {
                 return self.Items().length;
@@ -113,9 +122,28 @@
                 return result;
             });
 
-            self.Taxes = ko.observable(0.00);
+
+            self.ShippingCost = ko.computed(function () {
+                if (!self.ShippingInfo.ShippingOption()) {
+                    return 0;
+                }
+                var option = AQ(PushMkt.ShippingOptions)
+                        .first(function (x) { return x.Id == self.ShippingInfo.ShippingOption(); });
+                return option.Cost;
+            });
+
+            self.Taxes = ko.computed(function () {
+                if (!self.ShippingInfo.State()) {
+                    return 0;
+                }
+                var state = AQ(PushMkt.StatesOfAmerica)
+                        .first(function (x) { return x.abbreviation == self.ShippingInfo.State(); });
+                var taxPercentage = state.tax;
+                return (self.SubTotal() + self.ShippingCost()) * (taxPercentage / 100.0);
+            });
+
             self.GrandTotal = ko.computed(function () {
-                return self.SubTotal() + self.Taxes() + self.ShippingInfo.ShippingCost();
+                return self.SubTotal() + self.Taxes() + self.ShippingCost();
             });
         };
 
@@ -250,10 +278,27 @@
             );
         }
     </script>
+    <style>
+    #order-summary tr td:nth-child(1)
+    {
+        width:160px;
+        text-align:left;
+    }
+    #order-summary tr td:nth-child(2)
+    {
+        width:90px;
+        text-align:right;
+    }
+    .order-summary-item div, .order-summary-item span, .order-summary-item strong, .order-summary span
+    {
+        font-size: 11px;
+        line-height: 14px;
+    }    
+    </style>
     <script type="text/html" id="Order-Summary">
         <div style="float:left; width:250px;">
             <h4 style="margin-bottom:20px; margin-top:20px; float:left;">Order Summary</h4>
-            <a href="#" name="glideToReview" data-bind="click:$root.BackToReviewOrder" style="margin-top:20px; margin-left:10px; float:left;">(Edit Order)</a>
+            <a href="#" name="glideToReview" data-bind="click:$root.BackToReviewOrder" style="margin-top:20px; margin-left:10px; float:left;">(edit order)</a>
 
             <table>
             <tbody data-bind="foreach: $root.Cart().Items">
@@ -290,7 +335,7 @@
                 </tr>
                 <tr>
                     <td>Shipping:</td>
-                    <td><span data-bind="text: ToMoney($root.Cart().ShippingInfo.ShippingCost())"></span></td>
+                    <td><span data-bind="text: ToMoney($root.Cart().ShippingCost())"></span></td>
                 </tr>
                 <tr>
                     <td>Sales Tax:</td>

@@ -804,4 +804,8 @@ ProductColor => ImageBundle(2x)
 * Add Shipping View Model => DONE
 * Create Email Exists service => DONE - PHASE 2 w/ User Accounts
 
+3/31 2.5 Hours
+--------------
+- Sale Tax computation
+* Enter Billing Info => DONE
 

@@ -14,19 +14,23 @@ Front Range
 http://designmodo.github.com/Flat-UI/
 FONTS => https://news.ycombinator.com/item?id=5407499
 
+Marketing
+---------
+- Theme? http://kovshenin.com/2012/publish-a-free-minimal-and-responsive-wordpress-theme/#comments  -- either that or Thesis
 
 CreateNew Order Leftovers
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-* Enter Billing Info => TODO
-
 * Create Shipping Service for Shipping Options => TODO
-* Create Order service => TODO
+* Create Order w/ Payment Verification service => TODO
 
+- Add Card Entry Test Automation => TODO
+- Add Shipping Address to Order Summary w/ link to Shipping Info => TODO
+- Fix the double clicks on nav buttons => TODO
 - Fix the bug in choosing a color in the Product Editor => TODO
 - Fix the bug with Image pop-up on Create Order screen => TODO
 - Fix the double-link-click bug => TODO
 
-* Upgrade MVC to version 4.0 / start using the Web API => TODO
+* Upgrade MVC to version 4.0 / start using the Web API for Controllers => TODO
 
 
 
