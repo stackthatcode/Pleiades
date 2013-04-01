@@ -35,9 +35,35 @@
             );
 
 	        // ### TESTING SCRIPTS ###
+	        window.LoadPaymentInfo = function () {
+	            var billing = model.Cart().BillingInfo;
+	            billing.FirstName("Aleks");
+	            billing.LastName("Jones");
+	            billing.Address1("777 On The Way");
+	            billing.Address2("Suite 999");
+	            billing.City("Mount Prospect");
+	            billing.State("IL");
+	            billing.ZipCode("60013");
+	            billing.CardNumber("5247405514068983");
+	            billing.ExpirationMonth("03");
+	            billing.ExpirationYear("2014");
+	            billing.CVV("666");
+	        };
 	        // ### TESTING SCRIPTS ###
 	        // ### TESTING SCRIPTS ###
 	        window.Automation = function () {
+	            var shipping = model.Cart().ShippingInfo;
+	            shipping.EmailAddress("aleksjones@gmail.com");
+	            shipping.FirstName("Aleksandr");
+	            shipping.LastName("Jones");
+	            shipping.Address1("123 Test Street");
+	            shipping.Address2("Suite 100");
+	            shipping.City("Mount Prospect");
+	            shipping.State("IL");
+	            shipping.ZipCode("60013");
+	            shipping.Phone("510-717-8112");
+	            shipping.ShippingOption("1");
+
 	            flow.exec(
                     function () {
                         model.SearchClick(this);
@@ -63,7 +89,9 @@
                         model.GlideToShipping();
                     }
                 );
-	        }
+            }
+            // ### TESTING SCRIPTS ###
+
 	    });
 	</script>
 }

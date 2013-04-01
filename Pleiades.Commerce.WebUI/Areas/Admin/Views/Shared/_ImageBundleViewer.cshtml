@@ -9,31 +9,40 @@
 	    }
 
 	    // $data contains: { ImageBundle which will contain ExternalId, or ImageBundleExternalId: "(some guid)", 
-        // LightboxSuffixId: "Main, Child or Parent, etc." } 
+        // LightboxSuffixId: "Main, Child or Parent, etc." }
 
-	    BundleViewer.ImageBundleDownloadUrl = function (data, size) {
-	        var imageBundleExternalId = 
-                data.ImageBundleExternalId ? 
+	    BundleViewer.ExtractId = function (data) {
+	        var imageBundleExternalId =
+                data.ImageBundleExternalId ?
                     data.ImageBundleExternalId :
                     (data.ImageBundle && data.ImageBundle.ExternalId);
+	        return imageBundleExternalId;
+	    }
 
-            $downloadEndpoint = '/Pleiades/Admin/Image/Download/{exRID}?size={size}';
-            return $downloadEndpoint
-                .replace("{exRID}", imageBundleExternalId)
+	    BundleViewer.ImageBundleDownloadUrl = function (data, size) {
+	        var id = BundleViewer.ExtractId(data);
+
+	        $downloadEndpoint = '/Pleiades/Admin/Image/Download/{exRID}?size={size}';
+	        return $downloadEndpoint
+                .replace("{exRID}", id)
                 .replace("{size}", size);
+	    }
+
+	    BundleViewer.LightBoxElementId = function (data) {
+	        var id = BundleViewer.ExtractId(data);
+
+	        return 'lightBox-' + id + '-' + data.LightboxSuffixId;
         }
 
-        BundleViewer.LightBoxElementId = function (data) {
-            return 'lightBox-' + data.ImageBundleExternalId + '-' + data.LightboxSuffixId;
-        }
+        BundleViewer.ShowLightBox = function (data, event) {
+            event.stopPropagation();
 
-        BundleViewer.ShowLightBox = function (data) {
             var lightboxid = '#' + BundleViewer.LightBoxElementId(data);
             var lightboxImgId = lightboxid + " img";
 
             console.log(lightboxImgId + ' ' + $(lightboxImgId).attr("data-image"));
             $(lightboxImgId).attr("src", $(lightboxImgId).attr("data-image"));
-            $(lightboxImgId).load(function () { $(lightboxid).lightbox(); });            
+            $(lightboxImgId).load(function () { $(lightboxid).lightbox(); });
         }
 	</script>
 
@@ -42,7 +51,7 @@
             <tr>
             <td style="height:150px; border:1px dotted #CCC; width:150px; text-align:center;">
                 <div data-bind="if: BundleViewer.ContainsValidImage($data)">
-                    <a href="#" data-bind="click: function(data, event) { BundleViewer.ShowLightBox(data) }">
+                    <a href="#" data-bind="click: BundleViewer.ShowLightBox">
                         <img data-bind="attr: { src: BundleViewer.ImageBundleDownloadUrl($data, 'small') }" />
                     </a>
 
@@ -80,7 +89,7 @@
         <tr>
             <td style="height:75px; border:1px dotted #CCC; width:75px; text-align:center;">
                 <div data-bind="if: $data">
-                    <a href="#" data-bind="click: function(data, event) { BundleViewer.ShowLightBox(data) }">
+                    <a href="#" data-bind="click: BundleViewer.ShowLightBox">
                         <img data-bind="attr: { src: BundleViewer.ImageBundleDownloadUrl($data, 'thumbnail') }" />
                     </a>
 

@@ -13,6 +13,11 @@
             self.GlideLeft("SelectProducts");
         }
 
+        self.GlideToShipping = function () {
+            $("[name='btn-goto-shipping']").hide();
+            self.GlideRight("Shipping", self.InitializeShippingForms);
+        }
+
         self.CartItemClick = function (cartItem) {
             console.log(cartItem);
 
@@ -136,11 +141,6 @@
             self.SelectedCartItem().AcceptChanges();
             self.SelectedCartItem(null);
         }
-
-        self.GlideToShipping = function () {
-            $("[name='glideToSearch']").hide();
-            self.GlideRight("Shipping", self.InitializeShippingForms);
-        }
     }
 </script>
 <!-- KNOCKOUT TEMPLATES - Review Products -->
@@ -152,7 +152,7 @@
 			</div>
 			<div class="span3" style="margin-top:15px; text-align:right;">
                 <div data-bind="if: $root.Cart().TotalQuantity()">
-                    <a id="btn-goto-shipping" class="btn btn-primary" style="width:190px;" data-bind="click: $root.GlideToShipping">
+                    <a name="btn-goto-shipping" class="btn btn-primary" style="width:190px;" data-bind="click: $root.GlideToShipping">
                         <i class="icon-plane icon-white"></i> Shipping &amp; Billing <i class="icon-arrow-right icon-white"></i>
                     </a>
                 </div>
@@ -208,7 +208,7 @@
                     
                 <tr data-bind="if: $root.SelectedCartItem() && $root.SelectedCartItem().CartItem() == $data">
                     <td style="width:100px; vertical-align:top;" data-bind="if: $root.SelectedCartItem().Image()">
-                        <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundle: $root.SelectedCartItem().Image(), LightboxSuffixId: 'Review' } }">
+                        <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundle: $root.SelectedCartItem().Image(), LightboxSuffixId: 'SelectedItem' } }">
 			            </div>
                     </td>
                     <td style="width:800px;">                        

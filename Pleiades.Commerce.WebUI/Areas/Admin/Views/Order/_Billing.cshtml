@@ -11,7 +11,13 @@
             self.GlideLeft("Shipping", self.InitializeShippingForms);
         }
 
-        self.InitializeBillingForms = function () {            
+        self.InitializeBillingForms = function () {  
+            var data = self.Cart().BillingInfo;
+            data.CardNumber("");
+            data.CVV("");
+            data.ExpirationMonth(null);
+            data.ExpirationYear(null);
+            
             $("#billingAddressForm").validate({
                 rules: {
                     firstName: {
@@ -93,6 +99,7 @@
             failed = (! $("#paymentForm").valid()) || failed;
             
             if (!failed) {
+                $("[name='btn-submit-order']").hide();
                 alert("success!");
             }
             // DO IT!
@@ -113,7 +120,12 @@
     {
         width:600px;
         margin-left:110px;
-    }    
+    }
+    .shipping-summary-item div, .shipping-summary-item span, .shipping-summary-item strong, .shipping-summary span
+    {
+        font-size: 11px;
+        line-height: 14px;
+    }
 </style>
 
 <!-- KNOCKOUT TEMPLATES - Billing -->
@@ -124,7 +136,7 @@
 				<h1>Create Order &gt; Billing</h1>
 			</div>
 			<div class="span3" style="margin-top:15px; text-align:right;">
-                <a id="btn-goto-billing" class="btn btn-primary" style="width:190px;" data-bind="click: $root.SubmitOrder">
+                <a name="btn-submit-order" class="btn btn-primary" style="width:190px;" data-bind="click: $root.SubmitOrder">
                     <i class="icon-thumbs-up icon-white"></i> OK, Submit Order <i class="icon-arrow-right icon-white"></i>
                 </a>
 			</div>
@@ -247,11 +259,23 @@
                     </div>
                 </div>
             </form>
+
+            <div style="clear:both; margin-top:15px; width:500px;" data-bind="with: $root.Cart().ShippingInfo">
+                <h4 style="margin-bottom:10px; margin-top:30px; float:left;">Shipping Info</h4>
+                <a href="#" name="glideToShipping" data-bind="click:$root.BackToShippingInfo" style="margin-top:30px; margin-left:10px; float:left;">(edit)</a>
+
+                <div style="clear:both;">
+                    <div data-bind="text: $data.FirstName() + ' ' + $data.LastName()"></div>
+                    <div data-bind="text: $data.Address1"></div>
+                    <div data-bind="text: $data.Address2"></div>
+                    <div data-bind="text: $data.City() + ', ' + $data.State() + ' ' + $data.ZipCode()"></div>
+                </div>
+            </div>
         </div>
 
         <div style="float:left; width:250px;" data-bind="template: { name: 'Order-Summary' }">
         </div>
-
-        <!-- Add Shipping Info Summary -->
+        
+        <!-- .shipping-summary-item div, .shipping-summary-item span, .shipping-summary-item strong, .shipping-summary span -->
     </div>
 </script>

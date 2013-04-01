@@ -809,3 +809,16 @@ ProductColor => ImageBundle(2x)
 - Sale Tax computation
 * Enter Billing Info => DONE
 
+4/1/2013 1.5 Hours
+------------------
+- Add Shipping Address to Order Summary w/ link to Shipping Info => DONE
+- Fix the double clicks on nav buttons => DONE
+- Fix the double-link-click bug => DONE (BIG CATCH!)
+- Fix the bug with Image pop-up on Create Order screen => DONE
+- Fix the bug in choosing a color in the Product Editor => NO REPRO
+- Add Card Entry Test Automation => DONE
+- Cache the Image Bundles too...? => NOPE
+- Fix bug which consolidates Cart Items => DONE
+- Clicking a link while it's loading the AJAX causes JQuery to beef => DONE
+- Develop and/or Research Fluent Validation library => DONE
+

@@ -9,6 +9,7 @@ Front Range
 
 
 
+
 ### Design Options for StoreFront
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 http://designmodo.github.com/Flat-UI/
@@ -18,17 +19,15 @@ Marketing
 ---------
 - Theme? http://kovshenin.com/2012/publish-a-free-minimal-and-responsive-wordpress-theme/#comments  -- either that or Thesis
 
+
+
 CreateNew Order Leftovers
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-* Create Shipping Service for Shipping Options => TODO
+* Create Order Validation flow for Check-out => TODO
 * Create Order w/ Payment Verification service => TODO
+* Create Shipping Service for Shipping Options => TODO
 
-- Add Card Entry Test Automation => TODO
-- Add Shipping Address to Order Summary w/ link to Shipping Info => TODO
-- Fix the double clicks on nav buttons => TODO
-- Fix the bug in choosing a color in the Product Editor => TODO
-- Fix the bug with Image pop-up on Create Order screen => TODO
-- Fix the double-link-click bug => TODO
+* Create an Order Processing "post mortem" => TODO
 
 * Upgrade MVC to version 4.0 / start using the Web API for Controllers => TODO
 
@@ -49,7 +48,6 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/27/2013
 - Admin Order Create => DONE
 
 - Shopping Cart => IN PROGRESS
-- Barebones Console App => IN PROGRESS
 
 - High-touch Store Front => TODO
 - One Completely Solid Landing Page => TODO
@@ -59,6 +57,8 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/27/2013
 - Server Logging => TODO
 - Email Sending Engine => TODO
 - Revamped Membership Provider => TODO
+
+- Barebones Console App => IN PROGRESS
 
 
 
@@ -76,27 +76,24 @@ PHASE 2
 
 Backlog
 -------
-- Post Mortem - inventory *everything* from UI => IN PROGRESS
 - SUPER IMPORTANT - post mortem my approach to the designing the UI.  How to improve my speed? => TODO
 
 * On the StoreFront "Wrong Size or Color? Click Here" - and Navigate to Product => TODO
 - Logged-In User => TODO
 - Cache the AggregateUser stuff in a static Dictionary (I mean, seriously, man) => IMPORTANT
-- Cache the Image Bundles too...? => MAYBE
-- Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING)
-- Test *EVERYTHING* => create a Product and simulate Creation of a Product followed by deletion of  Categories, Brands, etc. => IN PROGRESS
 
-- Clicking a link while it's loading the AJAX causes JQuery to beef => TODO
+- Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING)
 - Improve the quality of client-side Error Logging => TODO
 - Check Sanderson for advanced Model Binding => TODO
 - 150 Magic Number(!!!) => TODO - FIX
 - IsONline - Check How This Functions => TODO
-- Develop and/or Research Fluent Validation library => TODO
 - Donate $20 to FineUploader upon successful integration => TODO
 
 - THE GREAT FLOW - Tieing it All Together (!!!)
+- Test *EVERYTHING* => create a Product and simulate Creation of a Product followed by deletion of  Categories, Brands, etc. => IN PROGRESS
 * What happens if a Product/Color/Size/Image is Deleted?  What happens to Carts?  What happens to Orders? => TODO
 * Why are there Product Color orphans in the database? => TODO
+
 
 
 
@@ -125,9 +122,9 @@ ARCHITECTURAL REVIEW 1/24/2013
 
 MORE BIG FISH
 -------------
-=> Store Front Design - 3/1/2013
+=> Store Front Design - 4/1/2013
 => Payment Processing Options, API's etc. => IN PROGRESS
-=> Custom Caching solution...?
+=> Custom Caching solution...? => IN PROGRESS
 => Find a good resource for Typography, Fonts, etc. => TODO
 => http://news.ycombinator.com/item?id=4669866 => IMPORTANT
 => Enable for Azure => TODO

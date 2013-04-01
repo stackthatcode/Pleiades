@@ -65,7 +65,8 @@
                 return;
             };
 
-            $("btn-view-cart").hide();
+            $("[name='btn-view-cart']").hide();
+
             $.each(self.SearchData(), function (index, elem) {
                 elem.ExpandInventory(false);
                 elem.Inventory.removeAll();
@@ -184,7 +185,7 @@
                     </div>
                 </div>
 				<div class="span3" style="margin-top:15px; text-align:right;">
-					<a id="btn-view-cart" class="btn btn-primary" style="width:190px;" data-bind="click: $root.ViewCart">
+					<a name="btn-view-cart" class="btn btn-primary" style="width:190px;" data-bind="click: $root.ViewCart">
                         <i class="icon-shopping-cart icon-white"></i> View Cart (<span data-bind="text: $root.Cart().TotalQuantity()"></span> Items) &nbsp;
                         <i class="icon-arrow-right icon-white"></i></a>
 				</div>

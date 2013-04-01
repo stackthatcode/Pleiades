@@ -3,15 +3,17 @@ function AjaxService(errorCallback, showLoadingCallback, hideLoadingCallback) {
 	var self = this;
 	
     // Configurable Settings
-    self.Timeout = 15000;
+    self.Timeout = 5000;
     self.BaseUrl = "/Pleiades"; // TODO: move this into dynamic code
 
 	self.ShowLoadingCallback = showLoadingCallback;
 	self.HideLoadingCallback = hideLoadingCallback;
-	self.ErrorCallback = function() {
-        self.HideLoadingCallback();
-        errorCallback();
-    }
+	self.ErrorCallback = function (jqXHR, textStatus, errorThrown) {
+	    if (jqXHR.status != 0 || textStatus == "timeout") {
+	        self.HideLoadingCallback();
+	        errorCallback();
+	    }
+	}
 
     self.AjaxGet = function (url, successFunc) {
         flow.exec(

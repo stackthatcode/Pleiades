@@ -27,18 +27,6 @@
             self.ZipCode = ko.observable();
             self.Phone = ko.observable();
             self.ShippingOption = ko.observable();
-
-            // ### TESTING FUNCTION, RIGHT? ### //
-            self.EmailAddress("aleksjones@gmail.com");
-            self.FirstName("Aleksandr");
-            self.LastName("Jones");
-            self.Address1("123 Test Street");
-            self.Address2("Suite 100");
-            self.City("Mount Prospect");
-            self.State("IL");
-            self.ZipCode("60013");
-            self.Phone("510-717-8112");
-            self.ShippingOption("1");
         }
 
 
@@ -59,18 +47,6 @@
             self.ExpirationMonth = ko.observable();
             self.ExpirationYear = ko.observable();
             self.CVV = ko.observable();
-
-            self.FirstName("Aleks");
-            self.LastName("Jones");
-            self.Address1("777 On The Way");
-            self.Address2("Suite 999");
-            self.City("Mount Prospect");
-            self.State("IL");
-            self.ZipCode("60013");
-            self.CardNumber("5247405514068983");
-            self.ExpirationMonth("03");
-            self.ExpirationYear("2014");
-            self.CVV("666");
         }
 
         PushMkt.Cart = function () {
@@ -297,8 +273,8 @@
     </style>
     <script type="text/html" id="Order-Summary">
         <div style="float:left; width:250px;">
-            <h4 style="margin-bottom:20px; margin-top:20px; float:left;">Order Summary</h4>
-            <a href="#" name="glideToReview" data-bind="click:$root.BackToReviewOrder" style="margin-top:20px; margin-left:10px; float:left;">(edit order)</a>
+            <h4 style="margin-bottom:15px; margin-top:20px; float:left;">Order Summary</h4>
+            <a href="#" name="glideToReview" data-bind="click:$root.BackToReviewOrder" style="margin-top:20px; margin-left:10px; float:left;">(edit)</a>
 
             <table>
             <tbody data-bind="foreach: $root.Cart().Items">
@@ -328,7 +304,7 @@
             <table>
 
             <!-- Add the items from my Order -->
-            <table style="margin-top:10px;" id="order-summary">
+            <table id="order-summary">
                 <tr>
                     <td>Order Subtotal:</td>
                     <td><span data-bind="text: ToMoney($root.Cart().SubTotal())"></span></td>
@@ -348,3 +324,4 @@
             </table>
         </div>
     </script>
+    

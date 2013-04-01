@@ -89,6 +89,7 @@
             
             // DO IT!
             if (!failed) {
+                $("[name='btn-goto-billing']").hide();
                 self.GlideRight("Billing", self.InitializeBillingForms);
             }
         }
@@ -118,7 +119,7 @@
 			</div>
 			<div class="span3" style="margin-top:15px; text-align:right;">
                 <div data-bind="if: $root.Cart().TotalQuantity()">
-                    <a id="btn-goto-billing" class="btn btn-primary" style="width:190px;" data-bind="click: $root.GotoBilling">
+                    <a name="btn-goto-billing" class="btn btn-primary" style="width:190px;" data-bind="click: $root.GotoBilling">
                         $ Proceed to Billing <i class="icon-arrow-right icon-white"></i>
                     </a>
                 </div>
