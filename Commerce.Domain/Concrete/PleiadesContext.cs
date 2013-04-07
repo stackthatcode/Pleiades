@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
 using Pleiades.Web.Security.Model;
+using Commerce.Persist.Model.Billing;
 using Commerce.Persist.Model.Lists;
 using Commerce.Persist.Model.Orders;
 using Commerce.Persist.Model.Products;
@@ -39,6 +40,10 @@ namespace Commerce.Persist.Concrete
         // Orders
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderLine> OrderLines { get; set; }
+        public DbSet<ShippingMethod> ShippingMethods { get; set; }
+
+        // Billing
+        public DbSet<StateTax> StateTaxes { get; set; }
 
 
         // Experimental

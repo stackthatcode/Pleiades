@@ -12,6 +12,9 @@ using Pleiades.Data.EF;
 
 namespace Commerce.Persist.Concrete
 {
+    /// <summary>
+    /// More of a ProductService, so-to-speak.  Manages the entire Bounded Context of Products
+    /// </summary>
     public class ProductRepository : IProductRepository
     {
         PleiadesContext Context { get; set; }
@@ -357,7 +360,7 @@ namespace Commerce.Persist.Concrete
         }
 
 
-        // Inventory      
+        // Inventory 
         private List<ProductSku> ActiveInventory(int id)
         {
             var product = this.ProductWithColorsAndSizes(id);
@@ -428,9 +431,7 @@ namespace Commerce.Persist.Concrete
             return total;
         }
 
-
         // TODO: be sure to wipe any Carts that have this Inventory
-
         public void WipeInventory(int productId)
         {
             foreach (var sku in this.ActiveInventory(productId))
@@ -439,9 +440,7 @@ namespace Commerce.Persist.Concrete
             }
         }
 
-
         // Only call this WHEN they visit the Inventory tab - TODO
-
         public void GenerateInventory(int productId)
         {
             var product = this.ProductWithColorsAndSizes(productId);

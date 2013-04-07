@@ -8,11 +8,14 @@ namespace Commerce.Persist.Model.Orders
     public class Order
     {
         public int Id { get; set; }
-        // public Customer Customer { get; set; }
+        public ShippingInfo ShippingInfo { get; set; }
         public List<OrderLine> OrderLines { get; set; }
+
+        // TODO: create a Tax Rate table
         public decimal TaxRate { get; set; }
 
-        public decimal TotalBeforeTax
+        // Computed properties...
+        public decimal SubTotal
         {
             get
             {
@@ -20,11 +23,19 @@ namespace Commerce.Persist.Model.Orders
             }
         }
 
-        public decimal TotalAfterTax
+        public decimal Tax
         {
             get
             {
-                return TotalBeforeTax - TotalBeforeTax * TaxRate;
+                return SubTotal * TaxRate;
+            }
+        }
+
+        public decimal GrandTotal
+        {
+            get
+            {
+                return SubTotal + (SubTotal * TaxRate) + ShippingInfo.ShippingCost;
             }
         }
     }

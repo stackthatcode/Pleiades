@@ -32,6 +32,25 @@ namespace Commerce.Persist.Model.Products
             }
         }
 
+        public string Description
+        {
+            get
+            {
+                if (Size != null && Color != null)
+                {
+                    return this.Product.Description + " - " + this.Color.Name + " - " + this.Size.Name;
+                }
+                if (Size != null)
+                {
+                    return this.Product.Description + " - " + this.Size.Name;
+                }
+                if (Color != null)
+                {
+                    return this.Product.Description + " - " + this.Color.Name;
+                }
+                return this.Product.Description;
+            }
+        }
 
         public int InStock { get; set; }
         public int Reserved { get; set; }

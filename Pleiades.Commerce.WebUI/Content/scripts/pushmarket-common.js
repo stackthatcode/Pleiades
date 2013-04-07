@@ -1,16 +1,17 @@
+var CopyPropertiesFromKo = function(from, target) { 
+    target = target || {};
+    for(var propertyName in from) {
+        target[propertyName] = (typeof from[propertyName] == "function") ? from[propertyName]() : from[propertyName];
+    }
+    return target;
+}
+
 String.prototype.koTrunc = function(n, useWordBoundary){
     var toLong = 
         this.length > n, s_ = toLong ? this.substr(0,n-1) : this;
         s_ = useWordBoundary && toLong ? s_.substr(0,s_.lastIndexOf(' ')) : s_;
     return toLong ? s_ + '...' : s_;
 }
-
-// Why did this fail...?
-//String.prototype.toMoney = function() {
-//    return "$" + this.toFixed(2);
-//}
-
-// TODO: how to add this to Array's prototype...?
 
 Array.prototype.firstOrNull = function(lambda) {
 	for (var arrayIndex = 0; arrayIndex < this.length; arrayIndex += 1) {
@@ -51,6 +52,7 @@ Array.prototype.remove = function(from, to) {
 	this.length = from < 0 ? this.length + from : from;
 	return this.push.apply(this, rest);
 };
+
 String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g, '');};
 
 String.prototype.ltrim=function(){return this.replace(/^\s+/,'');};
@@ -59,41 +61,8 @@ String.prototype.rtrim=function(){return this.replace(/\s+$/,'');};
 
 String.prototype.fulltrim=function(){return this.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,'').replace(/\s+/g,' ');};
 
-
 var ToMoney = function(input) {
     return "$" + input.toFixed(2);
-}
-
-function DeepClone(input) {
-	// Handle the 3 simple types, and null or undefined
-	if (null == input || "object" != typeof input) return input;
-	
-	// Handle Date
-	if (input instanceof Date) {
-		var copy = new Date();
-		copy.setTime(input.getTime());
-		return copy;
-	}
-	
-	// Handle Array
-	if (input instanceof Array) {
-		var copy = [];
-		for (var i = 0, len = input.length; i < len; ++i) {
-			copy[i] = DeepClone(input[i]);
-		}
-		return copy;
-	}
-
-	// Handle Object
-	if (input instanceof Object) {
-		var copy = {};
-		for (var attr in input) {
-			if (input.hasOwnProperty(attr)) copy[attr] = DeepClone(input[attr]);
-		}
-		return copy;
-	}
-	
-	throw new Error("Unable to copy input! Its type isn't supported.");
 }
 
 function CommonUI(containerDiv) {

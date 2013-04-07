@@ -1,4 +1,4 @@
-﻿<!-- Shipping Functions -->
+﻿<!-- Billing Functions -->
 @Html.Javascript("/jquery/jquery.validate.min.js")
 <script type="text/javascript">
     var PushMkt = PushMkt || {};
@@ -20,10 +20,7 @@
             
             $("#billingAddressForm").validate({
                 rules: {
-                    firstName: {
-                        required: true,
-                    },
-                    lastName: { 
+                    name: {
                         required: true,
                     },
                     address1: { 
@@ -93,16 +90,40 @@
             });
         }
 
-        self.SubmitOrder = function () {
+        self.SubmitOrderClick = function () {
             var failed = false;
             failed = (! $("#billingAddressForm").valid()) || failed;
-            failed = (! $("#paymentForm").valid()) || failed;
-            
-            if (!failed) {
-                $("[name='btn-submit-order']").hide();
-                alert("success!");
+            failed = (! $("#paymentForm").valid()) || failed;            
+            if (failed) {
+                return;
             }
-            // DO IT!
+
+            $("[name='btn-submit-order']").hide();
+            self.ProcessOrder();
+        }
+
+        self.ProcessOrder = function() {
+            flow.exec(
+                function() {
+                    var jsonOrder = {
+                        Items: [],
+                        ShippingInfo: CopyPropertiesFromKo(self.Cart().ShippingInfo),
+                        BillingInfo: CopyPropertiesFromKo(self.Cart().BillingInfo),
+                    };
+
+                    AQ(self.Cart().Items()).each(function(x) {
+                        jsonOrder.Items.push({
+                            SkuCode: x.Sku().SkuCode,
+                            Quantity: x.Quantity(),
+                        });
+                    });
+
+                    self.Service.AjaxPost("/Admin/Order/SubmitOrder", jsonOrder, this);
+                },
+                function(result) {
+                    console.log("Success?");
+                }
+            );
         }
     }
 </script>
@@ -136,7 +157,7 @@
 				<h1>Create Order &gt; Billing</h1>
 			</div>
 			<div class="span3" style="margin-top:15px; text-align:right;">
-                <a name="btn-submit-order" class="btn btn-primary" style="width:190px;" data-bind="click: $root.SubmitOrder">
+                <a name="btn-submit-order" class="btn btn-primary" style="width:190px;" data-bind="click: $root.SubmitOrderClick">
                     <i class="icon-thumbs-up icon-white"></i> OK, Submit Order <i class="icon-arrow-right icon-white"></i>
                 </a>
 			</div>
@@ -169,15 +190,9 @@
                 <div style="height:150px;">
                     <div style="float:left; width:300px;">
                         <div class="control-group">
-                            <label class="control-label" for="firstName">First Name</label>
+                            <label class="control-label" for="name">Name</label>
                             <div class="controls">
-                                <input type="text" name="firstName" data-bind="value: $data.FirstName" placeholder="First Name" maxlength="50">
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="lastName">Last Name</label>
-                            <div class="controls">
-                                <input type="text" name="lastName" data-bind="value: $data.LastName" placeholder="Last Name" maxlength="50">
+                                <input type="text" name="name" data-bind="value: $data.Name" placeholder="Name" maxlength="50">
                             </div>
                         </div>
                         <div class="control-group">
@@ -265,7 +280,7 @@
                 <a href="#" name="glideToShipping" data-bind="click:$root.BackToShippingInfo" style="margin-top:30px; margin-left:10px; float:left;">(edit)</a>
 
                 <div style="clear:both;">
-                    <div data-bind="text: $data.FirstName() + ' ' + $data.LastName()"></div>
+                    <div data-bind="text: $data.Name()"></div>
                     <div data-bind="text: $data.Address1"></div>
                     <div data-bind="text: $data.Address2"></div>
                     <div data-bind="text: $data.City() + ', ' + $data.State() + ' ' + $data.ZipCode()"></div>
@@ -275,7 +290,5 @@
 
         <div style="float:left; width:250px;" data-bind="template: { name: 'Order-Summary' }">
         </div>
-        
-        <!-- .shipping-summary-item div, .shipping-summary-item span, .shipping-summary-item strong, .shipping-summary span -->
     </div>
 </script>

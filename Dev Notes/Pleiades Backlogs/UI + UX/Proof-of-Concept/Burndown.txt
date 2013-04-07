@@ -822,3 +822,39 @@ ProductColor => ImageBundle(2x)
 - Clicking a link while it's loading the AJAX causes JQuery to beef => DONE
 - Develop and/or Research Fluent Validation library => DONE
 
+4/2/2013 2.0 Hours
+------------------
+- Frank and Oak's Store Front => DONE
+- Mockup of my Store Front Design => DONE
+- Fighter's Market => DONE
+- Order, Shipping, Billing, ShippingMethod Domain objects / Models => DONE
+- More Builders => DONE
+- Order Computation => DONE
+- RESTful URL research => DONE
+- Skeleton of Submit Order process => DONE
+
+4/5 1.0 Hour
+------------
+- Order Bounded Context Design => DONE
+
+4/6 1.0 Hours
+--------------
+- Researched Charts and Graphs => DONE
+
+4/7 5.0 Hours
+-------------
+1.) Compose the Order request into a JSON object => DONE
+2.) Send request to Server => DONE
+FIX - Email to Email Address => DONE
+FIX - Converge First Name and Last Name into Name => DONE
+* Create Order Validation flow for Check-out => DONE
+// (ME) Confirm Order data entry correctly translates - DONE
+// Client Side method that converts Cart into Order - DONE!
+2.5.) Validate Request => TODO - DONE, FOR NOW
+FIX - the Client Side Grand Total computation => DONE
+FIX - Unselected Edit before Shipping => done
+FIX - Inventory placeholder (says SKU) => DONE
+FIX - Add Category is broken => DONE FOR NOW
+State Taxes -- Added 
+
+

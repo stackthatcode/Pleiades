@@ -23,6 +23,9 @@ namespace Commerce.WebUI
             // Components
             AutofacBootstrap.RegisterAndWireIocContainer();
 
+            // Bit of glue to make JSON POST-ing work
+            ValueProviderFactories.Factories.Add(new JsonValueProviderFactory());
+
             // Filters
             RegisterGlobalFilters();
 

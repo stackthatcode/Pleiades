@@ -37,10 +37,7 @@
 
             $("#addressForm").validate({
                 rules: {
-                    firstName: {
-                        required: true,
-                    },
-                    lastName: { 
+                    name: {
                         required: true,
                     },
                     address1: { 
@@ -166,15 +163,9 @@
                 <div style="height:150px;">
                     <div style="float:left; width:300px;">
                         <div class="control-group">
-                            <label class="control-label" for="firstName">First Name</label>
+                            <label class="control-label" for="name">Name</label>
                             <div class="controls">
-                                <input type="text" name="firstName" data-bind="value: $data.FirstName" placeholder="First Name" maxlength="50">
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="lastName">Last Name</label>
-                            <div class="controls">
-                                <input type="text" name="lastName" data-bind="value: $data.LastName" placeholder="Last Name" maxlength="50">
+                                <input type="text" name="firstName" data-bind="value: $data.Name" placeholder="Name" maxlength="50">
                             </div>
                         </div>
                         <div class="control-group">

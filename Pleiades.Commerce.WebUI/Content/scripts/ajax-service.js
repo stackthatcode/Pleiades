@@ -42,8 +42,10 @@ function AjaxService(errorCallback, showLoadingCallback, hideLoadingCallback) {
                 self.ShowLoadingCallback();
                 $.ajax({
                     type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
                     url: self.BaseUrl + url,
-                    data: data,
+                    data: JSON.stringify(data),
                     timeout: self.Timeout,
                     error: self.ErrorCallback,
                     success: this

@@ -178,8 +178,5 @@ namespace Commerce.Initializer.Builders
         {
             return ConfigurationManager.AppSettings["DefaultBrandLogos"];
         }
-
     }
-
-
 }

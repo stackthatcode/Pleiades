@@ -15,6 +15,7 @@
 
         self.GlideToShipping = function () {
             $("[name='btn-goto-shipping']").hide();
+            self.CartItemCancel();
             self.GlideRight("Shipping", self.InitializeShippingForms);
         }
 

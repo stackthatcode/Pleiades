@@ -9,17 +9,21 @@
             self.Product = product;
         }
 
+        // Reference data
         PushMkt.ShippingOptions = [
             { Id: "1", Name: "UPS Ground (7-10 days)", Cost: 7.95 },
             { Id: "2", Name: "UPS Ground Quicker (3-5 days)", Cost: 14.95 },
             { Id: "3", Name: "UPS Ground Express (next day)", Cost: 21.95 },
         ];
 
+        PushMkt.ExpirationMonths = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+        PushMkt.ExpirationYears = AQ.range(2013, 2030).toArray();
+
+
         PushMkt.ShippingInfo = function () {
             var self = this;
             self.EmailAddress = ko.observable();
-            self.FirstName = ko.observable();
-            self.LastName = ko.observable();
+            self.Name = ko.observable();
             self.Address1 = ko.observable();
             self.Address2 = ko.observable();
             self.City = ko.observable();
@@ -29,14 +33,9 @@
             self.ShippingOption = ko.observable();
         }
 
-
-        PushMkt.ExpirationMonths = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
-        PushMkt.ExpirationYears = AQ.range(2013, 2030).toArray();
-
         PushMkt.BillingInfo = function () {
             var self = this;
-            self.FirstName = ko.observable();
-            self.LastName = ko.observable();
+            self.Name = ko.observable();
             self.Address1 = ko.observable();
             self.Address2 = ko.observable();
             self.City = ko.observable();
@@ -57,8 +56,7 @@
             self.BillingInfo = new PushMkt.BillingInfo();
 
             self.CopyShippingToBilling = function () {
-                self.BillingInfo.FirstName(self.ShippingInfo.FirstName());
-                self.BillingInfo.LastName(self.ShippingInfo.LastName());
+                self.BillingInfo.Name(self.ShippingInfo.Name());
                 self.BillingInfo.Address1(self.ShippingInfo.Address1());
                 self.BillingInfo.Address2(self.ShippingInfo.Address2());
                 self.BillingInfo.City(self.ShippingInfo.City());
@@ -98,7 +96,6 @@
                 return result;
             });
 
-
             self.ShippingCost = ko.computed(function () {
                 if (!self.ShippingInfo.ShippingOption()) {
                     return 0;
@@ -115,7 +112,7 @@
                 var state = AQ(PushMkt.StatesOfAmerica)
                         .first(function (x) { return x.abbreviation == self.ShippingInfo.State(); });
                 var taxPercentage = state.tax;
-                return (self.SubTotal() + self.ShippingCost()) * (taxPercentage / 100.0);
+                return self.SubTotal() * (taxPercentage / 100.0);
             });
 
             self.GrandTotal = ko.computed(function () {
@@ -309,13 +306,13 @@
                     <td>Order Subtotal:</td>
                     <td><span data-bind="text: ToMoney($root.Cart().SubTotal())"></span></td>
                 </tr>
+                <tr data-bind="if: $root.Cart().ShippingInfo.State()">
+                    <td>Sales Tax (<span data-bind="text: $root.Cart().ShippingInfo.State()"></span>):</td>
+                    <td><span data-bind="text: ToMoney($root.Cart().Taxes())"></span></td>
+                </tr>
                 <tr>
                     <td>Shipping:</td>
                     <td><span data-bind="text: ToMoney($root.Cart().ShippingCost())"></span></td>
-                </tr>
-                <tr>
-                    <td>Sales Tax:</td>
-                    <td><span data-bind="text: ToMoney($root.Cart().Taxes())"></span></td>
                 </tr>
                 <tr>
                     <td><span style="font-weight:bold; color:#444;">Order Total:</span></td>

@@ -65,6 +65,11 @@
     <Compile Include="Concrete\JsonCategoryRepository.cs" />
     <Compile Include="Concrete\JsonColorRepository.cs" />
     <Compile Include="Concrete\JsonSizeRepository.cs" />
+    <Compile Include="Concrete\GetPaidPaymentProcessor.cs" />
+    <Compile Include="Interfaces\IAnalyticsService.cs" />
+    <Compile Include="Interfaces\IEmailGenerator.cs" />
+    <Compile Include="Interfaces\IEmailService.cs" />
+    <Compile Include="Interfaces\IPaymentProcessor.cs" />
     <Compile Include="Interfaces\IProductRepository.cs" />
     <Compile Include="Interfaces\IJsonColorRepository.cs" />
     <Compile Include="Interfaces\IJsonBrandRepository.cs" />
@@ -73,6 +78,9 @@
     <Compile Include="Interfaces\IImageProcessor.cs" />
     <Compile Include="Interfaces\IImageBundleRepository.cs" />
     <Compile Include="Interfaces\IJsonSizeRepository.cs" />
+    <Compile Include="Model\Billing\PaymentProcessorResponse.cs" />
+    <Compile Include="Model\Billing\StateTax.cs" />
+    <Compile Include="Model\Email\Message.cs" />
     <Compile Include="Model\Lists\Brand.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -93,9 +101,11 @@
     <Compile Include="Model\Lists\SizeExtensions.cs" />
     <Compile Include="Model\Lists\SizeGroup.cs" />
     <Compile Include="Model\Lists\SmallIdea.cs" />
-    <Compile Include="Model\Orders\Address.cs" />
+    <Compile Include="Model\Billing\BillingInfo.cs" />
     <Compile Include="Model\Orders\Order.cs" />
     <Compile Include="Model\Orders\OrderLine.cs" />
+    <Compile Include="Model\Orders\ShippingInfo.cs" />
+    <Compile Include="Model\Orders\ShippingMethod.cs" />
     <Compile Include="Model\Products\ProductSize.cs" />
     <Compile Include="Model\Products\JsonProductColor.cs" />
     <Compile Include="Model\Products\JsonProductImage.cs" />

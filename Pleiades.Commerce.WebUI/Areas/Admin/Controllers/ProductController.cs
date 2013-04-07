@@ -44,6 +44,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             return View();
         }
 
+        // todo: move this over to Category Controller
         [HttpGet]
         public ActionResult Categories()
         {
@@ -51,6 +52,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             return new JsonNetResult(result);
         }
 
+        // todo: move this over to Brand Controller
         [HttpGet]
         public ActionResult Brands()
         {
@@ -58,6 +60,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             return new JsonNetResult(result);
         }
 
+        // todo: move this over to Size Controller
         [HttpGet]
         public ActionResult SizeGroups()
         {

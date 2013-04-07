@@ -49,6 +49,7 @@ namespace Commerce.Initializer
             BrandBuilder.EmptyAndRepopulate(serviceLocator);
             ColorBuilder.EmptyAndRepopulate(serviceLocator);
             ProductBuilder.EmptyAndRepopulate(serviceLocator);
+            ShippingMethodsBuilder.EmptyAndRepopulate(serviceLocator);
         }
 
         public static void DestroyDatabase()

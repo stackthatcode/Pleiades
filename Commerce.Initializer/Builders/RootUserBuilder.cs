@@ -17,9 +17,6 @@ using Commerce.WebUI.Plumbing;
 
 namespace Commerce.Initializer.Builders
 {
-    /// <summary>
-    /// TODO: determine proper usage of this program
-    /// </summary>
     public class RootUserBuilder
     {
         public static void CreateTheSupremeUser(IContainerAdapter ServiceLocator)
