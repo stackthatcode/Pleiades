@@ -21,7 +21,7 @@ namespace Commerce.Initializer.Builders
 {
     public class CategoryBuilder
     {
-        public static void EmptyAndRepopulate(IContainerAdapter ServiceLocator)
+        public static void Populate(IContainerAdapter ServiceLocator)
         {
             using (var tx = new TransactionScope())
             {

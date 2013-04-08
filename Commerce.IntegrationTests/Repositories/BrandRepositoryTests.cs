@@ -27,7 +27,7 @@ namespace Commerce.IntegrationTests.Repositories
                 var container = lifetime.Resolve<IContainerAdapter>();
                 var brandRepository = lifetime.Resolve<IJsonBrandRepository>();
                     
-                BrandBuilder.EmptyAndRepopulate(container);
+                BrandBuilder.Populate(container);
                 var allBrands = brandRepository.RetrieveAll();
                 
                 Console.WriteLine("\n");

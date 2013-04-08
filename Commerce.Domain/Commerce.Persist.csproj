@@ -78,7 +78,7 @@
     <Compile Include="Interfaces\IImageProcessor.cs" />
     <Compile Include="Interfaces\IImageBundleRepository.cs" />
     <Compile Include="Interfaces\IJsonSizeRepository.cs" />
-    <Compile Include="Model\Billing\PaymentProcessorResponse.cs" />
+    <Compile Include="Model\Billing\ProcessorResponse.cs" />
     <Compile Include="Model\Billing\StateTax.cs" />
     <Compile Include="Model\Email\Message.cs" />
     <Compile Include="Model\Lists\Brand.cs">
@@ -104,7 +104,6 @@
     <Compile Include="Model\Billing\BillingInfo.cs" />
     <Compile Include="Model\Orders\Order.cs" />
     <Compile Include="Model\Orders\OrderLine.cs" />
-    <Compile Include="Model\Orders\ShippingInfo.cs" />
     <Compile Include="Model\Orders\ShippingMethod.cs" />
     <Compile Include="Model\Products\ProductSize.cs" />
     <Compile Include="Model\Products\JsonProductColor.cs" />

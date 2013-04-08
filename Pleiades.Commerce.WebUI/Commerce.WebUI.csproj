@@ -104,6 +104,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Areas\Admin\Models\Order\OrderRequestItem.cs" />
+    <Compile Include="Areas\Admin\Models\Order\OrderRequestShipping.cs" />
     <Compile Include="Areas\Admin\Models\Order\OrderResponse.cs" />
     <Compile Include="Areas\Admin\Models\Order\OrderRequest.cs" />
     <Compile Include="Areas\Public\Controllers\ProductsController.cs" />

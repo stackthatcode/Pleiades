@@ -857,4 +857,12 @@ FIX - Inventory placeholder (says SKU) => DONE
 FIX - Add Category is broken => DONE FOR NOW
 State Taxes -- Added 
 
+4/8 1.5 Hours
+-------------
+2.8.) Shipping Process => DONE
+2.9.) Tax Process => DONE
+Add Shipping Info object to payload so Json matches C# Model => DONE
+// Get all of the Skus from the Order - DONE            
+* Create State Tax Service => DONE
+// Invoke Payment Processor - DONE
 

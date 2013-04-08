@@ -75,7 +75,7 @@
 
         self.GotoBilling = function () {
             var failed = false;
-            if (!self.Cart().ShippingInfo.ShippingOption()) {
+            if (!self.Cart().ShippingInfo.ShippingOptionId()) {
                 $("#shippingValidationErrors").show();
                 failed = true;
             } else {
@@ -223,7 +223,7 @@
                     <div data-bind="foreach: PushMkt.ShippingOptions">
                         <div style="clear:both; width:300px;">
                             <label>
-                                <input type="radio" name="shippingSelect" data-bind="value: $data.Id, checked: $parent.ShippingOption" /> 
+                                <input type="radio" name="shippingSelect" data-bind="value: $data.Id, checked: $parent.ShippingOptionId" /> 
                                 <span data-bind="text: $data.Name"></span>
                                 <span data-bind="text: ToMoney($data.Cost)"></span>
                             </label>

@@ -23,11 +23,11 @@ namespace Commerce.Persist.Model.Products
             {
                 if (this.Product.AssignImagesToColors == true)
                 {
-                    return Color.ProductImageBundle;
+                    return this.Color != null ? Color.ProductImageBundle : null;
                 }
                 else
                 {
-                    return Product.ThumbnailImageBundle;
+                    return Product.ThumbnailImageBundle != null ? Product.ThumbnailImageBundle : null;
                 }
             }
         }

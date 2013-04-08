@@ -44,12 +44,13 @@ namespace Commerce.Initializer
 
             // Application Data Initialization
             RootUserBuilder.CreateTheSupremeUser(serviceLocator);
-            CategoryBuilder.EmptyAndRepopulate(serviceLocator);
-            SizeBuilder.EmptyAndRepopulate(serviceLocator);
-            BrandBuilder.EmptyAndRepopulate(serviceLocator);
-            ColorBuilder.EmptyAndRepopulate(serviceLocator);
-            ProductBuilder.EmptyAndRepopulate(serviceLocator);
-            ShippingMethodsBuilder.EmptyAndRepopulate(serviceLocator);
+            CategoryBuilder.Populate(serviceLocator);
+            SizeBuilder.Populate(serviceLocator);
+            BrandBuilder.Populate(serviceLocator);
+            ColorBuilder.Populate(serviceLocator);
+            ProductBuilder.Populate(serviceLocator);
+            ShippingMethodsBuilder.Populate(serviceLocator);
+            StateTaxBuilder.Populate(serviceLocator);
         }
 
         public static void DestroyDatabase()

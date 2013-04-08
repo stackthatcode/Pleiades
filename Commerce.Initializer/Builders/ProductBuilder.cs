@@ -24,7 +24,7 @@ namespace Commerce.Initializer.Builders
 {
     public class ProductBuilder
     {
-        public static void EmptyAndRepopulate(IContainerAdapter ServiceLocator)
+        public static void Populate(IContainerAdapter ServiceLocator)
         {
             using (var tx = new TransactionScope())
             {
@@ -162,7 +162,7 @@ namespace Commerce.Initializer.Builders
                 foreach (var sku in productRepository.Inventory(product1.Id))
                 {
                     sku.Reserved = 0;
-                    sku.InStock = random.Next(0, 4);
+                    sku.InStock = random.Next(2, 6);
                 }
                 unitOfWork.SaveChanges();
                 tx.Complete();

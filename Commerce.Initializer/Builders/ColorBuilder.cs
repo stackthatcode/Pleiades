@@ -26,7 +26,7 @@ namespace Commerce.Initializer.Builders
 {
     public static class ColorBuilder
     {
-        public static void EmptyAndRepopulate(IContainerAdapter ServiceLocator)
+        public static void Populate(IContainerAdapter ServiceLocator)
         {
             using (var tx = new TransactionScope())
             {

@@ -25,7 +25,7 @@ namespace Commerce.IntegrationTests.Repositories
             {
                 // Empty + populate data using the Initializer Builder
                 var container = lifetime.Resolve<IContainerAdapter>();
-                CategoryBuilder.EmptyAndRepopulate(container);
+                CategoryBuilder.Populate(container);
 
                 Console.WriteLine();
                 var repository = lifetime.Resolve<IJsonCategoryRepository>();

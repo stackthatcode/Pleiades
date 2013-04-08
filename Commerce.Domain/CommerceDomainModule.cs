@@ -50,6 +50,11 @@ namespace Commerce.Persist
             builder.RegisterType<EFGenericRepository<Size>>().As<IGenericRepository<Size>>().InstancePerLifetimeScope();
             builder.RegisterType<EFGenericRepository<SizeGroup>>().As<IGenericRepository<SizeGroup>>().InstancePerLifetimeScope();
             builder.RegisterType<EFGenericRepository<Product>>().As<IGenericRepository<Product>>().InstancePerLifetimeScope();
+
+            // Payment Processors
+            builder.RegisterType<GetPaidPaymentProcessor>().As<IPaymentProcessor>();
+
+            // 
         }
     }
 }

@@ -30,7 +30,15 @@
             self.State = ko.observable();
             self.ZipCode = ko.observable();
             self.Phone = ko.observable();
-            self.ShippingOption = ko.observable();
+            self.ShippingOptionId = ko.observable();
+
+            self.ShippingOption = ko.computed(function () {
+                if (!self.ShippingOptionId()) {
+                    return null;
+                }
+                var option = AQ(PushMkt.ShippingOptions).first(function (x) { return x.Id == self.ShippingOptionId(); });
+                return option;
+            });
         }
 
         PushMkt.BillingInfo = function () {
@@ -97,12 +105,8 @@
             });
 
             self.ShippingCost = ko.computed(function () {
-                if (!self.ShippingInfo.ShippingOption()) {
-                    return 0;
-                }
-                var option = AQ(PushMkt.ShippingOptions)
-                        .first(function (x) { return x.Id == self.ShippingInfo.ShippingOption(); });
-                return option.Cost;
+                var option = self.ShippingInfo.ShippingOption();
+                return option ? option.Cost : 0;
             });
 
             self.Taxes = ko.computed(function () {

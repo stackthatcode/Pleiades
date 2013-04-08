@@ -5,12 +5,13 @@ namespace Commerce.Persist.Model.Orders
 {
     public class OrderLine
     {
-        public OrderLine(ProductSku sku)
+        public OrderLine(ProductSku sku, int quantity)
         {
             this.Sku = sku;
             this.OriginalSkuCode = sku.SkuCode;
             this.OriginalDescription = sku.Description;
             this.OriginalUnitPrice = sku.Product.UnitPrice;
+            this.Quantity = quantity;
         }
 
         public int Id { get; set; }

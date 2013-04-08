@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 
-namespace Commerce.Persist.Model.Orders
+namespace Commerce.WebUI.Areas.Admin.Models.Order
 {
     [JsonObject]
-    public class ShippingInfo
+    public class OrderRequestShipping
     {
         [JsonProperty]
         public string EmailAddress { get; set; }
@@ -30,9 +30,6 @@ namespace Commerce.Persist.Model.Orders
         public string Phone { get; set; }
 
         [JsonProperty]
-        public string ShippingOption { get; set; }
-
-        [JsonProperty]
-        public decimal ShippingCost { get; set; }
+        public int ShippingOptionId { get; set; }
     }
 }

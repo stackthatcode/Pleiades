@@ -9,7 +9,7 @@ namespace Commerce.WebUI.Areas.Admin.Models.Order
     public class OrderRequest
     {
         [JsonProperty]
-        public ShippingInfo ShippingInfo { get; set; }
+        public OrderRequestShipping ShippingInfo { get; set; }
 
         [JsonProperty]
         public BillingInfo BillingInfo { get; set; }

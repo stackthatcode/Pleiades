@@ -33,11 +33,11 @@ namespace Commerce.IntegrationTests.Repositories
                 var productRepository = lifetime.Resolve<IProductRepository>();
                 var productSearchRepository = lifetime.Resolve<IProductRepository>();
 
-                BrandBuilder.EmptyAndRepopulate(container);
-                ColorBuilder.EmptyAndRepopulate(container);
-                SizeBuilder.EmptyAndRepopulate(container);
-                CategoryBuilder.EmptyAndRepopulate(container);
-                ProductBuilder.EmptyAndRepopulate(container);
+                BrandBuilder.Populate(container);
+                ColorBuilder.Populate(container);
+                SizeBuilder.Populate(container);
+                CategoryBuilder.Populate(container);
+                ProductBuilder.Populate(container);
 
                 // Test the search query
                 var category1 = categoryRepository.FirstOrDefault(x => x.Name == "Jiu-jitsu Gear");

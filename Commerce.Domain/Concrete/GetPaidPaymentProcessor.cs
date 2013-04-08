@@ -1,4 +1,5 @@
-﻿using Commerce.Persist.Interfaces;
+﻿using System;
+using Commerce.Persist.Interfaces;
 using Commerce.Persist.Model.Billing;
 
 namespace Commerce.Persist.Concrete
@@ -6,15 +7,15 @@ namespace Commerce.Persist.Concrete
     public class GetPaidPaymentProcessor : IPaymentProcessor
     {
         // The various Payment Processor responses get decoded and/or logged/persisted in this implementation
-        public PaymentProcessorResponse AuthorizeAndCollect(BillingInfo billing, decimal Amount)
+        public ProcessorResponse AuthorizeAndCollect(BillingInfo billing, decimal Amount)
         {
-            // If somebody's payment fails... then what...?  Log it...?
-
-            return new PaymentProcessorResponse
+            // If somebody's payment fails... then Log it.
+            
+            return new ProcessorResponse
             {
                  ProcessorCode = "ABC-12345",
-                 Details = "",
-                 //Unified
+                 Details = "Payment accepted",
+                 ExternalReferenceCode = Guid.NewGuid().ToString(),
                  Success = true,
             };
         }

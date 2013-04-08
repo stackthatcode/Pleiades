@@ -75,8 +75,6 @@ Order Submission Flow - Bound Contexts and Concerns
 Ideally?  A Message Bus
 -----------------------
 2.7.) Inventory Process => TODO
-2.8.) Shipping Process => TODO
-2.9.) Tax Process => TODO
 
 3.) Payment Processing => TODO
 5.) Communication Process => TODO
@@ -84,9 +82,9 @@ Ideally?  A Message Bus
 
 7.) DONE
 
-Add Shipping Info object to payload so Json matches C# Model => IN PROGRESS
 * Create Order w/ Payment Verification service => IN PROGRESS
-* Create Shipping Service for Shipping Options => IN PROGRESS
+* Create Shipping Service for Shipping Options => DONE
+
 * Create an Order Processing "post mortem" Page => IN PROGRESS
 
 
