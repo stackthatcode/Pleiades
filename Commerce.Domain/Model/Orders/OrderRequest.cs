@@ -3,7 +3,7 @@ using Commerce.Persist.Model.Billing;
 using Commerce.Persist.Model.Orders;
 using Newtonsoft.Json;
 
-namespace Commerce.WebUI.Areas.Admin.Models.Order
+namespace Commerce.Persist.Model.Orders
 {
     [JsonObject]
     public class OrderRequest

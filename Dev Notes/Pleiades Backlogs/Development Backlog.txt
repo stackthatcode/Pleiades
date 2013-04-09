@@ -8,12 +8,6 @@ GRC
 - Send last meeting notes => DONE
 
 
-Front Range
------------
-* Order Creation + Checkout
-* Storefront Design => IN PROGRESS
-
-
 Marketing
 ---------
 - Theme? http://kovshenin.com/2012/publish-a-free-minimal-and-responsive-wordpress-theme/#comments  -- either that or Thesis
@@ -58,6 +52,8 @@ Marketing
 ~ FONTS => https://news.ycombinator.com/item?id=5407499
 
 
+Front Range
+-----------
 
 ### Order Creation + Checkout - Details ###
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -74,18 +70,12 @@ Order Submission Flow - Bound Contexts and Concerns
 
 Ideally?  A Message Bus
 -----------------------
-2.7.) Inventory Process => TODO
-
-3.) Payment Processing => TODO
 5.) Communication Process => TODO
 6.) Analytics Tracking Process => TODO
-
 7.) DONE
 
-* Create Order w/ Payment Verification service => IN PROGRESS
-* Create Shipping Service for Shipping Options => DONE
-
 * Create an Order Processing "post mortem" Page => IN PROGRESS
+
 
 
 // Internal Domain objects

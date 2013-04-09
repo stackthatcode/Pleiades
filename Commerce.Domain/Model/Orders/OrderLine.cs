@@ -12,13 +12,15 @@ namespace Commerce.Persist.Model.Orders
             this.OriginalDescription = sku.Description;
             this.OriginalUnitPrice = sku.Product.UnitPrice;
             this.Quantity = quantity;
+            this.Status = OrderLineStatus.Pending;
         }
 
         public int Id { get; set; }
+        public OrderLineStatus Status { get; set; }
 
         // This guy may or may not exist...
         public ProductSku Sku { get; set; }
-        
+
         public string OriginalSkuCode { get; set; }
         public string OriginalDescription { get; set; }
         public decimal OriginalUnitPrice { get; set; }

@@ -103,10 +103,6 @@
     <Compile Include="Areas\Admin\Models\Manager\ViewUserModel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Areas\Admin\Models\Order\OrderRequestItem.cs" />
-    <Compile Include="Areas\Admin\Models\Order\OrderRequestShipping.cs" />
-    <Compile Include="Areas\Admin\Models\Order\OrderResponse.cs" />
-    <Compile Include="Areas\Admin\Models\Order\OrderRequest.cs" />
     <Compile Include="Areas\Public\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Public\PublicAreaRegistration.cs" />
     <Compile Include="CommerceWebUIModule.cs" />
@@ -227,6 +223,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Admin\Models\Order\" />
     <Folder Include="Areas\Public\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

@@ -866,3 +866,18 @@ Add Shipping Info object to payload so Json matches C# Model => DONE
 * Create State Tax Service => DONE
 // Invoke Payment Processor - DONE
 
+4/9 1.5 Hours
+-------------
+-// Return Order Creation status object...? - DONE
+// Make corrections to the Quantities - DONE
+// How do we message that: => DONE
+// Payment Failed?=> DONE
+// Invalid Payment Info=> DONE
+// Valid Payment Info, but still a no-no=> DONE
+// Payment Succeeded=> DONE
+// Inventory changed?=> DONE
+2.7.) Inventory Process => DONE
+3.) Payment Processing => DONE FOR NOW
+* Create Shipping Service for Shipping Options => DONE
+* Create Order w/ Payment Verification service => DONE
+

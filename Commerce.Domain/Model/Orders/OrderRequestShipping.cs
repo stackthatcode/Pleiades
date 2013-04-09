@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Commerce.WebUI.Areas.Admin.Models.Order
+namespace Commerce.Persist.Model.Orders
 {
     [JsonObject]
     public class OrderRequestShipping

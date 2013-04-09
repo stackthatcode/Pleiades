@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using Pleiades.Web.Security.Model;
 using Commerce.Persist.Model.Billing;
 using Commerce.Persist.Model.Lists;
@@ -56,6 +57,18 @@ namespace Commerce.Persist.Concrete
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+        }
+
+        public void RefreshCollection<T>(IEnumerable<T> collection)
+        {
+            var objectContext = (this as IObjectContextAdapter).ObjectContext;
+            objectContext.Refresh(System.Data.Objects.RefreshMode.StoreWins, collection);
+        }
+
+        public void RefreshEntity<T>(T entity)
+        {
+            var objectContext = (this as IObjectContextAdapter).ObjectContext;
+            objectContext.Refresh(System.Data.Objects.RefreshMode.StoreWins, entity);
         }
     }
 }

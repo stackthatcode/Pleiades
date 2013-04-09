@@ -22,6 +22,9 @@ namespace Commerce.Persist.Model.Orders
         public List<OrderLine> OrderLines { get; set; }
         public StateTax StateTax { get; set; }
 
+        // Audit Info
+        public List<string> Notes { get; set; }
+
         // Computed properties...
         public decimal SubTotal
         {

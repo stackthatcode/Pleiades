@@ -1,27 +1,24 @@
 ﻿using System.Collections.Generic;
 
-namespace Commerce.WebUI.Areas.Admin.Models.Order
+namespace Commerce.Persist.Model.Orders
 {
-    public class OrderResponse
+    public class OrderRequestResult
     {
         public bool Success { get; set; }
         public List<string> Messages { get; set; }
 
-        public OrderResponse()
+        public OrderRequestResult()
         {
             this.Messages = new List<string>();
         }
 
+        public OrderRequestResult(bool success, string message)
+        {
+            this.Messages = new List<string>() { message };
+            this.Success = success;
+        }
 
-        // How do we message that:
-        // Payment Failed?
-        // Invalid Payment Info
-        // Valid Payment Info, but still a no-no
-        // Payment Succeeded
-
-        // Inventory changed?  
         // System Error?
-
         // On Success from Payment Process, take the External Payment ID
 
         // BOUNDED CONTEXT!
