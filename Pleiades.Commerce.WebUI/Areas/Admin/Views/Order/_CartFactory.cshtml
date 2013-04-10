@@ -9,13 +9,6 @@
             self.Product = product;
         }
 
-        // Reference data
-        PushMkt.ShippingOptions = [
-            { Id: "1", Name: "UPS Ground (7-10 days)", Cost: 7.95 },
-            { Id: "2", Name: "UPS Ground Quicker (3-5 days)", Cost: 14.95 },
-            { Id: "3", Name: "UPS Ground Express (next day)", Cost: 21.95 },
-        ];
-
         PushMkt.ExpirationMonths = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
         PushMkt.ExpirationYears = AQ.range(2013, 2030).toArray();
 
@@ -114,8 +107,8 @@
                     return 0;
                 }
                 var state = AQ(PushMkt.StatesOfAmerica)
-                        .first(function (x) { return x.abbreviation == self.ShippingInfo.State(); });
-                var taxPercentage = state.tax;
+                        .first(function (x) { return x.Abbreviation == self.ShippingInfo.State(); });
+                var taxPercentage = state.TaxRate;
                 return self.SubTotal() * (taxPercentage / 100.0);
             });
 

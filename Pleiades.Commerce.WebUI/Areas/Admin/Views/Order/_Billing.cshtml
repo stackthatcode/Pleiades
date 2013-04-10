@@ -120,15 +120,24 @@
 
                     self.Service.AjaxPost("/Admin/Order/SubmitOrder", jsonOrder, this);
                 },
-                function(result) {
-                    console.log("Success?");
+                function(response) {
+                    if (!response.Success) {
+                        $("[name='btn-submit-order']").show();
+                        self.ShowModal(
+                            "Notification", 
+                            "Order Submission", 
+                            "There was a problem submitting your Order", 
+                            response.Messages);
+                    } else {
+                        // Glide to Completion screen
+                    }
                 }
             );
         }
     }
 </script>
 
-<style>  
+<style>
     .checkout-form2 .control-group 
     {
         margin-bottom:10px;
@@ -220,7 +229,7 @@
                             <label class="control-label" for="state">State</label>
                             <div class="controls">
                                 <select id="state" name="state"
-                                    data-bind="options: PushMkt.StatesOfAmerica, optionsText: 'name', optionsValue: 'abbreviation', value: $data.State, optionsCaption:'Choose a State' " />
+                                    data-bind="options: PushMkt.StatesOfAmerica, optionsText: 'Name', optionsValue: 'Abbreviation', value: $data.State, optionsCaption:'Choose a State' " />
                             </div>
                         </div>
                         <div class="control-group">

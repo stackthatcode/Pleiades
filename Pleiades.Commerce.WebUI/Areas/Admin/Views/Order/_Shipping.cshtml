@@ -193,7 +193,7 @@
                             <label class="control-label" for="state">State</label>
                             <div class="controls">
                                 <select id="state" name="state"
-                                    data-bind="options: PushMkt.StatesOfAmerica, optionsText: 'name', optionsValue: 'abbreviation', value: $data.State, optionsCaption:'Choose a State' " />
+                                    data-bind="options: PushMkt.StatesOfAmerica, optionsText: 'Name', optionsValue: 'Abbreviation', value: $data.State, optionsCaption:'Choose a State' " />
                             </div>
                         </div>
                         <div class="control-group">
@@ -224,7 +224,7 @@
                         <div style="clear:both; width:300px;">
                             <label>
                                 <input type="radio" name="shippingSelect" data-bind="value: $data.Id, checked: $parent.ShippingOptionId" /> 
-                                <span data-bind="text: $data.Name"></span>
+                                <span data-bind="text: $data.Description"></span>
                                 <span data-bind="text: ToMoney($data.Cost)"></span>
                             </label>
                         </div>

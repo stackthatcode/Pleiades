@@ -46,6 +46,7 @@
                             "Notification",
                             "Item Out-Of-Stock",
                             "Item: " + editSku.SkuCode + " is no longer in stock. Sorry!",
+                            null,
                             function () {
                                 self.Cart().RemoveBySkuCode(editSku.SkuCode);
                             });
@@ -58,6 +59,7 @@
                             "Notification",
                             "Items Out-Of-Stock",
                             "Due to changes in available stock, items were removed from Cart",
+                            null,
                             this);
                         return;
                     }

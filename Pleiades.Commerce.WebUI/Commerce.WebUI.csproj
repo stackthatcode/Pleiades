@@ -223,7 +223,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Admin\Models\Order\" />
     <Folder Include="Areas\Public\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
@@ -353,10 +352,13 @@
     <Content Include="Areas\Admin\Views\Order\_Shipping.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Order\_States.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\_ReferenceData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Order\_Billing.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Order\_Completion.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

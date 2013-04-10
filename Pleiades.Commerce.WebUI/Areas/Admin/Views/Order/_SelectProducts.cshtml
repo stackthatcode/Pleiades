@@ -1,59 +1,7 @@
 ﻿<!-- List Model Functions -->
 <script type="text/javascript">
     var PushMkt = PushMkt || {};
-    PushMkt.AddListFunctions = function (model) {
-        var self = model;
-        self.BrandArray = ko.observableArray();
-        self.CategoryArray = ko.observableArray();
-
-        self.RetrieveCategoriesList = function (callback) {
-            flow.exec(
-                function () {
-                    self.Service.AjaxGet("/Admin/Product/Categories", this);
-                },
-                function (data) {
-                    self.CategoryArray.removeAll();
-                    self.CategoryArray.push({
-                        value: null,
-                        text: "(Select a Category)" 
-                    });
-
-                    var addCategory = function (category, indent) {
-                        self.CategoryArray.push({
-                            value: category.Id,
-                            text: indent + category.Name 
-                        });
-                        $.each(category.Categories, function (index, elem) { addCategory(elem, indent + '....'); });
-                    }
-                    $.each(data, function (index, elem) { addCategory(elem, ''); });
-                    if (callback) {
-                        callback();
-                    }
-                }
-            );
-        }
-
-        self.RetrieveBrandsList = function (callback) {
-            flow.exec(
-                function () {
-                    self.Service.AjaxGet("/Admin/Product/Brands", this);
-                },
-                function (data) {
-                    self.BrandArray.removeAll();
-                    self.BrandArray.push({ value: null, text: "(Select a Brand)" });
-
-                    $.each(data, function (index, elem) {
-                        self.BrandArray.push({ value: elem.Id, text: elem.Name });
-                    });
-
-                    if (callback) {
-                        callback();
-                    }
-                }
-            );
-        }
-    }
-
+    
     PushMkt.AddSearchFunctions = function (model) {
         self = model;
         self.SearchData = ko.observableArray();

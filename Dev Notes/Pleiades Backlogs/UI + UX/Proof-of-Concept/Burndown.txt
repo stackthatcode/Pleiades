@@ -881,3 +881,17 @@ Add Shipping Info object to payload so Json matches C# Model => DONE
 * Create Shipping Service for Shipping Options => DONE
 * Create Order w/ Payment Verification service => DONE
 
+4/10 1.75 Hours
+---------------
+- States + Shipping // TODO: load this into KO => DONE
+- Ideally?  A Message Bus => BUT NOT NOW
+*** MANDATE => more play with Autofac => DONE, FOR NOW
+- http://nblumhardt.com/2011/01/an-autofac-lifetime-primer/ => DONE, FOR NOW
+- JQuery Validate => DONE
+- difference between PartialViews, USerControls, etc. => DONE
+- Shopping Cart Problem Notification => DONE
+- Stubbed out the Analytics Service and Email Sending Service => DONE
+- Error Simulation => DONE
+Communication Process => DONE FOR NOW, UNTIL EMAIL ENGINE
+Analytics Tracking Process => DONE FOR NOW, UNTIL ANALYTICS ENGINE + NICE LITTLE GRAPH
+

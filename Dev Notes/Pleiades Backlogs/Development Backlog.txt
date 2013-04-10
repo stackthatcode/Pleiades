@@ -3,15 +3,12 @@ FRONTRANGE - HOTZONE
 
 GRC
 ---
-* Jeremy Meeting 2013/03/17
 - Box Cryptor => TODO
 - Send last meeting notes => DONE
-
 
 Marketing
 ---------
 - Theme? http://kovshenin.com/2012/publish-a-free-minimal-and-responsive-wordpress-theme/#comments  -- either that or Thesis
-
 
 ### Design Options for StoreFront
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -21,6 +18,8 @@ Marketing
 - Jiu-jitsu Gear 
 - Grown-up-ish
 - Sophisticated...?
+
+CHECK THIS OUT => http://www.ww2helmets.com/products-page/checkout/ => TODO
 
 * CSS Framework?
 - Bootstrap, maybe Metro
@@ -57,25 +56,7 @@ Front Range
 
 ### Order Creation + Checkout - Details ###
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Order Submission Flow - Bound Contexts and Concerns
----------------------------------------------------
-- Product Context (Creation, Deletion of Product, Colors, Images)
-- Inventory Context (In-stock, Reserved & Available Quantities)
-- Order Context (Creation of Order, Tracking/Management of Order Status)
-- Payment Context (Payment Processing, Receipt/record of Payment, Refunds, Payment History by canonicalized-email or User ID)
-- Communication Context (Email, Email Send History, Faxes, etc.)
-- Analytics Context (Sale Record, Product Popularity, Refund Record)
-
-
-Ideally?  A Message Bus
------------------------
-5.) Communication Process => TODO
-6.) Analytics Tracking Process => TODO
-7.) DONE
-
-* Create an Order Processing "post mortem" Page => IN PROGRESS
-
+* Create an Order Processing "post mortem" Page => IN PROGRESS (DO IN PARALLEL WITH THE STORE FRONT DESIGN)
 
 
 // Internal Domain objects
@@ -98,7 +79,6 @@ Order
 	History
 }
 
-
 Operations
 ----------
 - Split OrderLine (put something in the History)
@@ -116,7 +96,6 @@ OrderLine Status
 - Received
 - Refunded
 - Cancelled
-
 
 Interface Flow
 --------------
@@ -148,7 +127,7 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/27/2013
 - SKU Generator + Inventory Tracker => DONE
 - Admin Order Create => DONE
 
-- Shopping Cart => IN PROGRESS
+- Shopping Cart => IN PROGRESS - ALMOST DONE O_o
 - Search & Manage Orders => IN PROGRESS
 - Sales Graph => IN PROGRESS
 
@@ -212,12 +191,18 @@ ARCHITECTURAL REVIEW 1/24/2013
 - Compbine Domain and Persist assemblies.  They're not separate, dude!!!
 * NOTE: we never ever DELETE User records
 
+Order Submission Flow - Bound Contexts and Concerns 4/8/2013
+------------------------------------------------------------
+- Product Context (Creation, Deletion of Product, Colors, Images)
+- Inventory Context (In-stock, Reserved & Available Quantities)
+- Order Context (Creation of Order, Tracking/Management of Order Status)
+- Payment Context (Payment Processing, Receipt/record of Payment, Refunds, Payment History by canonicalized-email or User ID)
+- Communication Context (Email, Email Send History, Faxes, etc.)
+- Analytics Context (Sale Record, Product Popularity, Refund Record)
 
 
 *** TODO: what is the function of "nav-collapse collapse"?
 *** MANDATE => research HOW KnockoutJS actually works internally
-*** MANDATE => more play with Autofac 
-- http://nblumhardt.com/2011/01/an-autofac-lifetime-primer/
 - http://code.google.com/p/autofac/wiki/MvcIntegration
 
 
@@ -229,10 +214,7 @@ MORE BIG FISH
 => Find a good resource for Typography, Fonts, etc. => TODO
 => http://news.ycombinator.com/item?id=4669866 => IMPORTANT
 => Enable for Azure => TODO
-
 - Web Optimization Toolkit / Bundle Thingy => TODO
-
-
 
 E-Commerce API's & Payment Processors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -252,10 +234,8 @@ Research Backlog
 - TODO KNOCKOUTJS: difference between http://knockoutjs.com/documentation/extenders.html AND custom binders
 - ToHtmlString() => TODO
 - What's the benefit of <: stuff again...? => TODO
-- difference between PartialViews, USerControls, etc.
 - difference between <%: and <%=
 - Model Binding, how it all works - REVIEW
-- JQuery Validate => TODO
 - Easily the most important security article evar => - http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
 - Look up Troy Hunt's article's, too
 
@@ -265,10 +245,9 @@ https://github.com/MatthewMueller/array
 https://github.com/danderson00/knockout.composite/tree/master/Examples
 http://news.ycombinator.com/item?id=3265625
 http://twitter.github.com/flight/
-http://www.ww2helmets.com/products-page/checkout/ => Hmmmmm...?????
 http://fortawesome.github.com/Font-Awesome/
 http://pcottle.github.com/learnGitBranching/
-TextPad + Resharper => TODO
+SublimeText + Resharper => TODO
 
 Good Stuff
 ----------

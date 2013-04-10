@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using Commerce.Persist.Interfaces;
@@ -12,11 +13,18 @@ namespace Commerce.Persist.Concrete
     {
         PleiadesContext Context { get; set; }
         IPaymentProcessor PaymentProcessor { get; set; }
+        IAnalyticsService AnalyticsService { get; set; }
+        IEmailGenerator EmailGenerator { get; set; }
+        IEmailService EmailService { get; set; }
 
-        public OrderRepository(PleiadesContext context, IPaymentProcessor paymentProcessor)
+        public OrderRepository(PleiadesContext context, IPaymentProcessor paymentProcessor, 
+                IAnalyticsService analyticsService, IEmailGenerator emailGenerator, IEmailService emailService )
         {
             this.Context = context;
             this.PaymentProcessor = paymentProcessor;
+            this.AnalyticsService = analyticsService;
+            this.EmailGenerator = emailGenerator;
+            this.EmailService = emailService;
         }
 
         public OrderRequestResult SubmitOrder(OrderRequest orderRequest)
@@ -96,9 +104,35 @@ namespace Commerce.Persist.Concrete
                 }
             }
 
-            // Invoke the Analytics Service - TODO
+            // Send the Email
+            var message = this.EmailGenerator.OrderReceived();
+            this.EmailService.Send(message);
 
+            // Invoke the Analytics Service
+            this.AnalyticsService.AddSale(order);
+
+            // Testing hook
+            ResponseTesting(orderResponse);
+
+            // FIN!
             return orderResponse;
+        }
+
+        private void ResponseTesting(OrderRequestResult result)
+        {
+            var OrderSimulateException = Boolean.Parse(ConfigurationManager.AppSettings["OrderSimulateException"]);
+            var OrderSimulateFailure = Boolean.Parse(ConfigurationManager.AppSettings["OrderSimulateFailure"]);
+            var OrderMessages = ConfigurationManager.AppSettings["OrderMessages"].Split('|').ToList();
+
+            if (OrderSimulateException)
+            {
+                throw new Exception("Oh noes! Total system failure!!!");
+            }
+            if (OrderSimulateFailure)
+            {
+                result.Success = false;
+            }
+            OrderMessages.ForEach(x => result.Messages.Add(x));
         }
     }
 }

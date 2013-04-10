@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
 using System.Data.Objects.SqlClient;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Pleiades.Web;
@@ -32,14 +33,12 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             return View();
         }
 
-        // TODO: load this into KO
         [HttpGet]
         public ActionResult ShippingMethods()
         {
             return new JsonNetResult(this.Context.ShippingMethods.ToList());
         }
 
-        // TODO: load this into KO
         [HttpGet]
         public ActionResult States()
         {
@@ -49,8 +48,9 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult SubmitOrder(OrderRequest orderRequest)
         {
-            // TODO if response is false, then 500
-            return new JsonNetResult(this.OrderRepository.SubmitOrder(orderRequest));
+            // TODO if response is false, then 500...?
+            var response = this.OrderRepository.SubmitOrder(orderRequest);
+            return new JsonNetResult(response);
         }
 
         public ActionResult Manager()

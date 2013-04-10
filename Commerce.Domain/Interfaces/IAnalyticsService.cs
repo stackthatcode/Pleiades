@@ -1,9 +1,10 @@
 ﻿using System;
+using Commerce.Persist.Model.Orders;
 
 namespace Commerce.Persist.Interfaces
 {
     public interface IAnalyticsService
     {
-        void AddSale(DateTime transactionDate, decimal transactionAmount);
+        void AddSale(Order order);
     }
 }

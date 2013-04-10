@@ -36,7 +36,9 @@ namespace Commerce.Persist
 
             // Product Repositories
             builder.RegisterType<ProductRepository>().As<IProductRepository>().InstancePerLifetimeScope();
-            builder.RegisterType<ProductRepository>().As<IProductRepository>().InstancePerLifetimeScope();
+
+            // Order Repository
+            builder.RegisterType<OrderRepository>().As<IOrderRepository>().InstancePerLifetimeScope();
             
             // Resource Repositories
             builder.RegisterType<FileResourceRepository>().As<IFileResourceRepository>().InstancePerLifetimeScope();
@@ -54,7 +56,12 @@ namespace Commerce.Persist
             // Payment Processors
             builder.RegisterType<GetPaidPaymentProcessor>().As<IPaymentProcessor>();
 
-            // 
+            // Email Repositories
+            builder.RegisterType<EmailGenerator>().As<IEmailGenerator>();
+            builder.RegisterType<EmailService>().As<IEmailService>();
+
+            // Analytic Service
+            builder.RegisterType<AnalyticService>().As<IAnalyticsService>();
         }
     }
 }

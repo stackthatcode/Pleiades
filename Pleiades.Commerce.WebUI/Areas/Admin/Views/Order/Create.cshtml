@@ -4,11 +4,11 @@
 	@Html.Javascript("/aquery/aQuery-1.0-min.js")
     @Html.Partial("_ImageBundleViewer") 
     @Html.Partial("_EndlessGlider")
-    @Html.Partial("_CartFactory")    
     @Html.Partial("_BaseViewModel") 
+    @Html.Partial("_CartFactory")    
+    @Html.Partial("_ReferenceData")
     @Html.Partial("_SelectProducts") 
     @Html.Partial("_ReviewOrder")
-    @Html.Partial("_States")
     @Html.Partial("_Shipping")
     @Html.Partial("_Billing")
 
@@ -31,6 +31,12 @@
                 },
                 function () {
                     model.RetrieveBrandsList(this);
+                },
+                function () {
+                    model.RetrieveStatesOfAmerica(this);
+                },
+                function () {
+                    model.RetrieveShippingMethods(this);
                 }
             );
 
