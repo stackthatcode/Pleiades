@@ -45,7 +45,7 @@ namespace Commerce.Persist.Concrete
 
         // Billing
         public DbSet<StateTax> StateTaxes { get; set; }
-
+        public DbSet<Transaction> Transactions { get; set; }
 
         // Experimental
         public DbSet<SmallIdea> SmallIdeas { get; set; }

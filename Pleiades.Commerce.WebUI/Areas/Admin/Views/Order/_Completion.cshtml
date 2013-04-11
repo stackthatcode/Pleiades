@@ -5,16 +5,13 @@
     PushMkt.AddCompletionFunctions = function (model) {
         var self = model;
 
-        self.SubmitOrderClick = function () {
-            var failed = false;
-            failed = (! $("#billingAddressForm").valid()) || failed;
-            failed = (! $("#paymentForm").valid()) || failed;            
-            if (failed) {
-                return;
-            }
+        self.StartOverClick = function () {
+            // Clear Cart
+            self.SearchData.removeAll();
+            self.Cart(new PushMkt.Cart());
 
-            $("[name='btn-submit-order']").hide();
-            self.ProcessOrder();
+            // Glide Right to Beginning
+            self.GlideRight("SelectProducts");
         }
     }
 </script>
@@ -27,30 +24,30 @@
 	<div id="heading" class="container">
         <div class="row">
 			<div class="span9">
-				<h1>Create Order &gt; Complete</h1>
+				<h1>Create Order &gt; Complete!</h1>
 			</div>
 			<div class="span3" style="margin-top:15px; text-align:right;">
-                <a name="btn-submit-order" class="btn btn-primary" style="width:190px;" data-bind="click: $root.SubmitOrderClick">
-                    <i class="icon-thumbs-up icon-white"></i> OK, Submit Order <i class="icon-arrow-right icon-white"></i>
+                <a name="btn-submit-order" class="btn btn-primary" style="width:190px;" data-bind="click: $root.StartOverClick">
+                    <i class="icon-pencil icon-white"></i> Create Another Order <i class="icon-arrow-right icon-white"></i>
                 </a>
 			</div>
 		</div>
 
         <div class="row">
             <div class="span7" style="height:48px;">
-                <ul class="nav nav-pills">
-                    <li style="width:270px; text-align:center;">
-				        <a name="glideToBeginning" href="#" class="backbutton" data-bind="click: $root.BackToSearch">&laquo; Create Another Order</a>
-                    </li>
-                </ul
+                <!-- NADA -->
             </div>
         </div>
 	</div>
 </script>
 
 <script type="text/html" id="Main-Editor-Completion">
-    <div style="margin-bottom:200px;">                
-        <!-- PUT THE GOODS HERE...! -->
+    <div style="margin-bottom:200px;">
+        <div style="float:left; width:375px;" data-bind="template: { name: 'Order-Summary' }">
+        </div>
+
+        <div style="float:left; width:375px;" data-bind="template: { name: 'Order-Summary' }">
+        </div>
 
         <div style="float:left; width:250px;" data-bind="template: { name: 'Order-Summary' }">
         </div>

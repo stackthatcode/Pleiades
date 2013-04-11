@@ -4,6 +4,7 @@ namespace Commerce.Persist.Interfaces
 {
     public interface IPaymentProcessor
     {
-        ProcessorResponse AuthorizeAndCollect(BillingInfo billing, decimal Amount);
+        Transaction AuthorizeAndCollect(BillingInfo billing, decimal Amount);
+        Transaction Refund(Transaction originalTransaction, decimal Amount);
     }
 }

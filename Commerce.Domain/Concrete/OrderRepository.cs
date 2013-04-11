@@ -17,8 +17,9 @@ namespace Commerce.Persist.Concrete
         IEmailGenerator EmailGenerator { get; set; }
         IEmailService EmailService { get; set; }
 
-        public OrderRepository(PleiadesContext context, IPaymentProcessor paymentProcessor, 
-                IAnalyticsService analyticsService, IEmailGenerator emailGenerator, IEmailService emailService )
+        public OrderRepository(
+                PleiadesContext context, IPaymentProcessor paymentProcessor, IAnalyticsService analyticsService, 
+                IEmailGenerator emailGenerator, IEmailService emailService)
         {
             this.Context = context;
             this.PaymentProcessor = paymentProcessor;
@@ -42,13 +43,63 @@ namespace Commerce.Persist.Concrete
 
         public OrderRequestResult SubmitOrder_worker(OrderRequest orderRequest)
         {
+            // Order Request to Order translation
             if (orderRequest.BillingInfo == null || orderRequest.ShippingInfo == null ||
                             orderRequest.Items == null || orderRequest.Items.Count() == 0)
             {
                 return new OrderRequestResult(false, "Invalid or missing data passed");
             }
+            var order = FromOrderRequest(orderRequest);
 
-            var skus = orderRequest.Items.Select(x => x.SkuCode).ToList();
+            // Payment Processing
+            var paymentTransaction = PaymentProcessor.AuthorizeAndCollect(orderRequest.BillingInfo, order.GrandTotal);
+            if (paymentTransaction.Success == false)
+            {
+                return new OrderRequestResult(false, "Something's wrong with your Payment Info. Sorry, please try again");
+            }
+            order.PaymentTransactions.Add(paymentTransaction);
+            this.Context.Orders.Add(order);
+            this.Context.Transactions.Add(paymentTransaction);
+            this.Context.SaveChanges();
+
+            // Inventory corrections
+            var orderResponse = new OrderRequestResult() { Success = true };
+            var inventory = this.InventoryBySkuCodes(order.AllSkuCodes);
+            this.Context.RefreshCollection(inventory);
+            foreach (var line in order.OrderLines)
+            {
+                var sku = inventory.First(x => x.SkuCode == line.OriginalSkuCode);
+                if (sku.IsDeleted == true || sku.Available < line.Quantity)
+                {
+                    line.Quantity = sku.Available;
+                    orderResponse.Messages.Add(
+                        "Only " + sku.Available + " of the " + line.OriginalDescription +
+                        " were available in stock.  The size of your order was reduced.");
+                }
+            }
+
+            // Create the Order
+            this.Context.SaveChanges();
+
+            // Send the Email
+            var message = this.EmailGenerator.OrderReceived();
+            this.EmailService.Send(message);
+
+            // Invoke the Analytics Service
+            this.AnalyticsService.AddSale(order);
+            this.Context.SaveChanges();
+
+            // ** Temporary Testing hook ** //
+            this.ResponseTesting(orderResponse);
+
+            // FIN!
+            return orderResponse;
+        }
+
+        private Order FromOrderRequest(OrderRequest orderRequest)
+        {
+            var skus = orderRequest.AllSkuCodes;
+
             var inventory = this.Context.ProductSkus
                     .Include(x => x.Product)
                     .Where(x => skus.Contains(x.SkuCode)).ToList();
@@ -82,40 +133,17 @@ namespace Commerce.Persist.Concrete
                 ShippingMethod = shippingMethod,
             };
 
-            var paymentResponse = PaymentProcessor.AuthorizeAndCollect(orderRequest.BillingInfo, order.GrandTotal);
-            if (paymentResponse.Success == false)
-            {
-                return new OrderRequestResult(false, "Something's wrong with your Payment Info. Sorry, please try again");
-            }
+            order.OriginalGrandTotal = order.GrandTotal;
+            return order;
+        }
 
-            var orderResponse = new OrderRequestResult() { Success = true };
-
-            // Inventory corrections
+        public List<ProductSku> InventoryBySkuCodes(IEnumerable<string> skuCodes)
+        {
+            var inventory = this.Context.ProductSkus
+                   .Include(x => x.Product)
+                   .Where(x => skuCodes.Contains(x.SkuCode)).ToList();
             this.Context.RefreshCollection(inventory);
-            foreach (var line in order.OrderLines)
-            {
-                var sku = inventory.First(x => x.SkuCode == line.OriginalSkuCode);
-                if (sku.IsDeleted == true || sku.Available < line.Quantity)
-                {
-                    line.Quantity = sku.Available;
-                    orderResponse.Messages.Add(
-                        "Only " + sku.Available + " of the " + line.OriginalDescription +
-                        " were available in stock.  The size of your order was reduced.");
-                }
-            }
-
-            // Send the Email
-            var message = this.EmailGenerator.OrderReceived();
-            this.EmailService.Send(message);
-
-            // Invoke the Analytics Service
-            this.AnalyticsService.AddSale(order);
-
-            // Testing hook
-            ResponseTesting(orderResponse);
-
-            // FIN!
-            return orderResponse;
+            return inventory;
         }
 
         private void ResponseTesting(OrderRequestResult result)

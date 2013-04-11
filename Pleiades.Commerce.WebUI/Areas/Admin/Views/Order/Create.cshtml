@@ -11,6 +11,7 @@
     @Html.Partial("_ReviewOrder")
     @Html.Partial("_Shipping")
     @Html.Partial("_Billing")
+    @Html.Partial("_Completion")
 
     <!-- document.ready() Functions -->
 	<script type="text/javascript">
@@ -22,6 +23,7 @@
 	        PushMkt.AddReviewProductsFunctions(model);
 	        PushMkt.AddShippingFunctions(model);
 	        PushMkt.AddBillingFunctions(model);
+	        PushMkt.AddCompletionFunctions(model);
 	        ko.applyBindings(model);
 	        tmp = model;
 

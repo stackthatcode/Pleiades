@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Commerce.Persist.Model.Billing;
 
@@ -7,7 +8,11 @@ namespace Commerce.Persist.Model.Orders
     public class Order
     {
         public int Id { get; set; }
+        public string ExternalId { get; set; }
 
+        // Customer Id
+        public Guid CustomerId { get; set; }
+        
         // Shipping Info
         public string EmailAddress { get; set; }
         public string Name { get; set; }
@@ -22,8 +27,18 @@ namespace Commerce.Persist.Model.Orders
         public List<OrderLine> OrderLines { get; set; }
         public StateTax StateTax { get; set; }
 
+        // Payment Info
+        public List<Transaction> PaymentTransactions { get; set; }
+
         // Audit Info
         public List<string> Notes { get; set; }
+
+        // ctor
+        public Order()
+        {
+            this.OrderLines = new List<OrderLine>();
+            this.PaymentTransactions = new List<Transaction>();
+        }
 
         // Computed properties...
         public decimal SubTotal
@@ -47,6 +62,26 @@ namespace Commerce.Persist.Model.Orders
             get
             {
                 return SubTotal + Tax + ShippingMethod.Cost;
+            }
+        }
+
+        public decimal OriginalGrandTotal { get; set; }
+
+        public decimal RefundedAmount
+        {
+            get
+            {
+                return this.PaymentTransactions
+                    .Where(x => x.TransactionType == TransactionType.Refund && x.Success == true)
+                    .Sum(x => x.Amount);
+            }
+        }
+
+        public List<string> AllSkuCodes
+        {
+            get
+            {
+                return OrderLines.Select(x => x.OriginalSkuCode).ToList();
             }
         }
     }

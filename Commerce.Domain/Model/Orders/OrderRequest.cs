@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Commerce.Persist.Model.Billing;
 using Commerce.Persist.Model.Orders;
 using Newtonsoft.Json;
@@ -20,6 +21,14 @@ namespace Commerce.Persist.Model.Orders
         public OrderRequest()
         {
             this.Items = new List<OrderRequestItem>();
+        }
+
+        public List<string> AllSkuCodes
+        {
+            get
+            {
+                return Items.Select(x => x.SkuCode).ToList();
+            }
         }
     }
 }

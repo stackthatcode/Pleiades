@@ -83,8 +83,9 @@
     <Compile Include="Interfaces\IImageProcessor.cs" />
     <Compile Include="Interfaces\IImageBundleRepository.cs" />
     <Compile Include="Interfaces\IJsonSizeRepository.cs" />
-    <Compile Include="Model\Billing\ProcessorResponse.cs" />
+    <Compile Include="Model\Billing\Transaction.cs" />
     <Compile Include="Model\Billing\StateTax.cs" />
+    <Compile Include="Model\Billing\TransactionType.cs" />
     <Compile Include="Model\Email\Message.cs" />
     <Compile Include="Model\Lists\Brand.cs">
       <SubType>Code</SubType>

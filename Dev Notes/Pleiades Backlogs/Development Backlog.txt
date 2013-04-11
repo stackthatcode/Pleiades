@@ -57,30 +57,13 @@ Front Range
 ### Order Creation + Checkout - Details ###
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * Create an Order Processing "post mortem" Page => IN PROGRESS (DO IN PARALLEL WITH THE STORE FRONT DESIGN)
+* Order Domain object => IN PROGRESS
 
 
-// Internal Domain objects
-Order
-{
-	Shipping,
-	PaymentReceipt,
-	Aggregate Status
-	Order Line
-	{
-		Sku,
-		Order Line Status,
-		History, (just dump some blob text)
-	},
-	Order Notes,
-	{
-		Audit = UserId + DateCreated,
-		Content
-	},
-	History
-}
+* Manage an Order CRUD screen => IN PROGRESS
 
-Operations
-----------
+Order Domain Operations
+-----------------------
 - Split OrderLine (put something in the History)
 - Ship OrderLines => Split as needed => Update Status + History
 - Refund => Choose Order Lines => Hit the Payment Processor => Update Status on Order Lines + History
@@ -100,7 +83,7 @@ OrderLine Status
 Interface Flow
 --------------
 - Order Search + Results
-	- Order Summary Tab (Aggregate Status, Shipping, 3 Most Recent Histories)
+* Order Summary Tab (Aggregate Status, Shipping, 3 Most Recent Histories)
 
 - THE GREAT FLOW - Tieing it All Together (!!!)
 - Test *EVERYTHING* => create a Product and simulate Creation of a Product followed by deletion of Categories, Brands, etc. => IN PROGRESS
@@ -140,7 +123,7 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/27/2013
 - Rearchitect the REST URL's => TODO
 * http://stackoverflow.com/questions/3730777/whats-so-restful-about-asp-net-mvc => IMPORTANT
 
-- Barebones Console App => IN PROGRESS
+- Barebones Console App => ALMOST DONE
 
 
 
