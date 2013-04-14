@@ -8,6 +8,7 @@ namespace Commerce.Persist.Concrete
         public void AddSale(Order order)
         {
             // TODO: add functionality
+            // this.Context.SaveChanges            
         }
     }
 }

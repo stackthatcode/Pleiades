@@ -71,6 +71,8 @@ Order Domain Operations
 - Fail Shipping => Choose Order Lines => Update Status + History
 - Get Refunds by Sku...?
 
+
+
 OrderLine Status
 ----------------
 - Pending
@@ -92,7 +94,8 @@ Interface Flow
 * Why are there Product Color orphans in the database? => TODO
 
 - Upgrade MVC to version 4.0 / start using the Web API for Controllers => TODO
-
+- Delete Product => do we delete the Inventory
+- coupled to Inventory Context
 
 
 
@@ -109,21 +112,23 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/27/2013
 - Product Search & Editor => DONE
 - SKU Generator + Inventory Tracker => DONE
 - Admin Order Create => DONE
+- Payment Processing => DONE O_o
 
-- Shopping Cart => IN PROGRESS - ALMOST DONE O_o
+- Barebones Console App => ALMOST DONE
+- Check-out Process => IN PROGRESS - ALMOST DONE O_o ADD THE SUCCESS PAGE
 - Search & Manage Orders => IN PROGRESS
 - Sales Graph => IN PROGRESS
+- Email Sending Engine => IN PROGRESS
+- Customer-facing Shopping Cart => IN PROGRESS
 
 - High-touch Store Front => TODO
-- One Completely Solid Landing Page => TODO
 - Server Logging => TODO
-- Email Sending Engine => TODO
 
 - Revamped Membership Provider => TODO
 - Rearchitect the REST URL's => TODO
 * http://stackoverflow.com/questions/3730777/whats-so-restful-about-asp-net-mvc => IMPORTANT
 
-- Barebones Console App => ALMOST DONE
+- One Completely Solid Landing Page => MAYBE
 
 
 

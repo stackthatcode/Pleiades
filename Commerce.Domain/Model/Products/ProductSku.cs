@@ -48,6 +48,7 @@ namespace Commerce.Persist.Model.Products
                 {
                     return this.Product.Description + " - " + this.Color.Name;
                 }
+
                 return this.Product.Description;
             }
         }

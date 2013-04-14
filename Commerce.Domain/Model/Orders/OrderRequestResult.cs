@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Commerce.Persist.Model.Orders
 {
@@ -6,10 +7,13 @@ namespace Commerce.Persist.Model.Orders
     {
         public bool Success { get; set; }
         public List<string> Messages { get; set; }
+        public Order Order { get; set; }
 
-        public OrderRequestResult()
+        public OrderRequestResult(Order order)
         {
-            this.Messages = new List<string>();
+            this.Messages = order.Notes.Select(x => x.Content).ToList();
+            this.Order = order;
+            this.Success = true;
         }
 
         public OrderRequestResult(bool success, string message)
@@ -18,12 +22,12 @@ namespace Commerce.Persist.Model.Orders
             this.Success = success;
         }
 
-        // System Error?
+
+        // System Error? => no External Payment ID
         // On Success from Payment Process, take the External Payment ID
 
         // BOUNDED CONTEXT!
         // For every CreateRequestOrder, log the results in the database, sans PCI data
         // 1.) Payment Processor Response Code
-
     }
 }

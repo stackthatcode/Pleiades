@@ -9,7 +9,11 @@ namespace Commerce.Persist.Concrete
 
     public class EmailService : IEmailService
     {
-        public void Send(Message message)
+        public void SendOrderReceived()
+        {
+        }
+
+        public void SendOrderShipped()
         {
         }
     }

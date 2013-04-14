@@ -22,18 +22,20 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         IJsonSizeRepository SizeRepository { get; set; }
         IJsonColorRepository ColorRepository { get; set; }
         IProductRepository ProductRepository { get; set; }
+        IInventoryRepository InventoryRepository { get; set; }
         IImageBundleRepository ImageBundleRepository { get; set; }
         PleiadesContext Context { get; set; } 
 
-        public ProductController(
-                IJsonCategoryRepository categoryRepository, IJsonBrandRepository brandRepository, 
-                IProductRepository productRepository, IJsonSizeRepository sizeRepository,
+        public ProductController(IJsonCategoryRepository categoryRepository, 
+                IJsonBrandRepository brandRepository, IProductRepository productRepository, 
+                IJsonSizeRepository sizeRepository, IInventoryRepository inventoryRepository,
                 IImageBundleRepository imageBundleRepository, PleiadesContext context)
         {
             this.CategoryRepository = categoryRepository;
             this.BrandRepository = brandRepository;
             this.SizeRepository = sizeRepository;
             this.ProductRepository = productRepository;
+            this.InventoryRepository = inventoryRepository;
             this.ImageBundleRepository = imageBundleRepository;
             this.Context = context;
         }
@@ -271,7 +273,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult InventoryTotal(int id)
         {
-            var result = this.ProductRepository.InventoryTotal(id);
+            var result = this.InventoryRepository.TotalInStock(id);
             return new JsonNetResult(new { Total = result }); 
         }
 
@@ -283,18 +285,18 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
                 //var total = this.ProductRepository.InventoryTotal(id);
                 //if (total == 0)
 
-                this.ProductRepository.GenerateInventory(id);
+                this.InventoryRepository.Generate(id);
                 this.Context.SaveChanges();
             }
 
-            var inventory = this.ProductRepository.Inventory(id);
+            var inventory = this.InventoryRepository.ProductSkuById(id);
             return new JsonNetResult(inventory); 
         }
 
         [HttpPost]
         public ActionResult Inventory(int id, int inventoryTotal)
         {
-            this.ProductRepository.UpdateInventoryTotal(id, inventoryTotal);
+            this.InventoryRepository.UpdateInStock(id, inventoryTotal);
             this.Context.SaveChanges();
             return new JsonNetResult();
         }

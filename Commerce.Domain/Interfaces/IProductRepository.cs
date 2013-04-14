@@ -35,11 +35,5 @@ namespace Commerce.Persist.Interfaces
         void UnassignImagesFromColor(int productId);
         void ChangeImageColor(int productId, int productImageId, int newColor);
 
-        // Inventory
-        List<ProductSku> Inventory(int productId);
-        int InventoryTotal(int productId);
-        void WipeInventory(int productId);
-        void UpdateInventoryTotal(int productId, int inventoryTotal);
-        void GenerateInventory(int productId);
     }
 }

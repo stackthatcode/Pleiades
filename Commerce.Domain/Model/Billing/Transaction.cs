@@ -5,7 +5,7 @@ namespace Commerce.Persist.Model.Billing
     public class Transaction
     {
         public int Id { get; set; }
-        public DateTime DateCreated { get; set; }
+        public DateTime TransactionDate { get; set; }
 
         // Payment Details
         public decimal Amount { get; set; }
@@ -18,9 +18,18 @@ namespace Commerce.Persist.Model.Billing
         public string ReferenceCode { get; set; }
         public string OriginalReferenceCode { get; set; }
 
-        public Transaction()
+        public Transaction(TransactionType transactionType)
         {
-            this.DateCreated = DateTime.Now;
+            this.TransactionType = transactionType;
+            this.TransactionDate = DateTime.Now;
+        }
+
+        public string ToPlainEnglish()
+        {
+            return TransactionDate.ToString() + " - " +
+                this.TransactionType.ToPlainEnglish() + 
+                " of " + string.Format("{0:c}", this.Amount) +
+                (this.Success ? " succeeded " : " failed ");            
         }
     }
 }

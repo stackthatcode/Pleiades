@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commerce", "Commerce", "{71
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Base", "Pleiades.Framework\Pleiades.Base.csproj", "{10CEE227-9B7C-4D97-B53A-229E8D45B15F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commerce Tests", "Commerce Tests", "{42DBB876-C427-4C24-B1FA-E1F80B93A5FD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commerce.Tests", "Commerce.Tests", "{42DBB876-C427-4C24-B1FA-E1F80B93A5FD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Data.EF", "Pleiades.Data.EF\Pleiades.Data.EF.csproj", "{89303370-B830-4A89-8646-0F9D287AD657}"
 EndProject
@@ -27,13 +27,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commerce.Persist", "Commerc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commerce.IntegrationTests", "Commerce.IntegrationTests\Commerce.IntegrationTests.csproj", "{FE635455-8016-4AB0-BA25-5A459A76ABA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commerce.WebUI.UnitTests", "Commerce.WebUI.UnitTests\Commerce.WebUI.UnitTests.csproj", "{080581DA-D122-4195-A615-DF9B85DEE99E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commerce.UnitTests", "Commerce.WebUI.UnitTests\Commerce.UnitTests.csproj", "{080581DA-D122-4195-A615-DF9B85DEE99E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.IntegrationTests.DataEF", "Pleiades.IntegrationTests.DataEF\Pleiades.IntegrationTests.DataEF.csproj", "{D4EBBD91-DDCA-4E18-A04D-50008A9158F3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.UnitTests", "Pleiades.UnitTests\Pleiades.UnitTests.csproj", "{5F92F823-9790-4F67-9BCB-2AE22FCBED41}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pleiades Tests", "Pleiades Tests", "{3D30D9F1-2727-4E76-AD66-E3E03B99A444}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pleiades.Tests", "Pleiades.Tests", "{3D30D9F1-2727-4E76-AD66-E3E03B99A444}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Web.Security.UnitTests", "Pleiades.Web.Security.UnitTests\Pleiades.Web.Security.UnitTests.csproj", "{11018755-DEC2-493C-82D1-58DCC1AF5927}"
 EndProject

@@ -3,8 +3,8 @@ using Commerce.Persist.Model.Orders;
 
 namespace Commerce.Persist.Interfaces
 {
-    public interface IOrderRepository
+    public interface IOrderService
     {
-        OrderRequestResult SubmitOrder(OrderRequest orderRequest);
+        OrderRequestResult SubmitOrderRequest(OrderRequest orderRequest);
     }
 }

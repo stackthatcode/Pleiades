@@ -39,6 +39,7 @@ namespace Commerce.Initializer.Builders
                 var imageRepository = ServiceLocator.Resolve<IImageBundleRepository>();
                 var productRepository = ServiceLocator.Resolve<IProductRepository>();
                 var productColorRepository = ServiceLocator.Resolve<IProductRepository>();
+                var inventoryRepository = ServiceLocator.Resolve<IInventoryRepository>();
                 var unitOfWork = ServiceLocator.Resolve<IUnitOfWork>();
 
                 // Clear everything out
@@ -155,11 +156,11 @@ namespace Commerce.Initializer.Builders
                 }
                 unitOfWork.SaveChanges();
 
-                productRepository.GenerateInventory(product1.Id);
+                inventoryRepository.Generate(product1.Id);
                 unitOfWork.SaveChanges();
 
                 var random = new Random();
-                foreach (var sku in productRepository.Inventory(product1.Id))
+                foreach (var sku in inventoryRepository.ProductSkuById(product1.Id))
                 {
                     sku.Reserved = 0;
                     sku.InStock = random.Next(2, 6);

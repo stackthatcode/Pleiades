@@ -28,16 +28,29 @@ namespace Commerce.Persist.Model.Orders
         public StateTax StateTax { get; set; }
 
         // Payment Info
-        public List<Transaction> PaymentTransactions { get; set; }
+        public List<Transaction> Transactions { get; set; }
 
         // Audit Info
-        public List<string> Notes { get; set; }
+        public List<OrderNote> Notes { get; set; }
 
         // ctor
         public Order()
         {
+            this.CustomerId = Guid.NewGuid();
             this.OrderLines = new List<OrderLine>();
-            this.PaymentTransactions = new List<Transaction>();
+            this.Transactions = new List<Transaction>();
+            this.Notes = new List<OrderNote>();
+        }
+
+        public void AddNote(string content)
+        {
+            this.Notes.Add(new OrderNote(content));
+        }
+
+        public void AddTransaction(Transaction transaction)
+        {
+            this.Transactions.Add(transaction);
+            this.AddNote(transaction.ToPlainEnglish());
         }
 
         // Computed properties...
@@ -47,13 +60,21 @@ namespace Commerce.Persist.Model.Orders
             {
                 return OrderLines.Sum(x => x.LinePrice);
             }
+            set
+            {
+                // Do nothing!                
+            }
         }
 
         public decimal Tax
         {
             get
             {
-                return SubTotal * this.StateTax.TaxRate;
+                return SubTotal * this.StateTax.TaxRate / 100.00m;
+            }
+            set
+            {
+                // Do nothing!
             }
         }
 
@@ -63,6 +84,10 @@ namespace Commerce.Persist.Model.Orders
             {
                 return SubTotal + Tax + ShippingMethod.Cost;
             }
+            set
+            {
+                // Do nothing!
+            }
         }
 
         public decimal OriginalGrandTotal { get; set; }
@@ -71,7 +96,7 @@ namespace Commerce.Persist.Model.Orders
         {
             get
             {
-                return this.PaymentTransactions
+                return this.Transactions
                     .Where(x => x.TransactionType == TransactionType.Refund && x.Success == true)
                     .Sum(x => x.Amount);
             }

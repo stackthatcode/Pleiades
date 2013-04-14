@@ -4,6 +4,7 @@ namespace Commerce.Persist.Interfaces
 {
     public interface IEmailService
     {
-        void Send(Message message);
+        void SendOrderReceived();
+        void SendOrderShipped();
     }
 }

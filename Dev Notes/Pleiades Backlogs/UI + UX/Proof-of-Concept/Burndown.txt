@@ -895,3 +895,14 @@ Add Shipping Info object to payload so Json matches C# Model => DONE
 Communication Process => DONE FOR NOW, UNTIL EMAIL ENGINE
 Analytics Tracking Process => DONE FOR NOW, UNTIL ANALYTICS ENGINE + NICE LITTLE GRAPH
 
+4/11 1.0 Hours
+--------------
+- Order/Payment processing => IN PROGRESS
+
+4/12 1.5 Hours
+--------------
+- Order/Payment processing => IN PROGRESS
+
+4/14 6 Hours
+------------
+- Finished writing Unit Tests for Order/Payment Procesing => DONE - GOOD JOB, BRAH!

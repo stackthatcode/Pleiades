@@ -12,10 +12,9 @@ namespace Commerce.Persist.Concrete
             // If somebody's payment fails... then Log it.
             var pretendReferenceCode = Guid.NewGuid().ToString();
 
-            return new Transaction
+            return new Transaction(TransactionType.AuthorizeAndCollect)
             {
                 Amount = amount,
-                TransactionType = TransactionType.AuthorizeAndCollect,                
 
                 // Stubbed out Stripe details
                 ProcessorCode = "PAID-3333",
@@ -28,10 +27,9 @@ namespace Commerce.Persist.Concrete
 
         public Transaction Refund(Transaction originalTransaction, decimal amount)
         {
-            return new Transaction
+            return new Transaction(TransactionType.Refund)
             {
                 Amount = amount,
-                TransactionType = TransactionType.Refund,
                 OriginalReferenceCode = originalTransaction.ReferenceCode,
 
                 // Stubbed out Stripe details
