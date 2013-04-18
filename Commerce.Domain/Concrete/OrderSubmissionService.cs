@@ -10,7 +10,7 @@ using Commerce.Persist.Model.Products;
 
 namespace Commerce.Persist.Concrete
 {
-    public class OrderService : IOrderService
+    public class OrderSubmissionService : IOrderSubmissionService
     {
         public const string ErrorFault = "Oh noes! Something went wrong while processing your Order";
         public const string ErrorMissingData = "Invalid or missing data passed";
@@ -25,11 +25,11 @@ namespace Commerce.Persist.Concrete
         public Func<string, StateTax> StateTaxByAbbr;
         public Func<int, ShippingMethod> ShippingMethodById;
         public Func<IEnumerable<string>, bool, List<ProductSku>> InventoryBySkuCodes;
-        public Action<OrderRequestResult> ResponseTesting;
+        public Action<SubmitOrderResult> ResponseTesting;
         public Action<Order> CreateOrder;
         public Action SaveChanges;
 
-        public OrderService(PleiadesContext context, 
+        public OrderSubmissionService(PleiadesContext context, 
                 IPaymentProcessor paymentProcessor, IAnalyticsService analyticsService, IEmailService emailService)
         {
             this.Context = context;
@@ -45,26 +45,26 @@ namespace Commerce.Persist.Concrete
             this.SaveChanges = this.SaveChangesImpl;
         }
 
-        public OrderRequestResult SubmitOrderRequest(OrderRequest orderRequest)
+        public SubmitOrderResult Submit(SubmitOrderRequest orderRequest)
         {
             try
             {
-                return SubmitOrder_worker(orderRequest);
+                return Submit_worker(orderRequest);
             }
             catch (Exception ex)
             {
                 // TODO: Log it!
-                return new OrderRequestResult(false, ErrorFault);
+                return new SubmitOrderResult(false, ErrorFault);
             }
         }
 
-        public OrderRequestResult SubmitOrder_worker(OrderRequest orderRequest)
+        public SubmitOrderResult Submit_worker(SubmitOrderRequest orderRequest)
         {
             // Order Request to Order translation - Bounded Context
             if (orderRequest.BillingInfo == null || orderRequest.ShippingInfo == null || 
                 orderRequest.Items == null || orderRequest.Items.Count() == 0)
             {
-                return new OrderRequestResult(false, ErrorMissingData);
+                return new SubmitOrderResult(false, ErrorMissingData);
             }
             var order = FromOrderRequest(orderRequest);
 
@@ -74,7 +74,7 @@ namespace Commerce.Persist.Concrete
             if (paymentTransaction.Success == false)
             {
                 // Don't create the Order!
-                return new OrderRequestResult(false, ErrorFailedPayment);
+                return new SubmitOrderResult(false, ErrorFailedPayment);
             }
 
             // Payment Received + Create Order - Bounded Context
@@ -94,15 +94,19 @@ namespace Commerce.Persist.Concrete
                     if (sku.Available == 0 || sku.IsDeleted == true)
                     {
                         order.AddNote(
-                            "There are no longer any of the " + line.OriginalDescription + " available in stock.");
+                            "There are no longer any of the " + line.OriginalName + " available in stock.");
                     }
                     else
                     {
+                        var wereOrWas = sku.Available == 1 ? "was" : "were";
                         order.AddNote(
-                            "Only " + sku.Available + " of the " + line.OriginalDescription +
-                            " were available in stock.  The size of your order was reduced.");
+                            "Only " + sku.Available + " of the " + line.Quantity + " your requested " + line.OriginalName +
+                            " " + wereOrWas + " available in stock.  The size of your order was reduced.");
                     }
                 }
+
+                // Increment the Reserved Count in INVENTORY
+                sku.Reserved += line.Quantity;
             }
             this.SaveChanges();
 
@@ -121,11 +125,11 @@ namespace Commerce.Persist.Concrete
             this.AnalyticsService.AddSale(order);
 
             // FIN! - return OrderRequestResponse - Bounded Context
-            var orderResponse = new OrderRequestResult(order);
+            var orderResponse = new SubmitOrderResult(order);
             return orderResponse;
         }
 
-        private Order FromOrderRequest(OrderRequest orderRequest)
+        private Order FromOrderRequest(SubmitOrderRequest orderRequest)
         {
             var skus = orderRequest.AllSkuCodes;
             var inventory = this.InventoryBySkuCodes(skus, false);
@@ -156,6 +160,7 @@ namespace Commerce.Persist.Concrete
             };
 
             order.OriginalGrandTotal = order.GrandTotal;
+            order.ExternalId = OrderNumberGenerator.Next();
             return order;
         }
 
@@ -165,6 +170,9 @@ namespace Commerce.Persist.Concrete
             var inventory =
                 this.Context.ProductSkus
                     .Include(x => x.Product)
+                    .Include(x => x.Color)
+                    .Include(x => x.Size)
+                    .Include(x => x.Color.ProductImageBundle)
                     .Where(x => sku_codes.Contains(x.SkuCode)).ToList();
 
             if (refresh)

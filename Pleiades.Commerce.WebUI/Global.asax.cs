@@ -5,6 +5,7 @@ using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
 using Pleiades.Injection;
+using Pleiades.Web.Plumbing;
 using Pleiades.Web.Security.Providers;
 using Pleiades.Web.Security;
 using Pleiades.Web.Security.Aspect;
@@ -25,6 +26,9 @@ namespace Commerce.WebUI
 
             // Bit of glue to make JSON POST-ing work
             ValueProviderFactories.Factories.Add(new JsonValueProviderFactory());
+
+            // Model Binders
+            ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
 
             // Filters
             RegisterGlobalFilters();

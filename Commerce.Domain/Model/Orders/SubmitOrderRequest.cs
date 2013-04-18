@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace Commerce.Persist.Model.Orders
 {
     [JsonObject]
-    public class OrderRequest
+    public class SubmitOrderRequest
     {
         [JsonProperty]
         public OrderRequestShipping ShippingInfo { get; set; }
@@ -18,7 +18,7 @@ namespace Commerce.Persist.Model.Orders
         [JsonProperty]
         public List<OrderRequestItem> Items { get; set; }
 
-        public OrderRequest()
+        public SubmitOrderRequest()
         {
             this.Items = new List<OrderRequestItem>();
         }

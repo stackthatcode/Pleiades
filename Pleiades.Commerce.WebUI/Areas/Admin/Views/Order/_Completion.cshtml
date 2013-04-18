@@ -5,6 +5,8 @@
     PushMkt.AddCompletionFunctions = function (model) {
         var self = model;
 
+        self.CompletedOrder = ko.observable(null);
+
         self.StartOverClick = function () {
             // Clear Cart
             self.SearchData.removeAll();

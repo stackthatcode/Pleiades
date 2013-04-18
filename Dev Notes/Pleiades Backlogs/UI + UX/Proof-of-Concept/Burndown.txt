@@ -906,3 +906,23 @@ Analytics Tracking Process => DONE FOR NOW, UNTIL ANALYTICS ENGINE + NICE LITTLE
 4/14 6 Hours
 ------------
 - Finished writing Unit Tests for Order/Payment Procesing => DONE - GOOD JOB, BRAH!
+
+4/15 1.5 Hours
+--------------
+- Domain object modelling => IN PROGRESS
+
+4/16 1.5 Hours
+--------------
+- Fix bug in the Product Info Save button => TODO - PRETTY IMPORTANT - DONE
+- Update Sku Code
+- Disable Inventory Sku-Code Editing
+- Update Inventory Reserved
+
+4/18 1.0 Hours
+--------------
+- Add OrderNotes to one-to-many OrderLines => DONE
+- Order Number Generator => DONE
+- DDD on the Order => IN PROGRESS
+- Verification of Refund logic => DONE
+- Corrections of verbage on ORder corrections => DONE
+

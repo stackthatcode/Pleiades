@@ -9,7 +9,7 @@ namespace Commerce.Persist.Model.Orders
         {
             this.Sku = sku;
             this.OriginalSkuCode = sku.SkuCode;
-            this.OriginalDescription = sku.Description;
+            this.OriginalName = sku.Name;
             this.OriginalUnitPrice = sku.Product.UnitPrice;
             this.Quantity = quantity;
             this.Status = OrderLineStatus.Pending;
@@ -22,7 +22,7 @@ namespace Commerce.Persist.Model.Orders
         public ProductSku Sku { get; set; }
 
         public string OriginalSkuCode { get; set; }
-        public string OriginalDescription { get; set; }
+        public string OriginalName { get; set; }
         public decimal OriginalUnitPrice { get; set; }
 
         public int Quantity { get; set; }

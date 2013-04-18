@@ -1,4 +1,71 @@
-﻿    <!-- KNOCKOUT TEMPLATE - INVENTORY -->
+﻿     <!-- Inventory View Model -->
+    <script type="text/javascript">
+        var AddInventoryFunctions = function (rootModel) {
+            var self = rootModel;
+
+            self.SelectedProductInventory = ko.observableArray();
+
+            self.AddInventoryConstraint = function (inventoryRow) {
+                inventoryRow.TotalObservable = ko.observable(inventoryRow.InStock);
+                inventoryRow.EditTotalObservable = ko.observable(inventoryRow.InStock);
+
+                inventoryRow.EditTotalFormatted =
+                    ko.computed({
+                        read: function () {
+                            return inventoryRow.EditTotalObservable().toFixed(0);
+                        },
+                        // Could we move this to a currying function?
+                        write: function (value) {
+                            // Strip out unwanted characters, parse as float, then write the raw data back to the underlying "price" observable
+                            value = parseFloat(value.replace(/[^\d]/g, ""));
+                            inventoryRow.EditTotalObservable(isNaN(value) ? 0 : value);  // Write to underlying storage
+                            inventoryRow.EditTotalObservable.notifySubscribers();
+                        },
+                        // Parent object
+                        owner: inventoryRow
+                    });
+            }
+
+            self.SelectedSku = ko.observable(null);
+
+            self.InventoryTabClick = function () {
+                flow.exec(
+                    function () {
+                        self.ProductService.Inventory(self.SelectedProduct().Id(), this);
+                    },
+                    function (inventory) {
+                        $.each(inventory, function (index, elem) {
+                            self.AddInventoryConstraint(elem);
+                        });
+                        self.SelectedProductInventory(inventory);
+                        self.ActiveView({ Level: "Child", Template: "Inventory" });
+                    }
+                );
+            }
+
+            self.InventoryEditClick = function (data) {
+                data.EditTotalObservable(data.TotalObservable());
+                self.SelectedSku(data);
+            }
+
+            self.InventoryCancelClick = function (data) {
+                self.SelectedSku(null);
+            }
+
+            self.InventorySaveClick = function (data) {
+                flow.exec(
+                    function () {
+                        data.TotalObservable(data.EditTotalObservable());
+                        self.ProductService.UpdateInventory(data.Id, data.TotalObservable(), this);
+                    },
+                    function () {
+                        self.SelectedSku(null);
+                    });
+            }
+        }
+    </script>
+    
+    <!-- KNOCKOUT TEMPLATE - INVENTORY -->
 	<script type="text/html" id="Child-Editor-Inventory">
         <div id="inventory" data-bind="foreach: $root.SelectedProductInventory()">
 		    <table class="table table-hover" style="margin-bottom:0px;" data-bind="if: $data == $root.SelectedSku()">
@@ -6,8 +73,7 @@
 			        <tr>
 			        <td valign="top">
 				        <span class="span5">
-                            <h4 style="float:left; height:24px;">Sku Code </h4>
-                            <input class="input-large" style="width:220px; margin-top:4px; margin-left:5px;" type="text" placeholder="Sku Code" data-bind="value: $data.SkuCode" maxlength="20" />
+					        <h4 style="height:24px;">Sku Code: <span data-bind="text: $data.SkuCode"></span></h4>
                             <p style="line-height:15px; clear:both;">Original Sku Code: <span data-bind="text: $data.OriginalSkuCode"></span></p>
 				        </span>
                     </td>

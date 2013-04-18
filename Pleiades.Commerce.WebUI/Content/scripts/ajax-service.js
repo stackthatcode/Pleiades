@@ -3,7 +3,7 @@ function AjaxService(errorCallback, showLoadingCallback, hideLoadingCallback) {
 	var self = this;
 	
     // Configurable Settings
-    self.Timeout = 5000;
+    self.Timeout = 60000;
     self.BaseUrl = "/Pleiades"; // TODO: move this into dynamic code
 
 	self.ShowLoadingCallback = showLoadingCallback;

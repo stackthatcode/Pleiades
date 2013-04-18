@@ -99,7 +99,13 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             else
             {
                 result = this.Context.Products.First(x => x.Id == product.Id);
+                if (product.SkuCode != result.SkuCode) 
+                {
+                    // Update the Inventory Sku Code
+                    this.InventoryRepository.UpdateSkuCode(product.Id.Value, product.SkuCode);
+                }
             }
+
             result.Name = product.Name;
             result.Description = product.Description;
             result.Synopsis = product.Synopsis;
@@ -109,6 +115,7 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             result.UnitPrice = product.UnitPrice;
             result.Brand = this.Context.Brands.First(x => x.Id == product.BrandId);
             result.Category = this.Context.Categories.First(x => x.Id == product.CategoryId);
+
             this.Context.SaveChanges();
 
             return new JsonNetResult(result.ToJson());

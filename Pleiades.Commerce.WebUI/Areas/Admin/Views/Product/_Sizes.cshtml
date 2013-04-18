@@ -1,4 +1,197 @@
-﻿
+﻿    <!-- Size View Model -->
+    <script type="text/javascript">
+        var AddSizeFunctions = function (rootModel) {
+            var self = rootModel;
+            self.SelectedProductSizes = ko.observableArray();
+            self.SizeReferenceData = ko.observableArray();
+            self.NewSizeInput = ko.observable(null);
+            
+            self.AddSizeFromList = function () {
+                flow.exec(
+                    function () {
+                        self.ProductService.SizeGroups(this);
+                    },
+                    function (data) {
+                        self.SizeReferenceData(data);
+                        
+                        $.each(data, function (index, elem) { 
+                            $.each(elem.Sizes, function (index, subElem) {
+                                subElem.Selected = ko.observable(false); 
+                            });
+                        });
+                        self.ChildGlider.GlideToChild(this);
+                    },
+                    function () {
+                        self.ActiveView({ Level: "Sub-Child", Template: "AddSizesFromList" });
+
+                    }
+                );
+            }
+
+            self.CreateNewSize = function () {
+                var input = {
+                    EditAbbreviation: ko.observable(null),
+                    EditName: ko.observable(null),
+                    EditSkuCode: ko.observable(null),
+                };
+                self.NewSizeInput(input);                
+            }
+            
+            self.CancelCreateNewSize = function () {
+                self.NewSizeInput(null);
+            }
+            
+            self.GlideBackToSizesTabWithRefresh = function(callback) {
+                flow.exec(
+                    function () {
+                        self.ProductService.Sizes(self.SelectedProduct().Id(), this);
+                    },
+                    function (sizes) {
+                        self.SelectedProductSizes(sizes);
+                        self.ChildGlider.GlideToParent(this);
+                    },
+                    function () {
+                        self.ActiveView({ Level: "Child", Template: "Sizes" });
+                        self.MakeSizesSortable();
+                        if (callback) {
+                            callback();
+                        }
+                    }
+                );
+            }
+            
+            self.GlideBackToSizes = function () {
+                flow.exec(
+                    function () {
+                        $("#glideToParent").hide();
+                        self.ChildGlider.GlideToParent(this);
+                    },
+					function () {
+					    self.ActiveView({ Level: "Child", Template: "Sizes" });
+                        self.MakeColorsSortable();
+					}
+				);
+            }
+                        
+            // If there is Inventory, and this is the first Size, it will wipe the Inventory
+            self.SizeInventoryCheck = function(action) {
+                flow.exec(
+                    function() {
+                         self.ProductService.InventoryTotal(self.SelectedProduct().Id(), this);
+                    },
+                    function(inventoryTotal) {
+                        if (self.SelectedProductSizes().length == 0 && inventoryTotal.Total > 0) {
+                            self.ShowAddSizesInventoryDialog(action);
+                        } else {
+                            action();
+                        }
+                    }
+                );
+            };
+            
+            self.ShowAddSizesInventoryDialog = function (action) {
+                self.ModalViewModel({ Action: action, Template: "Modal-Dialog-ProductSizeInventory" });
+                $('#modal-dialog').modal('show');
+            }
+            
+            self.AddSizesToProductClick = function () {
+                self.SizeInventoryCheck(self.AddSizesToProductAction);
+            }
+
+            self.AddSizesToProductAction = function () {   
+                $('#modal-dialog').modal('hide');             
+                var sizeIdList = [];
+                $.each(self.SizeReferenceData(), function (index, elem) {
+                    $.each(elem.Sizes, function (index, subElem) {
+                        if (subElem.Selected()) {
+                            sizeIdList.push(subElem.Id);
+                        }
+                    });
+                });
+
+                var callback = (self.SelectedProductSizes().length == 0) ? self.ShowAddSizesDialog : null;
+                
+                var iterator = function () {
+                    if (sizeIdList.length == 0) {
+                        self.GlideBackToSizesTabWithRefresh(callback);
+                        return;
+                    }
+
+                    var nextSizeId = sizeIdList.shift();
+                    self.ProductService.AddProductSize(self.SelectedProduct().Id(), nextSizeId, iterator);
+                };
+                iterator();
+            }
+
+            self.DeleteProductSize = function (size) {
+                self.ModalViewModel({ Template: "Modal-Dialog-ProductSize", Data: size });
+                $('#modal-delete').modal();
+            }
+
+            self.DeleteProductSizeConfirm = function () {
+                var size = self.ModalViewModel().Data;
+                flow.exec(
+                    function () {
+                        $('#modal-delete').modal('hide');
+                        self.ProductService.DeleteProductSize(self.SelectedProduct().Id(), size.Id, this);
+                    },
+                    function () {
+                        self.SelectedProductSizes.remove(size);
+                        self.ModalViewModel({ Template: null });
+                    }
+                );
+            }
+            
+            self.SizesTabClick = function () {
+                flow.exec(
+                    function () {
+                        self.ProductService.Sizes(self.SelectedProduct().Id(), this);
+                    },
+                    function (sizes) {
+                        self.SelectedProductSizes(sizes);
+                        self.ActiveView({ Level: "Child", Template: "Sizes" });
+                        self.MakeSizesSortable();
+                    }
+                );
+            }
+
+            self.MakeSizesSortable = function () {
+                $(".sortable").sortable({
+                    placeholder: "ui-state-highlight",
+                    update: self.UpdateSizeSortOrder,
+                    delay: 300
+                });
+                $(".sortable").disableSelection();
+            }
+
+            self.UpdateSizeSortOrder = function () {
+                var sortOutput = [];
+                $.each($("#sizes > div"), function (index, elem) { 
+                    sortOutput.push($(elem).attr('id').replace('sorted', '')); 
+                });
+                var sortedIds = sortOutput.join(",");
+                self.ProductService.UpdateSizeOrder(self.SelectedProduct().Id(), sortedIds);
+            };
+        }
+	</script>
+    
+	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG PRODUCT ADD SIZE -->
+	<script type="text/html" id="Modal-Dialog-ProductSizeInventory">
+        <div id="modal-dialog" class="modal hide fade">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3>Add Sizes to Product</h3>
+			</div>
+			<div class="modal-body">
+				<p><strong>You will now be tracking Sizes in Inventory.</strong></p>
+                <p>Old Inventory without Size will be destroyed.  Please update your Inventory.</p>
+			</div>
+			<div class="modal-footer">    
+                <a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.ModalViewModel().Action"><i class="icon-ok icon-white"></i> Ok</a>
+			</div>
+		</div>
+	</script>
 	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR SIZES TAB -->
     <script type="text/html" id="Child-Editor-Sizes">
     <div style="margin-top:0px;">

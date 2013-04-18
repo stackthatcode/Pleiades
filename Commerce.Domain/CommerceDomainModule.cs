@@ -39,7 +39,7 @@ namespace Commerce.Persist
             builder.RegisterType<InventoryRepository>().As<IInventoryRepository>().InstancePerLifetimeScope();
 
             // Order Repository
-            builder.RegisterType<OrderService>().As<IOrderService>().InstancePerLifetimeScope();
+            builder.RegisterType<OrderSubmissionService>().As<IOrderSubmissionService>().InstancePerLifetimeScope();
             
             // Resource Repositories
             builder.RegisterType<FileResourceRepository>().As<IFileResourceRepository>().InstancePerLifetimeScope();

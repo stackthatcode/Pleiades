@@ -19,9 +19,9 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
     public class OrderController : Controller
     {
         PleiadesContext Context { get; set; }
-        IOrderService OrderRepository { get; set; }
+        IOrderSubmissionService OrderRepository { get; set; }
 
-        public OrderController(PleiadesContext context, IOrderService orderRepository)
+        public OrderController(PleiadesContext context, IOrderSubmissionService orderRepository)
         {
             this.Context = context;
             this.OrderRepository = orderRepository;
@@ -46,10 +46,9 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult SubmitOrder(OrderRequest orderRequest)
+        public ActionResult SubmitOrder(SubmitOrderRequest orderRequest)
         {
-            // TODO if response is false, then 500...?
-            var response = this.OrderRepository.SubmitOrderRequest(orderRequest);
+            var response = this.OrderRepository.Submit(orderRequest);
             return new JsonNetResult(response);
         }
 

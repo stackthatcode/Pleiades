@@ -10,12 +10,31 @@ namespace Commerce.Persist.Model.Products
     {
         public int Id { get; set; }        
         public string SkuCode { get; set; }
-        public string Name { get; set; }
-
         public string OriginalSkuCode { get; set; }
         public Product Product { get; set; }
         public ProductColor Color { get; set; }
         public ProductSize Size { get; set; }
+
+        public string Name
+        {
+            get
+            {
+                if (Size != null && Color != null)
+                {
+                    return this.Product.Name + " - " + this.Color.Name + " - " + this.Size.Name;
+                }
+                if (Size != null)
+                {
+                    return this.Product.Name + " - " + this.Size.Name;
+                }
+                if (Color != null)
+                {
+                    return this.Product.Name + " - " + this.Color.Name;
+                }
+
+                return this.Product.Name;
+            }
+        }
 
         public ImageBundle ImageBundle
         {
@@ -29,27 +48,6 @@ namespace Commerce.Persist.Model.Products
                 {
                     return Product.ThumbnailImageBundle != null ? Product.ThumbnailImageBundle : null;
                 }
-            }
-        }
-
-        public string Description
-        {
-            get
-            {
-                if (Size != null && Color != null)
-                {
-                    return this.Product.Description + " - " + this.Color.Name + " - " + this.Size.Name;
-                }
-                if (Size != null)
-                {
-                    return this.Product.Description + " - " + this.Size.Name;
-                }
-                if (Color != null)
-                {
-                    return this.Product.Description + " - " + this.Color.Name;
-                }
-
-                return this.Product.Description;
             }
         }
 
@@ -71,13 +69,19 @@ namespace Commerce.Persist.Model.Products
         public static ProductSku Factory(Product product, ProductColor color, ProductSize size)
         {
             var skuCode = product.SkuCode;
-            var name = product.Name;            
-            if (color != null)
+            var name = product.Name;
+
+            if (color != null && size != null)
+            {
+                skuCode += "-" + color.SkuCode + "-" + size.SkuCode;
+                name += " - " + color.Name + " - " + size.Name;
+            }
+            if (color != null && size == null)
             {
                 skuCode += "-" + color.SkuCode;
                 name += " - " + color.Name; 
             }
-            if (size != null)
+            if (size != null && color == null)
             {
                 skuCode += "-" + size.SkuCode;
                 name += " - " + size.Name;
@@ -86,8 +90,8 @@ namespace Commerce.Persist.Model.Products
             var productSku = new ProductSku
             {
                 OriginalSkuCode = skuCode,
+                
                 SkuCode = skuCode,
-                Name = name,
                 Product = product,
                 Color = color,
                 Size = size,

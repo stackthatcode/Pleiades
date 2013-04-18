@@ -26,6 +26,7 @@ namespace Commerce.Persist.Model.Orders
         public ShippingMethod ShippingMethod { get; set; }
         public List<OrderLine> OrderLines { get; set; }
         public StateTax StateTax { get; set; }
+        public DateTime DateCreated { get; set; }
 
         // Payment Info
         public List<Transaction> Transactions { get; set; }
@@ -107,6 +108,19 @@ namespace Commerce.Persist.Model.Orders
             get
             {
                 return OrderLines.Select(x => x.OriginalSkuCode).ToList();
+            }
+        }
+
+        public bool Complete
+        {
+            get
+            {
+                return this.OrderLines.Any(x => 
+                    x.Status != OrderLineStatus.Shipped && x.Status != OrderLineStatus.Received);
+            }
+            set 
+            {
+                // Do nothing
             }
         }
     }

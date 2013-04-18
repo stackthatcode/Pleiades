@@ -58,36 +58,24 @@ Front Range
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * Create an Order Processing "post mortem" Page => IN PROGRESS (DO IN PARALLEL WITH THE STORE FRONT DESIGN)
 * Order Domain object => IN PROGRESS
-
-
-* Manage an Order CRUD screen => IN PROGRESS
+* Order Id Provisioning Tool => TODO
 
 Order Domain Operations
 -----------------------
 - Split OrderLine (put something in the History)
 - Ship OrderLines => Split as needed => Update Status + History
 - Refund => Choose Order Lines => Hit the Payment Processor => Update Status on Order Lines + History
-- Add OrderNotes to one-to-many OrderLines
 - Fail Shipping => Choose Order Lines => Update Status + History
 - Get Refunds by Sku...?
+- Add OrderNotes to one-to-many OrderLines => DONE
 
-
-
-OrderLine Status
-----------------
-- Pending
-- Shipped
-- ShippingFail
-- Received
-- Refunded
-- Cancelled
-
-Interface Flow
---------------
+* Manage an Order CRUD screen => IN PROGRESS
 - Order Search + Results
-* Order Summary Tab (Aggregate Status, Shipping, 3 Most Recent Histories)
+- Order Summary Tab (Aggregate Status, Shipping, 3 Most Recent Histories)
 
-- THE GREAT FLOW - Tieing it All Together (!!!)
+
+
+- THE GREAT FLOW - Tying it All Together (!!!)
 - Test *EVERYTHING* => create a Product and simulate Creation of a Product followed by deletion of Categories, Brands, etc. => IN PROGRESS
 
 * What happens if a Product/Color/Size/Image is Deleted?  What happens to Carts?  What happens to Orders? => TODO
@@ -112,15 +100,15 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/27/2013
 - Product Search & Editor => DONE
 - SKU Generator + Inventory Tracker => DONE
 - Admin Order Create => DONE
-- Payment Processing => DONE O_o
+- Payment Processing Stub => DONE O_o
 
-- Barebones Console App => ALMOST DONE
-- Check-out Process => IN PROGRESS - ALMOST DONE O_o ADD THE SUCCESS PAGE
+- Check-out Process Server-side => IN PROGRESS - ALMOST DONE O_o ADD THE SUCCESS PAGE
 - Search & Manage Orders => IN PROGRESS
 - Sales Graph => IN PROGRESS
 - Email Sending Engine => IN PROGRESS
 - Customer-facing Shopping Cart => IN PROGRESS
 
+- Barebones Console App => ALMOST DONE
 - High-touch Store Front => TODO
 - Server Logging => TODO
 
@@ -145,7 +133,6 @@ PHASE 2
 
 
 
-
 Backlog
 -------
 - SUPER IMPORTANT - post mortem my approach to the designing the UI.  How to improve my speed? => TODO
@@ -154,6 +141,7 @@ Backlog
 - Logged-In User => TODO
 - Cache the AggregateUser stuff in a static Dictionary (I mean, seriously, man) => IMPORTANT
 
+- Prevent multiple Pop-ups from appearing
 - Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING)
 - Improve the quality of client-side Error Logging => TODO
 - Check Sanderson for advanced Model Binding => TODO
@@ -196,13 +184,14 @@ Order Submission Flow - Bound Contexts and Concerns 4/8/2013
 
 MORE BIG FISH
 -------------
-=> Store Front Design - 4/1/2013
+*** Move SkuCode editor to the Inventory screen => TODO
 => Payment Processing Options, API's etc. => IN PROGRESS
 => Custom Caching solution...? => IN PROGRESS
 => Find a good resource for Typography, Fonts, etc. => TODO
 => http://news.ycombinator.com/item?id=4669866 => IMPORTANT
 => Enable for Azure => TODO
 - Web Optimization Toolkit / Bundle Thingy => TODO
+
 
 E-Commerce API's & Payment Processors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -213,6 +202,7 @@ E-Commerce API's & Payment Processors
 - Braintree
 - WePay
 - Authorize.NET
+
 
 Research Backlog
 ----------------
@@ -227,6 +217,7 @@ Research Backlog
 - Easily the most important security article evar => - http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
 - Look up Troy Hunt's article's, too
 
+
 Please Research
 ~~~~~~~~~~~~~~~
 https://github.com/MatthewMueller/array
@@ -236,6 +227,7 @@ http://twitter.github.com/flight/
 http://fortawesome.github.com/Font-Awesome/
 http://pcottle.github.com/learnGitBranching/
 SublimeText + Resharper => TODO
+
 
 Good Stuff
 ----------

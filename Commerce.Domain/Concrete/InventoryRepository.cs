@@ -160,6 +160,19 @@ namespace Commerce.Persist.Concrete
             }
         }
 
+        public void UpdateSkuCode(int productId, string newSkuCode)
+        {
+            var inventory = this.Context.ProductSkus.Where(x => x.IsDeleted == false && x.Product.Id == productId);
+            var product = this.Context.Products.First(x => x.Id == productId);
+            var oldBaseSkuCode = product.SkuCode;
+
+            foreach (var sku in inventory)
+            {
+                sku.OriginalSkuCode = sku.OriginalSkuCode.Replace(oldBaseSkuCode, newSkuCode);
+                sku.SkuCode = sku.OriginalSkuCode;
+            }
+        }
+
         public void DeleteByColor(int productId, int productColorId)
         {
             this.ActiveInventory(productId)

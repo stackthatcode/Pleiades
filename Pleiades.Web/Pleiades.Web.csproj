@@ -69,6 +69,7 @@
     <Compile Include="MvcHelpers\StyleTagGenerator.cs" />
     <Compile Include="MvcHelpers\ScriptTagGenerator.cs" />
     <Compile Include="MvcHelpers\TagIfNotEmpty.cs" />
+    <Compile Include="Plumbing\DecimalModelBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvcHelpers\EnumToSelectList.cs" />
   </ItemGroup>
