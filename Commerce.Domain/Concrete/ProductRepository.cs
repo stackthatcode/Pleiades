@@ -182,6 +182,7 @@ namespace Commerce.Persist.Concrete
             }
 
             this.InventoryRepository.DeleteByColor(productId, productColorId);
+            productColor.IsDeleted = true;
             product.Colors.Remove(productColor);
             product.SetThumbnailImages();
         }
@@ -259,7 +260,9 @@ namespace Commerce.Persist.Concrete
         {
             var product = this.RetrieveProductForSizes(productId);
             this.InventoryRepository.DeleteBySize(productId, sizeId);
-            product.Sizes.Remove(product.Sizes.First(x => x.Id == sizeId));
+            var size = product.Sizes.First(x => x.Id == sizeId);
+            size.IsDeleted = true;
+            product.Sizes.Remove(size);
         }
 
 

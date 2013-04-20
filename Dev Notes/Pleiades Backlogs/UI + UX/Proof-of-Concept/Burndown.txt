@@ -925,4 +925,28 @@ Analytics Tracking Process => DONE FOR NOW, UNTIL ANALYTICS ENGINE + NICE LITTLE
 - DDD on the Order => IN PROGRESS
 - Verification of Refund logic => DONE
 - Corrections of verbage on ORder corrections => DONE
+- Order Status specification => DONE
+- Order Complete => DONE (I THINK)
+
+4/19 1.0 Hours
+--------------
+* Order Id Provisioning Tool => DONE
+
+4/20 5.0 Hours
+--------------
+- Finished the Order Completion part => DONE
+* Create an Order Processing "post mortem" Page => IN PROGRESS (DO IN PARALLEL WITH THE STORE FRONT DESIGN) => DONE
+- coupled to Inventory Context =>  DONE - DECOUPLED
+- Patched broken Images for missing Sku Image => DONE
+- The struggle for data integrity => IN PROGRESS
+- Delete Product => do we delete the Inventory => DONE
+* Why are there Product Color orphans in the database? => DONE
+- Fixed admin graphics
+- THE GREAT FLOW - Tying it All Together (!!!) => DONE
+- Test *EVERYTHING* => create a Product and simulate Creation of a Product followed by deletion of Categories, Brands, etc. => DONE
+* What happens if a Product/Color/Size/Image is Deleted?  What happens to Carts?  What happens to Orders? => DONE
+- Delete Product => do we delete the Inventory => DONE
+* Why are there Product Color orphans in the database? => DONE
+- Fixed Category and Brand data integrity => DONE
+- Fixed clear Brand / Category error => DONE
 

@@ -98,7 +98,12 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             }
             else
             {
-                result = this.Context.Products.First(x => x.Id == product.Id);
+                result = 
+                    this.Context.Products
+                        .Include(x => x.Brand)
+                        .Include(x => x.Category)
+                        .First(x => x.Id == product.Id);
+                    
                 if (product.SkuCode != result.SkuCode) 
                 {
                     // Update the Inventory Sku Code
@@ -113,8 +118,8 @@ namespace Commerce.WebUI.Areas.Admin.Controllers
             result.SEO = product.SEO;
             result.UnitCost = product.UnitCost;
             result.UnitPrice = product.UnitPrice;
-            result.Brand = this.Context.Brands.First(x => x.Id == product.BrandId);
-            result.Category = this.Context.Categories.First(x => x.Id == product.CategoryId);
+            result.Brand = this.Context.Brands.FirstOrDefault(x => x.Id == product.BrandId);
+            result.Category = this.Context.Categories.FirstOrDefault(x => x.Id == product.CategoryId);
 
             this.Context.SaveChanges();
 

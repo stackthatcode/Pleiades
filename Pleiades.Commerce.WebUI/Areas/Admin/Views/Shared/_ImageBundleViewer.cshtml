@@ -12,10 +12,9 @@
         // LightboxSuffixId: "Main, Child or Parent, etc." }
 
 	    BundleViewer.ExtractId = function (data) {
+	        //console.log(data);
 	        var imageBundleExternalId =
-                data.ImageBundleExternalId ?
-                    data.ImageBundleExternalId :
-                    (data.ImageBundle && data.ImageBundle.ExternalId);
+                data.ImageBundleExternalId ? data.ImageBundleExternalId : (data.ImageBundle && data.ImageBundle.ExternalId);
 	        return imageBundleExternalId;
 	    }
 
@@ -88,7 +87,7 @@
         <table>
         <tr>
             <td style="height:75px; border:1px dotted #CCC; width:75px; text-align:center;">
-                <div data-bind="if: $data">
+                <div data-bind="if: $data.ImageBundle || $data.ImageBundleExternalId">
                     <a href="#" data-bind="click: BundleViewer.ShowLightBox">
                         <img data-bind="attr: { src: BundleViewer.ImageBundleDownloadUrl($data, 'thumbnail') }" />
                     </a>

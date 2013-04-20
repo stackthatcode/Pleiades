@@ -87,28 +87,34 @@ namespace Commerce.Persist.Concrete
             foreach (var line in order.OrderLines)
             {
                 var sku = inventory.First(x => x.SkuCode == line.OriginalSkuCode);
-                if (sku.IsDeleted == true || sku.Available < line.Quantity)
+                if (sku == null || sku.IsDeleted == true)
                 {
-                    line.Quantity = sku.Available;
-
+                    line.Quantity = 0;
                     if (sku.Available == 0 || sku.IsDeleted == true)
                     {
                         order.AddNote(
                             "There are no longer any of the " + line.OriginalName + " available in stock.");
                     }
-                    else
-                    {
-                        var wereOrWas = sku.Available == 1 ? "was" : "were";
-                        order.AddNote(
-                            "Only " + sku.Available + " of the " + line.Quantity + " your requested " + line.OriginalName +
-                            " " + wereOrWas + " available in stock.  The size of your order was reduced.");
-                    }
+                }
+                else if (sku.Available < line.Quantity)                
+                {
+                    var wereOrWas = sku.Available == 1 ? "was" : "were";
+                    order.AddNote(
+                        "Only " + sku.Available + " of the " + line.Quantity + " " + line.OriginalName +
+                        " you requested " + wereOrWas + " in stock.  Your order was adjusted.");
+                    line.Quantity = sku.Available;
                 }
 
                 // Increment the Reserved Count in INVENTORY
                 sku.Reserved += line.Quantity;
             }
             this.SaveChanges();
+
+            // Shipping nothing?  Kill the shipping
+            if (order.OrderLines.All(x => x.Quantity == 0))
+            {
+                order.ShippingMethod = null;
+            }
 
             // Eventual Consistency w/ Payment Correction - Do we need to process a refund? - Bounded Context
             if (order.GrandTotal < order.OriginalGrandTotal)
@@ -161,6 +167,7 @@ namespace Commerce.Persist.Concrete
 
             order.OriginalGrandTotal = order.GrandTotal;
             order.ExternalId = OrderNumberGenerator.Next();
+            order.DateCreated = DateTime.UtcNow;
             return order;
         }
 
@@ -173,7 +180,7 @@ namespace Commerce.Persist.Concrete
                     .Include(x => x.Color)
                     .Include(x => x.Size)
                     .Include(x => x.Color.ProductImageBundle)
-                    .Where(x => sku_codes.Contains(x.SkuCode)).ToList();
+                    .Where(x => x.IsDeleted == false && sku_codes.Contains(x.SkuCode)).ToList();
 
             if (refresh)
             {

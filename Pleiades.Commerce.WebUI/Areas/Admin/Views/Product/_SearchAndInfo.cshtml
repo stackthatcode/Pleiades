@@ -19,7 +19,9 @@
 					<p>
                         <h4 data-bind="text: $data.Name" style="margin-bottom:5px;"></h4>
                         <span data-bind="text: 'Sku: ' + $data.SkuCode"></span><br />
-                        <span data-bind="text: 'Brand: ' + $data.BrandName"></span><br />
+                        <div data-bind="if:$data.BrandName">
+                            <span data-bind="text: 'Brand: ' + $data.BrandName"></span><br />
+                        </div>
                         <span data-bind="text: 'Price: ' + ToMoney($data.UnitPrice)"></span>
                     </p>
 				</span>

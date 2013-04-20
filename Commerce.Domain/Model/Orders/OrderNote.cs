@@ -11,7 +11,7 @@ namespace Commerce.Persist.Model.Orders
         public OrderNote(string content)
         {
             this.Content = content;
-            this.DateCreated = DateTime.Today;
+            this.DateCreated = DateTime.UtcNow;
         }
     }
 }

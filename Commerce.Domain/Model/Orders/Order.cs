@@ -79,11 +79,23 @@ namespace Commerce.Persist.Model.Orders
             }
         }
 
+        public decimal ShippingCost
+        {
+            get
+            {
+                return (this.SubTotal != 0 && this.ShippingMethod != null) ? this.ShippingMethod.Cost : 0;
+            }
+            set
+            {
+                // Do nothing
+            }
+        }
+
         public decimal GrandTotal
         {
             get
             {
-                return SubTotal + Tax + ShippingMethod.Cost;
+                return SubTotal + Tax + ShippingCost;
             }
             set
             {

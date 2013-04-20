@@ -143,6 +143,17 @@ namespace Commerce.Persist.Concrete
                 category.Deleted = true;
                 category.Touch();
             }
+
+            var products = 
+                this.Context.Products
+                    .Where(x => x.Category != null)
+                    .Where(x => x.Category.Id == categoryId)
+                    .ToList();
+                    
+            foreach (var product in products)
+            {
+                product.Category = null;
+            }
         }
 
         public void DeleteSection(int sectionId)

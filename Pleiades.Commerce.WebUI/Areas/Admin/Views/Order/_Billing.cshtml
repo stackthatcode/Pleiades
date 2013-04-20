@@ -121,15 +121,16 @@
                     self.Service.AjaxPost("/Admin/Order/SubmitOrder", jsonOrder, this);
                 },
                 function(response) {
-                    if (!response.Success) {
+                    self.CompletedOrderResponse(response);
+                    if (!self.CompletedOrderResponse().Success) {
                         $("[name='btn-submit-order']").show();
                         self.ShowModal(
                             "Notification", 
                             "Order Submission", 
                             "There was a problem submitting your Order", 
-                            response.Messages);
+                            self.CompletedOrderResponse().Messages);
                     } else {
-                        console.log(response);
+                        console.log(self.CompletedOrderResponse());
                         self.GlideRight("Completion");
                         // Glide to Completion screen
                     }

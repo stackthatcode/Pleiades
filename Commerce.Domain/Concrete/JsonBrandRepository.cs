@@ -32,7 +32,7 @@ namespace Commerce.Persist.Concrete
             return
                 this.Context.Products
                     .Include(x => x.Brand)
-                    .Where(x => x.IsDeleted == false)
+                    .Where(x => x.Brand != null && x.IsDeleted == false)
                     .GroupBy(x => x.Brand)
                     .Select(x => new ProductsPerBrand { Brand = x.Key, Count = x.Count() });
         }
@@ -104,6 +104,17 @@ namespace Commerce.Persist.Concrete
             brand.DateUpdated = DateTime.Now;
             brand.ImageBundle.Deleted = true;
             brand.ImageBundle.DateUpdated = DateTime.Now;
+
+            var products =
+                this.Context.Products
+                    .Where(x => x.Brand != null)
+                    .Where(x => x.Brand.Id == brand.Id)
+                    .ToList();
+
+            foreach (var product in products)
+            {
+                product.Brand = null;
+            }
         }
     }
 }

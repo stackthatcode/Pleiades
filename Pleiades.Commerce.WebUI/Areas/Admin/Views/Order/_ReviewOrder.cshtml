@@ -183,6 +183,7 @@
 		<table class="table table-hover" style="margin-bottom:0px;">
 			<tbody data-bind="foreach: $root.Cart().Items">
                 <tr data-bind="ifnot: $root.SelectedCartItem() &&  $root.SelectedCartItem().CartItem() == $data, click: $root.CartItemClick">
+                    
                     <td style="width:100px">
                 	    <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundle: $data.Sku().ImageBundle, LightboxSuffixId: 'Review' } }">
 			            </div>
@@ -208,7 +209,7 @@
                         </div>
                     </td>
                 </tr>
-                    
+                
                 <tr data-bind="if: $root.SelectedCartItem() && $root.SelectedCartItem().CartItem() == $data">
                     <td style="width:100px; vertical-align:top;" data-bind="if: $root.SelectedCartItem().Image()">
                         <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundle: $root.SelectedCartItem().Image(), LightboxSuffixId: 'SelectedItem' } }">

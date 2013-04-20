@@ -26,10 +26,9 @@ namespace Commerce.Persist.Model.Billing
 
         public string ToPlainEnglish()
         {
-            return TransactionDate.ToString() + " - " +
-                this.TransactionType.ToPlainEnglish() + 
-                " of " + string.Format("{0:c}", this.Amount) +
-                (this.Success ? " succeeded " : " failed ");            
+            return 
+                this.TransactionType.ToPlainEnglish() + " of " + string.Format("{0:c}", this.Amount) +
+                (this.Success ? " succeeded" : " failed");            
         }
     }
 }

@@ -13,6 +13,7 @@ namespace Commerce.Persist.Model.Products
         public string SEO { get; set; }
         public ImageBundle ColorImageBundle { get; set; }       // This is a copy of the Color
         public ImageBundle ProductImageBundle { get; set; }     // This is a thumbnail of the Product
+        public bool IsDeleted { get; set; }
         public int Order { get; set; }
     }
 }
