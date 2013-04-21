@@ -51,18 +51,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Concrete\CacheEntry.cs" />
     <Compile Include="Aspect\SecurityAttribute.cs" />
     <Compile Include="Concrete\AggregateUserService.cs" />
     <Compile Include="Default\DefaultSecurityContextBuilder.cs" />
     <Compile Include="Default\DefaultSecurityHttpResponder.cs" />
-    <Compile Include="Concrete\HttpContextUserService.cs" />
-    <Compile Include="Concrete\OwnerAuthorizationService.cs" />
     <Compile Include="Model\SecurityCode.cs" />
-    <Compile Include="Rules\FluentSecurityMethods.cs" />
-    <Compile Include="Interface\IHttpContextUserService.cs" />
-    <Compile Include="Interface\IOwnerAuthorizationService.cs" />
+    <Compile Include="Rules\FluentSecurityFunctions.cs" />
     <Compile Include="Interface\ISecurityHttpResponder.cs" />
     <Compile Include="Interface\ISecurityContextBuilder.cs" />
+    <Compile Include="Rules\OwnerAuthorizeFunctions.cs" />
+    <Compile Include="Utility\HttpContextExtensions.cs" />
     <Compile Include="WebSecurityAggregateBroker.cs" />
     <Compile Include="WebSecurityAggregateModule.cs" />
     <Compile Include="Interface\IAggregateUserRepository.cs" />

@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using Pleiades.Data;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Providers;
+using Pleiades.Web.Security.Utility;
 
 namespace Pleiades.Web.Security.Concrete
 {
@@ -17,26 +20,52 @@ namespace Pleiades.Web.Security.Concrete
         private Guid _tracer = Guid.NewGuid();
         public Guid Tracer { get { return _tracer; } }
 
+        private static 
+            ConcurrentDictionary<string, CacheEntry<AggregateUser>>
+                _cache = new ConcurrentDictionary<string, CacheEntry<AggregateUser>>();
+
+        public Func<string, AggregateUser> GetUserFromCache = (username) =>
+            {
+                if (!_cache.ContainsKey(username))
+                {
+                    return null;
+                }
+                CacheEntry<AggregateUser> entry;
+                var success = _cache.TryGetValue(username, out entry);
+                if (success == false)
+                {
+                    return null;
+                }
+
+                if (entry.LastRefreshed.AddSeconds(5) < DateTime.UtcNow)
+                {
+                    _cache.TryRemove(username, out entry);
+                    return null;
+                }
+
+                return entry.Item;
+            };
+
+        public Action<AggregateUser> PutUserInCache = (user) =>
+            {
+                _cache.TryAdd(user.Membership.UserName, new CacheEntry<AggregateUser>(user));
+            };
+
+
         public IAggregateUserRepository Repository { get; set; }
         public IMembershipService MembershipService { get; set; }
-        public IOwnerAuthorizationService OwnerAuthorizationService { get; set; }
         public IFormsAuthenticationService FormsService { get; set; }
-        public IHttpContextUserService HttpContextUserService { get; set; }
         public IUnitOfWork UnitOfWork { get; set; }
 
         public AggregateUserService(
                 IMembershipService membershipService, 
                 IAggregateUserRepository aggregateUserRepository,
-                IOwnerAuthorizationService ownerAuthorizationService,
                 IFormsAuthenticationService formsAuthenticationService,
-                IHttpContextUserService httpContextUserService,
                 IUnitOfWork unitOfWork)
         {
             this.MembershipService = membershipService;
             this.Repository = aggregateUserRepository;
-            this.OwnerAuthorizationService = ownerAuthorizationService;
             this.FormsService = formsAuthenticationService;
-            this.HttpContextUserService = httpContextUserService;
             this.UnitOfWork = unitOfWork;
         }
 
@@ -63,9 +92,9 @@ namespace Pleiades.Web.Security.Concrete
             return true;
         }
 
-        public AggregateUser GetAuthenticatedUser(HttpContextBase context)
+        public AggregateUser LoadAuthentedUserIntoContext(HttpContextBase context)
         {
-            var httpContextUser = this.HttpContextUserService.Get();
+            var httpContextUser = context.AggregateUser();
             if (httpContextUser != null)
             {
                 return httpContextUser;
@@ -75,20 +104,31 @@ namespace Pleiades.Web.Security.Concrete
             if (userName == null)
             {
                 var user = AggregateUser.AnonymousFactory();
-                this.HttpContextUserService.Put(user);
+                context.AggregateUser(user);
                 return user;
             }
 
+            var cachedUser = this.GetUserFromCache(userName);
+            if (cachedUser != null)
+            {
+                Debug.WriteLine("Cache hit - user: " + userName);
+                context.AggregateUser(cachedUser);
+                return cachedUser;
+            }
+
+            Debug.WriteLine("Cached miss - user: " + userName);
             var currentUser = this.Repository.RetrieveByMembershipUserName(userName);
+
             if (currentUser == null)
             {
-                var user = AggregateUser.AnonymousFactory();
                 this.FormsService.ClearAuthenticationCookie();
-                this.HttpContextUserService.Put(user);
+                var user = AggregateUser.AnonymousFactory();
+                context.AggregateUser(user);
                 return user;
             }
 
-            this.HttpContextUserService.Put(currentUser);
+            context.AggregateUser(currentUser);
+            this.PutUserInCache(currentUser);
             this.MembershipService.Touch(userName);
             return currentUser;
         } 
@@ -143,11 +183,6 @@ namespace Pleiades.Web.Security.Concrete
 
         public void UpdateIdentity(CreateOrModifyIdentityRequest identityUserRequest)
         {
-            var securityCode = this.OwnerAuthorizationService.Authorize(identityUserRequest.Id);
-            if (securityCode != SecurityCode.Allowed)
-            {
-                throw new Exception("Current User does not have Authorization to do that: " + securityCode);
-            }
             if (identityUserRequest.Email == null)
             {
                 throw new Exception("Cannot set email address to null");
@@ -169,12 +204,6 @@ namespace Pleiades.Web.Security.Concrete
 
         public void ChangeUserPassword(int targetUserId, string oldPassword, string newPassword)
         {
-            var securityCode = this.OwnerAuthorizationService.Authorize(targetUserId);
-            if (securityCode != SecurityCode.Allowed)
-            {
-                throw new Exception("Current User does not have Authorization to do that: " + securityCode);
-            }
-
             var user = this.Repository.RetrieveById(targetUserId);
             this.MembershipService.ChangePassword(user.Membership.UserName, oldPassword, newPassword);
             this.UnitOfWork.SaveChanges();

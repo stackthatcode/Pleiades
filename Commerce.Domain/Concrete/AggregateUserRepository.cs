@@ -29,6 +29,7 @@ namespace Commerce.Persist.Concrete
 
             var output = this.ReadOnlyData()
                 .Include(x => x.IdentityProfile)
+                .Include(x => x.Membership)
                 .FirstOrDefault(x => x.Membership.UserName == membershipUsername);
             return output;   
         }

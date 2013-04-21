@@ -20,9 +20,7 @@ namespace Pleiades.Web.Security
 
             // Concrete Services
             builder.RegisterType<AggregateUserService>().As<IAggregateUserService>().InstancePerLifetimeScope();
-            builder.RegisterType<HttpContextUserService>().As<IHttpContextUserService>().InstancePerLifetimeScope();
-            builder.RegisterType<OwnerAuthorizationService>().As<IOwnerAuthorizationService>().InstancePerLifetimeScope();
-
+            
             // Aspect
             builder.RegisterType<SecurityAttribute>().InstancePerLifetimeScope();
         }   

@@ -5,6 +5,7 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using Pleiades.Web.Security.Concrete;
 using Pleiades.Web.Security.Model;
+using Pleiades.Web.Security.Rules;
 
 namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
 {
@@ -19,10 +20,9 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
             // Arrange
             var currentUser = new AggregateUser { IdentityProfile = new IdentityProfile { ID = 333, } };
             var resourceOwner = (AggregateUser)null;
-            var service = new OwnerAuthorizationService(null, null);
-
+            
             // Act
-            var result = service.Authorize(currentUser, resourceOwner);
+            var result = OwnerAuthorizeFunctions.Authorize(currentUser, resourceOwner);
 
             // Assert
             Assert.AreEqual(SecurityCode.Allowed, result);
@@ -34,10 +34,9 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
             // Arrange
             var currentUser = new AggregateUser { IdentityProfile = new IdentityProfile { ID = 333, } };
             var resourceOwner = new AggregateUser { IdentityProfile = new IdentityProfile { ID = 333, } };
-            var service = new OwnerAuthorizationService(null, null);
 
             // Act
-            var result = service.Authorize(currentUser, resourceOwner);
+            var result = OwnerAuthorizeFunctions.Authorize(currentUser, resourceOwner);
 
             // Assert
             Assert.AreEqual(SecurityCode.Allowed, result);
@@ -49,10 +48,9 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
             // Arrange
             var currentUser = new AggregateUser { IdentityProfile = new IdentityProfile { ID = 444, } };
             var resourceOwner = new AggregateUser { IdentityProfile = new IdentityProfile { ID = 333, } };
-            var service = new OwnerAuthorizationService(null, null);
-
+            
             // Act
-            var result = service.Authorize(currentUser, resourceOwner);
+            var result = OwnerAuthorizeFunctions.Authorize(currentUser, resourceOwner);
 
             // Assert
             Assert.AreEqual(SecurityCode.AccessDenied, result);
@@ -64,10 +62,9 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
             // Arrange
             var currentUser = new AggregateUser { IdentityProfile = StubUserGenerator.AdminUser };
             var resourceOwner = new AggregateUser { IdentityProfile = StubUserGenerator.SupremeUser };
-            var service = new OwnerAuthorizationService(null, null);
-
+            
             // Act
-            var result = service.Authorize(currentUser, resourceOwner);
+            var result = OwnerAuthorizeFunctions.Authorize(currentUser, resourceOwner);
 
             // Assert
             Assert.AreEqual(SecurityCode.AccessDenied, result);
@@ -79,10 +76,9 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
             // Arrange
             var currentUser = new AggregateUser { IdentityProfile = StubUserGenerator.AdminUser };
             var resourceOwner = new AggregateUser { IdentityProfile = StubUserGenerator.ActiveTrustedGoldUser };
-            var service = new OwnerAuthorizationService(null, null);
-
+            
             // Act
-            var result = service.Authorize(currentUser, resourceOwner);
+            var result = OwnerAuthorizeFunctions.Authorize(currentUser, resourceOwner);
 
             // Assert
             Assert.AreEqual(SecurityCode.Allowed, result);
@@ -95,10 +91,8 @@ namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
             var currentUser = new AggregateUser { IdentityProfile = StubUserGenerator.SupremeUser };
             var resourceOwner = new AggregateUser { IdentityProfile = StubUserGenerator.SupremeUser };
 
-            var service = new OwnerAuthorizationService(null, null);
-
             // Act
-            var result = service.Authorize(currentUser, resourceOwner);
+            var result = OwnerAuthorizeFunctions.Authorize(currentUser, resourceOwner);
 
             // Assert
             Assert.AreEqual(SecurityCode.Allowed, result);

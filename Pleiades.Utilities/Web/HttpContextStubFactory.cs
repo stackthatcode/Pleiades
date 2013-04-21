@@ -54,6 +54,8 @@ namespace Pleiades.TestHelpers.Web
             httpcontext.Stub(x => x.Response).Return(HttpResponseStub(args));
             httpcontext.Stub(x => x.Session).Return(HttpSessionStub(args));
             httpcontext.Stub(x => x.Server).Return(HttpServerUtilityMock());
+            var items = new Dictionary<string, object>();
+            httpcontext.Stub(x => x.Items).Return(items);
             return httpcontext;
         }
 

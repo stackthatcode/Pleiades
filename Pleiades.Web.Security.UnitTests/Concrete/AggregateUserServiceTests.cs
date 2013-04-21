@@ -7,6 +7,7 @@ using Pleiades.TestHelpers.Web;
 using Pleiades.Web.Security.Concrete;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
+using Pleiades.Web.Security.Utility;
 
 namespace Pleiades.Web.Tests.Security.IntegrationTests
 {
@@ -24,7 +25,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             var formsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
             formsAuthService.Expect(x => x.ClearAuthenticationCookie());
 
-            var service = new AggregateUserService(membership, null, null, formsAuthService, null, null);
+            var service = new AggregateUserService(membership, null, null, null);
 
             // Act
             var result = service.Authenticate("admin", "123", true, null);
@@ -56,7 +57,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             var formsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
             formsAuthService.Expect(x => x.ClearAuthenticationCookie());
 
-            var service = new AggregateUserService(membership, aggregateRepository, null, formsAuthService, null, null);
+            var service = new AggregateUserService(membership, aggregateRepository, formsAuthService, null);
 
             // Act
             var result = service.Authenticate("admin", "123", true, new List<UserRole> { UserRole.Admin });
@@ -88,7 +89,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             var formsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
             formsAuthService.Expect(x => x.SetAuthCookieForUser("12345678", true));
 
-            var service = new AggregateUserService(membership, aggregateRepository, null, formsAuthService, null, null);
+            var service = new AggregateUserService(membership, aggregateRepository, formsAuthService, null);
 
             // Act
             var result = service.Authenticate("admin", "123", true, new List<UserRole> { UserRole.Admin });
@@ -106,26 +107,22 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
         public void Valid_Forms_Authenticated_User_That_Exists_In_Repository_Touches_Membership()
         {
             // Arrange
-            var httpContextUserService = MockRepository.GenerateMock<IHttpContextUserService>();
             var aggrUserRepository = MockRepository.GenerateMock<IAggregateUserRepository>();
             var membershipService = MockRepository.GenerateMock<IMembershipService>();
             var httpContext = HttpContextStubFactory.Create(AuthenticatedName: "12345678", IsAuthenticated: true);
             var formsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
 
             // ... set expectations
-            httpContextUserService.Expect(x => x.Get()).Return(null);
+
             var aggrUser = new AggregateUser();
-            aggrUserRepository.Expect(x => x.RetrieveByMembershipUserName("12345678")).Return(aggrUser);
-            httpContextUserService.Expect(x => x.Put(null)).IgnoreArguments();
+            aggrUserRepository.Expect(x => x.RetrieveByMembershipUserName("12345678")).Return(aggrUser);            
             membershipService.Expect(x => x.Touch("12345678"));
 
             // Act
-            var service = new AggregateUserService(
-                    membershipService, aggrUserRepository, null, formsAuthService, httpContextUserService, null);
-            var user = service.GetAuthenticatedUser(httpContext);
+            var service = new AggregateUserService(membershipService, aggrUserRepository, formsAuthService, null);
+            var user = service.LoadAuthentedUserIntoContext(httpContext);
 
             // Assert
-            httpContextUserService.VerifyAllExpectations();
             aggrUserRepository.VerifyAllExpectations();
             formsAuthService.VerifyAllExpectations();
             membershipService.VerifyAllExpectations();
@@ -136,22 +133,20 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
         public void Valid_Forms_Authenticated_User_That_DoesNOT_Exist_In_Repository_Clears_Cookies_And_Returns_Anoymous_User()
         {
             // Arrange
-            var httpContextUserService = MockRepository.GenerateMock<IHttpContextUserService>();
             var aggrUserRepository = MockRepository.GenerateMock<IAggregateUserRepository>();
             var membershipService = MockRepository.GenerateMock<IMembershipService>();
             var httpContext = HttpContextStubFactory.Create(AuthenticatedName: "12345678", IsAuthenticated: true);
             var formsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
 
             // Arrange
-            httpContextUserService.Expect(x => x.Get()).Return(null);
             var aggrUser = new AggregateUser();
             aggrUserRepository.Expect(x => x.RetrieveByMembershipUserName("12345678")).Return(null);
             formsAuthService.Expect(x => x.ClearAuthenticationCookie());
 
             // Act
             var service = new AggregateUserService(
-                membershipService, aggrUserRepository, null, formsAuthService, httpContextUserService, null);
-            var user = service.GetAuthenticatedUser(httpContext);
+                membershipService, aggrUserRepository, formsAuthService, null);
+            var user = service.LoadAuthentedUserIntoContext(httpContext);
 
             // Assert
             aggrUserRepository.VerifyAllExpectations();
@@ -165,12 +160,10 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             // Arrange
             var aggrUser = new AggregateUser();
             var httpContext = HttpContextStubFactory.Create(AuthenticatedName: null, IsAuthenticated: false);
-            var httpContextUserService = MockRepository.GenerateMock<IHttpContextUserService>();
-            httpContextUserService.Expect(x => x.Get()).Return(null);
 
             // Act
-            var service = new AggregateUserService(null, null, null, null, httpContextUserService, null);
-            var user = service.GetAuthenticatedUser(httpContext);
+            var service = new AggregateUserService(null, null, null, null);
+            var user = service.LoadAuthentedUserIntoContext(httpContext);
 
             // Assert
             Assert.AreEqual(UserRole.Anonymous, user.IdentityProfile.UserRole);
@@ -182,12 +175,10 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             // Arrange
             var aggrUser = new AggregateUser();
             var httpContext = HttpContextStubFactory.Create(AuthenticatedName: null, IsAuthenticated: false);
-            var httpContextUserService = MockRepository.GenerateMock<IHttpContextUserService>();
-            httpContextUserService.Expect(x => x.Get()).Return(aggrUser);
-
+            
             // Act
-            var service = new AggregateUserService(null, null, null, null, httpContextUserService, null);
-            var user = service.GetAuthenticatedUser(httpContext);
+            var service = new AggregateUserService(null, null, null, null);
+            var user = service.LoadAuthentedUserIntoContext(httpContext);
 
             // Assert
             Assert.AreEqual(user, aggrUser);
@@ -201,7 +192,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
         {
             // Arrange
             var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
-            var aggregateUserService = new  AggregateUserService(null, repository, null, null, null, null);
+            var aggregateUserService = new  AggregateUserService(null, repository, null, null);
             repository.Expect(x => x.GetUserCountByRole(UserRole.Admin)).Return(AggregateUserService.MaxAdminUsers);
 
             // Act
@@ -220,7 +211,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
         {
             // Arrange
             var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
-            var aggregateUserService = new AggregateUserService(null, repository, null, null, null, null);
+            var aggregateUserService = new AggregateUserService(null, repository, null, null);
             repository.Expect(x => x.GetUserCountByRole(UserRole.Admin)).Return(1);
             repository.Expect(x => x.GetUserCountByRole(UserRole.Supreme)).Return(AggregateUserService.MaxSupremeUsers);
 
@@ -247,7 +238,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
                 FirstName = "Jon",
                 LastName = "Smith",
             };
-            var aggregateUserService = new AggregateUserService(null, null, null, null, null, null);
+            var aggregateUserService = new AggregateUserService(null, null, null, null);
 
             // Act
             PleiadesMembershipCreateStatus createStatus;
@@ -277,7 +268,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
                 .IgnoreArguments()
                 .OutRef(PleiadesMembershipCreateStatus.DuplicateUserName);
 
-            var aggregateUserService = new AggregateUserService(membership, null, null, null, null, null);
+            var aggregateUserService = new AggregateUserService(membership, null, null, null);
 
             // Act
             var response =
@@ -317,7 +308,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             membership.Expect(x => x.CreateUser(null, out createStatus)).IgnoreArguments().OutRef(PleiadesMembershipCreateStatus.Success);
 
             // Act
-            var aggregateUserService = new AggregateUserService(membership, repository, null, null, null, unitOfWork);
+            var aggregateUserService = new AggregateUserService(membership, repository, null, unitOfWork);
 
             var response = aggregateUserService.Create(
                     null,
@@ -356,9 +347,6 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             aggrUserRepository.Expect(x => x.RetrieveById(888)).Return(user);
             aggrUserRepository.Expect(x => x.UpdateIdentity(modifyRequest));
 
-            var ownerAuthorizationService = MockRepository.GenerateMock<IOwnerAuthorizationService>();
-            ownerAuthorizationService.Expect(x => x.Authorize(888)).Return(SecurityCode.Allowed);
-
             var membershipService = MockRepository.GenerateMock<IMembershipService>();
             membershipService.Expect(x => x.SetUserApproval("123456", true));
             membershipService.Expect(x => x.ChangeEmailAddress("123456", "abc@efe.com"));
@@ -367,13 +355,12 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             unitOfWork.Expect(x => x.SaveChanges());
 
             var aggregateService =
-                new AggregateUserService(membershipService, aggrUserRepository, ownerAuthorizationService, null, null, unitOfWork);
+                new AggregateUserService(membershipService, aggrUserRepository, null, unitOfWork);
 
             // Act
             aggregateService.UpdateIdentity(modifyRequest);
 
             // Assert
-            ownerAuthorizationService.VerifyAllExpectations();
             aggrUserRepository.VerifyAllExpectations();
             unitOfWork.VerifyAllExpectations();
         }
@@ -382,17 +369,14 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
         [ExpectedException()]
         public void Unauthorized_Owners_Calling_UpdateIdentity_Fails()
         {
-            var ownerAuthorizationService = MockRepository.GenerateMock<IOwnerAuthorizationService>();
-            ownerAuthorizationService.Expect(x => x.Authorize(888)).Return(SecurityCode.AccessDenied);
-
-            var aggregateService = new AggregateUserService(null, null, ownerAuthorizationService, null, null, null);
+            var aggregateService = new AggregateUserService(null, null, null, null);
 
             // Act
             aggregateService.UpdateIdentity(new CreateOrModifyIdentityRequest() 
                     { Id = 888, FirstName = "Jospeh", LastName = "Lambert", Email = "abc@efe.com", IsApproved = true });
 
             // Assert
-            ownerAuthorizationService.VerifyAllExpectations();
+            // ???
         }
         #endregion
 
@@ -413,39 +397,18 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
             repository.Expect(x => x.RetrieveById(888)).Return(user);
 
-            var ownerAuthorizationService = MockRepository.GenerateMock<IOwnerAuthorizationService>();
-            ownerAuthorizationService.Expect(x => x.Authorize(888)).Return(SecurityCode.Allowed);
-
             var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
             unitOfWork.Expect(x => x.SaveChanges());
 
-            var service = new AggregateUserService(membershipService, repository, ownerAuthorizationService, null, null, unitOfWork);
+            var service = new AggregateUserService(membershipService, repository, null, unitOfWork);
 
             // Act
             service.ChangeUserPassword(888, "12345678", "abcdef");
 
             // Assert
-            ownerAuthorizationService.VerifyAllExpectations();
             repository.VerifyAllExpectations();
             membershipService.VerifyAllExpectations();
             unitOfWork.VerifyAllExpectations();
-        }
-
-        [Test]
-        [ExpectedException()]
-        public void UnAuthorized_Users_Calling_Update_Password_Fails()
-        {
-            // Arrange
-            var ownerAuthorizationService = MockRepository.GenerateMock<IOwnerAuthorizationService>();
-            ownerAuthorizationService.Expect(x => x.Authorize(888)).Return(SecurityCode.AccessDenied);
-
-            var service = new AggregateUserService(null, null, ownerAuthorizationService, null, null, null);
-
-            // Act
-            service.ChangeUserPassword(888, "12345678", "abcdef");
-
-            // Assert
-            ownerAuthorizationService.VerifyAllExpectations();
         }
         #endregion
     }

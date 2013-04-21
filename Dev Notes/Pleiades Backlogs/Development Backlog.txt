@@ -6,6 +6,7 @@ GRC
 - Box Cryptor => TODO
 - Send last meeting notes => DONE
 
+
 Marketing
 ---------
 - Theme? http://kovshenin.com/2012/publish-a-free-minimal-and-responsive-wordpress-theme/#comments  -- either that or Thesis
@@ -51,14 +52,12 @@ CHECK THIS OUT => http://www.ww2helmets.com/products-page/checkout/ => TODO
 ~ FONTS => https://news.ycombinator.com/item?id=5407499
 
 
-
 Front Range
 -----------
 * StoreFront Design => IN PROGRESS
 - Design the StoreFront layout => TODO
 
 * Host on EC2 by 5/1 => TODO
-- Modify permissions so Admins can modify their Expiration
 
 * Manage an Order CRUD screen => IN PROGRESS
 - Order Search + Results
@@ -71,9 +70,7 @@ Front Range
 - Get Refunds by Sku...?
 
 * Sidelog
-- Logged-In User => TODO
 - Prevent multiple Pop-ups from appearing
-- Cache the AggregateUser stuff in a static Dictionary (I mean, seriously, man) => IMPORTANT
 - Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING)
 - Add Data Clean-up Option to the Console App => TODO
 
@@ -107,6 +104,16 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/27/2013
 - Rearchitect the REST URL's => TODO
 * http://stackoverflow.com/questions/3730777/whats-so-restful-about-asp-net-mvc => IMPORTANT
 
+Backlog
+-------
+- SUPER IMPORTANT - post mortem my approach to the designing the UI.  How to improve my speed? => TODO
+* On the StoreFront "Wrong Size or Color? Click Here" - and Navigate to Product => TODO
+- Improve the quality of client-side Error Logging => TODO
+- Check Sanderson for advanced Model Binding => TODO
+- 150 Magic Number(!!!) => TODO - FIX
+- IsONline - Check How This Functions => TODO
+- Donate $20 to FineUploader upon successful integration => TODO
+
 
 PHASE 2
 -------
@@ -118,23 +125,11 @@ PHASE 2
 - Mobile Storefront + Cart
 
 
-Backlog
--------
-- SUPER IMPORTANT - post mortem my approach to the designing the UI.  How to improve my speed? => TODO
-
-* On the StoreFront "Wrong Size or Color? Click Here" - and Navigate to Product => TODO
-
-- Improve the quality of client-side Error Logging => TODO
-- Check Sanderson for advanced Model Binding => TODO
-- 150 Magic Number(!!!) => TODO - FIX
-- IsONline - Check How This Functions => TODO
-- Donate $20 to FineUploader upon successful integration => TODO
-
-
 
 ARCHITECTURAL REVIEW 1/24/2013
 ------------------------------
 - Flatten the Membership Provider object graph stuff
+- Modify permissions so Admins can modify their Expiration
 - Copy from the Dot Net Framework into MembershipService
 - Create a separate Authentication Service - Aggregate User Service should deal with CRUD only
 - Owner Authorization Service overlaps with Aggregate User Services... eliminate this method Authorize(int ownerUserId)
@@ -148,27 +143,12 @@ ARCHITECTURAL REVIEW 1/24/2013
 - Compbine Domain and Persist assemblies.  They're not separate, dude!!!
 * NOTE: we never ever DELETE User records
 
-Order Submission Flow - Bound Contexts and Concerns 4/8/2013
-------------------------------------------------------------
-- Product Context (Creation, Deletion of Product, Colors, Images)
-- Inventory Context (In-stock, Reserved & Available Quantities)
-- Order Context (Creation of Order, Tracking/Management of Order Status)
-- Payment Context (Payment Processing, Receipt/record of Payment, Refunds, Payment History by canonicalized-email or User ID)
-- Communication Context (Email, Email Send History, Faxes, etc.)
-- Analytics Context (Sale Record, Product Popularity, Refund Record)
-
-
-*** TODO: what is the function of "nav-collapse collapse"?
-*** MANDATE => research HOW KnockoutJS actually works internally
-- http://code.google.com/p/autofac/wiki/MvcIntegration
 
 
 MORE BIG FISH
 -------------
-*** Move SkuCode editor to the Inventory screen => TODO
 => Payment Processing Options, API's etc. => IN PROGRESS
 => Custom Caching solution...? => IN PROGRESS
-=> Find a good resource for Typography, Fonts, etc. => TODO
 => http://news.ycombinator.com/item?id=4669866 => IMPORTANT
 => Enable for Azure => TODO
 - Web Optimization Toolkit / Bundle Thingy => TODO
@@ -177,13 +157,38 @@ MORE BIG FISH
 E-Commerce API's & Payment Processors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Stripe
-- PayPal
-- Shopify => COMPETITIVE ANALYSIS
 - Cheddar Getter
 - Braintree
 - WePay
-- Authorize.NET
 
+
+Please Research
+~~~~~~~~~~~~~~~
+https://github.com/MatthewMueller/array
+https://github.com/danderson00/knockout.composite/tree/master/Examples
+http://news.ycombinator.com/item?id=3265625
+http://twitter.github.com/flight/
+http://fortawesome.github.com/Font-Awesome/
+http://pcottle.github.com/learnGitBranching/
+SublimeText + Resharper => TODO
+- http://fortawesome.github.com/Font-Awesome/
+
+
+Development Backlog
+-------------------- 
+Upgrade to ASP.NET MVC 4.0 (4.5?) => TODO
+* Get Scott Hanselman's obj/bin cleaner utility => IN PROGRESS
+- Disable Caching for AJAX stuff with ASP.NET MVC => TODO
+
+PENDING FEATURE BACKLOG
+-----------------------
+- Add more Logging to the Security check => PENDING EVAL
+- What about virus scan for file uploads, etc.? => PENDING EVALUATION
+- Add a way to execute the DDL which adds SQL Foreign Keys to Categories, etc. => PENDING EVAL
+- Show the number of Products under Category => PENDING EVAL
+- Rendering Adjustments for long Category Names et. al. => PENDING EVAL
+- Add constraints on the number of records we can add => PENDING EVAL
+- View Products => Hot Link to a RESTful URL - TODO => PENDING EVAL
 
 Research Backlog
 ----------------
@@ -197,51 +202,6 @@ Research Backlog
 - Model Binding, how it all works - REVIEW
 - Easily the most important security article evar => - http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
 - Look up Troy Hunt's article's, too
-
-
-Please Research
-~~~~~~~~~~~~~~~
-https://github.com/MatthewMueller/array
-https://github.com/danderson00/knockout.composite/tree/master/Examples
-http://news.ycombinator.com/item?id=3265625
-http://twitter.github.com/flight/
-http://fortawesome.github.com/Font-Awesome/
-http://pcottle.github.com/learnGitBranching/
-SublimeText + Resharper => TODO
-
-
-Good Stuff
-----------
-- http://fortawesome.github.com/Font-Awesome/
-
-Development Backlog
--------------------
-- Upgrade to ASP.NET MVC 4.0 (4.5?) => TODO
-* Get Scott Hanselman's obj/bin cleaner utility => IN PROGRESS
-
-THE OTHER BACKLOG
-=================
-- INTELLIGENCE - start reverse-engineering Frank and Oak's process => TODO
-- Disable Caching for AJAX stuff with ASP.NET MVC => TODO
-
-PENDING FEATURE BACKLOG
------------------------
-- Add Toop Tips to clear-up the clutter in Inventory Editor => TODO
-- Add more Logging to the Security check => PENDING EVAL
-- Traffic Source { PPC/PPM, SEO, Email } => Landing Page w/ Tracking => ??? => Conversion
-- Exclusive Squeeze Page => Email => Campaigns => ??? => Conversion
-- What about virus scan for file uploads, etc.? => PENDING EVALUATION
-- Add a way to execute the DDL which adds SQL Foreign Keys to Categories, etc. => PENDING EVAL
-- Eliminate the MembershipProvider (WHOO-HOO!!!!!!!) => PENDING EVAL
-* Roll everything into the MembershipService, take back control of your objects and data access.  Done.  OVER! => PENDING EVAL
-
-NOTES ON THE HEGEMONY OF UNREASON (STATIC MEMBERSHIP)
-- UpdateSelf() invocations... this odd function is called... with tons of exception checking... as if, there are not transactions...?  Why don't you throw
-- What's the rigamorale about Updating shit...?  Why not try it and if it fails, throw an Exception???
-- Show the number of Products under Category => PENDING EVAL
-- Modify Category Editor design i.e. Number of Categories, Products, etc. => PENDING EVAL
-- Rendering Adjustments for long Category Names et. al. => PENDING EVAL
-- Add Modal Pop-up - "Are You Sure?" Category Parent Change, etc. => PENDING EVAL
-- Add constraints on the number of records we can add => PENDING EVAL
-- View Products => Hot Link to a RESTful URL - TODO => PENDING EVAL
-
+*** TODO: what is the function of "nav-collapse collapse"?
+*** MANDATE => research HOW KnockoutJS actually works internally
+- http://code.google.com/p/autofac/wiki/MvcIntegration

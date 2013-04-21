@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Drawing;
 using System.Linq;
 using System.Data.Entity;
@@ -12,6 +13,9 @@ namespace Commerce.Persist.Concrete
 {
     public class ImageBundleRepository : IImageBundleRepository
     {
+        private static ConcurrentDictionary<int, ImageBundle> _cacheById = new ConcurrentDictionary<int, ImageBundle>();
+        private static ConcurrentDictionary<Guid, ImageBundle> _cacheByGuid = new ConcurrentDictionary<Guid, ImageBundle>();
+
         public PleiadesContext Context { get; set; }
         public IFileResourceRepository FileResourceRepository { get; set; }
         public IImageProcessor ImageProcessor { get; set; }
@@ -103,12 +107,26 @@ namespace Commerce.Persist.Concrete
 
         public ImageBundle Retrieve(int Id)
         {
-            return this.Data().FirstOrDefault(x => x.Id == Id);
+            if (_cacheById.ContainsKey(Id))
+            {
+                return _cacheById[Id];
+            }
+            var output = this.Data().FirstOrDefault(x => x.Id == Id);
+            _cacheById.TryAdd(output.Id, output);
+            _cacheByGuid.TryAdd(output.ExternalId, output);
+            return output;
         }
 
         public ImageBundle Retrieve(Guid externalId)
         {
-            return this.Data().FirstOrDefault(x => x.ExternalId == externalId);
+            if (_cacheByGuid.ContainsKey(externalId))
+            {
+                return _cacheByGuid[externalId];
+            }
+            var output = this.Data().FirstOrDefault(x => x.ExternalId == externalId);            
+            _cacheById.TryAdd(output.Id, output);
+            _cacheByGuid.TryAdd(output.ExternalId, output);
+            return output;
         }
 
         public void Delete(int Id)

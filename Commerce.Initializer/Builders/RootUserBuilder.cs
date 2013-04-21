@@ -41,8 +41,8 @@ namespace Commerce.Initializer.Builders
                     AccountStatus = AccountStatus.Active,
                     AccountLevel = AccountLevel.NotApplicable,
                     UserRole = UserRole.Supreme,
-                    FirstName = "Master",
-                    LastName = "Pleiades",
+                    FirstName = "Aleksandr",
+                    LastName = "Jones",
                 };
 
                 var membershipuser1 = new CreateNewMembershipUserRequest

@@ -1,4 +1,32 @@
-﻿
+﻿@using Pleiades.Web.Security.Model
+@using Pleiades.Web.Security.Utility
+    <script type="text/javascript">
+        $(document).ready(function () {
+                $("#logged-in").popover({
+                    html: true, 
+                    content: function() {
+                          return $('#popover_content_wrapper').html();
+                    },
+                    placement: "bottom",
+                });
+                $("#logged-in").click(function() {
+                $("#logged-in").popover("show");
+                $(".popover").click(function() {
+                    $("#logged-in").popover('hide')
+                });
+            });
+        });
+    </script>
+    <style>
+        #logged-in:hover
+        {
+            text-decoration:none;            
+        }
+        .popover 
+        {
+            width: 300px;
+        }
+    </style>
     <div id="top-menu-bar" class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">  
@@ -36,7 +64,36 @@
               </li>
 			</ul>
 
-			<p class="navbar-text pull-right">Logged in as <a href="#" style="color:#08C;" class="navbar-link">aleksjones@gmail.com</a></p>
+			<p class="navbar-text pull-right">
+                Logged in as <a id="logged-in" href="#" style="color:#08C;" class="navbar-link">
+                    @(HttpContext.Current.AggregateUser().Membership.Email)</a>
+            </p>
+            
+            <div id="popover_content_wrapper" style="display:none; width:250px;">
+                <div class="arrow"></div>
+                <div style="color:#333; line-height:24px;">
+                    <table>
+                        <tr>
+                            <td style="width:80px;">Name:</td>
+                            <td><strong>@(HttpContext.Current.AggregateUser().IdentityProfile.FirstName) 
+                            @(HttpContext.Current.AggregateUser().IdentityProfile.LastName)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>User Type:</td>
+                            <td><strong>@(HttpContext.Current.AggregateUser().IdentityProfile.UserRole)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Created:</td>
+                            <td><strong>@(HttpContext.Current.AggregateUser().Membership.CreationDate)</strong></td>
+                        </tr>
+                    </table>
+                    
+                    <br />
+                    <div style="width:100%; text-align:center;">
+                        <button type="button" style="width:100px;" class="btn btn-inverse">Close</button>
+                    </div>                    
+                </div>
+            </div>
           </div>
         </div>
       </div>

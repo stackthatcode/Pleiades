@@ -5,7 +5,7 @@ using Pleiades.Web.Security.Model;
 
 namespace Pleiades.Web.Security.Rules
 {
-    public static class FluentSecurityMethods
+    public static class FluentSecurityFunctions
     {
         public static SecurityContext AccountLevelCheck(this SecurityContext context)
         {

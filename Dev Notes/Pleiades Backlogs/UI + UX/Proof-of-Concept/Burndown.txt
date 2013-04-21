@@ -950,3 +950,27 @@ Analytics Tracking Process => DONE FOR NOW, UNTIL ANALYTICS ENGINE + NICE LITTLE
 - Fixed Category and Brand data integrity => DONE
 - Fixed clear Brand / Category error => DONE
 
+Order Submission Flow - Bound Contexts and Concerns 4/8/2013 => CLEAR
+------------------------------------------------------------
+- Product Context (Creation, Deletion of Product, Colors, Images)
+- Inventory Context (In-stock, Reserved & Available Quantities)
+- Order Context (Creation of Order, Tracking/Management of Order Status)
+- Payment Context (Payment Processing, Receipt/record of Payment, Refunds, Payment History by canonicalized-email or User ID)
+- Communication Context (Email, Email Send History, Faxes, etc.)
+- Analytics Context (Sale Record, Product Popularity, Refund Record)
+
+- INTELLIGENCE - start reverse-engineering Frank and Oak's process => DONE
+*** Move SkuCode editor to the Inventory screen => DONE
+NOTES ON THE HEGEMONY OF UNREASON (STATIC MEMBERSHIP)
+- UpdateSelf() invocations... this odd function is called... with tons of exception checking... as if, there are not transactions...?  Why don't you throw
+- What's the rigamorale about Updating shit...?  Why not try it and if it fails, throw an Exception???
+
+4/21/2013
+---------
+- Current User Popover => DONE
+- Logged-In User => DONE
+- Destroyed some of the old Security Model => DONE
+- http://stackoverflow.com/questions/4036582/asp-net-mvc-displaying-user-name-from-a-profile
+- Cache the AggregateUser stuff in a static Dictionary (I mean, seriously, man) => IMPORTANT
+- Added Image caching => DONE
+
