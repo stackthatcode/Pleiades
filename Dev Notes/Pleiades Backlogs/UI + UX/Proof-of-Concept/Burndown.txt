@@ -974,3 +974,11 @@ NOTES ON THE HEGEMONY OF UNREASON (STATIC MEMBERSHIP)
 - Cache the AggregateUser stuff in a static Dictionary (I mean, seriously, man) => IMPORTANT
 - Added Image caching => DONE
 
+
+5/2/2013
+--------
+- CHECK THIS OUT => http://www.ww2helmets.com/products-page/checkout/ => TODO
+~ Random => http://designmodo.github.com/Flat-UI/ => DONE
+
+
+

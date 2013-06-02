@@ -14,6 +14,13 @@ namespace Commerce.WebUI.Areas.Admin
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
+
+            // Default Route - *KEEP*
+            context.MapRoute(
+                "Home Route",
+                "Admin/",
+                new { controller = "Home", action = "Index" });
+
             // TODO: fix my RESTful URI's, fuck-it-all with these wierd Routes
             context.MapRoute(
                 "Inventory Total",
@@ -48,14 +55,9 @@ namespace Commerce.WebUI.Areas.Admin
             context.MapRoute(
                 "Admin Default",
                 "Admin/{controller}/{action}",
-                new { controller = "Category", action = "RetrieveAllSections" }
+                new { controller = "Home", action = "Index" }
             );
 
-            // Default Route - *KEEP*
-            context.MapRoute(
-                "Home Route",
-                "Admin/",
-                new { controller = "Home", action = "Index" });
 
         }
     }

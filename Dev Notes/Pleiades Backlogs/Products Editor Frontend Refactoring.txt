@@ -1,0 +1,40 @@
+Products Editor Frontend Refactoring
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Replace all of the GlideToParent, GlideToChild, GlideToSubChild invocations
+- Move each of the dialogs into the modal-enclave Template pattern
+- Move Endless Glider into the Shared Directory
+
+- FUNDAMENTALLY => isolate, package and make easy-to-use: 
+{ CommonUI, ImageBundle, Modal Dialog, Gliding, Spinner, JQuery, Bootstrap, aQuery, SammyJS, Knockout, fine-uploader, flow.js, Images.gif's }
+* Identify, document and analyze all the major interfaces
+* Same for dependencies
+- END GOALS => I want to build a PushMarket-blooded interface using this platform *quickly* with the ability to customize *easily*
+
+
+=> http://unbounce.com/landing-page-examples/built-using-unbounce/beautiful-landing-page-design-examples/
+
+
+Package #1 - Base Infrastructure
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- JQuery, aQuery, SammyJS, KnockoutJS, flow.js, jquery-validate.js, bootstrap model, alert, pop-overs, etc. => Bundle Package
+- Bootstrap CSS => CSS include
+
+Package #2 - pushmarket-common
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- pushmarket-common.js, ajax-service.js = Scroll Tracker, Spinner, Modal => Bundle Package
+- ~/Admin/Shared => _CrossCutting.cshtml partial view = Modal Template
+- ~/Admin/Views/Order/ _EndlessGlider.cshtml partial view
+- ~/Content/Images => ajax spinner and image place holder
+- pushmarket-common.CSS
+
+Package #3 - Image lib
+~~~~~~~~~~~~~~~~~~~~~~
+- Bootstrap-lightbox.js => Bundle Package
+- bootstrap-lightbox.css => CSS
+
+Other Libraries
+~~~~~~~~~~~~~~~
+- farbtastic color picker
+- fineUpload.js
+
+

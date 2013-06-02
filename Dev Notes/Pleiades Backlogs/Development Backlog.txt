@@ -1,82 +1,30 @@
+Burndown - 6/2/2013
+-------------------
+- Upgrade MVC to version 4.0 / start using the Web API for Controllers => DONE
+- PushMarket Phase 2 Review, Next Steps Strategy, so forth => DONE
+
+
 FRONTRANGE - HOTZONE
 ====================
 
-GRC
----
-- Box Cryptor => TODO
-- Send last meeting notes => DONE
+Final Deliverable Definition
+----------------------------
+- Landing-Page + Microsite => IN PROGRESS
+- Refactor the Products Knockout UI => IN PROGRESS
+- Revamped Membership Provider => TODO
+- Customer Checkout => TODO
+- Admin Search & Manage Orders => TODO
+- Admin Sales Graph by Product => TODO
+
+- Barebones Console App => ALMOST DONE
+- Email Sending Engine => TODO
+- Server Logging => TODO
+- Stripe Payment Integration => TODO
+- Amazon EC2 Hosting => TODO
 
 
-Marketing
----------
-- Theme? http://kovshenin.com/2012/publish-a-free-minimal-and-responsive-wordpress-theme/#comments  -- either that or Thesis
-
-### Design Options for StoreFront
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-* Choose Market / Brand feelers => TODO
-- TheArtOfGroundingFighting.com
-- People that specialize and FOCUS on Jiujitsu, not MMA => GOOD!
-- Jiu-jitsu Gear 
-- Grown-up-ish
-- Sophisticated...?
-
-CHECK THIS OUT => http://www.ww2helmets.com/products-page/checkout/ => TODO
-
-* CSS Framework?
-- Bootstrap, maybe Metro
-- http://wbpreview.com/previews/WB0D95984/index.html
-- http://wbpreview.com/previews/WB0F35928/tables.html
-- http://wrapbootstrap.com/preview/WB0225S29 => Maybe!
-- http://wrapbootstrap.com/preview/WB0356171
-- http://www.fightersmarket.com/Ronin-Samurai-Jiu-Jitsu-Gi-Navy-p/k266.htm
-
-* Choose Products - rip other images from Stores => TODO
-- http://www.fightersmarket.com/Do-or-Die-Hyperfly-Gi-Hyperfly-Kimono-Black-p/k263.htm
-
-* Product Page Inventory
-- Brand Logo
-- Image Browser w/ close-up
-- Description - add markdown?  Probably => TODO
-
-* Choose Genre => TODO
-* Olark for Contact Info => TODO
-* About Us Page => TODO
-- "MMA is good.  MMA is a beautiful art.  Our focus is on the most art of Brazillian Jiu Jitsu."
-
-* Brand - design a brand
-* Choose Fonts
-* Slideshow - identify images & marketing, based on Products and marketing message => TODO
-* You might also like
-
-~ Random => http://designmodo.github.com/Flat-UI/
-~ FONTS => https://news.ycombinator.com/item?id=5407499
-
-
-Front Range
------------
-* StoreFront Design => IN PROGRESS
-- Design the StoreFront layout => TODO
-
-* Host on EC2 by 5/1 => TODO
-
-* Manage an Order CRUD screen => IN PROGRESS
-- Order Search + Results
-- Order Summary Tab (Aggregate Status, Shipping, 3 Most Recent Histories)
-* Order Domain object => IN PROGRESS
-- Split OrderLine (put something in the History)
-- Ship OrderLines => Split as needed => Update Status + History
-- Refund => Choose Order Lines => Hit the Payment Processor => Update Status on Order Lines + History
-- Fail Shipping => Choose Order Lines => Update Status + History
-- Get Refunds by Sku...?
-
-* Sidelog
-- Prevent multiple Pop-ups from appearing
-- Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING)
-- Add Data Clean-up Option to the Console App => TODO
-
-
-Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/27/2013
-------------------------------------------------------------
+Already Done
+~~~~~~~~~~~~
 - Login Screen => DONE
 - Admin User Manager => DONE
 - Category Editor => DONE
@@ -88,35 +36,105 @@ Admin MVP Big Feature List - 12/2/2012 - LAST UPATE 1/27/2013
 - Product Search & Editor => DONE
 - SKU Generator + Inventory Tracker => DONE
 - Admin Order Create => DONE
-- Payment Processing Stub => DONE O_o
+- Payment Processing Stub => DONE
 - Check-out Process Server-side => DONE
-- Barebones Console App => ALMOST DONE
 
-- Search & Manage Orders => IN PROGRESS
-- High-touch Store Front => IN PROGRESS
-- Customer-facing Shopping Cart => IN PROGRESS
-- Sales Graph => IN PROGRESS
 
-- Email Sending Engine => TODO
-- Upgrade MVC to version 4.0 / start using the Web API for Controllers => TODO
-- Server Logging => TODO
-- Revamped Membership Provider => TODO
-- Rearchitect the REST URL's => TODO
-* http://stackoverflow.com/questions/3730777/whats-so-restful-about-asp-net-mvc => IMPORTANT
+
+
+### Design Options for StoreFront
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Top Black Band
+* Condensed White on Black Logo
+* Contact Us
+* View Cart 
+* Check-out
+
+- Logo | Cart | Checkout
+- Product Widgets
+- Browse By Brand Slideshow
+- Populate the Bottom with Content => TODO
+
+
+
+Checkout
+~~~~~~~~
+* Edit Cart
+* Shipping
+* Billing
+* Payment
+* Thanks
+
+Landing Pages
+~~~~~~~~~~~~~
+* Single Product => TODO
+* Browser => TODO
+
+Appendix Pages
+~~~~~~~~~~~~~~
+* Contact Us Page => TODO
+- Email Form
+- Google Map
+- Street Address
+* Shipping => TODO
+* Returns => TODO
+* About Us Page => TODO
+
+
+
+
+- Load Test Data into Console App => TODO
+- Add Data Clean-up Option to the Console App => TODO
+
+* Host on EC2 by 6/1 => IN PROGRESS - FAIL
+- Research EC2 some more
+- Sign-up to use EC2
+
+* Manage an Order CRUD screen => IN PROGRESS
+- Order Search Query
+	- Complete/Incomplete Orders
+	- By Date
+- Order Search Results
+- Order Summary Tab (Aggregate Status, Shipping, 3 Most Recent Histories)
+- Split OrderLine (put something in the History)
+- Ship OrderLines => Split as needed => Update Status + History
+- Refund => Choose Order Lines => Hit the Payment Processor => Update Status on Order Lines + History
+- Fail Shipping => Choose Order Lines => Update Status + History
+- Get Refunds by Sku...?
+
+* Sidelog
+- Prevent multiple Pop-ups from appearing
+- Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING)
+
+* Product Page Inventory
+- Brand Logo
+- Image Browser w/ close-up
+- Description - add markdown?  Probably => TODO
+
+* Brand - design a brand
+* Choose Fonts
+* Slideshow - identify images & marketing, based on Products and marketing message => TODO
+* You might also like
+
+~ FONTS => https://news.ycombinator.com/item?id=5407499
+
+
+
 
 Backlog
 -------
+* http://stackoverflow.com/questions/3730777/whats-so-restful-about-asp-net-mvc => IMPORTANT
+- Add a Logout Button
 - SUPER IMPORTANT - post mortem my approach to the designing the UI.  How to improve my speed? => TODO
 * On the StoreFront "Wrong Size or Color? Click Here" - and Navigate to Product => TODO
 - Improve the quality of client-side Error Logging => TODO
 - Check Sanderson for advanced Model Binding => TODO
 - 150 Magic Number(!!!) => TODO - FIX
-- IsONline - Check How This Functions => TODO
+- IsONline - Check How This Functions => UPDATE - NEED TO FIX TOUCH Function
 - Donate $20 to FineUploader upon successful integration => TODO
 
-
-PHASE 2
--------
+PHASE 2 - Or not...?
+--------------------
 - Analytics Integration - KISS, Mixpanel, whatevs
 - Automated Traffic Management
 - Email Marketing w/ User Management
@@ -184,16 +202,13 @@ PENDING FEATURE BACKLOG
 -----------------------
 - Add more Logging to the Security check => PENDING EVAL
 - What about virus scan for file uploads, etc.? => PENDING EVALUATION
-- Add a way to execute the DDL which adds SQL Foreign Keys to Categories, etc. => PENDING EVAL
 - Show the number of Products under Category => PENDING EVAL
 - Rendering Adjustments for long Category Names et. al. => PENDING EVAL
-- Add constraints on the number of records we can add => PENDING EVAL
 - View Products => Hot Link to a RESTful URL - TODO => PENDING EVAL
 
 Research Backlog
 ----------------
 => require.js? => We'll see => DONE FOR NOW
-=> Domain Modeling and Write User Stories - after reading through Shopify's API docs => TODO
 => Where did I put my fonts...?  What's a good resource for typography and fonts...? => TODO
 - TODO KNOCKOUTJS: difference between http://knockoutjs.com/documentation/extenders.html AND custom binders
 - ToHtmlString() => TODO

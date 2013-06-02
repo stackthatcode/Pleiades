@@ -23,16 +23,6 @@ Array.prototype.firstOrNull = function(lambda) {
 	return null;
 }
 
-// What does the "int" keyword do...?		
-Array.prototype.indexByLambda = function(lambda) {
-	for (var arrayIndex = 0; arrayIndex < this.length; arrayIndex += 1) {
-		if (lambda(this[arrayIndex]) === true) {
-			return arrayIndex;
-		}
-	}
-	return -1;
-};
-
 Array.prototype.arrayFirstIndexOf = function(predicate, predicateOwner) {
     for (var i = 0, j = this.length; i < j; i++) {
         if (predicate.call(predicateOwner, this[i])) {
@@ -42,24 +32,19 @@ Array.prototype.arrayFirstIndexOf = function(predicate, predicateOwner) {
     return -1;
 }
 
-Array.prototype.removeByLambda = function(lambda) {
-	var index = this.indexByLambda(lambda);
-	this.remove(index, index);
-};
-
 Array.prototype.remove = function(from, to) {
 	var rest = this.slice((to || from) + 1 || this.length);
 	this.length = from < 0 ? this.length + from : from;
 	return this.push.apply(this, rest);
 };
 
-String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g, '');};
+String.prototype.trim = function(){return this.replace(/^\s+|\s+$/g, '');};
 
-String.prototype.ltrim=function(){return this.replace(/^\s+/,'');};
+String.prototype.ltrim = function(){return this.replace(/^\s+/,'');};
 
-String.prototype.rtrim=function(){return this.replace(/\s+$/,'');};
+String.prototype.rtrim = function(){return this.replace(/\s+$/,'');};
 
-String.prototype.fulltrim=function(){return this.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,'').replace(/\s+/g,' ');};
+String.prototype.fulltrim = function(){return this.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,'').replace(/\s+/g,' ');};
 
 var ToMoney = function(input) {
     return "$" + input.toFixed(2);

@@ -2,8 +2,10 @@
 
 @section _Scripts {   
 	@Html.Javascript("/aquery/aQuery-1.0-min.js")
+
     @Html.Partial("_ImageBundleViewer") 
     @Html.Partial("_EndlessGlider")
+
     @Html.Partial("_BaseViewModel") 
     @Html.Partial("_CartFactory")    
     @Html.Partial("_ReferenceData")
@@ -57,6 +59,7 @@
 	            billing.CVV("666");
 	        };
 	        // ### TESTING SCRIPTS ###
+
 	        // ### TESTING SCRIPTS ###
 	        window.Automation = function () {
 	            var shipping = model.Cart().ShippingInfo;
@@ -107,9 +110,7 @@
 	        // ### TESTING SCRIPTS ###
 	    });
 	</script>
-}
-
-@section _Templates {
+    
     <style>
         table.skutable tbody tr td:nth-child(1)
         {
@@ -162,7 +163,9 @@
             cursor: pointer;
         }
     </style>
+}
 
+@section _Templates {
 }
 
 @section _Body {
@@ -174,7 +177,6 @@
 		<div id="glider1" class="glider" data-bind="template: { name: $root.EndlessGlider.EditorTemplate1() }"></div>		
 		<div id="glider2" class="glider" data-bind="template: { name: $root.EndlessGlider.EditorTemplate2() }"></div>
     </div>
-    <div id="modal-enclave" 
-        data-bind="template: { name: $root.ModalViewModel().Template, data: $root.ModalViewModel().Data }">
+    <div id="modal-enclave" data-bind="template: { name: $root.ModalViewModel().Template, data: $root.ModalViewModel().Data }">
     </div>    
 }
