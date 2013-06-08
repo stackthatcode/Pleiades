@@ -10,12 +10,12 @@ using Pleiades.TestHelpers;
 using Pleiades.TestHelpers.Web;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
-using Commerce.WebUI;
-using Commerce.WebUI.Areas.Admin.Controllers;
-using Commerce.WebUI.Areas.Admin.Models;
-using Commerce.WebUI.Plumbing;
+using Commerce.Web;
+using Commerce.Web.Areas.Admin.Controllers;
+using Commerce.Web.Areas.Admin.Models;
+using Commerce.Web.Plumbing;
 
-namespace Commerce.WebUI.TestsControllers
+namespace Commerce.Web.TestsControllers
 {
     [TestFixture]
     public class AuthControllerTests

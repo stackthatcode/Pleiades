@@ -6,7 +6,7 @@ using Pleiades.Injection;
 using Pleiades.Web.Autofac;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Providers;
-using Commerce.WebUI;
+using Commerce.Web;
 
 namespace Commerce.Initializer
 {

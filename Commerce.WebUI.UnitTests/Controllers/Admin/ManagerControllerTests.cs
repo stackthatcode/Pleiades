@@ -12,11 +12,11 @@ using Pleiades.TestHelpers.Web;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Rules;
-using Commerce.WebUI.Areas.Admin.Controllers;
-using Commerce.WebUI.Areas.Admin.Models;
+using Commerce.Web.Areas.Admin.Controllers;
+using Commerce.Web.Areas.Admin.Models;
 
 
-namespace Commerce.WebUI.TestsControllers
+namespace Commerce.Web.TestsControllers
 {
     [TestFixture]
     public class AdminManagerControllerTests

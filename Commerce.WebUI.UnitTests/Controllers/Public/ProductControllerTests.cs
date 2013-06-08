@@ -1,4 +1,4 @@
-﻿namespace Commerce.WebUI.UnitTests.Controllers.Public
+﻿namespace Commerce.Web.UnitTests.Controllers.Public
 {
     public class ProductControllerTests
     {

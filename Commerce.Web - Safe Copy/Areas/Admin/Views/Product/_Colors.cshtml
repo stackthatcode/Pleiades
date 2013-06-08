@@ -1,0 +1,458 @@
+﻿    <!-- Color View Model -->
+    <script type="text/javascript">
+        var AddColorFunctions = function (rootModel) {
+            var self = rootModel;
+            self.SelectedProductColors = ko.observableArray();
+            self.NewColorInput = ko.observable(null);
+            self.ColorArray = ko.observableArray();
+            
+            self.SlideToColorList = function () {
+                flow.exec(
+                    function () {
+                        self.ProductService.ColorsList(this);
+                    },
+                    function (data) {
+                        self.ColorArray(data);
+                        $.each(data, function (index, elem) { elem.Selected = ko.observable(false); });
+                        self.ChildGlider.GlideToChild(this);
+                    },
+                    function () {
+                        self.ActiveView({ Level: "Sub-Child", Template: "AddColorsFromList" });
+                    }
+                );
+            }
+
+            self.SlideToCreateNewColor = function () {
+                flow.exec(
+                    function () {
+                        var input = {
+                            ShowUpload: ko.observable(true),
+                            ImageBundleExternalId: ko.observable(null),
+                            EditName: ko.observable(null),
+                            EditSkuCode: ko.observable(null),
+                            EditSEO: ko.observable(null),
+                        };
+                        self.NewColorInput(input);
+                        self.ChildGlider.GlideToChild(this);
+                    },
+                    function () {
+                        self.ActiveView({ Level: "Sub-Child", Template: "CreateColor" });
+                        var fileUploader = new CommerceFileUploader(this.CommonUI, self.OnColorUpload);
+                    }
+                );
+            }
+            
+            self.PickColorToggle = function() {
+                self.NewColorInput().ShowUpload(false);
+                CreateColorPicker();
+            }
+
+            self.UploadSwatchToggle = function() {
+                self.NewColorInput().ShowUpload(true);
+            }
+
+            self.OnColorUpload = function(data) {
+                console.log(data);
+                self.NewColorInput().ImageBundleExternalId(data.ExternalId);
+            }
+
+            self.AddColorsToProductClick = function () {
+                self.ColorInventoryCheck(self.AddColorsToProductAction);
+            }
+
+            self.AddColorsToProductAction = function () {
+                $('#modal-dialog').modal('hide');
+                
+                var colorIdList = [];
+                $.each(self.ColorArray(), function (index, elem) {
+                    if (elem.Selected()) {
+                        colorIdList.push(elem.Id);
+                    }
+                });
+
+                var iterator = function () {
+                    if (colorIdList.length == 0) {
+                        self.GlideBackToColorsTabWithRefresh();
+                        return;
+                    }
+
+                    var nextColorId = colorIdList.pop();
+                    self.ProductService.AddProductColor(self.SelectedProduct().Id(), nextColorId, iterator);
+                };
+                iterator();
+            }
+            
+            // If there is Inventory, and this is the first Color, it will wipe the Inventory
+            self.ColorInventoryCheck = function(action) {
+                flow.exec(
+                    function() {
+                         self.ProductService.InventoryTotal(self.SelectedProduct().Id(), this);
+                    },
+                    function(inventoryTotal) {
+                        if (self.SelectedProductColors().length == 0 && inventoryTotal.Total > 0) {
+                            self.ShowAddColorsInventoryDialog(action);
+                        } else {
+                            action();
+                        }
+                    }
+                );
+            };
+            
+            self.ShowAddColorsInventoryDialog = function (action) {
+                self.ModalViewModel({ Action: action, Template: "Modal-Dialog-ProductColorInventory" });
+                $('#modal-dialog').modal('show');
+            }
+
+            self.SaveColorClick = function () {
+                var colorInput = self.NewColorInput();
+                if ($.trim(colorInput.EditName()) == "" || $.trim(colorInput.EditSEO()) == "" || 
+                    $.trim(colorInput.EditSkuCode()) == "")
+                {
+                    $("#validation").show();
+					return;
+				}
+
+                if (colorInput.ShowUpload() == true && colorInput.ImageBundleExternalId() == null) {
+                    $("#validation").show();
+					return;
+                }
+
+                self.ColorInventoryCheck(self.SaveColorAction);
+            }
+
+			self.SaveColorAction = function() {
+			    $('#modal-dialog').modal('hide');
+				var colorInput = self.NewColorInput();
+                flow.exec(
+					function() {                        
+                        if (colorInput.ShowUpload() == false) {
+                            var farbtasticColor = GetSelectedColor();                
+                            var createColorJson = { Rgb: farbtasticColor, Width: "150", Height: "150" };
+                            self.ProductService.CreateBitmap(createColorJson, this);
+                        }
+                        else {
+                            this( { ExternalId: colorInput.ImageBundleExternalId() });
+                        }
+                    },
+                    function(data) {
+                        console.log("Image Bundle Data: " + data);
+                        colorInput.ImageBundleExternalId(data.ExternalId);
+
+                        // Next, create a Color
+                        var serverRecord = {
+                            Name: colorInput.EditName(),
+                            SkuCode: colorInput.EditSkuCode(),
+                            SEO: colorInput.EditSEO(),
+                            ImageBundleExternalId: data.ExternalId, 
+                        };
+
+						self.ProductService.AddColorToColorList(serverRecord, this);                        
+					},
+					function(data) {
+                        self.ProductService.AddProductColor(self.SelectedProduct().Id(), data.Id, this);
+                    },
+					function() {
+                        self.GlideBackToColorsTabWithRefresh();
+                    }
+				);
+			}			
+
+            self.SelectColor = function (data) {
+                data.Selected(!data.Selected());
+            }
+            
+            self.DeleteProductColor = function (color) {
+                self.ModalViewModel({ Template: "Modal-Dialog-ProductColor", Data: color });
+                $('#modal-delete').modal();
+            }
+
+            self.DeleteProductColorConfirm = function () {
+                var color = self.ModalViewModel().Data;
+                flow.exec(
+                    function () {
+                        $('#modal-delete').modal('hide');
+                        self.ProductService.DeleteProductColor(self.SelectedProduct().Id(), color.Id, this);
+                    },
+                    function (data) {
+                        self.SelectedProductColors.remove(color);
+                        self.ModalViewModel({ Template: null });
+                    }
+                );
+            }
+            
+            self.ColorsTabClick = function () {
+                flow.exec(
+                    function () {
+                        self.ProductService.Colors(self.SelectedProduct().Id(), this);
+                    },
+                    function (colors) {
+                        self.SelectedProductColors(colors);
+                        self.ActiveView({ Level: "Child", Template: "Colors" });
+                        self.MakeColorsSortable();
+                    }
+                );
+            }
+
+            self.MakeColorsSortable = function () {
+                $(".sortable").sortable({
+                    placeholder: "ui-state-highlight",
+                    update: self.UpdateColorSortOrder,
+                    delay: 300
+                });
+                $(".sortable").disableSelection();
+            }
+
+            self.UpdateColorSortOrder = function () {
+                var sortOutput = [];
+                $.each($("#colors > div"), function (index, elem) { 
+                    sortOutput.push($(elem).attr('id').replace('sorted', '')); 
+                });
+                var sortedIds = sortOutput.join(",");
+                self.ProductService.UpdateColorOrder(self.SelectedProduct().Id(), sortedIds);
+            };
+
+            
+
+            self.GlideBackToColorsTabWithRefresh = function(callback) {
+                flow.exec(
+                    function () {
+                        self.ProductService.Colors(self.SelectedProduct().Id(), this);
+                    },
+                    function (colors) {
+                        self.SelectedProductColors(colors);
+                        self.ChildGlider.GlideToParent(this);
+                    },
+                    function () {
+                        self.ActiveView({ Level: "Child", Template: "Colors" });
+                        self.MakeColorsSortable();
+                        if (callback) {
+                            callback();
+                        }
+                    }
+                );
+            }
+            
+            self.GlideBackToColors = function () {
+                flow.exec(
+                    function () {
+                        $("#glideToParent").hide();
+                        self.ChildGlider.GlideToParent(this);
+                    },
+					function () {
+					    self.ActiveView({ Level: "Child", Template: "Colors" });
+                        self.MakeColorsSortable();
+					}
+				);
+            }
+        }
+	</script>
+	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB -->
+    <script type="text/html" id="Child-Editor-Colors">
+    <div style="margin-top:0px;">
+        <form>
+            <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SelectedProductColors().length == 0">
+			    <strong>There are no Colors for this Product.  Add a Color from the existing list, or Create a new one.</strong>  
+		    </div>
+		    
+            <div id="colors" class="sortable" data-bind="foreach: $root.SelectedProductColors()">
+                <div class="draggable" data-bind="attr: { id: 'sorted' + $data.Id }">
+		        <table class="table table-hover" style="margin-bottom:0px;">
+		            <tbody>
+			            <tr>
+			            <td>
+				            <span class="span2">
+                	            <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+			                    </div>
+                            </span>
+                        </td>
+                        <td>
+				            <span class="span5">
+					            <input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
+					            <p><strong data-bind="text: $data.Name"></strong> - <span data-bind="text: $data.SkuCode"></span></p>
+				            </span>
+                        </td>
+			            <td>
+				            <span class="span5" style="text-align:right;">
+                                <a href="#" class="btn btn-inverse disabled"><i class="icon-screenshot icon-white"></i> Drag Me!</a>
+					            <a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteProductColor($data) }"><i class="icon-trash icon-white"></i> Delete</a>
+				            </span>
+			            </td>
+			            </tr>
+		            </tbody>
+		        </table>
+                </div>
+            </div>
+        </form>
+    </div>
+    </script>
+    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB - ADD FROM LIST SUB -->
+    <script type="text/html" id="Sub-Child-Editor-AddColorsFromList">
+    <div>
+        <form>
+            <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.ColorArray().length == 0">
+			    <strong>There are no pre-defined Colors.  Go to Lists &gt; Color to add pre-defined Colors.</strong>  
+		    </div>
+
+		    <table id="color-table" class="table table-hover">
+		    <tbody data-bind="foreach: $root.ColorArray()">
+			    <tr>
+			    <td>
+				    <span class="span2">
+                	    <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+			            </div>
+                    </span>
+                </td>
+                <td>
+				    <span class="span7">
+					    <input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
+					    <p><strong data-bind="text: $data.Name"></strong> - <span data-bind="text: $data.SkuCode"></span></p>
+				    </span>
+                </td>
+			    <td>
+				    <span class="span3" style="text-align:right;">					
+                        <div data-bind="if: $data.Selected() == false">
+					        <a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.SelectColor($data) }">
+                                <i class="icon-plus icon-white"></i> Select</a>
+                        </div>
+                        <div data-bind="if: $data.Selected() == true">
+                            <span class="label label-info">Selected!</span>
+					        <a class="btn btn-white" style="width:70px;" href="#" data-bind="click: function() { $root.SelectColor($data) }">
+                                <i class="icon-minus icon-black"></i> Remove</a>
+                        </div>
+				    </span>
+			    </td>
+			    </tr>
+		    </tbody>
+		    </table>
+        </form>
+    </div>
+    </script>
+    <!-- KNOCKOUT TEMPLATE - CHILD EDITOR COLORS TAB - CREATE SUB -->
+    <script type="text/html" id="Sub-Child-Editor-CreateColor">
+        <div data-bind="with: $root.NewColorInput">
+        <form>
+            <div style="height:20px;"></div>
+
+			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
+                <strong>Please enter all the required fields.</strong>
+			</div>
+
+            <div class="row">
+                <div class="span3">
+                    <div data-bind="if: $data.ShowUpload">
+                        <ul class="nav nav-pills">
+                            <li class="active">
+                                <a href="#">Upload Swatch</a>
+                            </li>
+                            <li>
+                                <a href="#" data-bind="click: $root.PickColorToggle">Pick Color</a>
+                            </li>
+                        </ul>
+
+                        <label>Color Swatch</label>
+                        <div style="margin-bottom:20px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId(), LightboxSuffixId: 'Child' } }">
+			            </div>
+			            <div style="margin-bottom:20px; margin-top:20px;" data-bind="template: { name: 'Fine-Uploader', data: $data }">
+			            </div>
+                    </div>
+
+                    <div data-bind="ifnot: $data.ShowUpload">
+                        <ul class="nav nav-pills">
+                            <li>
+                                <a href="#" data-bind="click: $root.UploadSwatchToggle">Upload Swatch</a>
+                            </li>
+                            <li class="active">
+                                <a href="#">Pick Color</a>
+                            </li>
+                        </ul>
+
+                        <div id="color-picker" data-bind="template: { name: 'Color-Picker' }"></div>    
+                    </div>
+                  </div>
+                <div class="span9">
+                    <div class="row">
+                        <div class="span3">
+                            <label>Color Name<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Color Name" data-bind="value: $data.EditName" maxlength="50" />
+                            </label>
+                        </div>
+                        <div class="span3">
+                            <label>SKU Code<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Sku Code" data-bind="value: $data.EditSkuCode" maxlength="6" />
+				            </label>
+                        </div>
+                        <div class="span3">
+                            <label>SEO<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter SEO Tag" data-bind="value: $data.EditSEO" maxlength="50" />
+				            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="span9" style="text-align:right;">
+					<a class="btn btn-inverse" href="#" data-bind="click: $root.GlideBackToColors"><i class="icon-remove icon-white"></i> Cancel</a>                    
+					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveColorClick"><i class="icon-ok icon-white"></i> Save</a>
+                </div>
+            </div>
+            
+        </form>
+        </div>
+	</script>
+
+    <!-- KNOCKOUT TEMPLATE - MODAL DIALOG PRODUCT COLOR -->
+	<script type="text/html" id="Modal-Dialog-ProductColor">
+        <div id="modal-delete" class="modal hide fade">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3>Delete <span data-bind="text: $root.ModalViewModel().Data.Name"></span></h3>
+			</div>
+			<div class="modal-body">
+				<p>
+                    <strong>Are you sure you want to Delete this Color from the Product?</strong>
+                </p>			
+				<p>
+				    Any Inventory associated with this Color will be Deleted.
+                </p>			
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.DeleteProductColorConfirm"><i class="icon-ok icon-white"></i> Ok</a>
+			</div>
+		</div>
+	</script>
+    
+	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG PRODUCT COLOR -->
+	<script type="text/html" id="Modal-Dialog-ProductSize">
+        <div id="modal-delete" class="modal hide fade">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3>Delete <span data-bind="text: $root.ModalViewModel().Data.Name"></span></h3>
+			</div>
+			<div class="modal-body">
+				<p>
+                    <strong>Are you sure you want to Delete this Size from the Product?</strong>
+                </p>			
+				<p>
+				    Any Inventory associated with this Size will be Deleted.
+                </p>			
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.DeleteProductSizeConfirm"><i class="icon-ok icon-white"></i> Ok</a>
+			</div>
+		</div>
+	</script>
+    
+	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG PRODUCT ADD COLOR -->
+	<script type="text/html" id="Modal-Dialog-ProductColorInventory">
+        <div id="modal-dialog" class="modal hide fade">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3>Add Color to Product</h3>
+			</div>
+			<div class="modal-body">
+				<p><strong>You will now be tracking Colors in Inventory.</strong></p>
+                <p>Old Inventory without Colors will be destroyed.  Please update your Inventory.</p>
+			</div>
+			<div class="modal-footer">
+                <a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.ModalViewModel().Action"><i class="icon-ok icon-white"></i> Ok</a>
+			</div>
+		</div>
+	</script>

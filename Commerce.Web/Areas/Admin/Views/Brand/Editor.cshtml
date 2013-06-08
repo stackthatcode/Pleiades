@@ -1,0 +1,338 @@
+﻿@using Pleiades.Web.MvcHelpers
+
+@section _Scripts {
+    @Html.Partial("_FineUploader")
+	@Html.Partial("_ImageBundleViewer")	
+	@Html.Javascript("/scripts/brand-service.js")
+    
+    <script type="text/javascript">
+		// KO enabling/disabling of server JSON        
+        var BrandToKnockout = function(brand) {
+			return {
+				Id: ko.observable(brand.Id),
+				Name: ko.observable(brand.Name),
+				Description: ko.observable(brand.Description),
+				SEO: ko.observable(brand.SEO),
+				SkuCode: ko.observable(brand.SkuCode),
+                ProductCount: ko.observable(brand.ProductCount),
+
+                EditName: ko.observable(brand.Name),
+                EditDescription: ko.observable(brand.Description),
+                EditSEO: ko.observable(brand.SEO),
+                EditSkuCode: ko.observable(brand.SkuCode),
+
+                ImageBundleExternalId: ko.observable(brand.ImageBundleExternalId),
+			};
+		}
+		
+		var BrandToServerJson = function(brand) {
+			return {
+				Id: brand.Id(),
+				Name: brand.Name(),
+                Description: brand.Description(),
+                SEO: brand.SEO(),
+                SkuCode: brand.SkuCode(),
+                ImageBundleExternalId: brand.ImageBundleExternalId(),
+			};
+		}
+
+		function BrandViewModel(serviceAdapter, crossCuttingUI, gliderWidget) {	
+			var self = this;
+
+			// UI state management
+			self.AddBrand = function() {
+				flow.exec(
+					function() {
+						var knockedoutData = BrandToKnockout({});
+                        self.SelectedIndex = -1;
+						self.SelectedRecord(knockedoutData);
+						self.Glider.GlideToChild(this);
+                        var fileUploader = new CommerceFileUploader(this.CommonUI, self.OnFileUpload);
+					}
+				);
+			}
+			
+		    // asynchronous, service-bound operations            
+			self.GlideToChildView = function(brandRecord) {
+				flow.exec(
+					function() {
+                        self.SelectedIndex = self.Data.indexOf(brandRecord);
+						self.ServiceAdapter.Retrieve(brandRecord.Id, this);
+					},
+					function(data) {
+						var knockedoutData = BrandToKnockout(data);
+						self.SelectedRecord(knockedoutData);
+                        self.Glider.GlideToChild();
+                        var fileUploader = new CommerceFileUploader(this.CommonUI, self.OnFileUpload);
+					}
+				);
+			}
+			
+			self.GlideToParentView = function() {
+				var recordId = self.SelectedRecord().Id();
+				flow.exec(
+                    function() {
+				        $("#glideToParent").hide();
+                        self.Glider.GlideToParent(this);
+                    },
+					function() {
+                        self.SelectedRecord(null);
+                        self.SelectedIndex = null;
+                        self.CommonUI.ScrollToIdTracker(recordId);
+					}
+				);
+			}
+
+            // This is the bit of glue that bridges FineUploader and the Image Gallery stuff
+	        self.OnFileUpload = function (imageBundleData) {
+	            self.SelectedRecord().ImageBundleExternalId(imageBundleData.ExternalId);
+	        };
+
+			self.RetrieveBrands = function(callback) {
+				flow.exec(
+					function() {
+						self.SelectedRecord(null);		// Clear out the ChildView state
+						self.ServiceAdapter.RetrieveAll(this);						
+					},					
+					function(data) {												
+						self.Data(data);
+				        if (callback) callback();
+					}
+				);
+			}
+			
+			self.SaveBrand = function() {
+				flow.exec(
+					function() {
+						var record = self.SelectedRecord();
+						if ($.trim(record.EditName()) == "" || $.trim(record.EditSEO()) == "" || 
+                            $.trim(record.EditSkuCode()) == "" || !record.ImageBundleExternalId()) 
+                        {
+                        	$("#validation").show();
+							return;
+						}
+						record.Name(record.EditName());
+						record.SEO(record.EditSEO());
+						record.SkuCode(record.EditSkuCode());
+						record.Description(record.EditDescription());
+
+                        var serverRecord = BrandToServerJson(record);
+                        if (serverRecord.Id) {
+						    self.ServiceAdapter.Update(serverRecord, this);
+                        } else {
+						    self.ServiceAdapter.Insert(serverRecord, this);
+                        }
+					},
+					function(data) {
+                        if (self.SelectedIndex == -1) {				
+                            self.Data.unshift(data);
+                        } else {
+                            self.Data.replace(self.Data()[self.SelectedIndex], data);
+                        }
+                        self.GlideToParentView();
+					}
+				);
+			}
+			
+			self.DeleteBrand = function(brand) {
+				self.ModalViewModel(brand);
+				$('#modal-delete').modal();
+		    }
+
+			self.DeleteConfirm = function() { 
+				var record = self.ModalViewModel();
+			    flow.exec(
+                    function() {
+                        $('#modal-delete').modal('hide');				
+				        self.ServiceAdapter.Delete(record, this);
+                    },
+                    function(data) {
+						self.Data.remove(function(item) { return item.Id == record.Id; });
+                        self.ModalViewModel(null);
+                    }
+                );
+			}
+            
+			// Initialization
+			self.ServiceAdapter = serviceAdapter;
+            self.CommonUI = crossCuttingUI;
+            self.Glider = gliderWidget;
+            
+			// load ko.observables into view model
+            self.Data = ko.observableArray();
+			self.SelectedRecord = ko.observable(null);
+            self.SelectedRecordName = ko.computed(function() { return self.SelectedRecord() && self.SelectedRecord().Name() || "(New Brand)" }, this);
+			self.ModalViewModel = ko.observable(null);
+			
+			// load the Brands
+            self.RetrieveBrands();
+		}
+		
+		$(function() {
+            var crosscuttingUI = new CommonUI("#gliding-container");
+            var gliderWidget = new GliderWidget("#gliding-container", "#parent-editor", "#child-editor");			
+            var serviceAdapter = new BrandService(crosscuttingUI.Error, crosscuttingUI.ShowLoading, crosscuttingUI.HideLoading);
+			var model = new BrandViewModel(serviceAdapter, crosscuttingUI, gliderWidget);
+
+			ko.applyBindings(model);
+		});
+	</script>
+}	
+
+@section _Templates {
+	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE -->
+	<script type="text/html" id="Top-Workspace">
+		<!-- PARENT VIEW HEADER -->
+		<div id="heading" class="container" data-bind="ifnot: $root.SelectedRecord()">
+			<div class="row">
+				<div class="span9">
+					<h1>Brands > All</h1>
+				</div>
+				<div class="span3" style="margin-top:15px; text-align:right;">
+					<a class="btn btn-primary btn-block" data-bind="click: $root.AddBrand">Add New Brand <i class="icon-arrow-right icon-white"></i></a>
+				</div>
+			</div>
+		</div>
+		
+		<!-- CHILD VIEW HEADER -->
+		<div id="heading" class="container" data-bind="if: $root.SelectedRecord()">
+			<div class="row" style="position:relative;">
+				<div class="span9">
+					<h1>Brands &gt; <span data-bind="text: $root.SelectedRecordName"></span></h1>
+				</div>                
+			</div>
+            <div class="row">
+                <div class="span9">
+                    <ul class="nav nav-pills">
+                        <li style="width:140px;">
+				            <a id="glideToParent" class="backbutton" data-bind="click: $root.GlideToParentView">&laquo; Back to Brands</a>
+                            &nbsp;
+                        </li>
+                    </ul>
+                </div>
+			</div>
+		</div>
+	</script>
+	
+	<!-- KNOCKOUT TEMPLATE - PARENT EDITOR -->
+	<script type="text/html" id="Parent-Editor">
+		<div style="margin-top:40px; text-align:center;" class="alert alert-info" data-bind="visible: $data.Data().length == 0">
+			<button type="button" class="close" data-dismiss="alert">x</button>
+			<strong>There are no Brands.  Click "Add New Brands" to create a new one.</strong>  
+		</div>
+		
+		<table id="parent-editor-table" class="table table-hover" data-bind="visible: $data.Data().length > 0">
+		<tbody data-bind="foreach: $data.Data()">
+			<tr>
+			<td>
+				<span class="span3">
+                	<div data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+			        </div>
+                </span>
+            </td>
+            <td>
+				<span class="span6">
+					<input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
+					<h4><span data-bind="text: $data.Name + ' - ' + $data.SkuCode "></span></h4>
+                    <strong>Number of Products: <span data-bind="text: $data.ProductCount"></span></strong>
+                    <p data-bind="text: $data.Description.koTrunc(150, true)"></p>
+				</span>
+            </td>
+			<td>
+				<span class="span3" style="text-align:right;">					
+					<a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteBrand($data) }"><i class="icon-trash icon-white"></i> Delete</a>
+					<a class="btn btn-inverse" style="width:70px;" data-bind="click: $root.GlideToChildView">Edit <i class="icon-arrow-right icon-white"></i></a>
+				</span>
+			</td>
+			</tr>
+		</tbody>
+		</table>
+	</script>
+	
+	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR -->
+	<script type="text/html" id="Child-Editor">
+        <div style="margin-top:40px">
+        <form>
+			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
+				<a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Please enter all the required fields.</strong>
+			</div>
+
+            <div class="row">
+                <div class="span3">   
+                    <label>Brand Logo</label>                 
+                    <div style="margin-bottom:20px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId(), LightboxSuffixId: 'Child' } }">
+			        </div>
+			        <div style="margin-bottom:20px; margin-top:20px;" data-bind="template: { name: 'Fine-Uploader', data: $root }">
+			        </div>
+                </div>
+                <div class="span9">
+                    <div class="row">
+                        <div class="span3">
+                            <label>Brand Name<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Brand Name" data-bind="value: $data.EditName" maxlength="50" />
+                            </label>
+                        </div>
+                        <div class="span3">
+                            <label>SKU Code<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter Sku Code" data-bind="value: $data.EditSkuCode" maxlength="6" />
+				            </label>
+                        </div>
+                        <div class="span3">
+                            <label>SEO<br /><input class="input-large" style="width:200px;" type="text" placeholder="Enter SEO Tag" data-bind="value: $data.EditSEO" maxlength="50" />
+				            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="span9">
+                    <label>Description<br/>
+                        <textarea id="entry" type="text" class="input-large" style="width:685px;" rows="5" 
+                            placeholder="Enter Description" data-bind="value: $data.EditDescription" maxlength="500" />
+                    </label>
+                </div>
+                <div class="span9" style="text-align:right;">
+					<a class="btn btn-inverse" href="#" data-bind="click: $root.GlideToParentView"><i class="icon-remove icon-white"></i> Cancel</a>                    
+					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveBrand"><i class="icon-ok icon-white"></i> Save</a>
+                </div>
+            </div>
+            
+        </form>
+        </div>
+	</script>
+	
+	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG -->
+	<script type="text/html" id="Modal-Dialog">
+		<div id="modal-delete" class="modal hide fade" data-bind="if: $root.ModalViewModel()">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3>Delete <span data-bind="text: $root.ModalViewModel().Name"></span></h3>
+			</div>
+			<div class="modal-body">
+				<p>Are you sure you want to Delete this Brand?</p>			
+				<p>All Products that use it will not have a Brand</p>			
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.DeleteConfirm"><i class="icon-ok icon-white"></i> Ok</a>
+			</div>
+		</div>
+	</script>
+}
+
+@section _Body {	
+    <div class="workspace-heading-parent">
+		<div class="workspace-heading" data-bind="template: { name: 'Top-Workspace', data: $root }"></div>
+	</div>
+	
+	<div id="gliding-container" class="container">
+		<div id="parent-editor">
+			<div style="margin-bottom:200px;" data-bind="template: { name: 'Parent-Editor', data: $root }">
+			</div>
+		</div>
+		
+		<div id="child-editor" data-bind="if: $root.SelectedRecord()">
+			<div style="margin-bottom:200px;" data-bind="template: { name: 'Child-Editor', data: $root.SelectedRecord() }">
+			</div>
+		</div>
+    </div>
+
+    <div id="modal-enclave" data-bind="template: { name: 'Modal-Dialog' }"></div>    
+}

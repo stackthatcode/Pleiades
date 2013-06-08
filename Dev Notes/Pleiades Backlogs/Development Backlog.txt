@@ -3,14 +3,24 @@ Burndown - 6/2/2013
 - Upgrade MVC to version 4.0 / start using the Web API for Controllers => DONE
 - PushMarket Phase 2 Review, Next Steps Strategy, so forth => DONE
 
+Burndown - 6/7/2013
+-------------------
+- Started MVC 4 / EF 5 upgrade
+
+Burndown - 6/8/2013
+-------------------
+- Finished MVC 4 / EF 5 upgrade
+
+
+
 
 FRONTRANGE - HOTZONE
 ====================
 
 Final Deliverable Definition
 ----------------------------
-- Landing-Page + Microsite => IN PROGRESS
 - Refactor the Products Knockout UI => IN PROGRESS
+- Landing-Page + Microsite => IN PROGRESS
 - Revamped Membership Provider => TODO
 - Customer Checkout => TODO
 - Admin Search & Manage Orders => TODO
@@ -21,6 +31,7 @@ Final Deliverable Definition
 - Server Logging => TODO
 - Stripe Payment Integration => TODO
 - Amazon EC2 Hosting => TODO
+
 
 
 Already Done
@@ -38,7 +49,6 @@ Already Done
 - Admin Order Create => DONE
 - Payment Processing Stub => DONE
 - Check-out Process Server-side => DONE
-
 
 
 

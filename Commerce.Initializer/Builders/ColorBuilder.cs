@@ -18,8 +18,8 @@ using Commerce.Persist.Model.Lists;
 using DomainColor = Commerce.Persist.Model.Lists.Color;
 using Commerce.Persist.Model.Resources;
 using Commerce.Persist;
-using Commerce.WebUI;
-using Commerce.WebUI.Plumbing;
+using Commerce.Web;
+using Commerce.Web.Plumbing;
 
 
 namespace Commerce.Initializer.Builders

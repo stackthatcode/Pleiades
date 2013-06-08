@@ -5,9 +5,9 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using Pleiades.Web.Security.Model;
 using Pleiades.TestHelpers.Web;
-using Commerce.WebUI.Plumbing;
+using Commerce.Web.Plumbing;
 
-namespace Commerce.WebUI.UnitTests.Security
+namespace Commerce.Web.UnitTests.Security
 {
     [TestFixture]
     public class CommerceSecurityResponderTest

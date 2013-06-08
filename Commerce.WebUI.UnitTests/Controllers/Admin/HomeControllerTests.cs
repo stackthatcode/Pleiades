@@ -2,9 +2,9 @@
 using NUnit.Framework;
 using Pleiades.TestHelpers;
 using Pleiades.TestHelpers.Web;
-using Commerce.WebUI.Areas.Admin.Controllers;
+using Commerce.Web.Areas.Admin.Controllers;
 
-namespace Commerce.WebUI.UnitTests.Controllers.Admin
+namespace Commerce.Web.UnitTests.Controllers.Admin
 {
     [TestFixture]
     public class HomeControllerTests

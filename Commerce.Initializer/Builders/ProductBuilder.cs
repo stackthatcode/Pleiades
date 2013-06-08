@@ -16,8 +16,8 @@ using Commerce.Persist.Concrete;
 using Commerce.Persist.Interfaces;
 using Commerce.Persist.Model.Lists;
 using Commerce.Persist.Model.Products;
-using Commerce.WebUI;
-using Commerce.WebUI.Plumbing;
+using Commerce.Web;
+using Commerce.Web.Plumbing;
 using Color = Commerce.Persist.Model.Lists.Color;
 
 namespace Commerce.Initializer.Builders

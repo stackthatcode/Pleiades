@@ -118,7 +118,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\aquery\aQuery-1.0-min.js" />
-    <Content Include="Content\aquery\aQuery-1.0.js" />
     <Content Include="Content\bootstrap-lightbox\bootstrap-lightbox.css" />
     <Content Include="Content\bootstrap-lightbox\bootstrap-lightbox.js" />
     <Content Include="Content\bootstrap-lightbox\bootstrap-lightbox.min.css" />
@@ -167,7 +166,6 @@
     <Content Include="Content\scripts\brand-service.js" />
     <Content Include="Content\scripts\color-service.js" />
     <Content Include="Content\scripts\product-service.js" />
-    <Content Include="Content\scripts\image-service.js" />
     <Content Include="Content\scripts\section-service.js" />
     <Content Include="Content\scripts\size-service.js" />
     <Content Include="Content\scripts\flow.js" />

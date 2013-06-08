@@ -7,11 +7,11 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Commerce.WebUI;
+using Commerce.Web;
 using Pleiades.TestHelpers;
 using Pleiades.TestHelpers.Web;
 
-namespace Commerce.WebUI.UnitTests.Routing
+namespace Commerce.Web.UnitTests.Routing
 {
     [TestFixture]
     public class AdminRouteTests : RoutingTestBase

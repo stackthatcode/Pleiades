@@ -3,11 +3,11 @@ using System.Web.Mvc;
 using NUnit.Framework;
 using Rhino.Mocks;
 using Pleiades.Web.Security.Model;
-using Commerce.WebUI.Areas.Admin.Controllers;
-using Commerce.WebUI.Areas.Public.Controllers;
-using Commerce.WebUI.Plumbing;
+using Commerce.Web.Areas.Admin.Controllers;
+using Commerce.Web.Areas.Public.Controllers;
+using Commerce.Web.Plumbing;
 
-namespace Commerce.WebUI.UnitTests.Security
+namespace Commerce.Web.UnitTests.Security
 {
     [TestFixture]
     public class CommerceSecurityContextFactoryTest

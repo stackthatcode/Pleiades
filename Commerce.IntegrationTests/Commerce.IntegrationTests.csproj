@@ -43,9 +43,9 @@
     <Reference Include="Autofac.Integration.Mvc">
       <HintPath>..\packages\Autofac.Mvc3.2.6.3.862\lib\NET40\Autofac.Integration.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Lib\Newtonsoft.Json.dll</HintPath>
@@ -122,10 +122,6 @@
     <ProjectReference Include="..\Commerce.Initializer\Commerce.Initializer.csproj">
       <Project>{8E922D95-E286-4AF1-89E2-943EA247B806}</Project>
       <Name>Commerce.Initializer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Commerce.WebUI\Commerce.WebUI.csproj">
-      <Project>{EC92BFF1-A3ED-4A02-B5EC-833E55830967}</Project>
-      <Name>Commerce.WebUI</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pleiades.Web.Security.Membership\Pleiades.Web.Security.Membership.csproj">
       <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>

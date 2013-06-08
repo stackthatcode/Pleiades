@@ -6,12 +6,12 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using NUnit.Framework;
-using Commerce.WebUI;
-using Commerce.WebUI.Areas.Admin;
-using Commerce.WebUI.Areas.Public;
+using Commerce.Web;
+using Commerce.Web.Areas.Admin;
+using Commerce.Web.Areas.Public;
 using Pleiades.TestHelpers.Web;
 
-namespace Commerce.WebUI.UnitTests.Routing
+namespace Commerce.Web.UnitTests.Routing
 {
     public class RoutingTestBase
     {
@@ -27,7 +27,7 @@ namespace Commerce.WebUI.UnitTests.Routing
                     new PublicAreaRegistration(),
                 });
 
-            CommerceHttpApplication.RegisterRoutes();
+            CommerceWebApplication.RegisterRoutes();
         }
     }
 }

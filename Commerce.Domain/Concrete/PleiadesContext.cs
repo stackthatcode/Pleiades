@@ -53,6 +53,8 @@ namespace Commerce.Persist.Concrete
 
         public PleiadesContext() : base("PleiadesDb")
         {
+            Database.SetInitializer<PleiadesContext>(null);
+            Configuration.AutoDetectChangesEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

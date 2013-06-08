@@ -16,8 +16,8 @@ using Commerce.Persist.Concrete;
 using Commerce.Persist.Interfaces;
 using Commerce.Persist.Model.Lists;
 using Commerce.Initializer.Builders;
-using Commerce.WebUI;
-using Commerce.WebUI.Plumbing;
+using Commerce.Web;
+using Commerce.Web.Plumbing;
 
 namespace Commerce.Initializer
 {
