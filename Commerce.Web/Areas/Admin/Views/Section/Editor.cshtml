@@ -1,10 +1,8 @@
 ﻿@using Pleiades.Web.MvcHelpers
 
 @section _Scripts {
-	@Html.Javascript("/scripts/section-service.js")
-    
-    <script type="text/javascript">
-		// KO enabling/disabling of server JSON
+	<script type="text/javascript">
+    // KO enabling/disabling of server JSON
         var SectionToKnockout = function(section) {
 			return {
 				Id: ko.observable(section.Id),
@@ -21,8 +19,7 @@
 			    SEO: section.SEO()
 			};
 		};
-    </script>
-	<script type="text/javascript">
+
 	    function SectionViewModel(serviceAdapter) {	
 			var self = this;
 
@@ -117,12 +114,32 @@
 			self.ModalViewModel = ko.observable(null);
 			self.RetrieveSections();
 		}
-		
-		$(function() {
-            var crosscuttingUI = new CommonUI();
-            var serviceAdapter = new SectionService(crosscuttingUI.Error, crosscuttingUI.ShowLoading, crosscuttingUI.HideLoading);
-			var model = new SectionViewModel(serviceAdapter);
 
+		function SectionService() {
+		    var self = new PushLibrary.Ajax();
+
+		    self.RetrieveAllSections = function (callback) {
+		        self.AjaxGet("/Admin/Section/Sections", callback);
+		    };
+
+		    self.Insert = function (section, callback) {
+		        self.AjaxPost("/Admin/Section/Insert", section, callback);
+		    };
+
+		    self.Update = function (section, callback) {
+		        self.AjaxPost("/Admin/Section/Update", section, callback);
+		    }
+
+		    self.Delete = function (section, callback) {
+		        self.AjaxPost("/Admin/Section/Delete", section, callback);
+		    };
+
+		    return self;
+		}
+
+		$(function() {
+            var serviceAdapter = new SectionService();
+            var model = new SectionViewModel(serviceAdapter);
 			ko.applyBindings(model);
 		});
 	</script>
@@ -159,16 +176,16 @@
 	<!-- KNOCKOUT TEMPLATE - EDITOR ROW -->
 	<script type="text/html" id="Editor-Row">
 		<tr data-bind="if: $root.SelectedRecord() != $data, click: $root.EditRecord">
-		<td>
-			<span class="span9">	
+		<td style="height:70px;">
+			<span style="width:700px; float:left;">	
 				<input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id() }" />
                 <h4>
                     <span data-bind="text: $data.Name()"></span> - 
                     <span data-bind="text: $data.SEO()"></span>
                 </h4>	
-                 <span data-bind="text: $data.NumberOfCategories()"></span> Categories &amp; Sub-Categories
+                <span data-bind="text: $data.NumberOfCategories()"></span> Categories &amp; Sub-Categories
 			</span>
-			<span class="span3" style="text-align:right;">
+			<span style="width:200px; float:left; text-align:right; padding-top:20px;">
 				<p>Touch Row to Edit</p>
 			</span>
 		</td>
@@ -178,27 +195,28 @@
         <tr data-bind="if: $root.SelectedRecord() == $data">
         <td>
 			<form>
-			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
-				<a href="#" class="close" data-dismiss="alert">&times;</a>
-                <strong>Please enter all information for this Section.</strong>  
-			</div>		    
-			<div>
-				<!-- EDITOR FIELDS -->
-				<span class="span8" style="float:left;padding-top:5px;">
-					<input id="entry" class="input-large" style="float:left; width:250px; margin-right:20px;" type="text" placeholder="Enter Name" data-bind="value: $data.EditName" maxlength="20" />
-					<input id="entry" class="input-large" style="float:left; width:250px; margin-right:20px;" type="text" placeholder="Enter SEO" data-bind="value: $data.EditSEO" maxlength="20" />
-				</span>
+			    <div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
+				    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <strong>Please enter all information for this Section.</strong>  
+			    </div>		    
+			    <div style="padding-top:10px;">
+				    <!-- EDITOR FIELDS -->
+				    <span style="width:600px; float:left;">
+					    <input id="entry" class="input-large" style="float:left; width:250px; margin-right:20px;" type="text" placeholder="Enter Name" data-bind="value: $data.EditName" maxlength="20" />
+					    <input id="entry" class="input-large" style="float:left; width:250px; margin-right:20px;" type="text" placeholder="Enter SEO" data-bind="value: $data.EditSEO" maxlength="20" />
+				    </span>
 
-				<!-- BUTTONS -->
-				<span class="span4" style="padding-top:5px; text-align:right;">
-					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveSection"><i class="icon-ok icon-white"></i> Save</a>
-                    <!-- ko if: $root.Data().length > 1 -->
-					<a class="btn btn-primary" href="#" data-bind="click: $root.DeleteSection"><i class="icon-trash icon-white"></i> Delete</a>
-                    <!-- /ko -->
-					<a class="btn btn-inverse" href="#" data-bind="click: $root.CancelEdit"><i class="icon-remove icon-white"></i> Cancel</a>
-				</span>
-			</div>					
-			<div style="clear:both; height:20px;width:1px;" />			
+				    <!-- BUTTONS -->
+				    <span style="width:300px; float:left; text-align:right;">
+					    <a class="btn btn-primary" href="#" data-bind="click: $root.SaveSection"><i class="icon-ok icon-white"></i> Save</a>
+                        <!-- ko if: $root.Data().length > 1 -->
+					    <a class="btn btn-primary" href="#" data-bind="click: $root.DeleteSection"><i class="icon-trash icon-white"></i> Delete</a>
+                        <!-- /ko -->
+					    <a class="btn btn-inverse" href="#" data-bind="click: $root.CancelEdit"><i class="icon-remove icon-white"></i> Cancel</a>
+				    </span>
+
+			        <div style="clear:both; height:20px;width:1px;" />			
+			    </div>
 			</form>
 		</td>
 		</tr>

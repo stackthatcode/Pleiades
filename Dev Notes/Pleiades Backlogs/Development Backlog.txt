@@ -3,14 +3,18 @@ Burndown - 6/2/2013
 - Upgrade MVC to version 4.0 / start using the Web API for Controllers => DONE
 - PushMarket Phase 2 Review, Next Steps Strategy, so forth => DONE
 
-Burndown - 6/7/2013
--------------------
+Burndown - 6/7/2013 - 1 Hours
+-----------------------------
 - Started MVC 4 / EF 5 upgrade
 
-Burndown - 6/8/2013
--------------------
+Burndown - 6/8/2013 - 2 Hours
+-----------------------------
 - Finished MVC 4 / EF 5 upgrade
 
+Burndown - 6/9/2013 - 4.5 Hours
+-------------------------------
+- Bundle Optimization in progress
+- Isolation of Ajax, Spinner, Error and Tracker into separate library
 
 
 
@@ -19,7 +23,12 @@ FRONTRANGE - HOTZONE
 
 Final Deliverable Definition
 ----------------------------
-- Refactor the Products Knockout UI => IN PROGRESS
+- Refactor the Products to use the Endless Glider, plus clean the Templates => IN PROGRESS
+* http://elegantcode.com/2011/01/26/basic-javascript-part-8-namespaces/ => IMPORTANT
+
+* http://mindre.net/Article/Microsoft_Web_Optimization_development
+* HOW TO DEBUG BUNDLES...?
+
 - Landing-Page + Microsite => IN PROGRESS
 - Revamped Membership Provider => TODO
 - Customer Checkout => TODO

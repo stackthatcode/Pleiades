@@ -2,17 +2,16 @@
     @Html.Stylesheet("/bootstrap-lightbox/bootstrap-lightbox.css")
 
 	<script type="text/javascript">
-	    var BundleViewer = BundleViewer || {};
+	    var BundlerView = namespace("Commerce.Web.BundlerView");
+
+	    // $data contains: { ImageBundle which will contain ExternalId, or ImageBundleExternalId: "(some guid)", 
+	    // LightboxSuffixId: "Main, Child or Parent, etc." }
 
 	    BundleViewer.ContainsValidImage = function (data) {
 	        return (data.ImageBundleExternalId || (data.ImageBundle && data.ImageBundle.ExternalId));
 	    }
 
-	    // $data contains: { ImageBundle which will contain ExternalId, or ImageBundleExternalId: "(some guid)", 
-        // LightboxSuffixId: "Main, Child or Parent, etc." }
-
 	    BundleViewer.ExtractId = function (data) {
-	        //console.log(data);
 	        var imageBundleExternalId =
                 data.ImageBundleExternalId ? data.ImageBundleExternalId : (data.ImageBundle && data.ImageBundle.ExternalId);
 	        return imageBundleExternalId;

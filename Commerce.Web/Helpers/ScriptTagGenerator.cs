@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Web.Mvc;
 
-namespace Pleiades.Web.MvcHelpers
+namespace Commerce.Web.MvcHelpers
 {
     public static class ScriptTagGenerator
     {
-        public static string BasePath = "~/Content/";
-
         public static MvcHtmlString Javascript<T>(this HtmlHelper<T> html, string relativeFilePath)
         {
             // First create the 
             var urlHelper = new UrlHelper(html.ViewContext.RequestContext);
-            var absoluteFileUrl = urlHelper.Content(BasePath + relativeFilePath);
+            var absoluteFileUrl = urlHelper.Content(relativeFilePath);
 
             // Next, build the script tag
             var scriptTag = new TagBuilder("script");

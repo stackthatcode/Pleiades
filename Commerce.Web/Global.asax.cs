@@ -48,6 +48,9 @@ namespace Commerce.Web
             // Filters
             RegisterGlobalFilters();
 
+            // Bundle Optimization
+            MakeBundles();
+
             // Phil Haack's Tool => ***SAVE***
             //RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
         }
@@ -68,15 +71,38 @@ namespace Commerce.Web
 
         public void MakeBundles()
         {
-            //BundleTable.EnableOptimizations = true;
-            //BundleTable.Bundles.Add(
-            //    new ScriptBundle("~/bundles/baseScripts")
-            //        .Include()
-            //        .Include()
-            //        .Include()
+            // TODO: enable this via configuration
+            BundleTable.EnableOptimizations = true;
 
-            //    );
+            BundleTable.Bundles.Add(
+                new ScriptBundle("~/Bundles/Foundation")
+                    .Include("~/Content/JQuery/jquery-2.0.2.min.js")
+                    .Include("~/Content/JQuery/jquery.validate.min.js")
+                    .Include("~/Content/Utilities/*.js"));
+
+            BundleTable.Bundles.Add(
+                new ScriptBundle("~/Bundles/BootstrapBaseScript")
+                    .Include("~/Content/Bootstrap/js/bootstrap.min.js"));
+
+            BundleTable.Bundles.Add(
+                new StyleBundle("~/Bundles/BootstrapBaseStyle")
+                    .Include("~/Content/Bootstrap/css/bootstrap.min.css"));
+
+            BundleTable.Bundles.Add(
+                new ScriptBundle("~/Bundles/BootstrapEnhancements")
+                    .Include("~/Content/Bootstrap/js/bootstrap-alert.js")
+                    .Include("~/Content/Bootstrap/js/bootstrap-dropdown.js")
+                    .Include("~/Content/Bootstrap/js/bootstrap-modal.js")
+                    .Include("~/Content/Bootstrap/js/bootstrap-popover.js")
+                    .Include("~/Content/Bootstrap/js/bootstrap-tooltip.js"));
+
+            BundleTable.Bundles.Add(
+                new StyleBundle("~/Bundles/KnockoutJS")
+                    .Include("~/Content/Knockout/*.js"));
+
+            BundleTable.Bundles.Add(
+                new StyleBundle("~/Bundles/PushLibrary")
+                    .Include("~/Content/PushLibrary/Scripts/*.js"));
         }
-
     }
 }

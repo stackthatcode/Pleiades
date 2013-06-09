@@ -14,7 +14,6 @@ namespace Commerce.Web.Areas.Admin
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
-
             // Default Route - *KEEP*
             context.MapRoute(
                 "Home Route",
@@ -57,8 +56,6 @@ namespace Commerce.Web.Areas.Admin
                 "Admin/{controller}/{action}",
                 new { controller = "Home", action = "Index" }
             );
-
-
         }
     }
 }

@@ -212,7 +212,7 @@
 					    self.ActiveView({ Level: "Parent", Template: "Search" });
 					    self.SelectedProduct(null);
 					    self.SelectedIndex = null;
-					    self.CommonUI.ScrollToIdTracker(recordId);
+					    self.CommonUI.TrackToIdIfNotNull(recordId);
 					}
 				);
             }
