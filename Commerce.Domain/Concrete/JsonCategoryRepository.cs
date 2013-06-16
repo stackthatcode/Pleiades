@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using Commerce.Persist.Interfaces;
@@ -24,7 +25,7 @@ namespace Commerce.Persist.Concrete
 
         protected IQueryable<Category> Data()
         {
-            return Context.Set<Category>().Where(x => x.Deleted == false);
+            return Context.Categories.Where(x => x.Deleted == false);
         }
 
         protected IQueryable<Category> ReadOnlyData()
@@ -132,6 +133,7 @@ namespace Commerce.Persist.Concrete
             category.Name = jsonCategory.Name;
             category.SEO = jsonCategory.SEO;
             category.ParentId = jsonCategory.ParentId;
+            Touch(category);
         }
 
         public void DeleteCategory(int categoryId)
@@ -141,7 +143,7 @@ namespace Commerce.Persist.Concrete
             foreach (var category in categories)
             {
                 category.Deleted = true;
-                category.Touch();
+                Touch(category);
             }
 
             var products = 
@@ -168,12 +170,12 @@ namespace Commerce.Persist.Concrete
             foreach (var category in categories)
             {
                 category.Deleted = true;
-                category.Touch();
+                Touch(category);
             }
 
             var section = this.Retrieve(sectionId);
             section.Deleted = true;
-            section.Touch();
+            Touch(section);
         }
 
         public void SwapParentChild(int parentId, int newParentId)
@@ -184,14 +186,21 @@ namespace Commerce.Persist.Concrete
             foreach (var child in this.Data().Where(x => x.ParentId == parentId))
             {
                 child.ParentId = newParentId;
-                child.Touch();
+                Touch(child);
             }
 
             // child is easy
             newParent.ParentId = parent.ParentId;
-            newParent.Touch();
+            Touch(newParent);
             parent.ParentId = newParent.Id;
-            parent.Touch();
+            Touch(parent);
         }
+
+        public void Touch(Category category)
+        {
+            this.Context.Entry(category).State = EntityState.Modified;
+            category.DateUpdated = DateTime.Now;
+        }
+
     }
 }

@@ -42,6 +42,7 @@ namespace Commerce.Persist.Concrete
                 DateUpdated = DateTime.Now,
             };
             var sizeGroup = this.SizeGroupData().First(x => x.ID == jsonSize.ParentGroupId);
+            this.Context.Sizes.Add(size);
             sizeGroup.Sizes.Add(size);
             return () => size.ToJsonSize(sizeGroup.ID);
         }

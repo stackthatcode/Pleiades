@@ -1,11 +1,36 @@
 ﻿@using Pleiades.Web.MvcHelpers
 
 @section _Scripts {
-    @Html.Partial("_FineUploader")
+    @Html.Partial("_FineUploaderShim")
 	@Html.Partial("_ImageBundleViewer")	
-	@Html.Javascript("/scripts/brand-service.js")
-    
+	
     <script type="text/javascript">
+        function BrandService() {
+            var self = new PushLibrary.Ajax();
+
+            self.RetrieveAll = function (callback) {
+                self.AjaxGet("/Admin/Brand/Brands", callback);
+            };
+
+            self.Retrieve = function (id, callback) {
+                self.AjaxGet("/Admin/Brand/Brand/" + id, callback);
+            };
+
+            self.Insert = function (brand, callback) {
+                self.AjaxPost("/Admin/Brand/Insert", brand, callback);
+	        };
+
+            self.Update = function (brand, callback) {
+                self.AjaxPost("/Admin/Brand/Update", brand, callback);
+	        }
+
+            self.Delete = function (brand, callback) {
+                self.AjaxPost("/Admin/Brand/Delete", brand, callback);
+	        };
+
+	        return self;
+        }
+
 		// KO enabling/disabling of server JSON        
         var BrandToKnockout = function(brand) {
 			return {
@@ -36,7 +61,7 @@
 			};
 		}
 
-		function BrandViewModel(serviceAdapter, crossCuttingUI, gliderWidget) {	
+		function BrandViewModel() {	
 			var self = this;
 
 			// UI state management
@@ -47,7 +72,7 @@
                         self.SelectedIndex = -1;
 						self.SelectedRecord(knockedoutData);
 						self.Glider.GlideToChild(this);
-                        var fileUploader = new CommerceFileUploader(this.CommonUI, self.OnFileUpload);
+                        var fileUploader = new Commerce.FineUploader.Uploader(self.OnFileUpload);
 					}
 				);
 			}
@@ -63,7 +88,7 @@
 						var knockedoutData = BrandToKnockout(data);
 						self.SelectedRecord(knockedoutData);
                         self.Glider.GlideToChild();
-                        var fileUploader = new CommerceFileUploader(this.CommonUI, self.OnFileUpload);
+                        var fileUploader = new Commerce.FineUploader.Uploader(self.OnFileUpload);
 					}
 				);
 			}
@@ -154,10 +179,9 @@
 			}
             
 			// Initialization
-			self.ServiceAdapter = serviceAdapter;
-            self.CommonUI = crossCuttingUI;
-            self.Glider = gliderWidget;
-            
+			self.ServiceAdapter = new BrandService();
+            self.Glider = new PushLibrary.GliderWidget("#gliding-container", "#parent-editor", "#child-editor");
+			
 			// load ko.observables into view model
             self.Data = ko.observableArray();
 			self.SelectedRecord = ko.observable(null);
@@ -169,11 +193,7 @@
 		}
 		
 		$(function() {
-            var crosscuttingUI = new CommonUI("#gliding-container");
-            var gliderWidget = new GliderWidget("#gliding-container", "#parent-editor", "#child-editor");			
-            var serviceAdapter = new BrandService(crosscuttingUI.Error, crosscuttingUI.ShowLoading, crosscuttingUI.HideLoading);
-			var model = new BrandViewModel(serviceAdapter, crosscuttingUI, gliderWidget);
-
+			var model = new BrandViewModel();            
 			ko.applyBindings(model);
 		});
 	</script>
@@ -224,25 +244,19 @@
 		<table id="parent-editor-table" class="table table-hover" data-bind="visible: $data.Data().length > 0">
 		<tbody data-bind="foreach: $data.Data()">
 			<tr>
-			<td>
-				<span class="span3">
-                	<div data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
-			        </div>
-                </span>
+			<td style="width:200px;">
+                <div data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+			    </div>
             </td>
-            <td>
-				<span class="span6">
-					<input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
-					<h4><span data-bind="text: $data.Name + ' - ' + $data.SkuCode "></span></h4>
-                    <strong>Number of Products: <span data-bind="text: $data.ProductCount"></span></strong>
-                    <p data-bind="text: $data.Description.koTrunc(150, true)"></p>
-				</span>
+			<td style="width:450px;">
+				<input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
+				<h4><span data-bind="text: $data.Name + ' - ' + $data.SkuCode "></span></h4>
+                <strong>Number of Products: <span data-bind="text: $data.ProductCount"></span></strong>
+                <p data-bind="text: $data.Description.koTrunc(150, true)"></p>
             </td>
-			<td>
-				<span class="span3" style="text-align:right;">					
-					<a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteBrand($data) }"><i class="icon-trash icon-white"></i> Delete</a>
-					<a class="btn btn-inverse" style="width:70px;" data-bind="click: $root.GlideToChildView">Edit <i class="icon-arrow-right icon-white"></i></a>
-				</span>
+			<td style="text-align:right;">					
+				<a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteBrand($data) }"><i class="icon-trash icon-white"></i> Delete</a>
+				<a class="btn btn-inverse" style="width:70px;" data-bind="click: $root.GlideToChildView">Edit <i class="icon-arrow-right icon-white"></i></a>
 			</td>
 			</tr>
 		</tbody>

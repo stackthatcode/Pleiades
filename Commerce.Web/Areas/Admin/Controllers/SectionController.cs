@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Web;
 using System.Web.Mvc;
 using Pleiades.Data;
 using Pleiades.Web;
+using Commerce.Persist.Concrete;
 using Commerce.Persist.Interfaces;
 using Commerce.Persist.Model.Lists;
 
@@ -13,11 +15,13 @@ namespace Commerce.Web.Areas.Admin.Controllers
     {
         IJsonCategoryRepository Repository { get; set; }
         IUnitOfWork UnitOfWork { get; set; }
+        PleiadesContext Context { get; set; }
 
-        public SectionController(IJsonCategoryRepository repository, IUnitOfWork unitOfWork)
+        public SectionController(IJsonCategoryRepository repository, IUnitOfWork unitOfWork, PleiadesContext context)
         {
             this.Repository = repository;
             this.UnitOfWork = unitOfWork;
+            this.Context = context;
         }
 
         [HttpGet]
@@ -54,7 +58,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             this.Repository.DeleteSection(jsonCategory.Id.Value);
             this.UnitOfWork.SaveChanges();
-            return new JsonNetResult();
+            return new JsonNetResult(new { });
         }
     }
 }

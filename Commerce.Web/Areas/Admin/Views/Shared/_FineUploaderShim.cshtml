@@ -1,21 +1,20 @@
-﻿    @Html.Javascript("/fineuploader/js/header.js")
-    @Html.Javascript("/fineuploader/js/util.js")
-    @Html.Javascript("/fineuploader/js/button.js")
-    @Html.Javascript("/fineuploader/js/handler.base.js")
-    @Html.Javascript("/fineuploader/js/handler.form.js")
-    @Html.Javascript("/fineuploader/js/handler.xhr.js")
-    @Html.Javascript("/fineuploader/js/uploader.basic.js")
-    @Html.Javascript("/fineuploader/js/dnd.js")
-    @Html.Javascript("/fineuploader/js/uploader.js")
-    @Html.Javascript("/fineuploader/js/jquery-plugin.js")
-	@Html.Stylesheet("/fineuploader/fineuploader.css")
+﻿<!-- TODO: fix this bundle ordering issue -->
+@Html.Javascript("~/Content/fineuploader/js/util.js")
+@Scripts.Render("~/Bundles/FineUploaderJs")
+
+@Html.Stylesheet("~/Bundles/FineUploaderCss")
     
-    <script type="text/javascript">
-    var CommerceFileUploader = function(errorCallback, successCallback) {
-        
-        // TODO: move this into some kind of configuration
-        $loadingImage = '/Pleiades/Content/fineuploader/loading.gif';
-        $uploadEndpoint = '/Pleiades/Admin/Image/UploadFile';
+<script type="text/javascript">
+    var fineUploader = namespace("Commerce.FineUploader");
+    
+    fineUploader.Settings = {
+        LoadingImage: '/Pleiades/Content/FineUploader/loading.gif',
+        UploadEndpoint: '/Pleiades/Admin/Image/UploadFile'
+    };
+
+    fineUploader.Uploader = function(successCallback) {        
+        $loadingImage = namespace("Commerce.FineUploader.Settings").LoadingImage;
+        $uploadEndpoint = namespace("Commerce.FineUploader.Settings").UploadEndpoint;
 
         $fub = $('#fine-uploader-basic');
         $fubbusy = $('#fine-uploader-basic-busy');
@@ -84,15 +83,15 @@
             debug: false    // Set to "true" for logging
         });
     }
-    </script>
+</script>
 
-    <script type="text/html" id="Fine-Uploader">
-        <div id="fine-uploader-basic" class="btn btn-primary" style="width:160px;">
-            <i class="icon-upload icon-white"></i> Click to upload
-        </div>
-        <a id="fine-uploader-basic-busy" class="btn btn-primary disabled" style="display:none; width:180px;">
-            <i class="icon-upload icon-white"></i> Click to upload
-        </a>
-        <div id="messages"></div>
-    </script>
-    
+<script type="text/html" id="Fine-Uploader">
+    <div id="fine-uploader-basic" class="btn btn-primary" style="width:160px;">
+        <i class="icon-upload icon-white"></i> Click to upload
+    </div>
+    <a id="fine-uploader-basic-busy" class="btn btn-primary disabled" style="display:none; width:180px;">
+        <i class="icon-upload icon-white"></i> Click to upload
+    </a>
+    <div id="messages" style="overflow:hidden"></div>
+</script>
+ 

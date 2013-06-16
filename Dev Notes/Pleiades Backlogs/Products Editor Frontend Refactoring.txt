@@ -14,35 +14,3 @@ Products Editor Frontend Refactoring
 => http://unbounce.com/landing-page-examples/built-using-unbounce/beautiful-landing-page-design-examples/
 
 
-Package - Base Infrastructure
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- JQuery, aQuery, SammyJS, KnockoutJS, flow.js, jquery-validate.js,  => Bundle Package
-
-Package - Bootstrap
-~~~~~~~~~~~~~~~~~~~
-- Bootstrap CSS => CSS include
-- bootstrap modal, alert, pop-overs, etc.
-
-Package #2 - pushmarket-common
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- pushmarket-common.js, ajax-service.js = Scroll Tracker, Spinner, Modal => Bundle Package
-- ~/Admin/Shared => _CrossCutting.cshtml partial view = Modal Template
-- ~/Admin/Views/Order/ _EndlessGlider.cshtml partial view
-- ~/Content/Images => ajax spinner and image place holder
-- pushmarket-common.CSS => hmmm... really?
-
-Package #2 - Advanced UI
-~~~~~~~~~~~~~~~~~~~~~~~~
-- jquery UI and Animation stuff
-
-Package #3 - Image lib
-~~~~~~~~~~~~~~~~~~~~~~
-- Bootstrap-lightbox.js => Bundle Package
-- bootstrap-lightbox.css => CSS
-
-Other Libraries
-~~~~~~~~~~~~~~~
-- farbtastic color picker
-- fineUpload.js
-
-

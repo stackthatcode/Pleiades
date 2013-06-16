@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Pleiades.Data;
 using Pleiades.Web;
+using Commerce.Persist.Concrete;
 using Commerce.Persist.Interfaces;
 using Commerce.Persist.Model.Lists;
 
@@ -13,11 +15,13 @@ namespace Commerce.Web.Areas.Admin.Controllers
     {
         IJsonCategoryRepository Repository { get; set; }
         IUnitOfWork UnitOfWork { get; set; }
+        PleiadesContext Context { get; set; }
 
-        public CategoryController(IJsonCategoryRepository repository, IUnitOfWork unitOfWork)
+        public CategoryController(IJsonCategoryRepository repository, IUnitOfWork unitOfWork, PleiadesContext context)
         {
             this.Repository = repository;
             this.UnitOfWork = unitOfWork;
+            this.Context = context;
         }
 
         // TODO: write a custom Model Binder to map parentId and childId to Id
@@ -70,16 +74,15 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             this.Repository.DeleteCategory(id);
             this.UnitOfWork.SaveChanges();
-
-            return new JsonNetResult();
+            return new JsonNetResult(new { Sucess = true });
         }
 
         [HttpPost]
         public ActionResult SwapParentChild(int parentId, int childId)
         {
             this.Repository.SwapParentChild(parentId, childId);
-            this.UnitOfWork.SaveChanges();
-            return new JsonNetResult();
+            this.Context.SaveChanges();
+            return new JsonNetResult(new { Sucess = true });
         }
     }
 }

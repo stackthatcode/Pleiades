@@ -21,7 +21,6 @@ namespace Commerce.Web
         //protected void Application_Start()
         //{
         //    AreaRegistration.RegisterAllAreas();
-
         //    WebApiConfig.Register(GlobalConfiguration.Configuration);
         //    FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
         //    RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -72,6 +71,7 @@ namespace Commerce.Web
         public void MakeBundles()
         {
             // TODO: enable this via configuration
+
             BundleTable.EnableOptimizations = true;
 
             BundleTable.Bundles.Add(
@@ -97,12 +97,29 @@ namespace Commerce.Web
                     .Include("~/Content/Bootstrap/js/bootstrap-tooltip.js"));
 
             BundleTable.Bundles.Add(
-                new StyleBundle("~/Bundles/KnockoutJS")
+                new ScriptBundle("~/Bundles/KnockoutJS")
                     .Include("~/Content/Knockout/*.js"));
 
             BundleTable.Bundles.Add(
-                new StyleBundle("~/Bundles/PushLibrary")
-                    .Include("~/Content/PushLibrary/Scripts/*.js"));
+                new ScriptBundle("~/Bundles/PushLibrary")
+                    .Include("~/Content/PushLibrary/*.js"));
+
+            BundleTable.Bundles.Add(
+                new ScriptBundle("~/Bundles/FineUploaderJs")
+                    .Include("~/Content/FineUploader/js/util.js")
+                    .Include("~/Content/FineUploader/js/header.js")
+                    .Include("~/Content/FineUploader/js/button.js")
+                    .Include("~/Content/FineUploader/js/handler.base.js")
+                    .Include("~/Content/FineUploader/js/handler.form.js")
+                    .Include("~/Content/FineUploader/js/handler.xhr.js")
+                    .Include("~/Content/FineUploader/js/uploader.basic.js")
+                    .Include("~/Content/FineUploader/js/dnd.js")
+                    .Include("~/Content/FineUploader/js/uploader.js")
+                    .Include("~/Content/FineUploader/js/jquery-plugin.js"));
+            
+            BundleTable.Bundles.Add(
+                new StyleBundle("~/Bundles/FineUploaderCss")
+                    .Include("~/Content/FineUploader/fineuploader.css"));
         }
     }
 }

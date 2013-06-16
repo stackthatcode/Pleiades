@@ -2,7 +2,7 @@
 
 @section _Scripts {
 	<script type="text/javascript">
-    // KO enabling/disabling of server JSON
+        // KO enabling/disabling of server JSON
         var SectionToKnockout = function(section) {
 			return {
 				Id: ko.observable(section.Id),
@@ -143,7 +143,7 @@
 			ko.applyBindings(model);
 		});
 	</script>
-}	
+}
 
 @section _Templates {
 	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE -->
@@ -215,7 +215,9 @@
 					    <a class="btn btn-inverse" href="#" data-bind="click: $root.CancelEdit"><i class="icon-remove icon-white"></i> Cancel</a>
 				    </span>
 
-			        <div style="clear:both; height:20px;width:1px;" />			
+			        <div style="clear:both; height:14px;">			
+                        <span data-bind="text: $data.NumberOfCategories()"></span> Categories &amp; Sub-Categories
+                    </div>
 			    </div>
 			</form>
 		</td>

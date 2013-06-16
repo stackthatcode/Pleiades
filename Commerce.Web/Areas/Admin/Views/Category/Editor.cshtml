@@ -1,9 +1,43 @@
 ﻿@using Pleiades.Web.MvcHelpers
 
 @section _Scripts {
-	@Html.Javascript("/scripts/category-service.js")
-    
-	<script type="text/javascript">	
+    @Scripts.Render("~/Content/JQuery/jquery.animate-colors-min.js")
+
+	<script type="text/javascript">
+        function CategoryService() {
+            var self = new PushLibrary.Ajax();
+
+            self.RetrieveAllSections = function (callback) {
+                self.AjaxGet("/Admin/Category/Sections", callback);
+            };
+
+	        self.RetrieveAllCategoriesBySection = function (sectionId, callback) {
+	            self.AjaxGet("/Admin/Category/CategoriesBySection/" + sectionId, callback);
+	        };
+
+	        self.RetrieveById = function (id, callback) {
+	            self.AjaxGet("/Admin/Category/Category/" + id, callback);
+	        };
+
+	        self.Save = function (category, callback) {
+	            if (category.Id == null) {
+	                self.AjaxPost("/Admin/Category/Insert", category, callback);
+	            } else {
+	                self.AjaxPost("/Admin/Category/Update", category, callback);
+	            }
+	        };
+
+	        self.Delete = function (id, callback) {
+	            self.AjaxPost("/Admin/Category/Delete/" + id, {}, callback);
+	        };
+
+	        self.SwapParentChild = function (parent, child, callback) {
+	            self.AjaxPost("/Admin/Category/SwapParentChild/" + parent.Id + "/" + child.Id, {}, callback);
+	        };
+
+	        return self;
+        }
+
 		function CategoryViewModel(serviceAdapter) {	
 			var self = this;
 			
@@ -320,7 +354,7 @@
 
 			// Initialization
 			self.ServiceAdapter = serviceAdapter;
-            self.Glider = new GliderWidget("#gliding-container", "#parent-editor", "#child-editor");
+            self.Glider = new PushLibrary.GliderWidget("#gliding-container", "#parent-editor", "#child-editor");
 			
 			// load ko.observables into view model				
 			self.ParentViewModel = { 
@@ -338,9 +372,8 @@
 		}
 		
 		$(function() {
-            var crosscuttingUI = new CommonUI();
-            var serviceAdapter = new CategoryService(crosscuttingUI.Error, crosscuttingUI.ShowLoading, crosscuttingUI.HideLoading);
-			var model = new CategoryViewModel(serviceAdapter);
+            var serviceAdapter = new CategoryService();
+            var model = new CategoryViewModel(serviceAdapter);
 			ko.applyBindings(model);
 		});
 	</script>
@@ -376,7 +409,7 @@
 				</div>
 				
 				<!-- SECTION DROP DOWN -->
-				<div class="span9" data-bind="template: { name: 'Section-Navigator' }">
+				<div class="span9" data-bind="template: { name: 'Section-Navigator' }" style="height:44px;">
 				</div>
 			</div>
 		</div>
@@ -384,7 +417,7 @@
 	
 	<!-- KNOCKOUT TEMPLATE - SECTION NAVIGATOR -->
 	<script type="text/html" id="Section-Navigator">
-		<ul class="nav nav-pills">
+		<ul class="nav nav-pills" style="">
             <li style="width:140px;" data-bind="if: $root.ChildViewModel()">
 				<a id="glideToParent" class="backbutton" data-bind="click: $root.GlideToParentView">&laquo; Back to Section</a>
                 &nbsp;
@@ -394,14 +427,14 @@
 			<a class="dropdown-toggle" id="drop5" role="button" data-toggle="dropdown" href="#">Go to Different Section... <b class="caret"></b></a>
 				
 			<ul id="menu3" class="dropdown-menu" role="menu" aria-labelledby="drop5">
-				<div data-bind="foreach: $root.ParentViewModel.Sections()">
+				<!-- ko foreach: $root.ParentViewModel.Sections() -->
 					<li data-bind="ifnot: $data == $root.ParentViewModel.SelectedSection()">
 						<a tabindex="-1" href="#" data-bind="text: $data.Name, click: $root.SectionClick"></a>
 					</li>
 					<li data-bind="if: $data == $root.ParentViewModel.SelectedSection()">
 						<a href="#"><span data-bind="text: $data.Name" href="#"></span> <i class="icon-ok icon-black"></i></a>
 					</li>
-				</div>
+                <!-- /ko -->
 					
 				<li class="divider"></li>
 				<li><a tabindex="-1" href="@Url.RouteUrl(AdminNavigation.SectionEditor())">Edit Sections...</a></li>
@@ -420,7 +453,7 @@
 		<tbody data-bind="foreach: $data.Data()">
 			<tr>
 			<td>
-				<span class="span9">
+				<span class="span8">
 					<input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
 					<h4 data-bind="text: $data.Name"></h4>
 					
@@ -466,7 +499,7 @@
 	<script type="text/html" id="Editor-Row-Template">
 		<tr data-bind="if: $root.ChildViewSelectedRecord() != $data, click: $root.EditRecord">
 		<td>
-			<span class="span9">	
+			<span class="span8">	
 				<input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id() }" />
 				
 				<div data-bind="if: $data.Id() == $root.ChildViewModel().Id()">
@@ -479,7 +512,7 @@
 					<span data-bind="text: $data.SEO()"></span>
 				</div>
 			</span>				
-			<span class="span3" style="text-align:right;">
+			<span class="span3" style="text-align:right; padding-top:20px;">
 				<p>Touch Row to Edit</p>
 			</span>
 		</td>
@@ -496,9 +529,9 @@
 		
 			<div>
 				<!-- EDITOR FIELDS -->
-				<span class="span8" style="float:left;padding-top:5px;">
-					<input id="entry" class="input-large" style="float:left; width:250px; margin-right:20px;" type="text" placeholder="Enter Category Name" data-bind="value: $data.EditName" />
-					<input id="entry" class="input-large" style="float:left; width:250px;" type="text" value="sport-casual-seo-tag" placeholder="Enter SEO Tag" data-bind="value: $data.EditSEO" />
+				<span class="span7" style="float:left;padding-top:5px;">
+					<input id="entry" class="input-large" style="float:left; width:225px; margin-right:20px;" type="text" placeholder="Enter Category Name" data-bind="value: $data.EditName" />
+					<input id="entry" class="input-large" style="float:left; width:225px;" type="text" value="sport-casual-seo-tag" placeholder="Enter SEO Tag" data-bind="value: $data.EditSEO" />
 				</span>
 				
 				<!-- BUTTONS -->
@@ -508,7 +541,7 @@
 					<a class="btn btn-inverse" href="#" data-bind="click: $root.CancelEdit"><i class="icon-remove icon-white"></i> Cancel</a>
 				</span>
 			</div>					
-			<div style="clear:both; height:20px;width:1px;" />
+			<div style="clear:both; height:15px;width:1px;" />
 			<div>
 				<span class="span9" style="float:left;">					
 					<!-- CHANGE PARENT CATEGORY DROP DOWN -->					
@@ -550,15 +583,15 @@
 				</a>
 				
 				<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-					<div data-bind="foreach: $root.ParentViewModel.Data">	
-						<li data-bind="if: $root.IsRootCategoryForChildView($data.Id)">
-							<a href="#"><span data-bind="text: $data.Name" href="#"></span> <i class="icon-ok icon-black"></i></a>
-						</li>
-						<li data-bind="ifnot: $root.IsRootCategoryForChildView($data.Id)">
-							<a tabindex="-1" data-bind="text: $data.Name, click: $root.ChangeParent" href="#"></a>
-						</li>
-					</div>
-					
+                    <!-- ko foreach: $root.ParentViewModel.Data -->
+                    <li data-bind="if: $root.IsRootCategoryForChildView($data.Id)">
+						<a href="#"><span data-bind="text: $data.Name" href="#"></span> <i class="icon-ok icon-black"></i></a>
+					</li>
+					<li data-bind="ifnot: $root.IsRootCategoryForChildView($data.Id)">
+						<a tabindex="-1" data-bind="text: $data.Name, click: $root.ChangeParent" href="#"></a>
+					</li>
+					<!-- /ko -->
+                    
 					<li class="divider"></li>
 					<li><a tabindex="-1" data-bind="click: $root.SwapParentChild" href="#">Make This the Parent Category</a></li>
 				</ul>
@@ -571,14 +604,14 @@
 				</a>
 				
 				<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-					<div data-bind="foreach: $root.ParentViewModel.Sections">	
+					<!-- ko foreach: $root.ParentViewModel.Sections -->
 						<li data-bind="if: $root.IsSectionForChildView($data.Id)">
 							<a href="#"><span data-bind="text: $data.Name" href="#"></span> <i class="icon-ok icon-black"></i></a>
 						</li>
 						<li data-bind="ifnot: $root.IsSectionForChildView($data.Id)">
 							<a tabindex="-1" data-bind="text: $data.Name, click: $root.ChangeParent" href="#"></a>
 						</li>
-					</div>
+					<!-- /ko -->
 				</ul>
 			</div>
 		</div>		

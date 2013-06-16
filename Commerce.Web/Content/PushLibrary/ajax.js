@@ -1,19 +1,19 @@
-var ajaxSettings = namespace("PushLibrary.AjaxSettings");
+PushLibrary = namespace("PushLibrary");
 
-ajaxSettings.BaseUrl = "/Commerce.Web";
-ajaxSettings.Timeout = 60000;
-ajaxSettings.ModalErrorTagSelector = "#modal-error";
-ajaxSettings.SpinnerLayerTagSelector = "#spinner-layer";
+PushLibrary.AjaxSettings = {
+    // Override these settings in the PushLibrary Shim
+    BaseUrl: "/Commerce.Web",
+    Timeout: 60000,
+    ModalErrorTagSelector : "#modal-error",
+    SpinnerLayerTagSelector : "#spinner-layer",
+};
 
-var pushLibrary = namespace("PushLibrary");
-
-// TODO: override these in a master AJAX file
-pushLibrary.Ajax = function () {
+PushLibrary.Ajax = function () {
 	var self = this;
 
 	// Configurable Settings  
 	self.Error = function () {
-	    $(ajax.ModalErrorTagSelector).modal();
+	    $(ajaxSettings.ModalErrorTagSelector).modal();
 	    return false;
 	}
     

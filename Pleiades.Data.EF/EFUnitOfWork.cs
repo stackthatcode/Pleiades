@@ -6,16 +6,14 @@ using Pleiades.Data;
 namespace Pleiades.Data.EF
 {
     public class EFUnitOfWork : IUnitOfWork
-    {
-        Guid _tracer = Guid.NewGuid();
-
-        public Guid Tracer { get { return _tracer; } }
-
+    {        
         public DbContext Context { get; set; }
+        public Guid Tracer { get; set; }
 
         public EFUnitOfWork(DbContext context)
         {
             this.Context = context;
+            this.Tracer = Guid.NewGuid();
         }
 
         public void SaveChanges()

@@ -1,6 +1,6 @@
-var pushLibrary = namespace("PushLibrary");
+PushLibrary = namespace("PushLibrary");
 
-pushLibrary.ScrollTracker = function (containerDiv) {
+PushLibrary.ScrollTracker = function (containerDiv) {
     var self = this;
 
     self.TrackToIdIfNotNull = function (id) {

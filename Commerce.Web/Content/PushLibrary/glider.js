@@ -1,6 +1,6 @@
-var pushLibrary = namespace("PushLibrary");
+PushLibrary = namespace("PushLibrary");
 
-pushLibrary.GliderWidget = function(glidingContainer, parentDiv, childDiv) {
+PushLibrary.GliderWidget = function(glidingContainer, parentDiv, childDiv) {
 	var self = this;
 	self.LastParentScroll = 0;
 	

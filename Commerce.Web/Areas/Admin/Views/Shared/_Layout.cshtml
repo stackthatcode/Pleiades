@@ -4,20 +4,23 @@
 <html lang="en">
   <head>
     <title>PushMarket - Site Management</title>
-    
     @Scripts.Render("~/Bundles/Foundation")
     @Scripts.Render("~/Bundles/BootstrapBaseScript")
     @Html.Stylesheet("~/Content/Bootstrap/css/bootstrap.min.css")
     @Scripts.Render("~/Bundles/KnockoutJS")
-    @Scripts.Render("~/Bundles/PushLibrary")
-
+    <!-- TODO: create a full debug harness, which is swappable at runtime via configX
+    @Scripts.Render("~/Bundles/PushLibrary") -->
+    @Html.Javascript("~/Content/PushLibrary/ajax.js")
+    @Html.Javascript("~/Content/PushLibrary/glider.js")
+    @Html.Javascript("~/Content/PushLibrary/scroll-tracker.js")
+    
     @Html.Stylesheet("~/Content/Commerce.Web/Style/pushmarket.css")
     @RenderSection("_Scripts", false)
     @RenderSection("_Templates", false)
   </head>
   
   <body>    
-    @Html.Partial("_PushLibraryConnector")
+    @Html.Partial("_PushLibraryShim")
 
     @if (ViewContext.RouteData.GetRequiredString("action") == "Login")
     {

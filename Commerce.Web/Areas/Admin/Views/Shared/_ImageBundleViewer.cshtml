@@ -1,23 +1,27 @@
-﻿    @Html.Javascript("/bootstrap-lightbox/bootstrap-lightbox.js")
-    @Html.Stylesheet("/bootstrap-lightbox/bootstrap-lightbox.css")
+﻿    @Html.Javascript("~/Content/Bootstrap/js/bootstrap-lightbox.min.js")
+    @Html.Stylesheet("~/Content/Bootstrap/css/bootstrap-lightbox.min.css")
 
 	<script type="text/javascript">
-	    var BundlerView = namespace("Commerce.Web.BundlerView");
+	    var BundleViewer = namespace("Commerce.Web.BundleViewer");
 
-	    // $data contains: { ImageBundle which will contain ExternalId, or ImageBundleExternalId: "(some guid)", 
+	    BundleViewer.Default75x75 = '@Url.Content("~/Content/Commerce.Web/Images/75x75.gif")';
+	    BundleViewer.Default150x150 = '@Url.Content("~/Content/Commerce.Web/Images/150x150.gif")';
+
+	    // $data contains: { either ImageBundle: , which will contain ExternalId --- or ImageBundleExternalId: "(some guid)", 
 	    // LightboxSuffixId: "Main, Child or Parent, etc." }
 
-	    BundleViewer.ContainsValidImage = function (data) {
+	    namespace("Commerce.Web.BundleViewer").ContainsValidImage = function (data) {
 	        return (data.ImageBundleExternalId || (data.ImageBundle && data.ImageBundle.ExternalId));
 	    }
-
-	    BundleViewer.ExtractId = function (data) {
+        
+	    namespace("Commerce.Web.BundleViewer").ExtractId = function (data) {
 	        var imageBundleExternalId =
-                data.ImageBundleExternalId ? data.ImageBundleExternalId : (data.ImageBundle && data.ImageBundle.ExternalId);
+                data.ImageBundleExternalId ? 
+                    data.ImageBundleExternalId : (data.ImageBundle && data.ImageBundle.ExternalId);
 	        return imageBundleExternalId;
 	    }
 
-	    BundleViewer.ImageBundleDownloadUrl = function (data, size) {
+	    namespace("Commerce.Web.BundleViewer").ImageBundleDownloadUrl = function (data, size) {
 	        var id = BundleViewer.ExtractId(data);
 
 	        $downloadEndpoint = '/Pleiades/Admin/Image/Download/{exRID}?size={size}';
@@ -26,13 +30,13 @@
                 .replace("{size}", size);
 	    }
 
-	    BundleViewer.LightBoxElementId = function (data) {
+	    namespace("Commerce.Web.BundleViewer").LightBoxElementId = function (data) {
 	        var id = BundleViewer.ExtractId(data);
 
 	        return 'lightBox-' + id + '-' + data.LightboxSuffixId;
         }
 
-        BundleViewer.ShowLightBox = function (data, event) {
+	    namespace("Commerce.Web.BundleViewer").ShowLightBox = function (data, event) {
             event.stopPropagation();
 
             var lightboxid = '#' + BundleViewer.LightBoxElementId(data);
@@ -43,6 +47,12 @@
             $(lightboxImgId).load(function () { $(lightboxid).lightbox(); });
         }
 	</script>
+
+
+    <!-- 
+        $data contains: { ImageBundle which will contain ExternalId, or ImageBundleExternalId: "(GUID)", 
+	    LightboxSuffixId: "Main, Child or Parent, etc." } 
+    -->
 
 	<script type="text/html" id="Image-Bundle-Small-Viewer">
         <table>
@@ -58,7 +68,7 @@
                 </div>
 
                 <div data-bind="ifnot: BundleViewer.ContainsValidImage($data)">
-                    <img src="@Url.Content("~/content/Images/150x150.gif")" />
+                    <img data-bind="attr: { src: BundleViewer.Default150x150 }" />
                 </div>
             </td>
             </tr>
@@ -75,13 +85,14 @@
                     </a>
                 </div>
                 <div data-bind="ifnot: BundleViewer.ContainsValidImage($data)">
-                    <img src="@Url.Content("~/content/Images/75x75.gif")" />
+                    <img data-bind="attr: { src: BundleViewer.Default75x75 }" />
                 </div>
             </td>
         </tr>
         </table>
     </script>
 
+    
 	<script type="text/html" id="Image-Bundle-Thumbnail-Viewer">
         <table>
         <tr>
@@ -95,7 +106,7 @@
 			        </div>
                 </div>
                 <div data-bind="ifnot: $data">
-                    <img src="@Url.Content("~/content/Images/75x75.gif")" />
+                    <img data-bind="attr: { src: BundleViewer.Default75x75 }" />
                 </div>
             </td>
         </tr>

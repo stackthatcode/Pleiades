@@ -22,7 +22,10 @@ namespace Commerce.Persist
                 .As<PleiadesContext>()
                 .As<DbContext>()
                 .InstancePerLifetimeScope();
-            builder.RegisterType<EFUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
+
+            builder.RegisterType<EFUnitOfWork>()
+                .As<IUnitOfWork>()
+                .InstancePerLifetimeScope();
 
             // User Repositories
             builder.RegisterType<AggregateUserRepository>().As<IAggregateUserRepository>().InstancePerLifetimeScope();

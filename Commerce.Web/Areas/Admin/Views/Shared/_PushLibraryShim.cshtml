@@ -1,4 +1,14 @@
-﻿    <div id="push-library-shim">
+﻿    <script type="text/javascript">
+        var ajaxSettings = namespace("PushLibrary.AjaxSettings");
+
+        // Override these settings in the PushLibrary Shim
+        ajaxSettings.BaseUrl = "/Commerce.Web";
+        ajaxSettings.Timeout = 60000;
+        ajaxSettings.ModalErrorTagSelector = "#modal-error";
+        ajaxSettings.SpinnerLayerTagSelector = "#spinner-layer";
+    </script>
+
+    <div id="push-library-shim">
         <div id="spinner-layer" class="spinner-layer" style="display:none;">
 		    <div id="spinner" class="spinner">
 			    <img id="img-spinner" src="@Url.Content("~/Content/Commerce.Web/Images/ajax_loader.gif")" alt="Loading"/>
