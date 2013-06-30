@@ -7,21 +7,26 @@
     @Scripts.Render("~/Bundles/Foundation")
     @Scripts.Render("~/Bundles/BootstrapBaseScript")
     @Html.Stylesheet("~/Content/Bootstrap/css/bootstrap.min.css")
-    @Scripts.Render("~/Bundles/KnockoutJS")
 
-    <!-- TODO: create a full debug harness, which is swappable at runtime via configS
-    @Scripts.Render("~/Bundles/PushLibrary") -->
 
+    <!-- @Scripts.Render("~/Bundles/KnockoutJS") -->
+    @Html.Javascript("~/Content/Knockout/knockout-2.3.0rc.js")
+    @Html.Javascript("~/Content/Knockout/ko.observableDictionary.js")
+    
+
+    <!-- TODO: create a full debug harness, which is swappable at runtime via config -->
+    <!-- @Scripts.Render("~/Bundles/PushLibrary") -->
     @Html.Javascript("~/Content/PushLibrary/ajax.js")
     @Html.Javascript("~/Content/PushLibrary/glider.js")
     @Html.Javascript("~/Content/PushLibrary/scroll-tracker.js")    
     @Html.Stylesheet("~/Content/Commerce.Web/Style/pushmarket.css")
     
+
     @RenderSection("_Scripts", false)
     @RenderSection("_Templates", false)
   </head>
   
-  <body>    
+  <body>
     @Html.Partial("_PushLibraryShim")
 
     @if (ViewContext.RouteData.GetRequiredString("action") == "Login")

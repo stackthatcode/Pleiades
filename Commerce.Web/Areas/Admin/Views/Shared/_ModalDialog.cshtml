@@ -5,6 +5,7 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<h3><span data-bind="text: $data.Header"></span></h3>
 			</div>
+
 			<div class="modal-body">
 				<p><span data-bind="text: $data.Body"></span></p>
 
@@ -14,16 +15,17 @@
                     </ul>
                 </div>
 			</div>
+
 			<div class="modal-footer">
-				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $data.OkButton">
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: function() { $data.OkButton()(); } ">
                     <i class="icon-ok icon-white"></i> Ok</a>
 			</div>
 		</div>
 	</script>
 
     <!-- Pass the ModalDialogViewModel to this as the $data parameter -->
-	<script type="text/html" id="Modal-Dialog-Scaffolding">    
-        <div id="modal-enclave" data-bind="template: { name: $data.Template, data: $data.Data }">
+	<script type="text/html" id="Modal-Dialog-Scaffolding">        
+        <div id="modal-enclave" data-bind="template: { name: $data.Template, data: $data } "></div>
         </div>
     </script>
     
@@ -31,24 +33,23 @@
         var PushMkt = PushMkt || {};
 
         PushMkt.ModalDialogViewModel = function () {
-            self = this;
-
-            self.Template = ko.observable();
-            self.Data = ko.observable();
+            var self = this;
+            self.Template = ko.observable(null);
+            self.Header = ko.observable(null);
+            self.Body = ko.observable(null);
+            self.List = ko.observable(null);
+            self.OkButton = ko.observable(null);
 
             self.ShowModal = function (template, header, body, list, callback) {
                 self.Template("Modal-Dialog-" + template);
-                self.Data({
-                        Header: header,
-                        Body: body,
-                        List: list,
-                        OkButton: function () {
-                            self.HideModal();
-                            if (callback) {
-                                callback();
-                            }
-                        }
-                    });
+                self.Header(header);
+                self.Body(body);
+                self.List(list);
+                if (callback) {
+                    self.OkButton(callback);
+                } else {
+                    self.OkButton(function () { self.HideModal(); });
+                }
 
                 $('#modal-dialog').modal('show');
             };

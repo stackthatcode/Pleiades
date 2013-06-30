@@ -1,126 +1,6 @@
-﻿	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE SEARCH -->
-	<script type="text/html" id="Top-Workspace-Parent">
-        <div class="workspace-heading" style="height:125px;">
-		    <div id="heading" class="container">
-			    <div class="row">
-				    <div class="span9">
-					    <h1>Products > Search</h1>
-				    </div>
-				    <div class="span3" style="margin-top:15px; text-align:right;">
-					    <a class="btn btn-primary btn-block" data-bind="click: $root.AddProduct">Add New Product <i class="icon-arrow-right icon-white"></i></a>
-				    </div>
-			    </div>
+﻿
 
-                <div style="height:20px;"></div>
-                
-                <div class="row">
-				    <div class="span3">
-                        <select id="SearchCategory" data-bind="foreach: $data.CategoryArray">
-                            <option data-bind="value: $data.value, text: $data.text"  />
-                        </select>
-                    </div>
-				    <div class="span3">
-                        <select id="SearchBrand" data-bind="foreach: $data.BrandArray">
-                            <option data-bind="value: $data.value, text: $data.text"  />
-                        </select>
-                    </div>
-                    <div class="span3">
-                        <input id="SearchText" type="text" class="input-large" placeholder="Description, Name, Sku..." />
-                    </div>
-				    <div class="span3">
-					    <a class="btn btn-inverse btn-block" data-bind="click: $data.SearchClick">Search <i class="icon-search icon-white"></i></a>
-                    </div>
-                </div>
-		    </div>
-        </div>
-    </script>
-	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE PRODUCT -->
-	<script type="text/html" id="Top-Workspace-Child">
-        <div class="workspace-heading" style="height:125px;">
-		    <div id="heading" class="container" data-bind="if: $root.SelectedProduct()">
-			    <div class="row" style="position:relative;">				
-				    <div class="span12">
-					    <h1>Products &gt; <span data-bind="text: $root.SelectedProductName"></span></h1>
-				    </div>
-			    </div>
-                
-                <div style="height:20px;"></div>
-                
-                <div class="row">
-                    <div class="span7" style="height:48px;">
-                        <ul class="nav nav-pills">
-                            <li style="width:140px;">
-				                <a id="glideToParent" class="backbutton" data-bind="click: $root.GlideToSearchView">&laquo; Back to Search</a>
-                                &nbsp;
-                            </li>
-                            
-                            <li data-bind="if: $root.ActiveView().Template == 'Info'" class="active">
-                                <a href="#">Info</a>
-                            </li>
-                            <li data-bind="if: $root.ActiveView().Template != 'Info'">
-                                <a href="#" data-bind="click: $root.InfoTabClick">Info</a>
-                            </li>
-
-                            <!-- ko if: $root.SelectedProduct().Id() -->
-                            <li data-bind="if: $root.ActiveView().Template == 'Colors'" class="active">
-                                <a href="#">Colors</a>
-                            </li>
-                            <li data-bind="if: $root.ActiveView().Template != 'Colors'">
-                                <a href="#" data-bind="click: $root.ColorsTabClick">Colors</a>
-                            </li>
-
-                            <li data-bind="if: $root.ActiveView().Template == 'Images'" class="active">
-                                <a href="#">Images</a>
-                            </li>
-                            <li data-bind="if: $root.ActiveView().Template != 'Images'">
-                                <a href="#" data-bind="click: $root.ImagesTabClick">Images</a>
-                            </li>
-                                                        
-                            <li data-bind="if: $root.ActiveView().Template == 'Sizes'" class="active">
-                                <a href="#">Sizes</a>
-                            </li>
-                            <li data-bind="if: $root.ActiveView().Template != 'Sizes'">
-                                <a href="#" data-bind="click: $root.SizesTabClick">Sizes</a>
-                            </li>
-
-                            <li data-bind="if: $root.ActiveView().Template == 'Inventory'" class="active">
-                                <a href="#">Inventory</a>
-                            </li>
-                            <li data-bind="if: $root.ActiveView().Template != 'Inventory'">
-                                <a href="#" data-bind="click: $root.InventoryTabClick">Inventory</a>
-                            </li>
-                            <!-- /ko -->
-                        </ul>
-                    </div>
-
-                    <div class="span5" style="text-align:right;" data-bind="if: $root.ActiveView().Template == 'Info'">
-					    <a class="btn btn-inverse" href="#" data-bind="click: $root.GlideToSearchView"><i class="icon-remove icon-white"></i> Cancel</a>                    
-					    <a class="btn btn-primary" href="#" data-bind="click: $root.SaveClick"><i class="icon-ok icon-white"></i> Save</a>
-                    </div>
-
-                    <div class="span5" style="text-align:right;" data-bind="if: $root.ActiveView().Template == 'Colors'">
-					    <a class="btn btn-primary" href="#" data-bind="click: $root.SlideToColorList"><i class="icon-white icon-search"></i> Add Color from Lists</a>
-					    <a class="btn btn-primary" href="#" data-bind="click: $root.SlideToCreateNewColor"><i class="icon-white icon-pencil"></i> Create New Color</a>
-                    </div>
-
-                    <div class="span5" style="text-align:right;" data-bind="if: $root.ActiveView().Template == 'Images'">				        
-                        <!-- ko ifnot: $root.SelectedProduct().AssignImagesToColors() -->
-				        <a class="btn btn-primary" href="#" data-bind="click: $root.AddNewImage"><i class="icon-plus icon-white"></i> Add Image</a>
-                        <a class="btn btn-primary" href="#" data-bind="click: $root.AssignImagesToColorClick"><i class="icon-white icon-share"></i> Assign Images To Colors</a>
-                        <!-- /ko -->
-
-                        <!-- ko if: $root.SelectedProduct().AssignImagesToColors() -->
-				        <a class="btn btn-primary" href="#" data-bind="click: $root.UnassignImagesFromColorClick"><i class="icon-white icon-ban-circle"></i> Don't Assign Images To Colors</a>
-                        <!-- /ko -->
-                    </div>
-                    
-                    <div class="span5" style="text-align:right;" data-bind="if: $root.ActiveView().Template == 'Sizes'">
-					    <a class="btn btn-primary" href="#" data-bind="click: $root.AddSizeFromList"><i class="icon-white icon-search"></i> Add Size from Lists</a>
-                    </div>
-		        </div>
-		    </div>
-		</div>
-    </script>
+    <!-- TODO - chop these up! -->
 	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE COLOR-SUBVIEW -->
 	<script type="text/html" id="Top-Workspace-Sub-Child">
         <div class="workspace-heading" style="height:125px;">
@@ -133,7 +13,7 @@
                 
                 <div style="height:20px;"></div>
 
-                <!-- ko if: $root.ActiveView().Template == 'AddImage' -->
+                <!-- ko if: $root.GetActiveMainEditor() == 'AddImage' -->
                 <div class="row">
                     <div class="span2">
                         <ul class="nav nav-pills">
@@ -149,7 +29,7 @@
                 </div>
                 <!-- /ko -->
 
-                <!-- ko if: $root.ActiveView().Template == 'AddColorsFromList' -->
+                <!-- ko if: $root.GetActiveMainEditor() == 'AddColorsFromList' -->
                 <div class="row">
                      <div class="span2">
                         <ul class="nav nav-pills">
@@ -169,7 +49,7 @@
                 </div>
                 <!-- /ko -->
 
-                <!-- ko if: $root.ActiveView().Template == 'AddSizesFromList' -->
+                <!-- ko if: $root.GetActiveMainEditor() == 'AddSizesFromList' -->
                 <div class="row">
                      <div class="span2">
                         <ul class="nav nav-pills">
@@ -189,7 +69,7 @@
                 </div>
                 <!-- /ko -->
 
-                <!-- ko if: $root.ActiveView().Template == 'CreateColor' -->
+                <!-- ko if: $root.GetActiveMainEditor() == 'CreateColor' -->
                 <div class="row">
                     <div class="span2">
                         <ul class="nav nav-pills">

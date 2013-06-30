@@ -178,6 +178,7 @@
     <Content Include="Content\Bootstrap\js\bootstrap-modal.js" />
     <Content Include="Content\Bootstrap\js\bootstrap-popover.js" />
     <Content Include="Content\Bootstrap\js\bootstrap-tooltip.js" />
+    <Content Include="Content\Knockout\knockout-2.3.0rc.js" />
     <Content Include="Content\PushLibrary\scroll-tracker.js" />
     <Content Include="Content\Utilities\generalFunctions.js" />
     <Content Include="Content\PushLibrary\endless-ko-glider.js" />
@@ -209,7 +210,6 @@
     <Content Include="Content\JQuery\jquery-ui-1.10.0.custom.min.js" />
     <Content Include="Content\JQuery\jquery.animate-colors-min.js" />
     <Content Include="Content\JQuery\jquery.validate.min.js" />
-    <Content Include="Content\Knockout\knockout-2.2.1.js" />
     <Content Include="Content\Knockout\ko.observableDictionary.js" />
     <Content Include="Content\PushLibrary\ajax.js" />
     <Content Include="Content\PushLibrary\glider.js" />
@@ -324,6 +324,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Shared\_ModalDialog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Order\_TestingFunctions.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

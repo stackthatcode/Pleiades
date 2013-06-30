@@ -25,24 +25,27 @@
 	        // Modal state + functions
 	        self.ModalViewModel = new PushMkt.ModalDialogViewModel();
 
-	        // Glider functions
-	        var glider = new PushMkt.EndlessGlider();
-	        glider.Init("Top-Workspace-SelectProducts", "Main-Editor-SelectProducts");
-	        self.EndlessGlider = glider;
+	        // ... and pass throughs
+	        self.ShowModal = function (template, header, body, list, callback) {
+	            self.ModalViewModel.ShowModal(template, header, body, list, callback);
+	        }
 
+	        // Glider functions
+	        self.EndlessGlider = new PushMkt.EndlessGlider();
+	        self.EndlessGlider.Init("Top-Workspace-SelectProducts", "Main-Editor-SelectProducts");
+
+	        // ... and pass throughs
 	        self.GlideLeft = function (template, userCallback) {
 	            self.EndlessGlider.GlideToLeft("Top-Workspace-" + template, "Main-Editor-" + template, userCallback);
 	        }
-
 	        self.GlideRight = function (template, userCallback) {
 	            self.EndlessGlider.GlideToRight("Top-Workspace-" + template, "Main-Editor-" + template, userCallback);
 	        }
 	    }
 
-	    var tmp;
+        var tmp;
 	    $(function () {
 	        var model = new PushMkt.CreateOrderViewModel();
-
 	        PushMkt.AddListFunctions(model);
 	        PushMkt.AddSearchFunctions(model);
 	        PushMkt.AddReviewProductsFunctions(model);
@@ -50,7 +53,6 @@
 	        PushMkt.AddBillingFunctions(model);
 	        PushMkt.AddCompletionFunctions(model);
 	        ko.applyBindings(model);
-	        tmp = model;
 
 	        flow.exec(
                 function () {
@@ -67,83 +69,18 @@
                 }
             );
 
-
-            // TODO: move these to a PartialView
-	        // ### TESTING SCRIPTS ###
-	        window.LoadPaymentInfo = function () {
-	            var billing = model.Cart().BillingInfo;
-	            billing.Name("Aleks Jones");
-	            billing.Address1("777 On The Way");
-	            billing.Address2("Suite 999");
-	            billing.City("Mount Prospect");
-	            billing.State("IL");
-	            billing.ZipCode("60013");
-	            billing.CardNumber("5247405514068983");
-	            billing.ExpirationMonth("03");
-	            billing.ExpirationYear("2014");
-	            billing.CVV("666");
-	        };
-	        // ### TESTING SCRIPTS ###
-
-	        // ### TESTING SCRIPTS ###
-	        window.Automation = function () {
-	            var shipping = model.Cart().ShippingInfo;
-	            shipping.EmailAddress("aleksjones@gmail.com");
-	            shipping.Name("Aleksandr Jones");
-	            shipping.Address1("123 Test Street");
-	            shipping.Address2("Suite 100");
-	            shipping.City("Mount Prospect");
-	            shipping.State("IL");
-	            shipping.ZipCode("60013");
-	            shipping.Phone("510-717-8112");
-	            shipping.ShippingOptionId("1");
-
-	            flow.exec(
-                    function () {
-                        model.SearchClick(this);
-                    },
-                    function () {
-                        model.ShowInventory(model.SearchData()[0]);
-                        window.setTimeout(this, 1500);
-                    },
-                    function () {
-                        var product = model.SearchData()[0];
-                        var inventory = product.Inventory();
-                        var sku = inventory[1];
-                        sku.SelectedQuantity(2);
-                        model.AddToCart(sku, product);
-
-                        var sku2 = inventory[6];
-                        sku2.SelectedQuantity(1);
-                        model.AddToCart(sku2, product);
-                        model.ViewCart();
-                        window.setTimeout(this, 2000);
-                    },
-                    function () {
-                        model.GlideToShipping();
-                        window.setTimeout(this, 2000);
-                    },
-                    function () {
-                        model.GotoBilling();
-                        window.setTimeout(this, 2000);
-                    },
-                    function () {
-                        LoadPaymentInfo();
-                    }
-                );
-	        }
-	        // ### TESTING SCRIPTS ###
-	    });
-	</script>    
+            tmp = model;
+        });
+    </script>
 }
 
 @section _Templates {
 }
 
 @section _Body {
-	<div data-bind="template: { data: $root.EndlessGlider, name: 'Endless-Glider-Scaffolding' }">
+    <div data-bind="template: { data: $root.EndlessGlider, name: 'Endless-Glider-Scaffolding' }">
     </div>
     
-	<div data-bind="template: { data: $root.ModalViewModel, name: 'Modal-Dialog-Scaffolding' }">
-    </div>    
+    <div data-bind="template: { data: $root.ModalViewModel , name: 'Modal-Dialog-Scaffolding' }">
+    </div>
 }
