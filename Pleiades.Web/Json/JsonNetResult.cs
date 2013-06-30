@@ -26,6 +26,12 @@ namespace Pleiades.Web
             this.Data = data;
         }
 
+        public static JsonNetResult Success()
+        {
+            return new JsonNetResult(new { Success = true });
+        }
+
+
         public override void ExecuteResult(ControllerContext context)
         {
             if (context == null)

@@ -103,7 +103,7 @@
 					function() {
                         self.SelectedRecord(null);
                         self.SelectedIndex = null;
-                        self.CommonUI.TrackToIdIfNotNull(recordId);
+                        self.ScrollTracker.TrackToIdIfNotNull(recordId);
 					}
 				);
 			}
@@ -181,7 +181,8 @@
 			// Initialization
 			self.ServiceAdapter = new BrandService();
             self.Glider = new PushLibrary.GliderWidget("#gliding-container", "#parent-editor", "#child-editor");
-			
+			self.ScrollTracker = new PushLibrary.ScrollTracker("#gliding-container");
+
 			// load ko.observables into view model
             self.Data = ko.observableArray();
 			self.SelectedRecord = ko.observable(null);

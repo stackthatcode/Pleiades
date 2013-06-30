@@ -198,7 +198,7 @@ namespace Commerce.Persist.Concrete
 
         public void Touch(Category category)
         {
-            this.Context.Entry(category).State = EntityState.Modified;
+            this.Context.MarkModified(category);
             category.DateUpdated = DateTime.Now;
         }
 

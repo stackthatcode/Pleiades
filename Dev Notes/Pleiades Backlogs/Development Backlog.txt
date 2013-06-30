@@ -21,8 +21,10 @@ Burndown - 6/16/2013 - 4.5 Hours
 - More work on the Refresh Initiative
 - Fixed Entity Framework 5
 *** STOPPING POINT: still in progress refacatoring Colors & Brands
+* http://elegantcode.com/2011/01/26/basic-javascript-part-8-namespaces/ => DONE
 
-
+Burndown - 6/22/2013
+--------------------
 
 
 
@@ -32,7 +34,6 @@ FRONTRANGE - HOTZONE
 Final Deliverable Definition
 ----------------------------
 - Refactor the Products to use the Endless Glider, plus clean the Templates => IN PROGRESS
-* http://elegantcode.com/2011/01/26/basic-javascript-part-8-namespaces/ => IMPORTANT
 http://blog.stevensanderson.com/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/
 
 * http://mindre.net/Article/Microsoft_Web_Optimization_development

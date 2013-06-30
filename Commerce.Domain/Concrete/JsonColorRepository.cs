@@ -24,6 +24,7 @@ namespace Commerce.Persist.Concrete
         {
             return this.Context.Colors
                 .Where(x => x.Deleted == false)
+                .OrderBy(x => x.Name.ToUpper())
                 .Include(x => x.ImageBundle);
         }
 
@@ -42,13 +43,16 @@ namespace Commerce.Persist.Concrete
         public void Update(JsonColor colorDiff)
         {
             var imageBundle = this.ImageBundleRepository.Retrieve(Guid.Parse(colorDiff.ImageBundleExternalId));
-
             var color = this.Data().FirstOrDefault(x => x.Id == colorDiff.Id);
+
             color.Name = colorDiff.Name;
             color.SkuCode = colorDiff.SkuCode;
             color.SEO = colorDiff.SEO;
             color.ImageBundle = imageBundle;
             color.DateUpdated = DateTime.Now;
+
+            // EF 5.0 paranoia
+            this.Context.MarkModified(color);
         }
 
         public Func<JsonColor> Insert(JsonColor brandDiff)
@@ -74,6 +78,7 @@ namespace Commerce.Persist.Concrete
             var Color = this.Data().FirstOrDefault(x => x.Id == ColorDiff.Id);
             Color.Deleted = true;
             Color.DateUpdated = DateTime.Now;
+            this.Context.MarkModified(Color);
         }
     }
 }

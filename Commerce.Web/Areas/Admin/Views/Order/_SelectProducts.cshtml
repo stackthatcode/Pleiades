@@ -1,5 +1,59 @@
-﻿<!-- List Model Functions -->
-<script type="text/javascript">
+﻿
+    <style>
+        table.skutable tbody tr td:nth-child(1)
+        {
+            width:200px;
+        }
+        table.skutable tbody tr td:nth-child(2)
+        {
+            width:150px;
+            text-align: right;
+        }
+        table.skutable tbody tr td:nth-child(3)
+        {
+            width:150px;
+            text-align: right;
+        }
+        table.skutable tbody tr td:nth-child(4)
+        {
+            width:150px;
+            text-align: right;
+        }
+        table.skutable tbody tr td:nth-child(5)
+        {
+            width:150px;
+            text-align: right;
+        }        
+        table.editcart tr td
+        {
+            border-top: none; 
+        }
+        div.color-chooser
+        {
+            margin-right:10px; 
+            height:37px; 
+            padding:3px; 
+            width:37px; 
+            text-align:center; 
+            overflow:hidden;
+            cursor: pointer;
+        }
+        .selected
+        {
+            border: 2px solid #F00;
+        }
+        .not-selected
+        {
+            border: 2px solid #EEE;
+        }
+        .label
+        {
+            cursor: pointer;
+        }
+    </style>
+    
+    <!-- Function to add Product Search & Selection -->
+    <script type="text/javascript">
     var PushMkt = PushMkt || {};
     
     PushMkt.AddSearchFunctions = function (model) {

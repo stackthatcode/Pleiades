@@ -74,7 +74,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             this.Repository.DeleteCategory(id);
             this.UnitOfWork.SaveChanges();
-            return new JsonNetResult(new { Sucess = true });
+            return JsonNetResult.Success();
         }
 
         [HttpPost]
@@ -82,7 +82,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             this.Repository.SwapParentChild(parentId, childId);
             this.Context.SaveChanges();
-            return new JsonNetResult(new { Sucess = true });
+            return JsonNetResult.Success();
         }
     }
 }

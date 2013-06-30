@@ -51,6 +51,7 @@
       <HintPath>..\packages\AutoMapper.2.1.267\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -153,7 +154,7 @@
     <Compile Include="Areas\Public\Models\ProductListModel.cs" />
     <Compile Include="bin\PublicAreaRegistration.cs" />
     <Compile Include="AutofacBootstrap.cs" />
-    <Compile Include="CommerceWebUIModule.cs" />
+    <Compile Include="Content\CommerceWebUIModule.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -211,11 +212,8 @@
     <Content Include="Content\Knockout\knockout-2.2.1.js" />
     <Content Include="Content\Knockout\ko.observableDictionary.js" />
     <Content Include="Content\PushLibrary\ajax.js" />
-    <Content Include="Content\Commerce.Web\Scripts\color-service.js" />
-    <Content Include="Content\Commerce.Web\Scripts\product-service.js" />
     <Content Include="Content\PushLibrary\glider.js" />
     <Content Include="Content\Utilities\sammy-latest.min.js" />
-    <Content Include="Content\Commerce.Web\Scripts\size-service.js" />
     <Content Include="Content\JQuery\jquery-ui-1.10.0.custom.min.css" />
     <Content Include="Content\Commerce.Web\Style\pushmarket.css" />
     <Content Include="Global.asax" />
@@ -236,6 +234,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Public\Shared\" />
+    <Folder Include="Content\Commerce.Web\Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -287,7 +286,6 @@
     <Content Include="Areas\Admin\Views\Manager\_AdminUserDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Order\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Order\Manage.cshtml" />
-    <Content Include="Areas\Admin\Views\Order\_BaseViewModel.cshtml" />
     <Content Include="Areas\Admin\Views\Order\_Billing.cshtml" />
     <Content Include="Areas\Admin\Views\Order\_CartFactory.cshtml" />
     <Content Include="Areas\Admin\Views\Order\_Completion.cshtml" />
@@ -320,6 +318,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Public\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Shared\_EndlessGlider.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Shared\_ModalDialog.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -54,11 +55,25 @@ namespace Commerce.Persist.Concrete
         public PleiadesContext() : base("PleiadesDb")
         {
             Database.SetInitializer<PleiadesContext>(null);
-            Configuration.AutoDetectChangesEnabled = false;
+            Configuration.AutoDetectChangesEnabled = true;
+        }
+
+        public void MarkModified(object target)
+        {
+            this.Entry(target).State = EntityState.Modified;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Brand>()
+                .HasOptional(x => x.ImageBundle)
+                .WithMany()
+                .HasForeignKey(x => x.ImageBundleId);
+
+            modelBuilder.Entity<Color>()
+                .HasOptional(x => x.ImageBundle)
+                .WithMany()
+                .HasForeignKey(x => x.ImageBundleId);
         }
 
         public void RefreshCollection<T>(IEnumerable<T> collection)

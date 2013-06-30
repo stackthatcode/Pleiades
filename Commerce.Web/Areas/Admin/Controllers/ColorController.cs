@@ -76,7 +76,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             this.ColorRepository.DeleteSoft(color);
             this.UnitOfWork.SaveChanges();
-            return new JsonNetResult();
+            return JsonNetResult.Success();
         }
     }
 }

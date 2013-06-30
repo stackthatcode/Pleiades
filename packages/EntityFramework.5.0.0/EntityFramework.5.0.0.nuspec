@@ -3,7 +3,6 @@
   <metadata>
     <id>EntityFramework</id>
     <version>5.0.0</version>
-    <title>EntityFramework</title>
     <authors>Microsoft</authors>
     <owners>Microsoft</owners>
     <licenseUrl>http://go.microsoft.com/fwlink/?LinkId=253898&amp;clcid=0x409</licenseUrl>
@@ -11,9 +10,6 @@
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>Entity Framework is Microsoft's recommended data access technology for new applications.</description>
     <summary>Entity Framework is Microsoft's recommended data access technology for new applications.</summary>
-    <releaseNotes />
-    <copyright />
-    <language />
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System.Data.Entity" targetFramework="" />
       <frameworkAssembly assemblyName="System.ComponentModel.DataAnnotations" targetFramework="" />

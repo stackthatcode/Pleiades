@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using Commerce.Persist.Model.Resources;
 
 namespace Commerce.Persist.Model.Lists
@@ -9,7 +10,11 @@ namespace Commerce.Persist.Model.Lists
         public string Name { get; set; }
         public string SkuCode { get; set; }
         public string SEO { get; set; }
+
+        [ForeignKey("ImageBundleId")]
         public ImageBundle ImageBundle { get; set; }
+        public int? ImageBundleId { get; set; }
+
         public bool Deleted { get; set; }
         public DateTime DateUpdated { get; set; }
         public DateTime DateInserted { get; set; }

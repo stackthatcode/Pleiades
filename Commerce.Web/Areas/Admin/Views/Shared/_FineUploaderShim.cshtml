@@ -1,15 +1,14 @@
 ﻿<!-- TODO: fix this bundle ordering issue -->
 @Html.Javascript("~/Content/fineuploader/js/util.js")
 @Scripts.Render("~/Bundles/FineUploaderJs")
-
 @Html.Stylesheet("~/Bundles/FineUploaderCss")
     
 <script type="text/javascript">
     var fineUploader = namespace("Commerce.FineUploader");
     
     fineUploader.Settings = {
-        LoadingImage: '/Pleiades/Content/FineUploader/loading.gif',
-        UploadEndpoint: '/Pleiades/Admin/Image/UploadFile'
+        LoadingImage: '/Commerce.Web/Content/FineUploader/loading.gif',
+        UploadEndpoint: '/Commerce.Web/Admin/Image/UploadFile'
     };
 
     fineUploader.Uploader = function(successCallback) {        
@@ -85,6 +84,7 @@
     }
 </script>
 
+<!-- KnockoutJS Template -->
 <script type="text/html" id="Fine-Uploader">
     <div id="fine-uploader-basic" class="btn btn-primary" style="width:160px;">
         <i class="icon-upload icon-white"></i> Click to upload

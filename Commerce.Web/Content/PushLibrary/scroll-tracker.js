@@ -3,6 +3,10 @@ PushLibrary = namespace("PushLibrary");
 PushLibrary.ScrollTracker = function (containerDiv) {
     var self = this;
 
+    if (!containerDiv) {
+        throw "null value passed as containerDiv";
+    }
+
     self.TrackToIdIfNotNull = function (id) {
         if (!id) {
             return;
@@ -25,10 +29,10 @@ PushLibrary.ScrollTracker = function (containerDiv) {
             backgroundColor: "#FFF"
         },
 		{
-			duration: 1000,
-			complete: function () {
-			    set.css({ backgroundColor: "" });
-			}
+		    duration: 1000,
+		    complete: function () {
+		        set.css({ backgroundColor: "" });
+		    }
 		});
     }
 }

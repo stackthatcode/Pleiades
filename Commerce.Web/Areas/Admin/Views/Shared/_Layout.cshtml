@@ -8,13 +8,15 @@
     @Scripts.Render("~/Bundles/BootstrapBaseScript")
     @Html.Stylesheet("~/Content/Bootstrap/css/bootstrap.min.css")
     @Scripts.Render("~/Bundles/KnockoutJS")
-    <!-- TODO: create a full debug harness, which is swappable at runtime via configX
+
+    <!-- TODO: create a full debug harness, which is swappable at runtime via configS
     @Scripts.Render("~/Bundles/PushLibrary") -->
+
     @Html.Javascript("~/Content/PushLibrary/ajax.js")
     @Html.Javascript("~/Content/PushLibrary/glider.js")
-    @Html.Javascript("~/Content/PushLibrary/scroll-tracker.js")
-    
+    @Html.Javascript("~/Content/PushLibrary/scroll-tracker.js")    
     @Html.Stylesheet("~/Content/Commerce.Web/Style/pushmarket.css")
+    
     @RenderSection("_Scripts", false)
     @RenderSection("_Templates", false)
   </head>

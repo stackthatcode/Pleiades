@@ -4,6 +4,7 @@
 	<script type="text/javascript">
 	    var BundleViewer = namespace("Commerce.Web.BundleViewer");
 
+	    BundleViewer.DownloadTemplate = '@Url.Content("~/Admin/Image/Download/{exRID}?size={size}")';
 	    BundleViewer.Default75x75 = '@Url.Content("~/Content/Commerce.Web/Images/75x75.gif")';
 	    BundleViewer.Default150x150 = '@Url.Content("~/Content/Commerce.Web/Images/150x150.gif")';
 
@@ -24,8 +25,7 @@
 	    namespace("Commerce.Web.BundleViewer").ImageBundleDownloadUrl = function (data, size) {
 	        var id = BundleViewer.ExtractId(data);
 
-	        $downloadEndpoint = '/Pleiades/Admin/Image/Download/{exRID}?size={size}';
-	        return $downloadEndpoint
+	        return BundleViewer.DownloadTemplate
                 .replace("{exRID}", id)
                 .replace("{size}", size);
 	    }

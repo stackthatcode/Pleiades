@@ -1,12 +1,10 @@
 ﻿@using Pleiades.Web.MvcHelpers
 
-@section _Scripts {   
-	@Html.Javascript("/aquery/aQuery-1.0-min.js")
-
-    @Html.Partial("_ImageBundleViewer") 
+@section _Scripts {
     @Html.Partial("_EndlessGlider")
+    @Html.Partial("_ModalDialog")
+    @Html.Partial("_ImageBundleViewer") 
 
-    @Html.Partial("_BaseViewModel") 
     @Html.Partial("_CartFactory")    
     @Html.Partial("_ReferenceData")
     @Html.Partial("_SelectProducts") 
@@ -17,9 +15,34 @@
 
     <!-- document.ready() Functions -->
 	<script type="text/javascript">
+	    var PushMkt = PushMkt || {};
+	    PushMkt.CreateOrderViewModel = function () {
+	        var self = this;
+
+	        // We're using a "plain-vanilla" Ajax Service
+	        self.Service = new PushLibrary.Ajax();
+
+	        // Modal state + functions
+	        self.ModalViewModel = new PushMkt.ModalDialogViewModel();
+
+	        // Glider functions
+	        var glider = new PushMkt.EndlessGlider();
+	        glider.Init("Top-Workspace-SelectProducts", "Main-Editor-SelectProducts");
+	        self.EndlessGlider = glider;
+
+	        self.GlideLeft = function (template, userCallback) {
+	            self.EndlessGlider.GlideToLeft("Top-Workspace-" + template, "Main-Editor-" + template, userCallback);
+	        }
+
+	        self.GlideRight = function (template, userCallback) {
+	            self.EndlessGlider.GlideToRight("Top-Workspace-" + template, "Main-Editor-" + template, userCallback);
+	        }
+	    }
+
 	    var tmp;
 	    $(function () {
 	        var model = new PushMkt.CreateOrderViewModel();
+
 	        PushMkt.AddListFunctions(model);
 	        PushMkt.AddSearchFunctions(model);
 	        PushMkt.AddReviewProductsFunctions(model);
@@ -44,6 +67,8 @@
                 }
             );
 
+
+            // TODO: move these to a PartialView
 	        // ### TESTING SCRIPTS ###
 	        window.LoadPaymentInfo = function () {
 	            var billing = model.Cart().BillingInfo;
@@ -109,74 +134,16 @@
 	        }
 	        // ### TESTING SCRIPTS ###
 	    });
-	</script>
-    
-    <style>
-        table.skutable tbody tr td:nth-child(1)
-        {
-            width:200px;
-        }
-        table.skutable tbody tr td:nth-child(2)
-        {
-            width:150px;
-            text-align: right;
-        }
-        table.skutable tbody tr td:nth-child(3)
-        {
-            width:150px;
-            text-align: right;
-        }
-        table.skutable tbody tr td:nth-child(4)
-        {
-            width:150px;
-            text-align: right;
-        }
-        table.skutable tbody tr td:nth-child(5)
-        {
-            width:150px;
-            text-align: right;
-        }        
-        table.editcart tr td
-        {
-            border-top: none; 
-        }
-        div.color-chooser
-        {
-            margin-right:10px; 
-            height:37px; 
-            padding:3px; 
-            width:37px; 
-            text-align:center; 
-            overflow:hidden;
-            cursor: pointer;
-        }
-        .selected
-        {
-            border: 2px solid #F00;
-        }
-        .not-selected
-        {
-            border: 2px solid #EEE;
-        }
-        .label
-        {
-            cursor: pointer;
-        }
-    </style>
+	</script>    
 }
 
 @section _Templates {
 }
 
 @section _Body {
-    <div class="workspace-heading-parent">
-		<div class="workspace-heading" data-bind="template: { name: $root.EndlessGlider.WorkspaceTemplate() }">
-        </div>
-	</div>
-	<div id="gliding-container" class="container">
-		<div id="glider1" class="glider" data-bind="template: { name: $root.EndlessGlider.EditorTemplate1() }"></div>		
-		<div id="glider2" class="glider" data-bind="template: { name: $root.EndlessGlider.EditorTemplate2() }"></div>
+	<div data-bind="template: { data: $root.EndlessGlider, name: 'Endless-Glider-Scaffolding' }">
     </div>
-    <div id="modal-enclave" data-bind="template: { name: $root.ModalViewModel().Template, data: $root.ModalViewModel().Data }">
+    
+	<div data-bind="template: { data: $root.ModalViewModel, name: 'Modal-Dialog-Scaffolding' }">
     </div>    
 }

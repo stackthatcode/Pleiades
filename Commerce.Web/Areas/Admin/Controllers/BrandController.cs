@@ -62,7 +62,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             this.Repository.DeleteSoft(brand);
             this.UnitOfWork.SaveChanges();
-            return new JsonNetResult();
+            return JsonNetResult.Success();
         }
     }
 }

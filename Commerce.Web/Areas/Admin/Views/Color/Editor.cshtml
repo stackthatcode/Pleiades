@@ -106,7 +106,7 @@
                         self.SelectedRecord(null);
                         self.SelectedIndex = null;
                         self.ShowUpload(true);
-                        self.CommonUI.TrackToIdIfNotNull(recordId);
+                        self.ScrollTracker.TrackToIdIfNotNull(recordId);
 					}
 				);
 			}
@@ -209,8 +209,9 @@
 
 			// Initialization
 			self.ServiceAdapter = new ColorService();
-            self.Glider = new PushLibrary.GliderWidget("#gliding-container", "#parent-editor", "#child-editor");			
-            
+            self.Glider = new PushLibrary.GliderWidget("#gliding-container", "#parent-editor", "#child-editor");
+            self.ScrollTracker = new PushLibrary.ScrollTracker("#gliding-container");
+
 			// load ko.observables into view model
             self.Data = ko.observableArray();
 			self.SelectedRecord = ko.observable(null);
@@ -231,7 +232,7 @@
 			ko.applyBindings(model);
 		});
 	</script>
-}	
+}
 
 @section _Templates {
 	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE -->
@@ -279,19 +280,15 @@
 		<tbody data-bind="foreach: $data.Data()">
 			<tr>
 			<td>
-				<span class="span2">
+				<div style="width:150px; float:left;">
                 	<div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
 			        </div>
-                </span>
-            </td>
-            <td>
-				<span class="span7">
-					<input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
+                </div>
+                <input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
+				<div style="width:500px; padding-top:30px; float:left;">
 					<p><strong data-bind="text: $data.Name"></strong> - <span data-bind="text: $data.SkuCode"></span></p>
-				</span>
-            </td>
-			<td>
-				<span class="span3" style="text-align:right;">					
+				</div>
+				<div style="width:250px; padding-top:30px; float:left; text-align:right;">
 					<a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteColor($data) }"><i class="icon-trash icon-white"></i> Delete</a>
 					<a class="btn btn-inverse" style="width:70px;" data-bind="click: $root.GlideToChildView">Edit <i class="icon-arrow-right icon-white"></i></a>
 				</span>

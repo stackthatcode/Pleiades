@@ -1,8 +1,45 @@
 ﻿@using Pleiades.Web.MvcHelpers
 
 @section _Scripts {
-	@Html.Javascript("/scripts/size-service.js")
-    
+	<script type="text/javascript">
+	    function SizeService() {
+	        var self = new PushLibrary.Ajax();
+
+	        self.Sizes = function (callback) {
+	            self.AjaxGet("/Admin/Size/SizeGroups", callback);
+	        }
+
+	        self.SizeGroup = function (id, callback) {
+	            self.AjaxGet("/Admin/Size/SizeGroup/" + id, callback);
+	        }
+
+	        self.InsertGroup = function (group, callback) {
+	            self.AjaxPost("/Admin/Size/InsertGroup", group, callback);
+	        }
+
+	        self.InsertSize = function (size, callback) {
+	            self.AjaxPost("/Admin/Size/InsertSize", size, callback);
+	        }
+
+	        self.UpdateGroup = function (group, callback) {
+	            self.AjaxPost("/Admin/Size/UpdateGroup", group, callback);
+	        }
+
+	        self.UpdateSize = function (size, callback) {
+	            self.AjaxPost("/Admin/Size/UpdateSize", size, callback);
+	        }
+
+	        self.DeleteGroup = function (group, callback) {
+	            self.AjaxPost("/Admin/Size/DeleteGroup", group, callback);
+	        }
+
+	        self.DeleteSize = function (size, callback) {
+	            self.AjaxPost("/Admin/Size/DeleteSize", size, callback);
+	        }
+
+	        return self;
+	    }
+    </script>
     <script type="text/javascript">
 		// KO enabling/disabling of server JSON
         var SizeGroupToKnockout = function(sizeGroup) {
@@ -136,7 +173,7 @@
 					},
 					function() {
 						// animate back
-						self.CommonUI.TrackToIdIfNotNull(parentRecordId);
+						self.ScrollTracker.TrackToIdIfNotNull(parentRecordId);
 					}
 				);
 			}
@@ -255,11 +292,11 @@
 
 
 			// Initialization
-			self.ServiceAdapter = serviceAdapter;
-            self.CommonUI = crossCuttingUI;
-            self.Glider = gliderWidget;
+			self.ServiceAdapter = new SizeService();
+            self.Glider = new PushLibrary.GliderWidget("#gliding-container", "#parent-editor", "#child-editor");
+            self.ScrollTracker = new PushLibrary.ScrollTracker("#gliding-container");
 
-			// load ko.observables into view model				
+			// load ko.observables into view model
 			self.ParentViewModel = { 
 				Data: ko.observableArray(), 
 				ExpandData: ko.observableDictionary(), 
@@ -273,11 +310,7 @@
 		}
 		
 		$(function() {
-            var crossCuttingUI = new CommonUI("#gliding-container");
-            var gliderWidget = new GliderWidget("#gliding-container", "#parent-editor", "#child-editor");			
-            var serviceAdapter = new SizeService(crossCuttingUI.Error, crossCuttingUI.ShowLoading, crossCuttingUI.HideLoading);
-			var model = new SizeViewModel(serviceAdapter, crossCuttingUI, gliderWidget);
-
+			var model = new SizeViewModel();
 			ko.applyBindings(model);
 		});
 	</script>
@@ -309,8 +342,8 @@
 				</div>
 			</div>
             <div class="row">
-                <div class="span9">
-                    <ul class="nav nav-pills">
+                <div class="span9" style="height:40px;">
+                    <ul class="nav nav-pills" style="height:40px;">
                         <li style="width:140px;">
 				            <a id="glideToParent" class="backbutton" data-bind="click: $root.GlideToParentView">&laquo; Back to Sizes</a>
                             &nbsp;
@@ -331,7 +364,7 @@
 		<tbody data-bind="foreach: $data.Data()">
 			<tr>
 			<td>
-				<span class="span8">
+				<div style="width:600px; float:left;">
 					<input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
 					<h4 data-bind="text: $data.Name"></h4>
 					
@@ -340,16 +373,16 @@
 						<h4 style="padding-left:40px;">&raquo; <span data-bind="text: Name"></span> - <span data-bind="text: Description"></span></h4>
 					</div>
 					<!-- /ko -->
-				</span>
+				</div>
 				
-				<span class="span4" style="text-align:right;">
+				<div style="width:300px; text-align:right; float:left; padding-top:5px;">
 					<a class="btn" href="#" data-bind="click: $root.ExpandToggle">
 						<i class="icon-chevron-down" data-bind="visible: $data.Expanded()"></i>
 						<i class="icon-chevron-up" data-bind="visible: !$data.Expanded()"></i>
 					</a>
 					
 					<a class="btn btn-inverse" data-bind="click: $root.GlideToChildView">Edit Group of Sizes<i class="icon-arrow-right icon-white"></i></a>
-				</span>
+				</div>
 			</td>
 			</tr>
 		</tbody>
@@ -377,40 +410,38 @@
 	<!-- KNOCKOUT TEMPLATE - EDITOR ROW - SIZE GROUP -->
 	<script type="text/html" id="Editor-Row-Template-Group">
 		<tr data-bind="if: $root.ChildViewSelectedRecord() != $data, click: $root.EditGroup">
-		<td>
-			<span class="span9">	
-				<input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id() }" />				
-				<h4><span data-bind="text: $data.Name()"></span></h4>	
-			</span>
-			<span class="span3" style="text-align:right;">
-				<p>Touch Row to Edit</p>
-			</span>
-		</td>
+		    <td>
+                <div style="width:600px; float:left;">
+				    <input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id() }" />				
+				    <h4><span data-bind="text: $data.Name()"></span></h4>	
+			    </div>
+                <div style="width:300px; float:left; padding-top:10px; text-align:right;">
+				    <p>Touch Row to Edit</p>
+                </div>
+		    </td>
 		</tr>
 
 		<!-- EDITOR TEMPLATE -->
         <tr data-bind="if: $root.ChildViewSelectedRecord() == $data">
         <td>
 			<form>
-			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
-				<a href="#" class="close" data-dismiss="alert">&times;</a>
+			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">				
                 <strong>Please enter the Size Group Name.</strong>
 			</div>
 		
 			<div>
 				<!-- EDITOR FIELDS -->
-				<span class="span8" style="float:left;padding-top:5px;">
+				<div style="width:600px; float:left; text-align:right; padding-top:5px;">
 					<input id="entry" class="input-large" style="float:left; width:250px; margin-right:20px;" type="text" placeholder="Enter Size Group Name" data-bind="value: $data.EditName" />
-				</span>
-				
+				</div>
+
 				<!-- BUTTONS -->
 				<span class="span4" style="padding-top:5px; text-align:right;">
 					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveGroup"><i class="icon-ok icon-white"></i> Save</a>
 					<a class="btn btn-primary" href="#" data-bind="click: $root.DeleteGroup"><i class="icon-trash icon-white"></i> Delete</a>
 					<a class="btn btn-inverse" href="#" data-bind="click: $root.CancelEdit"><i class="icon-remove icon-white"></i> Cancel</a>
 				</span>
-			</div>					
-			<div style="clear:both; height:20px;width:1px;" />			
+			</div>		
 			</form>
 		</td>
 		</tr>
@@ -420,17 +451,17 @@
 	<script type="text/html" id="Editor-Row-Template-Size">
 		<tr data-bind="if: $root.ChildViewSelectedRecord() != $data, click: $root.EditSize">
 		<td>
-			<span class="span9">	
+            <div style="width:600px; float:left; spadding-top:5px;">
 				<input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id() }" />
                 <h4>&raquo; 
                     <span data-bind="text: $data.Name()"></span> - 
                     <span data-bind="text: $data.Description()"></span> - 
                     <span data-bind="text: $data.SkuCode()"></span> 
                 </h4>	
-			</span>
-			<span class="span3" style="text-align:right;">
+			</div>
+            <div style="width:300px; float:left; text-align:right; padding-top:10px;">
 				<p>Touch Row to Edit</p>
-			</span>
+			</div>
 		</td>
 		</tr>
 
@@ -439,25 +470,24 @@
         <td>
 			<form>
 			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
-				<a href="#" class="close" data-dismiss="alert">&times;</a>
 				<strong>Please fill in all the fields for this Size.</strong>  
 			</div>		    
 			<div>
 				<!-- EDITOR FIELDS -->
-				<span class="span8" style="float:left;padding-top:5px;">
-					<input id="entry" class="input-large" style="float:left; width:100px; margin-right:20px;" type="text" placeholder="Enter Abbreviation" data-bind="value: $data.EditName" maxlength="6" />
+                <div style="width:600px; float:left; spadding-top:5px;">
+                	<input id="entry" class="input-large" style="float:left; width:100px; margin-right:20px;" type="text" placeholder="Enter Abbreviation" data-bind="value: $data.EditName" maxlength="6" />
 					<input id="entry" class="input-large" style="float:left; width:250px; margin-right:20px;" type="text" placeholder="Enter Size Description" data-bind="value: $data.EditDescription" maxlength="20" />
 					<input id="entry" class="input-large" style="float:left; width:125px; margin-right:20px;" type="text" placeholder="Enter Sku Code" data-bind="value: $data.EditSkuCode" maxlength="6" />
-				</span>
+				</div>
 
 				<!-- BUTTONS -->
-				<span class="span4" style="padding-top:5px; text-align:right;">
+                <div style="width:300px; float:left; spadding-top:5px; text-align:right;">
 					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveSize"><i class="icon-ok icon-white"></i> Save</a>
 					<a class="btn btn-primary" href="#" data-bind="click: $root.DeleteSize"><i class="icon-trash icon-white"></i> Delete</a>
 					<a class="btn btn-inverse" href="#" data-bind="click: $root.CancelEdit"><i class="icon-remove icon-white"></i> Cancel</a>
-				</span>
+				</div>
 			</div>					
-			<div style="clear:both; height:20px;width:1px;" />			
+			<div style="clear:both; height:5px;width:1px;" />			
 			</form>
 		</td>
 		</tr>

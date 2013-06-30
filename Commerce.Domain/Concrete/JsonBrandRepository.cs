@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
 using System.Data.Entity;
 using Commerce.Persist.Interfaces;
 using Commerce.Persist.Model.Lists;
@@ -50,7 +51,11 @@ namespace Commerce.Persist.Concrete
         public List<JsonBrand> RetrieveAll()
         {
             var data = this.Data().ToList();
-            var result = data.Select(x => x.ToJson()).ToList();
+            var result = data
+                .Select(x => x.ToJson())
+                .OrderBy(x => x.Name.ToUpper())
+                .ToList();
+
             var productCount = ProductCountQuery().ToList();
 
             result.ForEach(x => x.ProductCount = 
@@ -69,6 +74,7 @@ namespace Commerce.Persist.Concrete
         {
             var imageBundle = this.ImageBundleRepository.Retrieve(Guid.Parse(brandDiff.ImageBundleExternalId));
             var brand = this.Data().FirstOrDefault(x => x.Id == brandDiff.Id);
+
             brand.Name = brandDiff.Name;
             brand.Description = brandDiff.Description;
             brand.SkuCode = brandDiff.SkuCode;
@@ -104,7 +110,8 @@ namespace Commerce.Persist.Concrete
             brand.DateUpdated = DateTime.Now;
             brand.ImageBundle.Deleted = true;
             brand.ImageBundle.DateUpdated = DateTime.Now;
-
+            this.Context.MarkModified(brand);
+            
             var products =
                 this.Context.Products
                     .Where(x => x.Brand != null)
@@ -114,6 +121,8 @@ namespace Commerce.Persist.Concrete
             foreach (var product in products)
             {
                 product.Brand = null;
+
+                this.Context.MarkModified(product);
             }
         }
     }
