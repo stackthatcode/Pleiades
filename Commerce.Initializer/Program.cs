@@ -1,34 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Transactions;
-using Pleiades.Data;
+using Commerce.Persist.Database;
 using Pleiades.Injection;
 using Pleiades.Utility;
-using Pleiades.Web.Security.Model;
-using Pleiades.Web.Security.Interface;
-using Pleiades.Web.Security.Providers;
-using Commerce.Persist;
 using Commerce.Persist.Concrete;
-using Commerce.Persist.Interfaces;
-using Commerce.Persist.Model.Lists;
 using Commerce.Initializer.Builders;
-using Commerce.Web;
-using Commerce.Web.Plumbing;
 
 namespace Commerce.Initializer
 {
     class Program
     {
-        static PleiadesContext DbContext { get; set; }
-        static IContainerAdapter ServiceLocator { get; set; }
+        static PushMarketContext DbContext { get; set; }
 
         static void Main(string[] args)
         {
-            DbContext = new PleiadesContext();
+            DbContext = new PushMarketContext();
 
             Console.WriteLine("\nPushMarket Commerce Version v1.0 Prototype Initializer");
             Console.WriteLine("Push Cloud Global - All Rights Reserved");
@@ -51,6 +38,8 @@ namespace Commerce.Initializer
             ProductBuilder.Populate(serviceLocator);
             ShippingMethodsBuilder.Populate(serviceLocator);
             StateTaxBuilder.Populate(serviceLocator);
+
+            //DbContext.
         }
 
         public static void DestroyDatabase()
@@ -71,13 +60,10 @@ namespace Commerce.Initializer
 
         public static void CreateDatabase()
         {
-            if (!DbContext.Database.Exists())
-            {
-                DbContext.Database.Create();
+            DbContext.MasterDatabaseCreate();
 
-                // Build Database
-                Console.WriteLine("Creating Database for Pleiades");
-            }
+            // Build Database
+            Console.WriteLine("Creating Database for Pleiades");
         }
     }
 }

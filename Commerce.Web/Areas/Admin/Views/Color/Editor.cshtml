@@ -150,7 +150,7 @@
 						record.SkuCode(record.EditSkuCode());
 
                         if (self.ShowUpload() == false) {
-                            var farbtasticColor = GetSelectedColor();                
+                            var farbtasticColor = PushMkt.GetSelectedColor();                
                             var color = { Rgb: farbtasticColor, Width: "150", Height: "150" };
                             self.ServiceAdapter.CreateBitmap(color, this);
                         }
@@ -184,28 +184,28 @@
 				$('#modal-delete').modal();
 		    }
 
-			self.DeleteConfirm = function() { 
-				var record = self.ModalViewModel();
-			    flow.exec(
-                    function() {
-                        $('#modal-delete').modal('hide');				
-				        self.ServiceAdapter.Delete(record, this);
-                    },
-                    function(data) {
-						self.Data.remove(function(item) { return item.Id == record.Id; });
-                        self.ModalViewModel(null);
-                    }
-                );
-			}
+		    self.DeleteConfirm = function() {
+		        var record = self.ModalViewModel();
+		        flow.exec(
+		            function() {
+		                $('#modal-delete').modal('hide');
+		                self.ServiceAdapter.Delete(record, this);
+		            },
+		            function(data) {
+		                self.Data.remove(function(item) { return item.Id == record.Id; });
+		                self.ModalViewModel(null);
+		            }
+		        );
+		    };
 
-            self.UploadSwatchToggle = function() {
-                self.ShowUpload(true);
-            }
-            
-            self.PickColorToggle = function() {
-                self.ShowUpload(false);
-                CreateColorPicker();
-            }
+		    self.UploadSwatchToggle = function() {
+		        self.ShowUpload(true);
+		    };
+
+		    self.PickColorToggle = function() {
+		        self.ShowUpload(false);
+		        PushMkt.CreateColorPicker();
+		    };
 
 			// Initialization
 			self.ServiceAdapter = new ColorService();

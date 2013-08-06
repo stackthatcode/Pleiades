@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using Commerce.Persist.Database;
 using Commerce.Persist.Interfaces;
 using Commerce.Persist.Model.Lists;
-using Pleiades.Data;
-using Pleiades.Data.EF;
 
 namespace Commerce.Persist.Concrete
 {
@@ -16,9 +14,9 @@ namespace Commerce.Persist.Concrete
     /// </summary>
     public class JsonCategoryRepository : IJsonCategoryRepository
     {
-        PleiadesContext Context { get; set; }
+        PushMarketContext Context { get; set; }
 
-        public JsonCategoryRepository(PleiadesContext context)
+        public JsonCategoryRepository(PushMarketContext context)
         {
             this.Context = context;
         }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
+using Commerce.Persist.Database;
 using Commerce.Persist.Interfaces;
 using Commerce.Persist.Model.Billing;
 using Commerce.Persist.Model.Orders;
@@ -16,7 +16,7 @@ namespace Commerce.Persist.Concrete
         public const string ErrorMissingData = "Invalid or missing data passed";
         public const string ErrorFailedPayment = "Something's wrong with your Payment Info. Sorry, please try again";
 
-        PleiadesContext Context { get; set; }
+        PushMarketContext Context { get; set; }
         IPaymentProcessor PaymentProcessor { get; set; }
         IAnalyticsService AnalyticsService { get; set; }
         IEmailService EmailService { get; set; }
@@ -29,7 +29,7 @@ namespace Commerce.Persist.Concrete
         public Action<Order> CreateOrder;
         public Action SaveChanges;
 
-        public OrderSubmissionService(PleiadesContext context, 
+        public OrderSubmissionService(PushMarketContext context, 
                 IPaymentProcessor paymentProcessor, IAnalyticsService analyticsService, IEmailService emailService)
         {
             this.Context = context;

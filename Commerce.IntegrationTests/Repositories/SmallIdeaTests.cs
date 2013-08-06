@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
+using Commerce.Persist.Database;
 using NUnit.Framework;
-using Commerce.Persist.Concrete;
 using Commerce.Persist.Model.Lists;
 
 namespace Commerce.IntegrationTests
@@ -15,7 +13,7 @@ namespace Commerce.IntegrationTests
         [Test]
         public void Test1()
         {
-            var context = new PleiadesContext();
+            var context = new PushMarketContext();
             context.SmallIdeas.ToList().ForEach(x => context.SmallIdeas.Remove(x));
             context.SaveChanges();
 

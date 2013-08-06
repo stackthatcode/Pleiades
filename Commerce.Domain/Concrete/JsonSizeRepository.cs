@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
+using Commerce.Persist.Database;
 using Commerce.Persist.Interfaces;
 using Commerce.Persist.Model.Lists;
-using Pleiades.Data;
-using Pleiades.Data.EF;
 
 namespace Commerce.Persist.Concrete
 {
     public class JsonSizeRepository : IJsonSizeRepository
     {
-        PleiadesContext Context { get; set; }
+        PushMarketContext Context { get; set; }
 
-        public JsonSizeRepository(PleiadesContext context)
+        public JsonSizeRepository(PushMarketContext context)
         {
             this.Context = context;
         }

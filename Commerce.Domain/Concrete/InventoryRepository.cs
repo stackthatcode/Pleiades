@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Commerce.Persist.Database;
 using Commerce.Persist.Interfaces;
 using Commerce.Persist.Model.Products;
 
@@ -9,9 +9,9 @@ namespace Commerce.Persist.Concrete
 {
     public class InventoryRepository : IInventoryRepository
     {
-        PleiadesContext Context { get; set; }
+        PushMarketContext Context { get; set; }
 
-        public InventoryRepository(PleiadesContext context)
+        public InventoryRepository(PushMarketContext context)
         {
             this.Context = context;
         }

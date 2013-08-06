@@ -1,24 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Data.Entity;
+using Commerce.Persist.Database;
 using Commerce.Persist.Interfaces;
 using Commerce.Persist.Model.Resources;
-using Pleiades.Data;
-using Pleiades.Data.EF;
 
 namespace Commerce.Persist.Concrete
 {
     public class FileResourceRepository : IFileResourceRepository
     {
-        public PleiadesContext Context { get; set; }
+        public PushMarketContext Context { get; set; }
         public string ResourceStorage { get; set; }
 
-        public FileResourceRepository(PleiadesContext context)
+        public FileResourceRepository(PushMarketContext context)
         {
             this.Context = context;
 

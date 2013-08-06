@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Pleiades.Data;
+using Commerce.Persist.Database;
 using Pleiades.Web;
-using Commerce.Persist.Concrete;
 using Commerce.Persist.Interfaces;
-using Commerce.Persist.Model.Lists;
 using Commerce.Persist.Model.Products;
 using Commerce.Web.Areas.Admin.Models.Color;
 
@@ -24,12 +19,12 @@ namespace Commerce.Web.Areas.Admin.Controllers
         IProductRepository ProductRepository { get; set; }
         IInventoryRepository InventoryRepository { get; set; }
         IImageBundleRepository ImageBundleRepository { get; set; }
-        PleiadesContext Context { get; set; } 
+        PushMarketContext Context { get; set; } 
 
         public ProductController(IJsonCategoryRepository categoryRepository, 
                 IJsonBrandRepository brandRepository, IProductRepository productRepository, 
                 IJsonSizeRepository sizeRepository, IInventoryRepository inventoryRepository,
-                IImageBundleRepository imageBundleRepository, PleiadesContext context)
+                IImageBundleRepository imageBundleRepository, PushMarketContext context)
         {
             this.CategoryRepository = categoryRepository;
             this.BrandRepository = brandRepository;
@@ -129,9 +124,9 @@ namespace Commerce.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            this.ProductRepository.Delete(id);
+             this.ProductRepository.Delete(id);
             this.Context.SaveChanges();
-            return new JsonNetResult();
+            return JsonNetResult.Success();
         }
 
 
@@ -157,14 +152,14 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             this.ProductRepository.DeleteProductColor(id, productColorId);
             this.Context.SaveChanges();
-            return new JsonNetResult();
+            return JsonNetResult.Success();
         }
 
         [HttpPost]
         public ActionResult UpdateColorOrder(int id, string sorted)
         {
             this.ProductRepository.UpdateProductColorSort(id, sorted);
-            return new JsonNetResult();
+            return JsonNetResult.Success();
         }
 
 
@@ -197,7 +192,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         public ActionResult UpdateSizeOrder(int id, string sorted)
         {
             this.ProductRepository.UpdateSizeOrder(id, sorted);
-            return new JsonNetResult();
+            return JsonNetResult.Success();
         }
 
         [HttpPost]
@@ -205,7 +200,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             this.ProductRepository.DeleteProductSize(id, sizeId);
             this.Context.SaveChanges();
-            return new JsonNetResult();
+            return JsonNetResult.Success();
         }
 
 
@@ -226,7 +221,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         public ActionResult UpdateImageOrder(int id, string sorted)
         {
             this.ProductRepository.UpdateProductImageSort(id, sorted);
-            return new JsonNetResult();
+            return JsonNetResult.Success();
         }
 
         [HttpPost]
@@ -234,7 +229,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             this.ProductRepository.ChangeImageColor(id, productImageId, newColorId);
             this.Context.SaveChanges();
-            return new JsonNetResult();
+            return JsonNetResult.Success();
         }
         
         [HttpPost]
@@ -242,7 +237,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             this.ProductRepository.DeleteProductImage(id, productImageId);
             this.Context.SaveChanges();
-            return new JsonNetResult();
+            return JsonNetResult.Success();
         }
 
         [HttpPost]
@@ -268,7 +263,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             this.ProductRepository.AssignImagesToColor(id);
             this.Context.SaveChanges();
-            return new JsonNetResult();
+            return JsonNetResult.Success();
         }
 
         [HttpPost]
@@ -276,7 +271,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             this.ProductRepository.UnassignImagesFromColor(id);
             this.Context.SaveChanges();
-            return new JsonNetResult();
+            return JsonNetResult.Success();
         }
 
 
@@ -310,7 +305,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             this.InventoryRepository.UpdateInStock(id, inventoryTotal);
             this.Context.SaveChanges();
-            return new JsonNetResult();
+            return JsonNetResult.Success();
         }
     }
 }

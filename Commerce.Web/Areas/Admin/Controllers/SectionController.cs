@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using Commerce.Persist.Database;
 using Pleiades.Data;
 using Pleiades.Web;
-using Commerce.Persist.Concrete;
 using Commerce.Persist.Interfaces;
 using Commerce.Persist.Model.Lists;
 
@@ -15,9 +11,9 @@ namespace Commerce.Web.Areas.Admin.Controllers
     {
         IJsonCategoryRepository Repository { get; set; }
         IUnitOfWork UnitOfWork { get; set; }
-        PleiadesContext Context { get; set; }
+        PushMarketContext Context { get; set; }
 
-        public SectionController(IJsonCategoryRepository repository, IUnitOfWork unitOfWork, PleiadesContext context)
+        public SectionController(IJsonCategoryRepository repository, IUnitOfWork unitOfWork, PushMarketContext context)
         {
             this.Repository = repository;
             this.UnitOfWork = unitOfWork;

@@ -1,6 +1,4 @@
-﻿@using Pleiades.Web.MvcHelpers
-
-@section _Scripts {
+﻿@section _Scripts {
     @Html.Javascript("~/Content/JQuery/jquery-ui-1.10.0.custom.min.js")
     @Html.Partial("_EndlessGlider")
     @Html.Partial("_ModalDialog")
@@ -16,8 +14,8 @@
 
             // Search
             self.Search = function (brandId, categoryId, searchText, callback) {
-                self.AjaxGet("/Admin/Product/Search" +
-            "?brandId=" + brandId + "&categoryId=" + categoryId + "&searchText=" + searchText, callback);
+                self.AjaxGet("/Admin/Product/Search?brandId=" + 
+                    brandId + "&categoryId=" + categoryId + "&searchText=" + searchText, callback);
             };
 
             self.Categories = function (callback) {
@@ -54,9 +52,9 @@
 
 
             // Sizes
-            self.SizeGroups = function (callback) {
+            self.SizeGroups = function(callback) {
                 self.AjaxGet("/Admin/Size/SizeGroups", callback);
-            }
+            };
 
             self.AddProductSize = function (productId, sizeId, callback) {
                 self.AjaxPost("/Admin/Product/AddProductSize/" + productId + "?sizeId=" + sizeId, {}, callback);
@@ -160,54 +158,55 @@
     <!-- Root View Model -->
     <script type="text/javascript">
         var PushMkt = PushMkt || {};
-        PushMkt.ProductModel = function () {
+        PushMkt.ProductModel = function() {
             var self = this;
 
             // We're using a "plain-vanilla" Ajax Service
             self.ProductService = new ProductService();
 
             // Modal state + functions
-            self.ModalViewModel = new PushMkt.ModalDialogViewModel();
-
-            // ... and pass throughs
-            self.ShowModal = function (template, header, body, list, callback) {
-                self.ModalViewModel.ShowModal(template, header, body, list, callback);
-            }
+            self.ModalViewModel = ko.observable({ Template: null, Data: null });
 
             // Glider functions
             self.EndlessGlider = new PushMkt.EndlessGlider();
             self.EndlessGlider.Init("Top-Workspace-Parent", "Main-Editor-Search");
 
             // ... and pass throughs
-            self.GlideLeft = function (topWorkspace, mainEditor, userCallback) {
+            self.GlideLeft = function(topWorkspace, mainEditor, userCallback) {
                 self.EndlessGlider.GlideToLeft("Top-Workspace-" + topWorkspace, "Main-Editor-" + mainEditor, userCallback);
-            }
+            };
 
-            self.GlideRight = function (topWorkspace, mainEditor, userCallback) {
+            self.GlideRight = function(topWorkspace, mainEditor, userCallback) {
                 self.EndlessGlider.GlideToRight("Top-Workspace-" + topWorkspace, "Main-Editor-" + mainEditor, userCallback);
-            }
+            };
 
-            self.GetActiveMainEditor = ko.computed(function () {
+            self.GetActiveMainEditor = ko.computed(function() {
                 var editor = self.EndlessGlider.GetActiveEditorTemplate() || "";
                 return editor.replace("Main-Editor-", "");
             });
 
-            self.SetActiveMainEditor = function (mainEditor) {
+            self.SetActiveMainEditor = function(mainEditor) {
                 self.EndlessGlider.SetActiveEditorTemplate("Main-Editor-" + mainEditor);
-            }
+            };
 
             self.ScrollTracker = new PushLibrary.ScrollTracker("#gliding-container");
-            
+
             PushMkt.AddSearchFunctions(self);
             PushMkt.AddInfoFunctions(self);
-            AddColorFunctions(self);
-            AddImageFunctions(self);
-            AddSizeFunctions(self);
-            AddInventoryFunctions(self);
+            PushMkt.AddColorFunctions(self);
+            PushMkt.AddImageFunctions(self);
+            PushMkt.AddSizeFunctions(self);
+            PushMkt.AddInventoryFunctions(self);
 
-            self.RetrieveCategoriesList();
-            self.RetrieveBrandsList();
-        }
+            flow.exec(
+                function() {
+                    self.RetrieveCategoriesList(this);
+                },
+                function() {
+                    self.RetrieveBrandsList(this);
+                }
+            );
+        };
 
         var model;
         $(function () {
@@ -232,5 +231,5 @@
     </div>
     
     <div data-bind="template: { data: $root.ModalViewModel , name: 'Modal-Dialog-Scaffolding' }">
-    </div>    
+    </div>
 }

@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
 using System.Data.Objects.SqlClient;
+using Commerce.Persist.Database;
 using Commerce.Persist.Interfaces;
-using Commerce.Persist.Model.Lists;
 using Commerce.Persist.Model.Products;
-using Commerce.Persist.Model.Resources;
-using Pleiades.Data;
-using Pleiades.Data.EF;
 
 namespace Commerce.Persist.Concrete
 {
@@ -17,11 +14,11 @@ namespace Commerce.Persist.Concrete
     /// </summary>
     public class ProductRepository : IProductRepository
     {
-        PleiadesContext Context { get; set; }
+        PushMarketContext Context { get; set; }
         IImageBundleRepository ImageBundleRepository { get; set; }
         IInventoryRepository InventoryRepository { get; set; }
 
-        public ProductRepository(PleiadesContext context, 
+        public ProductRepository(PushMarketContext context, 
                 IImageBundleRepository imageBundleRepository, IInventoryRepository inventoryRepository)
         {
             this.Context = context;
@@ -72,7 +69,13 @@ namespace Commerce.Persist.Concrete
             var query = this.ProductWithImagesBrandsCategories();
             if (categoryId != null)
             {
-                query = query.Where(x => x.Category.Id == categoryId || x.Category.ParentId == categoryId);
+                var categories = Context
+                    .CategoryHierarchies
+                    .Where(x => x.ParentId == categoryId)
+                    .Select(x => x.Id)
+                    .ToList();
+
+                query = query.Where(x => categories.Contains(x.Category.Id));
             }
             if (brandId != null)
             {

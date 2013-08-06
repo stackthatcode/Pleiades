@@ -1,25 +1,25 @@
 ﻿	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE PARENT/SEARCH -->
-	<script type="text/html" id="Top-Workspace-Parent">
+    <script type="text/html" id="Top-Workspace-Parent">
         <div class="workspace-heading" style="height:125px;">
-		    <div id="heading" class="container">
-			    <div class="row">
-				    <div class="span9">
-					    <h1>Products > Search</h1>
-				    </div>
-				    <div class="span3" style="margin-top:15px; text-align:right;">
-					    <a class="btn btn-primary btn-block" data-bind="click: $root.AddProduct">Add New Product <i class="icon-arrow-right icon-white"></i></a>
-				    </div>
-			    </div>
+            <div id="heading" class="container">
+                <div class="row">
+                    <div class="span9">
+                        <h1>Products > Search</h1>
+                    </div>
+                    <div class="span3" style="margin-top:15px; text-align:right;">
+                        <a class="btn btn-primary btn-block" data-bind="click: $root.AddProduct">Add New Product <i class="icon-arrow-right icon-white"></i></a>
+                    </div>
+                </div>
 
                 <div style="height:20px;"></div>
                 
                 <div class="row">
-				    <div class="span3">
+                    <div class="span3">
                         <select id="SearchCategory" data-bind="foreach: $data.CategoryArray">
                             <option data-bind="value: $data.value, text: $data.text"  />
                         </select>
                     </div>
-				    <div class="span3">
+                    <div class="span3">
                         <select id="SearchBrand" data-bind="foreach: $data.BrandArray">
                             <option data-bind="value: $data.value, text: $data.text"  />
                         </select>
@@ -27,13 +27,14 @@
                     <div class="span3">
                         <input id="SearchText" type="text" class="input-large" placeholder="Description, Name, Sku..." />
                     </div>
-				    <div class="span3">
-					    <a class="btn btn-inverse btn-block" data-bind="click: $data.SearchClick">Search <i class="icon-search icon-white"></i></a>
+                    <div class="span3">
+                        <a class="btn btn-inverse btn-block" data-bind="click: $data.SearchClick">Search <i class="icon-search icon-white"></i></a>
                     </div>
                 </div>
-		    </div>
+            </div>
         </div>
     </script>
+
     <!-- KNOCKOUT TEMPLATE - MAIN EDITOR PARENT/SEARCH) -->
 	<script type="text/html" id="Main-Editor-Search">
         <div style="width:100%; height:20px;"></div>
@@ -72,92 +73,93 @@
 	</script>
 
     <!-- KNOCKOUT TEMPLATE - TOP WORKSPACE INFO ET AL. aka the beastly tab management area.  Take heed! -->
-	<script type="text/html" id="Top-Workspace-Child">
-        <div class="workspace-heading" style="height:125px;">
-		    <div id="heading" class="container" data-bind="if: $root.SelectedProduct()">
-			    <div class="row" style="position:relative;">				
-				    <div class="span12">
-					    <h1>Products &gt; <span data-bind="text: $root.SelectedProductName"></span></h1>
-				    </div>
-			    </div>
+    <script type="text/html" id="Top-Workspace-Child">
+    <div class="workspace-heading" style="height:125px;">
+        <div id="heading" class="container" data-bind="if: $root.SelectedProduct()">
+            <div class="row" style="position:relative;">				
+                <div class="span12">
+                    <h1>Products &gt; <span data-bind="text: $root.SelectedProductName"></span></h1>
+                </div>
+            </div>
                 
-                <div style="height:20px;"></div>
+            <div style="height:20px;"></div>
                 
-                <div class="row">
-                    <div class="span7" style="height:48px;">
-                        <ul class="nav nav-pills">
-                            <li style="width:140px;">
-				                <a id="glideToParent" class="backbutton" data-bind="click: $root.GlideToSearchView">&laquo; Back to Search</a>
-                                &nbsp;
-                            </li>
+            <div class="row">
+                <div class="span7" style="height:48px;">
+                    <ul class="nav nav-pills">
+                        <li style="width:140px;">
+                            <a id="glideToParent" class="backbutton" data-bind="click: $root.GlideToSearchView">&laquo; Back to Search</a>
+                            &nbsp;
+                        </li>
 
-                            <li data-bind="if: $root.GetActiveMainEditor() == 'Info'" class="active">
-                                <a href="#">Info</a>
-                            </li>
-                            <li data-bind="if: $root.GetActiveMainEditor() != 'Info'">
-                                <a href="#" data-bind="click: $root.InfoTabClick">Info</a>
-                            </li>
+                        <li data-bind="if: $root.GetActiveMainEditor() == 'Info'" class="active">
+                            <a href="#">Info</a>
+                        </li>
+                        <li data-bind="if: $root.GetActiveMainEditor() != 'Info'">
+                            <a href="#" data-bind="click: $root.InfoTabClick">Info</a>
+                        </li>
 
-                            <!-- ko if: $root.SelectedProduct().Id() -->
-                            <li data-bind="if: $root.GetActiveMainEditor() == 'Colors'" class="active">
-                                <a href="#">Colors</a>
-                            </li>
-                            <li data-bind="if: $root.GetActiveMainEditor() != 'Colors'">
-                                <a href="#" data-bind="click: $root.ColorsTabClick">Colors</a>
-                            </li>
+                        <!-- ko if: $root.SelectedProduct().Id() -->
+                        <li data-bind="if: $root.GetActiveMainEditor() == 'Colors'" class="active">
+                            <a href="#">Colors</a>
+                        </li>
+                        <li data-bind="if: $root.GetActiveMainEditor() != 'Colors'">
+                            <a href="#" data-bind="click: $root.ColorsTabClick">Colors</a>
+                        </li>
 
-                            <li data-bind="if: $root.GetActiveMainEditor() == 'Images'" class="active">
-                                <a href="#">Images</a>
-                            </li>
-                            <li data-bind="if: $root.GetActiveMainEditor() != 'Images'">
-                                <a href="#" data-bind="click: $root.ImagesTabClick">Images</a>
-                            </li>
+                        <li data-bind="if: $root.GetActiveMainEditor() == 'Images'" class="active">
+                            <a href="#">Images</a>
+                        </li>
+                        <li data-bind="if: $root.GetActiveMainEditor() != 'Images'">
+                            <a href="#" data-bind="click: $root.ImagesTabClick">Images</a>
+                        </li>
                                                         
-                            <li data-bind="if: $root.GetActiveMainEditor() == 'Sizes'" class="active">
-                                <a href="#">Sizes</a>
-                            </li>
-                            <li data-bind="if: $root.GetActiveMainEditor() != 'Sizes'">
-                                <a href="#" data-bind="click: $root.SizesTabClick">Sizes</a>
-                            </li>
+                        <li data-bind="if: $root.GetActiveMainEditor() == 'Sizes'" class="active">
+                            <a href="#">Sizes</a>
+                        </li>
+                        <li data-bind="if: $root.GetActiveMainEditor() != 'Sizes'">
+                            <a href="#" data-bind="click: $root.SizesTabClick">Sizes</a>
+                        </li>
 
-                            <li data-bind="if: $root.GetActiveMainEditor() == 'Inventory'" class="active">
-                                <a href="#">Inventory</a>
-                            </li>
-                            <li data-bind="if: $root.GetActiveMainEditor() != 'Inventory'">
-                                <a href="#" data-bind="click: $root.InventoryTabClick">Inventory</a>
-                            </li>
-                            <!-- /ko -->
-                        </ul>
-                    </div>
-
-                    <div class="span5" style="text-align:right;" data-bind="if: $root.GetActiveMainEditor() == 'Info'">
-					    <a class="btn btn-inverse" href="#" data-bind="click: $root.GlideToSearchView"><i class="icon-remove icon-white"></i> Cancel</a>                    
-					    <a class="btn btn-primary" href="#" data-bind="click: $root.SaveClick"><i class="icon-ok icon-white"></i> Save</a>
-                    </div>
-
-                    <div class="span5" style="text-align:right;" data-bind="if: $root.GetActiveMainEditor() == 'Colors'">
-					    <a class="btn btn-primary" href="#" data-bind="click: $root.SlideToColorList"><i class="icon-white icon-search"></i> Add Color from Lists</a>
-					    <a class="btn btn-primary" href="#" data-bind="click: $root.SlideToCreateNewColor"><i class="icon-white icon-pencil"></i> Create New Color</a>
-                    </div>
-
-                    <div class="span5" style="text-align:right;" data-bind="if: $root.GetActiveMainEditor() == 'Images'">				        
-                        <!-- ko ifnot: $root.SelectedProduct().AssignImagesToColors() -->
-				        <a class="btn btn-primary" href="#" data-bind="click: $root.AddNewImage"><i class="icon-plus icon-white"></i> Add Image</a>
-                        <a class="btn btn-primary" href="#" data-bind="click: $root.AssignImagesToColorClick"><i class="icon-white icon-share"></i> Assign Images To Colors</a>
+                        <li data-bind="if: $root.GetActiveMainEditor() == 'Inventory'" class="active">
+                            <a href="#">Inventory</a>
+                        </li>
+                        <li data-bind="if: $root.GetActiveMainEditor() != 'Inventory'">
+                            <a href="#" data-bind="click: $root.InventoryTabClick">Inventory</a>
+                        </li>
                         <!-- /ko -->
+                    </ul>
+                </div>
 
-                        <!-- ko if: $root.SelectedProduct().AssignImagesToColors() -->
-				        <a class="btn btn-primary" href="#" data-bind="click: $root.UnassignImagesFromColorClick"><i class="icon-white icon-ban-circle"></i> Don't Assign Images To Colors</a>
-                        <!-- /ko -->
-                    </div>
+                <div class="span5" style="text-align:right;" data-bind="if: $root.GetActiveMainEditor() == 'Info'">
+                    <a class="btn btn-inverse" href="#" data-bind="click: $root.GlideToSearchView"><i class="icon-remove icon-white"></i> Cancel</a>                    
+                    <a class="btn btn-primary" href="#" data-bind="click: $root.SaveClick"><i class="icon-ok icon-white"></i> Save</a>
+                </div>
+
+                <div class="span5" style="text-align:right;" data-bind="if: $root.GetActiveMainEditor() == 'Colors'">
+                    <a class="btn btn-primary" href="#" data-bind="click: $root.SlideToColorList"><i class="icon-white icon-search"></i> Add Color from Lists</a>
+                    <a class="btn btn-primary" href="#" data-bind="click: $root.SlideToCreateNewColor"><i class="icon-white icon-pencil"></i> Create New Color</a>
+                </div>
+
+                <div class="span5" style="text-align:right;" data-bind="if: $root.GetActiveMainEditor() == 'Images'">				        
+                    <!-- ko ifnot: $root.SelectedProduct().AssignImagesToColors() -->
+                    <a class="btn btn-primary" href="#" data-bind="click: $root.AddNewImage"><i class="icon-plus icon-white"></i> Add Image</a>
+                    <a class="btn btn-primary" href="#" data-bind="click: $root.AssignImagesToColorClick"><i class="icon-white icon-share"></i> Assign Images To Colors</a>
+                    <!-- /ko -->
+
+                    <!-- ko if: $root.SelectedProduct().AssignImagesToColors() -->
+                    <a class="btn btn-primary" href="#" data-bind="click: $root.UnassignImagesFromColorClick"><i class="icon-white icon-ban-circle"></i> Don't Assign Images To Colors</a>
+                    <!-- /ko -->
+                </div>
                     
-                    <div class="span5" style="text-align:right;" data-bind="if: $root.GetActiveMainEditor() == 'Sizes'">
-					    <a class="btn btn-primary" href="#" data-bind="click: $root.AddSizeFromList"><i class="icon-white icon-search"></i> Add Size from Lists</a>
-                    </div>
-		        </div>
-		    </div>
-		</div>
-    </script>
+                <div class="span5" style="text-align:right;" data-bind="if: $root.GetActiveMainEditor() == 'Sizes'">
+                    <a class="btn btn-primary" href="#" data-bind="click: $root.AddSizeFromList"><i class="icon-white icon-search"></i> Add Size from Lists</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
     <!-- KNOCKOUT TEMPLATE - CHILD EDITOR INFO TAB -->
 	<script type="text/html" id="Main-Editor-Info">
         <div style="margin-top:40px;" data-bind="with: $root.SelectedProduct()">
@@ -257,12 +259,12 @@
     <script type="text/javascript">
 		// KO enabling/disabling of server JSON        
         var ProductInfoToKnockout = function(product) {
-			var output = {
-				Id: ko.observable(product.Id),
-				Name: ko.observable(product.Name || ""),
-				SEO: ko.observable(product.SEO || ""),
-				SkuCode: ko.observable(product.SkuCode || ""),
-				Synopsis: ko.observable(product.Synopsis || ""),
+            var output = {
+                Id: ko.observable(product.Id),
+                Name: ko.observable(product.Name || ""),
+                SEO: ko.observable(product.SEO || ""),
+                SkuCode: ko.observable(product.SkuCode || ""),
+                Synopsis: ko.observable(product.Synopsis || ""),
                 Description: ko.observable(product.Description || ""),
                 BrandId: ko.observable(product.BrandId),
                 BrandName: ko.observable(product.BrandName),
@@ -270,19 +272,19 @@
                 CategoryName: ko.observable(product.CategoryName),
                 UnitPrice: ko.observable(product.UnitPrice || 0),
                 UnitCost: ko.observable(product.UnitCost || 0),
-                AssignImagesToColors: ko.observable(product.AssignImagesToColors),             
+                AssignImagesToColors: ko.observable(product.AssignImagesToColors),
                 ImageBundleExternalId: ko.observable(product.ImageBundleExternalId),
-			};
-            
+            };
+
             // TODO: figure out how to glue this together via prototypes
-            output.UnitPriceFormatted = 
+            output.UnitPriceFormatted =
                 ko.computed({
-                    read: function () {
+                    read: function() {
                         var readValue = '$' + output.UnitPrice().toFixed(2);
                         //console.log("Reading to EditUnitPrice: " + readValue);
                         return readValue;
                     },
-                    write: function (value) {
+                    write: function(value) {
                         //console.log("Writing to EditUnitPrice: " + value);
                         // Strip out unwanted characters, parse as float, then write the raw data back to the underlying "price" observable
                         value = parseFloat(value.replace(/[^\.\d]/g, ""));
@@ -292,12 +294,12 @@
                     owner: output
                 });
 
-            output.UnitCostFormatted = 
+            output.UnitCostFormatted =
                 ko.computed({
-                    read: function () {
+                    read: function() {
                         return '$' + output.UnitCost().toFixed(2);
                     },
-                    write: function (value) {
+                    write: function(value) {
                         // Strip out unwanted characters, parse as float, then write the raw data back to the underlying "price" observable
                         value = parseFloat(value.replace(/[^\.\d]/g, ""));
                         output.UnitCost(isNaN(value) ? 0 : value); // Write to underlying storage
@@ -307,12 +309,12 @@
                 });
 
             return output;
-		}
-        
+        };
+
         var ProductInfoToServerJson = function(product) {
-			return {
-				Id: product.Id(),
-				Name: product.Name(),
+            return {
+                Id: product.Id(),
+                Name: product.Name(),
                 SEO: product.SEO(),
                 SkuCode: product.SkuCode(),
                 Synopsis: product.Synopsis(),
@@ -323,14 +325,14 @@
                 UnitCost: product.UnitCost(),
                 ImageBundleExternalId: product.ImageBundleExternalId(),
                 AssignImagesToColors: product.AssignImagesToColors(),
-			};
-		}
+            };
+        };
 	</script>
     <!-- Search & Info View Model functions -->
     <script type="text/javascript">
         var PushMkt = namespace("PushMkt");
 
-        PushMkt.AddSearchFunctions = function (rootModel) {
+        PushMkt.AddSearchFunctions = function(rootModel) {
             var self = rootModel;
 
             self.BrandArray = ko.observableArray();
@@ -339,42 +341,42 @@
 
             self.SelectedProduct = ko.observable(null);
             self.SelectedProductName = ko.computed(
-            function () {
-                return self.SelectedProduct() && self.SelectedProduct().Name() && self.SelectedProduct().Name().koTrunc(50, true) || "(New Product)"
-            }, this);
+                function() {
+                    return self.SelectedProduct() && self.SelectedProduct().Name() && self.SelectedProduct().Name().koTrunc(50, true) || "(New Product)"
+                }, this);
 
 
-            self.RetrieveCategoriesList = function (callback) {
+            self.RetrieveCategoriesList = function(callback) {
                 flow.exec(
-                    function () {
+                    function() {
                         self.ProductService.Categories(this);
                     },
-                    function (data) {
+                    function(data) {
                         self.CategoryArray.removeAll();
                         self.CategoryArray.push({ value: null, text: "(No Category)" });
 
-                        var addCategory = function (category, indent) {
+                        var addCategory = function(category, indent) {
                             self.CategoryArray.push({ value: category.Id, text: indent + category.Name });
-                            $.each(category.Categories, function (index, elem) { addCategory(elem, indent + '....'); });
-                        }
-                        $.each(data, function (index, elem) { addCategory(elem, ''); });
+                            $.each(category.Categories, function(index, elem) { addCategory(elem, indent + '....'); });
+                        };
+                        $.each(data, function(index, elem) { addCategory(elem, ''); });
                         if (callback) {
                             callback();
                         }
                     }
                 );
-            }
+            };
 
-            self.RetrieveBrandsList = function (callback) {
+            self.RetrieveBrandsList = function(callback) {
                 flow.exec(
-                    function () {
+                    function() {
                         self.ProductService.Brands(this);
                     },
-                    function (data) {
+                    function(data) {
                         self.BrandArray.removeAll();
                         self.BrandArray.push({ value: null, text: "(No Brand)" });
 
-                        $.each(data, function (index, elem) {
+                        $.each(data, function(index, elem) {
                             self.BrandArray.push({ value: elem.Id, text: elem.Name });
                         });
 
@@ -383,66 +385,65 @@
                         }
                     }
                 );
-            }
+            };
 
             // asynchronous, service-bound operations            
-            self.EditProduct = function (product) {
+            self.EditProduct = function(product) {
                 flow.exec(
-				    function () {
-				        self.SelectedIndex = self.SearchData.indexOf(product);
-				        self.ProductService.Info(product.Id, this);
-				    },
-				    function (product) {
-				        var knockedoutData = ProductInfoToKnockout(product);
-				        self.SelectedProduct(knockedoutData);
-				        self.GlideRight("Child", "Info", this);
-				    },
-                    function () {
+                    function() {
+                        self.SelectedIndex = self.SearchData.indexOf(product);
+                        self.ProductService.Info(product.Id, this);
+                    },
+                    function(product) {
+                        var knockedoutData = ProductInfoToKnockout(product);
+                        self.SelectedProduct(knockedoutData);
+                        self.GlideRight("Child", "Info", this);
+                    },
+                    function() {
                         self.InfoTabClick();
                     }
-			    );
-            }
+                );
+            };
 
-            self.SearchClick = function () {
+            self.SearchClick = function() {
                 flow.exec(
-                    function () {
+                    function() {
                         var brandId = $("#SearchBrand").val();
                         var categoryId = $("#SearchCategory").val();
                         var searchText = $("#SearchText").val();
                         self.ProductService.Search(brandId, categoryId, searchText, this);
                     },
-                    function (data) {
+                    function(data) {
                         self.SearchData(data);
                     }
                 );
-            }
+            };
 
-            self.AddProduct = function () {
+            self.AddProduct = function() {
                 flow.exec(
-                    function () {
+                    function() {
                         var knockedoutData = ProductInfoToKnockout({});
                         self.SelectedProduct(knockedoutData);
-                        self.ParentGlider.GlideToChild(this);
+                        self.GlideRight("Child", "Info", this);
                     },
-                    function () {
+                    function() {
                         self.InfoTabClick();
                     }
                 );
-            }
-        }
+            };
+        };
 
-        PushMkt.AddInfoFunctions = function (rootModel) {
+        PushMkt.AddInfoFunctions = function(rootModel) {
             var self = rootModel;
 
-            self.InfoTabClick = function () {
-                // TODO: fix this!
-                // self.ActiveView({ Level: "Child", Template: "Info" });
-            }
+            self.InfoTabClick = function() {
+                self.SetActiveMainEditor("Info");
+            };
 
-            self.GlideToSearchView = function () {
+            self.GlideToSearchView = function() {
                 var recordId = self.SelectedProduct().Id();
                 flow.exec(
-                    function () {
+                    function() {
                         $("#glideToParent").hide();
                         if (recordId) {
                             self.ProductService.Info(recordId, this);
@@ -450,9 +451,9 @@
                             this();
                         }
                     },
-                    function (data) {
+                    function(data) {
                         if (data) {
-                            var index = self.SearchData().arrayFirstIndexOf(function (x) { return x.Id == recordId; });
+                            var index = self.SearchData().arrayFirstIndexOf(function(x) { return x.Id == recordId; });
                             if (index == -1) {
                                 self.SearchData.unshift(data);
                             } else {
@@ -461,34 +462,34 @@
                         }
                         self.GlideLeft("Parent", "Search", this);
                     },
-					function () {
-					    self.SelectedProduct(null);
-					    self.SelectedIndex = null;
+                    function() {
+                        self.SelectedProduct(null);
+                        self.SelectedIndex = null;
 
-					    self.ScrollTracker.TrackToIdIfNotNull(recordId);
-					}
-				);
-            }
+                        self.ScrollTracker.TrackToIdIfNotNull(recordId);
+                    }
+                );
+            };
 
-            self.DeleteProduct = function (product) {
+            self.DeleteProduct = function(product) {
                 self.ModalViewModel({ Template: "Modal-Dialog-Product", Data: product });
                 $('#modal-delete').modal();
-            }
+            };
 
-            self.DeleteProductConfirm = function () {
+            self.DeleteProductConfirm = function() {
                 var record = self.ModalViewModel().Data;
                 flow.exec(
-                    function () {
+                    function() {
                         $('#modal-delete').modal('hide');
                         self.ProductService.Delete(record.Id, this);
                     },
-                    function (data) {
+                    function(data) {
                         self.SearchData.remove(record); //function (item) { return item.Id == record.Id; });
                         self.ModalViewModel({ Data: null, Template: null });
                     });
-            }
+            };
 
-            self.SaveClick = function () {
+            self.SaveClick = function() {
                 var product = self.SelectedProduct();
                 var errors = [];
                 errors.push({ controlGroup: "#ProductName", invalid: product.Name().trim() == "" });
@@ -499,12 +500,11 @@
 
                 var validationMessage = $("#validation");
                 validationMessage.hide();
-                $.each(errors, function (index, elem) {
+                $.each(errors, function(index, elem) {
                     if (elem.invalid) {
                         $(elem.controlGroup).addClass("error");
                         validationMessage.show();
-                    }
-                    else {
+                    } else {
                         $(elem.controlGroup).removeClass("error");
                     }
                 });
@@ -514,17 +514,17 @@
                 }
 
                 flow.exec(
-                    function () {
+                    function() {
                         self.ProductService.Save(ProductInfoToServerJson(product), this);
                     },
-                    function (product) {
+                    function(product) {
                         var knockedoutData = ProductInfoToKnockout(product);
                         self.SelectedProduct(knockedoutData);
                     }
                 );
-            }
+            };
 
             return self;
-        }
+        };
     </script> 
 

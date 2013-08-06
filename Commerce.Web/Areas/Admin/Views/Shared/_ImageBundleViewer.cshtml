@@ -1,51 +1,52 @@
-﻿    @Html.Javascript("~/Content/Bootstrap/js/bootstrap-lightbox.min.js")
+﻿    @using System.Configuration;
+    @Html.Javascript("~/Content/Bootstrap/js/bootstrap-lightbox.min.js")
     @Html.Stylesheet("~/Content/Bootstrap/css/bootstrap-lightbox.min.css")
 
 	<script type="text/javascript">
 	    var BundleViewer = namespace("Commerce.Web.BundleViewer");
 
 	    BundleViewer.DownloadTemplate = '@Url.Content("~/Admin/Image/Download/{exRID}?size={size}")';
-	    BundleViewer.Default75x75 = '@Url.Content("~/Content/Commerce.Web/Images/75x75.gif")';
-	    BundleViewer.Default150x150 = '@Url.Content("~/Content/Commerce.Web/Images/150x150.gif")';
+	    BundleViewer.Default75x75 = '@Url.Content(ConfigurationManager.AppSettings["BlankThumbnailImageUrl"])';
+	    BundleViewer.Default150x150 = '@Url.Content(ConfigurationManager.AppSettings["BlankSmallImageUrl"])';
 
 	    // $data contains: { either ImageBundle: , which will contain ExternalId --- or ImageBundleExternalId: "(some guid)", 
 	    // LightboxSuffixId: "Main, Child or Parent, etc." }
 
-	    namespace("Commerce.Web.BundleViewer").ContainsValidImage = function (data) {
+	    BundleViewer.ContainsValidImage = function (data) {
 	        return (data.ImageBundleExternalId || (data.ImageBundle && data.ImageBundle.ExternalId));
-	    }
-        
-	    namespace("Commerce.Web.BundleViewer").ExtractId = function (data) {
-	        var imageBundleExternalId =
-                data.ImageBundleExternalId ? 
-                    data.ImageBundleExternalId : (data.ImageBundle && data.ImageBundle.ExternalId);
-	        return imageBundleExternalId;
-	    }
+	    };
 
-	    namespace("Commerce.Web.BundleViewer").ImageBundleDownloadUrl = function (data, size) {
+	    BundleViewer.ExtractId = function (data) {
+	        var imageBundleExternalId =
+	            data.ImageBundleExternalId ?
+	                data.ImageBundleExternalId : (data.ImageBundle && data.ImageBundle.ExternalId);
+	        return imageBundleExternalId;
+	    };
+
+	    BundleViewer.ImageBundleDownloadUrl = function (data, size) {
 	        var id = BundleViewer.ExtractId(data);
 
 	        return BundleViewer.DownloadTemplate
-                .replace("{exRID}", id)
-                .replace("{size}", size);
-	    }
+	            .replace("{exRID}", id)
+	            .replace("{size}", size);
+	    };
 
-	    namespace("Commerce.Web.BundleViewer").LightBoxElementId = function (data) {
+	    BundleViewer.LightBoxElementId = function (data) {
 	        var id = BundleViewer.ExtractId(data);
 
 	        return 'lightBox-' + id + '-' + data.LightboxSuffixId;
-        }
+	    };
 
-	    namespace("Commerce.Web.BundleViewer").ShowLightBox = function (data, event) {
-            event.stopPropagation();
+	    BundleViewer.ShowLightBox = function (data, event) {
+	        event.stopPropagation();
 
-            var lightboxid = '#' + BundleViewer.LightBoxElementId(data);
-            var lightboxImgId = lightboxid + " img";
+	        var lightboxid = '#' + BundleViewer.LightBoxElementId(data);
+	        var lightboxImgId = lightboxid + " img";
 
-            console.log(lightboxImgId + ' ' + $(lightboxImgId).attr("data-image"));
-            $(lightboxImgId).attr("src", $(lightboxImgId).attr("data-image"));
-            $(lightboxImgId).load(function () { $(lightboxid).lightbox(); });
-        }
+	        console.log(lightboxImgId + ' ' + $(lightboxImgId).attr("data-image"));
+	        $(lightboxImgId).attr("src", $(lightboxImgId).attr("data-image"));
+	        $(lightboxImgId).load(function() { $(lightboxid).lightbox(); });
+	    };
 	</script>
 
 

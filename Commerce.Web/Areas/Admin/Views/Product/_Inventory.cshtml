@@ -1,6 +1,8 @@
 ﻿     <!-- Inventory View Model -->
     <script type="text/javascript">
-        var AddInventoryFunctions = function (rootModel) {
+        var PushMkt = namespace("PushMkt");
+
+        PushMkt.AddInventoryFunctions = function (rootModel) {
             var self = rootModel;
 
             self.SelectedProductInventory = ko.observableArray();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Transactions;
+using Commerce.Persist.Database;
 using Pleiades.Injection;
 using Pleiades.Data;
 using Commerce.Persist.Concrete;
@@ -14,7 +15,7 @@ namespace Commerce.Initializer.Builders
             using (var tx = new TransactionScope())
             {
                 Console.WriteLine("Create the default State Taxes");
-                var context = ServiceLocator.Resolve<PleiadesContext>();
+                var context = ServiceLocator.Resolve<PushMarketContext>();
 
                 context.StateTaxes.Add(new StateTax { 
                     Name = "Alabama",

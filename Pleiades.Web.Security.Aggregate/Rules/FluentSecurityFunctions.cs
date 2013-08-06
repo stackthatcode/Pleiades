@@ -1,7 +1,4 @@
-﻿using System;
-using Pleiades.Web.Security.Rules;
-using Pleiades.Web.Security.Interface;
-using Pleiades.Web.Security.Model;
+﻿using Pleiades.Web.Security.Model;
 
 namespace Pleiades.Web.Security.Rules
 {

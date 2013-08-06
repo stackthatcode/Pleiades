@@ -1,11 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Configuration;
-using Pleiades.Data;
-using Pleiades.Web.Security.Providers;
+using Commerce.Persist.Database;
 using Pleiades.Utility;
-using Commerce.Persist;
-using Commerce.Persist.Concrete;
 using NUnit.Framework;
 
 namespace Commerce.IntegrationTests
@@ -14,7 +11,7 @@ namespace Commerce.IntegrationTests
     public class FixtureBase
     {
         public static bool recreateDatabaseAndResources = false;
-        public static PleiadesContext context = new PleiadesContext();
+        public static PushMarketContext context = new PushMarketContext();
 
         public FixtureBase()
         {

@@ -1,6 +1,8 @@
 ﻿    <!-- Size View Model -->
     <script type="text/javascript">
-        var AddSizeFunctions = function (rootModel) {
+        var PushMkt = namespace("PushMkt");
+
+        PushMkt.AddSizeFunctions = function (rootModel) {
             var self = rootModel;
             self.SelectedProductSizes = ko.observableArray();
             self.SizeReferenceData = ko.observableArray();

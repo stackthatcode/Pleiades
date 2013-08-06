@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using Pleiades.Data;
+using Commerce.Persist.Database;
 using Pleiades.Data.EF;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
@@ -11,7 +11,7 @@ namespace Commerce.Persist.Concrete
 {
     public class AggregateUserRepository : EFGenericRepository<AggregateUser>, IAggregateUserRepository
     {
-        public AggregateUserRepository(PleiadesContext context) : base(context)
+        public AggregateUserRepository(PushMarketContext context) : base(context)
         {
         }
 

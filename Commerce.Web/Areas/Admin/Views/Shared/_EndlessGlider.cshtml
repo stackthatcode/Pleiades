@@ -29,7 +29,7 @@
             });
 
             self.SetActiveEditorTemplate = function(template) {
-                self.GetActiveEditorTemplate()(template);
+                getActiveEditor()(template);
             }
 
             self.Init = function (workspaceTemplate, editorTemplate) {

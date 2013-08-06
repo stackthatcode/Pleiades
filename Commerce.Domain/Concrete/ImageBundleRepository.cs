@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Drawing;
 using System.Linq;
 using System.Data.Entity;
+using Commerce.Persist.Database;
 using Commerce.Persist.Interfaces;
 using Commerce.Persist.Model.Resources;
-using Pleiades.Data;
-using Pleiades.Data.EF;
 
 namespace Commerce.Persist.Concrete
 {
@@ -16,11 +14,11 @@ namespace Commerce.Persist.Concrete
         private static ConcurrentDictionary<int, ImageBundle> _cacheById = new ConcurrentDictionary<int, ImageBundle>();
         private static ConcurrentDictionary<Guid, ImageBundle> _cacheByGuid = new ConcurrentDictionary<Guid, ImageBundle>();
 
-        public PleiadesContext Context { get; set; }
+        public PushMarketContext Context { get; set; }
         public IFileResourceRepository FileResourceRepository { get; set; }
         public IImageProcessor ImageProcessor { get; set; }
 
-        public ImageBundleRepository(PleiadesContext context,
+        public ImageBundleRepository(PushMarketContext context,
                 IFileResourceRepository fileResourceRepository, IImageProcessor imageProcessor)
         {
             this.Context = context;
@@ -123,7 +121,12 @@ namespace Commerce.Persist.Concrete
             {
                 return _cacheByGuid[externalId];
             }
-            var output = this.Data().FirstOrDefault(x => x.ExternalId == externalId);            
+            var output = this.Data().FirstOrDefault(x => x.ExternalId == externalId);
+            if (output == null)
+            {
+                return new ImageBundle { ExternalId = Guid.Empty };
+            }
+
             _cacheById.TryAdd(output.Id, output);
             _cacheByGuid.TryAdd(output.ExternalId, output);
             return output;

@@ -1,27 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Data.Entity;
-using System.Data.Objects.SqlClient;
-using System.Net;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
+using Commerce.Persist.Database;
 using Pleiades.Web;
-using Commerce.Persist.Concrete;
 using Commerce.Persist.Interfaces;
 using Commerce.Persist.Model.Orders;
-using Commerce.Persist.Model.Billing;
-using Commerce.Persist.Model.Products;
 
 namespace Commerce.Web.Areas.Admin.Controllers
 {
     // TODO: move this Controller to the WebAPI
     public class OrderController : Controller
     {
-        PleiadesContext Context { get; set; }
+        PushMarketContext Context { get; set; }
         IOrderSubmissionService OrderRepository { get; set; }
 
-        public OrderController(PleiadesContext context, IOrderSubmissionService orderRepository)
+        public OrderController(PushMarketContext context, IOrderSubmissionService orderRepository)
         {
             this.Context = context;
             this.OrderRepository = orderRepository;

@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Pleiades.Data;
 using Pleiades.Web;
 using Pleiades.Web.FineUploader;
 using Commerce.Persist.Interfaces;
-using Commerce.Persist.Model.Lists;
 using Commerce.Persist.Model.Resources;
 
 namespace Commerce.Web.Areas.Admin.Controllers
@@ -74,9 +71,14 @@ namespace Commerce.Web.Areas.Admin.Controllers
             {
                 string path;
                 if (size == "thumbnail")
-                    path = Server.MapPath("~/Content/Images/75x75.gif");
-                else 
-                    path = Server.MapPath("~/Content/Images/150x150.gif");
+                {
+                    path = Server.MapPath(ConfigurationManager.AppSettings["BlankThumbnailImageUrl"]);
+                }
+                else
+                {
+                    path = Server.MapPath(ConfigurationManager.AppSettings["BlankSmallImageUrls"]);
+                }
+
                 return base.File(path, "image/gif");
             }
             else

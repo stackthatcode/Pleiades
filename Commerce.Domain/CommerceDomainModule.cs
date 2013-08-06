@@ -1,10 +1,8 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using Autofac;
-using Autofac.Integration.Mvc;
+using Commerce.Persist.Database;
 using Pleiades.Data;
 using Pleiades.Data.EF;
-using Pleiades.Injection;
 using Pleiades.Web.Security.Interface;
 using Commerce.Persist.Concrete;
 using Commerce.Persist.Interfaces;
@@ -18,8 +16,8 @@ namespace Commerce.Persist
         protected override void Load(ContainerBuilder builder)
         {
             // Context and Unit of Work
-            builder.RegisterType<PleiadesContext>()
-                .As<PleiadesContext>()
+            builder.RegisterType<PushMarketContext>()
+                .As<PushMarketContext>()
                 .As<DbContext>()
                 .InstancePerLifetimeScope();
 

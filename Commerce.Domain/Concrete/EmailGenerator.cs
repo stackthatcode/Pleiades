@@ -1,5 +1,4 @@
-﻿using System;
-using Commerce.Persist.Interfaces;
+﻿using Commerce.Persist.Interfaces;
 using Commerce.Persist.Model.Email;
 
 namespace Commerce.Persist.Concrete

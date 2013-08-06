@@ -6,6 +6,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
+using Commerce.Persist.Database;
 using Pleiades.Injection;
 using Pleiades.Web.Plumbing;
 using Pleiades.Web.Security.Providers;
@@ -29,7 +30,7 @@ namespace Commerce.Web
         protected void Application_Start()
         {
             // Prevent Entity Framework foolishness
-            Database.SetInitializer<PleiadesContext>(null);
+            Database.SetInitializer<PushMarketContext>(null);
 
             // Routes
             AreaRegistration.RegisterAllAreas();

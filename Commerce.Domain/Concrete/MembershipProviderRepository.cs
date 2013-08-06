@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
+using Commerce.Persist.Database;
 using Pleiades.Data;
 using Pleiades.Data.EF;
 using Pleiades.Web.Security.Interface;
@@ -18,7 +18,7 @@ namespace Commerce.Persist.Concrete
         [Obsolete]
         public string ApplicationName { get; set; }
 
-        public PfMembershipRepository(PleiadesContext context, string applicationName = "/")
+        public PfMembershipRepository(PushMarketContext context, string applicationName = "/")
             : base(context)
         {
             this.ApplicationName = applicationName;
