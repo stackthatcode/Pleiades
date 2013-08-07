@@ -125,7 +125,7 @@
             };
 
             self.UpdateImageOrder = function (productId, sorted, callback) {
-                self.AjaxPost("/Admin/Product/UpdateImageOrder/" + productId + "?sorted=" + sorted, callback);
+                self.AjaxPost("/Admin/Product/UpdateImageOrder/" + productId + "?sorted=" + sorted, {}, callback);
             };
 
             self.CreateBitmap = function (createRequest, callback) {

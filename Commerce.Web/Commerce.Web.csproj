@@ -172,12 +172,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\Bootstrap\css\bootstrap-lightbox.min.css" />
+    <Content Include="Content\Bootstrap\js\bootstrap-lightbox.js" />
     <Content Include="Content\Bootstrap\js\bootstrap-lightbox.min.js" />
     <Content Include="Content\Bootstrap\js\bootstrap-alert.js" />
     <Content Include="Content\Bootstrap\js\bootstrap-dropdown.js" />
     <Content Include="Content\Bootstrap\js\bootstrap-modal.js" />
     <Content Include="Content\Bootstrap\js\bootstrap-popover.js" />
     <Content Include="Content\Bootstrap\js\bootstrap-tooltip.js" />
+    <Content Include="Content\JQuery\jquery-2.0.3.min.js" />
     <Content Include="Content\Knockout\knockout-2.3.0rc.js" />
     <Content Include="Content\PushLibrary\scroll-tracker.js" />
     <Content Include="Content\Utilities\generalFunctions.js" />

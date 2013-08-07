@@ -18,7 +18,7 @@ namespace Commerce.Initializer
             DbContext = new PushMarketContext();
 
             Console.WriteLine("\nPushMarket Commerce Version v1.0 Prototype Initializer");
-            Console.WriteLine("Push Cloud Global - All Rights Reserved");
+            Console.WriteLine("Push Global Software - All Rights Reserved");
             Console.WriteLine("...");
 
             // Database Destruction, Resource Directory too
@@ -30,6 +30,7 @@ namespace Commerce.Initializer
             var serviceLocator = AutofacBootstrap.CreateContainer();
 
             // Application Data Initialization
+            Console.WriteLine("Seeding PushMarket data");
             RootUserBuilder.CreateTheSupremeUser(serviceLocator);
             CategoryBuilder.Populate(serviceLocator);
             SizeBuilder.Populate(serviceLocator);
@@ -60,10 +61,9 @@ namespace Commerce.Initializer
 
         public static void CreateDatabase()
         {
-            DbContext.MasterDatabaseCreate();
-
             // Build Database
-            Console.WriteLine("Creating Database for Pleiades");
+            Console.WriteLine("Creating PushMarket database");
+            DbContext.MasterDatabaseCreate();
         }
     }
 }

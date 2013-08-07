@@ -77,7 +77,7 @@ namespace Commerce.Web
 
             BundleTable.Bundles.Add(
                 new ScriptBundle("~/Bundles/Foundation")
-                    .Include("~/Content/JQuery/jquery-2.0.2.min.js")
+                    .Include("~/Content/JQuery/jquery-2.0.3.min.js")
                     .Include("~/Content/JQuery/jquery.validate.min.js")
                     .Include("~/Content/Utilities/*.js"));
 

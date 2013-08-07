@@ -1,5 +1,5 @@
 ﻿    @using System.Configuration;
-    @Html.Javascript("~/Content/Bootstrap/js/bootstrap-lightbox.min.js")
+    @Html.Javascript("~/Content/Bootstrap/js/bootstrap-lightbox.js")
     @Html.Stylesheet("~/Content/Bootstrap/css/bootstrap-lightbox.min.css")
 
 	<script type="text/javascript">
@@ -38,14 +38,12 @@
 	    };
 
 	    BundleViewer.ShowLightBox = function (data, event) {
-	        event.stopPropagation();
-
 	        var lightboxid = '#' + BundleViewer.LightBoxElementId(data);
 	        var lightboxImgId = lightboxid + " img";
 
 	        console.log(lightboxImgId + ' ' + $(lightboxImgId).attr("data-image"));
 	        $(lightboxImgId).attr("src", $(lightboxImgId).attr("data-image"));
-	        $(lightboxImgId).load(function() { $(lightboxid).lightbox(); });
+	        $(lightboxid).lightbox();
 	    };
 	</script>
 

@@ -17,34 +17,39 @@
                     return color;
                 }
             }
+            return null;
         };
 
         self.ImagesTabClick = function() {
+            var colorData, scrollTop;
+            scrollTop = $(document).scrollTop();
+            
             if (self.SelectedProduct().AssignImagesToColors()) {
                 flow.exec(
                     function() {
+                        self.SelectedColorsWithImages.removeAll();
                         self.ProductService.Colors(self.SelectedProduct().Id(), this);
                     },
                     function(colorJson) {
                         $.each(colorJson, function(index, elem) {
                             elem.Images = ko.observableArray();
                         });
+                        colorJson.unshift({ Id: 0, Name: "Unassigned", Images: ko.observableArray() });
 
-                        self.SelectedColorsWithImages(colorJson);
-
-                        var unassignedColor = { Id: 0, Name: "Unassigned", Images: ko.observableArray() };
-                        self.SelectedColorsWithImages().unshift(unassignedColor);
+                        colorData = colorJson;
                         self.ProductService.Images(self.SelectedProduct().Id(), this);
                     },
-                    function(imagesJson) {
-                        $.each(imagesJson, function(index, elem) {
-                            color = self.ProductColorWithImagesById(elem.ProductColorId);
+                    function(imageData) {
+                        self.SelectedColorsWithImages(colorData);                        
+                        $.each(imageData, function(index, elem) {
+                            var color = self.ProductColorWithImagesById(elem.ProductColorId);
                             color.Images.push(elem);
                         });
 
                         self.RemoveAssignedColorAsNeeded();
                         self.SetActiveMainEditor("Images");
                         self.MakeImagesSortable();
+                        $(document).scrollTop(scrollTop);
                     }
                 );
             } else {
@@ -56,6 +61,7 @@
                         self.SelectedProductImages(images);
                         self.SetActiveMainEditor("Images");
                         self.MakeImagesSortable();
+                        $(document).scrollTop(scrollTop);
                     }
                 );
             }
@@ -77,18 +83,33 @@
                 drop: function(event, ui) {
                     var colorDropElem = $(this).closest("table.colorDrop");
                     if (colorDropElem.length == 0) {
-                        console.log("missed drop!");
+                        console.log("missed drop - type 1!");
                         console.log(this);
                         return;
                     }
 
+                    if ($(event.toElement).closest("li").length == 0) {
+                        console.log("missed drop - type 2!");
+                        return;
+                    }
+                        
+                    if ($(event.toElement).closest("table").length == 0) {
+                        console.log("missed drop - type 3!");
+                        return; 
+                    }
+                    
+                    if (!$(event.toElement).closest("table").attr("id")) {
+                        console.log("missed drop - type 4!");
+                        return; 
+                    }
+                    
                     var imageId = $(event.toElement).closest("li").attr("id").replace("sorted", "");                    
                     var originalColorId = $(event.toElement).closest("table").attr("id").replace('color', '');
                     
                     // Not sure about this!
                     var newColorId = colorDropElem.attr("id").replace("color", "");
                     
-                    console.log("originalColorId: " + originalColorId + " " + " newColorId: " + newColorId + " imageId: " + imageId);
+                    //console.log("originalColorId: " + originalColorId + " " + " newColorId: " + newColorId + " imageId: " + imageId);
                     self.UpdateImageToColorAssignment(originalColorId, newColorId, imageId);
                 }
             });
@@ -99,6 +120,7 @@
                     update: function() {
                         self.UpdateImageSortOrder(elem);
                     },
+                    delay: 150
                 }).disableSelection();
             });
         };
@@ -113,6 +135,9 @@
                     self.ProductService.ChangeImageColor(self.SelectedProduct().Id(), imageId, newColorId, this);
                 },
                 function() {
+                    self.ImagesTabClick();
+
+                    /*** NOTE: overly complicated, premature optimization.  Take it easy, now!                    
                     var newColor = self.ProductColorWithImagesById(newColorId);
                     var originalColor = self.ProductColorWithImagesById(originalColorId);
                     var index = originalColor.Images().arrayFirstIndexOf(function(x) { return x.Id == imageId; });
@@ -120,41 +145,48 @@
                     originalColor.Images.remove(image);
                     newColor.Images.push(image);
                     self.RemoveAssignedColorAsNeeded();
+                    */
                 }
             );
         };
 
         self.UpdateImageSortOrder = function(element) {
-            var sortOutput = [];
-            var sortedElements = $(element).find("li");
-            $.each(sortedElements, function(index, elem) {
-                sortOutput.push($(elem).attr('id').replace('sorted', ''));
-            });
+            flow.exec(
+                function() {
+                    var sortOutput = [];
+                    var sortedElements = $(element).find("li");
+                    $.each(sortedElements, function(index, elem) {
+                        sortOutput.push($(elem).attr('id').replace('sorted', ''));
+                    });
 
-            var sortedIds = sortOutput.join(",");
-            console.log("DOM Ids: " + sortedIds);
-            self.ProductService.UpdateImageOrder(self.SelectedProduct().Id(), sortedIds);
+                    var sortedIds = sortOutput.join(",");
+                    //console.log("DOM Ids: " + sortedIds);
+                    self.ProductService.UpdateImageOrder(self.SelectedProduct().Id(), sortedIds, this);
+                },
+                function() {
+                    // Update the Knockout model
+                    self.ImagesTabClick();
 
-            // Update the Knockout model
-            var myColorId = $(element).closest("table.colorDrop").attr("id").replace('color', '');
-            var color = self.ProductColorWithImagesById(myColorId);
-
-            var newImageArray = [];
-            $.each(sortOutput, function(index, elem) {
-                var index = color.Images().arrayFirstIndexOf(function(x) { return x.Id == elem; });
-                var image = color.Images()[index];
-                newImageArray.push(image);
-            });
-
-            color.Images.removeAll();
-            color.Images(newImageArray);
+                    /*** NOTE: overly complicated, premature optimization.  Take it easy, now!                    
+                    var myColorId = $(element).closest("table.colorDrop").attr("id").replace('color', '');
+                    var color = self.ProductColorWithImagesById(myColorId);
+                    var newImageArray = [];
+                    $.each(sortOutput, function(index, elem) {
+                        var index = color.Images().arrayFirstIndexOf(function(x) { return x.Id == elem; });
+                        var image = color.Images()[index];
+                        newImageArray.push(image);
+                    });
+                    color.Images.removeAll();
+                    color.Images(newImageArray);
+                    */
+                });
         };
 
         self.GlideBackToImages = function(callback) {
             flow.exec(
                 function() {
                     $("#glideToParent").hide();
-                    self.GlideLeft("Images", "Images", this);
+                    self.GlideLeft("Child", "Images", this);
                 },
                 function() {
                     self.MakeImagesSortable();
@@ -203,7 +235,7 @@
                     self.GlideRight("AddImage", "AddImage", this);
                 },
                 function() {
-                    var fileUploader = new CommerceFileUploader(this.CommonUI, self.OnImageUpload);
+                    var fileUploader = new Commerce.FineUploader.Uploader(self.OnImageUpload);
                 }
             );
         };
@@ -237,7 +269,7 @@
                         self.SelectedProductImages().push(data);
                     }
                     self.GlideBackToImages(function() {
-                        self.CommonUI.ScrollToTracker("sorted" + newId);
+                        self.ScrollTracker.ScrollToTracker("sorted" + newId);
                     });
                 }
             );
@@ -285,7 +317,7 @@
 <script type="text/html" id="Main-Editor-Images">
     <div style="height:20px;"></div>
 
-    <div data-bind="if: $root.SelectedProduct().AssignImagesToColors">
+    <div data-bind="if: $root.SelectedProduct() && $root.SelectedProduct().AssignImagesToColors && $root.SelectedColorsWithImages().length">
         <!-- ko foreach: $root.SelectedColorsWithImages() -->
         <div>
             <table class="table-hover colorDrop" data-bind="attr: { id: 'color' + $data.Id }">
@@ -295,8 +327,15 @@
                             <div data-bind="ifnot: $data.Images().length">
                                 <h2 style="text-align:center; padding-top:50px; color:#CCC;">No Images For This Color</h2>
                             </div>
-
-                            <ul class="sortable" data-bind="attr: { id: 'images' + $data.Id }, foreach: $data.Images()">
+                            
+                            
+                            <ul class="sortable" data-bind="attr: { id: 'images' + $data.Id }">
+                                <li style="display:none;">
+                                        <div style="width:160px; padding-bottom:5px;" 
+                                         data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: '000000000', LightboxSuffixId: 'Parent' } }">
+                                    </div>
+                                </li>
+                                <!-- ko foreach: $data.Images() -->
                                 <li data-bind="attr: { id: 'sorted' + $data.Id }">
                                     <div style="width:160px; padding-bottom:5px;" 
                                          data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
@@ -304,6 +343,7 @@
                                     <a href="#" style="width:55px;" class="btn btn-inverse btn-small disabled"><i class="icon-screenshot icon-white"></i> Drag!</a>
                                     <a class="btn btn-primary btn-small" style="width:55px;" href="#" data-bind="click: function() { $root.DeleteProductImage($data) }"><i class="icon-trash icon-white"></i> Delete</a>			
                                 </li>
+                                <!-- /ko -->
                             </ul>
                         </div>
                     </td>
@@ -335,7 +375,7 @@
         </div>
     </div>
 
-    <div data-bind="ifnot: $root.SelectedProduct().AssignImagesToColors" style="margin-top:20px;">
+    <div data-bind="ifnot: $root.SelectedProduct() && $root.SelectedProduct().AssignImagesToColors" style="margin-top:20px;">
         <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SelectedProductImages().length == 0">
             <strong>There are no images for this Product.  Click "Add Image" to Upload an image.</strong>  
         </div>

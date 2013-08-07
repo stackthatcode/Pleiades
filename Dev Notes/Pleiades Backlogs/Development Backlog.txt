@@ -1,22 +1,44 @@
 FRONTRANGE - HOTZONE
 ====================
 
-Burndown 8/16/2013 (5 Hours)
+Burndown 8/6/2013 (5 Hours)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Fixed Color Screens - good to go!
 - Fixed Product Thumbnail Image for missing image on Product Search => DONE
 - Fixed major defect with Category searching => DONE
 - Fixed Delete Product defect => DONE
-- Almost finished fixing the Colors => DONE
+- Almost finished fixing the Images => DONE
+
+Burndown 8/7/2013 (5 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Fixed another bug in Images (???)
+- Fixed another bug in Brand (null Description)
+- Fixed bug in Color Editor - inoperable File Upload
+- Fixed File Upload to new namespace in Product Images
+- Grappled with Drag and Drop mayhem
+- Fixed Drag and Drop for Color Editor
+- Disabled premature optimization in Image drag and drop
+- Fixed "missed drop type 2" with assertion - Good!
+- Fixed Scroll Position for Images drag and drop
+- Fixed Scroll Position for Color drag and drop
+- Fixed Drag and Drop in Color on Add New Color
+- Fixed broken Add New Image flow - Scroll Tracker bad reference
+- Fixed defect with dragging images back onto self
+- Fix Product Thumbnail when there are no Images => DONE
+- Fix Delete Product Bug => DONE
+
+Burndown 8/7/2013 (3 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Deathmarch to fix my lightbox!!!
+- Located lightbox alternative => DONE
+
 
 
 
 Final Deliverable Definition
 ----------------------------
 - Refactor the Products to use the Endless Glider, plus clean the Templates => IN PROGRESS
-
-- Fix Product Thumbnail when there are no Images => TODO
-- Fix Delete Product Bug => TODO
+- Fix the Lightbox stuff in Images - replace Lightbox with original Lightbox => TODO
 - Add Null-check to Image Bundle Repository => TODO
 
 * http://mindre.net/Article/Microsoft_Web_Optimization_development

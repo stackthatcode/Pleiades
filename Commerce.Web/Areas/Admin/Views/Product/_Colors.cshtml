@@ -21,7 +21,7 @@
                 }
             );
         };
-
+            
         self.SlideToColorList = function() {
             flow.exec(
                 function() {
@@ -194,19 +194,22 @@
             $(".sortable").sortable({
                 placeholder: "ui-state-highlight",
                 update: self.UpdateColorSortOrder,
-                delay: 300
+                distance: 5
             });
             $(".sortable").disableSelection();
         };
 
-        self.UpdateColorSortOrder = function() {            
-            flow.exec(
+        self.UpdateColorSortOrder = function() {
+            var scrollTop = $(document).scrollTop();
+             flow.exec(
                 function() {
                     var sortOutput = [];
                     $.each($("#colors > div"), function(index, elem) {
                         sortOutput.push($(elem).attr('id').replace('sorted', ''));
                     });
                     var sortedIds = sortOutput.join(",");
+                    
+                    self.SelectedProductColors.removeAll();
                     self.ProductService.UpdateColorOrder(self.SelectedProduct().Id(), sortedIds, this);
                 },
                 function() {
@@ -215,6 +218,7 @@
                 function(colors) {
                     self.SelectedProductColors(colors);
                     self.MakeColorsSortable();
+                    $(document).scrollTop(scrollTop);
                 }
             );
         };
@@ -222,6 +226,7 @@
         self.GlideBackToColorsTabWithRefresh = function(callback) {
             flow.exec(
                 function() {
+                    self.SelectedProductColors.removeAll();
                     self.ProductService.Colors(self.SelectedProduct().Id(), this);
                 },
                 function(colors) {
@@ -253,34 +258,37 @@
 
 <!-- KNOCKOUT TEMPLATE - MAIN EDITOR COLORS TAB -->
 <script type="text/html" id="Main-Editor-Colors">
-<div style="margin-top:20px; margin-bottom:100px;">
-    <form>
-        <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SelectedProductColors().length == 0">
-            <strong>There are no Colors for this Product.  Add a Color from the existing list, or Create a new one.</strong>  
-        </div>
+    <div id="editor" style="margin-top:20px; margin-bottom:100px;">
+        <form>
+            <div style="margin-top:40px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SelectedProductColors().length == 0">
+                <strong>There are no Colors for this Product.  Add a Color from the existing list, or Create a new one.</strong>  
+            </div>
+            
+            <div data-bind="if: $root.SelectedProductColors().length">
 		    
-        <div id="colors" class="sortable" data-bind="foreach: $root.SelectedProductColors()">
-            <div class="draggable" data-bind="attr: { id: 'sorted' + $data.Id }">
-                <table class="table table-hover" style="margin-bottom:0px;">
-                    <tbody>
-                        <tr>
-                            <td>
-                                <span style="width:150px; float:left;">
-                                    <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
-                                    </div>
-                                </span>
-                                <span style="width:500px; float:left; padding-top:40px;">
-                                    <input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
-                                    <p><strong data-bind="text: $data.Name"></strong> - <span data-bind="text: $data.SkuCode"></span></p>
-                                </span>
-                                <span style="width:250px; float:left; padding-top:30px; text-align:right;">
-                                    <a href="#" class="btn btn-inverse disabled"><i class="icon-screenshot icon-white"></i> Drag Me!</a>
-                                    <a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteProductColor($data) }"><i class="icon-trash icon-white"></i> Delete</a>
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div id="colors" class="sortable" data-bind="foreach: $root.SelectedProductColors()">
+                <div class="draggable" data-bind="attr: { id: 'sorted' + $data.Id }">
+                    <table class="table table-hover" style="margin-bottom:0px;">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span style="width:150px; float:left;">
+                                        <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+                                        </div>
+                                    </span>
+                                    <span style="width:500px; float:left; padding-top:40px;">
+                                        <input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
+                                        <p><strong data-bind="text: $data.Name"></strong> - <span data-bind="text: $data.SkuCode"></span></p>
+                                    </span>
+                                    <span style="width:250px; float:left; padding-top:30px; text-align:right;">
+                                        <a href="#" class="btn btn-inverse disabled"><i class="icon-screenshot icon-white"></i> Drag Me!</a>
+                                        <a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteProductColor($data) }"><i class="icon-trash icon-white"></i> Delete</a>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </form>
@@ -297,7 +305,7 @@
                     <h1>Products &gt; <span data-bind="text: $root.SelectedProductName"></span></h1>
                 </div>
             </div>
-                
+            
             <div style="height:20px;"></div>
             <div class="row" style="height:30px;">
                 <div class="span2">
@@ -319,10 +327,11 @@
         </div>
     </div>
 </script>
+
 <script type="text/html" id="Main-Editor-AddColorsFromList">
     <div style="margin-top:20px; margin-bottom:100px;">
         <form>
-            <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.ColorArray().length == 0">
+            <div style="margin-top:40px; text-align:center;" class="alert alert-info" data-bind="visible: $root.ColorArray().length == 0">
                 <strong>There are no pre-defined Colors.  Go to Lists &gt; Color to add pre-defined Colors.</strong>  
             </div>
 

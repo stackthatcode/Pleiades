@@ -20,25 +20,25 @@
                 self.AjaxPost("/Admin/Brand/Insert", brand, callback);
 	        };
 
-            self.Update = function (brand, callback) {
+            self.Update = function(brand, callback) {
                 self.AjaxPost("/Admin/Brand/Update", brand, callback);
-	        }
+            };
 
             self.Delete = function (brand, callback) {
                 self.AjaxPost("/Admin/Brand/Delete", brand, callback);
 	        };
 
 	        return self;
-        }
+        };
 
 		// KO enabling/disabling of server JSON        
         var BrandToKnockout = function(brand) {
-			return {
-				Id: ko.observable(brand.Id),
-				Name: ko.observable(brand.Name),
-				Description: ko.observable(brand.Description),
-				SEO: ko.observable(brand.SEO),
-				SkuCode: ko.observable(brand.SkuCode),
+            return {
+                Id: ko.observable(brand.Id),
+                Name: ko.observable(brand.Name),
+                Description: ko.observable(brand.Description || ""),
+                SEO: ko.observable(brand.SEO),
+                SkuCode: ko.observable(brand.SkuCode),
                 ProductCount: ko.observable(brand.ProductCount),
 
                 EditName: ko.observable(brand.Name),
@@ -47,136 +47,135 @@
                 EditSkuCode: ko.observable(brand.SkuCode),
 
                 ImageBundleExternalId: ko.observable(brand.ImageBundleExternalId),
-			};
-		}
-		
-		var BrandToServerJson = function(brand) {
-			return {
-				Id: brand.Id(),
-				Name: brand.Name(),
+            };
+        };
+
+        var BrandToServerJson = function(brand) {
+            return {
+                Id: brand.Id(),
+                Name: brand.Name(),
                 Description: brand.Description(),
                 SEO: brand.SEO(),
                 SkuCode: brand.SkuCode(),
                 ImageBundleExternalId: brand.ImageBundleExternalId(),
-			};
-		}
+            };
+        };
 
 		function BrandViewModel() {	
 			var self = this;
 
 			// UI state management
-			self.AddBrand = function() {
-				flow.exec(
-					function() {
-						var knockedoutData = BrandToKnockout({});
-                        self.SelectedIndex = -1;
-						self.SelectedRecord(knockedoutData);
-						self.Glider.GlideToChild(this);
-                        var fileUploader = new Commerce.FineUploader.Uploader(self.OnFileUpload);
-					}
-				);
-			}
+		    self.AddBrand = function() {
+		        flow.exec(
+		            function() {
+		                var knockedoutData = BrandToKnockout({});
+		                self.SelectedIndex = -1;
+		                self.SelectedRecord(knockedoutData);
+		                self.Glider.GlideToChild(this);
+		                var fileUploader = new Commerce.FineUploader.Uploader(self.OnFileUpload);
+		            }
+		        );
+		    };
 			
 		    // asynchronous, service-bound operations            
-			self.GlideToChildView = function(brandRecord) {
-				flow.exec(
-					function() {
-                        self.SelectedIndex = self.Data.indexOf(brandRecord);
-						self.ServiceAdapter.Retrieve(brandRecord.Id, this);
-					},
-					function(data) {
-						var knockedoutData = BrandToKnockout(data);
-						self.SelectedRecord(knockedoutData);
-                        self.Glider.GlideToChild();
-                        var fileUploader = new Commerce.FineUploader.Uploader(self.OnFileUpload);
-					}
-				);
-			}
-			
-			self.GlideToParentView = function() {
-				var recordId = self.SelectedRecord().Id();
-				flow.exec(
-                    function() {
-				        $("#glideToParent").hide();
-                        self.Glider.GlideToParent(this);
-                    },
-					function() {
-                        self.SelectedRecord(null);
-                        self.SelectedIndex = null;
-                        self.ScrollTracker.TrackToIdIfNotNull(recordId);
-					}
-				);
-			}
+		    self.GlideToChildView = function(brandRecord) {
+		        flow.exec(
+		            function() {
+		                self.SelectedIndex = self.Data.indexOf(brandRecord);
+		                self.ServiceAdapter.Retrieve(brandRecord.Id, this);
+		            },
+		            function(data) {
+		                var knockedoutData = BrandToKnockout(data);
+		                self.SelectedRecord(knockedoutData);
+		                self.Glider.GlideToChild();
+		                var fileUploader = new Commerce.FineUploader.Uploader(self.OnFileUpload);
+		            }
+		        );
+		    };
+
+		    self.GlideToParentView = function() {
+		        var recordId = self.SelectedRecord().Id();
+		        flow.exec(
+		            function() {
+		                $("#glideToParent").hide();
+		                self.Glider.GlideToParent(this);
+		            },
+		            function() {
+		                self.SelectedRecord(null);
+		                self.SelectedIndex = null;
+		                self.ScrollTracker.TrackToIdIfNotNull(recordId);
+		            }
+		        );
+		    };
 
             // This is the bit of glue that bridges FineUploader and the Image Gallery stuff
 	        self.OnFileUpload = function (imageBundleData) {
 	            self.SelectedRecord().ImageBundleExternalId(imageBundleData.ExternalId);
 	        };
 
-			self.RetrieveBrands = function(callback) {
-				flow.exec(
-					function() {
-						self.SelectedRecord(null);		// Clear out the ChildView state
-						self.ServiceAdapter.RetrieveAll(this);						
-					},					
-					function(data) {												
-						self.Data(data);
-				        if (callback) callback();
-					}
-				);
-			}
-			
-			self.SaveBrand = function() {
-				flow.exec(
-					function() {
-						var record = self.SelectedRecord();
-						if ($.trim(record.EditName()) == "" || $.trim(record.EditSEO()) == "" || 
-                            $.trim(record.EditSkuCode()) == "" || !record.ImageBundleExternalId()) 
-                        {
-                        	$("#validation").show();
-							return;
-						}
-						record.Name(record.EditName());
-						record.SEO(record.EditSEO());
-						record.SkuCode(record.EditSkuCode());
-						record.Description(record.EditDescription());
+		    self.RetrieveBrands = function(callback) {
+		        flow.exec(
+		            function() {
+		                self.SelectedRecord(null); // Clear out the ChildView state
+		                self.ServiceAdapter.RetrieveAll(this);
+		            },
+		            function(data) {
+		                self.Data(data);
+		                if (callback) callback();
+		            }
+		        );
+		    };
 
-                        var serverRecord = BrandToServerJson(record);
-                        if (serverRecord.Id) {
-						    self.ServiceAdapter.Update(serverRecord, this);
-                        } else {
-						    self.ServiceAdapter.Insert(serverRecord, this);
-                        }
-					},
-					function(data) {
-                        if (self.SelectedIndex == -1) {				
-                            self.Data.unshift(data);
-                        } else {
-                            self.Data.replace(self.Data()[self.SelectedIndex], data);
-                        }
-                        self.GlideToParentView();
-					}
-				);
-			}
-			
-			self.DeleteBrand = function(brand) {
-				self.ModalViewModel(brand);
-				$('#modal-delete').modal();
-		    }
+		    self.SaveBrand = function() {
+		        flow.exec(
+		            function() {
+		                var record = self.SelectedRecord();
+		                if ($.trim(record.EditName()) == "" || $.trim(record.EditSEO()) == "" ||
+		                    $.trim(record.EditSkuCode()) == "" || !record.ImageBundleExternalId()) {
+		                    $("#validation").show();
+		                    return;
+		                }
+		                record.Name(record.EditName());
+		                record.SEO(record.EditSEO());
+		                record.SkuCode(record.EditSkuCode());
+		                record.Description(record.EditDescription());
 
-			self.DeleteConfirm = function() { 
-				var record = self.ModalViewModel();
-			    flow.exec(
-                    function() {
-                        $('#modal-delete').modal('hide');				
-				        self.ServiceAdapter.Delete(record, this);
-                    },
-                    function(data) {
-						self.Data.remove(function(item) { return item.Id == record.Id; });
-                        self.ModalViewModel(null);
-                    }
-                );
-			}
+		                var serverRecord = BrandToServerJson(record);
+		                if (serverRecord.Id) {
+		                    self.ServiceAdapter.Update(serverRecord, this);
+		                } else {
+		                    self.ServiceAdapter.Insert(serverRecord, this);
+		                }
+		            },
+		            function(data) {
+		                if (self.SelectedIndex == -1) {
+		                    self.Data.unshift(data);
+		                } else {
+		                    self.Data.replace(self.Data()[self.SelectedIndex], data);
+		                }
+		                self.GlideToParentView();
+		            }
+		        );
+		    };
+
+		    self.DeleteBrand = function(brand) {
+		        self.ModalViewModel(brand);
+		        $('#modal-delete').modal();
+		    };
+
+		    self.DeleteConfirm = function() {
+		        var record = self.ModalViewModel();
+		        flow.exec(
+		            function() {
+		                $('#modal-delete').modal('hide');
+		                self.ServiceAdapter.Delete(record, this);
+		            },
+		            function(data) {
+		                self.Data.remove(function(item) { return item.Id == record.Id; });
+		                self.ModalViewModel(null);
+		            }
+		        );
+		    };
             
 			// Initialization
 			self.ServiceAdapter = new BrandService();
@@ -253,7 +252,7 @@
 				<input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
 				<h4><span data-bind="text: $data.Name + ' - ' + $data.SkuCode "></span></h4>
                 <strong>Number of Products: <span data-bind="text: $data.ProductCount"></span></strong>
-                <p data-bind="text: $data.Description.koTrunc(150, true)"></p>
+                <p data-bind="text: $data.Description ? $data.Description.koTrunc(150, true) : ''"></p>
             </td>
 			<td style="text-align:right;">					
 				<a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteBrand($data) }"><i class="icon-trash icon-white"></i> Delete</a>
@@ -265,20 +264,22 @@
 	</script>
 	
 	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR -->
-	<script type="text/html" id="Child-Editor">
+    <script type="text/html" id="Child-Editor">
         <div style="margin-top:40px">
-        <form>
-			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
-				<a href="#" class="close" data-dismiss="alert">&times;</a>
-                <strong>Please enter all the required fields.</strong>
-			</div>
+            <form>
+                <div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <strong>Please enter all the required fields.</strong>
+                </div>
 
-            <div class="row">
-                <div class="span3">   
-                    <label>Brand Logo</label>                 
-                    <div style="margin-bottom:20px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId(), LightboxSuffixId: 'Child' } }">
-			        </div>
-			        <div style="margin-bottom:20px; margin-top:20px;" data-bind="template: { name: 'Fine-Uploader', data: $root }">
+                <div class="row">
+                    <div class="span3">   
+                        <label>Brand Logo</label>                 
+                        <div style="margin-bottom:20px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId(), LightboxSuffixId: 'Child' } }">
+                        </div>
+                        
+                        <!-- Here's how we insert the Fine Uploader via KO Template -->
+                        <div style="margin-bottom:20px; margin-top:20px;" data-bind="template: { name: 'Fine-Uploader', data: $root }">
 			        </div>
                 </div>
                 <div class="span9">
