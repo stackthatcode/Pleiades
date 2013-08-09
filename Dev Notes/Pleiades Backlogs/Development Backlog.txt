@@ -32,13 +32,20 @@ Burndown 8/7/2013 (3 Hours)
 - Deathmarch to fix my lightbox!!!
 - Located lightbox alternative => DONE
 
+Burndown 8/8/2013 (0.5 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Argh!  Hacking away
+
+Burndown 8/9/2013 (0.75 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Breakthrough!!!  Fixed Image lightbox issues
 
 
 
 Final Deliverable Definition
 ----------------------------
-- Refactor the Products to use the Endless Glider, plus clean the Templates => IN PROGRESS
-- Fix the Lightbox stuff in Images - replace Lightbox with original Lightbox => TODO
+- Refactor the Products to use the Endless Glider, plus clean the Templates => ALMOST DONE
+- Fix the Lightbox stuff in Images - replace Lightbox with original Lightbox => TOP PRIORITY
 - Add Null-check to Image Bundle Repository => TODO
 
 * http://mindre.net/Article/Microsoft_Web_Optimization_development

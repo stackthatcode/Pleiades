@@ -326,8 +326,7 @@
                         <div style="width:712px;">
                             <div data-bind="ifnot: $data.Images().length">
                                 <h2 style="text-align:center; padding-top:50px; color:#CCC;">No Images For This Color</h2>
-                            </div>
-                            
+                            </div>                            
                             
                             <ul class="sortable" data-bind="attr: { id: 'images' + $data.Id }">
                                 <li style="display:none;">
@@ -338,7 +337,7 @@
                                 <!-- ko foreach: $data.Images() -->
                                 <li data-bind="attr: { id: 'sorted' + $data.Id }">
                                     <div style="width:160px; padding-bottom:5px;" 
-                                         data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+                                         data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'Image' } }">
                                     </div>
                                     <a href="#" style="width:55px;" class="btn btn-inverse btn-small disabled"><i class="icon-screenshot icon-white"></i> Drag!</a>
                                     <a class="btn btn-primary btn-small" style="width:55px;" href="#" data-bind="click: function() { $root.DeleteProductImage($data) }"><i class="icon-trash icon-white"></i> Delete</a>			
@@ -355,7 +354,7 @@
                         </div>
                         <div data-bind="ifnot: $data.Name == 'Unassigned'">
                             <div style="width:80px; margin-bottom:5px;" 
-                                 data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+                                 data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'AssignImageToColor' } }">
                             </div>
                             <p>
                                 <strong data-bind="text: $data.Name"></strong> - <span data-bind="text: $data.SkuCode"></span>
@@ -381,7 +380,7 @@
         </div>
         <ul class="sortable" data-bind="foreach: $root.SelectedProductImages()">
             <li data-bind="attr: { id: 'sorted' + $data.Id }">
-                <div style="width:160px; padding-bottom:5px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+                <div style="width:160px; padding-bottom:5px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'ImageTab' } }">
                 </div>
                 <a href="#" style="width:55px;" class="btn btn-inverse btn-small disabled"><i class="icon-screenshot icon-white"></i> Drag!</a>
                 <a class="btn btn-primary btn-small" style="width:55px;" href="#" data-bind="click: function() { $root.DeleteProductImage($data) }"><i class="icon-trash icon-white"></i> Delete</a>			
