@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using Commerce.Persist.Concrete;
 using Commerce.Persist.Database;
 using Pleiades.Web;
 using Commerce.Persist.Interfaces;
@@ -42,6 +43,13 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             var response = this.OrderRepository.Submit(orderRequest);
             return new JsonNetResult(response);
+        }
+
+        public ActionResult TestMethod()
+        {
+            var controller = new ProductRepository(Context, null, null);
+            var x = new ProductController(null, null, null, null, null, null, null);
+            return new ContentResult();
         }
 
         public ActionResult Manager()

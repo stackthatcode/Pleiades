@@ -128,7 +128,7 @@ namespace Commerce.Persist.Concrete
             this.EmailService.SendOrderReceived();
 
             // Invoke the Analytics Service - Bounded Context
-            this.AnalyticsService.AddSale(order);
+            this.AnalyticsService.AddSale(order, 3);
 
             // FIN! - return OrderRequestResponse - Bounded Context
             var orderResponse = new SubmitOrderResult(order);

@@ -110,6 +110,10 @@ namespace Commerce.Persist.Concrete
                 return _cacheById[Id];
             }
             var output = this.Data().FirstOrDefault(x => x.Id == Id);
+            if (output == null)
+            {
+                return new ImageBundle { ExternalId = Guid.Empty };
+            }
             _cacheById.TryAdd(output.Id, output);
             _cacheByGuid.TryAdd(output.ExternalId, output);
             return output;

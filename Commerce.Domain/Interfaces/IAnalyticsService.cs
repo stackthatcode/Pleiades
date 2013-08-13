@@ -1,10 +1,11 @@
-﻿using System;
-using Commerce.Persist.Model.Orders;
+﻿using Commerce.Persist.Model.Orders;
 
 namespace Commerce.Persist.Interfaces
 {
     public interface IAnalyticsService
     {
-        void AddSale(Order order);
+        void AddSale(Order order, int cost);
+        void AddSale(Order order1, Order order2);
+        int TestProperty { get; }
     }
 }

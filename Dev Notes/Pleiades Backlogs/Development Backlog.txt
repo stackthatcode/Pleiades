@@ -39,19 +39,33 @@ Burndown 8/8/2013 (0.5 Hours)
 Burndown 8/9/2013 (0.75 Hours)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Breakthrough!!!  Fixed Image lightbox issues
+- Fix the Lightbox stuff in Images - replace Lightbox with original Lightbox => TOP PRIORITY - DONE
 
+Burndown 8/12/2013 (0.5 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Fixed regression from Lightbox debacle => DONE
+
+Burndown 8/13/2013 (0.5 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Completed Size refactoring
+- Finished Refactoring of Inventory => GREAT!
+- Refactor the Products to use the Endless Glider, plus clean the Templates => 100% COMPLETE
+- Add Null-check to Image Bundle Repository => DONE
+* HOW TO DEBUG BUNDLES...? => DONE
+
+
+
+OTHER STUFF
+~~~~~~~~~~~
+http://g-form.com/products/extreme-sleeve-for-laptops/ => NEW COMPUTER PROTECTION
 
 
 Final Deliverable Definition
 ----------------------------
-- Refactor the Products to use the Endless Glider, plus clean the Templates => ALMOST DONE
-- Fix the Lightbox stuff in Images - replace Lightbox with original Lightbox => TOP PRIORITY
-- Add Null-check to Image Bundle Repository => TODO
-
 * http://mindre.net/Article/Microsoft_Web_Optimization_development
-* HOW TO DEBUG BUNDLES...?
 
 - Landing-Page + Microsite => IN PROGRESS
+- Server Logging => TODO
 - Revamped Membership Provider => TODO
 - Customer Checkout => TODO
 - Admin Search & Manage Orders => TODO
@@ -59,7 +73,6 @@ Final Deliverable Definition
 
 - Barebones Console App => ALMOST DONE
 - Email Sending Engine => TODO
-- Server Logging => TODO
 - Stripe Payment Integration => TODO
 - Amazon EC2 Hosting => TODO
 - http://blog.stevensanderson.com/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/

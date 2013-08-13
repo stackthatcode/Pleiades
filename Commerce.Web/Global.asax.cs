@@ -1,19 +1,10 @@
-﻿using System;
-using System.Data.Entity;
-using System.Web;
+﻿using System.Data.Entity;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Autofac;
-using Autofac.Integration.Mvc;
 using Commerce.Persist.Database;
-using Pleiades.Injection;
 using Pleiades.Web.Plumbing;
-using Pleiades.Web.Security.Providers;
-using Pleiades.Web.Security;
 using Pleiades.Web.Security.Aspect;
-using Commerce.Persist.Concrete;
-using Commerce.Web.Plumbing;
 
 namespace Commerce.Web
 {
@@ -62,17 +53,11 @@ namespace Commerce.Web
 
         public void RegisterGlobalFilters()
         {
-            // Evil "new"?  Yes, but there's no other way since .NET runtime constructs the object
             GlobalFilters.Filters.Add(new SecurityAttribute());
-
-            // TODO: respond to this one
-            // GlobalFilters.Filters.Add(new CustomErrorAttribute());
         }
 
         public void MakeBundles()
         {
-            // TODO: enable this via configuration
-
             BundleTable.EnableOptimizations = true;
 
             BundleTable.Bundles.Add(

@@ -137,6 +137,7 @@
     <Compile Include="Areas\Admin\Controllers\ColorController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\JiveController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
@@ -301,7 +302,6 @@
     <Content Include="Areas\Admin\Views\Product\_Inventory.cshtml" />
     <Content Include="Areas\Admin\Views\Product\_SearchAndInfo.cshtml" />
     <Content Include="Areas\Admin\Views\Product\_Sizes.cshtml" />
-    <Content Include="Areas\Admin\Views\Product\_TopWorkspace.cshtml" />
     <Content Include="Areas\Admin\Views\Section\Editor.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_ColorPickerShim.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_PushLibraryShim.cshtml" />

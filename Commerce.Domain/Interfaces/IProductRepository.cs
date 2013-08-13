@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Commerce.Persist.Interfaces;
-using Commerce.Persist.Model.Lists;
 using Commerce.Persist.Model.Products;
 
 namespace Commerce.Persist.Interfaces

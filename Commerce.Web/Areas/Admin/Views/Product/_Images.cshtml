@@ -329,11 +329,6 @@
                             </div>                            
                             
                             <ul class="sortable" data-bind="attr: { id: 'images' + $data.Id }">
-                                <li style="display:none;">
-                                        <div style="width:160px; padding-bottom:5px;" 
-                                         data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: '000000000', LightboxSuffixId: 'Parent' } }">
-                                    </div>
-                                </li>
                                 <!-- ko foreach: $data.Images() -->
                                 <li data-bind="attr: { id: 'sorted' + $data.Id }">
                                     <div style="width:160px; padding-bottom:5px;" 
