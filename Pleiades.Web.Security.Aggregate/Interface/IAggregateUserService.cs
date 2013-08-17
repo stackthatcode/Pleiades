@@ -5,6 +5,7 @@ using Pleiades.Web.Security.Model;
 
 namespace Pleiades.Web.Security.Interface
 {
+    //
     // The pass-through functions to MembershipService dependency exist to prevent bad, bad things like
     // reseting the Supreme User's password.  Initializer-type applications can use lower-level stuff like the 
     // MembershipService to perform these functions.

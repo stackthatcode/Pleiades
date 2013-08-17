@@ -1,7 +1,7 @@
 ﻿using Pleiades.Web.Security.Rules;
 using Pleiades.Web.Security.Model;
 
-namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
+namespace Pleiades.Web.Security.UnitTests.Rules
 {
     public class AuthContextGenerator
     {

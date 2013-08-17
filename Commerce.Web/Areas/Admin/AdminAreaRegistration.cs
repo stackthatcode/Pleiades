@@ -40,19 +40,19 @@ namespace Commerce.Web.Areas.Admin
 
             // This needs to be re-vamped - actually, we don't need it
             context.MapRoute(
-                "Category Action w/ Parent Id, Child Id",
+                "Category Action + Parent Id + Child Id",
                 "Admin/Category/{action}/{parentId}/{childId}",
                 new { controller = "Category" }
             );
 
             context.MapRoute(
-                "Admin Controller, Action, Id",
+                "Admin Controller + Action + Id",
                 "Admin/{controller}/{action}/{id}",
                 new { controller = "Home", action = "Index" }
             );
 
             context.MapRoute(
-                "Admin Default",
+                "Admin Controller + Action",
                 "Admin/{controller}/{action}",
                 new { controller = "Home", action = "Index" }
             );

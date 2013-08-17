@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
-using Rhino.Mocks;
+﻿using NUnit.Framework;
 using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Rules;
 
-namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
+namespace Pleiades.Web.Security.UnitTests.Rules
 {
     [TestFixture]
     public class AccountStatusAuthorizationStepTests

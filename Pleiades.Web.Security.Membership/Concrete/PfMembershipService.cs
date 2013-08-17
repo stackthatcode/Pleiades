@@ -2,268 +2,243 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Security;
-using SecurityMembershipUser = System.Web.Security.MembershipUser;
-using Pleiades.Data;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
-using Pleiades.Web.Security.Providers;
 
 namespace Pleiades.Web.Security.Concrete
 {
     /// <summary>
-    /// Wrapper around common Membership functions - enables testability of Membership-related functions
+    /// Membership functions re-coded to be test-friendly and DI-friendly
     /// </summary>
     public class PfMembershipService : IPfMembershipService
     {
-        IMembershipProviderRepository Repository { get; set; }
-        IUnitOfWork UnitOfWork { get; set; }
+        public IMembershipRepository Repository;
+        public IPasswordServices PasswordServices;
+        public IEncryptionService EncryptionService;
 
-        public PfMembershipService(IMembershipProviderRepository repository, IUnitOfWork unitOfWork)
+        const string ApplicationName = "/";
+
+        public PfMembershipService(IMembershipRepository repository, IPasswordServices passwordServices, IEncryptionService encryptionService)
         {
             this.Repository = repository;
-            this.UnitOfWork = unitOfWork;
+            this.PasswordServices = passwordServices;
+            this.EncryptionService = encryptionService;
         }
 
-        public Model.PfMembershipUser CreateUser(
-                CreateNewMembershipUserRequest request, out PleiadesMembershipCreateStatus outCreateStatus)
+        public PfMembershipUser CreateUser(CreateNewMembershipUserRequest request, out PfMembershipCreateStatus createStatus)
         {
-            MembershipCreateStatus createStatus;
-
-            var generatedUserName = GenerateUserName();
-            Membership.CreateUser(
-                generatedUserName, request.Password, request.Email, request.PasswordQuestion, request.PasswordAnswer, 
-                request.IsApproved, out createStatus);
-
-            //// Validate username/password
-
-            // *** TODO: add service or utility that validates password complexity
-            var complexEnough = true;
-            if (!complexEnough)
+            var validPassword = PasswordServices.IsValid(request.Password);
+            if (!validPassword)
             {
-                outCreateStatus = PleiadesMembershipCreateStatus.InvalidPassword;
+                createStatus = PfMembershipCreateStatus.InvalidPassword;
                 return null;
             }
 
+            var userByEmail = Repository.GetUserByEmail(request.Email);
+            if (userByEmail != null)
+            {
+                createStatus = PfMembershipCreateStatus.DuplicateEmail;
+                return null;
+            }
 
+            var userByUserName = Repository.GetUserByUserName(request.UserName);
+            if (userByUserName != null)
+            {
+                createStatus = PfMembershipCreateStatus.DuplicateUserName;
+                return null;
+            }
 
-            //if (RequiresUniqueEmail && GetUserNameByEmail(email) != "")
-            //{
-            //    status = MembershipCreateStatus.DuplicateEmail;
-            //    return null;
-            //}
+            var createDate = DateTime.Now;
+            var user = new PfMembershipUser 
+            {
+                ProviderUserKey = Guid.Empty,
+                UserName = request.UserName,
+                ApplicationName = ApplicationName,
+                Email = request.Email,
+                Password = this.PasswordServices.EncodePassword(request.Password),
+                PasswordQuestion = request.PasswordQuestion,
+                PasswordAnswer = request.PasswordAnswer,
+                IsApproved = request.IsApproved,
+                LastActivityDate = createDate,
+                LastLoginDate = createDate,
+                LastPasswordChangedDate = createDate,
+                CreationDate = createDate,
+                IsOnline = false,
+                IsLockedOut = false,
+                LastLockedOutDate = createDate,
+                FailedPasswordAttemptCount = 0,
+                FailedPasswordAttemptWindowStart = createDate,
+                FailedPasswordAnswerAttemptCount = 0,
+                FailedPasswordAnswerAttemptWindowStart = createDate,
+                LastModified = createDate,
+            };
 
-            //// Check whether user with passed username already exists
-            //var repository = PfMembershipRepositoryBroker.Create();
-            //var membershipUser = repository.GetUser(username);
-
-            //if (membershipUser != null)
-            //{
-            //    status = MembershipCreateStatus.DuplicateUserName;
-            //    return null;
-            //}
-
-
-            //if (providerUserKey == null)
-            //{
-            //    providerUserKey = Guid.NewGuid();
-            //}
-            //else
-            //{
-            //    if (!(providerUserKey is Guid))
-            //    {
-            //        status = MembershipCreateStatus.InvalidProviderUserKey;
-            //        return null;
-            //    }
-            //}
-
-            //var createDate = DateTime.Now;
-            //var user = new Model.PfMembershipUser
-            //{
-            //    ProviderUserKey = (Guid)providerUserKey,
-            //    UserName = username,
-            //    ApplicationName = this.ApplicationName,
-            //    Email = email,
-            //    Password = EncodePassword(password),
-            //    PasswordQuestion = passwordQuestion,
-            //    PasswordAnswer = passwordAnswer,
-            //    IsApproved = isApproved,
-            //    LastActivityDate = createDate,
-            //    LastLoginDate = createDate,
-            //    LastPasswordChangedDate = createDate,
-            //    CreationDate = createDate,
-            //    IsOnline = false,
-            //    IsLockedOut = false,
-            //    LastLockedOutDate = createDate,
-            //    FailedPasswordAttemptCount = 0,
-            //    FailedPasswordAttemptWindowStart = createDate,
-            //    FailedPasswordAnswerAttemptCount = 0,
-            //    FailedPasswordAnswerAttemptWindowStart = createDate,
-            //    LastModified = createDate,
-            //};
-
-            //try
-            //{
-            //    repository.Insert(user);
-            //    status = MembershipCreateStatus.Success;
-            //}
-            //catch (Exception ex)
-            //{
-            //    // TODO - get my Logs(!!!)
-            //    System.Diagnostics.Debug.WriteLine(ex.Message);
-            //    status = MembershipCreateStatus.UserRejected;
-            //    return null;
-            //}
-
-            //return user.ToSecurityMembershipUser(this.Name);
-
-            this.UnitOfWork.SaveChanges();   // I HATE THIS - THE SERVICES ARE MANAGING THE UNIT OF WORK TO WHICH THEY BELONG!!!
-
-            outCreateStatus = (PleiadesMembershipCreateStatus)createStatus;
-            return Repository.GetUser(generatedUserName);
+            Repository.Insert(user);
+            createStatus = PfMembershipCreateStatus.Success;
+            return user;
         }
 
-
-        /// <summary>
-        /// Creates a random 7-digit number for User Name (since we authenticate by email addy)
-        /// </summary>
-        public string GenerateUserName()
+        public string GenerateUniqueUserName(int maxAttempts)
         {
-            var username = "";
-            var counter = 0;
-            while (counter++ < 100)
+            var counter = 1;
+            while (counter++ < maxAttempts)
             {
+                var username = "";
                 var random = new Random();
                 username = random.Next(9999999).ToString("D7");
-
-                if (Membership.FindUsersByName(username).Count == 0)
+                    
+                if (Repository.GetUserByUserName(username) == null)
                 {
                     return username;
                 }
             }
 
-            throw new Exception("Unable to generate new user name after 100 tries");
+            throw new Exception("Unable to generate new user name after " + maxAttempts + " tries");
         }
 
-        /// <summary>
-        /// Returns a non-null Membership User if Validation succeeds
-        /// </summary>
-        public Model.PfMembershipUser ValidateUserByEmailAddr(string emailAddress, string password)
+        public PfMembershipUser ValidateUserByEmailAddr(string emailAddress, string password)
         {
-            var user = GetSingleUserByEmail(emailAddress);           
+            var user = this.Repository.GetUserByEmail(emailAddress);
             if (user == null)
             {
                 return null;
             }
 
-            var membershipValidated = Membership.ValidateUser(user.UserName, password);
-            if (membershipValidated == false)
+            if (CheckPassword(password, user))
             {
-                return null;
+                if (user.IsApproved && !user.IsLockedOut)
+                {
+                    user.LastLoginDate = DateTime.Now;
+                    return user;
+                }
             }
-
-            return user;
+            else
+            {
+                user.FailedPasswordAttemptCount++;
+            }
+            return null;
         }
 
-        /// <summary>
-        /// Returns user if they exist in Membership.  Throws an exception if there's more than one match.
-        /// </summary>
-        public Model.PfMembershipUser GetSingleUserByEmail(string emailAddress)
+        private bool CheckPassword(string password1, PfMembershipUser user)
         {
-            var users =  Membership.FindUsersByEmail(emailAddress);
-            if (users.Count == 0)
-            {
-                return null;
-            }
-            if (users.Count > 1)
-            {
-                throw new Exception("Multiple users were found with email address: " + emailAddress);
-            }
-
-            var enumerator = users.GetEnumerator();
-            enumerator.MoveNext();
-            var user = (SecurityMembershipUser)enumerator.Current;
-            return user.ToModelMembershipUser();
+            return this.EncryptionService.MakeHMAC256Base64(password1) == user.Password;
         }
 
-        /// <summary>
-        /// Retrieves username by email address.  Returns null if User does not exist in Membership
-        /// </summary>
-        // TODO: wire in the Repository directly - eliminate the legacy
-        public string GetUserNameByEmail(string emailAddress)
+        public PfMembershipUser GetUserByEmail(string emailAddress)
         {
-            var user = GetSingleUserByEmail(emailAddress);
-            if (user == null)
-            {
-                return null;
-            }
-            return user.UserName;
+            return this.Repository.GetUserByEmail(emailAddress);
         }
 
-        // TODO: wire in the Repository directly - eliminate the legacy
-        public List<Model.PfMembershipUser> GetAllUsers()
-        {            
-            int totalRecords;
-            var result = Membership.GetAllUsers(1, System.Int32.MaxValue, out totalRecords);
-            var output = new List<Model.PfMembershipUser>();
-            foreach (var user in result)
-            {
-                var modelUser = ((SecurityMembershipUser)user).ToModelMembershipUser();
-                output.Add(modelUser);
-            }
-            return output;
-        }
-
-        // TODO: wire in the Repository directly - eliminate the legacy
-        public Model.PfMembershipUser GetUserByUserName(string username)
+        public PfMembershipUser GetUserByUserName(string username)
         {
-            var users = Membership.FindUsersByName(username);
-            if (users.Count == 0)
-            {
-                return null;
-            }
-            if (users.Count > 1)
-            {
-                throw new Exception("Multiple users were found with username: " + username);
-            }
-
-            var user = (SecurityMembershipUser)users.GetEnumerator().Current;
-            return user.ToModelMembershipUser();
+            return this.Repository.GetUserByUserName(username);
         }
 
-        /// <summary>
-        /// Get the current number of User Active online - "touched" in the last configurable period
-        /// </summary>
-        // TODO: wire in the Repository directly - eliminate the legacy
+        public IEnumerable<PfMembershipUser> GetAllUsers()
+        {
+            return this.Repository.GetAllUsers();
+        }
+
+
+
+        // Bring this in for the ValidateUser stuff
+
+        // TODO: create PfMembershipConfiguration object
+
+        // TODO: where do we store password attempt window...?
+
+
+        //#region private methods
+        ///// <summary>
+        ///// A helper method that performs the checks and updates associated with password failure tracking.
+        ///// </summary>
+        //private void UpdateFailureCount(string username, string failureType)
+        //{
+        //    var repository = PfMembershipRepositoryBroker.Create();
+        //    var user = repository.GetUser(username);
+
+        //    if (user == null)
+        //    {
+        //        throw new ProviderException("Update failure count failed. No unique user found.");
+        //    }
+
+        //    var windowStart = new DateTime();
+        //    int failureCount = 0;
+
+        //    if (failureType == "password")
+        //    {
+        //        failureCount = Convert.ToInt32(user.FailedPasswordAttemptCount);
+        //        windowStart = Convert.ToDateTime(user.FailedPasswordAttemptWindowStart);
+        //    }
+
+        //    if (failureType == "passwordAnswer")
+        //    {
+        //        failureCount = Convert.ToInt32(user.FailedPasswordAnswerAttemptCount);
+        //        windowStart = Convert.ToDateTime(user.FailedPasswordAnswerAttemptWindowStart);
+        //    }
+
+        //    var windowEnd = windowStart.AddMinutes(PasswordAttemptWindow);
+
+        //    if (failureCount == 0 || DateTime.Now > windowEnd)
+        //    {
+        //        // First password failure or outside of PasswordAttemptWindow. 
+        //        // Start a new password failure count from 1 and a new window starting now.
+        //        if (failureType == "password")
+        //        {
+        //            user.FailedPasswordAttemptCount = 1;
+        //            user.FailedPasswordAttemptWindowStart = DateTime.Now;
+        //        }
+        //        if (failureType == "passwordAnswer")
+        //        {
+        //            user.FailedPasswordAnswerAttemptCount = 1;
+        //            user.FailedPasswordAnswerAttemptWindowStart = DateTime.Now;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        // FIXED: failure count
+        //        failureCount++;
+        //        if (failureCount >= MaxInvalidPasswordAttempts)
+        //        {
+        //            // Max password attempts have exceeded the failure threshold. Lock out the user.
+        //            user.IsLockedOut = true;
+        //            user.LastLockedOutDate = DateTime.Now;
+        //            user.FailedPasswordAnswerAttemptCount = 5;
+        //        }
+        //        else
+        //        {
+        //            // Max password attempts have not exceeded the failure threshold. Update
+        //            // the failure counts. Leave the window the same.
+        //            if (failureType == "password")
+        //            {
+        //                user.FailedPasswordAttemptCount = failureCount;
+        //            }
+        //            if (failureType == "passwordAnswer")
+        //            {
+        //                user.FailedPasswordAnswerAttemptCount = failureCount;
+        //            }
+        //        }
+        //    }
+        //}
+
+
+
         public int GetNumberOfUsersOnline()
         {
             return Membership.GetNumberOfUsersOnline();
         }
 
-        /// <summary>
-        /// Unlock a User Account that's failed Validation too many times
-        /// </summary>
-        // TODO: wire in the Repository directly - eliminate the legacy
         public void UnlockUser(string username)
         {
             var membershipUser = Membership.GetUser(username);
             membershipUser.UnlockUser();
         }
 
-        /// <summary>
-        /// Reset Password
-        /// </summary>
-        // TODO: wire in the Repository directly - eliminate the legacy
         public string ResetPassword(string username)
         {
-            var membershipUser = Membership.GetUser(username);
-            var resetPassword = membershipUser.ResetPassword();     // How did I know to did this...???
-            return resetPassword;
+            throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Reset Password with Answer for Password Question
-        /// </summary>
-        // TODO: wire in the Repository directly - eliminate the legacy
         public string ResetPasswordWithAnswer(string username, string answer)
         {
             var membershipUser = Membership.GetUser(username);
@@ -271,78 +246,59 @@ namespace Pleiades.Web.Security.Concrete
             return resetPassword;
         }
 
-        /// <summary>
-        /// Retreive Password Question
-        /// </summary>
-        // TODO: wire in the Repository directly - eliminate the legacy
         public string PasswordQuestion(string username)
         {
-            var membershipUser = Membership.GetUser(username);
-            return membershipUser.PasswordQuestion;
+            var user = this.Repository.GetUserByUserName(username);
+            return user.PasswordQuestion;
         }
 
-        // TODO: wire in the Repository directly - eliminate the legacy
+        // Soft Delete, mayhaps?
         public void DeleteUser(string username)
         {
-            Membership.DeleteUser(username);
+            this.Repository.DeleteUser(username, true);
         }
-
-        /// <summary>
-        /// Change Membership User's Password
-        /// </summary>
-        // TODO: wire in the Repository directly - eliminate the legacy
+        
         public void ChangePassword(string username, string oldPassword, string newPassword)
         {
-            var membershipUser = Membership.GetUser(username);
-            if (!membershipUser.ChangePassword(oldPassword, newPassword))
-            {
-                throw new Exception("Internal error occurs while attempting to change password");
-            }
+            throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Change Membership User's Password with Question and Answer
-        /// </summary>
-        // TODO: wire in the Repository directly - eliminate the legacy
         public void ChangePasswordQuestionAndAnswer(string username, string password, string question, string answer)
         {
+            var user = this.Repository.GetUserByUserName(username);
+            
             var membershipUser = Membership.GetUser(username);
             if (!membershipUser.ChangePasswordQuestionAndAnswer(password, question, answer))
             {
                 throw new Exception("Internal error occurs while attempting to change password");
             }
+
+            throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Change Membership User's Email Address
-        /// </summary>
-        // TODO: wire in the Repository directly - eliminate the legacy
         public void ChangeEmailAddress(string username, string emailAddress)
         {
-            var membershipUser = Membership.GetUser(username);
-            membershipUser.Email = emailAddress;
-            Membership.UpdateUser(membershipUser);
+            var user = this.Repository.GetUserByUserName(username);
+            var userCollision = this.Repository.GetUserByEmail(emailAddress);
+
+            if (userCollision != null)
+            {
+                throw new Exception("User with Email Address: " + emailAddress + " exists already");
+            }
+
+            user.Email = emailAddress;
         }
 
-        /// <summary>
-        /// Change the User's Membership Approval
-        /// </summary>
-        // TODO: wire in the Repository directly - eliminate the legacy
         public void SetUserApproval(string username, bool approved)
         {
-            var membershipUser = Membership.GetUser(username);
-            membershipUser.IsApproved = approved;
-            Membership.UpdateUser(membershipUser);
+            var user = this.Repository.GetUserByUserName(username);
+            user.IsApproved = approved;
         }
 
-        /// <summary>
-        /// Signal User Activity has occured
-        /// </summary>
-        /// <param name="user"></param>
-        // TODO: wire in the Repository directly - eliminate the legacy
         public void Touch(string username)
         {
-            var membershipUser = Membership.GetUser(username);
-        }          
+            var user = this.Repository.GetUserByUserName(username);
+            user.LastActivityDate = DateTime.Now;
+        }
     }
 }

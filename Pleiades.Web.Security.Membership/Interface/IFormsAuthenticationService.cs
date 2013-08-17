@@ -1,8 +1,4 @@
-﻿using System;
-using System.Web.Security;
-using Pleiades.Web.Security.Model;
-
-namespace Pleiades.Web.Security.Interface
+﻿namespace Pleiades.Web.Security.Interface
 {
     /// <summary>
     /// Enables us to abstract and mock the Forms Authentication functions

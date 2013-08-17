@@ -7,14 +7,12 @@ using Pleiades.TestHelpers.Web;
 using Pleiades.Web.Security.Concrete;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
-using Pleiades.Web.Security.Utility;
 
-namespace Pleiades.Web.Tests.Security.IntegrationTests
+namespace Pleiades.Web.Security.UnitTests.Concrete
 {
     [TestFixture]
     public class AggregateUserServiceTests
     {
-        #region Authenticate() Tests
         [Test]
         public void Invalid_Credentials_Returns_Bad_Execution_State_And_Clears_Cookie()
         {
@@ -100,9 +98,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             formsAuthService.VerifyAllExpectations();
             Assert.True(result);
         }
-        #endregion
 
-        #region GetAuthenticatedUser() Tests
         [Test]
         public void Valid_Forms_Authenticated_User_That_Exists_In_Repository_Touches_Membership()
         {
@@ -183,9 +179,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             // Assert
             Assert.AreEqual(user, aggrUser);
         }
-        #endregion
 
-        #region CreateUser tests
         [Test]
         [ExpectedException(typeof(Exception))]
         public void Cant_Add_More_Than_Maximum_Number_Of_Admins()
@@ -326,9 +320,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             unitOfWork.VerifyAllExpectations();
             Assert.IsNotNull(response);
         }
-        #endregion
 
-        #region Update  tests
         [Test]
         public void Authorized_Users_Calling_UpdateIdentity_Suceeds()
         {
@@ -378,9 +370,7 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             // Assert
             // ???
         }
-        #endregion
 
-        #region ChangePassword tests
         [Test]
         public void Authorized_Users_Calling_Update_Password_Succeeds()
         {
@@ -410,6 +400,5 @@ namespace Pleiades.Web.Tests.Security.IntegrationTests
             membershipService.VerifyAllExpectations();
             unitOfWork.VerifyAllExpectations();
         }
-        #endregion
     }
 }

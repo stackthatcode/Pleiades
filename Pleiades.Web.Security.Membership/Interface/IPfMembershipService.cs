@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Pleiades.Web.Security.Model;
 
 namespace Pleiades.Web.Security.Interface
@@ -9,14 +8,14 @@ namespace Pleiades.Web.Security.Interface
     /// </summary>
     public interface IPfMembershipService
     {
-        PfMembershipUser CreateUser(CreateNewMembershipUserRequest request, out PleiadesMembershipCreateStatus outCreateStatus);
-        string GenerateUserName();
+        PfMembershipUser CreateUser(CreateNewMembershipUserRequest request, out PfMembershipCreateStatus outCreateStatus);
+        string GenerateUniqueUserName(int maxAttempts);
+
         PfMembershipUser ValidateUserByEmailAddr(string emailaddr, string password);
-        PfMembershipUser GetSingleUserByEmail(string emailAddress);
+        PfMembershipUser GetUserByEmail(string emailAddress);
         PfMembershipUser GetUserByUserName(string userName);
-        List<PfMembershipUser> GetAllUsers();
+        IEnumerable<PfMembershipUser> GetAllUsers();
         
-        string GetUserNameByEmail(string emailAddress);
         int GetNumberOfUsersOnline();
 
         void UnlockUser(string userName);

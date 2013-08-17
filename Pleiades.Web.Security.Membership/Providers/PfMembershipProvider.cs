@@ -4,12 +4,9 @@ using System.Configuration.Provider;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web.Configuration;
 using System.Web.Security;
 using Pleiades.Data;
 using Pleiades.Helpers;
-using Pleiades.Web.Security.Concrete;
-using Pleiades.Web.Security.Interface;
 
 namespace Pleiades.Web.Security.Providers
 {
@@ -415,7 +412,7 @@ namespace Pleiades.Web.Security.Providers
 
             if (CheckPassword(password, user.Password))
             {
-                if (user.IsApproved && (!user.IsLockedOut ?? false))
+                if (user.IsApproved && (!user.IsLockedOut))
                 {
                     isValid = true;
                     user.LastLoginDate = DateTime.Now;

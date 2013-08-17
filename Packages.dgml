@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="Pleiades.Tests\Pleiades.Web.Security.UnitTests" Label="Pleiades.Web.Security.UnitTests" Category="Project" />
+    <Node Id="NUnit 2.6.0.12054" Label="NUnit 2.6.0.12054" Category="Package" />
+    <Node Id="RhinoMocks 3.6.1" Label="RhinoMocks 3.6.1" Category="Package" />
+    <Node Id="Pleiades.Tests\Pleiades.IntegrationTests.DataEF" Label="Pleiades.IntegrationTests.DataEF" Category="Project" />
+    <Node Id="EntityFramework 5.0.0" Label="EntityFramework 5.0.0" Category="Package" />
+    <Node Id="NUnit 2.6.0.12054" Label="NUnit 2.6.0.12054" Category="Package" />
+    <Node Id="RhinoMocks 3.6.1" Label="RhinoMocks 3.6.1" Category="Package" />
+    <Node Id="Pleiades.Tests\Pleiades.UnitTests" Label="Pleiades.UnitTests" Category="Project" />
+    <Node Id="NUnit 2.6.0.12054" Label="NUnit 2.6.0.12054" Category="Package" />
+    <Node Id="RhinoMocks 3.6.1" Label="RhinoMocks 3.6.1" Category="Package" />
+    <Node Id="Commerce.Tests\Commerce.UnitTests" Label="Commerce.UnitTests" Category="Project" />
+    <Node Id="EntityFramework 5.0.0" Label="EntityFramework 5.0.0" Category="Package" />
+    <Node Id="NUnit 2.6.0.12054" Label="NUnit 2.6.0.12054" Category="Package" />
+    <Node Id="RhinoMocks 3.6.1" Label="RhinoMocks 3.6.1" Category="Package" />
+    <Node Id="Commerce.Tests\Commerce.IntegrationTests" Label="Commerce.IntegrationTests" Category="Project" />
+    <Node Id="Autofac 2.6.3.862" Label="Autofac 2.6.3.862" Category="Package" />
+    <Node Id="Autofac.Mvc3 2.6.3.862" Label="Autofac.Mvc3 2.6.3.862" Category="Package" />
+    <Node Id="EntityFramework 5.0.0" Label="EntityFramework 5.0.0" Category="Package" />
+    <Node Id="NUnit 2.6.0.12054" Label="NUnit 2.6.0.12054" Category="Package" />
+    <Node Id="Commerce\Commerce.Web" Label="Commerce.Web" Category="Project" />
+    <Node Id="Autofac 2.6.3.862" Label="Autofac 2.6.3.862" Category="Package" />
+    <Node Id="Autofac.Mvc3 2.6.3.862" Label="Autofac.Mvc3 2.6.3.862" Category="Package" />
+    <Node Id="AutoMapper 2.1.267" Label="AutoMapper 2.1.267" Category="Package" />
+    <Node Id="EntityFramework 5.0.0" Label="EntityFramework 5.0.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.Mvc 4.0.20710.0" Label="Microsoft.AspNet.Mvc 4.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.Razor 2.0.20710.0" Label="Microsoft.AspNet.Razor 2.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.Web.Optimization 1.0.0" Label="Microsoft.AspNet.Web.Optimization 1.0.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebApi 4.0.20710.0" Label="Microsoft.AspNet.WebApi 4.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebApi.Client 4.0.20710.0" Label="Microsoft.AspNet.WebApi.Client 4.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebApi.Core 4.0.20710.0" Label="Microsoft.AspNet.WebApi.Core 4.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebApi.WebHost 4.0.20710.0" Label="Microsoft.AspNet.WebApi.WebHost 4.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebPages 2.0.20710.0" Label="Microsoft.AspNet.WebPages 2.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.Net.Http 2.0.20710.0" Label="Microsoft.Net.Http 2.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.Web.Infrastructure 1.0.0.0" Label="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package" />
+    <Node Id="Newtonsoft.Json 4.5.6" Label="Newtonsoft.Json 4.5.6" Category="Package" />
+    <Node Id="WebGrease 1.1.0" Label="WebGrease 1.1.0" Category="Package" />
+    <Node Id="Commerce\Commerce.Persist" Label="Commerce.Persist" Category="Project" />
+    <Node Id="Autofac 2.6.3.862" Label="Autofac 2.6.3.862" Category="Package" />
+    <Node Id="Autofac.Mvc3 2.6.3.862" Label="Autofac.Mvc3 2.6.3.862" Category="Package" />
+    <Node Id="EntityFramework 5.0.0" Label="EntityFramework 5.0.0" Category="Package" />
+    <Node Id="Commerce\Commerce.Initializer" Label="Commerce.Initializer" Category="Project" />
+    <Node Id="Autofac 2.6.3.862" Label="Autofac 2.6.3.862" Category="Package" />
+    <Node Id="Autofac.Mvc3 2.6.3.862" Label="Autofac.Mvc3 2.6.3.862" Category="Package" />
+    <Node Id="EntityFramework 5.0.0" Label="EntityFramework 5.0.0" Category="Package" />
+    <Node Id="Pleiades\Pleiades.Web.Security.Aggregate" Label="Pleiades.Web.Security.Aggregate" Category="Project" />
+    <Node Id="Autofac 2.6.3.862" Label="Autofac 2.6.3.862" Category="Package" />
+    <Node Id="Autofac.Mvc3 2.6.3.862" Label="Autofac.Mvc3 2.6.3.862" Category="Package" />
+    <Node Id="Pleiades\Pleiades.Data.EF" Label="Pleiades.Data.EF" Category="Project" />
+    <Node Id="AutoMapper 2.1.267" Label="AutoMapper 2.1.267" Category="Package" />
+    <Node Id="EntityFramework 5.0.0" Label="EntityFramework 5.0.0" Category="Package" />
+    <Node Id="Pleiades\Pleiades.Web" Label="Pleiades.Web" Category="Project" />
+    <Node Id="Autofac 2.6.3.862" Label="Autofac 2.6.3.862" Category="Package" />
+    <Node Id="AutoMapper 2.1.267" Label="AutoMapper 2.1.267" Category="Package" />
+    <Node Id="Pleiades\Pleiades.TestHelpers" Label="Pleiades.TestHelpers" Category="Project" />
+    <Node Id="NUnit 2.6.0.12054" Label="NUnit 2.6.0.12054" Category="Package" />
+    <Node Id="RhinoMocks 3.6.1" Label="RhinoMocks 3.6.1" Category="Package" />
+  </Nodes>
+  <Links>
+    <Link Source="Pleiades.Tests\Pleiades.Web.Security.UnitTests" Target="NUnit 2.6.0.12054" Category="Installed Package" />
+    <Link Source="Pleiades.Tests\Pleiades.Web.Security.UnitTests" Target="RhinoMocks 3.6.1" Category="Installed Package" />
+    <Link Source="Pleiades.Tests\Pleiades.IntegrationTests.DataEF" Target="EntityFramework 5.0.0" Category="Installed Package" />
+    <Link Source="Pleiades.Tests\Pleiades.IntegrationTests.DataEF" Target="NUnit 2.6.0.12054" Category="Installed Package" />
+    <Link Source="Pleiades.Tests\Pleiades.IntegrationTests.DataEF" Target="RhinoMocks 3.6.1" Category="Installed Package" />
+    <Link Source="Pleiades.Tests\Pleiades.UnitTests" Target="NUnit 2.6.0.12054" Category="Installed Package" />
+    <Link Source="Pleiades.Tests\Pleiades.UnitTests" Target="RhinoMocks 3.6.1" Category="Installed Package" />
+    <Link Source="Commerce.Tests\Commerce.UnitTests" Target="EntityFramework 5.0.0" Category="Installed Package" />
+    <Link Source="Commerce.Tests\Commerce.UnitTests" Target="NUnit 2.6.0.12054" Category="Installed Package" />
+    <Link Source="Commerce.Tests\Commerce.UnitTests" Target="RhinoMocks 3.6.1" Category="Installed Package" />
+    <Link Source="Autofac.Mvc3 2.6.3.862" Target="Autofac 2.6.3.862" Category="Package Dependency" />
+    <Link Source="Commerce.Tests\Commerce.IntegrationTests" Target="Autofac.Mvc3 2.6.3.862" Category="Installed Package" />
+    <Link Source="Commerce.Tests\Commerce.IntegrationTests" Target="EntityFramework 5.0.0" Category="Installed Package" />
+    <Link Source="Commerce.Tests\Commerce.IntegrationTests" Target="NUnit 2.6.0.12054" Category="Installed Package" />
+    <Link Source="Autofac.Mvc3 2.6.3.862" Target="Autofac 2.6.3.862" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.Mvc 4.0.20710.0" Target="Microsoft.AspNet.WebPages 2.0.20710.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.Mvc 4.0.20710.0" Target="Microsoft.AspNet.Razor 2.0.20710.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.Web.Optimization 1.0.0" Target="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.Web.Optimization 1.0.0" Target="WebGrease 1.1.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi 4.0.20710.0" Target="Microsoft.AspNet.WebApi.WebHost 4.0.20710.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi.Client 4.0.20710.0" Target="Microsoft.Net.Http 2.0.20710.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi.Client 4.0.20710.0" Target="Newtonsoft.Json 4.5.6" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi.Core 4.0.20710.0" Target="Microsoft.AspNet.WebApi.Client 4.0.20710.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi.WebHost 4.0.20710.0" Target="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi.WebHost 4.0.20710.0" Target="Microsoft.AspNet.WebApi.Core 4.0.20710.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebPages 2.0.20710.0" Target="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebPages 2.0.20710.0" Target="Microsoft.AspNet.Razor 2.0.20710.0" Category="Package Dependency" />
+    <Link Source="Commerce\Commerce.Web" Target="Autofac.Mvc3 2.6.3.862" Category="Installed Package" />
+    <Link Source="Commerce\Commerce.Web" Target="AutoMapper 2.1.267" Category="Installed Package" />
+    <Link Source="Commerce\Commerce.Web" Target="EntityFramework 5.0.0" Category="Installed Package" />
+    <Link Source="Commerce\Commerce.Web" Target="Microsoft.AspNet.Mvc 4.0.20710.0" Category="Installed Package" />
+    <Link Source="Commerce\Commerce.Web" Target="Microsoft.AspNet.Web.Optimization 1.0.0" Category="Installed Package" />
+    <Link Source="Commerce\Commerce.Web" Target="Microsoft.AspNet.WebApi 4.0.20710.0" Category="Installed Package" />
+    <Link Source="Autofac.Mvc3 2.6.3.862" Target="Autofac 2.6.3.862" Category="Package Dependency" />
+    <Link Source="Commerce\Commerce.Persist" Target="Autofac.Mvc3 2.6.3.862" Category="Installed Package" />
+    <Link Source="Commerce\Commerce.Persist" Target="EntityFramework 5.0.0" Category="Installed Package" />
+    <Link Source="Autofac.Mvc3 2.6.3.862" Target="Autofac 2.6.3.862" Category="Package Dependency" />
+    <Link Source="Commerce\Commerce.Initializer" Target="Autofac.Mvc3 2.6.3.862" Category="Installed Package" />
+    <Link Source="Commerce\Commerce.Initializer" Target="EntityFramework 5.0.0" Category="Installed Package" />
+    <Link Source="Autofac.Mvc3 2.6.3.862" Target="Autofac 2.6.3.862" Category="Package Dependency" />
+    <Link Source="Pleiades\Pleiades.Web.Security.Aggregate" Target="Autofac.Mvc3 2.6.3.862" Category="Installed Package" />
+    <Link Source="Pleiades\Pleiades.Data.EF" Target="AutoMapper 2.1.267" Category="Installed Package" />
+    <Link Source="Pleiades\Pleiades.Data.EF" Target="EntityFramework 5.0.0" Category="Installed Package" />
+    <Link Source="Pleiades\Pleiades.Web" Target="Autofac 2.6.3.862" Category="Installed Package" />
+    <Link Source="Pleiades\Pleiades.Web" Target="AutoMapper 2.1.267" Category="Installed Package" />
+    <Link Source="Pleiades\Pleiades.TestHelpers" Target="NUnit 2.6.0.12054" Category="Installed Package" />
+    <Link Source="Pleiades\Pleiades.TestHelpers" Target="RhinoMocks 3.6.1" Category="Installed Package" />
+  </Links>
+  <Categories>
+    <Category Id="Project" />
+    <Category Id="Package" />
+  </Categories>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Project" ValueLabel="True">
+      <Condition Expression="HasCategory('Project')" />
+      <Setter Property="Background" Value="Blue" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Package Dependency" ValueLabel="True">
+      <Condition Expression="HasCategory('Package Dependency')" />
+      <Setter Property="Background" Value="Yellow" />
+    </Style>
+  </Styles>
+</DirectedGraph>

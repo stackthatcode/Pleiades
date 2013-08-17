@@ -277,16 +277,9 @@ namespace Commerce.Web.TestsControllers
         [Test]
         public void DeleteConfirm_HttpPost()
         {
-            var user = new AggregateUser
-            {
-                Membership = new PfMembershipUser { UserName = "123456" },
-                IdentityProfile = new IdentityProfile(),
-            };
+            // Arrange
             var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
-            repository
-                .Expect(x => x.RetrieveById(888))
-                .Return(user);
-            repository.Expect(x => x.Delete(user));
+            repository.Expect(x => x.Delete(888));
 
             var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
             unitOfWork.Expect(x => x.SaveChanges());

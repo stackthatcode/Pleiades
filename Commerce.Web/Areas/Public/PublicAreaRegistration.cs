@@ -19,6 +19,13 @@ namespace Commerce.Web.Areas.Admin
                 "Public Home Route",
                 "",
                 new { controller = "Products", action = "List" });
+
+            context.MapRoute(
+                "Public Controller + Action",
+                "Public/{controller}/{action}",
+                new { controller = "Home", action = "Index" }
+);
+
         }
     }
 }

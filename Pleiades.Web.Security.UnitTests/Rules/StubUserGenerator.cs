@@ -1,7 +1,6 @@
-﻿using System;
-using Pleiades.Web.Security.Model;
+﻿using Pleiades.Web.Security.Model;
 
-namespace Pleiades.UnitTests.Web.Security.Aggregate.Step
+namespace Pleiades.Web.Security.UnitTests.Rules
 {
     public class StubUserGenerator
     {

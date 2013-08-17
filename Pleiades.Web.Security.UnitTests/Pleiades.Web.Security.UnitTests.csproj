@@ -8,8 +8,8 @@
     <ProjectGuid>{11018755-DEC2-493C-82D1-58DCC1AF5927}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ClassLibrary1</RootNamespace>
-    <AssemblyName>ClassLibrary1</AssemblyName>
+    <RootNamespace>Pleiades.Web.Security.UnitTests</RootNamespace>
+    <AssemblyName>Pleiades.Web.Security.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -43,7 +43,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,9 +51,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Concrete\PfMembershipServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Concrete\AggregateUserServiceTests.cs" />
-    <Compile Include="Concrete\OwnerAuthorizationStepTests.cs" />
+    <Compile Include="Concrete\OwnerAuthorizationRuleTests.cs" />
     <Compile Include="Provider\MembershipProviderTests.cs" />
     <Compile Include="Rules\AccountLevelCheckTests.cs" />
     <Compile Include="Rules\AccountStatusCheckTests.cs" />

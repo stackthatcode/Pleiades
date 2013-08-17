@@ -1,10 +1,7 @@
 ﻿using System;
 using Autofac;
-using Pleiades.Injection;
-using Pleiades.Web.Security.Concrete;
 using Pleiades.Web.Security.Default;
 using Pleiades.Web.Security.Interface;
-using Pleiades.Web.Security.Model;
 
 namespace Pleiades.Web.Security
 {

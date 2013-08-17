@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Pleiades.Injection;
-using Pleiades.TestHelpers;
 using Pleiades.TestHelpers.Web;
 using Pleiades.Web.Security.Interface;
-using Pleiades.Web.Security.Model;
-using Commerce.Web;
 using Commerce.Web.Areas.Admin.Controllers;
 using Commerce.Web.Areas.Admin.Models;
 using Commerce.Web.Plumbing;
@@ -82,6 +75,10 @@ namespace Commerce.Web.TestsControllers
                 .IgnoreArguments();
 
             var controller = new AuthController(service, null);
+            var context = HttpContextStubFactory.Create();
+            context.Server.Expect(x => x.UrlDecode("http://google.com")).Return("MyUrl.aspx").IgnoreArguments();
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
 
             // Act
             var result = controller.Login(model, "MyUrl.aspx");

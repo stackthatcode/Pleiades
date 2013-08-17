@@ -29,7 +29,7 @@ namespace Pleiades.Web.Security.Model
         public DateTime LastLoginDate { get; set; }
         public DateTime LastPasswordChangedDate { get; set; }
         public bool IsOnline { get; set; }
-        public bool? IsLockedOut { get; set; }
+        public bool IsLockedOut { get; set; }
         public DateTime LastLockedOutDate { get; set; }
         public int FailedPasswordAttemptCount { get; set; }
         public DateTime FailedPasswordAttemptWindowStart { get; set; }

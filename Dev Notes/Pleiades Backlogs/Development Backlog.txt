@@ -54,19 +54,33 @@ Burndown 8/13/2013 (0.5 Hours)
 * HOW TO DEBUG BUNDLES...? => DONE
 
 
+Burndown 8/13/2013 (0.75 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Begin process of cleaning up dependency HELL
+
+Burndown 8/14/2013 (1.0 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Finished ASP.NET MVC 4 upgrade, incl. Autofac + MVC Integration => DONE
+- Fixed Commerce.UnitTests
+
+Burndown 8/15/2013 (0.5 + 0.5 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Membership Provider revamp
+
+
 
 OTHER STUFF
 ~~~~~~~~~~~
 http://g-form.com/products/extreme-sleeve-for-laptops/ => NEW COMPUTER PROTECTION
+* http://mindre.net/Article/Microsoft_Web_Optimization_development
 
 
 Final Deliverable Definition
 ----------------------------
-* http://mindre.net/Article/Microsoft_Web_Optimization_development
+- Revamped Membership Provider => TODO
+- Server Logging => TODO
 
 - Landing-Page + Microsite => IN PROGRESS
-- Server Logging => TODO
-- Revamped Membership Provider => TODO
 - Customer Checkout => TODO
 - Admin Search & Manage Orders => TODO
 - Admin Sales Graph by Product => TODO
@@ -76,6 +90,7 @@ Final Deliverable Definition
 - Stripe Payment Integration => TODO
 - Amazon EC2 Hosting => TODO
 - http://blog.stevensanderson.com/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/
+
 
 
 Already Done
