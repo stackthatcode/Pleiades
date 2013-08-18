@@ -1,16 +1,10 @@
-﻿using System;
-using System.Configuration.Provider;
+﻿using System.Configuration.Provider;
 using System.Web.Security;
 using Autofac;
 using NUnit.Framework;
 using Pleiades.Data;
-using Pleiades.Injection;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
-using Pleiades.Web.Security.Providers;
-using Pleiades.Utility;
-using Commerce.Persist;
-using Commerce.Persist.Concrete;
 
 namespace Commerce.IntegrationTests.Security
 {

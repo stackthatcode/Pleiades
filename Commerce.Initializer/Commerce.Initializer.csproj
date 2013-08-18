@@ -98,9 +98,9 @@
       <Project>{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}</Project>
       <Name>Pleiades.Web.Security.Aggregate</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Web\Pleiades.Web.csproj">
+    <ProjectReference Include="..\Pleiades.Web\Pleiades.Web.Foundation.csproj">
       <Project>{804F063C-505F-441E-B205-688C42E637AD}</Project>
-      <Name>Pleiades.Web</Name>
+      <Name>Pleiades.Web.Foundation</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pleiades.Data.EF\Pleiades.Data.EF.csproj">
       <Project>{89303370-B830-4A89-8646-0F9D287AD657}</Project>

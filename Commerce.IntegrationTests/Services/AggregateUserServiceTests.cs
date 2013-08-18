@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web.Security;
 using Autofac;
 using NUnit.Framework;
 using Pleiades.Data;
-using Pleiades.Data.EF;
-using Pleiades.Injection;
-using Pleiades.Web.Security.Concrete;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
-using Pleiades.Web.Security.Providers;
-using Pleiades.Utility;
-using Commerce.Persist.Concrete;
 
 namespace Commerce.IntegrationTests.Security
 {

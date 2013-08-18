@@ -1,9 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Web", "Pleiades.Web\Pleiades.Web.csproj", "{804F063C-505F-441E-B205-688C42E637AD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.TestHelpers", "Pleiades.Utilities\Pleiades.TestHelpers.csproj", "{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Web.Foundation", "Pleiades.Web\Pleiades.Web.Foundation.csproj", "{804F063C-505F-441E-B205-688C42E637AD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pleiades", "Pleiades", "{8F70F38E-584A-42A3-BA71-9D356C46679E}"
 EndProject
@@ -29,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commerce.UnitTests", "Comme
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.IntegrationTests.DataEF", "Pleiades.IntegrationTests.DataEF\Pleiades.IntegrationTests.DataEF.csproj", "{D4EBBD91-DDCA-4E18-A04D-50008A9158F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.UnitTests", "Pleiades.UnitTests\Pleiades.UnitTests.csproj", "{5F92F823-9790-4F67-9BCB-2AE22FCBED41}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Web.UnitTests", "Pleiades.UnitTests\Pleiades.Web.UnitTests.csproj", "{5F92F823-9790-4F67-9BCB-2AE22FCBED41}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pleiades.Tests", "Pleiades.Tests", "{3D30D9F1-2727-4E76-AD66-E3E03B99A444}"
 EndProject
@@ -57,16 +55,6 @@ Global
 		{804F063C-505F-441E-B205-688C42E637AD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{804F063C-505F-441E-B205-688C42E637AD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{804F063C-505F-441E-B205-688C42E637AD}.Release|x86.ActiveCfg = Release|Any CPU
-		{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}.Release|x86.ActiveCfg = Release|Any CPU
 		{10CEE227-9B7C-4D97-B53A-229E8D45B15F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{10CEE227-9B7C-4D97-B53A-229E8D45B15F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10CEE227-9B7C-4D97-B53A-229E8D45B15F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -192,7 +180,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{EF01A5EE-C1FE-476D-941F-478D5ACDBB51} = {8F70F38E-584A-42A3-BA71-9D356C46679E}
 		{804F063C-505F-441E-B205-688C42E637AD} = {8F70F38E-584A-42A3-BA71-9D356C46679E}
 		{10CEE227-9B7C-4D97-B53A-229E8D45B15F} = {8F70F38E-584A-42A3-BA71-9D356C46679E}
 		{89303370-B830-4A89-8646-0F9D287AD657} = {8F70F38E-584A-42A3-BA71-9D356C46679E}

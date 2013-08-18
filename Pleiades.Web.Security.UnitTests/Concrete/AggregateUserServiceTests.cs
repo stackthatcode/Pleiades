@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
+using Pleiades.Web.Testing;
 using Rhino.Mocks;
 using Pleiades.Data;
-using Pleiades.TestHelpers.Web;
 using Pleiades.Web.Security.Concrete;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;

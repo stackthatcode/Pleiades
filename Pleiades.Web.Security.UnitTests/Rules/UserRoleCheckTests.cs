@@ -73,7 +73,7 @@ namespace Pleiades.Web.Security.UnitTests.Rules
             context.UserRoleCheck();
 
             // Assert
-            Assert.AreEqual(SecurityCode.AccessDenied, context.SecurityCode);
+            Assert.AreEqual(SecurityCode.AccessDeniedSolicitLogon, context.SecurityCode);
             Assert.AreEqual(false, context.Pass);
         }
 
@@ -145,7 +145,7 @@ namespace Pleiades.Web.Security.UnitTests.Rules
             context.UserRoleCheck();
 
             // Assert
-            Assert.AreEqual(SecurityCode.AccessDenied, context.SecurityCode);
+            Assert.AreEqual(SecurityCode.AccessDeniedSolicitLogon, context.SecurityCode);
             Assert.AreEqual(false, context.Pass);
         }
 

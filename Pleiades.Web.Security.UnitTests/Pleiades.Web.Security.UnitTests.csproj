@@ -67,10 +67,6 @@
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
       <Name>Pleiades.Base</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Utilities\Pleiades.TestHelpers.csproj">
-      <Project>{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}</Project>
-      <Name>Pleiades.TestHelpers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Web.Security.Aggregate\Pleiades.Web.Security.Aggregate.csproj">
       <Project>{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}</Project>
       <Name>Pleiades.Web.Security.Aggregate</Name>
@@ -79,9 +75,9 @@
       <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
       <Name>Pleiades.Web.Security.Membership</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Web\Pleiades.Web.csproj">
+    <ProjectReference Include="..\Pleiades.Web\Pleiades.Web.Foundation.csproj">
       <Project>{804F063C-505F-441E-B205-688C42E637AD}</Project>
-      <Name>Pleiades.Web</Name>
+      <Name>Pleiades.Web.Foundation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

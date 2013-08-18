@@ -4,7 +4,7 @@ using Pleiades.Web.Security.Model;
 namespace Pleiades.Web.Security.Interface
 {
     /// <summary>
-    /// Contains all Membership Provider-related operations for managing Membership User objects -- root Entity Aggregates
+    /// Contains all Membership Provider-related operations for managing Membership User objects
     /// </summary>
     public interface IPfMembershipService
     {
@@ -14,21 +14,20 @@ namespace Pleiades.Web.Security.Interface
         PfMembershipUser ValidateUserByEmailAddr(string emailaddr, string password);
         PfMembershipUser GetUserByEmail(string emailAddress);
         PfMembershipUser GetUserByUserName(string userName);
-        IEnumerable<PfMembershipUser> GetAllUsers();
-        
+        IEnumerable<PfMembershipUser> GetAllUsers();        
         int GetNumberOfUsersOnline();
 
         void UnlockUser(string userName);
-        string ResetPassword(string userName);
-        string ResetPasswordWithAnswer(string userName, string answer);
         string PasswordQuestion(string userName);
 
-        void DeleteUser(string userName);
+        string ResetPassword(string userName, string answer, bool adminOverride, out PfPasswordChangeStatus status);
+        bool ChangePassword(string userName, string oldPassword, string newPassword, bool adminOverride, out PfPasswordChangeStatus status);
 
-        void ChangePassword(string userName, string oldPassword, string newPassword);
-        void ChangePasswordQuestionAndAnswer(string userName, string password, string question, string answer);
-        void ChangeEmailAddress(string userName, string emailAddress);
+        bool ChangePasswordQuestionAndAnswer(string userName, string password, string question, string answer, out string message);
+        bool ChangeEmailAddress(string userName, string password, string emailAddress, out string message);
+
         void SetUserApproval(string userName, bool approved);
         void Touch(string userName);
+        void DeleteUser(string userName);
     }
 }

@@ -9,8 +9,8 @@
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pleiades.UnitTests</RootNamespace>
-    <AssemblyName>Pleiades.UnitTests</AssemblyName>
+    <RootNamespace>Pleiades.Web.UnitTests</RootNamespace>
+    <AssemblyName>Pleiades.Web.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Web\HttpContext\HttpContextStubTests.cs" />
+    <Compile Include="HttpContext\HttpContextStubTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pleiades.Web.Security.Membership\Pleiades.Web.Security.Membership.csproj">
@@ -68,17 +68,13 @@
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
       <Name>Pleiades.Base</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Utilities\Pleiades.TestHelpers.csproj">
-      <Project>{EF01A5EE-C1FE-476D-941F-478D5ACDBB51}</Project>
-      <Name>Pleiades.TestHelpers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Web.Security.Aggregate\Pleiades.Web.Security.Aggregate.csproj">
       <Project>{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}</Project>
       <Name>Pleiades.Web.Security.Aggregate</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Web\Pleiades.Web.csproj">
+    <ProjectReference Include="..\Pleiades.Web\Pleiades.Web.Foundation.csproj">
       <Project>{804F063C-505F-441E-B205-688C42E637AD}</Project>
-      <Name>Pleiades.Web</Name>
+      <Name>Pleiades.Web.Foundation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

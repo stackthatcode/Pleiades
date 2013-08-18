@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web.Security;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
+
 
 namespace Pleiades.Web.Security.Concrete
 {
@@ -13,21 +12,21 @@ namespace Pleiades.Web.Security.Concrete
     public class PfMembershipService : IPfMembershipService
     {
         public IMembershipRepository Repository;
-        public IPasswordServices PasswordServices;
-        public IEncryptionService EncryptionService;
+        public IPfPasswordService PasswordServices;
+        public IPfMembershipSettings Settings;
 
         const string ApplicationName = "/";
 
-        public PfMembershipService(IMembershipRepository repository, IPasswordServices passwordServices, IEncryptionService encryptionService)
+        public PfMembershipService(IMembershipRepository repository, IPfPasswordService passwordServices, IPfMembershipSettings settings)
         {
             this.Repository = repository;
             this.PasswordServices = passwordServices;
-            this.EncryptionService = encryptionService;
+            this.Settings = settings;
         }
 
         public PfMembershipUser CreateUser(CreateNewMembershipUserRequest request, out PfMembershipCreateStatus createStatus)
         {
-            var validPassword = PasswordServices.IsValid(request.Password);
+            var validPassword = PasswordServices.IsValidPassword(request.Password);
             if (!validPassword)
             {
                 createStatus = PfMembershipCreateStatus.InvalidPassword;
@@ -104,24 +103,21 @@ namespace Pleiades.Web.Security.Concrete
                 return null;
             }
 
-            if (CheckPassword(password, user))
+            if (!user.IsApproved || user.IsLockedOut)
             {
-                if (user.IsApproved && !user.IsLockedOut)
-                {
-                    user.LastLoginDate = DateTime.Now;
-                    return user;
-                }
+                return null;
+            }
+
+            if (this.PasswordServices.CheckSecureInformation(password, user.Password))
+            {
+                user.LastLoginDate = DateTime.Now;
+                return user;
             }
             else
             {
-                user.FailedPasswordAttemptCount++;
+                this.PasswordServices.UpdateFailedPasswordAttempts(user);
+                return null;
             }
-            return null;
-        }
-
-        private bool CheckPassword(string password1, PfMembershipUser user)
-        {
-            return this.EncryptionService.MakeHMAC256Base64(password1) == user.Password;
         }
 
         public PfMembershipUser GetUserByEmail(string emailAddress)
@@ -139,111 +135,15 @@ namespace Pleiades.Web.Security.Concrete
             return this.Repository.GetAllUsers();
         }
 
-
-
-        // Bring this in for the ValidateUser stuff
-
-        // TODO: create PfMembershipConfiguration object
-
-        // TODO: where do we store password attempt window...?
-
-
-        //#region private methods
-        ///// <summary>
-        ///// A helper method that performs the checks and updates associated with password failure tracking.
-        ///// </summary>
-        //private void UpdateFailureCount(string username, string failureType)
-        //{
-        //    var repository = PfMembershipRepositoryBroker.Create();
-        //    var user = repository.GetUser(username);
-
-        //    if (user == null)
-        //    {
-        //        throw new ProviderException("Update failure count failed. No unique user found.");
-        //    }
-
-        //    var windowStart = new DateTime();
-        //    int failureCount = 0;
-
-        //    if (failureType == "password")
-        //    {
-        //        failureCount = Convert.ToInt32(user.FailedPasswordAttemptCount);
-        //        windowStart = Convert.ToDateTime(user.FailedPasswordAttemptWindowStart);
-        //    }
-
-        //    if (failureType == "passwordAnswer")
-        //    {
-        //        failureCount = Convert.ToInt32(user.FailedPasswordAnswerAttemptCount);
-        //        windowStart = Convert.ToDateTime(user.FailedPasswordAnswerAttemptWindowStart);
-        //    }
-
-        //    var windowEnd = windowStart.AddMinutes(PasswordAttemptWindow);
-
-        //    if (failureCount == 0 || DateTime.Now > windowEnd)
-        //    {
-        //        // First password failure or outside of PasswordAttemptWindow. 
-        //        // Start a new password failure count from 1 and a new window starting now.
-        //        if (failureType == "password")
-        //        {
-        //            user.FailedPasswordAttemptCount = 1;
-        //            user.FailedPasswordAttemptWindowStart = DateTime.Now;
-        //        }
-        //        if (failureType == "passwordAnswer")
-        //        {
-        //            user.FailedPasswordAnswerAttemptCount = 1;
-        //            user.FailedPasswordAnswerAttemptWindowStart = DateTime.Now;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        // FIXED: failure count
-        //        failureCount++;
-        //        if (failureCount >= MaxInvalidPasswordAttempts)
-        //        {
-        //            // Max password attempts have exceeded the failure threshold. Lock out the user.
-        //            user.IsLockedOut = true;
-        //            user.LastLockedOutDate = DateTime.Now;
-        //            user.FailedPasswordAnswerAttemptCount = 5;
-        //        }
-        //        else
-        //        {
-        //            // Max password attempts have not exceeded the failure threshold. Update
-        //            // the failure counts. Leave the window the same.
-        //            if (failureType == "password")
-        //            {
-        //                user.FailedPasswordAttemptCount = failureCount;
-        //            }
-        //            if (failureType == "passwordAnswer")
-        //            {
-        //                user.FailedPasswordAnswerAttemptCount = failureCount;
-        //            }
-        //        }
-        //    }
-        //}
-
-
-
         public int GetNumberOfUsersOnline()
         {
-            return Membership.GetNumberOfUsersOnline();
+            return this.Repository.GetNumberOfUsersOnline(Settings.UserIsOnlineTimeWindow);
         }
 
         public void UnlockUser(string username)
         {
-            var membershipUser = Membership.GetUser(username);
-            membershipUser.UnlockUser();
-        }
-
-        public string ResetPassword(string username)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ResetPasswordWithAnswer(string username, string answer)
-        {
-            var membershipUser = Membership.GetUser(username);
-            var resetPassword = membershipUser.ResetPassword(answer);
-            return resetPassword;
+            var user = this.Repository.GetUserByUserName(username);
+            user.IsLockedOut = false;
         }
 
         public string PasswordQuestion(string username)
@@ -252,41 +152,84 @@ namespace Pleiades.Web.Security.Concrete
             return user.PasswordQuestion;
         }
 
-        // Soft Delete, mayhaps?
-        public void DeleteUser(string username)
-        {
-            this.Repository.DeleteUser(username, true);
-        }
-        
-        public void ChangePassword(string username, string oldPassword, string newPassword)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ChangePasswordQuestionAndAnswer(string username, string password, string question, string answer)
+        public string ResetPassword(string username, string answer, bool adminOverride, out PfPasswordChangeStatus status)
         {
             var user = this.Repository.GetUserByUserName(username);
-            
-            var membershipUser = Membership.GetUser(username);
-            if (!membershipUser.ChangePasswordQuestionAndAnswer(password, question, answer))
+            if (user == null)
             {
-                throw new Exception("Internal error occurs while attempting to change password");
+                status = PfPasswordChangeStatus.UserDoesNotExist;
+                return null;
+            }
+            if (!user.IsApproved)
+            {
+                status = PfPasswordChangeStatus.UserIsNotApproved;
+                return null;
+            }
+            if (user.IsLockedOut)
+            {
+                status = PfPasswordChangeStatus.UserIsLockedOut;
+                return null;
             }
 
-            throw new NotImplementedException();
+            if (!adminOverride)
+            {
+                if (!Settings.EnablePasswordReset)
+                {
+                    status = PfPasswordChangeStatus.PasswordResetIsNotEnabled;
+                    return null;
+                }
+                if (Settings.RequiresQuestionAndAnswer)
+                {
+                    if (answer == null)
+                    {
+                        PasswordServices.UpdateFailedQuestionAndAnswerAttempts(user);
+                        status = PfPasswordChangeStatus.AnswerRequiredForPasswordReset;
+                        return null;
+                    }
+                    if (!PasswordServices.CheckSecureInformation(answer, user.PasswordAnswer))
+                    {
+                        PasswordServices.UpdateFailedQuestionAndAnswerAttempts(user);
+                        status = PfPasswordChangeStatus.WrongAnswerSuppliedForSecurityQuestion;
+                        return null;
+                    }
+                }
+            }
+
+            string newPassword = PasswordServices.GeneratePassword();
+            user.Password = PasswordServices.EncodePassword(newPassword);
+            user.LastPasswordChangedDate = DateTime.Now;
+            status = PfPasswordChangeStatus.Success;
+            return newPassword;
         }
 
-        public void ChangeEmailAddress(string username, string emailAddress)
+        public bool ChangePassword(string username, string oldPassword, string newPassword, bool adminOverride, out PfPasswordChangeStatus status)
+        {
+            throw new NotImplementedException();   
+        }
+
+        // Totally different!
+        public bool ChangePasswordQuestionAndAnswer(string username, string password, string question, string answer, out string message)
+        {
+            var user = this.Repository.GetUserByUserName(username);
+            throw new NotImplementedException();   
+        }
+        
+        [Obsolete]
+        public bool ChangeEmailAddress(string username, string emailAddress, out string message)
         {
             var user = this.Repository.GetUserByUserName(username);
             var userCollision = this.Repository.GetUserByEmail(emailAddress);
-
             if (userCollision != null)
             {
-                throw new Exception("User with Email Address: " + emailAddress + " exists already");
+                message = "User with Email Address: " + emailAddress + " exists already";
             }
-
             user.Email = emailAddress;
+            throw new NotImplementedException();
+        }
+
+        public bool ChangeEmailAddress(string userName, string password, string emailAddress, out string message)
+        {
+            throw new NotImplementedException();
         }
 
         public void SetUserApproval(string username, bool approved)
@@ -300,5 +243,12 @@ namespace Pleiades.Web.Security.Concrete
             var user = this.Repository.GetUserByUserName(username);
             user.LastActivityDate = DateTime.Now;
         }
+
+        // Soft Delete, mayhaps?
+        public void DeleteUser(string username)
+        {
+            this.Repository.DeleteUser(username, true);
+        }
+
     }
 }

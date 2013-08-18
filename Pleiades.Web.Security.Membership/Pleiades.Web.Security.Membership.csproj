@@ -44,19 +44,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Concrete\EncryptionService.cs" />
+    <Compile Include="Concrete\PfPasswordService.cs" />
     <Compile Include="Concrete\PfMembershipService.cs" />
     <Compile Include="Concrete\FormsAuthenticationService.cs" />
     <Compile Include="Concrete\MembershipService.cs" />
-    <Compile Include="Interface\IEncryptionService.cs" />
     <Compile Include="Interface\IMembershipRepository.cs" />
     <Compile Include="Interface\IFormsAuthenticationService.cs" />
     <Compile Include="Interface\IMembershipProviderRepository.cs" />
     <Compile Include="Interface\IMembershipService.cs" />
     <Compile Include="Interface\IPfMembershipService.cs" />
-    <Compile Include="Interface\IPasswordServices.cs" />
+    <Compile Include="Interface\IPfPasswordService.cs" />
+    <Compile Include="Interface\IPfMembershipSettings.cs" />
     <Compile Include="Model\CreateNewMembershipUserRequest.cs" />
     <Compile Include="Model\PfMembershipCreateStatus.cs" />
+    <Compile Include="Model\PfPasswordChangeStatus.cs" />
     <Compile Include="Model\PleiadesMembershipCreateStatus.cs" />
     <Compile Include="Model\PfMembershipUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
