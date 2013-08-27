@@ -1,4 +1,4 @@
-﻿namespace Pleiades.Injection
+﻿namespace Pleiades.Application.Injection
 {
     public interface IContainerAdapter
     {

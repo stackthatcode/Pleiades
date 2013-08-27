@@ -1,6 +1,6 @@
 ﻿using System;
 using Autofac;
-using Pleiades.Injection;
+using Pleiades.Application.Injection;
 
 namespace Pleiades.Web.Autofac
 {

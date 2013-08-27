@@ -1,6 +1,6 @@
 ﻿using System;
 using Autofac;
-using Pleiades.Injection;
+using Pleiades.Application.Injection;
 using Pleiades.Web.Autofac;
 using Pleiades.Web.Security;
 using Commerce.Persist;

@@ -2,8 +2,7 @@
 using System.Configuration;
 using System.IO;
 using Commerce.Persist.Database;
-using Pleiades.Injection;
-using Pleiades.Utility;
+using Pleiades.Application.Utility;
 using Commerce.Persist.Concrete;
 using Commerce.Initializer.Builders;
 

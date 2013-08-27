@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Commerce.Persist.Model.Lists
+namespace Commerce.Application.Model.Lists
 {
     [JsonObject]
     public class JsonSizeGroup

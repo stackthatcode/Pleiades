@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using Pleiades.Injection;
+using Pleiades.Application.Injection;
 using Pleiades.Web.Autofac;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Providers;

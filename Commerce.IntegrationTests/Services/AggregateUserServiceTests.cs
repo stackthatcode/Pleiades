@@ -2,11 +2,12 @@
 using System.Linq;
 using Autofac;
 using NUnit.Framework;
-using Pleiades.Data;
+using Pleiades.Application;
+using Pleiades.Application.Data;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 
-namespace Commerce.IntegrationTests.Security
+namespace Commerce.IntegrationTests.Services
 {
     [TestFixture]
     public class AggregateUserServiceTests : FixtureBase
@@ -34,7 +35,7 @@ namespace Commerce.IntegrationTests.Security
                     FirstName = "John",
                     LastName = "Gerber",
                 };
-            var membershipuser1 = new CreateNewMembershipUserRequest
+            var membershipuser1 = new PfCreateNewMembershipUserRequest
                 {
                     Email = "john@gerber.com",
                     Password = "1234567890",
@@ -48,7 +49,7 @@ namespace Commerce.IntegrationTests.Security
                     FirstName = "Anne",
                     LastName = "Holtz",
                 };
-            var membershipuser2 = new CreateNewMembershipUserRequest
+            var membershipuser2 = new PfCreateNewMembershipUserRequest
                 {
                     Email = "anne@holtz.com",
                     Password = "1234567890",
@@ -88,7 +89,7 @@ namespace Commerce.IntegrationTests.Security
                 FirstName = "Diana",
                 LastName = "Moon",
             };
-            var membershipuser2 = new CreateNewMembershipUserRequest
+            var membershipuser2 = new PfCreateNewMembershipUserRequest
             {
                 Email = "dianemoon@city17.gov",
                 Password = "1234567890",
@@ -139,7 +140,7 @@ namespace Commerce.IntegrationTests.Security
                 FirstName = "User",
                 LastName = "X",
             };
-            var membershipuser2 = new CreateNewMembershipUserRequest
+            var membershipuser2 = new PfCreateNewMembershipUserRequest
             {
                 Email = "userx@city17.gov",
                 Password = "1234567890",
@@ -154,7 +155,7 @@ namespace Commerce.IntegrationTests.Security
                 FirstName = "User",
                 LastName = "Y",
             };
-            var membershipuser1 = new CreateNewMembershipUserRequest
+            var membershipuser1 = new PfCreateNewMembershipUserRequest
             {
                 Email = "userYYYY@city17.gov",
                 Password = "1234567890",

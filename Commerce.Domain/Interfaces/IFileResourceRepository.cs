@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
-using Commerce.Persist.Interfaces;
-using Commerce.Persist.Model.Resources;
+using Commerce.Application.Interfaces;
+using Commerce.Application.Model.Resources;
 
-namespace Commerce.Persist.Interfaces
+namespace Commerce.Application.Interfaces
 {
     public interface IFileResourceRepository
     {

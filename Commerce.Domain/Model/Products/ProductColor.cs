@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Commerce.Persist.Model.Lists;
-using Commerce.Persist.Model.Resources;
+﻿using Commerce.Application.Model.Resources;
 
-namespace Commerce.Persist.Model.Products
+namespace Commerce.Application.Model.Products
 {
     public class ProductColor
     {

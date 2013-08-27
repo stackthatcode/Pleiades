@@ -1,7 +1,7 @@
 ﻿using System;
-using Commerce.Persist.Model.Products;
+using Commerce.Application.Model.Products;
 
-namespace Commerce.Persist.Model.Orders
+namespace Commerce.Application.Model.Orders
 {
     public class OrderLine
     {

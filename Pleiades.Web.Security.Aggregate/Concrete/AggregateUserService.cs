@@ -3,7 +3,8 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Web;
-using Pleiades.Data;
+using Pleiades.Application;
+using Pleiades.Application.Data;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Providers;
@@ -11,6 +12,8 @@ using Pleiades.Web.Security.Utility;
 
 namespace Pleiades.Web.Security.Concrete
 {
+    // TODO: add Logging for the Cache Miss/Hit stuff on DEBUG
+
     public class AggregateUserService : IAggregateUserService
     {
         public const int MaxSupremeUsers = 1;
@@ -68,6 +71,7 @@ namespace Pleiades.Web.Security.Concrete
             this.UnitOfWork = unitOfWork;
         }
 
+        // Comment - this seems a bit superfluous, if not another layer of indirection... but I suppose it's one method
         public bool Authenticate(string username, string password, bool persistenceCookie, List<UserRole> expectedRoles)
         {
             var membershipUser = this.MembershipService.ValidateUserByEmailAddr(username, password);
@@ -93,25 +97,26 @@ namespace Pleiades.Web.Security.Concrete
 
         public AggregateUser LoadAuthentedUserIntoContext(HttpContextBase context)
         {
-            var httpContextUser = context.AggregateUser();
+            var httpContextUser = context.RetreiveAggregateUserFromContext();
             if (httpContextUser != null)
             {
                 return httpContextUser;
             }
 
-            var userName = context.MembershipUserName();
+            var userName = context.RetreiveMembershipUserNameFromContext();
             if (userName == null)
             {
                 var user = AggregateUser.AnonymousFactory();
-                context.AggregateUser(user);
+                context.StoreAggregateUserInContext(user);
                 return user;
             }
 
+            // NOTE: doesn't this stuff belong in the ReadOnlyRepository...?
             var cachedUser = this.GetUserFromCache(userName);
             if (cachedUser != null)
             {
                 Debug.WriteLine("Cache hit - user: " + userName);
-                context.AggregateUser(cachedUser);
+                context.StoreAggregateUserInContext(cachedUser);
                 return cachedUser;
             }
 
@@ -122,18 +127,19 @@ namespace Pleiades.Web.Security.Concrete
             {
                 this.FormsService.ClearAuthenticationCookie();
                 var user = AggregateUser.AnonymousFactory();
-                context.AggregateUser(user);
+                context.StoreAggregateUserInContext(user);
                 return user;
             }
 
-            context.AggregateUser(currentUser);
+            context.StoreAggregateUserInContext(currentUser);
             this.PutUserInCache(currentUser);
             this.MembershipService.Touch(userName);
             return currentUser;
         } 
 
-        public AggregateUser Create(CreateNewMembershipUserRequest membershipUserRequest, 
-                CreateOrModifyIdentityRequest identityUserRequest, out PleiadesMembershipCreateStatus outStatus)
+        public AggregateUser Create(
+                PfCreateNewMembershipUserRequest membershipUserRequest, CreateOrModifyIdentityRequest identityUserRequest, 
+                out PleiadesMembershipCreateStatus outStatus)
         {
             if (identityUserRequest.UserRole == UserRole.Anonymous)
             {
@@ -160,12 +166,10 @@ namespace Pleiades.Web.Security.Concrete
             }
 
             // Get the Membership User
-            var membershipUserThisContext = Repository.RetreiveMembershipUser(membershipUser.UserName);
-
             var aggegrateUser = new AggregateUser
             {
                 Membership = membershipUser,
-                IdentityProfile =  new Model.IdentityProfile
+                IdentityProfile =  new IdentityProfile
                 {
                     AccountStatus = identityUserRequest.AccountStatus.Value,
                     UserRole = identityUserRequest.UserRole.Value,
@@ -201,6 +205,8 @@ namespace Pleiades.Web.Security.Concrete
             this.UnitOfWork.SaveChanges();
         }
 
+        [Obsolete]
+        // TODO: remove this!
         public void ChangeUserPassword(int targetUserId, string oldPassword, string newPassword)
         {
             var user = this.Repository.RetrieveById(targetUserId);

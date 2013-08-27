@@ -1,4 +1,4 @@
-﻿namespace Commerce.Persist.Model.Lists
+﻿namespace Commerce.Application.Model.Lists
 {
     public static class BrandExtensions
     {

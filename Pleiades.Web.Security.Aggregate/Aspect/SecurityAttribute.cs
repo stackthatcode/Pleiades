@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Web.Mvc;
-using Pleiades.Injection;
+using Pleiades.Application.Injection;
 using Pleiades.Web.Security.Rules;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;

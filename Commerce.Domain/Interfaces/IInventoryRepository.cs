@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Commerce.Persist.Model.Products;
+using Commerce.Application.Model.Products;
 
-namespace Commerce.Persist.Interfaces
+namespace Commerce.Application.Interfaces
 {
     public interface IInventoryRepository
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Pleiades.Utility
+namespace Pleiades.Application.Utility
 {
     public static class LinqExtensions
     {

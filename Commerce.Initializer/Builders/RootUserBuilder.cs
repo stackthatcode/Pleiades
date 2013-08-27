@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Pleiades.Injection;
+using Pleiades.Application.Injection;
 using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Interface;
 
@@ -35,7 +35,7 @@ namespace Commerce.Initializer.Builders
                     LastName = "Jones",
                 };
 
-                var membershipuser1 = new CreateNewMembershipUserRequest
+                var membershipuser1 = new PfCreateNewMembershipUserRequest
                 {
                     Email = "aleksjones@gmail.com",
                     Password = "123456",

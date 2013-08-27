@@ -67,7 +67,7 @@
 
 			<p class="navbar-text pull-right">
                 Logged in as <a id="logged-in" href="#" style="color:#08C;" class="navbar-link">
-                    @(HttpContext.Current.AggregateUser().Membership.Email)</a>
+                    @(HttpContext.Current.RetreiveAggregateUserFromContext().Membership.Email)</a>
             </p>
             
             <div id="popover_content_wrapper" style="display:none; width:250px;">
@@ -76,16 +76,16 @@
                     <table>
                         <tr>
                             <td style="width:80px;">Name:</td>
-                            <td><strong>@(HttpContext.Current.AggregateUser().IdentityProfile.FirstName) 
-                            @(HttpContext.Current.AggregateUser().IdentityProfile.LastName)</strong></td>
+                            <td><strong>@(HttpContext.Current.RetreiveAggregateUserFromContext().IdentityProfile.FirstName) 
+                            @(HttpContext.Current.RetreiveAggregateUserFromContext().IdentityProfile.LastName)</strong></td>
                         </tr>
                         <tr>
                             <td>User Type:</td>
-                            <td><strong>@(HttpContext.Current.AggregateUser().IdentityProfile.UserRole)</strong></td>
+                            <td><strong>@(HttpContext.Current.RetreiveAggregateUserFromContext().IdentityProfile.UserRole)</strong></td>
                         </tr>
                         <tr>
                             <td>Created:</td>
-                            <td><strong>@(HttpContext.Current.AggregateUser().Membership.CreationDate)</strong></td>
+                            <td><strong>@(HttpContext.Current.RetreiveAggregateUserFromContext().Membership.CreationDate)</strong></td>
                         </tr>
                     </table>
                     

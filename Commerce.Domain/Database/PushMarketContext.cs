@@ -4,13 +4,13 @@ using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using Pleiades.Web.Security.Model;
-using Commerce.Persist.Model.Billing;
-using Commerce.Persist.Model.Lists;
-using Commerce.Persist.Model.Orders;
-using Commerce.Persist.Model.Products;
-using Commerce.Persist.Model.Resources;
+using Commerce.Application.Model.Billing;
+using Commerce.Application.Model.Lists;
+using Commerce.Application.Model.Orders;
+using Commerce.Application.Model.Products;
+using Commerce.Application.Model.Resources;
 
-namespace Commerce.Persist.Database
+namespace Commerce.Application.Database
 {
     public class PushMarketContext : DbContext
     {

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace Commerce.Persist.Model.Products
+namespace Commerce.Application.Model.Products
 {
     [JsonObject]
     public class JsonProductColor

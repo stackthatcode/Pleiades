@@ -2,7 +2,6 @@
 using Autofac;
 using Commerce.Initializer;
 using Commerce.Persist;
-using Pleiades.Injection;
 using Pleiades.Web;
 using Pleiades.Web.Autofac;
 using Pleiades.Web.Security;

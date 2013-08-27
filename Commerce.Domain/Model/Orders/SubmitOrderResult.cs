@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Commerce.Persist.Model.Orders
+namespace Commerce.Application.Model.Orders
 {
     public class SubmitOrderResult
     {

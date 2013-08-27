@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Pleiades.Data;
-using Commerce.Persist.Model.Lists;
+using Pleiades.Application;
+using Commerce.Application.Model.Lists;
 
-namespace Commerce.Persist.Interfaces
+namespace Commerce.Application.Interfaces
 {
     public interface IJsonCategoryRepository
     {

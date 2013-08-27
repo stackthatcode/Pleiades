@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Pleiades.Data;
+using Pleiades.Application.Data;
+using Pleiades.Application;
 using Pleiades.Web.Security.Model;
 
 namespace Pleiades.Web.Security.Interface

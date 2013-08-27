@@ -1,6 +1,6 @@
-﻿using Commerce.Persist.Model.Email;
+﻿using Commerce.Application.Model.Email;
 
-namespace Commerce.Persist.Interfaces
+namespace Commerce.Application.Interfaces
 {
     public interface IEmailService
     {

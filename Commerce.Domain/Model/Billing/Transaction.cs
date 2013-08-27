@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Commerce.Persist.Model.Billing
+namespace Commerce.Application.Model.Billing
 {
     public class Transaction
     {

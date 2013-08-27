@@ -7,17 +7,17 @@ namespace Pleiades.Web.Security.Utility
     {
         public const string _key = "AggregateUserCache";
 
-        public static AggregateUser AggregateUser(this HttpContextBase context)
+        public static AggregateUser RetreiveAggregateUserFromContext(this HttpContextBase context)
         {
             return context.Items[_key] as AggregateUser;
         }
 
-        public static AggregateUser AggregateUser(this HttpContext context)
+        public static AggregateUser RetreiveAggregateUserFromContext(this HttpContext context)
         {
             return context.Items[_key] as AggregateUser;
         }
 
-        public static void AggregateUser(this HttpContextBase context, AggregateUser user)
+        public static void StoreAggregateUserInContext(this HttpContextBase context, AggregateUser user)
         {
             context.Items[_key] = user;
         }

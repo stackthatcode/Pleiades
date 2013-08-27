@@ -44,20 +44,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Concrete\PfMembershipSettings.cs" />
     <Compile Include="Concrete\PfPasswordService.cs" />
     <Compile Include="Concrete\PfMembershipService.cs" />
     <Compile Include="Concrete\FormsAuthenticationService.cs" />
     <Compile Include="Concrete\MembershipService.cs" />
-    <Compile Include="Interface\IMembershipRepository.cs" />
+    <Compile Include="Interface\IMembershipWritableRepository.cs" />
+    <Compile Include="Interface\IMembershipReadOnlyRepository.cs" />
     <Compile Include="Interface\IFormsAuthenticationService.cs" />
     <Compile Include="Interface\IMembershipProviderRepository.cs" />
     <Compile Include="Interface\IMembershipService.cs" />
     <Compile Include="Interface\IPfMembershipService.cs" />
     <Compile Include="Interface\IPfPasswordService.cs" />
     <Compile Include="Interface\IPfMembershipSettings.cs" />
-    <Compile Include="Model\CreateNewMembershipUserRequest.cs" />
+    <Compile Include="Model\PfCreateNewMembershipUserRequest.cs" />
     <Compile Include="Model\PfMembershipCreateStatus.cs" />
-    <Compile Include="Model\PfPasswordChangeStatus.cs" />
+    <Compile Include="Model\PfCredentialsChangeStatus.cs" />
     <Compile Include="Model\PleiadesMembershipCreateStatus.cs" />
     <Compile Include="Model\PfMembershipUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,10 +71,13 @@
     <Compile Include="Utility\MachineKeyGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Base.csproj">
+    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Application.Foundation.csproj">
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
-      <Name>Pleiades.Base</Name>
+      <Name>Pleiades.Application.Foundation</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

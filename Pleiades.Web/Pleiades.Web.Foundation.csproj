@@ -74,17 +74,11 @@
     <Compile Include="Plumbing\DecimalModelBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvcHelpers\EnumToSelectList.cs" />
-    <Compile Include="Testing\ControllerHelpers.cs" />
-    <Compile Include="Testing\Extensions.cs" />
-    <Compile Include="Testing\HtmlHelperMockFactory.cs" />
-    <Compile Include="Testing\HttpContextStubFactory.cs" />
-    <Compile Include="Testing\HttpContextStubParams.cs" />
-    <Compile Include="Testing\RoutingHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Base.csproj">
+    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Application.Foundation.csproj">
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
-      <Name>Pleiades.Base</Name>
+      <Name>Pleiades.Application.Foundation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

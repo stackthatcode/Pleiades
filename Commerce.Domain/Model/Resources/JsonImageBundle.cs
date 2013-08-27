@@ -1,8 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Commerce.Persist.Model.Resources;
 
-namespace Commerce.Persist.Model.Resources
+namespace Commerce.Application.Model.Resources
 {
     [JsonObject]
     public class JsonImageBundle

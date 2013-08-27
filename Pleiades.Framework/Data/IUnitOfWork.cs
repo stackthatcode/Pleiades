@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Pleiades.Data
+namespace Pleiades.Application.Data
 {
     public interface IUnitOfWork
     {

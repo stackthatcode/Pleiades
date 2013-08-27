@@ -1,6 +1,6 @@
-﻿using Commerce.Persist.Model.Billing;
+﻿using Commerce.Application.Model.Billing;
 
-namespace Commerce.Persist.Interfaces
+namespace Commerce.Application.Interfaces
 {
     public interface IPaymentProcessor
     {

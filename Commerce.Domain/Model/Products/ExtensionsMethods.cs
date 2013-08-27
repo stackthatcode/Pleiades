@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Commerce.Persist.Model.Products
+namespace Commerce.Application.Model.Products
 {
     public static class ExtensionsMethods
     {

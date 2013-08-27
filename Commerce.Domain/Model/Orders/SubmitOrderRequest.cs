@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Commerce.Persist.Model.Billing;
-using Commerce.Persist.Model.Orders;
+using Commerce.Application.Model.Billing;
+using Commerce.Application.Model.Orders;
 using Newtonsoft.Json;
 
-namespace Commerce.Persist.Model.Orders
+namespace Commerce.Application.Model.Orders
 {
     [JsonObject]
     public class SubmitOrderRequest

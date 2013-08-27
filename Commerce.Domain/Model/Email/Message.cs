@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Commerce.Persist.Model.Email
+namespace Commerce.Application.Model.Email
 {
     public class Message
     {

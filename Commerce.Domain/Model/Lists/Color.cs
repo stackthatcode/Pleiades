@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using Commerce.Persist.Model.Resources;
+using Commerce.Application.Model.Resources;
 
-namespace Commerce.Persist.Model.Lists
+namespace Commerce.Application.Model.Lists
 {
     public class Color
     {

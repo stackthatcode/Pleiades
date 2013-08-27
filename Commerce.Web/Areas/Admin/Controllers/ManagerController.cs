@@ -5,8 +5,8 @@ using System.Web;
 using System.Web.Security;
 using System.Web.Mvc;
 using Commerce.Web.Areas.Admin.Models;
-using Pleiades.Data;
-using Pleiades.Injection;
+using Pleiades.Application;
+using Pleiades.Application.Data;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 
@@ -67,7 +67,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
             PleiadesMembershipCreateStatus status;
             var newuser =
                 this.AggregateUserService.Create(
-                    new CreateNewMembershipUserRequest
+                    new PfCreateNewMembershipUserRequest
                     {
                         Email = createAdminModel.Email,
                         IsApproved = true,

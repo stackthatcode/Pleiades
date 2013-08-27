@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Commerce.Persist.Model.Resources
+namespace Commerce.Application.Model.Resources
 {
     public class ImageBundle
     {

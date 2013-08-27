@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Commerce.Persist.Model.Orders
+namespace Commerce.Application.Model.Orders
 {
     public class OrderNote
     {

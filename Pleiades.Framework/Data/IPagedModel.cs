@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Pleiades.Data
+namespace Pleiades.Application.Data
 {
     public interface IPagedModel<T>
     {

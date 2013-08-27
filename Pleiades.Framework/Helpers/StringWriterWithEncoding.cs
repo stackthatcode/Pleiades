@@ -1,8 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 
-namespace Pleiades.Helpers
+namespace Pleiades.Application.Helpers
 {
     public sealed class StringWriterWithEncoding : StringWriter
     {

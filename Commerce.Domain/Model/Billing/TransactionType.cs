@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Commerce.Persist.Model.Billing
+namespace Commerce.Application.Model.Billing
 {
     public enum TransactionType
     {

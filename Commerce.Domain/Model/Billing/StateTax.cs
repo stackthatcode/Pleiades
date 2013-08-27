@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Commerce.Persist.Model.Billing
+namespace Commerce.Application.Model.Billing
 {
     public class StateTax
     {

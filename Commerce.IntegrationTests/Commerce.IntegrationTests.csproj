@@ -114,9 +114,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Commerce.Domain\Commerce.Persist.csproj">
+    <ProjectReference Include="..\Commerce.Domain\Commerce.Application.csproj">
       <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
-      <Name>Commerce.Persist</Name>
+      <Name>Commerce.Application</Name>
     </ProjectReference>
     <ProjectReference Include="..\Commerce.Initializer\Commerce.Initializer.csproj">
       <Project>{8E922D95-E286-4AF1-89E2-943EA247B806}</Project>
@@ -126,9 +126,9 @@
       <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
       <Name>Pleiades.Web.Security.Membership</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Base.csproj">
+    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Application.Foundation.csproj">
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
-      <Name>Pleiades.Base</Name>
+      <Name>Pleiades.Application.Foundation</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pleiades.Web.Security.Aggregate\Pleiades.Web.Security.Aggregate.csproj">
       <Project>{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}</Project>

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Reflection;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Pleiades.Utility
+﻿namespace Pleiades.Application.Utility
 {
     public static class PropertyReflection
     {

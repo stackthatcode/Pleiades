@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using Pleiades.Web.Testing;
+using Pleiades.Application.Data;
+using Pleiades.TestHelpers.Web;
+using Pleiades.Web.Security.Utility;
 using Rhino.Mocks;
-using Pleiades.Data;
+using Pleiades.Application;
 using Pleiades.Web.Security.Concrete;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
@@ -23,7 +25,7 @@ namespace Pleiades.Web.Security.UnitTests.Concrete
             var formsAuthService = MockRepository.GenerateMock<IFormsAuthenticationService>();
             formsAuthService.Expect(x => x.ClearAuthenticationCookie());
 
-            var service = new AggregateUserService(membership, null, null, null);
+            var service = new AggregateUserService(membership, null, formsAuthService, null);
 
             // Act
             var result = service.Authenticate("admin", "123", true, null);
@@ -99,6 +101,8 @@ namespace Pleiades.Web.Security.UnitTests.Concrete
             Assert.True(result);
         }
 
+
+
         [Test]
         public void Valid_Forms_Authenticated_User_That_Exists_In_Repository_Touches_Membership()
         {
@@ -110,7 +114,7 @@ namespace Pleiades.Web.Security.UnitTests.Concrete
 
             // ... set expectations
 
-            var aggrUser = new AggregateUser();
+            var aggrUser = new AggregateUser() { Membership = new PfMembershipUser {UserName = "12345678"}};
             aggrUserRepository.Expect(x => x.RetrieveByMembershipUserName("12345678")).Return(aggrUser);            
             membershipService.Expect(x => x.Touch("12345678"));
 
@@ -171,7 +175,8 @@ namespace Pleiades.Web.Security.UnitTests.Concrete
             // Arrange
             var aggrUser = new AggregateUser();
             var httpContext = HttpContextStubFactory.Create(AuthenticatedName: null, IsAuthenticated: false);
-            
+            httpContext.StoreAggregateUserInContext(aggrUser);
+
             // Act
             var service = new AggregateUserService(null, null, null, null);
             var user = service.LoadAuthentedUserIntoContext(httpContext);
@@ -179,6 +184,10 @@ namespace Pleiades.Web.Security.UnitTests.Concrete
             // Assert
             Assert.AreEqual(user, aggrUser);
         }
+
+        // TOOD: more tests for LoadAuthentedUserIntoContext (???)
+
+
 
         [Test]
         [ExpectedException(typeof(Exception))]
@@ -240,6 +249,8 @@ namespace Pleiades.Web.Security.UnitTests.Concrete
 
             // Assert - show thorw!
         }
+
+
 
         [Test]
         public void MembershipFailure_Create_Request()

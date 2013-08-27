@@ -1,5 +1,5 @@
 ﻿using System;
-using Pleiades.Utility;
+using Pleiades.Application.Utility;
 
 namespace Pleiades.Web.Security.Model
 {

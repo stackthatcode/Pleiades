@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Commerce.Persist.Model.Lists;
+using Commerce.Application.Model.Lists;
 
-namespace Commerce.Persist.Interfaces
+namespace Commerce.Application.Interfaces
 {
     public interface IJsonBrandRepository
     {

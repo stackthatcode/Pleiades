@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Pleiades.Data;
-using Pleiades.Data.EF;
+using Pleiades.Application;
+using Pleiades.Application.EF;
 
 namespace Pleiades.IntegrationTests.DataEF
 {

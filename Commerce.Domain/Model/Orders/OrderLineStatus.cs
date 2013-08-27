@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Commerce.Persist.Model.Orders
+namespace Commerce.Application.Model.Orders
 {
     public enum OrderLineStatus
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Commerce.Persist.Model.Resources
+namespace Commerce.Application.Model.Resources
 {
     public class FileResource
     {

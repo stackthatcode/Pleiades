@@ -17,7 +17,7 @@ namespace Pleiades.Web.Security.Interface
         Guid Tracer { get; }
 
         AggregateUser Create(
-            CreateNewMembershipUserRequest membershipUser, 
+            PfCreateNewMembershipUserRequest membershipUser, 
             CreateOrModifyIdentityRequest identityUser,
             out PleiadesMembershipCreateStatus outStatus);
 

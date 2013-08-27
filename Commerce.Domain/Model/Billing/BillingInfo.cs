@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Commerce.Persist.Model.Billing
+namespace Commerce.Application.Model.Billing
 {
     [JsonObject]
     public class BillingInfo

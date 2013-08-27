@@ -3,9 +3,10 @@ using System.Configuration;
 using System.Drawing;
 using System.IO;
 using System.Transactions;
-using Pleiades.Data;
-using Pleiades.Injection;
-using Pleiades.Utility;
+using Pleiades.Application.Data;
+using Pleiades.Application.Injection;
+using Pleiades.Application;
+using Pleiades.Application.Utility;
 
 using Commerce.Persist.Interfaces;
 using Commerce.Persist.Model.Lists;

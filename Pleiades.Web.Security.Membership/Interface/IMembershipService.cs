@@ -10,7 +10,7 @@ namespace Pleiades.Web.Security.Interface
     /// </summary>
     public interface IMembershipService
     {
-        PfMembershipUser CreateUser(CreateNewMembershipUserRequest request, out PleiadesMembershipCreateStatus outCreateStatus);
+        PfMembershipUser CreateUser(PfCreateNewMembershipUserRequest request, out PleiadesMembershipCreateStatus outCreateStatus);
         string GenerateUserName();
         PfMembershipUser ValidateUserByEmailAddr(string emailaddr, string password);
         PfMembershipUser GetSingleUserByEmail(string emailAddress);

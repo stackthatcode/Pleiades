@@ -5,7 +5,7 @@ namespace Pleiades.Web.Security.Providers
 {
     public static class HttpContextExtensions
     {
-        public static string MembershipUserName(this HttpContextBase context)
+        public static string RetreiveMembershipUserNameFromContext(this HttpContextBase context)
         {
             var identity = context.User.Identity;
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Commerce.Persist.Model.Lists
+namespace Commerce.Application.Model.Lists
 {
     public class Category
     {

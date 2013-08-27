@@ -53,7 +53,6 @@ Burndown 8/13/2013 (0.5 Hours)
 - Add Null-check to Image Bundle Repository => DONE
 * HOW TO DEBUG BUNDLES...? => DONE
 
-
 Burndown 8/13/2013 (0.75 Hours)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Begin process of cleaning up dependency HELL
@@ -76,13 +75,78 @@ Burndown 8/17/2013 (3.5 Hours)
 - Continuation of Membership
 - Fixed Git error message
 
-Burndown 8/18/2013 (5.5 Hours)
+Burndown 8/18/2013 (6.0 Hours)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Continuation of Membership revamp
 
+Burndown 8/19/2013 (0.25 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Wrote more Unit Tests for Membership
+
+Burndown 8/19/2013 Evening (0.50 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Morning Unit Test writing session - finished Change Password Tests
+
+Burndown 8/20/2013 Evening (0.50 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Morning Unit Test writing session - Change Password Answer Tests
+
+Burndown 8/20/2013 Evening (0.50 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Morning Unit Test writing session - Change Password Answer Tests
+
+Burndown 8/21/2013 Evening (0.50 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Started Readable vs. Writable Repository
+
+Burndown 8/22/2013 Morning (0.50 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Finished fixing tests after Readable vs. Writable Repository
+
+Burndown 8/22/2013 Evening (0.50 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Morning Unit Test writing session - started Change Email Address Tests
+
+Burndown 8/23/2013 Morning (0.50 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Morning Unit Test writing session - finished Change Email Address Tests
+
+Burndown 8/23/2013 Evening (0.50 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Added tests for PfPasswordService
+
+Burndown 8/26/2013 Morning (0.50 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Finished tests for PfPasswordService
+
+Burndown 8/26/2013 Evening (0.50 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Started re-organizing namespaces in Application
+
+Burndown 8/27/2013 Morning (0.50 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Started building new Membership Repositories
+
+Burndown 8/27/2013 Evening (0.75 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Finished Membership Repositories
+- Started Commerce Integration Tests
 
 
 
+PushMarket Front-end
+~~~~~~~~~~~~~~~~~~~~
+- Angular.js
+- JavaScript Promises
+- JQuery
+- Less or Sass
+- CSS3...?
+- Bootstrap...?
+- .NET MVC 4
+- C# + .NET 4.5
+- Entity Framework 6
+- HTML 5
+- SQL Server 2008...?
 
 
 OTHER STUFF

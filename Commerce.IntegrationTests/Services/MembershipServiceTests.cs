@@ -2,11 +2,12 @@
 using System.Web.Security;
 using Autofac;
 using NUnit.Framework;
-using Pleiades.Data;
+using Pleiades.Application;
+using Pleiades.Application.Data;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 
-namespace Commerce.IntegrationTests.Security
+namespace Commerce.IntegrationTests.Services
 {
     /// <summary>
     /// Big fucking awful TODO - fix the lifetime scope stuff after killing the Membership Provider
@@ -25,7 +26,7 @@ namespace Commerce.IntegrationTests.Security
         {
             var lifetime = TestContainer.LifetimeScope();
             var service = lifetime.Resolve<IMembershipService>();
-            var request = new CreateNewMembershipUserRequest()
+            var request = new PfCreateNewMembershipUserRequest()
             {
                 Email = "aleksjones1@gmail.com",
                 IsApproved = true,
@@ -47,7 +48,7 @@ namespace Commerce.IntegrationTests.Security
         {
             var lifetime = TestContainer.LifetimeScope();
             var service = lifetime.Resolve<IMembershipService>();
-            var request = new CreateNewMembershipUserRequest()
+            var request = new PfCreateNewMembershipUserRequest()
             {
                 Email = "aleksjones2@gmail.com",
                 IsApproved = true,
@@ -70,7 +71,7 @@ namespace Commerce.IntegrationTests.Security
         {
             var lifetime = TestContainer.LifetimeScope();
             var service = lifetime.Resolve<IMembershipService>();
-            var request = new CreateNewMembershipUserRequest()
+            var request = new PfCreateNewMembershipUserRequest()
             {
                 Email = "aleksjones3@gmail.com",
                 IsApproved = true,
@@ -93,7 +94,7 @@ namespace Commerce.IntegrationTests.Security
         {
             var lifetime = TestContainer.LifetimeScope();
             var service = lifetime.Resolve<IMembershipService>();
-            var request = new CreateNewMembershipUserRequest()
+            var request = new PfCreateNewMembershipUserRequest()
             {
                 Email = "aleksjones4@gmail.com",
                 IsApproved = false,
@@ -117,7 +118,7 @@ namespace Commerce.IntegrationTests.Security
         {
             var lifetime = TestContainer.LifetimeScope();
             var service = lifetime.Resolve<IMembershipService>();
-            var request = new CreateNewMembershipUserRequest()
+            var request = new PfCreateNewMembershipUserRequest()
             {
                 Email = "aleksjones5@gmail.com",
                 IsApproved = true,
@@ -154,7 +155,7 @@ namespace Commerce.IntegrationTests.Security
             var service = lifetime.Resolve<IMembershipService>();
             var unitOfWork = lifetime.Resolve<IUnitOfWork>();
 
-            var request = new CreateNewMembershipUserRequest()
+            var request = new PfCreateNewMembershipUserRequest()
             {
                 Email = "aleksjones6@gmail.com",
                 IsApproved = true,
@@ -190,7 +191,7 @@ namespace Commerce.IntegrationTests.Security
             var lifetime = TestContainer.LifetimeScope();
             var unitOfWork = lifetime.Resolve<IUnitOfWork>();
             var service = lifetime.Resolve<IMembershipService>();
-            var request = new CreateNewMembershipUserRequest()
+            var request = new PfCreateNewMembershipUserRequest()
             {
                 Email = "aleksjones7@gmail.com",
                 IsApproved = true,
@@ -228,7 +229,7 @@ namespace Commerce.IntegrationTests.Security
             var lifetime = TestContainer.LifetimeScope();
             var service = lifetime.Resolve<IMembershipService>();
             var unitOfWork = lifetime.Resolve<IUnitOfWork>();
-            var request = new CreateNewMembershipUserRequest()
+            var request = new PfCreateNewMembershipUserRequest()
             {
                 Email = "aleksjones8@gmail.com",
                 IsApproved = true,
@@ -256,7 +257,7 @@ namespace Commerce.IntegrationTests.Security
         {
             var lifetime = TestContainer.LifetimeScope();
             var service = lifetime.Resolve<IMembershipService>();
-            var request1 = new CreateNewMembershipUserRequest()
+            var request1 = new PfCreateNewMembershipUserRequest()
             {
                 Email = "aleksjones9@gmail.com",
                 IsApproved = true,
@@ -269,7 +270,7 @@ namespace Commerce.IntegrationTests.Security
             var newUser1 = service.CreateUser(request1, out statusResponse);
             Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
 
-            var request2 = new CreateNewMembershipUserRequest()
+            var request2 = new PfCreateNewMembershipUserRequest()
             {
                 Email = "bob999@gmail.com",
                 IsApproved = true,
@@ -292,7 +293,7 @@ namespace Commerce.IntegrationTests.Security
             var service = lifetime.Resolve<IMembershipService>();
             var unitOfWork = lifetime.Resolve<IUnitOfWork>();
 
-            var request1 = new CreateNewMembershipUserRequest()
+            var request1 = new PfCreateNewMembershipUserRequest()
             {
                 Email = "aleksjones10@gmail.com",
                 IsApproved = true,
@@ -331,7 +332,7 @@ namespace Commerce.IntegrationTests.Security
             var service = lifetime.Resolve<IMembershipService>();
             var unitOfWork = lifetime.Resolve<IUnitOfWork>();
 
-            var request1 = new CreateNewMembershipUserRequest()
+            var request1 = new PfCreateNewMembershipUserRequest()
             {
                 Email = "aleksjones11@gmail.com",
                 IsApproved = true,
@@ -361,7 +362,7 @@ namespace Commerce.IntegrationTests.Security
             var service = lifetime.Resolve<IMembershipService>();
             var unitOfWork = lifetime.Resolve<IUnitOfWork>();
 
-            var request1 = new CreateNewMembershipUserRequest()
+            var request1 = new PfCreateNewMembershipUserRequest()
             {
                 Email = "aleksjones12@gmail.com",
                 IsApproved = true,

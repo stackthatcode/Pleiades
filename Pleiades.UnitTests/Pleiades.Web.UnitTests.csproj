@@ -60,6 +60,10 @@
     <Compile Include="HttpContext\HttpContextStubTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Pleiades.TestHelpers\Pleiades.TestHelpers.csproj">
+      <Project>{A839CD41-8163-4667-A4B3-9B7593FC0350}</Project>
+      <Name>Pleiades.TestHelpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Web.Security.Membership\Pleiades.Web.Security.Membership.csproj">
       <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
       <Name>Pleiades.Web.Security.Membership</Name>

@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using Pleiades.Web.Testing;
+using Pleiades.TestHelpers.Web;
 
-namespace Pleiades.Web.Tests.HttpContext
+namespace Pleiades.Web.UnitTests.HttpContext
 {
     [TestFixture]
     public class HttpContextMockTests

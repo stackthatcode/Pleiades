@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Transactions;
-using Pleiades.Data;
+using Pleiades.Application;
+using Pleiades.Application.Data;
 
-namespace Pleiades.Data.EF
+namespace Pleiades.Application.EF
 {
     public class EFUnitOfWork : IUnitOfWork
     {        

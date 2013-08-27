@@ -52,9 +52,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Concrete\PfMembershipServiceTests.cs" />
+    <Compile Include="Concrete\PfPasswordServiceTests.cs" />
+    <Compile Include="HttpContext\HttpContextStubTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Concrete\AggregateUserServiceTests.cs" />
-    <Compile Include="Concrete\OwnerAuthorizationRuleTests.cs" />
+    <Compile Include="Rules\OwnerAuthorizationRuleTests.cs" />
     <Compile Include="Provider\MembershipProviderTests.cs" />
     <Compile Include="Rules\AccountLevelCheckTests.cs" />
     <Compile Include="Rules\AccountStatusCheckTests.cs" />
@@ -63,9 +65,13 @@
     <Compile Include="Rules\StubUserGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Base.csproj">
+    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Application.Foundation.csproj">
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
-      <Name>Pleiades.Base</Name>
+      <Name>Pleiades.Application.Foundation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pleiades.TestHelpers\Pleiades.TestHelpers.csproj">
+      <Project>{A839CD41-8163-4667-A4B3-9B7593FC0350}</Project>
+      <Name>Pleiades.TestHelpers</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pleiades.Web.Security.Aggregate\Pleiades.Web.Security.Aggregate.csproj">
       <Project>{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}</Project>

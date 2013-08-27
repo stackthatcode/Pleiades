@@ -38,5 +38,10 @@ namespace Pleiades.Web.Security.Model
         // Membership Provider state properties
         public DateTime CreationDate { get; set; }
         public DateTime LastModified { get; set; }
+
+        public virtual bool ActiveUser
+        {
+            get { return IsApproved || !IsLockedOut; }
+        }
     }
 }

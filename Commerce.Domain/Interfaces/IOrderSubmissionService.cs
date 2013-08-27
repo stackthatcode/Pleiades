@@ -1,7 +1,7 @@
 ﻿using System;
-using Commerce.Persist.Model.Orders;
+using Commerce.Application.Model.Orders;
 
-namespace Commerce.Persist.Interfaces
+namespace Commerce.Application.Interfaces
 {
     public interface IOrderSubmissionService
     {

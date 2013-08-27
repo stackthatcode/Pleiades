@@ -11,20 +11,24 @@ namespace Pleiades.Web.Security.Concrete
     /// </summary>
     public class PfMembershipService : IPfMembershipService
     {
-        public IMembershipRepository Repository;
+        public IMembershipReadOnlyRepository ReadOnlyRepository;
+        public IMembershipWritableRepository WritableRepository;
         public IPfPasswordService PasswordServices;
         public IPfMembershipSettings Settings;
 
         const string ApplicationName = "/";
 
-        public PfMembershipService(IMembershipRepository repository, IPfPasswordService passwordServices, IPfMembershipSettings settings)
+        public PfMembershipService(
+                IMembershipReadOnlyRepository readOnlyRepository, IMembershipWritableRepository writableRepository, 
+                IPfPasswordService passwordServices, IPfMembershipSettings settings)
         {
-            this.Repository = repository;
+            this.ReadOnlyRepository = readOnlyRepository;
+            this.WritableRepository = writableRepository;
             this.PasswordServices = passwordServices;
             this.Settings = settings;
         }
 
-        public PfMembershipUser CreateUser(CreateNewMembershipUserRequest request, out PfMembershipCreateStatus createStatus)
+        public PfMembershipUser CreateUser(PfCreateNewMembershipUserRequest request, out PfMembershipCreateStatus createStatus)
         {
             var validPassword = PasswordServices.IsValidPassword(request.Password);
             if (!validPassword)
@@ -33,14 +37,14 @@ namespace Pleiades.Web.Security.Concrete
                 return null;
             }
 
-            var userByEmail = Repository.GetUserByEmail(request.Email);
+            var userByEmail = ReadOnlyRepository.GetUserByEmail(request.Email);
             if (userByEmail != null)
             {
                 createStatus = PfMembershipCreateStatus.DuplicateEmail;
                 return null;
             }
 
-            var userByUserName = Repository.GetUserByUserName(request.UserName);
+            var userByUserName = ReadOnlyRepository.GetUserByUserName(request.UserName);
             if (userByUserName != null)
             {
                 createStatus = PfMembershipCreateStatus.DuplicateUserName;
@@ -54,7 +58,7 @@ namespace Pleiades.Web.Security.Concrete
                 UserName = request.UserName,
                 ApplicationName = ApplicationName,
                 Email = request.Email,
-                Password = this.PasswordServices.EncodePassword(request.Password),
+                Password = this.PasswordServices.EncodeSecureInformation(request.Password),
                 PasswordQuestion = request.PasswordQuestion,
                 PasswordAnswer = request.PasswordAnswer,
                 IsApproved = request.IsApproved,
@@ -72,7 +76,7 @@ namespace Pleiades.Web.Security.Concrete
                 LastModified = createDate,
             };
 
-            Repository.Insert(user);
+            WritableRepository.AddUser(user);
             createStatus = PfMembershipCreateStatus.Success;
             return user;
         }
@@ -86,7 +90,7 @@ namespace Pleiades.Web.Security.Concrete
                 var random = new Random();
                 username = random.Next(9999999).ToString("D7");
                     
-                if (Repository.GetUserByUserName(username) == null)
+                if (ReadOnlyRepository.GetUserByUserName(username) == null)
                 {
                     return username;
                 }
@@ -97,7 +101,7 @@ namespace Pleiades.Web.Security.Concrete
 
         public PfMembershipUser ValidateUserByEmailAddr(string emailAddress, string password)
         {
-            var user = this.Repository.GetUserByEmail(emailAddress);
+            var user = this.ReadOnlyRepository.GetUserByEmail(emailAddress);
             if (user == null)
             {
                 return null;
@@ -108,7 +112,7 @@ namespace Pleiades.Web.Security.Concrete
                 return null;
             }
 
-            if (this.PasswordServices.CheckSecureInformation(password, user.Password))
+            if (this.PasswordServices.CheckPassword(password, user))
             {
                 user.LastLoginDate = DateTime.Now;
                 return user;
@@ -122,60 +126,49 @@ namespace Pleiades.Web.Security.Concrete
 
         public PfMembershipUser GetUserByEmail(string emailAddress)
         {
-            return this.Repository.GetUserByEmail(emailAddress);
+            return this.ReadOnlyRepository.GetUserByEmail(emailAddress);
         }
 
         public PfMembershipUser GetUserByUserName(string username)
         {
-            return this.Repository.GetUserByUserName(username);
+            return this.ReadOnlyRepository.GetUserByUserName(username);
         }
 
         public IEnumerable<PfMembershipUser> GetAllUsers()
         {
-            return this.Repository.GetAllUsers();
+            return this.ReadOnlyRepository.GetAllUsers();
         }
 
         public int GetNumberOfUsersOnline()
         {
-            return this.Repository.GetNumberOfUsersOnline(Settings.UserIsOnlineTimeWindow);
-        }
-
-        public void UnlockUser(string username)
-        {
-            var user = this.Repository.GetUserByUserName(username);
-            user.IsLockedOut = false;
+            return this.ReadOnlyRepository.GetNumberOfUsersOnline(Settings.UserIsOnlineTimeWindow);
         }
 
         public string PasswordQuestion(string username)
         {
-            var user = this.Repository.GetUserByUserName(username);
+            var user = this.ReadOnlyRepository.GetUserByUserName(username);
             return user.PasswordQuestion;
         }
 
-        public string ResetPassword(string username, string answer, bool adminOverride, out PfPasswordChangeStatus status)
+        public void UnlockUser(string username)
         {
-            var user = this.Repository.GetUserByUserName(username);
-            if (user == null)
-            {
-                status = PfPasswordChangeStatus.UserDoesNotExist;
-                return null;
-            }
-            if (!user.IsApproved)
-            {
-                status = PfPasswordChangeStatus.UserIsNotApproved;
-                return null;
-            }
-            if (user.IsLockedOut)
-            {
-                status = PfPasswordChangeStatus.UserIsLockedOut;
-                return null;
-            }
+            var user = this.WritableRepository.GetUserByUserName(username);
+            user.IsLockedOut = false;
+        }
 
+        public string ResetPassword(string username, string answer, bool adminOverride, out PfCredentialsChangeStatus status)
+        {
+            var user = this.WritableRepository.GetUserByUserName(username);
             if (!adminOverride)
             {
+                if (!user.ActiveUser)
+                {
+                    status = PfCredentialsChangeStatus.InactiveUser;
+                    return null;
+                }
                 if (!Settings.EnablePasswordReset)
                 {
-                    status = PfPasswordChangeStatus.PasswordResetIsNotEnabled;
+                    status = PfCredentialsChangeStatus.PasswordResetIsNotEnabled;
                     return null;
                 }
                 if (Settings.RequiresQuestionAndAnswer)
@@ -183,72 +176,109 @@ namespace Pleiades.Web.Security.Concrete
                     if (answer == null)
                     {
                         PasswordServices.UpdateFailedQuestionAndAnswerAttempts(user);
-                        status = PfPasswordChangeStatus.AnswerRequiredForPasswordReset;
+                        status = PfCredentialsChangeStatus.AnswerRequiredForPasswordReset;
                         return null;
                     }
-                    if (!PasswordServices.CheckSecureInformation(answer, user.PasswordAnswer))
+                    if (!PasswordServices.CheckPasswordAnswer(answer, user))
                     {
                         PasswordServices.UpdateFailedQuestionAndAnswerAttempts(user);
-                        status = PfPasswordChangeStatus.WrongAnswerSuppliedForSecurityQuestion;
+                        status = PfCredentialsChangeStatus.WrongAnswerSupplied;
                         return null;
                     }
                 }
             }
 
             string newPassword = PasswordServices.GeneratePassword();
-            user.Password = PasswordServices.EncodePassword(newPassword);
+            user.Password = PasswordServices.EncodeSecureInformation(newPassword);
             user.LastPasswordChangedDate = DateTime.Now;
-            status = PfPasswordChangeStatus.Success;
+            user.LastModified = DateTime.Now;
+            status = PfCredentialsChangeStatus.Success;
             return newPassword;
         }
 
-        public bool ChangePassword(string username, string oldPassword, string newPassword, bool adminOverride, out PfPasswordChangeStatus status)
+        public PfCredentialsChangeStatus ChangePassword(string username, string oldPassword, string newPassword, bool adminOverride)
         {
-            throw new NotImplementedException();   
+            var user = this.WritableRepository.GetUserByUserName(username);
+            if (!adminOverride)
+            {
+                if (!user.ActiveUser)
+                {
+                    return PfCredentialsChangeStatus.InactiveUser;
+                }
+                if (!PasswordServices.CheckPassword(oldPassword, user))
+                {
+                    PasswordServices.UpdateFailedQuestionAndAnswerAttempts(user);
+                    return PfCredentialsChangeStatus.WrongPasswordSupplied;
+                }
+            }
+
+            user.Password = PasswordServices.EncodeSecureInformation(newPassword);
+            user.LastPasswordChangedDate = DateTime.Now;
+            user.LastModified = DateTime.Now;
+            return PfCredentialsChangeStatus.Success;
         }
 
-        // Totally different!
-        public bool ChangePasswordQuestionAndAnswer(string username, string password, string question, string answer, out string message)
+        public PfCredentialsChangeStatus ChangePasswordQuestionAndAnswer(
+                string userName, string password, string question, string answer, bool adminOverride)
         {
-            var user = this.Repository.GetUserByUserName(username);
-            throw new NotImplementedException();   
+            var user = this.WritableRepository.GetUserByUserName(userName);            
+            if (!adminOverride)
+            {
+                if (!user.ActiveUser)
+                {
+                    return PfCredentialsChangeStatus.InactiveUser; ;
+                }
+                if (!PasswordServices.CheckPassword(password, user))
+                {
+                    PasswordServices.UpdateFailedQuestionAndAnswerAttempts(user);
+                    return PfCredentialsChangeStatus.WrongPasswordSupplied;
+                }
+            }
+
+            user.PasswordAnswer = PasswordServices.EncodeSecureInformation(answer);
+            user.LastModified = DateTime.Now;
+            return PfCredentialsChangeStatus.Success;
         }
-        
-        [Obsolete]
-        public bool ChangeEmailAddress(string username, string emailAddress, out string message)
+
+        public PfCredentialsChangeStatus ChangeEmailAddress(string userName, string password, string emailAddress, bool adminOverride)
         {
-            var user = this.Repository.GetUserByUserName(username);
-            var userCollision = this.Repository.GetUserByEmail(emailAddress);
+            var user = this.WritableRepository.GetUserByUserName(userName);
+            var userCollision = this.WritableRepository.GetUserByEmail(emailAddress);
+            if (!adminOverride)
+            {
+                if (!user.ActiveUser)
+                {
+                    return PfCredentialsChangeStatus.InactiveUser;
+                }
+                if (!this.PasswordServices.CheckPassword(password, user))
+                {
+                    return PfCredentialsChangeStatus.WrongPasswordSupplied;
+                }
+            }
             if (userCollision != null)
             {
-                message = "User with Email Address: " + emailAddress + " exists already";
+                return PfCredentialsChangeStatus.EmailAddressAlreadyTaken;
             }
-            user.Email = emailAddress;
-            throw new NotImplementedException();
-        }
-
-        public bool ChangeEmailAddress(string userName, string password, string emailAddress, out string message)
-        {
-            throw new NotImplementedException();
+            user.Email = emailAddress;            
+            return PfCredentialsChangeStatus.Success;
         }
 
         public void SetUserApproval(string username, bool approved)
         {
-            var user = this.Repository.GetUserByUserName(username);
+            var user = this.WritableRepository.GetUserByUserName(username);
             user.IsApproved = approved;
         }
 
         public void Touch(string username)
         {
-            var user = this.Repository.GetUserByUserName(username);
+            var user = this.WritableRepository.GetUserByUserName(username);
             user.LastActivityDate = DateTime.Now;
         }
 
         // Soft Delete, mayhaps?
         public void DeleteUser(string username)
         {
-            this.Repository.DeleteUser(username, true);
+            this.WritableRepository.DeleteUser(username, true);
         }
-
     }
 }

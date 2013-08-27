@@ -5,7 +5,9 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web.Security;
-using Pleiades.Data;
+using Pleiades.Application.Data;
+using Pleiades.Application.Helpers;
+using Pleiades.Application;
 using Pleiades.Helpers;
 
 namespace Pleiades.Web.Security.Providers

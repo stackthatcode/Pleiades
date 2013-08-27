@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Pleiades.Helpers
+namespace Pleiades.Application.Helpers
 {
     public static class ParsingExtensions
     {

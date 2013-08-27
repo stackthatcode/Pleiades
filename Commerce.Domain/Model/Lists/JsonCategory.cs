@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Commerce.Persist.Model.Lists;
+using Commerce.Application.Model.Lists;
 using Newtonsoft.Json;
-using DomainCategory = Commerce.Persist.Model.Lists.Category;
+using DomainCategory = Commerce.Application.Model.Lists.Category;
 
-namespace Commerce.Persist.Model.Lists
+namespace Commerce.Application.Model.Lists
 {
     [JsonObject]
     public class JsonCategory

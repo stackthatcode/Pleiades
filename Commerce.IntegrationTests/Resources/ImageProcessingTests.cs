@@ -4,9 +4,10 @@ using System.Drawing;
 using System.IO;
 using Autofac;
 using NUnit.Framework;
-using Pleiades.Data;
+using Pleiades.Application;
 using Commerce.Persist.Interfaces;
 using Commerce.Persist.Model.Resources;
+using Pleiades.Application.Data;
 
 
 namespace Commerce.IntegrationTests.Resources

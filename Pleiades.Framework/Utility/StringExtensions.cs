@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Pleiades.Utility
+namespace Pleiades.Application.Utility
 {
     public static class StringExtensions
     {
