@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using Autofac;
 using NUnit.Framework;
-using Pleiades.Application;
-using Commerce.Persist.Interfaces;
-using Commerce.Persist.Model.Resources;
 using Pleiades.Application.Data;
+using Commerce.Application.Interfaces;
 
 
 namespace Commerce.IntegrationTests.Resources
@@ -20,7 +16,6 @@ namespace Commerce.IntegrationTests.Resources
         {
             using (var lifetime = TestContainer.LifetimeScope())
             {
-                var currentDirectory = Environment.CurrentDirectory;
                 var image1 = new Bitmap(@".\TestImages\Image1.jpg");
 
                 var imageBundleRepository = lifetime.Resolve<IImageBundleRepository>();

@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
 using System.Linq;
-using Commerce.Persist.Concrete;
-using Commerce.Persist.Interfaces;
-using Commerce.Persist.Model.Orders;
+using Commerce.Application.Concrete;
+using Commerce.Application.Interfaces;
+using Commerce.Application.Model.Orders;
 
 namespace Commerce.Web.Areas.Admin.Controllers
 {

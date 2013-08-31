@@ -1,10 +1,8 @@
-﻿using System;
-using NUnit.Framework;
-using Pleiades.TestHelpers;
-using Pleiades.TestHelpers.Web;
+﻿using NUnit.Framework;
 using Commerce.Web.Areas.Admin.Controllers;
+using Pleiades.TestHelpers.Web;
 
-namespace Commerce.Web.UnitTests.Controllers.Admin
+namespace Commerce.UnitTests.Controllers.Admin
 {
     [TestFixture]
     public class HomeControllerTests

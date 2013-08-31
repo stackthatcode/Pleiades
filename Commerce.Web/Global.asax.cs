@@ -2,9 +2,9 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Commerce.Persist.Database;
 using Pleiades.Web.Plumbing;
 using Pleiades.Web.Security.Aspect;
+using Commerce.Application.Database;
 
 namespace Commerce.Web
 {

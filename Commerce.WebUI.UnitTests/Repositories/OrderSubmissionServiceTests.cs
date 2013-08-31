@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using NUnit.Framework;
-using Commerce.Persist.Concrete;
-using Commerce.Persist.Interfaces;
-using Commerce.Persist.Model.Billing;
-using Commerce.Persist.Model.Orders;
-using Commerce.Persist.Model.Products;
 using Rhino.Mocks;
+using Commerce.Application.Concrete.Orders;
+using Commerce.Application.Interfaces;
+using Commerce.Application.Model.Products;
+using Commerce.Application.Model.Billing;
+using Commerce.Application.Model.Orders;
 
 namespace Commerce.UnitTests.Repositories
 {

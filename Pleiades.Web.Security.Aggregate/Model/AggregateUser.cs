@@ -1,7 +1,4 @@
-﻿using System;
-using Pleiades.Web.Security.Model;
-
-namespace Pleiades.Web.Security.Model
+﻿namespace Pleiades.Web.Security.Model
 {
     public class AggregateUser
     {
@@ -20,6 +17,7 @@ namespace Pleiades.Web.Security.Model
                     },
                     Membership = new PfMembershipUser
                     {
+                        UserName = null,
                     }
                 };
         }

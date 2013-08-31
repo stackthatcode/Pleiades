@@ -48,26 +48,18 @@
     <Compile Include="Concrete\PfPasswordService.cs" />
     <Compile Include="Concrete\PfMembershipService.cs" />
     <Compile Include="Concrete\FormsAuthenticationService.cs" />
-    <Compile Include="Concrete\MembershipService.cs" />
     <Compile Include="Interface\IMembershipWritableRepository.cs" />
     <Compile Include="Interface\IMembershipReadOnlyRepository.cs" />
     <Compile Include="Interface\IFormsAuthenticationService.cs" />
-    <Compile Include="Interface\IMembershipProviderRepository.cs" />
-    <Compile Include="Interface\IMembershipService.cs" />
     <Compile Include="Interface\IPfMembershipService.cs" />
     <Compile Include="Interface\IPfPasswordService.cs" />
     <Compile Include="Interface\IPfMembershipSettings.cs" />
     <Compile Include="Model\PfCreateNewMembershipUserRequest.cs" />
     <Compile Include="Model\PfMembershipCreateStatus.cs" />
     <Compile Include="Model\PfCredentialsChangeStatus.cs" />
-    <Compile Include="Model\PleiadesMembershipCreateStatus.cs" />
     <Compile Include="Model\PfMembershipUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\HttpContextExtensions.cs" />
-    <Compile Include="Providers\MembershipExtensions.cs" />
-    <Compile Include="Providers\PfMembershipProvider.cs" />
-    <Compile Include="Providers\PfMembershipProviderSettings.cs" />
-    <Compile Include="Providers\PfMembershipRepositoryBroker.cs" />
+    <Compile Include="Utility\HttpContextExtensions.cs" />
     <Compile Include="Utility\MachineKeyGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,9 +67,6 @@
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
       <Name>Pleiades.Application.Foundation</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

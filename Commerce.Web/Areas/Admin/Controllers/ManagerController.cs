@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Security;
 using System.Web.Mvc;
 using Commerce.Web.Areas.Admin.Models;
-using Pleiades.Application;
 using Pleiades.Application.Data;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
@@ -17,15 +13,15 @@ namespace Commerce.Web.Areas.Admin.Controllers
         public const string DefaultQuestion = "Type Default";
         public const string DefaultAnswer = "Default";
 
-        public IAggregateUserRepository AggregateUserRepository { get; set; }
+        public IReadOnlyAggregateUserRepository AggregateUserRepository { get; set; }
         public IAggregateUserService AggregateUserService { get; set; }
-        public IMembershipService MembershipService { get; set; }
+        public IPfMembershipService MembershipService { get; set; }
         public IUnitOfWork UnitOfWork { get; set; }
 
         public ManagerController(
-                IAggregateUserRepository aggregateUserRepository, 
+                IReadOnlyAggregateUserRepository aggregateUserRepository, 
                 IAggregateUserService aggregateUserService,
-                IMembershipService membershipService,
+                IPfMembershipService membershipService,
                 IUnitOfWork unitOfWork)
         {
             AggregateUserRepository = aggregateUserRepository;
@@ -37,7 +33,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult List(int page = 1)
         {
-            var users = AggregateUserRepository.Retreive(new List<UserRole>() { UserRole.Admin, UserRole.Supreme });
+            var users = AggregateUserRepository.Retreive(new List<UserRole>() { UserRole.Admin, UserRole.Root });
             var listUsersViewModel = users.Select(user => new UserViewModel(user)).ToList();
             return View(listUsersViewModel); 
         }
@@ -64,7 +60,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
                 return View(createAdminModel);
             }
 
-            PleiadesMembershipCreateStatus status;
+            string status;
             var newuser =
                 this.AggregateUserService.Create(
                     new PfCreateNewMembershipUserRequest
@@ -75,7 +71,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
                         PasswordAnswer = DefaultAnswer,
                         PasswordQuestion = DefaultQuestion,
                     },
-                    new CreateOrModifyIdentityRequest
+                    new IdentityProfileChange
                     {                        
                         AccountStatus = AccountStatus.Active,
                         UserRole = UserRole.Admin,
@@ -85,7 +81,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
                     },
                     out status);
 
-            if (status != PleiadesMembershipCreateStatus.Success)
+            if (newuser == null)
             {
                 ViewData["ErrorMessage"] = "Error creating user with following code: " + status.ToString();
                 return View(createAdminModel);
@@ -112,14 +108,11 @@ namespace Commerce.Web.Areas.Admin.Controllers
             }
 
             // Execute
-            this.AggregateUserService.UpdateIdentity(
-                new CreateOrModifyIdentityRequest 
+            this.AggregateUserService.UpdateIdentity(id, 
+                new IdentityProfileChange 
                 { 
-                    Id = id, 
                     FirstName = userViewModel.FirstName, 
                     LastName = userViewModel.LastName, 
-                    IsApproved = userViewModel.IsApproved,
-                    Email = userViewModel.Email,
                 });
 
             // Respond
@@ -141,23 +134,24 @@ namespace Commerce.Web.Areas.Admin.Controllers
                 return View(model);
 
             // Execute
-            this.AggregateUserService.ChangeUserPassword(id, model.OldPassword, model.NewPassword);
+            var user = this.AggregateUserRepository.RetrieveById(id);
+            this.MembershipService.ChangePassword(user.Membership.UserName, model.OldPassword, model.NewPassword, false);
+            this.UnitOfWork.SaveChanges();
 
             // Respond
             return RedirectToAction("Details", new { id = id });
         }
 
-        // TODO: move this into atomic AggregateUserService method
         [HttpGet]
         public ActionResult Reset(int id)
         {
             var user = this.AggregateUserRepository.RetrieveById(id);
-            var newpassword = this.MembershipService.ResetPassword(user.Membership.UserName);
+            PfCredentialsChangeStatus status;
+            var newpassword = this.MembershipService.ResetPassword(user.Membership.UserName, null, true, out status);
             this.UnitOfWork.SaveChanges();
             return View(new ResetPasswordModel { Email = user.Membership.Email, NewPassword = newpassword });
         }
 
-        // TODO: move this into atomic AggregateUserService method
         [HttpGet]
         public ActionResult Unlock(int id)
         {
@@ -175,11 +169,10 @@ namespace Commerce.Web.Areas.Admin.Controllers
             return View(userModel);
         }
 
-        // TODO: move this into atomic AggregateUserService method
         [HttpPost]
         public ActionResult DeleteConfirm(int id)
         {
-            this.AggregateUserRepository.Delete(id);
+            this.AggregateUserService.Delete(id);
             this.UnitOfWork.SaveChanges();
             return RedirectToAction("List");
         }

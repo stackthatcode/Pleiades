@@ -1,14 +1,13 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using Commerce.Persist.Concrete;
-using Commerce.Persist.Database;
+using Commerce.Application.Concrete.Products;
+using Commerce.Application.Database;
+using Commerce.Application.Interfaces;
 using Pleiades.Web;
-using Commerce.Persist.Interfaces;
-using Commerce.Persist.Model.Orders;
+using Commerce.Application.Model.Orders;
 
 namespace Commerce.Web.Areas.Admin.Controllers
 {
-    // TODO: move this Controller to the WebAPI
     public class OrderController : Controller
     {
         PushMarketContext Context { get; set; }

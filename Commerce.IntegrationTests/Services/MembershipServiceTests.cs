@@ -2,7 +2,6 @@
 using System.Web.Security;
 using Autofac;
 using NUnit.Framework;
-using Pleiades.Application;
 using Pleiades.Application.Data;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
@@ -14,18 +13,12 @@ namespace Commerce.IntegrationTests.Services
     /// </summary>
     [TestFixture]
     public class MembershipRepositoryTests : FixtureBase
-    {
-        [TestFixtureSetUp]
-        public void TestSetup()
-        {
-            FixtureBase.CleanOutUserData();
-        }
-
+    {        
         [Test]
         public void Create_MembershipUser_Pass()
         {
             var lifetime = TestContainer.LifetimeScope();
-            var service = lifetime.Resolve<IMembershipService>();
+            var service = lifetime.Resolve<IPfMembershipService>();
             var request = new PfCreateNewMembershipUserRequest()
             {
                 Email = "aleksjones1@gmail.com",
@@ -35,10 +28,10 @@ namespace Commerce.IntegrationTests.Services
                 PasswordQuestion = "Who dat?",
             };
 
-            PleiadesMembershipCreateStatus statusResponse;
+            PfMembershipCreateStatus statusResponse;
             var newUser = service.CreateUser(request, out statusResponse);
 
-            Assert.AreEqual(statusResponse, PleiadesMembershipCreateStatus.Success);
+            Assert.AreEqual(statusResponse, PfMembershipCreateStatus.Success);
             Assert.AreEqual(request.Email, newUser.Email);
             Assert.AreEqual(request.IsApproved, newUser.IsApproved);
         }
@@ -47,7 +40,7 @@ namespace Commerce.IntegrationTests.Services
         public void Create_Approved_User_And_Authenticate_Pass()
         {
             var lifetime = TestContainer.LifetimeScope();
-            var service = lifetime.Resolve<IMembershipService>();
+            var service = lifetime.Resolve<IPfMembershipService>();
             var request = new PfCreateNewMembershipUserRequest()
             {
                 Email = "aleksjones2@gmail.com",
@@ -57,10 +50,10 @@ namespace Commerce.IntegrationTests.Services
                 PasswordQuestion = "Who dat?",
             };
 
-            PleiadesMembershipCreateStatus statusResponse;
+            PfMembershipCreateStatus statusResponse;
             var newUser = service.CreateUser(request, out statusResponse);
 
-            Assert.AreEqual(statusResponse, PleiadesMembershipCreateStatus.Success);
+            Assert.AreEqual(statusResponse, PfMembershipCreateStatus.Success);
 
             var result = service.ValidateUserByEmailAddr(request.Email, request.Password);
             Assert.IsNotNull(result);
@@ -70,7 +63,7 @@ namespace Commerce.IntegrationTests.Services
         public void Create_Approved_User_And_Authenticate_WithBadPassword_Should_Fail()
         {
             var lifetime = TestContainer.LifetimeScope();
-            var service = lifetime.Resolve<IMembershipService>();
+            var service = lifetime.Resolve<IPfMembershipService>();
             var request = new PfCreateNewMembershipUserRequest()
             {
                 Email = "aleksjones3@gmail.com",
@@ -80,10 +73,10 @@ namespace Commerce.IntegrationTests.Services
                 PasswordQuestion = "Who dat?",
             };
 
-            PleiadesMembershipCreateStatus statusResponse;
+            PfMembershipCreateStatus statusResponse;
             var newUser = service.CreateUser(request, out statusResponse);
 
-            Assert.AreEqual(statusResponse, PleiadesMembershipCreateStatus.Success);
+            Assert.AreEqual(statusResponse, PfMembershipCreateStatus.Success);
 
             var result = service.ValidateUserByEmailAddr(request.Email, "bullshit password");
             Assert.IsNull(result);
@@ -93,7 +86,7 @@ namespace Commerce.IntegrationTests.Services
         public void Create_Disapproved_User_And_Authenticate_WithGoodPassword_Should_Fail()
         {
             var lifetime = TestContainer.LifetimeScope();
-            var service = lifetime.Resolve<IMembershipService>();
+            var service = lifetime.Resolve<IPfMembershipService>();
             var request = new PfCreateNewMembershipUserRequest()
             {
                 Email = "aleksjones4@gmail.com",
@@ -103,11 +96,11 @@ namespace Commerce.IntegrationTests.Services
                 PasswordQuestion = "Who dat?",
             };
 
-            PleiadesMembershipCreateStatus statusResponse;
+            PfMembershipCreateStatus statusResponse;
             var newUser = service.CreateUser(request, out statusResponse);
-            Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
+            Assert.AreEqual(PfMembershipCreateStatus.Success, statusResponse);
 
-            Assert.AreEqual(statusResponse, PleiadesMembershipCreateStatus.Success);
+            Assert.AreEqual(statusResponse, PfMembershipCreateStatus.Success);
 
             var result = service.ValidateUserByEmailAddr(request.Email, request.Password);
             Assert.IsNull(result);
@@ -117,7 +110,7 @@ namespace Commerce.IntegrationTests.Services
         public void Create_User_And_Reset_Password_Fail_To_Authenticate_Then_Reset_Then_Authenticate_And_Pass()
         {
             var lifetime = TestContainer.LifetimeScope();
-            var service = lifetime.Resolve<IMembershipService>();
+            var service = lifetime.Resolve<IPfMembershipService>();
             var request = new PfCreateNewMembershipUserRequest()
             {
                 Email = "aleksjones5@gmail.com",
@@ -127,12 +120,13 @@ namespace Commerce.IntegrationTests.Services
                 PasswordQuestion = "Who dat?",
             };
 
-            PleiadesMembershipCreateStatus statusResponse;
+            PfMembershipCreateStatus statusResponse;
             var newUser = service.CreateUser(request, out statusResponse);
-            Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
+            Assert.AreEqual(PfMembershipCreateStatus.Success, statusResponse);
 
             // Reset the Password
-            var resetPwd = service.ResetPassword(newUser.UserName);
+            PfCredentialsChangeStatus status;
+            var resetPwd = service.ResetPassword(newUser.UserName, null, true, out status);
 
             // Try authenticating with valid credentials
             var result = service.ValidateUserByEmailAddr(newUser.Email, resetPwd);
@@ -143,7 +137,7 @@ namespace Commerce.IntegrationTests.Services
             Assert.IsNull(result2);
 
             // Now, use the reset password to change the Password
-            service.ChangePassword(newUser.UserName, resetPwd, "password1");
+            service.ChangePassword(newUser.UserName, resetPwd, "password1", true);
             var result3 = service.ValidateUserByEmailAddr(newUser.Email, "password1");
             Assert.IsNotNull(result3);
         }
@@ -152,7 +146,7 @@ namespace Commerce.IntegrationTests.Services
         public void Disapprove_User_And_Validate_Fails_Reapprove_And_Validate_Succeeds()
         {
             var lifetime = TestContainer.LifetimeScope();
-            var service = lifetime.Resolve<IMembershipService>();
+            var service = lifetime.Resolve<IPfMembershipService>();
             var unitOfWork = lifetime.Resolve<IUnitOfWork>();
 
             var request = new PfCreateNewMembershipUserRequest()
@@ -164,9 +158,9 @@ namespace Commerce.IntegrationTests.Services
                 PasswordQuestion = "Who dat?",
             };
 
-            PleiadesMembershipCreateStatus statusResponse;
+            PfMembershipCreateStatus statusResponse;
             var newUser = service.CreateUser(request, out statusResponse);
-            Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
+            Assert.AreEqual(PfMembershipCreateStatus.Success, statusResponse);
 
             // Disapprove User
             service.SetUserApproval(newUser.UserName, false);
@@ -190,7 +184,7 @@ namespace Commerce.IntegrationTests.Services
         {
             var lifetime = TestContainer.LifetimeScope();
             var unitOfWork = lifetime.Resolve<IUnitOfWork>();
-            var service = lifetime.Resolve<IMembershipService>();
+            var service = lifetime.Resolve<IPfMembershipService>();
             var request = new PfCreateNewMembershipUserRequest()
             {
                 Email = "aleksjones7@gmail.com",
@@ -200,9 +194,9 @@ namespace Commerce.IntegrationTests.Services
                 PasswordQuestion = "Who dat?",
             };
 
-            PleiadesMembershipCreateStatus statusResponse;
+            PfMembershipCreateStatus statusResponse;
             var newUser = service.CreateUser(request, out statusResponse);
-            Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
+            Assert.AreEqual(PfMembershipCreateStatus.Success, statusResponse);
 
             // Get user
             for (int i = 0; i < 10; i++)
@@ -227,7 +221,7 @@ namespace Commerce.IntegrationTests.Services
         public void Change_User_Email_And_Validate_Successfully()
         {
             var lifetime = TestContainer.LifetimeScope();
-            var service = lifetime.Resolve<IMembershipService>();
+            var service = lifetime.Resolve<IPfMembershipService>();
             var unitOfWork = lifetime.Resolve<IUnitOfWork>();
             var request = new PfCreateNewMembershipUserRequest()
             {
@@ -238,12 +232,12 @@ namespace Commerce.IntegrationTests.Services
                 PasswordQuestion = "Who dat?",
             };
 
-            PleiadesMembershipCreateStatus statusResponse;
+            PfMembershipCreateStatus statusResponse;
             var newUser = service.CreateUser(request, out statusResponse);
-            Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
+            Assert.AreEqual(PfMembershipCreateStatus.Success, statusResponse);
 
             // Change the password
-            service.ChangeEmailAddress(newUser.UserName, "bob4444@bob.com");
+            service.ChangeEmailAddress(newUser.UserName, null, "bob4444@bob.com", true);
             unitOfWork.SaveChanges();
 
             // Try authenticating with valid credentials
@@ -256,7 +250,7 @@ namespace Commerce.IntegrationTests.Services
         public void Change_User_Email_Address_To_Another_Users_Email_Address()
         {
             var lifetime = TestContainer.LifetimeScope();
-            var service = lifetime.Resolve<IMembershipService>();
+            var service = lifetime.Resolve<IPfMembershipService>();
             var request1 = new PfCreateNewMembershipUserRequest()
             {
                 Email = "aleksjones9@gmail.com",
@@ -266,9 +260,9 @@ namespace Commerce.IntegrationTests.Services
                 PasswordQuestion = "Who dat?",
             };
 
-            PleiadesMembershipCreateStatus statusResponse;
+            PfMembershipCreateStatus statusResponse;
             var newUser1 = service.CreateUser(request1, out statusResponse);
-            Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
+            Assert.AreEqual(PfMembershipCreateStatus.Success, statusResponse);
 
             var request2 = new PfCreateNewMembershipUserRequest()
             {
@@ -280,17 +274,17 @@ namespace Commerce.IntegrationTests.Services
             };
 
             var newUser2 = service.CreateUser(request2, out statusResponse);
-            Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
+            Assert.AreEqual(PfMembershipCreateStatus.Success, statusResponse);
 
             // Should throw an Exception
-            service.ChangeEmailAddress(newUser1.UserName, "bob999@gmail.com");
+            service.ChangeEmailAddress(newUser1.UserName, null, "bob999@gmail.com", true);
         }
 
         [Test]
         public void Reset_Password_With_Question_And_Answer_Test()
         {
             var lifetime = TestContainer.LifetimeScope();
-            var service = lifetime.Resolve<IMembershipService>();
+            var service = lifetime.Resolve<IPfMembershipService>();
             var unitOfWork = lifetime.Resolve<IUnitOfWork>();
 
             var request1 = new PfCreateNewMembershipUserRequest()
@@ -302,15 +296,16 @@ namespace Commerce.IntegrationTests.Services
                 PasswordQuestion = "Who dat?",
             };
 
-            PleiadesMembershipCreateStatus statusResponse;
+            PfMembershipCreateStatus statusResponse;
             var newUser1 = service.CreateUser(request1, out statusResponse);
-            Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
+            Assert.AreEqual(PfMembershipCreateStatus.Success, statusResponse);
 
             var question = service.PasswordQuestion(newUser1.UserName);
             Assert.AreEqual(question, request1.PasswordQuestion);
 
             // Try Reseting
-            var resetPwd = service.ResetPasswordWithAnswer(newUser1.UserName, request1.PasswordAnswer);
+            PfCredentialsChangeStatus status;
+            var resetPwd = service.ResetPassword(newUser1.UserName, request1.PasswordAnswer, true, out status);
             unitOfWork.SaveChanges();
 
             // Try authenticating with valid credentials
@@ -329,7 +324,7 @@ namespace Commerce.IntegrationTests.Services
         public void Reset_Password_With_Wrong_And_Answer_And_FAIL()
         {
             var lifetime = TestContainer.LifetimeScope();
-            var service = lifetime.Resolve<IMembershipService>();
+            var service = lifetime.Resolve<IPfMembershipService>();
             var unitOfWork = lifetime.Resolve<IUnitOfWork>();
 
             var request1 = new PfCreateNewMembershipUserRequest()
@@ -341,12 +336,13 @@ namespace Commerce.IntegrationTests.Services
                 PasswordQuestion = "Who dat?",
             };
 
-            PleiadesMembershipCreateStatus statusResponse;
+            PfMembershipCreateStatus statusResponse;
             var newUser1 = service.CreateUser(request1, out statusResponse);
-            Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
+            Assert.AreEqual(PfMembershipCreateStatus.Success, statusResponse);
 
             // Reset the Password with WRONG answer
-            var resetPwd = service.ResetPasswordWithAnswer(request1.Email, "Donald777");
+            PfCredentialsChangeStatus status;
+            var resetPwd = service.ResetPassword(request1.Email, null, true, out status);
             unitOfWork.SaveChanges();
 
             // Should've *thrown* an Exception
@@ -359,7 +355,7 @@ namespace Commerce.IntegrationTests.Services
         public void ChangePasswordQuestionAndAnswerTest()
         {
             var lifetime = TestContainer.LifetimeScope();
-            var service = lifetime.Resolve<IMembershipService>();
+            var service = lifetime.Resolve<IPfMembershipService>();
             var unitOfWork = lifetime.Resolve<IUnitOfWork>();
 
             var request1 = new PfCreateNewMembershipUserRequest()
@@ -371,12 +367,12 @@ namespace Commerce.IntegrationTests.Services
                 PasswordQuestion = "Who dat?",
             };
 
-            PleiadesMembershipCreateStatus statusResponse;
+            PfMembershipCreateStatus statusResponse;
             var newUser1 = service.CreateUser(request1, out statusResponse);
-            Assert.AreEqual(PleiadesMembershipCreateStatus.Success, statusResponse);
+            Assert.AreEqual(PfMembershipCreateStatus.Success, statusResponse);
 
             // Change the question and answer
-            service.ChangePasswordQuestionAndAnswer(newUser1.UserName, "password123", "New Question", "New Answer");
+            service.ChangePasswordQuestionAndAnswer(newUser1.UserName, "password123", "New Question", "New Answer", false);
             unitOfWork.SaveChanges();
 
             // Test the question
@@ -385,7 +381,8 @@ namespace Commerce.IntegrationTests.Services
             Assert.AreEqual(question, "New Question");
 
             // Try Reseting
-            var resetPwd = service.ResetPasswordWithAnswer(newUser1.UserName, "New Answer");
+            PfCredentialsChangeStatus status;
+            var resetPwd = service.ResetPassword(newUser1.UserName, "New Answer", true, out status);
             unitOfWork.SaveChanges();
 
             // Try authenticating with valid credentials

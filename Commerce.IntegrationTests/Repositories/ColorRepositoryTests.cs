@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Linq;
-using System.Transactions;
 using Autofac;
-using NUnit.Framework;
-using Pleiades.Application.Injection;
-using Pleiades.Application;
-using Pleiades.Application.EF;
-using Pleiades.Application.Utility;
-using Commerce.Persist;
-using Commerce.Persist.Concrete;
-using Commerce.Persist.Interfaces;
-using Commerce.Persist.Model.Lists;
-using Commerce.Initializer.Builders;
 using Newtonsoft.Json;
+using NUnit.Framework;
+using Commerce.Application.Interfaces;
+using Commerce.Initializer.Builders;
 
 namespace Commerce.IntegrationTests.Repositories
 {
@@ -24,12 +15,11 @@ namespace Commerce.IntegrationTests.Repositories
         {
             using (var lifetime = TestContainer.LifetimeScope())
             {
-                var container = lifetime.Resolve<IContainerAdapter>();
+                // Empty + populate data using the Initializer Builder
+                lifetime.Resolve<ColorBuilder>().Run();
                 var colorRepository = lifetime.Resolve<IJsonColorRepository>();
 
-                ColorBuilder.Populate(container);
                 var colors = colorRepository.RetrieveAll();
-
                 Console.WriteLine("\n");
                 Console.WriteLine(JsonConvert.SerializeObject(colors, Formatting.Indented));
             }

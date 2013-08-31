@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
-using Commerce.Persist.Database;
+using Commerce.Application.Database;
 using NUnit.Framework;
-using Commerce.Persist.Model.Lists;
+using Commerce.Application.Model.Lists;
 
 namespace Commerce.IntegrationTests
 {

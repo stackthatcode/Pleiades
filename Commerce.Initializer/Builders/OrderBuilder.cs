@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Transactions;
-using Commerce.Persist.Database;
+using Commerce.Application.Database;
 using Pleiades.Application.Injection;
 using Pleiades.Application;
-using Commerce.Persist.Concrete;
-using Commerce.Persist.Model.Orders;
+using Commerce.Application.Concrete;
+using Commerce.Application.Model.Orders;
 
 namespace Commerce.Initializer.Builders
 {

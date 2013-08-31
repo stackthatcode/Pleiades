@@ -85,7 +85,7 @@ namespace Pleiades.Web.Security.UnitTests.Rules
             {
                 return new IdentityProfile()
                 {
-                    UserRole = UserRole.Supreme,
+                    UserRole = UserRole.Root,
                     AccountStatus = AccountStatus.Active,
                 };
             }

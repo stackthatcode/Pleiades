@@ -1,44 +1,30 @@
-﻿using System;
-using System.Linq;
-using System.Transactions;
-using Autofac;
+﻿using Autofac;
 using NUnit.Framework;
 using Pleiades.Application.Data;
 using Pleiades.Application.Injection;
-using Pleiades.Application;
-using Pleiades.Application.EF;
-using Pleiades.Application.Utility;
-using Commerce.Persist;
-using Commerce.Persist.Concrete;
-using Commerce.Persist.Interfaces;
-using Commerce.Persist.Model.Lists;
-using Commerce.Persist.Model.Products;
+using Commerce.Application.Interfaces;
+using Commerce.Application.Model.Lists;
+using Commerce.Application.Model.Products;
 using Commerce.Initializer.Builders;
-using Newtonsoft.Json;
 
 namespace Commerce.IntegrationTests.Repositories
 {
     [TestFixture]
     public class ProductRepositoryTests : FixtureBase
     {
-        // TODO: how to segment the tests, since this relies on other data being present...?
-
         [Test]
         public void Empty_And_Repopulate_And_Update_Products()
         {
             using (var lifetime = TestContainer.LifetimeScope())
             {
-                var container = lifetime.Resolve<IContainerAdapter>();
-                var genericProductRepository = lifetime.Resolve<IGenericRepository<Product>>();
                 var categoryRepository = lifetime.Resolve<IGenericRepository<Category>>();
-                var productRepository = lifetime.Resolve<IProductRepository>();
                 var productSearchRepository = lifetime.Resolve<IProductRepository>();
 
-                BrandBuilder.Populate(container);
-                ColorBuilder.Populate(container);
-                SizeBuilder.Populate(container);
-                CategoryBuilder.Populate(container);
-                ProductBuilder.Populate(container);
+                lifetime.Resolve<BrandBuilder>().Run();
+                lifetime.Resolve<ColorBuilder>().Run();
+                lifetime.Resolve<SizeBuilder>().Run();
+                lifetime.Resolve<CategoryBuilder>().Run();
+                lifetime.Resolve<ProductBuilder>().Run();
 
                 // Test the search query
                 var category1 = categoryRepository.FirstOrDefault(x => x.Name == "Jiu-jitsu Gear");

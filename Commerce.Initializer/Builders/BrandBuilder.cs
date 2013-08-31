@@ -4,113 +4,95 @@ using System.Drawing;
 using System.IO;
 using System.Transactions;
 using Pleiades.Application.Data;
-using Pleiades.Application.Injection;
-using Pleiades.Application;
+using Commerce.Application.Interfaces;
+using Commerce.Application.Model.Lists;
 using Pleiades.Application.Utility;
-
-using Commerce.Persist.Interfaces;
-using Commerce.Persist.Model.Lists;
 
 
 namespace Commerce.Initializer.Builders
 {
-    public static class BrandBuilder
+    public class BrandBuilder : IBuilder
     {
-        public static void Populate(IContainerAdapter ServiceLocator)
+        public IUnitOfWork _unitOfWork;
+        public IGenericRepository<Brand> _genericRepository;
+        public IJsonBrandRepository _brandRepository;
+        public IImageBundleRepository _imageBundleRepository;
+        
+        public BrandBuilder(
+                IUnitOfWork unitOfWork,
+                IGenericRepository<Brand> genericRepository,
+                IJsonBrandRepository brandRepository,
+                IImageBundleRepository imageBundleRepository)
+        {
+            _unitOfWork = unitOfWork;
+            _genericRepository = genericRepository;
+            _brandRepository = brandRepository;
+            _imageBundleRepository = imageBundleRepository;
+        }
+
+        public void AddBrand(string brandImage, string name, string descrtipion, string SEO, string SkuCode)
+        {
+            var imageBundle1 = _imageBundleRepository.Add(new Bitmap(brandImage));
+            _unitOfWork.SaveChanges();
+            var brand1 = new JsonBrand()
+            {
+                Name = name,
+                Description = descrtipion,
+                SEO = "afflication-mma",
+                SkuCode = "AFFL",
+                ImageBundleExternalId = imageBundle1.ExternalId.ToString(),
+            };
+            _brandRepository.Insert(brand1);
+            _unitOfWork.SaveChanges();            
+        }
+
+        public void Run()
         {
             using (var tx = new TransactionScope())
             {
                 Console.WriteLine("Create the default Brands");
 
-                var unitOfWork = ServiceLocator.Resolve<IUnitOfWork>();
-                var genericRepository = ServiceLocator.Resolve<IGenericRepository<Brand>>();
-                var brandRepository = ServiceLocator.Resolve<IJsonBrandRepository>();
-                var imageBundleRepository = ServiceLocator.Resolve<IImageBundleRepository>();
+                _genericRepository.GetAll().ForEach(x => _genericRepository.Delete(x));
+                _unitOfWork.SaveChanges();
 
-                genericRepository.GetAll().ForEach(x => genericRepository.Delete(x));
-                unitOfWork.SaveChanges();
+                AddBrand(Path.Combine(BrandLogoDirectory(), "Afflictionmma2.jpg"),
+                         "Affliction",
+                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                         "afflication-mma",
+                         "AFFL");
 
-                // *** Affliction *** //
-                var imageBundle1 = imageBundleRepository.Add(new Bitmap(Path.Combine(BrandLogoDirectory(), "Afflictionmma2.jpg")));
-                unitOfWork.SaveChanges();
-                var brand1 = new JsonBrand()
-                {
-                    Name = "Affliction",
-                    Description = 
-                        @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
-                        @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-                    SEO = "afflication-mma",
-                    SkuCode = "AFFL",
-                    ImageBundleExternalId = imageBundle1.ExternalId.ToString(),
-                };
-                var result1 = brandRepository.Insert(brand1);
-                unitOfWork.SaveChanges();
+                AddBrand(Path.Combine(BrandLogoDirectory(), "badboy.jpg"),
+                         "Bad Boy",
+                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                         "bad-boy-mma",
+                         "BBOY");
 
-                // *** Bad Boy *** //
-                var imageBundle2 = imageBundleRepository.Add(new Bitmap(Path.Combine(BrandLogoDirectory(), "badboy.jpg")));
-                unitOfWork.SaveChanges();
-                var brand2 = new JsonBrand()
-                {
-                    Name = "Bad Boy",
-                    Description = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
-                        @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-                    SEO = "bad-boy-mma",
-                    SkuCode = "BBOY",
-                    ImageBundleExternalId = imageBundle2.ExternalId.ToString(),
-                };
-                var result2 = brandRepository.Insert(brand2);
-                unitOfWork.SaveChanges();
+                AddBrand(Path.Combine(BrandLogoDirectory(), "dethrone2.png"),
+                         "Dethrone",
+                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                         "dethrone-mma",
+                         "DETHRONE");
 
-                // *** Dethrone *** //
-                var imageBundle3 = imageBundleRepository.Add(new Bitmap(Path.Combine(BrandLogoDirectory(), "dethrone2.png")));
-                unitOfWork.SaveChanges();
-                var brand3 = new JsonBrand()
-                {
-                    Name = "Dethrone",
-                    Description = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
-                        @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-                    SEO = "dethrone-mma",
-                    SkuCode = "DETHRONE",
-                    ImageBundleExternalId = imageBundle3.ExternalId.ToString(),
-                };
-                var result3 = brandRepository.Insert(brand3);
-                unitOfWork.SaveChanges();
+                AddBrand(Path.Combine(BrandLogoDirectory(), "fuji.jpg"),
+                         "Fuji",
+                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                         "fuji-mma",
+                         "FUJI");
 
-                // *** Fuji *** //
-                var imageBundle4 = imageBundleRepository.Add(new Bitmap(Path.Combine(BrandLogoDirectory(), "fuji.jpg")));
-                unitOfWork.SaveChanges();
-                var brand4 = new JsonBrand()
-                {
-                    Name = "Fuji",
-                    Description = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
-                        @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-                    SEO = "fuji-mma",
-                    SkuCode = "FUJI",
-                    ImageBundleExternalId = imageBundle4.ExternalId.ToString(),
-                };
-                var result4 = brandRepository.Insert(brand4);
-                unitOfWork.SaveChanges();
-
-                // *** Tatami *** //
-                var imageBundle5 = imageBundleRepository.Add(new Bitmap(Path.Combine(BrandLogoDirectory(), "tatami.jpg")));
-                unitOfWork.SaveChanges();
-                var brand5 = new JsonBrand()
-                {
-                    Name = "Tatami",
-                    Description = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
-                        @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-                    SEO = "tatami-mma",
-                    SkuCode = "TATAMI",
-                    ImageBundleExternalId = imageBundle5.ExternalId.ToString(),
-                };
-                var result5 = brandRepository.Insert(brand5);
-                unitOfWork.SaveChanges();
-
-                tx.Complete();
+                AddBrand(Path.Combine(BrandLogoDirectory(), "tatami.jpg"),
+                         "Tatami",
+                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                         "tatami-mma",
+                         "TATAMI");
             }
         }
 
-        public static string BrandLogoDirectory()
+        public string BrandLogoDirectory()
         {
             return ConfigurationManager.AppSettings["DefaultBrandLogos"];
         }

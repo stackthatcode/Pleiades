@@ -11,8 +11,5 @@
         DuplicateUserName,
         DuplicateEmail,
         UserRejected,
-        InvalidProviderUserKey,
-        DuplicateProviderUserKey,
-        ProviderError,
     }
 }

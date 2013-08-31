@@ -7,7 +7,7 @@ namespace Pleiades.Web.Security.Rules
         public static SecurityCode Authorize(AggregateUser requestingUser, AggregateUser ownerUser)
         {
             if (requestingUser.IdentityProfile.UserRole == UserRole.Admin &&
-                ownerUser.IdentityProfile.UserRole == UserRole.Supreme)
+                ownerUser.IdentityProfile.UserRole == UserRole.Root)
             {
                 return SecurityCode.AccessDenied;
             }

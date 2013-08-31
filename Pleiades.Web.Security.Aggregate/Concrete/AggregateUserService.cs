@@ -3,30 +3,47 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Web;
-using Pleiades.Application;
-using Pleiades.Application.Data;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
-using Pleiades.Web.Security.Providers;
 using Pleiades.Web.Security.Utility;
 
 namespace Pleiades.Web.Security.Concrete
 {
+    //
     // TODO: add Logging for the Cache Miss/Hit stuff on DEBUG
-
+    //
     public class AggregateUserService : IAggregateUserService
     {
-        public const int MaxSupremeUsers = 1;
+        public const int MaxRootUsers = 1;
         public const int MaxAdminUsers = 5;
 
-        private Guid _tracer = Guid.NewGuid();
-        public Guid Tracer { get { return _tracer; } }
+        public IPfMembershipService MembershipService { get; set; }
+        public IReadOnlyAggregateUserRepository ReadOnlyRepository { get; set; }
+        public IWritableAggregateUserRepository WritableRepository { get; set; }
+        public IFormsAuthenticationService FormsService { get; set; }
 
-        private static 
-            ConcurrentDictionary<string, CacheEntry<AggregateUser>>
-                _cache = new ConcurrentDictionary<string, CacheEntry<AggregateUser>>();
+        private static ConcurrentDictionary<string, CacheEntry<AggregateUser>> _cache;
 
-        public Func<string, AggregateUser> GetUserFromCache = (username) =>
+        public AggregateUserService(
+                IPfMembershipService membershipService, IReadOnlyAggregateUserRepository aggregateUserRepository,
+                IWritableAggregateUserRepository writableAggregateUserRepository, IFormsAuthenticationService formsAuthenticationService)
+        {
+            this.MembershipService = membershipService;
+            this.ReadOnlyRepository = aggregateUserRepository;
+            this.WritableRepository = writableAggregateUserRepository;
+            this.FormsService = formsAuthenticationService;
+        }
+
+        static AggregateUserService()
+        {
+            _cache = new ConcurrentDictionary<string, CacheEntry<AggregateUser>>();
+        }
+
+        public Action<AggregateUser> PutUserInCache = 
+            (user) => _cache.TryAdd(user.Membership.UserName, new CacheEntry<AggregateUser>(user));
+        
+        public Func<string, AggregateUser> GetUserFromCache = 
+            (username) =>
             {
                 if (!_cache.ContainsKey(username))
                 {
@@ -46,53 +63,28 @@ namespace Pleiades.Web.Security.Concrete
                 }
 
                 return entry.Item;
-            };
+         };
 
-        public Action<AggregateUser> PutUserInCache = (user) =>
-            {
-                _cache.TryAdd(user.Membership.UserName, new CacheEntry<AggregateUser>(user));
-            };
-
-
-        public IAggregateUserRepository Repository { get; set; }
-        public IMembershipService MembershipService { get; set; }
-        public IFormsAuthenticationService FormsService { get; set; }
-        public IUnitOfWork UnitOfWork { get; set; }
-
-        public AggregateUserService(
-                IMembershipService membershipService, 
-                IAggregateUserRepository aggregateUserRepository,
-                IFormsAuthenticationService formsAuthenticationService,
-                IUnitOfWork unitOfWork)
-        {
-            this.MembershipService = membershipService;
-            this.Repository = aggregateUserRepository;
-            this.FormsService = formsAuthenticationService;
-            this.UnitOfWork = unitOfWork;
-        }
-
-        // Comment - this seems a bit superfluous, if not another layer of indirection... but I suppose it's one method
-        public bool Authenticate(string username, string password, bool persistenceCookie, List<UserRole> expectedRoles)
+        public AggregateUser Authenticate(string username, string password, bool persistenceCookie, List<UserRole> expectedRoles)
         {
             var membershipUser = this.MembershipService.ValidateUserByEmailAddr(username, password);
 
             if (membershipUser == null)
             {
                 this.FormsService.ClearAuthenticationCookie();
-                return false;
+                return null;
             }
 
-            var aggregateuser = this.Repository.RetrieveByMembershipUserName(membershipUser.UserName);
-
+            var aggregateuser = this.ReadOnlyRepository.RetrieveByMembershipUserName(membershipUser.UserName);
             if (!expectedRoles.Contains(aggregateuser.IdentityProfile.UserRole))
             {
                 this.FormsService.ClearAuthenticationCookie();
-                return false;
+                return null;
             }
 
             // Success!
             this.FormsService.SetAuthCookieForUser(membershipUser.UserName, persistenceCookie);
-            return true;
+            return aggregateuser;
         }
 
         public AggregateUser LoadAuthentedUserIntoContext(HttpContextBase context)
@@ -103,7 +95,7 @@ namespace Pleiades.Web.Security.Concrete
                 return httpContextUser;
             }
 
-            var userName = context.RetreiveMembershipUserNameFromContext();
+            var userName = context.ExtractUserNameFromContext();
             if (userName == null)
             {
                 var user = AggregateUser.AnonymousFactory();
@@ -115,13 +107,15 @@ namespace Pleiades.Web.Security.Concrete
             var cachedUser = this.GetUserFromCache(userName);
             if (cachedUser != null)
             {
+                // TODO: logging
                 Debug.WriteLine("Cache hit - user: " + userName);
                 context.StoreAggregateUserInContext(cachedUser);
                 return cachedUser;
             }
 
+            // TODO: logging
             Debug.WriteLine("Cached miss - user: " + userName);
-            var currentUser = this.Repository.RetrieveByMembershipUserName(userName);
+            var currentUser = this.ReadOnlyRepository.RetrieveByMembershipUserName(userName);
 
             if (currentUser == null)
             {
@@ -137,81 +131,75 @@ namespace Pleiades.Web.Security.Concrete
             return currentUser;
         } 
 
-        public AggregateUser Create(
-                PfCreateNewMembershipUserRequest membershipUserRequest, CreateOrModifyIdentityRequest identityUserRequest, 
-                out PleiadesMembershipCreateStatus outStatus)
+        public AggregateUser Create(PfCreateNewMembershipUserRequest membershipUserRequest, 
+                IdentityProfileChange identityUserChange, out string message)
         {
-            if (identityUserRequest.UserRole == UserRole.Anonymous)
+            if (identityUserChange.UserRole == UserRole.Anonymous)
             {
-                throw new Exception("Can't create an Anonymous User");
-            }
-
-            if (identityUserRequest.UserRole == UserRole.Admin && 
-                this.Repository.GetUserCountByRole(UserRole.Admin) >= MaxAdminUsers)
-            {
-                throw new Exception(String.Format("Maximum number of Admin Users is {0}", MaxAdminUsers));
-            }
-
-            if (identityUserRequest.UserRole == UserRole.Supreme &&
-                this.Repository.GetUserCountByRole(UserRole.Supreme) >= MaxSupremeUsers)
-            {
-                throw new Exception(String.Format("Maximum number of Supreme Users is 1", MaxSupremeUsers));
-            }
-            
-            // Create Membership User... does this being here?
-            var membershipUser = this.MembershipService.CreateUser(membershipUserRequest, out outStatus);
-            if (outStatus != PleiadesMembershipCreateStatus.Success)
-            {
+                message = "Can't create an Anonymous User";
                 return null;
             }
 
-            // Get the Membership User
+            if (identityUserChange.UserRole == UserRole.Admin && ReadOnlyRepository.GetUserCountByRole(UserRole.Admin) >= MaxAdminUsers)
+            {
+                message = String.Format("Maximum number of Admin Users is {0}", MaxAdminUsers);
+                return null;
+            }
+
+            if (identityUserChange.UserRole == UserRole.Root && ReadOnlyRepository.GetUserCountByRole(UserRole.Root) >= MaxRootUsers)
+            {
+                message = String.Format("Maximum number of Root Users is {0}", MaxRootUsers);
+                return null;
+            }
+            
+            // Create Membership User... does this being here?
+            PfMembershipCreateStatus outStatus;
+            var membershipUser = this.MembershipService.CreateUser(membershipUserRequest, out outStatus);
+            if (outStatus != PfMembershipCreateStatus.Success)
+            {
+                message = "Membership Failure: " + outStatus.ToString();
+                return null;
+            }
+
+            // Create Aggregate User object record
             var aggegrateUser = new AggregateUser
             {
                 Membership = membershipUser,
                 IdentityProfile =  new IdentityProfile
                 {
-                    AccountStatus = identityUserRequest.AccountStatus.Value,
-                    UserRole = identityUserRequest.UserRole.Value,
-                    AccountLevel = identityUserRequest.AccountLevel.Value,
-                    FirstName = identityUserRequest.FirstName,
-                    LastName = identityUserRequest.LastName,
+                    AccountStatus = identityUserChange.AccountStatus.Value,
+                    UserRole = identityUserChange.UserRole.Value,
+                    AccountLevel = identityUserChange.AccountLevel.Value,
+                    FirstName = identityUserChange.FirstName,
+                    LastName = identityUserChange.LastName,
                 }
             };
 
-            this.Repository.Insert(aggegrateUser);
-            this.UnitOfWork.SaveChanges();
+            this.WritableRepository.Add(aggegrateUser);
+            message = "Success";
             return aggegrateUser;
         }
 
-        public void UpdateIdentity(CreateOrModifyIdentityRequest identityUserRequest)
+        public void UpdateIdentity(int id, IdentityProfileChange identityChange)
         {
-            if (identityUserRequest.Email == null)
-            {
-                throw new Exception("Cannot set email address to null");
-            }
+            var user = this.WritableRepository.RetrieveById(id);
 
-            this.Repository.UpdateIdentity(identityUserRequest);
-            var user = this.Repository.RetrieveById(identityUserRequest.Id);
-
-            // NOW: possibly create another Service method UpdateEmailAndApproval..
-            if (user.IdentityProfile.UserRole != UserRole.Supreme)
-            {
-                var membershipUserName = user.Membership.UserName;
-                this.MembershipService.ChangeEmailAddress(membershipUserName, identityUserRequest.Email);
-                this.MembershipService.SetUserApproval(membershipUserName, identityUserRequest.IsApproved);
-            }
-
-            this.UnitOfWork.SaveChanges();
+            if (identityChange.AccountStatus != null)
+                user.IdentityProfile.AccountStatus = identityChange.AccountStatus.Value;
+            if (identityChange.UserRole != null && identityChange.UserRole != UserRole.Root)
+                user.IdentityProfile.UserRole = identityChange.UserRole.Value;
+            if (identityChange.AccountLevel != null)
+                user.IdentityProfile.AccountLevel = identityChange.AccountLevel.Value;
+            if (identityChange.FirstName != null)
+                user.IdentityProfile.FirstName = identityChange.FirstName;
+            if (identityChange.LastName != null)
+                user.IdentityProfile.LastName = identityChange.LastName;
         }
 
-        [Obsolete]
-        // TODO: remove this!
-        public void ChangeUserPassword(int targetUserId, string oldPassword, string newPassword)
+
+        public void Delete(int id)
         {
-            var user = this.Repository.RetrieveById(targetUserId);
-            this.MembershipService.ChangePassword(user.Membership.UserName, oldPassword, newPassword);
-            this.UnitOfWork.SaveChanges();
+            this.WritableRepository.Delete(id);
         }
     }
 }

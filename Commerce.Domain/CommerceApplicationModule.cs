@@ -3,6 +3,7 @@ using Autofac;
 using Pleiades.Application.Data;
 using Pleiades.Application;
 using Pleiades.Application.EF;
+using Pleiades.Web.Security.Concrete;
 using Pleiades.Web.Security.Interface;
 using Commerce.Application.Concrete.Infrastructure;
 using Commerce.Application.Concrete.Lists;
@@ -32,8 +33,10 @@ namespace Commerce.Application
                 .InstancePerLifetimeScope();
 
             // User Repositories
-            builder.RegisterType<AggregateUserRepository>().As<IAggregateUserRepository>().InstancePerLifetimeScope();
-            builder.RegisterType<PfMembershipRepository>().As<IMembershipProviderRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<AggregateUserService>().As<IAggregateUserService>().InstancePerLifetimeScope();
+            builder.RegisterType<AggregateUserRepository>().As<IReadOnlyAggregateUserRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<MembershipReadableRepository>().As<IMembershipReadOnlyRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<MembershipWritableRepository>().As<IMembershipWritableRepository>().InstancePerLifetimeScope();
 
             // List Repositories
             builder.RegisterType<JsonCategoryRepository>().As<IJsonCategoryRepository>().InstancePerLifetimeScope();

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
-using Commerce.Persist.Database;
+using Pleiades.Application.Injection;
 using Pleiades.Application.Utility;
-using Commerce.Persist.Concrete;
+using Commerce.Application.Database;
 using Commerce.Initializer.Builders;
 
 namespace Commerce.Initializer
@@ -11,6 +11,18 @@ namespace Commerce.Initializer
     class Program
     {
         static PushMarketContext DbContext { get; set; }
+        private readonly static IContainerAdapter _serviceLocator;
+
+        static Program()
+        {
+            _serviceLocator = AutofacBootstrap.CreateContainer();            
+        }
+
+        static void CreateAndRunBuilder<T>() where T : IBuilder
+        {
+            var builder = _serviceLocator.Resolve<T>();
+            builder.Run();
+        }
 
         static void Main(string[] args)
         {
@@ -26,20 +38,18 @@ namespace Commerce.Initializer
             CreateDatabase();
 
             // Components Initialization
-            var serviceLocator = AutofacBootstrap.CreateContainer();
-
+            
             // Application Data Initialization
             Console.WriteLine("Seeding PushMarket data");
-            RootUserBuilder.CreateTheSupremeUser(serviceLocator);
-            CategoryBuilder.Populate(serviceLocator);
-            SizeBuilder.Populate(serviceLocator);
-            BrandBuilder.Populate(serviceLocator);
-            ColorBuilder.Populate(serviceLocator);
-            ProductBuilder.Populate(serviceLocator);
-            ShippingMethodsBuilder.Populate(serviceLocator);
-            StateTaxBuilder.Populate(serviceLocator);
 
-            //DbContext.
+            CreateAndRunBuilder<UserBuilder>();
+            CreateAndRunBuilder<CategoryBuilder>();
+            CreateAndRunBuilder<SizeBuilder>();
+            CreateAndRunBuilder<BrandBuilder>();
+            CreateAndRunBuilder<ColorBuilder>();
+            CreateAndRunBuilder<ProductBuilder>();
+            CreateAndRunBuilder<ShippingMethodsBuilder>();
+            CreateAndRunBuilder<StateTaxBuilder>();
         }
 
         public static void DestroyDatabase()

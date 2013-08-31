@@ -30,8 +30,10 @@ namespace Commerce.Application.Concrete.Security
             return this.FirstOrDefault(x => x.Email == email);
         }
 
+        // TODO: build this out...?
         public int GetNumberOfUsersOnline(TimeSpan userIsOnlineTimeWindow)
         {
+            //e DateTime.Now - userIsOnlineTimeWindow
             throw new System.NotImplementedException();
         }
 

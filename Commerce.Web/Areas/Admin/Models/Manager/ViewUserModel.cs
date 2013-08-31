@@ -67,7 +67,7 @@ namespace Commerce.Web.Areas.Admin.Models
             FirstName = user.IdentityProfile.FirstName;
             LastName = user.IdentityProfile.LastName;
             IsApproved = user.Membership.IsApproved;
-            IsLockedOut = user.Membership.IsLockedOut ?? false;
+            IsLockedOut = user.Membership.IsLockedOut;
             IsOnline = user.Membership.IsOnline;
             LastModified = user.Membership.LastModified;
         }

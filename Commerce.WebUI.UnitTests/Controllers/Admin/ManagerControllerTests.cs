@@ -1,22 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using NUnit.Framework;
-using Pleiades.Application.Data;
 using Rhino.Mocks;
-using Pleiades.Application;
-using Pleiades.TestHelpers;
+using Pleiades.Application.Data;
 using Pleiades.TestHelpers.Web;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
-using Pleiades.Web.Security.Rules;
 using Commerce.Web.Areas.Admin.Controllers;
 using Commerce.Web.Areas.Admin.Models;
 
-
-namespace Commerce.Web.TestsControllers
+namespace Commerce.UnitTests.Controllers.Admin
 {
     [TestFixture]
     public class AdminManagerControllerTests
@@ -50,9 +43,9 @@ namespace Commerce.Web.TestsControllers
         public void List_HttpPost()
         {
             // Arrange
-            var aggregateUserRepository = MockRepository.GenerateMock<IAggregateUserRepository>();
+            var aggregateUserRepository = MockRepository.GenerateMock<IReadOnlyAggregateUserRepository>();
             aggregateUserRepository 
-                .Expect(x => x.Retreive(new List<UserRole>() { UserRole.Admin, UserRole.Supreme }))
+                .Expect(x => x.Retreive(new List<UserRole>() { UserRole.Admin, UserRole.Root }))
                 .Return(new List<AggregateUser> 
                         { 
                             AdminUserFactory(), 
@@ -74,7 +67,7 @@ namespace Commerce.Web.TestsControllers
         public void Detail_HttpGet()
         {
             // Arrange
-            var aggregateUserRepository = MockRepository.GenerateMock<IAggregateUserRepository>();
+            var aggregateUserRepository = MockRepository.GenerateMock<IReadOnlyAggregateUserRepository>();
 
             aggregateUserRepository
                 .Expect(x => x.RetrieveById(123))
@@ -105,14 +98,13 @@ namespace Commerce.Web.TestsControllers
                 PasswordVerify = "1234"
             };
 
-            PleiadesMembershipCreateStatus status;
+            string status;
             
             var aggrService = MockRepository.GenerateMock<IAggregateUserService>();
             aggrService
                 .Expect(x => x.Create(null, null, out status))
                 .IgnoreArguments()
-                .Return(new AggregateUser() { ID = 123 })
-                .OutRef(PleiadesMembershipCreateStatus.Success);
+                .Return(new AggregateUser() {ID = 123});
 
             var controller = new ManagerController(null, aggrService, null, null);
 
@@ -147,13 +139,13 @@ namespace Commerce.Web.TestsControllers
                 IdentityProfile = new IdentityProfile(),
             };
 
-            var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
+            var repository = MockRepository.GenerateMock<IReadOnlyAggregateUserRepository>();
             repository
                 .Expect(x => x.RetrieveById(888))
                 .Return(user);
 
             var service = MockRepository.GenerateMock<IAggregateUserService>();
-            service.Expect(x => x.UpdateIdentity(null)).IgnoreArguments();
+            service.Expect(x => x.UpdateIdentity(888, null)).IgnoreArguments();
             var controller = new ManagerController(repository, service, null, null);
             
             // Act
@@ -167,7 +159,7 @@ namespace Commerce.Web.TestsControllers
         [Test]
         public void ChangePassword_HttpGet()
         {
-            var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
+            var repository = MockRepository.GenerateMock<IReadOnlyAggregateUserRepository>();
             repository
                 .Expect(x => x.RetrieveById(888))
                 .Return(new AggregateUser { Membership = new PfMembershipUser { Email = "hull@hello.com" } });
@@ -182,10 +174,20 @@ namespace Commerce.Web.TestsControllers
         [Test]
         public void Change_HttpPost_ValidState()
         {
-            var service = MockRepository.GenerateMock<IAggregateUserService>();
-            service.Expect(x => x.ChangeUserPassword(888, "pass123", "pass456"));
-            var controller = new ManagerController(null, service, null, null);
+            var service = MockRepository.GenerateMock<IPfMembershipService>();
+            service.Expect(x => x.ChangePassword("888", "pass123", "pass456", false))
+                   .Return(PfCredentialsChangeStatus.Success);
+            var repository = MockRepository.GenerateMock<IReadOnlyAggregateUserRepository>();
+            repository.Expect(
+                x => x.RetrieveById(888))
+                .Return(new AggregateUser() { Membership = new PfMembershipUser()
+                {
+                    UserName = "888"
+                }});
+            var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
+            unitOfWork.Expect(x => x.SaveChanges());
 
+            var controller = new ManagerController(repository, null, service, unitOfWork);
             var result = controller.ChangePassword(888, new ChangePasswordModel() { OldPassword = "pass123", NewPassword = "pass456" });
 
             result.ShouldBeRedirectionTo(new { Action = "Details" });
@@ -206,23 +208,26 @@ namespace Commerce.Web.TestsControllers
         [Test]
         public void Reset_HttpPost()
         {
-            var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
+            var repository = MockRepository.GenerateMock<IReadOnlyAggregateUserRepository>();
             repository
                 .Expect(x => x.RetrieveById(888))
                 .Return(new AggregateUser { Membership = new PfMembershipUser { UserName = "123456" } });
 
-            var service = MockRepository.GenerateMock<IMembershipService>();
+            var service = MockRepository.GenerateMock<IPfMembershipService>();
+            PfCredentialsChangeStatus status;
             service
-                .Expect(x => x.ResetPassword("123456"))
+                .Expect(x => x.ResetPassword("123456", null, false, out status))
+                .IgnoreArguments()
                 .Return("seruifjk");
 
             var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
             unitOfWork.Expect(x => x.SaveChanges());
-
             var controller = new ManagerController(repository, null, service, unitOfWork);
 
+            // Act
             var result = controller.Reset(888);
 
+            // Assert
             result.ShouldBeView();
             repository.VerifyAllExpectations();
             service.VerifyAllExpectations();
@@ -232,12 +237,12 @@ namespace Commerce.Web.TestsControllers
         [Test]
         public void Unlock_HttpGet()
         {
-            var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
+            var repository = MockRepository.GenerateMock<IReadOnlyAggregateUserRepository>();
             repository
                 .Expect(x => x.RetrieveById(888))
                 .Return(new AggregateUser { Membership = new PfMembershipUser { UserName = "123456" } });
 
-            var service = MockRepository.GenerateMock<IMembershipService>();
+            var service = MockRepository.GenerateMock<IPfMembershipService>();
             service.Expect(x => x.UnlockUser("123456"));
 
             var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
@@ -257,7 +262,7 @@ namespace Commerce.Web.TestsControllers
         [Test]
         public void Delete_HttpGet()
         {
-            var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
+            var repository = MockRepository.GenerateMock<IReadOnlyAggregateUserRepository>();
             repository
                 .Expect(x => x.RetrieveById(888))
                 .Return(new AggregateUser 
@@ -278,20 +283,20 @@ namespace Commerce.Web.TestsControllers
         public void DeleteConfirm_HttpPost()
         {
             // Arrange
-            var repository = MockRepository.GenerateMock<IAggregateUserRepository>();
-            repository.Expect(x => x.Delete(888));
+            var service = MockRepository.GenerateMock<IAggregateUserService>();
+            service.Expect(x => x.Delete(888));
 
             var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
             unitOfWork.Expect(x => x.SaveChanges());
 
-            var controller = new ManagerController(repository, null, null, unitOfWork);
+            var controller = new ManagerController(null, service, null, unitOfWork);
 
             // Act
             var result = controller.DeleteConfirm(888);
 
             // Assert
             result.ShouldBeRedirectionTo(new { Action = "List" });
-            repository.VerifyAllExpectations();
+            service.VerifyAllExpectations();
             unitOfWork.VerifyAllExpectations();
         }
     }

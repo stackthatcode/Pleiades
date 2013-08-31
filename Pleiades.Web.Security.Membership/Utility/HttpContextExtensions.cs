@@ -1,11 +1,10 @@
 ﻿using System.Web;
-using System.Security.Principal;
 
-namespace Pleiades.Web.Security.Providers
+namespace Pleiades.Web.Security.Utility
 {
     public static class HttpContextExtensions
     {
-        public static string RetreiveMembershipUserNameFromContext(this HttpContextBase context)
+        public static string ExtractUserNameFromContext(this HttpContextBase context)
         {
             var identity = context.User.Identity;
 

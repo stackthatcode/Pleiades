@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="CommerceApplicationModule.cs" />
     <Compile Include="Concrete\Infrastructure\AnalyticService.cs" />
+    <Compile Include="Concrete\Security\AggregateWriteableRepository.cs" />
     <Compile Include="Concrete\Security\MembershipReadableRepository.cs" />
     <Compile Include="Concrete\Security\MembershipWritableRepository.cs" />
     <Compile Include="Concrete\Infrastructure\EmailGenerator.cs" />
@@ -140,8 +141,7 @@
     <Compile Include="Concrete\Infrastructure\FileResourceRepository.cs" />
     <Compile Include="Concrete\Infrastructure\ImageBundleRepository.cs" />
     <Compile Include="Concrete\Infrastructure\ImageProcessor.cs" />
-    <Compile Include="Concrete\Security\AggregateUserRepository.cs" />
-    <Compile Include="Concrete\Security\MembershipProviderRepository.cs" />
+    <Compile Include="Concrete\Security\AggregateReadonlyRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />

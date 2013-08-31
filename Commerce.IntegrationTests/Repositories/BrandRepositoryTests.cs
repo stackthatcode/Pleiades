@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Linq;
-using System.Transactions;
 using Autofac;
-using NUnit.Framework;
-using Pleiades.Application.Injection;
-using Pleiades.Application;
-using Pleiades.Application.EF;
-using Pleiades.Application.Utility;
-using Commerce.Persist;
-using Commerce.Persist.Concrete;
-using Commerce.Persist.Interfaces;
-using Commerce.Persist.Model.Lists;
-using Commerce.Initializer.Builders;
 using Newtonsoft.Json;
+using NUnit.Framework;
+using Commerce.Application.Interfaces;
+using Commerce.Initializer.Builders;
 
 namespace Commerce.IntegrationTests.Repositories
 {
@@ -24,12 +15,10 @@ namespace Commerce.IntegrationTests.Repositories
         {
             using (var lifetime = TestContainer.LifetimeScope())
             {
-                var container = lifetime.Resolve<IContainerAdapter>();
                 var brandRepository = lifetime.Resolve<IJsonBrandRepository>();
-                    
-                BrandBuilder.Populate(container);
-                var allBrands = brandRepository.RetrieveAll();
-                
+                lifetime.Resolve<BrandBuilder>().Run();
+
+                var allBrands = brandRepository.RetrieveAll();                
                 Console.WriteLine("\n");
                 Console.WriteLine(JsonConvert.SerializeObject(allBrands, Formatting.Indented));
             }

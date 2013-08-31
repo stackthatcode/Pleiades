@@ -114,6 +114,10 @@
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
       <Name>Pleiades.Application.Foundation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Pleiades.TestHelpers\Pleiades.TestHelpers.csproj">
+      <Project>{A839CD41-8163-4667-A4B3-9B7593FC0350}</Project>
+      <Name>Pleiades.TestHelpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Web.Security.Aggregate\Pleiades.Web.Security.Aggregate.csproj">
       <Project>{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}</Project>
       <Name>Pleiades.Web.Security.Aggregate</Name>

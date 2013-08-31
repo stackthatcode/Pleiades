@@ -1,13 +1,9 @@
-﻿using System;
-using System.Drawing;
-using System.Collections.Generic;
-using System.Web;
+﻿using System.Drawing;
 using System.Web.Mvc;
-using Pleiades.Application;
 using Pleiades.Application.Data;
 using Pleiades.Web;
-using Commerce.Persist.Interfaces;
-using Commerce.Persist.Model.Lists;
+using Commerce.Application.Interfaces;
+using Commerce.Application.Model.Lists;
 using Commerce.Web.Areas.Admin.Models.Color;
 
 namespace Commerce.Web.Areas.Admin.Controllers

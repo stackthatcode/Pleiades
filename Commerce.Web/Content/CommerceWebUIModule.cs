@@ -1,12 +1,9 @@
-﻿using System;
-using Autofac;
+﻿using Autofac;
 using Autofac.Integration.Mvc;
 using Pleiades.Application.Injection;
 using Pleiades.Web.Autofac;
 using Pleiades.Web.Security;
-using Pleiades.Web.Security.Aspect;
-using Pleiades.Web.Security.Interface;
-using Commerce.Persist;
+using Commerce.Application;
 using Commerce.Web.Plumbing;
 
 namespace Commerce.Web
@@ -23,7 +20,7 @@ namespace Commerce.Web
 
             // External Modules
             builder.RegisterModule<WebSecurityAggregateModule>();
-            builder.RegisterModule<CommerceDomainModule>();
+            builder.RegisterModule<CommerceApplicationModule>();
 
             // Aggregrate User Registration framework
             WebSecurityAggregateBroker.RegisterSecurityContextFactory<SecurityContextFactory>();

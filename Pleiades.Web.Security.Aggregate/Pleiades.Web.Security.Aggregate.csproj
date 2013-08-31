@@ -51,6 +51,7 @@
     <Compile Include="Concrete\AggregateUserService.cs" />
     <Compile Include="Default\DefaultSecurityContextBuilder.cs" />
     <Compile Include="Default\DefaultSecurityHttpResponder.cs" />
+    <Compile Include="Interface\IWritableAggregateUserRepository.cs" />
     <Compile Include="Model\SecurityCode.cs" />
     <Compile Include="Rules\FluentSecurityRules.cs" />
     <Compile Include="Interface\ISecurityHttpResponder.cs" />
@@ -59,13 +60,13 @@
     <Compile Include="Utility\HttpContextExtensions.cs" />
     <Compile Include="WebSecurityAggregateBroker.cs" />
     <Compile Include="WebSecurityAggregateModule.cs" />
-    <Compile Include="Interface\IAggregateUserRepository.cs" />
+    <Compile Include="Interface\IReadOnlyAggregateUserRepository.cs" />
     <Compile Include="Interface\IAggregateUserService.cs" />
     <Compile Include="Model\AccountLevel.cs" />
     <Compile Include="Model\AccountStatus.cs" />
     <Compile Include="Model\AggregateUser.cs" />
     <Compile Include="Model\AuthorizationZone.cs" />
-    <Compile Include="Model\CreateOrModifyIdentityRequest.cs" />
+    <Compile Include="Model\IdentityProfileChange.cs" />
     <Compile Include="Model\IdentityProfile.cs" />
     <Compile Include="Model\UserRole.cs" />
     <Compile Include="Rules\SecurityContext.cs" />

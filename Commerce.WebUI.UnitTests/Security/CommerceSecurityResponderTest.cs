@@ -1,10 +1,8 @@
-﻿using System;
-using System.Net;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using NUnit.Framework;
+using Pleiades.TestHelpers.Web;
 using Rhino.Mocks;
 using Pleiades.Web.Security.Model;
-using Pleiades.TestHelpers.Web;
 using Commerce.Web.Plumbing;
 
 namespace Commerce.Web.UnitTests.Security

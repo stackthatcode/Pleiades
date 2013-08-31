@@ -1,14 +1,15 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 using NUnit.Framework;
-using Rhino.Mocks;
 using Pleiades.TestHelpers.Web;
+using Pleiades.Web.Security.Model;
+using Rhino.Mocks;
 using Pleiades.Web.Security.Interface;
 using Commerce.Web.Areas.Admin.Controllers;
 using Commerce.Web.Areas.Admin.Models;
 using Commerce.Web.Plumbing;
 
-namespace Commerce.Web.TestsControllers
+namespace Commerce.UnitTests.Controllers.Public
 {
     [TestFixture]
     public class AuthControllerTests
@@ -29,7 +30,7 @@ namespace Commerce.Web.TestsControllers
             var service = MockRepository.GenerateMock<IAggregateUserService>();
             service
                 .Expect(x => x.Authenticate("admin", "123", AuthController.PersistentCookie, null))
-                .Return(false)
+                .Return(null)
                 .IgnoreArguments();
 
             var controller = new AuthController(service, null);
@@ -47,11 +48,12 @@ namespace Commerce.Web.TestsControllers
         {
             // Arrange
             var model = new LogOnViewModel { UserName = "admin", Password = "123" };
+            var user = new AggregateUser {};
             var service = MockRepository.GenerateMock<IAggregateUserService>();
             service
                 .Expect(x => x.Authenticate("admin", "123", AuthController.PersistentCookie, null))
-                .Return(true)
-                .IgnoreArguments();
+                .IgnoreArguments()
+                .Return(user);
 
             var controller = new AuthController(service, null);
 
@@ -68,10 +70,11 @@ namespace Commerce.Web.TestsControllers
         {
             // Arrange
             var model = new LogOnViewModel { UserName = "admin", Password = "123" };
+            var user = new AggregateUser();
             var service = MockRepository.GenerateMock<IAggregateUserService>();
             service
                 .Expect(x => x.Authenticate("admin", "123", AuthController.PersistentCookie, null))
-                .Return(true)
+                .Return(user)
                 .IgnoreArguments();
 
             var controller = new AuthController(service, null);

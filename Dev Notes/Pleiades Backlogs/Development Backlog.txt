@@ -132,6 +132,33 @@ Burndown 8/27/2013 Evening (0.75 Hours)
 - Finished Membership Repositories
 - Started Commerce Integration Tests
 
+Burndown 8/28/2013 Morning (0.50 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Refactored AggregateUserService to use new PfMembership
+
+Burndown 8/28/2013 Evening (0.50 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Refactored AggregateUserService to use new PfMembership - continuation
+
+Burndown 8/29/2013 Morning (0.50 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Fixed the AggregateUserService Tests
+
+Burndown 8/29/2013 Evening (0.50 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Cleaned-up FixtureBase
+
+8/30/2013 Morning (0.50 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Continuation of the Second Great Refactoring aftershock
+- Fixed the hell out of the Initializer
+
+8/30/2013 Morning (1.50 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Continuation of the Second Great Refactoring aftershock
+- Fixed the hell out of the Initializer
+
+
 
 
 PushMarket Front-end

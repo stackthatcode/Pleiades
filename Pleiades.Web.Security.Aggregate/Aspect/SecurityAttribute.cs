@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Web.Mvc;
+using Pleiades.Application.Data;
 using Pleiades.Application.Injection;
 using Pleiades.Web.Security.Rules;
 using Pleiades.Web.Security.Interface;
-using Pleiades.Web.Security.Model;
 
 namespace Pleiades.Web.Security.Aspect
 {
@@ -21,9 +20,12 @@ namespace Pleiades.Web.Security.Aspect
             var contextFactory = _container.Resolve<ISecurityContextBuilder>();
             var httpSecurityResponder = _container.Resolve<ISecurityHttpResponder>();
             var aggregateUserService = _container.Resolve<IAggregateUserService>();
-            Debug.WriteLine("AggrUserService Id: " + aggregateUserService.Tracer);
+            var unitOfWork = _container.Resolve<IUnitOfWork>();
 
             var user = aggregateUserService.LoadAuthentedUserIntoContext(filterContext.HttpContext);
+
+            // For the touch method
+            unitOfWork.SaveChanges();
 
             var context = 
                 contextFactory.Create(filterContext, user)

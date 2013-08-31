@@ -8,8 +8,8 @@ using Pleiades.Application;
 using Pleiades.Application.Data;
 using Pleiades.Web;
 using Pleiades.Web.FineUploader;
-using Commerce.Persist.Interfaces;
-using Commerce.Persist.Model.Resources;
+using Commerce.Application.Interfaces;
+using Commerce.Application.Model.Resources;
 
 namespace Commerce.Web.Areas.Admin.Controllers
 {

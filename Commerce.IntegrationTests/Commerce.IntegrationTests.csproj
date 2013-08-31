@@ -76,7 +76,6 @@
     <Compile Include="Repositories\BrandRepositoryTests.cs" />
     <Compile Include="Repositories\CategoryRepositoryTests.cs" />
     <Compile Include="Repositories\ColorRepositoryTests.cs" />
-    <Compile Include="Repositories\MembershipRepositoryTests.cs" />
     <Compile Include="Repositories\SizeAndSizeGroupRepositoryTests.cs" />
     <Compile Include="Services\AggregateUserServiceTests.cs" />
     <Compile Include="FixtureBase.cs" />

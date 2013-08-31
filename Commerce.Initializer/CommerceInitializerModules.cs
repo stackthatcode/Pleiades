@@ -3,7 +3,7 @@ using Autofac;
 using Pleiades.Application.Injection;
 using Pleiades.Web.Autofac;
 using Pleiades.Web.Security;
-using Commerce.Persist;
+using Commerce.Application;
 
 namespace Commerce.Initializer
 {
@@ -16,7 +16,7 @@ namespace Commerce.Initializer
 
             // External Modules
             builder.RegisterModule<WebSecurityAggregateModule>();
-            builder.RegisterModule<CommerceDomainModule>();
+            builder.RegisterModule<CommerceApplicationModule>();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using Pleiades.Web.Security.Interface;
 
 namespace Pleiades.Web.Security.Concrete
@@ -9,47 +10,50 @@ namespace Pleiades.Web.Security.Concrete
 
         public int MaxInvalidPasswordAttempts
         {
-            get { throw new NotImplementedException(); }
+            get { return Int32.Parse(ConfigurationManager.AppSettings["MaxInvalidPasswordAttempts"]); }
         }
 
         public int PasswordAttemptWindowSeconds
         {
-            get { throw new NotImplementedException(); }
+            get { return Int32.Parse(ConfigurationManager.AppSettings["PasswordAttemptWindowSeconds"]); }
         }
 
         public int MinRequiredPasswordLength
         {
-            get { throw new NotImplementedException(); }
+            get { return Int32.Parse(ConfigurationManager.AppSettings["MinRequiredPasswordLength"]); }
         }
 
         public int MinRequiredNonAlphanumericCharacters
         {
-            get { throw new NotImplementedException(); }
+            get { return Int32.Parse(ConfigurationManager.AppSettings["MinRequiredNonAlphanumericCharacters"]); }
         }
 
         public string PasswordStrengthRegularExpression
         {
-            get { throw new NotImplementedException(); }
+            get { return ConfigurationManager.AppSettings["PasswordStrengthRegularExpression"]; }
         }
 
         public string Base64EncodedHashKey
         {
-            get { throw new NotImplementedException(); }
+            get { return ConfigurationManager.AppSettings["Base64EncodedHashKey"]; }
         }
 
         public bool EnablePasswordReset
         {
-            get { throw new NotImplementedException(); }
+            get { return bool.Parse(ConfigurationManager.AppSettings["EnablePasswordReset"]); }
         }
 
         public bool RequiresQuestionAndAnswer
         {
-            get { throw new NotImplementedException(); }
+            get { return bool.Parse(ConfigurationManager.AppSettings["RequiresQuestionAndAnswer"]); }
         }
 
         public TimeSpan UserIsOnlineTimeWindow
         {
-            get { throw new NotImplementedException(); }
+            get 
+            { 
+                return new TimeSpan(0, 0, Int32.Parse(ConfigurationManager.AppSettings["UserIsOnlineTimeWindow"])); 
+            }
         }
     }
 }

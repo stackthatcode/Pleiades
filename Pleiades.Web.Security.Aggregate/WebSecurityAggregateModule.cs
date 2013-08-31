@@ -11,7 +11,9 @@ namespace Pleiades.Web.Security
         {
             // Pleiades.Web.Security.MembershipProvider            
             builder.RegisterType<FormsAuthenticationService>().As<IFormsAuthenticationService>().InstancePerLifetimeScope();
-            builder.RegisterType<MembershipService>().As<IMembershipService>().InstancePerLifetimeScope();
+            builder.RegisterType<PfMembershipService>().As<IPfMembershipService>().InstancePerLifetimeScope();
+            builder.RegisterType<PfPasswordService>().As<IPfPasswordService>().InstancePerLifetimeScope();
+            builder.RegisterType<PfMembershipSettings>().As<IPfMembershipSettings>().InstancePerLifetimeScope();
 
             // Concrete Services
             builder.RegisterType<AggregateUserService>().As<IAggregateUserService>().InstancePerLifetimeScope();

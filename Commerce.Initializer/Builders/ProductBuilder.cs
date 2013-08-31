@@ -1,58 +1,69 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Transactions;
+using Commerce.Application.Model.Resources;
 using Pleiades.Application.Data;
-using Pleiades.Application.Injection;
-using Pleiades.Application;
 using Pleiades.Application.Utility;
-using Pleiades.Web.Security.Model;
-using Pleiades.Web.Security.Interface;
-using Pleiades.Web.Security.Providers;
-using Commerce.Persist.Concrete;
-using Commerce.Persist.Interfaces;
-using Commerce.Persist.Model.Lists;
-using Commerce.Persist.Model.Products;
-using Commerce.Web;
-using Commerce.Web.Plumbing;
-using Color = Commerce.Persist.Model.Lists.Color;
+using Commerce.Application.Interfaces;
+using Commerce.Application.Model.Lists;
+using Commerce.Application.Model.Products;
+using Color = Commerce.Application.Model.Lists.Color;
 
 namespace Commerce.Initializer.Builders
 {
-    public class ProductBuilder
+    public class ProductBuilder : IBuilder
     {
-        public static void Populate(IContainerAdapter ServiceLocator)
+        IGenericRepository<Category> _categoryRepository;
+        IGenericRepository<SizeGroup> _sizeGroupRepository;
+        IGenericRepository<Product> _genericProductRepository;
+        IGenericRepository<Color> _colorRepository;
+        IGenericRepository<Brand> _brandRepository;
+        IImageBundleRepository _imageRepository;
+        IProductRepository _productRepository;
+        IInventoryRepository _inventoryRepository;
+        IUnitOfWork _unitOfWork;
+        
+        public ProductBuilder(
+            IGenericRepository<Category> categoryRepository,
+            IGenericRepository<SizeGroup> sizeGroupRepository,
+            IGenericRepository<Product> genericProductRepository,
+            IGenericRepository<Color> colorRepository,
+            IGenericRepository<Brand> brandRepository,
+            IImageBundleRepository imageRepository,
+            IProductRepository productRepository,
+            IInventoryRepository inventoryRepository,
+            IUnitOfWork unitOfWork)
+        {
+            _categoryRepository = categoryRepository;
+            _sizeGroupRepository = sizeGroupRepository;
+            _genericProductRepository = genericProductRepository;
+            _colorRepository = colorRepository;
+            _brandRepository = brandRepository;
+            _imageRepository = imageRepository;
+            _productRepository = productRepository;
+            _inventoryRepository = inventoryRepository;
+            _unitOfWork = unitOfWork;
+        }
+
+        public void Run()
         {
             using (var tx = new TransactionScope())
             {
                 Console.WriteLine("Create the default Products");
 
-                // Create the Repos
-                var categoryRepository = ServiceLocator.Resolve<IGenericRepository<Category>>();
-                var sizeGroupRepository = ServiceLocator.Resolve<IGenericRepository<SizeGroup>>();
-                var genericProductRepository = ServiceLocator.Resolve<IGenericRepository<Product>>();
-                var colorRepository = ServiceLocator.Resolve<IGenericRepository<Color>>();
-                var brandRepository = ServiceLocator.Resolve<IGenericRepository<Brand>>();
-                var imageRepository = ServiceLocator.Resolve<IImageBundleRepository>();
-                var productRepository = ServiceLocator.Resolve<IProductRepository>();
-                var productColorRepository = ServiceLocator.Resolve<IProductRepository>();
-                var inventoryRepository = ServiceLocator.Resolve<IInventoryRepository>();
-                var unitOfWork = ServiceLocator.Resolve<IUnitOfWork>();
-
                 // Clear everything out
-                genericProductRepository.GetAll().ForEach(x => genericProductRepository.Delete(x));
-                unitOfWork.SaveChanges();
+                _genericProductRepository.GetAll().ForEach(x => _genericProductRepository.Delete(x));
+                _unitOfWork.SaveChanges();
 
                 // Get reference data
-                var brandTatami = brandRepository.GetAll().ToList()[4];     // TATAMI
-                var sizeGroup = sizeGroupRepository.GetAll().ToList()[1];   // SIZE GROUP
-                var black = colorRepository.FirstOrDefault(x => x.SkuCode == "BLACK");
-                var blue = colorRepository.FirstOrDefault(x => x.SkuCode == "BLUE");
-                var category1 = categoryRepository.FirstOrDefault(x => x.Name == "Choke-proof Gis");
+                var brandTatami = _brandRepository.GetAll().ToList()[4];     // TATAMI
+                var sizeGroup = _sizeGroupRepository.GetAll().ToList()[1];   // SIZE GROUP
+                var black = _colorRepository.FirstOrDefault(x => x.SkuCode == "BLACK");
+                var blue = _colorRepository.FirstOrDefault(x => x.SkuCode == "BLUE");
+                var category1 = _categoryRepository.FirstOrDefault(x => x.Name == "Choke-proof Gis");
 
                 // Create Product 1 - Image Bundles
                 var product1 = new Product()
@@ -74,101 +85,85 @@ namespace Commerce.Initializer.Builders
                     DateCreated = DateTime.Now,
                     LastModified = DateTime.Now,
                 };
-                genericProductRepository.Insert(product1);
-                unitOfWork.SaveChanges();
+                _genericProductRepository.Insert(product1);
+                _unitOfWork.SaveChanges();
                 var product1Id = product1.Id;
 
-                var productColor12Result = productRepository.AddProductColor(product1Id, blue.Id);
-                var productColor11Result = productRepository.AddProductColor(product1Id, black.Id);
-                unitOfWork.SaveChanges();
+                var productColor11 = this.AddProductColor(product1Id, black);
+                var productColor12 = this.AddProductColor(product1Id, blue);
+                _unitOfWork.SaveChanges();
                 
-                var bundle11 = imageRepository.Add(ImageHelper("tat-1010_black_01_xl.jpg"));
-                var bundle12 = imageRepository.Add(ImageHelper("tat-1010_black_02_xl.jpg"));
-                var bundle13 = imageRepository.Add(ImageHelper("tat-1010_black_03_xl.jpg"));
-                var bundle14 = imageRepository.Add(ImageHelper("tat-1010_black_04_xl.jpg"));
-                var bundle15 = imageRepository.Add(ImageHelper("tat-1010_black_05_xl.jpg"));
-                unitOfWork.SaveChanges();
+                var bundle11 = AddImage("tat-1010_black_01_xl.jpg");
+                var bundle12 = AddImage("tat-1010_black_02_xl.jpg");
+                var bundle13 = AddImage("tat-1010_black_03_xl.jpg");
+                var bundle14 = AddImage("tat-1010_black_04_xl.jpg");
+                var bundle15 = AddImage("tat-1010_black_05_xl.jpg");
+                _unitOfWork.SaveChanges();
 
-                productRepository.AddProductImage(product1Id, new JsonProductImage
-                {
-                    ImageBundleExternalId = bundle11.ExternalId.ToString(),
-                    ProductColorId = productColor11Result().Id,
-                    Order = 1
-                });
-                productRepository.AddProductImage(product1Id, new JsonProductImage
-                {
-                    ImageBundleExternalId = bundle12.ExternalId.ToString(),
-                    ProductColorId = productColor11Result().Id,
-                });
-                productRepository.AddProductImage(product1Id, new JsonProductImage
-                {
-                    ImageBundleExternalId = bundle13.ExternalId.ToString(),
-                    ProductColorId = productColor11Result().Id,
-                });
-                productRepository.AddProductImage(product1Id, new JsonProductImage
-                {
-                    ImageBundleExternalId = bundle14.ExternalId.ToString(),
-                    ProductColorId = productColor11Result().Id,
-                });
-                productRepository.AddProductImage(product1Id, new JsonProductImage
-                {
-                    ImageBundleExternalId = bundle15.ExternalId.ToString(),
-                    ProductColorId = productColor11Result().Id,
-                });
+                this.AddProductImage(product1Id, productColor11.Id, bundle11);
+                this.AddProductImage(product1Id, productColor11.Id, bundle12);
+                this.AddProductImage(product1Id, productColor11.Id, bundle13);
+                this.AddProductImage(product1Id, productColor11.Id, bundle14);
+                this.AddProductImage(product1Id, productColor11.Id, bundle15);
 
-                var bundle16 = imageRepository.Add(ImageHelper("tat-1010_blue_01_xl.jpg"));
-                var bundle17 = imageRepository.Add(ImageHelper("tat-1010_blue_02_xl.jpg"));
-                var bundle18 = imageRepository.Add(ImageHelper("tat-1010_blue_03_xl.jpg"));
-                var bundle19 = imageRepository.Add(ImageHelper("tat-1010_blue_04_xl.jpg"));
-                var bundle110 = imageRepository.Add(ImageHelper("tat-1010_blue_05_xl.jpg"));
-                unitOfWork.SaveChanges();
+                var bundle16 = AddImage("tat-1010_blue_01_xl.jpg");
+                var bundle17 = AddImage("tat-1010_blue_02_xl.jpg");
+                var bundle18 = AddImage("tat-1010_blue_03_xl.jpg");
+                var bundle19 = AddImage("tat-1010_blue_04_xl.jpg");
+                var bundle110 = AddImage("tat-1010_blue_05_xl.jpg");
+                _unitOfWork.SaveChanges();
 
-                productRepository.AddProductImage(product1Id, new JsonProductImage
-                {
-                    ImageBundleExternalId = bundle16.ExternalId.ToString(),
-                    ProductColorId = productColor12Result().Id,
-                });
-                productRepository.AddProductImage(product1Id, new JsonProductImage
-                {
-                    ImageBundleExternalId = bundle17.ExternalId.ToString(),
-                    ProductColorId = productColor12Result().Id,
-                });
-                productRepository.AddProductImage(product1Id, new JsonProductImage
-                {
-                    ImageBundleExternalId = bundle18.ExternalId.ToString(),
-                    ProductColorId = productColor12Result().Id,
-                });
-                productRepository.AddProductImage(product1Id, new JsonProductImage
-                {
-                    ImageBundleExternalId = bundle19.ExternalId.ToString(),
-                    ProductColorId = productColor12Result().Id,
-                });
+                this.AddProductImage(product1Id, productColor12.Id, bundle16);
+                this.AddProductImage(product1Id, productColor12.Id, bundle17);
+                this.AddProductImage(product1Id, productColor12.Id, bundle18);
+                this.AddProductImage(product1Id, productColor12.Id, bundle19);
+                this.AddProductImage(product1Id, productColor12.Id, bundle110);
+                _unitOfWork.SaveChanges();
 
-                productRepository.AddProductImage(product1Id, new JsonProductImage
-                {
-                    ImageBundleExternalId = bundle110.ExternalId.ToString(),
-                    ProductColorId = productColor12Result().Id,
-                });
-                unitOfWork.SaveChanges();
+                this.AddSizes(product1Id, sizeGroup);
+                _unitOfWork.SaveChanges();
 
-                foreach (var size in sizeGroup.Sizes)
-                {
-                    productRepository.AddProductSize(product1.Id, size.ID);
-                }
-                unitOfWork.SaveChanges();
-
-                inventoryRepository.Generate(product1.Id);
-                unitOfWork.SaveChanges();
+                _inventoryRepository.Generate(product1.Id);
+                _unitOfWork.SaveChanges();
 
                 var random = new Random();
-                foreach (var sku in inventoryRepository.ProductSkuById(product1.Id))
-                {
-                    sku.Reserved = 0;
-                    sku.InStock = random.Next(2, 6);
-                }
-                unitOfWork.SaveChanges();
+                _inventoryRepository.ProductSkuById(product1.Id).ForEach(x =>
+                    {
+                        x.Reserved = 0;
+                        x.InStock = random.Next(2, 6);
+                    });
+                _unitOfWork.SaveChanges();
                 tx.Complete();
             }
+        }
+
+        public void AddSizes(int productId, SizeGroup sizeGroup)
+        {
+            foreach (var size in sizeGroup.Sizes)
+            {
+                _productRepository.AddProductSize(productId, size.ID);
+            }            
+        }
+
+        public ImageBundle AddImage(string filename)
+        {
+            return _imageRepository.Add(ImageHelper(filename));
+        }
+
+        public JsonProductImage AddProductImage(int productId, int? colorId, ImageBundle imageBundle)
+        {
+            return _productRepository.AddProductImage(
+                productId,
+                new JsonProductImage
+                {
+                    ImageBundleExternalId = imageBundle.ExternalId.ToString(),
+                    ProductColorId = colorId.Value,
+                })();          
+        }
+
+        public JsonProductColor AddProductColor(int productId, Color color)
+        {
+            return _productRepository.AddProductColor(productId, color.Id)();
         }
 
         static Bitmap ImageHelper(string filename)

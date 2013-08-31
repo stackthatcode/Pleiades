@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Linq;
-using System.Transactions;
 using Autofac;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using Pleiades.Application.Data;
-using Pleiades.Application.Injection;
-using Pleiades.Application;
-using Pleiades.Application.EF;
-using Pleiades.Application.Utility;
-using Commerce.Persist;
-using Commerce.Persist.Concrete;
-using Commerce.Persist.Interfaces;
-using Commerce.Persist.Model.Lists;
+using Commerce.Application.Interfaces;
 using Commerce.Initializer.Builders;
-using Newtonsoft.Json;
 
 namespace Commerce.IntegrationTests.Repositories
 {
@@ -26,11 +17,10 @@ namespace Commerce.IntegrationTests.Repositories
             using (var lifetime = TestContainer.LifetimeScope())
             {
                 // Empty + populate data using the Initializer Builder
-                var container = lifetime.Resolve<IContainerAdapter>();
-                SizeBuilder.Populate(container);
+                lifetime.Resolve<SizeBuilder>().Run();
 
-                var repository = container.Resolve<IJsonSizeRepository>();
-                var unitOfWork = container.Resolve<IUnitOfWork>();
+                var repository = lifetime.Resolve<IJsonSizeRepository>();
+                var unitOfWork = lifetime.Resolve<IUnitOfWork>();
 
                 // All Size Groups to JSON
                 var allSizeGroups = repository.RetrieveAll(false);

@@ -1,10 +1,10 @@
 ﻿using System.Web.Mvc;
-using Commerce.Persist.Database;
+using Commerce.Application.Database;
 using Pleiades.Application;
 using Pleiades.Application.Data;
 using Pleiades.Web;
-using Commerce.Persist.Interfaces;
-using Commerce.Persist.Model.Lists;
+using Commerce.Application.Interfaces;
+using Commerce.Application.Model.Lists;
 
 namespace Commerce.Web.Areas.Admin.Controllers
 {

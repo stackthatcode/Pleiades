@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 using Commerce.Web.Areas.Admin.Models;
@@ -44,9 +41,9 @@ namespace Commerce.Web.Areas.Admin.Controllers
             }
 
             var result = this.AggregateUserService.Authenticate(
-                model.UserName, model.Password, PersistentCookie, new List<UserRole> { UserRole.Supreme, UserRole.Admin });
+                model.UserName, model.Password, PersistentCookie, new List<UserRole> { UserRole.Root, UserRole.Admin });
                         
-            if (result == false)
+            if (result == null)
             {
                 ModelState.AddModelError("", "Failed authentication credentials");
                 return View();
