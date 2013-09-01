@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Commerce.Application.Database;
-using Pleiades.Application.EF;
+using Pleiades.Application.Data.EF;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 

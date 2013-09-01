@@ -10,39 +10,36 @@ namespace Commerce.IntegrationTests
     [TestFixture]
     public class FixtureBase
     {
-        public static bool recreateDatabaseAndResources = false;
-        public static PushMarketContext context = new PushMarketContext();
+        public bool RecreateDatabaseAndResources = true;
+        public PushMarketContext Context = new PushMarketContext();
 
         [TestFixtureSetUp]
         public void FixtureBaseSetup()
         {
             // Clean-out the Database
-            if (!recreateDatabaseAndResources)
+            if (RecreateDatabaseAndResources && Context.Database.Exists())
             {
-                if (context.Database.Exists())
-                {
-                    Console.WriteLine("Deleting Database for Integration Testing");
-                    context.Database.Delete();
-                }
-
-                Console.WriteLine("Creating Database for Integration Testing");
-                context.Database.Create();
-
-                // Clean-out the Resource Directory
-                Console.WriteLine("Deleting Resource Files for Integration Testing");
-                var resourceDirectory = ConfigurationManager.AppSettings["ResourceStorage"];
-                var directoryInfo = new DirectoryInfo(resourceDirectory);
-                directoryInfo.GetFiles("*.*", SearchOption.AllDirectories).ForEach(x => x.Delete());
-                directoryInfo.GetDirectories().ForEach(x => x.Delete());
-
-                recreateDatabaseAndResources = true;
-
-                Console.WriteLine("Deleting User Data for Integration Testing");
-                context.AggregateUsers.ForEach(x => context.AggregateUsers.Remove(x));
-                context.IdentityProfiles.ForEach(x => context.IdentityProfiles.Remove(x));
-                context.MembershipUsers.ForEach(x => context.MembershipUsers.Remove(x));
-                context.SaveChanges();
+                Console.WriteLine("Deleting Database for Integration Testing");
+                Context.Database.Delete();
             }
+
+            Console.WriteLine("Creating Database for Integration Testing");
+            Context.MasterDatabaseCreate();
+
+            // Clean-out the Resource Directory
+            Console.WriteLine("Deleting Resource Files for Integration Testing");
+            var resourceDirectory = ConfigurationManager.AppSettings["ResourceStorage"];
+            var directoryInfo = new DirectoryInfo(resourceDirectory);
+            directoryInfo.GetFiles("*.*", SearchOption.AllDirectories).ForEach(x => x.Delete());
+            directoryInfo.GetDirectories().ForEach(x => x.Delete());
+
+            RecreateDatabaseAndResources = true;
+
+            Console.WriteLine("Deleting User Data for Integration Testing");
+            Context.AggregateUsers.ForEach(x => Context.AggregateUsers.Remove(x));
+            Context.IdentityProfiles.ForEach(x => Context.IdentityProfiles.Remove(x));
+            Context.MembershipUsers.ForEach(x => Context.MembershipUsers.Remove(x));
+            Context.SaveChanges();
         }
     }
 }

@@ -136,7 +136,6 @@
     <Compile Include="Areas\Admin\Controllers\ColorController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
-    <Compile Include="Areas\Admin\Controllers\JiveController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
@@ -250,9 +249,9 @@
       <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
       <Name>Commerce.Application</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Data.EF\Pleiades.Data.EF.csproj">
+    <ProjectReference Include="..\Pleiades.Data.EF\Pleiades.Application.Data.EF.csproj">
       <Project>{89303370-B830-4A89-8646-0F9D287AD657}</Project>
-      <Name>Pleiades.Data.EF</Name>
+      <Name>Pleiades.Application.Data.EF</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pleiades.Framework\Pleiades.Application.Foundation.csproj">
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>

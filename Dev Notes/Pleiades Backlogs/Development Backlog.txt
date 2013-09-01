@@ -153,12 +153,26 @@ Burndown 8/29/2013 Evening (0.50 Hours)
 - Continuation of the Second Great Refactoring aftershock
 - Fixed the hell out of the Initializer
 
-8/30/2013 Morning (1.50 Hours)
+8/30/2013 Evening (3.00 Hours)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Continuation of the Second Great Refactoring aftershock
-- Fixed the hell out of the Initializer
+- Near completion of the Second Great Refactoring 
 
+8/31/2013 (0.25 Hours)
+~~~~~~~~~~~~~~~~~~~~~~
+- Fixing some Tests
 
+8/31/2013 (4 Hours)
+~~~~~~~~~~~~~~~~~~~
+- Configured new environment on Macbook Air w/ Windows 8
+
+9/1/2013 (4 Hours)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Fixed Transaction issue with Builders (!!!)
+- Fixed Membership Provider Tests and LifetimeScope issues
+- Fixed Commerce Integration Tests - DONE, DONE, DONE
+- Fixed residual Builder issues
+- Added Logout Button
+- Toyed with Popovers
 
 
 PushMarket Front-end
@@ -175,18 +189,16 @@ PushMarket Front-end
 - HTML 5
 - SQL Server 2008...?
 
-
 OTHER STUFF
 ~~~~~~~~~~~
-http://g-form.com/products/extreme-sleeve-for-laptops/ => NEW COMPUTER PROTECTION
+* http://g-form.com/products/extreme-sleeve-for-laptops/ => NEW COMPUTER PROTECTION
 * http://mindre.net/Article/Microsoft_Web_Optimization_development
 
 
 Final Deliverable Definition
 ----------------------------
-- Revamped Membership Provider => TODO
 - Server Logging => TODO
-- Barebones Console App => TODO - CLEAN-UP AND BE HAPPY
+- Error Handling => TODO
 
 - Landing-Page + Microsite => IN PROGRESS
 - Customer Checkout => TODO
@@ -216,6 +228,8 @@ Already Done
 - Admin Order Create => DONE
 - Payment Processing Stub => DONE
 - Check-out Process Server-side => DONE
+- Revamped Barebones Console App => DONE
+- Revamped Membership Provider => DONE
 
 
 
@@ -300,6 +314,7 @@ Appendix Pages
 
 Backlog
 -------
+- Use Sentinel for Logging stuff?
 * http://stackoverflow.com/questions/3730777/whats-so-restful-about-asp-net-mvc => IMPORTANT
 - Add a Logout Button
 - SUPER IMPORTANT - post mortem my approach to the designing the UI.  How to improve my speed? => TODO

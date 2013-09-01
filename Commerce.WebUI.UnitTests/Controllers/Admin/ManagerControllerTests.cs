@@ -106,13 +106,17 @@ namespace Commerce.UnitTests.Controllers.Admin
                 .IgnoreArguments()
                 .Return(new AggregateUser() {ID = 123});
 
-            var controller = new ManagerController(null, aggrService, null, null);
+
+            var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
+            unitOfWork.Expect(x => x.SaveChanges());
+            var controller = new ManagerController(null, aggrService, null, unitOfWork);
 
             // Act
             var result = controller.Create(model);
 
             // Assert
             aggrService.VerifyAllExpectations();
+            unitOfWork.VerifyAllExpectations();
         }
 
         [Test]
@@ -144,9 +148,12 @@ namespace Commerce.UnitTests.Controllers.Admin
                 .Expect(x => x.RetrieveById(888))
                 .Return(user);
 
+            var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
+            unitOfWork.Expect(x => x.SaveChanges());
+
             var service = MockRepository.GenerateMock<IAggregateUserService>();
             service.Expect(x => x.UpdateIdentity(888, null)).IgnoreArguments();
-            var controller = new ManagerController(repository, service, null, null);
+            var controller = new ManagerController(repository, service, null, unitOfWork);
             
             // Act
             var result = controller.Edit(888, new EditUserModel());
@@ -154,6 +161,7 @@ namespace Commerce.UnitTests.Controllers.Admin
             // Assert
             result.ShouldBeRedirectionTo(new { action = "Details" });
             service.VerifyAllExpectations();
+            unitOfWork.VerifyAllExpectations();
         }
 
         [Test]

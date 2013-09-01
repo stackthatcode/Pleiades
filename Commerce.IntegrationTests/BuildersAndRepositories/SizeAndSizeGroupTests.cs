@@ -6,10 +6,10 @@ using Pleiades.Application.Data;
 using Commerce.Application.Interfaces;
 using Commerce.Initializer.Builders;
 
-namespace Commerce.IntegrationTests.Repositories
+namespace Commerce.IntegrationTests.BuildersAndRepositories
 {
     [TestFixture]
-    public class SizeAndSizeGroupRepositoryTests : FixtureBase
+    public class SizeAndSizeGroupTests : FixtureBase
     {       
         [Test]
         public void Empty_And_Repopulate_And_Update_Sizes()

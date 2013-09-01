@@ -5,7 +5,7 @@ using Commerce.Application.Database;
 using NUnit.Framework;
 using Commerce.Application.Model.Lists;
 
-namespace Commerce.IntegrationTests
+namespace Commerce.IntegrationTests.BuildersAndRepositories
 {
     [TestFixture]
     public class SmallIdeaTests : FixtureBase

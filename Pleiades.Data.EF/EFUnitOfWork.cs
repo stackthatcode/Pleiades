@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Data.Entity;
-using System.Transactions;
-using Pleiades.Application;
-using Pleiades.Application.Data;
 
-namespace Pleiades.Application.EF
+namespace Pleiades.Application.Data.EF
 {
-    public class EFUnitOfWork : IUnitOfWork
+    public class EfUnitOfWork : IUnitOfWork
     {        
         public DbContext Context { get; set; }
         public Guid Tracer { get; set; }
 
-        public EFUnitOfWork(DbContext context)
+        public EfUnitOfWork(DbContext context)
         {
             this.Context = context;
             this.Tracer = Guid.NewGuid();

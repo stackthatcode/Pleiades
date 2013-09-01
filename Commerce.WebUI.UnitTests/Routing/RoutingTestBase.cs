@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Commerce.Web.Areas.Public;
 using NUnit.Framework;
 using Commerce.Web.Areas.Admin;
 using Pleiades.TestHelpers.Web;

@@ -1,21 +1,24 @@
-﻿@using Pleiades.Web.Security.Model
-@using Pleiades.Web.Security.Utility
+﻿@using Pleiades.Web.Security.Utility
+
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(
+            function () {
                 $("#logged-in").popover({
                     html: true, 
                     content: function() {
-                          return $('#popover_content_wrapper').html();
+                            return $('#popover_content_wrapper').html();
                     },
                     placement: "bottom",
                 });
+                
                 $("#logged-in").click(function() {
-                $("#logged-in").popover("show");
-                $(".popover").click(function() {
-                    $("#logged-in").popover('hide')
+                    $("#logged-in").popover("show");
+                    $(".popover").click(function() {
+                        $("#logged-in").popover('hide');
+                    });
                 });
-            });
-        });
+            }
+        );
     </script>
 
     <style>
@@ -70,14 +73,14 @@
                     @(HttpContext.Current.RetreiveAggregateUserFromContext().Membership.Email)</a>
             </p>
             
-            <div id="popover_content_wrapper" style="display:none; width:250px;">
+              <div id="popover_content_wrapper" style="display:none; position: absolute; left:-200px; width:250px;">
                 <div class="arrow"></div>
                 <div style="color:#333; line-height:24px;">
                     <table>
                         <tr>
                             <td style="width:80px;">Name:</td>
                             <td><strong>@(HttpContext.Current.RetreiveAggregateUserFromContext().IdentityProfile.FirstName) 
-                            @(HttpContext.Current.RetreiveAggregateUserFromContext().IdentityProfile.LastName)</strong></td>
+                                    @(HttpContext.Current.RetreiveAggregateUserFromContext().IdentityProfile.LastName)</strong></td>
                         </tr>
                         <tr>
                             <td>User Type:</td>
@@ -92,9 +95,10 @@
                     <br />
                     <div style="width:100%; text-align:center;">
                         <button type="button" style="width:100px;" class="btn btn-inverse">Close</button>
-                    </div>                    
+                        <a href="@Url.RouteUrl(AdminNavigation.Logout())" id="logout" style="width:100px;" class="btn btn-primary">Logout</a>
+                    </div>                   
                 </div>
-            </div>
+              </div>
           </div>
         </div>
       </div>

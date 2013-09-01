@@ -141,15 +141,15 @@
     <Compile Include="Concrete\Infrastructure\FileResourceRepository.cs" />
     <Compile Include="Concrete\Infrastructure\ImageBundleRepository.cs" />
     <Compile Include="Concrete\Infrastructure\ImageProcessor.cs" />
-    <Compile Include="Concrete\Security\AggregateReadonlyRepository.cs" />
+    <Compile Include="Concrete\Security\AggregateReadOnlyRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pleiades.Data.EF\Pleiades.Data.EF.csproj">
+    <ProjectReference Include="..\Pleiades.Data.EF\Pleiades.Application.Data.EF.csproj">
       <Project>{89303370-B830-4A89-8646-0F9D287AD657}</Project>
-      <Name>Pleiades.Data.EF</Name>
+      <Name>Pleiades.Application.Data.EF</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pleiades.Web.Security.Aggregate\Pleiades.Web.Security.Aggregate.csproj">
       <Project>{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}</Project>
@@ -165,7 +165,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

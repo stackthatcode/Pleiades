@@ -12,6 +12,6 @@ namespace Pleiades.Web.Security.Interface
         string Base64EncodedHashKey { get; }
         bool EnablePasswordReset { get; }
         bool RequiresQuestionAndAnswer { get; }
-        TimeSpan UserIsOnlineTimeWindow { get; }
+        TimeSpan UserIsOnlineTimeWindowMinutes { get; }
     }
 }

@@ -69,14 +69,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Repositories\ProductRepositoryTests.cs" />
-    <Compile Include="Repositories\SmallIdeaTests.cs" />
+    <Compile Include="BuildersAndRepositories\ProductTests.cs" />
+    <Compile Include="BuildersAndRepositories\SmallIdeaTests.cs" />
     <Compile Include="Resources\ImageProcessingTests.cs" />
     <Compile Include="TestContainer.cs" />
-    <Compile Include="Repositories\BrandRepositoryTests.cs" />
-    <Compile Include="Repositories\CategoryRepositoryTests.cs" />
-    <Compile Include="Repositories\ColorRepositoryTests.cs" />
-    <Compile Include="Repositories\SizeAndSizeGroupRepositoryTests.cs" />
+    <Compile Include="BuildersAndRepositories\BrandTests.cs" />
+    <Compile Include="BuildersAndRepositories\CategoryTests.cs" />
+    <Compile Include="BuildersAndRepositories\ColorTests.cs" />
+    <Compile Include="BuildersAndRepositories\SizeAndSizeGroupTests.cs" />
     <Compile Include="Services\AggregateUserServiceTests.cs" />
     <Compile Include="FixtureBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -137,9 +137,9 @@
       <Project>{804F063C-505F-441E-B205-688C42E637AD}</Project>
       <Name>Pleiades.Web.Foundation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Data.EF\Pleiades.Data.EF.csproj">
+    <ProjectReference Include="..\Pleiades.Data.EF\Pleiades.Application.Data.EF.csproj">
       <Project>{89303370-B830-4A89-8646-0F9D287AD657}</Project>
-      <Name>Pleiades.Data.EF</Name>
+      <Name>Pleiades.Application.Data.EF</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

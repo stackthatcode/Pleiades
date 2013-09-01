@@ -1,16 +1,14 @@
 ﻿using Autofac;
 using NUnit.Framework;
 using Pleiades.Application.Data;
-using Pleiades.Application.Injection;
 using Commerce.Application.Interfaces;
 using Commerce.Application.Model.Lists;
-using Commerce.Application.Model.Products;
 using Commerce.Initializer.Builders;
 
-namespace Commerce.IntegrationTests.Repositories
+namespace Commerce.IntegrationTests.BuildersAndRepositories
 {
     [TestFixture]
-    public class ProductRepositoryTests : FixtureBase
+    public class ProductTests : FixtureBase
     {
         [Test]
         public void Empty_And_Repopulate_And_Update_Products()

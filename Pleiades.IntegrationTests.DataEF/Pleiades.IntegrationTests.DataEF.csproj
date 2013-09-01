@@ -82,9 +82,9 @@
       <Project>{804F063C-505F-441E-B205-688C42E637AD}</Project>
       <Name>Pleiades.Web.Foundation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Data.EF\Pleiades.Data.EF.csproj">
+    <ProjectReference Include="..\Pleiades.Data.EF\Pleiades.Application.Data.EF.csproj">
       <Project>{89303370-B830-4A89-8646-0F9D287AD657}</Project>
-      <Name>Pleiades.Data.EF</Name>
+      <Name>Pleiades.Application.Data.EF</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

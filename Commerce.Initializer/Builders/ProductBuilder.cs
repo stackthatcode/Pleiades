@@ -100,11 +100,11 @@ namespace Commerce.Initializer.Builders
                 var bundle15 = AddImage("tat-1010_black_05_xl.jpg");
                 _unitOfWork.SaveChanges();
 
-                this.AddProductImage(product1Id, productColor11.Id, bundle11);
-                this.AddProductImage(product1Id, productColor11.Id, bundle12);
-                this.AddProductImage(product1Id, productColor11.Id, bundle13);
-                this.AddProductImage(product1Id, productColor11.Id, bundle14);
-                this.AddProductImage(product1Id, productColor11.Id, bundle15);
+                this.AddProductImage(product1Id, productColor11().Id, bundle11);
+                this.AddProductImage(product1Id, productColor11().Id, bundle12);
+                this.AddProductImage(product1Id, productColor11().Id, bundle13);
+                this.AddProductImage(product1Id, productColor11().Id, bundle14);
+                this.AddProductImage(product1Id, productColor11().Id, bundle15);
 
                 var bundle16 = AddImage("tat-1010_blue_01_xl.jpg");
                 var bundle17 = AddImage("tat-1010_blue_02_xl.jpg");
@@ -113,11 +113,11 @@ namespace Commerce.Initializer.Builders
                 var bundle110 = AddImage("tat-1010_blue_05_xl.jpg");
                 _unitOfWork.SaveChanges();
 
-                this.AddProductImage(product1Id, productColor12.Id, bundle16);
-                this.AddProductImage(product1Id, productColor12.Id, bundle17);
-                this.AddProductImage(product1Id, productColor12.Id, bundle18);
-                this.AddProductImage(product1Id, productColor12.Id, bundle19);
-                this.AddProductImage(product1Id, productColor12.Id, bundle110);
+                this.AddProductImage(product1Id, productColor12().Id, bundle16);
+                this.AddProductImage(product1Id, productColor12().Id, bundle17);
+                this.AddProductImage(product1Id, productColor12().Id, bundle18);
+                this.AddProductImage(product1Id, productColor12().Id, bundle19);
+                this.AddProductImage(product1Id, productColor12().Id, bundle110);
                 _unitOfWork.SaveChanges();
 
                 this.AddSizes(product1Id, sizeGroup);
@@ -161,9 +161,9 @@ namespace Commerce.Initializer.Builders
                 })();          
         }
 
-        public JsonProductColor AddProductColor(int productId, Color color)
+        public Func<JsonProductColor> AddProductColor(int productId, Color color)
         {
-            return _productRepository.AddProductColor(productId, color.Id)();
+            return _productRepository.AddProductColor(productId, color.Id);
         }
 
         static Bitmap ImageHelper(string filename)

@@ -77,11 +77,9 @@ namespace Pleiades.Web.Security.UnitTests.Concrete
             repository.Expect(x => x.GetUserByUserName(username)).IgnoreArguments().Return(new PfMembershipUser());
 
             IPfMembershipService service = new PfMembershipService(repository, null, passwordService, null);
+            service.GenerateUniqueUserName = x => username;
 
-            var request = new PfCreateNewMembershipUserRequest
-                {
-                    UserName = username
-                };
+            var request = new PfCreateNewMembershipUserRequest();
 
             // Act
             PfMembershipCreateStatus createStatus;
@@ -97,6 +95,7 @@ namespace Pleiades.Web.Security.UnitTests.Concrete
         public void Create_User_Success_Test()
         {
             var username = "123456";
+            var password = "12dfkjgkl32";
             var passwordService = MockRepository.GenerateMock<IPfPasswordService>();
             passwordService.Expect(x => x.IsValidPassword(null))
                         .Return(true)
@@ -105,11 +104,9 @@ namespace Pleiades.Web.Security.UnitTests.Concrete
             var repository = MockRepository.GenerateMock<IMembershipReadOnlyRepository>();
             var emailAddress = "jones@jones.com";
             repository.Expect(x => x.GetUserByEmail(emailAddress))
-                        .IgnoreArguments()
                         .Return(null);
 
             repository.Expect(x => x.GetUserByUserName(username))
-                        .IgnoreArguments()
                         .Return(null);
 
             var writable_repository = MockRepository.GenerateMock<IMembershipWritableRepository>();
@@ -118,10 +115,13 @@ namespace Pleiades.Web.Security.UnitTests.Concrete
             // TODO: verify user identity, etc.
 
             IPfMembershipService service = new PfMembershipService(repository, writable_repository, passwordService, null);
-            var request = new PfCreateNewMembershipUserRequest
-            {
-                UserName = username
-            };
+            service.GenerateUniqueUserName = x => username;
+
+            var request = new PfCreateNewMembershipUserRequest()
+                {
+                    Email = emailAddress,
+                    Password = password,
+                };
 
             // Act            
             PfMembershipCreateStatus createStatus;
@@ -175,12 +175,12 @@ namespace Pleiades.Web.Security.UnitTests.Concrete
         [Test]
         public void ValidateUserByEmailAddr_Returns_Null_For_Non_Existent_User()
         {
-            var repository = MockRepository.GenerateMock<IMembershipReadOnlyRepository>();
+            var repository = MockRepository.GenerateMock<IMembershipWritableRepository>();
             repository.Expect(x => x.GetUserByEmail(null))
                       .IgnoreArguments()
                       .Return(null);
 
-            IPfMembershipService service = new PfMembershipService(repository, null, null, null);
+            IPfMembershipService service = new PfMembershipService(null, repository, null, null);
 
             // Act
             var result = service.ValidateUserByEmailAddr("aleks@aleks.com", "1233455");
@@ -193,12 +193,12 @@ namespace Pleiades.Web.Security.UnitTests.Concrete
         [Test]
         public void ValidateUserByEmailAddr_Returns_Null_For_Approved_But_Locked_Out_Users()
         {
-            var repository = MockRepository.GenerateMock<IMembershipReadOnlyRepository>();
+            var repository = MockRepository.GenerateMock<IMembershipWritableRepository>();
             repository.Expect(x => x.GetUserByEmail(null))
                       .IgnoreArguments()
                       .Return(new PfMembershipUser() { IsApproved = true, IsLockedOut = true});
 
-            IPfMembershipService service = new PfMembershipService(repository, null, null, null);
+            IPfMembershipService service = new PfMembershipService(null, repository, null, null);
                 
             // Act
             var result = service.ValidateUserByEmailAddr("aleks@aleks.com", "1233455");
@@ -211,12 +211,12 @@ namespace Pleiades.Web.Security.UnitTests.Concrete
         [Test]
         public void ValidateUserByEmailAddr_Returns_Null_For_Unapproved_Users()
         {
-            var repository = MockRepository.GenerateMock<IMembershipReadOnlyRepository>();
+            var repository = MockRepository.GenerateMock<IMembershipWritableRepository>();
             repository.Expect(x => x.GetUserByEmail(null))
                       .IgnoreArguments()
                       .Return(new PfMembershipUser() { IsApproved = false });
 
-            IPfMembershipService service = new PfMembershipService(repository, null, null, null);
+            IPfMembershipService service = new PfMembershipService(null, repository, null, null);
 
             // Act
             var result = service.ValidateUserByEmailAddr("aleks@aleks.com", "1233455");
@@ -229,7 +229,7 @@ namespace Pleiades.Web.Security.UnitTests.Concrete
         [Test]
         public void ValidateUserByEmailAddr_Returns_Null_For_InvalidPassword()
         {
-            var repository = MockRepository.GenerateMock<IMembershipReadOnlyRepository>();
+            var repository = MockRepository.GenerateMock<IMembershipWritableRepository>();
             
             var storedPasswordHash = "1234567890ABCDEF";
             var user = new PfMembershipUser() {IsApproved = true, Password = storedPasswordHash};
@@ -241,7 +241,7 @@ namespace Pleiades.Web.Security.UnitTests.Concrete
             var passwordService = MockRepository.GenerateMock<IPfPasswordService>();
             passwordService.Expect(x => x.CheckPassword(passwordAttempt, user)).Return(false);
 
-            IPfMembershipService service = new PfMembershipService(repository, null, passwordService, null);
+            IPfMembershipService service = new PfMembershipService(null, repository, passwordService, null);
 
             // Act
             var result = service.ValidateUserByEmailAddr("aleks@aleks.com", passwordAttempt);
@@ -255,7 +255,7 @@ namespace Pleiades.Web.Security.UnitTests.Concrete
         [Test]
         public void ValidateUserByEmailAddr_Returns_User_With_ValidPassword()
         {
-            var repository = MockRepository.GenerateMock<IMembershipReadOnlyRepository>();
+            var repository = MockRepository.GenerateMock<IMembershipWritableRepository>();
             var storedPasswordHash = "1234567890ABCDEF";
             var user = new PfMembershipUser() { IsApproved = true, Password = storedPasswordHash };
 
@@ -267,7 +267,7 @@ namespace Pleiades.Web.Security.UnitTests.Concrete
             var passwordService = MockRepository.GenerateMock<IPfPasswordService>();
             passwordService.Expect(x => x.CheckPassword(passwordAttempt, user)).Return(true);
 
-            IPfMembershipService service = new PfMembershipService(repository, null, passwordService, null);
+            IPfMembershipService service = new PfMembershipService(null, repository, passwordService, null);
                 
             // Act            
             var result = service.ValidateUserByEmailAddr("aleks@aleks.com", passwordAttempt);
@@ -330,7 +330,7 @@ namespace Pleiades.Web.Security.UnitTests.Concrete
             var repository = MockRepository.GenerateMock<IMembershipReadOnlyRepository>();
             var onlineWindow = new TimeSpan();
             var settings = MockRepository.GenerateStub<IPfMembershipSettings>();
-            settings.Expect(x => x.UserIsOnlineTimeWindow).Return(onlineWindow);
+            settings.Expect(x => x.UserIsOnlineTimeWindowMinutes).Return(onlineWindow);
             repository.Expect(x => x.GetNumberOfUsersOnline(onlineWindow)).Return(22);
             IPfMembershipService service = new PfMembershipService(repository, null, null, settings);
 

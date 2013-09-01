@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Linq;
 
-namespace Pleiades.Application.EF
+namespace Pleiades.Application.Data.EF
 {
     public static class ContextExtensionMethods
     {

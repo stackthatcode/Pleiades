@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Application.Founda
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commerce.Tests", "Commerce.Tests", "{42DBB876-C427-4C24-B1FA-E1F80B93A5FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Data.EF", "Pleiades.Data.EF\Pleiades.Data.EF.csproj", "{89303370-B830-4A89-8646-0F9D287AD657}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Application.Data.EF", "Pleiades.Data.EF\Pleiades.Application.Data.EF.csproj", "{89303370-B830-4A89-8646-0F9D287AD657}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Web.Security.Membership", "Pleiades.Web.Security.Membership\Pleiades.Web.Security.Membership.csproj", "{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}"
 EndProject

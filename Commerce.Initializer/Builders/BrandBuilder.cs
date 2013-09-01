@@ -38,8 +38,8 @@ namespace Commerce.Initializer.Builders
             {
                 Name = name,
                 Description = descrtipion,
-                SEO = "afflication-mma",
-                SkuCode = "AFFL",
+                SEO = SEO,
+                SkuCode = SkuCode,
                 ImageBundleExternalId = imageBundle1.ExternalId.ToString(),
             };
             _brandRepository.Insert(brand1);
@@ -89,6 +89,8 @@ namespace Commerce.Initializer.Builders
                          @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
                          "tatami-mma",
                          "TATAMI");
+
+                tx.Complete();
             }
         }
 

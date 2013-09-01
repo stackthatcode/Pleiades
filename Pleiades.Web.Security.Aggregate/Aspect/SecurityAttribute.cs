@@ -12,11 +12,9 @@ namespace Pleiades.Web.Security.Aspect
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            //
             // TODO: refactor for testability that confirms invocation of extension methods (???)
-            //
-            var _container = DependencyResolver.Current.GetService<IContainerAdapter>();
 
+            var _container = DependencyResolver.Current.GetService<IContainerAdapter>();
             var contextFactory = _container.Resolve<ISecurityContextBuilder>();
             var httpSecurityResponder = _container.Resolve<ISecurityHttpResponder>();
             var aggregateUserService = _container.Resolve<IAggregateUserService>();

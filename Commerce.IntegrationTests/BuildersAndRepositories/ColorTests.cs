@@ -5,10 +5,10 @@ using NUnit.Framework;
 using Commerce.Application.Interfaces;
 using Commerce.Initializer.Builders;
 
-namespace Commerce.IntegrationTests.Repositories
+namespace Commerce.IntegrationTests.BuildersAndRepositories
 {
     [TestFixture]
-    public class ColorRepositoryTests : FixtureBase
+    public class ColorTests : FixtureBase
     {
         [Test]
         public void Empty_And_Repopulate_And_Update_Sizes()

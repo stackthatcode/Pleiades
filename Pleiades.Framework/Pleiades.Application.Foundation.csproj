@@ -51,6 +51,9 @@
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Helpers\StringWriterWithEncoding.cs" />
     <Compile Include="Injection\IContainerAdapter.cs" />
+    <Compile Include="Logging\ConsoleAndDebugLogger.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\LoggerSingleton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\EnumExtensions.cs" />
     <Compile Include="Utility\LinqExtensions.cs" />

@@ -1,15 +1,14 @@
 ﻿using System;
 using Autofac;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using Pleiades.Application.Data;
-using Pleiades.Application.Injection;
 using Commerce.Initializer.Builders;
 using Commerce.Application.Interfaces;
-using Newtonsoft.Json;
 
-namespace Commerce.IntegrationTests.Repositories
+namespace Commerce.IntegrationTests.BuildersAndRepositories
 {
-    public class CategoryRepositoryTests : FixtureBase
+    public class CategoryTests : FixtureBase
     {
         [Test]
         public void Empty_And_Repopulate_And_Update_Categories()

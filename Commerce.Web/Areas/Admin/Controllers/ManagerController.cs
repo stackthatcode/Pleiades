@@ -80,6 +80,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
                         LastName =  createAdminModel.LastName
                     },
                     out status);
+            this.UnitOfWork.SaveChanges();
 
             if (newuser == null)
             {
@@ -114,6 +115,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
                     FirstName = userViewModel.FirstName, 
                     LastName = userViewModel.LastName, 
                 });
+            this.UnitOfWork.SaveChanges();
 
             // Respond
             return RedirectToAction("Details", new { id = id });

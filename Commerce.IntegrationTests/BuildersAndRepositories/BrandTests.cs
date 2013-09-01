@@ -5,10 +5,10 @@ using NUnit.Framework;
 using Commerce.Application.Interfaces;
 using Commerce.Initializer.Builders;
 
-namespace Commerce.IntegrationTests.Repositories
+namespace Commerce.IntegrationTests.BuildersAndRepositories
 {
     [TestFixture]
-    public class BrandRepositoryTests : FixtureBase
+    public class BrandTests : FixtureBase
     {
         [Test]
         public void Empty_And_Repopulate_And_Update_Sizes()
@@ -21,6 +21,7 @@ namespace Commerce.IntegrationTests.Repositories
                 var allBrands = brandRepository.RetrieveAll();                
                 Console.WriteLine("\n");
                 Console.WriteLine(JsonConvert.SerializeObject(allBrands, Formatting.Indented));
+                Assert.That(allBrands.Count, Is.EqualTo(5));
             }
         }
     }

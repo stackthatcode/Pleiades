@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Commerce.Application.Database;
-using Pleiades.Application.EF;
+using Pleiades.Application.Data.EF;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 
@@ -15,19 +15,14 @@ namespace Commerce.Application.Concrete.Security
         {
         }
 
-        protected override IQueryable<PfMembershipUser> Data()
-        {
-            return base.ReadOnlyData();
-        }
-
         PfMembershipUser IMembershipReadOnlyRepository.GetUserByUserName(string username)
         {
-            return this.FirstOrDefault(x => x.UserName == username);
+            return this.ReadOnlyData().FirstOrDefault(x => x.UserName == username);
         }
 
         PfMembershipUser IMembershipReadOnlyRepository.GetUserByEmail(string email)
         {
-            return this.FirstOrDefault(x => x.Email == email);
+            return this.ReadOnlyData().FirstOrDefault(x => x.Email == email);
         }
 
         // TODO: build this out...?
@@ -39,7 +34,7 @@ namespace Commerce.Application.Concrete.Security
 
         public IEnumerable<PfMembershipUser> GetAllUsers()
         {
-            return this.Where(x => true);
+            return this.ReadOnlyData().Where(x => true);
         }
     }
 }

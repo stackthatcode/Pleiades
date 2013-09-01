@@ -15,6 +15,7 @@ namespace Pleiades.Web.Security.Concrete
         public IMembershipWritableRepository WritableRepository;
         public IPfPasswordService PasswordServices;
         public IPfMembershipSettings Settings;
+        public Func<int, string> GenerateUniqueUserName { get; set; }
 
         const string ApplicationName = "/";
 
@@ -26,8 +27,26 @@ namespace Pleiades.Web.Security.Concrete
             this.WritableRepository = writableRepository;
             this.PasswordServices = passwordServices;
             this.Settings = settings;
-        }
 
+            this.GenerateUniqueUserName =
+                (maxAttempts) =>
+                    {
+                        var counter = 1;
+                        while (counter++ < maxAttempts)
+                        {
+                            var username = "";
+                            var random = new Random();
+                            username = random.Next(9999999).ToString("D7");
+
+                            if (ReadOnlyRepository.GetUserByUserName(username) == null)
+                            {
+                                return username;
+                            }
+                        }
+                        throw new Exception("Unable to generate new user name after " + maxAttempts + " tries");
+                    };
+        }
+ 
         public PfMembershipUser CreateUser(PfCreateNewMembershipUserRequest request, out PfMembershipCreateStatus createStatus)
         {
             var validPassword = PasswordServices.IsValidPassword(request.Password);
@@ -44,7 +63,8 @@ namespace Pleiades.Web.Security.Concrete
                 return null;
             }
 
-            var userByUserName = ReadOnlyRepository.GetUserByUserName(request.UserName);
+            var username = this.GenerateUniqueUserName(5);
+            var userByUserName = ReadOnlyRepository.GetUserByUserName(username);
             if (userByUserName != null)
             {
                 createStatus = PfMembershipCreateStatus.DuplicateUserName;
@@ -55,7 +75,7 @@ namespace Pleiades.Web.Security.Concrete
             var user = new PfMembershipUser 
             {
                 ProviderUserKey = Guid.Empty,
-                UserName = request.UserName,
+                UserName = username,
                 ApplicationName = ApplicationName,
                 Email = request.Email,
                 Password = this.PasswordServices.EncodeSecureInformation(request.Password),
@@ -81,27 +101,9 @@ namespace Pleiades.Web.Security.Concrete
             return user;
         }
 
-        public string GenerateUniqueUserName(int maxAttempts)
-        {
-            var counter = 1;
-            while (counter++ < maxAttempts)
-            {
-                var username = "";
-                var random = new Random();
-                username = random.Next(9999999).ToString("D7");
-                    
-                if (ReadOnlyRepository.GetUserByUserName(username) == null)
-                {
-                    return username;
-                }
-            }
-
-            throw new Exception("Unable to generate new user name after " + maxAttempts + " tries");
-        }
-
         public PfMembershipUser ValidateUserByEmailAddr(string emailAddress, string password)
         {
-            var user = this.ReadOnlyRepository.GetUserByEmail(emailAddress);
+            var user = this.WritableRepository.GetUserByEmail(emailAddress);
             if (user == null)
             {
                 return null;
@@ -141,7 +143,7 @@ namespace Pleiades.Web.Security.Concrete
 
         public int GetNumberOfUsersOnline()
         {
-            return this.ReadOnlyRepository.GetNumberOfUsersOnline(Settings.UserIsOnlineTimeWindow);
+            return this.ReadOnlyRepository.GetNumberOfUsersOnline(Settings.UserIsOnlineTimeWindowMinutes);
         }
 
         public string PasswordQuestion(string username)
@@ -235,6 +237,7 @@ namespace Pleiades.Web.Security.Concrete
                 }
             }
 
+            user.PasswordQuestion = question;
             user.PasswordAnswer = PasswordServices.EncodeSecureInformation(answer);
             user.LastModified = DateTime.Now;
             return PfCredentialsChangeStatus.Success;

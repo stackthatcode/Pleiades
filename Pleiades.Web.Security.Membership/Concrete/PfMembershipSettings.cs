@@ -6,7 +6,7 @@ namespace Pleiades.Web.Security.Concrete
 {
     public class PfMembershipSettings : IPfMembershipSettings 
     {
-        // Add stuff to read the values from configuration
+        // TODO: add defaults to make it more forgiving
 
         public int MaxInvalidPasswordAttempts
         {
@@ -48,11 +48,11 @@ namespace Pleiades.Web.Security.Concrete
             get { return bool.Parse(ConfigurationManager.AppSettings["RequiresQuestionAndAnswer"]); }
         }
 
-        public TimeSpan UserIsOnlineTimeWindow
+        public TimeSpan UserIsOnlineTimeWindowMinutes
         {
             get 
             { 
-                return new TimeSpan(0, 0, Int32.Parse(ConfigurationManager.AppSettings["UserIsOnlineTimeWindow"])); 
+                return new TimeSpan(0, 0, Int32.Parse(ConfigurationManager.AppSettings["UserIsOnlineTimeWindowMinutes"])); 
             }
         }
     }

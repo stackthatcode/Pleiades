@@ -8,8 +8,8 @@
     <ProjectGuid>{89303370-B830-4A89-8646-0F9D287AD657}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pleiades.Data.EF</RootNamespace>
-    <AssemblyName>Pleiades.Data.EF</AssemblyName>
+    <RootNamespace>Pleiades.Application.Data.EF</RootNamespace>
+    <AssemblyName>Pleiades.Application.Data.EF</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

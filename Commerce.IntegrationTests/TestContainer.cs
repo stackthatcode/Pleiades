@@ -1,11 +1,5 @@
-﻿using System;
-using Autofac;
+﻿using Autofac;
 using Commerce.Initializer;
-using Commerce.Application;
-using Pleiades.Web;
-using Pleiades.Web.Autofac;
-using Pleiades.Web.Security;
-using Pleiades.Web.Security.Interface;
 
 namespace Commerce.IntegrationTests
 {
@@ -16,7 +10,7 @@ namespace Commerce.IntegrationTests
 
         public static ILifetimeScope LifetimeScope()
         {
-            return _rootScope;
+            return _rootScope.BeginLifetimeScope();
         }
 
         static TestContainer()

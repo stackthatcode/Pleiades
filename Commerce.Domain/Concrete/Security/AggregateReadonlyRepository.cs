@@ -2,25 +2,24 @@
 using System.Data.Entity;
 using System.Linq;
 using Commerce.Application.Database;
-using Pleiades.Application.EF;
+using Pleiades.Application.Data.EF;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 
 namespace Commerce.Application.Concrete.Security
 {
-    public class AggregateUserRepository : EFGenericRepository<AggregateUser>, IReadOnlyAggregateUserRepository
+    public class AggregateReadOnlyRepository : EFGenericRepository<AggregateUser>, IReadOnlyAggregateUserRepository
     {
-        public AggregateUserRepository(PushMarketContext context) : base(context)
+        public AggregateReadOnlyRepository(PushMarketContext context) : base(context)
         {
         }
 
         protected override IQueryable<AggregateUser> ReadOnlyData()
         {
-            return this.ReadOnlyData()
+            return base.ReadOnlyData()
                        .Include(x => x.IdentityProfile)
                        .Include(x => x.Membership);
         }
-
 
         public AggregateUser RetrieveByMembershipUserName(string membershipUsername)
         {

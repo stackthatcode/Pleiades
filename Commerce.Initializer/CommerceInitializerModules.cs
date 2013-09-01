@@ -1,5 +1,5 @@
-﻿using System;
-using Autofac;
+﻿using Autofac;
+using Commerce.Initializer.Builders;
 using Pleiades.Application.Injection;
 using Pleiades.Web.Autofac;
 using Pleiades.Web.Security;
@@ -17,6 +17,16 @@ namespace Commerce.Initializer
             // External Modules
             builder.RegisterModule<WebSecurityAggregateModule>();
             builder.RegisterModule<CommerceApplicationModule>();
+
+            builder.RegisterType<BrandBuilder>();
+            builder.RegisterType<CategoryBuilder>();
+            builder.RegisterType<ColorBuilder>();
+            builder.RegisterType<OrderBuilder>();
+            builder.RegisterType<ProductBuilder>();
+            builder.RegisterType<ShippingMethodsBuilder>();
+            builder.RegisterType<SizeBuilder>();
+            builder.RegisterType<StateTaxBuilder>();
+            builder.RegisterType<UserBuilder>();
         }
     }
 }

@@ -2,9 +2,8 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using Pleiades.Application.Data;
 
-namespace Pleiades.Application.EF
+namespace Pleiades.Application.Data.EF
 {
     /// <summary>
     /// Er, what's the value of this whole thing...? 

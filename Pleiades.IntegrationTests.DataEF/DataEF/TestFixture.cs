@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using Pleiades.Application.EF;
+using Pleiades.Application.Data.EF;
 using Pleiades.Application.Utility;
 
 namespace Pleiades.IntegrationTests.DataEF
@@ -30,7 +30,7 @@ namespace Pleiades.IntegrationTests.DataEF
             // Arrange
             var context = new MyContext();
             var repository = new MyEntityRepository(context);
-            var unitOfWork = new EFUnitOfWork(context);
+            var unitOfWork = new EfUnitOfWork(context);
 
             // Act
             var entity1 = new MyEntity { Name = "George", Description = "It's like this and ah!", Amount = 900 };
@@ -60,7 +60,7 @@ namespace Pleiades.IntegrationTests.DataEF
             // First, initialize
             var context = new MyContext();
             var repository = new MyEntityRepository(context);            
-            var unitOfWork = new EFUnitOfWork(context);
+            var unitOfWork = new EfUnitOfWork(context);
 
             // Arrange
             var entity1 = new MyEntity { Name = "Aleks", Description = "Pimping awaaaay", Amount = 222 };
@@ -93,7 +93,7 @@ namespace Pleiades.IntegrationTests.DataEF
             {
                 var context1 = new MyContext();
                 var repository1 = new MyEntityRepository(context1);
-                var unitOfWork1 = new EFUnitOfWork(context1);
+                var unitOfWork1 = new EfUnitOfWork(context1);
                 repository1.Insert(entity1);
                 unitOfWork1.SaveChanges();
             }
@@ -106,7 +106,7 @@ namespace Pleiades.IntegrationTests.DataEF
             {
                 var context2 = new MyContext();
                 var repository2 = new MyEntityRepository(context2); 
-                var unitOfWork2 = new EFUnitOfWork(context2);
+                var unitOfWork2 = new EfUnitOfWork(context2);
                 // Assert
                 var entity2 = repository2.FirstOrDefault(x => x.Name == "Olga");
                 Assert.IsTrue(entity2.StrungOutCompare(entity1));
@@ -124,7 +124,7 @@ namespace Pleiades.IntegrationTests.DataEF
             {
                 var context3 = new MyContext();
                 var repository3 = new MyEntityRepository(context3);
-                var unitOfWork3 = new EFUnitOfWork(context3);
+                var unitOfWork3 = new EfUnitOfWork(context3);
                 var entity3 = repository3.FirstOrDefault(x => x.Name == "Olga");
                 Assert.AreEqual(777, entity3.Amount);
                 entity3.Amount = 800;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Pleiades.Application;
-using Pleiades.Application.EF;
+using Pleiades.Application.Data.EF;
 
 namespace Pleiades.IntegrationTests.DataEF
 {

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
-using Commerce.Application.Database;
+using System.Data.Entity;
+using System.Data.Entity;using Commerce.Application.Database;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 
@@ -14,16 +15,24 @@ namespace Commerce.Application.Concrete.Security
             _context = context;
         }
 
+
+        protected IQueryable<AggregateUser> Data()
+        {
+            return _context.AggregateUsers
+                       .Include(x => x.IdentityProfile)
+                       .Include(x => x.Membership);
+        }
+
+
         public AggregateUser RetrieveByMembershipUserName(string username)
         {
-            return _context.AggregateUsers.FirstOrDefault(x => x.Membership.UserName == username);
+            return this.Data().FirstOrDefault(x => x.Membership.UserName == username);
         }
 
         public AggregateUser RetrieveById(int aggregateUserId)
         {
-            return _context.AggregateUsers.FirstOrDefault(x => x.ID == aggregateUserId);
+            return this.Data().FirstOrDefault(x => x.ID == aggregateUserId);
         }
-
 
         public AggregateUser Add(AggregateUser aggregateUser)
         {
