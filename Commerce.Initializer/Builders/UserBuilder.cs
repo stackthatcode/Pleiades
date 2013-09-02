@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Pleiades.Application.Logging;
 using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Interface;
 
@@ -23,7 +24,7 @@ namespace Commerce.Initializer.Builders
 
         public void Run()
         {
-            Console.WriteLine("Create the default Root User");
+            LoggerSingleton.Get().Info("Create the default Root User");
             
             var users = _userRepository.Retreive(new List<UserRole>() { UserRole.Root });
 

@@ -34,6 +34,12 @@ namespace Pleiades.Application.Logging
             System.Diagnostics.Debug.WriteLine(message);
         }
 
+        public void Error(Exception exception)
+        {
+            Console.WriteLine(exception.StackTrace);
+            System.Diagnostics.Debug.WriteLine(exception.StackTrace);
+        }
+
         public void Fatal(string message)
         {
             Console.WriteLine(message);

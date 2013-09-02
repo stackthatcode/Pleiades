@@ -1,0 +1,20 @@
+2013-09-02 11:49:27.7935|Debug|041cc240-858f-4079-bd5b-b728af227058|Test Logger 
+2013-09-02 11:49:27.8405|Error|041cc240-858f-4079-bd5b-b728af227058|System.Exception:Oh noes!!!
+   at Commerce.Web.Areas.Public.Controllers.ProductsController.List() in C:\DEV\Pleiades\Commerce.Web\Areas\Public\Controllers\ProductsController.cs:line 16 
+2013-09-02 11:50:38.6055|Error|5cfdef2c-65e9-49b9-ba86-460778358bd9|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Areas.Admin.Controllers.ManagerController.Error() in C:\DEV\Pleiades\Commerce.Web\Areas\Admin\Controllers\ManagerController.cs:line 37
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 

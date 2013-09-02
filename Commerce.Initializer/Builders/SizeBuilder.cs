@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Transactions;
 using Pleiades.Application.Data;
+using Pleiades.Application.Logging;
 using Pleiades.Application.Utility;
 using Commerce.Application.Interfaces;
 using Commerce.Application.Model.Lists;
@@ -29,7 +30,7 @@ namespace Commerce.Initializer.Builders
         {
             using (var tx = new TransactionScope())
             {
-                Console.WriteLine("Create the default Size Groups and Sizes");
+                LoggerSingleton.Get().Info("Create the default Size Groups and Sizes");
 
                 // Clear everything out
                 _sizeRepository.GetAll().ForEach(x => _sizeRepository.Delete(x));

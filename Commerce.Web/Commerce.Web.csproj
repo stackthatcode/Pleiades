@@ -159,7 +159,7 @@
     <Compile Include="Helpers\ScriptTagGenerator.cs" />
     <Compile Include="Helpers\StyleTagGenerator.cs" />
     <Compile Include="Plumbing\AdminNavigation.cs" />
-    <Compile Include="Plumbing\CustomErrorAttribute.cs" />
+    <Compile Include="Plumbing\HandleErrorAttributeImpl.cs" />
     <Compile Include="Plumbing\PublicNavigation.cs" />
     <Compile Include="Plumbing\SecurityContextFactory.cs" />
     <Compile Include="Plumbing\SecurityResponder.cs" />
@@ -215,7 +215,7 @@
     <Content Include="Content\PushLibrary\glider.js" />
     <Content Include="Content\Utilities\sammy-latest.min.js" />
     <Content Include="Content\JQuery\jquery-ui-1.10.0.custom.min.css" />
-    <Content Include="Content\Commerce.Web\Style\pushmarket.css" />
+    <Content Include="Content\Commerce.Web\Style\pushmarketadmin.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Bootstrap\css\bootstrap-responsive.css" />
     <Content Include="Content\Bootstrap\css\bootstrap-responsive.min.css" />

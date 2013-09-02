@@ -6,6 +6,7 @@ using System.Transactions;
 using Pleiades.Application.Data;
 using Commerce.Application.Interfaces;
 using Commerce.Application.Model.Lists;
+using Pleiades.Application.Logging;
 using Pleiades.Application.Utility;
 
 
@@ -50,7 +51,7 @@ namespace Commerce.Initializer.Builders
         {
             using (var tx = new TransactionScope())
             {
-                Console.WriteLine("Create the default Brands");
+                LoggerSingleton.Get().Info("Create the default Brands");
 
                 _genericRepository.GetAll().ForEach(x => _genericRepository.Delete(x));
                 _unitOfWork.SaveChanges();

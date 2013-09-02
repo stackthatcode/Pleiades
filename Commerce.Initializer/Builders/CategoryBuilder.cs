@@ -4,6 +4,7 @@ using Pleiades.Application.Data;
 using Pleiades.Application.Helpers;
 using Commerce.Application.Interfaces;
 using Commerce.Application.Model.Lists;
+using Pleiades.Application.Logging;
 
 namespace Commerce.Initializer.Builders
 {
@@ -27,7 +28,7 @@ namespace Commerce.Initializer.Builders
         {
             using (var tx = new TransactionScope())
             {
-                Console.WriteLine("Create the default Categories");
+                LoggerSingleton.Get().Info("Create the default Categories");
 
                 var all = _repository.GetAll();
                 all.ForEach(x => _repository.Delete(x));

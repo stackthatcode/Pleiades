@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Transactions;
 using Pleiades.Application.Data;
+using Pleiades.Application.Logging;
 using Pleiades.Application.Utility;
 using Commerce.Application.Interfaces;
 using Commerce.Application.Model.Lists;
@@ -44,7 +45,7 @@ namespace Commerce.Initializer.Builders
                 _genericRepository.GetAll().ForEach(x => _genericRepository.Delete(x));
                 _unitOfWork.SaveChanges();
 
-                Console.WriteLine("Create the default Colors");
+                LoggerSingleton.Get().Info("Create the default Colors");
 
                 AddColor(new JsonColor() { Name = "Red", SkuCode = "RED", SEO = "red"}, 
                     System.Drawing.Color.FromArgb(255, 0, 0));

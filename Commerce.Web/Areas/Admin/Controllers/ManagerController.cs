@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Commerce.Web.Areas.Admin.Models;
@@ -28,6 +29,12 @@ namespace Commerce.Web.Areas.Admin.Controllers
             AggregateUserService = aggregateUserService;
             MembershipService = membershipService;
             UnitOfWork = unitOfWork;
+        }
+
+        [HttpGet]
+        public ActionResult Error()
+        {
+            throw new NotImplementedException("Oh noes!");
         }
 
         [HttpGet]

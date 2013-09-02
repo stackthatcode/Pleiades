@@ -21,6 +21,11 @@ namespace Commerce.Web.Plumbing
             return new RouteValueDictionary(new { area = "Admin", controller = "Auth", action = "Logout", });
         }
 
+        public static RouteValueDictionary ErrorTest()
+        {
+            return new RouteValueDictionary(new { area = "Admin", controller = "Manager", action = "Error", });
+        }
+
         public static RouteValueDictionary ManagerList()
         {
             return new RouteValueDictionary(new { area = "Admin", controller = "Manager", action = "List", });
@@ -71,7 +76,6 @@ namespace Commerce.Web.Plumbing
         {
             return new RouteValueDictionary(new { area = "Admin", controller = "Product", action = "Editor", });
         }
-
 
         public static RouteValueDictionary CreateNewOrder()
         {

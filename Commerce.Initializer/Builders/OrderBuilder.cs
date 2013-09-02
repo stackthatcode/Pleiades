@@ -2,9 +2,7 @@
 using System.Transactions;
 using Commerce.Application.Database;
 using Pleiades.Application.Injection;
-using Pleiades.Application;
-using Commerce.Application.Concrete;
-using Commerce.Application.Model.Orders;
+using Pleiades.Application.Logging;
 
 namespace Commerce.Initializer.Builders
 {
@@ -14,7 +12,7 @@ namespace Commerce.Initializer.Builders
         {
             using (var tx = new TransactionScope())
             {
-                Console.WriteLine("Create the Sample Data with Orders");
+                LoggerSingleton.Get().Info("Create the Sample Data with Orders");
                 var context = ServiceLocator.Resolve<PushMarketContext>();
 
                 // ... 

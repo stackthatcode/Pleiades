@@ -2,6 +2,9 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Commerce.Web.Plumbing;
+using Pleiades.Application.Logging;
+using Pleiades.Web.Logging;
 using Pleiades.Web.Plumbing;
 using Pleiades.Web.Security.Aspect;
 using Commerce.Application.Database;
@@ -42,6 +45,9 @@ namespace Commerce.Web
             // Bundle Optimization
             MakeBundles();
 
+            // Logger
+            LoggerSingleton.Get = NLoggerImpl.RegistrationFactory("Commerce.Web", ActivityId.MessageFormatter);
+
             // Phil Haack's Tool => ***SAVE***
             //RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
         }
@@ -54,6 +60,7 @@ namespace Commerce.Web
         public void RegisterGlobalFilters()
         {
             GlobalFilters.Filters.Add(new SecurityAttribute());
+            GlobalFilters.Filters.Add(new HandleErrorAttributeImpl());
         }
 
         public void MakeBundles()

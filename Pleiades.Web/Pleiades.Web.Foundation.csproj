@@ -73,6 +73,7 @@
     <Compile Include="FineUploader\FineUpload.cs" />
     <Compile Include="FineUploader\FineUploadResult.cs" />
     <Compile Include="Json\JsonNetResult.cs" />
+    <Compile Include="Logging\ActivityId.cs" />
     <Compile Include="Logging\NLoggerImpl.cs" />
     <Compile Include="MvcHelpers\TagIfNotEmpty.cs" />
     <Compile Include="Plumbing\DecimalModelBinder.cs" />

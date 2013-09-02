@@ -6,62 +6,63 @@ namespace Pleiades.Web.Logging
 {
     public class NLoggerImpl : ILogger
     {
-        private readonly Logger _fileLogger;
-        private readonly ConsoleAndDebugLogger _consoleAndDebugLogger;
+        private readonly string _loggerName;
 
-        public static Func<ILogger> RegistrationFactory(bool consoleEnabled)
+        public static Func<ILogger> RegistrationFactory(string loggerName, Func<string, string> formatter = null)
         {
-            var logger = new NLoggerImpl(consoleEnabled);
+            ILogger logger = new NLoggerImpl(loggerName, formatter);            
             return () => logger;
         }
 
-        public NLoggerImpl(bool consoleEnabled)
+        public Func<string, string> MessageFormatter = x => x;
+
+        public NLoggerImpl(string loggerName, Func<string, string> formatter)
         {
-            _fileLogger = LogManager.GetCurrentClassLogger();
-            if (consoleEnabled)
-                _consoleAndDebugLogger = new ConsoleAndDebugLogger();
+            _loggerName = loggerName;
+            if (formatter != null)
+            {
+                MessageFormatter = formatter;
+            }
+        }
+
+        public Logger GetLogger
+        {
+            get { return LogManager.GetLogger(_loggerName); }
         }
 
         public void Trace(string message)
         {
-            _fileLogger.Trace(message);
-            if (_consoleAndDebugLogger != null)
-                _consoleAndDebugLogger.Trace(message);
+            GetLogger.Trace(MessageFormatter(message));
         }
 
         public void Debug(string message)
         {
-            _fileLogger.Debug(message);
-            if (_consoleAndDebugLogger != null)
-                _consoleAndDebugLogger.Trace(message);
+            GetLogger.Debug(MessageFormatter(message));
         }
 
         public void Info(string message)
         {
-            _fileLogger.Info(message);
-            if (_consoleAndDebugLogger != null)
-                _consoleAndDebugLogger.Trace(message);
+            GetLogger.Info(MessageFormatter(message));
         }
 
         public void Warn(string message)
         {
-            _fileLogger.Warn(message);
-            if (_consoleAndDebugLogger != null)
-                _consoleAndDebugLogger.Trace(message);
+            GetLogger.Warn(MessageFormatter(message));
         }
 
         public void Error(string message)
         {
-            _fileLogger.Error(message);
-            if (_consoleAndDebugLogger != null)
-                _consoleAndDebugLogger.Error(message);
+            GetLogger.Error(MessageFormatter(message));
+        }
+
+        public void Error(Exception exception)
+        {
+            GetLogger.Error(MessageFormatter(exception.FullStackTraceDump()));
         }
 
         public void Fatal(string message)
         {
-            _fileLogger.Fatal(message);
-            if (_consoleAndDebugLogger != null)
-                _consoleAndDebugLogger.Fatal(message);
+            GetLogger.Fatal(MessageFormatter(message));
         }
     }
 }

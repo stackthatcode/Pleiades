@@ -6,6 +6,7 @@ using System.Linq;
 using System.Transactions;
 using Commerce.Application.Model.Resources;
 using Pleiades.Application.Data;
+using Pleiades.Application.Logging;
 using Pleiades.Application.Utility;
 using Commerce.Application.Interfaces;
 using Commerce.Application.Model.Lists;
@@ -52,7 +53,7 @@ namespace Commerce.Initializer.Builders
         {
             using (var tx = new TransactionScope())
             {
-                Console.WriteLine("Create the default Products");
+                LoggerSingleton.Get().Info("Create the default Products");
 
                 // Clear everything out
                 _genericProductRepository.GetAll().ForEach(x => _genericProductRepository.Delete(x));

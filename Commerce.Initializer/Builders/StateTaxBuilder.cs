@@ -2,6 +2,7 @@
 using System.Transactions;
 using Commerce.Application.Database;
 using Commerce.Application.Model.Billing;
+using Pleiades.Application.Logging;
 
 namespace Commerce.Initializer.Builders
 {
@@ -17,7 +18,7 @@ namespace Commerce.Initializer.Builders
         {
             using (var tx = new TransactionScope())
             {
-                Console.WriteLine("Create the default State Taxes");
+                LoggerSingleton.Get().Info("Create the default State Taxes");
 
                 _context.StateTaxes.Add(new StateTax { 
                     Name = "Alabama",

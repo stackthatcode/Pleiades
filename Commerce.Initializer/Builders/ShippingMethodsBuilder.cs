@@ -8,6 +8,7 @@ using Pleiades.Application.Injection;
 using Pleiades.Application;
 using Commerce.Application.Concrete;
 using Commerce.Application.Model.Orders;
+using Pleiades.Application.Logging;
 
 namespace Commerce.Initializer.Builders
 {
@@ -24,7 +25,7 @@ namespace Commerce.Initializer.Builders
         {
             using (var tx = new TransactionScope())
             {
-                Console.WriteLine("Create the default Shipping Methods");
+                LoggerSingleton.Get().Info("Create the default Shipping Methods");
 
                 _context.ShippingMethods.Add(new ShippingMethod { Description = "UPS Ground (7-10 days)", Cost = 7.95m });
                 _context.ShippingMethods.Add(new ShippingMethod { Description = "UPS Ground Quicker (3-5 days) ", Cost = 14.95m });
