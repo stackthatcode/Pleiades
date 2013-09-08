@@ -1,0 +1,16 @@
+﻿@using System.Configuration
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PushMarket - Site Management</title>
+        @Html.Stylesheet("~/Content/Bootstrap/css/bootstrap.min.css")     
+        @Html.Stylesheet("~/Content/Commerce.Web/Style/pushmarketadmin.css")
+    </head>
+  
+    <body>
+        @Html.Partial("_HeaderBare")
+        @RenderSection("_Body")	    
+        @Html.Partial("_Footer")
+    </body>
+</html>

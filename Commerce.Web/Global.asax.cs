@@ -1,7 +1,9 @@
 ﻿using System.Data.Entity;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Commerce.Web.Areas.Public.Controllers;
 using Commerce.Web.Plumbing;
 using Pleiades.Application.Logging;
 using Pleiades.Web.Logging;
@@ -54,6 +56,13 @@ namespace Commerce.Web
 
         public static void RegisterRoutes()
         {
+            RouteTable.Routes.MapRoute(
+                "404-PageNotFound",
+                "{*url}",
+                new {area="Public", controller = "System", action = "NotFound"},
+                new [] {"Commerce.Web.Areas.Public.Controllers"}
+                );
+
             RouteTable.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
         }
 

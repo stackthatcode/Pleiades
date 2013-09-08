@@ -1,231 +1,62 @@
 FRONTRANGE - HOTZONE
 ====================
 
-Burndown 8/6/2013 (5 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Fixed Color Screens - good to go!
-- Fixed Product Thumbnail Image for missing image on Product Search => DONE
-- Fixed major defect with Category searching => DONE
-- Fixed Delete Product defect => DONE
-- Almost finished fixing the Images => DONE
+9/3/2013 (0.25 Hours)
+~~~~~~~~~~~~~~~~~~~~~
+- Storefront tasking - started
 
-Burndown 8/7/2013 (5 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Fixed another bug in Images (???)
-- Fixed another bug in Brand (null Description)
-- Fixed bug in Color Editor - inoperable File Upload
-- Fixed File Upload to new namespace in Product Images
-- Grappled with Drag and Drop mayhem
-- Fixed Drag and Drop for Color Editor
-- Disabled premature optimization in Image drag and drop
-- Fixed "missed drop type 2" with assertion - Good!
-- Fixed Scroll Position for Images drag and drop
-- Fixed Scroll Position for Color drag and drop
-- Fixed Drag and Drop in Color on Add New Color
-- Fixed broken Add New Image flow - Scroll Tracker bad reference
-- Fixed defect with dragging images back onto self
-- Fix Product Thumbnail when there are no Images => DONE
-- Fix Delete Product Bug => DONE
+9/3/2013 (0.5 Hours)
+~~~~~~~~~~~~~~~~~~~~~
+- Storefront tasking - in progress
 
-Burndown 8/7/2013 (3 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Deathmarch to fix my lightbox!!!
-- Located lightbox alternative => DONE
+9/4/2013 (0.5 Hours)
+~~~~~~~~~~~~~~~~~~~~~
+- AngularJS study time => Started
+- Review Cart KO code for portability => IT'S KIND OF NOT - DONE
+- Storefront tasking - in progress
+- Add Data Clean-up Option to the Console App => DEAD
+- SUPER IMPORTANT - post mortem my approach to the designing the UI.  How to improve my speed? => IN PROGRESS
+- Web Optimization Toolkit / Bundle Thingy => DONE
+- Upgrade to ASP.NET MVC 4.0 (4.5?) => DONE
 
-Burndown 8/8/2013 (0.5 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Argh!  Hacking away
+9/4/2013 (0.5 Hours)
+~~~~~~~~~~~~~~~~~~~~
+- More tasking for the StoreFront stuff => IN PROGRESS
 
-Burndown 8/9/2013 (0.75 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Breakthrough!!!  Fixed Image lightbox issues
-- Fix the Lightbox stuff in Images - replace Lightbox with original Lightbox => TOP PRIORITY - DONE
+9/5/2013 (0.25 Hours)
+~~~~~~~~~~~~~~~~~~~~~
+- Error handling page
 
-Burndown 8/12/2013 (0.5 Hours)
+9/6/2013 (0.5 Hours) - Morning
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Fixed regression from Lightbox debacle => DONE
+* How to shared Partial Views across Areas? => NOPE, DON'T WANT TO
+* Standalone Error Page appropriate for both Admin and Public Controller => NOPE, ONE FOR EACH
+* Wire the Error Page into the web.config => DONE
+* How to route traffic to the shared Public Error page? => DONE
 
-Burndown 8/13/2013 (0.5 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Completed Size refactoring
-- Finished Refactoring of Inventory => GREAT!
-- Refactor the Products to use the Endless Glider, plus clean the Templates => 100% COMPLETE
-- Add Null-check to Image Bundle Repository => DONE
-* HOW TO DEBUG BUNDLES...? => DONE
-
-Burndown 8/13/2013 (0.75 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Begin process of cleaning up dependency HELL
-
-Burndown 8/14/2013 (1.0 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Finished ASP.NET MVC 4 upgrade, incl. Autofac + MVC Integration => DONE
-- Fixed Commerce.UnitTests
-
-Burndown 8/15/2013 (0.5 + 0.5 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Membership Provider revamp
-
-Burndown 8/16/2013 (0.5 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Continuation of Membership
-
-Burndown 8/17/2013 (3.5 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Continuation of Membership
-- Fixed Git error message
-
-Burndown 8/18/2013 (6.0 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Continuation of Membership revamp
-
-Burndown 8/19/2013 (0.25 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Wrote more Unit Tests for Membership
-
-Burndown 8/19/2013 Evening (0.50 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Morning Unit Test writing session - finished Change Password Tests
-
-Burndown 8/20/2013 Evening (0.50 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Morning Unit Test writing session - Change Password Answer Tests
-
-Burndown 8/20/2013 Evening (0.50 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Morning Unit Test writing session - Change Password Answer Tests
-
-Burndown 8/21/2013 Evening (0.50 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Started Readable vs. Writable Repository
-
-Burndown 8/22/2013 Morning (0.50 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Finished fixing tests after Readable vs. Writable Repository
-
-Burndown 8/22/2013 Evening (0.50 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Morning Unit Test writing session - started Change Email Address Tests
-
-Burndown 8/23/2013 Morning (0.50 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Morning Unit Test writing session - finished Change Email Address Tests
-
-Burndown 8/23/2013 Evening (0.50 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Added tests for PfPasswordService
-
-Burndown 8/26/2013 Morning (0.50 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Finished tests for PfPasswordService
-
-Burndown 8/26/2013 Evening (0.50 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Started re-organizing namespaces in Application
-
-Burndown 8/27/2013 Morning (0.50 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Started building new Membership Repositories
-
-Burndown 8/27/2013 Evening (0.75 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Finished Membership Repositories
-- Started Commerce Integration Tests
-
-Burndown 8/28/2013 Morning (0.50 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Refactored AggregateUserService to use new PfMembership
-
-Burndown 8/28/2013 Evening (0.50 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Refactored AggregateUserService to use new PfMembership - continuation
-
-Burndown 8/29/2013 Morning (0.50 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Fixed the AggregateUserService Tests
-
-Burndown 8/29/2013 Evening (0.50 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Cleaned-up FixtureBase
-
-8/30/2013 Morning (0.50 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Continuation of the Second Great Refactoring aftershock
-- Fixed the hell out of the Initializer
-
-8/30/2013 Evening (3.00 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Near completion of the Second Great Refactoring
-
-8/31/2013 (0.25 Hours)
-~~~~~~~~~~~~~~~~~~~~~~
-- Fixing some Tests
-
-8/31/2013 (4 Hours)
+9/6/2013 0.75 Hours
 ~~~~~~~~~~~~~~~~~~~
-- Configured new environment on Macbook Air w/ Windows 8
+* Error Page crafting
 
-9/1/2013 (4 Hours)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Fixed Transaction issue with Builders (!!!)
-- Fixed Membership Provider Tests and LifetimeScope issues
-- Fixed Commerce Integration Tests - DONE, DONE, DONE
-- Fixed residual Builder issues
-- Added Logout Button
-- Toyed with Popovers
-- Started building Logging and Error Handling infrastructure
+9/7/2013 0.25 Hours
+~~~~~~~~~~~~~~~~~~~
+- Centralize Push Market Name to configuration, lambda, whatevs => DONE FOR NOW - JUST IN HEADERS
 
-9/2/2013 (3.5 Hours)
-~~~~~~~~~~~~~~~~~~~~
-- Exceptional Job => built all logging infrastructure
-- Started work on Error Handling infrastructure
-
-
-
-PushMarket Front-end
-~~~~~~~~~~~~~~~~~~~~
-- Angular.js
-- JavaScript Promises / flow.js
-- JQuery
-- Less or Sass
-- CSS3...?
-- Bootstrap...?
-- .NET MVC 4
-- C# + .NET 4.5
-- Entity Framework 6
-- HTML 5
-- SQL Server 2008...?
-
-OTHER STUFF
-~~~~~~~~~~~
-* http://g-form.com/products/extreme-sleeve-for-laptops/ => NEW COMPUTER PROTECTION
-* http://mindre.net/Article/Microsoft_Web_Optimization_development
-
-
-Final Deliverable Definition
-----------------------------
-- Landing-Page + Microsite => IN PROGRESS
-- Customer Checkout => TODO
-
-- Admin Search & Manage Orders => TODO
-- Admin Sales Graph by Product => TODO
-
-Infrastructure
---------------
-- Email Sending Engine => TODO
-- Stripe Payment Integration => TODO
-- Amazon EC2 Hosting + Deployment => TODO
+9/7/2013 6.00 Hours
+~~~~~~~~~~~~~~~~~~~
+- Ironed-out details with the Error Pages
+- Fixed defect in the Logout pop-up link
+- Stubbed out Contact Us Page
+- Chasing those bloody 404 pages...
 - Error Handling => IN PROGRESS
-* How to cherry pick Actions and respond differently for each?
-* How to route traffic to the shared Public Error page?
-* How to shared Partial Views across Areas?
-* Standalone Error Page appropriate for both Admin and Public Controller
-* Wire the Error Page into the web.config
-* Handle Error Attribute for Admin Controllers
-* Handle Error Attribute for Public Controllers
+* What if the error page bombs..? => DONE
+* How to cherry pick Actions and respond differently for each? => DONE
+* Handle Error Attribute for Admin Controllers => DONE
+* Handle Error Attribute for Public Controllers => DONE
+- Centralize Company and Software Name => DONE
+- Truly Attacked and Dominated Error Handling.  Good job!!!! => DONE
+- Added Ajax Request detection in EH => DONE
 
-- http://blog.stevensanderson.com/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/
-- http://haacked.com/archive/2011/10/10/preventing-csrf-with-ajax.aspx
 
 
 Already Done
@@ -246,58 +77,117 @@ Already Done
 - Revamped Barebones Console App => DONE
 - Revamped Membership Provider => DONE
 - Server Logging => DONE
+- Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING) - DONE
+- Separated Error PAges => DONE
+
+
+Front Range
+-----------
+- Landing-Page / Microsite => IN PROGRESS
+* Page skeleton => IN PROGRESS
+
+- AngularJs library integration => IN PROGRESS
+* Do a tutorial or three - basics + Navigation Stack + Hash tag navigation => IN PROGRESS
+
+- Customer Checkout => TODO
+- Admin Search & Manage Orders => TODO
+- Admin Sales Graph by Product => TODO
+
+Infrastructure
+--------------
+- Email Sending Engine => TODO
+- Stripe Payment Integration => TODO
+- Amazon EC2 Hosting + Deployment => TODO
+
+http://blog.stevensanderson.com/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/
+http://haacked.com/archive/2011/10/10/preventing-csrf-with-ajax.aspx
+http://mindre.net/Article/Microsoft_Web_Optimization_development
+
+
+PushMarket Front-end
+~~~~~~~~~~~~~~~~~~~~
+- Angular.js
+- JavaScript Promises / flow.js
+- JQuery
+- Less or Sass
+- CSS3...?
+- Bootstrap 3
+- .NET MVC 4
+- C# + .NET 4.5
+- Entity Framework 6
+- HTML 5
+- SQL Server 2008...?
 
 
 
-### Design Options for StoreFront
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Top Black Band
-* Condensed White on Black Logo
-* Contact Us
-* View Cart 
-* Check-out
+Header Tasking
+~~~~~~~~~~~~~~
+- Logo FPO => followed with real logo
+- View Cart link, with Items summary
+- Checkout link
 
-- Logo | Cart | Checkout
-- Product Widgets
-- Browse By Brand Slideshow
-- Populate the Bottom with Content => TODO
+Bottom Tasking
+~~~~~~~~~~~~~~
+- Mark-up and graphics, etc. Tagline, Contact Us, About Us, etc.
 
+Shopping Cart Persistence
+~~~~~~~~~~~~~~~~~~~~~~~~~
+- Entities + Repository
+- WebAPI Controllers with Actions
+- Cookie Service, Flow, etc.
+- Review concurrency issues
 
+Checkout Process Tasking
+~~~~~~~~~~~~~~~~~~~~~~~~
+- Port Knockout Cart Editor to Angular JS
+- New Markup
 
-Checkout
-~~~~~~~~
-* Edit Cart
-* Shipping
-* Billing
-* Payment
-* Thanks
+Shipping Information Tasking
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Port Knockout Shipping Information to Angular JS
+
+Billing Information Entry
+~~~~~~~~~~~~~~~~~~~~~~~~~
+- Port Knockout Billings Information to Angular JS
+
+Confirmation
+~~~~~~~~~~~~
+- Port Knockout Confirmation Information to Angular JS
+- Order Submission process
+- Order Confirmation Email
+
+Thank You Page
+~~~~~~~~~~~~~~
+- Port Ko Thank You Page
 
 Landing Pages
 ~~~~~~~~~~~~~
-* Single Product => TODO
-* Browser => TODO
+* Product Title
+* Product Description
+* Brand Logo
+* Brand Description
+* Color Browser Model
+* Color to Image Selector Model
+* Color-to-Size-to-Quantity Model
+* Widget for browsing to other Products
+* Add to Cart Button
+* Splash Graphic...?
 
-Appendix Pages
-~~~~~~~~~~~~~~
-* Contact Us Page => TODO
+Contact Us Page Tasking
+~~~~~~~~~~~~~~~~~~~~~~~
 - Email Form
 - Google Map
 - Street Address
-* Shipping => TODO
-* Returns => TODO
-* About Us Page => TODO
+
+About Us Page Tasking
+~~~~~~~~~~~~~~~~~~~~~
+- Slideshow with graphics
+- Shipping Verbage
+- Returns Verbage
 
 
-
-
-- Load Test Data into Console App => TODO
-- Add Data Clean-up Option to the Console App => TODO
-
-* Host on EC2 by 6/1 => IN PROGRESS - FAIL
-- Research EC2 some more
-- Sign-up to use EC2
-
-* Manage an Order CRUD screen => IN PROGRESS
+Manage an Order CRUD screen
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Order Search Query
 	- Complete/Incomplete Orders
 	- By Date
@@ -307,69 +197,37 @@ Appendix Pages
 - Ship OrderLines => Split as needed => Update Status + History
 - Refund => Choose Order Lines => Hit the Payment Processor => Update Status on Order Lines + History
 - Fail Shipping => Choose Order Lines => Update Status + History
-- Get Refunds by Sku...?
 
-* Sidelog
-- Prevent multiple Pop-ups from appearing
-- Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING)
 
-* Product Page Inventory
-- Brand Logo
-- Image Browser w/ close-up
-- Description - add markdown?  Probably => TODO
 
-* Brand - design a brand
-* Choose Fonts
+Moar Tasks
+~~~~~~~~~~
+- Fix defect in the Edit Card Screen => TODO
+- Load Test Data into Console App => TODO
+
+* Host on EC2 by 6/1 => IN PROGRESS - FAIL
+- Research EC2 some more
+- Sign-up to use EC2
+
 * Slideshow - identify images & marketing, based on Products and marketing message => TODO
 * You might also like
-
 ~ FONTS => https://news.ycombinator.com/item?id=5407499
-
 
 
 
 Backlog
 -------
+- Prevent multiple Pop-ups from appearing
+- Description - add markdown?  Probably => TODO
 - Use Sentinel for Logging stuff?
 * http://stackoverflow.com/questions/3730777/whats-so-restful-about-asp-net-mvc => IMPORTANT
-- Add a Logout Button
-- SUPER IMPORTANT - post mortem my approach to the designing the UI.  How to improve my speed? => TODO
 * On the StoreFront "Wrong Size or Color? Click Here" - and Navigate to Product => TODO
 - Improve the quality of client-side Error Logging => TODO
 - Check Sanderson for advanced Model Binding => TODO
 - 150 Magic Number(!!!) => TODO - FIX
 - IsONline - Check How This Functions => UPDATE - NEED TO FIX TOUCH Function
 - Donate $20 to FineUploader upon successful integration => TODO
-
-PHASE 2 - Or not...?
---------------------
-- Analytics Integration - KISS, Mixpanel, whatevs
-- Automated Traffic Management
-- Email Marketing w/ User Management
-- Offer Engine
-- Shipping API's
-- Mobile Storefront + Cart
-
-
-
-ARCHITECTURAL REVIEW 1/24/2013
-------------------------------
-- Flatten the Membership Provider object graph stuff
-- Modify permissions so Admins can modify their Expiration
-- Copy from the Dot Net Framework into MembershipService
-- Create a separate Authentication Service - Aggregate User Service should deal with CRUD only
-- Owner Authorization Service overlaps with Aggregate User Services... eliminate this method Authorize(int ownerUserId)
-- Determine how to delegate User Authorization to Aggregate User Service... if at all!  Maybe that shit goes in the Controller?  Hmm....
-- Consider using OnActionExecuting instead of the Attribute... maybe.
-- Ultimately, should Pleiades be separate from Commerce...?  Nah, but move that Attribute out of Pleiades.  Fuck Security Context factory.
-- Move Owner Auth Service under Rules
-- Roll Pleiades.UnitTests and Security Tests into Pleiades.Web.UnitTests
-- Roll Pleiades Base, Data EF, and TestHelpers into Pleiades.Web.Foundation
-- Move ProductSearchRepository stuff into the Controller.  Yup!  Try it!
-- Compbine Domain and Persist assemblies.  They're not separate, dude!!!
-* NOTE: we never ever DELETE User records
-
-
+- Get Refunds by Sku...?
 
 MORE BIG FISH
 -------------
@@ -377,8 +235,6 @@ MORE BIG FISH
 => Custom Caching solution...? => IN PROGRESS
 => http://news.ycombinator.com/item?id=4669866 => IMPORTANT
 => Enable for Azure => TODO
-- Web Optimization Toolkit / Bundle Thingy => TODO
-
 
 E-Commerce API's & Payment Processors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -398,11 +254,8 @@ http://pcottle.github.com/learnGitBranching/
 SublimeText + Resharper => TODO
 - http://fortawesome.github.com/Font-Awesome/
 
-
 Development Backlog
 -------------------- 
-Upgrade to ASP.NET MVC 4.0 (4.5?) => TODO
-* Get Scott Hanselman's obj/bin cleaner utility => IN PROGRESS
 - Disable Caching for AJAX stuff with ASP.NET MVC => TODO
 
 PENDING FEATURE BACKLOG
@@ -412,6 +265,7 @@ PENDING FEATURE BACKLOG
 - Show the number of Products under Category => PENDING EVAL
 - Rendering Adjustments for long Category Names et. al. => PENDING EVAL
 - View Products => Hot Link to a RESTful URL - TODO => PENDING EVAL
+* Get Scott Hanselman's obj/bin cleaner utility => IN PROGRESS
 
 Research Backlog
 ----------------
@@ -429,3 +283,12 @@ Research Backlog
 *** TODO: what is the function of "nav-collapse collapse"?
 *** MANDATE => research HOW KnockoutJS actually works internally
 - http://code.google.com/p/autofac/wiki/MvcIntegration
+
+PHASE 2 - Or not...?
+--------------------
+- Analytics Integration - KISS, Mixpanel, whatevs
+- Automated Traffic Management
+- Email Marketing w/ User Management
+- Offer Engine
+- Shipping API's
+- Mobile Storefront + Cart

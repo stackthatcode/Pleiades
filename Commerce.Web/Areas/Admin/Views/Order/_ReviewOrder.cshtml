@@ -11,13 +11,13 @@
             self.CartItemCancel();
             $("[name='glideToSearch']").hide();
             self.GlideLeft("SelectProducts");
-        }
+        };
 
-        self.GlideToShipping = function () {
+        self.GlideToShipping = function() {
             $("[name='btn-goto-shipping']").hide();
             self.CartItemCancel();
             self.GlideRight("Shipping", self.InitializeShippingForms);
-        }
+        };
 
         self.CartItemClick = function (cartItem) {
             console.log(cartItem);

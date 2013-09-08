@@ -4,18 +4,14 @@
     ViewBag.Title = "List";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>pushmarket</title>
-    @Scripts.Render("~/Bundles/Foundation")
-    @Scripts.Render("~/Bundles/BootstrapScript")
-    @Styles.Render("~/Bundles/BootstrapStyle")
-  </head>
-  
-  <body>
-    <h1>Welcome Back to Pleiades!- Under Construction</h1>
-    @Html.RouteLink("Go To Admin Area", AdminNavigation.Home())
-    @Html.RouteLink("Go To Admin Login", AdminNavigation.Login())  
-  </body>
-</html>
+
+@section _Body {
+    
+    <div id="heading" class="container" style="margin-top:200px;">
+        <h1>Welcome to The Art of Ground Fighting.com - Under Construction</h1>
+        @Html.RouteLink("Go To Admin Area", AdminNavigation.Home())<br />
+        @Html.RouteLink("Go To Admin Login", AdminNavigation.Login())<br />  
+        <a href="@Url.Content("~/Public/System/Exception")">Let things blow up!</a><br />
+    </div>
+
+}

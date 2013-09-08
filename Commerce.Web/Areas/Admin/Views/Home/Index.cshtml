@@ -1,6 +1,9 @@
-﻿@section _Body {
+﻿@using System.Configuration
+@section _Body {
     <div id="body-container" class="container">
-        <h1>Welcome to PushMarket v1.0 (prototype)</h1>
+        <h1>Welcome to @ConfigurationManager.AppSettings["ApplicationName"]</h1>
+        <h2 style="color:#999;">@ConfigurationManager.AppSettings["CompanyName"]</h2>
+
         <div style="clear:both; height:20px;"></div>
 
         <p>This is a temporary placeholder for the Admin Splash Page.</p>

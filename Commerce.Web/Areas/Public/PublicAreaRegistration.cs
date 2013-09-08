@@ -24,7 +24,6 @@ namespace Commerce.Web.Areas.Public
                 "Public Controller + Action",
                 "Public/{controller}/{action}",
                 new { controller = "Home", action = "Index" });
-
         }
     }
 }

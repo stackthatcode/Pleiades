@@ -34,6 +34,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Error()
         {
+            // For testing purpose...!!!
             throw new NotImplementedException("Oh noes!");
         }
 

@@ -1,9 +1,12 @@
-﻿    <div class="navbar navbar-fixed-bottom">
-		<div class="bottom-navbar-style">
-			<div class="container">
-			  <footer>
-				<p>&copy; Push Global Software Solutions - LLC 2012 | <a href="#">Company</a> | <a href="#">Contact Technical Support</a></p>
-			  </footer>
-			</div>
-		</div>
-	</div>
+﻿@using System.Configuration
+    <div class="navbar navbar-fixed-bottom">
+        <div class="bottom-navbar-style" style="background-color: #333; color: #FFF;">
+            <div class="container">
+                <footer>
+                    <p>@ConfigurationManager.AppSettings["ApplicationName"] |
+                        @ConfigurationManager.AppSettings["CompanyName"] | 
+                        <a style="color:#08C;" href="http://www.pushmarket.co">http://www.pushmarket.co</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>

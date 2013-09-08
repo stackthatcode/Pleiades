@@ -35,7 +35,7 @@
       <div class="navbar-inner">
         <div class="container">
           <img src="@Url.Content("~/Content/Commerce.Web/Images/webicon-2.png")" style="float:left;" />
-		  <a class="brand" href="@Url.RouteUrl(AdminNavigation.Home())" style="color:#FFF;">pushmarket</a>
+		  <a class="brand" href="@Url.RouteUrl(AdminNavigation.Home())" style="color:#FFF;">PushMarket</a>
 
           <div class="nav-collapse">
             <ul class="nav">
@@ -69,11 +69,11 @@
 			</ul>
 
 			<p class="navbar-text pull-right">
-                Logged in as <a id="logged-in" href="#" style="color:#08C;" class="navbar-link">
+                Logged in as <a id="logged-in" style="color:#08C; cursor:pointer;" class="navbar-link">
                     @(HttpContext.Current.RetreiveAggregateUserFromContext().Membership.Email)</a>
             </p>
             
-              <div id="popover_content_wrapper" style="display:none; position: absolute; left:-200px; width:250px;">
+            <div id="popover_content_wrapper" style="display:none; position: absolute; left:-200px; width:250px;">
                 <div class="arrow"></div>
                 <div style="color:#333; line-height:24px;">
                     <table>

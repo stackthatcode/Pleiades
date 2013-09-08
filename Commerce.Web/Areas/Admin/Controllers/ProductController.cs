@@ -46,6 +46,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Categories()
         {
+            throw new Exception("Ajax Bomb!");
             var result = this.CategoryRepository.RetrieveAllSectionsWithCategories();
             return new JsonNetResult(result);
         }

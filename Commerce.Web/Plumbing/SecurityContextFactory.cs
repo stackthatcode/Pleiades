@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Rules;
@@ -12,7 +11,10 @@ namespace Commerce.Web.Plumbing
     {
         public SecurityContext Create(AuthorizationContext filterContext, AggregateUser user)
         {
-            if (filterContext.Controller is AuthController || filterContext.Controller is ProductsController)
+            if (filterContext.Controller is AuthController || 
+                filterContext.Controller is ProductsController || 
+                filterContext.Controller is Areas.Admin.Controllers.SystemController ||
+                filterContext.Controller is Areas.Public.Controllers.SystemController)
             {
                 return new SecurityContext(user)
                 {

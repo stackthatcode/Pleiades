@@ -31,5 +31,10 @@ namespace Commerce.Web.Areas.Public.Controllers
         {
             return View(model);
         }
+
+        public ActionResult SystemError()
+        {
+            throw new Exception("Oh my!!!");
+        }
     }
 }

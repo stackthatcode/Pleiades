@@ -1,0 +1,20 @@
+﻿@using System.Configuration
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title></title>
+        @Html.Stylesheet("~/Content/Bootstrap/css/bootstrap.min.css")
+        @Html.Stylesheet("~/Content/Commerce.Web/Style/pushmarketadmin.css")
+    </head>
+
+    <body>
+        @Html.Partial("_Header")
+        
+        <!-- TODO: upgrade to Bootstrap 3 -->
+        @RenderSection("_Body")	  
+    
+        @Html.Partial("_Footer") 
+    </body>
+</html>

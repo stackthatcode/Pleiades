@@ -1,5 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
 using Pleiades.Application.Logging;
+using Pleiades.Web.Logging;
 
 namespace Commerce.Web.Plumbing
 {
@@ -7,10 +9,71 @@ namespace Commerce.Web.Plumbing
     {
         public override void OnException(ExceptionContext filterContext)
         {
+            if (filterContext.ExceptionHandled || !filterContext.HttpContext.IsCustomErrorEnabled)
+            {
+                return;
+            }
+
+            if (new HttpException(null, filterContext.Exception).GetHttpCode() != 500)
+            {
+                return;
+            }
+            
+            if (!ExceptionType.IsInstanceOfType(filterContext.Exception))
+            {
+                return;
+            }
+
+            LoggerSingleton.Get().Error(
+                    "URL:" + filterContext.HttpContext.Request.Url + " - " +
+                    "IsAjaxRequest: " + filterContext.HttpContext.Request.IsAjaxRequest());
             LoggerSingleton.Get().Error(filterContext.Exception);
 
-            var controller = filterContext.Controller;
-            //var action = filterContext.
+            if (filterContext.HttpContext.Request.IsAjaxRequest())
+            {
+                filterContext.Result = new JsonResult
+                    {
+                        JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                        Data = new
+                            {
+                                activityId = ActivityId.Current,
+                                error = true,
+                                message = filterContext.Exception.Message
+                            }
+                    };
+            }
+            else
+            {
+                var model = new ErrorModel();                
+                model.AspxErrorPath = filterContext.HttpContext.Request.Path;
+
+                if (filterContext.HttpContext.Request.UrlReferrer != null &&
+                    filterContext.HttpContext.Request.UrlReferrer.ToString().Contains("/Admin"))
+                {
+                    model.NavigatedFromAdminArea = true;
+
+                    filterContext.Result = new ViewResult
+                    {
+                        ViewName = "~/Areas/Admin/Views/System/ServerError.cshtml",
+                        ViewData = new ViewDataDictionary<ErrorModel>(model),
+                    };
+                }
+                else
+                {
+                    model.NavigatedFromAdminArea = false;
+
+                    filterContext.Result = new ViewResult
+                    {
+                        ViewName = "~/Areas/Public/Views/System/ServerError.cshtml",
+                        ViewData = new ViewDataDictionary<ErrorModel>(model),
+                    };
+                }
+            }
+
+            filterContext.ExceptionHandled = true;
+            filterContext.HttpContext.Response.Clear();
+            filterContext.HttpContext.Response.StatusCode = 500;
+            filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
         }
     }
 }

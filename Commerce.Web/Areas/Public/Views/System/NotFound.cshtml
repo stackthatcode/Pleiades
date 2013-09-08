@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+@{
+    Layout = "";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    @Html.Stylesheet("~/Content/Bootstrap/css/bootstrap.min.css")
+    @Html.Stylesheet("~/Content/Commerce.Web/Style/pushmarketadmin.css")
+</head>
+
+<body>
+     <div id="top-menu-bar" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <img src="@Url.Content("~/Content/Commerce.Web/Images/webicon-2.png")" style="float: left;" />
+                <a class="brand" href="/" style="color: #FFF;">HTTP 404 - Page Not Found</a>
+                <div class="nav-collapse">           
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="heading" class="container" style="margin-top:200px;">
+        <div class="hero-unit" style="height: 300px;">
+            <h1>Page Not Found - 404</h1>
+            
+            <div style="height:20px; width:100px; clear:both;"></div>
+            
+            <div style="float:left; width:600px; height:200px;">
+                <p style="color:#666;">
+                    <strong>Are you lost?  Try entering a different URL...</strong>
+                </p>
+                <img src="@Url.Content("~/Content/Commerce.Web/Images/ohnoes.png")" style="float: left;" />
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar navbar-fixed-bottom">
+        <div class="bottom-navbar-style" style="background-color: #333; color: #FFF;">
+            <div class="container">
+                <footer>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
