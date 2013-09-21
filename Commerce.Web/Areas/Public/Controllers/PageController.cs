@@ -1,22 +1,35 @@
 ﻿using System;
 using System.Net;
 using System.Web.Mvc;
-using Commerce.Web.Areas.Public.Models;
 using Commerce.Web.Plumbing;
 
 namespace Commerce.Web.Areas.Public.Controllers
 {
-    public class SystemController : Controller
+    public class PageController : Controller
     {
-        public ActionResult Exception()
+        //
+        // TODO: devise a better page navigation schema
+        //
+        public ActionResult Index()
         {
-            throw new Exception();
+            return View();
+        }
+
+        // Actually, aren't these partial views...?  Hmmm?
+        public ActionResult Contact()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ActionResult About()
+        {
+            throw new NotImplementedException();
         }
 
         public ActionResult ServerError()
         {
             var model = new ErrorModel();
-            if (this.HttpContext.Request.UrlReferrer != null &&                     
+            if (this.HttpContext.Request.UrlReferrer != null &&
                 this.HttpContext.Request.UrlReferrer.ToString().Contains("/Admin"))
             {
                 model.NavigatedFromAdminArea = true;
@@ -35,19 +48,17 @@ namespace Commerce.Web.Areas.Public.Controllers
             return View(model);
         }
 
-
         public ActionResult NotFound()
         {
             this.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
-            return View("~/Areas/Public/Views/System/NotFound.cshtml");
-        }
-
-        public ActionResult Contact()
-        {
             return View();
         }
 
-        // TODO: add System Downtime page stuff
+        public ActionResult TestHttp500()
+        {
+            throw new Exception();
+        }
 
+        // TODO: add System Downtime page stuff
     }
 }

@@ -1,9 +1,5 @@
-﻿@model Commerce.Web.Areas.Admin.Models.LogOnViewModel
-
-@{
-    ViewBag.Title = "Login";
-}
-
+﻿@using Commerce.Web.Areas.Admin
+@using Commerce.Web.Areas.Public
 
 @section _Body {    
     <div id="body-container" class="container">        
@@ -48,6 +44,7 @@
 		    <a style="float:left; margin-right:20px; width:175px;" href="@Url.RouteUrl(PublicNavigation.Home())" class="btn btn-block">
 		        <i class="icon-arrow-left"></i> &nbsp;Back To Store Front
 		    </a>
+
             <a href="@Url.RouteUrl(AdminNavigation.Home())" class="btn btn-block" style="float:left; width:175px; margin-top: 0px;">
 		        <i class="icon-ban-circle"></i> &nbsp;Can't Login?
 		    </a> 

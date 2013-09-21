@@ -1,11 +1,11 @@
 ﻿@using System.Configuration
+@using Commerce.Web.Areas.Admin
+@using Commerce.Web.Areas.Public
 @section _Body {
     <div id="body-container" class="container">
         <h1>Welcome to @ConfigurationManager.AppSettings["ApplicationName"]</h1>
         <h2 style="color:#999;">@ConfigurationManager.AppSettings["CompanyName"]</h2>
-
         <div style="clear:both; height:20px;"></div>
-
         <p>This is a temporary placeholder for the Admin Splash Page.</p>
 
         <table>
@@ -17,13 +17,19 @@
                 @Html.RouteLink("Manage Brands", AdminNavigation.BrandEditor())<br />
                 @Html.RouteLink("Manage Colors", AdminNavigation.ColorEditor())<br />
             </td>
+            
             <td style="width:200px; vertical-align:top;">
                 @Html.RouteLink("Manage Products", AdminNavigation.ProductEditor())<br />
                 @Html.RouteLink("Manage Orders", AdminNavigation.ManageOrders())<br />
                 @Html.RouteLink("Create New Order", AdminNavigation.CreateNewOrder())<br />
             </td>
+
             <td style="width:200px; vertical-align:top;">
                 @Html.RouteLink("Manage Admin Users", AdminNavigation.ManagerList())<br />
+            </td>
+
+            <td style="width:200px; vertical-align:top;">
+                @Html.RouteLink("Public Home", PublicNavigation.Home())<br />
                 @Html.RouteLink("Test Error Redirect", AdminNavigation.ErrorTest())<br />
             </td>
         </tr>

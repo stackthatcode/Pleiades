@@ -1,4 +1,5 @@
-﻿<!-- TODO: fix this bundle ordering issue -->
+﻿@using Pleiades.Web.MvcHelpers
+<!-- TODO: fix this bundle ordering issue -->
 @Html.Javascript("~/Content/fineuploader/js/util.js")
 @Scripts.Render("~/Bundles/FineUploaderJs")
 @Html.Stylesheet("~/Bundles/FineUploaderCss")
@@ -7,8 +8,8 @@
     var fineUploader = namespace("Commerce.FineUploader");
     
     fineUploader.Settings = {
-        LoadingImage: '/Commerce.Web/Content/FineUploader/loading.gif',
-        UploadEndpoint: '/Commerce.Web/Admin/Image/UploadFile'
+        LoadingImage: '@Url.BaseUrl()/Content/FineUploader/loading.gif',
+        UploadEndpoint: '@Url.BaseUrl()/Commerce.Web/Admin/Image/UploadFile'
     };
 
     fineUploader.Uploader = function(successCallback) {        

@@ -1,8 +1,11 @@
-﻿    <script type="text/javascript">
+﻿@using Pleiades.Web.MvcHelpers
+
+    <script type="text/javascript">
         var ajaxSettings = namespace("PushLibrary.AjaxSettings");
 
         // Override these settings in the PushLibrary Shim
-        ajaxSettings.BaseUrl = "/Commerce.Web";
+        // TODO: override this with Application Root
+        ajaxSettings.BaseUrl = "@Url.BaseUrl()";
         ajaxSettings.Timeout = 60000;
         ajaxSettings.ModalErrorTagSelector = "#modal-error";
         ajaxSettings.SpinnerLayerTagSelector = "#spinner-layer";

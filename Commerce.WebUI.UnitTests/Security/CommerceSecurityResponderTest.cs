@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Commerce.Web.Areas.Admin;
 using NUnit.Framework;
 using Pleiades.TestHelpers.Web;
 using Rhino.Mocks;

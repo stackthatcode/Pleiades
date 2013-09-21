@@ -1,0 +1,45 @@
+﻿@using Commerce.Web.Areas.Admin
+@using Pleiades.Web.MvcHelpers
+
+<script type="text/javascript">
+    var urlLocator = namespace("CommerceWeb.UrlLocator");
+    urlLocator.admin_home = '@Url.RouteUrl(AdminNavigation.Home())';
+    urlLocator.BaseUrl = '@Url.BaseUrl()';
+
+    var ngAjax = namespace("PushLibrary.NgAjax");
+    ngAjax.BaseUrl = "@Url.BaseUrl()";
+    ngAjax.Timeout = 60000;
+    ngAjax.ModalErrorTagSelector = "#modal-error";
+    ngAjax.SpinnerLayerTagSelector = "#spinner-layer";
+
+    //
+    // TODO: write some Promises hooks that show my spinner/error stuff
+    //
+    ngAjax.Get = function ($http, url, successClosure) {
+        $http.get(ngAjax.BaseUrl + url).success(successClosure);
+    };
+</script>
+
+<div id="push-library-shim">
+    <div id="spinner-layer" class="spinner-layer" style="display:none;">
+        <div id="spinner" class="spinner">
+            <img id="img-spinner" src="@Url.Content("~/Content/Commerce.Web/Images/ajax_loader.gif")" alt="Loading"/>
+        </div>
+    </div>
+	    
+    <!-- Dedciated Error Dialog Box -->
+    <div id="modal-error" class="modal hide fade">
+        <div class="modal-header">
+            <h3>Oh Noes!</h3>
+        </div>
+        <div class="modal-body">
+            <p><strong>Something went wrong with the system.</strong></p>			
+            <p>Note: if this keeps happening, please contact Customer Support.</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#" id="modal-action" class="btn btn-primary" data-bind="click: function() { location.reload(true); }">
+                <i class="icon-ok icon-white"></i> Ok, Reload Page
+            </a>
+        </div>
+    </div>
+</div>

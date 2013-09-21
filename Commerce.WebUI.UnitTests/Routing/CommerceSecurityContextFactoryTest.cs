@@ -6,6 +6,7 @@ using Pleiades.Web.Security.Model;
 using Commerce.Web.Areas.Admin.Controllers;
 using Commerce.Web.Areas.Public.Controllers;
 using Commerce.Web.Plumbing;
+using PageController = Commerce.Web.Areas.Admin.Controllers.HomeController;
 
 namespace Commerce.Web.UnitTests.Security
 {
@@ -17,7 +18,7 @@ namespace Commerce.Web.UnitTests.Security
         {
             // Arrange
             var context = MockRepository.GenerateStub<AuthorizationContext>();
-            context.Controller = new AuthController(null, null);
+            context.Controller = new UnsecuredController(null, null);
             var factory = new SecurityContextFactory();
             var user = new AggregateUser();
              
@@ -36,7 +37,7 @@ namespace Commerce.Web.UnitTests.Security
         {
             // Arrange
             var context = MockRepository.GenerateStub<AuthorizationContext>();
-            context.Controller = new ProductsController();
+            context.Controller = new Areas.Public.Controllers.PageController();
             var factory = new SecurityContextFactory();
             var user = new AggregateUser();
 
@@ -55,7 +56,7 @@ namespace Commerce.Web.UnitTests.Security
         {
             //// Arrange
             var context = MockRepository.GenerateStub<AuthorizationContext>();
-            context.Controller = new HomeController();
+            context.Controller = new PageController();
             var factory = new SecurityContextFactory();
             var user = new AggregateUser();
 

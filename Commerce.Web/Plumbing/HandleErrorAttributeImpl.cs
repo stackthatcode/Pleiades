@@ -1,5 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using Commerce.Web.Areas.Admin;
+using Commerce.Web.Areas.Public;
 using Pleiades.Application.Logging;
 using Pleiades.Web.Logging;
 
@@ -38,7 +40,7 @@ namespace Commerce.Web.Plumbing
                             {
                                 activityId = ActivityId.Current,
                                 error = true,
-                                message = filterContext.Exception.Message
+                                message = "System Fault - check Logs for Activity Id"
                             }
                     };
             }
@@ -54,7 +56,7 @@ namespace Commerce.Web.Plumbing
 
                     filterContext.Result = new ViewResult
                     {
-                        ViewName = "~/Areas/Admin/Views/System/ServerError.cshtml",
+                        ViewName = AdminNavigation.ServerErrorView(),
                         ViewData = new ViewDataDictionary<ErrorModel>(model),
                     };
                 }
@@ -64,7 +66,7 @@ namespace Commerce.Web.Plumbing
 
                     filterContext.Result = new ViewResult
                     {
-                        ViewName = "~/Areas/Public/Views/System/ServerError.cshtml",
+                        ViewName = PublicNavigation.ServerErrorView(),
                         ViewData = new ViewDataDictionary<ErrorModel>(model),
                     };
                 }

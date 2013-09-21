@@ -1,6 +1,8 @@
-﻿@model ErrorModel
+﻿@using Commerce.Web.Areas.Public
+@model ErrorModel
+
 @{
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutBare.cshtml";
+    Layout = "~/Areas/Public/Views/Shared/_Layout.cshtml";
 }
 
 @section _Body {   
@@ -17,20 +19,19 @@
             
                 @if (Model.AspxErrorPath != null)
                 {
-                    <a style="float: left; margin-right: 20px; width: 250px;" href="@Url.Content(Model.AspxErrorPath)" class="btn btn-success btn-large btn-block">
-                        <i class="icon-white icon-arrow-left"></i> &nbsp;Go Back And Try Again
-                    </a>
+                    <a style="float:left; margin-right:20px; width:250px;" href="@Url.Content(Model.AspxErrorPath)" class="btn btn-success btn-large btn-block">
+		                <i class="icon-white icon-arrow-left"></i> &nbsp;Go Back And Try Again
+		            </a>
                 }
                 
-                <a href="@Url.RouteUrl(AdminNavigation.Home())" class="btn btn-primary btn-large btn-block" style="float: left; width: 250px; margin-top: 0px;">
+                <a href="@Url.RouteUrl(PublicNavigation.Home())" class="btn btn-primary btn-large btn-block" style="float: left; width: 250px; margin-top: 0px;">
                     <i class="icon-white icon-home"></i> &nbsp;Navigate Home  
                 </a>
-                
             </div>
             
             <div style="float:left; width:210px; text-align:right;"></div>
 
             <img src="@Url.Content("~/Content/Commerce.Web/Images/ohnoes.png")" />
         </div>
-    </div>
+    </div> 
 }

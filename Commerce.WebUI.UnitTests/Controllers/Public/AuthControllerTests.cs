@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using Commerce.Web.Areas.Admin;
+using Commerce.Web.Areas.Public;
 using NUnit.Framework;
 using Pleiades.TestHelpers.Web;
 using Pleiades.Web.Security.Model;
@@ -17,7 +19,7 @@ namespace Commerce.UnitTests.Controllers.Public
         [Test]
         public void Logon_Get_Returns_Default_View()
         {
-            var controller = new AuthController(null, null);
+            var controller = new UnsecuredController(null, null);
             var result = controller.Login();
             result.ShouldBeDefaultView();
         }
@@ -29,11 +31,11 @@ namespace Commerce.UnitTests.Controllers.Public
             var model = new LogOnViewModel { UserName = "admin", Password = "123" };
             var service = MockRepository.GenerateMock<IAggregateUserService>();
             service
-                .Expect(x => x.Authenticate("admin", "123", AuthController.PersistentCookie, null))
+                .Expect(x => x.Authenticate("admin", "123", UnsecuredController.PersistentCookie, null))
                 .Return(null)
                 .IgnoreArguments();
 
-            var controller = new AuthController(service, null);
+            var controller = new UnsecuredController(service, null);
 
             // Act
             var result = controller.Login(model, null);
@@ -51,11 +53,11 @@ namespace Commerce.UnitTests.Controllers.Public
             var user = new AggregateUser {};
             var service = MockRepository.GenerateMock<IAggregateUserService>();
             service
-                .Expect(x => x.Authenticate("admin", "123", AuthController.PersistentCookie, null))
+                .Expect(x => x.Authenticate("admin", "123", UnsecuredController.PersistentCookie, null))
                 .IgnoreArguments()
                 .Return(user);
 
-            var controller = new AuthController(service, null);
+            var controller = new UnsecuredController(service, null);
 
             // Act
             var result = controller.Login(model, null);
@@ -73,11 +75,11 @@ namespace Commerce.UnitTests.Controllers.Public
             var user = new AggregateUser();
             var service = MockRepository.GenerateMock<IAggregateUserService>();
             service
-                .Expect(x => x.Authenticate("admin", "123", AuthController.PersistentCookie, null))
+                .Expect(x => x.Authenticate("admin", "123", UnsecuredController.PersistentCookie, null))
                 .Return(user)
                 .IgnoreArguments();
 
-            var controller = new AuthController(service, null);
+            var controller = new UnsecuredController(service, null);
             var context = HttpContextStubFactory.Create();
             context.Server.Expect(x => x.UrlDecode("http://google.com")).Return("MyUrl.aspx").IgnoreArguments();
 
@@ -99,7 +101,7 @@ namespace Commerce.UnitTests.Controllers.Public
             var service = MockRepository.GenerateMock<IFormsAuthenticationService>();
             service.Expect(x => x.ClearAuthenticationCookie());
 
-            var controller = new AuthController(null, service);
+            var controller = new UnsecuredController(null, service);
 
             // Act
             var result = controller.Logout();

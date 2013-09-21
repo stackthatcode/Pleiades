@@ -1,36 +1,33 @@
-﻿using System.Data.Entity;
-using System.Web;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data.Entity;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Commerce.Web.Areas.Public.Controllers;
-using Commerce.Web.Plumbing;
+using Commerce.Web.Areas.Admin;
+using Commerce.Web.Areas.Public;
 using Pleiades.Application.Logging;
+using Pleiades.Application.Utility;
 using Pleiades.Web.Logging;
 using Pleiades.Web.Plumbing;
 using Pleiades.Web.Security.Aspect;
 using Commerce.Application.Database;
+using Commerce.Web.Plumbing;
 
 namespace Commerce.Web
 {
     public class CommerceWebApplication : System.Web.HttpApplication
     {
-        //protected void Application_Start()
-        //{
-        //    AreaRegistration.RegisterAllAreas();
-        //    WebApiConfig.Register(GlobalConfiguration.Configuration);
-        //    FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-        //    RouteConfig.RegisterRoutes(RouteTable.Routes);
-        //}
-
         protected void Application_Start()
         {
             // Prevent Entity Framework foolishness
             Database.SetInitializer<PushMarketContext>(null);
 
             // Routes
-            AreaRegistration.RegisterAllAreas();
-            RegisterRoutes();
+            RegisterAllRoutes();
+            RegisterSystemRoutes();
 
             // Components
             AutofacBootstrap.RegisterAndWireIocContainer();
@@ -50,11 +47,30 @@ namespace Commerce.Web
             // Logger
             LoggerSingleton.Get = NLoggerImpl.RegistrationFactory("Commerce.Web", ActivityId.MessageFormatter);
 
-            // Phil Haack's Tool => ***SAVE***
-            //RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
+            // Phil Haack's Tool
+            if (ConfigurationManager.AppSettings["EnableRouteDebug"].ToBoolTryParse())
+            {
+                RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
+            }
         }
 
-        public static void RegisterRoutes()
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            LoggerSingleton.Get().Error(Server.GetLastError());
+        }
+
+        public static void RegisterAllRoutes()
+        {
+            var adminArea = new AdminAreaRegistration();
+            var adminAreaContext = new AreaRegistrationContext(adminArea.AreaName, RouteTable.Routes);
+            adminArea.RegisterArea(adminAreaContext);
+
+            var publicArea = new PublicAreaRegistration();
+            var publicAreaContext = new AreaRegistrationContext(publicArea.AreaName, RouteTable.Routes);
+            publicArea.RegisterArea(publicAreaContext);
+        }
+
+        public static void RegisterSystemRoutes()
         {
             RouteTable.Routes.MapRoute(
                 "404-PageNotFound",
@@ -68,6 +84,7 @@ namespace Commerce.Web
 
         public void RegisterGlobalFilters()
         {
+            // MVC "classic" filters
             GlobalFilters.Filters.Add(new SecurityAttribute());
             GlobalFilters.Filters.Add(new HandleErrorAttributeImpl());
         }
@@ -103,8 +120,8 @@ namespace Commerce.Web
                     .Include("~/Content/Knockout/*.js"));
 
             BundleTable.Bundles.Add(
-                new ScriptBundle("~/Bundles/PushLibrary")
-                    .Include("~/Content/PushLibrary/*.js"));
+                new ScriptBundle("~/Bundles/PushLibraryKo")
+                    .Include("~/Content/PushLibraryKo/*.js"));
 
             BundleTable.Bundles.Add(
                 new ScriptBundle("~/Bundles/FineUploaderJs")

@@ -1,11 +1,17 @@
 ﻿using System.Web.Routing;
 
-namespace Commerce.Web.Plumbing
+namespace Commerce.Web.Areas.Admin
 {
     // TODO: add ControllerObject.ToRoute() extension method
+    // TODO: add a bit of glue which uses Controller Type with Actions verified by Expression Tree.  Voila!
 
     public class AdminNavigation
     {
+        public static string ServerErrorView()
+        {
+            return "~/Areas/Admin/Views/Unsecured/ServerError.cshtml";
+        }
+
         public static RouteValueDictionary Home()
         {
             return new RouteValueDictionary( new { area = "Admin", controller = "Home", action = "Index", });
@@ -35,7 +41,6 @@ namespace Commerce.Web.Plumbing
         {
             return new RouteValueDictionary(new { area = "Admin", controller = "Manager", action = "DeleteConfirm", id = id });
         }
-
 
         public static RouteValueDictionary ManagerDetails(object id)
         {

@@ -22,7 +22,7 @@ namespace Commerce.Web.UnitTests.Routing
                     new PublicAreaRegistration(),
                 });
 
-            CommerceWebApplication.RegisterRoutes();
+            CommerceWebApplication.RegisterSystemRoutes();
         }
     }
 }

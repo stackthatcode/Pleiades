@@ -1,18 +1,20 @@
 ﻿@using System.Configuration
 
 <!DOCTYPE html>
-<html>
+<html ng-app>
     <head>
         <meta name="viewport" content="width=device-width" />
         <title></title>
+
+        <!-- TODO: upgrade Bootstrap to 3.0 -->
         @Html.Stylesheet("~/Content/Bootstrap/css/bootstrap.min.css")
+        @Scripts.Render("~/Bundles/BootstrapBaseScript")
         @Html.Stylesheet("~/Content/Commerce.Web/Style/pushmarketadmin.css")
     </head>
 
     <body>
         @Html.Partial("_Header")
         
-        <!-- TODO: upgrade to Bootstrap 3 -->
         @RenderSection("_Body")	  
     
         @Html.Partial("_Footer") 

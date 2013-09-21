@@ -133,7 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\AuthController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UnsecuredController.cs" />
     <Compile Include="Areas\Admin\Controllers\BrandController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ColorController.cs" />
@@ -144,8 +144,8 @@
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\SectionController.cs" />
     <Compile Include="Areas\Admin\Controllers\SizeController.cs" />
-    <Compile Include="Areas\Admin\Controllers\SystemController.cs" />
-    <Compile Include="Areas\Public\Controllers\SystemController.cs" />
+    <Compile Include="Areas\Public\Controllers\SectionController.cs" />
+    <Compile Include="Areas\Public\Controllers\ProductsController.cs" />
     <Compile Include="Plumbing\ErrorModel.cs" />
     <Compile Include="Areas\Public\PublicAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Models\Auth\LogOnViewModel.cs" />
@@ -155,7 +155,7 @@
     <Compile Include="Areas\Admin\Models\Manager\EditUserModel.cs" />
     <Compile Include="Areas\Admin\Models\Manager\ResetPasswordModel.cs" />
     <Compile Include="Areas\Admin\Models\Manager\ViewUserModel.cs" />
-    <Compile Include="Areas\Public\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\Public\Controllers\PageController.cs" />
     <Compile Include="Areas\Public\Models\ProductListModel.cs" />
     <Compile Include="AutofacBootstrap.cs" />
     <Compile Include="Content\CommerceWebUIModule.cs" />
@@ -164,9 +164,9 @@
     </Compile>
     <Compile Include="Helpers\ScriptTagGenerator.cs" />
     <Compile Include="Helpers\StyleTagGenerator.cs" />
-    <Compile Include="Plumbing\AdminNavigation.cs" />
+    <Compile Include="Areas\Admin\AdminNavigation.cs" />
     <Compile Include="Plumbing\HandleErrorAttributeImpl.cs" />
-    <Compile Include="Plumbing\PublicNavigation.cs" />
+    <Compile Include="Areas\Public\PublicNavigation.cs" />
     <Compile Include="Plumbing\SecurityContextFactory.cs" />
     <Compile Include="Plumbing\SecurityResponder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -175,6 +175,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\Angular\angular-cookies.js" />
+    <Content Include="Content\Angular\angular-cookies.min.js" />
+    <Content Include="Content\Angular\angular-loader.js" />
+    <Content Include="Content\Angular\angular-loader.min.js" />
+    <Content Include="Content\Angular\angular-resource.js" />
+    <Content Include="Content\Angular\angular-resource.min.js" />
+    <Content Include="Content\Angular\angular-sanitize.js" />
+    <Content Include="Content\Angular\angular-sanitize.min.js" />
+    <Content Include="Content\Angular\angular.js" />
+    <Content Include="Content\Angular\angular.min.js" />
+    <Content Include="Content\Angular\version.txt" />
     <Content Include="Content\Bootstrap\css\bootstrap-lightbox.min.css" />
     <Content Include="Content\Bootstrap\js\bootstrap-lightbox.js" />
     <Content Include="Content\Bootstrap\js\bootstrap-lightbox.min.js" />
@@ -183,12 +194,17 @@
     <Content Include="Content\Bootstrap\js\bootstrap-modal.js" />
     <Content Include="Content\Bootstrap\js\bootstrap-popover.js" />
     <Content Include="Content\Bootstrap\js\bootstrap-tooltip.js" />
+    <Content Include="Content\Commerce.Web\ng-templates\ProductDetail.html" />
+    <Content Include="Content\Commerce.Web\ng-templates\ProductList.html" />
+    <Content Include="Content\Commerce.Web\Scripts\angular-app.js" />
+    <Content Include="Content\Commerce.Web\Scripts\angular-controller.js" />
     <Content Include="Content\Commerce.Web\Images\ohnoes.png" />
     <Content Include="Content\JQuery\jquery-2.0.3.min.js" />
     <Content Include="Content\Knockout\knockout-2.3.0rc.js" />
-    <Content Include="Content\PushLibrary\scroll-tracker.js" />
+    <Content Include="Content\PushLibraryKo\scroll-tracker.js" />
+    <Content Include="Content\PushLibraryNg\endless-ng-glider.js" />
     <Content Include="Content\Utilities\generalFunctions.js" />
-    <Content Include="Content\PushLibrary\endless-ko-glider.js" />
+    <Content Include="Content\PushLibraryKo\endless-ko-glider.js" />
     <Content Include="Content\Farbtastic\farbtasticSecure.css" />
     <Content Include="Content\Farbtastic\farbtasticSecure.js" />
     <Content Include="Content\Farbtastic\marker.png" />
@@ -218,9 +234,8 @@
     <Content Include="Content\JQuery\jquery.animate-colors-min.js" />
     <Content Include="Content\JQuery\jquery.validate.min.js" />
     <Content Include="Content\Knockout\ko.observableDictionary.js" />
-    <Content Include="Content\PushLibrary\ajax.js" />
-    <Content Include="Content\PushLibrary\glider.js" />
-    <Content Include="Content\Utilities\sammy-latest.min.js" />
+    <Content Include="Content\PushLibraryKo\ajax.js" />
+    <Content Include="Content\PushLibraryKo\knockout-glider.js" />
     <Content Include="Content\JQuery\jquery-ui-1.10.0.custom.min.css" />
     <Content Include="Content\Commerce.Web\Style\pushmarketadmin.css" />
     <Content Include="Global.asax" />
@@ -243,7 +258,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
-    <Folder Include="Content\Commerce.Web\Scripts\" />
     <Folder Include="Content\Meltdown\" />
   </ItemGroup>
   <ItemGroup>
@@ -278,7 +292,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Auth\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Unsecured\Login.cshtml" />
     <Content Include="Areas\Admin\Views\Brand\Editor.cshtml" />
     <Content Include="Areas\Admin\Views\Category\Editor.cshtml" />
     <Content Include="Areas\Admin\Views\Color\Editor.cshtml" />
@@ -318,7 +332,7 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Size\Editor.cshtml" />
     <Content Include="Areas\Admin\Views\_viewstart.cshtml" />
-    <Content Include="Areas\Public\Views\Products\List.cshtml" />
+    <Content Include="Areas\Public\Views\Page\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Web.config" />
@@ -336,13 +350,13 @@
     <Content Include="Areas\Admin\Views\Order\_TestingFunctions.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Public\Views\System\ServerError.cshtml" />
+    <Content Include="Areas\Public\Views\Page\ServerError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Public\Views\Shared\_Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Public\Views\System\Contact.cshtml" />
+    <Content Include="Areas\Public\Views\Page\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Public\Views\Shared\_Header.cshtml" />
@@ -351,10 +365,10 @@
     <Content Include="Areas\Admin\Views\Shared\_HeaderBare.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Public\Views\System\NotFound.cshtml" />
+    <Content Include="Areas\Public\Views\Page\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Public\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Public\Views\Shared\_NgLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Public\Views\_viewstart.cshtml" />
@@ -363,7 +377,13 @@
     <Content Include="Areas\Admin\Views\Shared\_LayoutBare.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\System\ServerError.cshtml" />
+    <Content Include="Areas\Admin\Views\Unsecured\ServerError.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Public\Views\Shared\_MvcShim.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Public\Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

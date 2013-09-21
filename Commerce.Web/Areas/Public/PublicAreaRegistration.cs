@@ -12,18 +12,34 @@ namespace Commerce.Web.Areas.Public
             }
         }
 
+        // ** Note to Self: the usage of defaults to dictate route matches strikes a bit weird... no?
         public override void RegisterArea(AreaRegistrationContext context)
         {
-            // Default Route - *KEEP*
-            context.MapRoute(
-                "Public Home Route",
-                "",
-                new { controller = "Products", action = "List" });
+            var namespaces = new[] { "Commerce.Web.Areas.Public.Controllers" };
 
             context.MapRoute(
-                "Public Controller + Action",
-                "Public/{controller}/{action}",
-                new { controller = "Home", action = "Index" });
+                "Public Home",
+                "page/{action}",
+                new { controller = "Page", action = "Index" },
+                namespaces);
+
+            context.MapRoute(
+                "Page Navigation",
+                "",
+                new { controller = "Page", action = "Index" },
+                namespaces);
+
+            context.MapRoute(
+                "REST Routes with Id",
+                "{controller}/{id}",
+                new { action = "action-with-id"},
+                namespaces);
+
+            context.MapRoute(
+                "REST Routes with no Id",
+                "{controller}",
+                new { action = "action" },
+                namespaces);
         }
     }
 }

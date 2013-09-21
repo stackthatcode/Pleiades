@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net;
 using System.Web.Mvc;
+using Commerce.Web.Areas.Public;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 using Commerce.Web.Areas.Admin.Models;
@@ -8,13 +10,13 @@ using Commerce.Web.Plumbing;
 
 namespace Commerce.Web.Areas.Admin.Controllers
 {
-    public class AuthController : Controller
+    public class UnsecuredController : Controller
     {
         public const bool PersistentCookie = true;
         public IAggregateUserService AggregateUserService { get; set; }
         public IFormsAuthenticationService FormsAuthenticationService { get; set; }
 
-        public AuthController(
+        public UnsecuredController(
                 IAggregateUserService aggregateUserService, IFormsAuthenticationService formsAuthenticationService)
         {
             this.AggregateUserService = aggregateUserService;
@@ -64,5 +66,12 @@ namespace Commerce.Web.Areas.Admin.Controllers
             this.FormsAuthenticationService.ClearAuthenticationCookie();
             return new RedirectToRouteResult(PublicNavigation.Home());
         }
+
+        public ActionResult ServerError()
+        {
+            this.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            return View();
+        }
+
     }
 }

@@ -42,7 +42,7 @@ FRONTRANGE - HOTZONE
 ~~~~~~~~~~~~~~~~~~~
 - Centralize Push Market Name to configuration, lambda, whatevs => DONE FOR NOW - JUST IN HEADERS
 
-9/7/2013 6.00 Hours
+9/7/2013 6.50 Hours
 ~~~~~~~~~~~~~~~~~~~
 - Ironed-out details with the Error Pages
 - Fixed defect in the Logout pop-up link
@@ -56,6 +56,69 @@ FRONTRANGE - HOTZONE
 - Centralize Company and Software Name => DONE
 - Truly Attacked and Dominated Error Handling.  Good job!!!! => DONE
 - Added Ajax Request detection in EH => DONE
+
+9/8/2013 1.0 Hour
+~~~~~~~~~~~~~~~~~
+- Began designing the store front => IN PROGRESS
+
+9/9/2013 1.0 Hour (Morning and Evening)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Designing the store front => IN PROGRESS
+
+9/10/2013 1.0 Hour (Morning and Evening)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Finished designing the store front - will create a Sales Letter, and an About Us page => DONE
+
+9/11/2013 Morning 0.5 
+~~~~~~~~~~~~~~~~~~~~~
+- Began building Angular-centric framework
+
+9/11/2013 Evening 0.5 
+~~~~~~~~~~~~~~~~~~~~~
+- Continuation of Angular PushMarket
+
+9/12/2013 thru 9/13/2013 1.5
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- More Angular experimentation
+
+9/16/2013 thru 9/20/2013 8 to 10 Hours
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- PushMarket AnuglarJs framework
+- WebAPI error handling shit
+- Rollback of WebAPI bullshit - replaced with MVC controller and re-engineered routes
+- Successful connection to AngularJS stuff
+- Fixed Route Registration ordering
+- Enabled Configurable Route Debugging
+* Do the tutorials - basics + Navigation Stack + Hash tag navigation => DONE 
+
+9/21/2013 3 Hours
+~~~~~~~~~~~~~~~~~
+- Fixed Routing, Navigation and all that good stuff
+
+
+Front Range
+-----------
+- Landing-Page / Microsite => IN PROGRESS
+* Load Test Data into Console App => TODO
+
+* Page skeleton => IN PROGRESS
+* Google Web Fonts => TODO
+* Bootstrap 3 - Make it Responsive(!!!) => TODO
+* AngularJs library integration => IN PROGRESS
+
+- Customer Checkout => TODO
+- Admin Search & Manage Orders => TODO
+- Admin Sales Graph by Product => TODO
+
+
+
+The Plan Apparent...
+====================
+1.) Parent Controller which swaps between separate views
+2.) A bit of glue that tells the Glider which property of the Controller (or method) to use setting the current view
+3.) Two dynamically selected Views which are wired to Parent Controller...
+4.) How do we handle back button...?  Intercept and continue...?
+
 
 
 
@@ -80,18 +143,10 @@ Already Done
 - Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING) - DONE
 - Separated Error PAges => DONE
 
+- NEED TO LEARN THE "ANGULAR WAY" => http://www.youtube.com/watch?v=qK-Z0oEdE4Y&feature=player_embedded
 
-Front Range
------------
-- Landing-Page / Microsite => IN PROGRESS
-* Page skeleton => IN PROGRESS
 
-- AngularJs library integration => IN PROGRESS
-* Do a tutorial or three - basics + Navigation Stack + Hash tag navigation => IN PROGRESS
 
-- Customer Checkout => TODO
-- Admin Search & Manage Orders => TODO
-- Admin Sales Graph by Product => TODO
 
 Infrastructure
 --------------
@@ -185,7 +240,6 @@ About Us Page Tasking
 - Shipping Verbage
 - Returns Verbage
 
-
 Manage an Order CRUD screen
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Order Search Query
@@ -200,10 +254,10 @@ Manage an Order CRUD screen
 
 
 
+
 Moar Tasks
 ~~~~~~~~~~
 - Fix defect in the Edit Card Screen => TODO
-- Load Test Data into Console App => TODO
 
 * Host on EC2 by 6/1 => IN PROGRESS - FAIL
 - Research EC2 some more
