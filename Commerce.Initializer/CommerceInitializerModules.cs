@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Commerce.Initializer.Builders;
+using Commerce.Initializer.Builders.Products;
 using Pleiades.Application.Injection;
 using Pleiades.Web.Autofac;
 using Pleiades.Web.Security;
@@ -23,6 +24,9 @@ namespace Commerce.Initializer
             builder.RegisterType<ColorBuilder>();
             builder.RegisterType<OrderBuilder>();
             builder.RegisterType<ProductBuilder>();
+            builder.RegisterType<TatamiEstiloBuilder>();
+            builder.RegisterType<BullTerrierMushinBuilder>();       
+            builder.RegisterType<BullTerrierSuperStarBuilder>();       
             builder.RegisterType<ShippingMethodsBuilder>();
             builder.RegisterType<SizeBuilder>();
             builder.RegisterType<StateTaxBuilder>();

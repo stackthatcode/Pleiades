@@ -75,6 +75,8 @@
     <Compile Include="Json\JsonNetResult.cs" />
     <Compile Include="Logging\ActivityId.cs" />
     <Compile Include="Logging\NLoggerImpl.cs" />
+    <Compile Include="MvcHelpers\MvcReflection.cs" />
+    <Compile Include="MvcHelpers\RouteValueDictionaryBuilder.cs" />
     <Compile Include="MvcHelpers\TagIfNotEmpty.cs" />
     <Compile Include="MvcHelpers\UrlExtensions.cs" />
     <Compile Include="Plumbing\DecimalModelBinder.cs" />

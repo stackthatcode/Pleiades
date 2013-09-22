@@ -39,7 +39,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult List(int page = 1)
+        public ActionResult List()
         {
             var users = AggregateUserRepository.Retreive(new List<UserRole>() { UserRole.Admin, UserRole.Root });
             var listUsersViewModel = users.Select(user => new UserViewModel(user)).ToList();
@@ -92,7 +92,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
 
             if (newuser == null)
             {
-                ViewData["ErrorMessage"] = "Error creating user with following code: " + status.ToString();
+                ModelState.AddModelError("", "Error creating user - " + status);
                 return View(createAdminModel);
             }
 
@@ -107,6 +107,8 @@ namespace Commerce.Web.Areas.Admin.Controllers
             return View(userModel);
         }
 
+        // TODO: improve test coverage of this stuff
+
         [HttpPost]
         public ActionResult Edit(int id, EditUserModel userViewModel)
         {
@@ -117,12 +119,27 @@ namespace Commerce.Web.Areas.Admin.Controllers
             }
 
             // Execute
+            var user = this.AggregateUserRepository.RetrieveById(id);
+            var username = user.Membership.UserName;
+
+            if (user.Membership.Email.ToUpper() != userViewModel.Email.ToUpper())
+            {
+                var result = this.MembershipService.ChangeEmailAddress(username, null, userViewModel.Email, true);
+                if (result != PfCredentialsChangeStatus.Success)
+                {
+                    ModelState.AddModelError("", "Error Updating Email Address: " + result.ToString());
+                    return View(userViewModel);
+                }
+            }
+
             this.AggregateUserService.UpdateIdentity(id, 
                 new IdentityProfileChange 
                 { 
                     FirstName = userViewModel.FirstName, 
                     LastName = userViewModel.LastName, 
                 });
+
+            this.MembershipService.SetUserApproval(username, userViewModel.IsApproved);
             this.UnitOfWork.SaveChanges();
 
             // Respond
@@ -133,7 +150,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         public ActionResult ChangePassword(int id)
         {
             var user = this.AggregateUserRepository.RetrieveById(id);
-            return View(new ChangePasswordModel { Email = user.Membership.Email });
+            return View(new ChangePasswordModel { AggregateUserId = user.ID, Email = user.Membership.Email });
         }
 
         [HttpPost]
@@ -145,7 +162,12 @@ namespace Commerce.Web.Areas.Admin.Controllers
 
             // Execute
             var user = this.AggregateUserRepository.RetrieveById(id);
-            this.MembershipService.ChangePassword(user.Membership.UserName, model.OldPassword, model.NewPassword, false);
+            var result = this.MembershipService.ChangePassword(user.Membership.UserName, model.OldPassword, model.NewPassword, false);
+            if (result != PfCredentialsChangeStatus.Success)
+            {
+                this.ModelState.AddModelError("", "Unable to Change Password.  Reason: " + result.ToString());
+                return View(model);
+            }
             this.UnitOfWork.SaveChanges();
 
             // Respond

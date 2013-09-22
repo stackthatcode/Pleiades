@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Commerce.Initializer.Builders.Products;
 using NUnit.Framework;
 using Pleiades.Application.Data;
 using Commerce.Application.Interfaces;
@@ -22,7 +23,7 @@ namespace Commerce.IntegrationTests.BuildersAndRepositories
                 lifetime.Resolve<ColorBuilder>().Run();
                 lifetime.Resolve<SizeBuilder>().Run();
                 lifetime.Resolve<CategoryBuilder>().Run();
-                lifetime.Resolve<ProductBuilder>().Run();
+                lifetime.Resolve<TatamiEstiloBuilder>().Run();
 
                 // Test the search query
                 var category1 = categoryRepository.FirstOrDefault(x => x.Name == "Jiu-jitsu Gear");

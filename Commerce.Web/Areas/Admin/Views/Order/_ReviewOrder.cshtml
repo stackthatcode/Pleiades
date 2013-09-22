@@ -182,14 +182,14 @@
 
 		<table class="table table-hover" style="margin-bottom:0px;">
 			<tbody data-bind="foreach: $root.Cart().Items">
-                <tr data-bind="ifnot: $root.SelectedCartItem() &&  $root.SelectedCartItem().CartItem() == $data, click: $root.CartItemClick">
+                <tr data-bind="ifnot: $root.SelectedCartItem() &&  $root.SelectedCartItem().CartItem() == $data">
                     
-                    <td style="width:100px">
-                	    <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundle: $data.Sku().ImageBundle, LightboxSuffixId: 'Review' } }">
+                    <td style="width:100px" data-bind="if: $data.Sku().ImageBundle">
+                	    <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundle: $data.Sku().ImageBundle, LightboxSuffixId: 'Review' + $index() } }">
 			            </div>
                     </td>
 
-                    <td style="width:800px;">
+                    <td style="width:800px;" data-bind="click: $root.CartItemClick">
                         <div style="width:250px; vertical-align:top; float:left;">
                             <strong data-bind="text: $data.Product.Name"></strong><br/>
                             <span>Sku Code: </span> <span data-bind="text: $data.Sku().SkuCode"></span><br/>

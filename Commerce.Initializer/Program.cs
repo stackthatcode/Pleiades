@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
+using Commerce.Initializer.Builders.Products;
 using Pleiades.Application.Injection;
 using Pleiades.Application.Logging;
 using Pleiades.Application.Utility;
@@ -12,17 +13,18 @@ namespace Commerce.Initializer
 {
     class Program
     {
-        static PushMarketContext DbContext { get; set; }
-        private readonly static IContainerAdapter _serviceLocator;
+        private static readonly PushMarketContext DbContext;
+        private static readonly IContainerAdapter ServiceLocator;
 
         static Program()
         {
-            _serviceLocator = AutofacBootstrap.CreateContainer();            
+            ServiceLocator = AutofacBootstrap.CreateContainer();
+            DbContext = new PushMarketContext();
         }
 
         static void CreateAndRunBuilder<T>() where T : IBuilder
         {
-            var builder = _serviceLocator.Resolve<T>();
+            var builder = ServiceLocator.Resolve<T>();
             builder.Run();
         }
 
@@ -34,7 +36,6 @@ namespace Commerce.Initializer
                 LoggerSingleton.Get = NLoggerImpl.RegistrationFactory("Commerce.Initializer");
                 LoggerSingleton.Get().Info("PROCESS START:" + DateTime.Now + Environment.NewLine);
                 DoStuff();
-                throw new Exception("sdfsdflkl!");
             }
             catch (Exception ex)
             {
@@ -48,10 +49,8 @@ namespace Commerce.Initializer
 
         public static void DoStuff()
         {
-            DbContext = new PushMarketContext();
-
-            LoggerSingleton.Get().Info("PushMarket Commerce Version v1.0 Prototype Initializer");
-            LoggerSingleton.Get().Info("Push Global Software - All Rights Reserved");
+            LoggerSingleton.Get().Info(ConfigurationManager.AppSettings["ApplicationName"]);
+            LoggerSingleton.Get().Info(ConfigurationManager.AppSettings["CompanyName"]);
             LoggerSingleton.Get().Info("...");
 
             // Database Destruction, Resource Directory too
@@ -69,7 +68,9 @@ namespace Commerce.Initializer
             CreateAndRunBuilder<SizeBuilder>();
             CreateAndRunBuilder<BrandBuilder>();
             CreateAndRunBuilder<ColorBuilder>();
-            CreateAndRunBuilder<ProductBuilder>();
+            CreateAndRunBuilder<TatamiEstiloBuilder>();
+            CreateAndRunBuilder<BullTerrierMushinBuilder>();
+            CreateAndRunBuilder<BullTerrierSuperStarBuilder>();
             CreateAndRunBuilder<ShippingMethodsBuilder>();
             CreateAndRunBuilder<StateTaxBuilder>();
 
@@ -78,25 +79,28 @@ namespace Commerce.Initializer
 
         public static void DestroyDatabase()
         {
+            LoggerSingleton.Get().Info("Attemping to Delete Database...");
             DbContext.Database.Delete();
-            LoggerSingleton.Get().Info("Deleted Database");
+            LoggerSingleton.Get().Info("Database Deleted");
         }
 
         public static void DestroyResourceFiles()
         {
             // Clean-out the Resource Directory
             var resourceDirectory = ConfigurationManager.AppSettings["ResourceStorage"];
-            LoggerSingleton.Get().Info("Cleaning out Resource Directory: " + resourceDirectory);
+            LoggerSingleton.Get().Info("Cleaning out Resource Directory: " + resourceDirectory + "...");
             var directoryInfo = new DirectoryInfo(resourceDirectory);
             directoryInfo.GetFiles("*.*", SearchOption.AllDirectories).ForEach(x => x.Delete());
             directoryInfo.GetDirectories().ForEach(x => x.Delete());
+            LoggerSingleton.Get().Info("Resource Directory Cleaned");
         }
 
         public static void CreateDatabase()
         {
             // Build Database
-            LoggerSingleton.Get().Info("Creating PushMarket database");
+            LoggerSingleton.Get().Info("Creating PushMarket Database...");
             DbContext.MasterDatabaseCreate();
+            LoggerSingleton.Get().Info("PushMarket Database Created");
         }
     }
 }

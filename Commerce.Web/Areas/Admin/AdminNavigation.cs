@@ -1,12 +1,15 @@
 ﻿using System.Web.Routing;
+using Commerce.Web.Areas.Admin.Controllers;
+using Pleiades.Web.MvcHelpers;
 
 namespace Commerce.Web.Areas.Admin
 {
     // TODO: add ControllerObject.ToRoute() extension method
-    // TODO: add a bit of glue which uses Controller Type with Actions verified by Expression Tree.  Voila!
 
     public class AdminNavigation
     {
+        public static string AreaName = "Admin";
+
         public static string ServerErrorView()
         {
             return "~/Areas/Admin/Views/Unsecured/ServerError.cshtml";
@@ -14,82 +17,86 @@ namespace Commerce.Web.Areas.Admin
 
         public static RouteValueDictionary Home()
         {
-            return new RouteValueDictionary( new { area = "Admin", controller = "Home", action = "Index", });
+            return RouteValueDictionaryBuilder.FromController<HomeController>(AreaName, x => x.Index());
         }
 
         public static RouteValueDictionary Login()
         {
-            return new RouteValueDictionary(new { area = "Admin", controller = "Auth", action = "Login", });
+            return RouteValueDictionaryBuilder.FromController<UnsecuredController>(AreaName, x => x.Login());
         }
 
         public static RouteValueDictionary Logout()
         {
-            return new RouteValueDictionary(new { area = "Admin", controller = "Auth", action = "Logout", });
+            return RouteValueDictionaryBuilder.FromController<UnsecuredController>(AreaName, x => x.Logout());
         }
 
         public static RouteValueDictionary ErrorTest()
         {
-            return new RouteValueDictionary(new { area = "Admin", controller = "Manager", action = "Error", });
+            return RouteValueDictionaryBuilder.FromController<ManagerController>(AreaName, x => x.Error());
         }
 
         public static RouteValueDictionary ManagerList()
         {
-            return new RouteValueDictionary(new { area = "Admin", controller = "Manager", action = "List", });
+            return RouteValueDictionaryBuilder.FromController<ManagerController>(AreaName, x => x.List());
         }
 
         public static RouteValueDictionary ConfirmDeleteUser(int id)
         {
-            return new RouteValueDictionary(new { area = "Admin", controller = "Manager", action = "DeleteConfirm", id = id });
+            var output = RouteValueDictionaryBuilder.FromController<ManagerController>(AreaName, x => x.DeleteConfirm(12345));
+            output["id"] = id;
+            return output;
         }
 
         public static RouteValueDictionary ManagerDetails(object id)
         {
-            return new RouteValueDictionary(new { area = "Admin", controller = "Manager", action = "Details", id = id });
+            var output = RouteValueDictionaryBuilder.FromController<ManagerController>(AreaName, x => x.Details(12345));
+            output["id"] = id;
+            return output;
         }
 
         public static RouteValueDictionary CategoryEditor()
         {
-            return new RouteValueDictionary(new { area = "Admin", controller = "Category", action = "Editor", });
+            return RouteValueDictionaryBuilder.FromController<CategoryController>(AreaName, x => x.Editor());
         }
 
         public static RouteValueDictionary SizeEditor()
         {
-            return new RouteValueDictionary(new { area = "Admin", controller = "Size", action = "Editor", });
+            return RouteValueDictionaryBuilder.FromController<SizeController>(AreaName, x => x.Editor());
         }
 
         public static RouteValueDictionary SectionEditor()
         {
-            return new RouteValueDictionary(new { area = "Admin", controller = "Section", action = "Editor", });
+            return RouteValueDictionaryBuilder.FromController<SectionController>(AreaName, x => x.Editor());
         }
 
         public static RouteValueDictionary BrandEditor()
         {
-            return new RouteValueDictionary(new { area = "Admin", controller = "Brand", action = "Editor", });
+            return RouteValueDictionaryBuilder.FromController<BrandController>(AreaName, x => x.Editor());
         }
 
         public static RouteValueDictionary ColorEditor()
         {
-            return new RouteValueDictionary(new { area = "Admin", controller = "Color", action = "Editor", });
+            return RouteValueDictionaryBuilder.FromController<ColorController>(AreaName, x => x.Editor());
         }
 
         public static RouteValueDictionary ImageUploadTest()
         {
-            return new RouteValueDictionary(new { area = "Admin", controller = "Image", action = "UploadTest", });
+            return RouteValueDictionaryBuilder.FromController<ImageController>(AreaName, x => x.UploadTest());
         }
 
         public static RouteValueDictionary ProductEditor()
         {
-            return new RouteValueDictionary(new { area = "Admin", controller = "Product", action = "Editor", });
+            return RouteValueDictionaryBuilder.FromController<ProductController>(AreaName, x => x.Editor());
         }
 
         public static RouteValueDictionary CreateNewOrder()
         {
-            return new RouteValueDictionary(new { area = "Admin", controller = "Order", action = "Create", });
+            return RouteValueDictionaryBuilder.FromController<OrderController>(AreaName, x => x.Create());
         }
 
         public static RouteValueDictionary ManageOrders()
         {
-            return new RouteValueDictionary(new { area = "Admin", controller = "Order", action = "Manage", });
+            return RouteValueDictionaryBuilder.FromController<OrderController>(AreaName, x => x. Manage());
         }
     }
 }

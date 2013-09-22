@@ -51,7 +51,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
             return new ContentResult();
         }
 
-        public ActionResult Manager()
+        public ActionResult Manage()
         {
             return View();
         }

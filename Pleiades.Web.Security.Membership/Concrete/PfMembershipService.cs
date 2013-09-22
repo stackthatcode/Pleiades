@@ -8,6 +8,8 @@ namespace Pleiades.Web.Security.Concrete
 {
     /// <summary>
     /// Membership functions re-coded to be test-friendly and DI-friendly
+    /// 
+    /// TODO: add Password Complexity Enforcement
     /// </summary>
     public class PfMembershipService : IPfMembershipService
     {
@@ -16,8 +18,6 @@ namespace Pleiades.Web.Security.Concrete
         public IPfPasswordService PasswordServices;
         public IPfMembershipSettings Settings;
         public Func<int, string> GenerateUniqueUserName { get; set; }
-
-        const string ApplicationName = "/";
 
         public PfMembershipService(
                 IMembershipReadOnlyRepository readOnlyRepository, IMembershipWritableRepository writableRepository, 
@@ -76,7 +76,6 @@ namespace Pleiades.Web.Security.Concrete
             {
                 ProviderUserKey = Guid.Empty,
                 UserName = username,
-                ApplicationName = ApplicationName,
                 Email = request.Email,
                 Password = this.PasswordServices.EncodeSecureInformation(request.Password),
                 PasswordQuestion = request.PasswordQuestion,
@@ -228,7 +227,7 @@ namespace Pleiades.Web.Security.Concrete
             {
                 if (!user.ActiveUser)
                 {
-                    return PfCredentialsChangeStatus.InactiveUser; ;
+                    return PfCredentialsChangeStatus.InactiveUser;
                 }
                 if (!PasswordServices.CheckPassword(password, user))
                 {

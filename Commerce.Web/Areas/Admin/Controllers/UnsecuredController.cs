@@ -2,11 +2,10 @@
 using System.Diagnostics;
 using System.Net;
 using System.Web.Mvc;
+using Commerce.Web.Areas.Admin.Models;
 using Commerce.Web.Areas.Public;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
-using Commerce.Web.Areas.Admin.Models;
-using Commerce.Web.Plumbing;
 
 namespace Commerce.Web.Areas.Admin.Controllers
 {

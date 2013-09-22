@@ -56,7 +56,7 @@ namespace Commerce.UnitTests.Controllers.Admin
             var adminmgrController = new ManagerController(aggregateUserRepository, null, null, null);
 
             // Act
-            var result = adminmgrController.List(1);
+            var result = adminmgrController.List();
 
             // Assert
             result.ShouldBeView();
@@ -133,34 +133,65 @@ namespace Commerce.UnitTests.Controllers.Admin
             result.ShouldBeDefaultView();
         }
 
+        // TODO: expand/deepen this test coverage
         [Test]
         public void Edit_HttpPost_ValidState()
         {
             // Arrange
+            var expectedID = 888;
+            var username = "123456";
+            var expectedApproval = true;
+            var expectedEmail = "tony@griepwffe.com";
+            var expectedFirstName = "Tony";
+            var expectedLastName = "Stark";
+                 
             var user = new AggregateUser
             {
-                Membership = new PfMembershipUser { UserName = "123456" },
+                ID = expectedID,
+                Membership = new PfMembershipUser { UserName = username, Email = "tony@oldaddress.com"},
                 IdentityProfile = new IdentityProfile(),
             };
 
             var repository = MockRepository.GenerateMock<IReadOnlyAggregateUserRepository>();
             repository
-                .Expect(x => x.RetrieveById(888))
+                .Expect(x => x.RetrieveById(expectedID))
                 .Return(user);
+
+            var aggregateUserService = MockRepository.GenerateMock<IAggregateUserService>();
+            aggregateUserService.Expect(x => x.UpdateIdentity(888, null)).IgnoreArguments()
+                                .Do((Action<int, IdentityProfileChange>) ((id, change) =>
+                                    {
+                                        Assert.That(id, Is.EqualTo(expectedID));
+                                        Assert.That(change.FirstName, Is.EqualTo(expectedFirstName));
+                                        Assert.That(change.LastName, Is.EqualTo(expectedLastName));
+                                    }));
+
+            var membershipService = MockRepository.GenerateMock<IPfMembershipService>();
+            membershipService.Expect(x => x.SetUserApproval(username, expectedApproval));
+            membershipService
+                .Expect(x => x.ChangeEmailAddress(username, null, expectedEmail, true))
+                .Return(PfCredentialsChangeStatus.Success);
 
             var unitOfWork = MockRepository.GenerateMock<IUnitOfWork>();
             unitOfWork.Expect(x => x.SaveChanges());
 
-            var service = MockRepository.GenerateMock<IAggregateUserService>();
-            service.Expect(x => x.UpdateIdentity(888, null)).IgnoreArguments();
-            var controller = new ManagerController(repository, service, null, unitOfWork);
-            
+
             // Act
-            var result = controller.Edit(888, new EditUserModel());
+            var controller = new ManagerController(repository, aggregateUserService, membershipService, unitOfWork);
+            var result = controller.Edit(expectedID, new EditUserModel()
+                {
+                    FirstName = expectedFirstName,
+                    LastName = expectedLastName,
+                    IsApproved = expectedApproval,
+                    Email = expectedEmail,
+                });
 
             // Assert
             result.ShouldBeRedirectionTo(new { action = "Details" });
-            service.VerifyAllExpectations();
+
+            repository.VerifyAllExpectations();
+            aggregateUserService.VerifyAllExpectations();
+            membershipService.VerifyAllExpectations();
             unitOfWork.VerifyAllExpectations();
         }
 

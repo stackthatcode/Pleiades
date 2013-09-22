@@ -195,3 +195,98 @@ ARCHITECTURAL REVIEW 1/24/2013 - UPDATED 9/3/2013
 - Compbine Domain and Persist assemblies.  They're not separate, dude!!! => DONE
 * NOTE: we never ever DELETE User records
 
+
+9/3/2013 (0.25 Hours)
+~~~~~~~~~~~~~~~~~~~~~
+- Storefront tasking - started
+
+9/3/2013 (0.5 Hours)
+~~~~~~~~~~~~~~~~~~~~~
+- Storefront tasking - in progress
+
+9/4/2013 (0.5 Hours)
+~~~~~~~~~~~~~~~~~~~~~
+- AngularJS study time => Started
+- Review Cart KO code for portability => IT'S KIND OF NOT - DONE
+- Storefront tasking - in progress
+- Add Data Clean-up Option to the Console App => DEAD
+- SUPER IMPORTANT - post mortem my approach to the designing the UI.  How to improve my speed? => IN PROGRESS
+- Web Optimization Toolkit / Bundle Thingy => DONE
+- Upgrade to ASP.NET MVC 4.0 (4.5?) => DONE
+
+9/4/2013 (0.5 Hours)
+~~~~~~~~~~~~~~~~~~~~
+- More tasking for the StoreFront stuff => IN PROGRESS
+
+9/5/2013 (0.25 Hours)
+~~~~~~~~~~~~~~~~~~~~~
+- Error handling page
+
+9/6/2013 (0.5 Hours) - Morning
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* How to shared Partial Views across Areas? => NOPE, DON'T WANT TO
+* Standalone Error Page appropriate for both Admin and Public Controller => NOPE, ONE FOR EACH
+* Wire the Error Page into the web.config => DONE
+* How to route traffic to the shared Public Error page? => DONE
+
+9/6/2013 0.75 Hours
+~~~~~~~~~~~~~~~~~~~
+* Error Page crafting
+
+9/7/2013 0.25 Hours
+~~~~~~~~~~~~~~~~~~~
+- Centralize Push Market Name to configuration, lambda, whatevs => DONE FOR NOW - JUST IN HEADERS
+
+9/7/2013 6.50 Hours
+~~~~~~~~~~~~~~~~~~~
+- Ironed-out details with the Error Pages
+- Fixed defect in the Logout pop-up link
+- Stubbed out Contact Us Page
+- Chasing those bloody 404 pages...
+- Error Handling => IN PROGRESS
+* What if the error page bombs..? => DONE
+* How to cherry pick Actions and respond differently for each? => DONE
+* Handle Error Attribute for Admin Controllers => DONE
+* Handle Error Attribute for Public Controllers => DONE
+- Centralize Company and Software Name => DONE
+- Truly Attacked and Dominated Error Handling.  Good job!!!! => DONE
+- Added Ajax Request detection in EH => DONE
+
+9/8/2013 1.0 Hour
+~~~~~~~~~~~~~~~~~
+- Began designing the store front => IN PROGRESS
+
+9/9/2013 1.0 Hour (Morning and Evening)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Designing the store front => IN PROGRESS
+
+9/10/2013 1.0 Hour (Morning and Evening)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Finished designing the store front - will create a Sales Letter, and an About Us page => DONE
+
+9/11/2013 Morning 0.5 
+~~~~~~~~~~~~~~~~~~~~~
+- Began building Angular-centric framework
+
+9/11/2013 Evening 0.5 
+~~~~~~~~~~~~~~~~~~~~~
+- Continuation of Angular PushMarket
+
+9/12/2013 thru 9/13/2013 1.5
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- More Angular experimentation
+
+9/16/2013 thru 9/20/2013 8 to 10 Hours
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- PushMarket AnuglarJs framework
+- WebAPI error handling shit
+- Rollback of WebAPI bullshit - replaced with MVC controller and re-engineered routes
+- Successful connection to AngularJS stuff
+- Fixed Route Registration ordering
+- Enabled Configurable Route Debugging
+* Do the tutorials - basics + Navigation Stack + Hash tag navigation => DONE 
+
+9/21/2013 3 Hours
+~~~~~~~~~~~~~~~~~
+- Fixed Routing, Navigation and all that good stuff
+

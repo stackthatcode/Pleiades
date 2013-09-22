@@ -15,7 +15,6 @@ namespace Pleiades.Web.Security.Model
         public string UserName { get; set; }
 
         // Membership-Provider specific Data
-        public string ApplicationName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string PasswordQuestion { get; set; }

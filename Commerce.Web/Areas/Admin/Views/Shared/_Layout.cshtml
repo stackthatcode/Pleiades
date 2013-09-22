@@ -4,7 +4,19 @@
 <html lang="en">
   <head>
     <title>PushMarket - Site Management</title>
-    @Scripts.Render("~/Bundles/Foundation")
+    @if (ConfigurationManager.AppSettings["BundleOptimizationDebug"] == "true") {
+        <!-- Non optimized -->
+        @Html.Javascript("~/Content/JQuery/jquery-2.0.3.min.js")
+        @Html.Javascript("~/Content/JQuery/jquery.validate.min.js")
+        @Html.Javascript("~/Content/Utilities/aQuery-1.0-min.js")        
+        @Html.Javascript("~/Content/Utilities/flow.js")        
+        @Html.Javascript("~/Content/Utilities/generalFunctions.js")        
+    }
+    else
+    {
+        @Scripts.Render("~/Bundles/Foundation")
+    }
+
     @Scripts.Render("~/Bundles/BootstrapBaseScript")
     @Html.Stylesheet("~/Content/Bootstrap/css/bootstrap.min.css")
     
@@ -12,7 +24,6 @@
     {
         @Html.Javascript("~/Content/Knockout/knockout-2.3.0rc.js")
         @Html.Javascript("~/Content/Knockout/ko.observableDictionary.js")
-
         @Html.Javascript("~/Content/PushLibraryKo/ajax.js")
         @Html.Javascript("~/Content/PushLibraryKo/knockout-glider.js")
         @Html.Javascript("~/Content/PushLibraryKo/scroll-tracker.js")

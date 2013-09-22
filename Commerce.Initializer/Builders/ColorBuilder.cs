@@ -42,8 +42,8 @@ namespace Commerce.Initializer.Builders
         {
             using (var tx = new TransactionScope())
             {
-                _genericRepository.GetAll().ForEach(x => _genericRepository.Delete(x));
-                _unitOfWork.SaveChanges();
+                //_genericRepository.GetAll().ForEach(x => _genericRepository.Delete(x));
+                //_unitOfWork.SaveChanges();
 
                 LoggerSingleton.Get().Info("Create the default Colors");
 

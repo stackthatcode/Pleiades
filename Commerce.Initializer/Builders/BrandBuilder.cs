@@ -33,6 +33,7 @@ namespace Commerce.Initializer.Builders
 
         public void AddBrand(string brandImage, string name, string descrtipion, string SEO, string SkuCode)
         {
+            LoggerSingleton.Get().Info("brandImage File Path - " + brandImage);
             var imageBundle1 = _imageBundleRepository.Add(new Bitmap(brandImage));
             _unitOfWork.SaveChanges();
             var brand1 = new JsonBrand()
@@ -47,14 +48,19 @@ namespace Commerce.Initializer.Builders
             _unitOfWork.SaveChanges();            
         }
 
+        public string BrandLogoDirectory()
+        {
+            return @"Content\BrandLogos";
+        }
+
         public void Run()
         {
             using (var tx = new TransactionScope())
             {
                 LoggerSingleton.Get().Info("Create the default Brands");
 
-                _genericRepository.GetAll().ForEach(x => _genericRepository.Delete(x));
-                _unitOfWork.SaveChanges();
+                //_genericRepository.GetAll().ForEach(x => _genericRepository.Delete(x));
+                //_unitOfWork.SaveChanges();
 
                 AddBrand(Path.Combine(BrandLogoDirectory(), "Afflictionmma2.jpg"),
                          "Affliction",
@@ -68,6 +74,13 @@ namespace Commerce.Initializer.Builders
                          @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
                          @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
                          "bad-boy-mma",
+                         "BBOY");
+
+                AddBrand(Path.Combine(BrandLogoDirectory(), "bullterriergearl.gif"),
+                         "Bull Terrier",
+                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                         "bull-terrier-mma",
                          "BBOY");
 
                 AddBrand(Path.Combine(BrandLogoDirectory(), "dethrone2.png"),
@@ -93,11 +106,6 @@ namespace Commerce.Initializer.Builders
 
                 tx.Complete();
             }
-        }
-
-        public string BrandLogoDirectory()
-        {
-            return ConfigurationManager.AppSettings["DefaultBrandLogos"];
         }
     }
 }

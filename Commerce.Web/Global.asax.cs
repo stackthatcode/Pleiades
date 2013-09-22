@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
-using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Commerce.Web.Areas.Admin;
-using Commerce.Web.Areas.Public;
 using Pleiades.Application.Logging;
 using Pleiades.Application.Utility;
 using Pleiades.Web.Logging;
 using Pleiades.Web.Plumbing;
 using Pleiades.Web.Security.Aspect;
 using Commerce.Application.Database;
+using Commerce.Web.Areas.Admin;
+using Commerce.Web.Areas.Public;
 using Commerce.Web.Plumbing;
 
 namespace Commerce.Web

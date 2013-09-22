@@ -68,6 +68,9 @@
     <Compile Include="Builders\CategoryBuilder.cs" />
     <Compile Include="Builders\ColorBuilder.cs" />
     <Compile Include="Builders\IBuilder.cs" />
+    <Compile Include="Builders\Products\BullTerrierSuperStarBuilder.cs" />
+    <Compile Include="Builders\Products\BullTerrierMushinBuilder.cs" />
+    <Compile Include="Builders\Products\TatamiEstiloBuilder.cs" />
     <Compile Include="Builders\StateTaxBuilder.cs" />
     <Compile Include="Builders\OrderBuilder.cs" />
     <Compile Include="Builders\ProductBuilder.cs" />
@@ -115,6 +118,95 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="Content\BrandLogos\Afflictionmma2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BrandLogos\badboy.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BrandLogos\bullterriergearl.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BrandLogos\dethrone2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BrandLogos\fuji.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BrandLogos\imgres.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BrandLogos\tatami.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BullTerrierMuhsin\Black\70726f647563742f32303132313230375f3261393536332e6a7067003330300000660066.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BullTerrierMuhsin\Black\70726f647563742f32303132313230375f3339333837622e6a7067003330300000660066.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BullTerrierMuhsin\Black\70726f647563742f32303132313230375f3662616662642e6a7067003330300000660066.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BullTerrierMuhsin\Black\70726f647563742f32303132313230375f3730653835362e6a7067003330300000660066.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BullTerrierSuperstar\Blue\70726f647563742f32303132313230375f3330616134652e6a7067003330300000660066.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BullTerrierSuperstar\Blue\70726f647563742f32303132313230375f3338323335662e6a7067003330300000660066.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BullTerrierSuperstar\Blue\70726f647563742f32303132313230375f3465613639322e6a7067003330300000660066.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BullTerrierSuperstar\Blue\70726f647563742f32303132313230375f3862376564642e6a7067003330300000660066.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BullTerrierSuperstar\White\1363199386.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BullTerrierSuperstar\White\1363199391.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BullTerrierSuperstar\White\1363199395.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BullTerrierSuperstar\White\1363199398.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\TatamiEstilo\Black\tat-1010_black_01_xl.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\TatamiEstilo\Black\tat-1010_black_02_xl.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\TatamiEstilo\Black\tat-1010_black_03_xl.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\TatamiEstilo\Black\tat-1010_black_04_xl.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\TatamiEstilo\Black\tat-1010_black_05_xl.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\TatamiEstilo\Blue\tat-1010_blue_01_xl.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\TatamiEstilo\Blue\tat-1010_blue_02_xl.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\TatamiEstilo\Blue\tat-1010_blue_03_xl.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\TatamiEstilo\Blue\tat-1010_blue_04_xl.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\TatamiEstilo\Blue\tat-1010_blue_05_xl.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

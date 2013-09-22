@@ -88,13 +88,12 @@
     <Compile Include="Controllers\Admin\ManagerControllerTests.cs" />
     <Compile Include="Controllers\Public\ProductControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\OrderSubmissionServiceTests.cs" />
+    <Compile Include="Application\OrderSubmissionServiceTests.cs" />
     <Compile Include="Routing\AdminRouteTests.cs" />
-    <Compile Include="Routing\DefaultRouteTests.cs" />
     <Compile Include="Routing\ProductRouteTests.cs" />
     <Compile Include="Routing\RoutingTestBase.cs" />
     <Compile Include="Security\CommerceSecurityResponderTest.cs" />
-    <Compile Include="Routing\CommerceSecurityContextFactoryTest.cs" />
+    <Compile Include="Security\CommerceSecurityContextFactoryTest.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

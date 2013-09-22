@@ -33,9 +33,9 @@ namespace Commerce.Initializer.Builders
                 LoggerSingleton.Get().Info("Create the default Size Groups and Sizes");
 
                 // Clear everything out
-                _sizeRepository.GetAll().ForEach(x => _sizeRepository.Delete(x));
-                _sizeGroupRepository.GetAll().ForEach(x => _sizeGroupRepository.Delete(x));
-                _unitOfWork.SaveChanges();
+                //_sizeRepository.GetAll().ForEach(x => _sizeRepository.Delete(x));
+                //_sizeGroupRepository.GetAll().ForEach(x => _sizeGroupRepository.Delete(x));
+                //_unitOfWork.SaveChanges();
 
                 // Create size groups
                 var result0 = _jsonSizeRepository.Insert(new JsonSizeGroup { Name = "N/A", Default = true });
