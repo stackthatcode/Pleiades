@@ -6,10 +6,8 @@
         <meta name="viewport" content="width=device-width" />
         <title></title>
 
-        <!-- TODO: upgrade Bootstrap to 3.0 -->
-        @Html.Stylesheet("~/Content/Bootstrap/css/bootstrap.min.css")
-        @Scripts.Render("~/Bundles/BootstrapBaseScript")
-        @Html.Stylesheet("~/Content/Commerce.Web/Style/pushmarketadmin.css")
+        @Html.Stylesheet("~/Content/Bootstrap_3_0_0/css/bootstrap.min.css")
+        @Html.Stylesheet("~/Content/Commerce.Web/Style/artofgroundfighting.css")
     </head>
 
     <body>
@@ -18,5 +16,6 @@
         @RenderSection("_Body")	  
     
         @Html.Partial("_Footer") 
+        @Html.Javascript("~/Content/Bootstrap_3_0_0/js/bootstrap.min.js")
     </body>
 </html>

@@ -1,33 +1,34 @@
 FRONTRANGE - HOTZONE
 ====================
 
-Today's Burndown
-~~~~~~~~~~~~~~~~
+9/22 Burndown 6.0 Hours
+~~~~~~~~~~~~~~~~~~~~~~~
 - Add a bit of glue which uses Controller Type with Actions verified by Expression Tree.  Voila! => Well played, sir! => DONE
 - Test and fix defects in the Membership Management stuff => DONE - FIXED A LOT OF BULLSHIT, NEED MORE TEST COVERAGE
 - Fixed Routing Unit Tests => DONE
 - Fixed Integration Tests => DONE
 - Fixed Cart Lightbox defect => DONE
+- Loaded 2 new Products => DONE
+- Refactored Builders => DONE
 
-- Load Test Data into Console App => IN PROGRESS
-
-- Create AJAX Error Handling and Spinner => TODO
-
-
-
-http://www.budovideos.com/shop/customer/product.php?productid=31949&cat=&page=1
-
+9/23 - 1.5 Hours
+~~~~~~~~~~~~~~~~
+- Installed Bootstrap 3 + created Bundle Optimizers 
+- Ate shit trying to fix the Bootstrap Styles
 
 
 Front Range
 -----------
+- Fix the Bootstrap styling on the 3.0.0 consumers => IN PROGRESS
+- Create AJAX Error Handling and Spinner => TODO
+
 - Landing-Page / Microsite => IN PROGRESS
 * Page skeleton => IN PROGRESS
 * Bootstrap 3 - How to Make it Responsive ??? => IN PROGRESS
 * AngularJs library integration => IN PROGRESS
+* Google Web Fonts => IN PROGRESS
 
-* Google Web Fonts => TODO
-
+- Load Test Data into Console App => IN PROGRESS
 - Customer Checkout => TODO
 - Admin Search & Manage Orders => TODO
 - Admin Sales Graph by Product => TODO

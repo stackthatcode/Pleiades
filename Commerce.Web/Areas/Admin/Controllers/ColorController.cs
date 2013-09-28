@@ -47,7 +47,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             string rgb = request.Rgb;
             var color = ColorTranslator.FromHtml(rgb);
-            var imageBundle = this.ImageRepository.Add(color, 150, 150);
+            var imageBundle = this.ImageRepository.AddColor(color, 150, 150);
             UnitOfWork.SaveChanges();
             return new JsonNetResult(imageBundle);
         }

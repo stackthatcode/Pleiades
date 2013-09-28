@@ -144,6 +144,7 @@
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\SectionController.cs" />
     <Compile Include="Areas\Admin\Controllers\SizeController.cs" />
+    <Compile Include="Areas\Public\Controllers\ImageController.cs" />
     <Compile Include="Areas\Public\Controllers\SectionController.cs" />
     <Compile Include="Areas\Public\Controllers\ProductsController.cs" />
     <Compile Include="Plumbing\ErrorModel.cs" />
@@ -186,19 +187,27 @@
     <Content Include="Content\Angular\angular.js" />
     <Content Include="Content\Angular\angular.min.js" />
     <Content Include="Content\Angular\version.txt" />
-    <Content Include="Content\Bootstrap\css\bootstrap-lightbox.min.css" />
-    <Content Include="Content\Bootstrap\js\bootstrap-lightbox.js" />
-    <Content Include="Content\Bootstrap\js\bootstrap-lightbox.min.js" />
-    <Content Include="Content\Bootstrap\js\bootstrap-alert.js" />
-    <Content Include="Content\Bootstrap\js\bootstrap-dropdown.js" />
-    <Content Include="Content\Bootstrap\js\bootstrap-modal.js" />
-    <Content Include="Content\Bootstrap\js\bootstrap-popover.js" />
-    <Content Include="Content\Bootstrap\js\bootstrap-tooltip.js" />
+    <Content Include="Content\Bootstrap_2_3_2\css\bootstrap-lightbox.min.css" />
+    <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-lightbox.js" />
+    <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-lightbox.min.js" />
+    <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-alert.js" />
+    <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-dropdown.js" />
+    <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-modal.js" />
+    <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-popover.js" />
+    <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-tooltip.js" />
+    <Content Include="Content\Bootstrap_3_0_0\css\bootstrap-theme.css" />
+    <Content Include="Content\Bootstrap_3_0_0\css\bootstrap-theme.min.css" />
+    <Content Include="Content\Bootstrap_3_0_0\css\bootstrap.css" />
+    <Content Include="Content\Bootstrap_3_0_0\css\bootstrap.min.css" />
+    <Content Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Bootstrap_3_0_0\js\bootstrap.js" />
+    <Content Include="Content\Bootstrap_3_0_0\js\bootstrap.min.js" />
     <Content Include="Content\Commerce.Web\ng-templates\ProductDetail.html" />
     <Content Include="Content\Commerce.Web\ng-templates\ProductList.html" />
     <Content Include="Content\Commerce.Web\Scripts\angular-app.js" />
     <Content Include="Content\Commerce.Web\Scripts\angular-controller.js" />
     <Content Include="Content\Commerce.Web\Images\ohnoes.png" />
+    <Content Include="Content\Commerce.Web\Style\artofgroundfighting.css" />
     <Content Include="Content\JQuery\jquery-2.0.3.min.js" />
     <Content Include="Content\Knockout\knockout-2.3.0rc.js" />
     <Content Include="Content\PushLibraryKo\scroll-tracker.js" />
@@ -238,13 +247,13 @@
     <Content Include="Content\JQuery\jquery-ui-1.10.0.custom.min.css" />
     <Content Include="Content\Commerce.Web\Style\pushmarketadmin.css" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Bootstrap\css\bootstrap-responsive.css" />
-    <Content Include="Content\Bootstrap\css\bootstrap-responsive.min.css" />
-    <Content Include="Content\Bootstrap\css\bootstrap.css" />
-    <Content Include="Content\Bootstrap\css\bootstrap.min.css" />
-    <Content Include="Content\Bootstrap\img\glyphicons-halflings-white.png" />
-    <Content Include="Content\Bootstrap\img\glyphicons-halflings.png" />
-    <Content Include="Content\Bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\Bootstrap_2_3_2\css\bootstrap-responsive.css" />
+    <Content Include="Content\Bootstrap_2_3_2\css\bootstrap-responsive.min.css" />
+    <Content Include="Content\Bootstrap_2_3_2\css\bootstrap.css" />
+    <Content Include="Content\Bootstrap_2_3_2\css\bootstrap.min.css" />
+    <Content Include="Content\Bootstrap_2_3_2\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\Bootstrap_2_3_2\img\glyphicons-halflings.png" />
+    <Content Include="Content\Bootstrap_2_3_2\js\bootstrap.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -378,12 +387,17 @@
     <Content Include="Areas\Admin\Views\Unsecured\ServerError.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Public\Views\Shared\_MvcShim.cshtml" />
+    <Content Include="Areas\Public\Views\Shared\_MvcShimHead.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Public\Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Public\Views\Shared\_CrossCutting.cshtml" />
+    <Content Include="Areas\Public\Views\Shared\_MvcShimBody.cshtml" />
+    <None Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Content\JQuery\jquery-2.0.3.min.map" />
   </ItemGroup>
   <PropertyGroup>

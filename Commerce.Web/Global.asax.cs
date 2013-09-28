@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.Entity;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -16,7 +17,7 @@ using Commerce.Web.Plumbing;
 
 namespace Commerce.Web
 {
-    public class CommerceWebApplication : System.Web.HttpApplication
+    public class CommerceWebApplication : HttpApplication
     {
         protected void Application_Start()
         {
@@ -98,20 +99,20 @@ namespace Commerce.Web
                     .Include("~/Content/Utilities/*.js"));
 
             BundleTable.Bundles.Add(
-                new ScriptBundle("~/Bundles/BootstrapBaseScript")
-                    .Include("~/Content/Bootstrap/js/bootstrap.min.js"));
+                new ScriptBundle("~/Bundles/BootstrapBaseScript_2_3_2")
+                    .Include("~/Content/Bootstrap_2_3_2/js/bootstrap.min.js"));
+            
+            BundleTable.Bundles.Add(
+                new ScriptBundle("~/Bundles/BootstrapBaseScript_3_0_0")
+                    .Include("~/Content/Bootstrap_3_0_0/js/bootstrap.min.js"));
 
             BundleTable.Bundles.Add(
-                new StyleBundle("~/Bundles/BootstrapBaseStyle")
-                    .Include("~/Content/Bootstrap/css/bootstrap.min.css"));
-
-            BundleTable.Bundles.Add(
-                new ScriptBundle("~/Bundles/BootstrapEnhancements")
-                    .Include("~/Content/Bootstrap/js/bootstrap-alert.js")
-                    .Include("~/Content/Bootstrap/js/bootstrap-dropdown.js")
-                    .Include("~/Content/Bootstrap/js/bootstrap-modal.js")
-                    .Include("~/Content/Bootstrap/js/bootstrap-popover.js")
-                    .Include("~/Content/Bootstrap/js/bootstrap-tooltip.js"));
+                new ScriptBundle("~/Bundles/BootstrapEnhancements_2_3_2")
+                    .Include("~/Content/Bootstrap_2_3_2/js/bootstrap-alert.js")
+                    .Include("~/Content/Bootstrap_2_3_2/js/bootstrap-dropdown.js")
+                    .Include("~/Content/Bootstrap_2_3_2/js/bootstrap-modal.js")
+                    .Include("~/Content/Bootstrap_2_3_2/js/bootstrap-popover.js")
+                    .Include("~/Content/Bootstrap_2_3_2/js/bootstrap-tooltip.js"));
 
             BundleTable.Bundles.Add(
                 new ScriptBundle("~/Bundles/KnockoutJS")

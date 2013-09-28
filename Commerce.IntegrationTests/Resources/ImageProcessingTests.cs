@@ -20,7 +20,7 @@ namespace Commerce.IntegrationTests.Resources
 
                 var imageBundleRepository = lifetime.Resolve<IImageBundleRepository>();
                 var unitOfWork = lifetime.Resolve<IUnitOfWork>();
-                var resource1 = imageBundleRepository.Add(image1);
+                var resource1 = imageBundleRepository.AddBitmap(image1);
 
                 Console.WriteLine(resource1.ExternalId);
                 unitOfWork.SaveChanges();

@@ -1,29 +1,25 @@
-﻿@using System.Configuration
-
-<!DOCTYPE html>
-<html ng-app>
+﻿<!DOCTYPE html>
+<html ng-app="push-market">
     <head>
         <meta name="viewport" content="width=device-width" />
         <title></title>
         @Html.Javascript("~/Bundles/Foundation")
+        @Html.Partial("_MvcShimHead")
+        
+        @Html.Stylesheet("~/Content/Bootstrap_3_0_0/css/bootstrap.min.css")
+        @Html.Javascript("~/Content/Bootstrap_3_0_0/js/bootstrap.min.js")
+        @Html.Stylesheet("~/Content/Commerce.Web/Style/artofgroundfighting.css")
+
+        <!-- TODO: bundle these together -->
         @Html.Javascript("~/Content/angular/angular.min.js")
-        @Html.Partial("_MvcShim")
         @Html.Javascript("~/Content/Commerce.Web/Scripts/angular-app.js")
         @Html.Javascript("~/Content/Commerce.Web/Scripts/angular-controller.js")
-
-        <!-- TODO: upgrade Bootstrap to 3.0 -->
-        @Html.Stylesheet("~/Content/Bootstrap/css/bootstrap.min.css")
-        @Scripts.Render("~/Bundles/BootstrapBaseScript")
-
-        @Html.Javascript("~/Content/PushLibraryNg/endless-ng-glider.js")
-        @Html.Stylesheet("~/Content/Commerce.Web/Style/pushmarketadmin.css")
     </head>
 
     <body>
-        @Html.Partial("_Header")
-        
-        @RenderSection("_Body")	  
-    
-        @Html.Partial("_Footer") 
+        @Html.Partial("_Header")        
+        @RenderSection("_Body")	      
+        @Html.Partial("_Footer")
+        @Html.Partial("_MvcShimBody")
     </body>
 </html>

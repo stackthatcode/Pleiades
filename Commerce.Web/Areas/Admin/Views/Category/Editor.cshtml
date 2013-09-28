@@ -204,7 +204,7 @@
 						// select the section
 						self.ParentViewModel.SelectedSection(section);
 						
-						// expand - add expand state to our observable dictionary if it's not *yet* added
+						// expand - AddColor expand state to our observable dictionary if it's not *yet* AddColored
 						$.each(data, function(index, elem) { 
 							if (!self.ParentViewModel.ExpandData.get(elem.Id)()) {
 								self.ParentViewModel.ExpandData.set(elem.Id, false);
@@ -390,7 +390,7 @@
 					<h1><span data-bind="text: $root.ParentViewModel.SelectedSection().Name"></span> &gt; All Categories</h1>
 				</div>
 				<div class="span3" style="margin-top:15px; text-align:right;">
-					<a class="btn btn-primary btn-block" data-bind="click: $root.AddParentRecord">Add New Category <i class="icon-arrow-right icon-white"></i></a>
+					<a class="btn btn-primary btn-block" data-bind="click: $root.AddColorParentRecord">AddColor New Category <i class="icon-arrow-right icon-white"></i></a>
 				</div>
 				
 				<!-- SECTION DROP DOWN -->
@@ -406,7 +406,7 @@
 					<h1><span data-bind="text:$root.ParentViewModel.SelectedSection().Name"></span> &gt; <span data-bind="text: $root.ChildViewModel().Name"></span></h1>
 				</div>
 				<div class="span3" style="margin-top:15px; text-align:right;" data-bind="visible: $root.ChildViewModel().Id">
-					<a class="btn btn-primary btn-block" data-bind="click: $root.AddChildRecord"><i class="icon-plus icon-white"></i> Add Sub-Category</a>
+					<a class="btn btn-primary btn-block" data-bind="click: $root.AddColorChildRecord"><i class="icon-plus icon-white"></i> AddColor Sub-Category</a>
 				</div>
 				
 				<!-- SECTION DROP DOWN -->
@@ -447,7 +447,7 @@
 	<!-- KNOCKOUT TEMPLATE - PARENT EDITOR -->
 	<script type="text/html" id="Parent-Editor">
 		<div style="margin-top:40px; text-align:center;" class="alert alert-info" data-bind="visible: $data.Data().length == 0">
-			<strong>This Section is empty. Click "Add New Category" to start adding Categories.</strong>  
+			<strong>This Section is empty. Click "AddColor New Category" to start adding Categories.</strong>  
 		</div>
 		
 		<table id="parent-editor-table" class="table table-hover" data-bind="visible: $data.Data().length > 0">
@@ -492,7 +492,7 @@
 		</table>
 
         <div style="margin-top:40px; text-align:center;" class="alert alert-info" data-bind="visible: $data.Id() && $data.Categories().length == 0">
-			<strong>This Category has no Sub-Categories.  Click "Add New Sub Category" to start adding new ones.</strong>  
+			<strong>This Category has no Sub-Categories.  Click "AddColor New Sub Category" to start adding new ones.</strong>  
 	    </div>
 	</script>
 	

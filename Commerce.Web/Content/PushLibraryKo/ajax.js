@@ -8,25 +8,25 @@ PushLibrary.AjaxSettings = {
     SpinnerLayerTagSelector : "#spinner-layer",
 };
 
-PushLibrary.Ajax = function () {
-	var self = this;
+PushLibrary.Ajax = function() {
+    var self = this;
 
-	// Configurable Settings  
-	self.Error = function () {
-	    $(ajaxSettings.ModalErrorTagSelector).modal();
-	    return false;
-	}
-    
-	self.ErrorCallback = function (jqXHR, textStatus, errorThrown) {
-	    if (jqXHR.status != 0 || textStatus == "timeout") {
-	        self.HideLoading();
-	        self.Error();
-	    }
-	}
+    // Configurable Settings  
+    self.Error = function() {
+        $(ajaxSettings.ModalErrorTagSelector).modal();
+        return false;
+    };
 
-    self.AjaxGet = function (url, successFunc) {
+    self.ErrorCallback = function(jqXHR, textStatus, errorThrown) {
+        if (jqXHR.status != 0 || textStatus == "timeout") {
+            self.HideLoading();
+            self.Error();
+        }
+    };
+
+    self.AjaxGet = function(url, successFunc) {
         flow.exec(
-            function () {
+            function() {
                 self.ShowLoading();
                 $.ajax({
                     type: 'GET',
@@ -36,18 +36,18 @@ PushLibrary.Ajax = function () {
                     success: this
                 });
             },
-            function (data, textStatus, jqXHR) {
+            function(data, textStatus, jqXHR) {
                 self.HideLoading();
                 if (successFunc) {
                     successFunc(data, textStatus, jqXHR);
                 }
             }
         );
-    }
+    };
 
-    self.AjaxPost = function (url, data, successFunc) {
+    self.AjaxPost = function(url, data, successFunc) {
         flow.exec(
-            function () {
+            function() {
                 self.ShowLoading();
                 $.ajax({
                     type: 'POST',
@@ -60,20 +60,20 @@ PushLibrary.Ajax = function () {
                     success: this
                 });
             },
-            function (data, textStatus, jqXHR) {
+            function(data, textStatus, jqXHR) {
                 self.HideLoading();
                 if (successFunc) {
                     successFunc(data, textStatus, jqXHR);
                 }
             }
         );
-    }
+    };
 
-    self.ShowLoading = function () {
+    self.ShowLoading = function() {
         $(ajaxSettings.SpinnerLayerTagSelector).show();
-    }
+    };
 
-    self.HideLoading = function () {
+    self.HideLoading = function() {
         $(ajaxSettings.SpinnerLayerTagSelector).hide();
-    }
-}
+    };
+};

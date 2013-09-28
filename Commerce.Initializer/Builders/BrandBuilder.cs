@@ -34,7 +34,7 @@ namespace Commerce.Initializer.Builders
         public void AddBrand(string brandImage, string name, string descrtipion, string SEO, string SkuCode)
         {
             LoggerSingleton.Get().Info("brandImage File Path - " + brandImage);
-            var imageBundle1 = _imageBundleRepository.Add(new Bitmap(brandImage));
+            var imageBundle1 = _imageBundleRepository.AddBitmap(new Bitmap(brandImage));
             _unitOfWork.SaveChanges();
             var brand1 = new JsonBrand()
             {

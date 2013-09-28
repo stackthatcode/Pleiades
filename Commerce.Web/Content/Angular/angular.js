@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license AngularJS v1.0.6
  * (c) 2010-2012 Google, Inc. http://angularjs.org
  * License: MIT
@@ -886,7 +886,7 @@ function encodeUriQuery(val, pctEncodeSpaces) {
  *
  <doc:example>
    <doc:source>
-    I can add: 1 + 2 =  {{ 1+2 }}
+    I can AddColor: 1 + 2 =  {{ 1+2 }}
    </doc:source>
  </doc:example>
  *
@@ -1438,7 +1438,7 @@ function publishExternalAPI(angular){
  *
  * ## Angular's jQuery lite provides the following methods:
  *
- * - [addClass()](http://api.jquery.com/addClass/)
+ * - [AddColorClass()](http://api.jquery.com/AddColorClass/)
  * - [after()](http://api.jquery.com/after/)
  * - [append()](http://api.jquery.com/append/)
  * - [attr()](http://api.jquery.com/attr/)
@@ -1469,7 +1469,7 @@ function publishExternalAPI(angular){
  * - [val()](http://api.jquery.com/val/)
  * - [wrap()](http://api.jquery.com/wrap/)
  *
- * ## In addtion to the above, Angular provides additional methods to both jQuery and jQuery lite:
+ * ## In AddColortion to the above, Angular provides AddColoritional methods to both jQuery and jQuery lite:
  *
  * - `controller(name)` - retrieves the controller of the current element or its parent. By default
  *   retrieves controller associated with the `ngController` directive. If `name` is provided as
@@ -2239,7 +2239,7 @@ HashMap.prototype = {
 };
 
 /**
- * A map where multiple values can be added to the same key such that they form a queue.
+ * A map where multiple values can be AddColored to the same key such that they form a queue.
  * @returns {HashQueueMap}
  */
 function HashQueueMap() {}
@@ -2293,7 +2293,7 @@ HashQueueMap.prototype = {
  *
 
  * @param {Array.<string|Function>} modules A list of module functions or their aliases. See
- *        {@link angular.module}. The `ng` module must be explicitly added.
+ *        {@link angular.module}. The `ng` module must be explicitly AddColored.
  * @returns {function()} Injector function. See {@link AUTO.$injector $injector}.
  *
  * @example
@@ -2317,7 +2317,7 @@ HashQueueMap.prototype = {
  * @name AUTO
  * @description
  *
- * Implicit module which gets automatically added to each {@link AUTO.$injector $injector}.
+ * Implicit module which gets automatically AddColored to each {@link AUTO.$injector $injector}.
  */
 
 var FN_ARGS = /^function\s*[^\(]*\(\s*([^\)]*)\)/m;
@@ -2400,7 +2400,7 @@ function annotate(fn) {
  * tools since these tools change the argument names.
  *
  * ## `$inject` Annotation
- * By adding a `$inject` property onto a function the injection parameters can be specified.
+ * By AddColoring a `$inject` property onto a function the injection parameters can be specified.
  *
  * ## Inline
  * As an array of injection names, where the last item in the array is the function to call.
@@ -2539,7 +2539,7 @@ function annotate(fn) {
  * The providers share the same name as the instance they create with `Provider` suffixed to them.
  *
  * A provider is an object with a `$get()` method. The injector calls the `$get` method to create a new instance of
- * a service. The Provider can have additional methods which would allow for configuration of the provider.
+ * a service. The Provider can have AddColoritional methods which would allow for configuration of the provider.
  *
  * <pre>
  *   function GreetProvider() {
@@ -2585,7 +2585,7 @@ function annotate(fn) {
  * @methodOf AUTO.$provide
  * @description
  *
- * Register a provider for a service. The providers can be retrieved and can have additional configuration methods.
+ * Register a provider for a service. The providers can be retrieved and can have AddColoritional configuration methods.
  *
  * @param {string} name The name of the instance. NOTE: the provider will be available under `name + 'Provider'` key.
  * @param {(Object|function())} provider If the provider is:
@@ -3039,16 +3039,16 @@ function Browser(window, document, $log, $sniffer) {
       pollTimeout;
 
   /**
-   * @name ng.$browser#addPollFn
+   * @name ng.$browser#AddColorPollFn
    * @methodOf ng.$browser
    *
-   * @param {function()} fn Poll function to add
+   * @param {function()} fn Poll function to AddColor
    *
    * @description
    * Adds a function to the list of functions that poller periodically executes,
    * and starts polling if not started yet.
    *
-   * @returns {function()} the added function
+   * @returns {function()} the AddColored function
    */
   self.addPollFn = function(fn) {
     if (isUndefined(pollTimeout)) startPoller(100, setTimeout);
@@ -3143,7 +3143,7 @@ function Browser(window, document, $log, $sniffer) {
    * Register callback function that will be called, when url changes.
    *
    * It's only called when the url is changed by outside of angular:
-   * - user types different url into address bar
+   * - user types different url into AddColorress bar
    * - user clicks on history (forward/back) button
    * - user clicks on a link
    *
@@ -3160,7 +3160,7 @@ function Browser(window, document, $log, $sniffer) {
   self.onUrlChange = function(callback) {
     if (!urlChangeInit) {
       // We listen on both (hashchange/popstate) when available, as some browsers (e.g. Opera)
-      // don't fire popstate when user change the address bar and don't fire hashchange when url
+      // don't fire popstate when user change the AddColorress bar and don't fire hashchange when url
       // changed by push/replaceState
 
       // html5 history api - popstate event
@@ -3977,11 +3977,11 @@ function $CompileProvider($provide) {
 
 
     /**
-     * Looks for directives on the given node and adds them to the directive collection which is
+     * Looks for directives on the given node and AddColors them to the directive collection which is
      * sorted.
      *
      * @param node Node to search.
-     * @param directives An array to which the directives are added to. This array is sorted before
+     * @param directives An array to which the directives are AddColored to. This array is sorted before
      *        the function returns.
      * @param attrs The shared attrs object which is used to populate the normalized attributes.
      * @param {number=} maxPriority Max directive priority.
@@ -4153,7 +4153,7 @@ function $CompileProvider($provide) {
             // combine directives from the original node and from the template:
             // - take the array of directives for this element
             // - split it into two parts, those that were already applied and those that weren't
-            // - collect directives from the template, add them to the second group and sort them
+            // - collect directives from the template, AddColor them to the second group and sort them
             // - append the second group with new directives to the first group
             directives = directives.concat(
                 collectDirectives(
@@ -4379,7 +4379,7 @@ function $CompileProvider($provide) {
      *   * `A': attribute
      *   * `C`: class
      *   * `M`: comment
-     * @returns true if directive was added.
+     * @returns true if directive was AddColored.
      */
     function addDirective(tDirectives, name, location, maxPriority) {
       var match = false;
@@ -4911,14 +4911,14 @@ function $InterpolateProvider() {
           index = endIndex + endSymbolLength;
           hasInterpolation = true;
         } else {
-          // we did not find anything, so we have to add the remainder to the parts array
+          // we did not find anything, so we have to AddColor the remainder to the parts array
           (index != length) && parts.push(text.substring(index));
           index = length;
         }
       }
 
       if (!(length = parts.length)) {
-        // we added, nothing, must have been an empty string.
+        // we AddColored, nothing, must have been an empty string.
         parts.push('');
         length = 1;
       }
@@ -5303,7 +5303,7 @@ LocationUrl.prototype = {
    *
    * Change path when called with parameter and return `$location`.
    *
-   * Note: Path should always begin with forward slash (/), this method will add the forward slash
+   * Note: Path should always begin with forward slash (/), this method will AddColor the forward slash
    * if it is missing.
    *
    * @param {string=} path New path
@@ -5373,7 +5373,7 @@ LocationUrl.prototype = {
    *
    * @description
    * If called, all changes to $location during current `$digest` will be replacing current history
-   * record, instead of adding new one.
+   * record, instead of AddColoring new one.
    */
   replace: function() {
     this.$$replace = true;
@@ -5425,18 +5425,18 @@ function locationGetterSetter(property, preprocess) {
  * @requires $rootElement
  *
  * @description
- * The $location service parses the URL in the browser address bar (based on the
+ * The $location service parses the URL in the browser AddColorress bar (based on the
  * {@link https://developer.mozilla.org/en/window.location window.location}) and makes the URL
- * available to your application. Changes to the URL in the address bar are reflected into
- * $location service and changes to $location are reflected into the browser address bar.
+ * available to your application. Changes to the URL in the AddColorress bar are reflected into
+ * $location service and changes to $location are reflected into the browser AddColorress bar.
  *
  * **The $location service:**
  *
- * - Exposes the current URL in the browser address bar, so you can
+ * - Exposes the current URL in the browser AddColorress bar, so you can
  *   - Watch and observe the URL.
  *   - Change the URL.
  * - Synchronizes the URL with the browser when the user
- *   - Changes the address bar.
+ *   - Changes the AddColorress bar.
  *   - Clicks the back or forward button (or clicks a History link).
  *   - Clicks on a link.
  * - Represents the URL object as a set of methods (protocol, host, port, path, search, hash).
@@ -7014,7 +7014,7 @@ function $RouteProvider(){
    *
    * @param {string} path Route path (matched against `$location.path`). If `$location.path`
    *    contains redundant trailing slash or is missing one, the route will still match and the
-   *    `$location.path` will be updated to add or drop the trailing slash to exactly match the
+   *    `$location.path` will be updated to AddColor or drop the trailing slash to exactly match the
    *    route definition.
    *
    *    `path` can contain named groups starting with a colon (`:name`). All characters up to the
@@ -7507,7 +7507,7 @@ function $RouteParamsProvider() {
  *     exposed as $$____ properties
  *
  * Loop operations are optimized by using while(count--) { ... }
- *   - this means that in order to keep the same order of execution as addition we have to add
+ *   - this means that in order to keep the same order of execution as AddColorition we have to AddColor
  *     items to the array at the begging (shift) instead of at the end (push)
  *
  * Child scopes are created and removed often
@@ -8590,7 +8590,7 @@ function $HttpProvider() {
      *
      * # Setting HTTP Headers
      *
-     * The $http service will automatically add certain http headers to all requests. These defaults
+     * The $http service will automatically AddColor certain http headers to all requests. These defaults
      * can be fully configured by accessing the `$httpProvider.defaults.headers` configuration
      * object, which currently contains this default configuration:
      *
@@ -8602,8 +8602,8 @@ function $HttpProvider() {
      * - `$httpProvider.defaults.headers.put` (header defaults for HTTP PUT requests)
      *   - `Content-Type: application/json`
      *
-     * To add or overwrite these defaults, simply add or remove a property from this configuration
-     * objects. To add headers for an HTTP method other than POST or PUT, simply add a new object
+     * To AddColor or overwrite these defaults, simply AddColor or remove a property from this configuration
+     * objects. To AddColor headers for an HTTP method other than POST or PUT, simply AddColor a new object
      * with name equal to the lower-cased http method name, e.g.
      * `$httpProvider.defaults.headers.get['My-Header']='value'`.
      *
@@ -8662,7 +8662,7 @@ function $HttpProvider() {
      * promise apis} to fulfil this need for both synchronous and asynchronous preprocessing.
      *
      * The interceptors are service factories that are registered with the $httpProvider by
-     * adding them to the `$httpProvider.responseInterceptors` array. The factory is called and
+     * AddColoring them to the `$httpProvider.responseInterceptors` array. The factory is called and
      * injected with dependencies (if specified) and returns the interceptor  — a function that
      * takes a {@link ng.$q promise} and returns the original or a new promise.
      *
@@ -8703,7 +8703,7 @@ function $HttpProvider() {
      * - {@link http://en.wikipedia.org/wiki/Cross-site_request_forgery XSRF}
      *
      * Both server and the client must cooperate in order to eliminate these threats. Angular comes
-     * pre-configured with strategies that address these issues, but for this to work backend server
+     * pre-configured with strategies that AddColorress these issues, but for this to work backend server
      * cooperation is required.
      *
      * ## JSON Vulnerability Protection
@@ -8743,7 +8743,7 @@ function $HttpProvider() {
      * that only JavaScript running on your domain could have read the token. The token must be
      * unique for each user and must be verifiable by the server (to prevent the JavaScript making
      * up its own tokens). We recommend that the token is a digest of your site's authentication
-     * cookie with {@link http://en.wikipedia.org/wiki/Rainbow_table salt for added security}.
+     * cookie with {@link http://en.wikipedia.org/wiki/Rainbow_table salt for AddColored security}.
      *
      *
      * @param {object} config Object describing the request to be made and how it should be
@@ -9279,7 +9279,7 @@ function createHttpBackend($browser, XHR, $browserDefer, callbacks, rawDocument,
   function jsonpReq(url, done) {
     // we can't use jQuery/jqLite here because jQuery does crazy shit with script elements, e.g.:
     // - fetches local scripts via XHR and evals them
-    // - adds and immediately removes script elements from the document
+    // - AddColors and immediately removes script elements from the document
     var script = rawDocument.createElement('script'),
         doneWrapper = function() {
           rawDocument.body.removeChild(script);
@@ -9984,23 +9984,23 @@ var DATE_FORMATS_SPLIT = /((?:[^yMdHhmsaZE']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|d+
  *   `format` string can be composed of the following elements:
  *
  *   * `'yyyy'`: 4 digit representation of year (e.g. AD 1 => 0001, AD 2010 => 2010)
- *   * `'yy'`: 2 digit representation of year, padded (00-99). (e.g. AD 2001 => 01, AD 2010 => 10)
+ *   * `'yy'`: 2 digit representation of year, pAddColored (00-99). (e.g. AD 2001 => 01, AD 2010 => 10)
  *   * `'y'`: 1 digit representation of year, e.g. (AD 1 => 1, AD 199 => 199)
  *   * `'MMMM'`: Month in year (January-December)
  *   * `'MMM'`: Month in year (Jan-Dec)
- *   * `'MM'`: Month in year, padded (01-12)
+ *   * `'MM'`: Month in year, pAddColored (01-12)
  *   * `'M'`: Month in year (1-12)
- *   * `'dd'`: Day in month, padded (01-31)
+ *   * `'dd'`: Day in month, pAddColored (01-31)
  *   * `'d'`: Day in month (1-31)
  *   * `'EEEE'`: Day in Week,(Sunday-Saturday)
  *   * `'EEE'`: Day in Week, (Sun-Sat)
- *   * `'HH'`: Hour in day, padded (00-23)
+ *   * `'HH'`: Hour in day, pAddColored (00-23)
  *   * `'H'`: Hour in day (0-23)
- *   * `'hh'`: Hour in am/pm, padded (01-12)
+ *   * `'hh'`: Hour in am/pm, pAddColored (01-12)
  *   * `'h'`: Hour in am/pm, (1-12)
- *   * `'mm'`: Minute in hour, padded (00-59)
+ *   * `'mm'`: Minute in hour, pAddColored (00-59)
  *   * `'m'`: Minute in hour (0-59)
- *   * `'ss'`: Second in minute, padded (00-59)
+ *   * `'ss'`: Second in minute, pAddColored (00-59)
  *   * `'s'`: Second in minute (0-59)
  *   * `'a'`: am/pm marker
  *   * `'Z'`: 4 digit (+sign) representation of the timezone offset (-1200-+1200)
@@ -10434,7 +10434,7 @@ var htmlAnchorDirective = valueFn({
         attr.$set('href', '');
       }
 
-      // add a comment node to anchors to workaround IE bug that causes element content to be reset
+      // AddColor a comment node to anchors to workaround IE bug that causes element content to be reset
       // to new attribute content if attribute is updated with value containing @ and element also
       // contains value with @
       // see issue #1949
@@ -11277,7 +11277,7 @@ var inputType = {
    *
    * @description
    * Text input with email validation. Sets the `email` validation error key if not a valid email
-   * address.
+   * AddColorress.
    *
    * @param {string} ngModel Assignable angular expression to data-bind to.
    * @param {string=} name Property name of the form under which the control is published.
@@ -12528,12 +12528,12 @@ function classDirective(name, selector) {
  *
  * @description
  * The `ngClass` allows you to set CSS class on HTML element dynamically by databinding an
- * expression that represents all classes to be added.
+ * expression that represents all classes to be AddColored.
  *
- * The directive won't add duplicate classes if a particular class was already set.
+ * The directive won't AddColor duplicate classes if a particular class was already set.
  *
- * When the expression changes, the previously added classes are removed and only then the
- * new classes are added.
+ * When the expression changes, the previously AddColored classes are removed and only then the
+ * new classes are AddColored.
  *
  * @element ANY
  * @param {expression} ngClass {@link guide/expression Expression} to eval. The result
@@ -12697,9 +12697,9 @@ var ngClassEvenDirective = classDirective('Even', 1);
  * alternatively, the css rule (above) must be included in the external stylesheet of the
  * application.
  *
- * Legacy browsers, like IE7, do not provide attribute selector support (added in CSS 2.1) so they
- * cannot match the `[ng\:cloak]` selector. To work around this limitation, you must add the css
- * class `ngCloak` in addition to `ngCloak` directive as shown in the example below.
+ * Legacy browsers, like IE7, do not provide attribute selector support (AddColored in CSS 2.1) so they
+ * cannot match the `[ng\:cloak]` selector. To work around this limitation, you must AddColor the css
+ * class `ngCloak` in AddColorition to `ngCloak` directive as shown in the example below.
  *
  * @element ANY
  *
@@ -12771,7 +12771,7 @@ var ngCloakDirective = ngDirective({
            alert(this.name);
           };
 
-          $scope.addContact = function() {
+          $scope.AddColorContact = function() {
            this.contacts.push({type:'email', value:'yourname@example.org'});
           };
 
@@ -12800,7 +12800,7 @@ var ngCloakDirective = ngDirective({
             [ <a href="" ng-click="clearContact(contact)">clear</a>
             | <a href="" ng-click="removeContact(contact)">X</a> ]
           </li>
-          <li>[ <a href="" ng-click="addContact()">add</a> ]</li>
+          <li>[ <a href="" ng-click="AddColorContact()">AddColor</a> ]</li>
        </ul>
       </div>
      </doc:source>
@@ -12815,7 +12815,7 @@ var ngCloakDirective = ngDirective({
          element('.doc-example-live li:first a:contains("clear")').click();
          expect(element('.doc-example-live li:first input').val()).toBe('');
 
-         element('.doc-example-live li:last a:contains("add")').click();
+         element('.doc-example-live li:last a:contains("AddColor")').click();
          expect(element('.doc-example-live li:nth-child(3) input').val())
            .toBe('yourname@example.org');
        });
@@ -13347,7 +13347,7 @@ var ngNonBindableDirective = ngDirective({ terminal: true, priority: 1000 });
  * </ng-pluralize>
  * </pre>
  *
- * Notice that we are still using two plural categories(one, other), but we added
+ * Notice that we are still using two plural categories(one, other), but we AddColored
  * three explicit number rules 0, 1 and 2.
  * When one person, perhaps John, views the document, "John is viewing" will be shown.
  * When three people view the document, no explicit number rule is found, so
@@ -13812,7 +13812,7 @@ var ngStyleDirective = ngDirective(function(scope, element, attr) {
  * @scope
  * @param {*} ngSwitch|on expression to match against <tt>ng-switch-when</tt>.
  * @paramDescription
- * On child elments add:
+ * On child elments AddColor:
  *
  * * `ngSwitchWhen`: the case statement to match against. If match then this
  *   case will be displayed.
@@ -14255,7 +14255,7 @@ var scriptDirective = ['$templateCache', function($templateCache) {
               [<a href ng-click="colors.splice($index, 1)">X</a>]
             </li>
             <li>
-              [<a href ng-click="colors.push({})">add</a>]
+              [<a href ng-click="colors.push({})">AddColor</a>]
             </li>
           </ul>
           <hr/>
@@ -14490,7 +14490,7 @@ var selectDirective = ['$compile', '$parse', function($compile,   $parse) {
           // compile the element since there might be bindings in it
           $compile(nullOption)(scope);
 
-          // remove the class, which is added automatically because we recompile the element and it
+          // remove the class, which is AddColored automatically because we recompile the element and it
           // becomes the compilation root
           nullOption.removeClass('ng-scope');
 
@@ -14499,7 +14499,7 @@ var selectDirective = ['$compile', '$parse', function($compile,   $parse) {
           nullOption.remove();
         }
 
-        // clear contents, we'll add what's needed based on the model
+        // clear contents, we'll AddColor what's needed based on the model
         selectElement.html('');
 
         selectElement.bind('change', function() {
@@ -14569,7 +14569,7 @@ var selectDirective = ['$compile', '$parse', function($compile,   $parse) {
           if (multiple) {
             selectedSet = new HashMap(modelValue);
           } else if (modelValue === null || nullOption) {
-            // if we are not multiselect, and we are null then we have to add the nullOption
+            // if we are not multiselect, and we are null then we have to AddColor the nullOption
             optionGroups[''].push({selected:modelValue === null, id:'', label:''});
             selectedSet = true;
           }

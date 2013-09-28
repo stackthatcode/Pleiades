@@ -58,7 +58,7 @@ qq.extend(qq.UploadHandlerForm.prototype, {
         var input = this._inputs[id];
 
         if (!input){
-            throw new Error('file with passed id was not added, or already uploaded or cancelled');
+            throw new Error('file with passed id was not AddColored, or already uploaded or cancelled');
         }
 
         var fileName = this.getName(id);
@@ -73,7 +73,7 @@ qq.extend(qq.UploadHandlerForm.prototype, {
 
             var response = self._getIframeContentJSON(iframe);
 
-            // timeout added to fix busy state in FF3.6
+            // timeout AddColored to fix busy state in FF3.6
             setTimeout(function(){
                 self._detach_load_events[id]();
                 delete self._detach_load_events[id];

@@ -4,8 +4,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Web;
 using System.Web.Mvc;
-using Pleiades.Application;
 using Pleiades.Application.Data;
+using Pleiades.Application.Logging;
 using Pleiades.Web;
 using Pleiades.Web.FineUploader;
 using Commerce.Application.Interfaces;
@@ -15,17 +15,21 @@ namespace Commerce.Web.Areas.Admin.Controllers
 {
     public class ImageController : Controller
     {
-        IImageBundleRepository ImageBundleRepository { get; set; }
-        IFileResourceRepository FileResourceRepository { get; set; }
+        private readonly IImageBundleRepository _imageBundleRepository;
+        private readonly IFileResourceRepository _fileResourceRepository;
+        private readonly IBlankImageRepository _blankImageRepository;
+    
         IUnitOfWork UnitOfWork { get; set; }
 
         public ImageController(
                 IImageBundleRepository imageBundleRepository, 
                 IFileResourceRepository fileResourceRepository, 
+                IBlankImageRepository blankImageRepository,
                 IUnitOfWork unitOfWork)
         {
-            this.ImageBundleRepository = imageBundleRepository;
-            this.FileResourceRepository = fileResourceRepository;
+            this._imageBundleRepository = imageBundleRepository;
+            this._fileResourceRepository = fileResourceRepository;
+            this._blankImageRepository = blankImageRepository;
             this.UnitOfWork = unitOfWork;
         }
 
@@ -40,7 +44,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             var stream = file.InputStream;
             var bitmap = new Bitmap(file.InputStream);
-            var imageBundle = this.ImageBundleRepository.Add(bitmap);
+            var imageBundle = this._imageBundleRepository.AddBitmap(bitmap);
 
             return new JsonNetResult(imageBundle);
         }
@@ -51,7 +55,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
             try
             {
                 var bitmap = new Bitmap(upload.InputStream);
-                var imageBundle = this.ImageBundleRepository.Add(bitmap);
+                var imageBundle = this._imageBundleRepository.AddBitmap(bitmap);
                 this.UnitOfWork.SaveChanges();
                 return new FineUploaderResult(true, new { ImageBundle = imageBundle });
             }
@@ -65,39 +69,23 @@ namespace Commerce.Web.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Download(Guid externalResourceId, string size)
         {
-            Debug.WriteLine("Image => Download: " + externalResourceId + " " + size);
-            var imageBundle = this.ImageBundleRepository.Retrieve(externalResourceId);
+            LoggerSingleton.Get().Debug("Image - Download: " + externalResourceId + " " + size);
 
-            if (externalResourceId == Guid.Empty)
+            // ALSO: why are we doing this stuff in a controller...?
+            var imageBundle = this._imageBundleRepository.Retrieve(externalResourceId);
+            if (imageBundle == null)
             {
-                string path;
-                if (size == "thumbnail")
-                {
-                    path = Server.MapPath(ConfigurationManager.AppSettings["BlankThumbnailImageUrl"]);
-                }
-                else
-                {
-                    path = Server.MapPath(ConfigurationManager.AppSettings["BlankSmallImageUrls"]);
-                }
-
+                // TODO: introduce Physical File type, which contains file extension
+                var path = _blankImageRepository.BlankImageBySize(size.ToImageSize());
                 return base.File(path, "image/gif");
             }
             else
             {
-                FileResource fileResource;
-                if (size == "thumbnail")
-                    fileResource = imageBundle.Thumbnail;
-                else if (size == "large")
-                    fileResource = imageBundle.Large;
-                else if (size == "small")
-                    fileResource = imageBundle.Small;
-                else
-                    fileResource = imageBundle.Original;
+                var fileResource = imageBundle.FileByImageSize(size.ToImageSize());
+                var path = this._fileResourceRepository.PhysicalFilePath(fileResource.ExternalId);
 
-                var path = this.FileResourceRepository.PhysicalFilePath(fileResource.ExternalId);
-
-                // TODO: add more MIME-types?
-                return base.File(path, "image/jpeg");
+                // TODO: map file types on upload
+                return base.File(path, "image/jpg");
             }
         }
     }

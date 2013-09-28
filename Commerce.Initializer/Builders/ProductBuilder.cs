@@ -74,7 +74,7 @@ namespace Commerce.Initializer.Builders
         {
 
             var rawImage = new Bitmap(filePath);
-            return _imageRepository.Add(rawImage);
+            return _imageRepository.AddBitmap(rawImage);
         }
 
         public JsonProductImage AddProductImage(int productId, int? colorId, ImageBundle imageBundle)

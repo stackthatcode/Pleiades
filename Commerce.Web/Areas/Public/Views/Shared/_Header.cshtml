@@ -1,11 +1,13 @@
 ﻿@using Commerce.Web.Areas.Public
-    <div id="top-menu-bar" class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <img src="@Url.Content("~/Content/Commerce.Web/Images/webicon-2.png")" style="float: left;" />
-                <a class="brand" href="@Url.RouteUrl(PublicNavigation.Home())" style="color: #FFF;">The Art of Ground Fighting.com</a>
-                <div class="nav-collapse">           
-                </div>
-            </div>
+
+<header class="navbar navbar-inverse navbar-fixed-top" style="z-index:500;">
+    <div class="container">
+        <div class="navbar-header">
+            <img src="@Url.Content("~/Content/Commerce.Web/Images/webicon-2.png")" style="float: left; padding-top:4px;" />
+            <a href="@Url.RouteUrl(PublicNavigation.Home())" class="navbar-brand" style="color: #FFF;">The Art of Ground Fighting.com</a>
         </div>
     </div>
+</header>
+
+<!-- Disappear for mobile...? -->
+<div id="top-spacer" style="height:150px; width:100px;"></div>

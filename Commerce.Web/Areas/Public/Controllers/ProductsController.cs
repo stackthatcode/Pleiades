@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Commerce.Application.Interfaces;
 using Pleiades.Application.Logging;
 using Pleiades.Web;
@@ -26,9 +27,10 @@ namespace Commerce.Web.Areas.Public.Controllers
         // GET api/product/5
         [HttpGet]
         [ActionName("action-with-id")]
-        public JsonNetResult Get(int id)
+        public JsonNetResult Get(string id)
         {
-            var results = _productRepository.RetrieveInfo(id);
+            var identifier = Int32.Parse(id);
+            var results = _productRepository.RetrieveInfo(identifier);
             return new JsonNetResult(results);
         }
 

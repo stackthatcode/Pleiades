@@ -1,11 +1,16 @@
 'use strict';
 
-/* App Module */
-
-angular.module('phonecat', []).
+angular.module('push-market', []).
   config(['$routeProvider', function($routeProvider) {
-  $routeProvider.
-      when('/products', { templateUrl: '/Content/C/phone-list.html', controller: ListController }).
-      when('/products/:productid', { templateUrl: 'partials/phone-detail.html', controller: DetailController }).
-      otherwise({redirectTo: '/phones'});
-}]);
+        $routeProvider
+          .when('/products', {
+              templateUrl: 'Content/Commerce.Web/ng-templates/ProductList.html', 
+              controller: 'ListController'
+          })
+          .when('/products/:productid', {
+              templateUrl: 'Content/Commerce.Web/ng-templates/ProductDetail.html', 
+              controller: 'DetailController'
+          })
+          .otherwise({ redirectTo: '/products' });
+    }
+  ]);

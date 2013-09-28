@@ -18,8 +18,11 @@ namespace Commerce.Application.Concrete.Infrastructure
         public IFileResourceRepository FileResourceRepository { get; set; }
         public IImageProcessor ImageProcessor { get; set; }
 
-        public ImageBundleRepository(PushMarketContext context,
-                IFileResourceRepository fileResourceRepository, IImageProcessor imageProcessor)
+
+        public ImageBundleRepository(
+                PushMarketContext context,
+                IFileResourceRepository fileResourceRepository, 
+                IImageProcessor imageProcessor)
         {
             this.Context = context;
             this.FileResourceRepository = fileResourceRepository;
@@ -36,7 +39,7 @@ namespace Commerce.Application.Concrete.Infrastructure
                 .Include(x => x.Small);
         }
 
-        public ImageBundle Add(Bitmap original)
+        public ImageBundle AddBitmap(Bitmap original)
         {
             var thumbnail = this.ImageProcessor.CreateThumbnail(original);
             var large = this.ImageProcessor.CreateLarge(original);
@@ -57,7 +60,7 @@ namespace Commerce.Application.Concrete.Infrastructure
             return bundle;
         }
 
-        public ImageBundle Add(Color color, int width, int height)
+        public ImageBundle AddColor(Color color, int width, int height)
         {
             var original = new Bitmap(width, height);
             using (Graphics gfx = Graphics.FromImage(original))
@@ -112,15 +115,18 @@ namespace Commerce.Application.Concrete.Infrastructure
             var output = this.Data().FirstOrDefault(x => x.Id == Id);
             if (output == null)
             {
-                return new ImageBundle { ExternalId = Guid.Empty };
+                return null;
             }
-            _cacheById.TryAdd(output.Id, output);
-            _cacheByGuid.TryAdd(output.ExternalId, output);
+            AddToCache(output);
             return output;
         }
 
         public ImageBundle Retrieve(Guid externalId)
         {
+            if (externalId == Guid.Empty)
+            {
+                return null;
+            }
             if (_cacheByGuid.ContainsKey(externalId))
             {
                 return _cacheByGuid[externalId];
@@ -128,17 +134,21 @@ namespace Commerce.Application.Concrete.Infrastructure
             var output = this.Data().FirstOrDefault(x => x.ExternalId == externalId);
             if (output == null)
             {
-                return new ImageBundle { ExternalId = Guid.Empty };
+                return null;
             }
-
-            _cacheById.TryAdd(output.Id, output);
-            _cacheByGuid.TryAdd(output.ExternalId, output);
+            AddToCache(output);
             return output;
         }
 
-        public void Delete(int Id)
+        private void AddToCache(ImageBundle bundle)
         {
-            var imageBundle = this.Retrieve(Id);
+            _cacheById.TryAdd(bundle.Id, bundle);
+            _cacheByGuid.TryAdd(bundle.ExternalId, bundle);            
+        }
+
+        public void Delete(int id)
+        {
+            var imageBundle = this.Retrieve(id);
             imageBundle.Original.Deleted = true;
             imageBundle.Thumbnail.Deleted = true;
             imageBundle.Large.Deleted = true;

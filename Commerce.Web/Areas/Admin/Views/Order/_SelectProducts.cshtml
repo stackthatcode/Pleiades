@@ -63,7 +63,7 @@
 
         self.ViewCart = function () {
             if (self.Cart().NumberOfDistinctItems() == 0) {
-                self.ShowModal("Notification", "The Shopping Cart is Empty", "Add Items to the Order");
+                self.ShowModal("Notification", "The Shopping Cart is Empty", "AddBitmapColor Items to the Order");
                 return;
             };
 
@@ -147,7 +147,7 @@
                 return;
             }
             if (self.Cart().NumberOfDistinctItems() >= 20) {
-                self.ShowModal("Notification", "The Shopping Cart is Full", "You can only add 20 distinct Skus per Order");
+                self.ShowModal("Notification", "The Shopping Cart is Full", "You can only AddBitmapColor 20 distinct Skus per Order");
                 return;
             }
             if (quantityInCart + selectedQuantity > inventoryItem.Available) {
@@ -168,8 +168,8 @@
             inventoryItem.GenerateQuantityOptions();
             inventoryItem.SelectedQuantity(null);
 
-            $("#AddFeedback").show();
-            $("#AddFeedback").fadeOut({ duration: 1000 });
+            $("#AddBitmapColorFeedback").show();
+            $("#AddBitmapColorFeedback").fadeOut({ duration: 1000 });
         }
     }
 </script>
@@ -179,11 +179,11 @@
 		<div id="heading" class="container">
             <div class="row">
 				<div class="span7">
-					<h1>Create Order &gt; Add Items</h1>
+					<h1>Create Order &gt; AddBitmapColor Items</h1>
 				</div>
                 <div class="span2" style="margin-top:20px; text-align:right;">
                     <div id="AddFeedback" style="display:none;">
-                        <span class="label label-info"> <i class="icon-star icon-white"></i>Item Added! &nbsp;</span>
+                        <span class="label label-info"> <i class="icon-star icon-white"></i>Item AddBitmapColored! &nbsp;</span>
                     </div>
                 </div>
 				<div class="span3" style="margin-top:15px; text-align:right;">
@@ -219,7 +219,7 @@
 <script type="text/html" id="Main-Editor-SelectProducts">
     <div style="margin-top:20px; margin-bottom:200px;">
         <div style="margin-top:50px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SearchData().length == 0">
-			<strong>There are no Products in your current search.  Click "Search" to run a search or click "Add New Product" to create a new one.</strong>  
+			<strong>There are no Products in your current search.  Click "Search" to run a search or click "AddBitmapColor New Product" to create a new one.</strong>  
 		</div>
 		    
 		<table id="parent-editor-table" class="table" data-bind="visible: $root.SearchData().length > 0">
@@ -264,7 +264,7 @@
                         <th style="text-align:right;">In Stock</th>
                         <th style="text-align:right;">Available</th>
                         <th style="text-align:right;">Quantity</th>
-                        <th style="text-align:right;">Add to Cart</th>
+                        <th style="text-align:right;">AddBitmapColor to Cart</th>
                     </thead>
                     <tbody data-bind="foreach: $data.Inventory">
                     <tr style="height:40px;">
@@ -282,7 +282,7 @@
                                 <span style="margin-right:10px;">N/A</span>
                             </div>
                         </td>
-                        <td style="width:100px; text-align:right;"><a name="add-to-cart" href="#" data-bind="click: function() { $root.AddToCart($data, $parent); }" style="color:#333;"><i class="icon-shopping-cart icon-blue"></i> Add to Cart</a></td>
+                        <td style="width:100px; text-align:right;"><a name="add-to-cart" href="#" data-bind="click: function() { $root.AddBitmapColorToCart($data, $parent); }" style="color:#333;"><i class="icon-shopping-cart icon-blue"></i> AddBitmapColor to Cart</a></td>
                     </tr>
                     </tbody>
                     </table>

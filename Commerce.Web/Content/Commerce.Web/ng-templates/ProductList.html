@@ -1,1 +1,12 @@
-﻿
+﻿<h1 style="font-weight:bold;" >The Art of Ground Fighting.com</h1>
+
+<h2 style="color: #666;">{{ testVariable }} {{ products.length }}</h2>
+<span>{{ NameTest() }}</span>
+
+<!-- TODO: build a function which creates the Image Bundle Url -->
+<div ng-repeat="product in products | orderBy:name" class="thumbnail">
+    <a href="#/products/{{product.Id}}">{{ product.Name }}</a> Here!            
+</div>
+
+<a href="#/products/explode">Test Error</a>
+    

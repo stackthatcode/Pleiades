@@ -53,7 +53,7 @@
 
 		this.escape();
 	
-		// This bit is added since we don't display until we have the size
+		// This bit is AddColored since we don't display until we have the size
 		//	which prevents image jumping
 		this.preloadSize(function()
 		{
@@ -151,11 +151,11 @@
 		windowHeight = $(window).height();
 		windowWidth  = $(window).width();
 
-		// Get the top, bottom, right, and left padding
-		padTop    = parseInt( that.$element.find('.lightbox-content').css('padding-top')    , 10);
-		padBottom = parseInt( that.$element.find('.lightbox-content').css('padding-bottom') , 10);
-		padLeft   = parseInt( that.$element.find('.lightbox-content').css('padding-left')   , 10);
-		padRight  = parseInt( that.$element.find('.lightbox-content').css('padding-right')  , 10);
+		// Get the top, bottom, right, and left pAddColoring
+		padTop    = parseInt( that.$element.find('.lightbox-content').css('pAddColoring-top')    , 10);
+		padBottom = parseInt( that.$element.find('.lightbox-content').css('pAddColoring-bottom') , 10);
+		padLeft   = parseInt( that.$element.find('.lightbox-content').css('pAddColoring-left')   , 10);
+		padRight  = parseInt( that.$element.find('.lightbox-content').css('pAddColoring-right')  , 10);
 
 		// Load the image, we have to do this because if the image isn't already loaded we get a bad size
 		$image    = that.$element.find('.lightbox-content').find('img:first');

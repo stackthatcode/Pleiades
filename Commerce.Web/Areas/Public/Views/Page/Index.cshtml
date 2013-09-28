@@ -2,18 +2,10 @@
 @using Commerce.Web.Areas.Public
 @model ProductListModel
 
-@section _Body {
+@section _Body {    
+    <div id="arena" class="container" ng-view></div>
     
-    <!-- TODO: create a navigation Route catalog in one of the glue pieces -->
-    <div id="heading" class="container" style="margin-top: 200px;" ng-controller="ListController">
-        
-        <h1>Welcome to The Art of Ground Fighting.com - Under Construction</h1>
-        <h2 style="color: #666;">{{ testVariable }} {{ products.length }}</h2>
-
-        <div ng-repeat="product in products | orderBy:name" class="thumbnail">
-            <a href="#/products/{{product.Id}}">{{ product.Name }}</a> Here!
-        </div>
-
+    <div id="test-stuff-afterthought" class="container">
         @Html.RouteLink("Go To Admin Area", AdminNavigation.Home())<br />
         <a href="@Url.RouteUrl(PublicNavigation.TestHttp500())">Let things blow up!</a><br />
     </div>

@@ -55,6 +55,7 @@ namespace Commerce.Application
             builder.RegisterType<FileResourceRepository>().As<IFileResourceRepository>().InstancePerLifetimeScope();
             builder.RegisterType<ImageBundleRepository>().As<IImageBundleRepository>().InstancePerLifetimeScope();
             builder.RegisterType<ImageProcessor>().As<IImageProcessor>().InstancePerLifetimeScope();
+            builder.RegisterType<BlankImageRepository>().As<IBlankImageRepository>().InstancePerLifetimeScope();
 
             // Generic Repositories
             builder.RegisterType<EFGenericRepository<Brand>>().As<IGenericRepository<Brand>>().InstancePerLifetimeScope();

@@ -2,21 +2,16 @@
 
 var ngAjax = namespace("PushLibrary.NgAjax");
 var urlLocator = namespace("CommerceWeb.UrlLocator");
+var app = angular.module('push-market');
 
-/* Controllers */
-function ListController($scope, $http) {
-    $scope.testVariable = 'hello there!';
-    $scope.urlLocator = urlLocator;
-
-    ngAjax.Get($http, 'products', function (data) {
+app.controller('ListController', function($scope, $http) {
+    ngAjax.Get($http, 'products', function(data) {
         $scope.products = data;
     });
-}
+});
 
-function DetailController($scope, $routeParams, $http) {
-    $scope.UrlLocator = urlLocator;
-
-    ngAjax.Get($http, 'products/' + $routeParams.productid, function (data) {
+app.controller('DetailController', function($scope, $routeParams, $http) {
+    ngAjax.Get($http, 'products/' + $routeParams.productid, function(data) {
         $scope.product = data;
     });
-}
+});

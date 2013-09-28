@@ -7,7 +7,7 @@
                         <h1>Products > Search</h1>
                     </div>
                     <div class="span3" style="margin-top:15px; text-align:right;">
-                        <a class="btn btn-primary btn-block" data-bind="click: $root.AddProduct">Add New Product <i class="icon-arrow-right icon-white"></i></a>
+                        <a class="btn btn-primary btn-block" data-bind="click: $root.AddColorProduct">AddColor New Product <i class="icon-arrow-right icon-white"></i></a>
                     </div>
                 </div>
 
@@ -40,7 +40,7 @@
         <div style="width:100%; height:20px;"></div>
 
 		<div style="margin-top:20px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SearchData().length == 0">
-			<strong>There are no Products in your current search.  Click "Search" to run a search or click "Add New Product" to create a new one.</strong>  
+			<strong>There are no Products in your current search.  Click "Search" to run a search or click "AddColor New Product" to create a new one.</strong>  
 		</div>
 		
 		<table id="parent-editor-table" class="table table-hover" data-bind="visible: $root.SearchData().length > 0">
@@ -137,13 +137,13 @@
                 </div>
 
                 <div class="span5" style="text-align:right;" data-bind="if: $root.GetActiveMainEditor() == 'Colors'">
-                    <a class="btn btn-primary" href="#" data-bind="click: $root.SlideToColorList"><i class="icon-white icon-search"></i> Add Color from Lists</a>
+                    <a class="btn btn-primary" href="#" data-bind="click: $root.SlideToColorList"><i class="icon-white icon-search"></i> AddColor Color from Lists</a>
                     <a class="btn btn-primary" href="#" data-bind="click: $root.SlideToCreateNewColor"><i class="icon-white icon-pencil"></i> Create New Color</a>
                 </div>
 
                 <div class="span5" style="text-align:right;" data-bind="if: $root.GetActiveMainEditor() == 'Images'">				        
                     <!-- ko ifnot: $root.SelectedProduct().AssignImagesToColors() -->
-                    <a class="btn btn-primary" href="#" data-bind="click: $root.AddNewImage"><i class="icon-plus icon-white"></i> Add Image</a>
+                    <a class="btn btn-primary" href="#" data-bind="click: $root.AddColorNewImage"><i class="icon-plus icon-white"></i> AddColor Image</a>
                     <a class="btn btn-primary" href="#" data-bind="click: $root.AssignImagesToColorClick"><i class="icon-white icon-share"></i> Assign Images To Colors</a>
                     <!-- /ko -->
 
@@ -153,7 +153,7 @@
                 </div>
                     
                 <div class="span5" style="text-align:right;" data-bind="if: $root.GetActiveMainEditor() == 'Sizes'">
-                    <a class="btn btn-primary" href="#" data-bind="click: $root.AddSizeFromList"><i class="icon-white icon-search"></i> Add Size from Lists</a>
+                    <a class="btn btn-primary" href="#" data-bind="click: $root.AddColorSizeFromList"><i class="icon-white icon-search"></i> AddColor Size from Lists</a>
                 </div>
             </div>
         </div>

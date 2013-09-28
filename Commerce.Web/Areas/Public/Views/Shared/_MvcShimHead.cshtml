@@ -1,0 +1,52 @@
+﻿@using Commerce.Web.Areas.Admin
+@using Commerce.Web.Areas.Public
+@using Pleiades.Web.MvcHelpers
+
+<script type="text/javascript">
+    var urlLocator = namespace("CommerceWeb.UrlLocator");
+    urlLocator.admin_home = '@Url.RouteUrl(AdminNavigation.Home())';
+    urlLocator.contact_support = '@Url.RouteUrl(PublicNavigation.Contact())';
+    urlLocator.baseUrl = '@Url.BaseUrl()';
+
+    var ngAjax = namespace("PushLibrary.NgAjax");
+    ngAjax.Timeout = 60000;
+    ngAjax.ModelErrorSelector = "#modal-error";
+    ngAjax.SpinnerSelector = "#spinner-layer";
+    ngAjax.ModalErrorAction = "#modal-error-action";
+
+    ngAjax.ModalError = function () {
+        $(ngAjax.ModelErrorSelector).modal();
+        $(ngAjax.ModalErrorAction).click(function () {
+            location.reload();
+        });
+    };
+
+    ngAjax.ShowLoading = function() {
+        $(ngAjax.SpinnerSelector).show();
+    };
+
+    ngAjax.HideLoading = function () {
+        $(ngAjax.SpinnerSelector).hide();
+    };
+
+    ngAjax.HideLoadingFactory = function (successClosure) {
+        return function(data, status, headers, config) {
+            $(ngAjax.SpinnerSelector).hide();
+            successClosure(data, status, headers, config);
+        };
+    };
+
+    ngAjax.ModalErrorFactory = function () {
+        return function (data, status, headers, config) {
+            ngAjax.HideLoading();
+            ngAjax.ModalError();
+        };
+    };
+
+    ngAjax.Get = function ($http, url, successClosure) {
+        ngAjax.ShowLoading();
+        $http.get(urlLocator.baseUrl + url)
+            .success(ngAjax.HideLoadingFactory(successClosure))
+            .error(ngAjax.ModalErrorFactory());
+    };
+</script>

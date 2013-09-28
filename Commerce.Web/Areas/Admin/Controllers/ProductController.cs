@@ -246,7 +246,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             string rgb = request.Rgb;
             var color = ColorTranslator.FromHtml(rgb);
-            var imageBundle = this.ImageBundleRepository.Add(color, 150, 150);
+            var imageBundle = this.ImageBundleRepository.AddColor(color, 150, 150);
             this.Context.SaveChanges();
             return new JsonNetResult(imageBundle);
         }
