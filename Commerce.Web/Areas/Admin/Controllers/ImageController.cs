@@ -70,13 +70,12 @@ namespace Commerce.Web.Areas.Admin.Controllers
         public ActionResult Download(Guid externalResourceId, string size)
         {
             LoggerSingleton.Get().Debug("Image - Download: " + externalResourceId + " " + size);
-
-            // ALSO: why are we doing this stuff in a controller...?
             var imageBundle = this._imageBundleRepository.Retrieve(externalResourceId);
             if (imageBundle == null)
             {
-                // TODO: introduce Physical File type, which contains file extension
                 var path = _blankImageRepository.BlankImageBySize(size.ToImageSize());
+
+                // TODO: introduce Physical File type, which contains file extension
                 return base.File(path, "image/gif");
             }
             else

@@ -147,6 +147,9 @@
     <Compile Include="Areas\Public\Controllers\ImageController.cs" />
     <Compile Include="Areas\Public\Controllers\SectionController.cs" />
     <Compile Include="Areas\Public\Controllers\ProductsController.cs" />
+    <Compile Include="Plumbing\CommerceWebUIModule.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Plumbing\ErrorModel.cs" />
     <Compile Include="Areas\Public\PublicAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Models\Auth\LogOnViewModel.cs" />
@@ -159,7 +162,6 @@
     <Compile Include="Areas\Public\Controllers\PageController.cs" />
     <Compile Include="Areas\Public\Models\ProductListModel.cs" />
     <Compile Include="AutofacBootstrap.cs" />
-    <Compile Include="Content\CommerceWebUIModule.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -187,14 +189,34 @@
     <Content Include="Content\Angular\angular.js" />
     <Content Include="Content\Angular\angular.min.js" />
     <Content Include="Content\Angular\version.txt" />
+    <Content Include="Content\ArtOfGroundFighting\Images\ajax_loader.gif" />
+    <Content Include="Content\ArtOfGroundFighting\Images\ohnoes.png" />
+    <Content Include="Content\ArtOfGroundFighting\Images\vintage-logo-sm.png" />
+    <Content Include="Content\ArtOfGroundFighting\ng-templates\about.html" />
+    <Content Include="Content\ArtOfGroundFighting\ng-templates\cart.html" />
+    <Content Include="Content\ArtOfGroundFighting\ng-templates\contact.html" />
+    <Content Include="Content\ArtOfGroundFighting\ng-templates\content-parent.html" />
+    <Content Include="Content\ArtOfGroundFighting\ng-templates\product-detail.html" />
+    <Content Include="Content\ArtOfGroundFighting\ng-templates\product-list.html" />
+    <Content Include="Content\ArtOfGroundFighting\ng-templates\shipping.html" />
+    <Content Include="Content\ArtOfGroundFighting\Scripts\angular-app.js" />
+    <Content Include="Content\ArtOfGroundFighting\Scripts\angular-controller.js" />
+    <Content Include="Content\ArtOfGroundFighting\Style\artofgroundfighting.css" />
     <Content Include="Content\Bootstrap_2_3_2\css\bootstrap-lightbox.min.css" />
-    <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-lightbox.js" />
-    <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-lightbox.min.js" />
+    <Content Include="Content\Bootstrap_2_3_2\css\bootstrap-responsive.css" />
+    <Content Include="Content\Bootstrap_2_3_2\css\bootstrap-responsive.min.css" />
+    <Content Include="Content\Bootstrap_2_3_2\css\bootstrap.css" />
+    <Content Include="Content\Bootstrap_2_3_2\css\bootstrap.min.css" />
+    <Content Include="Content\Bootstrap_2_3_2\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\Bootstrap_2_3_2\img\glyphicons-halflings.png" />
     <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-alert.js" />
     <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-dropdown.js" />
+    <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-lightbox.js" />
+    <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-lightbox.min.js" />
     <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-modal.js" />
     <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-popover.js" />
     <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-tooltip.js" />
+    <Content Include="Content\Bootstrap_2_3_2\js\bootstrap.min.js" />
     <Content Include="Content\Bootstrap_3_0_0\css\bootstrap-theme.css" />
     <Content Include="Content\Bootstrap_3_0_0\css\bootstrap-theme.min.css" />
     <Content Include="Content\Bootstrap_3_0_0\css\bootstrap.css" />
@@ -202,25 +224,17 @@
     <Content Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Bootstrap_3_0_0\js\bootstrap.js" />
     <Content Include="Content\Bootstrap_3_0_0\js\bootstrap.min.js" />
-    <Content Include="Content\Commerce.Web\ng-templates\ProductDetail.html" />
-    <Content Include="Content\Commerce.Web\ng-templates\ProductList.html" />
-    <Content Include="Content\Commerce.Web\Scripts\angular-app.js" />
-    <Content Include="Content\Commerce.Web\Scripts\angular-controller.js" />
-    <Content Include="Content\Commerce.Web\Images\ohnoes.png" />
-    <Content Include="Content\Commerce.Web\Style\artofgroundfighting.css" />
-    <Content Include="Content\JQuery\jquery-2.0.3.min.js" />
-    <Content Include="Content\Knockout\knockout-2.3.0rc.js" />
-    <Content Include="Content\PushLibraryKo\scroll-tracker.js" />
-    <Content Include="Content\PushLibraryNg\endless-ng-glider.js" />
-    <Content Include="Content\Utilities\generalFunctions.js" />
-    <Content Include="Content\PushLibraryKo\endless-ko-glider.js" />
+    <Content Include="Content\Commerce.Web\Images\200x200.gif" />
+    <Content Include="Content\Commerce.Web\Images\75x75.gif" />
+    <Content Include="Content\Commerce.Web\Images\800x600.gif" />
+    <Content Include="Content\Commerce.Web\Images\ajax_loader.gif" />
+    <Content Include="Content\Commerce.Web\Images\webicon-2.png" />
+    <Content Include="Content\Commerce.Web\Style\pushmarketadmin.css" />
     <Content Include="Content\Farbtastic\farbtasticSecure.css" />
     <Content Include="Content\Farbtastic\farbtasticSecure.js" />
     <Content Include="Content\Farbtastic\marker.png" />
     <Content Include="Content\Farbtastic\mask.png" />
     <Content Include="Content\Farbtastic\wheel.png" />
-    <Content Include="Content\Utilities\aQuery-1.0-min.js" />
-    <Content Include="Content\Utilities\flow.js" />
     <Content Include="Content\FineUploader\fineuploader.css" />
     <Content Include="Content\FineUploader\js\button.js" />
     <Content Include="Content\FineUploader\js\dnd.js" />
@@ -234,26 +248,22 @@
     <Content Include="Content\FineUploader\js\util.js" />
     <Content Include="Content\FineUploader\loading.gif" />
     <Content Include="Content\FineUploader\processing.gif" />
-    <Content Include="Content\Commerce.Web\Images\150x150.gif" />
-    <Content Include="Content\Commerce.Web\Images\75x75.gif" />
-    <Content Include="Content\Commerce.Web\Images\ajax_loader.gif" />
-    <Content Include="Content\Commerce.Web\Images\webicon-2.png" />
+    <Content Include="Content\JQuery\jquery-2.0.3.min.js" />
+    <Content Include="Content\JQuery\jquery-ui-1.10.0.custom.min.css" />
     <Content Include="Content\JQuery\jquery-ui-1.10.0.custom.min.js" />
     <Content Include="Content\JQuery\jquery.animate-colors-min.js" />
     <Content Include="Content\JQuery\jquery.validate.min.js" />
+    <Content Include="Content\Knockout\knockout-2.3.0rc.js" />
     <Content Include="Content\Knockout\ko.observableDictionary.js" />
     <Content Include="Content\PushLibraryKo\ajax.js" />
+    <Content Include="Content\PushLibraryKo\endless-ko-glider.js" />
     <Content Include="Content\PushLibraryKo\knockout-glider.js" />
-    <Content Include="Content\JQuery\jquery-ui-1.10.0.custom.min.css" />
-    <Content Include="Content\Commerce.Web\Style\pushmarketadmin.css" />
+    <Content Include="Content\PushLibraryKo\scroll-tracker.js" />
+    <Content Include="Content\PushLibraryNg\endless-ng-glider.js" />
+    <Content Include="Content\Utilities\aQuery-1.0-min.js" />
+    <Content Include="Content\Utilities\flow.js" />
+    <Content Include="Content\Utilities\generalFunctions.js" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Bootstrap_2_3_2\css\bootstrap-responsive.css" />
-    <Content Include="Content\Bootstrap_2_3_2\css\bootstrap-responsive.min.css" />
-    <Content Include="Content\Bootstrap_2_3_2\css\bootstrap.css" />
-    <Content Include="Content\Bootstrap_2_3_2\css\bootstrap.min.css" />
-    <Content Include="Content\Bootstrap_2_3_2\img\glyphicons-halflings-white.png" />
-    <Content Include="Content\Bootstrap_2_3_2\img\glyphicons-halflings.png" />
-    <Content Include="Content\Bootstrap_2_3_2\js\bootstrap.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -363,9 +373,6 @@
     <Content Include="Areas\Public\Views\Shared\_Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Public\Views\Page\Contact.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Areas\Public\Views\Shared\_Header.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -393,8 +400,10 @@
     <Content Include="Areas\Public\Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Public\Views\Shared\_CrossCutting.cshtml" />
     <Content Include="Areas\Public\Views\Shared\_MvcShimBody.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\ArtOfGroundFighting\Fonts\Bevan.woff" />
     <None Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.eot" />
     <None Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.woff" />

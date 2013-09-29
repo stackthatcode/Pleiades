@@ -15,3 +15,7 @@ app.controller('DetailController', function($scope, $routeParams, $http) {
         $scope.product = data;
     });
 });
+
+app.controller('ContentController', function ($scope, $routeParams) {
+    $scope.templateUrl = 'Content/ArtOfGroundFighting/ng-templates/' + $routeParams.contentid + '.html';
+});

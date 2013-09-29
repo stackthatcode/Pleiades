@@ -10,7 +10,8 @@ namespace Commerce.Web.Plumbing
         public SecurityContext Create(AuthorizationContext filterContext, AggregateUser user)
         {
             if (filterContext.Controller is Areas.Public.Controllers.ProductsController ||
-                filterContext.Controller is Areas.Public.Controllers.PageController)
+                filterContext.Controller is Areas.Public.Controllers.PageController || 
+                filterContext.Controller is Areas.Public.Controllers.ImageController)
             {
                 return new SecurityContext(user)
                 {

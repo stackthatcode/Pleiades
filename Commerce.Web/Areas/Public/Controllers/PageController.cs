@@ -7,23 +7,9 @@ namespace Commerce.Web.Areas.Public.Controllers
 {
     public class PageController : Controller
     {
-        //
-        // TODO: devise a better page navigation schema
-        //
         public ActionResult Index()
         {
             return View();
-        }
-
-        // Actually, aren't these partial views...?  Hmmm?
-        public ActionResult Contact()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ActionResult About()
-        {
-            throw new NotImplementedException();
         }
 
         public ActionResult ServerError()
@@ -58,7 +44,5 @@ namespace Commerce.Web.Areas.Public.Controllers
         {
             throw new Exception();
         }
-
-        // TODO: add System Downtime page stuff
     }
 }

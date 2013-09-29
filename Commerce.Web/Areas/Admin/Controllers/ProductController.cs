@@ -1,13 +1,12 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Web.Mvc;
 using Commerce.Application.Database;
-using Pleiades.Web;
 using Commerce.Application.Interfaces;
 using Commerce.Application.Model.Products;
 using Commerce.Web.Areas.Admin.Models.Color;
+using Pleiades.Web;
 
 namespace Commerce.Web.Areas.Admin.Controllers
 {

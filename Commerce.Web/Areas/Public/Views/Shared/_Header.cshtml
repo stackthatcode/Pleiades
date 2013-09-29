@@ -2,12 +2,20 @@
 
 <header class="navbar navbar-inverse navbar-fixed-top" style="z-index:500;">
     <div class="container">
-        <div class="navbar-header">
-            <img src="@Url.Content("~/Content/Commerce.Web/Images/webicon-2.png")" style="float: left; padding-top:4px;" />
-            <a href="@Url.RouteUrl(PublicNavigation.Home())" class="navbar-brand" style="color: #FFF;">The Art of Ground Fighting.com</a>
+        <div class="navbar-header" style="float:left;">
+            <a href="@Url.RouteUrl(PublicNavigation.Home())" class="navbar-brand" style="color: #FFF;"><i class="glyphicon glyphicon-star"></i>
+                The Art of Ground Fighting.com</a>
         </div>
+        
+        <ul class="nav navbar-nav navbar-right visible-lg" style="float:right;">
+            <li><a class="gold-link" style="color:gold;" href="#/content/about">Who We Are <i class="glyphicon glyphicon-user"></i></a></li>
+            <li><a class="gold-link" style="color:gold;" href="#/content/contact">Contact Us <i class="glyphicon glyphicon-phone-alt"></i></a></li>
+            <li><a class="gold-link" style="color:gold;" href="#/content/shipping">Shipping <i class="glyphicon glyphicon-plane"></i></a></li>
+            <li><a class="gold-link" style="color:gold;" href="#/content/cart">My Cart <i class="glyphicon glyphicon-shopping-cart"></i></a></li>
+        </ul>
+        
+        <ul class="nav navbar-nav navbar-right hidden-lg" style="float:right;">
+            <li><a class="gold-link" style="color:gold;" href="#/content/cart">My Cart <i class="glyphicon glyphicon-shopping-cart"></i></a></li>
+        </ul>
     </div>
 </header>
-
-<!-- Disappear for mobile...? -->
-<div id="top-spacer" style="height:150px; width:100px;"></div>

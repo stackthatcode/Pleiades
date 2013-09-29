@@ -18,11 +18,6 @@ namespace Commerce.Web.Areas.Public
             return RouteValueDictionaryBuilder.FromController<PageController>(AreaName, x => x.Index());
         }
 
-        public static RouteValueDictionary Contact()
-        {
-            return RouteValueDictionaryBuilder.FromController<PageController>(AreaName, x => x.Contact());
-        }
-
         public static RouteValueDictionary TestHttp500()
         {
             return RouteValueDictionaryBuilder.FromController<PageController>(AreaName, x => x.TestHttp500());

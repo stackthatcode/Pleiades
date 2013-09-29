@@ -11,27 +11,60 @@ FRONTRANGE - HOTZONE
 - Loaded 2 new Products => DONE
 - Refactored Builders => DONE
 
-9/23 - 1.5 Hours
-~~~~~~~~~~~~~~~~
+9/23 - 9/27 - 7.0 Hours
+~~~~~~~~~~~~~~~~~~~~~~~
 - Installed Bootstrap 3 + created Bundle Optimizers 
 - Ate shit trying to fix the Bootstrap Styles
+- Built Image Controller
+- Add Responsive design to Server Error page
+* Bootstrap 3 - How to Make it Responsive ??? => DONE
+* AngularJs library integration => DONE
+
+9/28 - 3.0 Hours
+~~~~~~~~~~~~~~~~
+- Create AJAX Error Handling and Spinner => DONE
+* Page skeleton w/ Error Handling, AJAX stuff, etc. => DONE
+
+9/28 - 4.0 Hours
+~~~~~~~~~~~~~~~~
+* Install Bevan => DONE
+- Change Image "Small" to 200px; => DONE
+- Google Web Fonts => DONE FOR NOW
+- Fix Image shrinking code => DONE
+
+9/29
+~~~~~~~~~~~~~~~~~~
+- Added Content browsing pages
+- Make Header Responsive => DONE
+- Add Cart Link at the Top => DONE
+- Add About Us Link at the Top => DONE
+- Build Responsive Header => DONE
+- Add Vintage Logo FPO => DONE
+- Create Anchor styling => DONE
+- Footer styling => DONE
+- Move style in CSS file => DONE
+- Fix the Bootstrap styling on the 3.0.0 consumers => DONE
+- Fix the 404 and Server Error Response Pages => DONE
+- Create Reponsive Sizing for Cells => DONE
+- Fix the Error Pop-up Dialog => DONE
+DEFECT REPORT - fix the Add New Product Button => DONE
+DEFECT REPORT - Product screen - fix the "widow" => DONE
+DEFECT REPORT - eliminate the unassigned Color Image thingy + make it assign Images to the first Color => DONE
+
 
 
 Front Range
 -----------
-- Fix the Bootstrap styling on the 3.0.0 consumers => IN PROGRESS
-- Create AJAX Error Handling and Spinner => TODO
+DEFECT REPORT - 
+- http://getbootstrap.com/css/#overview-responsive-images
 
 - Landing-Page / Microsite => IN PROGRESS
-* Page skeleton => IN PROGRESS
-* Bootstrap 3 - How to Make it Responsive ??? => IN PROGRESS
-* AngularJs library integration => IN PROGRESS
-* Google Web Fonts => IN PROGRESS
-
 - Load Test Data into Console App => IN PROGRESS
+
 - Customer Checkout => TODO
 - Admin Search & Manage Orders => TODO
 - Admin Sales Graph by Product => TODO
+- Add Muted Background => TODO
 
 => NEED TO LEARN THE "ANGULAR WAY" => http://www.youtube.com/watch?v=qK-Z0oEdE4Y&feature=player_embedded
 => http://blog.stevensanderson.com/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/
@@ -42,7 +75,6 @@ Infrastructure
 - Email Sending Engine => TODO
 - Stripe Payment Integration => TODO
 - Amazon EC2 Hosting + Deployment => TODO
-
 
 
 ### END PRODUCT DEFINITION + TASKING ###

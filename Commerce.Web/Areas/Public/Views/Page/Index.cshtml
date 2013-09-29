@@ -1,12 +1,23 @@
-﻿@using Commerce.Web.Areas.Admin
-@using Commerce.Web.Areas.Public
-@model ProductListModel
+﻿@model ProductListModel
 
 @section _Body {    
+    <div id="above-brand-spacer" style="height:50px;"></div>
+
+    <div id="brand-header" style="color:#FFF; background-color: #d00; padding-top:15px; padding-bottom:15px;">
+        <div class="container">
+            <img src="Content/ArtOfGroundFighting/Images/vintage-logo-sm.png" style="float:left; margin-right:10px;" />
+            
+            <h1 style="font-weight:bold; font-family:Bevan; font-size:50px; margin-top: 5px; margin-bottom: 5px; text-shadow: 3px 3px 2px #333; filter: dropshadow(color=##900, offx=3, offy=3);">
+                The Art of Ground Fighting.com
+            </h1>
+
+            <h3 style="font-weight:bold;margin-top: 5px;">Made and worn by fighters for fighters</h3>
+        </div>
+    </div>
+
+    <div  id="above-arena-spacer" style="height:50px;"></div>
+
     <div id="arena" class="container" ng-view></div>
     
-    <div id="test-stuff-afterthought" class="container">
-        @Html.RouteLink("Go To Admin Area", AdminNavigation.Home())<br />
-        <a href="@Url.RouteUrl(PublicNavigation.TestHttp500())">Let things blow up!</a><br />
-    </div>
-}
+    <div  id="below-arena-spacer" style="height:100px;"></div>
+}  
