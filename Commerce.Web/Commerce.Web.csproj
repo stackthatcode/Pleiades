@@ -228,6 +228,7 @@
     <Content Include="Content\Commerce.Web\Images\75x75.gif" />
     <Content Include="Content\Commerce.Web\Images\800x600.gif" />
     <Content Include="Content\Commerce.Web\Images\ajax_loader.gif" />
+    <Content Include="Content\Commerce.Web\Images\ohnoes.png" />
     <Content Include="Content\Commerce.Web\Images\webicon-2.png" />
     <Content Include="Content\Commerce.Web\Style\pushmarketadmin.css" />
     <Content Include="Content\Farbtastic\farbtasticSecure.css" />

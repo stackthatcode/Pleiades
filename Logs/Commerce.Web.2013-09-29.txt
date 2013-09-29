@@ -2951,3 +2951,389 @@ Parameter name: fileName
 2013-09-29 13:43:45.6073|Debug|dbfaf6bd-d11c-4748-b5a3-32e8b1a352bc|Image - Download: ed922d6b-527f-44e7-93b0-f3156c9bbae7 thumbnail 
 2013-09-29 13:43:45.6343|Debug|6dba1751-213f-476a-bd13-8d56e5490660|Image - Download: b1e62a72-118f-4d80-ab2d-026dfffc386c thumbnail 
 2013-09-29 13:43:45.6983|Debug|5ee138a4-ec9c-44e2-8a4b-af2e34cf391f|Image - Download: 210529f7-54cf-4130-9e17-f4edb8b3f2e1 thumbnail 
+2013-09-29 13:45:53.7886|Debug|9935b282-5683-461a-9121-9235eb9d94a0|Image - Download: 2969b92d-8a83-4568-8ab0-4e4228f922dc small 
+2013-09-29 13:45:53.7886|Debug|48fab3fb-5971-4cfc-aefd-becf70722b1c|Image - Download: a49c0491-a5ce-4e54-abb5-00e9dfc64a46 small 
+2013-09-29 13:45:53.7886|Debug|634c0b38-6627-4487-baf4-f24cc8539d42|Image - Download: 606a6957-1fc8-49b7-8247-b960d49f9cfd small 
+2013-09-29 13:45:53.7886|Debug|72ead01c-e6ff-4e7b-a57c-d3ee402a5440|Image - Download: 00000000-0000-0000-0000-000000000000 small 
+2013-09-29 13:46:25.4344|Error|081ce8db-c839-4711-b559-13f5d9872ded|System.Web.HttpException:The controller for path '/Commerce.Web/Adm' was not found or does not implement IController.
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) 
+2013-09-29 13:46:25.8254|Error|acee5da9-0610-452f-8141-056bc6b065e1|System.Web.HttpException:The controller for path '/Commerce.Web/Content/Commerce.Web/Images/ohnoes.png' was not found or does not implement IController.
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) 
+2013-09-29 13:47:32.3012|Error|612d19b2-3e5c-49c0-b55a-db97ee17bf5b|System.Web.HttpException:The controller for path '/Commerce.Web/Content/Commerce.Web/Images/ohnoes.png' was not found or does not implement IController.
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) 
+2013-09-29 13:52:17.1265|Error|64cbb470-52e3-41f3-adea-9dca6a69fc3d|URL:http://localhost/Commerce.Web/Admin/Manager/Error - IsAjaxRequest: False 
+2013-09-29 13:52:17.2015|Error|64cbb470-52e3-41f3-adea-9dca6a69fc3d|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Areas.Admin.Controllers.ManagerController.Error() in C:\DEV\Pleiades\Commerce.Web\Areas\Admin\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-09-29 13:52:18.2856|Error|b55b051d-bdb0-4ab2-9dbe-2a57ff44b4b5|System.Web.HttpException:The controller for path '/Commerce.Web/Bundles/BootstrapBaseStyle_2_3_2' was not found or does not implement IController.
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) 
+2013-09-29 13:52:50.3134|Error|b2543cc8-e438-4430-a511-d36aad2517d2|URL:http://localhost/Commerce.Web/Admin/Manager/Error - IsAjaxRequest: False 
+2013-09-29 13:52:50.3134|Error|b2543cc8-e438-4430-a511-d36aad2517d2|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Areas.Admin.Controllers.ManagerController.Error() in C:\DEV\Pleiades\Commerce.Web\Areas\Admin\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-09-29 13:52:50.5944|Error|bb1d2769-a1d1-4e7b-ab64-2fc067bc83d6|System.Web.HttpException:The controller for path '/Commerce.Web/Bundles/BootstrapBaseStyle_2_3_2' was not found or does not implement IController.
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) 
+2013-09-29 13:53:17.9410|Debug|799c54b1-2d27-4b14-97a9-b26d20333e2a|Image - Download: 606a6957-1fc8-49b7-8247-b960d49f9cfd small 
+2013-09-29 13:53:17.9410|Debug|c9295035-fdd1-4fd8-b9eb-0691d18138c9|Image - Download: 2969b92d-8a83-4568-8ab0-4e4228f922dc small 
+2013-09-29 13:53:17.9410|Debug|4687e586-bfea-479f-bab6-4c1fa22f3e9b|Image - Download: a49c0491-a5ce-4e54-abb5-00e9dfc64a46 small 
+2013-09-29 13:53:17.9470|Debug|4c2509f9-d787-4687-a6f9-5f8a685efe82|Image - Download: 00000000-0000-0000-0000-000000000000 small 
+2013-09-29 13:53:23.9143|Error|1a51966b-e065-41d0-8136-cc43db1344f2|URL:http://localhost/Commerce.Web/page/TestHttp500 - IsAjaxRequest: False 
+2013-09-29 13:53:23.9143|Error|1a51966b-e065-41d0-8136-cc43db1344f2|System.Exception:Exception of type 'System.Exception' was thrown.
+   at Commerce.Web.Areas.Public.Controllers.PageController.TestHttp500() in C:\DEV\Pleiades\Commerce.Web\Areas\Public\Controllers\PageController.cs:line 45
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-09-29 13:53:29.5987|Error|227d6fdd-0631-49cc-b95d-4ddebb5b50b6|URL:http://localhost/Commerce.Web/page/TestHttp500 - IsAjaxRequest: False 
+2013-09-29 13:53:29.6017|Error|227d6fdd-0631-49cc-b95d-4ddebb5b50b6|System.Exception:Exception of type 'System.Exception' was thrown.
+   at Commerce.Web.Areas.Public.Controllers.PageController.TestHttp500() in C:\DEV\Pleiades\Commerce.Web\Areas\Public\Controllers\PageController.cs:line 45
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-09-29 13:53:31.9048|Debug|e34571cf-c3eb-439f-959d-467a61721601|Image - Download: a49c0491-a5ce-4e54-abb5-00e9dfc64a46 small 
+2013-09-29 13:53:31.9048|Debug|fdd77622-2eba-4b1d-9842-27719fe5ef21|Image - Download: 00000000-0000-0000-0000-000000000000 small 
+2013-09-29 13:53:31.9048|Debug|5b26504c-7a26-48e8-864e-d7bf7f96487c|Image - Download: 606a6957-1fc8-49b7-8247-b960d49f9cfd small 
+2013-09-29 13:53:31.9328|Debug|1b5b46ba-47c4-4b34-bef5-b17066fecfa4|Image - Download: 2969b92d-8a83-4568-8ab0-4e4228f922dc small 
+2013-09-29 13:53:44.3665|Debug|e9a40839-ebbd-41c1-ba61-55157c6c4267|Image - Download: a49c0491-a5ce-4e54-abb5-00e9dfc64a46 small 
+2013-09-29 13:53:44.3665|Debug|829a41f6-9cef-46dc-9a18-067e71ec682f|Image - Download: 2969b92d-8a83-4568-8ab0-4e4228f922dc small 
+2013-09-29 13:53:44.4085|Debug|cfd6e1dc-efa5-4b0a-9731-d4081ecfef1c|Image - Download: 00000000-0000-0000-0000-000000000000 small 
+2013-09-29 13:53:44.4085|Debug|87f79bb7-21b2-4dea-aecd-1a918ca2c5aa|Image - Download: 606a6957-1fc8-49b7-8247-b960d49f9cfd small 
+2013-09-29 13:53:48.9088|Error|ee022fe0-dd64-4591-bcdc-ca64e4ae3d93|System.Web.HttpException:The controller for path '/Commerce.Web/Public/Products/List' was not found or does not implement IController.
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) 
+2013-09-29 13:53:52.6040|Debug|bd7960b8-e285-4ed3-9584-ef025bd80698|Image - Download: 2969b92d-8a83-4568-8ab0-4e4228f922dc small 
+2013-09-29 13:53:52.6040|Debug|4eb2351c-678b-493f-8e54-83c89a66d846|Image - Download: 00000000-0000-0000-0000-000000000000 small 
+2013-09-29 13:53:52.6280|Debug|308fd3d4-9494-4790-b866-3abb05e56f7f|Image - Download: a49c0491-a5ce-4e54-abb5-00e9dfc64a46 small 
+2013-09-29 13:53:52.6040|Debug|443905bc-8238-48bd-87e8-4d380efe8ac7|Image - Download: 606a6957-1fc8-49b7-8247-b960d49f9cfd small 
+2013-09-29 13:53:55.0521|Debug|7ae7f139-e796-43dd-8f0a-a15c9a1d651a|Image - Download: 2969b92d-8a83-4568-8ab0-4e4228f922dc small 
+2013-09-29 13:53:55.0681|Debug|383573c3-d8ef-49bd-969a-4b5fb17e7e41|Image - Download: a49c0491-a5ce-4e54-abb5-00e9dfc64a46 small 
+2013-09-29 13:53:55.0681|Debug|fa6f98a5-c498-4a8a-8afe-4cfb72ef52d4|Image - Download: 00000000-0000-0000-0000-000000000000 small 
+2013-09-29 13:53:55.0771|Debug|f2a0fd51-c0dc-4a12-9e09-97f2632574cb|Image - Download: 606a6957-1fc8-49b7-8247-b960d49f9cfd small 
+2013-09-29 13:54:01.0535|Error|c0a79892-b569-434a-9170-2f4e1e9dfec0|URL:http://localhost/Commerce.Web/page/TestHttp500 - IsAjaxRequest: False 
+2013-09-29 13:54:01.0535|Error|c0a79892-b569-434a-9170-2f4e1e9dfec0|System.Exception:Exception of type 'System.Exception' was thrown.
+   at Commerce.Web.Areas.Public.Controllers.PageController.TestHttp500() in C:\DEV\Pleiades\Commerce.Web\Areas\Public\Controllers\PageController.cs:line 45
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-09-29 13:56:13.9471|Error|08e7fc35-6723-4c85-84b0-4bb1354b7810|URL:http://localhost/Commerce.Web/Admin/Manager/Error - IsAjaxRequest: False 
+2013-09-29 13:56:14.0111|Error|08e7fc35-6723-4c85-84b0-4bb1354b7810|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Areas.Admin.Controllers.ManagerController.Error() in C:\DEV\Pleiades\Commerce.Web\Areas\Admin\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-09-29 13:56:15.0691|Error|e290ff4a-5114-4405-b7ca-20cc1a33cfa4|System.Web.HttpException:The controller for path '/Commerce.Web/Bundles/BootstrapBaseStyle_2_3_2' was not found or does not implement IController.
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) 
+2013-09-29 13:57:25.0641|Error|a0152b8f-5525-4e08-a54c-6be8acbf3e2a|URL:http://localhost/Commerce.Web/Admin/Manager/Error - IsAjaxRequest: False 
+2013-09-29 13:57:25.0641|Error|a0152b8f-5525-4e08-a54c-6be8acbf3e2a|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Areas.Admin.Controllers.ManagerController.Error() in C:\DEV\Pleiades\Commerce.Web\Areas\Admin\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-09-29 13:57:55.0439|Error|927c26e9-e941-4e84-8670-6269bea7c243|URL:http://localhost/Commerce.Web/Admin/Manager/Error - IsAjaxRequest: False 
+2013-09-29 13:57:55.0439|Error|927c26e9-e941-4e84-8670-6269bea7c243|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Areas.Admin.Controllers.ManagerController.Error() in C:\DEV\Pleiades\Commerce.Web\Areas\Admin\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-09-29 13:58:03.4553|Error|39928eb9-f55b-4c92-816d-0012ed92a676|URL:http://localhost/Commerce.Web/Admin/Manager/Error - IsAjaxRequest: False 
+2013-09-29 13:58:03.4553|Error|39928eb9-f55b-4c92-816d-0012ed92a676|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Areas.Admin.Controllers.ManagerController.Error() in C:\DEV\Pleiades\Commerce.Web\Areas\Admin\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-09-29 13:58:05.3464|Error|38618d86-07f8-4817-838c-115e37a616c3|URL:http://localhost/Commerce.Web/Admin/Manager/Error - IsAjaxRequest: False 
+2013-09-29 13:58:05.3514|Error|38618d86-07f8-4817-838c-115e37a616c3|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Areas.Admin.Controllers.ManagerController.Error() in C:\DEV\Pleiades\Commerce.Web\Areas\Admin\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-09-29 13:58:10.1217|Error|f77f4cbc-e6a1-4d14-9c0d-97ca7d425e19|URL:http://localhost/Commerce.Web/Admin/Manager/Error - IsAjaxRequest: False 
+2013-09-29 13:58:10.1217|Error|f77f4cbc-e6a1-4d14-9c0d-97ca7d425e19|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Areas.Admin.Controllers.ManagerController.Error() in C:\DEV\Pleiades\Commerce.Web\Areas\Admin\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-09-29 13:59:17.0175|Error|fb18a266-e6f2-46c5-a916-1614754d8857|URL:http://localhost/Commerce.Web/Admin/Manager/Error - IsAjaxRequest: False 
+2013-09-29 13:59:17.0175|Error|fb18a266-e6f2-46c5-a916-1614754d8857|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Areas.Admin.Controllers.ManagerController.Error() in C:\DEV\Pleiades\Commerce.Web\Areas\Admin\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-09-29 13:59:38.1437|Debug|ae650c30-b3c6-49ca-b67d-77e7c65b6654|Image - Download: 2969b92d-8a83-4568-8ab0-4e4228f922dc thumbnail 
+2013-09-29 13:59:38.2138|Debug|23e8870f-5a11-4fd4-bd8a-caf323c04508|Image - Download: a49c0491-a5ce-4e54-abb5-00e9dfc64a46 thumbnail 
+2013-09-29 13:59:38.3798|Debug|d5a5b77f-6348-4878-b426-5a93b246342a|Image - Download: 00000000-0000-0000-0000-000000000000 thumbnail 
+2013-09-29 13:59:38.3798|Debug|0a56d87e-4881-4679-91a1-db7952481952|Image - Download: 606a6957-1fc8-49b7-8247-b960d49f9cfd thumbnail 
+2013-09-29 13:59:46.6992|Debug|a0c30cf8-6fb8-48f9-b0ad-c4ea4ddd9d80|Image - Download: a49c0491-a5ce-4e54-abb5-00e9dfc64a46 small 
+2013-09-29 13:59:46.7112|Debug|0d30da10-8043-4a50-9af9-29ea04e366e6|Image - Download: f2167795-fd66-4a78-927e-496fa7c2d38f small 
+2013-09-29 13:59:46.7372|Debug|99db3988-b3b3-497f-8157-f4545c88679d|Image - Download: bd87cc5e-88de-4c8c-9e6b-bd33123bfd94 small 
+2013-09-29 13:59:46.7632|Debug|ae414308-a91e-4093-b99b-3ba1072cd2d7|Image - Download: b3a563b5-805c-4236-a950-7b045a68bed7 thumbnail 
+2013-09-29 13:59:46.7872|Debug|a098d970-513a-4a4d-ac12-f89176a22139|Image - Download: 36fcdf91-6845-446c-88c1-503177225b34 small 
+2013-09-29 14:01:05.0027|Error|219527ef-8832-4e8f-9067-99389ef3869b|URL:http://localhost/Commerce.Web/Admin/Manager/Error - IsAjaxRequest: False 
+2013-09-29 14:01:05.0027|Error|219527ef-8832-4e8f-9067-99389ef3869b|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Areas.Admin.Controllers.ManagerController.Error() in C:\DEV\Pleiades\Commerce.Web\Areas\Admin\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-09-29 14:01:09.0319|Error|eaaa2cf8-e827-4178-b9c1-13ed6874343f|URL:http://localhost/Commerce.Web/Admin/Manager/Error - IsAjaxRequest: False 
+2013-09-29 14:01:09.0319|Error|eaaa2cf8-e827-4178-b9c1-13ed6874343f|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Areas.Admin.Controllers.ManagerController.Error() in C:\DEV\Pleiades\Commerce.Web\Areas\Admin\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-09-29 14:01:43.9779|Debug|827bd6d4-1cb4-49e8-9187-bba7cb709ac7|Image - Download: 2969b92d-8a83-4568-8ab0-4e4228f922dc small 
+2013-09-29 14:01:43.9869|Debug|300b235f-3a47-40db-a126-1ed86b0f9ec7|Image - Download: 606a6957-1fc8-49b7-8247-b960d49f9cfd small 
+2013-09-29 14:01:43.9869|Debug|e5955925-f6d1-4c8f-a196-a378ebb18e84|Image - Download: 00000000-0000-0000-0000-000000000000 small 
+2013-09-29 14:01:44.0079|Debug|ddf78477-021d-4071-9437-58128821eafb|Image - Download: a49c0491-a5ce-4e54-abb5-00e9dfc64a46 small 
+2013-09-29 14:02:11.4355|Error|39265d8d-611b-4d73-a0f5-326a7726b8a6|System.Web.HttpException:The controller for path '/Commerce.Web/pa' was not found or does not implement IController.
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) 
+2013-09-29 14:02:20.6460|Debug|97e2f603-6852-4447-be34-e2f54cc9fd99|Image - Download: 2969b92d-8a83-4568-8ab0-4e4228f922dc small 
+2013-09-29 14:02:20.6460|Debug|d8ef18fa-c10f-48c8-8515-92a1f077a72d|Image - Download: 606a6957-1fc8-49b7-8247-b960d49f9cfd small 
+2013-09-29 14:02:20.6610|Debug|2c685f0c-520b-4661-9a9f-6bb6e43064d7|Image - Download: 00000000-0000-0000-0000-000000000000 small 
+2013-09-29 14:02:20.6460|Debug|53a14c82-c63f-4255-a0ce-bde7c2b8076c|Image - Download: a49c0491-a5ce-4e54-abb5-00e9dfc64a46 small 
+2013-09-29 14:02:26.7764|Error|9a8896e9-14ac-41a0-8e40-d911a32d3c95|URL:http://localhost/Commerce.Web/products/112321kl;l; - IsAjaxRequest: True 
+2013-09-29 14:02:26.7764|Error|9a8896e9-14ac-41a0-8e40-d911a32d3c95|System.FormatException:Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at Commerce.Web.Areas.Public.Controllers.ProductsController.Get(String id) in C:\DEV\Pleiades\Commerce.Web\Areas\Public\Controllers\ProductsController.cs:line 32
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 

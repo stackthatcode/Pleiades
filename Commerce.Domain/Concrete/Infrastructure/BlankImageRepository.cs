@@ -15,7 +15,7 @@ namespace Commerce.Application.Concrete.Infrastructure
             if (size == ImageSize.Small)
             {
                 return ConfigurationManager.AppSettings["BlankSmallImageUrl"];
-            }
+            }   
             else
             {
                 return ConfigurationManager.AppSettings["BlankLargeImageUrl"];

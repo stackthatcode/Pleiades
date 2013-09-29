@@ -54,6 +54,8 @@ DEFECT REPORT - massive
 
 #### MASSIVE MASSIVE UPHEAVAL - CODE LOSS CAUSE BY BAD GITHUB USAGE ####
 
+DEFECT REPORT - fixed bad Server Error Page, 404 Page, etc.
+
 
 
 Front Range
