@@ -232,7 +232,7 @@
                         Description: ko.observable(null),
                     };
                     self.NewImageInput(input);
-                    self.GlideRight("AddBitmapColorImage", "AddBitmapColorImage", this);
+                    self.GlideRight("AddImage", "AddImage", this);
                 },
                 function() {
                     var fileUploader = new Commerce.FineUploader.Uploader(self.OnImageUpload);
@@ -356,7 +356,7 @@
                             </p>
                         </div>
                         <div data-bind="ifnot: $data.Name == 'Unassigned'">           
-                            <a class="btn btn-primary" href="#" data-bind="click: $root.AddBitmapColorNewImageForColor"><i class="icon-plus icon-white"></i> AddBitmapColor Image</a>
+                            <a class="btn btn-primary" href="#" data-bind="click: $root.AddNewImageForColor"><i class="icon-plus icon-white"></i> Add Image</a>
                         </div>
                         <div style="clear:both; height:30px;"></div>
                     </td>
@@ -371,7 +371,7 @@
 
     <div data-bind="ifnot: $root.SelectedProduct() && $root.SelectedProduct().AssignImagesToColors" style="margin-top:20px;">
         <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SelectedProductImages().length == 0">
-            <strong>There are no images for this Product.  Click "AddBitmapColor Image" to Upload an image.</strong>  
+            <strong>There are no images for this Product.  Click "Add Image" to Upload an image.</strong>  
         </div>
         <ul class="sortable" data-bind="foreach: $root.SelectedProductImages()">
             <li data-bind="attr: { id: 'sorted' + $data.Id }">
@@ -387,7 +387,7 @@
 </script>
 
 <!-- KNOCKOUT TEMPLATE - CHILD EDITOR IMAGES - ADD IMAGE -->
-<script type="text/html" id="Top-Workspace-AddBitmapColorImage">
+<script type="text/html" id="Top-Workspace-AddImage">
     <div class="workspace-heading" style="height:125px;">
         <div class="container" data-bind="if: $root.SelectedProduct()" style="height:124px;">
             <div class="row" style="position:relative;">				
@@ -414,7 +414,7 @@
         </div>
     </div>
 </script>
-<script type="text/html" id="Main-Editor-AddBitmapColorImage">
+<script type="text/html" id="Main-Editor-AddImage">
     <div style="height:40px;"></div>
 
     <div data-bind="with: $root.NewImageInput">

@@ -38,18 +38,7 @@ namespace Commerce.Application.Concrete.Products
                 .Include(x => x.Images.Select(img => img.ImageBundle))
                 .Include(x => x.Images.Select(img => img.ProductColor));
         }
-
-        private Product ProductWithColorsAndSizes(int id)
-        {
-            return
-                this.Context.Products
-                    .Include(x => x.ThumbnailImageBundle)
-                    .Include(x => x.Sizes)
-                    .Include(x => x.Colors)
-                    .Include(x => x.Colors.Select(color => color.ProductImageBundle))
-                    .First(x => x.Id == id && x.IsDeleted == false);
-        }
-
+        
         private Product ProductWithColorsAndImages(int id)
         {
             var product = this.Context.Products
@@ -348,6 +337,22 @@ namespace Commerce.Application.Concrete.Products
         public void AssignImagesToColor(int productId)
         {
             var product = this.ProductWithColorsAndImages(productId);
+            var color = product.Colors.OrderBy(x => x.Order).FirstOrDefault();
+            if (color == null)
+            {
+                foreach (var image in product.Images)
+                {
+                    image.ImageBundle.Deleted = true;
+                    product.Images.Remove(image);
+                }
+            }
+            else
+            {
+                foreach (var image in product.Images)
+                {
+                    image.ProductColor = color;
+                }
+            }
             product.AssignImagesToColors = true;
             product.SetThumbnailImages();
         }

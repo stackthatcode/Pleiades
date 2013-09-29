@@ -32,7 +32,7 @@ FRONTRANGE - HOTZONE
 - Google Web Fonts => DONE FOR NOW
 - Fix Image shrinking code => DONE
 
-9/29
+9/29 - 8.0 Hours
 ~~~~~~~~~~~~~~~~~~
 - Added Content browsing pages
 - Make Header Responsive => DONE
@@ -50,12 +50,14 @@ FRONTRANGE - HOTZONE
 DEFECT REPORT - fix the Add New Product Button => DONE
 DEFECT REPORT - Product screen - fix the "widow" => DONE
 DEFECT REPORT - eliminate the unassigned Color Image thingy + make it assign Images to the first Color => DONE
+DEFECT REPORT - massive 
+
+#### MASSIVE MASSIVE UPHEAVAL - CODE LOSS CAUSE BY BAD GITHUB USAGE ####
 
 
 
 Front Range
 -----------
-DEFECT REPORT - 
 - http://getbootstrap.com/css/#overview-responsive-images
 
 - Landing-Page / Microsite => IN PROGRESS

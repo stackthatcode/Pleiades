@@ -12,9 +12,13 @@ namespace Commerce.Application.Concrete.Infrastructure
             {
                 return ConfigurationManager.AppSettings["BlankThumbnailImageUrl"];
             }
+            if (size == ImageSize.Small)
+            {
+                return ConfigurationManager.AppSettings["BlankSmallImageUrl"];
+            }
             else
             {
-                return ConfigurationManager.AppSettings["BlankSmallImageUrls"];                
+                return ConfigurationManager.AppSettings["BlankLargeImageUrl"];
             }
         }
     }

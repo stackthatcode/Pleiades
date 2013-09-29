@@ -43,21 +43,21 @@
 			var self = this;
 			
 			// KO enabling/disabling of server JSON
-            self.KnockoutIfyCategory = function(category) {
-				var output = {
-					Id: ko.observable(category.Id),
-					ParentId: ko.observable(category.ParentId),
-					Name: ko.observable(category.Name),
-					SEO: ko.observable(category.SEO),
-					Categories: ko.observableArray(),
-				};				
-				if (category.Categories) {
-					$.each(category.Categories, function (index, element) {
-						output.Categories.push(self.KnockoutIfyCategory(element));
-					});
-				}				
-				return output;
-			}
+		    self.KnockoutIfyCategory = function(category) {
+		        var output = {
+		            Id: ko.observable(category.Id),
+		            ParentId: ko.observable(category.ParentId),
+		            Name: ko.observable(category.Name),
+		            SEO: ko.observable(category.SEO),
+		            Categories: ko.observableArray(),
+		        };
+		        if (category.Categories) {
+		            $.each(category.Categories, function(index, element) {
+		                output.Categories.push(self.KnockoutIfyCategory(element));
+		            });
+		        }
+		        return output;
+		    };
 			
 			self.CategoryToServerJson = function(category) {
 				return {
@@ -69,288 +69,286 @@
 			};
 			
 			// UI state management
-			self.ExpandToggle = function(record) {
-				var current = self.ParentViewModel.ExpandData.get(record.Id)();
-				self.ParentViewModel.ExpandData.set(record.Id, !current);
-			}
-			
-			self.IsRootCategoryForChildView = function(categoryId) {
-				return categoryId == self.ChildViewModel().Id();
-			}
-			
-			self.IsSectionForChildView = function(sectionId) {
-				return sectionId == self.ChildViewModel().ParentId()
-			}
-			
-            self.SectionClick = function(record, event) {
-                self.RetrieveModelBySection(record, null);
-            }
+		    self.ExpandToggle = function(record) {
+		        var current = self.ParentViewModel.ExpandData.get(record.Id)();
+		        self.ParentViewModel.ExpandData.set(record.Id, !current);
+		    };
 
-			self.EditRecord = function(record) {
-				self.ClearUnsavedCategoryFromModel();				
-				record.EditName = ko.observable(record.Name());
-				record.EditSEO = ko.observable(record.SEO());				
-				self.ChildViewSelectedRecord(record);
-			}
-			
-			self.AddParentRecord = function() {
-				flow.exec(
-					function() {
-						var parentId = self.ParentViewModel.SelectedSection().Id;
-						var newCategory = { Id: null, ParentId: parentId, Name: "", SEO: "", Categories: null };
-						var knockedoutData = self.KnockoutIfyCategory(newCategory);
-						self.ChildViewModel(knockedoutData);
-						self.Glider.GlideToChild(this);
-					},
-					function() {
-						self.EditRecord(self.ChildViewModel());	// The ChildViewModel is the root of that category
-					}
-				);
-			}
-			
-			self.AddChildRecord = function() {
-				var newCategory = self.KnockoutIfyCategory(
-					{ Id: null, ParentId: self.ChildViewModel().Id(), Name: "", SEO: "", Categories: null });
-				
-				self.ChildViewModel().Categories.unshift(newCategory);
-				self.EditRecord(newCategory);
-				window.scrollTo(0, 0);
-			}			
-			
-			self.CancelEdit = function(record) {
-				self.ClearUnsavedCategoryFromModel();
-				self.ChildViewSelectedRecord(null);
-			}
-			
-			self.ClearUnsavedCategoryFromModel = function() {
-				if (self.ChildViewSelectedRecord() && self.ChildViewSelectedRecord().Id() === null) {
-					self.ChildViewModel().Categories.remove(self.ChildViewSelectedRecord());
-				}
-			}
+		    self.IsRootCategoryForChildView = function(categoryId) {
+		        return categoryId == self.ChildViewModel().Id();
+		    };
+
+		    self.IsSectionForChildView = function(sectionId) {
+		        return sectionId == self.ChildViewModel().ParentId()
+		    };
+
+		    self.SectionClick = function(record, event) {
+		        self.RetrieveModelBySection(record, null);
+		    };
+
+		    self.EditRecord = function(record) {
+		        self.ClearUnsavedCategoryFromModel();
+		        record.EditName = ko.observable(record.Name());
+		        record.EditSEO = ko.observable(record.SEO());
+		        self.ChildViewSelectedRecord(record);
+		    };
+
+		    self.AddParentRecord = function() {
+		        flow.exec(
+		            function() {
+		                var parentId = self.ParentViewModel.SelectedSection().Id;
+		                var newCategory = { Id: null, ParentId: parentId, Name: "", SEO: "", Categories: null };
+		                var knockedoutData = self.KnockoutIfyCategory(newCategory);
+		                self.ChildViewModel(knockedoutData);
+		                self.Glider.GlideToChild(this);
+		            },
+		            function() {
+		                self.EditRecord(self.ChildViewModel()); // The ChildViewModel is the root of that category
+		            }
+		        );
+		    };
+
+		    self.AddChildRecord = function() {
+		        var newCategory = self.KnockoutIfyCategory(
+		            { Id: null, ParentId: self.ChildViewModel().Id(), Name: "", SEO: "", Categories: null });
+
+		        self.ChildViewModel().Categories.unshift(newCategory);
+		        self.EditRecord(newCategory);
+		        window.scrollTo(0, 0);
+		    };
+
+		    self.CancelEdit = function(record) {
+		        self.ClearUnsavedCategoryFromModel();
+		        self.ChildViewSelectedRecord(null);
+		    };
+
+		    self.ClearUnsavedCategoryFromModel = function() {
+		        if (self.ChildViewSelectedRecord() && self.ChildViewSelectedRecord().Id() === null) {
+		            self.ChildViewModel().Categories.remove(self.ChildViewSelectedRecord());
+		        }
+		    };
 			
 
 		    // asynchronous, service-bound operations
-			self.SelectSectionFromChildView = function(record) {				
-				self.Glider.GlideToParent(function() {
-					self.ChildViewModel(null);
-					self.ChildViewSelectedRecord(null);
-					self.RetrieveModelBySection(record);
-				});
-			}
-			
-			self.GlideToChildView = function(parentRecord) {
-				flow.exec(
-					function() {
-						self.ServiceAdapter.RetrieveById(parentRecord.Id, this);
-					},
-					function(parentRecord) {
-						var knockedoutData = self.KnockoutIfyCategory(parentRecord);				
-						self.ChildViewModel(knockedoutData);
-						self.Glider.GlideToChild();
-					}
-				);
-			}
-			
-			self.GlideToParentView = function() {
-				var parentRecordId = self.ChildViewModel().Id();
-				flow.exec(
-					function() {
-				        $("#glideToParent").hide();
-						self.RetrieveModelBySection(self.ParentViewModel.SelectedSection(), this);
-					},
-					function() {
-						// animate back
-						//self.Glider.GlideToParent(this);
-						self.TrackToIdIfNotNull(parentRecordId);
-					},
-					function() {
-					}
-				);
-			}
-			
-			self.RetrieveSections = function(callback) {
-				flow.exec(
-					function() {
-						self.ServiceAdapter.RetrieveAllSections(this);
-					}, 
-					function(sections) {
-						self.ParentViewModel.Sections(sections);
-						self.RetrieveModelBySection(self.ParentViewModel.Sections()[0], this);
-					},
-					function() {
-						if (callback) {
-							callback();
-						}
-					}
-				);
-			}
-			
-			self.RetrieveModelBySection = function(section, callback) {
-				flow.exec(
-					function() {
-						if (self.ChildViewModel()) {
-							self.Glider.GlideToParent(this);
-						}
-						else {
-							this();
-						}
-					},
-					function() {
-						self.ChildViewSelectedRecord(null);		// Clear out the ChildView state
-						self.ChildViewModel(null);
-						self.ServiceAdapter.RetrieveAllCategoriesBySection(section.Id, this);						
-					},					
-					function(data) {
-						// select the section
-						self.ParentViewModel.SelectedSection(section);
-						
-						// expand - AddColor expand state to our observable dictionary if it's not *yet* AddColored
-						$.each(data, function(index, elem) { 
-							if (!self.ParentViewModel.ExpandData.get(elem.Id)()) {
-								self.ParentViewModel.ExpandData.set(elem.Id, false);
-							}
-							
-							elem.Expanded = ko.computed(function() { 
-								return self.ParentViewModel.ExpandData.get(elem.Id)();
-							});
-						});
-						
-						self.ParentViewModel.Data(data);
-						if (callback) {
-							callback();
-						}
-					}
-				);
-			}
-			
-			self.SaveRecord = function() {
-				flow.exec(
-					function() {
-						var record = self.ChildViewSelectedRecord();
-						if ($.trim(record.EditName()) == "" || $.trim(record.EditSEO()) == "") {
-							$("#validation").show();
-							return;
-						}
-						record.Name(record.EditName());
-						record.SEO(record.EditSEO());
-						
-						self.ServiceAdapter.Save(self.CategoryToServerJson(record), this);
-					},
-					function(data) {						
-						self.ChildViewSelectedRecord().Id(data.Id);				
-						self.ChildViewSelectedRecord(null);
-					}
-				);
-			}
-			
-			self.SwapParentChild = function() {
-				var oldParent = self.CategoryToServerJson(self.ChildViewModel());
-				var newParent = self.CategoryToServerJson(self.ChildViewSelectedRecord());
-					
-				flow.exec(
-					function() {
-						self.ServiceAdapter.SwapParentChild(oldParent, newParent, this);
-					},
-					function() {
-                        self.RetrieveModelBySection(self.ParentViewModel.SelectedSection(), this);
-						self.ServiceAdapter.RetrieveById(newParent.Id, this);
-					},
-					function(refreshedChildData) {
-						self.ChildViewModel(self.KnockoutIfyCategory(refreshedChildData));				
-						self.TrackToIdIfNotNull(newParent.Id);
-						self.HighlightByTrackerId(newParent.Id);
-					}
-				);
-			}
-			
-			self.ChangeParent = function(parentRecord) {	
-				var newParentRecordId = parentRecord.Id;
-				var selectedRecordId = self.ChildViewSelectedRecord().Id();
-				flow.exec(
-					function() {
-						self.ChildViewSelectedRecord().ParentId(newParentRecordId);				
-						self.ServiceAdapter.Save(self.CategoryToServerJson(self.ChildViewSelectedRecord()), this);
-					},
-					function() {
-						self.Glider.GlideToParent(this);
-					},
-					function() {
-						var isTopLevelCategory = parentRecord.ParentId == null;
-						if (isTopLevelCategory) {
-							self.ParentViewModel.SelectedSection(parentRecord);
-							self.ServiceAdapter.RetrieveById(selectedRecordId, this);
-						}
-						else {
-							self.ServiceAdapter.RetrieveById(newParentRecordId, this);
-						}
-					},
-					function(updatedParentRecord) {
-						var knockedoutData = self.KnockoutIfyCategory(updatedParentRecord);
-						self.ChildViewModel(knockedoutData);					
-						self.Glider.GlideToChild(this);
-					}, 
-					function() {
-						self.TrackToIdIfNotNull(selectedRecordId);
-						self.HighlightByTrackerId(selectedRecordId);
-					}
-				);
-			}
-			
-			self.Delete = function() {
-				var record = self.ChildViewSelectedRecord();
-				if (self.IsRootCategoryForChildView(record.Id())) {
-					self.ModalViewModel("Delete");
-					$('#modal-delete').modal();
-					return;
-				}
-				
-				flow.exec(
-					function() {
-						self.ServiceAdapter.Delete(record.Id(), this);
-					},
-					function() {
-						self.ServiceAdapter.RetrieveById(self.ChildViewModel().Id(), this);
-					},
-					function(parentRecord) {
-						self.ChildViewModel(self.KnockoutIfyCategory(parentRecord));
-					}
-				);
-			}
-			
-			self.DeleteConfirm = function() { 
-				$('#modal-delete').modal('hide');
-			    flow.exec(
-                    function() {
-				        var record = self.ChildViewSelectedRecord();
-				        self.ServiceAdapter.Delete(record.Id(), this);
-                    },
-                    function() {
-						self.RetrieveModelBySection(self.ParentViewModel.SelectedSection(), this);
-                    },
-                    function() {
-                        self.ChildViewModel(null);
-				        self.ChildViewSelectedRecord(null);
-				    }
-                );
-			}
+		    self.SelectSectionFromChildView = function(record) {
+		        self.Glider.GlideToParent(function() {
+		            self.ChildViewModel(null);
+		            self.ChildViewSelectedRecord(null);
+		            self.RetrieveModelBySection(record);
+		        });
+		    };
+
+		    self.GlideToChildView = function(parentRecord) {
+		        flow.exec(
+		            function() {
+		                self.ServiceAdapter.RetrieveById(parentRecord.Id, this);
+		            },
+		            function(parentRecord) {
+		                var knockedoutData = self.KnockoutIfyCategory(parentRecord);
+		                self.ChildViewModel(knockedoutData);
+		                self.Glider.GlideToChild();
+		            }
+		        );
+		    };
+
+		    self.GlideToParentView = function() {
+		        var parentRecordId = self.ChildViewModel().Id();
+		        flow.exec(
+		            function() {
+		                $("#glideToParent").hide();
+		                self.RetrieveModelBySection(self.ParentViewModel.SelectedSection(), this);
+		            },
+		            function() {
+		                // animate back
+		                //self.Glider.GlideToParent(this);
+		                self.TrackToIdIfNotNull(parentRecordId);
+		            },
+		            function() {
+		            }
+		        );
+		    };
+
+		    self.RetrieveSections = function(callback) {
+		        flow.exec(
+		            function() {
+		                self.ServiceAdapter.RetrieveAllSections(this);
+		            },
+		            function(sections) {
+		                self.ParentViewModel.Sections(sections);
+		                self.RetrieveModelBySection(self.ParentViewModel.Sections()[0], this);
+		            },
+		            function() {
+		                if (callback) {
+		                    callback();
+		                }
+		            }
+		        );
+		    };
+
+		    self.RetrieveModelBySection = function(section, callback) {
+		        flow.exec(
+		            function() {
+		                if (self.ChildViewModel()) {
+		                    self.Glider.GlideToParent(this);
+		                } else {
+		                    this();
+		                }
+		            },
+		            function() {
+		                self.ChildViewSelectedRecord(null); // Clear out the ChildView state
+		                self.ChildViewModel(null);
+		                self.ServiceAdapter.RetrieveAllCategoriesBySection(section.Id, this);
+		            },
+		            function(data) {
+		                // select the section
+		                self.ParentViewModel.SelectedSection(section);
+
+		                // expand - Add expand state to our observable dictionary if it's not *yet* Added
+		                $.each(data, function(index, elem) {
+		                    if (!self.ParentViewModel.ExpandData.get(elem.Id)()) {
+		                        self.ParentViewModel.ExpandData.set(elem.Id, false);
+		                    }
+
+		                    elem.Expanded = ko.computed(function() {
+		                        return self.ParentViewModel.ExpandData.get(elem.Id)();
+		                    });
+		                });
+
+		                self.ParentViewModel.Data(data);
+		                if (callback) {
+		                    callback();
+		                }
+		            }
+		        );
+		    };
+
+		    self.SaveRecord = function() {
+		        flow.exec(
+		            function() {
+		                var record = self.ChildViewSelectedRecord();
+		                if ($.trim(record.EditName()) == "" || $.trim(record.EditSEO()) == "") {
+		                    $("#validation").show();
+		                    return;
+		                }
+		                record.Name(record.EditName());
+		                record.SEO(record.EditSEO());
+
+		                self.ServiceAdapter.Save(self.CategoryToServerJson(record), this);
+		            },
+		            function(data) {
+		                self.ChildViewSelectedRecord().Id(data.Id);
+		                self.ChildViewSelectedRecord(null);
+		            }
+		        );
+		    };
+
+		    self.SwapParentChild = function() {
+		        var oldParent = self.CategoryToServerJson(self.ChildViewModel());
+		        var newParent = self.CategoryToServerJson(self.ChildViewSelectedRecord());
+
+		        flow.exec(
+		            function() {
+		                self.ServiceAdapter.SwapParentChild(oldParent, newParent, this);
+		            },
+		            function() {
+		                self.RetrieveModelBySection(self.ParentViewModel.SelectedSection(), this);
+		                self.ServiceAdapter.RetrieveById(newParent.Id, this);
+		            },
+		            function(refreshedChildData) {
+		                self.ChildViewModel(self.KnockoutIfyCategory(refreshedChildData));
+		                self.TrackToIdIfNotNull(newParent.Id);
+		                self.HighlightByTrackerId(newParent.Id);
+		            }
+		        );
+		    };
+
+		    self.ChangeParent = function(parentRecord) {
+		        var newParentRecordId = parentRecord.Id;
+		        var selectedRecordId = self.ChildViewSelectedRecord().Id();
+		        flow.exec(
+		            function() {
+		                self.ChildViewSelectedRecord().ParentId(newParentRecordId);
+		                self.ServiceAdapter.Save(self.CategoryToServerJson(self.ChildViewSelectedRecord()), this);
+		            },
+		            function() {
+		                self.Glider.GlideToParent(this);
+		            },
+		            function() {
+		                var isTopLevelCategory = parentRecord.ParentId == null;
+		                if (isTopLevelCategory) {
+		                    self.ParentViewModel.SelectedSection(parentRecord);
+		                    self.ServiceAdapter.RetrieveById(selectedRecordId, this);
+		                } else {
+		                    self.ServiceAdapter.RetrieveById(newParentRecordId, this);
+		                }
+		            },
+		            function(updatedParentRecord) {
+		                var knockedoutData = self.KnockoutIfyCategory(updatedParentRecord);
+		                self.ChildViewModel(knockedoutData);
+		                self.Glider.GlideToChild(this);
+		            },
+		            function() {
+		                self.TrackToIdIfNotNull(selectedRecordId);
+		                self.HighlightByTrackerId(selectedRecordId);
+		            }
+		        );
+		    };
+
+		    self.Delete = function() {
+		        var record = self.ChildViewSelectedRecord();
+		        if (self.IsRootCategoryForChildView(record.Id())) {
+		            self.ModalViewModel("Delete");
+		            $('#modal-delete').modal();
+		            return;
+		        }
+
+		        flow.exec(
+		            function() {
+		                self.ServiceAdapter.Delete(record.Id(), this);
+		            },
+		            function() {
+		                self.ServiceAdapter.RetrieveById(self.ChildViewModel().Id(), this);
+		            },
+		            function(parentRecord) {
+		                self.ChildViewModel(self.KnockoutIfyCategory(parentRecord));
+		            }
+		        );
+		    };
+
+		    self.DeleteConfirm = function() {
+		        $('#modal-delete').modal('hide');
+		        flow.exec(
+		            function() {
+		                var record = self.ChildViewSelectedRecord();
+		                self.ServiceAdapter.Delete(record.Id(), this);
+		            },
+		            function() {
+		                self.RetrieveModelBySection(self.ParentViewModel.SelectedSection(), this);
+		            },
+		            function() {
+		                self.ChildViewModel(null);
+		                self.ChildViewSelectedRecord(null);
+		            }
+		        );
+		    };
 			
             // Scroll Tracking
-            self.TrackToIdIfNotNull = function(id) {
+		    self.TrackToIdIfNotNull = function(id) {
 		        if (!id) return;
 		        var offset = $('#tracker' + id).parent().offset().top - $("#gliding-container").offset().top;
 		        $("body").scrollTop(offset);
-	        }
-			
-	        self.HighlightByTrackerId = function(id) {
+		    };
+
+		    self.HighlightByTrackerId = function(id) {
 		        var set = $('#tracker' + id).closest("td");
 		        set.animate({ backgroundColor: "#AAA" }, { duration: 1000 });
 		        set.animate(
-			        { backgroundColor: "#FFF" }, 
-			        { 
-				        duration: 1000, 
-				        complete: function() { set.css({ backgroundColor: "" }); } 
-		        });				
-	        }
+		            { backgroundColor: "#FFF" },
+		            {
+		                duration: 1000,
+		                complete: function() { set.css({ backgroundColor: "" }); }
+		            });
+		    };
 
 
 			// Initialization
@@ -390,7 +388,7 @@
 					<h1><span data-bind="text: $root.ParentViewModel.SelectedSection().Name"></span> &gt; All Categories</h1>
 				</div>
 				<div class="span3" style="margin-top:15px; text-align:right;">
-					<a class="btn btn-primary btn-block" data-bind="click: $root.AddColorParentRecord">AddColor New Category <i class="icon-arrow-right icon-white"></i></a>
+					<a class="btn btn-primary btn-block" data-bind="click: $root.AddParentRecord">Add New Category <i class="icon-arrow-right icon-white"></i></a>
 				</div>
 				
 				<!-- SECTION DROP DOWN -->
@@ -406,7 +404,7 @@
 					<h1><span data-bind="text:$root.ParentViewModel.SelectedSection().Name"></span> &gt; <span data-bind="text: $root.ChildViewModel().Name"></span></h1>
 				</div>
 				<div class="span3" style="margin-top:15px; text-align:right;" data-bind="visible: $root.ChildViewModel().Id">
-					<a class="btn btn-primary btn-block" data-bind="click: $root.AddColorChildRecord"><i class="icon-plus icon-white"></i> AddColor Sub-Category</a>
+					<a class="btn btn-primary btn-block" data-bind="click: $root.AddChildRecord"><i class="icon-plus icon-white"></i> Add Sub-Category</a>
 				</div>
 				
 				<!-- SECTION DROP DOWN -->
@@ -419,7 +417,7 @@
 	<!-- KNOCKOUT TEMPLATE - SECTION NAVIGATOR -->
 	<script type="text/html" id="Section-Navigator">
 		<ul class="nav nav-pills" style="">
-            <li style="width:140px;" data-bind="if: $root.ChildViewModel()">
+            <li style="width:150px;" data-bind="if: $root.ChildViewModel()">
 				<a id="glideToParent" class="backbutton" data-bind="click: $root.GlideToParentView">&laquo; Back to Section</a>
                 &nbsp;
             </li>
@@ -447,7 +445,7 @@
 	<!-- KNOCKOUT TEMPLATE - PARENT EDITOR -->
 	<script type="text/html" id="Parent-Editor">
 		<div style="margin-top:40px; text-align:center;" class="alert alert-info" data-bind="visible: $data.Data().length == 0">
-			<strong>This Section is empty. Click "AddColor New Category" to start adding Categories.</strong>  
+			<strong>This Section is empty. Click "Add New Category" to start adding Categories.</strong>  
 		</div>
 		
 		<table id="parent-editor-table" class="table table-hover" data-bind="visible: $data.Data().length > 0">
@@ -492,7 +490,7 @@
 		</table>
 
         <div style="margin-top:40px; text-align:center;" class="alert alert-info" data-bind="visible: $data.Id() && $data.Categories().length == 0">
-			<strong>This Category has no Sub-Categories.  Click "AddColor New Sub Category" to start adding new ones.</strong>  
+			<strong>This Category has no Sub-Categories.  Click "Add New Sub Category" to start adding new ones.</strong>  
 	    </div>
 	</script>
 	

@@ -21,7 +21,7 @@
                             subElem.Selected = ko.observable(false);
                         });
                     });
-                    self.GlideRight("AddBitmapColorSizesFromList", "AddBitmapColorSizesFromList", this);
+                    self.GlideRight("AddSizesFromList", "AddSizesFromList", this);
                 }
             );
         };
@@ -176,7 +176,7 @@
     <div id="modal-dialog" class="modal hide fade">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h3>AddBitmapColor Sizes to Product</h3>
+            <h3>Add Sizes to Product</h3>
         </div>
         <div class="modal-body">
             <p><strong>You will now be tracking Sizes in Inventory.</strong></p>
@@ -194,7 +194,7 @@
     <div style="margin-top:20px;">
         <form>
             <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SelectedProductSizes().length == 0">
-                <strong>There are no Sizes for this Product.  AddBitmapColor a Size from the existing list.</strong>  
+                <strong>There are no Sizes for this Product.     a Size from the existing list.</strong>  
             </div>
 
             <div id="sizes" class="sortable" data-bind="foreach: $root.SelectedProductSizes()">
@@ -227,7 +227,7 @@
 
 
 <!-- KNOCKOUT TEMPLATE - TOP WORKSPACE ADDSIZESFROMLIST -->
-<script type="text/html" id="Top-Workspace-AddBitmapColorSizesFromList">
+<script type="text/html" id="Top-Workspace-AddSizesFromList">
     <div class="workspace-heading" style="height:125px;">
         <div class="container" data-bind="if: $root.SelectedProduct()" style="height:124px;">
             <div class="row" style="position:relative;">				
@@ -252,13 +252,13 @@
                 </div>
                 <div class="span5" style="text-align:right;">
                     <a class="btn btn-inverse" href="#" data-bind="click: $root.GlideBackToSizes"><i class="icon-remove icon-white"></i> Cancel</a>                    
-                    <a class="btn btn-primary" href="#" data-bind="click: $root.AddBitmapColorSizesToProductClick"><i class="icon-ok icon-white"></i> AddBitmapColor Sizes</a>
+                    <a class="btn btn-primary" href="#" data-bind="click: $root.AddSizesToProductClick"><i class="icon-ok icon-white"></i> Add Sizes</a>
                 </div>
             </div>
         </div>
     </div>
 </script>
-<script type="text/html" id="Main-Editor-AddBitmapColorSizesFromList">
+<script type="text/html" id="Main-Editor-AddSizesFromList">
     <form>
         <div style="width:100%; margin-top:20px;"></div>
 
