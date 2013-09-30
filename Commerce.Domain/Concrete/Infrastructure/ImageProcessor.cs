@@ -43,20 +43,43 @@ namespace Commerce.Application.Concrete.Infrastructure
             }
         }
 
-        public Bitmap CreateThumbnail(Bitmap bitmap)
+
+        public Bitmap CreateThumbnail(Bitmap bitmap, bool crop)
         {
-            return this.CopyImageToNewConstraints(bitmap, MaxThumbnailWidth, MaxThumbnailHeight);
+            if (crop)
+            {
+                return this.ShrinkImageToConstraintsAndCrop(bitmap, MaxThumbnailWidth, MaxThumbnailHeight);
+            }
+            else
+            {
+                return this.CopyImageToNewConstraints(bitmap, MaxThumbnailWidth, MaxThumbnailHeight);
+            }
         }
 
-        public Bitmap CreateLarge(Bitmap bitmap)
+        public Bitmap CreateLarge(Bitmap bitmap, bool crop)
         {
-            return this.CopyImageToNewConstraints(bitmap, MaxLargeWidth, MaxLargeHeight);
+            if (crop)
+            {
+                return this.ShrinkImageToConstraintsAndCrop(bitmap, MaxLargeWidth, MaxLargeHeight);
+            }
+            else
+            {
+                return this.CopyImageToNewConstraints(bitmap, MaxLargeWidth, MaxLargeHeight);
+            }
         }
 
-        public Bitmap CreateSmall(Bitmap bitmap)
+        public Bitmap CreateSmall(Bitmap bitmap, bool crop)
         {
-            return this.CopyImageToNewConstraints(bitmap, MaxSmallWidth, MaxSmallHeight);
+            if (crop)
+            {
+                return this.ShrinkImageToConstraintsAndCrop(bitmap, MaxSmallWidth, MaxSmallHeight);
+            }
+            else
+            {
+                return this.CopyImageToNewConstraints(bitmap, MaxSmallWidth, MaxSmallHeight);
+            }
         }
+
 
         public Bitmap CopyImageToNewConstraints(Bitmap bitmap, int targetWidth, int targetHeight)
         {
@@ -74,17 +97,58 @@ namespace Commerce.Application.Concrete.Infrastructure
                 var factor = (decimal)targetWidth / (decimal)bitmap.Width;
                 var newWidth = targetWidth;
                 var newHeight = (decimal)bitmap.Height * factor;
-                return new Bitmap(bitmap, new System.Drawing.Size((int)newWidth, (int)newHeight));
+                return new Bitmap(bitmap, new Size((int)newWidth, (int)newHeight));
             }
             else
             {
                 var factor = (decimal)targetHeight / (decimal)bitmap.Height;
                 var newWidth = (decimal)bitmap.Width * factor;
                 var newHeight = targetHeight;
-                return new Bitmap(bitmap, new System.Drawing.Size((int)newWidth, (int)newHeight));
+                return new Bitmap(bitmap, new Size((int)newWidth, (int)newHeight));
+            }
+        }
+
+        public Bitmap ShrinkImageToConstraintsAndCrop(Bitmap source, int targetWidth, int targetHeight)
+        {
+            if (source.Width <= targetWidth && source.Height <= targetHeight)
+            {
+                return new Bitmap(source);
             }
 
+            var targetAspectRatio = AspectRatio(targetWidth, targetHeight);
+            var bitmapAspectRatio = AspectRatio(source);
+
+            if (targetAspectRatio < bitmapAspectRatio)
+            {
+                var newWidth = (int)(targetWidth * bitmapAspectRatio);
+                var newHeight = targetHeight;
+                var shrunkImage = new Bitmap(source, newWidth, newHeight);
+                return (Crop(shrunkImage, targetWidth, targetHeight));
+            }
+            else
+            {
+                var newWidth = targetWidth;
+                var newHeight = (int)(targetHeight / bitmapAspectRatio);
+                var shrunkImage = new Bitmap(source, newWidth, newHeight);
+                return (Crop(shrunkImage, targetWidth, targetHeight));
+            }
         }
+
+        public Bitmap Crop(Bitmap sourceImage, int targetWidth, int targetHeight)
+        {
+            var cropRect = new Rectangle(0, 0, targetWidth, targetHeight);
+            var target = new Bitmap(cropRect.Width, cropRect.Height);
+
+            using(Graphics g = Graphics.FromImage(target))
+            {
+               g.DrawImage(sourceImage, new Rectangle(0, 0, target.Width, target.Height), 
+                                cropRect,                        
+                                GraphicsUnit.Pixel);
+            }
+            return target;
+        }
+
+
 
         // Width:Height
         public decimal AspectRatio(Bitmap bitmap)

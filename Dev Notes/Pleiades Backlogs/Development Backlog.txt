@@ -32,7 +32,7 @@ FRONTRANGE - HOTZONE
 - Google Web Fonts => DONE FOR NOW
 - Fix Image shrinking code => DONE
 
-9/29 - 8.0 Hours
+9/29 - 11.0 Hours
 ~~~~~~~~~~~~~~~~~~
 - Added Content browsing pages
 - Make Header Responsive => DONE
@@ -55,7 +55,10 @@ DEFECT REPORT - massive
 #### MASSIVE MASSIVE UPHEAVAL - CODE LOSS CAUSE BY BAD GITHUB USAGE ####
 
 DEFECT REPORT - fixed bad Server Error Page, 404 Page, etc.
+DEFECT REPORT - Big whopping fucking fuck-up with Delete Color.
+DEFECT REPORT - bad Images Tab template
 
+A long and weary trip to get the fucking interface working.  Was it worth?  We shall see...
 
 
 Front Range
@@ -64,8 +67,8 @@ Front Range
 
 - Landing-Page / Microsite => IN PROGRESS
 - Load Test Data into Console App => IN PROGRESS
+- Customer Checkout => IN PROGRESS
 
-- Customer Checkout => TODO
 - Admin Search & Manage Orders => TODO
 - Admin Sales Graph by Product => TODO
 - Add Muted Background => TODO

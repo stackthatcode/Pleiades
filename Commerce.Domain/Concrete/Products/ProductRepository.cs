@@ -165,11 +165,12 @@ namespace Commerce.Application.Concrete.Products
             var product = this.ProductWithColorsAndImages(productId);
             var productColor = this.Context.ProductColors.First(x => x.Id == productColorId);
             
-            foreach (var image in product.Images)
+            foreach (var image in product.Images.ToList())
             {
                 if (image.ProductColor != null && image.ProductColor.Id == productColorId)
                 {
-                    image.ProductColor = null;
+                    image.ImageBundle.Deleted = true;
+                    product.Images.Remove(image);
                 }
             }
 

@@ -41,9 +41,9 @@ namespace Commerce.Application.Concrete.Infrastructure
 
         public ImageBundle AddBitmap(Bitmap original)
         {
-            var thumbnail = this.ImageProcessor.CreateThumbnail(original);
-            var large = this.ImageProcessor.CreateLarge(original);
-            var small = this.ImageProcessor.CreateSmall(original);
+            var thumbnail = this.ImageProcessor.CreateThumbnail(original, true);
+            var small = this.ImageProcessor.CreateSmall(original, true);
+            var large = this.ImageProcessor.CreateLarge(original, true);
 
             var bundle = new ImageBundle()
             {
@@ -69,9 +69,9 @@ namespace Commerce.Application.Concrete.Infrastructure
                 gfx.FillRectangle(brush, 0, 0, width, height);
             };
 
-            var thumbnail = this.ImageProcessor.CreateThumbnail(original);
-            var small = this.ImageProcessor.CreateSmall(original);
-            var large = this.ImageProcessor.CreateLarge(original);
+            var thumbnail = this.ImageProcessor.CreateThumbnail(original, true);
+            var small = this.ImageProcessor.CreateSmall(original, true);
+            var large = this.ImageProcessor.CreateLarge(original, true);
 
             var bundle = new ImageBundle()
             {

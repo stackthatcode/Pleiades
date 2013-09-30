@@ -1,12 +1,11 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace Commerce.Application.Interfaces
 {
     public interface IImageProcessor
     {
-        Bitmap CreateThumbnail(Bitmap original);
-        Bitmap CreateLarge(Bitmap original);
-        Bitmap CreateSmall(Bitmap original);
+        Bitmap CreateThumbnail(Bitmap original, bool crop);
+        Bitmap CreateLarge(Bitmap original, bool crop);
+        Bitmap CreateSmall(Bitmap original, bool crop);
     }
 }

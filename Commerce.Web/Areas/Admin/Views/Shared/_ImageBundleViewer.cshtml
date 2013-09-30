@@ -26,9 +26,13 @@
 	    BundleViewer.ImageBundleDownloadUrl = function (data, size) {
 	        var id = BundleViewer.ExtractId(data);
 
-	        return BundleViewer.DownloadTemplate
+	        var url = BundleViewer.DownloadTemplate
 	            .replace("{exRID}", id)
+	            .replace("{exRID}", "00000000-0000-0000-0000-000000000000")
 	            .replace("{size}", size);
+	        
+	        console.log("Generated URL:" + url);
+	        return url;
 	    };
 
 	    BundleViewer.LightBoxElementId = function (data) {
@@ -89,7 +93,6 @@
         </tr>
         </table>
     </script>
-
     
 	<script type="text/html" id="Image-Bundle-Thumbnail-Viewer">
         <table>

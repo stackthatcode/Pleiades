@@ -29,7 +29,7 @@
                 function(data) {
                     $.each(data, function(index, elem) { elem.Selected = ko.observable(false); });
                     self.ColorArray(data);
-                    self.GlideRight("AddBitmapColorColorsFromList", "AddBitmapColorColorsFromList");
+                    self.GlideRight("AddColorsFromList", "AddColorsFromList");
                 }
             );
         };
@@ -60,6 +60,7 @@
 
         self.UploadSwatchToggle = function() {
             self.NewColorInput().ShowUpload(true);
+            var fileUploader = new Commerce.FineUploader.Uploader(self.OnColorUpload);
         };
 
         self.OnColorUpload = function(data) {
@@ -138,7 +139,7 @@
                     if (colorInput.ShowUpload() == false) {
                         var farbtasticColor = PushMkt.GetSelectedColor();
                         var createColorJson = { Rgb: farbtasticColor, Width: "150", Height: "150" };
-                        self.ProductService.CreateBitmap(createColorJson, this);
+                        self.ProductService.Create(createColorJson, this);
                     } else {
                         this({ ExternalId: colorInput.ImageBundleExternalId() });
                     }
@@ -260,7 +261,7 @@
     <div id="editor" style="margin-top:20px; margin-bottom:100px;">
         <form>
             <div style="margin-top:40px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SelectedProductColors().length == 0">
-                <strong>There are no Colors for this Product.  AddBitmapColor a Color from the existing list, or Create a new one.</strong>  
+                <strong>There are no Colors for this Product.  Add a Color from the existing list, or Create a new one.</strong>  
             </div>
             
             <div data-bind="if: $root.SelectedProductColors().length">
@@ -268,24 +269,22 @@
             <div id="colors" class="sortable" data-bind="foreach: $root.SelectedProductColors()">
                 <div class="draggable" data-bind="attr: { id: 'sorted' + $data.Id }">
                     <table class="table table-hover" style="margin-bottom:0px;">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <span style="width:150px; float:left;">
-                                        <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
-                                        </div>
-                                    </span>
-                                    <span style="width:500px; float:left; padding-top:40px;">
-                                        <input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
-                                        <p><strong data-bind="text: $data.Name"></strong> - <span data-bind="text: $data.SkuCode"></span></p>
-                                    </span>
-                                    <span style="width:250px; float:left; padding-top:30px; text-align:right;">
-                                        <a href="#" class="btn btn-inverse disabled"><i class="icon-screenshot icon-white"></i> Drag Me!</a>
-                                        <a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteProductColor($data) }"><i class="icon-trash icon-white"></i> Delete</a>
-                                    </span>
-                                </td>
-                            </tr>
-                        </tbody>
+                    <tr>
+                        <td>
+                            <span style="width:150px; float:left;">
+                                <div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+                                </div>
+                            </span>
+                            <span style="width:500px; float:left; padding-top:40px;">
+                                <input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
+                                <p><strong data-bind="text: $data.Name"></strong> - <span data-bind="text: $data.SkuCode"></span></p>
+                            </span>
+                            <span style="width:250px; float:left; padding-top:30px; text-align:right;">
+                                <a href="#" class="btn btn-inverse disabled"><i class="icon-screenshot icon-white"></i> Drag Me!</a>
+                                <a class="btn btn-primary" style="width:70px;" href="#" data-bind="click: function() { $root.DeleteProductColor($data) }"><i class="icon-trash icon-white"></i> Delete</a>
+                            </span>
+                        </td>
+                    </tr>
                     </table>
                 </div>
             </div>
@@ -296,7 +295,7 @@
 
 
 <!-- KNOCKOUT TEMPLATE - ADD COLOR FROM LIST DRILL-DOWN VIEW -->
-<script type="text/html" id="Top-Workspace-AddBitmapColorColorsFromList">
+<script type="text/html" id="Top-Workspace-AddColorsFromList">
     <div class="workspace-heading" style="height:125px;">
         <div class="container" data-bind="if: $root.SelectedProduct()" style="height:124px;">
             <div class="row" style="position:relative;">				
@@ -320,14 +319,14 @@
                 </div>
                 <div class="span5" style="text-align:right;">
                     <a class="btn btn-inverse" href="#" data-bind="click: $root.GlideBackToColors"><i class="icon-remove icon-white"></i> Cancel</a>                    
-                    <a class="btn btn-primary" href="#" data-bind="click: $root.AddBitmapColorColorsToProductClick"><i class="icon-ok icon-white"></i> AddBitmapColor Colors</a>
+                    <a class="btn btn-primary" href="#" data-bind="click: $root.AddColorsToProductClick"><i class="icon-ok icon-white"></i> Add Colors</a>
                 </div>
             </div>
         </div>
     </div>
 </script>
 
-<script type="text/html" id="Main-Editor-AddBitmapColorColorsFromList">
+<script type="text/html" id="Main-Editor-AddColorsFromList">
     <div style="margin-top:20px; margin-bottom:100px;">
         <form>
             <div style="margin-top:40px; text-align:center;" class="alert alert-info" data-bind="visible: $root.ColorArray().length == 0">
@@ -474,6 +473,7 @@
             </p>			
             <p>
                 Any Inventory associated with this Color will be Deleted.
+                Any Images associated with this Color will be Deleted.
             </p>			
         </div>
         <div class="modal-footer">
@@ -510,7 +510,7 @@
     <div id="modal-dialog" class="modal hide fade">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<h3>AddBitmapColor Color to Product</h3>
+			<h3>Add Color to Product</h3>
 		</div>
 		<div class="modal-body">
 			<p><strong>You will now be tracking Colors in Inventory.</strong></p>

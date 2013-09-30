@@ -1,128 +1,128 @@
-﻿<!-- Images View Model -->
-<script type="text/javascript">
+﻿<script type="text/javascript">
     var PushMkt = namespace("PushMkt");
 
     PushMkt.AddImageFunctions = function(rootModel) {
         var self = rootModel;
 
-        self.SelectedColorsWithImages = ko.observableArray();
-        self.SelectedProductImages = ko.observableArray();
-        self.SelectedProductColorForImage = ko.observable();
-        self.NewImageInput = ko.observable();
+        self.ImageTab = {
+            Colors: ko.observableArray(),
+            Images: ko.observableArray(),
+            FileUpload: {
+                ImageBundleExternalId: ko.observable("00000000-0000-0000-0000-000000000000"),
+                Description: ko.observable(""),
+            },
+            SelectedColorForUpload: ko.observable(),
+        };
 
         self.ProductColorWithImagesById = function(id) {
-            for (i = 0; i < self.SelectedColorsWithImages().length; i++) {
-                var color = self.SelectedColorsWithImages()[i];
+            for (var i = 0; i < self.ImageTab.Colors().length; i++) {
+                var color = self.ImageTab.Colors()[i];
                 if (color.Id == id) {
                     return color;
                 }
             }
             return null;
         };
-
+        
         self.ImagesTabClick = function() {
+            self.ImagesTabClickImpl();
+        };
+
+        self.ImagesTabClickImpl = function(callback) {
             var colorData, scrollTop;
             scrollTop = $(document).scrollTop();
             
             if (self.SelectedProduct().AssignImagesToColors()) {
                 flow.exec(
                     function() {
-                        self.SelectedColorsWithImages.removeAll();
+                        self.ImageTab.Colors.removeAll();
                         self.ProductService.Colors(self.SelectedProduct().Id(), this);
                     },
                     function(colorJson) {
                         $.each(colorJson, function(index, elem) {
                             elem.Images = ko.observableArray();
                         });
-                        colorJson.unshift({ Id: 0, Name: "Unassigned", Images: ko.observableArray() });
 
                         colorData = colorJson;
                         self.ProductService.Images(self.SelectedProduct().Id(), this);
                     },
                     function(imageData) {
-                        self.SelectedColorsWithImages(colorData);                        
+                        self.ImageTab.Colors(colorData);                        
                         $.each(imageData, function(index, elem) {
-                            var color = self.ProductColorWithImagesById(elem.ProductColorId);
+                            var color = AQ(self.ImageTab.Colors()).firstOrDefault(function(x) { return x.Id == elem.ProductColorId; });                            
                             color.Images.push(elem);
                         });
-
-                        self.RemoveAssignedColorAsNeeded();
                         self.SetActiveMainEditor("Images");
                         self.MakeImagesSortable();
                         $(document).scrollTop(scrollTop);
+                        if (callback) {
+                            callback();
+                        }
                     }
                 );
             } else {
                 flow.exec(
                     function() {
+                        self.ImageTab.Colors.removeAll();
                         self.ProductService.Images(self.SelectedProduct().Id(), this);
                     },
                     function(images) {
-                        self.SelectedProductImages(images);
+                        self.ImageTab.Images(images);
                         self.SetActiveMainEditor("Images");
                         self.MakeImagesSortable();
                         $(document).scrollTop(scrollTop);
+                        if (callback) {
+                            callback();
+                        }
                     }
                 );
             }
         };
 
-        self.RemoveAssignedColorAsNeeded = function() {
-            var index = self.SelectedColorsWithImages().arrayFirstIndexOf(function(x) { return x.Id == 0; });
-            if (index == -1) {
-                return;
-            }
-            var unassignedColor = self.SelectedColorsWithImages()[index];
-            if (!unassignedColor.Images().length) {
-                self.SelectedColorsWithImages.remove(unassignedColor);
-            }
-        };
-
         self.MakeImagesSortable = function() {
             $(".colorDrop").droppable({
-                drop: function(event, ui) {
-                    var colorDropElem = $(this).closest("table.colorDrop");
-                    if (colorDropElem.length == 0) {
-                        console.log("missed drop - type 1!");
-                        console.log(this);
-                        return;
-                    }
-
-                    if ($(event.toElement).closest("li").length == 0) {
-                        console.log("missed drop - type 2!");
-                        return;
-                    }
-                        
-                    if ($(event.toElement).closest("table").length == 0) {
-                        console.log("missed drop - type 3!");
-                        return; 
-                    }
-                    
-                    if (!$(event.toElement).closest("table").attr("id")) {
-                        console.log("missed drop - type 4!");
-                        return; 
-                    }
-                    
-                    var imageId = $(event.toElement).closest("li").attr("id").replace("sorted", "");                    
-                    var originalColorId = $(event.toElement).closest("table").attr("id").replace('color', '');
-                    
-                    // Not sure about this!
-                    var newColorId = colorDropElem.attr("id").replace("color", "");
-                    
-                    //console.log("originalColorId: " + originalColorId + " " + " newColorId: " + newColorId + " imageId: " + imageId);
-                    self.UpdateImageToColorAssignment(originalColorId, newColorId, imageId);
-                }
+                drop: self.DropFunction
             });
 
             $.each($(".sortable"), function(index, elem) {
-                $(elem).sortable({
-                    placeholder: "ui-state-highlight",
-                    update: function() {
-                        self.UpdateImageSortOrder(elem);
-                    },
-                    delay: 150
-                }).disableSelection();
+                $(elem)
+                    .sortable({
+                        placeholder: "ui-state-highlight",
+                        update: function() {
+                            self.UpdateImageSortOrder(elem);
+                        },
+                        delay: 150
+                    })
+                    .disableSelection();
             });
+        };
+
+        self.DropFunction = function(event, ui) {
+            var colorDropElem = $(this).closest("table.colorDrop");
+            if (colorDropElem.length == 0) {
+                console.log("missed drop - type 1!");
+                console.log(this);
+                return;
+            }
+            if ($(event.toElement).closest("li").length == 0) {
+                console.log("missed drop - type 2!");
+                return;
+            }
+            if ($(event.toElement).closest("table").length == 0) {
+                console.log("missed drop - type 3!");
+                return;
+            }
+            if (!$(event.toElement).closest("table").attr("id")) {
+                console.log("missed drop - type 4!");
+                return;
+            }
+
+            var imageId = $(event.toElement).closest("li").attr("id").replace("sorted", "");
+            var originalColorId = $(event.toElement).closest("table").attr("id").replace('color', '');
+            var newColorId = colorDropElem.attr("id").replace("color", "");
+
+            //console.log("originalColorId: " + originalColorId + " " + " newColorId: " + newColorId + " imageId: " + imageId);
+            self.UpdateImageToColorAssignment(originalColorId, newColorId, imageId);
         };
 
         self.UpdateImageToColorAssignment = function(originalColorId, newColorId, imageId) {
@@ -135,17 +135,7 @@
                     self.ProductService.ChangeImageColor(self.SelectedProduct().Id(), imageId, newColorId, this);
                 },
                 function() {
-                    self.ImagesTabClick();
-
-                    /*** NOTE: overly complicated, premature optimization.  Take it easy, now!                    
-                    var newColor = self.ProductColorWithImagesById(newColorId);
-                    var originalColor = self.ProductColorWithImagesById(originalColorId);
-                    var index = originalColor.Images().arrayFirstIndexOf(function(x) { return x.Id == imageId; });
-                    var image = originalColor.Images()[index];
-                    originalColor.Images.remove(image);
-                    newColor.Images.push(image);
-                    self.RemoveAssignedColorAsNeeded();
-                    */
+                    self.ImagesTabClickImpl();
                 }
             );
         };
@@ -160,39 +150,21 @@
                     });
 
                     var sortedIds = sortOutput.join(",");
-                    //console.log("DOM Ids: " + sortedIds);
                     self.ProductService.UpdateImageOrder(self.SelectedProduct().Id(), sortedIds, this);
                 },
                 function() {
-                    // Update the Knockout model
-                    self.ImagesTabClick();
-
-                    /*** NOTE: overly complicated, premature optimization.  Take it easy, now!                    
-                    var myColorId = $(element).closest("table.colorDrop").attr("id").replace('color', '');
-                    var color = self.ProductColorWithImagesById(myColorId);
-                    var newImageArray = [];
-                    $.each(sortOutput, function(index, elem) {
-                        var index = color.Images().arrayFirstIndexOf(function(x) { return x.Id == elem; });
-                        var image = color.Images()[index];
-                        newImageArray.push(image);
-                    });
-                    color.Images.removeAll();
-                    color.Images(newImageArray);
-                    */
+                    self.ImagesTabClickImpl();
                 });
         };
 
-        self.GlideBackToImages = function(callback) {
+        self.GlideBackToImages = function() {
             flow.exec(
                 function() {
                     $("#glideToParent").hide();
                     self.GlideLeft("Child", "Images", this);
                 },
                 function() {
-                    self.MakeImagesSortable();
-                    if (callback) {
-                        callback();
-                    }
+                    self.MakeImagesSortable();                    
                 }
             );
         };
@@ -205,33 +177,28 @@
                 function(data) {
                     console.log(image);
                     if (self.SelectedProduct().AssignImagesToColors()) {
-                        var color = self.ProductColorWithImagesById(image.ProductColorId);
+                        var color = AQ(self.ImageTab.Colors()).firstOrDefault(function(x) { return x.Id == image.ProductColorId; });                            
                         color.Images.remove(image);
                     } else {
-                        self.SelectedProductImages.remove(image);
+                        self.ImageTab.Images.remove(image);
                     }
                 }
             );
         };
 
         self.AddNewImageForColor = function(data) {
-            self.SelectedProductColorForImage(data);
+            self.ImageTab.SelectedColorForUpload(data);
             self.SlideToImageUpload();
         };
 
         self.AddNewImage = function() {
-            self.SelectedProductColorForImage(null);
+            self.ImageTab.SelectedColorForUpload(null);
             self.SlideToImageUpload();
         };
 
         self.SlideToImageUpload = function() {
             flow.exec(
-                function() {
-                    var input = {
-                        ImageBundleExternalId: ko.observable(null),
-                        Description: ko.observable(null),
-                    };
-                    self.NewImageInput(input);
+                function() {                    
                     self.GlideRight("AddImage", "AddImage", this);
                 },
                 function() {
@@ -241,54 +208,55 @@
         };
 
         self.SaveImage = function() {
-            var newImage = self.NewImageInput();
-            if (!newImage.ImageBundleExternalId()) {
-                $("#validation").show();
-                return;
-            }
-
-            var input = {
-                ImageBundleExternalId: newImage.ImageBundleExternalId(),
-                Description: newImage.Description(),
-            };
-
-            if (self.SelectedProductColorForImage()) {
-                input.ProductColorId = self.SelectedProductColorForImage().Id;
-            }
-
+            var newId;
+            
             flow.exec(
                 function() {
-                    self.ProductService.AddProductImage(self.SelectedProduct().Id(), input, this);
+                    if (!self.ImageTab.FileUpload.ImageBundleExternalId()) {
+                        $("#validation").show();
+                        return;
+                    }
+                    
+                    var newProductImage = {
+                        ImageBundleExternalId: self.ImageTab.FileUpload.ImageBundleExternalId(),
+                        Description: self.ImageTab.FileUpload.Description(),
+                        ProductColorId: self.ImageTab.SelectedColorForUpload() ? self.ImageTab.SelectedColorForUpload().Id : null,
+                    };
+                    self.ProductService.AddProductImage(self.SelectedProduct().Id(), newProductImage, this);
                 },
                 function(data) {
-                    // Move it into the color
-                    var newId = data.Id;
-                    if (self.SelectedProductColorForImage()) {
-                        self.SelectedProductColorForImage().Images.push(data);
-                    } else {
-                        self.SelectedProductImages().push(data);
-                    }
-                    self.GlideBackToImages(function() {
-                        self.ScrollTracker.ScrollToTracker("sorted" + newId);
-                    });
+                    newId = data.Id;
+                    console.log(data);
+                    self.ImagesTabClickImpl(this);
+                },
+                function () {
+                    $("#glideToParent").hide();
+                    self.GlideLeft("Child", "Images", this);
+                },
+                function() {
+                    self.MakeImagesSortable();
+                    self.ScrollTracker.ScrollToTracker("sorted" + newId);
                 }
             );
         };
 
         self.OnImageUpload = function(data) {
-            console.log(data);
-            self.NewImageInput().ImageBundleExternalId(data.ExternalId);
+            self.ImageTab.FileUpload.ImageBundleExternalId(data.ExternalId);
         };
 
-        self.AssignImagesToColorClick = function() {
+        self.AssignImagesToColorClick = function() {            
             flow.exec(
                 function() {
+                    self.ProductService.Colors(self.SelectedProduct().Id(), this);
+                },
+                function(data) {
+                    if (data.length == 0) {
+                        return;
+                    }
                     var id = self.SelectedProduct().Id();
                     self.ProductService.AssignImagesToColor(id, this);
                 },
                 function() {
-                    self.SelectedColorsWithImages.removeAll();
-                    self.SelectedProductImages.removeAll();
                     self.SelectedProduct().AssignImagesToColors(true);
                     self.ImagesTabClick();
                 }
@@ -302,8 +270,6 @@
                     self.ProductService.UnassignImagesFromColor(id, this);
                 },
                 function() {
-                    self.SelectedColorsWithImages.removeAll();
-                    self.SelectedProductImages.removeAll();
                     self.SelectedProduct().AssignImagesToColors(false);
                     self.ImagesTabClick();
                 }
@@ -312,13 +278,18 @@
     };
 </script>
 
-
-<!-- KNOCKOUT TEMPLATE - MAIN EDITOR IMAGES TAB -->
 <script type="text/html" id="Main-Editor-Images">
-    <div style="height:20px;"></div>
+    <div style="height:20px;"></div>    
+    <div data-bind="template: { data: $root, name: 'Images-Assigned-To-Color' }"></div>
+    <div data-bind="template: { data: $root, name: 'Images-Not-Assigned-To-Color' }"></div>
+</script>
 
-    <div data-bind="if: $root.SelectedProduct() && $root.SelectedProduct().AssignImagesToColors && $root.SelectedColorsWithImages().length">
-        <!-- ko foreach: $root.SelectedColorsWithImages() -->
+<script type="text/html" id="Images-Assigned-To-Color">
+    <div data-bind="if: $root.SelectedProduct() && $root.SelectedProduct().AssignImagesToColors() == true">
+        <div style="margin-top:20px; text-align:center;" class="alert alert-info" data-bind="visible: $root.ImageTab.Colors().length == 0">
+            <strong>There are no Colors for this Product.  Click on the Colors tab to add Colors.</strong>  
+        </div>
+        <!-- ko foreach: $root.ImageTab.Colors() -->
         <div>
             <table class="table-hover colorDrop" data-bind="attr: { id: 'color' + $data.Id }">
                 <tr>
@@ -332,7 +303,7 @@
                                 <!-- ko foreach: $data.Images() -->
                                 <li data-bind="attr: { id: 'sorted' + $data.Id }">
                                     <div style="width:160px; padding-bottom:5px;" 
-                                         data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'Image' } }">
+                                         data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'ImageUpload' } }">
                                     </div>
                                     <a href="#" style="width:55px;" class="btn btn-inverse btn-small disabled"><i class="icon-screenshot icon-white"></i> Drag!</a>
                                     <a class="btn btn-primary btn-small" style="width:55px;" href="#" data-bind="click: function() { $root.DeleteProductImage($data) }"><i class="icon-trash icon-white"></i> Delete</a>			
@@ -343,10 +314,6 @@
                     </td>
 
                     <td valign="top" style="width:220px; text-align:left; vertical-align:top; padding-top:20px; padding-right:20px; height:200px;">
-                        <div data-bind="if: $data.Name == 'Unassigned'">
-                            <p><strong>No Color</strong></p>
-                            <h5>Drag Images from this Region to assign them to a Color and make them visible.</h5>
-                        </div>
                         <div data-bind="ifnot: $data.Name == 'Unassigned'">
                             <div style="width:80px; margin-bottom:5px;" 
                                  data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'AssignImageToColor' } }">
@@ -368,12 +335,14 @@
         <div style="display:block; margin-bottom:200px; clear:both;">
         </div>
     </div>
+</script>
 
-    <div data-bind="ifnot: $root.SelectedProduct() && $root.SelectedProduct().AssignImagesToColors" style="margin-top:20px;">
-        <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SelectedProductImages().length == 0">
+<script type="text/html" id="Images-Not-Assigned-To-Color">
+    <div data-bind="ifnot: $root.SelectedProduct() && $root.SelectedProduct().AssignImagesToColors() == true" style="margin-top:20px;">
+        <div style="margin-top:20px; text-align:center;" class="alert alert-info" data-bind="visible: $root.ImageTab.Images().length == 0">
             <strong>There are no images for this Product.  Click "Add Image" to Upload an image.</strong>  
         </div>
-        <ul class="sortable" data-bind="foreach: $root.SelectedProductImages()">
+        <ul class="sortable" data-bind="foreach: $root.ImageTab.Images()">
             <li data-bind="attr: { id: 'sorted' + $data.Id }">
                 <div style="width:160px; padding-bottom:5px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'ImageTab' } }">
                 </div>
@@ -386,7 +355,6 @@
     </div>
 </script>
 
-<!-- KNOCKOUT TEMPLATE - CHILD EDITOR IMAGES - ADD IMAGE -->
 <script type="text/html" id="Top-Workspace-AddImage">
     <div class="workspace-heading" style="height:125px;">
         <div class="container" data-bind="if: $root.SelectedProduct()" style="height:124px;">
@@ -414,59 +382,52 @@
         </div>
     </div>
 </script>
+
 <script type="text/html" id="Main-Editor-AddImage">
     <div style="height:40px;"></div>
 
-    <div data-bind="with: $root.NewImageInput">
-    <form>
-		<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
-            <strong>Please Upload an Image.</strong>
-		</div>
+    <div data-bind="with: $root.ImageTab.FileUpload">
+        <form>
+            <div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
+                <strong>Please Upload an Image.</strong>
+            </div>
 
-        <div class="row">
-            <div class="span3">
-                <div style="margin-bottom:20px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId(), LightboxSuffixId: 'Child' } }">
-			    </div>
-			    <div style="margin-bottom:20px; margin-top:20px;" data-bind="template: { name: 'Fine-Uploader', data: $data }">
-			    </div>
-            </div>
-            <div class="span9">
-                <div class="row">
-                    <div class="span6">
-                        <label>Image Description<br /><input class="input-large" style="width:300px;" type="text" placeholder="Enter Image Description" data-bind="value: $data.Description" maxlength="100" />
-                        </label>
+            <div class="row">
+                <div class="span3">
+                    <div style="margin-bottom:20px;" data-bind="template: { name: 'Image-Bundle-Small-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId(), LightboxSuffixId: 'Child' } }">
                     </div>
-                    <div class="span3">
-					    <a class="btn btn-inverse" href="#" data-bind="click: $root.GlideBackToImages"><i class="icon-remove icon-white"></i> Cancel</a>                    
-					    <a class="btn btn-primary" href="#" data-bind="click: $root.SaveImage"><i class="icon-ok icon-white"></i> Save</a>
+
+                    <div style="margin-bottom:20px; margin-top:20px;" data-bind="template: { name: 'Fine-Uploader', data: $data }">
                     </div>
                 </div>
-                <div class="row" data-bind="if: $root.SelectedProductColorForImage()">
-                    <div class="span6">
+
+                <div class="span9">
+                    <div class="row">
+                        <div class="span6">
+                            <label>Image Description<br /><input class="input-large" style="width:300px;" type="text" placeholder="Enter Image Description" data-bind="value: $data.Description" maxlength="100" />
+                            </label>
+                        </div>
+                        <div class="span3">
+                            <a class="btn btn-inverse" href="#" data-bind="click: $root.GlideBackToImages"><i class="icon-remove icon-white"></i> Cancel</a>                    
+                            <a class="btn btn-primary" href="#" data-bind="click: $root.SaveImage"><i class="icon-ok icon-white"></i> Save</a>
+                        </div>
                     </div>
-                    <div class="span3">
-                        <!-- ko if:  $root.SelectedProductColorForImage().Id -->
-                            <label>Assigned Color<br />
-                            <div style="width:80px; margin-bottom:5px;" 
-                                data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundleExternalId: $root.SelectedProductColorForImage().ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
-			                </div>
-				            <p>
-                                <strong data-bind="text: $root.SelectedProductColorForImage().Name"></strong > - 
-                                <span data-bind="text: $root.SelectedProductColorForImage().SkuCode"></span>
-                            </p>
-                            </label>
-                        <!-- /ko -->
-                        <!-- ko ifnot:  $root.SelectedProductColorForImage().Id -->
-                            <label>Assigned Color<br />
-                            <p>
-                                <strong>No Color Assigned</strong>
-                            </p>
-                            </label>
-                        <!-- /ko -->
+
+                    <div class="row" data-bind="if: $root.ImageTab.SelectedColorForUpload()">
+                        <div class="span6">
+                        </div>
+                        <div class="span3">
+                            <!-- ko if:  $root.ImageTab.SelectedColorForUpload().Id -->
+                                <label>Assigned Color<br />
+                                <div style="width:80px; margin-bottom:5px;" 
+                                    data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundleExternalId: $root.ImageTab.SelectedColorForUpload().ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+			                    </div>
+                                </label>
+                            <!-- /ko -->
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>            
-    </form>
+       </form>
     </div>
 </script>
