@@ -39,11 +39,11 @@ namespace Commerce.Application.Concrete.Infrastructure
                 .Include(x => x.Small);
         }
 
-        public ImageBundle AddBitmap(Bitmap original)
+        public ImageBundle AddBitmap(Bitmap original, bool cropThumbnail, bool cropSmall, bool cropLarge)
         {
-            var thumbnail = this.ImageProcessor.CreateThumbnail(original, true);
-            var small = this.ImageProcessor.CreateSmall(original, true);
-            var large = this.ImageProcessor.CreateLarge(original, true);
+            var thumbnail = this.ImageProcessor.CreateThumbnail(original, cropThumbnail);
+            var small = this.ImageProcessor.CreateSmall(original, cropSmall);
+            var large = this.ImageProcessor.CreateLarge(original, cropLarge);
 
             var bundle = new ImageBundle()
             {

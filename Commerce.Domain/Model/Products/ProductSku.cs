@@ -8,6 +8,7 @@ namespace Commerce.Application.Model.Products
         public int Id { get; set; }        
         public string SkuCode { get; set; }
         public string OriginalSkuCode { get; set; }
+
         public Product Product { get; set; }
         public ProductColor Color { get; set; }
         public ProductSize Size { get; set; }

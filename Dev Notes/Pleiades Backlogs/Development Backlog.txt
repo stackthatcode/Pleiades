@@ -32,8 +32,8 @@ FRONTRANGE - HOTZONE
 - Google Web Fonts => DONE FOR NOW
 - Fix Image shrinking code => DONE
 
-9/29 - 11.0 Hours
-~~~~~~~~~~~~~~~~~~
+9/29 - 11.0 Hours - 6:30AM to 8:00PM
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Added Content browsing pages
 - Make Header Responsive => DONE
 - Add Cart Link at the Top => DONE
@@ -60,20 +60,56 @@ DEFECT REPORT - bad Images Tab template
 
 A long and weary trip to get the fucking interface working.  Was it worth?  We shall see...
 
+10/1 1.5 Hours => Fixed lightbox, fixed image shrinking/cropping, fixed image default thumbnail, removed extraneous code =>  DONE
+10/2 1.5 Hours => added responsiveness to Product Listing; Fixed more ReSharper shiznit; fixed UnitCost defect in Add Items to Order; added Images and Inventory to the Products service
+
+- Logo FPO => followed with real logo => DONE
+- View Cart link, with Items summary => DONE
+- Checkout link => DONE
+
+
+Inventory { SKU, Image Bundle, Size, Color }
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1.) There are Colors
+1.1.) If YES, then Load the Inventory for the first Color => RetrieveInventoryByColor
+1.2.) Return the Images for that Color => RetrieveImagesByColor
+1.3.) Returns Sizes for that Color => RetrieveSizes
+
+2.) No, there are NO Colors
+2.1.) Load the Inventory => RetrieveInventory
+2.2.) Return all of the Images => RetrieveImages
+1.3.) Returns Sizes for that Color =>  RetrieveSizes
+
+Templates
+~~~~~~~~~
+1.) This Color, One-to-Many Sizes => 
+* Many Skus
+* Link to other Colors => Product Colors has nothing to do with Product
+* Many Images for this Color
+
+2.) This Color, No-Sizes => 
+* One Sku
+* Link to other Colors
+
+3.) No Color, One-to-Many Sizes => 
+* Many Skus
+* Many Images 
+
+4.) No Color, No Sizes => 
+* One Sku
+
+
 
 Front Range
------------
-- http://getbootstrap.com/css/#overview-responsive-images
-
+===========
 - Landing-Page / Microsite => IN PROGRESS
-- Load Test Data into Console App => IN PROGRESS
 - Customer Checkout => IN PROGRESS
+- Load Test Data into Console App => IN PROGRESS
 
 - Admin Search & Manage Orders => TODO
 - Admin Sales Graph by Product => TODO
-- Add Muted Background => TODO
 
-=> NEED TO LEARN THE "ANGULAR WAY" => http://www.youtube.com/watch?v=qK-Z0oEdE4Y&feature=player_embedded
+- http://getbootstrap.com/css/#overview-responsive-images
 => http://blog.stevensanderson.com/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/
 => http://haacked.com/archive/2011/10/10/preventing-csrf-with-ajax.aspx
 
@@ -85,25 +121,6 @@ Infrastructure
 
 
 ### END PRODUCT DEFINITION + TASKING ###
-
-
-PushMarket Front-end
-~~~~~~~~~~~~~~~~~~~~
-- Angular.js
-- JavaScript Promises
-- JQuery
-- Bootstrap 3
-- .NET MVC 4
-- C# + .NET 4.5
-- Entity Framework 6
-- HTML 5
-- SQL Server 2008...?
-
-Header Tasking
-~~~~~~~~~~~~~~
-- Logo FPO => followed with real logo
-- View Cart link, with Items summary
-- Checkout link
 
 Bottom Tasking
 ~~~~~~~~~~~~~~
@@ -164,6 +181,7 @@ About Us Page Tasking
 - Shipping Verbage
 - Returns Verbage
 
+
 Manage an Order CRUD screen
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Order Search Query
@@ -180,16 +198,12 @@ Manage an Order CRUD screen
 Moar Tasks
 ~~~~~~~~~~
 - Fix image pop-up defect in the Edit Cart Screen => TODO
-
 * Host on EC2 by 6/1 => IN PROGRESS - FAIL
 - Research EC2 some more
 - Sign-up to use EC2
 
 * Slideshow - identify images & marketing, based on Products and marketing message => TODO
-* You might also like
 ~ FONTS => https://news.ycombinator.com/item?id=5407499
-
-
 
 Backlog
 -------
@@ -206,19 +220,8 @@ Backlog
 
 MORE BIG FISH
 -------------
-=> Payment Processing Options, API's etc. => IN PROGRESS
-=> Custom Caching solution...? => IN PROGRESS
 => http://news.ycombinator.com/item?id=4669866 => IMPORTANT
-=> Enable for Azure => TODO
-
-E-Commerce API's & Payment Processors
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Stripe
-- Cheddar Getter
-- Braintree
-- WePay
-
-http://fortawesome.github.com/Font-Awesome/
+=> http://fortawesome.github.com/Font-Awesome/
 
 
 Development Backlog
@@ -232,20 +235,6 @@ PENDING FEATURE BACKLOG
 - Rendering Adjustments for long Category Names et. al. => PENDING EVAL
 
 
-
-
-PHASE 2 Backlog
----------------
-- NCrunch coverage analysis and remediation for Controllers and Routes
-- Analytics Integration - KISS, Mixpanel, whatevs
-- Automated Traffic Management
-- Email Marketing w/ User Management
-- Offer/Promotion Engine
-- Shipping API's
-- What about virus scan for file uploads, etc.
-- Get Scott Hanselman's obj/bin cleaner utility
-- Use Sentinel for Logging stuff
-- DapperORM
 
 Already Done
 ~~~~~~~~~~~~
@@ -268,7 +257,31 @@ Already Done
 - Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING) - DONE
 - Separated Error PAges => DONE
 
+PushMarket Front-end
+~~~~~~~~~~~~~~~~~~~~
+- Angular.js
+- JavaScript Promises
+- JQuery
+- Bootstrap 3
+- .NET MVC 4
+- C# + .NET 4.5
+- Entity Framework 6
+- HTML 5
+- SQL Server 2008...?
 
+
+PHASE 2 Backlog
+---------------
+- NCrunch coverage analysis and remediation for Controllers and Routes
+- Analytics Integration - KISS, Mixpanel, whatevs
+- Automated Traffic Management
+- Email Marketing w/ User Management
+- Offer/Promotion Engine
+- Shipping API's
+- What about virus scan for file uploads, etc.
+- Get Scott Hanselman's obj/bin cleaner utility
+- Use Sentinel for Logging stuff
+- DapperORM
 
 Research Backlog
 ----------------
@@ -285,13 +298,9 @@ Research Backlog
 *** TODO: what is the function of "nav-collapse collapse"?
 *** MANDATE => research HOW KnockoutJS actually works internally
 - http://code.google.com/p/autofac/wiki/MvcIntegration
-
-Please Research
-~~~~~~~~~~~~~~~
+=> NEED TO LEARN THE "ANGULAR WAY" => http://www.youtube.com/watch?v=qK-Z0oEdE4Y&feature=player_embedded
 https://github.com/MatthewMueller/array
-https://github.com/danderson00/knockout.composite/tree/master/Examples
 http://news.ycombinator.com/item?id=3265625
 http://twitter.github.com/flight/
 http://pcottle.github.com/learnGitBranching/
 SublimeText + Resharper => TODO
-

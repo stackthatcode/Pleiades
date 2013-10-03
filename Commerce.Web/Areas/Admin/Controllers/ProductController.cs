@@ -296,7 +296,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
                 this.Context.SaveChanges();
             }
 
-            var inventory = this.InventoryRepository.ProductSkuById(id);
+            var inventory = this.InventoryRepository.RetreiveByProductId(id, false);
             return new JsonNetResult(inventory); 
         }
 

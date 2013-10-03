@@ -18,70 +18,50 @@ namespace Commerce.Application.Concrete.Infrastructure
         public ImageProcessor()
         {
             if (ConfigurationManager.AppSettings["MaxLargeWidth"] != null)
-            {
                 MaxLargeWidth = Int32.Parse(ConfigurationManager.AppSettings["MaxLargeWidth"]);
-            }
             if (ConfigurationManager.AppSettings["MaxLargeHeight"] != null)
-            {
                 MaxLargeHeight = Int32.Parse(ConfigurationManager.AppSettings["MaxLargeHeight"]);
-            }
-            if (ConfigurationManager.AppSettings["MaxSmallWidth"] != null)
-            {
-                MaxSmallWidth = Int32.Parse(ConfigurationManager.AppSettings["MaxSmallWidth"]);
-            }
-            if (ConfigurationManager.AppSettings["MaxSmallHeight"] != null)
-            {
-                MaxSmallHeight = Int32.Parse(ConfigurationManager.AppSettings["MaxSmallHeight"]);
-            }
-            if (ConfigurationManager.AppSettings["MaxThumbnailWidth"] != null)
-            {
-                MaxThumbnailWidth = Int32.Parse(ConfigurationManager.AppSettings["MaxThumbnailWidth"]);
-            }
-            if (ConfigurationManager.AppSettings["MaxThumbnailHeight"] != null)
-            {
-                MaxThumbnailHeight = Int32.Parse(ConfigurationManager.AppSettings["MaxThumbnailHeight"]);
-            }
-        }
 
+            if (ConfigurationManager.AppSettings["MaxSmallWidth"] != null)
+                MaxSmallWidth = Int32.Parse(ConfigurationManager.AppSettings["MaxSmallWidth"]);
+            if (ConfigurationManager.AppSettings["MaxSmallHeight"] != null)
+                MaxSmallHeight = Int32.Parse(ConfigurationManager.AppSettings["MaxSmallHeight"]);
+
+            if (ConfigurationManager.AppSettings["MaxThumbnailWidth"] != null)
+                MaxThumbnailWidth = Int32.Parse(ConfigurationManager.AppSettings["MaxThumbnailWidth"]);
+            if (ConfigurationManager.AppSettings["MaxThumbnailHeight"] != null)
+                MaxThumbnailHeight = Int32.Parse(ConfigurationManager.AppSettings["MaxThumbnailHeight"]);
+        }
 
         public Bitmap CreateThumbnail(Bitmap bitmap, bool crop)
         {
-            if (crop)
-            {
-                return this.ShrinkImageToConstraintsAndCrop(bitmap, MaxThumbnailWidth, MaxThumbnailHeight);
-            }
-            else
-            {
-                return this.CopyImageToNewConstraints(bitmap, MaxThumbnailWidth, MaxThumbnailHeight);
-            }
+            return ResizingProcessor(crop)(bitmap, MaxThumbnailWidth, MaxThumbnailHeight);
         }
 
         public Bitmap CreateLarge(Bitmap bitmap, bool crop)
         {
-            if (crop)
-            {
-                return this.ShrinkImageToConstraintsAndCrop(bitmap, MaxLargeWidth, MaxLargeHeight);
-            }
-            else
-            {
-                return this.CopyImageToNewConstraints(bitmap, MaxLargeWidth, MaxLargeHeight);
-            }
+            return ResizingProcessor(crop)(bitmap, MaxLargeWidth, MaxLargeHeight);
         }
 
         public Bitmap CreateSmall(Bitmap bitmap, bool crop)
         {
-            if (crop)
-            {
-                return this.ShrinkImageToConstraintsAndCrop(bitmap, MaxSmallWidth, MaxSmallHeight);
-            }
-            else
-            {
-                return this.CopyImageToNewConstraints(bitmap, MaxSmallWidth, MaxSmallHeight);
-            }
+            return ResizingProcessor(crop)(bitmap, MaxSmallWidth, MaxSmallHeight);
         }
 
 
-        public Bitmap CopyImageToNewConstraints(Bitmap bitmap, int targetWidth, int targetHeight)
+        public Func<Bitmap, int, int, Bitmap> ResizingProcessor(bool crop)
+        {
+            if (crop)
+            {
+                return ResizeMinimumDimensionToConstraintsAndCrop;
+            }
+            else
+            {
+                return ResizeEntireImageToNewConstraints;
+            }
+        }
+
+        public Bitmap ResizeEntireImageToNewConstraints(Bitmap bitmap, int targetWidth, int targetHeight)
         {
             if (bitmap.Width <= targetWidth && bitmap.Height <= targetHeight)
             {
@@ -108,21 +88,25 @@ namespace Commerce.Application.Concrete.Infrastructure
             }
         }
 
-        public Bitmap ShrinkImageToConstraintsAndCrop(Bitmap source, int targetWidth, int targetHeight)
+        public Bitmap ResizeMinimumDimensionToConstraintsAndCrop(Bitmap source, int targetWidth, int targetHeight)
         {
             if (source.Width <= targetWidth && source.Height <= targetHeight)
             {
                 return new Bitmap(source);
             }
 
+            // e.g. 1:1
             var targetAspectRatio = AspectRatio(targetWidth, targetHeight);
+            // e.g. 4:1
             var bitmapAspectRatio = AspectRatio(source);
 
-            if (targetAspectRatio < bitmapAspectRatio)
+            if (bitmapAspectRatio > targetAspectRatio)
             {
                 var newWidth = (int)(targetWidth * bitmapAspectRatio);
                 var newHeight = targetHeight;
                 var shrunkImage = new Bitmap(source, newWidth, newHeight);
+
+                // TODO: CROP X-offset and Y-offset
                 return (Crop(shrunkImage, targetWidth, targetHeight));
             }
             else
@@ -130,6 +114,8 @@ namespace Commerce.Application.Concrete.Infrastructure
                 var newWidth = targetWidth;
                 var newHeight = (int)(targetHeight / bitmapAspectRatio);
                 var shrunkImage = new Bitmap(source, newWidth, newHeight);
+
+                // TODO: CROP X-offset and Y-offset
                 return (Crop(shrunkImage, targetWidth, targetHeight));
             }
         }
@@ -147,7 +133,6 @@ namespace Commerce.Application.Concrete.Infrastructure
             }
             return target;
         }
-
 
 
         // Width:Height

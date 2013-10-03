@@ -107,7 +107,7 @@ namespace Commerce.Initializer.Builders.Products
                 _unitOfWork.SaveChanges();
 
                 var random = new Random();
-                _inventoryRepository.ProductSkuById(product1.Id).ForEach(x =>
+                _inventoryRepository.RetreiveByProductId(product1.Id, false).ForEach(x =>
                 {
                     x.Reserved = 0;
                     x.InStock = random.Next(2, 6);

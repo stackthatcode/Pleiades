@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Commerce.Application.Model.Products;
 
 namespace Commerce.Application.Interfaces
 {
     public interface IInventoryRepository
     {
-        List<ProductSku> ProductSkuById(int productId);
+        List<ProductSku> RetreiveByProductId(int productId, bool includeChildren);
         int TotalInStock(int productId);
         void Wipe(int productId);
         void UpdateInStock(int productId, int inventoryTotal);

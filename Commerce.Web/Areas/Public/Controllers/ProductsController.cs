@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Commerce.Application.Interfaces;
 using Pleiades.Application.Logging;
@@ -9,10 +10,12 @@ namespace Commerce.Web.Areas.Public.Controllers
     public class ProductsController : Controller
     {
         private readonly IProductRepository _productRepository;
+        private readonly IInventoryRepository _inventoryRepository;
 
-        public ProductsController(IProductRepository productRepository)
+        public ProductsController(IProductRepository productRepository, IInventoryRepository inventoryRepository)
         {
             _productRepository = productRepository;
+            _inventoryRepository = inventoryRepository;
         }
 
         // GET api/product
@@ -29,9 +32,25 @@ namespace Commerce.Web.Areas.Public.Controllers
         [ActionName("action-with-id")]
         public JsonNetResult Get(string id)
         {
-            var identifier = Int32.Parse(id);
-            var results = _productRepository.RetrieveInfo(identifier);
-            return new JsonNetResult(results);
+            var productid = Int32.Parse(id);
+            var info = _productRepository.RetrieveInfo(productid);
+            var colors = _productRepository.RetreiveColors(productid);
+
+            if (colors.Any())
+            {
+                var selectedColor = colors.First();
+                var inventory = _inventoryRepository.RetreiveByProductId(productid, false);
+                var images = _productRepository.RetrieveImages(productid, selectedColor.Id);
+                var result = new {Info = info, Inventory = inventory, Images = images};
+                return new JsonNetResult(result);
+            }
+            else
+            {
+                var inventory = _inventoryRepository.RetreiveByProductId(productid, false);
+                var images = _productRepository.RetrieveImages(productid);
+                var result = new { Info = info, Inventory = inventory, Images = images };
+                return new JsonNetResult(result);
+            }
         }
 
         [HttpPost]

@@ -1,5 +1,5 @@
 ﻿    @using System.Configuration;
-    @Html.Javascript("~/Content/Bootstrap_2_3_2/js/bootstrap-lightbox.js")
+    @Html.Javascript("~/Content/Bootstrap_2_3_2/js/bootstrap-lightbox.min.js")
     @Html.Stylesheet("~/Content/Bootstrap_2_3_2/css/bootstrap-lightbox.min.css")
 
 	<script type="text/javascript">
@@ -114,14 +114,14 @@
         </table>
 	</script>
 
-    <script type="text/html" id="Image-Bundle-Lightbox">
-        <div data-bind="attr: { id: BundleViewer.LightBoxElementId($data) }"  
-                class="lightbox hide fade" tabindex="-1" role="dialog" aria-hidden="true">
-	        <div class='lightbox-header'>
-		        <button type="button" class="close" data-dismiss="lightbox" aria-hidden="true">&times;</button>
-	        </div>
-	        <div class='lightbox-content'>
-		        <img data-bind="attr: { 'data-image': BundleViewer.ImageBundleDownloadUrl($data, 'large') }" />
-	        </div>
-        </div>
-    </script>
+<script type="text/html" id="Image-Bundle-Lightbox">
+    <div data-bind="attr: { id: BundleViewer.LightBoxElementId($data) }"  
+            class="lightbox hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class='lightbox-header'>
+		    <button type="button" class="close" data-dismiss="lightbox" aria-hidden="true">&times;</button>
+	    </div>
+	    <div class='lightbox-content'>
+		    <img data-bind="attr: { 'data-image': BundleViewer.ImageBundleDownloadUrl($data, 'large') }" />
+	    </div>
+	</div>
+</script>

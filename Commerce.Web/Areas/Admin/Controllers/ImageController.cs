@@ -44,7 +44,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             var stream = file.InputStream;
             var bitmap = new Bitmap(file.InputStream);
-            var imageBundle = this._imageBundleRepository.AddBitmap(bitmap);
+            var imageBundle = this._imageBundleRepository.AddBitmap(bitmap, true, true, false);
 
             return new JsonNetResult(imageBundle);
         }
@@ -55,7 +55,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
             try
             {
                 var bitmap = new Bitmap(upload.InputStream);
-                var imageBundle = this._imageBundleRepository.AddBitmap(bitmap);
+                var imageBundle = this._imageBundleRepository.AddBitmap(bitmap, true, true, false);
                 this.UnitOfWork.SaveChanges();
                 return new FineUploaderResult(true, new { ImageBundle = imageBundle });
             }

@@ -8,10 +8,15 @@
             Colors: ko.observableArray(),
             Images: ko.observableArray(),
             FileUpload: {
-                ImageBundleExternalId: ko.observable("00000000-0000-0000-0000-000000000000"),
-                Description: ko.observable(""),
+                ImageBundleExternalId: ko.observable(),
+                Description: ko.observable(),
             },
             SelectedColorForUpload: ko.observable(),
+        };
+
+        self.ResetFileUpload = function() {
+            self.ImageTab.FileUpload.ImageBundleExternalId("00000000-0000-0000-0000-000000000000");
+            self.ImageTab.FileUpload.Description("");
         };
 
         self.ProductColorWithImagesById = function(id) {
@@ -80,10 +85,6 @@
         };
 
         self.MakeImagesSortable = function() {
-            $(".colorDrop").droppable({
-                drop: self.DropFunction
-            });
-
             $.each($(".sortable"), function(index, elem) {
                 $(elem)
                     .sortable({
@@ -95,49 +96,6 @@
                     })
                     .disableSelection();
             });
-        };
-
-        self.DropFunction = function(event, ui) {
-            var colorDropElem = $(this).closest("table.colorDrop");
-            if (colorDropElem.length == 0) {
-                console.log("missed drop - type 1!");
-                console.log(this);
-                return;
-            }
-            if ($(event.toElement).closest("li").length == 0) {
-                console.log("missed drop - type 2!");
-                return;
-            }
-            if ($(event.toElement).closest("table").length == 0) {
-                console.log("missed drop - type 3!");
-                return;
-            }
-            if (!$(event.toElement).closest("table").attr("id")) {
-                console.log("missed drop - type 4!");
-                return;
-            }
-
-            var imageId = $(event.toElement).closest("li").attr("id").replace("sorted", "");
-            var originalColorId = $(event.toElement).closest("table").attr("id").replace('color', '');
-            var newColorId = colorDropElem.attr("id").replace("color", "");
-
-            //console.log("originalColorId: " + originalColorId + " " + " newColorId: " + newColorId + " imageId: " + imageId);
-            self.UpdateImageToColorAssignment(originalColorId, newColorId, imageId);
-        };
-
-        self.UpdateImageToColorAssignment = function(originalColorId, newColorId, imageId) {
-            if (originalColorId == newColorId) {
-                return;
-            }
-
-            flow.exec(
-                function() {
-                    self.ProductService.ChangeImageColor(self.SelectedProduct().Id(), imageId, newColorId, this);
-                },
-                function() {
-                    self.ImagesTabClickImpl();
-                }
-            );
         };
 
         self.UpdateImageSortOrder = function(element) {
@@ -198,7 +156,8 @@
 
         self.SlideToImageUpload = function() {
             flow.exec(
-                function() {                    
+                function() {
+                    self.ResetFileUpload();
                     self.GlideRight("AddImage", "AddImage", this);
                 },
                 function() {
@@ -354,6 +313,7 @@
         </div>
     </div>
 </script>
+
 
 <script type="text/html" id="Top-Workspace-AddImage">
     <div class="workspace-heading" style="height:125px;">

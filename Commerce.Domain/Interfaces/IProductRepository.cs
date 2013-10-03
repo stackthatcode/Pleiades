@@ -26,12 +26,12 @@ namespace Commerce.Application.Interfaces
 
         // Images
         List<JsonProductImage> RetrieveImages(int productId);
+        List<JsonProductImage> RetrieveImages(int productId, int colorId);
         Func<JsonProductImage> AddProductImage(int productId, JsonProductImage image);
         void DeleteProductImage(int productId, int imageId);
         void UpdateProductImageSort(int productId, string sortedIds);
         void AssignImagesToColor(int productId);
         void UnassignImagesFromColor(int productId);
         void ChangeImageColor(int productId, int productImageId, int newColor);
-
     }
 }

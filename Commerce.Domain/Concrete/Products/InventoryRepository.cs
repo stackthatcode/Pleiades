@@ -16,67 +16,68 @@ namespace Commerce.Application.Concrete.Products
             this.Context = context;
         }
 
-
-        // Helper functions
         private Product ProductWithColorsAndSizes(int id)
         {
             return
                 this.Context.Products
-                    .Include(x => x.ThumbnailImageBundle)
-                    .Include(x => x.Sizes)
-                    .Include(x => x.Colors)
-                    .Include(x => x.Colors.Select(color => color.ProductImageBundle))
-                    .First(x => x.Id == id && x.IsDeleted == false);
+                        .Include(x => x.ThumbnailImageBundle)
+                        .Include(x => x.Sizes)
+                        .Include(x => x.Colors)
+                        .Include(x => x.Colors.Select(color => color.ProductImageBundle))
+                        .First(x => x.Id == id && x.IsDeleted == false);
         }
 
-        private List<ProductSku> ActiveInventory(int id)
+        private List<ProductSku> ActiveInventory(int id, bool includeChildren)
         {
             var product = this.ProductWithColorsAndSizes(id);
             return this.ActiveInventory(product);
         }
         
-        private List<ProductSku> ActiveInventory(Product product)
+        private List<ProductSku> ActiveInventory(Product product, bool includeChildren = false)
         {
+            IQueryable<ProductSku> dataset;
+            if (includeChildren)
+            {
+                dataset = Context.ProductSkus
+                                 .Include(x => x.Size)
+                                 .Include(x => x.Product.ThumbnailImageBundle)
+                                 .Include(x => x.Color.ColorImageBundle)
+                                 .Where(x => x.Product.Id == product.Id && x.IsDeleted == false);
+            }
+            else
+            {
+                dataset = Context.ProductSkus
+                                 .Where(x => x.Product.Id == product.Id && x.IsDeleted == false);
+            }
+            
             if (!product.Colors.Any() && product.Sizes.Any())
             {
-                return this.Context.ProductSkus
-                    .Include(x => x.Size)
-                    .Include(x => x.Product.ThumbnailImageBundle)
-                    .Include(x => x.Color.ColorImageBundle)
+                return dataset
                     .OrderBy(x => x.Size.Order)
-                    .Where(x => x.Product.Id == product.Id && x.IsDeleted == false).ToList();
+                    .ToList();
             }
 
             if (product.Colors.Any() && !product.Sizes.Any())
             {
-                return this.Context.ProductSkus
-                    .Include(x => x.Color)
-                    .Include(x => x.Product.ThumbnailImageBundle)
-                    .Include(x => x.Color.ColorImageBundle)
+                return dataset
                     .OrderBy(x => x.Color.Order)
-                    .Where(x => x.Product.Id == product.Id && x.IsDeleted == false).ToList();
+                    .ToList();
             }
 
             if (product.Colors.Any() && product.Sizes.Any())
             {
-                return this.Context.ProductSkus
-                    .Include(x => x.Size)
-                    .Include(x => x.Product.ThumbnailImageBundle)
-                    .Include(x => x.Color)
-                    .Include(x => x.Color.ColorImageBundle)
+                return dataset
                     .OrderBy(x => x.Color.Order)
                     .ThenBy(x => x.Size.Order)
-                    .Where(x => x.Product.Id == product.Id && x.IsDeleted == false).ToList();
+                    .ToList();
             }
 
-            return this.Context.ProductSkus.Where(x => x.Product.Id == product.Id && x.IsDeleted == false).ToList();
+            return this.Context.ProductSkus.ToList();
         }
 
-
-        // Inventory 
-        public List<ProductSku> ProductSkuById(int id)
+        public List<ProductSku> RetreiveByProductId(int id, bool includeChildren)
         {
-            return this.ActiveInventory(id);
+            return this.ActiveInventory(id, includeChildren);
         }
 
         public void UpdateInStock(int id, int inventoryTotal)
@@ -91,8 +92,7 @@ namespace Commerce.Application.Concrete.Products
         public int TotalInStock(int productId)
         {
             var inventory = this.Context.ProductSkus.Where(x => x.Product.Id == productId && x.IsDeleted == false);
-
-            if (inventory.Count() == 0)
+            if (!inventory.Any())
             {
                 return 0;
             }
@@ -103,17 +103,16 @@ namespace Commerce.Application.Concrete.Products
 
         public void Wipe(int productId)
         {
-            foreach (var sku in this.ActiveInventory(productId))
+            foreach (var sku in this.ActiveInventory(productId, false))
             {
                 sku.IsDeleted = true;
             }
         }
 
-        // Only call this WHEN they visit the Inventory tab - TODO
         public void Generate(int productId)
         {
             var product = this.ProductWithColorsAndSizes(productId);
-            var skus = this.ActiveInventory(productId);
+            var skus = this.ActiveInventory(productId, true);
 
             if (!product.Sizes.Any() && !product.Colors.Any())
             {
@@ -128,7 +127,7 @@ namespace Commerce.Application.Concrete.Products
             {
                 foreach (var size in product.Sizes)
                 {
-                    if (!skus.Any(x => x.Size == size))
+                    if (skus.All(x => x.Size != size))
                     {
                         this.Context.ProductSkus.Add(ProductSku.Factory(product, null, size));
                     }
@@ -140,7 +139,7 @@ namespace Commerce.Application.Concrete.Products
             {
                 foreach (var color in product.Colors)
                 {
-                    if (!skus.Any(x => x.Color == color))
+                    if (skus.All(x => x.Color != color))
                     {
                         this.Context.ProductSkus.Add(ProductSku.Factory(product, color, null));
                     }
@@ -175,7 +174,7 @@ namespace Commerce.Application.Concrete.Products
 
         public void DeleteByColor(int productId, int productColorId)
         {
-            this.ActiveInventory(productId)
+            this.ActiveInventory(productId, true)
                     .Where(x => x.Color.Id == productColorId)
                     .ToList()
                     .ForEach(sku => sku.IsDeleted = true);
@@ -183,7 +182,7 @@ namespace Commerce.Application.Concrete.Products
 
         public void DeleteBySize(int productId, int productSizeId)
         {
-            this.ActiveInventory(productId)
+            this.ActiveInventory(productId, true)
                     .Where(x => x.Size.Id == productSizeId)
                     .ToList()
                     .ForEach(sku => sku.IsDeleted = true);

@@ -85,7 +85,9 @@ namespace Commerce.Application.Concrete.Products
 
         public JsonProductInfo RetrieveInfo(int productId)
         {
-            return this.ProductWithImagesBrandsCategories().FirstOrDefault(x => x.Id == productId).ToJson();
+            return this.ProductWithImagesBrandsCategories()
+                .FirstOrDefault(x => x.Id == productId)
+                .ToJson();
         }
 
         public void Delete(int productId)
@@ -269,6 +271,27 @@ namespace Commerce.Application.Concrete.Products
                 .Select(x => x.ToJson())
                 .ToList();
         }
+
+        public List<JsonProductImage> RetrieveImages(int productId, int colorId)
+        {
+            var product = Context.Products.FirstOrDefault(x => x.Id == productId);
+
+            if (product == null)
+            {
+                return null;
+            }
+            else
+            {
+                return product
+                    .Images
+                    .Where(x => x.ProductColor != null)
+                    .Where(x => x.ProductColor.Id == colorId)
+                    .OrderBy(x => x.Order)
+                    .Select(x => x.ToJson())
+                    .ToList();
+            }
+        }
+
 
         public Func<JsonProductImage> AddProductImage(int productId, JsonProductImage image)
         {
