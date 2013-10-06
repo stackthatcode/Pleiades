@@ -18,7 +18,8 @@ Port Knockout Cart Editor to Angular JS => DONE
 Front Range
 ===========
 - Landing-Page / Microsite => IN PROGRESS
-* GetSizesByColor
+* GetSizesByColorAndInventory => TODO
+* Missing Images - use the default Color's images => TODO
 * Validation Message
 * Out-of-Stock
 * Color-to-Size-to-Quantity Model

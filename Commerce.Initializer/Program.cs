@@ -76,9 +76,10 @@ namespace Commerce.Initializer
             CreateAndRunBuilder<BullTerrierMastersBuilder>();
             CreateAndRunBuilder<HayabusaHeadGearBuilder>();
             CreateAndRunBuilder<JiuJitsuDummyBuilder>();
-            CreateAndRunBuilder<ShockDoctorMouthGuardBuilder>();
+            CreateAndRunBuilder<ShockDoctorMouthGuardBuilderCase>();
             CreateAndRunBuilder<ShockDoctorGelNanoBuilder>();
-            
+            CreateAndRunBuilder<TapoutMouthguardCaseBuilder>();
+                        
             CreateAndRunBuilder<ShippingMethodsBuilder>();
             CreateAndRunBuilder<StateTaxBuilder>();
 

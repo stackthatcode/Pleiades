@@ -69,7 +69,7 @@ namespace Commerce.Application.Concrete.Products
                     .ToList();
             }
 
-            return this.Context.ProductSkus.ToList();
+            return dataset.ToList();
         }
 
         public List<ProductSku> RetreiveByProductId(int id, bool includeChildren)

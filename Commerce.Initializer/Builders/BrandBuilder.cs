@@ -122,8 +122,15 @@ namespace Commerce.Initializer.Builders
                          "Shock Doctor",
                          @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
                          @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-                         "tatami-mma",
+                         "shock-doctor",
                          "SHOCKDOCTOR");
+
+                AddBrand(Path.Combine(BrandLogoDirectory(), "logotapout.jpg"),
+                         "Tapout",
+                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                         "tapout",
+                         "TAPOUT");
 
                 tx.Complete();
             }

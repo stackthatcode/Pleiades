@@ -34,7 +34,7 @@
             <p>{{ Product.Info.Description }}</p>
             
             <div ng-show="HasMultipleColors()">
-                <h4 style="color:#555; font-weight:bold;">Select a Color ({{ SelectedColorName() }})</h4>
+                <h4 style="color:#555; font-weight:bold;">Select a Color - {{ SelectedColorName() }}</h4>
                 <div ng-repeat="color in Product.Colors" style="float:left; margin-right:12px;">
                     <a class="thumbnail-color-selected" style="float:left;" ng-show="IsSelectedColorId(color.Id)">
                         <div style="overflow:hidden; height:50px; width:50px;">

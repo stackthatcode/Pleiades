@@ -14,6 +14,8 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
     $scope.SelectedColorId = null;
     $scope.SelectedImages = null;
     $scope.SelectedImageId = null;
+    $scope.SelectedSizes = null;
+    $scope.SelectedSizeId = null;
 
     var parentScope = $scope;
 
@@ -65,6 +67,16 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         return ibexternalId && ("image/" + ibexternalId + "?size=" + size);
     };
 
+    /*
+    $scope.RefreshSizes = function() {
+        if ($scope.HasMultipleColors()) {
+        var inventoryByColor = AQ()
+        } else {
+            
+        }
+    };
+    */
+
     $scope.GetSelectedSku = function () {
         // TODO: HasColors
         // TODO: HasSizes
@@ -82,8 +94,6 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
 
     ngAjax.Get($http, 'products/' + $routeParams.productid, function (product) {
         $scope.Product = product;
-
-        // Initialize State
         $scope.SelectColorDefault();
         $scope.RefreshImages();
     });

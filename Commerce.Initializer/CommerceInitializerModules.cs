@@ -32,9 +32,10 @@ namespace Commerce.Initializer
             builder.RegisterType<BullTerrierMastersBuilder>();
             builder.RegisterType<HayabusaHeadGearBuilder>();
             builder.RegisterType<JiuJitsuDummyBuilder>();
-            builder.RegisterType<ShockDoctorMouthGuardBuilder>();
-            builder.RegisterType<ShockDoctorGelNanoBuilder>();                        
-
+            builder.RegisterType<ShockDoctorMouthGuardBuilderCase>();
+            builder.RegisterType<ShockDoctorGelNanoBuilder>();
+            builder.RegisterType<TapoutMouthguardCaseBuilder>();                        
+            
             builder.RegisterType<ShippingMethodsBuilder>();
             builder.RegisterType<SizeBuilder>();
             builder.RegisterType<StateTaxBuilder>();

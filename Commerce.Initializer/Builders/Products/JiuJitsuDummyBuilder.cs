@@ -97,7 +97,7 @@ namespace Commerce.Initializer.Builders.Products
                 _inventoryRepository.RetreiveByProductId(product1.Id, false).ForEach(x =>
                 {
                     x.Reserved = 0;
-                    x.InStock = random.Next(0, 1);
+                    x.InStock = random.Next(0, 2);
                 });
                 _unitOfWork.SaveChanges();
                 tx.Complete();

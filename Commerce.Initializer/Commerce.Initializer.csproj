@@ -72,8 +72,9 @@
     <Compile Include="Builders\Products\BullTerrierMushinBuilder.cs" />
     <Compile Include="Builders\Products\BullTerrierZebraBuilder.cs" />
     <Compile Include="Builders\Products\BullTerrierMastersBuilder.cs" />
+    <Compile Include="Builders\Products\TapoutMouthguardCaseBuilder.cs" />
     <Compile Include="Builders\Products\ShockDoctorGelNanoBuilder.cs" />
-    <Compile Include="Builders\Products\ShockDoctorMouthGuardBuilder.cs" />
+    <Compile Include="Builders\Products\ShockDoctorMouthGuardBuilderCase.cs" />
     <Compile Include="Builders\Products\JiuJitsuDummyBuilder.cs" />
     <Compile Include="Builders\Products\HayabusaHeadGearBuilder.cs" />
     <Compile Include="Builders\Products\TatamiEstiloBuilder.cs" />
@@ -141,6 +142,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\BrandLogos\hayabusa-logo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BrandLogos\logotapout.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\BrandLogos\RingToCageLogo.jpg">

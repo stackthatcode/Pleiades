@@ -8,7 +8,7 @@ using Pleiades.Application.Logging;
 
 namespace Commerce.Initializer.Builders.Products
 {
-    public class ShockDoctorGelNanoBuilder : ProductBuilder
+    public class ShockDoctorMouthGuardBuilderCase : ProductBuilder
     {
         private readonly IGenericRepository<Category> _categoryRepository;
         private readonly IGenericRepository<SizeGroup> _sizeGroupRepository;
@@ -20,7 +20,7 @@ namespace Commerce.Initializer.Builders.Products
         private readonly IInventoryRepository _inventoryRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ShockDoctorGelNanoBuilder(
+        public ShockDoctorMouthGuardBuilderCase(
                 IGenericRepository<Category> categoryRepository, 
                 IGenericRepository<SizeGroup> sizeGroupRepository, 
                 IGenericRepository<Product> genericProductRepository, 
@@ -48,43 +48,54 @@ namespace Commerce.Initializer.Builders.Products
         {            
             using (var tx = new TransactionScope())
             {
-                string name = "Shock Doctor Gel Nano Mouth Guard";
+                string name = "Shock Doctor Anti-Microbial Mouthguard Case";
+
                 LoggerSingleton.Get().Info("Creating Product: " + name);
 
                 // Get reference data
-                var brand = _brandRepository.FirstOrDefault(x => x.Name == "Shock Doctor");
+                var brandTatami = _brandRepository.FirstOrDefault(x => x.Name == "Shock Doctor");
+                var orange = _colorRepository.FirstOrDefault(x => x.SkuCode == "ORANGE");
+                var blue = _colorRepository.FirstOrDefault(x => x.SkuCode == "BLUE");
                 var category1 = _categoryRepository.FirstOrDefault(x => x.Name == "Mouth Guards");
 
                 var product1 = new Product()
                 {
                     Name = name,
-                    Description = 
-                        @"Protect the protector of your chops." +
+                    Description = "Hang on to your Mouth Guard." +
                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco" +
                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt",
-                    Synopsis = "Super Star BJJ Athletes need to wear this Gi.",
-                    SEO = "SHOCKDOC-GELNANO",
-                    SkuCode = "SHOCKDOC-GELNANO",
+                    Synopsis =  "Hang on to your Mouth Guard.",
+                    SEO = "shock-mouthguard-case",
+                    SkuCode = "SHOCKDOC-CASE",
                     Active = true,
-                    UnitPrice = 8.00m,
-                    UnitCost = 1.00m,
-                    Brand = brand,
+                    UnitPrice = 9.00m,
+                    UnitCost = 2.00m,
+                    Brand = brandTatami,
                     Category = category1,
                     AssignImagesToColors = true,
                     IsDeleted = false,
                     DateCreated = DateTime.Now,
                     LastModified = DateTime.Now,
                 };
-
                 _genericProductRepository.Insert(product1);
                 _unitOfWork.SaveChanges();
-
                 var product1Id = product1.Id;
-                var bundleList1 = AddImagesFromDirectory(@"Content\ShockDoctorGelNano");
+
+                var productColor11 = this.AddProductColor(product1Id, orange);
+                var productColor12 = this.AddProductColor(product1Id, blue);
                 _unitOfWork.SaveChanges();
 
-                bundleList1.ForEach(x => this.AddProductImage(product1Id, null, x));
+                var bundleList1 = AddImagesFromDirectory(@"Content\ShockDoctorMouthguardCase\Orange");
+                _unitOfWork.SaveChanges();
+
+                bundleList1.ForEach(x => this.AddProductImage(product1Id, productColor11().Id, x));
+                _unitOfWork.SaveChanges();
+
+                var bundleList2 = AddImagesFromDirectory(@"Content\ShockDoctorMouthguardCase\Blue");
+                _unitOfWork.SaveChanges();
+
+                bundleList2.ForEach(x => this.AddProductImage(product1Id, productColor12().Id, x));
                 _unitOfWork.SaveChanges();
 
                 _inventoryRepository.Generate(product1.Id);
@@ -94,7 +105,7 @@ namespace Commerce.Initializer.Builders.Products
                 _inventoryRepository.RetreiveByProductId(product1.Id, false).ForEach(x =>
                 {
                     x.Reserved = 0;
-                    x.InStock = random.Next(0, 2);
+                    x.InStock = random.Next(2, 6);
                 });
                 _unitOfWork.SaveChanges();
                 tx.Complete();
