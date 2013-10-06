@@ -18,6 +18,9 @@ namespace Commerce.Application.Concrete.Infrastructure
         public IFileResourceRepository FileResourceRepository { get; set; }
         public IImageProcessor ImageProcessor { get; set; }
 
+        public const int DefaultColorWidth = 200;
+        public const int DefaultColorHeight = 200;
+
 
         public ImageBundleRepository(
                 PushMarketContext context,
@@ -60,13 +63,13 @@ namespace Commerce.Application.Concrete.Infrastructure
             return bundle;
         }
 
-        public ImageBundle AddColor(Color color, int width, int height)
+        public ImageBundle AddColor(Color color)
         {
-            var original = new Bitmap(width, height);
+            var original = new Bitmap(DefaultColorWidth, DefaultColorHeight);
             using (Graphics gfx = Graphics.FromImage(original))
             using (SolidBrush brush = new SolidBrush(color))
             {
-                gfx.FillRectangle(brush, 0, 0, width, height);
+                gfx.FillRectangle(brush, 0, 0, DefaultColorWidth, DefaultColorHeight);
             };
 
             var thumbnail = this.ImageProcessor.CreateThumbnail(original, true);

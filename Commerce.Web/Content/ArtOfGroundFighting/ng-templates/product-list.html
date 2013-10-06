@@ -1,4 +1,6 @@
-﻿<div class="row">
+﻿<div  id="arena-top-spacer" style="height:60px; padding-top:10px;">
+</div>
+<div class="row">
     <div ng-repeat="product in products | orderBy:name"  class="col-lg-4">
         <div style="height:250px;">            
             <div style="height:200px; text-align:left; width:200px; float:left; margin-right:20px;">
@@ -7,7 +9,7 @@
                 </a>                
             </div>
 
-            <div style="height:168px;">                    
+            <div style="height:168px;">
                 <a href="#/products/{{product.Id}}" class="product-list-link">{{ product.Name }}</a><br />                
                 <div class="product-list-price">Our Price: ${{ product.UnitPrice }}</div>     
                 <div class="visible-lg">
@@ -17,7 +19,7 @@
                     <div class="product-list-synopsis">{{ product.Description.koTrunc(160, "...") }}</div>
                 </div>
             </div>
-            <a  href="#/products/{{product.Id}}" class="btn btn-danger btn-md" style="width:139px;">
+            <a  href="#/products/{{product.Id}}" class="btn btn-oldstyle btn-md" style="width:139px;">
                 <i class="glyphicon glyphicon-hand-left"></i>&nbsp;Check It Out
             </a>             
         </div>

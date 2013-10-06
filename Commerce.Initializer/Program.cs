@@ -71,6 +71,8 @@ namespace Commerce.Initializer
             CreateAndRunBuilder<TatamiEstiloBuilder>();
             CreateAndRunBuilder<BullTerrierMushinBuilder>();
             CreateAndRunBuilder<BullTerrierSuperStarBuilder>();
+            CreateAndRunBuilder<BullTerrierZebraBuilder>();
+            CreateAndRunBuilder<BullTerrierMastersBuilder>();
             CreateAndRunBuilder<ShippingMethodsBuilder>();
             CreateAndRunBuilder<StateTaxBuilder>();
 

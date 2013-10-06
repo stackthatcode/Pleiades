@@ -24,16 +24,16 @@ namespace Commerce.Application.Model.Products
         public string Description { get; set; }
 
         public decimal UnitPrice { get; set; }
-        public decimal UnitCost { get; set; }     
-        
-        public Brand Brand { get; set; }
-        public Category Category { get; set; }
+        public decimal UnitCost { get; set; }
+
         public bool Active { get; set; }
 
-        public List<ProductColor> Colors { get; set; }
-        public List<ProductSize> Sizes { get; set; }
+        public virtual Brand Brand { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual List<ProductColor> Colors { get; set; }
+        public virtual List<ProductSize> Sizes { get; set; }
+        public virtual List<ProductImage> Images { get; set; }
 
-        public List<ProductImage> Images { get; set; }
         public bool AssignImagesToColors { get; set; }
         public ImageBundle ThumbnailImageBundle { get; set; }
 

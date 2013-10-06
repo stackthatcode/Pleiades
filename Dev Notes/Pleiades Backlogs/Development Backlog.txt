@@ -1,115 +1,28 @@
-FRONTRANGE - HOTZONE
-====================
-
-9/22 Burndown 6.0 Hours
-~~~~~~~~~~~~~~~~~~~~~~~
-- Add a bit of glue which uses Controller Type with Actions verified by Expression Tree.  Voila! => Well played, sir! => DONE
-- Test and fix defects in the Membership Management stuff => DONE - FIXED A LOT OF BULLSHIT, NEED MORE TEST COVERAGE
-- Fixed Routing Unit Tests => DONE
-- Fixed Integration Tests => DONE
-- Fixed Cart Lightbox defect => DONE
-- Loaded 2 new Products => DONE
-- Refactored Builders => DONE
-
-9/23 - 9/27 - 7.0 Hours
-~~~~~~~~~~~~~~~~~~~~~~~
-- Installed Bootstrap 3 + created Bundle Optimizers 
-- Ate shit trying to fix the Bootstrap Styles
-- Built Image Controller
-- Add Responsive design to Server Error page
-* Bootstrap 3 - How to Make it Responsive ??? => DONE
-* AngularJs library integration => DONE
-
-9/28 - 3.0 Hours
-~~~~~~~~~~~~~~~~
-- Create AJAX Error Handling and Spinner => DONE
-* Page skeleton w/ Error Handling, AJAX stuff, etc. => DONE
-
-9/28 - 4.0 Hours
-~~~~~~~~~~~~~~~~
-* Install Bevan => DONE
-- Change Image "Small" to 200px; => DONE
-- Google Web Fonts => DONE FOR NOW
-- Fix Image shrinking code => DONE
-
-9/29 - 11.0 Hours - 6:30AM to 8:00PM
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Added Content browsing pages
-- Make Header Responsive => DONE
-- Add Cart Link at the Top => DONE
-- Add About Us Link at the Top => DONE
-- Build Responsive Header => DONE
-- Add Vintage Logo FPO => DONE
-- Create Anchor styling => DONE
-- Footer styling => DONE
-- Move style in CSS file => DONE
-- Fix the Bootstrap styling on the 3.0.0 consumers => DONE
-- Fix the 404 and Server Error Response Pages => DONE
-- Create Reponsive Sizing for Cells => DONE
-- Fix the Error Pop-up Dialog => DONE
-DEFECT REPORT - fix the Add New Product Button => DONE
-DEFECT REPORT - Product screen - fix the "widow" => DONE
-DEFECT REPORT - eliminate the unassigned Color Image thingy + make it assign Images to the first Color => DONE
-DEFECT REPORT - massive 
-
-#### MASSIVE MASSIVE UPHEAVAL - CODE LOSS CAUSE BY BAD GITHUB USAGE ####
-
-DEFECT REPORT - fixed bad Server Error Page, 404 Page, etc.
-DEFECT REPORT - Big whopping fucking fuck-up with Delete Color.
-DEFECT REPORT - bad Images Tab template
-
-A long and weary trip to get the fucking interface working.  Was it worth?  We shall see...
-
-10/1 1.5 Hours => Fixed lightbox, fixed image shrinking/cropping, fixed image default thumbnail, removed extraneous code =>  DONE
-10/2 1.5 Hours => added responsiveness to Product Listing; Fixed more ReSharper shiznit; fixed UnitCost defect in Add Items to Order; added Images and Inventory to the Products service
-
-- Logo FPO => followed with real logo => DONE
-- View Cart link, with Items summary => DONE
-- Checkout link => DONE
-
-
-Inventory { SKU, Image Bundle, Size, Color }
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-1.) There are Colors
-1.1.) If YES, then Load the Inventory for the first Color => RetrieveInventoryByColor
-1.2.) Return the Images for that Color => RetrieveImagesByColor
-1.3.) Returns Sizes for that Color => RetrieveSizes
-
-2.) No, there are NO Colors
-2.1.) Load the Inventory => RetrieveInventory
-2.2.) Return all of the Images => RetrieveImages
-1.3.) Returns Sizes for that Color =>  RetrieveSizes
-
-Templates
-~~~~~~~~~
-1.) This Color, One-to-Many Sizes => 
-* Many Skus
-* Link to other Colors => Product Colors has nothing to do with Product
-* Many Images for this Color
-
-2.) This Color, No-Sizes => 
-* One Sku
-* Link to other Colors
-
-3.) No Color, One-to-Many Sizes => 
-* Many Skus
-* Many Images 
-
-4.) No Color, No Sizes => 
-* One Sku
-
+Backlog
+~~~~~~~
+Bottom Tasking - Mark-up and graphics, etc. Tagline, Contact Us, About Us, etc. => DONE
+Port Knockout Cart Editor to Angular JS => DONE
+- 150 Magic Number(!!!) => TODO - FIX => DONE
+* On the StoreFront "Wrong Size or Color? Click Here" - and Navigate to Product => DONE
 
 
 Front Range
 ===========
-- Landing-Page / Microsite => IN PROGRESS
-- Customer Checkout => IN PROGRESS
 - Load Test Data into Console App => IN PROGRESS
+
+- Landing-Page / Microsite => IN PROGRESS
+* Load data with no Sizes
+* Load data with Sizes and no Colors
+* Color-to-Size-to-Quantity Model
+* Widget for browsing to other Products
+* Add to Cart Button
+- Fix image pop-up defect in the Edit Cart Screen => TODO
+
+- Customer Checkout + Stripe => IN PROGRESS
 
 - Admin Search & Manage Orders => TODO
 - Admin Sales Graph by Product => TODO
 
-- http://getbootstrap.com/css/#overview-responsive-images
 => http://blog.stevensanderson.com/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/
 => http://haacked.com/archive/2011/10/10/preventing-csrf-with-ajax.aspx
 
@@ -120,11 +33,8 @@ Infrastructure
 - Amazon EC2 Hosting + Deployment => TODO
 
 
-### END PRODUCT DEFINITION + TASKING ###
 
-Bottom Tasking
-~~~~~~~~~~~~~~
-- Mark-up and graphics, etc. Tagline, Contact Us, About Us, etc.
+### END PRODUCT DEFINITION + TASKING ###
 
 Shopping Cart Persistence
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -135,7 +45,6 @@ Shopping Cart Persistence
 
 Checkout Process Tasking
 ~~~~~~~~~~~~~~~~~~~~~~~~
-- Port Knockout Cart Editor to Angular JS
 - New Markup
 
 Shipping Information Tasking
@@ -156,19 +65,6 @@ Thank You Page
 ~~~~~~~~~~~~~~
 - Port Ko Thank You Page
 
-Landing Pages
-~~~~~~~~~~~~~
-* Product Title
-* Product Description
-* Brand Logo
-* Brand Description
-* Color Browser Model
-* Color to Image Selector Model
-* Color-to-Size-to-Quantity Model
-* Widget for browsing to other Products
-* Add to Cart Button
-* Splash Graphic...?
-
 Contact Us Page Tasking
 ~~~~~~~~~~~~~~~~~~~~~~~
 - Email Form => use that thing from stache.io
@@ -180,7 +76,6 @@ About Us Page Tasking
 - Slideshow with graphics
 - Shipping Verbage
 - Returns Verbage
-
 
 Manage an Order CRUD screen
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -194,43 +89,29 @@ Manage an Order CRUD screen
 - Refund => Choose Order Lines => Hit the Payment Processor => Update Status on Order Lines + History
 - Fail Shipping => Choose Order Lines => Update Status + History
 
-
 Moar Tasks
 ~~~~~~~~~~
-- Fix image pop-up defect in the Edit Cart Screen => TODO
 * Host on EC2 by 6/1 => IN PROGRESS - FAIL
-- Research EC2 some more
 - Sign-up to use EC2
+- Research EC2 some more
 
+* Splash Graphic...?
 * Slideshow - identify images & marketing, based on Products and marketing message => TODO
-~ FONTS => https://news.ycombinator.com/item?id=5407499
+~ FONTS => 
 
 Backlog
 -------
 - Prevent multiple Pop-ups from appearing
 - Description - add markdown?  Probably => TODO
 * http://stackoverflow.com/questions/3730777/whats-so-restful-about-asp-net-mvc => IMPORTANT
-* On the StoreFront "Wrong Size or Color? Click Here" - and Navigate to Product => TODO
 - Improve the quality of client-side Error Logging => TODO
 - Check Sanderson for advanced Model Binding => TODO
-- 150 Magic Number(!!!) => TODO - FIX
 - IsONline - Check How This Functions => UPDATE - NEED TO FIX TOUCH Function
 - Donate $20 to FineUploader upon successful integration => TODO
-- Get Refunds by Sku...?
-
-MORE BIG FISH
--------------
-=> http://news.ycombinator.com/item?id=4669866 => IMPORTANT
-=> http://fortawesome.github.com/Font-Awesome/
-
-
-Development Backlog
--------------------- 
-- Disable Caching for AJAX stuff with ASP.NET MVC => TODO
 
 PENDING FEATURE BACKLOG
 -----------------------
-- Add more Logging to the Security check => PENDING EVAL
+- Disable Caching for AJAX stuff with ASP.NET MVC => TODO
 - Show the number of Products under Category => PENDING EVAL
 - Rendering Adjustments for long Category Names et. al. => PENDING EVAL
 
@@ -257,6 +138,7 @@ Already Done
 - Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING) - DONE
 - Separated Error PAges => DONE
 
+
 PushMarket Front-end
 ~~~~~~~~~~~~~~~~~~~~
 - Angular.js
@@ -282,6 +164,8 @@ PHASE 2 Backlog
 - Get Scott Hanselman's obj/bin cleaner utility
 - Use Sentinel for Logging stuff
 - DapperORM
+- Add more Logging to the Security check
+- Get Refunds by Sku
 
 Research Backlog
 ----------------

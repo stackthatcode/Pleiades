@@ -7,7 +7,7 @@ namespace Commerce.Application.Interfaces
     public interface IImageBundleRepository
     {
         ImageBundle AddBitmap(Bitmap original, bool cropThumbnail, bool cropSmall, bool cropLarge);
-        ImageBundle AddColor(Color color, int width, int height);
+        ImageBundle AddColor(Color color);
         ImageBundle Retrieve(int Id);
         ImageBundle Retrieve(Guid externalId);
         ImageBundle Copy(int Id);

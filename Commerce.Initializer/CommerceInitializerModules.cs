@@ -24,9 +24,13 @@ namespace Commerce.Initializer
             builder.RegisterType<ColorBuilder>();
             builder.RegisterType<OrderBuilder>();
             builder.RegisterType<ProductBuilder>();
+
             builder.RegisterType<TatamiEstiloBuilder>();
             builder.RegisterType<BullTerrierMushinBuilder>();       
-            builder.RegisterType<BullTerrierSuperStarBuilder>();       
+            builder.RegisterType<BullTerrierSuperStarBuilder>();
+            builder.RegisterType<BullTerrierZebraBuilder>();
+            builder.RegisterType<BullTerrierMastersBuilder>();
+            
             builder.RegisterType<ShippingMethodsBuilder>();
             builder.RegisterType<SizeBuilder>();
             builder.RegisterType<StateTaxBuilder>();

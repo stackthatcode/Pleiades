@@ -9,9 +9,9 @@ namespace Commerce.Application.Model.Products
         public string SkuCode { get; set; }
         public string OriginalSkuCode { get; set; }
 
-        public Product Product { get; set; }
-        public ProductColor Color { get; set; }
-        public ProductSize Size { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual ProductColor Color { get; set; }
+        public virtual ProductSize Size { get; set; }
 
         public string Name
         {

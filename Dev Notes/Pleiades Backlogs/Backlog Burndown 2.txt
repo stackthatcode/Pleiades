@@ -290,3 +290,86 @@ ARCHITECTURAL REVIEW 1/24/2013 - UPDATED 9/3/2013
 ~~~~~~~~~~~~~~~~~
 - Fixed Routing, Navigation and all that good stuff
 
+
+9/22 Burndown 6.0 Hours
+~~~~~~~~~~~~~~~~~~~~~~~
+- Add a bit of glue which uses Controller Type with Actions verified by Expression Tree.  Voila! => Well played, sir! => DONE
+- Test and fix defects in the Membership Management stuff => DONE - FIXED A LOT OF BULLSHIT, NEED MORE TEST COVERAGE
+- Fixed Routing Unit Tests => DONE
+- Fixed Integration Tests => DONE
+- Fixed Cart Lightbox defect => DONE
+- Loaded 2 new Products => DONE
+- Refactored Builders => DONE
+
+9/23 - 9/27 - 7.0 Hours
+~~~~~~~~~~~~~~~~~~~~~~~
+- Installed Bootstrap 3 + created Bundle Optimizers 
+- Ate shit trying to fix the Bootstrap Styles
+- Built Image Controller
+- Add Responsive design to Server Error page
+* Bootstrap 3 - How to Make it Responsive ??? => DONE
+* AngularJs library integration => DONE
+
+9/28 - 3.0 Hours
+~~~~~~~~~~~~~~~~
+- Create AJAX Error Handling and Spinner => DONE
+* Page skeleton w/ Error Handling, AJAX stuff, etc. => DONE
+
+9/28 - 4.0 Hours
+~~~~~~~~~~~~~~~~
+* Install Bevan => DONE
+- Change Image "Small" to 200px; => DONE
+- Google Web Fonts => DONE FOR NOW
+- Fix Image shrinking code => DONE
+
+9/29 - 11.0 Hours - 6:30AM to 8:00PM
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Added Content browsing pages
+- Make Header Responsive => DONE
+- Add Cart Link at the Top => DONE
+- Add About Us Link at the Top => DONE
+- Build Responsive Header => DONE
+- Add Vintage Logo FPO => DONE
+- Create Anchor styling => DONE
+- Footer styling => DONE
+- Move style in CSS file => DONE
+- Fix the Bootstrap styling on the 3.0.0 consumers => DONE
+- Fix the 404 and Server Error Response Pages => DONE
+- Create Reponsive Sizing for Cells => DONE
+- Fix the Error Pop-up Dialog => DONE
+DEFECT REPORT - fix the Add New Product Button => DONE
+DEFECT REPORT - Product screen - fix the "widow" => DONE
+DEFECT REPORT - eliminate the unassigned Color Image thingy + make it assign Images to the first Color => DONE
+DEFECT REPORT - massive 
+
+#### MASSIVE MASSIVE UPHEAVAL - CODE LOSS CAUSE BY BAD GITHUB USAGE ####
+
+DEFECT REPORT - fixed bad Server Error Page, 404 Page, etc.
+DEFECT REPORT - Big whopping fucking fuck-up with Delete Color.
+DEFECT REPORT - bad Images Tab template
+
+A long and weary trip to get the fucking interface working.  Was it worth?  We shall see...
+
+10/1 1.5 Hours => Fixed lightbox, fixed image shrinking/cropping, fixed image default thumbnail, removed extraneous code =>  DONE
+10/2 1.5 Hours => added responsiveness to Product Listing; Fixed more ReSharper shiznit; fixed UnitCost defect in Add Items to Order; added Images and Inventory to the Products service
+- Logo FPO => followed with real logo => DONE
+- View Cart link, with Items summary => DONE
+- Checkout link => DONE
+
+10/3 thru 10/5 4.5 Hours + 5 Hours
+
+Inventory { SKU, Image Bundle, Size, Color } => DONE
+Templates for different combinations => DONE
+
+Detail Page 
+~~~~~~~~~~~
+* Product Title => DONE
+* Product Description => DONE
+* Brand Logo => DONE
+* Brand Description => DONE
+* Color Browser Model => DONE
+* Color to Image Selector Model => DONE
+- http://getbootstrap.com/css/#overview-responsive-images => DONE
+
+
+

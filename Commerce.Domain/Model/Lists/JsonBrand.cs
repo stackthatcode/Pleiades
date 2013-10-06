@@ -1,6 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
-using Commerce.Application.Model.Resources;
+﻿using Newtonsoft.Json;
 
 namespace Commerce.Application.Model.Lists
 {

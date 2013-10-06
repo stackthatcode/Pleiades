@@ -9,8 +9,8 @@ namespace Commerce.Application.Concrete.Infrastructure
     {
         public int MaxLargeWidth = 800;
         public int MaxLargeHeight = 800;
-        public int MaxSmallWidth = 150;
-        public int MaxSmallHeight = 150;
+        public int MaxSmallWidth = 200;
+        public int MaxSmallHeight = 200;
         public int MaxThumbnailWidth = 75;
         public int MaxThumbnailHeight = 75;
         public bool AutoCrop = false;

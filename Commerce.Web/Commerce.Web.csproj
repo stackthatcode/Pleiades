@@ -147,6 +147,7 @@
     <Compile Include="Areas\Public\Controllers\ImageController.cs" />
     <Compile Include="Areas\Public\Controllers\SectionController.cs" />
     <Compile Include="Areas\Public\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\Public\Models\JsonExtensions.cs" />
     <Compile Include="Plumbing\CommerceWebUIModule.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -160,7 +161,6 @@
     <Compile Include="Areas\Admin\Models\Manager\ResetPasswordModel.cs" />
     <Compile Include="Areas\Admin\Models\Manager\ViewUserModel.cs" />
     <Compile Include="Areas\Public\Controllers\PageController.cs" />
-    <Compile Include="Areas\Public\Models\ProductListModel.cs" />
     <Compile Include="AutofacBootstrap.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -405,6 +405,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\ArtOfGroundFighting\Fonts\Bevan.woff" />
+    <None Include="Content\ArtOfGroundFighting\Fonts\OpenSans-400.woff" />
+    <None Include="Content\ArtOfGroundFighting\Fonts\OpenSans-700.woff" />
+    <None Include="Content\ArtOfGroundFighting\Fonts\OpenSans-800.woff" />
     <None Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.eot" />
     <None Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.woff" />

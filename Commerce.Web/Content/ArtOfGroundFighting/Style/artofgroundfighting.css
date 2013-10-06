@@ -1,3 +1,31 @@
+@font-face {
+  font-family: 'Bevan';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Bevan'), url(../Fonts/Bevan.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(../Fonts/OpenSans-400.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(../Fonts/OpenSans-700.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 800;
+  src: local('Open Sans Extrabold'), local('OpenSans-Extrabold'), url(../Fonts/OpenSans-800.woff) format('woff');
+}
+
 .spinner-layer {
     position: fixed;
     top: 0%;
@@ -18,13 +46,6 @@
     overflow: auto;
     width: 200px; /* width of the spinner gif */
     height: 202px; /*height of the spinner gif +2px to fix IE8 issue */
-}
-
-@font-face {
-  font-family: 'Bevan';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Bevan'), url(../Fonts/Bevan.woff) format('woff');
 }
 
 .footer-container {
@@ -74,4 +95,78 @@ a.gold-link:visited {
 a.product-list-link {
     font-weight: bold; 
     color:#F00
+}
+
+
+a.mybreadcrumb {
+    color: #777;
+}
+
+a.thumbnail-image {
+    border: 3px solid #FFF;
+    display: block;
+}
+
+a.thumbnail-image:hover {
+    border: 3px solid #DDD;
+    display: block;
+}
+
+a.thumbnail-color {
+    border: 3px solid #EEE;
+    display: block;
+}
+
+a.thumbnail-color:hover {
+    border: 3px solid #FF0000;
+    display: block;
+}
+
+
+.btn-oldstyle {
+  background-color: #cc0000;
+  border-color: #cc0000;
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+  background-color: #b80000;
+  background-image: -moz-linear-gradient(top,#cc0000,#990000);
+  background-image: -webkit-gradient(linear,0 0,0 100%,from(#cc0000),to(#990000));
+  background-image: -webkit-linear-gradient(top,#cc0000,#990000);
+  background-image: -o-linear-gradient(top,#cc0000,#990000);
+  background-image: linear-gradient(to bottom,#cc0000,#990000);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffcc0000', endColorstr='#ff990000', GradientType=0);
+  border-color: #990000 #990000 #4d0000;
+  border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+}
+.btn-oldstyle:hover,
+.btn-oldstyle:focus {
+  text-decoration: none;
+  background-position: 0 -15px;
+  -webkit-transition: background-position .1s linear;
+  -moz-transition: background-position .1s linear;
+  -o-transition: background-position .1s linear;
+  transition: background-position .1s linear;
+}
+.btn-oldstyle:hover,
+.btn-oldstyle:focus {
+  background-color: #990000;
+    color: #dddddd;
+}
+.btn-oldstyle:active,
+.btn-oldstyle.active,
+.btn-oldstyle.active:hover {
+  background-color: #b30000;
+  border-color: #990000;
+}
+.btn-oldstyle.disabled:hover,
+.btn-oldstyle.disabled:focus,
+.btn-oldstyle.disabled:active,
+.btn-oldstyle.disabled.active,
+.btn-oldstyle[disabled] .btn-oldstyle:hover,
+.btn-oldstyle[disabled] .btn-oldstyle:focus,
+.btn-oldstyle[disabled] .btn-oldstyle:active,
+.btn-oldstyle[disabled] .btn-oldstyle.active {
+  background-color: #cc0000;
+  border-color: #cc0000;
 }

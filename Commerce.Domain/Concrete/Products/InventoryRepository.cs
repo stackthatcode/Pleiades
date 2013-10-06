@@ -30,7 +30,7 @@ namespace Commerce.Application.Concrete.Products
         private List<ProductSku> ActiveInventory(int id, bool includeChildren)
         {
             var product = this.ProductWithColorsAndSizes(id);
-            return this.ActiveInventory(product);
+            return this.ActiveInventory(product, includeChildren);
         }
         
         private List<ProductSku> ActiveInventory(Product product, bool includeChildren = false)
@@ -48,22 +48,19 @@ namespace Commerce.Application.Concrete.Products
             {
                 dataset = Context.ProductSkus
                                  .Where(x => x.Product.Id == product.Id && x.IsDeleted == false);
-            }
-            
+            }            
             if (!product.Colors.Any() && product.Sizes.Any())
             {
                 return dataset
                     .OrderBy(x => x.Size.Order)
                     .ToList();
             }
-
             if (product.Colors.Any() && !product.Sizes.Any())
             {
                 return dataset
                     .OrderBy(x => x.Color.Order)
                     .ToList();
             }
-
             if (product.Colors.Any() && product.Sizes.Any())
             {
                 return dataset

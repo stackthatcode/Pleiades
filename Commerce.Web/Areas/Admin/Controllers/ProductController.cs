@@ -65,8 +65,6 @@ namespace Commerce.Web.Areas.Admin.Controllers
             return new JsonNetResult(result);
         }
         
-
-
         // Info
         [HttpGet]
         public ActionResult Search(int? brandId, int? categoryId, string searchText)
@@ -245,7 +243,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             string rgb = request.Rgb;
             var color = ColorTranslator.FromHtml(rgb);
-            var imageBundle = this.ImageBundleRepository.AddColor(color, 150, 150);
+            var imageBundle = this.ImageBundleRepository.AddColor(color);
             this.Context.SaveChanges();
             return new JsonNetResult(imageBundle);
         }

@@ -1,4 +1,5 @@
-﻿<div id="push-library-shim">
+﻿@using Commerce.Web.Areas.Public
+<div id="push-library-shim">
     <div style="position:relative; z-index: 1000">
         <div id="spinner-layer" class="spinner-layer" style="display:none;">
             <div id="spinner" class="spinner">
@@ -22,6 +23,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <a id="modal-error-action" class="btn btn-default" href="@Url.RouteUrl(PublicNavigation.Home())">
+                        <i class="icon-home icon-white"></i> Take Me Home
+                    </a>
                     <a id="modal-error-action" class="btn btn-danger">
                         <i class="icon-ok icon-white"></i> Ok, Reload Page
                     </a>

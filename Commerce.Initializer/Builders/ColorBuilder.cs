@@ -30,7 +30,7 @@ namespace Commerce.Initializer.Builders
 
         public void AddColor(JsonColor color, System.Drawing.Color rgbColor)
         {
-            var imageBundle = _imageBundleRepository.AddColor(rgbColor, 150, 150);
+            var imageBundle = _imageBundleRepository.AddColor(rgbColor);
             _unitOfWork.SaveChanges();
             color.ImageBundleExternalId = imageBundle.ExternalId.ToString();
             _colorRepository.Insert(color);

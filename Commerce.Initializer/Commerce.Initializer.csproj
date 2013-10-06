@@ -70,6 +70,8 @@
     <Compile Include="Builders\IBuilder.cs" />
     <Compile Include="Builders\Products\BullTerrierSuperStarBuilder.cs" />
     <Compile Include="Builders\Products\BullTerrierMushinBuilder.cs" />
+    <Compile Include="Builders\Products\BullTerrierZebraBuilder.cs" />
+    <Compile Include="Builders\Products\BullTerrierMastersBuilder.cs" />
     <Compile Include="Builders\Products\TatamiEstiloBuilder.cs" />
     <Compile Include="Builders\StateTaxBuilder.cs" />
     <Compile Include="Builders\OrderBuilder.cs" />
@@ -140,6 +142,18 @@
     <Content Include="Content\BrandLogos\tatami.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\BullTerrierMasters\20121217_80c344.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BullTerrierMasters\20121217_8877df.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BullTerrierMasters\20121217_90a34b.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BullTerrierMasters\20121217_97ea13.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\BullTerrierMuhsin\Black\70726f647563742f32303132313230375f3261393536332e6a7067003330300000660066.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -174,6 +188,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\BullTerrierSuperstar\White\1363199398.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BullTerrierZebra\20130728_3e9d27.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BullTerrierZebra\20130728_818d44.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BullTerrierZebra\20130728_86e9af.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BullTerrierZebra\20130728_d7a719.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\TatamiEstilo\Black\tat-1010_black_01_xl.jpg">
