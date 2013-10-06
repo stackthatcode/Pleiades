@@ -72,6 +72,10 @@
     <Compile Include="Builders\Products\BullTerrierMushinBuilder.cs" />
     <Compile Include="Builders\Products\BullTerrierZebraBuilder.cs" />
     <Compile Include="Builders\Products\BullTerrierMastersBuilder.cs" />
+    <Compile Include="Builders\Products\ShockDoctorGelNanoBuilder.cs" />
+    <Compile Include="Builders\Products\ShockDoctorMouthGuardBuilder.cs" />
+    <Compile Include="Builders\Products\JiuJitsuDummyBuilder.cs" />
+    <Compile Include="Builders\Products\HayabusaHeadGearBuilder.cs" />
     <Compile Include="Builders\Products\TatamiEstiloBuilder.cs" />
     <Compile Include="Builders\StateTaxBuilder.cs" />
     <Compile Include="Builders\OrderBuilder.cs" />
@@ -136,7 +140,13 @@
     <Content Include="Content\BrandLogos\fuji.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\BrandLogos\imgres.jpg">
+    <Content Include="Content\BrandLogos\hayabusa-logo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BrandLogos\RingToCageLogo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BrandLogos\shock_doctor_logo.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\BrandLogos\tatami.jpg">
@@ -200,6 +210,30 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\BullTerrierZebra\20130728_d7a719.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\HayabusaHeadGear\hay-1097_01_xl.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\HayabusaHeadGear\hay-1097_black_02_xl.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\HayabusaHeadGear\hay-1097_black_03_xl.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\JiuJitsuDummy\RC24MS.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\ShockDoctorGelNano\Shock-Doctor-Gel-Nano.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\ShockDoctorMouthguardCase\Blue\Shockdoctor_Mouthguard_Case-1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\ShockDoctorMouthguardCase\Orange\shock_doctor_mouthguard_case.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\TapoutMouthguardCase\tapout-mouthguard-case.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\TatamiEstilo\Black\tat-1010_black_01_xl.jpg">

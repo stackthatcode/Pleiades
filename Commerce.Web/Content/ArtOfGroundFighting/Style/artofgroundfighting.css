@@ -65,10 +65,20 @@ ul#footer-mobile-nav > li {
 a:hover {text-decoration:underline;}
 a:active {text-decoration:underline;}
 
+.navbar-inverse .navbar-nav>li>a {
+    color:#CCC;    
+}
+
 
 a.gold-link {
     font-weight:bold; 
     color:gold;
+}
+
+a.gold-link:hover {
+    font-weight:bold; 
+    color:#FFFFFF;
+    text-decoration: none;
 }
 
 a.gold-link:visited {
@@ -81,22 +91,29 @@ a.gold-link:visited {
     padding-top: 5px;
     font-family: "open-sans", "Helvetica Neue", sans-serif; 
     font-size:12px;
-    color: #864;
+    color: #666;
     height: 103px;
 }
 
-.product-list-price
+div.product-list-price
 {
+    font-family: "Open Sans";
     font-weight: bold; 
-    color:#642; 
-    margin-top:5px;
+    color:#333; 
+    margin-top:3px;
 }
 
 a.product-list-link {
+    font-family: "Open Sans";
     font-weight: bold; 
     color:#F00
 }
 
+a.product-list-link:hover {
+    font-weight: bold;
+    color: #900;
+    text-decoration: none;
+}
 
 a.mybreadcrumb {
     color: #777;
@@ -118,6 +135,11 @@ a.thumbnail-color {
 }
 
 a.thumbnail-color:hover {
+    border: 3px solid #999;
+    display: block;
+}
+
+a.thumbnail-color-selected {
     border: 3px solid #FF0000;
     display: block;
 }

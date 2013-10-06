@@ -49,6 +49,9 @@ namespace Commerce.Initializer.Builders
 
                 AddColor(new JsonColor() { Name = "Red", SkuCode = "RED", SEO = "red"}, 
                     System.Drawing.Color.FromArgb(255, 0, 0));
+
+                AddColor(new JsonColor() { Name = "Orange", SkuCode = "ORANGE", SEO = "orange" },
+                    System.Drawing.Color.FromArgb(255, 144, 0));
                 
                 AddColor(new JsonColor() { Name = "White", SkuCode = "WHITE", SEO = "white" },
                     System.Drawing.Color.FromArgb(255, 255, 255));

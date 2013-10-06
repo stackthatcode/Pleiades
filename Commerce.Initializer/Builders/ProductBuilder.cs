@@ -83,7 +83,7 @@ namespace Commerce.Initializer.Builders
                 new JsonProductImage
                 {
                     ImageBundleExternalId = imageBundle.ExternalId.ToString(),
-                    ProductColorId = colorId.Value,
+                    ProductColorId = colorId ?? null,
                 })();          
         }
 

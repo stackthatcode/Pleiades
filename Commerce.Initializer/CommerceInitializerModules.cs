@@ -30,7 +30,11 @@ namespace Commerce.Initializer
             builder.RegisterType<BullTerrierSuperStarBuilder>();
             builder.RegisterType<BullTerrierZebraBuilder>();
             builder.RegisterType<BullTerrierMastersBuilder>();
-            
+            builder.RegisterType<HayabusaHeadGearBuilder>();
+            builder.RegisterType<JiuJitsuDummyBuilder>();
+            builder.RegisterType<ShockDoctorMouthGuardBuilder>();
+            builder.RegisterType<ShockDoctorGelNanoBuilder>();                        
+
             builder.RegisterType<ShippingMethodsBuilder>();
             builder.RegisterType<SizeBuilder>();
             builder.RegisterType<StateTaxBuilder>();

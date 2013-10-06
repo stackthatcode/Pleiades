@@ -104,6 +104,27 @@ namespace Commerce.Initializer.Builders
                          "tatami-mma",
                          "TATAMI");
 
+                AddBrand(Path.Combine(BrandLogoDirectory(), "hayabusa-logo.jpg"),
+                         "Hayabusa",
+                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                         "tatami-mma",
+                         "HAYABUSA");
+
+                AddBrand(Path.Combine(BrandLogoDirectory(), "RingToCageLogo.jpg"),
+                         "Ring to Cage",
+                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                         "tatami-mma",
+                         "RINGTOCAGE");
+
+                AddBrand(Path.Combine(BrandLogoDirectory(), "shock_doctor_logo.jpg"),
+                         "Shock Doctor",
+                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                         "tatami-mma",
+                         "SHOCKDOCTOR");
+
                 tx.Complete();
             }
         }

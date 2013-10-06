@@ -47,7 +47,6 @@ namespace Commerce.Initializer.Builders
                 _jsonRepository.Insert(new JsonCategory { ParentId = parent1_1.Id, Name = "Golf Shoes", SEO = "sample-seo-text-4" });
                 _jsonRepository.Insert(new JsonCategory { ParentId = parent1_1.Id, Name = "Playah Shoes", SEO = "sample-seo-text-5" });
                 _jsonRepository.Insert(new JsonCategory { ParentId = parent1_1.Id, Name = "Mountain Shoes", SEO = "sample-seo-text-6" });
-                _jsonRepository.Insert(new JsonCategory { ParentId = parent1_1.Id, Name = "Ass-Kicking Shoes", SEO = "sample-seo-text-7" });
                 _unitOfWork.SaveChanges();
 
                 var result1_2 = _jsonRepository.Insert(
@@ -58,6 +57,8 @@ namespace Commerce.Initializer.Builders
                 _jsonRepository.Insert(new JsonCategory { ParentId = parent1_2.Id, Name = "Choke-proof Gis", SEO = "sample-seo-text-9" });
                 _jsonRepository.Insert(new JsonCategory { ParentId = parent1_2.Id, Name = "Belts", SEO = "sample-seo-text-10" });
                 _jsonRepository.Insert(new JsonCategory { ParentId = parent1_2.Id, Name = "Mouth Guards", SEO = "sample-seo-text-11" });
+                _jsonRepository.Insert(new JsonCategory { ParentId = parent1_2.Id, Name = "Training Dummies", SEO = "sample-seo-text-999" });
+                _jsonRepository.Insert(new JsonCategory { ParentId = parent1_2.Id, Name = "Head Gear", SEO = "head-gear" });
                 _unitOfWork.SaveChanges();
 
                 var result1_3 = _jsonRepository.Insert(

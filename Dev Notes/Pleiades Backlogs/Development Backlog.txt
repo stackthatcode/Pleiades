@@ -1,25 +1,31 @@
 Backlog
 ~~~~~~~
+
+Sunday 10/6
+===========
 Bottom Tasking - Mark-up and graphics, etc. Tagline, Contact Us, About Us, etc. => DONE
 Port Knockout Cart Editor to Angular JS => DONE
 - 150 Magic Number(!!!) => TODO - FIX => DONE
 * On the StoreFront "Wrong Size or Color? Click Here" - and Navigate to Product => DONE
+- Load Test Data into Console App => DONE
+- Fix image pop-up defect in the Edit Cart Screen => DONE
+* Load data with no Sizes => DONE
+* Load data with Sizes and no Colors => DONE
+* Fix Red Text on List => DONE
+
 
 
 Front Range
 ===========
-- Load Test Data into Console App => IN PROGRESS
-
 - Landing-Page / Microsite => IN PROGRESS
-* Load data with no Sizes
-* Load data with Sizes and no Colors
+* GetSizesByColor
+* Validation Message
+* Out-of-Stock
 * Color-to-Size-to-Quantity Model
-* Widget for browsing to other Products
 * Add to Cart Button
-- Fix image pop-up defect in the Edit Cart Screen => TODO
+* CSS Refactor
 
-- Customer Checkout + Stripe => IN PROGRESS
-
+- Customer Checkout + Stripe => TODO
 - Admin Search & Manage Orders => TODO
 - Admin Sales Graph by Product => TODO
 
@@ -34,12 +40,12 @@ Infrastructure
 
 
 
+
 ### END PRODUCT DEFINITION + TASKING ###
 
 Shopping Cart Persistence
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 - Entities + Repository
-- WebAPI Controllers with Actions
 - Cookie Service, Flow, etc.
 - Review concurrency issues
 
@@ -73,7 +79,7 @@ Contact Us Page Tasking
 
 About Us Page Tasking
 ~~~~~~~~~~~~~~~~~~~~~
-- Slideshow with graphics
+- Picture of Tsinerev
 - Shipping Verbage
 - Returns Verbage
 
@@ -94,18 +100,12 @@ Moar Tasks
 * Host on EC2 by 6/1 => IN PROGRESS - FAIL
 - Sign-up to use EC2
 - Research EC2 some more
-
 * Splash Graphic...?
 * Slideshow - identify images & marketing, based on Products and marketing message => TODO
-~ FONTS => 
 
 Backlog
 -------
 - Prevent multiple Pop-ups from appearing
-- Description - add markdown?  Probably => TODO
-* http://stackoverflow.com/questions/3730777/whats-so-restful-about-asp-net-mvc => IMPORTANT
-- Improve the quality of client-side Error Logging => TODO
-- Check Sanderson for advanced Model Binding => TODO
 - IsONline - Check How This Functions => UPDATE - NEED TO FIX TOUCH Function
 - Donate $20 to FineUploader upon successful integration => TODO
 
@@ -166,25 +166,29 @@ PHASE 2 Backlog
 - DapperORM
 - Add more Logging to the Security check
 - Get Refunds by Sku
+- Improve the quality of client-side Error Logging
+- Markdown
+- Widget for browsing to other Products
+
 
 Research Backlog
 ----------------
+- http://stackoverflow.com/questions/3730777/whats-so-restful-about-asp-net-mvc => IMPORTANT
 - SQL ShowPlan, Common Table Expressions 
-=> require.js? => We'll see => DONE FOR NOW
-=> Where did I put my fonts...?  What's a good resource for typography and fonts...? => TODO
+- require.js
 - TODO KNOCKOUTJS: difference between http://knockoutjs.com/documentation/extenders.html AND custom binders
 - ToHtmlString() => TODO
 - What's the benefit of <: stuff again...? => TODO
 - difference between <%: and <%=
-- Model Binding, how it all works - REVIEW
 - Easily the most important security article evar => - http://blogs.msdn.com/b/rickandy/archive/2011/05/02/securing-your-asp-net-mvc-3-application.aspx
 - Look up Troy Hunt's article's, too
-*** TODO: what is the function of "nav-collapse collapse"?
-*** MANDATE => research HOW KnockoutJS actually works internally
+- MANDATE => research HOW KnockoutJS actually works internally
 - http://code.google.com/p/autofac/wiki/MvcIntegration
-=> NEED TO LEARN THE "ANGULAR WAY" => http://www.youtube.com/watch?v=qK-Z0oEdE4Y&feature=player_embedded
-https://github.com/MatthewMueller/array
-http://news.ycombinator.com/item?id=3265625
-http://twitter.github.com/flight/
-http://pcottle.github.com/learnGitBranching/
-SublimeText + Resharper => TODO
+- NEED TO LEARN THE "ANGULAR WAY" => http://www.youtube.com/watch?v=qK-Z0oEdE4Y&feature=player_embedded
+- https://github.com/MatthewMueller/array
+- http://news.ycombinator.com/item?id=3265625
+- http://twitter.github.com/flight/
+- http://pcottle.github.com/learnGitBranching/
+- SublimeText + Resharper => TODO
+- Check Sanderson for advanced Model Binding => TODO
+

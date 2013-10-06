@@ -22,7 +22,7 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
     };
 
     $scope.HasSizes = function () {
-        return $scope.Product && $scope.Product.Sizes.length == 1;
+        return $scope.Product && $scope.Product.Sizes && $scope.Product.Sizes.length >= 1;
     };
 
     $scope.SelectColor = function (colorid) {
@@ -32,6 +32,10 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
 
     $scope.SelectColorDefault = function () {
         $scope.SelectedColorId = $scope.HasMultipleColors() && $scope.Product.Colors[0].Id;
+    };
+
+    $scope.IsSelectedColorId = function (colorid) {
+        return colorid == $scope.SelectedColorId;
     };
 
     $scope.SelectedColorName = function () {
@@ -61,7 +65,12 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         return ibexternalId && ("image/" + ibexternalId + "?size=" + size);
     };
 
-
+    $scope.GetSelectedSku = function () {
+        // TODO: HasColors
+        // TODO: HasSizes
+        // TODO: HasColors & HasSizes
+        // TODO: !HasColors & !HasSizes
+    };
 
     // There are one-to-many images
     $scope.AddToCart = function () {

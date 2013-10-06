@@ -68,11 +68,17 @@ namespace Commerce.Initializer
             CreateAndRunBuilder<SizeBuilder>();
             CreateAndRunBuilder<BrandBuilder>();
             CreateAndRunBuilder<ColorBuilder>();
+
             CreateAndRunBuilder<TatamiEstiloBuilder>();
             CreateAndRunBuilder<BullTerrierMushinBuilder>();
             CreateAndRunBuilder<BullTerrierSuperStarBuilder>();
             CreateAndRunBuilder<BullTerrierZebraBuilder>();
             CreateAndRunBuilder<BullTerrierMastersBuilder>();
+            CreateAndRunBuilder<HayabusaHeadGearBuilder>();
+            CreateAndRunBuilder<JiuJitsuDummyBuilder>();
+            CreateAndRunBuilder<ShockDoctorMouthGuardBuilder>();
+            CreateAndRunBuilder<ShockDoctorGelNanoBuilder>();
+            
             CreateAndRunBuilder<ShippingMethodsBuilder>();
             CreateAndRunBuilder<StateTaxBuilder>();
 
