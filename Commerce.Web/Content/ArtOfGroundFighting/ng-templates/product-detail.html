@@ -1,5 +1,4 @@
-﻿
-<div ng-show="Product">    
+﻿<div ng-show="Product">    
     <div  id="arena-top-spacer" style="height:50px; padding-top:20px;">
         <a class="mybreadcrumb" href="#/products">All Products</a> &gt;&gt; <span>{{ Product.Info.Name }}</span>
     </div>
@@ -19,7 +18,8 @@
         
             <div ng-repeat="image in SelectedImages" style="float:left; margin-right: 10px;">
                 <a class="thumbnail-image">
-                    <img ng-click="SelectImage(image.ImageBundleExternalId)" ng-src="image/{{ image.ImageBundleExternalId }}?size=thumbnail" style="border: #CCC dotted 1px;" />                
+                    <img  style="border: #CCC dotted 1px;" ng-click="SelectImage(image.ImageBundleExternalId)" 
+                            ng-src="{{ ImageUrl(image.ImageBundleExternalId, 'thumbnail') }}" />
                 </a>
             </div>
         
@@ -38,32 +38,31 @@
                 <div ng-repeat="color in Product.Colors" style="float:left; margin-right:12px;">
                     <a class="thumbnail-color-selected" style="float:left;" ng-show="IsSelectedColorId(color.Id)">
                         <div style="overflow:hidden; height:50px; width:50px;">
-                            <img ng-click="SelectColor(color.Id)" ng-src="image/{{ color.ImageBundleExternalId }}?size=thumbnail" />
+                            <img ng-click="SelectColor(color.Id)" ng-src="{{ ImageUrl(color.ImageBundleExternalId, 'thumbnail') }}" />
                         </div>
                     </a>
-                     <a class="thumbnail-color" style="float:left;" ng-show="!IsSelectedColorId(color.Id)">
+                    <a class="thumbnail-color" style="float:left;" ng-show="!IsSelectedColorId(color.Id)">
                         <div style="overflow:hidden; height:50px; width:50px;">
-                            <img ng-click="SelectColor(color.Id)" ng-src="image/{{ color.ImageBundleExternalId }}?size=thumbnail" />
+                            <img ng-click="SelectColor(color.Id)" ng-src="{{ ImageUrl(color.ImageBundleExternalId, 'thumbnail') }}" />
                         </div>
                     </a>
-               </div>
-
+                </div>
                 <div style="clear:both; height: 20px;"></div>
             </div>
-        
+            
             <div ng-show="HasSizes()">
                 <select ng-model="SelectedSize" ng-options="size.Id as size.Name for size in Product.Sizes" 
                         class="form-control" style="width:250px; height:40px; font-size:18px; font-weight:bold;">
                     <option value="">Choose your Size</option>
                 </select>
 
-            <div style="clear:both; height: 20px;"></div>
-            </div>        
+                <div style="clear:both; height: 20px;"></div>
+            </div>
 
             <button class="btn btn-default btn-lg btn-oldstyle" style="font-size:21px; width:250px;" ng-click="AddToCart()">
                 <i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart 
             </button>
-        
+            
             <div style="height:30px;"></div>
             <img class="img-responsive" ng-src="{{ ImageUrl(Product.Brand.ImageBundleExternalId, 'large') }}" />
             <div style="height:15px;"></div>

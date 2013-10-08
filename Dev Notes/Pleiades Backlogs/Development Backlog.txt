@@ -23,6 +23,7 @@ Front Range
 * Validation Message
 * Out-of-Stock
 * Color-to-Size-to-Quantity Model
+
 * Add to Cart Button
 * CSS Refactor
 

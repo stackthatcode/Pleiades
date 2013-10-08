@@ -30,6 +30,7 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
     $scope.SelectColor = function (colorid) {
         $scope.SelectedColorId = colorid;
         $scope.RefreshImages();
+        $scope.RefreshSizes();
     };
 
     $scope.SelectColorDefault = function () {
@@ -41,7 +42,7 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
     };
 
     $scope.SelectedColorName = function () {
-        if ($scope.Product) {
+        if ($scope.Product && $scope.SelectedColorId) {
             var color = AQ($scope.Product.Colors).first(function (x) { return x.Id == $scope.SelectedColorId; });
             return color ? color.Name : "";
         }
@@ -67,15 +68,30 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         return ibexternalId && ("image/" + ibexternalId + "?size=" + size);
     };
 
-    /*
-    $scope.RefreshSizes = function() {
+    $scope.AvailableInventory = function () {
         if ($scope.HasMultipleColors()) {
-        var inventoryByColor = AQ()
+            return AQ($scope.Product.Inventory)
+                    .where(function (x) { return x.ColorId == $scope.SelectedColorId && x.Quantity > 0; })
+                    .toArray();
         } else {
-            
+            return AQ($scope.Product.Inventory).where(function (x) { return x.Quantity > 0; }).toArray();
         }
     };
-    */
+
+    $scope.RefreshSizes = function () {
+        $scope.SelectedSizes = [];
+        if ($scope.HasSizes()) {
+            console.log($scope.AvailableInventory());
+            AQ($scope.AvailableInventory()).each(function (inventoryItem) {
+                var size = AQ($scope.Product.Sizes)
+                    .firstOrDefault(function (x) { return x.Id == inventoryItem.SizeId; });
+
+                $scope.SelectedSizes.push(size);
+            });
+        } else {
+            $scope.SelectedSizes = $scope.Product.Sizes;
+        }
+    };
 
     $scope.GetSelectedSku = function () {
         // TODO: HasColors
@@ -95,6 +111,7 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
     ngAjax.Get($http, 'products/' + $routeParams.productid, function (product) {
         $scope.Product = product;
         $scope.SelectColorDefault();
+        $scope.RefreshSizes();
         $scope.RefreshImages();
     });
 });
