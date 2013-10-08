@@ -1,8 +1,8 @@
 Backlog
 ~~~~~~~
 
-Sunday 10/6
-===========
+Sunday 10/6 - 5.0 Hours
+=======================
 Bottom Tasking - Mark-up and graphics, etc. Tagline, Contact Us, About Us, etc. => DONE
 Port Knockout Cart Editor to Angular JS => DONE
 - 150 Magic Number(!!!) => TODO - FIX => DONE
@@ -13,19 +13,23 @@ Port Knockout Cart Editor to Angular JS => DONE
 * Load data with Sizes and no Colors => DONE
 * Fix Red Text on List => DONE
 
+10/7 thru 10/11
+===============
+- Inventory, Images, Colors, Sizes, edge cases, oh my!
+* GetSizesByColorAndInventory => DONE
+* Missing Images - use the default Color's images => DONE
+* Out-of-Stock => DONE
+* Color-to-Size-to-Quantity Model => DONE
+* Validation Message => DONE
 
 
 Front Range
 ===========
 - Landing-Page / Microsite => IN PROGRESS
-* GetSizesByColorAndInventory => TODO
-* Missing Images - use the default Color's images => TODO
-* Validation Message
-* Out-of-Stock
-* Color-to-Size-to-Quantity Model
-
 * Add to Cart Button
+* Item Added Feedback graphics => TODO
 * CSS Refactor
+* 400 when the Product doesn't exist
 
 - Customer Checkout + Stripe => TODO
 - Admin Search & Manage Orders => TODO

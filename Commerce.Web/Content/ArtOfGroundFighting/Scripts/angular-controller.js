@@ -16,15 +16,16 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
     $scope.SelectedImageId = null;
     $scope.SelectedSizes = null;
     $scope.SelectedSizeId = null;
+    $scope.AddToCartValidationMessage = null;
 
     var parentScope = $scope;
 
-    $scope.HasMultipleColors = function () {
-        return $scope.Product && $scope.Product.Colors && ($scope.Product.Colors.length > 1);
+    $scope.HasColors = function () {
+        return $scope.Product && $scope.Product.Colors;
     };
 
-    $scope.HasSizes = function () {
-        return $scope.Product && $scope.Product.Sizes && $scope.Product.Sizes.length >= 1;
+    $scope.HasMultipleColors = function () {
+        return $scope.HasColors() && ($scope.Product.Colors.length > 1);
     };
 
     $scope.SelectColor = function (colorid) {
@@ -41,6 +42,10 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         return colorid == $scope.SelectedColorId;
     };
 
+    $scope.FirstColorId = function () {
+        return $scope.HasColors() ? $scope.Product.Colors[0].Id : null;
+    };
+
     $scope.SelectedColorName = function () {
         if ($scope.Product && $scope.SelectedColorId) {
             var color = AQ($scope.Product.Colors).first(function (x) { return x.Id == $scope.SelectedColorId; });
@@ -54,6 +59,13 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
                 AQ($scope.Product.Images)
                     .where(function (x) { return x.ColorId == $scope.SelectedColorId; })
                     .toArray();
+
+            if ($scope.SelectedImages.length == 0) {
+                $scope.SelectedImages =
+                    AQ($scope.Product.Images)
+                        .where(function (x) { return x.ColorId == $scope.FirstColorId(); })
+                        .toArray();
+            }
         } else {
             $scope.SelectedImages = $scope.Product.Images;
         }
@@ -68,7 +80,15 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         return ibexternalId && ("image/" + ibexternalId + "?size=" + size);
     };
 
+
+    $scope.HasSizes = function () {
+        return $scope.Product && $scope.Product.Sizes && $scope.Product.Sizes.length >= 1;
+    };
+
     $scope.AvailableInventory = function () {
+        if (!$scope.Product || !$scope.Product.Inventory) {
+            return [];
+        }
         if ($scope.HasMultipleColors()) {
             return AQ($scope.Product.Inventory)
                     .where(function (x) { return x.ColorId == $scope.SelectedColorId && x.Quantity > 0; })
@@ -80,8 +100,9 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
 
     $scope.RefreshSizes = function () {
         $scope.SelectedSizes = [];
+        $scope.AddToCartValidationMessage = null;
+
         if ($scope.HasSizes()) {
-            console.log($scope.AvailableInventory());
             AQ($scope.AvailableInventory()).each(function (inventoryItem) {
                 var size = AQ($scope.Product.Sizes)
                     .firstOrDefault(function (x) { return x.Id == inventoryItem.SizeId; });
@@ -93,19 +114,34 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         }
     };
 
+    $scope.HasInventory = function () {
+        return $scope.AvailableInventory().length > 0;
+    };
+
     $scope.GetSelectedSku = function () {
-        // TODO: HasColors
-        // TODO: HasSizes
-        // TODO: HasColors & HasSizes
-        // TODO: !HasColors & !HasSizes
+        if (!$scope.HasInventory()) {
+            return null;
+        }
+        if ($scope.HasSizes() && $scope.SelectedSizeId) {
+            return AQ($scope.AvailableInventory()).firstOrDefault(function (x) { return x.SizeId == $scope.SelectedSizeId; });
+        } else {
+            return $scope.AvailableInventory()[0];
+        }
+    };
+
+    $scope.SizeClick = function () {
+        if ($scope.SelectedSizeId) {
+            $scope.AddToCartValidationMessage = null;
+        }
     };
 
     // There are one-to-many images
     $scope.AddToCart = function () {
-        console.log("got it!");
-
-        // Ok, how to change the model via the ng way
-        $scope.SelectedImageId = $scope.Product.Images[2].ImageBundleExternalId;
+        if ($scope.HasSizes() && !$scope.SelectedSizeId) {
+            $scope.AddToCartValidationMessage = "Please Choose a Size";
+            return;
+        }
+        console.log($scope.GetSelectedSku());
     };
 
     ngAjax.Get($http, 'products/' + $routeParams.productid, function (product) {
@@ -119,4 +155,3 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
 app.controller('ContentController', function ($scope, $routeParams) {
     $scope.templateUrl = 'Content/ArtOfGroundFighting/ng-templates/' + $routeParams.contentid + '.html';
 });
-
