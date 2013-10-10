@@ -88,6 +88,8 @@
     <Compile Include="Model\Billing\Transaction.cs" />
     <Compile Include="Model\Billing\StateTax.cs" />
     <Compile Include="Model\Billing\TransactionType.cs" />
+    <Compile Include="Model\Cart\Cart.cs" />
+    <Compile Include="Model\Cart\CartItem.cs" />
     <Compile Include="Model\Email\Message.cs" />
     <Compile Include="Model\Lists\Brand.cs">
       <SubType>Code</SubType>
@@ -109,11 +111,11 @@
     <Compile Include="Model\Lists\JsonBrand.cs" />
     <Compile Include="Model\Lists\SizeExtensions.cs" />
     <Compile Include="Model\Lists\SizeGroup.cs" />
-    <Compile Include="Model\Lists\SmallIdea.cs" />
     <Compile Include="Model\Billing\BillingInfo.cs" />
     <Compile Include="Model\Orders\Order.cs" />
     <Compile Include="Model\Orders\OrderLine.cs" />
     <Compile Include="Model\Orders\OrderLineStatus.cs" />
+    <Compile Include="Model\Orders\OrderLineStatusExtensions.cs" />
     <Compile Include="Model\Orders\OrderNote.cs" />
     <Compile Include="Model\Orders\OrderNumberGenerator.cs" />
     <Compile Include="Model\Orders\SubmitOrderRequest.cs" />

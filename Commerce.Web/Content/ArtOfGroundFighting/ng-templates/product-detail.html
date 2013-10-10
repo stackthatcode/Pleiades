@@ -30,8 +30,10 @@
             <div style="text-align: left;">
                 <h1 style="font-family:Open Sans; font-size:35px; font-weight:bold; color:#555; margin-top:0px;">Our Price: ${{ Product.Info.UnitPrice }}</h1>
             </div>
-            
-            <p>{{ Product.Info.Description }}</p>
+
+            <div style="margin-bottom:20px;">
+                <p>{{ Product.Info.Description }}</p>                
+            </div>
             
             <div ng-show="HasMultipleColors()">
                 <h4 style="color:#555; font-weight:bold;">Select a Color - {{ SelectedColorName() }}</h4>
@@ -57,7 +59,7 @@
                     <option value="">Choose your Size</option>
                 </select>
                 <div ng-show="AddToCartValidationMessage">
-                    <h3 style="color:#F00;">{{ AddToCartValidationMessage }}</h3>
+                    <h4 style="font-weight: bold; color:#F00;">{{ AddToCartValidationMessage }}</h4>
                 </div>
                 <div style="clear:both; height: 20px;"></div>
             </div>
@@ -68,10 +70,19 @@
             </div>
             
             <div ng-show="HasInventory()">
-                <button class="btn btn-default btn-lg btn-oldstyle" style="font-size:21px; width:250px;" ng-click="AddToCart()">
+                <div ng-show="QuantitiesVisible()">                    
+                    <select ng-model="SelectedQuantityValue" class="form-control" 
+                            ng-options="quantity as quantity for quantity in SelectedQuantities" 
+                            style="float:left; width:100px; height:40px; font-size:18px; font-weight:bold; margin-right: 10px;">
+                    </select>
+                    <h4 style="color:#555; font-weight: bold; float:left; margin-right:10px;">Quantity</h4>                    
+                </div>                
+                
+                <button class="btn btn-default btn-lg btn-oldstyle" ng-click="AddToCart()"
+                        style="clear:both; float:left; margin-right:10px; margin-top:20px; font-size:21px; width:250px;">
                     <i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart 
                 </button>
-                <div style="height:30px;"></div>
+                <div style="clear:both; height:30px;"></div>
             </div>
             
             <img class="img-responsive" ng-src="{{ ImageUrl(Product.Brand.ImageBundleExternalId, 'large') }}" />

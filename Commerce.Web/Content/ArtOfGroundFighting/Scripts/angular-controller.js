@@ -17,6 +17,8 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
     $scope.SelectedSizes = null;
     $scope.SelectedSizeId = null;
     $scope.AddToCartValidationMessage = null;
+    $scope.SelectedQuantities = null;
+    $scope.SelectedQuantityValue = null;
 
     var parentScope = $scope;
 
@@ -80,7 +82,6 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         return ibexternalId && ("image/" + ibexternalId + "?size=" + size);
     };
 
-
     $scope.HasSizes = function () {
         return $scope.Product && $scope.Product.Sizes && $scope.Product.Sizes.length >= 1;
     };
@@ -110,6 +111,7 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
                 $scope.SelectedSizes.push(size);
             });
         } else {
+            // Is this necessary...?
             $scope.SelectedSizes = $scope.Product.Sizes;
         }
     };
@@ -132,22 +134,44 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
     $scope.SizeClick = function () {
         if ($scope.SelectedSizeId) {
             $scope.AddToCartValidationMessage = null;
+            $scope.RefreshQuantities();
         }
     };
 
-    // There are one-to-many images
+    $scope.RefreshQuantities = function () {
+        $scope.SelectedQuantities = [];
+        console.log($scope.GetSelectedSku());
+
+        if ($scope.GetSelectedSku()) {
+            // Should have the Cart and find item by Sku - subtract its Quantity
+            for (var i = 1; i <= $scope.GetSelectedSku().Quantity; i++) {
+                $scope.SelectedQuantities.push(i);
+            }
+            $scope.SelectedQuantityValue = $scope.SelectedQuantities[0];
+        }
+        console.log($scope.SelectedQuantities.length);
+    };
+
+    $scope.QuantitiesVisible = function () {        
+        return $scope.SelectedQuantities.length > 0;
+    };
+
     $scope.AddToCart = function () {
+        // There are one-to-many images
+
         if ($scope.HasSizes() && !$scope.SelectedSizeId) {
-            $scope.AddToCartValidationMessage = "Please Choose a Size";
+            $scope.AddToCartValidationMessage = "Please choose your Size";
             return;
         }
         console.log($scope.GetSelectedSku());
+        console.log("Quantity = " + $scope.GetSelectedSku());
     };
 
     ngAjax.Get($http, 'products/' + $routeParams.productid, function (product) {
         $scope.Product = product;
         $scope.SelectColorDefault();
         $scope.RefreshSizes();
+        $scope.RefreshQuantities();
         $scope.RefreshImages();
     });
 });
