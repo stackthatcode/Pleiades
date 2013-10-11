@@ -53,40 +53,41 @@
     </style>
     
     <!-- Function to add Product Search & Selection -->
-    <script type="text/javascript">
+<script type="text/javascript">
     var PushMkt = PushMkt || {};
-    
-    PushMkt.AddSearchFunctions = function (model) {
+
+    PushMkt.AddSearchFunctions = function(model) {
         self = model;
         self.SearchData = ko.observableArray();
         self.Cart = ko.observable(new PushMkt.Cart());
 
-        self.ViewCart = function () {
+        self.ViewCart = function() {
             if (self.Cart().NumberOfDistinctItems() == 0) {
                 self.ShowModal("Notification", "The Shopping Cart is Empty", "Add Items to the Order");
                 return;
-            };
+            }
+            ;
 
             $("[name='btn-view-cart']").hide();
 
-            $.each(self.SearchData(), function (index, elem) {
+            $.each(self.SearchData(), function(index, elem) {
                 elem.ExpandInventory(false);
                 elem.Inventory.removeAll();
             });
             self.GlideRight("ReviewProducts");
-        }
+        };
 
-        self.SearchClick = function (callback) {
+        self.SearchClick = function(callback) {
             flow.exec(
-                function () {
+                function() {
                     var brandId = $("#SearchBrand").val();
                     var categoryId = $("#SearchCategory").val();
                     var searchText = $("#SearchText").val();
                     self.Service.AjaxGet("/Admin/Product/Search" +
                         "?brandId=" + brandId + "&categoryId=" + categoryId + "&searchText=" + searchText, this);
                 },
-                function (data) {
-                    $.each(data, function (index, elem) {
+                function(data) {
+                    $.each(data, function(index, elem) {
                         elem.ExpandInventory = ko.observable(false);
                         elem.Inventory = ko.observableArray([]);
                     });
@@ -96,29 +97,29 @@
                     }
                 }
             );
-        }
+        };
 
-        self.ShowInventory = function (data) {
+        self.ShowInventory = function(data) {
             flow.exec(
-                function () {
+                function() {
                     self.Service.AjaxGet("/Admin/Product/Inventory/" + data.Id, this);
                 },
-                function (inventory) {
+                function(inventory) {
                     data.ExpandInventory(true);
 
-                    $.each(inventory, function (index, inventoryItem) {
+                    $.each(inventory, function(index, inventoryItem) {
                         inventoryItem.SelectedQuantity = ko.observable(0);
                         inventoryItem.QuantityOptions = ko.observableArray();
 
                         inventoryItem.ComputedAvailable = ko.computed(
-                            function () {
+                            function() {
                                 var quantityInCart = self.Cart().QuantityBySkuCode(inventoryItem.SkuCode);
                                 //var available = inventoryItem.Available > 10 ? 10 : inventoryItem.Available;
                                 return inventoryItem.Available - quantityInCart;
                             }
                         );
 
-                        inventoryItem.GenerateQuantityOptions = function () {
+                        inventoryItem.GenerateQuantityOptions = function() {
                             inventoryItem.QuantityOptions.removeAll();
 
                             for (var quantity = 1; quantity <= inventoryItem.ComputedAvailable(); quantity++) {
@@ -131,14 +132,14 @@
                     });
                 }
             );
-        }
+        };
 
-        self.HideInventory = function (data) {
+        self.HideInventory = function(data) {
             data.ExpandInventory(false);
             data.Inventory.removeAll();
-        }
+        };
 
-        self.AddToCart = function (inventoryItem, product) {
+        self.AddToCart = function(inventoryItem, product) {
             var selectedQuantity = inventoryItem.SelectedQuantity();
             var skuCode = inventoryItem.SkuCode;
             var quantityInCart = self.Cart().QuantityBySkuCode(skuCode);
@@ -152,7 +153,7 @@
             }
             if (quantityInCart + selectedQuantity > inventoryItem.Available) {
                 self.ShowModal("Notification",
-                        "Stock Availability", "Only " + inventoryItem.Available + " of that item available for purchase. Adjusting quantity.");
+                    "Stock Availability", "Only " + inventoryItem.Available + " of that item available for purchase. Adjusting quantity.");
                 return;
             }
 
@@ -170,9 +171,10 @@
 
             $("#AddFeedback").show();
             $("#AddFeedback").fadeOut({ duration: 1000 });
-        }
-    }
+        };
+    };
 </script>
+
 <!-- KNOCKOUT TEMPLATES - Select Products -->
 <script type="text/html" id="Top-Workspace-SelectProducts">
     <div class="workspace-heading" style="height:125px;">
@@ -217,8 +219,8 @@
     </div>
 </script>
 <script type="text/html" id="Main-Editor-SelectProducts">
-    <div style="margin-top:20px; margin-bottom:200px;">
-        <div style="margin-top:40px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SearchData().length == 0">
+    <div style="margin-top:0px; margin-bottom:200px;">
+        <div style="margin-top:20px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SearchData().length == 0">
 			<strong>There are no Products in your current search.  Click "Search" to run a search or click "Add New Product" to create a new one.</strong>  
 		</div>
 		    

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using Commerce.Application.Model.Cart;
 using Pleiades.Web.Security.Model;
 using Commerce.Application.Model.Billing;
 using Commerce.Application.Model.Lists;
@@ -47,10 +48,11 @@ namespace Commerce.Application.Database
         // Billing
         public IDbSet<StateTax> StateTaxes { get; set; }
         public IDbSet<Transaction> Transactions { get; set; }
+        public IDbSet<Total> Totals { get; set; }
 
-        // Experimental
-        public IDbSet<SmallIdea> SmallIdeas { get; set; }
-
+        // Carts
+        public IDbSet<Cart> Carts { get; set; }
+        public IDbSet<CartItem> CartItems { get; set; }
 
         public PushMarketContext() : base("PleiadesDb")
         {

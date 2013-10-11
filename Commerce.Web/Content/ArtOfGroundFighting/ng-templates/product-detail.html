@@ -6,10 +6,11 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 style="font-family: Open Sans; font-size:50px; margin-top: 0px; font-weight:bolder;">{{ Product.Info.Name }}</h1>
-        
+            
             <div style="clear:both; height:20px;"></div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-lg-7">
             <img class="img-responsive" ng-src="{{ ImageUrl(SelectedImageId, 'large') }}" style="border: #CCC dotted 1px;" />
@@ -28,7 +29,9 @@
 
         <div class="col-lg-5">
             <div style="text-align: left;">
-                <h1 style="font-family:Open Sans; font-size:35px; font-weight:bold; color:#555; margin-top:0px;">Our Price: ${{ Product.Info.UnitPrice }}</h1>
+                <h1 style="font-family:Open Sans; font-size:35px; font-weight:bold; color:#555; margin-top:0px;">
+                    Our Price: ${{ Product.Info.UnitPrice }}
+                </h1>
             </div>
 
             <div style="margin-bottom:20px;">

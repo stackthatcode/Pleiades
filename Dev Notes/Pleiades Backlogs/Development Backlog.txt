@@ -13,14 +13,15 @@ Port Knockout Cart Editor to Angular JS => DONE
 * Load data with Sizes and no Colors => DONE
 * Fix Red Text on List => DONE
 
-10/7 thru 10/11
-===============
+10/7 thru 10/11 6.5 Hours
+=========================
 - Inventory, Images, Colors, Sizes, edge cases, oh my!
 * GetSizesByColorAndInventory => DONE
 * Missing Images - use the default Color's images => DONE
 * Out-of-Stock => DONE
 * Color-to-Size-to-Quantity Model => DONE
 * Validation Message => DONE
+- Refactored Total for reusability => DONE
 
 
 Front Range
@@ -31,7 +32,13 @@ Front Range
 * CSS Refactor
 * 400 when the Product doesn't exist
 
-- Customer Checkout + Stripe => TODO
+Shopping Cart Persistence
+~~~~~~~~~~~~~~~~~~~~~~~~~
+- Shopping Cart + Entities + Repository => IN PROGRESS
+- Shopping Cart + Cookie Service, Flow, etc. => IN PROGRESS
+- Review concurrency issues => IN PROGRESS
+- Customer Checkout => IN PROGRESS
+
 - Admin Search & Manage Orders => TODO
 - Admin Sales Graph by Product => TODO
 
@@ -48,12 +55,6 @@ Infrastructure
 
 
 ### END PRODUCT DEFINITION + TASKING ###
-
-Shopping Cart Persistence
-~~~~~~~~~~~~~~~~~~~~~~~~~
-- Entities + Repository
-- Cookie Service, Flow, etc.
-- Review concurrency issues
 
 Checkout Process Tasking
 ~~~~~~~~~~~~~~~~~~~~~~~~

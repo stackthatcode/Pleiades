@@ -1,70 +1,69 @@
-﻿
-    <!-- TODO: move this to another PartialView -->
-    <script type="text/javascript">	    
-        // TODO: move these to a PartialView
-	    // ### TESTING SCRIPTS ###
-	    window.LoadPaymentInfo = function () {
-	        var billing = model.Cart().BillingInfo;
-	        billing.Name("Aleks Jones");
-	        billing.Address1("777 On The Way");
-	        billing.Address2("Suite 999");
-	        billing.City("Mount Prospect");
-	        billing.State("IL");
-	        billing.ZipCode("60013");
-	        billing.CardNumber("5247405514068983");
-	        billing.ExpirationMonth("03");
-	        billing.ExpirationYear("2014");
-	        billing.CVV("666");
-	    };
-	    // ### TESTING SCRIPTS ###
+﻿<script type="text/javascript">	    
+	// ### TESTING SCRIPTS ###
+	window.LoadPaymentInfo = function () {
+	    var modelReference = window.tmp;
+	    var billing = modelReference.Cart().BillingInfo;
+	    billing.Name("Aleks Jones");
+	    billing.Address1("777 On The Way");
+	    billing.Address2("Suite 999");
+	    billing.City("Mount Prospect");
+	    billing.State("IL");
+	    billing.ZipCode("60013");
+	    billing.CardNumber("5247405514068983");
+	    billing.ExpirationMonth("03");
+	    billing.ExpirationYear("2014");
+	    billing.CVV("666");
+	};
+	// ### TESTING SCRIPTS ###
 
-	    // ### TESTING SCRIPTS ###
-	    window.Automation = function () {
-	        var shipping = model.Cart().ShippingInfo;
-	        shipping.EmailAddress("aleksjones@gmail.com");
-	        shipping.Name("Aleksandr Jones");
-	        shipping.Address1("123 Test Street");
-	        shipping.Address2("Suite 100");
-	        shipping.City("Mount Prospect");
-	        shipping.State("IL");
-	        shipping.ZipCode("60013");
-	        shipping.Phone("510-717-8112");
-	        shipping.ShippingOptionId("1");
+	// ### TESTING SCRIPTS ###
+	window.Automation = function() {
+	    var modelReference = window.tmp;
+	    var shipping = modelReference.Cart().ShippingInfo;
+	    shipping.EmailAddress("aleksjones@gmail.com");
+	    shipping.Name("Aleksandr Jones");
+	    shipping.Address1("123 Test Street");
+	    shipping.Address2("Suite 100");
+	    shipping.City("Mount Prospect");
+	    shipping.State("IL");
+	    shipping.ZipCode("60013");
+	    shipping.Phone("510-717-8112");
+	    shipping.ShippingOptionId("1");
 
-	        flow.exec(
-                function () {
-                    model.SearchClick(this);
-                },
-                function () {
-                    model.ShowInventory(model.SearchData()[0]);
-                    window.setTimeout(this, 1500);
-                },
-                function () {
-                    var product = model.SearchData()[0];
-                    var inventory = product.Inventory();
-                    var sku = inventory[1];
-                    sku.SelectedQuantity(2);
-                    model.AddToCart(sku, product);
+	    flow.exec(
+	        function() {
+	            modelReference.SearchClick(this);
+	        },
+	        function() {
+	            modelReference.ShowInventory(modelReference.SearchData()[0]);
+	            window.setTimeout(this, 1500);
+	        },
+	        function() {
+	            var product = modelReference.SearchData()[0];
+	            var inventory = product.Inventory();
+	            var sku = inventory[1];
+	            sku.SelectedQuantity(2);
+	            modelReference.AddToCart(sku, product);
 
-                    var sku2 = inventory[6];
-                    sku2.SelectedQuantity(1);
-                    model.AddToCart(sku2, product);
-                    model.ViewCart();
-                    window.setTimeout(this, 2000);
-                },
-                function () {
-                    model.GlideToShipping();
-                    window.setTimeout(this, 2000);
-                },
-                function () {
-                    model.GotoBilling();
-                    window.setTimeout(this, 2000);
-                },
-                function () {
-                    LoadPaymentInfo();
-                }
-            );
-	    }
-	    // ### TESTING SCRIPTS ###
-	</script>    
+	            var sku2 = inventory[6];
+	            sku2.SelectedQuantity(1);
+	            modelReference.AddToCart(sku2, product);
+	            modelReference.ViewCart();
+	            window.setTimeout(this, 2000);
+	        },
+	        function() {
+	            modelReference.GlideToShipping();
+	            window.setTimeout(this, 2000);
+	        },
+	        function() {
+	            modelReference.GotoBilling();
+	            window.setTimeout(this, 2000);
+	        },
+	        function() {
+	            LoadPaymentInfo();
+	        }
+	    );
+	};
+	// ### TESTING SCRIPTS ###
+</script>    
 }

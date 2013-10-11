@@ -8,7 +8,7 @@ using Commerce.Application.Model.Products;
 using Commerce.Application.Model.Billing;
 using Commerce.Application.Model.Orders;
 
-namespace Commerce.UnitTests.Repositories
+namespace Commerce.UnitTests.Application
 {
     [TestFixture]
     public class OrderSubmissionServiceTests    
@@ -27,7 +27,7 @@ namespace Commerce.UnitTests.Repositories
             // Assert
             Assert.That(result.Success, Is.False);
             Assert.That(result.Messages, Contains.Item(OrderSubmissionService.ErrorMissingData));
-            result.Messages.ForEach(x => Console.WriteLine(x));
+            result.Messages.ForEach(Console.WriteLine);
         }
         
         [Test]

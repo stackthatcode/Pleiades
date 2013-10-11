@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Commerce.Application.Model.Billing;
-using Commerce.Application.Model.Orders;
 using Newtonsoft.Json;
 
 namespace Commerce.Application.Model.Orders

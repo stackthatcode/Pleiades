@@ -70,6 +70,8 @@
     <Compile Include="Concrete\Infrastructure\GetPaidPaymentProcessor.cs" />
     <Compile Include="Concrete\Orders\OrderSubmissionService.cs" />
     <Compile Include="Interfaces\IAnalyticsService.cs" />
+    <Compile Include="Interfaces\ICartIdentificationService.cs" />
+    <Compile Include="Interfaces\ICartRepository.cs" />
     <Compile Include="Interfaces\IEmailGenerator.cs" />
     <Compile Include="Interfaces\IEmailService.cs" />
     <Compile Include="Interfaces\IBlankImageRepository.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="Interfaces\IImageProcessor.cs" />
     <Compile Include="Interfaces\IImageBundleRepository.cs" />
     <Compile Include="Interfaces\IJsonSizeRepository.cs" />
+    <Compile Include="Model\Billing\Total.cs" />
     <Compile Include="Model\Billing\Transaction.cs" />
     <Compile Include="Model\Billing\StateTax.cs" />
     <Compile Include="Model\Billing\TransactionType.cs" />

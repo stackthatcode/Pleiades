@@ -13,7 +13,7 @@
             self.GlideLeft("SelectProducts");
         };
 
-        self.GlideToShipping = function() {
+        self.GlideToShipping = function () {
             $("[name='btn-goto-shipping']").hide();
             self.CartItemCancel();
             self.GlideRight("Shipping", self.InitializeShippingForms);
@@ -99,7 +99,7 @@
                     self.SelectedCartItem(selectedCartItem);
                 }
             );
-        }
+        };
 
         self.ColorSelectorClick = function (color) {
             self.SelectedCartItem().EditColor(color);
@@ -108,34 +108,34 @@
             }
             self.SelectedCartItem().EditSize(null);
             self.SelectedCartItem().UpdateQuantityOptions();
-        }
+        };
 
         self.SizeSelectorClick = function (size) {
             self.SelectedCartItem().EditSize(size);
             self.SelectedCartItem().UpdateQuantityOptions();
-        }
+        };
 
         self.ColorSelectorClass = function (color) {
             return (color && self.SelectedCartItem().EditColor() && color.Id == self.SelectedCartItem().EditColor().Id) ?
                 "color-chooser selected" :
                 "color-chooser not-selected";
-        }
+        };
 
         self.SizeSelectorClass = function (size) {
             return (size && self.SelectedCartItem().EditSize() && size.Id == self.SelectedCartItem().EditSize().Id) ?
                 "label label-info" :
                 "label";
-        }
+        };
 
         self.CartItemCancel = function () {
             self.SelectedCartItem(null);
-        }
+        };
 
         self.CartItemDelete = function (data) {
             self.Cart().Items.remove(data);
-        }
+        };
 
-        self.CartItemOk = function () {
+        self.CartItemOk = function() {
             if (!self.SelectedCartItem().HasValidSelection() || !self.SelectedCartItem().EditQuantity()) {
                 $("#quantity-validation").show();
                 return;
@@ -143,8 +143,8 @@
 
             self.SelectedCartItem().AcceptChanges();
             self.SelectedCartItem(null);
-        }
-    }
+        };
+    };
 </script>
 <!-- KNOCKOUT TEMPLATES - Review Products -->
 <script type="text/html" id="Top-Workspace-ReviewProducts">

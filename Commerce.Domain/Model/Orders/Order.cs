@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Commerce.Application.Model.Billing;
+using Newtonsoft.Json;
 
 namespace Commerce.Application.Model.Orders
 {
@@ -23,10 +24,10 @@ namespace Commerce.Application.Model.Orders
         public string ZipCode { get; set; }
         public string Phone { get; set; }
 
-        public ShippingMethod ShippingMethod { get; set; }
         public List<OrderLine> OrderLines { get; set; }
-        public StateTax StateTax { get; set; }
         public DateTime DateCreated { get; set; }
+
+        public Total Total { get; private set; }
 
         // Payment Info
         public List<Transaction> Transactions { get; set; }
@@ -37,15 +38,16 @@ namespace Commerce.Application.Model.Orders
         // ctor
         public Order()
         {
-            this.CustomerId = Guid.NewGuid();
-            this.OrderLines = new List<OrderLine>();
-            this.Transactions = new List<Transaction>();
-            this.Notes = new List<OrderNote>();
+            CustomerId = Guid.NewGuid();
+            OrderLines = new List<OrderLine>();
+            Total = new Total(SubTotal);
+            Transactions = new List<Transaction>();
+            Notes = new List<OrderNote>();
         }
 
         public void AddNote(string content)
         {
-            this.Notes.Add(new OrderNote(content));
+            Notes.Add(new OrderNote(content));
         }
 
         public void AddTransaction(Transaction transaction)
@@ -54,52 +56,12 @@ namespace Commerce.Application.Model.Orders
             this.AddNote(transaction.ToPlainEnglish());
         }
 
-        // Computed properties...
-        public decimal SubTotal
+        [JsonIgnore]
+        public Func<decimal> SubTotal
         {
             get
             {
-                return OrderLines.Sum(x => x.LinePrice);
-            }
-            set
-            {
-                // Do nothing!                
-            }
-        }
-
-        public decimal Tax
-        {
-            get
-            {
-                return SubTotal * this.StateTax.TaxRate / 100.00m;
-            }
-            set
-            {
-                // Do nothing!
-            }
-        }
-
-        public decimal ShippingCost
-        {
-            get
-            {
-                return (this.SubTotal != 0 && this.ShippingMethod != null) ? this.ShippingMethod.Cost : 0;
-            }
-            set
-            {
-                // Do nothing
-            }
-        }
-
-        public decimal GrandTotal
-        {
-            get
-            {
-                return SubTotal + Tax + ShippingCost;
-            }
-            set
-            {
-                // Do nothing!
+                return () => OrderLines.Sum(x => x.LinePrice);
             }
         }
 

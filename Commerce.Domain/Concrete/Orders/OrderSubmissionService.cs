@@ -32,17 +32,17 @@ namespace Commerce.Application.Concrete.Orders
         public OrderSubmissionService(PushMarketContext context, 
                 IPaymentProcessor paymentProcessor, IAnalyticsService analyticsService, IEmailService emailService)
         {
-            this.Context = context;
-            this.PaymentProcessor = paymentProcessor;
-            this.AnalyticsService = analyticsService;
-            this.EmailService = emailService;
+            Context = context;
+            PaymentProcessor = paymentProcessor;
+            AnalyticsService = analyticsService;
+            EmailService = emailService;
 
             // injectible function initialization
-            this.StateTaxByAbbr = (abbr) => this.Context.StateTaxes.First(x => x.Abbreviation == abbr);
-            this.ShippingMethodById = (id) => this.Context.ShippingMethods.First(x => x.Id == id);
-            this.InventoryBySkuCodes = this.InventoryBySkuCodesImpl;
-            this.CreateOrder = this.CreateOrderImpl;
-            this.SaveChanges = this.SaveChangesImpl;
+            StateTaxByAbbr = (abbr) => Context.StateTaxes.First(x => x.Abbreviation == abbr);
+            ShippingMethodById = (id) => Context.ShippingMethods.First(x => x.Id == id);
+            InventoryBySkuCodes = InventoryBySkuCodesImpl;
+            CreateOrder = CreateOrderImpl;
+            SaveChanges = SaveChangesImpl;
         }
 
         public SubmitOrderResult Submit(SubmitOrderRequest orderRequest)
@@ -70,7 +70,7 @@ namespace Commerce.Application.Concrete.Orders
 
             // Payment Processing - Bounded Context
             var paymentTransaction = 
-                this.PaymentProcessor.AuthorizeAndCollect(orderRequest.BillingInfo, order.GrandTotal);
+                PaymentProcessor.AuthorizeAndCollect(orderRequest.BillingInfo, order.Total.GrandTotal);
             if (paymentTransaction.Success == false)
             {
                 // Don't create the Order!
@@ -79,10 +79,10 @@ namespace Commerce.Application.Concrete.Orders
 
             // Payment Received + Create Order - Bounded Context
             order.AddTransaction(paymentTransaction);
-            this.CreateOrder(order);
+            CreateOrder(order);
             
             // Inventory corrections - Bounded Context
-            var inventory = this.InventoryBySkuCodes(order.AllSkuCodes, true);
+            var inventory = InventoryBySkuCodes(order.AllSkuCodes, true);
 
             foreach (var line in order.OrderLines)
             {
@@ -108,27 +108,27 @@ namespace Commerce.Application.Concrete.Orders
                 // Increment the Reserved Count in INVENTORY
                 sku.Reserved += line.Quantity;
             }
-            this.SaveChanges();
+            SaveChanges();
 
             // Shipping nothing?  Kill the shipping
             if (order.OrderLines.All(x => x.Quantity == 0))
             {
-                order.ShippingMethod = null;
+                order.Total.ShippingMethod = null;
             }
 
             // Eventual Consistency w/ Payment Correction - Do we need to process a refund? - Bounded Context
-            if (order.GrandTotal < order.OriginalGrandTotal)
+            if (order.Total.GrandTotal < order.OriginalGrandTotal)
             {
-                var refundAmount = order.OriginalGrandTotal - order.GrandTotal;
-                var refundTransaction = this.PaymentProcessor.Refund(paymentTransaction, refundAmount);
+                var refundAmount = order.OriginalGrandTotal - order.Total.GrandTotal;
+                var refundTransaction = PaymentProcessor.Refund(paymentTransaction, refundAmount);
                 order.AddTransaction(refundTransaction);    // NOTE: if this failed, it will appear for the Customer
             }
 
             // Send the Email - Bounded Context
-            this.EmailService.SendOrderReceived();
+            EmailService.SendOrderReceived();
 
             // Invoke the Analytics Service - Bounded Context
-            this.AnalyticsService.AddSale(order, 3);
+            AnalyticsService.AddSale(order, 3);
 
             // FIN! - return OrderRequestResponse - Bounded Context
             var orderResponse = new SubmitOrderResult(order);
@@ -138,16 +138,16 @@ namespace Commerce.Application.Concrete.Orders
         private Order FromOrderRequest(SubmitOrderRequest orderRequest)
         {
             var skus = orderRequest.AllSkuCodes;
-            var inventory = this.InventoryBySkuCodes(skus, false);
+            var inventory = InventoryBySkuCodes(skus, false);
             
             var orderLines =
                 orderRequest.Items
                     .Select(x => new OrderLine(inventory.First(y => y.SkuCode == x.SkuCode), x.Quantity))
                     .ToList();
 
-            var stateTax = this.StateTaxByAbbr(orderRequest.BillingInfo.State);
+            var stateTax = StateTaxByAbbr(orderRequest.BillingInfo.State);
 
-            var shippingMethod = this.ShippingMethodById(orderRequest.ShippingInfo.ShippingOptionId);
+            var shippingMethod = ShippingMethodById(orderRequest.ShippingInfo.ShippingOptionId);
 
             var order = new Order()
             {
@@ -161,11 +161,13 @@ namespace Commerce.Application.Concrete.Orders
                 Phone = orderRequest.ShippingInfo.Phone,
 
                 OrderLines = orderLines,
-                StateTax = stateTax,
-                ShippingMethod = shippingMethod,
             };
 
-            order.OriginalGrandTotal = order.GrandTotal;
+            // Need these to get the right GrandTotal
+            order.Total.ShippingMethod = shippingMethod;
+            order.Total.StateTax = stateTax;
+            
+            order.OriginalGrandTotal = order.Total.GrandTotal;
             order.ExternalId = OrderNumberGenerator.Next();
             order.DateCreated = DateTime.UtcNow;
             return order;
@@ -175,7 +177,7 @@ namespace Commerce.Application.Concrete.Orders
         private List<ProductSku> InventoryBySkuCodesImpl(IEnumerable<string> sku_codes, bool refresh)
         {
             var inventory =
-                this.Context.ProductSkus
+                Context.ProductSkus
                     .Include(x => x.Product)
                     .Include(x => x.Color)
                     .Include(x => x.Size)
@@ -184,20 +186,20 @@ namespace Commerce.Application.Concrete.Orders
 
             if (refresh)
             {
-                this.Context.RefreshCollection(inventory);
+                Context.RefreshCollection(inventory);
             }
             return inventory;
         }
 
         private void CreateOrderImpl(Order order)
         {
-            this.Context.Orders.Add(order);
-            this.Context.SaveChanges();
+            Context.Orders.Add(order);
+            Context.SaveChanges();
         }
 
         private void SaveChangesImpl()
         {
-            this.Context.SaveChanges();
+            Context.SaveChanges();
         }
     }
 }

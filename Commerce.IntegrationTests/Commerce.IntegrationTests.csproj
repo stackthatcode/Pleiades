@@ -70,7 +70,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BuildersAndRepositories\ProductTests.cs" />
-    <Compile Include="BuildersAndRepositories\SmallIdeaTests.cs" />
     <Compile Include="Resources\ImageProcessingTests.cs" />
     <Compile Include="TestContainer.cs" />
     <Compile Include="BuildersAndRepositories\BrandTests.cs" />

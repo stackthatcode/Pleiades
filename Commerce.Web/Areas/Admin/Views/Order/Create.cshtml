@@ -1,4 +1,5 @@
-﻿@section _Scripts {
+﻿@using System.Configuration
+@section _Scripts {
     @Html.Partial("_EndlessGlider")
     @Html.Partial("_ModalDialog")
     @Html.Partial("_ImageBundleViewer") 
@@ -12,48 +13,47 @@
     @Html.Partial("_Completion")
 
     <!-- document.ready() Functions -->
-	<script type="text/javascript">
-	    var PushMkt = PushMkt || {};
-	    PushMkt.CreateOrderViewModel = function() {
-	        var self = this;
+    <script type="text/javascript">
+        var PushMkt = PushMkt || {};
+        PushMkt.CreateOrderViewModel = function() {
+            var self = this;
 
-	        // We're using a "plain-vanilla" Ajax Service
-	        self.Service = new PushLibrary.Ajax();
+            // We're using a "plain-vanilla" Ajax Service
+            self.Service = new PushLibrary.Ajax();
 
-	        // Modal state + functions
-	        self.ModalViewModel = new PushMkt.ModalDialogViewModel();
+            // Modal state + functions
+            self.ModalViewModel = new PushMkt.ModalDialogViewModel();
 
-	        // ... and pass throughs
-	        self.ShowModal = function(template, header, body, list, callback) {
-	            self.ModalViewModel.ShowModal(template, header, body, list, callback);
-	        };
+            // ... and pass throughs
+            self.ShowModal = function(template, header, body, list, callback) {
+                self.ModalViewModel.ShowModal(template, header, body, list, callback);
+            };
 
-	        // Glider functions
-	        self.EndlessGlider = new PushMkt.EndlessGlider();
-	        self.EndlessGlider.Init("Top-Workspace-SelectProducts", "Main-Editor-SelectProducts");
+            // Glider functions
+            self.EndlessGlider = new PushMkt.EndlessGlider();
+            self.EndlessGlider.Init("Top-Workspace-SelectProducts", "Main-Editor-SelectProducts");
 
-	        // ... and pass throughs
-	        self.GlideLeft = function(template, userCallback) {
-	            self.EndlessGlider.GlideToLeft("Top-Workspace-" + template, "Main-Editor-" + template, userCallback);
-	        };
+            // ... and pass throughs
+            self.GlideLeft = function(template, userCallback) {
+                self.EndlessGlider.GlideToLeft("Top-Workspace-" + template, "Main-Editor-" + template, userCallback);
+            };
 
-	        self.GlideRight = function(template, userCallback) {
-	            self.EndlessGlider.GlideToRight("Top-Workspace-" + template, "Main-Editor-" + template, userCallback);
-	        };
-	    };
+            self.GlideRight = function(template, userCallback) {
+                self.EndlessGlider.GlideToRight("Top-Workspace-" + template, "Main-Editor-" + template, userCallback);
+            };
+        };
 
-        var tmp;
-	    $(function () {
-	        var model = new PushMkt.CreateOrderViewModel();
-	        PushMkt.AddListFunctions(model);
-	        PushMkt.AddSearchFunctions(model);
-	        PushMkt.AddReviewProductsFunctions(model);
-	        PushMkt.AddShippingFunctions(model);
-	        PushMkt.AddBillingFunctions(model);
-	        PushMkt.AddCompletionFunctions(model);
-	        ko.applyBindings(model);
+        $(function () {
+            var model = new PushMkt.CreateOrderViewModel();
+            PushMkt.AddListFunctions(model);
+            PushMkt.AddSearchFunctions(model);
+            PushMkt.AddReviewProductsFunctions(model);
+            PushMkt.AddShippingFunctions(model);
+            PushMkt.AddBillingFunctions(model);
+            PushMkt.AddCompletionFunctions(model);
+            ko.applyBindings(model);
 
-	        flow.exec(
+            flow.exec(
                 function () {
                     model.RetrieveCategoriesList(this);
                 },
@@ -68,9 +68,14 @@
                 }
             );
 
-            tmp = model;
+            window.tmp = model;
         });
     </script>
+    
+    @if (ConfigurationManager.AppSettings["AdminOrderDebug"] == "true")
+    {
+        @Html.Partial("_TestingFunctions")
+    }
 }
 
 @section _Templates {
