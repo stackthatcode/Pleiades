@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Commerce.Application.Model.Billing;
 
-namespace Commerce.Application.Model.Cart
+namespace Commerce.Application.Model.Shopping
 {
     public class Cart
     {
@@ -26,6 +26,8 @@ namespace Commerce.Application.Model.Cart
         {
             Total = new Total(SubTotal);
             CartItems = new List<CartItem>();
+            CreatedOn = DateTime.Now;
+            LastModified = DateTime.Now;
         }
     }
 }

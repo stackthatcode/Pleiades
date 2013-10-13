@@ -6,6 +6,7 @@ namespace Commerce.Application.Interfaces
     public interface IInventoryRepository
     {
         List<ProductSku> RetreiveByProductId(int productId, bool includeChildren);
+        ProductSku RetreiveBySkuCode(string skuCode);
         int TotalInStock(int productId);
         void Wipe(int productId);
         void UpdateInStock(int productId, int inventoryTotal);

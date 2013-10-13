@@ -8,6 +8,7 @@ using Commerce.Application.Model.Products;
 using Commerce.Web.Areas.Public.Models;
 using Pleiades.Application.Logging;
 using Pleiades.Web;
+using Pleiades.Web.Json;
 
 namespace Commerce.Web.Areas.Public.Controllers
 {

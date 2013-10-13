@@ -7,4 +7,3 @@ Blog + Brand == Freelance Gigs ==> Escape from Alcatraz
 - etc.
 
 - Stack That Code
-- 

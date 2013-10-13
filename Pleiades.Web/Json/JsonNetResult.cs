@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Globalization;
 using System.Text;
-using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 
-namespace Pleiades.Web
+namespace Pleiades.Web.Json
 {
     public class JsonNetResult : ActionResult
     {

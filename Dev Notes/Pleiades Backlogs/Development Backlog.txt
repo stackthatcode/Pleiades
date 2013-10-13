@@ -23,30 +23,36 @@ Port Knockout Cart Editor to Angular JS => DONE
 * Validation Message => DONE
 - Refactored Total for reusability => DONE
 
+10/13 3 Hours
+~~~~~~~~~~~~~
+- Shopping Cart + Entities + Repository => DONE
+- Review concurrency issues => DONE
+
+
 
 Front Range
 ===========
-- Landing-Page / Microsite => IN PROGRESS
 * Add to Cart Button => IN PROGRESS
+
+- Generic Message Bootstrap 3 Pop-up 
+- Items were removed on Retreive
+- Item no longer Available on Add
+- Quantities were adjusted due to changes in Inventory on Add
+- Item no longer Available on Update
+- Quantities were adjusted due to changes in Inventory on Update
+
 * Item Added Feedback graphics => TODO
-* CSS Refactor
-* 400 when the Product doesn't exist
+* CSS Refactor => TODO
+* 400 when the Product doesn't exist => TODO
 
 Shopping Cart Persistence
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-- Shopping Cart + Entities + Repository => IN PROGRESS
 - Shopping Cart + Cookie Service, Flow, etc. => IN PROGRESS
-- Review concurrency issues => IN PROGRESS
-- Customer Checkout => IN PROGRESS
 
+Finished Line
+-------------
 - Admin Search & Manage Orders => TODO
 - Admin Sales Graph by Product => TODO
-
-=> http://blog.stevensanderson.com/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/
-=> http://haacked.com/archive/2011/10/10/preventing-csrf-with-ajax.aspx
-
-Infrastructure
---------------
 - Email Sending Engine => TODO
 - Stripe Payment Integration => TODO
 - Amazon EC2 Hosting + Deployment => TODO
@@ -104,10 +110,6 @@ Manage an Order CRUD screen
 
 Moar Tasks
 ~~~~~~~~~~
-* Host on EC2 by 6/1 => IN PROGRESS - FAIL
-- Sign-up to use EC2
-- Research EC2 some more
-* Splash Graphic...?
 * Slideshow - identify images & marketing, based on Products and marketing message => TODO
 
 Backlog
@@ -115,12 +117,6 @@ Backlog
 - Prevent multiple Pop-ups from appearing
 - IsONline - Check How This Functions => UPDATE - NEED TO FIX TOUCH Function
 - Donate $20 to FineUploader upon successful integration => TODO
-
-PENDING FEATURE BACKLOG
------------------------
-- Disable Caching for AJAX stuff with ASP.NET MVC => TODO
-- Show the number of Products under Category => PENDING EVAL
-- Rendering Adjustments for long Category Names et. al. => PENDING EVAL
 
 
 
@@ -161,6 +157,9 @@ PushMarket Front-end
 
 PHASE 2 Backlog
 ---------------
+* Splash Graphic...?
+=> http://blog.stevensanderson.com/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/
+=> http://haacked.com/archive/2011/10/10/preventing-csrf-with-ajax.aspx
 - NCrunch coverage analysis and remediation for Controllers and Routes
 - Analytics Integration - KISS, Mixpanel, whatevs
 - Automated Traffic Management
@@ -176,6 +175,9 @@ PHASE 2 Backlog
 - Improve the quality of client-side Error Logging
 - Markdown
 - Widget for browsing to other Products
+- Disable Caching for AJAX stuff with ASP.NET MVC => TODO
+- Show the number of Products under Category => PENDING EVAL
+- Rendering Adjustments for long Category Names et. al. => DONE
 
 
 Research Backlog

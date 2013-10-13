@@ -33,22 +33,26 @@ namespace Commerce.Application.Concrete.Products
             return this.ActiveInventory(product, includeChildren);
         }
         
-        private List<ProductSku> ActiveInventory(Product product, bool includeChildren = false)
+        private IQueryable<ProductSku> DataSet(bool includeChildren)
         {
-            IQueryable<ProductSku> dataset;
             if (includeChildren)
             {
-                dataset = Context.ProductSkus
-                                 .Include(x => x.Size)
-                                 .Include(x => x.Product.ThumbnailImageBundle)
-                                 .Include(x => x.Color.ColorImageBundle)
-                                 .Where(x => x.Product.Id == product.Id && x.IsDeleted == false);
+                return Context.ProductSkus
+                                    .Include(x => x.Size)
+                                    .Include(x => x.Product.ThumbnailImageBundle)
+                                    .Include(x => x.Color.ColorImageBundle)
+                                    .Where(x => x.IsDeleted == false);
             }
             else
             {
-                dataset = Context.ProductSkus
-                                 .Where(x => x.Product.Id == product.Id && x.IsDeleted == false);
-            }            
+                return Context.ProductSkus.Where(x => x.IsDeleted == false);
+            }
+        }
+
+        private List<ProductSku> ActiveInventory(Product product, bool includeChildren = false)
+        {
+            var dataset = DataSet(includeChildren).Where(x => x.Product.Id == product.Id);
+
             if (!product.Colors.Any() && product.Sizes.Any())
             {
                 return dataset
@@ -75,6 +79,11 @@ namespace Commerce.Application.Concrete.Products
         public List<ProductSku> RetreiveByProductId(int id, bool includeChildren)
         {
             return this.ActiveInventory(id, includeChildren);
+        }
+
+        public ProductSku RetreiveBySkuCode(string skuCode)
+        {
+            return this.DataSet(false).FirstOrDefault(x => x.SkuCode == skuCode);
         }
 
         public void UpdateInStock(int id, int inventoryTotal)

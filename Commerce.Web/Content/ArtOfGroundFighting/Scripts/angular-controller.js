@@ -102,7 +102,8 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
     $scope.RefreshSizes = function () {
         $scope.SelectedSizes = [];
         $scope.AddToCartValidationMessage = null;
-
+        $scope.SelectedSizeId = null;
+        
         if ($scope.HasSizes()) {
             AQ($scope.AvailableInventory()).each(function (inventoryItem) {
                 var size = AQ($scope.Product.Sizes)
@@ -153,7 +154,6 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
     };
 
     $scope.AddToCart = function () {
-        // There are one-to-many images
         if ($scope.HasSizes() && !$scope.SelectedSizeId) {
             $scope.AddToCartValidationMessage = "Please choose your Size";
             return;

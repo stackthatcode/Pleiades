@@ -55,6 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommerceApplicationModule.cs" />
+    <Compile Include="Concrete\Shopping\CartIdentificationService.cs" />
+    <Compile Include="Concrete\Shopping\CartManagementService.cs" />
     <Compile Include="Concrete\Infrastructure\AnalyticService.cs" />
     <Compile Include="Concrete\Infrastructure\BlankImageRepository.cs" />
     <Compile Include="Concrete\Security\AggregateWriteableRepository.cs" />
@@ -69,8 +71,10 @@
     <Compile Include="Concrete\Lists\JsonSizeRepository.cs" />
     <Compile Include="Concrete\Infrastructure\GetPaidPaymentProcessor.cs" />
     <Compile Include="Concrete\Orders\OrderSubmissionService.cs" />
+    <Compile Include="Concrete\Shopping\CartRepository.cs" />
     <Compile Include="Interfaces\IAnalyticsService.cs" />
     <Compile Include="Interfaces\ICartIdentificationService.cs" />
+    <Compile Include="Interfaces\ICartManagementService.cs" />
     <Compile Include="Interfaces\ICartRepository.cs" />
     <Compile Include="Interfaces\IEmailGenerator.cs" />
     <Compile Include="Interfaces\IEmailService.cs" />
@@ -91,8 +95,9 @@
     <Compile Include="Model\Billing\Transaction.cs" />
     <Compile Include="Model\Billing\StateTax.cs" />
     <Compile Include="Model\Billing\TransactionType.cs" />
-    <Compile Include="Model\Cart\Cart.cs" />
-    <Compile Include="Model\Cart\CartItem.cs" />
+    <Compile Include="Model\Shopping\AdjustedCart.cs" />
+    <Compile Include="Model\Shopping\Cart.cs" />
+    <Compile Include="Model\Shopping\CartItem.cs" />
     <Compile Include="Model\Email\Message.cs" />
     <Compile Include="Model\Lists\Brand.cs">
       <SubType>Code</SubType>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using Commerce.Application.Model.Cart;
+using Commerce.Application.Model.Shopping;
 using Pleiades.Web.Security.Model;
 using Commerce.Application.Model.Billing;
 using Commerce.Application.Model.Lists;

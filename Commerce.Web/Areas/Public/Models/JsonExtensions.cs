@@ -2,7 +2,7 @@
 using System.Linq;
 using Commerce.Application.Model.Lists;
 using Commerce.Application.Model.Products;
-using Pleiades.Web;
+using Pleiades.Web.Json;
 
 namespace Commerce.Web.Areas.Public.Models
 {

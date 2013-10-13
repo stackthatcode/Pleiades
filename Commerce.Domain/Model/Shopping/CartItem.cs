@@ -1,6 +1,6 @@
 ﻿ using Commerce.Application.Model.Products;
 
-namespace Commerce.Application.Model.Cart
+namespace Commerce.Application.Model.Shopping
 {
     public class CartItem
     {
