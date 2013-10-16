@@ -1,9 +1,9 @@
 ﻿using System.Data.Entity;
+using System.Web;
 using Autofac;
+using Commerce.Application.Concrete.Shopping;
 using Pleiades.Application.Data;
-using Pleiades.Application;
 using Pleiades.Application.Data.EF;
-using Pleiades.Web.Security.Concrete;
 using Pleiades.Web.Security.Interface;
 using Commerce.Application.Concrete.Infrastructure;
 using Commerce.Application.Concrete.Lists;
@@ -72,8 +72,16 @@ namespace Commerce.Application
             builder.RegisterType<EmailGenerator>().As<IEmailGenerator>();
             builder.RegisterType<EmailService>().As<IEmailService>();
 
+            // Cart 
+            builder.RegisterType<CartIdentificationService>().As<ICartIdentificationService>();
+            builder.RegisterType<CartManagementService>().As<ICartManagementService>();
+            builder.RegisterType<CartRepository>().As<ICartRepository>();
+
             // Analytic Service
             builder.RegisterType<AnalyticService>().As<IAnalyticsService>();
+
+            // HttpContext
+            builder.Register<HttpContextBase>(c => new HttpContextWrapper(HttpContext.Current));
         }
     }
 }

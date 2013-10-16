@@ -1,0 +1,490 @@
+2013-10-14 17:45:21.8141|Debug|c6fe41f2-27c6-4c32-83c8-01216e7c56c4|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 small 
+2013-10-14 17:45:21.8141|Debug|cac14036-dac7-4b91-b52c-676e34e39939|Image - Download: 43c6708a-80fd-4197-b2bf-36dc896770a0 small 
+2013-10-14 17:45:21.8141|Debug|ce6d7a2e-6a99-4db4-8d39-5438f6adabeb|Image - Download: 2f3f6472-95bc-438e-92f0-f08c7fc4e8d1 small 
+2013-10-14 17:45:21.8141|Debug|fad763a3-25d9-4281-9f6f-3482ac2731a8|Image - Download: 6e04cd36-40df-40c9-a218-a6e95438b56f small 
+2013-10-14 17:45:21.9431|Debug|041a95c1-1760-4cbc-aad5-5decd565ace3|Image - Download: bac862b9-5bbe-41e9-a76d-08623c44109b small 
+2013-10-14 17:45:21.9431|Debug|dfc729d4-b771-4558-966e-a643595c7721|Image - Download: fba102af-793b-491f-8e98-fb7ec239db9c small 
+2013-10-14 17:45:22.0441|Debug|aac3219d-a534-4b75-b359-8b63bf8f85a3|Image - Download: 26c45dd5-68c3-44d0-a04f-972c2c5a29ac small 
+2013-10-14 17:45:22.0621|Debug|a22be5da-9dfd-4418-8acb-17fb07502e91|Image - Download: c06533d5-6082-40b3-a51c-4f8a52635285 small 
+2013-10-14 17:45:22.0771|Debug|7fac4feb-968a-4a49-9475-f2981d11201d|Image - Download: 63cd9892-63c2-432d-8623-22f54ad5f081 small 
+2013-10-14 17:45:22.1001|Debug|d47159e8-528c-41ca-98e6-45f47a23f9f4|Image - Download: 0daae85d-03f1-4276-8335-1a2bff091dbd small 
+2013-10-14 17:45:35.7569|Debug|8d1b0350-4a09-4acb-8d23-76848c86ea00|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 thumbnail 
+2013-10-14 17:45:35.7569|Debug|b5e2e3a8-bbf7-43e4-8c53-e3631dc61733|Image - Download: 474afc16-53e8-4145-8909-58789cb7d8e4 large 
+2013-10-14 17:45:35.7679|Debug|09f3560d-8f41-4d9d-a31b-d42fa4774364|Image - Download: 7a0cec8f-add7-4988-9480-28d449682528 thumbnail 
+2013-10-14 17:45:35.8599|Debug|3c59b87c-ea31-4064-b75b-cefb9aacc750|Image - Download: 146b4f74-4f5e-45dc-88cb-d78537f56174 thumbnail 
+2013-10-14 17:45:35.8599|Debug|1ad571c8-2088-4464-9488-d917343a2704|Image - Download: ba35511d-231a-41b3-b812-0518661f7097 thumbnail 
+2013-10-14 17:45:35.9089|Debug|a33c1bf5-0fa2-4859-8f36-aa4e75ae9286|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 large 
+2013-10-14 17:45:35.9089|Debug|79fd1d01-528f-4461-ac7b-63126f3a63c3|Image - Download: 896a1926-6a7e-44f5-8323-d102c6f4703b thumbnail 
+2013-10-14 17:45:35.9279|Debug|3d0574d9-2bb2-4148-a38c-521324f167f3|Image - Download: 1f783be3-2ff0-4464-9e82-000af42835f8 thumbnail 
+2013-10-14 17:45:35.9549|Debug|67375566-d6ac-4509-8759-c415857b9608|Image - Download: af0daca0-d442-450d-96f6-ce8a60b61eb4 thumbnail 
+2013-10-14 17:45:40.1332|Debug|e547704a-8a7e-4c98-b299-6e64c34f3e3a|Image - Download: af85817b-9a84-41cc-9bec-28f45a818e0c large 
+2013-10-14 17:45:40.1662|Debug|3dc273e3-e71f-44da-ac74-1b4f1134ad69|Image - Download: b4378210-b81e-4631-ad80-bcf2272c6e60 thumbnail 
+2013-10-14 17:45:40.1802|Debug|ff72cf5f-71e9-4480-abe9-cca198016e41|Image - Download: af85817b-9a84-41cc-9bec-28f45a818e0c thumbnail 
+2013-10-14 17:45:40.1802|Debug|6530ea51-4264-437a-8a92-08d77fea04e6|Image - Download: 34ab9193-c2bb-4587-b9cf-1bd8a4e5429b thumbnail 
+2013-10-14 17:45:40.2142|Debug|ae65edd2-8e04-489c-ab89-992f389859aa|Image - Download: 1579162f-4119-4e1e-98aa-ecc398224d97 thumbnail 
+2013-10-14 17:45:40.2252|Debug|632f9cc6-80bf-4f86-9b74-2709c73d6edd|Image - Download: f304d62f-5576-4b6d-ae64-f9c3bafec395 thumbnail 
+2013-10-14 17:51:25.4789|Debug|810b92bc-032d-4cc1-8187-5f3db91bb004|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 large 
+2013-10-14 17:51:25.4999|Debug|e94decbd-4ddb-48b6-8268-cafdb0a83aba|Image - Download: 474afc16-53e8-4145-8909-58789cb7d8e4 large 
+2013-10-14 17:51:25.4999|Debug|5de53545-a91b-422b-829d-9aa4abac52c0|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 thumbnail 
+2013-10-14 17:51:25.4999|Debug|1db5eca0-6dc0-45a2-810f-0e9faeafd922|Image - Download: ba35511d-231a-41b3-b812-0518661f7097 thumbnail 
+2013-10-14 17:51:25.4999|Debug|5f3673c2-7226-404a-9776-df3adeecd89e|Image - Download: 146b4f74-4f5e-45dc-88cb-d78537f56174 thumbnail 
+2013-10-14 17:51:25.4999|Debug|65cb2bed-9f9d-4bf1-b6f4-003ca7b14c03|Image - Download: 7a0cec8f-add7-4988-9480-28d449682528 thumbnail 
+2013-10-14 17:51:25.4999|Debug|08da4ef3-6023-474b-b55f-9a2c4cefdebd|Image - Download: 896a1926-6a7e-44f5-8323-d102c6f4703b thumbnail 
+2013-10-14 17:51:25.5389|Debug|e78b4746-ff04-4162-8978-8ee51defc737|Image - Download: af0daca0-d442-450d-96f6-ce8a60b61eb4 thumbnail 
+2013-10-14 17:51:25.5489|Debug|86f30f8f-5790-46e9-bd5b-e0fc295c186f|Image - Download: 1f783be3-2ff0-4464-9e82-000af42835f8 thumbnail 
+2013-10-14 17:51:30.5032|Error|7fd1b6db-3df8-43d0-960f-5bacb981e79b|System.InvalidOperationException:An error occurred when trying to create a controller of type 'Commerce.Web.Areas.Public.Controllers.CartController'. Make sure that the controller has a parameterless public constructor.
+   at System.Web.Mvc.DefaultControllerFactory.DefaultControllerActivator.Create(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Autofac.Core.DependencyResolutionException:None of the constructors found with 'Autofac.Core.Activators.Reflection.DefaultConstructorFinder' on type 'Commerce.Application.Concrete.Shopping.CartIdentificationService' can be invoked with the available services and parameters:
+Cannot resolve parameter 'System.Web.HttpContextBase context' of constructor 'Void .ctor(System.Web.HttpContextBase)'.
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Registration.ExternalRegistrySource.<>c__DisplayClass8.<RegistrationsFor>b__3(IComponentContext c, IEnumerable`1 p)
+   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Activators.Reflection.AutowiringParameter.<>c__DisplayClass2.<CanSupplyValue>b__0()
+   at Autofac.Core.Activators.Reflection.ConstructorParameterBinding.Instantiate()
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Registration.ExternalRegistrySource.<>c__DisplayClass8.<RegistrationsFor>b__3(IComponentContext c, IEnumerable`1 p)
+   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Activators.Reflection.AutowiringParameter.<>c__DisplayClass2.<CanSupplyValue>b__0()
+   at Autofac.Core.Activators.Reflection.ConstructorParameterBinding.Instantiate()
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Registration.ExternalRegistrySource.<>c__DisplayClass8.<RegistrationsFor>b__3(IComponentContext c, IEnumerable`1 p)
+   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.ResolveOperation.Execute(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Lifetime.LifetimeScope.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.ResolutionExtensions.TryResolveService(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
+   at Autofac.ResolutionExtensions.ResolveOptionalService(IComponentContext context, Service service, IEnumerable`1 parameters)
+   at Autofac.Integration.Mvc.AutofacDependencyResolver.GetService(Type serviceType)
+   at System.Web.Mvc.DefaultControllerFactory.DefaultControllerActivator.Create(RequestContext requestContext, Type controllerType) 
+2013-10-14 17:52:20.2921|Debug|8939da98-657d-4ef5-b407-f3bdd25ff10a|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 large 
+2013-10-14 17:52:20.3561|Debug|20ebd09d-8d8c-4135-a297-88029b5bc57e|Image - Download: 146b4f74-4f5e-45dc-88cb-d78537f56174 thumbnail 
+2013-10-14 17:52:20.3561|Debug|e3892897-1cbe-4330-9d51-17384ece6a36|Image - Download: 474afc16-53e8-4145-8909-58789cb7d8e4 large 
+2013-10-14 17:52:20.3561|Debug|2e29374b-4a61-413e-85a3-6232438e33cc|Image - Download: ba35511d-231a-41b3-b812-0518661f7097 thumbnail 
+2013-10-14 17:52:20.3681|Debug|bfdf4d40-9918-404e-ae49-9d676106e8e0|Image - Download: 7a0cec8f-add7-4988-9480-28d449682528 thumbnail 
+2013-10-14 17:52:20.3681|Debug|77624f25-80e1-4659-959d-7d2218d71a6b|Image - Download: 896a1926-6a7e-44f5-8323-d102c6f4703b thumbnail 
+2013-10-14 17:52:20.3681|Debug|c119e46d-9007-4981-9c39-4506e5433dfb|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 thumbnail 
+2013-10-14 17:52:20.3831|Debug|21bed5fb-8159-4165-8995-9f9c47a595f5|Image - Download: 1f783be3-2ff0-4464-9e82-000af42835f8 thumbnail 
+2013-10-14 17:52:20.3991|Debug|6de5f556-e05e-4bd6-a6df-b52c0c8df73e|Image - Download: af0daca0-d442-450d-96f6-ce8a60b61eb4 thumbnail 
+2013-10-14 17:52:27.6415|Error|383a1e9d-e2bf-445b-b83d-59f0c45570df|System.InvalidOperationException:An error occurred when trying to create a controller of type 'Commerce.Web.Areas.Public.Controllers.CartController'. Make sure that the controller has a parameterless public constructor.
+   at System.Web.Mvc.DefaultControllerFactory.DefaultControllerActivator.Create(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Autofac.Core.DependencyResolutionException:None of the constructors found with 'Autofac.Core.Activators.Reflection.DefaultConstructorFinder' on type 'Commerce.Application.Concrete.Shopping.CartIdentificationService' can be invoked with the available services and parameters:
+Cannot resolve parameter 'System.Web.HttpContextBase context' of constructor 'Void .ctor(System.Web.HttpContextBase)'.
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Registration.ExternalRegistrySource.<>c__DisplayClass8.<RegistrationsFor>b__3(IComponentContext c, IEnumerable`1 p)
+   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Activators.Reflection.AutowiringParameter.<>c__DisplayClass2.<CanSupplyValue>b__0()
+   at Autofac.Core.Activators.Reflection.ConstructorParameterBinding.Instantiate()
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Registration.ExternalRegistrySource.<>c__DisplayClass8.<RegistrationsFor>b__3(IComponentContext c, IEnumerable`1 p)
+   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Activators.Reflection.AutowiringParameter.<>c__DisplayClass2.<CanSupplyValue>b__0()
+   at Autofac.Core.Activators.Reflection.ConstructorParameterBinding.Instantiate()
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Registration.ExternalRegistrySource.<>c__DisplayClass8.<RegistrationsFor>b__3(IComponentContext c, IEnumerable`1 p)
+   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.ResolveOperation.Execute(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Lifetime.LifetimeScope.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.ResolutionExtensions.TryResolveService(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
+   at Autofac.ResolutionExtensions.ResolveOptionalService(IComponentContext context, Service service, IEnumerable`1 parameters)
+   at Autofac.Integration.Mvc.AutofacDependencyResolver.GetService(Type serviceType)
+   at System.Web.Mvc.DefaultControllerFactory.DefaultControllerActivator.Create(RequestContext requestContext, Type controllerType) 
+2013-10-14 17:52:38.7671|Debug|9d2d8750-9fb9-4765-b9a1-c70e118d826c|Image - Download: fba102af-793b-491f-8e98-fb7ec239db9c small 
+2013-10-14 17:52:38.7671|Debug|a7e3da0e-94c0-4756-9d5a-84530dd0af11|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 small 
+2013-10-14 17:52:38.7901|Debug|0c28283d-d2e1-4cb6-a0ce-0cc8337234e1|Image - Download: bac862b9-5bbe-41e9-a76d-08623c44109b small 
+2013-10-14 17:52:38.7901|Debug|8cf544da-37d5-4aef-93b5-0f1cd115549f|Image - Download: 43c6708a-80fd-4197-b2bf-36dc896770a0 small 
+2013-10-14 17:52:38.7901|Debug|4c91b79b-3f2b-4aa7-b9c0-f14458db7293|Image - Download: 2f3f6472-95bc-438e-92f0-f08c7fc4e8d1 small 
+2013-10-14 17:52:38.8061|Debug|b820cbf9-5b54-4539-a504-1bf7ca8c3fac|Image - Download: 6e04cd36-40df-40c9-a218-a6e95438b56f small 
+2013-10-14 17:52:38.7901|Debug|2d39564e-1085-4a60-bf8e-61925c834a56|Image - Download: 26c45dd5-68c3-44d0-a04f-972c2c5a29ac small 
+2013-10-14 17:52:38.8361|Debug|36aee0d2-f47f-4cc7-8b59-b50b491c1118|Image - Download: 0daae85d-03f1-4276-8335-1a2bff091dbd small 
+2013-10-14 17:52:38.8361|Debug|9f272257-e60e-4b45-bf68-2cd751163247|Image - Download: c06533d5-6082-40b3-a51c-4f8a52635285 small 
+2013-10-14 17:52:38.8561|Debug|7eec5d0a-59d3-4a4d-aa07-ccdd12f64eab|Image - Download: 63cd9892-63c2-432d-8623-22f54ad5f081 small 
+2013-10-14 17:52:41.0713|Debug|77a1f5cb-6f76-431e-ac02-8e5224702d53|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 large 
+2013-10-14 17:52:41.0923|Debug|4bb38696-5ac7-413b-b7d4-3c75e18a6aa7|Image - Download: 474afc16-53e8-4145-8909-58789cb7d8e4 large 
+2013-10-14 17:52:41.1033|Debug|3ffb7f69-88eb-4082-84f5-e9d527a39a75|Image - Download: 146b4f74-4f5e-45dc-88cb-d78537f56174 thumbnail 
+2013-10-14 17:52:41.1033|Debug|95cbf5be-012a-4c97-81d2-65e382134aa9|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 thumbnail 
+2013-10-14 17:52:41.1033|Debug|ad3eaa34-d51b-4f08-ac6d-ecc244403828|Image - Download: 7a0cec8f-add7-4988-9480-28d449682528 thumbnail 
+2013-10-14 17:52:41.1143|Debug|182cc365-a5d1-4c14-8f38-bff21ad6af43|Image - Download: ba35511d-231a-41b3-b812-0518661f7097 thumbnail 
+2013-10-14 17:52:41.1143|Debug|17597bce-196f-42ee-9728-84ec797e3f5a|Image - Download: 1f783be3-2ff0-4464-9e82-000af42835f8 thumbnail 
+2013-10-14 17:52:41.1033|Debug|3e9c835d-b0fe-4089-8200-fb9195cf1e6f|Image - Download: 896a1926-6a7e-44f5-8323-d102c6f4703b thumbnail 
+2013-10-14 17:52:41.1283|Debug|edf749ec-9255-4a45-982c-db8aef1571ba|Image - Download: af0daca0-d442-450d-96f6-ce8a60b61eb4 thumbnail 
+2013-10-14 17:54:18.5008|Debug|248d3be4-92cd-4434-936f-80c79866c394|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 large 
+2013-10-14 17:54:18.5188|Debug|f52234df-de2a-4656-8499-4a83a25f2eba|Image - Download: 474afc16-53e8-4145-8909-58789cb7d8e4 large 
+2013-10-14 17:54:18.5208|Debug|2163b4d8-7a8e-4678-b024-b95d57fb398e|Image - Download: 146b4f74-4f5e-45dc-88cb-d78537f56174 thumbnail 
+2013-10-14 17:54:18.5208|Debug|139ebdec-5937-4950-abf9-e51ecca79343|Image - Download: ba35511d-231a-41b3-b812-0518661f7097 thumbnail 
+2013-10-14 17:54:18.5628|Debug|ea8671d8-1042-472d-ab78-08eace432f71|Image - Download: 7a0cec8f-add7-4988-9480-28d449682528 thumbnail 
+2013-10-14 17:54:18.5678|Debug|c0f11074-33c8-4fca-8d27-c3dca48ecab7|Image - Download: 896a1926-6a7e-44f5-8323-d102c6f4703b thumbnail 
+2013-10-14 17:54:18.5678|Debug|983a8eab-2df2-44c5-97b5-846680509e13|Image - Download: 1f783be3-2ff0-4464-9e82-000af42835f8 thumbnail 
+2013-10-14 17:54:18.5678|Debug|e5867c54-61cf-4066-bbd0-3451f3e43000|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 thumbnail 
+2013-10-14 17:54:18.5898|Debug|6a7de6df-b89d-4814-892b-b7ad9fee13dc|Image - Download: af0daca0-d442-450d-96f6-ce8a60b61eb4 thumbnail 
+2013-10-14 17:54:21.6450|Error|8a846b6e-48cb-43d7-bf26-21b5d13bc73f|System.InvalidOperationException:An error occurred when trying to create a controller of type 'Commerce.Web.Areas.Public.Controllers.CartController'. Make sure that the controller has a parameterless public constructor.
+   at System.Web.Mvc.DefaultControllerFactory.DefaultControllerActivator.Create(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Autofac.Core.DependencyResolutionException:None of the constructors found with 'Autofac.Core.Activators.Reflection.DefaultConstructorFinder' on type 'Commerce.Application.Concrete.Shopping.CartIdentificationService' can be invoked with the available services and parameters:
+Cannot resolve parameter 'System.Web.HttpContextBase context' of constructor 'Void .ctor(System.Web.HttpContextBase)'.
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Registration.ExternalRegistrySource.<>c__DisplayClass8.<RegistrationsFor>b__3(IComponentContext c, IEnumerable`1 p)
+   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Activators.Reflection.AutowiringParameter.<>c__DisplayClass2.<CanSupplyValue>b__0()
+   at Autofac.Core.Activators.Reflection.ConstructorParameterBinding.Instantiate()
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Registration.ExternalRegistrySource.<>c__DisplayClass8.<RegistrationsFor>b__3(IComponentContext c, IEnumerable`1 p)
+   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Activators.Reflection.AutowiringParameter.<>c__DisplayClass2.<CanSupplyValue>b__0()
+   at Autofac.Core.Activators.Reflection.ConstructorParameterBinding.Instantiate()
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Registration.ExternalRegistrySource.<>c__DisplayClass8.<RegistrationsFor>b__3(IComponentContext c, IEnumerable`1 p)
+   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.ResolveOperation.Execute(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Lifetime.LifetimeScope.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.ResolutionExtensions.TryResolveService(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
+   at Autofac.ResolutionExtensions.ResolveOptionalService(IComponentContext context, Service service, IEnumerable`1 parameters)
+   at Autofac.Integration.Mvc.AutofacDependencyResolver.GetService(Type serviceType)
+   at System.Web.Mvc.DefaultControllerFactory.DefaultControllerActivator.Create(RequestContext requestContext, Type controllerType) 
+2013-10-14 17:54:43.5953|Debug|401606ae-07f2-44b3-b414-cb4955680dc6|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 large 
+2013-10-14 17:54:43.6253|Debug|ad018409-dc14-4a4a-a584-b50c157031f1|Image - Download: 474afc16-53e8-4145-8909-58789cb7d8e4 large 
+2013-10-14 17:54:43.6443|Debug|7514e666-2f04-47e0-9930-b0788d433410|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 thumbnail 
+2013-10-14 17:54:43.6443|Debug|5df05d34-4b0c-4178-9de6-86783722b8d2|Image - Download: ba35511d-231a-41b3-b812-0518661f7097 thumbnail 
+2013-10-14 17:54:43.6523|Debug|a8abc8e2-aa2e-4e7a-9e6d-f1ee24fd1a15|Image - Download: 146b4f74-4f5e-45dc-88cb-d78537f56174 thumbnail 
+2013-10-14 17:54:43.6523|Debug|b589cd85-0888-4226-81c8-a2522de7fa08|Image - Download: 7a0cec8f-add7-4988-9480-28d449682528 thumbnail 
+2013-10-14 17:54:43.6523|Debug|145c5759-9de1-48e8-82d6-bb26fd39d52e|Image - Download: 896a1926-6a7e-44f5-8323-d102c6f4703b thumbnail 
+2013-10-14 17:54:43.6683|Debug|6ade2335-4ebb-4da0-a3fa-7b887d81a27b|Image - Download: af0daca0-d442-450d-96f6-ce8a60b61eb4 thumbnail 
+2013-10-14 17:54:43.6683|Debug|40b086dc-4d40-48f5-b4b5-d007598532b2|Image - Download: 1f783be3-2ff0-4464-9e82-000af42835f8 thumbnail 
+2013-10-14 17:54:49.1986|Error|3f4c3d6e-d1bb-4766-985c-c2becd278d32|System.InvalidOperationException:An error occurred when trying to create a controller of type 'Commerce.Web.Areas.Public.Controllers.CartController'. Make sure that the controller has a parameterless public constructor.
+   at System.Web.Mvc.DefaultControllerFactory.DefaultControllerActivator.Create(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Autofac.Core.DependencyResolutionException:None of the constructors found with 'Autofac.Core.Activators.Reflection.DefaultConstructorFinder' on type 'Commerce.Application.Concrete.Shopping.CartIdentificationService' can be invoked with the available services and parameters:
+Cannot resolve parameter 'System.Web.HttpContextBase context' of constructor 'Void .ctor(System.Web.HttpContextBase)'.
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Registration.ExternalRegistrySource.<>c__DisplayClass8.<RegistrationsFor>b__3(IComponentContext c, IEnumerable`1 p)
+   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Activators.Reflection.AutowiringParameter.<>c__DisplayClass2.<CanSupplyValue>b__0()
+   at Autofac.Core.Activators.Reflection.ConstructorParameterBinding.Instantiate()
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Registration.ExternalRegistrySource.<>c__DisplayClass8.<RegistrationsFor>b__3(IComponentContext c, IEnumerable`1 p)
+   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Activators.Reflection.AutowiringParameter.<>c__DisplayClass2.<CanSupplyValue>b__0()
+   at Autofac.Core.Activators.Reflection.ConstructorParameterBinding.Instantiate()
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Registration.ExternalRegistrySource.<>c__DisplayClass8.<RegistrationsFor>b__3(IComponentContext c, IEnumerable`1 p)
+   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.ResolveOperation.Execute(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Lifetime.LifetimeScope.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.ResolutionExtensions.TryResolveService(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
+   at Autofac.ResolutionExtensions.ResolveOptionalService(IComponentContext context, Service service, IEnumerable`1 parameters)
+   at Autofac.Integration.Mvc.AutofacDependencyResolver.GetService(Type serviceType)
+   at System.Web.Mvc.DefaultControllerFactory.DefaultControllerActivator.Create(RequestContext requestContext, Type controllerType) 
+2013-10-14 17:55:39.4605|Debug|5f32281b-803b-4dcc-91d0-fd2d24e29035|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 large 
+2013-10-14 17:55:39.4835|Debug|fab7c345-b606-425a-a4d2-c30f9954ad4d|Image - Download: 474afc16-53e8-4145-8909-58789cb7d8e4 large 
+2013-10-14 17:55:39.4845|Debug|692ef69e-81ce-4ae2-a96f-333ca4fa5418|Image - Download: ba35511d-231a-41b3-b812-0518661f7097 thumbnail 
+2013-10-14 17:55:39.4845|Debug|01da7cf2-2b86-448c-a48d-d642b3f1edbf|Image - Download: 146b4f74-4f5e-45dc-88cb-d78537f56174 thumbnail 
+2013-10-14 17:55:39.4845|Debug|0cd41e5b-ace4-4d7b-a02b-8570231c65ee|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 thumbnail 
+2013-10-14 17:55:39.4845|Debug|4d915050-f8eb-40cf-92c4-16e979c01fe9|Image - Download: 896a1926-6a7e-44f5-8323-d102c6f4703b thumbnail 
+2013-10-14 17:55:39.4845|Debug|f96c45b0-2e47-4700-976a-589a5950d93d|Image - Download: 7a0cec8f-add7-4988-9480-28d449682528 thumbnail 
+2013-10-14 17:55:39.5205|Debug|3c9f9087-3a10-428d-ab6a-87614191bdc4|Image - Download: 1f783be3-2ff0-4464-9e82-000af42835f8 thumbnail 
+2013-10-14 17:55:39.5205|Debug|cf688662-c850-4b39-b5b4-268cd84e2b65|Image - Download: af0daca0-d442-450d-96f6-ce8a60b61eb4 thumbnail 
+2013-10-14 17:55:44.2807|Error|ff3909e1-8fc5-4bef-810e-f70e01e7a230|System.InvalidOperationException:An error occurred when trying to create a controller of type 'Commerce.Web.Areas.Public.Controllers.CartController'. Make sure that the controller has a parameterless public constructor.
+   at System.Web.Mvc.DefaultControllerFactory.DefaultControllerActivator.Create(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Autofac.Core.DependencyResolutionException:None of the constructors found with 'Autofac.Core.Activators.Reflection.DefaultConstructorFinder' on type 'Commerce.Application.Concrete.Shopping.CartIdentificationService' can be invoked with the available services and parameters:
+Cannot resolve parameter 'System.Web.HttpContextBase context' of constructor 'Void .ctor(System.Web.HttpContextBase)'.
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Registration.ExternalRegistrySource.<>c__DisplayClass8.<RegistrationsFor>b__3(IComponentContext c, IEnumerable`1 p)
+   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Activators.Reflection.AutowiringParameter.<>c__DisplayClass2.<CanSupplyValue>b__0()
+   at Autofac.Core.Activators.Reflection.ConstructorParameterBinding.Instantiate()
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Registration.ExternalRegistrySource.<>c__DisplayClass8.<RegistrationsFor>b__3(IComponentContext c, IEnumerable`1 p)
+   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Activators.Reflection.AutowiringParameter.<>c__DisplayClass2.<CanSupplyValue>b__0()
+   at Autofac.Core.Activators.Reflection.ConstructorParameterBinding.Instantiate()
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Registration.ExternalRegistrySource.<>c__DisplayClass8.<RegistrationsFor>b__3(IComponentContext c, IEnumerable`1 p)
+   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.ResolveOperation.Execute(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Lifetime.LifetimeScope.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.ResolutionExtensions.TryResolveService(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
+   at Autofac.ResolutionExtensions.ResolveOptionalService(IComponentContext context, Service service, IEnumerable`1 parameters)
+   at Autofac.Integration.Mvc.AutofacDependencyResolver.GetService(Type serviceType)
+   at System.Web.Mvc.DefaultControllerFactory.DefaultControllerActivator.Create(RequestContext requestContext, Type controllerType) 
+2013-10-14 17:55:46.6729|Debug|6309dd98-bce8-4550-bbfa-7c091ab1d300|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 large 
+2013-10-14 17:55:46.6979|Debug|4b3fd8ee-b0c3-49ea-9af8-a511eea24ddf|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 thumbnail 
+2013-10-14 17:55:46.7249|Debug|5d7c073f-8164-4b34-b08d-69dc6680713d|Image - Download: 146b4f74-4f5e-45dc-88cb-d78537f56174 thumbnail 
+2013-10-14 17:55:46.7249|Debug|311223fb-fd43-4aa2-9397-8d7f7803c004|Image - Download: 896a1926-6a7e-44f5-8323-d102c6f4703b thumbnail 
+2013-10-14 17:55:46.7249|Debug|5cdc30f5-5b3b-4b86-8025-21485338f32e|Image - Download: 474afc16-53e8-4145-8909-58789cb7d8e4 large 
+2013-10-14 17:55:46.7249|Debug|b577f571-29d0-4629-8aed-1ae091e9c522|Image - Download: ba35511d-231a-41b3-b812-0518661f7097 thumbnail 
+2013-10-14 17:55:46.7249|Debug|34b97b1b-1002-4944-bc11-bdfdb9a424c0|Image - Download: 7a0cec8f-add7-4988-9480-28d449682528 thumbnail 
+2013-10-14 17:55:46.7649|Debug|53729d77-7a06-42f7-8cf4-fadedec6f09d|Image - Download: af0daca0-d442-450d-96f6-ce8a60b61eb4 thumbnail 
+2013-10-14 17:55:46.7779|Debug|fcb6ad1e-8921-4c66-a83a-618540d9e9e8|Image - Download: 1f783be3-2ff0-4464-9e82-000af42835f8 thumbnail 
+2013-10-14 18:01:07.7382|Debug|1f36f560-327c-484e-a8fd-2b01888e0aa4|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 thumbnail 
+2013-10-14 18:01:07.7382|Debug|842ec179-753f-49b0-8428-043232a3f962|Image - Download: 7a0cec8f-add7-4988-9480-28d449682528 thumbnail 
+2013-10-14 18:01:07.7382|Debug|c8e826cb-29dd-4ef7-be84-b49f8d3bacdf|Image - Download: ba35511d-231a-41b3-b812-0518661f7097 thumbnail 
+2013-10-14 18:01:07.7382|Debug|cfb87c67-163d-43ff-bda0-fba9db3903d3|Image - Download: 146b4f74-4f5e-45dc-88cb-d78537f56174 thumbnail 
+2013-10-14 18:01:07.7382|Debug|167fd6fa-7bcc-4291-9b1e-8198bee804b5|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 large 
+2013-10-14 18:01:07.7382|Debug|da3d8ea8-fce8-42de-90cb-7ed1d6ec74a4|Image - Download: 474afc16-53e8-4145-8909-58789cb7d8e4 large 
+2013-10-14 18:01:07.9823|Debug|ec745e67-f080-4704-aaea-f30b8df4b5fa|Image - Download: 896a1926-6a7e-44f5-8323-d102c6f4703b thumbnail 
+2013-10-14 18:01:08.0353|Debug|ec30e71c-ed48-48b9-a4f7-b7c4b33c71db|Image - Download: 1f783be3-2ff0-4464-9e82-000af42835f8 thumbnail 
+2013-10-14 18:01:08.0463|Debug|7c89c4b4-e35e-4913-b58a-2759f744fc2b|Image - Download: af0daca0-d442-450d-96f6-ce8a60b61eb4 thumbnail 
+2013-10-14 18:01:16.3967|Error|33190b9b-eeda-4b98-8b1b-5316e6131941|System.InvalidOperationException:An error occurred when trying to create a controller of type 'Commerce.Web.Areas.Public.Controllers.CartController'. Make sure that the controller has a parameterless public constructor.
+   at System.Web.Mvc.DefaultControllerFactory.DefaultControllerActivator.Create(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Autofac.Core.DependencyResolutionException:None of the constructors found with 'Autofac.Core.Activators.Reflection.DefaultConstructorFinder' on type 'Commerce.Application.Concrete.Shopping.CartIdentificationService' can be invoked with the available services and parameters:
+Cannot resolve parameter 'System.Web.HttpContextBase context' of constructor 'Void .ctor(System.Web.HttpContextBase)'.
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Registration.ExternalRegistrySource.<>c__DisplayClass8.<RegistrationsFor>b__3(IComponentContext c, IEnumerable`1 p)
+   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Activators.Reflection.AutowiringParameter.<>c__DisplayClass2.<CanSupplyValue>b__0()
+   at Autofac.Core.Activators.Reflection.ConstructorParameterBinding.Instantiate()
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Registration.ExternalRegistrySource.<>c__DisplayClass8.<RegistrationsFor>b__3(IComponentContext c, IEnumerable`1 p)
+   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Activators.Reflection.AutowiringParameter.<>c__DisplayClass2.<CanSupplyValue>b__0()
+   at Autofac.Core.Activators.Reflection.ConstructorParameterBinding.Instantiate()
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Registration.ExternalRegistrySource.<>c__DisplayClass8.<RegistrationsFor>b__3(IComponentContext c, IEnumerable`1 p)
+   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.InstanceLookup.Execute()
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Resolving.ResolveOperation.Execute(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.Core.Lifetime.LifetimeScope.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)
+   at Autofac.ResolutionExtensions.TryResolveService(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
+   at Autofac.ResolutionExtensions.ResolveOptionalService(IComponentContext context, Service service, IEnumerable`1 parameters)
+   at Autofac.Integration.Mvc.AutofacDependencyResolver.GetService(Type serviceType)
+   at System.Web.Mvc.DefaultControllerFactory.DefaultControllerActivator.Create(RequestContext requestContext, Type controllerType) 
+2013-10-14 18:01:20.5950|Debug|0ceee35a-98be-4291-bc4f-603c9a845cc4|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 large 
+2013-10-14 18:01:20.6130|Debug|369cfd05-b86f-485f-a5af-f5b8ec67e01e|Image - Download: 7a0cec8f-add7-4988-9480-28d449682528 thumbnail 
+2013-10-14 18:01:20.6130|Debug|9ab02580-a1b3-410c-805e-8d2b41d6860b|Image - Download: 474afc16-53e8-4145-8909-58789cb7d8e4 large 
+2013-10-14 18:01:20.6130|Debug|c7b3ca2c-00b5-4ef7-b0e1-d8dd4f10ea8f|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 thumbnail 
+2013-10-14 18:01:20.6130|Debug|83753b4d-4e7f-4aaa-8968-a7a518d10356|Image - Download: 896a1926-6a7e-44f5-8323-d102c6f4703b thumbnail 
+2013-10-14 18:01:20.6300|Debug|a13bc8e7-c1ac-4fd4-98a8-db05d94e08e5|Image - Download: ba35511d-231a-41b3-b812-0518661f7097 thumbnail 
+2013-10-14 18:01:20.6300|Debug|720254d1-9b3e-4179-99f3-a8908ba76666|Image - Download: 146b4f74-4f5e-45dc-88cb-d78537f56174 thumbnail 
+2013-10-14 18:01:20.6440|Debug|fc4ec6d7-bd94-4494-87ec-4edf746385d5|Image - Download: af0daca0-d442-450d-96f6-ce8a60b61eb4 thumbnail 
+2013-10-14 18:01:20.6440|Debug|2c672d65-13f7-4cb3-b351-f308ececcb5f|Image - Download: 1f783be3-2ff0-4464-9e82-000af42835f8 thumbnail 
+2013-10-14 18:02:10.1328|Debug|de905ff0-3d5c-4558-b7ef-8a0c9f231245|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 large 
+2013-10-14 18:02:10.1328|Debug|db82593a-af5b-47dd-b0a8-0523653d2361|Image - Download: 146b4f74-4f5e-45dc-88cb-d78537f56174 thumbnail 
+2013-10-14 18:02:10.1328|Debug|da9b990b-4d6b-4c69-80c5-4e7125ca8dce|Image - Download: 474afc16-53e8-4145-8909-58789cb7d8e4 large 
+2013-10-14 18:02:10.1328|Debug|111566f4-5621-46d5-a9b3-805f5c5f78e6|Image - Download: ba35511d-231a-41b3-b812-0518661f7097 thumbnail 
+2013-10-14 18:02:10.1328|Debug|9e872a72-1ee2-4594-a959-7a32b85f950b|Image - Download: 7a0cec8f-add7-4988-9480-28d449682528 thumbnail 
+2013-10-14 18:02:10.1428|Debug|720b2b15-bfa4-4fc2-a17a-6b840b4c8cca|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 thumbnail 
+2013-10-14 18:02:10.3388|Debug|e4030b3a-ae75-436a-8c4e-d96535670b04|Image - Download: 896a1926-6a7e-44f5-8323-d102c6f4703b thumbnail 
+2013-10-14 18:02:10.3388|Debug|bbf9b0cf-61e1-4dfc-bb6f-a6fa45eb029e|Image - Download: 1f783be3-2ff0-4464-9e82-000af42835f8 thumbnail 
+2013-10-14 18:02:10.3468|Debug|6709f04c-427b-4247-949e-ba7712fba1e8|Image - Download: af0daca0-d442-450d-96f6-ce8a60b61eb4 thumbnail 
+2013-10-14 18:02:12.3099|Debug|a4b18d31-a30a-4531-b0be-010b7c0964a9|Image - Download: af85817b-9a84-41cc-9bec-28f45a818e0c large 
+2013-10-14 18:02:12.3499|Debug|1d88a2d0-78dc-4f6b-9b84-548a3cc5a86f|Image - Download: af85817b-9a84-41cc-9bec-28f45a818e0c thumbnail 
+2013-10-14 18:02:12.3499|Debug|c4128ff7-85a9-43f5-91f6-8dc32b4fa278|Image - Download: 1579162f-4119-4e1e-98aa-ecc398224d97 thumbnail 
+2013-10-14 18:02:12.3709|Debug|a3b0cbaf-a786-4ab3-a211-7c1959eb18b9|Image - Download: 34ab9193-c2bb-4587-b9cf-1bd8a4e5429b thumbnail 
+2013-10-14 18:02:12.3829|Debug|9f972a42-f0a0-426f-9c90-2c2176195d64|Image - Download: b4378210-b81e-4631-ad80-bcf2272c6e60 thumbnail 
+2013-10-14 18:02:12.3829|Debug|52b941f5-f35f-446d-b934-913701ea0c3a|Image - Download: f304d62f-5576-4b6d-ae64-f9c3bafec395 thumbnail 
+2013-10-14 18:02:16.1021|Error|7bd9ca07-2ad9-4cde-9391-8f76290a06b1|System.Web.HttpException:A public action method 'action' was not found on controller 'Commerce.Web.Areas.Public.Controllers.CartController'.
+   at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+   at System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) 
+2013-10-14 18:03:53.0017|Debug|6ba1925f-3758-4ea5-be69-4a4f65d39c00|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 large 
+2013-10-14 18:03:53.0157|Debug|a04c3443-25da-4112-934c-d0c60573fd9f|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 thumbnail 
+2013-10-14 18:03:53.0157|Debug|9d4e3187-9d6e-4a2f-94a9-7e026a592044|Image - Download: ba35511d-231a-41b3-b812-0518661f7097 thumbnail 
+2013-10-14 18:03:53.0317|Debug|449d0a65-b589-468c-9a33-fea0d4cdbd6b|Image - Download: 146b4f74-4f5e-45dc-88cb-d78537f56174 thumbnail 
+2013-10-14 18:03:53.0317|Debug|c22edb85-1e82-480c-9532-4f8b58bb25f9|Image - Download: 474afc16-53e8-4145-8909-58789cb7d8e4 large 
+2013-10-14 18:03:53.0317|Debug|9907949e-6c3b-46a0-a8c1-2ee393e0080d|Image - Download: 896a1926-6a7e-44f5-8323-d102c6f4703b thumbnail 
+2013-10-14 18:03:53.0557|Debug|a927722f-1503-4205-b3c4-58dde0c9f127|Image - Download: 7a0cec8f-add7-4988-9480-28d449682528 thumbnail 
+2013-10-14 18:03:53.0557|Debug|ce0263c0-da5c-48dd-9ef9-fbbe88995461|Image - Download: af0daca0-d442-450d-96f6-ce8a60b61eb4 thumbnail 
+2013-10-14 18:03:53.0557|Debug|06d13e55-fa5c-401a-a617-69a084224463|Image - Download: 1f783be3-2ff0-4464-9e82-000af42835f8 thumbnail 
+2013-10-14 18:04:11.4447|Debug|baa5570b-4a1c-4f50-a9e8-4b35672349f3|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 thumbnail 
+2013-10-14 18:04:11.4447|Debug|00129301-dedc-4893-bbcd-3d48df6061bc|Image - Download: 474afc16-53e8-4145-8909-58789cb7d8e4 large 
+2013-10-14 18:04:11.4447|Debug|1b7d1727-4a7c-4b2d-abba-50ca205a73ce|Image - Download: ba35511d-231a-41b3-b812-0518661f7097 thumbnail 
+2013-10-14 18:04:11.4447|Debug|5df5f5f4-87bb-400e-844c-28bbd0ac630b|Image - Download: 7a0cec8f-add7-4988-9480-28d449682528 thumbnail 
+2013-10-14 18:04:11.4547|Debug|fb9d2a78-60cf-4260-b401-48985091a8f2|Image - Download: 146b4f74-4f5e-45dc-88cb-d78537f56174 thumbnail 
+2013-10-14 18:04:11.4637|Debug|257663f3-4c45-4b31-9629-ca2d15d11cc6|Image - Download: e41aeb54-c1e3-44c6-a658-eeb6f1b78908 large 
+2013-10-14 18:04:11.6108|Debug|6cb7392e-5a50-4ef9-8d6b-ce0ea5d84aad|Image - Download: 896a1926-6a7e-44f5-8323-d102c6f4703b thumbnail 
+2013-10-14 18:04:11.6108|Debug|e5cc19ee-c8ce-4bcb-81f8-3ce143025244|Image - Download: 1f783be3-2ff0-4464-9e82-000af42835f8 thumbnail 
+2013-10-14 18:04:11.6268|Debug|e7adc78f-465c-4a97-89ff-872e64c0a940|Image - Download: af0daca0-d442-450d-96f6-ce8a60b61eb4 thumbnail 

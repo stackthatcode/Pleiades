@@ -373,3 +373,31 @@ Detail Page
 
 
 
+Sunday 10/6 - 5.0 Hours
+=======================
+Bottom Tasking - Mark-up and graphics, etc. Tagline, Contact Us, About Us, etc. => DONE
+Port Knockout Cart Editor to Angular JS => DONE
+- 150 Magic Number(!!!) => TODO - FIX => DONE
+* On the StoreFront "Wrong Size or Color? Click Here" - and Navigate to Product => DONE
+- Load Test Data into Console App => DONE
+- Fix image pop-up defect in the Edit Cart Screen => DONE
+* Load data with no Sizes => DONE
+* Load data with Sizes and no Colors => DONE
+* Fix Red Text on List => DONE
+
+10/7 thru 10/11 6.5 Hours
+=========================
+- Inventory, Images, Colors, Sizes, edge cases, oh my!
+* GetSizesByColorAndInventory => DONE
+* Missing Images - use the default Color's images => DONE
+* Out-of-Stock => DONE
+* Color-to-Size-to-Quantity Model => DONE
+* Validation Message => DONE
+- Refactored Total for reusability => DONE
+
+10/13 3 Hours
+=============
+- Shopping Cart + Entities + Repository => DONE
+- Review concurrency issues => DONE
+
+

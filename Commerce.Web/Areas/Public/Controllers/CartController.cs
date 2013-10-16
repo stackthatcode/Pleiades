@@ -24,7 +24,7 @@ namespace Commerce.Web.Areas.Public.Controllers
         }
 
         [HttpPost]
-        [ActionName("operate")]
+        [ActionName("action")]
         public JsonNetResult Post(string skuCode, int quantity)
         {
             var result =_cartManagementService.AddQuantity(skuCode, quantity);
@@ -33,7 +33,7 @@ namespace Commerce.Web.Areas.Public.Controllers
         }
 
         [HttpPut]
-        [ActionName("operate")]
+        [ActionName("action")]
         public JsonNetResult Put(string skuCode, int quantity)
         {
             var result = _cartManagementService.UpdateQuantity(skuCode, quantity);
@@ -42,7 +42,7 @@ namespace Commerce.Web.Areas.Public.Controllers
         }
 
         [HttpDelete]
-        [ActionName("operate")]
+        [ActionName("action")]
         public JsonNetResult Delete(string skuCode)
         {
             _cartManagementService.RemoveItem(skuCode);

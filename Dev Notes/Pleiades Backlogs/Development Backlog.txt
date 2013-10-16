@@ -1,39 +1,11 @@
-Backlog
-~~~~~~~
-
-Sunday 10/6 - 5.0 Hours
-=======================
-Bottom Tasking - Mark-up and graphics, etc. Tagline, Contact Us, About Us, etc. => DONE
-Port Knockout Cart Editor to Angular JS => DONE
-- 150 Magic Number(!!!) => TODO - FIX => DONE
-* On the StoreFront "Wrong Size or Color? Click Here" - and Navigate to Product => DONE
-- Load Test Data into Console App => DONE
-- Fix image pop-up defect in the Edit Cart Screen => DONE
-* Load data with no Sizes => DONE
-* Load data with Sizes and no Colors => DONE
-* Fix Red Text on List => DONE
-
-10/7 thru 10/11 6.5 Hours
-=========================
-- Inventory, Images, Colors, Sizes, edge cases, oh my!
-* GetSizesByColorAndInventory => DONE
-* Missing Images - use the default Color's images => DONE
-* Out-of-Stock => DONE
-* Color-to-Size-to-Quantity Model => DONE
-* Validation Message => DONE
-- Refactored Total for reusability => DONE
-
-10/13 3 Hours
-~~~~~~~~~~~~~
-- Shopping Cart + Entities + Repository => DONE
-- Review concurrency issues => DONE
-
+Burndown
+~~~~~~~~
+* Shopping Cart Cookie Service => DONE
 
 
 Front Range
 ===========
 * Add to Cart Button => IN PROGRESS
-
 - Generic Message Bootstrap 3 Pop-up 
 - Items were removed on Retreive
 - Item no longer Available on Add
@@ -41,23 +13,18 @@ Front Range
 - Item no longer Available on Update
 - Quantities were adjusted due to changes in Inventory on Update
 
-* Item Added Feedback graphics => TODO
 * CSS Refactor => TODO
+* Item Added Feedback graphics => TODO
 * 400 when the Product doesn't exist => TODO
 
-Shopping Cart Persistence
-~~~~~~~~~~~~~~~~~~~~~~~~~
-- Shopping Cart + Cookie Service, Flow, etc. => IN PROGRESS
 
-Finished Line
--------------
+Finish Line
+-----------
 - Admin Search & Manage Orders => TODO
 - Admin Sales Graph by Product => TODO
 - Email Sending Engine => TODO
 - Stripe Payment Integration => TODO
 - Amazon EC2 Hosting + Deployment => TODO
-
-
 
 
 ### END PRODUCT DEFINITION + TASKING ###
@@ -108,20 +75,16 @@ Manage an Order CRUD screen
 - Refund => Choose Order Lines => Hit the Payment Processor => Update Status on Order Lines + History
 - Fail Shipping => Choose Order Lines => Update Status + History
 
-Moar Tasks
-~~~~~~~~~~
-* Slideshow - identify images & marketing, based on Products and marketing message => TODO
-
 Backlog
 -------
-- Prevent multiple Pop-ups from appearing
-- IsONline - Check How This Functions => UPDATE - NEED TO FIX TOUCH Function
 - Donate $20 to FineUploader upon successful integration => TODO
 
 
 
 Already Done
 ~~~~~~~~~~~~
+- Store Front Screen => DONE
+- Add Item Screen => DONE
 - Login Screen => DONE
 - Admin User Manager => DONE
 - Category Editor => DONE
@@ -138,9 +101,8 @@ Already Done
 - Revamped Barebones Console App => DONE
 - Revamped Membership Provider => DONE
 - Server Logging => DONE
-- Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => TODO (REFACTORING) - DONE
+- Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => DONE
 - Separated Error PAges => DONE
-
 
 PushMarket Front-end
 ~~~~~~~~~~~~~~~~~~~~
@@ -153,7 +115,6 @@ PushMarket Front-end
 - Entity Framework 6
 - HTML 5
 - SQL Server 2008...?
-
 
 PHASE 2 Backlog
 ---------------
@@ -178,7 +139,8 @@ PHASE 2 Backlog
 - Disable Caching for AJAX stuff with ASP.NET MVC => TODO
 - Show the number of Products under Category => PENDING EVAL
 - Rendering Adjustments for long Category Names et. al. => DONE
-
+- Prevent multiple Pop-ups from appearing
+- IsONline - Check How This Functions => UPDATE - NEED TO FIX TOUCH Function
 
 Research Backlog
 ----------------
@@ -200,4 +162,3 @@ Research Backlog
 - http://pcottle.github.com/learnGitBranching/
 - SublimeText + Resharper => TODO
 - Check Sanderson for advanced Model Binding => TODO
-

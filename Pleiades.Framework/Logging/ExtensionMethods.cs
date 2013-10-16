@@ -11,7 +11,10 @@ namespace Pleiades.Application.Logging
             
             if (exception.InnerException != null)
             {
-                output = output + Environment.NewLine + exception.InnerException.FullStackTraceDump();
+                output = output + 
+                    Environment.NewLine + Environment.NewLine +
+                    "INNER EXCEPTION" + Environment.NewLine + 
+                    exception.InnerException.FullStackTraceDump();
             }
             return output;
         }

@@ -30,44 +30,53 @@ namespace Commerce.Application.Concrete.Shopping
             var identifier = _cartIdentificationService.GetCurrentRequestCardId();
             if (identifier == null)
             {
-                var newIdentifier = _cartIdentificationService.ProvisionNewCartId();
-                var cart = new Cart
-                    {
-                        CartIdentifier = newIdentifier,                        
-                    };
-
-                _cartRepository.AddCart(cart);
-                return cart;
+                return CreateNewCart();
             }
             else
             {
                 var cart = _cartRepository.Retrieve(identifier.Value);
+                if (cart == null)
+                {
+                    return CreateNewCart();
+                }
                 AdjustInventory(cart);
                 return cart;
             }
         }
 
+        private Cart CreateNewCart()
+        {
+            var newIdentifier = _cartIdentificationService.ProvisionNewCartId();
+            var cart = new Cart
+            {
+                CartIdentifier = newIdentifier,
+            };
+
+            _cartRepository.AddCart(cart);
+            return cart;            
+        }
+
         private bool AdjustInventory(Cart cart)
         {
-            bool AdjustmentsMade = false;
+            bool adjustmentsMade = false;
             foreach (var item in cart.CartItems.ToList())
             {
                 var inventory = _inventoryRepository.RetreiveBySkuCode(item.Sku.SkuCode);
                 if (inventory.Available < item.Quantity)
                 {
                     item.Quantity = inventory.Available;
-                    AdjustmentsMade = true;
+                    adjustmentsMade = true;
                 }
                 if (inventory.Available == 0)
                 {
                     cart.CartItems.Remove(item);
-                    AdjustmentsMade = true;
+                    adjustmentsMade = true;
                 }
             }
-            return AdjustmentsMade;
+            return adjustmentsMade;
         }
 
-        public int AddQuantity(string skuCode, int quantity)
+        public CartResponseCodes AddQuantity(string skuCode, int quantity)
         {
             var cart = IdempotentCartFetcher();
             var cartItem = cart.CartItems.FirstOrDefault(x => x.Sku.SkuCode == skuCode);
@@ -76,38 +85,63 @@ namespace Commerce.Application.Concrete.Shopping
             if (inventory.Available == 0)
             {
                 cart.CartItems.Remove(cartItem);
-                return 0;
+                return CartResponseCodes.ItemNoLongerAvailable;
             }
 
             if (cartItem == null)
             {
-                var correctedQuantity = quantity >= inventory.Available ? inventory.Available : quantity;
+                CartResponseCodes responseCode;
+                int correctedQuantity;
 
-                cart.CartItems.Add(
-                    new CartItem
+                if (quantity > inventory.Available)
+                {
+                    responseCode = CartResponseCodes.ReducedQuantityAddedToCart;
+                    correctedQuantity = inventory.Available;
+                }
+                else
+                {
+                    responseCode = CartResponseCodes.FullQuantityAddedToCart;
+                    correctedQuantity = quantity;
+                }
+
+                cartItem = new CartItem()
                     {
                         Quantity = correctedQuantity,
                         Sku = inventory,
-                    });
-                return correctedQuantity;
+                    };
+                cart.CartItems.Add(cartItem);
+                return responseCode;
             }
             else
             {
-                var correctedQuantity = 
-                    quantity + cartItem.Quantity >= inventory.Available ? inventory.Available : quantity + cartItem.Quantity;
-
-                cartItem.Quantity = correctedQuantity;
-                return correctedQuantity;
+                if (cartItem.Quantity >= inventory.Available)
+                {
+                    cartItem.Quantity = inventory.Available;
+                    return CartResponseCodes.ReducedQuantityInCart;
+                }
+                else
+                {
+                    if ((cartItem.Quantity + quantity) > inventory.Available)
+                    {
+                        cartItem.Quantity = inventory.Available;
+                        return CartResponseCodes.ReducedQuantityAddedToCart;
+                    }
+                    else
+                    {
+                        cartItem.Quantity += quantity;
+                        return CartResponseCodes.FullQuantityAddedToCart;
+                    }
+                }
             }
         }
 
-        public int UpdateQuantity(string skuCode, int quantity)
+        public CartResponseCodes UpdateQuantity(string skuCode, int quantity)
         {
             var cart = IdempotentCartFetcher();
             var cartItem = cart.CartItems.FirstOrDefault(x => x.Sku.SkuCode == skuCode);
             if (cartItem == null)
             {
-                return 0;
+                return CartResponseCodes.ItemNotInCart;
             }
 
             var inventory = _inventoryRepository.RetreiveBySkuCode(skuCode);
@@ -115,12 +149,19 @@ namespace Commerce.Application.Concrete.Shopping
             if (inventory.Available == 0)
             {
                 cart.CartItems.Remove(cartItem);
-                return 0;
+                return CartResponseCodes.ItemNoLongerAvailable;
             }
 
-            var correctedQuantity = quantity + cartItem.Quantity >= inventory.Available ? inventory.Available : quantity;            
-            cartItem.Quantity = correctedQuantity;
-            return correctedQuantity;
+            if (quantity > inventory.Available)
+            {
+                cartItem.Quantity = inventory.Available;
+                return CartResponseCodes.ReducedQuantityInCart;
+            }
+            else
+            {
+                cartItem.Quantity = quantity;
+                return CartResponseCodes.FullQuantityUpdatedOnCart;
+            }
         }
 
         public void RemoveItem(string skuCode)

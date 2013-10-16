@@ -396,13 +396,13 @@
     <Content Include="Areas\Admin\Views\Unsecured\ServerError.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Public\Views\Shared\_MvcShimHead.cshtml" />
+    <Content Include="Areas\Public\Views\Shared\_NgShimHead.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Public\Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Public\Views\Shared\_MvcShimBody.cshtml" />
+    <Content Include="Areas\Public\Views\Shared\_NgShimBody.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\ArtOfGroundFighting\Fonts\Bevan.woff" />

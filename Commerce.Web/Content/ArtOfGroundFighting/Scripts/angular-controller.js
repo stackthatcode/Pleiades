@@ -103,7 +103,7 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         $scope.SelectedSizes = [];
         $scope.AddToCartValidationMessage = null;
         $scope.SelectedSizeId = null;
-        
+
         if ($scope.HasSizes()) {
             AQ($scope.AvailableInventory()).each(function (inventoryItem) {
                 var size = AQ($scope.Product.Sizes)
@@ -158,8 +158,13 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
             $scope.AddToCartValidationMessage = "Please choose your Size";
             return;
         }
-        console.log($scope.GetSelectedSku().SkuCode);
-        console.log("Quantity = " + $scope.SelectedQuantityValue);
+
+        var skuCode = $scope.GetSelectedSku().SkuCode;
+        var quantity = $scope.SelectedQuantityValue;
+        var url = 'cart?skuCode=' + skuCode + '&quantity=' + quantity;
+        ngAjax.Post($http, url, null, function (cartAddResults) {
+
+        });
     };
 
     ngAjax.Get($http, 'products/' + $routeParams.productid, function (product) {

@@ -41,9 +41,25 @@
         };
     };
 
-    ngAjax.Get = function ($http, url, successClosure) {
+    ngAjax.Get = function($http, url, successClosure) {
+        ngAjax.AjaxExecutor(function() { return $http.get(urlLocator.baseUrl + url); }, successClosure );
+    };
+
+    ngAjax.Post = function ($http, url, body, successClosure) {
+        ngAjax.AjaxExecutor(function () { return $http.post(urlLocator.baseUrl + url, body); }, successClosure );
+    };
+
+    ngAjax.Put = function ($http, httpFunction, successClosure) {
+        ngAjax.AjaxExecutor(function () { return $http.put(urlLocator.baseUrl + url, body); }, successClosure);
+    };
+
+    ngAjax.Delete = function ($http, httpFunction, successClosure) {
+        ngAjax.AjaxExecutor(function () { return $http.delete(urlLocator.baseUrl + url); }, successClosure);
+    };
+
+    ngAjax.AjaxExecutor = function(httpMethod, successClosure) {
         ngAjax.ShowLoading();
-        $http.get(urlLocator.baseUrl + url)
+        httpMethod()
             .success(ngAjax.HideLoadingFactory(successClosure))
             .error(ngAjax.ModalErrorFactory());
     };

@@ -21,11 +21,18 @@ namespace Commerce.Application.Concrete.Shopping
             _context.Carts.Add(cart);
         }
 
+        public void AddItemToCart(Cart cart, CartItem cartItem)
+        {
+            _context.CartItems.Add(cartItem);
+            cart.CartItems.Add(cartItem);
+        }
+
         public Cart Retrieve(Guid identifier)
         {
             return _context.Carts
                 .Include(x => x.CartItems)
-                .First(x => x.CartIdentifier == identifier);
+                .Include(x => x.CartItems.Select(item => item.Sku))
+                .FirstOrDefault(x => x.CartIdentifier == identifier);
         }
     }
 }

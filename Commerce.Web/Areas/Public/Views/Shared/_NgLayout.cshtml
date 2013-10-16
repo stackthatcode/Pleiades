@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width" />
         <title></title>
         @Html.Javascript("~/Bundles/Foundation")
-        @Html.Partial("_MvcShimHead")
+        @Html.Partial("_NgShimHead")
         
         @Html.Stylesheet("~/Content/Bootstrap_3_0_0/css/bootstrap.min.css")
         @Html.Javascript("~/Content/Bootstrap_3_0_0/js/bootstrap.min.js")
@@ -20,6 +20,6 @@
         @Html.Partial("_Header")        
         @RenderSection("_Body")	      
         @Html.Partial("_Footer")
-        @Html.Partial("_MvcShimBody")
+        @Html.Partial("_NgShimBody")
     </body>
 </html>
