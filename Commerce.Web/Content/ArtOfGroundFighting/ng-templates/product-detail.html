@@ -73,7 +73,7 @@
             </div>
             
             <div ng-show="HasInventory()">
-                <div ng-show="QuantitiesVisible()">                    
+                <div ng-show="QuantitiesVisible()" style="height:40px;">
                     <select ng-model="SelectedQuantityValue" class="form-control" 
                             ng-options="quantity as quantity for quantity in SelectedQuantities" 
                             style="float:left; width:100px; height:40px; font-size:18px; font-weight:bold; margin-right: 10px;">
@@ -81,10 +81,19 @@
                     <h4 style="color:#555; font-weight: bold; float:left; margin-right:10px;">Quantity</h4>                    
                 </div>                
                 
-                <button class="btn btn-default btn-lg btn-oldstyle" ng-click="AddToCart()"
-                        style="clear:both; float:left; margin-right:10px; margin-top:20px; font-size:21px; width:250px;">
-                    <i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart 
-                </button>
+                <div id="item-added" style="height:60px; margin-top:20px; clear:both; display:none;">
+                    <span style="font-size:30px; padding-bottom:10px;" class="badge">
+                        <i class="glyphicon glyphicon-star"></i> Item Added <i class="glyphicon glyphicon-star"></i>
+                    </span>
+                </div>
+                
+                <div id="add-button" style="height:60px; margin-top:20px; clear:both;">
+                    <button class="btn btn-default btn-lg btn-oldstyle" ng-click="AddToCart()"
+                            style="clear:both; float:left; margin-right:10px; font-size:21px; width:250px;">
+                        <i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart 
+                    </button>
+                </div>
+                
                 <div style="clear:both; height:30px;"></div>
             </div>
             

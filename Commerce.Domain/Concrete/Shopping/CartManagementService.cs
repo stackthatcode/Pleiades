@@ -114,24 +114,22 @@ namespace Commerce.Application.Concrete.Shopping
             }
             else
             {
-                if (cartItem.Quantity >= inventory.Available)
+                if (cartItem.Quantity > inventory.Available)
                 {
                     cartItem.Quantity = inventory.Available;
                     return CartResponseCodes.ReducedQuantityInCart;
                 }
-                else
+                if (cartItem.Quantity == inventory.Available)
                 {
-                    if ((cartItem.Quantity + quantity) > inventory.Available)
-                    {
-                        cartItem.Quantity = inventory.Available;
-                        return CartResponseCodes.ReducedQuantityAddedToCart;
-                    }
-                    else
-                    {
-                        cartItem.Quantity += quantity;
-                        return CartResponseCodes.FullQuantityAddedToCart;
-                    }
+                    return CartResponseCodes.MaximumQuantityInCart; ;
                 }
+                if ((cartItem.Quantity + quantity) > inventory.Available)
+                {
+                    cartItem.Quantity = inventory.Available;
+                    return CartResponseCodes.ReducedQuantityAddedToCart;
+                }
+                cartItem.Quantity += quantity;
+                return CartResponseCodes.FullQuantityAddedToCart;
             }
         }
 

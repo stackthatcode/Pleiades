@@ -29,7 +29,7 @@ namespace Commerce.Web.Areas.Public.Controllers
         {
             var result =_cartManagementService.AddQuantity(skuCode, quantity);
             _pushMarketContext.SaveChanges();
-            return new JsonNetResult(new { ActualQuantity = result });
+            return new JsonNetResult(new { CartResponseCode = result.ToString() });
         }
 
         [HttpPut]
@@ -38,7 +38,7 @@ namespace Commerce.Web.Areas.Public.Controllers
         {
             var result = _cartManagementService.UpdateQuantity(skuCode, quantity);
             _pushMarketContext.SaveChanges();
-            return new JsonNetResult(new { ActualQuantity = result });
+            return new JsonNetResult(new { CartResponseCode = result.ToString() });
         }
 
         [HttpDelete]

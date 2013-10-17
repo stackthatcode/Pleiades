@@ -1,22 +1,19 @@
 Burndown
 ~~~~~~~~
 * Shopping Cart Cookie Service => DONE
-
+* Add to Cart Button => DONE
+- Items were removed on Retreive => DONE
+- Item no longer Available on Add => DONE
+- Quantities were adjusted due to changes in Inventory on Add => DONE
+- Item no longer Available on Update => DONE
+- Quantities were adjusted due to changes in Inventory on Update => DONE
+- Item Added Feedback graphics => DONE
 
 Front Range
 ===========
-* Add to Cart Button => IN PROGRESS
-- Generic Message Bootstrap 3 Pop-up 
-- Items were removed on Retreive
-- Item no longer Available on Add
-- Quantities were adjusted due to changes in Inventory on Add
-- Item no longer Available on Update
-- Quantities were adjusted due to changes in Inventory on Update
-
+- Generic Message Bootstrap 3 Pop-up
 * CSS Refactor => TODO
-* Item Added Feedback graphics => TODO
 * 400 when the Product doesn't exist => TODO
-
 
 Finish Line
 -----------
@@ -25,6 +22,7 @@ Finish Line
 - Email Sending Engine => TODO
 - Stripe Payment Integration => TODO
 - Amazon EC2 Hosting + Deployment => TODO
+
 
 
 ### END PRODUCT DEFINITION + TASKING ###

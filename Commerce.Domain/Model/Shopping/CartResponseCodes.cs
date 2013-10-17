@@ -6,6 +6,7 @@
         FullQuantityUpdatedOnCart,
         ReducedQuantityInCart,
         ReducedQuantityAddedToCart,
+        MaximumQuantityInCart,
         ItemNoLongerAvailable,
         ItemNotInCart,
     }

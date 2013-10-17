@@ -163,7 +163,15 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         var quantity = $scope.SelectedQuantityValue;
         var url = 'cart?skuCode=' + skuCode + '&quantity=' + quantity;
         ngAjax.Post($http, url, null, function (cartAddResults) {
-
+            console.log(cartAddResults);
+            $("#add-button").hide();
+            $("#item-added").show();
+            $("#item-added").fadeOut({
+                duration: 2000,
+                complete: function () {
+                    $("#add-button").show();                    
+                }
+            });
         });
     };
 
