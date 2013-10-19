@@ -218,6 +218,14 @@ a.thumbnail-color-selected {
     margin-top:0px;
 }
 
+.sub-sub-header {
+    font-family:Open Sans; 
+    font-size:24px; 
+    font-weight:bold; 
+    color:#666; 
+    margin-top:0px;
+}
+
 .product-detail-header {
     color:#555; 
     font-weight: bold; 

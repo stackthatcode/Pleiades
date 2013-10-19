@@ -51,11 +51,11 @@ function isNumber(n) {
 }
 
 String.prototype.toMoney = function () {
-    return "$" + parseFloat(this).toFixed(2);
+    return !this ? "" : ("$" + parseFloat(this).toFixed(2));
 };
 
 function ToMoney(input) {
-    return input.toString().toMoney();
+    return input != null ? input.toString().toMoney() : "";
 }
 
 function namespace(namespaceString) {

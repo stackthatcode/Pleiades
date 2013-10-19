@@ -7,7 +7,7 @@ var app = angular.module('push-market');
 app.controller('CartController', function ($scope, $http) {
 
     $scope.ToMoney = function (input) {
-        return input.toString().toMoney();
+        return input ? input.toString().toMoney() : "";
     };
 
     $scope.NonEmptyCart = function () {
@@ -29,7 +29,7 @@ app.controller('CartController', function ($scope, $http) {
                 item.QuantityList.push(x + 1);
             }
         }
-        
+
         console.log(data);
         $scope.cart = data.Cart;
         if (data.InventoryAdjusted) {

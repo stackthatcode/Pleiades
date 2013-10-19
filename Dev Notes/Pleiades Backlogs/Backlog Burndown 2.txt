@@ -401,3 +401,26 @@ Port Knockout Cart Editor to Angular JS => DONE
 - Review concurrency issues => DONE
 
 
+Burndown
+~~~~~~~~
+* Shopping Cart Cookie Service => DONE
+* Add to Cart Button => DONE
+- Items were removed on Retreive => DONE
+- Item no longer Available on Add => DONE
+- Quantities were adjusted due to changes in Inventory on Add => DONE
+- Item no longer Available on Update => DONE
+- Quantities were adjusted due to changes in Inventory on Update => DONE
+- Item Added Feedback graphics => DONE
+* 400 when the Product doesn't exist => DONE
+- Generic Message Bootstrap 3 Pop-up => DONE
+- Don't show the Quantity until they choose a size => DONE
+* CSS Refactor => DONE
+- Cart Link => DONE
+- Cart Contents Template => DONE
+- Cart Item Template => DONE
+- Delete from Cart => DONE
+- Pop-up on Empty Cart => DONE
+- Getting the Cart right => DONE
+- Function to get Inventory => DONE
+- Cart Controller => DONE
+- Inventory Adjustment Message => DONE

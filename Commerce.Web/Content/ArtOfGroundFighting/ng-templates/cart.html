@@ -6,6 +6,9 @@
 <div class="row">
     <div class="col-lg-8" ng-show="NonEmptyCart()">
         <h1 class="main-header">Shopping Cart</h1>
+        <h1 class="sub-sub-header">
+            Current Total: {{ ToMoney(cart.Total.SubTotal) }}
+        </h1>
         <div style="height:10px;" class="hidden-lg"></div>
     </div>
 
