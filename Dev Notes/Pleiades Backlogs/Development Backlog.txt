@@ -8,12 +8,24 @@ Burndown
 - Item no longer Available on Update => DONE
 - Quantities were adjusted due to changes in Inventory on Update => DONE
 - Item Added Feedback graphics => DONE
+* 400 when the Product doesn't exist => DONE
+- Generic Message Bootstrap 3 Pop-up => DONE
+- Don't show the Quantity until they choose a size => DONE
+* CSS Refactor => DONE
+- Cart Link => DONE
+- Cart Contents Template => DONE
+- Cart Item Template => DONE
+- Delete from Cart => DONE
+
 
 Front Range
 ===========
-- Generic Message Bootstrap 3 Pop-up
-* CSS Refactor => TODO
-* 400 when the Product doesn't exist => TODO
+- Cart Controller => IN PROGRESS
+- Cart Total => TODO
+- Inventory Adjustment Message => TODO
+- Pop-up on Empty Cart => TODO
+- Link to Checkout => TODO
+
 
 Finish Line
 -----------
@@ -26,10 +38,6 @@ Finish Line
 
 
 ### END PRODUCT DEFINITION + TASKING ###
-
-Checkout Process Tasking
-~~~~~~~~~~~~~~~~~~~~~~~~
-- New Markup
 
 Shipping Information Tasking
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~

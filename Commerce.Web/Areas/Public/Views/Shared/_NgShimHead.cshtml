@@ -7,16 +7,27 @@
     urlLocator.baseUrl = '@Url.BaseUrl()';
 
     var ngAjax = namespace("PushLibrary.NgAjax");
+    
     ngAjax.Timeout = 60000;
-    ngAjax.ModelErrorSelector = "#modal-error";
     ngAjax.SpinnerSelector = "#spinner-layer";
+    
+    ngAjax.ModelErrorSelector = "#modal-error";
     ngAjax.ModalErrorAction = "#modal-error-action";
-
+    ngAjax.ModalGenericSelector = "#modal-generic";
+    ngAjax.ModalGenericSelectorHeader = "#modal-generic-header";
+    ngAjax.ModalGenericSelectorBody = "#modal-generic-body";
+    
     ngAjax.ModalError = function () {
         $(ngAjax.ModelErrorSelector).modal();
         $(ngAjax.ModalErrorAction).click(function () {
             location.reload();
         });
+    };
+
+    ngAjax.ModalGeneric = function(header, body) {
+        $(ngAjax.ModalGenericSelectorHeader).html(header);
+        $(ngAjax.ModalGenericSelectorBody).html(body);
+        $(ngAjax.ModalGenericSelector).modal();
     };
 
     ngAjax.ShowLoading = function() {
@@ -49,11 +60,11 @@
         ngAjax.AjaxExecutor(function () { return $http.post(urlLocator.baseUrl + url, body); }, successClosure );
     };
 
-    ngAjax.Put = function ($http, httpFunction, successClosure) {
+    ngAjax.Put = function ($http, url, body, successClosure) {
         ngAjax.AjaxExecutor(function () { return $http.put(urlLocator.baseUrl + url, body); }, successClosure);
     };
 
-    ngAjax.Delete = function ($http, httpFunction, successClosure) {
+    ngAjax.Delete = function ($http, url, successClosure) {
         ngAjax.AjaxExecutor(function () { return $http.delete(urlLocator.baseUrl + url); }, successClosure);
     };
 

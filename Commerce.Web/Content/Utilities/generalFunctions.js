@@ -46,8 +46,12 @@ String.prototype.rtrim = function(){return this.replace(/\s+$/,'');};
 
 String.prototype.fulltrim = function(){return this.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,'').replace(/\s+/g,' ');};
 
-var ToMoney = function(input) {
-    return "$" + input.toFixed(2);
+function isNumber(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+String.prototype.toMoney = function () {
+    return "$" + parseFloat(this).toFixed(2);
 };
 
 function namespace(namespaceString) {

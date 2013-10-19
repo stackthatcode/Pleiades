@@ -1,6 +1,4 @@
-﻿@using System.Configuration
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html ng-app>
     <head>
         <meta name="viewport" content="width=device-width" />
@@ -9,11 +7,10 @@
         @Html.Stylesheet("~/Content/Bootstrap_3_0_0/css/bootstrap.min.css")
         @Html.Stylesheet("~/Content/ArtOfGroundFighting/Style/artofgroundfighting.css")
     </head>
-
     <body>
-        @Html.Partial("_Header")        
-        @RenderSection("_Body")	      
-        @Html.Partial("_Footer") 
+        @Html.Partial("_Header")
+        @RenderSection("_Body")
+        @Html.Partial("_Footer")
         @Html.Javascript("~/Content/Bootstrap_3_0_0/js/bootstrap.min.js")
     </body>
 </html>

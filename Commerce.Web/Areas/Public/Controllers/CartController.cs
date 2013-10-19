@@ -29,7 +29,7 @@ namespace Commerce.Web.Areas.Public.Controllers
         {
             var result =_cartManagementService.AddQuantity(skuCode, quantity);
             _pushMarketContext.SaveChanges();
-            return new JsonNetResult(new { CartResponseCode = result.ToString() });
+            return new JsonNetResult(new { CartResponseCode = (int)result });
         }
 
         [HttpPut]
@@ -38,7 +38,7 @@ namespace Commerce.Web.Areas.Public.Controllers
         {
             var result = _cartManagementService.UpdateQuantity(skuCode, quantity);
             _pushMarketContext.SaveChanges();
-            return new JsonNetResult(new { CartResponseCode = result.ToString() });
+            return new JsonNetResult(new { CartResponseCode = (int)result });
         }
 
         [HttpDelete]
@@ -46,7 +46,8 @@ namespace Commerce.Web.Areas.Public.Controllers
         public JsonNetResult Delete(string skuCode)
         {
             _cartManagementService.RemoveItem(skuCode);
-            return JsonNetResult.Success();
+            _pushMarketContext.SaveChanges();
+            return new JsonNetResult(_cartManagementService.Retrieve());
         }
 
     }

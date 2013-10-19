@@ -103,10 +103,16 @@ div.product-list-price
     margin-top:3px;
 }
 
-a.product-list-link {
+.product-list-link {
     font-family: "Open Sans";
-    font-weight: bold; 
-    color:#F00
+    font-weight: bold;
+    color: #F00;
+}
+
+.product-list-black {
+    font-family: "Open Sans";
+    font-weight: bold;
+    color: #333;
 }
 
 a.product-list-link:hover {
@@ -191,4 +197,48 @@ a.thumbnail-color-selected {
 .btn-oldstyle[disabled] .btn-oldstyle.active {
   background-color: #cc0000;
   border-color: #cc0000;
+}
+
+.product-name {
+    font-family: Open Sans; 
+    font-size:50px; 
+    margin-top: 0px; 
+    font-weight:bolder;
+}
+
+.product-thumbnail {
+    border: #CCC dotted 1px;
+}
+
+.product-price {
+    font-family:Open Sans; 
+    font-size:35px; 
+    font-weight:bold; 
+    color:#555; 
+    margin-top:0px;
+}
+
+.product-detail-header {
+    color:#555; 
+    font-weight: bold; 
+    float:left; 
+    margin-right:10px;    
+}
+
+.cart-validation-message {
+    font-weight: bold; color:#F00;
+}
+
+.quantity-list {
+    float:left; 
+    width:100px; 
+    height:40px; 
+    font-size:18px; 
+    font-weight:bold; 
+    margin-right: 10px;
+}
+
+.action-flasher {
+    font-size:30px; 
+    padding-bottom:10px;    
 }

@@ -34,6 +34,7 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         $scope.SelectedColorId = colorid;
         $scope.RefreshImages();
         $scope.RefreshSizes();
+        $scope.RefreshQuantities();
     };
 
     $scope.SelectColorDefault = function () {
@@ -124,8 +125,10 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         if (!$scope.HasInventory()) {
             return null;
         }
-        if ($scope.HasSizes() && $scope.SelectedSizeId) {
-            return AQ($scope.AvailableInventory()).firstOrDefault(function (x) { return x.SizeId == $scope.SelectedSizeId; });
+        if ($scope.HasSizes()) {
+            if ($scope.SelectedSizeId) {
+                return AQ($scope.AvailableInventory()).firstOrDefault(function (x) { return x.SizeId == $scope.SelectedSizeId; });
+            }
         } else {
             return $scope.AvailableInventory()[0];
         }
@@ -162,17 +165,37 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         var skuCode = $scope.GetSelectedSku().SkuCode;
         var quantity = $scope.SelectedQuantityValue;
         var url = 'cart?skuCode=' + skuCode + '&quantity=' + quantity;
+
+        $scope.HideAddButton();
+
         ngAjax.Post($http, url, null, function (cartAddResults) {
             console.log(cartAddResults);
-            $("#add-button").hide();
-            $("#item-added").show();
-            $("#item-added").fadeOut({
-                duration: 2000,
-                complete: function () {
-                    $("#add-button").show();                    
-                }
-            });
+            var responseFunction = CartResponseFunction(cartAddResults.CartResponseCode);
+            if (responseFunction) {
+                responseFunction();
+                $scope.ShowAddButton();
+            } else {
+                $scope.FlashItemAdded($scope.ShowAddButton);
+            }
         });
+    };
+
+    $scope.HideAddButton = function () {
+        $("#add-button").hide();
+    };
+
+    $scope.ShowAddButton = function () {
+        $("#add-button").show();
+    };
+
+    $scope.FlashItemAdded = function (completeFunction) {
+        $("#item-added").show();
+        setTimeout(function () {
+            $("#item-added").hide();
+            if (completeFunction) {
+                completeFunction();
+            }
+        }, 1000);
     };
 
     ngAjax.Get($http, 'products/' + $routeParams.productid, function (product) {

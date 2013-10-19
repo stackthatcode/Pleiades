@@ -17,6 +17,10 @@ angular.module('push-market', []).
               templateUrl: templateUrlBase + 'content-parent.html', 
               controller: 'ContentController'
           })
+          .when('/cart', {
+              templateUrl: templateUrlBase + 'cart.html',
+              controller: 'CartController'
+          })
           .otherwise({ redirectTo: '/products' });
     }
   ]);

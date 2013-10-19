@@ -27,6 +27,10 @@ namespace Commerce.Application.Model.Billing
         {
             get
             {
+                if (StateTax == null)
+                {
+                    return 0;
+                }
                 return SubTotal * StateTax.TaxRate / 100.00m;
             }
         }

@@ -9,7 +9,7 @@
         </div>
     </div>
     
-    <!-- Dedciated Error Dialog Box -->
+    <!-- Dedicated Error Dialog Box -->
     <div id="modal-error" tabindex="-1" role="dialog" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">                
@@ -34,4 +34,26 @@
             </div>
         </div>
     </div>
+    
+    <!-- Generic Message Dialog Box -->
+    <div id="modal-generic" tabindex="-1" role="dialog" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">                
+                <div class="modal-header" style="background-color:#333;">
+                    <h2 style="font-weight:bold; color:#FFF;" id="modal-generic-header">Generic Header</h2>
+                </div>
+                <div class="modal-body">
+                    <div style="clear:both; height:142px;" id="modal-generic-body">
+                        <p>Generic Modal Content</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a id="modal-error-action" class="btn btn-danger" onclick="$('#modal-generic').modal('hide');">
+                        <i class="icon-ok icon-white"></i> Ok, Thanks
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

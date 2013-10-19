@@ -2,7 +2,7 @@
 using Commerce.Application.Interfaces;
 using Commerce.Application.Model.Orders;
 
-namespace Commerce.Application.Concrete
+namespace Commerce.Application.Concrete.Infrastructure
 {
     public class AnalyticService : IAnalyticsService
     {

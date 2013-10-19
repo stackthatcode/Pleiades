@@ -1,9 +1,20 @@
-﻿<!DOCTYPE html>
+﻿@using System.Configuration
+<!DOCTYPE html>
 <html ng-app="push-market">
     <head>
         <meta name="viewport" content="width=device-width" />
-        <title></title>
-        @Html.Javascript("~/Bundles/Foundation")
+        <title>Welcome to the Art of Ground Fighting.com</title>
+        @if (ConfigurationManager.AppSettings["BundleOptimizationDebug"] == "true") {
+            @Html.Javascript("~/Content/JQuery/jquery-2.0.3.min.js")
+            @Html.Javascript("~/Content/JQuery/jquery.validate.min.js")
+            @Html.Javascript("~/Content/Utilities/aQuery-1.0-min.js")        
+            @Html.Javascript("~/Content/Utilities/flow.js")        
+            @Html.Javascript("~/Content/Utilities/generalFunctions.js")        
+        }
+        else
+        {
+            @Scripts.Render("~/Bundles/Foundation")
+        }
         @Html.Partial("_NgShimHead")
         
         @Html.Stylesheet("~/Content/Bootstrap_3_0_0/css/bootstrap.min.css")
@@ -13,7 +24,9 @@
         <!-- TODO: bundle these together -->
         @Html.Javascript("~/Content/angular/angular.min.js")
         @Html.Javascript("~/Content/ArtOfGroundFighting/Scripts/angular-app.js")
-        @Html.Javascript("~/Content/ArtOfGroundFighting/Scripts/angular-controller.js")
+        @Html.Javascript("~/Content/ArtOfGroundFighting/Scripts/products-controller.js")
+        @Html.Javascript("~/Content/ArtOfGroundFighting/Scripts/cart-functions.js")
+        @Html.Javascript("~/Content/ArtOfGroundFighting/Scripts/cart-controller.js")
     </head>
 
     <body>

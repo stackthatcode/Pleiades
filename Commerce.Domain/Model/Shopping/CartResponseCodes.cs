@@ -2,12 +2,12 @@
 {
     public enum CartResponseCodes
     {
-        FullQuantityAddedToCart,
-        FullQuantityUpdatedOnCart,
-        ReducedQuantityInCart,
-        ReducedQuantityAddedToCart,
-        MaximumQuantityInCart,
-        ItemNoLongerAvailable,
-        ItemNotInCart,
+        FullQuantityAddedToCart = 1,
+        FullQuantityUpdatedOnCart = 2,
+        ReducedQuantityInCart = 3,
+        ReducedQuantityAddedToCart = 4,
+        MaximumQuantityInCart = 5,
+        ItemNoLongerAvailable = 6,
+        ItemNotInCart = 7,
     }
 }

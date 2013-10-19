@@ -32,7 +32,7 @@
     <script type="text/javascript">
         var PushMkt = PushMkt || {};
 
-        PushMkt.ModalDialogViewModel = function () {
+        PushMkt.ModalDialogViewModel = function() {
             var self = this;
             self.Template = ko.observable(null);
             self.Header = ko.observable(null);
@@ -40,7 +40,7 @@
             self.List = ko.observable(null);
             self.OkButton = ko.observable(null);
 
-            self.ShowModal = function (template, header, body, list, callback) {
+            self.ShowModal = function(template, header, body, list, callback) {
                 self.Template("Modal-Dialog-" + template);
                 self.Header(header);
                 self.Body(body);
@@ -48,15 +48,15 @@
                 if (callback) {
                     self.OkButton(callback);
                 } else {
-                    self.OkButton(function () { self.HideModal(); });
+                    self.OkButton(function() { self.HideModal(); });
                 }
 
                 $('#modal-dialog').modal('show');
             };
 
-            self.HideModal = function () {
+            self.HideModal = function() {
                 $('#modal-dialog').modal('hide');
-            }
-        }
+            };
+        };
     </script>
     
