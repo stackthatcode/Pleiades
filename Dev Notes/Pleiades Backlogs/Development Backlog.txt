@@ -16,15 +16,23 @@ Burndown
 - Cart Contents Template => DONE
 - Cart Item Template => DONE
 - Delete from Cart => DONE
+- Pop-up on Empty Cart => DONE
+- Getting the Cart right => DONE
+- Function to get Inventory => DONE
+- Cart Controller => DONE
+- Inventory Adjustment Message => DONE
+
 
 
 Front Range
 ===========
-- Cart Controller => IN PROGRESS
-- Cart Total => TODO
-- Inventory Adjustment Message => TODO
-- Pop-up on Empty Cart => TODO
 - Link to Checkout => TODO
+- Cart Total => TODO
+
+=> Shipping Information Tasking
+=> Billing Information Entry
+=> Confirmation
+=> Thank You Page
 
 
 Finish Line
@@ -38,24 +46,6 @@ Finish Line
 
 
 ### END PRODUCT DEFINITION + TASKING ###
-
-Shipping Information Tasking
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Port Knockout Shipping Information to Angular JS
-
-Billing Information Entry
-~~~~~~~~~~~~~~~~~~~~~~~~~
-- Port Knockout Billings Information to Angular JS
-
-Confirmation
-~~~~~~~~~~~~
-- Port Knockout Confirmation Information to Angular JS
-- Order Submission process
-- Order Confirmation Email
-
-Thank You Page
-~~~~~~~~~~~~~~
-- Port Ko Thank You Page
 
 Contact Us Page Tasking
 ~~~~~~~~~~~~~~~~~~~~~~~

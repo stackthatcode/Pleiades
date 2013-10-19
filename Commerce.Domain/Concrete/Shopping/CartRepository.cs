@@ -29,10 +29,12 @@ namespace Commerce.Application.Concrete.Shopping
 
         public Cart Retrieve(Guid identifier)
         {
-            return _context.Carts
+            var cart = _context.Carts
                 .Include(x => x.CartItems)
                 .Include(x => x.CartItems.Select(item => item.Sku))
                 .FirstOrDefault(x => x.CartIdentifier == identifier);
+            _context.RefreshEntity(cart);
+            return cart;
         }
     }
 }

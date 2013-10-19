@@ -38,17 +38,16 @@ namespace Commerce.Web.Areas.Public.Controllers
         {
             var result = _cartManagementService.UpdateQuantity(skuCode, quantity);
             _pushMarketContext.SaveChanges();
-            return new JsonNetResult(new { CartResponseCode = (int)result });
+            return new JsonNetResult(_cartManagementService.Retrieve());
         }
 
         [HttpDelete]
         [ActionName("action")]
         public JsonNetResult Delete(string skuCode)
         {
-            _cartManagementService.RemoveItem(skuCode);
+            var result = _cartManagementService.RemoveItem(skuCode);
             _pushMarketContext.SaveChanges();
-            return new JsonNetResult(_cartManagementService.Retrieve());
+            return new JsonNetResult(result);
         }
-
     }
 }

@@ -54,6 +54,10 @@ String.prototype.toMoney = function () {
     return "$" + parseFloat(this).toFixed(2);
 };
 
+function ToMoney(input) {
+    return input.toString().toMoney();
+}
+
 function namespace(namespaceString) {
     var parts = namespaceString.split('.'),
         parent = window,

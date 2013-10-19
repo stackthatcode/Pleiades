@@ -1,6 +1,6 @@
 ﻿namespace Commerce.Application.Model.Shopping
 {
-    public enum CartResponseCodes
+    public enum AddCartResponseCodes
     {
         FullQuantityAddedToCart = 1,
         FullQuantityUpdatedOnCart = 2,
