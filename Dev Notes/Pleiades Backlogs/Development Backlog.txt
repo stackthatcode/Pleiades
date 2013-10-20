@@ -1,22 +1,16 @@
-Finish Line
------------
-- Billing Information => DONE
-* State List
-* Expires Months
-* Expires YEars
-* Validation
-
+Sunday is One Day
+~~~~~~~~~~~~~~~~~
 - Shipping Information => DONE
 - Thank You Page => DONE
 
 
-
+Finish Line
+-----------
 - Add Limit to Cart => TODO
 - Admin Search & Manage Orders => TODO
 - Admin Sales Graph by Product => TODO
 - Email Sending Engine => TODO
 http://stackoverflow.com/questions/10512845/how-to-send-email-wth-email-template-c-sharp/10512995#10512995
-
 - Stripe Payment Integration => TODO
 
 

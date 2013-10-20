@@ -428,3 +428,8 @@ Burndown
 - Cart Total => DONE
 - Link to Checkout => DONE
 
+- Billing Information => DONE
+* State List
+* Expires Months
+* Expires YEars
+* Validation

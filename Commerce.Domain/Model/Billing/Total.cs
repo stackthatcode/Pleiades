@@ -8,14 +8,16 @@ namespace Commerce.Application.Model.Billing
     {
         [JsonIgnore]
         private readonly Func<decimal> _subTotal;
+        private readonly Func<ShippingMethod> _shippingMethod;
+        private readonly Func<StateTax> _stateTax;
 
         public int Id { get; set; }
-        public ShippingMethod ShippingMethod { get; set; }
-        public StateTax StateTax { get; set; }
 
-        public Total(Func<decimal> subTotal)
+        public Total(Func<decimal> subTotal, Func<ShippingMethod> shippingMethod, Func<StateTax> stateTax)
         {
             _subTotal = subTotal;
+            _shippingMethod = shippingMethod;
+            _stateTax = stateTax;
         }
 
         public decimal SubTotal 
@@ -27,11 +29,11 @@ namespace Commerce.Application.Model.Billing
         {
             get
             {
-                if (StateTax == null)
+                if (_stateTax == null || _stateTax() == null)
                 {
                     return 0;
                 }
-                return SubTotal * StateTax.TaxRate / 100.00m;
+                return SubTotal * _stateTax().TaxRate / 100.00m;
             }
         }
 
@@ -39,7 +41,7 @@ namespace Commerce.Application.Model.Billing
         {
             get
             {
-                return (SubTotal != 0 && ShippingMethod != null) ? ShippingMethod.Cost : 0;
+                return (SubTotal != 0 && _shippingMethod != null && _shippingMethod() != null) ? _shippingMethod().Cost : 0;
             }
         }
 

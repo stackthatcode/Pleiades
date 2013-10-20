@@ -112,7 +112,7 @@ namespace Commerce.Application.Concrete.Orders
             // Shipping nothing?  Kill the shipping
             if (order.OrderLines.All(x => x.Quantity == 0))
             {
-                order.Total.ShippingMethod = null;
+                order.ShippingMethod = null;
             }
 
             // Eventual Consistency w/ Payment Correction - Do we need to process a refund? - Bounded Context
@@ -162,8 +162,8 @@ namespace Commerce.Application.Concrete.Orders
             var stateTax = StateTaxByAbbr(orderRequest.BillingInfo.State);
             var shippingMethod = ShippingMethodById(orderRequest.ShippingInfo.ShippingOptionId);
 
-            order.Total.ShippingMethod = shippingMethod;
-            order.Total.StateTax = stateTax;
+            order.ShippingMethod = shippingMethod;
+            order.StateTax = stateTax;
             
             order.OriginalGrandTotal = order.Total.GrandTotal;
             order.ExternalId = OrderNumberGenerator.Next();

@@ -618,3 +618,252 @@ The statement has been terminated.
 2013-10-20 10:29:52.3406|Debug|79ca3b6e-5d7d-448d-9594-5f739de9c298|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
 2013-10-20 10:30:00.8141|Debug|bbb26189-729c-4edb-a1e0-e75db2bf5ed5|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
 2013-10-20 10:32:26.8384|Debug|58b359f1-9f54-4d55-83dd-007c2d12e2de|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 10:39:04.1701|Debug|9b5f1539-18c9-44e8-8c6e-1b42a28a97e9|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 10:42:51.6131|Debug|978a56d0-3555-46ab-ae77-93eab8e50306|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 10:43:55.8438|Debug|44ecc450-6092-4682-9b7e-0a806769d367|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 10:45:18.4715|Debug|d1989d5a-f41f-45d4-9330-2276f1185c48|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 10:45:43.9440|Debug|a9c5abcc-3818-4873-972c-50dd9daf62fd|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 10:48:53.5018|Debug|a0cbfd9e-47a7-4b97-9218-4d627908db95|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 10:51:25.5265|Debug|59015fd8-01fe-45f4-a7fd-6c74474b6dfc|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 10:51:47.5298|Debug|b37c8af4-6b25-48d3-899e-51911987af82|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 10:55:10.2054|Debug|4a02b389-db7c-40e5-b2d5-d9c1932e0481|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 10:56:16.8632|Debug|0649a2f3-9b0c-4eae-85de-9a74ede60f8a|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 10:56:48.4780|Debug|eacc8a28-af98-46ea-bf0e-9162d753355a|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:01:50.0033|Debug|36fa90f8-b28b-40c8-aac3-2aea85918d48|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:04:35.3997|Debug|cdbedfc3-9743-49a6-bed0-dc8135a891c4|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:05:18.0792|Debug|4882fbf4-54ac-4193-821f-bd19a7338c6b|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:05:37.9303|Debug|c4e26b57-0d29-459b-8702-76ee3e29ad26|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:05:58.3615|Debug|b4b9f23e-94ae-4fc7-9ece-8a6cda479063|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:06:32.5214|Debug|90b0dba1-7c1a-4e55-b757-b68846ddbce5|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:07:00.5870|Debug|3be62449-7b56-448e-bdcf-e778d788eba1|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:09:18.9699|Debug|96df215b-7025-45e6-9f29-031f6ce57b97|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:09:21.6141|Debug|fb1f47f9-0cee-43e1-a5a0-10ae6d0ffc33|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:11:11.9204|Debug|3ad652d1-abd6-4103-8067-d4c753088dc7|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:15:37.2166|Debug|897e63ca-0cce-42a7-9d2c-3c343690fa56|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:16:05.7192|Debug|258e49f1-b4b2-4a81-8998-99d601c030ad|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:18:14.9976|Debug|d3012659-63f0-4a0e-9b63-1acdc7918523|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:19:10.9388|Debug|527e0edc-b1fd-4760-919c-17f3794c6515|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:22:51.5854|Error|9f8f3778-d402-40f0-baab-6913084710cf|System.Web.HttpException:A public action method 'action' was not found on controller 'Commerce.Web.Areas.Public.Controllers.ImageController'.
+   at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+   at System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) 
+2013-10-20 11:22:51.5854|Error|2055dabc-2602-4f05-b1b2-71f6eaa4d4bf|System.Web.HttpException:A public action method 'action' was not found on controller 'Commerce.Web.Areas.Public.Controllers.ImageController'.
+   at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+   at System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) 
+2013-10-20 11:22:59.9499|Debug|6110dea1-a251-4c2d-8f2d-4e188cc3426b|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:22:59.9499|Debug|808b0465-dbd1-4069-bd33-516b2562b63e|Image - Download: 0326a982-540b-46ab-887b-14824c8acb2e thumbnail 
+2013-10-20 11:22:59.9499|Debug|b4d6e1a7-faa7-4023-8faf-c6960c01e5a0|Image - Download: b76e5342-bbee-483a-a285-ab5cbd9a3e24 thumbnail 
+2013-10-20 11:22:59.9499|Debug|1784ac41-66da-4690-94f0-b3bd8bb5a6e5|Image - Download: 8b77d4c7-3f1e-4a4a-aee9-729ce5c7d46c small 
+2013-10-20 11:22:59.9499|Debug|eb7f4d02-34b0-4d8d-b833-48c1f8189e07|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 large 
+2013-10-20 11:22:59.9649|Debug|b2344d9b-34a9-486b-a7b2-6a3bd3190b37|Image - Download: bffb1320-2488-4f20-ad71-3a065f5a3b8d thumbnail 
+2013-10-20 11:22:59.9649|Debug|b8cf23f5-3173-4654-accd-e9c0c6406576|Image - Download: 9e53b448-58ae-4893-bf96-ddfb0199cc56 thumbnail 
+2013-10-20 11:23:00.1429|Debug|a21605f4-7ad9-4c1c-b39d-60d0f4ff68f3|Image - Download: bf7d4243-9d75-4c42-bdd0-26fd8371980b thumbnail 
+2013-10-20 11:23:00.1609|Debug|4a38e303-887c-407f-927e-a6f6b8b7bee8|Image - Download: 694a1854-a270-4c4e-b105-908aae199408 thumbnail 
+2013-10-20 11:27:13.5734|Debug|6b07d411-6abc-47f0-bcec-f4a79f433560|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:32:48.6996|Debug|9e117487-dc0a-42b0-914c-23764e03e3fe|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:33:03.3494|Debug|444456ee-5b4b-4777-8477-670950fb6907|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:33:27.6338|Debug|eff74fc1-b9c1-479c-9a3d-43151d70ec42|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:34:08.2401|Debug|d1d6e021-a68a-4f06-9dc0-c04161b6aafd|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:38:08.5939|Debug|b6b9e86e-15e7-4713-a8bd-8b3d4d682257|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:38:31.0961|Debug|6bc5691d-4703-4a8d-b0a7-2969d5336366|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:47:47.9210|Debug|e3b03478-fc9b-4b4b-9f44-68ca117c8437|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:48:28.6173|Debug|4d6d67bb-5e2d-4419-9e30-5b8edfd9b62d|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:49:32.1110|Debug|9b97af7d-ee53-43cf-b6ef-4bf636b4d8ee|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:50:11.4102|Debug|c98b74b8-6c3e-4c10-9029-924b2c64f9c2|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:50:28.0282|Debug|eaa155cb-a836-4e14-8aff-ea7abd0906c5|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:53:07.4573|Debug|33d7274c-177a-4075-b10b-eb2c90b88a76|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:53:51.2778|Debug|2901ff9f-525b-4653-b01a-f7de1030c85d|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:54:53.8424|Debug|3094d58f-6377-42df-a4ae-ad57b4d60b18|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:55:27.4363|Debug|71ee791b-9587-4384-abeb-88d694c0263d|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:55:55.0709|Debug|6f81cb3d-8342-4d40-82d7-d27679d09c27|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 11:57:48.9824|Debug|a7a8b0ca-8bdc-42f3-aae3-71ef14a618db|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 12:03:47.4829|Debug|86c4f1f8-829b-4de0-bd8a-d8a186a88502|Image - Download: 035fb45d-9d7e-4e8e-938c-86ec42e68284 thumbnail 
+2013-10-20 12:12:50.0339|Error|78d47185-b6b5-4881-9d5a-0501badbf752|URL:http://localhost/Commerce.Web/cart - IsAjaxRequest: True 
+2013-10-20 12:12:50.4879|Error|78d47185-b6b5-4881-9d5a-0501badbf752|System.Data.EntityCommandExecutionException:An error occurred while executing the command definition. See the inner exception for details.
+   at System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   at System.Data.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   at System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[S](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
+   at Commerce.Application.Concrete.Shopping.CartRepository.Retrieve(Guid identifier) in C:\DEV\Pleiades\Commerce.Domain\Concrete\Shopping\CartRepository.cs:line 32
+   at Commerce.Application.Concrete.Shopping.CartManagementService.IdempotentCartFetcher() in C:\DEV\Pleiades\Commerce.Domain\Concrete\Shopping\CartManagementService.cs:line 35
+   at Commerce.Application.Concrete.Shopping.CartManagementService.Retrieve() in C:\DEV\Pleiades\Commerce.Domain\Concrete\Shopping\CartManagementService.cs:line 23
+   at Commerce.Web.Areas.Public.Controllers.CartController.Get() in C:\DEV\Pleiades\Commerce.Web\Areas\Public\Controllers\CartController.cs:line 23
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Invalid column name 'ShippingMethod_Id'.
+Invalid column name 'StateTax_Abbreviation'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior) 
+2013-10-20 12:17:28.1718|Error|0cbbc7e2-34ed-4407-8ff0-8b1592025fbf|URL:http://localhost/Commerce.Web/cart - IsAjaxRequest: True 
+2013-10-20 12:17:28.7409|Error|0cbbc7e2-34ed-4407-8ff0-8b1592025fbf|Newtonsoft.Json.JsonSerializationException:Error getting value from 'Tax' on 'Commerce.Application.Model.Billing.Total'.
+   at Newtonsoft.Json.Serialization.DynamicValueProvider.GetValue(Object target)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeObject(JsonWriter writer, Object value, JsonObjectContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeObject(JsonWriter writer, Object value, JsonObjectContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeObject(JsonWriter writer, Object value, JsonObjectContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.Serialize(JsonWriter jsonWriter, Object value)
+   at Newtonsoft.Json.JsonSerializer.SerializeInternal(JsonWriter jsonWriter, Object value)
+   at Newtonsoft.Json.JsonSerializer.Serialize(JsonWriter jsonWriter, Object value)
+   at Pleiades.Web.Json.JsonNetResult.ExecuteResult(ControllerContext context) in C:\DEV\Pleiades\Pleiades.Web\Json\JsonNetResult.cs:line 52
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+INNER EXCEPTION
+System.NullReferenceException:Object reference not set to an instance of an object.
+   at Commerce.Application.Model.Billing.Total.get_Tax() in C:\DEV\Pleiades\Commerce.Domain\Model\Billing\Total.cs:line 36
+   at GetTax(Object )
+   at Newtonsoft.Json.Serialization.DynamicValueProvider.GetValue(Object target) 
+2013-10-20 12:17:33.9041|Error|160b6d9a-0269-4818-98ec-0025aa9063bc|URL:http://localhost/Commerce.Web/cart - IsAjaxRequest: True 
+2013-10-20 12:17:33.9041|Error|160b6d9a-0269-4818-98ec-0025aa9063bc|Newtonsoft.Json.JsonSerializationException:Error getting value from 'Tax' on 'Commerce.Application.Model.Billing.Total'.
+   at Newtonsoft.Json.Serialization.DynamicValueProvider.GetValue(Object target)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeObject(JsonWriter writer, Object value, JsonObjectContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeObject(JsonWriter writer, Object value, JsonObjectContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeObject(JsonWriter writer, Object value, JsonObjectContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.Serialize(JsonWriter jsonWriter, Object value)
+   at Newtonsoft.Json.JsonSerializer.SerializeInternal(JsonWriter jsonWriter, Object value)
+   at Newtonsoft.Json.JsonSerializer.Serialize(JsonWriter jsonWriter, Object value)
+   at Pleiades.Web.Json.JsonNetResult.ExecuteResult(ControllerContext context) in C:\DEV\Pleiades\Pleiades.Web\Json\JsonNetResult.cs:line 52
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+INNER EXCEPTION
+System.NullReferenceException:Object reference not set to an instance of an object.
+   at Commerce.Application.Model.Billing.Total.get_Tax() in C:\DEV\Pleiades\Commerce.Domain\Model\Billing\Total.cs:line 36
+   at GetTax(Object )
+   at Newtonsoft.Json.Serialization.DynamicValueProvider.GetValue(Object target) 
+2013-10-20 12:18:17.1186|Error|88f7beca-6326-4b4f-9b98-4a125c511cda|URL:http://localhost/Commerce.Web/cart - IsAjaxRequest: True 
+2013-10-20 12:18:17.1516|Error|88f7beca-6326-4b4f-9b98-4a125c511cda|Newtonsoft.Json.JsonSerializationException:Error getting value from 'Tax' on 'Commerce.Application.Model.Billing.Total'.
+   at Newtonsoft.Json.Serialization.DynamicValueProvider.GetValue(Object target)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeObject(JsonWriter writer, Object value, JsonObjectContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeObject(JsonWriter writer, Object value, JsonObjectContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeObject(JsonWriter writer, Object value, JsonObjectContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.Serialize(JsonWriter jsonWriter, Object value)
+   at Newtonsoft.Json.JsonSerializer.SerializeInternal(JsonWriter jsonWriter, Object value)
+   at Newtonsoft.Json.JsonSerializer.Serialize(JsonWriter jsonWriter, Object value)
+   at Pleiades.Web.Json.JsonNetResult.ExecuteResult(ControllerContext context) in C:\DEV\Pleiades\Pleiades.Web\Json\JsonNetResult.cs:line 52
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+INNER EXCEPTION
+System.NullReferenceException:Object reference not set to an instance of an object.
+   at Commerce.Application.Model.Billing.Total.get_Tax() in C:\DEV\Pleiades\Commerce.Domain\Model\Billing\Total.cs:line 36
+   at GetTax(Object )
+   at Newtonsoft.Json.Serialization.DynamicValueProvider.GetValue(Object target) 
+2013-10-20 12:19:39.4513|Debug|4d93541f-9fc4-48f4-9e3d-e40eaeff5187|Image - Download: 1e4194cd-e46e-4a61-958b-dff941e98608 small 
+2013-10-20 12:19:39.4513|Debug|11842f54-0fe0-45dc-95fb-6e4199d2550c|Image - Download: bea96e3d-7f11-4fdc-b286-6379248777f4 small 
+2013-10-20 12:19:39.4513|Debug|2aebbc10-d45b-4dc3-973d-8f7288aed950|Image - Download: 027e3f1c-915c-4d75-aca6-8ce4d7403fdd small 
+2013-10-20 12:19:39.5933|Debug|ee8515ca-c35e-433b-b712-0c5d8356e1b7|Image - Download: c6dd2deb-422a-42d1-bae3-1eb9c2c3418b small 
+2013-10-20 12:19:39.5933|Debug|26352a8b-c966-4bc6-abc0-6d7d0dacc614|Image - Download: e2d2a3f7-16aa-4d9c-8927-974b199c659f small 
+2013-10-20 12:19:39.6433|Debug|cd0e141d-f8fb-499e-96fa-e966cbd07d1c|Image - Download: 08f9900e-3ae1-4c83-829c-6cc99504315b small 
+2013-10-20 12:19:39.6713|Debug|f95897fe-e9f5-4bb7-a33a-4f238233d10d|Image - Download: adc147a3-5d49-4b79-8498-e7534a3b8c2a small 
+2013-10-20 12:19:39.6873|Debug|bc12c688-6ed9-480c-afe6-d4c82ef8a7ae|Image - Download: f1e718e8-c043-41ef-8415-8d085537be57 small 
+2013-10-20 12:19:39.7143|Debug|09f3503c-f50e-4d3a-8592-bf05ed768524|Image - Download: eb9bac22-af2d-4f78-86b6-8766fbf97a8b small 
+2013-10-20 12:19:39.7143|Debug|e10c7433-6c76-4747-8e4d-c71a1d6ebedd|Image - Download: 1c575fec-12b8-4f33-80c3-228189259d31 small 
+2013-10-20 12:19:41.6935|Debug|996834ae-94c1-4ef5-b246-c589321b3554|Image - Download: 027e3f1c-915c-4d75-aca6-8ce4d7403fdd large 
+2013-10-20 12:19:41.6935|Debug|82fecd2f-0eb7-4500-9735-5f2318bc389e|Image - Download: 027e3f1c-915c-4d75-aca6-8ce4d7403fdd thumbnail 
+2013-10-20 12:19:41.7065|Debug|129ff710-f9a0-470a-9151-817871c6b745|Image - Download: 456f4ff1-c221-4275-a793-74d3def49b84 thumbnail 
+2013-10-20 12:19:41.7065|Debug|6e9bd793-22df-43e3-bc48-36f115b7a89f|Image - Download: 9228bcfa-9e1c-4084-a84e-f56a502158d7 large 
+2013-10-20 12:19:41.7065|Debug|34e121bd-9a0b-45f6-9907-eb9a79aafb2d|Image - Download: aab1e3a3-7ac7-4011-a1f7-da9fea4b218c thumbnail 
+2013-10-20 12:19:41.7405|Debug|30fea828-8d08-4f1a-9b1c-6209cd597e72|Image - Download: f7a5a42e-6b02-433c-8013-0cda351c9837 thumbnail 
+2013-10-20 12:19:41.7575|Debug|65a9368e-d09d-479b-bdd9-8dc272f9f35a|Image - Download: 5cbfa230-6ac7-4c9d-bdbf-43ef08143490 thumbnail 
+2013-10-20 12:19:41.7575|Debug|5feee233-032d-4621-9ce0-5dc031410170|Image - Download: 4f7a7732-2c98-4041-b139-537c6c594bcf thumbnail 
+2013-10-20 12:19:41.8255|Debug|27d3030a-ba23-4c43-b8a3-9413ea39fbf2|Image - Download: c495edb7-2da9-44c9-b3f9-44ff7b0c0731 thumbnail 
+2013-10-20 12:19:46.9018|Debug|521f6461-a8a8-43d3-b7e2-8dfae1ca2d47|Image - Download: fb781490-0f04-4706-9e6f-4ea0cef4beac large 
+2013-10-20 12:19:46.9248|Debug|4fd25af9-ae3b-40df-bf14-83bdafb9c1f6|Image - Download: 75c480a9-330b-449b-92dd-e6aecbb11ad9 thumbnail 
+2013-10-20 12:19:46.9248|Debug|6e3f6d9d-e051-4597-af54-97fa1e82864b|Image - Download: de5ea308-059a-42e0-99ff-bbbd6710e500 thumbnail 
+2013-10-20 12:19:46.9398|Debug|655e8ad4-68cb-4885-9de2-b3c894d2da80|Image - Download: 87df8f53-a52a-418a-a699-7945a17372f6 thumbnail 
+2013-10-20 12:19:46.9398|Debug|4c09f78f-a8cf-40bc-a4c8-e58ab0583829|Image - Download: 92916b54-0893-4b77-b00a-4e91a99fb1b8 thumbnail 
+2013-10-20 12:19:46.9558|Debug|d0281459-35cf-4d7b-9c85-baaa53496244|Image - Download: fb781490-0f04-4706-9e6f-4ea0cef4beac thumbnail 
+2013-10-20 12:19:50.4190|Debug|8edcf3d9-89ec-46ba-9d87-f7044d09de46|Image - Download: 027e3f1c-915c-4d75-aca6-8ce4d7403fdd thumbnail 
+2013-10-20 12:19:50.4190|Debug|cd25c5a8-44ef-439e-9a93-8c7471514416|Image - Download: fb781490-0f04-4706-9e6f-4ea0cef4beac thumbnail 
+2013-10-20 12:19:53.4971|Debug|3e701b85-1cc5-4821-abec-634d7e440a53|Image - Download: fb781490-0f04-4706-9e6f-4ea0cef4beac thumbnail 
+2013-10-20 12:19:53.5011|Debug|91ef308a-0bde-44d9-8fb0-0427a1a1c9ac|Image - Download: 027e3f1c-915c-4d75-aca6-8ce4d7403fdd thumbnail 
+2013-10-20 12:27:34.5845|Debug|c458f5fc-af54-4288-821c-13aab14d646d|Image - Download: 027e3f1c-915c-4d75-aca6-8ce4d7403fdd thumbnail 
+2013-10-20 12:27:34.5845|Debug|1e1a2b00-b4fb-4498-b312-1bfc9ada1157|Image - Download: fb781490-0f04-4706-9e6f-4ea0cef4beac thumbnail 
+2013-10-20 12:28:29.3886|Debug|a6846140-fe58-40f0-bc02-ebf834cee11e|Image - Download: 027e3f1c-915c-4d75-aca6-8ce4d7403fdd thumbnail 
+2013-10-20 12:28:29.3886|Debug|bb032974-4d3c-42d1-acf6-6404619a3966|Image - Download: fb781490-0f04-4706-9e6f-4ea0cef4beac thumbnail 
+2013-10-20 12:29:09.6529|Debug|8684dac4-aa2f-4b26-b353-114a824144f3|Image - Download: 027e3f1c-915c-4d75-aca6-8ce4d7403fdd thumbnail 
+2013-10-20 12:29:09.6529|Debug|43b2e58a-fa9e-454e-bfc7-6080c316a022|Image - Download: fb781490-0f04-4706-9e6f-4ea0cef4beac thumbnail 

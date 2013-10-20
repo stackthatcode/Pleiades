@@ -27,6 +27,8 @@ namespace Commerce.Application.Model.Orders
         public List<OrderLine> OrderLines { get; set; }
         public DateTime DateCreated { get; set; }
 
+        public ShippingMethod ShippingMethod { get; set; }
+        public StateTax StateTax { get; set; }
         public Total Total { get; private set; }
 
         // Payment Info
@@ -40,7 +42,7 @@ namespace Commerce.Application.Model.Orders
         {
             CustomerId = Guid.NewGuid();
             OrderLines = new List<OrderLine>();
-            Total = new Total(SubTotal);
+            Total = new Total(SubTotal, () => ShippingMethod, () => StateTax);
             Transactions = new List<Transaction>();
             Notes = new List<OrderNote>();
         }

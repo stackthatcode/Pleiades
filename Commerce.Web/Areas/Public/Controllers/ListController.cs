@@ -22,7 +22,10 @@ namespace Commerce.Web.Areas.Public.Controllers
             {
                 return new JsonNetResult(_pushMarketContext.StateTaxes.OrderBy(x => x.Name).ToList());                
             }
-
+            if (listId == "ShippingMethods")
+            {
+                return new JsonNetResult(_pushMarketContext.ShippingMethods.ToList());
+            }
             return JsonNetResult.Success();
         }
     }

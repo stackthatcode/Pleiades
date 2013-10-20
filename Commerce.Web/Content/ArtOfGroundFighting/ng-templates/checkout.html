@@ -18,9 +18,6 @@
     
     <div class="col-lg-4" style="text-align:right;">
         <div ng-show="NonEmptyCart()">
-            <button class="btn btn-default btn-lg cart-big-action" ng-click="Checkout()" >
-                Submit Order <i class="glyphicon glyphicon-flash"></i>  
-            </button>
         </div>
         <div ng-show="!NonEmptyCart()">
             <a href="#/products" class="btn btn-default btn-lg cart-big-action">
@@ -30,108 +27,168 @@
     </div>
 </div>
 
-<div class="col-lg-12" style="height:20px;"></div>
-
-<div class="col-lg-8" style="padding-left:0px;" ng-show="NonEmptyCart()">
-    
-    <div style="width:400px;">
-        <h1 class="sub-sub-header" style="color:#999;">Enter your Billing Information</h1>
-
-        <div id="addressValidationErrors" style="text-align:center;" class="alert alert-error hide">
-            <strong>Please enter valid Billing Address information</strong>  
-        </div>
-
-        <form id="billingAddressForm">        
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input class="form-control" type="text" name="name" ng-model="cart.BillingInfo.Name" placeholder="Name" maxlength="50">
-            </div>
-            <div class="form-group">
-                <label for="address1">Address 1</label>
-                <input class="form-control" type="text" name="address1" ng-model="cart.BillingInfo.Address1" placeholder="Address Line 1" maxlength="50">
-            </div>
-            <div class="form-group">
-                <label for="address2">Address 2</label>
-                <input class="form-control" type="text" name="address2" ng-model="cart.BillingInfo.Address2" placeholder="Address Line 2" maxlength="50">
-            </div>
-
-            <div class="form-group" style="float:left;">
-                <label for="city">City</label>
-                <input class="form-control" type="text" name="city" ng-model="cart.BillingInfo.City" placeholder="City" maxlength="25">            
-            </div>
-            <div class="form-group" style="float:left; margin-left:15px;">
-                <label for="state">State</label>
-                <select class="form-control" id="Select1" name="state" ng-model="cart.BillingInfo.State"
-                         ng-options="state.Abbreviation as state.Abbreviation for state in StatesAndTaxes" />
-            </div>
-            <div class="form-group" style="float:left; margin-left:15px;">
-                <label for="state">Zip Code</label>
-                <input class="form-control" style="width:100px;" type="text" name="zipCode" ng-model="cart.BillingInfo.ZipCode" placeholder="Zip Code" maxlength="5">
-            </div>
-        </form>
-
-        <div id="paymentValidationErrors" style="width:570px; text-align:center;" class="alert alert-error hide">
-            <strong>Please enter valid Credit Card Information</strong>  
-        </div>
-
-        <form id="paymentForm">
-            <div style="clear:both;">
-                <div class="form-group" style="float:left;">
-                    <label for="cardNumber">Card Number</label>
-                    <input class="form-control" type="text" name="cardNumber" ng-model="cart.BillingInfo.CardNumber" placeholder="Card Number" maxlength="16">
-                </div>
-                <div class="form-group" style="float:left; margin-left:30px;">
-                    <label for="CVV">CVV</label>
-                    <input class="form-control" type="text" style="width:75px;" name="CVV" ng-model="cart.BillingInfo.CVV" placeholder="CVV" maxlength="16">
-                </div>
-            </div>
-            
-            <div style="clear:both;">
-                <div class="form-group" style="float:left;">
-                    <label for="lastName">Expires Month</label>
-                    <select class="form-control" id="state" name="expirationMonth" style="width:100px;" ng-model="cart.BillingInfo.ExpirationMonth" 
-                            ng-options="state.Abbreviation as state.Abbreviation for state in StatesAndTaxes" />
-                </div>
-                <div class="form-group" style="float:left; margin-left:30px;">
-                    <label for="lastName">Expires Year</label>
-                    <select class="form-control"    id="state" name="expirationYear" style="width:100px;" ng-model="cart.BillingInfo.ExpirationYear"
-                            ng-options="state.Abbreviation as state.Abbreviation for state in StatesAndTaxes" />
-                </div>
-            </div>
-        </form>    
-    </div>
-    <div style="width:400px; height:30px; clear:both;">
-    </div>
+<div class="row">
+    <div class="col-lg-12" style="height:20px;"></div>
 </div>
 
-<div class="col-lg-4" style="padding-left: 0px;" ng-show="NonEmptyCart()">
-    <h1 class="sub-sub-header" style="color:#999;">Order Summary</h1>
-    
-    <div ng-repeat="item in cart.CartItems | orderBy:name" style="height:100px;">
-        <img ng-src="image/{{ item.Sku.ImageBundle.ExternalId }}?size=thumbnail" style="border: #CCC dotted 1px; float:left; margin-right:20px;" />
-        <span class="bold-print-black">{{ item.Sku.Name }}</span><br />
-        <span class="product-list-synopsis">{{ item.Sku.SkuCode }}</span><br />
-        <span class="product-list-synopsis">{{ item.Quantity }} {{ ItemsText(item.Quantity) }} at {{ ToMoney(item.Sku.Product.UnitPrice) }}</span><br />
+<div class="row">
+    <div class="col-lg-8" ng-show="NonEmptyCart()">
+        <div style="width:400px;">
+            <h1 class="sub-sub-header" style="color:#999;">Enter your Shipping Information</h1>
+
+            <div id="Div1" style="text-align:center; display:none; height:50px; clear:both;" class="alert alert-danger">
+                <strong>Please enter valid Shipping Information</strong>  
+            </div>
+
+            <form id="shippingInfoForm">
+                <div class="form-group">
+                          <label for="name">Name</label>
+                          <input class="form-control" type="text" name="name" ng-model="ShippingInfo.Name" placeholder="Name" maxlength="50">
+                      </div>
+                <div class="form-group">
+                    <label for="address1">Address 1</label>
+                    <input class="form-control" type="text" name="address1" ng-model="ShippingInfo.Address1" placeholder="Address Line 1" maxlength="50">
+                </div>
+                <div class="form-group">
+                    <label for="address2">Address 2</label>
+                    <input class="form-control" type="text" name="address2" ng-model="ShippingInfo.Address2" placeholder="Address Line 2" maxlength="50">
+                </div>
+
+                <div class="form-group" style="float:left;">
+                    <label for="city">City</label>
+                    <input class="form-control" type="text" name="city" ng-model="ShippingInfo.City" placeholder="City" maxlength="25">            
+                </div>
+                <div class="form-group" style="float:left; margin-left:15px;">
+                    <label for="state">State</label>
+                    <select class="form-control" id="Select2" name="state" ng-model="ShippingInfo.State"
+                            ng-options="state.Abbreviation as state.Abbreviation for state in StatesAndTaxes" />
+                </div>
+                <div class="form-group" style="float:left; margin-left:15px;">
+                    <label for="state">Zip Code</label>
+                    <input class="form-control" style="width:100px;" type="text" name="zipCode" ng-model="ShippingInfo.ZipCode" placeholder="Zip Code" maxlength="5">
+                </div>
+                <div style="clear:both;"></div>
+                <div class="form-group" ng-repeat="method in ShippingMethods">
+                    <div class="radio">
+                        <label for="method">
+                            <input type="radio" ng-model="ShippingInfo.ShippingMethodId" name="method" value="{{ method.Id }}" />
+                            {{ method.Description }}
+                        </label>                     
+                    </div>
+                </div>
+            </form>
+            <div style="width:400px; height:30px; clear:both;">
+            </div>
+        </div>
+
+        <div style="width:400px;">
+            <h1 class="sub-sub-header" style="color:#999;">Enter your Billing Information</h1>
+
+            <div id="billing-address-errors" style="text-align:center; display:none; height:50px; clear:both;" class="alert alert-danger">
+                <strong>Please enter valid Billing Address</strong>  
+            </div>
+
+            <form id="billingAddressForm">        
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input class="form-control" type="text" name="name" ng-model="BillingInfo.Name" placeholder="Name" maxlength="50">
+                </div>
+                <div class="form-group">
+                    <label for="address1">Address 1</label>
+                    <input class="form-control" type="text" name="address1" ng-model="BillingInfo.Address1" placeholder="Address Line 1" maxlength="50">
+                </div>
+                <div class="form-group">
+                    <label for="address2">Address 2</label>
+                    <input class="form-control" type="text" name="address2" ng-model="BillingInfo.Address2" placeholder="Address Line 2" maxlength="50">
+                </div>
+
+                <div class="form-group" style="float:left;">
+                    <label for="city">City</label>
+                    <input class="form-control" type="text" name="city" ng-model="BillingInfo.City" placeholder="City" maxlength="25">            
+                </div>
+                <div class="form-group" style="float:left; margin-left:15px;">
+                    <label for="state">State</label>
+                    <select class="form-control" id="Select1" name="state" ng-model="BillingInfo.State"
+                            ng-options="state.Abbreviation as state.Abbreviation for state in StatesAndTaxes" />
+                </div>
+                <div class="form-group" style="float:left; margin-left:15px;">
+                    <label for="state">Zip Code</label>
+                    <input class="form-control" style="width:100px;" type="text" name="zipCode" ng-model="BillingInfo.ZipCode" placeholder="Zip Code" maxlength="5">
+                </div>
+            </form>
+
+            <div id="payment-info-errors" style="text-align:center; display:none; height:50px; clear:both;" class="alert alert-danger">
+                <strong>Please enter valid Credit Card Information</strong>  
+            </div>
+
+            <form id="paymentForm">
+                <div style="clear:both;">
+                    <div class="form-group" style="float:left;">
+                        <label for="cardNumber">Card Number</label>
+                        <input class="form-control" type="text" name="cardNumber" ng-model="BillingInfo.CardNumber" placeholder="Card Number" maxlength="16">
+                    </div>
+                    <div class="form-group" style="float:left; margin-left:30px;">
+                        <label for="CVV">CVV</label>
+                        <input class="form-control" type="text" style="width:75px;" name="CVV" ng-model="BillingInfo.CVV" placeholder="CVV" maxlength="16">
+                    </div>
+                </div>
+            
+                <div style="clear:both;">
+                    <div class="form-group" style="float:left;">
+                        <label for="lastName">Expires Month</label>
+                        <select class="form-control" id="month" name="expirationMonth" style="width:100px;" ng-model="BillingInfo.ExpirationMonth" 
+                                ng-options="month for month in ExpirationMonths" />
+                    </div>
+                    <div class="form-group" style="float:left; margin-left:30px;">
+                        <label for="lastName">Expires Year</label>
+                        <select class="form-control" id="year" name="expirationYear" style="width:100px;" ng-model="BillingInfo.ExpirationYear"
+                                ng-options="year for year in ExpirationYears" />
+                    </div>
+                </div>
+            </form>    
+        </div>
+        <div style="width:400px; height:30px; clear:both;">
+        </div>
+        <div>
+            <button class="btn btn-default btn-lg cart-big-action" ng-click="Checkout()">Submit Your Order <i class="glyphicon glyphicon-flash"></i></button>
+        </div>
     </div>
 
-    <div>
-        <table style="width:100%">
-            <tr>
-                <td class="bold-print-grey" style="width:200px;">Order Subtotal</td>
-                <td class="bold-print-grey" style="text-align:right;">{{ ToMoney(cart.Total.SubTotal) }}</td>
-            </tr>
-            <tr>
-                <td class="bold-print-grey">Sales Tax {{ SalesTaxText(cart.Total) }}</td>
-                <td style="text-align:right;" class="bold-print-grey">{{ ToMoney(cart.Total.Tax) }}</td>
-            </tr>
-            <tr>
-                <td class="bold-print-grey">Shipping</td>
-                <td class="bold-print-grey" style="text-align:right;">{{ ToMoney(cart.Total.ShippingCost) }}</td>
-            </tr>
-            <tr>
-                <td class="bold-print-black">Order Total</td>
-                <td style="text-align:right;" class="bold-print-black">{{ ToMoney(cart.Total.GrandTotal) }}</td>
-            </tr>
-        </table>        
+    <div class="col-lg-4" ng-show="NonEmptyCart()">
+        <h1 class="sub-sub-header" style="color:#999;">Order Summary</h1>
+    
+        <div ng-repeat="item in cart.CartItems | orderBy:name" style="height:100px;">
+            <img ng-src="image/{{ item.Sku.ImageBundle.ExternalId }}?size=thumbnail" style="border: #CCC dotted 1px; float:left; margin-right:20px;" />
+            <span class="bold-print-black">{{ item.Sku.Name }}</span><br />
+            <span class="product-list-synopsis">{{ item.Sku.SkuCode }}</span><br />
+            <span class="product-list-synopsis">{{ item.Quantity }} {{ ItemsText(item.Quantity) }} at {{ ToMoney(item.Sku.Product.UnitPrice) }}</span><br />
+        </div>
+
+        <div>
+            <table style="width:100%">
+                <tr>
+                    <td class="bold-print-grey" style="width:200px;">Order Subtotal</td>
+                    <td class="bold-print-grey" style="text-align:right;">{{ ToMoney(cart.Total.SubTotal) }}</td>
+                </tr>
+                <tr>
+                    <td class="bold-print-grey">Sales Tax {{ SalesTaxText(cart.Total) }}</td>
+                    <td style="text-align:right;" class="bold-print-grey">{{ ToMoney(cart.Total.Tax) }}</td>
+                </tr>
+                <tr>
+                    <td class="bold-print-grey">Shipping</td>
+                    <td class="bold-print-grey" style="text-align:right;">{{ ToMoney(cart.Total.ShippingCost) }}</td>
+                </tr>
+                <tr>
+                    <td class="bold-print-black">Order Total</td>
+                    <td style="text-align:right;" class="bold-print-black">{{ ToMoney(cart.Total.GrandTotal) }}</td>
+                </tr>
+            </table>        
+        </div>
+
+        <div style="width:400px; height:30px; clear:both;">
+        </div>
+        <div>
+            <button class="btn btn-default btn-lg cart-big-action" ng-click="Checkout()">Submit Your Order <i class="glyphicon glyphicon-flash"></i></button>
+        </div>
     </div>
 </div>

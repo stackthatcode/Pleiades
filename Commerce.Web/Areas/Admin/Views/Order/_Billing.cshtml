@@ -51,7 +51,7 @@
                 errorPlacement: function(error, element) {
                     return true;
                 },
-                errorContainer: $("#addressValidationErrors"),
+                errorContainer: $("#billing-address-errors"),
             });
 
             $("#paymentForm").validate({
@@ -194,7 +194,7 @@
             <a href="#" data-bind="click:$root.Cart().CopyShippingToBilling" style="margin-top:20px; margin-left:10px; float:left;">(click here to copy Shipping Address)</a>
             <div style="clear:both;"></div>
 
-            <div id="addressValidationErrors" style="width:570px; text-align:center;" class="alert alert-error hide">
+            <div id="billing-address-errors" style="width:570px; text-align:center;" class="alert alert-error hide">
                 <strong>Please enter valid Billing Address information</strong>  
 		    </div>
 
