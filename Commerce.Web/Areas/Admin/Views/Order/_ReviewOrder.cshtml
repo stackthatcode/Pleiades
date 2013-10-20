@@ -148,28 +148,29 @@
 </script>
 <!-- KNOCKOUT TEMPLATES - Review Products -->
 <script type="text/html" id="Top-Workspace-ReviewProducts">
-	<div id="heading" class="container">
+    <div id="heading" class="container" style="height:125px;">
         <div class="row">
-			<div class="span9">
-				<h1>Create Order &gt; Review Cart</h1>
-			</div>
-			<div class="span3" style="margin-top:15px; text-align:right;">
+            <div class="span9">
+                <h1>Create Order &gt; Review Cart</h1>
+            </div>
+            <div class="span3" style="margin-top:15px; text-align:right;">
                 <div data-bind="if: $root.Cart().TotalQuantity()">
                     <a name="btn-goto-shipping" class="btn btn-primary" style="width:190px;" data-bind="click: $root.GlideToShipping">
                         <i class="icon-plane icon-white"></i> Shipping &amp; Billing <i class="icon-arrow-right icon-white"></i>
                     </a>
                 </div>
-			</div>
-		</div>
+            </div>
+        </div>
+        <div style="height:20px;"></div>
 
         <div class="row">
             <div class="span7" style="height:48px;">
                 <ul class="nav nav-pills">
                     <li style="width:160px;">
-				        <a name="glideToSearch" href="#" class="backbutton" data-bind="click: $root.BackToProductSearch">&laquo; Add Items To Cart</a>
+                        <a name="glideToSearch" href="#" class="backbutton" data-bind="click: $root.BackToProductSearch">&laquo; Add Items To Cart</a>
                         &nbsp;
                     </li>
-                </ul
+                </ul>
             </div>
         </div>
 	</div>

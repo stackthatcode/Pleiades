@@ -109,10 +109,16 @@ div.product-list-price
     color: #F00;
 }
 
-.product-list-black {
+.bold-print-black {
     font-family: "Open Sans";
     font-weight: bold;
     color: #333;
+}
+
+.bold-print-grey {
+    font-family: "Open Sans";
+    font-weight: bold;
+    color: #666;
 }
 
 a.product-list-link:hover {

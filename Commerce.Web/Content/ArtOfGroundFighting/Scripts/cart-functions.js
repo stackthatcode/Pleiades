@@ -50,3 +50,17 @@ var CartResponseFunction = function(code) {
         return response.ResponseFunction;
     }
 };
+
+var DecorateAdjustedCartModelWithQuantities = function(data) {
+    for (var i = 0; i < data.Cart.CartItems.length; i++) {
+        var item = data.Cart.CartItems[i];
+        item.QuantityList = [];
+        for (var x = 0; x < item.Sku.Available; x++) {
+            item.QuantityList.push(x + 1);
+        }
+    }
+    
+    if (data.InventoryAdjusted) {
+        ngAjax.ModalGeneric("Changes were made to your Cart", "Due to changes in inventory, items were removed from your cart.");
+    }
+};

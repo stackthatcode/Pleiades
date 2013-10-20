@@ -2,39 +2,39 @@
 <script type="text/javascript">
     var PushMkt = PushMkt || {};
 
-    PushMkt.AddBillingFunctions = function (model) {
+    PushMkt.AddBillingFunctions = function(model) {
         var self = model;
 
-        self.BackToShippingInfo = function () {
+        self.BackToShippingInfo = function() {
             $("[name='glideToShipping']").hide();
             self.GlideLeft("Shipping", self.InitializeShippingForms);
-        }
+        };
 
-        self.InitializeBillingForms = function () {  
+        self.InitializeBillingForms = function() {
             var data = self.Cart().BillingInfo;
             data.CardNumber("");
             data.CVV("");
             data.ExpirationMonth(null);
             data.ExpirationYear(null);
-            
+
             $("#billingAddressForm").validate({
                 rules: {
                     name: {
                         required: true,
                     },
-                    address1: { 
+                    address1: {
                         required: true,
                     },
-                    city: { 
+                    city: {
                         required: true,
                     },
-                    zipCode: { 
+                    zipCode: {
                         required: true,
                     },
                     state: {
                         required: true,
-                    },                    
-                    phone: { 
+                    },
+                    phone: {
                         required: true,
                     },
                 },
@@ -43,12 +43,12 @@
                         .closest('.control-group')
                         .addClass('error');
                 },
-                unhighlight:  function(element) {
+                unhighlight: function(element) {
                     $(element)
                         .closest('.control-group')
                         .removeClass('error');
                 },
-                errorPlacement: function(error,element) {
+                errorPlacement: function(error, element) {
                     return true;
                 },
                 errorContainer: $("#addressValidationErrors"),
@@ -60,46 +60,46 @@
                         required: true,
                         creditcard: true,
                     },
-                    CVV: { 
+                    CVV: {
                         required: true,
                         number: true,
                         minlength: 3,
                     },
-                    expirationMonth: { 
+                    expirationMonth: {
                         required: true,
                     },
-                    expirationYear: { 
+                    expirationYear: {
                         required: true,
-                    },                    
+                    },
                 },
                 highlight: function(element) {
                     $(element)
                         .closest('.control-group')
                         .addClass('error');
                 },
-                unhighlight:  function(element) {
+                unhighlight: function(element) {
                     $(element)
                         .closest('.control-group')
                         .removeClass('error');
                 },
-                errorPlacement: function(error,element) {
+                errorPlacement: function(error, element) {
                     return true;
                 },
                 errorContainer: $("#paymentValidationErrors"),
             });
-        }
+        };
 
-        self.SubmitOrderClick = function () {
+        self.SubmitOrderClick = function() {
             var failed = false;
-            failed = (! $("#billingAddressForm").valid()) || failed;
-            failed = (! $("#paymentForm").valid()) || failed;            
+            failed = (!$("#billingAddressForm").valid()) || failed;
+            failed = (!$("#paymentForm").valid()) || failed;
             if (failed) {
                 return;
             }
 
             $("[name='btn-submit-order']").hide();
             self.ProcessOrder();
-        }
+        };
 
         self.ProcessOrder = function() {
             flow.exec(
@@ -124,9 +124,9 @@
                     if (!self.CompletedOrderResponse().Success) {
                         $("[name='btn-submit-order']").show();
                         self.ShowModal(
-                            "Notification", 
-                            "Order Submission", 
-                            "There was a problem submitting your Order", 
+                            "Notification",
+                            "Order Submission",
+                            "There was a problem submitting your Order",
                             self.CompletedOrderResponse().Messages);
                     } else {
                         console.log(self.CompletedOrderResponse());
@@ -135,8 +135,8 @@
                     }
                 }
             );
-        }
-    }
+        };
+    };
 </script>
 
 <style>
@@ -173,6 +173,7 @@
                 </a>
 			</div>
 		</div>
+                <div style="height:20px;"></div>
 
         <div class="row">
             <div class="span7" style="height:48px;">

@@ -4,15 +4,20 @@ var ngAjax = namespace("PushLibrary.NgAjax");
 var urlLocator = namespace("CommerceWeb.UrlLocator");
 var app = angular.module('push-market');
 
-app.controller('CartController', function ($scope, $http) {
+app.controller('CheckoutController', function ($scope, $http) {
 
     $scope.ToMoney = function (input) {
         return input ? input.toString().toMoney() : "";
     };
 
+    $scope.ItemsText = function (quantity) {
+        return (quantity == 1 ? "item" : "items");
+    };
+
     $scope.NonEmptyCart = function () {
         return $scope.cart && $scope.cart.CartItems && $scope.cart.CartItems.length > 0;
     };
+
 
     $scope.DeleteItem = function (skuCode) {
         var url = 'cart?skuCode=' + skuCode;
@@ -29,8 +34,7 @@ app.controller('CartController', function ($scope, $http) {
 
     $scope.RetrieveCart = function () {
         ngAjax.Get($http, 'cart', function (data) {
-            DecorateAdjustedCartModelWithQuantities(data);
-            $scope.cart = data.Cart;
+            $scope.LoadDataIntoModel(data);
         });
     };
 

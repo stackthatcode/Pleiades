@@ -1,7 +1,9 @@
+- Cart Total => DONE
+
+
 Front Range
 ===========
-- Cart Total => TODO
-
+- Add Limit to Cart => TODO
 - Link to Checkout => TODO
 - Shipping Information => TODO
 - Billing Information => TODO

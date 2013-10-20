@@ -1,0 +1,67 @@
+﻿
+<div id="arena-top-spacer" style="height:50px; padding-top:20px;">
+    Checkout &gt;&gt; <a class="mybreadcrumb" href="#/cart">Shopping Cart</a> &gt;&gt; <span>Billing &amp; Shipping</span>
+</div>
+
+<div class="row">
+    <!-- TODO: how to reuse templates..? -->
+    <div class="col-lg-8" ng-show="NonEmptyCart()">
+        <h1 class="main-header">Billing &amp; Shipping</h1>
+        <h1 class="sub-sub-header">
+            Current Total: {{ ToMoney(cart.Total.SubTotal) }}
+        </h1>
+        <div style="height:10px;" class="hidden-lg"></div>
+    </div>
+    <div class="col-lg-8" ng-show="!NonEmptyCart()">
+        <h1 class="main-header">Your Cart is Empty</h1>        
+    </div>
+    
+    <div class="col-lg-4" style="text-align:right;">
+        <div ng-show="NonEmptyCart()">
+            <button class="btn btn-default btn-lg cart-big-action" ng-click="AddToCart()" >
+                Submit Order <i class="glyphicon glyphicon-flash"></i>  
+            </button>
+        </div>
+        <div ng-show="!NonEmptyCart()">
+            <a href="#/products" class="btn btn-default btn-lg cart-big-action" ng-click="AddToCart()" >
+                Go Back to Storefront <i class="glyphicon glyphicon-forward"></i>  
+            </a> 
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12" style="height:40px;"></div>
+
+<div class="col-lg-8">
+    
+
+</div>
+
+<div class="col-lg-4">
+    <div ng-repeat="item in cart.CartItems | orderBy:name" style="height:100px;">
+        <img ng-src="image/{{ item.Sku.ImageBundle.ExternalId }}?size=thumbnail" style="border: #CCC dotted 1px; float:left; margin-right:20px;" />
+        <span class="bold-print-black">{{ item.Sku.Name }}</span><br />
+        <span class="product-list-synopsis">{{ item.Sku.SkuCode }}</span><br />
+        <span class="product-list-synopsis">{{ item.Quantity }} {{ ItemsText(item.Quantity) }} at {{ ToMoney(item.Sku.Product.UnitPrice) }}</span><br />
+    </div>
+    <div>
+        <table style="width:100%">
+            <tr>
+                <td class="bold-print-grey" style="width:200px;">Order Subtotal</td>
+                <td class="bold-print-grey" style="text-align:right;">{{ ToMoney(cart.Total.SubTotal) }}</td>
+            </tr>
+            <tr>
+                <td class="bold-print-grey">Sales Tax (7.5%)</td>
+                <td style="text-align:right;" class="bold-print-grey">{{ ToMoney(cart.Total.Tax) }}</td>
+            </tr>
+            <tr>
+                <td class="bold-print-grey">Shipping</td>
+                <td class="bold-print-grey" style="text-align:right;">{{ ToMoney(cart.Total.ShippingCost) }}</td>
+            </tr>
+            <tr>
+                <td class="bold-print-black">Order Total</td>
+                <td style="text-align:right;" class="bold-print-black">{{ ToMoney(cart.Total.GrandTotal) }}</td>
+            </tr>
+        </table>        
+    </div>
+</div>

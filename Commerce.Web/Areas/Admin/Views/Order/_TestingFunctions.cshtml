@@ -14,10 +14,8 @@
 	    billing.ExpirationYear("2014");
 	    billing.CVV("666");
 	};
-	// ### TESTING SCRIPTS ###
 
-	// ### TESTING SCRIPTS ###
-	window.Automation = function() {
+	window.LoadShippingInfo = function() {
 	    var modelReference = window.tmp;
 	    var shipping = modelReference.Cart().ShippingInfo;
 	    shipping.EmailAddress("aleksjones@gmail.com");
@@ -29,16 +27,21 @@
 	    shipping.ZipCode("60013");
 	    shipping.Phone("510-717-8112");
 	    shipping.ShippingOptionId("1");
+	};
 
+	window.Automation = function () {
+	    var modelReference = window.tmp;
+	    window.LoadShippingInfo();
+	    
 	    flow.exec(
-	        function() {
+	        function () {
 	            modelReference.SearchClick(this);
 	        },
-	        function() {
+	        function () {
 	            modelReference.ShowInventory(modelReference.SearchData()[0]);
 	            window.setTimeout(this, 1500);
 	        },
-	        function() {
+	        function () {
 	            var product = modelReference.SearchData()[0];
 	            var inventory = product.Inventory();
 	            var sku = inventory[1];
@@ -51,15 +54,15 @@
 	            modelReference.ViewCart();
 	            window.setTimeout(this, 2000);
 	        },
-	        function() {
+	        function () {
 	            modelReference.GlideToShipping();
 	            window.setTimeout(this, 2000);
 	        },
-	        function() {
+	        function () {
 	            modelReference.GotoBilling();
 	            window.setTimeout(this, 2000);
 	        },
-	        function() {
+	        function () {
 	            LoadPaymentInfo();
 	        }
 	    );
