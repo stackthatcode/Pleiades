@@ -43,10 +43,12 @@
     <div class="col-lg-4" style="margin-bottom:60px;">
         <span class="product-detail-header" style="margin-top:10px; float:left;">Quantity</span>
         
-        <select class="form-control quantity-list" ng-change="ChangeQuantity(item)" ng-model="item.Quantity" ng-options="quantity for quantity in item.QuantityList" style="float:left;">
+        <select class="form-control quantity-list" ng-change="ChangeQuantity(item)" style="float:left;"
+                ng-model="item.Quantity" ng-options="quantity for quantity in item.QuantityList">
         </select>
         
-        <button class="btn btn-default" style="width:100px; margin-left:20px; margin-top:3px; font-weight:bold; color:#555; float:left;" ng-click="DeleteItem(item.Sku.SkuCode)">
+        <button class="btn btn-default" ng-click="DeleteItem(item.Sku.SkuCode)"
+                style="width:100px; margin-left:20px; margin-top:3px; font-weight:bold; color:#555; float:left;">
             <i class="glyphicon glyphicon-trash"></i>&nbsp;Delete
         </button>
     </div>

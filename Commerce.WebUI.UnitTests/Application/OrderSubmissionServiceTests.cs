@@ -151,7 +151,7 @@ namespace Commerce.UnitTests.Application
 
 
         // Define Injectibles
-        private SubmitOrderRequest OrderRequestGenerator()
+        private OrderRequest OrderRequestGenerator()
         {
             var item1 = new OrderRequestItem()
             {
@@ -171,10 +171,10 @@ namespace Commerce.UnitTests.Application
                 SkuCode = "PROD3",
             };
 
-            var OrderRequest = new SubmitOrderRequest()
+            var OrderRequest = new OrderRequest()
             {
                 BillingInfo = new BillingInfo(),
-                ShippingInfo = new OrderRequestShipping(),
+                ShippingInfo = new ShippingInfo(),
                 Items = new List<OrderRequestItem>
                 {
                     item1,

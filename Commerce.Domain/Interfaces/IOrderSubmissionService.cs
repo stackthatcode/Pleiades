@@ -5,6 +5,6 @@ namespace Commerce.Application.Interfaces
 {
     public interface IOrderSubmissionService
     {
-        SubmitOrderResult Submit(SubmitOrderRequest orderRequest);
+        SubmitOrderResult Submit(OrderRequest orderRequest);
     }
 }

@@ -3,7 +3,7 @@
 namespace Commerce.Application.Model.Orders
 {
     [JsonObject]
-    public class OrderRequestShipping
+    public class ShippingInfo
     {
         [JsonProperty]
         public string EmailAddress { get; set; }
@@ -29,6 +29,7 @@ namespace Commerce.Application.Model.Orders
         [JsonProperty]
         public string Phone { get; set; }
 
+        // NOTE: this is legacy, but used by the old Knockout Submit Form
         [JsonProperty]
         public int ShippingOptionId { get; set; }
     }

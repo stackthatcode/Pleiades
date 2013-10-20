@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Commerce.Application.Model.Orders
+﻿namespace Commerce.Application.Model.Orders
 {
     public class ShippingMethod
     {

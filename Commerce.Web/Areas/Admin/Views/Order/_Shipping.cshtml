@@ -2,15 +2,15 @@
 <script type="text/javascript">
     var PushMkt = PushMkt || {};
 
-    PushMkt.AddShippingFunctions = function (model) {
+    PushMkt.AddShippingFunctions = function(model) {
         var self = model;
 
-        self.BackToReviewOrder = function () {
+        self.BackToReviewOrder = function() {
             $("[name='glideToReview']").hide();
             self.GlideLeft("ReviewProducts");
-        }
+        };
 
-        self.InitializeShippingForms = function () {
+        self.InitializeShippingForms = function() {
             $("#emailForm").validate({
                 rules: {
                     emailAddress: {
@@ -23,12 +23,12 @@
                         .closest('.control-group')
                         .addClass('error');
                 },
-                unhighlight:  function(element) {
+                unhighlight: function(element) {
                     $(element)
                         .closest('.control-group')
                         .removeClass('error');
                 },
-                errorPlacement: function(error,element) {
+                errorPlacement: function(error, element) {
                     return true;
                 },
                 errorContainer: $("#emailValidationErrors"),
@@ -39,19 +39,19 @@
                     name: {
                         required: true,
                     },
-                    address1: { 
+                    address1: {
                         required: true,
                     },
-                    city: { 
+                    city: {
                         required: true,
                     },
-                    zipCode: { 
+                    zipCode: {
                         required: true,
                     },
                     state: {
                         required: true,
-                    },                    
-                    phone: { 
+                    },
+                    phone: {
                         required: true,
                     },
                 },
@@ -60,19 +60,19 @@
                         .closest('.control-group')
                         .addClass('error');
                 },
-                unhighlight:  function(element) {
+                unhighlight: function(element) {
                     $(element)
                         .closest('.control-group')
                         .removeClass('error');
                 },
-                errorPlacement: function(error,element) {
+                errorPlacement: function(error, element) {
                     return true;
                 },
                 errorContainer: $("#addressValidationErrors"),
             });
-        }
+        };
 
-        self.GotoBilling = function () {
+        self.GotoBilling = function() {
             var failed = false;
             if (!self.Cart().ShippingInfo.ShippingOptionId()) {
                 $("#shippingValidationErrors").show();
@@ -80,16 +80,16 @@
             } else {
                 $("#shippingValidationErrors").hide();
             }
-            failed = (! $("#emailForm").valid()) || failed;
-            failed = (! $("#addressForm").valid()) || failed;
-            
+            failed = (!$("#emailForm").valid()) || failed;
+            failed = (!$("#addressForm").valid()) || failed;
+
             // DO IT!
             if (!failed) {
                 $("[name='btn-goto-billing']").hide();
                 self.GlideRight("Billing", self.InitializeBillingForms);
             }
-        }
-    }
+        };
+    };
 </script>
 <style>  
     .checkout-form1 .control-group 

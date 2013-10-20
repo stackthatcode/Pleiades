@@ -39,7 +39,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult SubmitOrder(SubmitOrderRequest orderRequest)
+        public ActionResult SubmitOrder(OrderRequest orderRequest)
         {
             var response = this.OrderRepository.Submit(orderRequest);
             return new JsonNetResult(response);

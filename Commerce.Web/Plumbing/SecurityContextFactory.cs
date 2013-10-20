@@ -13,7 +13,8 @@ namespace Commerce.Web.Plumbing
             if (filterContext.Controller is ProductsController ||
                 filterContext.Controller is PageController || 
                 filterContext.Controller is ImageController ||
-                filterContext.Controller is CartController)
+                filterContext.Controller is CartController ||
+                filterContext.Controller is ListController)
             {
                 return new SecurityContext(user)
                 {

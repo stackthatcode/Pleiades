@@ -145,6 +145,7 @@
     <Compile Include="Areas\Admin\Controllers\SectionController.cs" />
     <Compile Include="Areas\Admin\Controllers\SizeController.cs" />
     <Compile Include="Areas\Public\Controllers\CartController.cs" />
+    <Compile Include="Areas\Public\Controllers\ListController.cs" />
     <Compile Include="Areas\Public\Controllers\ImageController.cs" />
     <Compile Include="Areas\Public\Controllers\SectionController.cs" />
     <Compile Include="Areas\Public\Controllers\ProductsController.cs" />

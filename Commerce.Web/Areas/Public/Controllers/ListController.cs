@@ -1,0 +1,29 @@
+﻿using System.Linq;
+using System.Web.Mvc;
+using Commerce.Application.Database;
+using Pleiades.Web.Json;
+
+namespace Commerce.Web.Areas.Public.Controllers
+{
+    public class ListController : Controller
+    {
+        private readonly PushMarketContext _pushMarketContext;
+
+        public ListController(PushMarketContext pushMarketContext)
+        {
+            _pushMarketContext = pushMarketContext;
+        }
+
+        [HttpGet]
+        [ActionName("action")]
+        public JsonNetResult Get(string listId)
+        {
+            if (listId == "StatesAndTaxes")
+            {
+                return new JsonNetResult(_pushMarketContext.StateTaxes.OrderBy(x => x.Name).ToList());                
+            }
+
+            return JsonNetResult.Success();
+        }
+    }
+}

@@ -45,7 +45,7 @@ namespace Commerce.Application.Concrete.Orders
             SaveChanges = SaveChangesImpl;
         }
 
-        public SubmitOrderResult Submit(SubmitOrderRequest orderRequest)
+        public SubmitOrderResult Submit(OrderRequest orderRequest)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace Commerce.Application.Concrete.Orders
             }
         }
 
-        public SubmitOrderResult Submit_worker(SubmitOrderRequest orderRequest)
+        public SubmitOrderResult Submit_worker(OrderRequest orderRequest)
         {
             // Order Request to Order translation - Bounded Context
             if (orderRequest.BillingInfo == null || orderRequest.ShippingInfo == null || 
@@ -69,8 +69,7 @@ namespace Commerce.Application.Concrete.Orders
             var order = FromOrderRequest(orderRequest);
 
             // Payment Processing - Bounded Context
-            var paymentTransaction = 
-                PaymentProcessor.AuthorizeAndCollect(orderRequest.BillingInfo, order.Total.GrandTotal);
+            var paymentTransaction = PaymentProcessor.AuthorizeAndCollect(orderRequest.BillingInfo, order.Total.GrandTotal);
             if (paymentTransaction.Success == false)
             {
                 // Don't create the Order!
@@ -135,7 +134,7 @@ namespace Commerce.Application.Concrete.Orders
             return orderResponse;
         }
 
-        private Order FromOrderRequest(SubmitOrderRequest orderRequest)
+        private Order FromOrderRequest(OrderRequest orderRequest)
         {
             var skus = orderRequest.AllSkuCodes;
             var inventory = InventoryBySkuCodes(skus, false);
@@ -144,10 +143,6 @@ namespace Commerce.Application.Concrete.Orders
                 orderRequest.Items
                     .Select(x => new OrderLine(inventory.First(y => y.SkuCode == x.SkuCode), x.Quantity))
                     .ToList();
-
-            var stateTax = StateTaxByAbbr(orderRequest.BillingInfo.State);
-
-            var shippingMethod = ShippingMethodById(orderRequest.ShippingInfo.ShippingOptionId);
 
             var order = new Order()
             {
@@ -164,6 +159,9 @@ namespace Commerce.Application.Concrete.Orders
             };
 
             // Need these to get the right GrandTotal
+            var stateTax = StateTaxByAbbr(orderRequest.BillingInfo.State);
+            var shippingMethod = ShippingMethodById(orderRequest.ShippingInfo.ShippingOptionId);
+
             order.Total.ShippingMethod = shippingMethod;
             order.Total.StateTax = stateTax;
             

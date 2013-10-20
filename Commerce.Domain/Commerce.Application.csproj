@@ -128,9 +128,9 @@
     <Compile Include="Model\Orders\OrderLineStatusExtensions.cs" />
     <Compile Include="Model\Orders\OrderNote.cs" />
     <Compile Include="Model\Orders\OrderNumberGenerator.cs" />
-    <Compile Include="Model\Orders\SubmitOrderRequest.cs" />
+    <Compile Include="Model\Orders\OrderRequest.cs" />
     <Compile Include="Model\Orders\OrderRequestItem.cs" />
-    <Compile Include="Model\Orders\OrderRequestShipping.cs" />
+    <Compile Include="Model\Orders\ShippingInfo.cs" />
     <Compile Include="Model\Orders\SubmitOrderResult.cs" />
     <Compile Include="Model\Orders\ShippingMethod.cs" />
     <Compile Include="Model\Products\ProductSize.cs" />

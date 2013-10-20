@@ -424,3 +424,7 @@ Burndown
 - Function to get Inventory => DONE
 - Cart Controller => DONE
 - Inventory Adjustment Message => DONE
+
+- Cart Total => DONE
+- Link to Checkout => DONE
+

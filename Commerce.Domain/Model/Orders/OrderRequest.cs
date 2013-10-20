@@ -6,10 +6,10 @@ using Newtonsoft.Json;
 namespace Commerce.Application.Model.Orders
 {
     [JsonObject]
-    public class SubmitOrderRequest
+    public class OrderRequest
     {
         [JsonProperty]
-        public OrderRequestShipping ShippingInfo { get; set; }
+        public ShippingInfo ShippingInfo { get; set; }
 
         [JsonProperty]
         public BillingInfo BillingInfo { get; set; }
@@ -17,7 +17,7 @@ namespace Commerce.Application.Model.Orders
         [JsonProperty]
         public List<OrderRequestItem> Items { get; set; }
 
-        public SubmitOrderRequest()
+        public OrderRequest()
         {
             this.Items = new List<OrderRequestItem>();
         }
