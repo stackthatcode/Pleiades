@@ -1,16 +1,23 @@
 Sunday is One Day
 ~~~~~~~~~~~~~~~~~
 - Shipping Information => DONE
-- Thank You Page => DONE
+- Create Order Page => DONE
+- Sales Tax Text => DONE
 
 
 Finish Line
 -----------
+- Load Shipping Method and State Tax from Cart => TODO
+- Set default Shipping Method and State Tax on Cart => TODO
+
+- Order Submission Process => TODO
+- Thank You Page => TODO
 - Add Limit to Cart => TODO
-- Admin Search & Manage Orders => TODO
+
 - Admin Sales Graph by Product => TODO
+- Admin Search & Manage Orders => TODO
 - Email Sending Engine => TODO
-http://stackoverflow.com/questions/10512845/how-to-send-email-wth-email-template-c-sharp/10512995#10512995
+* http://stackoverflow.com/questions/10512845/how-to-send-email-wth-email-template-c-sharp/10512995#10512995
 - Stripe Payment Integration => TODO
 
 

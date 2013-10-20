@@ -36,15 +36,24 @@
         <div style="width:400px;">
             <h1 class="sub-sub-header" style="color:#999;">Enter your Shipping Information</h1>
 
-            <div id="Div1" style="text-align:center; display:none; height:50px; clear:both;" class="alert alert-danger">
+            <div id="shipping-info-error" style="text-align:center; display:none; height:50px; clear:both;" class="alert alert-danger">
                 <strong>Please enter valid Shipping Information</strong>  
             </div>
 
             <form id="shippingInfoForm">
                 <div class="form-group">
-                          <label for="name">Name</label>
-                          <input class="form-control" type="text" name="name" ng-model="ShippingInfo.Name" placeholder="Name" maxlength="50">
-                      </div>
+                    <label for="name">Name</label>
+                    <input class="form-control" type="text" name="name" ng-model="ShippingInfo.Name" placeholder="Name" maxlength="50">
+                </div>
+                <div class="form-group" style="float:left;">
+                    <label for="name">Email Address</label>
+                    <input class="form-control" type="text" name="emailAddress" ng-model="ShippingInfo.EmailAddress" placeholder="Name" maxlength="50">
+                </div>
+                <div class="form-group" style="float:left; margin-left:15px;">
+                    <label for="name">Phone</label>
+                    <input class="form-control" type="text" name="phone" ng-model="ShippingInfo.Phone" placeholder="Name" maxlength="25">
+                </div>
+
                 <div class="form-group">
                     <label for="address1">Address 1</label>
                     <input class="form-control" type="text" name="address1" ng-model="ShippingInfo.Address1" placeholder="Address Line 1" maxlength="50">
@@ -60,7 +69,7 @@
                 </div>
                 <div class="form-group" style="float:left; margin-left:15px;">
                     <label for="state">State</label>
-                    <select class="form-control" id="Select2" name="state" ng-model="ShippingInfo.State"
+                    <select class="form-control" id="Select2" name="state" ng-model="ShippingInfo.State" ng-change="ChangeStateTax()"
                             ng-options="state.Abbreviation as state.Abbreviation for state in StatesAndTaxes" />
                 </div>
                 <div class="form-group" style="float:left; margin-left:15px;">
@@ -71,7 +80,7 @@
                 <div class="form-group" ng-repeat="method in ShippingMethods">
                     <div class="radio">
                         <label for="method">
-                            <input type="radio" ng-model="ShippingInfo.ShippingMethodId" name="method" value="{{ method.Id }}" />
+                            <input type="radio" ng-model="ShippingInfo.ShippingMethodId" name="method" value="{{ method.Id }}" ng-change="ChangeShippingMethod()" />
                             {{ method.Description }}
                         </label>                     
                     </div>
@@ -152,6 +161,8 @@
         <div>
             <button class="btn btn-default btn-lg cart-big-action" ng-click="Checkout()">Submit Your Order <i class="glyphicon glyphicon-flash"></i></button>
         </div>
+        <div style="width:400px; height:30px; clear:both;">
+        </div>
     </div>
 
     <div class="col-lg-4" ng-show="NonEmptyCart()">
@@ -171,7 +182,7 @@
                     <td class="bold-print-grey" style="text-align:right;">{{ ToMoney(cart.Total.SubTotal) }}</td>
                 </tr>
                 <tr>
-                    <td class="bold-print-grey">Sales Tax {{ SalesTaxText(cart.Total) }}</td>
+                    <td class="bold-print-grey">Sales Tax {{ SalesTaxText() }}</td>
                     <td style="text-align:right;" class="bold-print-grey">{{ ToMoney(cart.Total.Tax) }}</td>
                 </tr>
                 <tr>

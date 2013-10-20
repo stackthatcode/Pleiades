@@ -30,6 +30,8 @@ namespace Commerce.Application.Concrete.Shopping
         public Cart Retrieve(Guid identifier)
         {
             var cart = _context.Carts
+                .Include(x => x.ShippingMethod)
+                .Include(x => x.StateTax)
                 .Include(x => x.CartItems)
                 .Include(x => x.CartItems.Select(item => item.Sku))
                 .FirstOrDefault(x => x.CartIdentifier == identifier);

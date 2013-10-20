@@ -4,6 +4,7 @@ var ngAjax = namespace("PushLibrary.NgAjax");
 var urlLocator = namespace("CommerceWeb.UrlLocator");
 var app = angular.module('push-market');
 
+
 app.controller('CheckoutController', function ($scope, $http) {
     $scope.ExpirationMonths = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
     $scope.ExpirationYears = AQ.range(2013, 2030).toArray();
@@ -16,8 +17,9 @@ app.controller('CheckoutController', function ($scope, $http) {
         return (quantity == 1 ? "item" : "items");
     };
 
-    $scope.SalesTaxText = function (totalObject) {
-        return totalObject && totalObject.StateTax ? "(" + totalObject.StateTax.Abbreviation + " " + totalObject.StateTax.TaxRate + "%)" : "";
+    $scope.SalesTaxText = function () {
+        //console.log($scope.cart);
+        return $scope.cart && $scope.cart.StateTax ? "(" + $scope.cart.StateTax.Abbreviation + " " + $scope.cart.StateTax.TaxRate + "%)" : "";
     };
 
     $scope.NonEmptyCart = function () {
@@ -59,6 +61,7 @@ app.controller('CheckoutController', function ($scope, $http) {
                 $scope.ShippingInfo.State = $scope.StatesAndTaxes[0].Abbreviation;
                 $scope.ShippingInfo.ShippingMethodId = $scope.ShippingMethods[0].Id;
 
+                $scope.AutomationLoadTestData();
                 // TODO: if cart contains these, then populate
                 // StateTax.Abbrevation
                 // ShippingMethod.Id
@@ -74,27 +77,79 @@ app.controller('CheckoutController', function ($scope, $http) {
         });
     };
 
+    $scope.ChangeShippingMethod = function() {
+        var url = 'cart?shippingMethodId=' + $scope.ShippingInfo.ShippingMethodId;
+        ngAjax.Put($http, url, null, function (data) {
+            DecorateAdjustedCartModelWithQuantities(data);
+            $scope.cart = data.Cart;
+        });
+    };
+
+    $scope.ChangeStateTax = function() {
+        var url = 'cart?stateTaxAbbr=' + $scope.ShippingInfo.State;
+        ngAjax.Put($http, url, null, function (data) {
+            DecorateAdjustedCartModelWithQuantities(data);
+            $scope.cart = data.Cart;
+        });
+    };
+
+    $scope.Checkout = function() {
+        console.log($scope.cart);
+        
+        $scope.ValidateBillingAddress();
+        $scope.ValidateCreditCard();
+        $scope.ValidateShippingInfo();
+
+        var failed = false;
+        if (!$("#shippingInfoForm").valid()) {
+            $("shipping-info-error").show();
+            failed = true;
+        }
+        if (!$("#billingAddressForm").valid()) {
+            $("#billing-address-errors").show();
+            failed = true;
+        }
+        if (!$("#paymentForm").valid()) {
+            $("#payment-info-errors").show();
+            failed = true;
+        }
+        if (failed) {
+            return;
+        }
+    };
+    
     $scope.ValidateBillingAddress = function() {
         $("#billingAddressForm").validate({
             rules: {
-                name: {
-                    required: true,
-                },
-                address1: {
-                    required: true,
-                },
-                city: {
-                    required: true,
-                },
-                zipCode: {
-                    required: true,
-                },
-                state: {
-                    required: true,
-                },
-                phone: {
-                    required: true,
-                },
+                name: { required: true },
+                address1: { required: true },
+                city: { required: true },
+                zipCode: { required: true },
+                state: { required: true },
+            },
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass('has-error');
+            },
+            unhighlight: function(element) {
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            errorPlacement: function(error, element) {
+                return true;
+            },
+            errorContainer: $("#billing-address-errors"),
+        });
+    };
+    
+    $scope.ValidateShippingInfo = function() {
+        $("#shippingInfoForm").validate({
+            rules: {
+                name: { required: true },
+                address1: { required: true },
+                city: { required: true },
+                zipCode: { required: true },
+                state: { required: true },
+                phone: { required: true },
+                emailAddress: { required: true },
             },
             highlight: function(element) {
                 $(element).closest('.form-group').addClass('has-error');
@@ -140,26 +195,29 @@ app.controller('CheckoutController', function ($scope, $http) {
             errorContainer: $("#payment-info-errors"),
         });
     };
-        
-    $scope.Checkout = function() {
-        console.log($scope.cart);
-        
-        $scope.ValidateBillingAddress();
-        $scope.ValidateCreditCard();
-        
-        var failed = false;
-        if (!$("#billingAddressForm").valid()) {
-            $("#billing-address-errors").show();
-            failed = true;
-        }
-        if (!$("#paymentForm").valid()) {
-            $("#payment-info-errors").show();
-            failed = true;
-        }
-        if (failed) {
-            return;
-        }
-    };
-
+    
     $scope.RetrieveCart();
+    
+    $scope.AutomationLoadTestData = function() {
+        $scope.ShippingInfo.Name = "Jessie JAmes";
+        $scope.ShippingInfo.EmailAddress = "Jessie@JAmes.com";
+        $scope.ShippingInfo.Phone = "847-333-1234";
+        $scope.ShippingInfo.Address1 = "123 Test Street";
+        $scope.ShippingInfo.City = "Heliopoulis";
+        $scope.ShippingInfo.State = "MN";
+        $scope.ShippingInfo.ZipCode = "44432";
+        $scope.ShippingInfo.ShippingMethodId = 3;
+        
+        $scope.BillingInfo.Name = "Jessie JAmes";
+        $scope.BillingInfo.EmailAddress = "Jessie@JAmes.com";
+        $scope.BillingInfo.Phone = "847-333-1234";
+        $scope.BillingInfo.Address1 = "123 Test Street";
+        $scope.BillingInfo.City = "Heliopoulis";
+        $scope.BillingInfo.State = "MN";
+        $scope.BillingInfo.ZipCode = "44432";
+        $scope.BillingInfo.CardNumber = "4111111111111111";
+        $scope.BillingInfo.CVV = "445";
+        $scope.BillingInfo.ExpirationMonth = "09";
+        $scope.BillingInfo.ExpirationYear = 2015;
+    };
 });

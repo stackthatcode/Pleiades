@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Commerce.Application.Database;
 using Commerce.Application.Interfaces;
 using Commerce.Application.Model.Shopping;
 
@@ -9,13 +10,16 @@ namespace Commerce.Application.Concrete.Shopping
         private readonly ICartIdentificationService _cartIdentificationService;
         private readonly ICartRepository _cartRepository;
         private readonly IInventoryRepository _inventoryRepository;
+        private readonly PushMarketContext _context;
 
-        public CartManagementService(ICartIdentificationService cartIdentificationService, 
-                ICartRepository cartRepository, IInventoryRepository inventoryRepository)
+        public CartManagementService(
+                ICartIdentificationService cartIdentificationService, ICartRepository cartRepository, IInventoryRepository inventoryRepository, 
+                PushMarketContext context)
         {            
             _cartIdentificationService = cartIdentificationService;
             _cartRepository = cartRepository;
             _inventoryRepository = inventoryRepository;
+            _context = context;
         }
 
         public AdjustedCart Retrieve()
@@ -164,6 +168,22 @@ namespace Commerce.Application.Concrete.Shopping
                 cartItem.Quantity = quantity;
                 return adjustedCart;
             }
+        }
+
+        public AdjustedCart UpdateShippingMethod(int shippingMethodId)
+        {
+            var adjustedCart = IdempotentCartFetcher();
+            var method = _context.ShippingMethods.FirstOrDefault(x => x.Id == shippingMethodId);
+            adjustedCart.Cart.ShippingMethod = method;
+            return adjustedCart;
+        }
+
+        public AdjustedCart UpdateStateTax(string stateTaxAbbreviation)
+        {
+            var adjustedCart = IdempotentCartFetcher();
+            var stateTax = _context.StateTaxes.FirstOrDefault(x => x.Abbreviation == stateTaxAbbreviation);
+            adjustedCart.Cart.StateTax = stateTax;
+            return adjustedCart;            
         }
 
         public AdjustedCart RemoveItem(string skuCode)

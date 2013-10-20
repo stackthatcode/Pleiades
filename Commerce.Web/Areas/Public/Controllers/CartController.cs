@@ -34,10 +34,24 @@ namespace Commerce.Web.Areas.Public.Controllers
 
         [HttpPut]
         [ActionName("action")]
-        public JsonNetResult Put(string skuCode, int quantity)
+        public JsonNetResult Put(string skuCode, int? quantity, int? shippingMethodId, string stateTaxAbbr)
         {
-            var result = _cartManagementService.UpdateQuantity(skuCode, quantity);
-            _pushMarketContext.SaveChanges();
+            if (skuCode != null && quantity != null)
+            {
+                _cartManagementService.UpdateQuantity(skuCode, quantity.Value);
+                _pushMarketContext.SaveChanges();
+            }
+            if (shippingMethodId != null)
+            {
+                _cartManagementService.UpdateShippingMethod(shippingMethodId.Value);
+                _pushMarketContext.SaveChanges();
+            }
+            if (stateTaxAbbr != null)
+            {
+                _cartManagementService.UpdateStateTax(stateTaxAbbr);
+                _pushMarketContext.SaveChanges();
+                return new JsonNetResult(_cartManagementService.Retrieve());                
+            }
             return new JsonNetResult(_cartManagementService.Retrieve());
         }
 
