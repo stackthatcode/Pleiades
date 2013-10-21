@@ -13,8 +13,8 @@ namespace Commerce.Application.Concrete.Shopping
         private readonly PushMarketContext _context;
 
         public CartManagementService(
-                ICartIdentificationService cartIdentificationService, ICartRepository cartRepository, IInventoryRepository inventoryRepository, 
-                PushMarketContext context)
+                ICartIdentificationService cartIdentificationService, ICartRepository cartRepository, 
+                IInventoryRepository inventoryRepository, PushMarketContext context)
         {            
             _cartIdentificationService = cartIdentificationService;
             _cartRepository = cartRepository;
@@ -49,9 +49,13 @@ namespace Commerce.Application.Concrete.Shopping
         private AdjustedCart CreateNewCart()
         {
             var newIdentifier = _cartIdentificationService.ProvisionNewCartId();
+            var shippingMethod = _context.ShippingMethods.FirstOrDefault();
+            var stateTax = _context.StateTaxes.OrderBy(x => x.Abbreviation).FirstOrDefault();
             var cart = new Cart
             {
                 CartIdentifier = newIdentifier,
+                ShippingMethod = shippingMethod,
+                StateTax = stateTax
             };
 
             _cartRepository.AddCart(cart);

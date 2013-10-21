@@ -34,37 +34,50 @@ app.controller('CheckoutController', function ($scope, $http) {
         });
     };
 
-    $scope.RetrieveCart = function () {
+    $scope.Initialize = function(complete) {
         flow.exec(
-            function () {
+            function() {
                 ngAjax.Get($http, 'list?listId=StatesAndTaxes', this);
             },
-            function (data) {
+            function(data) {
                 $scope.StatesAndTaxes = data;
                 ngAjax.Get($http, 'list?listId=ShippingMethods', this);
             },
-            function (data) {
-                console.log(data);
+            function(data) {
                 $scope.ShippingMethods = data;
+                $scope.BillingInfo = {};
+                $scope.BillingInfo.ExpirationMonth = $scope.ExpirationMonths[0];
+                $scope.BillingInfo.ExpirationYear = $scope.ExpirationYears[0];
+                $scope.BillingInfo.State = $scope.StatesAndTaxes[0].Abbreviation;
+                
+                $scope.ShippingInfo = {};
+                $scope.ShippingInfo.State = $scope.StatesAndTaxes[0].Abbreviation;
+                $scope.ShippingInfo.ShippingMethodId = $scope.ShippingMethods[0].Id;
+                
+                if (complete) {
+                    complete();
+                }
+            });
+    };
+
+    $scope.RetrieveCart = function (complete) {
+        flow.exec(
+            function () {
                 ngAjax.Get($http, 'cart', this);
             },
             function(data) {
                 DecorateAdjustedCartModelWithQuantities(data);
                 $scope.cart = data.Cart;
-
-                $scope.BillingInfo = {};
-                $scope.BillingInfo.State = $scope.StatesAndTaxes[0].Abbreviation;
-                $scope.BillingInfo.ExpirationMonth = $scope.ExpirationMonths[0];
-                $scope.BillingInfo.ExpirationYear = $scope.ExpirationYears[0];
                 
-                $scope.ShippingInfo = {};
-                $scope.ShippingInfo.State = $scope.StatesAndTaxes[0].Abbreviation;
-                $scope.ShippingInfo.ShippingMethodId = $scope.ShippingMethods[0].Id;
-
-                $scope.AutomationLoadTestData();
-                // TODO: if cart contains these, then populate
-                // StateTax.Abbrevation
-                // ShippingMethod.Id
+                if ($scope.cart.StateTax) {
+                    $scope.ShippingInfo.State = $scope.cart.StateTax.Abbreviation;
+                }
+                if ($scope.cart.ShippingMethod) {
+                    $scope.ShippingInfo.ShippingMethodId = $scope.cart.ShippingMethod.Id;
+                }                
+                if (complete) {
+                    complete();
+                }
             }
         );
     };
@@ -196,7 +209,7 @@ app.controller('CheckoutController', function ($scope, $http) {
         });
     };
     
-    $scope.RetrieveCart();
+    $scope.Initialize($scope.RetrieveCart);
     
     $scope.AutomationLoadTestData = function() {
         $scope.ShippingInfo.Name = "Jessie JAmes";

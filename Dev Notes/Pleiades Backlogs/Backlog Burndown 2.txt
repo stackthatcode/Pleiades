@@ -433,3 +433,30 @@ Burndown
 * Expires Months
 * Expires YEars
 * Validation
+
+
+
+Already Done
+~~~~~~~~~~~~
+- Checkout Screen => ALMOST DONE
+- Cart Screen => DONE
+- Store Front Screen => DONE
+- Add Item Screen => DONE
+- Login Screen => DONE
+- Admin User Manager => DONE
+- Category Editor => DONE
+- Size Editor => DONE
+- Section Editor => DONE
+- Color Editor => DONE
+- Brand Editor => DONE
+- Image Upload & Processing Engine => DONE
+- Product Search & Editor => DONE
+- SKU Generator + Inventory Tracker => DONE
+- Admin Order Create => DONE
+- Payment Processing Stub => DONE
+- Check-out Process Server-side => DONE
+- Revamped Barebones Console App => DONE
+- Revamped Membership Provider => DONE
+- Server Logging => DONE
+- Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => DONE
+- Separated Error PAges => DONE

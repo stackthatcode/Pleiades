@@ -3,12 +3,13 @@ Sunday is One Day
 - Shipping Information => DONE
 - Create Order Page => DONE
 - Sales Tax Text => DONE
+- Load Shipping Method and State Tax from Cart => DONE
+- Set default Shipping Method and State Tax on Cart => DONE
 
 
 Finish Line
 -----------
-- Load Shipping Method and State Tax from Cart => TODO
-- Set default Shipping Method and State Tax on Cart => TODO
+- "Designed by fighters, worn by fighters"
 
 - Order Submission Process => TODO
 - Thank You Page => TODO
@@ -53,31 +54,10 @@ Backlog
 - Amazon EC2 Hosting + Deployment => TODO
 
 
-Already Done
-~~~~~~~~~~~~
-- Store Front Screen => DONE
-- Add Item Screen => DONE
-- Login Screen => DONE
-- Admin User Manager => DONE
-- Category Editor => DONE
-- Size Editor => DONE
-- Section Editor => DONE
-- Color Editor => DONE
-- Brand Editor => DONE
-- Image Upload & Processing Engine => DONE
-- Product Search & Editor => DONE
-- SKU Generator + Inventory Tracker => DONE
-- Admin Order Create => DONE
-- Payment Processing Stub => DONE
-- Check-out Process Server-side => DONE
-- Revamped Barebones Console App => DONE
-- Revamped Membership Provider => DONE
-- Server Logging => DONE
-- Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => DONE
-- Separated Error PAges => DONE
 
-PushMarket Front-end
-~~~~~~~~~~~~~~~~~~~~
+
+PushMarket Front-end (for Marketing)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Angular.js
 - JavaScript Promises
 - JQuery

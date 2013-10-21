@@ -20,7 +20,7 @@ namespace Commerce.Web.Areas.Public.Controllers
         {
             if (listId == "StatesAndTaxes")
             {
-                return new JsonNetResult(_pushMarketContext.StateTaxes.OrderBy(x => x.Name).ToList());                
+                return new JsonNetResult(_pushMarketContext.StateTaxes.OrderBy(x => x.Abbreviation).ToList());                
             }
             if (listId == "ShippingMethods")
             {
