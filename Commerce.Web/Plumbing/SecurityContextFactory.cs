@@ -14,7 +14,8 @@ namespace Commerce.Web.Plumbing
                 filterContext.Controller is PageController || 
                 filterContext.Controller is ImageController ||
                 filterContext.Controller is CartController ||
-                filterContext.Controller is ListController)
+                filterContext.Controller is ListController ||
+                filterContext.Controller is OrderController)
             {
                 return new SecurityContext(user)
                 {

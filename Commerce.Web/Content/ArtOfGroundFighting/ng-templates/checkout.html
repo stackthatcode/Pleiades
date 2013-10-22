@@ -1,15 +1,14 @@
-﻿
-<div id="arena-top-spacer" style="height:50px; padding-top:20px;">
+﻿<div id="arena-top-spacer" style="height:50px; padding-top:20px;">
     Checkout &gt;&gt; <a class="mybreadcrumb" href="#/cart">Shopping Cart</a> &gt;&gt; <span>Billing &amp; Shipping</span>
 </div>
 
 <div class="row">
-    <!-- TODO: how to reuse templates..? -->
     <div class="col-lg-8" ng-show="NonEmptyCart()">
         <h1 class="main-header">Billing &amp; Shipping</h1>
         <h1 class="sub-sub-header">
             Current Total: {{ ToMoney(cart.Total.SubTotal) }}
         </h1>
+        <a id="automation-trigger" style="display:none;" href="" ng-click="AutomationLoadTestData()">Load Test Data</a>
         <div style="height:10px;" class="hidden-lg"></div>
     </div>
     <div class="col-lg-8" ng-show="!NonEmptyCart()">

@@ -108,14 +108,17 @@ app.controller('CheckoutController', function ($scope, $http) {
 
     $scope.Checkout = function() {
         console.log($scope.cart);
-        
-        $scope.ValidateBillingAddress();
-        $scope.ValidateCreditCard();
-        $scope.ValidateShippingInfo();
+        console.log($scope.ShippingInfo);
+        console.log($scope.BillingInfo);
+
+        var validator = new CheckOutValidationInitializer();
+        validator.ValidateBillingAddress();
+        validator.ValidateCreditCard();
+        validator.ValidateShippingInfo();
 
         var failed = false;
         if (!$("#shippingInfoForm").valid()) {
-            $("shipping-info-error").show();
+            $("#shipping-info-error").show();
             failed = true;
         }
         if (!$("#billingAddressForm").valid()) {
@@ -129,9 +132,49 @@ app.controller('CheckoutController', function ($scope, $http) {
         if (failed) {
             return;
         }
+
+        var orderRequest = {
+            shippingInfo: $scope.ShippingInfo,
+            billingInfo: $scope.BillingInfo,
+        };
+        
+        ngAjax.Post($http, "order", orderRequest, 
+            function() {
+                console.log('got it!');
+            }
+        );
+        // TODO: invoke Payment Processor
+
     };
     
-    $scope.ValidateBillingAddress = function() {
+    $scope.Initialize($scope.RetrieveCart);
+    
+    $scope.AutomationLoadTestData = function() {
+        $scope.ShippingInfo.Name = "Jessie JAmes";
+        $scope.ShippingInfo.EmailAddress = "Jessie@JAmes.com";
+        $scope.ShippingInfo.Phone = "847-333-1234";
+        $scope.ShippingInfo.Address1 = "123 Test Street";
+        $scope.ShippingInfo.City = "Heliopoulis";
+        $scope.ShippingInfo.State = "MN";
+        $scope.ShippingInfo.ZipCode = "44432";
+        $scope.ShippingInfo.ShippingMethodId = 3;
+        
+        $scope.BillingInfo.Name = "Jessie JAmes";
+        $scope.BillingInfo.EmailAddress = "Jessie@JAmes.com";
+        $scope.BillingInfo.Phone = "847-333-1234";
+        $scope.BillingInfo.Address1 = "123 Test Street";
+        $scope.BillingInfo.City = "Heliopoulis";
+        $scope.BillingInfo.State = "MN";
+        $scope.BillingInfo.ZipCode = "44432";
+        $scope.BillingInfo.CardNumber = "4111111111111111";
+        $scope.BillingInfo.CVV = "445";
+        $scope.BillingInfo.ExpirationMonth = "09";
+        $scope.BillingInfo.ExpirationYear = 2015;
+    };
+});
+
+var CheckOutValidationInitializer = function() {
+    this.ValidateBillingAddress = function() {
         $("#billingAddressForm").validate({
             rules: {
                 name: { required: true },
@@ -152,8 +195,8 @@ app.controller('CheckoutController', function ($scope, $http) {
             errorContainer: $("#billing-address-errors"),
         });
     };
-    
-    $scope.ValidateShippingInfo = function() {
+
+    this.ValidateShippingInfo = function() {
         $("#shippingInfoForm").validate({
             rules: {
                 name: { required: true },
@@ -173,11 +216,11 @@ app.controller('CheckoutController', function ($scope, $http) {
             errorPlacement: function(error, element) {
                 return true;
             },
-            errorContainer: $("#billing-address-errors"),
+            errorContainer: $("#shipping-info-error"),
         });
     };
 
-    $scope.ValidateCreditCard = function() {
+    this.ValidateCreditCard = function() {
         $("#paymentForm").validate({
             rules: {
                 cardNumber: {
@@ -208,29 +251,8 @@ app.controller('CheckoutController', function ($scope, $http) {
             errorContainer: $("#payment-info-errors"),
         });
     };
-    
-    $scope.Initialize($scope.RetrieveCart);
-    
-    $scope.AutomationLoadTestData = function() {
-        $scope.ShippingInfo.Name = "Jessie JAmes";
-        $scope.ShippingInfo.EmailAddress = "Jessie@JAmes.com";
-        $scope.ShippingInfo.Phone = "847-333-1234";
-        $scope.ShippingInfo.Address1 = "123 Test Street";
-        $scope.ShippingInfo.City = "Heliopoulis";
-        $scope.ShippingInfo.State = "MN";
-        $scope.ShippingInfo.ZipCode = "44432";
-        $scope.ShippingInfo.ShippingMethodId = 3;
-        
-        $scope.BillingInfo.Name = "Jessie JAmes";
-        $scope.BillingInfo.EmailAddress = "Jessie@JAmes.com";
-        $scope.BillingInfo.Phone = "847-333-1234";
-        $scope.BillingInfo.Address1 = "123 Test Street";
-        $scope.BillingInfo.City = "Heliopoulis";
-        $scope.BillingInfo.State = "MN";
-        $scope.BillingInfo.ZipCode = "44432";
-        $scope.BillingInfo.CardNumber = "4111111111111111";
-        $scope.BillingInfo.CVV = "445";
-        $scope.BillingInfo.ExpirationMonth = "09";
-        $scope.BillingInfo.ExpirationYear = 2015;
-    };
-});
+};
+
+var EnableAutomation = function() {
+    $("#automation-trigger").show();
+};

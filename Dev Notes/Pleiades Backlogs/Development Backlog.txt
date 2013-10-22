@@ -1,17 +1,16 @@
-Sunday is One Day
-~~~~~~~~~~~~~~~~~
+Burndown
+~~~~~~~~
 - Shipping Information => DONE
 - Create Order Page => DONE
 - Sales Tax Text => DONE
 - Load Shipping Method and State Tax from Cart => DONE
 - Set default Shipping Method and State Tax on Cart => DONE
+- "Designed by fighters, worn by fighters"
 
 
 Finish Line
 -----------
-- "Designed by fighters, worn by fighters"
-
-- Order Submission Process => TODO
+- Order Submission Process => IN PROGRESS
 - Thank You Page => TODO
 - Add Limit to Cart => TODO
 
