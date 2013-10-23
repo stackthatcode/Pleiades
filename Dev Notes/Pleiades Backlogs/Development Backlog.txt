@@ -6,14 +6,12 @@ Burndown
 - Load Shipping Method and State Tax from Cart => DONE
 - Set default Shipping Method and State Tax on Cart => DONE
 - "Designed by fighters, worn by fighters"
-- Order Submission Process => DONE
-
-
 Finish Line
 -----------
-- Thank You Page => TODO
-- Add Limit to Cart => TODO
 - Admin Search & Manage Orders => IN PROGRESS
+- Seed the Test Order Data... => TODO
+- Add Limit to how many items in Cart => TODO
+
 
 Manage an Order CRUD screen
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -24,12 +22,17 @@ Manage an Order CRUD screen
 - Order Search Results
 	- Date of Order
 	- External OrderId
+	- Original Order Amount
+	- Order Total
+	- How Many Items
 
 - Order Summary Tab 
 * Shipping Info
 * List of Order Items w/ Statuses
-* Aggregate Status
+* Completion
 * History 
+
+
 
 - Ship Order Lines
 * STEP #1 => Select Order Lines and Quantity
@@ -37,7 +40,6 @@ Manage an Order CRUD screen
 * STEP #3 => Update Status + History
 
 - Refund => Choose Order Lines => Hit the Payment Processor => Update Status on Order Lines + History
-
 - Fail Shipping => Choose Order Lines => Update Status + History
 
 
@@ -65,7 +67,6 @@ About Us Page Tasking
 Backlog
 -------
 - Donate $20 to FineUploader upon successful integration => TODO
-- Amazon EC2 Hosting + Deployment => TODO
 
 
 
@@ -84,6 +85,7 @@ PushMarket Front-end (for Marketing)
 
 PHASE 2 Backlog
 ---------------
+- Amazon EC2 Hosting + Deployment => TODO
 * Splash Graphic...?
 => http://blog.stevensanderson.com/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/
 => http://haacked.com/archive/2011/10/10/preventing-csrf-with-ajax.aspx

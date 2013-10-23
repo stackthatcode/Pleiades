@@ -92,7 +92,7 @@ namespace Commerce.Application.Model.Orders
             get
             {
                 return this.OrderLines.Any(x => 
-                    x.Status != OrderLineStatus.Shipped && x.Status != OrderLineStatus.Received);
+                    x.Status != OrderLineStatus.Shipped || x.Status != OrderLineStatus.Cancelled);
             }
             set 
             {

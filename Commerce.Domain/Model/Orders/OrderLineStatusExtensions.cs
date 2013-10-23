@@ -8,8 +8,6 @@ namespace Commerce.Application.Model.Orders
             {
                 { OrderLineStatus.Pending, "Pending" },
                 { OrderLineStatus.Shipped, "Shipped" },
-                { OrderLineStatus.Received, "Received" },
-                { OrderLineStatus.ShippingFailure, "Shipping Failure" },
                 { OrderLineStatus.Refunded, "Refunded" },
                 { OrderLineStatus.Cancelled, "Cancelled" },
             };
