@@ -15,6 +15,7 @@ namespace Commerce.Application.Model.Shopping
         public StateTax StateTax { get; set; }
         public Total Total { get; set; }
 
+        public string OrderExternalId { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime LastModified { get; set; }
 
@@ -24,6 +25,11 @@ namespace Commerce.Application.Model.Shopping
             {
                 return () => CartItems.Sum(x => x.Quantity * x.Sku.Product.UnitPrice);
             }
+        }
+
+        public bool OrderSubmitted
+        {
+            get { return OrderExternalId != null; }
         }
 
         public Cart()

@@ -6,16 +6,43 @@ Burndown
 - Load Shipping Method and State Tax from Cart => DONE
 - Set default Shipping Method and State Tax on Cart => DONE
 - "Designed by fighters, worn by fighters"
+- Order Submission Process => DONE
 
 
 Finish Line
 -----------
-- Order Submission Process => IN PROGRESS
 - Thank You Page => TODO
 - Add Limit to Cart => TODO
+- Admin Search & Manage Orders => IN PROGRESS
+
+Manage an Order CRUD screen
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Order Search Query
+	- Complete/Incomplete Orders
+	- By Date Range
+	
+- Order Search Results
+	- Date of Order
+	- External OrderId
+
+- Order Summary Tab 
+* Shipping Info
+* List of Order Items w/ Statuses
+* Aggregate Status
+* History 
+
+- Ship Order Lines
+* STEP #1 => Select Order Lines and Quantity
+* STEP #2 => 
+* STEP #3 => Update Status + History
+
+- Refund => Choose Order Lines => Hit the Payment Processor => Update Status on Order Lines + History
+
+- Fail Shipping => Choose Order Lines => Update Status + History
+
+
 
 - Admin Sales Graph by Product => TODO
-- Admin Search & Manage Orders => TODO
 - Email Sending Engine => TODO
 * http://stackoverflow.com/questions/10512845/how-to-send-email-wth-email-template-c-sharp/10512995#10512995
 - Stripe Payment Integration => TODO
@@ -34,18 +61,6 @@ About Us Page Tasking
 - Picture of Tsinerev
 - Shipping Verbage
 - Returns Verbage
-
-Manage an Order CRUD screen
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Order Search Query
-	- Complete/Incomplete Orders
-	- By Date
-- Order Search Results
-- Order Summary Tab (Aggregate Status, Shipping, 3 Most Recent Histories)
-- Split OrderLine (put something in the History)
-- Ship OrderLines => Split as needed => Update Status + History
-- Refund => Choose Order Lines => Hit the Payment Processor => Update Status on Order Lines + History
-- Fail Shipping => Choose Order Lines => Update Status + History
 
 Backlog
 -------
@@ -92,6 +107,7 @@ PHASE 2 Backlog
 - Rendering Adjustments for long Category Names et. al. => DONE
 - Prevent multiple Pop-ups from appearing
 - IsONline - Check How This Functions => UPDATE - NEED TO FIX TOUCH Function
+- Intrusion Detection
 
 Research Backlog
 ----------------

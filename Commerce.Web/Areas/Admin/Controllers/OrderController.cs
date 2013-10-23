@@ -12,9 +12,9 @@ namespace Commerce.Web.Areas.Admin.Controllers
     public class OrderController : Controller
     {
         PushMarketContext Context { get; set; }
-        IOrderSubmissionService OrderRepository { get; set; }
+        IOrderService OrderRepository { get; set; }
 
-        public OrderController(PushMarketContext context, IOrderSubmissionService orderRepository)
+        public OrderController(PushMarketContext context, IOrderService orderRepository)
         {
             this.Context = context;
             this.OrderRepository = orderRepository;
@@ -43,13 +43,6 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             var response = this.OrderRepository.Submit(orderRequest);
             return new JsonNetResult(response);
-        }
-
-        public ActionResult TestMethod()
-        {
-            var controller = new ProductRepository(Context, null, null);
-            var x = new ProductController(null, null, null, null, null, null, null);
-            return new ContentResult();
         }
 
         public ActionResult Manage()

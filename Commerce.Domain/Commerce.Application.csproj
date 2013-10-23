@@ -72,7 +72,7 @@
     <Compile Include="Concrete\Lists\JsonColorRepository.cs" />
     <Compile Include="Concrete\Lists\JsonSizeRepository.cs" />
     <Compile Include="Concrete\Infrastructure\GetPaidPaymentProcessor.cs" />
-    <Compile Include="Concrete\Orders\OrderSubmissionService.cs" />
+    <Compile Include="Concrete\Orders\OrderService.cs" />
     <Compile Include="Concrete\Shopping\CartRepository.cs" />
     <Compile Include="Interfaces\IAnalyticsService.cs" />
     <Compile Include="Interfaces\ICartIdentificationService.cs" />
@@ -83,7 +83,7 @@
     <Compile Include="Interfaces\IBlankImageRepository.cs" />
     <Compile Include="Interfaces\IImageDownloadService.cs" />
     <Compile Include="Interfaces\IInventoryRepository.cs" />
-    <Compile Include="Interfaces\IOrderSubmissionService.cs" />
+    <Compile Include="Interfaces\IOrderService.cs" />
     <Compile Include="Interfaces\IPaymentProcessor.cs" />
     <Compile Include="Interfaces\IProductRepository.cs" />
     <Compile Include="Interfaces\IJsonColorRepository.cs" />

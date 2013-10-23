@@ -23,13 +23,13 @@
             self.State = ko.observable();
             self.ZipCode = ko.observable();
             self.Phone = ko.observable();
-            self.ShippingOptionId = ko.observable();
+            self.ShippingMethodId = ko.observable();
 
             self.ShippingOption = ko.computed(function () {
-                if (!self.ShippingOptionId()) {
+                if (!self.ShippingMethodId()) {
                     return null;
                 }
-                var option = AQ(PushMkt.ShippingOptions).first(function (x) { return x.Id == self.ShippingOptionId(); });
+                var option = AQ(PushMkt.ShippingOptions).first(function (x) { return x.Id == self.ShippingMethodId(); });
                 return option;
             });
         };

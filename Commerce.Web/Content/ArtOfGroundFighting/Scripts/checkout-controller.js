@@ -18,8 +18,9 @@ app.controller('CheckoutController', function ($scope, $http) {
     };
 
     $scope.SalesTaxText = function () {
-        //console.log($scope.cart);
-        return $scope.cart && $scope.cart.StateTax ? "(" + $scope.cart.StateTax.Abbreviation + " " + $scope.cart.StateTax.TaxRate + "%)" : "";
+        return $scope.cart && $scope.cart.StateTax ? "(" + 
+            $scope.cart.StateTax.Abbreviation + " " + 
+            $scope.cart.StateTax.TaxRate + "%)" : "";
     };
 
     $scope.NonEmptyCart = function () {
@@ -139,12 +140,11 @@ app.controller('CheckoutController', function ($scope, $http) {
         };
         
         ngAjax.Post($http, "order", orderRequest, 
-            function() {
-                console.log('got it!');
+            function(data) {
+                console.log(data);
+                window.location = "#/order?externalId=" + data.Order.ExternalId + "&emailAddress=" + data.Order.EmailAddress;
             }
         );
-        // TODO: invoke Payment Processor
-
     };
     
     $scope.Initialize($scope.RetrieveCart);

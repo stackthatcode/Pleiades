@@ -12,23 +12,29 @@ namespace Commerce.Web.Areas.Public.Controllers
     public class OrderController : Controller
     {
         private readonly ICartManagementService _cartManagementService;
-        private readonly IOrderSubmissionService _orderSubmissionService;
+        private readonly ICartIdentificationService _cartIdentificationService;
+        private readonly IOrderService _orderSubmissionService;
         private readonly PushMarketContext _pushMarketContext;
 
-        public OrderController(ICartManagementService cartManagementService, 
-                PushMarketContext pushMarketContext, IOrderSubmissionService orderSubmissionService)
+        public OrderController(
+                ICartManagementService cartManagementService, 
+                ICartIdentificationService cartIdentificationService,
+                PushMarketContext pushMarketContext, 
+                IOrderService orderSubmissionService)
         {
             _cartManagementService = cartManagementService;
+            _cartIdentificationService = cartIdentificationService;
             _pushMarketContext = pushMarketContext;
             _orderSubmissionService = orderSubmissionService;
         }
 
         [HttpGet]
-        [ActionName("action")]
+        [ActionName("DISABLED")]
         public JsonNetResult Get()
         {
-            throw new NotImplementedException();
-            //return new JsonNetResult(_cartManagementService.Retrieve());
+            var cart = _cartManagementService.Retrieve();
+            var order = _orderSubmissionService.Retreive(cart.Cart.OrderExternalId);
+            return new JsonNetResult(order);
         }
 
         [HttpPost]
@@ -36,7 +42,6 @@ namespace Commerce.Web.Areas.Public.Controllers
         public JsonNetResult Post(ShippingInfo shippingInfo, BillingInfo billingInfo)
         {
             var cart = _cartManagementService.Retrieve();
-            _pushMarketContext.SaveChanges();
             var orderRequest = new OrderRequest
                 {
                     Items =
@@ -46,7 +51,15 @@ namespace Commerce.Web.Areas.Public.Controllers
                     ShippingInfo = shippingInfo,
                 };
 
-            return JsonNetResult.Success(); 
+            var result = _orderSubmissionService.Submit(orderRequest);
+            if (result.Success == true)
+            {
+                _cartIdentificationService.ProvisionNewCartId();
+                cart.Cart.OrderExternalId = result.Order.ExternalId;
+            }
+
+            _pushMarketContext.SaveChanges();
+            return new JsonNetResult(result); 
         }
     }
 }

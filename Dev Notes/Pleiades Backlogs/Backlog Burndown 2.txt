@@ -434,11 +434,14 @@ Burndown
 * Expires YEars
 * Validation
 
+- Order Submission Process => DONE
+- Thank You Page => DONE
+
 
 
 Already Done
 ~~~~~~~~~~~~
-- Checkout Screen => ALMOST DONE
+- Checkout Screen => DONE
 - Cart Screen => DONE
 - Store Front Screen => DONE
 - Add Item Screen => DONE

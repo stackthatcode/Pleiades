@@ -21,13 +21,5 @@ namespace Commerce.Application.Model.Orders
             this.Messages = new List<string>() { message };
             this.Success = success;
         }
-
-
-        // System Error? => no External Payment ID
-        // On Success from Payment Process, take the External Payment ID
-
-        // BOUNDED CONTEXT!
-        // For every CreateRequestOrder, log the results in the database, sans PCI data
-        // 1.) Payment Processor Response Code
     }
 }

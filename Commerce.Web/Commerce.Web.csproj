@@ -200,12 +200,14 @@
     <Content Include="Content\ArtOfGroundFighting\ng-templates\contact.html" />
     <Content Include="Content\ArtOfGroundFighting\ng-templates\content-parent.html" />
     <Content Include="Content\ArtOfGroundFighting\ng-templates\checkout.html" />
+    <Content Include="Content\ArtOfGroundFighting\ng-templates\thank-you.html" />
     <Content Include="Content\ArtOfGroundFighting\ng-templates\product-detail.html" />
     <Content Include="Content\ArtOfGroundFighting\ng-templates\product-list.html" />
     <Content Include="Content\ArtOfGroundFighting\ng-templates\shipping.html" />
     <Content Include="Content\ArtOfGroundFighting\Scripts\angular-app.js" />
     <Content Include="Content\ArtOfGroundFighting\Scripts\cart-controller.js" />
     <Content Include="Content\ArtOfGroundFighting\Scripts\checkout-controller.js" />
+    <Content Include="Content\ArtOfGroundFighting\Scripts\order-controller.js" />
     <Content Include="Content\ArtOfGroundFighting\Scripts\products-controller.js" />
     <Content Include="Content\ArtOfGroundFighting\Scripts\cart-functions.js" />
     <Content Include="Content\ArtOfGroundFighting\Style\artofgroundfighting.css" />

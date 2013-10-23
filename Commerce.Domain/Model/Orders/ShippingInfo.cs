@@ -31,6 +31,6 @@ namespace Commerce.Application.Model.Orders
 
         // NOTE: this is legacy, but used by the old Knockout Submit Form
         [JsonProperty]
-        public int ShippingOptionId { get; set; }
+        public int ShippingMethodId { get; set; }
     }
 }

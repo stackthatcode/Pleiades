@@ -19,14 +19,14 @@ namespace Commerce.UnitTests.Application
             // Arrange
             var request = OrderRequestGenerator();
             request.BillingInfo = null;
-            var service = new OrderSubmissionService(null, null, null, null);
+            var service = new OrderService(null, null, null, null);
 
             // Act
             var result = service.Submit(request);
 
             // Assert
             Assert.That(result.Success, Is.False);
-            Assert.That(result.Messages, Contains.Item(OrderSubmissionService.ErrorMissingData));
+            Assert.That(result.Messages, Contains.Item(OrderService.ErrorMissingData));
             result.Messages.ForEach(Console.WriteLine);
         }
         
@@ -41,7 +41,7 @@ namespace Commerce.UnitTests.Application
                 .Return(new Transaction(TransactionType.AuthorizeAndCollect) { Success = false })
                 .IgnoreArguments();
 
-            var service = new OrderSubmissionService(null, paymentProcessor, null, null);
+            var service = new OrderService(null, paymentProcessor, null, null);
             service.InventoryBySkuCodes = this.SkuFunctionGenerator_PlainVanilla();
             service.StateTaxByAbbr = this.StateTaxFunctionGenerator();
             service.ShippingMethodById = this.ShippingMethodFunctionGenerator();
@@ -52,7 +52,7 @@ namespace Commerce.UnitTests.Application
             // Assert
             paymentProcessor.VerifyAllExpectations();
             Assert.That(result.Success, Is.False);
-            Assert.That(result.Messages, Contains.Item(OrderSubmissionService.ErrorFailedPayment));
+            Assert.That(result.Messages, Contains.Item(OrderService.ErrorFailedPayment));
             result.Messages.ForEach(x => Console.WriteLine(x));
         }
 
@@ -61,14 +61,14 @@ namespace Commerce.UnitTests.Application
         {
             // Arrange
             var request = OrderRequestGenerator();
-            var service = new OrderSubmissionService(null, null, null, null);
+            var service = new OrderService(null, null, null, null);
 
             // Act
             var result = service.Submit(request);
 
             // Assert
             Assert.That(result.Success, Is.False);
-            Assert.That(result.Messages, Contains.Item(OrderSubmissionService.ErrorFault));
+            Assert.That(result.Messages, Contains.Item(OrderService.ErrorFault));
             result.Messages.ForEach(x => Console.WriteLine(x));
         }
 
@@ -89,7 +89,7 @@ namespace Commerce.UnitTests.Application
             var analyticsService = MockRepository.GenerateMock<IAnalyticsService>();
             analyticsService.Expect(x => x.AddSale(null, 0)).IgnoreArguments();
 
-            var service = new OrderSubmissionService(null, paymentProcessor, analyticsService, emailService);
+            var service = new OrderService(null, paymentProcessor, analyticsService, emailService);
             service.InventoryBySkuCodes = this.SkuFunctionGenerator_PlainVanilla();
             service.StateTaxByAbbr = this.StateTaxFunctionGenerator();
             service.ShippingMethodById = this.ShippingMethodFunctionGenerator();
@@ -127,7 +127,7 @@ namespace Commerce.UnitTests.Application
             var analyticsService = MockRepository.GenerateMock<IAnalyticsService>();
             analyticsService.Expect(x => x.AddSale(null, 0)).IgnoreArguments();
 
-            var service = new OrderSubmissionService(null, paymentProcessor, analyticsService, emailService);
+            var service = new OrderService(null, paymentProcessor, analyticsService, emailService);
             service.InventoryBySkuCodes = this.SkuFunctionGenerator_ChangingInventory();
             service.StateTaxByAbbr = this.StateTaxFunctionGenerator();
             service.ShippingMethodById = this.ShippingMethodFunctionGenerator();

@@ -25,6 +25,10 @@ angular.module('push-market', []).
                 templateUrl: templateUrlBase + 'checkout.html',
                 controller: 'CheckoutController'
             })
+            .when('/order', {
+                templateUrl: templateUrlBase + 'thank-you.html',
+                controller: 'OrderController'
+            })
             .otherwise({ redirectTo: '/products' });
         }
     ]
