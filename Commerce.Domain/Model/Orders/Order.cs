@@ -58,12 +58,19 @@ namespace Commerce.Application.Model.Orders
             this.AddNote(transaction.ToPlainEnglish());
         }
 
+        public Transaction Payment
+        {
+            get { return Transactions.FirstOrDefault(x => x.TransactionType == TransactionType.AuthorizeAndCollect); }
+        }
+
         [JsonIgnore]
         public Func<decimal> SubTotal
         {
             get
             {
-                return () => OrderLines.Sum(x => x.LinePrice);
+                return () => OrderLines
+                    .Where(x => x.Status != OrderLineStatus.Refunded)
+                    .Sum(x => x.LinePrice);
             }
         }
 
@@ -79,22 +86,66 @@ namespace Commerce.Application.Model.Orders
             }
         }
 
+        public void SplitLines()
+        {
+            foreach (var line in this.OrderLines.ToList())
+            {
+                this.OrderLines.Remove(line);
+                this.OrderLines.AddRange(line.Split());
+            }
+        }
+
         public List<string> AllSkuCodes
         {
             get
             {
-                return OrderLines.Select(x => x.OriginalSkuCode).ToList();
+                return OrderLines
+                        .Select(x => x.OriginalSkuCode)
+                        .Distinct()
+                        .ToList();
             }
+        }
+
+        public Dictionary<string, int> QuantityBySkuCode
+        {
+            get
+            {
+                var output = new Dictionary<string, int>();
+                foreach (var skucode in OrderLines.Select(x => x.OriginalSkuCode).Distinct())
+                {
+                    output[skucode] = OrderLines.Where(x => x.OriginalSkuCode == skucode).Sum(x => x.Quantity);
+                }
+                return output;
+            }
+        }
+
+        public List<OrderLine> RefundableLines
+        {
+            get 
+            { 
+                return OrderLines.Where(x => 
+                    x.Status != OrderLineStatus.Refunded && x.Status != OrderLineStatus.Shipped).ToList(); 
+            }
+        }
+
+        public List<OrderLine> ReadyToShipItems
+        {
+             get { return OrderLines.Where(x => x.Status == OrderLineStatus.Pending).ToList(); }
+        }
+
+        public List<OrderLine> ShippedItems
+        {
+            get { return OrderLines.Where(x => x.Status != OrderLineStatus.Pending).ToList(); }            
         }
 
         public bool Complete
         {
             get
             {
-                return this.OrderLines.Any(x => 
-                    x.Status != OrderLineStatus.Shipped || x.Status != OrderLineStatus.Cancelled);
+                return OrderLines.Any(x => 
+                    x.Status != OrderLineStatus.Shipped || x.Status != OrderLineStatus.Refunded);
             }
-            set 
+            set
             {
                 // Do nothing
             }

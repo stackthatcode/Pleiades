@@ -4,7 +4,8 @@
     {
         Pending = 1,
         Shipped = 2,
-        Refunded = 3,
-        Cancelled = 4,
+        FailedShipping = 5,
+        Returned = 3,
+        Refunded = 4,
     }
 }

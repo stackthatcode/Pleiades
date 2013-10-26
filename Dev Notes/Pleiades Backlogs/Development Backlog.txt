@@ -6,11 +6,16 @@ Burndown
 - Load Shipping Method and State Tax from Cart => DONE
 - Set default Shipping Method and State Tax on Cart => DONE
 - "Designed by fighters, worn by fighters"
+
 Finish Line
 -----------
 - Admin Search & Manage Orders => IN PROGRESS
+- Compute the Refund => IN PROGRESS
 - Seed the Test Order Data... => TODO
 - Add Limit to how many items in Cart => TODO
+
+- Contact Us Page Tasking => Email Form: use that thing from stache.io, Google Map, Street Address
+- About Us Page Tasking => Picture of Tsinerev, Shipping Verbage, Returns Verbage
 
 
 Manage an Order CRUD screen
@@ -23,8 +28,10 @@ Manage an Order CRUD screen
 	- Date of Order
 	- External OrderId
 	- Original Order Amount
-	- Order Total
-	- How Many Items
+	- Current Order Total
+	- Tax
+	- Shipping
+	- How Many Items by Sku	
 
 - Order Summary Tab 
 * Shipping Info
@@ -34,58 +41,63 @@ Manage an Order CRUD screen
 
 
 
-- Ship Order Lines
+Buttons
+~~~~~~~
+- Refund
+- Items Shipped
+- Items Returned
+
+- Refund Order Lines
 * STEP #1 => Select Order Lines and Quantity
-* STEP #2 => 
+* STEP #2 => MessageBox - "Are you sure?"
+* STEP #3 => Hit Payment Process
 * STEP #3 => Update Status + History
 
-- Refund => Choose Order Lines => Hit the Payment Processor => Update Status on Order Lines + History
-- Fail Shipping => Choose Order Lines => Update Status + History
+- Failed Shipping
+* STEP #1 => Select Order Lines and Quantity
+* STEP #2 => MessageBox - "Are you sure?"
+* STEP #3 => Hit Payment Process
+* STEP #3 => Update Status + History
 
 
-
-- Admin Sales Graph by Product => TODO
-- Email Sending Engine => TODO
-* http://stackoverflow.com/questions/10512845/how-to-send-email-wth-email-template-c-sharp/10512995#10512995
-- Stripe Payment Integration => TODO
 
 
 ### END PRODUCT DEFINITION + TASKING ###
+- Admin Sales Graph by Product => TODO
+- Choose Date Range (months)
+* Pie Chart of Sales my Product
+* Sales By Date
+* Refunds By Month
+* Income with Expenses By Month
 
-Contact Us Page Tasking
-~~~~~~~~~~~~~~~~~~~~~~~
-- Email Form => use that thing from stache.io
-- Google Map
-- Street Address
+- Email Sending Engine => TODO
+* http://stackoverflow.com/questions/10512845/how-to-send-email-wth-email-template-c-sharp/10512995#10512995
 
-About Us Page Tasking
-~~~~~~~~~~~~~~~~~~~~~
-- Picture of Tsinerev
-- Shipping Verbage
-- Returns Verbage
+- Stripe Payment Integration => TODO
+
+
+
 
 Backlog
 -------
 - Donate $20 to FineUploader upon successful integration => TODO
 
-
-
-
-PushMarket Front-end (for Marketing)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+PushMarket (for Marketing)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Angular.js
-- JavaScript Promises
+- KnockoutJs
 - JQuery
 - Bootstrap 3
 - .NET MVC 4
 - C# + .NET 4.5
-- Entity Framework 6
+- Entity Framework
 - HTML 5
 - SQL Server 2008...?
+- Responsive
 
 PHASE 2 Backlog
 ---------------
-- Amazon EC2 Hosting + Deployment => TODO
+- Azure Deployment => TODO
 * Splash Graphic...?
 => http://blog.stevensanderson.com/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/
 => http://haacked.com/archive/2011/10/10/preventing-csrf-with-ajax.aspx
@@ -108,7 +120,7 @@ PHASE 2 Backlog
 - Show the number of Products under Category => PENDING EVAL
 - Rendering Adjustments for long Category Names et. al. => DONE
 - Prevent multiple Pop-ups from appearing
-- IsONline - Check How This Functions => UPDATE - NEED TO FIX TOUCH Function
+- IsOnline - Check How This Functions => UPDATE - NEED TO FIX TOUCH Function
 - Intrusion Detection
 
 Research Backlog

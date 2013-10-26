@@ -27,6 +27,7 @@ namespace Commerce.Application.Concrete.Orders
         public Func<IEnumerable<string>, bool, List<ProductSku>> InventoryBySkuCodes;
         public Action<SubmitOrderResult> ResponseTesting;
         public Action<Order> CreateOrder;
+        public Action<Order> RefundDifference;
         public Action SaveChanges;
 
         public OrderService(PushMarketContext context, 
@@ -42,6 +43,7 @@ namespace Commerce.Application.Concrete.Orders
             ShippingMethodById = (id) => Context.ShippingMethods.First(x => x.Id == id);
             InventoryBySkuCodes = InventoryBySkuCodesImpl;
             CreateOrder = CreateOrderImpl;
+            RefundDifference = RefundDifferenceImpl;
             SaveChanges = SaveChangesImpl;
         }
 
@@ -86,21 +88,57 @@ namespace Commerce.Application.Concrete.Orders
             CreateOrder(order);
             
             // Inventory corrections - Bounded Context
+            CorrectOrderQuantities(order);
+
+            // Shipping nothing?  Kill the shipping
+            if (order.OrderLines.All(x => x.Quantity == 0))
+            {
+                order.ShippingMethod = null;
+            }
+
+            RefundDifference(order);
+
+            // Send the Email - Bounded Context
+            EmailService.SendOrderReceived();
+
+            // Invoke the Analytics Service - Bounded Context
+            AnalyticsService.AddSale(order, 3);
+
+            // FIN! - return OrderRequestResponse - Bounded Context
+            order.SplitLines();
+            var orderResponse = new SubmitOrderResult(order);
+            return orderResponse;
+        }
+
+        private void RefundDifferenceImpl(Order order)
+        {
+            // Eventual Consistency w/ Payment Correction - Do we need to process a refund? - Bounded Context
+            if (order.Total.GrandTotal < order.OriginalGrandTotal)
+            {
+                var originalPayment = order.Transactions.First(x => x.TransactionType == TransactionType.AuthorizeAndCollect);
+                var refundAmount = order.OriginalGrandTotal - order.Total.GrandTotal;
+                var refundTransaction = PaymentProcessor.Refund(originalPayment, refundAmount);
+                order.AddTransaction(refundTransaction); // NOTE: if this failed, it will appear for the Customer
+            }
+        }
+
+        private void CorrectOrderQuantities(Order order)
+        {
             var inventory = InventoryBySkuCodes(order.AllSkuCodes, true);
 
             foreach (var line in order.OrderLines)
             {
                 var sku = inventory.First(x => x.SkuCode == line.OriginalSkuCode);
-                if (sku == null || sku.IsDeleted == true)
+                if (sku == null || sku.IsDeleted)
                 {
                     line.Quantity = 0;
-                    if (sku.Available == 0 || sku.IsDeleted == true)
+                    if (sku.Available == 0 || sku.IsDeleted)
                     {
                         order.AddNote(
                             "There are no longer any of the " + line.OriginalName + " available in stock.");
                     }
                 }
-                else if (sku.Available < line.Quantity)                
+                else if (sku.Available < line.Quantity)
                 {
                     var wereOrWas = sku.Available == 1 ? "was" : "were";
                     order.AddNote(
@@ -113,30 +151,6 @@ namespace Commerce.Application.Concrete.Orders
                 sku.Reserved += line.Quantity;
             }
             SaveChanges();
-
-            // Shipping nothing?  Kill the shipping
-            if (order.OrderLines.All(x => x.Quantity == 0))
-            {
-                order.ShippingMethod = null;
-            }
-
-            // Eventual Consistency w/ Payment Correction - Do we need to process a refund? - Bounded Context
-            if (order.Total.GrandTotal < order.OriginalGrandTotal)
-            {
-                var refundAmount = order.OriginalGrandTotal - order.Total.GrandTotal;
-                var refundTransaction = PaymentProcessor.Refund(paymentTransaction, refundAmount);
-                order.AddTransaction(refundTransaction);    // NOTE: if this failed, it will appear for the Customer
-            }
-
-            // Send the Email - Bounded Context
-            EmailService.SendOrderReceived();
-
-            // Invoke the Analytics Service - Bounded Context
-            AnalyticsService.AddSale(order, 3);
-
-            // FIN! - return OrderRequestResponse - Bounded Context
-            var orderResponse = new SubmitOrderResult(order);
-            return orderResponse;
         }
 
         private Order FromOrderRequest(OrderRequest orderRequest)

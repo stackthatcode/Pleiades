@@ -8,11 +8,9 @@ namespace Commerce.Application.Interfaces
     {
         List<Order> Find(DateTime? startDate, DateTime? endDate, bool? complete);
         Order Retrieve(string externalId);
-        void Refund(string externalId);
-        void Refund(string externalId, List<OrderLineChange> itemsAndQuantities);
-        void Ship(string externalId);
-        void Ship(string externalId, List<OrderLineChange> itemsAndQuantities);
-        void Cancel(string externalId);
-        void Cancel(string externalId, List<OrderLineChange> itemsAndQuantities);
+        void Refund(string externalId, List<int> items);
+        void Ship(string externalId, List<int> items);
+        void FailShipping(string externalId, List<int> items);
+        void Return(string externalId, List<int> items);
     }
 }

@@ -17,7 +17,7 @@ namespace Commerce.Application.Model.Billing
                 {
                     { TransactionType.AuthorizeAndCollect, "Payment" },
                     { TransactionType.Refund, "Refund" },
-                    { TransactionType.ChargeBack, "Charge Back" },
+                    { TransactionType.ChargeBack, "Charge Back" },  // How will we capture these...?
                 };
 
         public static string ToPlainEnglish(this TransactionType transactionType)
