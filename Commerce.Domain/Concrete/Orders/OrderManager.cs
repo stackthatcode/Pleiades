@@ -91,8 +91,11 @@ namespace Commerce.Application.Concrete.Orders
             if (!result.Success)
             {
                 refundableItems.ForEach(x => _context.RefreshEntity(x));
+            }
+            else
+            {
                 order.UpdateComplete();
-                order.LastModified = DateTime.Now;
+                order.LastModified = DateTime.Now;  
             }
             return order;
         }

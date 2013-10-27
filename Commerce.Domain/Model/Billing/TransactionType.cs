@@ -2,25 +2,25 @@
 
 namespace Commerce.Application.Model.Billing
 {
-    public enum TransactionType
+    public class TransactionType
     {
-        AuthorizeAndCollect = 1,
-        Refund = 2,
-        ChargeBack = 3,
+        public const int AuthorizeAndCollect = 1;
+        public const int Refund = 2;
+        public const int ChargeBack = 3;
     }
 
     public static class TransactionTypeExtensions
     {
         private readonly static 
-            Dictionary<TransactionType, string> _descriptions =
-                new Dictionary<TransactionType, string>()
+            Dictionary<int, string> _descriptions =
+                new Dictionary<int, string>()
                 {
                     { TransactionType.AuthorizeAndCollect, "Payment" },
                     { TransactionType.Refund, "Refund" },
                     { TransactionType.ChargeBack, "Charge Back" },  // How will we capture these...?
                 };
 
-        public static string ToPlainEnglish(this TransactionType transactionType)
+        public static string ToPlainEnglish(this int transactionType)
         {
             return _descriptions[transactionType];
         }

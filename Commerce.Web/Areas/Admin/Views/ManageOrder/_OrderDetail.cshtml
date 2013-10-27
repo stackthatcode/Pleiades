@@ -22,20 +22,23 @@
             data.Selected(!data.Selected());
         };
 
-        self.Ship = function () {
+        self.SelectedOrderLines = function () {
             var orderLines = [];
             AQ(self.OrderData().OrderLines)
                 .where(function (x) { return x.Selected() == true; })
                 .each(function (item) { orderLines.push(item.Id); })
                 .toArray();
-            if (orderLines.length == 0) return;
+            return orderLines.join(",");
+        };
 
-            var orderLinesArg = orderLines.join(",");
+        self.Ship = function () {
             var externalId = self.SelectedOrderId();
+            var orderLines = self.SelectedOrderLines();
+            if (orderLines == "") return;
 
             flow.exec(
                 function () {
-                    var url = "/Admin/ManageOrder/Ship?externalId=" + externalId + "&orderLineIds=" + orderLinesArg;
+                    var url = "/Admin/ManageOrder/Ship?externalId=" + externalId + "&orderLineIds=" + orderLines;
                     self.Root.Service.AjaxPost(url, {}, this);
                 },
                 function (data) {
@@ -46,8 +49,22 @@
             );
         };
 
-        self.Refund = function() {
-            
+        self.Refund = function () {
+            var externalId = self.SelectedOrderId();
+            var orderLines = self.SelectedOrderLines();
+            if (orderLines == "") return;
+
+            flow.exec(
+                function () {
+                    var url = "/Admin/ManageOrder/Refund?externalId=" + externalId + "&orderLineIds=" + orderLines;
+                    self.Root.Service.AjaxPost(url, {}, this);
+                },
+                function (data) {
+                    self.SelectedOrderId(data.ExternalId);
+                    AQ(data.OrderLines).each(function (x) { x.Selected = ko.observable(false); });
+                    self.OrderData(data);
+                }
+            );
         };
 
         self.Load = function (externalId, callback) {
@@ -89,7 +106,7 @@
             
             <div style="float:right; text-align: right;">
                 <a href="#" class="btn btn-primary" data-bind="click: Ship">Ship <i class="icon-white icon-plane"></i></a>
-                <a href="#" class="btn btn-primary">Refund <i class="icon-white icon-share-alt"></i></a>
+                <a href="#" class="btn btn-primary" data-bind="click: Refund">Refund <i class="icon-white icon-share-alt"></i></a>
                 <!--<a href="#" class="btn btn-primary">Items Returned <i class="icon-white icon-tags"></i></a> -->
             </div>
         </div>

@@ -9,7 +9,7 @@ namespace Commerce.Application.Model.Billing
 
         // Payment Details
         public decimal Amount { get; set; }
-        public TransactionType TransactionType { get; set; }
+        public int TransactionType { get; set; }
 
         // Payment Processor Response
         public bool Success { get; set; }
@@ -22,10 +22,15 @@ namespace Commerce.Application.Model.Billing
         {            
         }
 
-        public Transaction(TransactionType transactionType)
+        public Transaction(int transactionType)
         {
             this.TransactionType = transactionType;
             this.TransactionDate = DateTime.Now;
+        }
+
+        public string TransactionTypeDescription
+        {
+            get { return TransactionType.ToPlainEnglish(); }
         }
 
         public string ToPlainEnglish()

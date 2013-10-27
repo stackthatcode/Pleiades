@@ -7,7 +7,6 @@ Finish Line
 * STEP #3 => Hit Payment Process
 * STEP #3 => Update Status + History
 
-
 - Contact Us Page Tasking => Email Form: use that thing from stache.io, Google Map, Street Address
 - About Us Page Tasking => Picture of Tsinerev, Shipping Verbage, Returns Verbage
 - Seed the Test Order Data... => TODO
@@ -51,7 +50,7 @@ PHASE 2 Backlog
 ---------------
 - Lightbox on the Storefront
 - Azure Deployment
-* Splash Graphic...?
+- Are you sure want to Refund that?
 => http://blog.stevensanderson.com/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/
 => http://haacked.com/archive/2011/10/10/preventing-csrf-with-ajax.aspx
 - NCrunch coverage analysis and remediation for Controllers and Routes

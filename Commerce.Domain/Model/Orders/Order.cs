@@ -132,8 +132,7 @@ namespace Commerce.Application.Model.Orders
         {
             get 
             { 
-                return OrderLines.Where(x => 
-                    x.Status != OrderLineStatus.Refunded && x.Status != OrderLineStatus.Shipped).ToList(); 
+                return OrderLines.Where(x => x.Status != OrderLineStatus.Refunded).ToList(); 
             }
         }
 
