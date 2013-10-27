@@ -1,62 +1,17 @@
-Burndown
-~~~~~~~~
-- Shipping Information => DONE
-- Create Order Page => DONE
-- Sales Tax Text => DONE
-- Load Shipping Method and State Tax from Cart => DONE
-- Set default Shipping Method and State Tax on Cart => DONE
-- "Designed by fighters, worn by fighters"
-- Order Search Query
-	- Complete/Incomplete Orders
-	- By Date Range
-	
-- Order Search Results
-	- Date of Order
-	- External OrderId
-	- Original Order Amount
-	- Current Order Total
-	- Tax
-	- Shipping
-	- How Many Items by Sku	
-- Compute the Refund => DONE
-- Search =>DONE
-	
 Finish Line
 -----------
 - Manage Orders => IN PROGRESS
-- Seed the Test Order Data... => TODO
-- Add Limit to how many items in Cart => TODO
-
-- Contact Us Page Tasking => Email Form: use that thing from stache.io, Google Map, Street Address
-- About Us Page Tasking => Picture of Tsinerev, Shipping Verbage, Returns Verbage
-
-
-Manage an Order CRUD screen
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Order Summary Tab 
-* Shipping Info
-* List of Order Items w/ Statuses
-* Completion
-* History 
-
-Buttons
-~~~~~~~
-- Refund
-- Items Shipped
-- Items Returned
-
 - Refund Order Lines
 * STEP #1 => Select Order Lines and Quantity
 * STEP #2 => MessageBox - "Are you sure?"
 * STEP #3 => Hit Payment Process
 * STEP #3 => Update Status + History
 
-- Failed Shipping
-* STEP #1 => Select Order Lines and Quantity
-* STEP #2 => MessageBox - "Are you sure?"
-* STEP #3 => Hit Payment Process
-* STEP #3 => Update Status + History
 
+- Contact Us Page Tasking => Email Form: use that thing from stache.io, Google Map, Street Address
+- About Us Page Tasking => Picture of Tsinerev, Shipping Verbage, Returns Verbage
+- Seed the Test Order Data... => TODO
+- Add Limit to how many items in Cart => TODO
 
 
 
@@ -72,7 +27,6 @@ Buttons
 * http://stackoverflow.com/questions/10512845/how-to-send-email-wth-email-template-c-sharp/10512995#10512995
 
 - Stripe Payment Integration => TODO
-
 
 
 

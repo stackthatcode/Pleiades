@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
+using Commerce.Application.Database;
 using Commerce.Application.Interfaces;
 using Pleiades.Web.Json;
 
@@ -8,10 +10,12 @@ namespace Commerce.Web.Areas.Admin.Controllers
     public class ManageOrderController : Controller
     {
         private readonly IOrderManager _orderManager;
+        private PushMarketContext _context;
 
-        public ManageOrderController(IOrderManager orderManager)
+        public ManageOrderController(IOrderManager orderManager, PushMarketContext context)
         {
             _orderManager = orderManager;
+            _context = context;
         }
 
         public ViewResult Editor()
@@ -21,7 +25,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
 
         public JsonNetResult Search(int? orderStatus, string startDate, string endDate)
         {
-            var complete = orderStatus.HasValue ? (orderStatus.Value == 1) : (bool?)null;
+            var complete = orderStatus.HasValue ? (orderStatus.Value == 2) : (bool?)null;
             var result = _orderManager.Find(DateTime.Parse(startDate), DateTime.Parse(endDate), complete);
             return new JsonNetResult(result);
         }
@@ -30,6 +34,24 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             var result = _orderManager.Retrieve(externalId);
             return new JsonNetResult(result);
+        }
+
+        [HttpPost]
+        public JsonNetResult Ship(string externalId, string orderLineIds)
+        {
+            var orderLines = orderLineIds.Split(',').Select(Int32.Parse).ToList();
+            var order = _orderManager.Ship(externalId, orderLines);
+            _context.SaveChanges();
+            return new JsonNetResult(order);
+        }
+
+        [HttpPost]
+        public JsonNetResult Refund(string externalId, string orderLineIds)
+        {
+            var orderLines = orderLineIds.Split(',').Select(Int32.Parse).ToList();
+            var order = _orderManager.Refund(externalId, orderLines);
+            _context.SaveChanges();
+            return new JsonNetResult(order);
         }
     }
 }

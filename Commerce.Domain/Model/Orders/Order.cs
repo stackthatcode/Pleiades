@@ -27,6 +27,7 @@ namespace Commerce.Application.Model.Orders
 
         public List<OrderLine> OrderLines { get; set; }
         public DateTime DateCreated { get; set; }
+        public DateTime LastModified { get; set; }
 
         public ShippingMethod ShippingMethod { get; set; }
         public StateTax StateTax { get; set; }
@@ -46,6 +47,7 @@ namespace Commerce.Application.Model.Orders
             Total = new Total(SubTotal, () => ShippingMethod, () => StateTax);
             Transactions = new List<Transaction>();
             Notes = new List<OrderNote>();
+            LastModified = DateTime.Now;
         }
 
         public void AddNote(string content)
@@ -88,13 +90,16 @@ namespace Commerce.Application.Model.Orders
             }
         }
 
-        public void SplitLines()
+        public List<OrderLine> SplitLines()
         {
+            var output = new List<OrderLine>();
             foreach (var line in this.OrderLines.ToList())
             {
                 this.OrderLines.Remove(line);
+                output.Add(line);
                 this.OrderLines.AddRange(line.Split());
             }
+            return output;
         }
 
         public List<string> AllSkuCodes
@@ -144,17 +149,13 @@ namespace Commerce.Application.Model.Orders
             get { return OrderLines.Where(x => x.Status != OrderLineStatus.Pending).ToList(); }            
         }
 
-        public bool Complete
+        public bool Complete { get; set; }
+
+        public void UpdateComplete()
         {
-            get
-            {
-                return OrderLines.Any(x => 
-                    x.Status != OrderLineStatus.Shipped || x.Status != OrderLineStatus.Refunded);
-            }
-            set
-            {
-                // Do nothing
-            }
+            Complete = OrderLines.All(x =>
+                x.Status == OrderLineStatus.Shipped || x.Status == OrderLineStatus.Refunded);
         }
+
     }
 }

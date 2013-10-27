@@ -1,5 +1,4 @@
-﻿<!-- Function to add Product Search & Selection -->
-<script type="text/javascript">
+﻿<script type="text/javascript">
     var PushMkt = PushMkt || {};
 
     PushMkt.AddFindOrderView = function ($root) {
@@ -29,20 +28,30 @@
         self.InitializeControls = function () {
             $("#data-picker-start").datepicker();
             $("#data-picker-end").datepicker();
+            if (self.StartDate() && self.EndDate()) return;
 
             var nowTemp = new Date();
             var now = (nowTemp.getMonth() + 1) + "/" + nowTemp.getDate() + "/" + nowTemp.getFullYear();
-            self.StartDate(now);
+
+            var twoWeeksAgoTemp = new Date();
+            twoWeeksAgoTemp.setDate(nowTemp.getDate() - 14);
+            var twoWeeksAgo = (twoWeeksAgoTemp.getMonth() + 1) + "/" + twoWeeksAgoTemp.getDate() + "/" + twoWeeksAgoTemp.getFullYear();
+
+            self.StartDate(twoWeeksAgo);
             self.EndDate(now);
         };
 
         self.SearchClick = function () {
             flow.exec(
                 function () {
+                    self.StartDate($("#data-picker-start").val());
+                    self.EndDate($("#data-picker-end").val());
+                    
                     var url = "/Admin/ManageOrder/Search" +
                         "?orderStatus=" + self.SelectedStatus() +
-                        "&startDate=" + $("#data-picker-start").val() +
-                        "&endDate=" + $("#data-picker-end").val();
+                        "&startDate=" + self.StartDate() +
+                        "&endDate=" + self.EndDate();
+                    
                     self.Root.Service.AjaxGet(url, this);
                 },
                 function (data) {
@@ -111,10 +120,10 @@
                 <tr>
                     <td style="vertical-align:top; padding-top:20px; padding-bottom:20px; width:300px;">				
                         <h4 style="font-weight: bold; margin-top:0; margin-bottom:0px;" data-bind="text: 'Order Number: ' + ExternalId"></h4>
-                        <div data-bind="if: Complete"><i class="icon-search icon-ok"></i> Order Complete</div>
-                        <div data-bind="ifnot: Complete"><i class="icon-search icon-remove"></i> Order Incomplete</div>
+                        <div data-bind="if: Complete"><i class="icon-ok"></i> Order Complete</div>
+                        <div data-bind="ifnot: Complete"><i class="icon-fire"></i> Order Incomplete</div>
                     </td>
-                                        
+
                     <td style="vertical-align:top; padding-top:20px; padding-bottom:20px; text-align:left;">
                         <span>Customer Name:</span> <span style="font-weight: bold;" data-bind="text: Name"></span><br/>
                         <span>Email:</span> <span style="font-weight: bold;" data-bind="text: EmailAddress"></span>

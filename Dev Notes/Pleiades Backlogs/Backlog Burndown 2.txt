@@ -463,3 +463,40 @@ Already Done
 - Server Logging => DONE
 - Centralize Settings for Ajax-Service and ImageBundleView and UploadTest scripts => DONE
 - Separated Error PAges => DONE
+
+
+Burndown
+~~~~~~~~
+- Shipping Information => DONE
+- Create Order Page => DONE
+- Sales Tax Text => DONE
+- Load Shipping Method and State Tax from Cart => DONE
+- Set default Shipping Method and State Tax on Cart => DONE
+- "Designed by fighters, worn by fighters"
+- Order Search Query
+	- Complete/Incomplete Orders
+	- By Date Range
+	
+- Order Search Results
+	- Date of Order
+	- External OrderId
+	- Original Order Amount
+	- Current Order Total
+	- Tax
+	- Shipping
+	- How Many Items by Sku	
+- Compute the Refund => DONE
+- Search =>DONE
+- Order Summary Tab 
+* Shipping Info
+* List of Order Items w/ Statuses
+* Completion
+* History 
+- Refund
+- Items Shipped
+- Items Returned
+- Failed Shipping
+* STEP #1 => Select Order Lines and Quantity
+* STEP #2 => MessageBox - "Are you sure?"
+* STEP #3 => Hit Payment Process
+* STEP #3 => Update Status + History

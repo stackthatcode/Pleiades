@@ -229,11 +229,13 @@
     <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-popover.js" />
     <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-tooltip.js" />
     <Content Include="Content\Bootstrap_2_3_2\js\bootstrap.min.js" />
+    <Content Include="Content\Bootstrap_3_0_0\css\bootstrap-lightbox.css" />
     <Content Include="Content\Bootstrap_3_0_0\css\bootstrap-theme.css" />
     <Content Include="Content\Bootstrap_3_0_0\css\bootstrap-theme.min.css" />
     <Content Include="Content\Bootstrap_3_0_0\css\bootstrap.css" />
     <Content Include="Content\Bootstrap_3_0_0\css\bootstrap.min.css" />
     <Content Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Bootstrap_3_0_0\js\bootstrap-lightbox.js" />
     <Content Include="Content\Bootstrap_3_0_0\js\bootstrap.js" />
     <Content Include="Content\Bootstrap_3_0_0\js\bootstrap.min.js" />
     <Content Include="Content\Commerce.Web\Images\200x200.gif" />

@@ -31,7 +31,7 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-8" ng-show="NonEmptyCart()">
+    <div class="col-lg-6" ng-show="NonEmptyCart()">
         <div style="width:400px;">
             <h1 class="sub-sub-header" style="color:#999;">Enter your Shipping Information</h1>
 
@@ -168,16 +168,27 @@
         <h1 class="sub-sub-header" style="color:#999;">Order Summary</h1>
     
         <div ng-repeat="item in cart.CartItems | orderBy:name" style="height:100px;">
-            <img ng-src="image/{{ item.Sku.ImageBundle.ExternalId }}?size=thumbnail" style="border: #CCC dotted 1px; float:left; margin-right:20px;" />
+            <a data-toggle="lightbox" href="#lightbox-{{ item.Id }}">
+                <img ng-src="image/{{ item.Sku.ImageBundle.ExternalId }}?size=thumbnail" style="border: #CCC dotted 1px; float:left; margin-right:20px;" />
+            </a>
+
             <span class="bold-print-black">{{ item.Sku.Name }}</span><br />
             <span class="product-list-synopsis">{{ item.Sku.SkuCode }}</span><br />
             <span class="product-list-synopsis">{{ item.Quantity }} {{ ItemsText(item.Quantity) }} at {{ ToMoney(item.Sku.Product.UnitPrice) }}</span><br />
+            
+            <div id="lightbox-{{ item.Id }}" class="lightbox fade" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="lightbox-dialog">
+                    <div class="lightbox-content">                    
+                        <img ng-src="image/{{ item.Sku.ImageBundle.ExternalId }}?size=large" />
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div>
-            <table style="width:100%">
+            <table>
                 <tr>
-                    <td class="bold-print-grey" style="width:200px;">Order Subtotal</td>
+                    <td class="bold-print-grey" style="width:275px;">Order Subtotal</td>
                     <td class="bold-print-grey" style="text-align:right;">{{ ToMoney(cart.Total.SubTotal) }}</td>
                 </tr>
                 <tr>

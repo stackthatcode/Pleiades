@@ -105,7 +105,8 @@ namespace Commerce.Application.Concrete.Orders
             AnalyticsService.AddSale(order, 3);
 
             // FIN! - return OrderRequestResponse - Bounded Context
-            order.SplitLines();
+            var oldLines = order.SplitLines();
+            oldLines.ForEach(x => Context.OrderLines.Remove(x));
             var orderResponse = new SubmitOrderResult(order);
             return orderResponse;
         }

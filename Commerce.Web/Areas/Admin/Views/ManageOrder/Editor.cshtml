@@ -34,24 +34,25 @@
 
             // Navigation between Views
             self.EditOrderClick = function (data) {
-                self.OrderDetailView.Load(data.ExternalId, function() {
+                self.OrderDetailView.Load(data.ExternalId, function () {
                     self.GlideRight(self.OrderDetailView.TopWorkspaceTemplate, self.OrderDetailView.MainEditorTemplate);
                 });
             };
 
             self.BackToSearch = function () {
                 self.GlideLeft(
-                    self.FindOrderView.TopWorkspaceTemplate, 
+                    self.FindOrderView.TopWorkspaceTemplate,
                     self.FindOrderView.MainEditorTemplate,
-                    function() {
-                        self.OrderDetailView.SelectedOrderId();                        
+                    function () {
+                        self.OrderDetailView.SelectedOrderId(null);
+                        self.FindOrderView.SearchClick();
                     });
             };
 
             self.EndlessGlider.Init(self.FindOrderView.TopWorkspaceTemplate, self.FindOrderView.MainEditorTemplate);
         };
 
-        $(function () {
+        $(function() {
             var model = new PushMkt.ManageOrderViewModel();
             ko.applyBindings(model);
             window.tmp = model;

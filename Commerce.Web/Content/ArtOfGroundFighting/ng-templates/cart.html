@@ -33,11 +33,23 @@
 <div class="col-lg-12" style="height:40px;"></div>
 
 <div class="row" ng-repeat="item in cart.CartItems | orderBy:name">    
-    <div class="col-lg-8" style="height:7px;">
-        <img ng-src="image/{{ item.Sku.ImageBundle.ExternalId }}?size=thumbnail" style="border: #CCC dotted 1px; float:left; margin-right:20px;" />
+    <div class="col-lg-8" style="height:75px;">
+        
+        <a data-toggle="lightbox" href="#lightbox-{{ item.Id }}">
+            <img ng-src="image/{{ item.Sku.ImageBundle.ExternalId }}?size=thumbnail" style="border: #CCC dotted 1px; float:left; margin-right:20px;" />            
+        </a>
+
         <span class="bold-print-black">{{ item.Sku.Name }}</span><br />
         <span class="product-list-synopsis">{{ item.Sku.SkuCode }}</span><br />
         <span class="product-list-synopsis">{{ ToMoney(item.Sku.Product.UnitPrice) }}</span><br />
+
+        <div id="lightbox-{{ item.Id }}" class="lightbox fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="lightbox-dialog">
+                <div class="lightbox-content">                    
+                    <img ng-src="image/{{ item.Sku.ImageBundle.ExternalId }}?size=large" />
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="col-lg-4" style="margin-bottom:60px;">

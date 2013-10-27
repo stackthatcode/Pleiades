@@ -54,7 +54,20 @@ namespace Commerce.Application.Concrete.Orders
                     .FirstOrDefault(x => x.ExternalId == externalId);
         }
 
-        public void RefundWithContextControl(string externalId, List<int> items)
+
+        public Order Ship(string externalId, List<int> items)
+        {
+            var order = this.Retrieve(externalId);
+            order.ReadyToShipItems
+                .Where(x => items.Contains(x.Id))
+                .ToList()
+                .ForEach(x => x.Status = OrderLineStatus.Shipped);
+            order.LastModified = DateTime.Now;
+            order.UpdateComplete();
+            return order;
+        }
+
+        public Order Refund(string externalId, List<int> items)
         {
             var order = this.Retrieve(externalId);
             var currentTotal = order.Total.GrandTotal;
@@ -68,7 +81,8 @@ namespace Commerce.Application.Concrete.Orders
             var refundAmount = currentTotal - postRefundTotal;
             if (refundAmount == 0)
             {
-                return;
+                refundableItems.ForEach(x => _context.RefreshEntity(x));
+                return order;
             }
 
             var paymentTransaction = order.Payment;
@@ -77,16 +91,10 @@ namespace Commerce.Application.Concrete.Orders
             if (!result.Success)
             {
                 refundableItems.ForEach(x => _context.RefreshEntity(x));
+                order.UpdateComplete();
+                order.LastModified = DateTime.Now;
             }
-        }
-
-        public void Ship(string externalId, List<int> items)
-        {
-            var order = this.Retrieve(externalId);
-            order.ReadyToShipItems
-                .Where(x => items.Contains(x.Id))
-                .ToList()
-                .ForEach(x => x.Status = OrderLineStatus.Shipped);
+            return order;
         }
 
         public void FailShipping(string externalId, List<int> items)

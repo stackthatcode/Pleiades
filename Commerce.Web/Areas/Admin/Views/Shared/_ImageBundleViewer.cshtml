@@ -46,6 +46,7 @@
 	        var lightboxImgId = lightboxid + " img";
 
 	        console.log(lightboxImgId + ' ' + $(lightboxImgId).attr("data-image"));
+	        
 	        $(lightboxImgId).attr("src", $(lightboxImgId).attr("data-image"));
 	        $(lightboxid).lightbox();
 	    };

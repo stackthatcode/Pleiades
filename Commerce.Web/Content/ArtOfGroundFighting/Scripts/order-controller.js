@@ -15,10 +15,8 @@ app.controller('OrderController', function ($scope, $http, $routeParams) {
     };
 
     $scope.Initialize = function () {
-        ngAjax.Get($http, 'order', function (data) {
-            $scope.externalId = $routeParams.externalId;
-            $scope.emailAddress = $routeParams.emailAddress;
-        });
+        $scope.externalId = $routeParams.externalId;
+        $scope.emailAddress = $routeParams.emailAddress;
     };
 
     $scope.Initialize();
