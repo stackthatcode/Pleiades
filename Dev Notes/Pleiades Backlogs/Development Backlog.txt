@@ -1,31 +1,20 @@
-Finish Line
------------
-- Manage Orders => IN PROGRESS
-- Refund Order Lines
-* STEP #1 => Select Order Lines and Quantity
-* STEP #2 => MessageBox - "Are you sure?"
-* STEP #3 => Hit Payment Process
-* STEP #3 => Update Status + History
-
-- Contact Us Page Tasking => Email Form: use that thing from stache.io, Google Map, Street Address
-- About Us Page Tasking => Picture of Tsinerev, Shipping Verbage, Returns Verbage
-- Seed the Test Order Data... => TODO
-- Add Limit to how many items in Cart => TODO
-
-
-
 ### END PRODUCT DEFINITION + TASKING ###
+
+- About Us Page Tasking => Picture of Tsinerev, Shipping Verbage, Returns Verbage
+- Contact Us Page Tasking => Email Form: use that thing from stache.io, Google Map, Street Address
+
 - Admin Sales Graph by Product => TODO
-- Choose Date Range (months)
-* Pie Chart of Sales my Product
-* Sales By Date
-* Refunds By Month
-* Income with Expenses By Month
+* Seed the Analytic Data => TODO
+* Pie Chart of Sales by SkuCode
+* Pie Chart of Refunds by SkuCode
+* Sales & Refunds By Date
+* Sales & Costs By Date
+
+
+- Stripe Payment Integration => TODO
 
 - Email Sending Engine => TODO
 * http://stackoverflow.com/questions/10512845/how-to-send-email-wth-email-template-c-sharp/10512995#10512995
-
-- Stripe Payment Integration => TODO
 
 
 
@@ -33,24 +22,11 @@ Backlog
 -------
 - Donate $20 to FineUploader upon successful integration => TODO
 
-PushMarket (for Marketing)
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-- HTML 5
-- Responsive
-- Angular.js
-- KnockoutJs
-- JQuery
-- Bootstrap 3
-- .NET MVC 4
-- C# + .NET 4.5
-- Entity Framework
-- SQL Server 2008
 
 PHASE 2 Backlog
 ---------------
-- Lightbox on the Storefront
-- Azure Deployment
 - Are you sure want to Refund that?
+- Azure Deployment
 => http://blog.stevensanderson.com/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/
 => http://haacked.com/archive/2011/10/10/preventing-csrf-with-ajax.aspx
 - NCrunch coverage analysis and remediation for Controllers and Routes

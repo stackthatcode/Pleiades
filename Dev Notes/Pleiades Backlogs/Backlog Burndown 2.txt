@@ -500,3 +500,23 @@ Burndown
 * STEP #2 => MessageBox - "Are you sure?"
 * STEP #3 => Hit Payment Process
 * STEP #3 => Update Status + History
+- Manage Orders => IN PROGRESS
+- Refund Order Lines
+* STEP #1 => Select Order Lines and Quantity
+* STEP #2 => MessageBox - "Are you sure?"
+* STEP #3 => Hit Payment Process
+* STEP #3 => Update Status + History
+
+PushMarket (for Marketing)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+- HTML 5
+- Responsive
+- Angular.js
+- KnockoutJs
+- JQuery
+- Bootstrap 3
+- .NET MVC 4
+- C# + .NET 4.5
+- Entity Framework
+- SQL Server 2008
+- Choose Date Range (months)
