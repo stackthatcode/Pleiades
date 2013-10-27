@@ -57,7 +57,7 @@
   <ItemGroup>
     <Compile Include="CommerceApplicationModule.cs" />
     <Compile Include="Interfaces\IOrderManager.cs" />
-    <Compile Include="Interfaces\OrderManager.cs" />
+    <Compile Include="Concrete\Orders\OrderManager.cs" />
     <Compile Include="Model\Shopping\AddCartResponseCodes.cs" />
     <Compile Include="Concrete\Shopping\CartIdentificationService.cs" />
     <Compile Include="Concrete\Shopping\CartManagementService.cs" />

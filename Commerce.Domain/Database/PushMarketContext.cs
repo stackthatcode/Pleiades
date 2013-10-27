@@ -104,6 +104,14 @@ namespace Commerce.Application.Database
                 .HasOptional(x => x.ImageBundle)
                 .WithMany()
                 .HasForeignKey(x => x.ImageBundleId);
+
+            var orderLine = modelBuilder.Entity<OrderLine>();
+            orderLine.HasKey(x => x.Id);
+            orderLine.Property(x => x.OriginalName);
+            orderLine.Property(x => x.OriginalSkuCode);
+            orderLine.Property(x => x.OriginalUnitPrice);
+            orderLine.Property(x => x.Quantity);
+            orderLine.Property(x => x.OrderLineStatusValue);
         }
 
         public void RefreshCollection<T>(IEnumerable<T> collection)

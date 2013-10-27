@@ -18,6 +18,10 @@ namespace Commerce.Application.Model.Billing
         public string ReferenceCode { get; set; }
         public string OriginalReferenceCode { get; set; }
 
+        public Transaction()
+        {            
+        }
+
         public Transaction(TransactionType transactionType)
         {
             this.TransactionType = transactionType;

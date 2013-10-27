@@ -48,8 +48,9 @@ namespace Commerce.Application
             builder.RegisterType<ProductRepository>().As<IProductRepository>().InstancePerLifetimeScope();
             builder.RegisterType<InventoryRepository>().As<IInventoryRepository>().InstancePerLifetimeScope();
 
-            // Order ReadOnlyRepository
+            // Order Stuff
             builder.RegisterType<OrderService>().As<IOrderService>().InstancePerLifetimeScope();
+            builder.RegisterType<OrderManager>().As<IOrderManager>().InstancePerLifetimeScope();
             
             // Resource Repositories
             builder.RegisterType<FileResourceRepository>().As<IFileResourceRepository>().InstancePerLifetimeScope();

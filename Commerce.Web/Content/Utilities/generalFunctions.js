@@ -58,6 +58,11 @@ function ToMoney(input) {
     return input != null ? input.toString().toMoney() : "";
 }
 
+function ToShortDate(input) {
+    var date = new Date(input);
+    return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
+}
+
 function namespace(namespaceString) {
     var parts = namespaceString.split('.'),
         parent = window,

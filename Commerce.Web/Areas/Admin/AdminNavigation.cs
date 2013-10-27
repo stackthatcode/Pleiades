@@ -91,12 +91,12 @@ namespace Commerce.Web.Areas.Admin
 
         public static RouteValueDictionary CreateNewOrder()
         {
-            return RouteValueDictionaryBuilder.FromController<OrderController>(AreaName, x => x.Create());
+            return RouteValueDictionaryBuilder.FromController<CreateOrderController>(AreaName, x => x.Create());
         }
 
         public static RouteValueDictionary ManageOrders()
         {
-            return RouteValueDictionaryBuilder.FromController<OrderController>(AreaName, x => x. Manage());
+            return RouteValueDictionaryBuilder.FromController<ManageOrderController>(AreaName, x => x.Editor());
         }
     }
 }

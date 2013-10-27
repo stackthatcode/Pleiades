@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Commerce.Application.Database;
+using Commerce.Application.Interfaces;
 using Commerce.Application.Model.Orders;
 
-namespace Commerce.Application.Interfaces
+namespace Commerce.Application.Concrete.Orders
 {
     public class OrderManager : IOrderManager
     {
@@ -19,22 +21,40 @@ namespace Commerce.Application.Interfaces
 
         public List<Order> Find(DateTime? startDate, DateTime? endDate, bool? complete)
         {
-            var data = _context.Orders.AsQueryable();
+            var data = _context.Orders
+                .Include(x => x.OrderLines)
+                .Include(x => x.Transactions)
+                .AsQueryable();
+
             if (startDate.HasValue)
+            {
                 data = data.Where(x => x.DateCreated >= startDate.Value);
+            }
             if (endDate.HasValue)
-                data = data.Where(x => x.DateCreated >= endDate.Value);
+            {
+                endDate = endDate.Value.AddDays(1);
+                data = data.Where(x => x.DateCreated < endDate);
+            }
             if (complete.HasValue)
+            {
                 data = data.Where(x => x.Complete == complete);
-            return data.ToList();
+            }
+            return data
+                .OrderByDescending(x =>  x.DateCreated)
+                .ToList();
         }
 
         public Order Retrieve(string externalId)
         {
-            return _context.Orders.FirstOrDefault(x => x.ExternalId == externalId);
+            return _context.Orders
+                    .Include(x => x.OrderLines)
+                    .Include(x => x.StateTax)
+                    .Include(x => x.ShippingMethod)
+                    .Include(x => x.Transactions)
+                    .FirstOrDefault(x => x.ExternalId == externalId);
         }
 
-        public void Refund(string externalId, List<int> items)
+        public void RefundWithContextControl(string externalId, List<int> items)
         {
             var order = this.Retrieve(externalId);
             var currentTotal = order.Total.GrandTotal;
@@ -42,9 +62,8 @@ namespace Commerce.Application.Interfaces
             var refundableItems = order.RefundableLines
                 .Where(x => items.Contains(x.Id))
                 .ToList();
-            refundableItems
-                .ForEach(x =>x.Status = OrderLineStatus.Refunded);
 
+            refundableItems.ForEach(x => x.Status = OrderLineStatus.Refunded);
             var postRefundTotal = order.Total.GrandTotal;
             var refundAmount = currentTotal - postRefundTotal;
             if (refundAmount == 0)
@@ -53,7 +72,12 @@ namespace Commerce.Application.Interfaces
             }
 
             var paymentTransaction = order.Payment;
-            _paymentProcessor.Refund(paymentTransaction, refundAmount);
+            var result = _paymentProcessor.Refund(paymentTransaction, refundAmount);
+            order.Transactions.Add(result);            
+            if (!result.Success)
+            {
+                refundableItems.ForEach(x => _context.RefreshEntity(x));
+            }
         }
 
         public void Ship(string externalId, List<int> items)

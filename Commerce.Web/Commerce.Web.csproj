@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManageOrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\UnsecuredController.cs" />
     <Compile Include="Areas\Admin\Controllers\BrandController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
@@ -140,7 +141,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerController.cs" />
-    <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CreateOrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\SectionController.cs" />
     <Compile Include="Areas\Admin\Controllers\SizeController.cs" />
@@ -216,9 +217,11 @@
     <Content Include="Content\Bootstrap_2_3_2\css\bootstrap-responsive.min.css" />
     <Content Include="Content\Bootstrap_2_3_2\css\bootstrap.css" />
     <Content Include="Content\Bootstrap_2_3_2\css\bootstrap.min.css" />
+    <Content Include="Content\Bootstrap_2_3_2\css\datepicker.css" />
     <Content Include="Content\Bootstrap_2_3_2\img\glyphicons-halflings-white.png" />
     <Content Include="Content\Bootstrap_2_3_2\img\glyphicons-halflings.png" />
     <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-alert.js" />
+    <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-datepicker.js" />
     <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-dropdown.js" />
     <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-lightbox.js" />
     <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-lightbox.min.js" />
@@ -333,15 +336,14 @@
     <Content Include="Areas\Admin\Views\Manager\List.cshtml" />
     <Content Include="Areas\Admin\Views\Manager\Reset.cshtml" />
     <Content Include="Areas\Admin\Views\Manager\_AdminUserDetails.cshtml" />
-    <Content Include="Areas\Admin\Views\Order\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Order\Manage.cshtml" />
-    <Content Include="Areas\Admin\Views\Order\_Billing.cshtml" />
-    <Content Include="Areas\Admin\Views\Order\_CartFactory.cshtml" />
-    <Content Include="Areas\Admin\Views\Order\_Completion.cshtml" />
-    <Content Include="Areas\Admin\Views\Order\_ReferenceData.cshtml" />
-    <Content Include="Areas\Admin\Views\Order\_ReviewOrder.cshtml" />
-    <Content Include="Areas\Admin\Views\Order\_SelectProducts.cshtml" />
-    <Content Include="Areas\Admin\Views\Order\_Shipping.cshtml" />
+    <Content Include="Areas\Admin\Views\CreateOrder\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CreateOrder\_Billing.cshtml" />
+    <Content Include="Areas\Admin\Views\CreateOrder\_CartFactory.cshtml" />
+    <Content Include="Areas\Admin\Views\CreateOrder\_Completion.cshtml" />
+    <Content Include="Areas\Admin\Views\CreateOrder\_ReferenceData.cshtml" />
+    <Content Include="Areas\Admin\Views\CreateOrder\_ReviewOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\CreateOrder\_SelectProducts.cshtml" />
+    <Content Include="Areas\Admin\Views\CreateOrder\_Shipping.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Editor.cshtml" />
     <Content Include="Areas\Admin\Views\Product\_Colors.cshtml" />
     <Content Include="Areas\Admin\Views\Product\_Images.cshtml" />
@@ -374,7 +376,7 @@
     <Content Include="Areas\Admin\Views\Shared\_ModalDialog.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Order\_TestingFunctions.cshtml" />
+    <Content Include="Areas\Admin\Views\CreateOrder\_TestingFunctions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Public\Views\Page\ServerError.cshtml" />
@@ -413,6 +415,9 @@
     <Content Include="Areas\Public\Views\Shared\_NgShimBody.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Views\ManageOrder\Editor.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageOrder\_FindOrders.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageOrder\_OrderDetail.cshtml" />
     <None Include="Content\ArtOfGroundFighting\Fonts\Bevan.woff" />
     <None Include="Content\ArtOfGroundFighting\Fonts\OpenSans-400.woff" />
     <None Include="Content\ArtOfGroundFighting\Fonts\OpenSans-700.woff" />

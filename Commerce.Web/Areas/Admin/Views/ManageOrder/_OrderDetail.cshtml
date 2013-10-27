@@ -1,0 +1,170 @@
+﻿<!-- Function to add Product Search & Selection -->
+<script type="text/javascript">
+    var PushMkt = PushMkt || {};
+
+    PushMkt.AddOrderDetailView = function ($root) {
+        var self = {};
+        self.Root = $root;
+        self.Root.OrderDetailView = self;
+
+        self.TopWorkspaceTemplate = "Top-Workspace-OrderDetail";
+        self.MainEditorTemplate = "Main-Editor-OrderDetail";
+
+        self.SelectedOrderId = ko.observable(null);
+        self.OrderData = ko.observable(null);
+
+        self.GoBackToSearch = function () {
+            self.GlideLeft(
+                self.Root.AddFindOrderView.TopWorkspaceTemplate,
+                self.Root.AddFindOrderView.MainEditorTemplate);
+        };
+
+        self.Load = function (externalId, callback) {
+            flow.exec(
+                function () {
+                    var url = "/Admin/ManageOrder/Get?externalId=" + externalId;
+                    self.Root.Service.AjaxGet(url, this);
+                },
+                function (data) {
+                    console.log(data);
+                    self.SelectedOrderId(data.ExternalId);
+                    self.OrderData(data);
+                    if (callback) callback();
+                }
+            );
+        };
+    };
+</script>
+
+<script type="text/html" id="Top-Workspace-OrderDetail">
+    <div class="workspace-heading" style="height:125px;" data-bind="{ with: $root.OrderDetailView }">
+        <div id="heading" class="container">
+            <div class="row">
+                <div class="span9">
+                    <h1>Manage Orders &gt; <span data-bind="text: SelectedOrderId"></span></h1>
+                </div>
+                <div class="span3" style="margin-top:20px; text-align:right;">                   
+                </div>
+            </div>
+
+            <div style="height:20px;"></div>
+            
+            <ul class="nav nav-pills" style="height:40px;">
+                <li style="width:140px;">
+                    <a id="glideToParent" class="backbutton" data-bind="click: $root.BackToSearch">&laquo; Back to Search</a>
+                    &nbsp;
+                </li>
+            </ul>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="Main-Editor-OrderDetail">
+    <div style="margin-top:20px; margin-bottom:200px; padding-top:20px;" data-bind="{ with: $root.OrderDetailView }">
+        <div style="text-align:center;" class="alert alert-info" data-bind="visible: !OrderData()">
+            <strong>This Order no longer exists.</strong>  
+        </div>
+		
+        <div class="row" data-bind="{ with: $data.OrderData }">            
+            <div class="span5">
+                <h3 style="color: #666; font-weight: bold; margin-top:0; margin-bottom:0px;" data-bind="text: 'Order Number: ' + ExternalId"></h3>
+                
+                <div style="height:20px;"></div>
+
+                <h4>Shipping Information</h4>
+                <table style="color:#555;">
+                    <tr>
+                        <td style="width:125px;">Name:</td>
+                        <td><span style="font-weight: bold;" data-bind="text: Name"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td> 
+                        <td><span style="font-weight: bold;" data-bind="text: EmailAddress"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Address1:</td> 
+                        <td><span style="font-weight: bold;" data-bind="text: Address1"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Address2:</td> 
+                        <td><span style="font-weight: bold;" data-bind="text: Address2"></span></td>
+                    </tr>
+                    <tr>
+                        <td>City:</td> 
+                        <td><span style="font-weight: bold;" data-bind="text: City"></span></td>
+                    </tr>
+                    <tr>
+                        <td>State:</td> 
+                        <td><span style="font-weight: bold;" data-bind="text: State"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Zip Code:</td> 
+                        <td><span style="font-weight: bold;" data-bind="text: ZipCode"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Shipping:</td> 
+                        <td><span style="font-weight: bold;" data-bind="text: ShippingMethod.Description"></span></td>
+                    </tr>
+                </table>
+                
+                <div style="height:20px;"></div>
+
+                <h4>Totals</h4>                    
+                <table style="color:#555;">
+                    <tr>
+                        <td style="width:125px;">Subtotal:</td>
+                        <td><span style="font-weight: bold;" data-bind="text: ToMoney(Total.SubTotal)"></span></td>
+                    </tr>
+                    <tr>
+                        <td style="width:125px;">Shipping Cost:</td>
+                        <td><span style="font-weight: bold;" data-bind="text: ToMoney(Total.ShippingCost)"></span></td>
+                    </tr>
+                    <tr>
+                        <td style="width:125px;">Tax (<span data-bind="text: ToMoney(StateTax.TaxRate)"></span>%):</td>
+                        <td><span style="font-weight: bold;" data-bind="text: ToMoney(Total.Tax)"></span></td>
+                    </tr>
+                    <tr>
+                        <td style="width:125px;">Current Total:</td>
+                        <td><span style="font-weight: bold;" data-bind="text: ToMoney(Total.GrandTotal)"></span></td>
+                    </tr>
+                    <tr>
+                        <td style="width:125px;">Original Total:</td>
+                        <td><span style="font-weight: bold;" data-bind="text: ToMoney(OriginalGrandTotal)"></span></td>
+                    </tr>
+                </table>
+                
+                <div style="height:20px;"></div>
+                
+                <h4>Transactions</h4>
+                
+                <table class="table table-striped">
+                    <tbody data-bind="foreach: Transactions">
+                        <tr>
+                            <td><span data-bind="text: ToShortDate(TransactionDate)"></span></td>
+                            <td><span data-bind="text: Details"></span></td>
+                            <td><span data-bind="text: ToMoney(Amount)"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="span7">
+                
+            </div>
+        </div>
+        
+        <!--
+            <h4 style="font-weight: bold; margin-top:0; margin-bottom:0px;" data-bind="text: 'Order Number: ' + ExternalId"></h4>
+            <div data-bind="if: Complete"><i class="icon-search icon-ok"></i> Order Complete</div>
+            <div data-bind="ifnot: Complete"><i class="icon-search icon-remove"></i> Order Incomplete</div>
+            <span>Customer Name:</span> <span style="font-weight: bold;" data-bind="text: Name"></span><br/>
+            <span>Email:</span> <span style="font-weight: bold;" data-bind="text: EmailAddress"></span>
+            <span>Created:</span><br/>
+            <span>Total:</span>
+            <td style="vertical-align:top; padding-top:20px; padding-bottom:20px;">
+                <span style="font-weight: bold;" data-bind="text: ToShortDate(DateCreated)"></span><br/>
+                <span style="font-weight: bold;" data-bind="text: ToMoney(OriginalGrandTotal)"></span>
+            </td>
+            -->
+    </div>
+</script>

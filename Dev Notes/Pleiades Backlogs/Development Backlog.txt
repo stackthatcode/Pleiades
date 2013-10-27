@@ -6,20 +6,6 @@ Burndown
 - Load Shipping Method and State Tax from Cart => DONE
 - Set default Shipping Method and State Tax on Cart => DONE
 - "Designed by fighters, worn by fighters"
-
-Finish Line
------------
-- Admin Search & Manage Orders => IN PROGRESS
-- Compute the Refund => IN PROGRESS
-- Seed the Test Order Data... => TODO
-- Add Limit to how many items in Cart => TODO
-
-- Contact Us Page Tasking => Email Form: use that thing from stache.io, Google Map, Street Address
-- About Us Page Tasking => Picture of Tsinerev, Shipping Verbage, Returns Verbage
-
-
-Manage an Order CRUD screen
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Order Search Query
 	- Complete/Incomplete Orders
 	- By Date Range
@@ -32,14 +18,26 @@ Manage an Order CRUD screen
 	- Tax
 	- Shipping
 	- How Many Items by Sku	
+- Compute the Refund => DONE
+- Search =>DONE
+	
+Finish Line
+-----------
+- Manage Orders => IN PROGRESS
+- Seed the Test Order Data... => TODO
+- Add Limit to how many items in Cart => TODO
 
+- Contact Us Page Tasking => Email Form: use that thing from stache.io, Google Map, Street Address
+- About Us Page Tasking => Picture of Tsinerev, Shipping Verbage, Returns Verbage
+
+
+Manage an Order CRUD screen
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Order Summary Tab 
 * Shipping Info
 * List of Order Items w/ Statuses
 * Completion
 * History 
-
-
 
 Buttons
 ~~~~~~~
@@ -84,6 +82,8 @@ Backlog
 
 PushMarket (for Marketing)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+- HTML 5
+- Responsive
 - Angular.js
 - KnockoutJs
 - JQuery
@@ -91,13 +91,12 @@ PushMarket (for Marketing)
 - .NET MVC 4
 - C# + .NET 4.5
 - Entity Framework
-- HTML 5
-- SQL Server 2008...?
-- Responsive
+- SQL Server 2008
 
 PHASE 2 Backlog
 ---------------
-- Azure Deployment => TODO
+- Lightbox on the Storefront
+- Azure Deployment
 * Splash Graphic...?
 => http://blog.stevensanderson.com/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/
 => http://haacked.com/archive/2011/10/10/preventing-csrf-with-ajax.aspx

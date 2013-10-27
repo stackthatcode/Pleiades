@@ -10,7 +10,7 @@ namespace Commerce.Application.Model.Orders
         public string OriginalName { get; set; }
         public decimal OriginalUnitPrice { get; set; }
         public int Quantity { get; set; }
-        public OrderLineStatus Status { get; set; }
+
         public ProductSku Sku { get; set; } // This guy may or may not exist...
 
         public OrderLine()
@@ -27,10 +27,19 @@ namespace Commerce.Application.Model.Orders
             this.Status = OrderLineStatus.Pending;
         }
 
+        public OrderLineStatus Status
+        {
+            get { return (OrderLineStatus)OrderLineStatusValue; }
+            set { OrderLineStatusValue = (int)value; }
+        }
+
+        public int OrderLineStatusValue { get; set; }
+
         public decimal LinePrice
         {
             get { return Quantity*OriginalUnitPrice; }
         }
+
 
         public List<OrderLine> Split()
         {

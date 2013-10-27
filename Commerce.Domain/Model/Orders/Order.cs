@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Commerce.Application.Model.Billing;
 using Newtonsoft.Json;
@@ -76,6 +77,7 @@ namespace Commerce.Application.Model.Orders
 
         public decimal OriginalGrandTotal { get; set; }
 
+        [NotMapped]
         public decimal RefundedAmount
         {
             get
@@ -106,6 +108,7 @@ namespace Commerce.Application.Model.Orders
             }
         }
 
+        [NotMapped]
         public Dictionary<string, int> QuantityBySkuCode
         {
             get
@@ -119,6 +122,7 @@ namespace Commerce.Application.Model.Orders
             }
         }
 
+        [NotMapped]
         public List<OrderLine> RefundableLines
         {
             get 
@@ -128,11 +132,13 @@ namespace Commerce.Application.Model.Orders
             }
         }
 
+        [NotMapped]
         public List<OrderLine> ReadyToShipItems
         {
              get { return OrderLines.Where(x => x.Status == OrderLineStatus.Pending).ToList(); }
         }
 
+        [NotMapped]
         public List<OrderLine> ShippedItems
         {
             get { return OrderLines.Where(x => x.Status != OrderLineStatus.Pending).ToList(); }            

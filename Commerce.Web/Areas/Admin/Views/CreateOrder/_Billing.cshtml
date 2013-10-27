@@ -117,7 +117,7 @@
                         });
                     });
 
-                    self.Service.AjaxPost("/Admin/Order/SubmitOrder", jsonOrder, this);
+                    self.Service.AjaxPost("/Admin/CreateOrder/SubmitOrder", jsonOrder, this);
                 },
                 function(response) {
                     self.CompletedOrderResponse(response);

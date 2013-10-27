@@ -1,20 +1,18 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using Commerce.Application.Concrete.Products;
+using Pleiades.Web.Json;
 using Commerce.Application.Database;
 using Commerce.Application.Interfaces;
-using Pleiades.Web;
 using Commerce.Application.Model.Orders;
-using Pleiades.Web.Json;
 
 namespace Commerce.Web.Areas.Admin.Controllers
 {
-    public class OrderController : Controller
+    public class CreateOrderController : Controller
     {
         PushMarketContext Context { get; set; }
         IOrderService OrderRepository { get; set; }
 
-        public OrderController(PushMarketContext context, IOrderService orderRepository)
+        public CreateOrderController(PushMarketContext context, IOrderService orderRepository)
         {
             this.Context = context;
             this.OrderRepository = orderRepository;

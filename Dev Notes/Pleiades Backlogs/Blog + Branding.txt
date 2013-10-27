@@ -4,6 +4,5 @@ Blog + Brand == Freelance Gigs ==> Escape from Alcatraz
 - Sleepless Coder
 - Restless Coder's Abode
 - Restless Coder's Web Log
-- etc.
-
 - Stack That Code
+
