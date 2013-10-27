@@ -33,6 +33,11 @@ namespace Commerce.Application.Model.Orders
             set { OrderLineStatusValue = (int)value; }
         }
 
+        public string StatusDescription
+        {
+            get { return Status.ToString(); }
+        }
+
         public int OrderLineStatusValue { get; set; }
 
         public decimal LinePrice
