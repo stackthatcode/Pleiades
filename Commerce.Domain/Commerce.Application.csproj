@@ -76,7 +76,7 @@
     <Compile Include="Concrete\Infrastructure\GetPaidPaymentProcessor.cs" />
     <Compile Include="Concrete\Orders\OrderService.cs" />
     <Compile Include="Concrete\Shopping\CartRepository.cs" />
-    <Compile Include="Interfaces\IAnalyticsService.cs" />
+    <Compile Include="Interfaces\IAnalyticsCollector.cs" />
     <Compile Include="Interfaces\ICartIdentificationService.cs" />
     <Compile Include="Interfaces\ICartManagementService.cs" />
     <Compile Include="Interfaces\ICartRepository.cs" />

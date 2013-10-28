@@ -86,7 +86,7 @@ namespace Commerce.UnitTests.Application
             var emailService = MockRepository.GenerateMock<IEmailService>();
             emailService.Expect(x => x.SendOrderReceived());
 
-            var analyticsService = MockRepository.GenerateMock<IAnalyticsService>();
+            var analyticsService = MockRepository.GenerateMock<IAnalyticsCollector>();
             analyticsService.Expect(x => x.AddSale(null, 0)).IgnoreArguments();
 
             var service = new OrderService(null, paymentProcessor, analyticsService, emailService);
@@ -124,7 +124,7 @@ namespace Commerce.UnitTests.Application
             var emailService = MockRepository.GenerateMock<IEmailService>();
             emailService.Expect(x => x.SendOrderReceived());
 
-            var analyticsService = MockRepository.GenerateMock<IAnalyticsService>();
+            var analyticsService = MockRepository.GenerateMock<IAnalyticsCollector>();
             analyticsService.Expect(x => x.AddSale(null, 0)).IgnoreArguments();
 
             var service = new OrderService(null, paymentProcessor, analyticsService, emailService);

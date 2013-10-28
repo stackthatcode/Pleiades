@@ -193,6 +193,7 @@
     <Content Include="Content\Angular\angular.js" />
     <Content Include="Content\Angular\angular.min.js" />
     <Content Include="Content\Angular\version.txt" />
+    <Content Include="Content\ArtOfGroundFighting\Images\about.png" />
     <Content Include="Content\ArtOfGroundFighting\Images\ajax_loader.gif" />
     <Content Include="Content\ArtOfGroundFighting\Images\ohnoes.png" />
     <Content Include="Content\ArtOfGroundFighting\Images\vintage-logo-sm.png" />

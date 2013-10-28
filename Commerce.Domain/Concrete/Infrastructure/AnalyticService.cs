@@ -4,7 +4,7 @@ using Commerce.Application.Model.Orders;
 
 namespace Commerce.Application.Concrete.Infrastructure
 {
-    public class AnalyticService : IAnalyticsService
+    public class AnalyticService : IAnalyticsCollector
     {
         public static int TestVariable = 3;
 

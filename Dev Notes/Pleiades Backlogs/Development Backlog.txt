@@ -1,8 +1,13 @@
-### END PRODUCT DEFINITION + TASKING ###
+Burndown
+--------
+- Kurt Wuckert	
+- Pay check to: Proforma - $100
+kurt.wuckertjr@proforma.com => READY
+- About Us Page Tasking => Picture of Tsinerev, Shipping Verbage, Returns Verbage - DONE
 
-- About Us Page Tasking => Picture of Tsinerev, Shipping Verbage, Returns Verbage
-- Contact Us Page Tasking => Email Form: use that thing from stache.io, Google Map, Street Address
 
+Last Week of Construction
+~~~~~~~~~~~~~~~~~~~~~~~~~
 - Admin Sales Graph by Product => TODO
 * Seed the Analytic Data => TODO
 * Pie Chart of Sales by SkuCode
@@ -10,9 +15,13 @@
 * Sales & Refunds By Date
 * Sales & Costs By Date
 
+- Contact Us Page Tasking => Email Form: use that thing from stache.io, Google Map, Street Address => IN PROGRESS
+- Shipping Page => TODO
 
+
+Saturday...!!!
+~~~~~~~~~~~~~~
 - Stripe Payment Integration => TODO
-
 - Email Sending Engine => TODO
 * http://stackoverflow.com/questions/10512845/how-to-send-email-wth-email-template-c-sharp/10512995#10512995
 

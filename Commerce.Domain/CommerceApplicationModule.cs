@@ -79,7 +79,7 @@ namespace Commerce.Application
             builder.RegisterType<CartRepository>().As<ICartRepository>();
 
             // Analytic Service
-            builder.RegisterType<AnalyticService>().As<IAnalyticsService>();
+            builder.RegisterType<AnalyticService>().As<IAnalyticsCollector>();
 
             // HttpContext
             builder.Register<HttpContextBase>(c => new HttpContextWrapper(HttpContext.Current));

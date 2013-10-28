@@ -18,7 +18,7 @@ namespace Commerce.Application.Concrete.Orders
 
         PushMarketContext Context { get; set; }
         IPaymentProcessor PaymentProcessor { get; set; }
-        IAnalyticsService AnalyticsService { get; set; }
+        IAnalyticsCollector AnalyticsService { get; set; }
         IEmailService EmailService { get; set; }
 
         // injectible functions
@@ -31,7 +31,7 @@ namespace Commerce.Application.Concrete.Orders
         public Action SaveChanges;
 
         public OrderService(PushMarketContext context, 
-                IPaymentProcessor paymentProcessor, IAnalyticsService analyticsService, IEmailService emailService)
+                IPaymentProcessor paymentProcessor, IAnalyticsCollector analyticsService, IEmailService emailService)
         {
             Context = context;
             PaymentProcessor = paymentProcessor;
