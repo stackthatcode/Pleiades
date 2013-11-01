@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Web;
 using Autofac;
+using Commerce.Application.Concrete.Analytics;
 using Commerce.Application.Concrete.Shopping;
 using Pleiades.Application.Data;
 using Pleiades.Application.Data.EF;
@@ -78,8 +79,9 @@ namespace Commerce.Application
             builder.RegisterType<CartManagementService>().As<ICartManagementService>();
             builder.RegisterType<CartRepository>().As<ICartRepository>();
 
-            // Analytic Service
-            builder.RegisterType<AnalyticService>().As<IAnalyticsCollector>();
+            // Analytics
+            builder.RegisterType<AnalyticsCollector>().As<IAnalyticsCollector>();
+            builder.RegisterType<AnalyticsAggregator>().As<IAnalyticsAggregator>();
 
             // HttpContext
             builder.Register<HttpContextBase>(c => new HttpContextWrapper(HttpContext.Current));

@@ -102,7 +102,7 @@ namespace Commerce.Application.Concrete.Orders
             EmailService.SendOrderReceived();
 
             // Invoke the Analytics Service - Bounded Context
-            AnalyticsService.AddSale(order, 3);
+            AnalyticsService.Sale(order);
 
             // FIN! - return OrderRequestResponse - Bounded Context
             var oldLines = order.SplitLines();

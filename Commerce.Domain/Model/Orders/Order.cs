@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Commerce.Application.Model.Billing;
+using Commerce.Application.Model.Products;
 using Newtonsoft.Json;
 
 namespace Commerce.Application.Model.Orders
@@ -113,6 +114,16 @@ namespace Commerce.Application.Model.Orders
             }
         }
 
+        public List<ProductSku> AllSkus
+        {
+            get
+            {
+                return OrderLines
+                    .Select(x => x.Sku)
+                    .ToList();
+            }
+        }
+            
         [NotMapped]
         public Dictionary<string, int> QuantityBySkuCode
         {

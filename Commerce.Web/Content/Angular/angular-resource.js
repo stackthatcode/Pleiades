@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license AngularJS v1.0.6
  * (c) 2010-2012 Google, Inc. http://angularjs.org
  * License: MIT
@@ -133,8 +133,8 @@
        // server returns: {id:456, number:'1234', name: 'J. Smith'};
 
        // our custom method is mapped as well.
-       card.$charge({amount:9.99});
-       // POST: /user/123/card/456?amount=9.99&charge=true {id:456, number:'1234', name:'J. Smith'}
+       card.$charge({SaleAmount:9.99});
+       // POST: /user/123/card/456?SaleAmount=9.99&charge=true {id:456, number:'1234', name:'J. Smith'}
      });
 
      // we can create an instance as well

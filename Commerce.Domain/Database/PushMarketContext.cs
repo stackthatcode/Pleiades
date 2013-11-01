@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using Commerce.Application.Model.Analytics;
 using Commerce.Application.Model.Shopping;
 using Pleiades.Web.Security.Model;
 using Commerce.Application.Model.Billing;
@@ -40,11 +41,6 @@ namespace Commerce.Application.Database
         public IDbSet<ProductColor> ProductColors { get; set; }
         public IDbSet<ProductSku> ProductSkus { get; set; }
 
-        // Orders
-        public IDbSet<Order> Orders { get; set; }
-        public IDbSet<OrderLine> OrderLines { get; set; }
-        public IDbSet<ShippingMethod> ShippingMethods { get; set; }
-
         // Billing
         public IDbSet<StateTax> StateTaxes { get; set; }
         public IDbSet<Transaction> Transactions { get; set; }
@@ -53,6 +49,18 @@ namespace Commerce.Application.Database
         // Carts
         public IDbSet<Cart> Carts { get; set; }
         public IDbSet<CartItem> CartItems { get; set; }
+
+        // Orders
+        public IDbSet<Order> Orders { get; set; }
+        public IDbSet<OrderLine> OrderLines { get; set; }
+        public IDbSet<ShippingMethod> ShippingMethods { get; set; }
+
+        // Analytics
+        public IDbSet<PurchaseOrderEvent> PurchaseOrderEvents { get; set; }
+        public IDbSet<PurchaseSkuEvent> PurchaseSkuEvents { get; set; }
+        public IDbSet<RefundEvent> RefundEvents { get; set; }
+        public IDbSet<RefundSkuEvent> RefundSkuEvents { get; set; }
+
 
         public PushMarketContext() : base("PleiadesDb")
         {

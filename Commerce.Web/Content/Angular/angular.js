@@ -9731,7 +9731,7 @@ function filterFilter() {
  * Formats a number as a currency (ie $1,234.56). When no currency symbol is provided, default
  * symbol for current locale is used.
  *
- * @param {number} amount Input to filter.
+ * @param {number} SaleAmount Input to filter.
  * @param {string=} symbol Currency symbol or identifier to be displayed.
  * @returns {string} Formatted number.
  *
@@ -9741,24 +9741,24 @@ function filterFilter() {
      <doc:source>
        <script>
          function Ctrl($scope) {
-           $scope.amount = 1234.56;
+           $scope.SaleAmount = 1234.56;
          }
        </script>
        <div ng-controller="Ctrl">
-         <input type="number" ng-model="amount"> <br>
-         default currency symbol ($): {{amount | currency}}<br>
-         custom currency identifier (USD$): {{amount | currency:"USD$"}}
+         <input type="number" ng-model="SaleAmount"> <br>
+         default currency symbol ($): {{SaleAmount | currency}}<br>
+         custom currency identifier (USD$): {{SaleAmount | currency:"USD$"}}
        </div>
      </doc:source>
      <doc:scenario>
        it('should init with 1234.56', function() {
-         expect(binding('amount | currency')).toBe('$1,234.56');
-         expect(binding('amount | currency:"USD$"')).toBe('USD$1,234.56');
+         expect(binding('SaleAmount | currency')).toBe('$1,234.56');
+         expect(binding('SaleAmount | currency:"USD$"')).toBe('USD$1,234.56');
        });
        it('should update', function() {
-         input('amount').enter('-1234');
-         expect(binding('amount | currency')).toBe('($1,234.00)');
-         expect(binding('amount | currency:"USD$"')).toBe('(USD$1,234.00)');
+         input('SaleAmount').enter('-1234');
+         expect(binding('SaleAmount | currency')).toBe('($1,234.00)');
+         expect(binding('SaleAmount | currency:"USD$"')).toBe('(USD$1,234.00)');
        });
      </doc:scenario>
    </doc:example>

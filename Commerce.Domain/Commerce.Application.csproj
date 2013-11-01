@@ -56,12 +56,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommerceApplicationModule.cs" />
+    <Compile Include="Concrete\Analytics\AnalyticsAggregator.cs" />
+    <Compile Include="Concrete\Analytics\AnalyticsCollector.cs" />
+    <Compile Include="Concrete\Analytics\AnalyticsRepository.cs" />
+    <Compile Include="Interfaces\IAnalyticsAggregator.cs" />
+    <Compile Include="Interfaces\IAnalyticsRepository.cs" />
     <Compile Include="Interfaces\IOrderManager.cs" />
     <Compile Include="Concrete\Orders\OrderManager.cs" />
+    <Compile Include="Model\Analytics\RefundEvent.cs" />
+    <Compile Include="Model\Analytics\DateTotal.cs" />
+    <Compile Include="Model\Analytics\RefundItem.cs" />
+    <Compile Include="Model\Analytics\SkuTotal.cs" />
+    <Compile Include="Model\Analytics\PurchaseOrderEvent.cs" />
+    <Compile Include="Model\Analytics\PurchaseSkuEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Analytics\RefundSkuEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Analytics\SkuDateTotal.cs" />
     <Compile Include="Model\Shopping\AddCartResponseCodes.cs" />
     <Compile Include="Concrete\Shopping\CartIdentificationService.cs" />
     <Compile Include="Concrete\Shopping\CartManagementService.cs" />
-    <Compile Include="Concrete\Infrastructure\AnalyticService.cs" />
     <Compile Include="Concrete\Infrastructure\BlankImageRepository.cs" />
     <Compile Include="Concrete\Security\AggregateWriteableRepository.cs" />
     <Compile Include="Concrete\Security\MembershipReadableRepository.cs" />

@@ -87,7 +87,7 @@ namespace Commerce.UnitTests.Application
             emailService.Expect(x => x.SendOrderReceived());
 
             var analyticsService = MockRepository.GenerateMock<IAnalyticsCollector>();
-            analyticsService.Expect(x => x.AddSale(null, 0)).IgnoreArguments();
+            analyticsService.Expect(x => x.Sale(null)).IgnoreArguments();   // Oh my!
 
             var service = new OrderService(null, paymentProcessor, analyticsService, emailService);
             service.InventoryBySkuCodes = this.SkuFunctionGenerator_PlainVanilla();
@@ -125,7 +125,7 @@ namespace Commerce.UnitTests.Application
             emailService.Expect(x => x.SendOrderReceived());
 
             var analyticsService = MockRepository.GenerateMock<IAnalyticsCollector>();
-            analyticsService.Expect(x => x.AddSale(null, 0)).IgnoreArguments();
+            analyticsService.Expect(x => x.Sale(null)).IgnoreArguments();
 
             var service = new OrderService(null, paymentProcessor, analyticsService, emailService);
             service.InventoryBySkuCodes = this.SkuFunctionGenerator_ChangingInventory();

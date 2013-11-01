@@ -28,7 +28,7 @@ namespace Commerce.Application.Concrete.Security
         // TODO: build this out...?
         public int GetNumberOfUsersOnline(TimeSpan userIsOnlineTimeWindow)
         {
-            //e DateTime.Now - userIsOnlineTimeWindow
+            //e Date.Now - userIsOnlineTimeWindow
             throw new System.NotImplementedException();
         }
 
