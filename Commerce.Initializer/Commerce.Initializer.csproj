@@ -67,6 +67,7 @@
     <Compile Include="Builders\BrandBuilder.cs" />
     <Compile Include="Builders\CategoryBuilder.cs" />
     <Compile Include="Builders\ColorBuilder.cs" />
+    <Compile Include="Builders\AnalyticsBuilder.cs" />
     <Compile Include="Builders\IBuilder.cs" />
     <Compile Include="Builders\Products\BullTerrierSuperStarBuilder.cs" />
     <Compile Include="Builders\Products\BullTerrierMushinBuilder.cs" />

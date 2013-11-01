@@ -1,0 +1,116 @@
+2013-11-01 07:07:02.5229|Error|3615b449-c601-4f8f-ac51-f0592606bb8b|URL:http://localhost/Commerce.Web/cart - IsAjaxRequest: True 
+2013-11-01 07:07:02.6439|Error|3615b449-c601-4f8f-ac51-f0592606bb8b|System.Data.EntityCommandExecutionException:An error occurred while executing the command definition. See the inner exception for details.
+   at System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   at System.Data.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   at System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[S](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
+   at Commerce.Application.Concrete.Shopping.CartRepository.Retrieve(Guid identifier) in C:\DEV\Pleiades\Commerce.Domain\Concrete\Shopping\CartRepository.cs:line 32
+   at Commerce.Application.Concrete.Shopping.CartManagementService.IdempotentCartFetcher() in C:\DEV\Pleiades\Commerce.Domain\Concrete\Shopping\CartManagementService.cs:line 39
+   at Commerce.Application.Concrete.Shopping.CartManagementService.Retrieve() in C:\DEV\Pleiades\Commerce.Domain\Concrete\Shopping\CartManagementService.cs:line 27
+   at Commerce.Web.Areas.Public.Controllers.CartController.Get() in C:\DEV\Pleiades\Commerce.Web\Areas\Public\Controllers\CartController.cs:line 23
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Invalid column name 'Order_Id'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior) 
+2013-11-01 07:07:14.0105|Error|60d24424-35f6-4f37-bfc3-c31ee072c98e|URL:http://localhost/Commerce.Web/cart - IsAjaxRequest: True 
+2013-11-01 07:07:14.0105|Error|60d24424-35f6-4f37-bfc3-c31ee072c98e|System.Data.EntityCommandExecutionException:An error occurred while executing the command definition. See the inner exception for details.
+   at System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   at System.Data.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   at System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[S](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
+   at Commerce.Application.Concrete.Shopping.CartRepository.Retrieve(Guid identifier) in C:\DEV\Pleiades\Commerce.Domain\Concrete\Shopping\CartRepository.cs:line 32
+   at Commerce.Application.Concrete.Shopping.CartManagementService.IdempotentCartFetcher() in C:\DEV\Pleiades\Commerce.Domain\Concrete\Shopping\CartManagementService.cs:line 39
+   at Commerce.Application.Concrete.Shopping.CartManagementService.Retrieve() in C:\DEV\Pleiades\Commerce.Domain\Concrete\Shopping\CartManagementService.cs:line 27
+   at Commerce.Web.Areas.Public.Controllers.CartController.Get() in C:\DEV\Pleiades\Commerce.Web\Areas\Public\Controllers\CartController.cs:line 23
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Invalid column name 'Order_Id'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior) 
+2013-11-01 07:07:18.4298|Debug|3a3bc8b1-5a65-4aa0-93a5-9325f10d49ce|Image - Download: ad1d95e2-3b29-479d-95ed-71db11401934 small 
+2013-11-01 07:07:18.4298|Debug|b07f87c6-5b7c-4ca7-8ab6-3df76de520f8|Image - Download: e8b9cb87-4c30-40ae-8848-8bae9b54c045 small 
+2013-11-01 07:07:18.4308|Debug|5a398624-8b0d-4f1e-9499-0e4bfc904cda|Image - Download: ad4a9b19-47da-4322-ad59-989fba6ea30b small 
+2013-11-01 07:07:18.4308|Debug|35c9442b-4377-4ad5-bc68-5ae840bffc94|Image - Download: d39b63f9-d439-4853-94a3-8f210300d626 small 
+2013-11-01 07:07:18.4308|Debug|0b044613-d1a1-44bb-acfc-9c66761fd20b|Image - Download: 578e6283-224b-4f9a-ba3e-253a86696852 small 
+2013-11-01 07:07:18.4308|Debug|34ec4f23-c1ee-4434-a106-6ba2cc15e050|Image - Download: 4a3333b4-f098-4454-a412-4229dc142161 small 
+2013-11-01 07:07:18.6298|Debug|21c6d11f-5eb2-490a-9856-c30106c31525|Image - Download: eb2d6fc7-ddc3-4ca8-8098-7d40c579aead small 
+2013-11-01 07:07:18.6338|Debug|3992b5c0-3c47-4c18-ae04-0af4af23e2c5|Image - Download: 1ab891eb-59e6-414c-b4e4-cbf0362adb8c small 
+2013-11-01 07:07:18.6338|Debug|b09e7c35-38b1-4321-b26a-fb8309d20259|Image - Download: 62fe103d-60b0-448e-943f-e5a591f1bcf9 small 
+2013-11-01 07:07:18.6688|Debug|b20bfa03-6e89-48c3-8c8a-ad9b9c5498d6|Image - Download: e1cb6c22-5a59-4440-afd5-2177afa7ce43 small 
+2013-11-01 07:15:03.2644|Debug|114297bb-b89c-46ed-8c74-856202670e77|Image - Download: b60cf840-1e74-4db7-831c-17dd78e81d16 small 
+2013-11-01 07:15:03.2674|Debug|86047317-792a-4a1c-9f84-4b364623173a|Image - Download: b5cf584b-36b0-498c-b763-a3ba2e27c8ae small 
+2013-11-01 07:15:03.2644|Debug|7776d278-0e7f-49c9-b7de-a67084dbd984|Image - Download: eb201aa2-97a6-4b82-a6e9-f68120debacf small 
+2013-11-01 07:15:03.4314|Debug|adebf1d3-cb57-4e46-9bbe-3e1b89aa2e95|Image - Download: f3597692-c9a8-436b-b612-fa3af65dfd40 small 
+2013-11-01 07:15:03.4314|Debug|ffa1eb46-8386-4c92-953b-59ba2055fc6d|Image - Download: c5a39bf4-dfb5-46f9-b22c-6c0d5b4ad493 small 
+2013-11-01 07:15:03.4434|Debug|f8d21ba9-87a8-469b-a504-b7eba101ebce|Image - Download: bec537d1-98ec-4f98-a4a0-5d662789a481 small 
+2013-11-01 07:15:03.4594|Debug|4518ede3-5264-4cc0-bf94-6a8f77e09280|Image - Download: 700fd0c5-8167-4b9b-bc9f-269de5cd8911 small 
+2013-11-01 07:15:03.4594|Debug|775bd241-52f2-4acf-9bf4-bd57066e0405|Image - Download: 5a9f00c5-fae8-4a93-991b-d2896fdad721 small 
+2013-11-01 07:15:03.4774|Debug|5dfc0c22-1b93-42c0-a235-de7731b8f98b|Image - Download: 552377c2-3542-4e1d-ad08-fe8e81359ae3 small 
+2013-11-01 07:15:03.4874|Debug|a95273c0-10f6-4dd3-8792-75296faf415f|Image - Download: 39a17a3b-17f9-4bba-a6f2-ee3c423b7847 small 

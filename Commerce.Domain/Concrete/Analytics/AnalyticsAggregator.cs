@@ -37,27 +37,6 @@ namespace Commerce.Application.Concrete.Analytics
         }
 
 
-        public List<SkuDateTotal> TotalSalesAmountsByDateAndSku(DateTime @from, DateTime to)
-        {
-            return AggregatePurchaseSkuEvents(@from, to, x => x.Amount);
-        }
-
-        public List<SkuDateTotal> TotalSalesQuantitiesByDateAndSku(DateTime @from, DateTime to)
-        {
-            return AggregatePurchaseSkuEvents(@from, to, x => x.Quantity);
-        }
-
-        public List<SkuDateTotal> TotalRefundAmountsByDateAndSku(DateTime @from, DateTime to)
-        {
-            return AggregateRefundSkuEvents(@from, to, x => x.Amount);
-        }
-
-        public List<SkuDateTotal> TotalRefundQuantitiesByDateAndSku(DateTime @from, DateTime to)
-        {
-            return AggregateRefundSkuEvents(@from, to, x => x.Quantity);
-        }
-
-
         public List<SkuTotal> TotalSalesAmountsBySku(DateTime @from, DateTime to)
         {
             var data = _context.PurchaseSkuEvents.Where(x => x.Date >= from && x.Date <= to);
@@ -118,6 +97,31 @@ namespace Commerce.Application.Concrete.Analytics
                 .ToList();            
         }
 
+
+        public List<SkuDateTotal> TotalSalesAmountsByDateAndSku(DateTime @from, DateTime to)
+        {
+            return AggregatePurchaseSkuEvents(@from, to, x => x.Amount);
+        }
+
+        public List<SkuDateTotal> TotalSalesQuantitiesByDateAndSku(DateTime @from, DateTime to)
+        {
+            return AggregatePurchaseSkuEvents(@from, to, x => x.Quantity);
+        }
+
+        public List<SkuDateTotal> TotalRefundAmountsByDateAndSku(DateTime @from, DateTime to)
+        {
+            return AggregateRefundSkuEvents(@from, to, x => x.Amount);
+        }
+
+        public List<SkuDateTotal> TotalRefundQuantitiesByDateAndSku(DateTime @from, DateTime to)
+        {
+            return AggregateRefundSkuEvents(@from, to, x => x.Quantity);
+        }
+
+
+        // TODO: create function to order List<SkuTotal> by Sku
+
+        // TODO: create function to order List<SkuDateTotal> by Sku
 
 
         private List<DateTotal> AggregatePurchaseOrderEvents(

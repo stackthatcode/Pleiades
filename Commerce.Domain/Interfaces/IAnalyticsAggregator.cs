@@ -20,5 +20,7 @@ namespace Commerce.Application.Interfaces
         List<SkuTotal> TotalSalesQuantityBySku(DateTime @from, DateTime to);
         List<SkuTotal> TotalRefundAmountsBySku(DateTime @from, DateTime to);
         List<SkuTotal> TotalRefundQuantityBySku(DateTime @from, DateTime to); 
+
+        // PHASE 2 - Total Sales by Product
     }
 }

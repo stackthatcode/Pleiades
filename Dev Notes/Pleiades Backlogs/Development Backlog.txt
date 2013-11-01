@@ -4,16 +4,18 @@ Burndown
 - Pay check to: Proforma - $100
 kurt.wuckertjr@proforma.com => READY
 - About Us Page Tasking => Picture of Tsinerev, Shipping Verbage, Returns Verbage - DONE
+* Sales & Refunds By Date
+* Sales & Costs By Date
+* Sales by SkuCode => DONE
+* Refunds by SkuCode => DONE 
 
 
 Last Week of Construction
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-- Admin Sales Graph by Product => TODO
+- Beautiful Analytics
 * Seed the Analytic Data => TODO
-* Pie Chart of Sales by SkuCode
-* Pie Chart of Refunds by SkuCode
-* Sales & Refunds By Date
-* Sales & Costs By Date
+* Translate data to JSON => TODO
+* Graphs and Charts => TODO
 
 - Contact Us Page Tasking => Email Form: use that thing from stache.io, Google Map, Street Address => IN PROGRESS
 - Shipping Page => TODO
