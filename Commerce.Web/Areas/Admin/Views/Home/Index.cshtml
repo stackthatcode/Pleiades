@@ -1,11 +1,11 @@
 ﻿@using System.Configuration
-@using Commerce.Web.Areas.Admin
 @using Commerce.Web.Areas.Public
 
 @section _Scripts {
     @Html.Javascript("~/Content/Bootstrap_2_3_2/js/bootstrap-datepicker.js")
     @Html.Stylesheet("~/Content/Bootstrap_2_3_2/css/datepicker.css")
     @Html.Javascript("~/Content/Flot/jquery.flot.js")
+    @Html.Javascript("~/Content/Flot/jquery.flot.pie.js")
     @Html.Javascript("~/Content/Flot/jquery.flot.time.js")
 
     <script type="text/javascript">
@@ -37,29 +37,104 @@
                 // TODO: please enter a valid date?
 
                 flow.exec(
-                    function() {
-                        self.AnalyticDataService('TotalSalesAmountsByDate', startDate, endDate, this);
+                    function () {
+                        self.LoadSalesAndRefundsGraphs(startDate, endDate, this);
                     },
-                    function(data) {
-                        self.MoneyTimeGraph("#TotalSalesAmountsByDate", data);
-                        self.AnalyticDataService('TotalRefundAmountsByDate', startDate, endDate, this);
-                    },
-                    function(data) {
-                        self.MoneyTimeGraph("#TotalRefundAmountsByDate", data);
+                    function () {
+                        self.LoadSkuGraphs(startDate, endDate, this);
+                        console.log("Done!");
                     }
                 );
             };
 
-            self.AnalyticDataService = function(analytic, startDate, endDate, callback) {
-                var url = "/Admin/Analytics/Sales?analytic=" + analytic + "&startDate=" + startDate + "&endDate=" + endDate;
-                self.Service.AjaxGet(url, callback);
+            self.LoadSalesAndRefundsGraphs = function (startDate, endDate, callback) {
+                var salesDollars = [], refundsDollars = [], salesQuantity = [], refundQuantity = [];
+                flow.exec(
+                    function () {
+                        self.AnalyticDataService('TotalSalesAmountsByDate', startDate, endDate, this);
+                    },
+                    function (data) {
+                        salesDollars = data;
+                        self.AnalyticDataService('TotalRefundAmountsByDate', startDate, endDate, this);
+                    },
+                    function (data) {
+                        refundsDollars = data;
+                        $.plot(
+                            "#SalesAndRefundsDollar",
+                            [
+                                { data: salesDollars, label: "Sales $(USD)" },
+                                { data: refundsDollars, label: "Refunds $(USD)"}],
+                            {
+                                xaxis: { mode: "time" }
+                            });
+                        self.AnalyticDataService('TotalSalesQuantitiesByDate', startDate, endDate, this);
+                    },
+                    function (data) {
+                        salesQuantity = data;
+                        self.AnalyticDataService('TotalRefundQuantitiesByDate', startDate, endDate, this);
+                    },
+                    function (data) {
+                        refundQuantity = data;
+                        $.plot(
+                            "#SalesAndRefundsQuantity",
+                            [
+                                { data: salesQuantity, label: "Sales Items" },
+                                { data: refundQuantity, label: "Refunds Items"}],
+                            {
+                                xaxis: { mode: "time" }
+                            });
+                        if (callback) callback();
+                    }
+                );
             };
 
-            self.MoneyTimeGraph = function(id, data) {
-                $.plot(id, [data], {
-                    xaxis: { mode: "time" },
-                    yaxes: [{ label: "Price (USD)" }],
-                });
+            self.LoadSkuGraphs = function (startDate, endDate, callback) {
+                var salesDollarsBySku = [], refundDollarsBySku = [];
+                
+                flow.exec(
+                    function () {
+                        self.AnalyticDataService('TotalSalesAmountsBySku', startDate, endDate, this);
+                    },
+                    function (data) {
+                        console.log(data);
+
+                        salesDollarsBySku = data;                        
+                        $.plot(
+                            "#SaleDollarsBySku",                            
+                            salesDollarsBySku,
+                            {
+                                series: {
+                                    pie: {
+                                        innerRadius: 0.5,
+                                        show: true,
+                                    }
+                                }
+                            });
+                        self.AnalyticDataService('TotalRefundAmountsBySku', startDate, endDate, this);
+                    },
+                    function (data) {
+                        refundDollarsBySku = data;                        
+                        $.plot(
+                            "#RefundDollarsBySku",                            
+                            refundDollarsBySku,
+                            {
+                                series: {
+                                    pie: {
+                                        show: true,
+                                    }
+                                },
+                                legend: {
+                                    show: false
+                                }
+                            });
+                        if (callback) callback();
+                    }
+                );
+            };
+
+            self.AnalyticDataService = function (analytic, startDate, endDate, callback) {
+                var url = "/Admin/Analytics/Data?analytic=" + analytic + "&startDate=" + startDate + "&endDate=" + endDate;
+                self.Service.AjaxGet(url, callback);
             };
         };
 
@@ -71,15 +146,23 @@
     </script>
 }
 
-@section _Body {
-    
-    <div class="workspace-heading-parent" style="height:200px;">
-        
+@section _Body {    
+    <div class="workspace-heading-parent" style="height:200px;">        
         <div style="height:60px;"></div>
         <div id="heading" class="container">
-            <h1>@ConfigurationManager.AppSettings["ApplicationName"]</h1>
-            <h4 style="color:#999;">@ConfigurationManager.AppSettings["CompanyName"]</h4>            
+            <div class="row">
+                <span class="span10">
+                    <h1>@ConfigurationManager.AppSettings["ApplicationName"]</h1>
+                    <h4 style="color:#999;">@ConfigurationManager.AppSettings["CompanyName"]</h4>            
+                </span>
+                <span class="span2">
+                    <div style="height:15px;"></div>
+                    <a href="@Url.RouteUrl(PublicNavigation.Home())" class="btn btn-block">Go to Storefront &nbsp;<i class="icon-arrow-right"></i></a>
+                </span>
+            </div>
+
             <div style="height:8px;"></div>
+
             <div class="row">
                 <div class="span3">
                     <div style="float:left; padding-top:3px;">From Date: &nbsp;</div>
@@ -101,22 +184,32 @@
     </div>
 
     <div id="body-container" class="container">
-        <div style="height:50px;"></div>
-            
+        <div style="height:20px;"></div>
+
         <div class="row">
             <div class="span6" style="text-align:center;">
-                <h4 style="color:#666;">Total Sales By Date</h4>            
-                <div id="TotalSalesAmountsByDate" style="height:330px; width:460px;"></div>
+                <h4 style="color:#666;">Total Sales &amp; Refund Dollars By Date</h4> 
+                <div id="SalesAndRefundsDollar" style="height:330px; width:460px;"></div>
             </div>
             <div class="span6" style="text-align:center;">
-                <h4 style="color:#666;">Total Refunds By Date</h4>            
-                <div id="TotalRefundAmountsByDate" style="height:330px; width:460px;"></div>
+                <h4 style="color:#666;">Total Sales Dollars By Sku</h4> 
+                <div id="SaleDollarsBySku" style="height:330px; width:460px;"></div>
             </div>
         </div>
+        
+        <div style="height:50px;"></div>        
 
-        <!--
-            @Html.RouteLink("Public Home", PublicNavigation.Home())<br />
-            @Html.RouteLink("Test Error Redirect", AdminNavigation.ErrorTest())<br />
-            -->
+        <div class="row">
+            <div class="span6" style="text-align:center;">
+                <h4 style="color:#666;">Total Sales &amp; Refund Items By Date</h4> 
+                <div id="SalesAndRefundsQuantity" style="height:330px; width:460px;"></div>
+            </div>
+            <div class="span6" style="text-align:center;">
+                <h4 style="color:#666;">Top 5 Refunds By Sku</h4> 
+                <div id="RefundDollarsBySku" style="height:330px; width:460px;"></div>
+            </div>
+        </div>
+        
+        <div style="height:100px;"></div>
     </div>
 }

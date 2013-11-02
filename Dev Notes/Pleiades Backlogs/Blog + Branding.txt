@@ -8,13 +8,19 @@ Blog + Brand == Freelance Gigs ==> Escape from Alcatraz
 
 PushMarket (for Marketing)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+- C#
+- ASP.NET MVC 4
 - HTML 5
 - Responsive
 - Angular.js
 - KnockoutJs
 - JQuery
-- Bootstrap 3
-- .NET MVC 4
-- C# + .NET 4.5
+- Bootstrap
 - Entity Framework
-- SQL Server 2008
+- SQL Server
+
+My NEXT POST
+~~~~~~~~~~~~
+Developers Don't Know How To Think Like Owners  aka  A Direct Assault on the Intellectual Conceit of the Software Industry
+
+

@@ -36,7 +36,7 @@
       <div class="navbar-inner">
         <div class="container">
           <img src="@Url.Content("~/Content/Commerce.Web/Images/webicon-2.png")" style="float:left;" />
-		  <a class="brand" href="@Url.RouteUrl(AdminNavigation.Home())" style="color:#FFF;">PushMarket</a>
+		  <a class="brand" href="@Url.RouteUrl(AdminNavigation.Home())" style="color:#FFF;">Pushmarket</a>
 
           <div class="nav-collapse">
             <ul class="nav">
@@ -63,8 +63,9 @@
                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b>
                    </a>
                    <ul class="dropdown-menu">
-                        <li><a href="@Url.RouteUrl(AdminNavigation.ManagerList())">Admins</a></li>                        
-                    </ul>
+                       <li><a href="@Url.RouteUrl(AdminNavigation.ManagerList())">Admins</a></li>                        
+                       <li><a href="@Url.RouteUrl(AdminNavigation.ErrorTest())">Error Test</a></li>
+                   </ul>
               </li>
 			</ul>
 

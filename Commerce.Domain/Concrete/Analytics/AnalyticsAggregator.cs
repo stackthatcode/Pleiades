@@ -41,7 +41,6 @@ namespace Commerce.Application.Concrete.Analytics
         }
 
 
-
         public List<SkuTotal> TotalSalesAmountsBySku(DateTime @from, DateTime to)
         {
             var data = _context.PurchaseSkuEvents.Where(x => x.Date >= from && x.Date <= to);
@@ -53,6 +52,7 @@ namespace Commerce.Application.Concrete.Analytics
                         SkuCode = x,
                         Amount = data.Where(@event => @event.SkuCode == x).Sum(@event => @event.Amount)
                     })
+                .OrderBy(x => x.Amount)
                 .ToList();
         }
 
@@ -67,6 +67,7 @@ namespace Commerce.Application.Concrete.Analytics
                     SkuCode = x,
                     Amount = data.Where(@event => @event.SkuCode == x).Sum(@event => @event.Quantity)
                 })
+                .OrderBy(x => x.Amount)
                 .ToList();            
         }
 
@@ -83,6 +84,7 @@ namespace Commerce.Application.Concrete.Analytics
                         .Where(@event => @event.SkuCode == x)
                         .Sum(@event => @event.Amount)
                 })
+                .OrderBy(x => x.Amount)
                 .ToList();            
         }
 
@@ -99,6 +101,7 @@ namespace Commerce.Application.Concrete.Analytics
                         .Where(@event => @event.SkuCode == x)
                         .Sum(@event => @event.Quantity)
                 })
+                .OrderBy(x => x.Amount)
                 .ToList();            
         }
 
@@ -122,11 +125,6 @@ namespace Commerce.Application.Concrete.Analytics
         {
             return AggregateRefundSkuEvents(@from, to, x => x.Quantity);
         }
-
-
-        // TODO: create function to order List<SkuTotal> by Sku
-
-        // TODO: create function to order List<SkuDateTotal> by Sku
 
 
         private List<DateTotal> AggregatePurchaseOrderEvents(
