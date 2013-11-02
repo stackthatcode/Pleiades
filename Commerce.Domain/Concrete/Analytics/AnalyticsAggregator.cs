@@ -18,23 +18,28 @@ namespace Commerce.Application.Concrete.Analytics
 
         public List<DateTotal> TotalSalesAmountsByDate(DateTime @from, DateTime to)
         {
-            return AggregatePurchaseOrderEvents(@from, @to, x => x.SaleAmount);
+            return AggregatePurchaseOrderEvents(@from, @to, x => x.SaleAmount)
+                .FillEmptyDates(from, to);
         }
 
         public List<DateTotal> TotalSalesQuantitiesByDate(DateTime @from, DateTime to)
         {
-            return AggregatePurchaseOrderEvents(@from, @to, x => x.Quantity);
+            return AggregatePurchaseOrderEvents(@from, @to, x => x.Quantity)
+                .FillEmptyDates(from, to);
         }
 
         public List<DateTotal> TotalRefundAmountsByDate(DateTime @from, DateTime to)
         {
-            return AggregateRefundEvents(@from, to, x => x.Amount);
+            return AggregateRefundEvents(@from, to, x => x.Amount)
+                .FillEmptyDates(from, to);
         }
 
         public List<DateTotal> TotalRefundQuantitiesByDate(DateTime @from, DateTime to)
         {
-            return AggregateRefundEvents(@from, to, x => x.Quantity);
+            return AggregateRefundEvents(@from, to, x => x.Quantity)
+                .FillEmptyDates(from, to);
         }
+
 
 
         public List<SkuTotal> TotalSalesAmountsBySku(DateTime @from, DateTime to)
@@ -205,5 +210,20 @@ namespace Commerce.Application.Concrete.Analytics
             }
             return dateTotals.ToList();
         }
+    }
+
+    public static class AggregatorHelperExtensions
+    {
+        public static List<DateTotal> FillEmptyDates(this List<DateTotal> totals, DateTime @from, DateTime to)
+        {
+            for (var current = @from; current <= to; current = current.AddDays(1))
+            {
+                if (totals.All(x => x.DateTime != current))
+                {
+                    totals.Add(new DateTotal { DateTime = current, Amount = 0 });
+                }
+            }
+            return totals.OrderBy(x => x.DateTime).ToList();
+        }        
     }
 }

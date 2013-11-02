@@ -41,17 +41,21 @@
             self.EndDate(now);
         };
 
+        self.InitializeGraph = function() {
+            
+        };
+
         self.SearchClick = function () {
             flow.exec(
                 function () {
                     self.StartDate($("#data-picker-start").val());
                     self.EndDate($("#data-picker-end").val());
-                    
+
                     var url = "/Admin/ManageOrder/Search" +
                         "?orderStatus=" + self.SelectedStatus() +
                         "&startDate=" + self.StartDate() +
                         "&endDate=" + self.EndDate();
-                    
+
                     self.Root.Service.AjaxGet(url, this);
                 },
                 function (data) {
@@ -73,13 +77,13 @@
 
         <div class="span3">
             <div style="float:left; padding-top:3px;">From Date: &nbsp;</div>
-            <input type="text" class="span2" value="02-16-2012" id="data-picker-start" onkeypress="return false;"
+            <input type="text" class="span2" value="02-16-2012" id="data-picker-start"
                     data-bind="value: $data.StartDate">
         </div>
 
         <div class="span3">
             <div style="float:left; padding-top:3px;">To Date: &nbsp;</div>
-            <input type="text" class="span2" value="02-16-2012" id="data-picker-end" onkeypress="return false;"
+            <input type="text" class="span2" value="02-16-2012" id="data-picker-end"
                     data-bind="value: $data.EndDate">
         </div>
 
