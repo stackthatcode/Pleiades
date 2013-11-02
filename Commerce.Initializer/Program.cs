@@ -82,6 +82,7 @@ namespace Commerce.Initializer
                         
             CreateAndRunBuilder<ShippingMethodsBuilder>();
             CreateAndRunBuilder<StateTaxBuilder>();
+            CreateAndRunBuilder<AnalyticsBuilder>();
 
             LoggerSingleton.Get().Info("Seeding PushMarket data - Complete!");
         }

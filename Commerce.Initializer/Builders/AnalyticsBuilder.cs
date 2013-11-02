@@ -5,7 +5,6 @@ using System.Transactions;
 using Commerce.Application.Database;
 using Commerce.Application.Interfaces;
 using Commerce.Application.Model.Analytics;
-using Commerce.Application.Model.Lists;
 using Commerce.Application.Model.Orders;
 using Commerce.Application.Model.Products;
 using Pleiades.Application.Data;
@@ -16,35 +15,35 @@ namespace Commerce.Initializer.Builders
     public class AnalyticsBuilder : IBuilder
     {
         private IUnitOfWork _unitOfWork;
-        private IGenericRepository<ProductSku> _inventoryRepository;
+        private PushMarketContext _pushMarketContext;
         private IAnalyticsCollector _analyticsCollector;
 
         public AnalyticsBuilder(
                 IUnitOfWork unitOfWork, 
-                IGenericRepository<ProductSku> inventoryRepository, 
-                IAnalyticsCollector analyticsCollector)
+                IAnalyticsCollector analyticsCollector, 
+                PushMarketContext pushMarketContext)
         {
             _unitOfWork = unitOfWork;
-            _inventoryRepository = inventoryRepository;
             _analyticsCollector = analyticsCollector;
+            _pushMarketContext = pushMarketContext;
         }
 
         public void Run()
         {
-            using (var tx = new TransactionScope())
-            {
-                LoggerSingleton.Get().Info("Create the default Categories");
-                var startDate = DateTime.Today.AddMonths(-3);
-                var endDate = DateTime.Today;
-                var productSkus = _inventoryRepository.GetAll().ToList();
-                var topSellers = PickTopSellers(productSkus);
+            LoggerSingleton.Get().Info("Create Analytics Test Data");
+            var startDate = DateTime.Today.AddMonths(-3);
+            var endDate = DateTime.Today;
+            var productSkus = _pushMarketContext.ProductSkus.ToList();
+            var topSellers = PickTopSellers(productSkus);
 
-                foreach (var topSeller in topSellers)
+            foreach (var sku in topSellers)
+            {
+                using (var tx = new TransactionScope())
                 {
-                    
+                    PopulateSalesAndRefunds(sku, startDate, endDate);
+                    _unitOfWork.SaveChanges();
+                    tx.Complete();
                 }
-                _unitOfWork.SaveChanges();
-                tx.Complete();
             }
         }
 
@@ -63,33 +62,38 @@ namespace Commerce.Initializer.Builders
             return output;
         }
 
-        public void PopulateSales(ProductSku productSku, DateTime startDate, DateTime endDate)
+        public void PopulateSalesAndRefunds(ProductSku productSku, DateTime startDate, DateTime endDate)
         {
+            LoggerSingleton.Get().Info("Create Analytics Test Data for Sku: " + productSku.SkuCode);
+
             var random = new Random();
             for (var current = startDate; current <= endDate; current = current.AddDays(random.Next(0, 3)))
             {
+                LoggerSingleton.Get().Info("Date: " + current);
+
+                var orderId = random.Next(10000, 99999);
                 var order = new Order()
                     {
+                        Id = orderId,
                         DateCreated = current
                     };
-                var quantity = random.Next(1, 3);
+                var quantity = random.Next(1, 4);
                 order.OrderLines.Add(new OrderLine(productSku, quantity));
 
-                if (random.Next(1, 5) == 5)
+                if (random.Next(1, 6) == 5)
                 {
                     _analyticsCollector.Refund(
-                        current.AddDays(
-                            random.Next(3, 14)), 
-                            random.Next(10000, 99999), 
-                            new List<RefundItem>()
-                                {
-                                    new RefundItem
-                                        {
-                                            Quantity = 1, 
-                                            SkuCode = productSku.SkuCode, 
-                                            UnitPrice = productSku.Product.UnitPrice
-                                        }
-                                } );
+                        current,
+                        orderId,
+                        new List<RefundItem>()
+                            {
+                                new RefundItem
+                                    {
+                                        Quantity = 1, 
+                                        SkuCode = productSku.SkuCode, 
+                                        UnitPrice = productSku.Product.UnitPrice
+                                    }
+                            } );
                 }
 
                 _analyticsCollector.Sale(order);

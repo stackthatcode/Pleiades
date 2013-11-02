@@ -1,38 +1,72 @@
 ﻿@using System.Configuration
 @using Commerce.Web.Areas.Admin
 @using Commerce.Web.Areas.Public
+
+@section _Scripts {
+    @Html.Javascript("~/Content/Bootstrap_2_3_2/js/bootstrap-datepicker.js")
+    @Html.Stylesheet("~/Content/Bootstrap_2_3_2/css/datepicker.css")
+
+    <script type="text/javascript">
+        var PushMkt = PushMkt || {};
+
+        PushMkt.Dashboard = function () {
+            self = this;
+
+            self.Service = new PushLibrary.Ajax();
+
+            self.InitializeControls = function () {                
+                var nowTemp = new Date();
+                var now = (nowTemp.getMonth() + 1) + "/" + nowTemp.getDate() + "/" + nowTemp.getFullYear();
+
+                var twoWeeksAgoTemp = new Date();
+                twoWeeksAgoTemp.setDate(nowTemp.getDate() - 14);
+                var twoWeeksAgo = (twoWeeksAgoTemp.getMonth() + 1) + "/" + twoWeeksAgoTemp.getDate() + "/" + twoWeeksAgoTemp.getFullYear();
+
+                $("#data-picker-start").val(twoWeeksAgo);
+                $("#data-picker-end").val(now);
+                $("#data-picker-start").datepicker();
+                $("#data-picker-end").datepicker();
+                
+
+            };
+        };
+
+        $(function () {
+            var dashboard = new PushMkt.Dashboard();
+            dashboard.InitializeControls();
+        });
+    </script>
+}
+
 @section _Body {
-    <div id="body-container" class="container">
-        <h1>Welcome to @ConfigurationManager.AppSettings["ApplicationName"]</h1>
-        <h2 style="color:#999;">@ConfigurationManager.AppSettings["CompanyName"]</h2>
-        <div style="clear:both; height:20px;"></div>
-        <p>This is a temporary placeholder for the Admin Splash Page.</p>
+    <div style="height:90px;"></div>
+    <div id="heading" class="container">
+        <h1>@ConfigurationManager.AppSettings["ApplicationName"]</h1>
+        <h4 style="color:#999;">@ConfigurationManager.AppSettings["CompanyName"]</h4>            
+    </div>
+    <div style="height:45px;"></div>
+    <div id="heading" class="container">
+        <div class="row">
+            <div class="span3">
+                <div style="float:left; padding-top:3px;">From Date: &nbsp;</div>
+                <input type="text" class="span2" value="02-16-2012" id="data-picker-start" onkeypress="return false;"
+                        data-bind="value: $data.StartDate">
+            </div>
 
-        <table>
-        <tr>
-            <td style="width:200px; vertical-align:top;">
-                @Html.RouteLink("Manage Sections", AdminNavigation.SectionEditor())<br />
-                @Html.RouteLink("Manage Categories", AdminNavigation.CategoryEditor())<br />
-                @Html.RouteLink("Manage Sizes", AdminNavigation.SizeEditor())<br />
-                @Html.RouteLink("Manage Brands", AdminNavigation.BrandEditor())<br />
-                @Html.RouteLink("Manage Colors", AdminNavigation.ColorEditor())<br />
-            </td>
-            
-            <td style="width:200px; vertical-align:top;">
-                @Html.RouteLink("Manage Products", AdminNavigation.ProductEditor())<br />
-                @Html.RouteLink("Manage Orders", AdminNavigation.ManageOrders())<br />
-                @Html.RouteLink("Create New Order", AdminNavigation.CreateNewOrder())<br />
-            </td>
+            <div class="span3">
+                <div style="float:left; padding-top:3px;">To Date: &nbsp;</div>
+                <input type="text" class="span2" value="02-16-2012" id="data-picker-end" onkeypress="return false;"
+                        data-bind="value: $data.EndDate">
+            </div>
 
-            <td style="width:200px; vertical-align:top;">
-                @Html.RouteLink("Manage Admin Users", AdminNavigation.ManagerList())<br />
-            </td>
+            <div class="span3">
+                <a class="btn btn-primary" style="width:125px;" data-bind="click: function() { $data.SearchClick(); }">
+                    Refresh <i class="icon-search icon-white"></i>
+                </a>
+            </div>
+        </div>
 
-            <td style="width:200px; vertical-align:top;">
-                @Html.RouteLink("Public Home", PublicNavigation.Home())<br />
-                @Html.RouteLink("Test Error Redirect", AdminNavigation.ErrorTest())<br />
-            </td>
-        </tr>
-        </table>
+        <!--        @Html.RouteLink("Public Home", PublicNavigation.Home())<br />
+            @Html.RouteLink("Test Error Redirect", AdminNavigation.ErrorTest())<br /> -->
     </div>
 }

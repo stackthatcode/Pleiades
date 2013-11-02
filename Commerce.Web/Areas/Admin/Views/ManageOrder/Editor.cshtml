@@ -17,6 +17,7 @@
             PushMkt.AddOrderDetailView(self);
 
             self.Service = new PushLibrary.Ajax();
+            
             self.ModalViewModel = new PushMkt.ModalDialogViewModel();
             self.ShowModal = function (template, header, body, list, callback) {
                 self.ModalViewModel.ShowModal(template, header, body, list, callback);

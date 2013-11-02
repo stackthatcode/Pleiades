@@ -40,6 +40,8 @@ namespace Commerce.Initializer
             builder.RegisterType<SizeBuilder>();
             builder.RegisterType<StateTaxBuilder>();
             builder.RegisterType<UserBuilder>();
+
+            builder.RegisterType<AnalyticsBuilder>();
         }
     }
 }
