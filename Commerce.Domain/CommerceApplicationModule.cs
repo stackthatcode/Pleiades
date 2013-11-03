@@ -19,6 +19,7 @@ using Commerce.Application.Concrete;
 using Commerce.Application.Interfaces;
 using Commerce.Application.Model.Lists;
 using Commerce.Application.Model.Products;
+using Stripe;
 
 namespace Commerce.Application
 {
@@ -80,6 +81,10 @@ namespace Commerce.Application
                                ? (IPaymentsProcessor)c.Resolve<StripePaymentProcessor>()
                                : (IPaymentsProcessor)c.Resolve<MockPaymentProcessor>();
                 });
+            builder
+                .Register(c => new StripeChargeService(c.Resolve<IConfigurationAdapter>().SecretKey))
+                .As<StripeChargeService>();
+            builder.RegisterType<ConfigurationAdapter>().As<IConfigurationAdapter>();
 
             // Email Repositories
             builder.RegisterType<EmailGenerator>().As<IEmailGenerator>();

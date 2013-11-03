@@ -7,3 +7,309 @@
 2013-11-03 00:03:01.0816|Debug|936c0c2e-8517-463c-8016-857d21904340|Image - Download: e27deec3-b8f0-496e-b8e7-4fc6c499cc55 thumbnail 
 2013-11-03 00:03:01.0816|Debug|84b3340f-4a67-41ef-b496-abb9c97a320b|Image - Download: e27deec3-b8f0-496e-b8e7-4fc6c499cc55 large 
 2013-11-03 00:03:08.4860|Debug|1b4dc614-6d30-4683-a002-5f5408022437|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 large 
+2013-11-03 00:50:58.0941|Error|d0d0695b-0c92-486f-990b-2465b7cea675|URL:http://localhost/Commerce.Web/Admin - IsAjaxRequest: False 
+2013-11-03 00:50:58.0941|Error|94b219a2-11d3-4f2d-a1b4-04e05a7796d2|URL:http://localhost/Commerce.Web/page - IsAjaxRequest: False 
+2013-11-03 00:50:58.2542|Error|d0d0695b-0c92-486f-990b-2465b7cea675|System.Data.EntityException:The underlying provider failed on Open.
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure)
+   at System.Data.EntityClient.EntityConnection.Open()
+   at System.Data.Objects.ObjectContext.EnsureConnection()
+   at System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[S](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
+   at Commerce.Application.Concrete.Security.AggregateReadOnlyRepository.RetrieveByMembershipUserName(String membershipUsername) in C:\DEV\Pleiades\Commerce.Domain\Concrete\Security\AggregateReadOnlyRepository.cs:line 28
+   at Pleiades.Web.Security.Concrete.AggregateUserService.LoadAuthentedUserIntoContext(HttpContextBase context) in C:\DEV\Pleiades\Pleiades.Web.Security.Aggregate\Concrete\AggregateUserService.cs:line 118
+   at Pleiades.Web.Security.Aspect.SecurityAttribute.OnAuthorization(AuthorizationContext filterContext) in C:\DEV\Pleiades\Pleiades.Web.Security.Aggregate\Aspect\SecurityAttribute.cs:line 23
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAuthorizationFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__1e(AsyncCallback asyncCallback, Object asyncState)
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+   at System.Data.ProviderBase.DbConnectionPool.GetConnection(DbConnection owningObject)
+   at System.Data.ProviderBase.DbConnectionFactory.GetConnection(DbConnection owningConnection)
+   at System.Data.ProviderBase.DbConnectionClosed.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   at System.Data.ProviderBase.DbConnectionFactory.GetConnection(DbConnection owningConnection)
+   at System.Data.ProviderBase.DbConnectionClosed.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   at System.Data.ProviderBase.DbConnectionFactory.GetConnection(DbConnection owningConnection)
+   at System.Data.ProviderBase.DbConnectionClosed.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.ProviderBase.DbConnectionClosed.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure) 
+2013-11-03 00:50:58.2792|Error|94b219a2-11d3-4f2d-a1b4-04e05a7796d2|System.Data.EntityException:The underlying provider failed on Open.
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure)
+   at System.Data.EntityClient.EntityConnection.Open()
+   at System.Data.Objects.ObjectContext.EnsureConnection()
+   at System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[S](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
+   at Commerce.Application.Concrete.Security.AggregateReadOnlyRepository.RetrieveByMembershipUserName(String membershipUsername) in C:\DEV\Pleiades\Commerce.Domain\Concrete\Security\AggregateReadOnlyRepository.cs:line 28
+   at Pleiades.Web.Security.Concrete.AggregateUserService.LoadAuthentedUserIntoContext(HttpContextBase context) in C:\DEV\Pleiades\Pleiades.Web.Security.Aggregate\Concrete\AggregateUserService.cs:line 118
+   at Pleiades.Web.Security.Aspect.SecurityAttribute.OnAuthorization(AuthorizationContext filterContext) in C:\DEV\Pleiades\Pleiades.Web.Security.Aggregate\Aspect\SecurityAttribute.cs:line 23
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAuthorizationFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__1e(AsyncCallback asyncCallback, Object asyncState)
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+   at System.Data.ProviderBase.DbConnectionPool.GetConnection(DbConnection owningObject)
+   at System.Data.ProviderBase.DbConnectionFactory.GetConnection(DbConnection owningConnection)
+   at System.Data.ProviderBase.DbConnectionClosed.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   at System.Data.ProviderBase.DbConnectionFactory.GetConnection(DbConnection owningConnection)
+   at System.Data.ProviderBase.DbConnectionClosed.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   at System.Data.ProviderBase.DbConnectionFactory.GetConnection(DbConnection owningConnection)
+   at System.Data.ProviderBase.DbConnectionClosed.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.ProviderBase.DbConnectionClosed.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure) 
+2013-11-03 00:50:58.0961|Error|7c9f752a-aa9b-4a71-b945-1fb2de01af1a|URL:http://localhost/Commerce.Web/page - IsAjaxRequest: False 
+2013-11-03 00:50:58.3612|Error|7c9f752a-aa9b-4a71-b945-1fb2de01af1a|System.Data.EntityException:The underlying provider failed on Open.
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure)
+   at System.Data.EntityClient.EntityConnection.Open()
+   at System.Data.Objects.ObjectContext.EnsureConnection()
+   at System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[S](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
+   at Commerce.Application.Concrete.Security.AggregateReadOnlyRepository.RetrieveByMembershipUserName(String membershipUsername) in C:\DEV\Pleiades\Commerce.Domain\Concrete\Security\AggregateReadOnlyRepository.cs:line 28
+   at Pleiades.Web.Security.Concrete.AggregateUserService.LoadAuthentedUserIntoContext(HttpContextBase context) in C:\DEV\Pleiades\Pleiades.Web.Security.Aggregate\Concrete\AggregateUserService.cs:line 118
+   at Pleiades.Web.Security.Aspect.SecurityAttribute.OnAuthorization(AuthorizationContext filterContext) in C:\DEV\Pleiades\Pleiades.Web.Security.Aggregate\Aspect\SecurityAttribute.cs:line 23
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAuthorizationFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__1e(AsyncCallback asyncCallback, Object asyncState)
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+   at System.Data.ProviderBase.DbConnectionPool.GetConnection(DbConnection owningObject)
+   at System.Data.ProviderBase.DbConnectionFactory.GetConnection(DbConnection owningConnection)
+   at System.Data.ProviderBase.DbConnectionClosed.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   at System.Data.ProviderBase.DbConnectionFactory.GetConnection(DbConnection owningConnection)
+   at System.Data.ProviderBase.DbConnectionClosed.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   at System.Data.ProviderBase.DbConnectionFactory.GetConnection(DbConnection owningConnection)
+   at System.Data.ProviderBase.DbConnectionClosed.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.ProviderBase.DbConnectionClosed.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure) 
+2013-11-03 00:51:23.3106|Error|94b219a2-11d3-4f2d-a1b4-04e05a7796d2|URL:http://localhost/Commerce.Web/page - IsAjaxRequest: False 
+2013-11-03 00:51:23.3106|Error|94b219a2-11d3-4f2d-a1b4-04e05a7796d2|System.InvalidOperationException:The partial view '_HeaderBare' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/Public/Views/Page/_HeaderBare.aspx
+~/Areas/Public/Views/Page/_HeaderBare.ascx
+~/Areas/Public/Views/Shared/_HeaderBare.aspx
+~/Areas/Public/Views/Shared/_HeaderBare.ascx
+~/Views/Page/_HeaderBare.aspx
+~/Views/Page/_HeaderBare.ascx
+~/Views/Shared/_HeaderBare.aspx
+~/Views/Shared/_HeaderBare.ascx
+~/Areas/Public/Views/Page/_HeaderBare.cshtml
+~/Areas/Public/Views/Page/_HeaderBare.vbhtml
+~/Areas/Public/Views/Shared/_HeaderBare.cshtml
+~/Areas/Public/Views/Shared/_HeaderBare.vbhtml
+~/Views/Page/_HeaderBare.cshtml
+~/Views/Page/_HeaderBare.vbhtml
+~/Views/Shared/_HeaderBare.cshtml
+~/Views/Shared/_HeaderBare.vbhtml
+   at System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
+   at System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   at System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   at System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName)
+   at ASP._Page_Areas_Admin_Views_Shared__LayoutBare_cshtml.Execute() in c:\DEV\Pleiades\Commerce.Web\Areas\Admin\Views\Shared\_LayoutBare.cshtml:line 13
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   at System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   at System.Web.WebPages.WebPageBase.<>c__DisplayClass7.<RenderPageCore>b__6(TextWriter writer)
+   at System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   at System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   at System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   at System.Web.WebPages.WebPageBase.PopContext()
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   at System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   at System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2c.<BeginInvokeAction>b__21()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-11-03 00:51:23.3106|Error|7c9f752a-aa9b-4a71-b945-1fb2de01af1a|URL:http://localhost/Commerce.Web/page - IsAjaxRequest: False 
+2013-11-03 00:51:23.3106|Error|7c9f752a-aa9b-4a71-b945-1fb2de01af1a|System.InvalidOperationException:The partial view '_HeaderBare' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/Public/Views/Page/_HeaderBare.aspx
+~/Areas/Public/Views/Page/_HeaderBare.ascx
+~/Areas/Public/Views/Shared/_HeaderBare.aspx
+~/Areas/Public/Views/Shared/_HeaderBare.ascx
+~/Views/Page/_HeaderBare.aspx
+~/Views/Page/_HeaderBare.ascx
+~/Views/Shared/_HeaderBare.aspx
+~/Views/Shared/_HeaderBare.ascx
+~/Areas/Public/Views/Page/_HeaderBare.cshtml
+~/Areas/Public/Views/Page/_HeaderBare.vbhtml
+~/Areas/Public/Views/Shared/_HeaderBare.cshtml
+~/Areas/Public/Views/Shared/_HeaderBare.vbhtml
+~/Views/Page/_HeaderBare.cshtml
+~/Views/Page/_HeaderBare.vbhtml
+~/Views/Shared/_HeaderBare.cshtml
+~/Views/Shared/_HeaderBare.vbhtml
+   at System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
+   at System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   at System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   at System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName)
+   at ASP._Page_Areas_Admin_Views_Shared__LayoutBare_cshtml.Execute() in c:\DEV\Pleiades\Commerce.Web\Areas\Admin\Views\Shared\_LayoutBare.cshtml:line 13
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   at System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   at System.Web.WebPages.WebPageBase.<>c__DisplayClass7.<RenderPageCore>b__6(TextWriter writer)
+   at System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   at System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   at System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   at System.Web.WebPages.WebPageBase.PopContext()
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   at System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   at System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2c.<BeginInvokeAction>b__21()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-11-03 00:51:23.3416|Error|7c9f752a-aa9b-4a71-b945-1fb2de01af1a|System.InvalidOperationException:The partial view '_HeaderBare' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/Public/Views/Page/_HeaderBare.aspx
+~/Areas/Public/Views/Page/_HeaderBare.ascx
+~/Areas/Public/Views/Shared/_HeaderBare.aspx
+~/Areas/Public/Views/Shared/_HeaderBare.ascx
+~/Views/Page/_HeaderBare.aspx
+~/Views/Page/_HeaderBare.ascx
+~/Views/Shared/_HeaderBare.aspx
+~/Views/Shared/_HeaderBare.ascx
+~/Areas/Public/Views/Page/_HeaderBare.cshtml
+~/Areas/Public/Views/Page/_HeaderBare.vbhtml
+~/Areas/Public/Views/Shared/_HeaderBare.cshtml
+~/Areas/Public/Views/Shared/_HeaderBare.vbhtml
+~/Views/Page/_HeaderBare.cshtml
+~/Views/Page/_HeaderBare.vbhtml
+~/Views/Shared/_HeaderBare.cshtml
+~/Views/Shared/_HeaderBare.vbhtml
+   at System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
+   at System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   at System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   at System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName)
+   at ASP._Page_Areas_Admin_Views_Shared__LayoutBare_cshtml.Execute() in c:\DEV\Pleiades\Commerce.Web\Areas\Admin\Views\Shared\_LayoutBare.cshtml:line 13
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   at System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   at System.Web.WebPages.WebPageBase.<>c__DisplayClass7.<RenderPageCore>b__6(TextWriter writer)
+   at System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   at System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   at System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   at System.Web.WebPages.WebPageBase.PopContext()
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   at System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   at System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) 
+2013-11-03 00:51:23.3686|Error|94b219a2-11d3-4f2d-a1b4-04e05a7796d2|System.InvalidOperationException:The partial view '_HeaderBare' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/Public/Views/Page/_HeaderBare.aspx
+~/Areas/Public/Views/Page/_HeaderBare.ascx
+~/Areas/Public/Views/Shared/_HeaderBare.aspx
+~/Areas/Public/Views/Shared/_HeaderBare.ascx
+~/Views/Page/_HeaderBare.aspx
+~/Views/Page/_HeaderBare.ascx
+~/Views/Shared/_HeaderBare.aspx
+~/Views/Shared/_HeaderBare.ascx
+~/Areas/Public/Views/Page/_HeaderBare.cshtml
+~/Areas/Public/Views/Page/_HeaderBare.vbhtml
+~/Areas/Public/Views/Shared/_HeaderBare.cshtml
+~/Areas/Public/Views/Shared/_HeaderBare.vbhtml
+~/Views/Page/_HeaderBare.cshtml
+~/Views/Page/_HeaderBare.vbhtml
+~/Views/Shared/_HeaderBare.cshtml
+~/Views/Shared/_HeaderBare.vbhtml
+   at System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
+   at System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   at System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   at System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName)
+   at ASP._Page_Areas_Admin_Views_Shared__LayoutBare_cshtml.Execute() in c:\DEV\Pleiades\Commerce.Web\Areas\Admin\Views\Shared\_LayoutBare.cshtml:line 13
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   at System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   at System.Web.WebPages.WebPageBase.<>c__DisplayClass7.<RenderPageCore>b__6(TextWriter writer)
+   at System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   at System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   at System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   at System.Web.WebPages.WebPageBase.PopContext()
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   at System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   at System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) 
+2013-11-03 00:51:34.4062|Debug|2f902225-3ebc-41a8-b046-81880cc48658|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 large 
+2013-11-03 00:51:34.4062|Debug|5f4fc596-58d6-4da5-9853-7a112970008f|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 thumbnail 
+2013-11-03 00:51:34.4062|Debug|6a4cea26-2c81-4ba9-a1af-5038f945079d|Image - Download: e27deec3-b8f0-496e-b8e7-4fc6c499cc55 thumbnail 
+2013-11-03 00:51:34.4062|Debug|9403fdcb-e1d2-42e5-a053-0447b30d115d|Image - Download: e27deec3-b8f0-496e-b8e7-4fc6c499cc55 large 
+2013-11-03 00:53:15.4690|Debug|e5216467-2ac9-4206-8dc1-72cd9179bf5e|Image - Download: e27deec3-b8f0-496e-b8e7-4fc6c499cc55 small 
+2013-11-03 00:53:15.4750|Debug|c1b66886-e449-4e93-931e-f4749db6aaaf|Image - Download: 82db1d0a-b076-446b-9f86-9434b72a0f18 small 
+2013-11-03 00:53:15.5160|Debug|5326b626-b7ba-41c0-ab53-bc4243925462|Image - Download: 94287fce-4a91-4a18-8a34-dd54c7aaf9a3 small 
+2013-11-03 00:53:15.5160|Debug|e3f95ea7-ec13-4b15-9d59-b91cb6b451d5|Image - Download: 4262e479-6a9c-4432-b7a3-d135de3e1aef small 
+2013-11-03 00:53:15.5330|Debug|e18dabe5-fede-4217-b9fb-6957b7fcd2db|Image - Download: 58e9cb0e-6a4e-4777-9919-b9647e487fa5 small 
+2013-11-03 00:53:15.5220|Debug|7d970aa0-ce9c-4582-9969-9446d717af7c|Image - Download: 8384d19c-4269-4d4c-8809-97c97bf0bf05 small 
+2013-11-03 00:53:15.6620|Debug|a3fa80bb-8725-4603-944d-76f496ca9db7|Image - Download: f13e93a8-704d-4614-9ae8-e43925b6cf5b small 
+2013-11-03 00:53:15.8050|Debug|127f5de6-3f3c-4478-bb10-fed1f64a73a0|Image - Download: 8d184830-a7ae-4303-a902-0a75cfcfc957 small 
+2013-11-03 00:53:15.8940|Debug|7bf9ddfe-2035-488a-a219-c0dcf129cfcd|Image - Download: b06df65b-c223-41aa-85b8-214d5f8eb4ac small 
+2013-11-03 00:53:16.0910|Debug|82f6b05c-e4c4-4ca6-877f-de6a72d3c02f|Image - Download: 48ea29c1-278d-4bc6-95d3-2e47067b299f small 
+2013-11-03 00:53:18.6202|Debug|1c07260c-355a-4a6b-890e-a708389ce24f|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 thumbnail 
+2013-11-03 00:53:18.6252|Debug|de4de45b-bf63-4f1d-89d4-d4f29e8e7f23|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 large 
+2013-11-03 00:53:18.6252|Debug|e57d54cf-2877-44ba-8b3c-b4c49696dced|Image - Download: e27deec3-b8f0-496e-b8e7-4fc6c499cc55 large 
+2013-11-03 00:53:18.6462|Debug|22d077d6-a13e-40a2-8020-7e31583e2fd9|Image - Download: e27deec3-b8f0-496e-b8e7-4fc6c499cc55 thumbnail 
+2013-11-03 00:53:21.1153|Debug|81a1ce88-61fe-42db-bf52-8a2028666bbe|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 large 
+2013-11-03 00:53:21.1193|Debug|01499eb9-7fd4-4299-8268-fcbf915c78c3|Image - Download: e27deec3-b8f0-496e-b8e7-4fc6c499cc55 thumbnail 
+2013-11-03 00:53:21.1193|Debug|4ce9a95d-1e53-454a-b406-8c4d23961434|Image - Download: e27deec3-b8f0-496e-b8e7-4fc6c499cc55 large 
+2013-11-03 00:53:21.1153|Debug|0f61f96f-fdd0-4640-ba2f-c413f803a683|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 thumbnail 

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Configuration;
 
-namespace Commerce.StripeClient
+namespace Commerce.Application.Concrete.Payment
 {
     public class StripeConfiguration : ConfigurationSection
     {

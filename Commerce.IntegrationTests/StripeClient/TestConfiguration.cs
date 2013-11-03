@@ -1,4 +1,4 @@
-﻿using Commerce.StripeClient;
+﻿using Commerce.Application.Concrete.Payment;
 using NUnit.Framework;
 
 namespace Commerce.IntegrationTests.StripeClient

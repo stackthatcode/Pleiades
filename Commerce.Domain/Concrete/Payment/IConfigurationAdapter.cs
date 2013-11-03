@@ -1,4 +1,4 @@
-﻿namespace Commerce.StripeClient
+﻿namespace Commerce.Application.Concrete.Payment
 {
     public interface IConfigurationAdapter
     {

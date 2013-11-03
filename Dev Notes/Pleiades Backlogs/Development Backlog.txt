@@ -22,6 +22,7 @@ kurt.wuckertjr@proforma.com => READY
 * JavaScript library for Stripe client-side - make it an adapter => DONE
 * Hook in JS library to enable mock => DONE
 * Clientside for Checkout Payment => DONE
+* Wire in Charges with Token => DONE
 
 
 Last Week of Construction
@@ -29,7 +30,6 @@ Last Week of Construction
 * Clientside for Admin Payment => TODO
 
 * Integrate Nuget Library => TODO
-* Wire in Charges with Token => TODO
 * Wire in Refund with Token => TODO
 
 * Test Create Order screen => TODO
