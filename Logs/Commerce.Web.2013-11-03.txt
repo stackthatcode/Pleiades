@@ -313,3 +313,326 @@ System.Data.SqlClient.SqlException:Timeout expired.  The timeout period elapsed 
 2013-11-03 00:53:21.1193|Debug|01499eb9-7fd4-4299-8268-fcbf915c78c3|Image - Download: e27deec3-b8f0-496e-b8e7-4fc6c499cc55 thumbnail 
 2013-11-03 00:53:21.1193|Debug|4ce9a95d-1e53-454a-b406-8c4d23961434|Image - Download: e27deec3-b8f0-496e-b8e7-4fc6c499cc55 large 
 2013-11-03 00:53:21.1153|Debug|0f61f96f-fdd0-4640-ba2f-c413f803a683|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 thumbnail 
+2013-11-03 01:12:32.8669|Debug|27cfc436-9ece-4774-9ac1-0ee3a93fefaf|Image - Download: 58e9cb0e-6a4e-4777-9919-b9647e487fa5 small 
+2013-11-03 01:12:32.8669|Debug|5609755b-f745-4565-aebf-ec3b6b1a25e8|Image - Download: e27deec3-b8f0-496e-b8e7-4fc6c499cc55 small 
+2013-11-03 01:12:32.8669|Debug|ac49765a-520f-4993-912c-6e6f2913a0f7|Image - Download: 82db1d0a-b076-446b-9f86-9434b72a0f18 small 
+2013-11-03 01:12:32.8669|Debug|4368c828-d585-4edf-9622-971820766dc6|Image - Download: 8384d19c-4269-4d4c-8809-97c97bf0bf05 small 
+2013-11-03 01:12:32.8669|Debug|ad1d78e0-de63-40ae-9bc8-2fb0e7355b66|Image - Download: 4262e479-6a9c-4432-b7a3-d135de3e1aef small 
+2013-11-03 01:12:32.8669|Debug|8cb259c5-30d7-48cf-88b4-29f5b660d83f|Image - Download: 94287fce-4a91-4a18-8a34-dd54c7aaf9a3 small 
+2013-11-03 01:12:35.0571|Debug|8a9bc1db-ee74-40eb-a628-4ed1012150fa|Image - Download: f13e93a8-704d-4614-9ae8-e43925b6cf5b small 
+2013-11-03 01:12:35.2861|Debug|a43d319e-a741-40bf-8a6c-3745bd3a6976|Image - Download: b06df65b-c223-41aa-85b8-214d5f8eb4ac small 
+2013-11-03 01:12:35.2871|Debug|d8e7e438-31d2-4e4b-b668-71defe16d533|Image - Download: 8d184830-a7ae-4303-a902-0a75cfcfc957 small 
+2013-11-03 01:12:35.2861|Debug|67a7cdfc-ef37-4008-8cfb-bc3efafa9bec|Image - Download: 48ea29c1-278d-4bc6-95d3-2e47067b299f small 
+2013-11-03 01:12:40.7524|Debug|086d6264-5296-42be-ba8b-75ab6d11894a|Image - Download: a95d72b5-a863-46ef-921a-abb6cbed6a24 thumbnail 
+2013-11-03 01:12:40.7764|Debug|7b6f430a-ffea-490a-a93b-d428ac766595|Image - Download: d50fae61-f754-4817-bbe8-48788b522d86 thumbnail 
+2013-11-03 01:12:40.7804|Debug|cc4e1576-24d7-40f4-8e81-f1274f0697d5|Image - Download: db2b7218-f349-4724-a92c-45f00b45d119 thumbnail 
+2013-11-03 01:12:40.8174|Debug|0ac3470f-b809-47de-be44-8446a635396e|Image - Download: 8384d19c-4269-4d4c-8809-97c97bf0bf05 large 
+2013-11-03 01:12:40.9064|Debug|bc8e6f63-d44b-4e41-b7b4-4ad477c531af|Image - Download: 72ac6c2d-6de2-4ac8-af00-359fc6641f3f large 
+2013-11-03 01:12:40.9064|Debug|6da65fff-97d3-4d6f-9034-037b27eea8ed|Image - Download: 8384d19c-4269-4d4c-8809-97c97bf0bf05 thumbnail 
+2013-11-03 01:12:41.1074|Debug|e04f79d0-9b40-4b1e-9b12-99dbad7469fe|Image - Download: 5f0386d7-f501-4805-bdfd-a44e368465b4 thumbnail 
+2013-11-03 01:12:58.3464|Debug|a7aebcba-69ed-406e-b7e4-9325fc5ee8b6|Image - Download: 8384d19c-4269-4d4c-8809-97c97bf0bf05 small 
+2013-11-03 01:12:58.3954|Debug|9c684a27-ecfd-4046-9c9c-b40270cc31c1|Image - Download: 4262e479-6a9c-4432-b7a3-d135de3e1aef small 
+2013-11-03 01:12:58.4414|Debug|cf17b51c-0b22-4a36-a423-492d48a529cf|Image - Download: 58e9cb0e-6a4e-4777-9919-b9647e487fa5 small 
+2013-11-03 01:12:58.4414|Debug|580f6ee8-d02f-4860-aa95-bda4fe260bdb|Image - Download: 82db1d0a-b076-446b-9f86-9434b72a0f18 small 
+2013-11-03 01:12:58.5004|Debug|7fa0f0b7-5f02-447c-8133-4182d601d3bc|Image - Download: 94287fce-4a91-4a18-8a34-dd54c7aaf9a3 small 
+2013-11-03 01:12:58.5674|Debug|6ebd4386-ff5f-4eee-a4fc-09f08fd136d1|Image - Download: e27deec3-b8f0-496e-b8e7-4fc6c499cc55 small 
+2013-11-03 01:12:58.6924|Debug|2dfd2221-0f0a-41ec-a4f0-d5d7228a8ec8|Image - Download: 8d184830-a7ae-4303-a902-0a75cfcfc957 small 
+2013-11-03 01:12:58.7214|Debug|7c0afe99-0c6a-43cc-ac16-fd30cb4c0e1e|Image - Download: b06df65b-c223-41aa-85b8-214d5f8eb4ac small 
+2013-11-03 01:12:58.7384|Debug|92d3ebd1-d418-43d6-8610-f490e73a80e1|Image - Download: 48ea29c1-278d-4bc6-95d3-2e47067b299f small 
+2013-11-03 01:12:58.7384|Debug|2be80bfc-b011-40f5-9cc0-47ed4bcdf861|Image - Download: f13e93a8-704d-4614-9ae8-e43925b6cf5b small 
+2013-11-03 01:13:01.4256|Debug|173a3fd7-405a-4a3f-8ac6-cb70a1d30dd9|Image - Download: e27deec3-b8f0-496e-b8e7-4fc6c499cc55 large 
+2013-11-03 01:13:02.0066|Debug|cd0686b7-c613-4d68-a12f-3fdc80be83b6|Image - Download: e27deec3-b8f0-496e-b8e7-4fc6c499cc55 thumbnail 
+2013-11-03 01:13:02.0956|Debug|c712aa04-64ab-4d1a-9079-06b6befa5b1e|Image - Download: 9af73693-c4be-46e2-8d8a-ce0031fc664f large 
+2013-11-03 01:13:02.0956|Debug|9b9bf98d-4268-4fb3-8fc4-05d7fd25d2e1|Image - Download: 296ce75f-771c-47ad-9747-6036b8faa015 thumbnail 
+2013-11-03 01:13:02.1396|Debug|3149e807-e21e-49ea-aeee-4421d66fae99|Image - Download: af73dccf-feba-40a8-9cda-64525335f7b9 thumbnail 
+2013-11-03 01:13:02.1866|Debug|22c8d21f-f45c-4b79-aa49-c54bf17bf6e3|Image - Download: 92988866-64ce-4890-942b-7fdb3bc9c595 thumbnail 
+2013-11-03 01:13:02.4346|Debug|a5568f64-4ea4-4193-ae41-b13d174bad13|Image - Download: cd5b2235-ba40-4e1a-883b-80f81411c195 thumbnail 
+2013-11-03 01:13:02.8476|Debug|98ae942a-4236-40e3-b58a-0a1c65eea038|Image - Download: 89a3cc97-105f-4f64-9fb3-ce07941e4542 thumbnail 
+2013-11-03 01:13:02.8836|Debug|1640fc54-654b-43f7-9b7a-8bf4bcc0e1df|Image - Download: 0d512283-a122-42a4-9f17-750d45a00d83 thumbnail 
+2013-11-03 01:13:04.5957|Debug|b05cd254-f343-48b7-bee5-7c9c58048e43|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 thumbnail 
+2013-11-03 01:13:04.6387|Debug|15bfc329-56af-49f1-8fed-a7d606bdd26e|Image - Download: 02180403-3f58-426d-b3b1-24242c52dda7 thumbnail 
+2013-11-03 01:13:04.6387|Debug|6b18679d-9192-4054-b891-9b6835af35d7|Image - Download: ea84b83c-5d9d-4d29-a2be-f526fd541e2f thumbnail 
+2013-11-03 01:13:04.6387|Debug|7fe8af78-a85b-4a19-9df6-d95468bce429|Image - Download: 1ee744f3-8664-4535-a451-6b3d35ed0a42 thumbnail 
+2013-11-03 01:13:04.6387|Debug|bce0f6fa-b953-48e8-a37e-a205be593327|Image - Download: edc6ef9b-8ef7-4d80-abbc-d8c5bd94eb89 thumbnail 
+2013-11-03 01:13:04.6997|Debug|3650fdfb-b31c-4740-b524-f42784bc76d2|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 large 
+2013-11-03 01:13:11.9602|Debug|26521c04-73ca-41aa-9ba3-b239ac050b4f|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 large 
+2013-11-03 01:13:11.9822|Debug|8045ca8c-6c55-4955-a8e9-a4ebd9bb17a6|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 thumbnail 
+2013-11-03 01:13:13.6223|Debug|cb1895a0-577d-409a-919d-79d71f7788ec|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 large 
+2013-11-03 01:13:13.6323|Debug|ef47eae7-2b03-4aee-bc0f-1f92e4201297|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 thumbnail 
+2013-11-03 01:17:15.9941|Debug|9b6b550e-3ad3-4f90-b0af-ffb2c8bcf320|Image - Download: 82db1d0a-b076-446b-9f86-9434b72a0f18 small 
+2013-11-03 01:17:15.9941|Debug|e8ccc22b-80a2-4c48-b5d1-36d9ba1b99ad|Image - Download: 58e9cb0e-6a4e-4777-9919-b9647e487fa5 small 
+2013-11-03 01:17:15.9961|Debug|42906284-804d-443d-b59f-b8e7ae0fab46|Image - Download: 94287fce-4a91-4a18-8a34-dd54c7aaf9a3 small 
+2013-11-03 01:17:15.9941|Debug|5e242a51-a823-4c7a-8901-abbbdeac7cac|Image - Download: 4262e479-6a9c-4432-b7a3-d135de3e1aef small 
+2013-11-03 01:17:15.9941|Debug|c2d1bc95-2a12-4bd2-91e7-6bfff636b218|Image - Download: e27deec3-b8f0-496e-b8e7-4fc6c499cc55 small 
+2013-11-03 01:17:15.9961|Debug|2dd4dc01-b84c-4622-8a18-53b38428d7ec|Image - Download: 8384d19c-4269-4d4c-8809-97c97bf0bf05 small 
+2013-11-03 01:17:17.6462|Debug|420930b1-7db0-49d1-9c6f-33868a939cb2|Image - Download: 48ea29c1-278d-4bc6-95d3-2e47067b299f small 
+2013-11-03 01:17:17.6532|Debug|3ac1a71b-a18e-4404-bc5d-0a872c7010d6|Image - Download: b06df65b-c223-41aa-85b8-214d5f8eb4ac small 
+2013-11-03 01:17:17.6462|Debug|d07d9133-a1f2-42a1-a6d7-eb6c7c7d8e96|Image - Download: f13e93a8-704d-4614-9ae8-e43925b6cf5b small 
+2013-11-03 01:17:17.7392|Debug|63ffd184-8f75-4064-b926-48442f3bcb07|Image - Download: 8d184830-a7ae-4303-a902-0a75cfcfc957 small 
+2013-11-03 01:17:18.5753|Debug|428ea213-f319-4348-be80-7cefde1a2579|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 thumbnail 
+2013-11-03 01:17:18.5753|Debug|4cf4bce0-980d-4d60-8b0d-83020a5eb7c6|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 large 
+2013-11-03 01:17:20.0564|Debug|5eb39951-2cf7-4147-a40b-1d5f1397935f|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 thumbnail 
+2013-11-03 01:17:20.0934|Debug|3f43141d-b1d7-486f-9231-2a2af5721ae2|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 large 
+2013-11-03 01:19:03.5343|Error|4a6e41f4-7212-4d6a-9a01-0eeec39ed80c|System.Data.Entity.Infrastructure.DbUpdateException:An error occurred while saving entities that do not expose foreign key properties for their relationships. The EntityEntries property will return null because a single entity cannot be identified as the source of the exception. Handling of exceptions while saving can be made easier by exposing foreign key properties in your entity types. See the InnerException for details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Commerce.Application.Concrete.Orders.OrderService.CreateOrderImpl(Order order) in C:\DEV\Pleiades\Commerce.Domain\Concrete\Orders\OrderService.cs:line 217
+   at Commerce.Application.Concrete.Orders.OrderService.Submit_worker(OrderRequest orderRequest) in C:\DEV\Pleiades\Commerce.Domain\Concrete\Orders\OrderService.cs:line 89
+   at Commerce.Application.Concrete.Orders.OrderService.Submit(OrderRequest orderRequest) in C:\DEV\Pleiades\Commerce.Domain\Concrete\Orders\OrderService.cs:line 55
+
+INNER EXCEPTION
+System.Data.UpdateException:An error occurred while updating the entries. See the inner exception for details.
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+   at System.Data.EntityClient.EntityAdapter.Update(IEntityStateManager entityCache)
+   at System.Data.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Invalid column name 'ProcessorResponse'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter) 
+2013-11-03 01:19:11.0517|Error|4a6e41f4-7212-4d6a-9a01-0eeec39ed80c|URL:http://localhost/Commerce.Web/order - IsAjaxRequest: True 
+2013-11-03 01:19:11.0517|Error|4a6e41f4-7212-4d6a-9a01-0eeec39ed80c|System.Data.Entity.Infrastructure.DbUpdateException:An error occurred while saving entities that do not expose foreign key properties for their relationships. The EntityEntries property will return null because a single entity cannot be identified as the source of the exception. Handling of exceptions while saving can be made easier by exposing foreign key properties in your entity types. See the InnerException for details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Commerce.Web.Areas.Public.Controllers.OrderController.Post(ShippingInfo shippingInfo, String token) in C:\DEV\Pleiades\Commerce.Web\Areas\Public\Controllers\OrderController.cs:line 61
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+INNER EXCEPTION
+System.Data.UpdateException:An error occurred while updating the entries. See the inner exception for details.
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+   at System.Data.EntityClient.EntityAdapter.Update(IEntityStateManager entityCache)
+   at System.Data.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Invalid column name 'ProcessorResponse'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter) 
+2013-11-03 01:19:25.6725|Debug|7cb9f9a3-9041-4bb9-9ab2-ba1695a204b6|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 large 
+2013-11-03 01:19:25.6905|Debug|1a579adc-49a9-48a8-a6d6-f412d641a50c|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 thumbnail 
+2013-11-03 01:21:16.6079|Error|1bc8865c-a819-4275-aaca-1936f90d586b|System.Data.Entity.Infrastructure.DbUpdateException:An error occurred while saving entities that do not expose foreign key properties for their relationships. The EntityEntries property will return null because a single entity cannot be identified as the source of the exception. Handling of exceptions while saving can be made easier by exposing foreign key properties in your entity types. See the InnerException for details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Commerce.Application.Concrete.Orders.OrderService.CreateOrderImpl(Order order) in C:\DEV\Pleiades\Commerce.Domain\Concrete\Orders\OrderService.cs:line 217
+   at Commerce.Application.Concrete.Orders.OrderService.Submit_worker(OrderRequest orderRequest) in C:\DEV\Pleiades\Commerce.Domain\Concrete\Orders\OrderService.cs:line 89
+   at Commerce.Application.Concrete.Orders.OrderService.Submit(OrderRequest orderRequest) in C:\DEV\Pleiades\Commerce.Domain\Concrete\Orders\OrderService.cs:line 55
+
+INNER EXCEPTION
+System.Data.UpdateException:An error occurred while updating the entries. See the inner exception for details.
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+   at System.Data.EntityClient.EntityAdapter.Update(IEntityStateManager entityCache)
+   at System.Data.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Invalid column name 'ProcessorResponse'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter) 
+2013-11-03 01:21:16.7449|Error|1bc8865c-a819-4275-aaca-1936f90d586b|URL:http://localhost/Commerce.Web/order - IsAjaxRequest: True 
+2013-11-03 01:21:16.7449|Error|1bc8865c-a819-4275-aaca-1936f90d586b|System.Data.Entity.Infrastructure.DbUpdateException:An error occurred while saving entities that do not expose foreign key properties for their relationships. The EntityEntries property will return null because a single entity cannot be identified as the source of the exception. Handling of exceptions while saving can be made easier by exposing foreign key properties in your entity types. See the InnerException for details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Commerce.Web.Areas.Public.Controllers.OrderController.Post(ShippingInfo shippingInfo, String token) in C:\DEV\Pleiades\Commerce.Web\Areas\Public\Controllers\OrderController.cs:line 61
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+INNER EXCEPTION
+System.Data.UpdateException:An error occurred while updating the entries. See the inner exception for details.
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+   at System.Data.EntityClient.EntityAdapter.Update(IEntityStateManager entityCache)
+   at System.Data.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Invalid column name 'ProcessorResponse'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter) 
+2013-11-03 01:22:48.4491|Debug|1ecd9cb4-8958-4cf9-9c69-d86e48838f96|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 large 
+2013-11-03 01:22:48.4491|Debug|6f41db4c-ea59-494d-ac63-2ea40f4930ea|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 thumbnail 
+2013-11-03 01:32:21.3259|Debug|2e265785-31af-4129-8530-eb2fffbb4692|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 large 
+2013-11-03 01:32:21.3259|Debug|8028e76e-9bc0-4189-8c6c-bd9ed7dd0d09|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 thumbnail 
+2013-11-03 01:32:28.4573|Error|e0c06026-9eee-4fa8-a256-ace558edbb38|System.Data.Entity.Infrastructure.DbUpdateException:An error occurred while saving entities that do not expose foreign key properties for their relationships. The EntityEntries property will return null because a single entity cannot be identified as the source of the exception. Handling of exceptions while saving can be made easier by exposing foreign key properties in your entity types. See the InnerException for details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Commerce.Application.Concrete.Orders.OrderService.CreateOrderImpl(Order order) in C:\DEV\Pleiades\Commerce.Domain\Concrete\Orders\OrderService.cs:line 217
+   at Commerce.Application.Concrete.Orders.OrderService.Submit_worker(OrderRequest orderRequest) in C:\DEV\Pleiades\Commerce.Domain\Concrete\Orders\OrderService.cs:line 89
+   at Commerce.Application.Concrete.Orders.OrderService.Submit(OrderRequest orderRequest) in C:\DEV\Pleiades\Commerce.Domain\Concrete\Orders\OrderService.cs:line 55
+
+INNER EXCEPTION
+System.Data.UpdateException:An error occurred while updating the entries. See the inner exception for details.
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+   at System.Data.EntityClient.EntityAdapter.Update(IEntityStateManager entityCache)
+   at System.Data.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Invalid column name 'ProcessorResponse'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter) 
+2013-11-03 01:32:28.5003|Error|e0c06026-9eee-4fa8-a256-ace558edbb38|URL:http://localhost/Commerce.Web/order - IsAjaxRequest: True 
+2013-11-03 01:32:28.5003|Error|e0c06026-9eee-4fa8-a256-ace558edbb38|System.Data.Entity.Infrastructure.DbUpdateException:An error occurred while saving entities that do not expose foreign key properties for their relationships. The EntityEntries property will return null because a single entity cannot be identified as the source of the exception. Handling of exceptions while saving can be made easier by exposing foreign key properties in your entity types. See the InnerException for details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Commerce.Web.Areas.Public.Controllers.OrderController.Post(ShippingInfo shippingInfo, String token) in C:\DEV\Pleiades\Commerce.Web\Areas\Public\Controllers\OrderController.cs:line 61
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+INNER EXCEPTION
+System.Data.UpdateException:An error occurred while updating the entries. See the inner exception for details.
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+   at System.Data.EntityClient.EntityAdapter.Update(IEntityStateManager entityCache)
+   at System.Data.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Invalid column name 'ProcessorResponse'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter) 
+2013-11-03 01:32:31.7975|Debug|4641423b-f547-4dfd-9dc5-a6db2530229a|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 thumbnail 
+2013-11-03 01:32:31.8075|Debug|495600d3-759b-4017-8af6-8f5484f5d7f9|Image - Download: 1e4c44c9-31a9-4c42-951b-91a676e65e84 large 
+2013-11-03 01:44:14.7317|Debug|1821dabb-3d08-4b3c-9a5c-12306b3b98de|Image - Download: 3920e724-e246-49c7-acec-230e32baecd6 small 
+2013-11-03 01:44:14.7317|Debug|5feb1ec4-149b-47f5-8c16-b902bbf07747|Image - Download: 33c46a54-4cb9-46e5-b351-5b4f58814da9 small 
+2013-11-03 01:44:15.5578|Debug|1f434ab8-7964-4a3a-8abf-acf0a2cf0816|Image - Download: 401d42a6-3ccc-4a0b-be45-1ebf894ac1cc small 
+2013-11-03 01:44:15.5578|Debug|b276d034-a094-4932-8ef2-4d5c1236e474|Image - Download: 3d90a61d-8cbd-42bd-af5b-d5444a146f6f small 
+2013-11-03 01:44:15.5578|Debug|ae199f5f-aefe-4cf8-b567-2746696b344f|Image - Download: d0b509ab-a783-4787-9820-1ca5c0b7ec96 small 
+2013-11-03 01:44:16.1058|Debug|9a523f86-c5fd-449f-a9f8-01625b6d2b02|Image - Download: e73e5e2f-5925-41a5-89a6-87cb8faa317b small 
+2013-11-03 01:44:16.1188|Debug|52d641e6-4af8-4422-adfd-edddf3136a5c|Image - Download: bfddd499-2e5d-4655-9465-17d41045072d small 
+2013-11-03 01:44:16.1668|Debug|008633b8-82e2-41f0-afbf-fd7f72ec4426|Image - Download: 68fe5112-fb3c-46be-9a8e-d0ebeb305fb8 small 
+2013-11-03 01:44:16.3108|Debug|579affff-41bc-49eb-b40c-66034ead2226|Image - Download: d7a83535-fe0e-44fa-9ec0-66c6dff6503d small 
+2013-11-03 01:44:16.3528|Debug|c46337b3-c6a8-4c2a-a069-10e07237d84b|Image - Download: ecec4414-8637-40ef-8ad3-70b0056fcf8c small 
+2013-11-03 01:44:17.5279|Debug|81fb1316-a66a-4be6-942c-81a007416b85|Image - Download: 3920e724-e246-49c7-acec-230e32baecd6 large 
+2013-11-03 01:44:17.5279|Debug|e2ce9a12-46a3-46ba-ac16-b06dec3d4ffb|Image - Download: 3920e724-e246-49c7-acec-230e32baecd6 thumbnail 
+2013-11-03 01:44:17.5339|Debug|7bc5e0b9-1eba-4e45-9054-46d943a3c077|Image - Download: 515e48e0-dcae-4ed9-b467-5b74ecc76a96 large 
+2013-11-03 01:44:17.8319|Debug|09938906-5440-4c23-9102-b70e90c6d9a5|Image - Download: 157bb766-8e0e-4279-be5d-2f9b57e8f33b thumbnail 
+2013-11-03 01:44:17.8319|Debug|33be1ee4-2693-4d22-bfe9-721c39167f31|Image - Download: 0cb40460-7b04-435f-87ab-a6bbc5e021cb thumbnail 
+2013-11-03 01:44:17.8859|Debug|e80bdfb6-67bb-42a6-bcca-678f62a38565|Image - Download: fb746645-34d5-47ea-bb68-5ebd6127db21 thumbnail 
+2013-11-03 01:44:17.9369|Debug|0d27ed20-792f-4204-a784-0a64efa46cb8|Image - Download: 749b919d-f87c-4995-8a33-a7a2f30217b4 thumbnail 
+2013-11-03 01:44:23.5532|Debug|88821145-b9e3-4ce1-a679-41c6f1c8853f|Image - Download: 3920e724-e246-49c7-acec-230e32baecd6 thumbnail 
+2013-11-03 01:44:23.5532|Debug|92a2c451-650a-47fc-8249-e5c3d56fe73e|Image - Download: 3920e724-e246-49c7-acec-230e32baecd6 large 
+2013-11-03 01:44:25.2753|Debug|4cde4fc5-3091-4fb7-bb92-f9c64454797c|Image - Download: 3920e724-e246-49c7-acec-230e32baecd6 thumbnail 
+2013-11-03 01:44:25.3083|Debug|3c4cad5e-b9d4-4100-8cf7-6ef866ce3218|Image - Download: 3920e724-e246-49c7-acec-230e32baecd6 large 

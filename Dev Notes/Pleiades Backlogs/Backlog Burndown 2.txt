@@ -520,3 +520,29 @@ PushMarket (for Marketing)
 - Entity Framework
 - SQL Server 2008
 - Choose Date Range (months)
+
+- Kurt Wuckert	
+- Pay check to: Proforma - $100
+kurt.wuckertjr@proforma.com => READY
+- About Us Page Tasking => Picture of Tsinerev, Shipping Verbage, Returns Verbage - DONE
+* Sales & Refunds By Date
+* Sales & Costs By Date
+* Sales by SkuCode => DONE
+* Refunds by SkuCode => DONE 
+* Seed the Analytic Data => DONE
+* Translate data to JSON => DONE
+- Beautiful Analytics
+* Graphs and Charts => DONE
+
+~~~payment~~~
+* Configuration with Keys + Encryption => DONE
+* Modify OrderService to use Stripe Token => DONE
+* Configuration to use MockPaymentProcessor => DONE
+* Eliminate dependencies on BillingInfo class => DONE
+* Test config file Encryption => DONE
+* JavaScript library for Stripe client-side - make it an adapter => DONE
+* Hook in JS library to enable mock => DONE
+* Clientside for Checkout Payment => DONE
+* Wire in Charges with Token => DONE
+* Test Cart Checkout Stripe Payment sequence => TODO
+

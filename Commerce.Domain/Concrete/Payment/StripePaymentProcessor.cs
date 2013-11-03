@@ -10,9 +10,10 @@ namespace Commerce.Application.Concrete.Payment
         private readonly IConfigurationAdapter _configurationAdapter;
         private readonly StripeChargeService _stripeService;
 
-        public StripePaymentProcessor(IConfigurationAdapter configurationAdapter)
+        public StripePaymentProcessor(IConfigurationAdapter configurationAdapter, StripeChargeService stripeService)
         {
             _configurationAdapter = configurationAdapter;
+            _stripeService = stripeService;
         }
 
         public Transaction Charge(string token, decimal amount)

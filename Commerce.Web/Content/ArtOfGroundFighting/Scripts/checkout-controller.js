@@ -138,7 +138,7 @@ app.controller('CheckoutController', function ($scope, $http) {
     $scope.ProcessStripeResponse = function(status, response) {
         var orderRequest = {
             shippingInfo: $scope.ShippingInfo,
-            token: response.id,            
+            token: response.id,
         };
         // For debugging purposes
         //response.error = { message: "oh shit!!!" };
@@ -177,7 +177,7 @@ app.controller('CheckoutController', function ($scope, $http) {
         $scope.BillingInfo.City = "Heliopoulis";
         $scope.BillingInfo.State = "MN";
         $scope.BillingInfo.ZipCode = "44432";
-        $scope.BillingInfo.CardNumber = "4111111111111111";
+        $scope.BillingInfo.CardNumber = "4242424242424242";
         $scope.BillingInfo.CVV = "445";
         $scope.BillingInfo.ExpirationMonth = "09";
         $scope.BillingInfo.ExpirationYear = 2015;
