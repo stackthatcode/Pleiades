@@ -13,10 +13,10 @@ namespace Commerce.Application.Concrete.Orders
         private readonly PushMarketContext _context;
         private readonly IPaymentsProcessor _paymentProcessor;
 
-        public OrderManager(PushMarketContext context, IPaymentsProcessor paymentProcessor)
+        public OrderManager(PushMarketContext context, Func<IPaymentsProcessor> paymentProcessor)
         {
             _context = context;
-            _paymentProcessor = paymentProcessor;
+            _paymentProcessor = paymentProcessor();
         }
 
         public List<Order> Find(DateTime? startDate, DateTime? endDate, bool? complete)

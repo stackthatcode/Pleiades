@@ -13,7 +13,8 @@ stripe.card = {
         };
         responseHandler(response);
     },
-    setPublishableKey: function(key) {
-        console.log("Public Key: " + key);
-    }
+};
+
+stripe.setPublishableKey = function(key) {
+    console.log("Public Key: " + key);
 };

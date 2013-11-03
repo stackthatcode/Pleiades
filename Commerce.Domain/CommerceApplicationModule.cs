@@ -72,8 +72,8 @@ namespace Commerce.Application
             builder.RegisterType<EFGenericRepository<Product>>().As<IGenericRepository<Product>>().InstancePerLifetimeScope();
 
             // Payment Processors
-            builder.RegisterType<MockPaymentProcessor>().As<IPaymentsProcessor>();
-            builder.RegisterType<StripePaymentProcessor>().As<IPaymentsProcessor>();
+            builder.RegisterType<MockPaymentProcessor>();
+            builder.RegisterType<StripePaymentProcessor>();
 
             builder.Register<Func<IPaymentsProcessor>>(c =>
                 {

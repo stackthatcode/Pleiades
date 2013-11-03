@@ -545,4 +545,6 @@ kurt.wuckertjr@proforma.com => READY
 * Clientside for Checkout Payment => DONE
 * Wire in Charges with Token => DONE
 * Test Cart Checkout Stripe Payment sequence => TODO
+* Integrate Nuget Library => TODO
+* Wire in Refund with Token => TODO
 

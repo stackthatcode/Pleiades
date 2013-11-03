@@ -53,7 +53,14 @@ namespace Commerce.Application.Concrete.Payment
 
         public Transaction Refund(Transaction originalTransaction, decimal amount)
         {
-            throw new NotImplementedException();
+            var result = _stripeService.Refund(originalTransaction.OriginalReferenceCode, (int)(100*amount));
+            return new Transaction(TransactionType.Refund)
+                {
+                    Amount = amount,
+                    ProcessorResponse = "",
+                    ReferenceCode = result.Id,
+                    OriginalReferenceCode = originalTransaction.ReferenceCode,
+                };
         }
     }
 }
