@@ -35,7 +35,7 @@ namespace Commerce.UnitTests.Application
         {
             // Arrange
             var request = OrderRequestGenerator();
-            var paymentProcessor = MockRepository.GenerateMock<IPaymentProcessor>();
+            var paymentProcessor = MockRepository.GenerateMock<IPaymentsService>();
             paymentProcessor
                 .Expect(x => x.AuthorizeAndCollect(null, 206.975M))
                 .Return(new Transaction(TransactionType.AuthorizeAndCollect) { Success = false })
@@ -77,7 +77,7 @@ namespace Commerce.UnitTests.Application
         {
             // Arrange
             var request = OrderRequestGenerator();
-            var paymentProcessor = MockRepository.GenerateMock<IPaymentProcessor>();
+            var paymentProcessor = MockRepository.GenerateMock<IPaymentsService>();
             paymentProcessor
                 .Expect(x => x.AuthorizeAndCollect(null, 206.975m))
                 .Return(new Transaction(TransactionType.AuthorizeAndCollect) { Success = true, Amount = 206.975m })
@@ -111,7 +111,7 @@ namespace Commerce.UnitTests.Application
             // Arrange
             var request = OrderRequestGenerator();
 
-            var paymentProcessor = MockRepository.GenerateMock<IPaymentProcessor>();
+            var paymentProcessor = MockRepository.GenerateMock<IPaymentsService>();
             paymentProcessor
                 .Expect(x => x.AuthorizeAndCollect(null, 206.975m))
                 .Return(new Transaction(TransactionType.AuthorizeAndCollect) { Success = true, Amount = 206.975m })

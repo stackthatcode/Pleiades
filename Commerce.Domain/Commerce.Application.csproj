@@ -63,6 +63,7 @@
     <Compile Include="Interfaces\IAnalyticsRepository.cs" />
     <Compile Include="Interfaces\IOrderManager.cs" />
     <Compile Include="Concrete\Orders\OrderManager.cs" />
+    <Compile Include="Interfaces\IPaymentsService.cs" />
     <Compile Include="Model\Analytics\RefundEvent.cs" />
     <Compile Include="Model\Analytics\DateTotal.cs" />
     <Compile Include="Model\Analytics\RefundItem.cs" />
@@ -75,6 +76,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Analytics\SkuDateTotal.cs" />
+    <Compile Include="Model\Billing\TransactionTypeExtensions.cs" />
     <Compile Include="Model\Shopping\AddCartResponseCodes.cs" />
     <Compile Include="Concrete\Shopping\CartIdentificationService.cs" />
     <Compile Include="Concrete\Shopping\CartManagementService.cs" />
@@ -102,7 +104,6 @@
     <Compile Include="Interfaces\IImageDownloadService.cs" />
     <Compile Include="Interfaces\IInventoryRepository.cs" />
     <Compile Include="Interfaces\IOrderService.cs" />
-    <Compile Include="Interfaces\IPaymentProcessor.cs" />
     <Compile Include="Interfaces\IProductRepository.cs" />
     <Compile Include="Interfaces\IJsonColorRepository.cs" />
     <Compile Include="Interfaces\IJsonBrandRepository.cs" />

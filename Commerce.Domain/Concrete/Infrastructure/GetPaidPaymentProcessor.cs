@@ -4,7 +4,7 @@ using Commerce.Application.Model.Billing;
 
 namespace Commerce.Application.Concrete.Infrastructure
 {
-    public class GetPaidPaymentProcessor : IPaymentProcessor
+    public class GetPaidPaymentProcessor : IPaymentsService
     {
         // The various Payment Processor responses get decoded and/or logged/persisted in this implementation
         public Transaction AuthorizeAndCollect(BillingInfo billing, decimal amount)

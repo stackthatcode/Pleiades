@@ -68,7 +68,7 @@ namespace Commerce.Application
             builder.RegisterType<EFGenericRepository<Product>>().As<IGenericRepository<Product>>().InstancePerLifetimeScope();
 
             // Payment Processors
-            builder.RegisterType<GetPaidPaymentProcessor>().As<IPaymentProcessor>();
+            builder.RegisterType<GetPaidPaymentProcessor>().As<IPaymentsService>();
 
             // Email Repositories
             builder.RegisterType<EmailGenerator>().As<IEmailGenerator>();

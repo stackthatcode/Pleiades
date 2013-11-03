@@ -13,10 +13,10 @@ namespace Commerce.Application.Model.Billing
 
         // Payment Processor Response
         public bool Success { get; set; }
+        public string OriginalReferenceCode { get; set; }
+        public string ReferenceCode { get; set; }
         public string ProcessorCode { get; set; }
         public string Details { get; set; }
-        public string ReferenceCode { get; set; }
-        public string OriginalReferenceCode { get; set; }
 
         public Transaction()
         {            
