@@ -11,9 +11,9 @@ namespace Commerce.Application.Concrete.Orders
     public class OrderManager : IOrderManager
     {
         private readonly PushMarketContext _context;
-        private readonly IPaymentsService _paymentProcessor;
+        private readonly IPaymentsProcessor _paymentProcessor;
 
-        public OrderManager(PushMarketContext context, IPaymentsService paymentProcessor)
+        public OrderManager(PushMarketContext context, IPaymentsProcessor paymentProcessor)
         {
             _context = context;
             _paymentProcessor = paymentProcessor;

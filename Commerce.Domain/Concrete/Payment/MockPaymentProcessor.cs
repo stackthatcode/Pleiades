@@ -2,12 +2,12 @@
 using Commerce.Application.Interfaces;
 using Commerce.Application.Model.Billing;
 
-namespace Commerce.Application.Concrete.Infrastructure
+namespace Commerce.Application.Concrete.Payment
 {
-    public class GetPaidPaymentProcessor : IPaymentsService
+    public class MockPaymentProcessor : IPaymentsProcessor
     {
         // The various Payment Processor responses get decoded and/or logged/persisted in this implementation
-        public Transaction AuthorizeAndCollect(BillingInfo billing, decimal amount)
+        public Transaction Charge(string token, decimal amount)
         {
             // If somebody's payment fails... then Log it.
             var pretendReferenceCode = Guid.NewGuid().ToString();
@@ -17,7 +17,7 @@ namespace Commerce.Application.Concrete.Infrastructure
                 Amount = amount,
 
                 // Stubbed out Stripe details
-                ProcessorCode = "PAID-3333",
+                ProcessorResponse = "PAID-3333",
                 Details = "Payment accepted",
                 ReferenceCode = pretendReferenceCode,
                 OriginalReferenceCode = pretendReferenceCode,
@@ -33,7 +33,7 @@ namespace Commerce.Application.Concrete.Infrastructure
                 OriginalReferenceCode = originalTransaction.ReferenceCode,
 
                 // Stubbed out Stripe details
-                ProcessorCode = "REFUND-7777",
+                ProcessorResponse = "REFUND-7777",
                 Details = "Refund granted",
                 ReferenceCode = Guid.NewGuid().ToString(),
                 Success = true,

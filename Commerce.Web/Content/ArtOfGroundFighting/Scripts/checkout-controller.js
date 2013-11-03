@@ -108,10 +108,6 @@ app.controller('CheckoutController', function ($scope, $http) {
     };
 
     $scope.Checkout = function() {
-        console.log($scope.cart);
-        console.log($scope.ShippingInfo);
-        console.log($scope.BillingInfo);
-
         var validator = new CheckOutValidationInitializer();
         validator.ValidateBillingAddress();
         validator.ValidateCreditCard();
@@ -134,12 +130,27 @@ app.controller('CheckoutController', function ($scope, $http) {
             return;
         }
 
+        $("#exp-month").val($scope.BillingInfo.ExpirationMonth);
+        $("#exp-year").val($scope.BillingInfo.ExpirationYear);
+        Stripe.card.createToken($("#paymentForm"), $scope.ProcessStripeResponse);
+    };
+
+    $scope.ProcessStripeResponse = function(status, response) {
         var orderRequest = {
             shippingInfo: $scope.ShippingInfo,
-            billingInfo: $scope.BillingInfo,
+            token: response.id,            
         };
+        // For debugging purposes
+        //response.error = { message: "oh shit!!!" };
+
+        $('#payment-processing-feedback').hide();
+        if (response.error) {
+            $('#payment-processing-message').text(response.error.message);            
+            $('#payment-processing-feedback').show();            
+            return;
+        }
         
-        ngAjax.Post($http, "order", orderRequest, 
+        ngAjax.Post($http, "order", orderRequest,
             function(data) {
                 console.log(data);
                 window.location = "#/order?externalId=" + data.Order.ExternalId + "&emailAddress=" + data.Order.EmailAddress;

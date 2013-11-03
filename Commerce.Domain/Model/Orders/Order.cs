@@ -96,9 +96,8 @@ namespace Commerce.Application.Model.Orders
             var output = new List<OrderLine>();
             foreach (var line in this.OrderLines.ToList())
             {
-                this.OrderLines.Remove(line);
                 output.Add(line);
-                this.OrderLines.AddRange(line.Split());
+                this.OrderLines.AddRange(line.Split().Where(x => x.Id != line.Id));
             }
             return output;
         }

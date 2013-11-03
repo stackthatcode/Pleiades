@@ -1,0 +1,15 @@
+﻿@using System.Configuration
+@using Commerce.StripeClient
+
+@if (ConfigurationManager.AppSettings["PaymentProcessor"] == "LIVE")
+{
+    @Html.Javascript("https://js.stripe.com/v2/")
+}
+else
+{
+    @Html.Javascript("~/Content/StripeMock/stripe.js")
+}   
+<script type="text/javascript">
+    var ajaxSettings = namespace("PushLibrary.AjaxSettings");
+    Stripe.setPublishableKey('@StripeConfiguration.Settings.PublishableKey');
+</script>

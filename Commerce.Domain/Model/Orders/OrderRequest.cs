@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Commerce.Application.Model.Billing;
 using Newtonsoft.Json;
 
 namespace Commerce.Application.Model.Orders
@@ -12,7 +11,7 @@ namespace Commerce.Application.Model.Orders
         public ShippingInfo ShippingInfo { get; set; }
 
         [JsonProperty]
-        public BillingInfo BillingInfo { get; set; }
+        public string Token { get; set; }
 
         [JsonProperty]
         public List<OrderRequestItem> Items { get; set; }

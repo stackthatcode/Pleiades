@@ -7,6 +7,7 @@ using Commerce.Application.Interfaces;
 using Commerce.Application.Model.Billing;
 using Commerce.Application.Model.Orders;
 using Commerce.Application.Model.Products;
+using Pleiades.Application.Logging;
 
 namespace Commerce.Application.Concrete.Orders
 {
@@ -17,7 +18,7 @@ namespace Commerce.Application.Concrete.Orders
         public const string ErrorFailedPayment = "Something's wrong with your Payment Info. Sorry, please try again";
 
         PushMarketContext Context { get; set; }
-        IPaymentsService PaymentProcessor { get; set; }
+        IPaymentsProcessor PaymentProcessor { get; set; }
         IAnalyticsCollector AnalyticsService { get; set; }
         IEmailService EmailService { get; set; }
 
@@ -31,7 +32,7 @@ namespace Commerce.Application.Concrete.Orders
         public Action SaveChanges;
 
         public OrderService(PushMarketContext context, 
-                IPaymentsService paymentProcessor, IAnalyticsCollector analyticsService, IEmailService emailService)
+                IPaymentsProcessor paymentProcessor, IAnalyticsCollector analyticsService, IEmailService emailService)
         {
             Context = context;
             PaymentProcessor = paymentProcessor;
@@ -55,7 +56,7 @@ namespace Commerce.Application.Concrete.Orders
             }
             catch (Exception ex)
             {
-                // TODO: Log it!
+                LoggerSingleton.Get().Error(ex);
                 return new SubmitOrderResult(false, ErrorFault);
             }
         }
@@ -68,15 +69,15 @@ namespace Commerce.Application.Concrete.Orders
         public SubmitOrderResult Submit_worker(OrderRequest orderRequest)
         {
             // Order Request to Order translation - Bounded Context
-            if (orderRequest.BillingInfo == null || orderRequest.ShippingInfo == null || 
-                orderRequest.Items == null || orderRequest.Items.Count() == 0)
+            if (orderRequest.Token == null || orderRequest.ShippingInfo == null || 
+                orderRequest.Items == null || !orderRequest.Items.Any())
             {
                 return new SubmitOrderResult(false, ErrorMissingData);
             }
             var order = FromOrderRequest(orderRequest);
 
             // Payment Processing - Bounded Context
-            var paymentTransaction = PaymentProcessor.AuthorizeAndCollect(orderRequest.BillingInfo, order.Total.GrandTotal);
+            var paymentTransaction = PaymentProcessor.Charge(orderRequest.Token, order.Total.GrandTotal);
             if (paymentTransaction.Success == false)
             {
                 // Don't create the Order!
@@ -104,9 +105,10 @@ namespace Commerce.Application.Concrete.Orders
             // Invoke the Analytics Service - Bounded Context
             AnalyticsService.Sale(order);
 
+            // Last step, Split the Order Lines
+            order.SplitLines();
+
             // FIN! - return OrderRequestResponse - Bounded Context
-            var oldLines = order.SplitLines();
-            oldLines.ForEach(x => Context.OrderLines.Remove(x));
             var orderResponse = new SubmitOrderResult(order);
             return orderResponse;
         }
@@ -179,7 +181,7 @@ namespace Commerce.Application.Concrete.Orders
             };
 
             // Need these to get the right GrandTotal
-            var stateTax = StateTaxByAbbr(orderRequest.BillingInfo.State);
+            var stateTax = StateTaxByAbbr(orderRequest.ShippingInfo.State);
             var shippingMethod = ShippingMethodById(orderRequest.ShippingInfo.ShippingMethodId);
 
             order.ShippingMethod = shippingMethod;

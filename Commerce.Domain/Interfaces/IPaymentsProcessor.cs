@@ -2,9 +2,9 @@
 
 namespace Commerce.Application.Interfaces
 {
-    public interface IPaymentsService
+    public interface IPaymentsProcessor
     {
-        Transaction AuthorizeAndCollect(BillingInfo billing, decimal amount);
+        Transaction Charge(string token, decimal amount);
         Transaction Refund(Transaction originalTransaction, decimal amount);
     }
 }

@@ -296,6 +296,7 @@
     <Content Include="Content\PushLibraryKo\knockout-glider.js" />
     <Content Include="Content\PushLibraryKo\scroll-tracker.js" />
     <Content Include="Content\PushLibraryNg\endless-ng-glider.js" />
+    <Content Include="Content\StripeMock\stripe.js" />
     <Content Include="Content\Utilities\aQuery-1.0-min.js" />
     <Content Include="Content\Utilities\flow.js" />
     <Content Include="Content\Utilities\generalFunctions.js" />
@@ -322,6 +323,10 @@
     <ProjectReference Include="..\Commerce.Domain\Commerce.Application.csproj">
       <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
       <Name>Commerce.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Commerce.StripeClient\Commerce.StripeClient.csproj">
+      <Project>{04FC7018-00C2-479F-8340-C11EF08518D5}</Project>
+      <Name>Commerce.StripeClient</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pleiades.Data.EF\Pleiades.Application.Data.EF.csproj">
       <Project>{89303370-B830-4A89-8646-0F9D287AD657}</Project>
@@ -449,6 +454,7 @@
     <None Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Content\JQuery\jquery-2.0.3.min.map" />
+    <Content Include="Shared\_StripeShim.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

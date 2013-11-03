@@ -11,14 +11,50 @@ using Commerce.Application.Model.Orders;
 namespace Commerce.UnitTests.Application
 {
     [TestFixture]
-    public class OrderSubmissionServiceTests    
+    public class OrderSubmissionServiceTests
     {
+        private OrderRequest _orderRequest;
+
+        [SetUp]
+        public void Setup()
+        {
+            var item1 = new OrderRequestItem()
+            {
+                Quantity = 5,
+                SkuCode = "PROD1-RED-MED",
+            };
+
+            var item2 = new OrderRequestItem()
+            {
+                Quantity = 3,
+                SkuCode = "PROD2-BLUE-MED",
+            };
+
+            var item3 = new OrderRequestItem()
+            {
+                Quantity = 3,
+                SkuCode = "PROD3",
+            };
+
+            _orderRequest = new OrderRequest()
+            {
+                Token = "TESTTOKEN",
+                ShippingInfo = new ShippingInfo(),
+                Items = new List<OrderRequestItem>
+                {
+                    item1,
+                    item2, 
+                    item3,
+                }
+            };
+        }
+
         [Test]
         public void Verify_That_Missing_Info_Causes_Failure()
         {
             // Arrange
-            var request = OrderRequestGenerator();
-            request.BillingInfo = null;
+            var request = _orderRequest;
+            request.Token = null;
             var service = new OrderService(null, null, null, null);
 
             // Act
@@ -34,10 +70,10 @@ namespace Commerce.UnitTests.Application
         public void Verify_That_Failed_Payment_Causes_Failure()
         {
             // Arrange
-            var request = OrderRequestGenerator();
-            var paymentProcessor = MockRepository.GenerateMock<IPaymentsService>();
+            var request = _orderRequest;
+            var paymentProcessor = MockRepository.GenerateMock<IPaymentsProcessor>();
             paymentProcessor
-                .Expect(x => x.AuthorizeAndCollect(null, 206.975M))
+                .Expect(x => x.Charge(null, 206.975M))
                 .Return(new Transaction(TransactionType.AuthorizeAndCollect) { Success = false })
                 .IgnoreArguments();
 
@@ -60,7 +96,7 @@ namespace Commerce.UnitTests.Application
         public void Verify_That_Exception_Throw_Causes_Failure()
         {
             // Arrange
-            var request = OrderRequestGenerator();
+            var request = _orderRequest;
             var service = new OrderService(null, null, null, null);
 
             // Act
@@ -73,15 +109,14 @@ namespace Commerce.UnitTests.Application
         }
 
         [Test]
-        public void Verify_That_Failed_Payment_With_Plain_Vanilla_Inventory_Succeeds()
+        public void Verify_That_Successful_Payment_With_Plain_Vanilla_Inventory_Succeeds()
         {
             // Arrange
-            var request = OrderRequestGenerator();
-            var paymentProcessor = MockRepository.GenerateMock<IPaymentsService>();
+            var request = _orderRequest;
+            var paymentProcessor = MockRepository.GenerateMock<IPaymentsProcessor>();
             paymentProcessor
-                .Expect(x => x.AuthorizeAndCollect(null, 206.975m))
-                .Return(new Transaction(TransactionType.AuthorizeAndCollect) { Success = true, Amount = 206.975m })
-                .IgnoreArguments();
+                .Expect(x => x.Charge(_orderRequest.Token, 206.975m))
+                .Return(new Transaction(TransactionType.AuthorizeAndCollect) {Success = true, Amount = 206.975m});
 
             var emailService = MockRepository.GenerateMock<IEmailService>();
             emailService.Expect(x => x.SendOrderReceived());
@@ -109,11 +144,11 @@ namespace Commerce.UnitTests.Application
         public void Verify_That_Failed_Payment_With_Changing_Inventory_Succeeds_And_Issues_Refund()
         {
             // Arrange
-            var request = OrderRequestGenerator();
+            var request = _orderRequest;
 
-            var paymentProcessor = MockRepository.GenerateMock<IPaymentsService>();
+            var paymentProcessor = MockRepository.GenerateMock<IPaymentsProcessor>();
             paymentProcessor
-                .Expect(x => x.AuthorizeAndCollect(null, 206.975m))
+                .Expect(x => x.Charge(null, 206.975m))
                 .Return(new Transaction(TransactionType.AuthorizeAndCollect) { Success = true, Amount = 206.975m })
                 .IgnoreArguments();
             paymentProcessor
@@ -151,41 +186,6 @@ namespace Commerce.UnitTests.Application
 
 
         // Define Injectibles
-        private OrderRequest OrderRequestGenerator()
-        {
-            var item1 = new OrderRequestItem()
-            {
-                Quantity = 5,
-                SkuCode = "PROD1-RED-MED",
-            };
-
-            var item2 = new OrderRequestItem()
-            {
-                Quantity = 3,
-                SkuCode = "PROD2-BLUE-MED",
-            };
-
-            var item3 = new OrderRequestItem()
-            {
-                Quantity = 3,
-                SkuCode = "PROD3",
-            };
-
-            var OrderRequest = new OrderRequest()
-            {
-                BillingInfo = new BillingInfo(),
-                ShippingInfo = new ShippingInfo(),
-                Items = new List<OrderRequestItem>
-                {
-                    item1,
-                    item2, 
-                    item3,
-                }
-            };
-
-            return OrderRequest;
-        }
-
         private Func<IEnumerable<string>, bool, List<ProductSku>> SkuFunctionGenerator_PlainVanilla()
         {
             var product1 = new Product() 

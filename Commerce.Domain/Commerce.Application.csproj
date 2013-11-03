@@ -59,11 +59,12 @@
     <Compile Include="Concrete\Analytics\AnalyticsAggregator.cs" />
     <Compile Include="Concrete\Analytics\AnalyticsCollector.cs" />
     <Compile Include="Concrete\Analytics\AnalyticsRepository.cs" />
+    <Compile Include="Concrete\Payment\StripePaymentProcessor.cs" />
     <Compile Include="Interfaces\IAnalyticsAggregator.cs" />
     <Compile Include="Interfaces\IAnalyticsRepository.cs" />
     <Compile Include="Interfaces\IOrderManager.cs" />
     <Compile Include="Concrete\Orders\OrderManager.cs" />
-    <Compile Include="Interfaces\IPaymentsService.cs" />
+    <Compile Include="Interfaces\IPaymentsProcessor.cs" />
     <Compile Include="Model\Analytics\RefundEvent.cs" />
     <Compile Include="Model\Analytics\DateTotal.cs" />
     <Compile Include="Model\Analytics\RefundItem.cs" />
@@ -91,7 +92,7 @@
     <Compile Include="Concrete\Lists\JsonCategoryRepository.cs" />
     <Compile Include="Concrete\Lists\JsonColorRepository.cs" />
     <Compile Include="Concrete\Lists\JsonSizeRepository.cs" />
-    <Compile Include="Concrete\Infrastructure\GetPaidPaymentProcessor.cs" />
+    <Compile Include="Concrete\Payment\MockPaymentProcessor.cs" />
     <Compile Include="Concrete\Orders\OrderService.cs" />
     <Compile Include="Concrete\Shopping\CartRepository.cs" />
     <Compile Include="Interfaces\IAnalyticsCollector.cs" />

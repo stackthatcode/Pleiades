@@ -39,7 +39,7 @@ namespace Commerce.Web.Areas.Public.Controllers
 
         [HttpPost]
         [ActionName("action")]
-        public JsonNetResult Post(ShippingInfo shippingInfo, BillingInfo billingInfo)
+        public JsonNetResult Post(ShippingInfo shippingInfo, string token)
         {
             var cart = _cartManagementService.Retrieve();
             var orderRequest = new OrderRequest
@@ -47,7 +47,7 @@ namespace Commerce.Web.Areas.Public.Controllers
                     Items =
                         cart.Cart.CartItems.Select(
                             x => new OrderRequestItem {Quantity = x.Quantity, SkuCode = x.Sku.SkuCode}).ToList(),
-                    BillingInfo = billingInfo,
+                    Token = token,
                     ShippingInfo = shippingInfo,
                 };
 

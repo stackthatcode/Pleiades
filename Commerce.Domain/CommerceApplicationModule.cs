@@ -1,7 +1,10 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Configuration;
+using System.Data.Entity;
 using System.Web;
 using Autofac;
 using Commerce.Application.Concrete.Analytics;
+using Commerce.Application.Concrete.Payment;
 using Commerce.Application.Concrete.Shopping;
 using Pleiades.Application.Data;
 using Pleiades.Application.Data.EF;
@@ -68,7 +71,15 @@ namespace Commerce.Application
             builder.RegisterType<EFGenericRepository<Product>>().As<IGenericRepository<Product>>().InstancePerLifetimeScope();
 
             // Payment Processors
-            builder.RegisterType<GetPaidPaymentProcessor>().As<IPaymentsService>();
+            builder.RegisterType<MockPaymentProcessor>().As<IPaymentsProcessor>();
+            builder.RegisterType<StripePaymentProcessor>().As<IPaymentsProcessor>();
+
+            builder.Register<Func<IPaymentsProcessor>>(c =>
+                {
+                    return () => (ConfigurationManager.AppSettings["PaymentProcess"] ?? "") == "LIVE"
+                               ? (IPaymentsProcessor)c.Resolve<StripePaymentProcessor>()
+                               : (IPaymentsProcessor)c.Resolve<MockPaymentProcessor>();
+                });
 
             // Email Repositories
             builder.RegisterType<EmailGenerator>().As<IEmailGenerator>();

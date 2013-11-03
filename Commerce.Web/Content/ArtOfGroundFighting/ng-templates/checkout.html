@@ -128,29 +128,38 @@
             <div id="payment-info-errors" style="text-align:center; display:none; height:50px; clear:both;" class="alert alert-danger">
                 <strong>Please enter valid Credit Card Information</strong>  
             </div>
+            <div id="payment-processing-feedback" style="text-align:center; display:none; height:50px; clear:both;" class="alert alert-danger">
+                <strong><span id="payment-processing-message"></span></strong>  
+            </div>
 
             <form id="paymentForm">
                 <div style="clear:both;">
                     <div class="form-group" style="float:left;">
                         <label for="cardNumber">Card Number</label>
-                        <input class="form-control" type="text" name="cardNumber" ng-model="BillingInfo.CardNumber" placeholder="Card Number" maxlength="16">
+                        <input class="form-control" type="text" name="cardNumber" placeholder="Card Number" maxlength="16"
+                               ng-model="BillingInfo.CardNumber" data-stripe="number" />
                     </div>
+
                     <div class="form-group" style="float:left; margin-left:30px;">
                         <label for="CVV">CVV</label>
-                        <input class="form-control" type="text" style="width:75px;" name="CVV" ng-model="BillingInfo.CVV" placeholder="CVV" maxlength="16">
+                        <input class="form-control" type="text" style="width:75px;" name="CVV" placeholder="CVV" maxlength="16"
+                               ng-model="BillingInfo.CVV" data-stripe="cvc" />
                     </div>
                 </div>
-            
+                
                 <div style="clear:both;">
                     <div class="form-group" style="float:left;">
                         <label for="lastName">Expires Month</label>
-                        <select class="form-control" id="month" name="expirationMonth" style="width:100px;" ng-model="BillingInfo.ExpirationMonth" 
-                                ng-options="month for month in ExpirationMonths" />
+                        <select class="form-control" id="month" name="expirationMonth" style="width:100px;" 
+                                ng-model="BillingInfo.ExpirationMonth" ng-options="month for month in ExpirationMonths" data-stripe="exp-month"  />
+                        <input id="exp-month" type="hidden" data-stripe="exp-month" />
                     </div>
+
                     <div class="form-group" style="float:left; margin-left:30px;">
                         <label for="lastName">Expires Year</label>
-                        <select class="form-control" id="year" name="expirationYear" style="width:100px;" ng-model="BillingInfo.ExpirationYear"
-                                ng-options="year for year in ExpirationYears" />
+                        <select class="form-control" id="year" name="expirationYear" style="width:100px;" 
+                                ng-model="BillingInfo.ExpirationYear" ng-options="year for year in ExpirationYears" />
+                        <input id="exp-year" type="hidden" data-stripe="exp-year" />
                     </div>
                 </div>
             </form>    

@@ -12,22 +12,29 @@ kurt.wuckertjr@proforma.com => READY
 * Translate data to JSON => DONE
 - Beautiful Analytics
 * Graphs and Charts => DONE
+
+~~~payment~~~
 * Configuration with Keys + Encryption => DONE
+* Modify OrderService to use Stripe Token => DONE
+* Configuration to use MockPaymentProcessor => DONE
+* Eliminate dependencies on BillingInfo class => DONE
+* Test config file Encryption => DONE
+* JavaScript library for Stripe client-side - make it an adapter => DONE
+* Hook in JS library to enable mock => DONE
+* Clientside for Checkout Payment => DONE
 
 
 Last Week of Construction
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-- Stripe Payment Integration => TODO
+* Clientside for Admin Payment => TODO
 
-* Modify OrderService to use Stripe Token => TODO
 * Integrate Nuget Library => TODO
-* Configuration to use MockPaymentProcessor => TODO
-* JavaScript library for Stripe client-side - make it an adapter => TODO
-* Hook in JS library to enable mock => TODO
-* Test config file Encryption => TODO
-* Eliminate dependencies on BillingInfo class => TODO
+* Wire in Charges with Token => TODO
+* Wire in Refund with Token => TODO
+
 * Test Create Order screen => TODO
-* Test full Stripe Payment sequence => TODO
+* Test Cart Checkout Stripe Payment sequence => TODO
+
 
 - Contact Us Page Tasking => Email Form: use that thing from stache.io, Google Map, Street Address => IN PROGRESS
 - Shipping Page => TODO
