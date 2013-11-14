@@ -13,10 +13,10 @@
             
             <div style="float:left; width:600px; height:200px;">
                 <p style="color:#666;"><strong>We've just encountered some technical difficulties.  Don't worry, our internal systems team is working hard to make things right.</strong></p>
-	    
+	            
                 <div style="height:40px; width:100px; clear:both;"></div>
             
-                @if (Model.AspxErrorPath != null)
+                @if (Model != null && Model.AspxErrorPath != null)
                 {
                     <a style="float: left; margin-right: 20px; width: 250px;" href="@Url.Content(Model.AspxErrorPath)" class="btn btn-default btn-large btn-block">
                         <i class="icon-black icon-arrow-left"></i> &nbsp;Go Back And Try Again

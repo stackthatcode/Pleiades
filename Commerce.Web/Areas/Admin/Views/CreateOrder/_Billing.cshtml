@@ -97,11 +97,22 @@
                 return;
             }
 
-            $("[name='btn-submit-order']").hide();
-            self.ProcessOrder();
+            $("#exp-month").val(self.Cart().BillingInfo.ExpirationMonth());
+            $("#exp-year").val(self.Cart().BillingInfo.ExpirationYear());
+            console.log($("#exp-month").val() + " " + $("#exp-year").val());
+            Stripe.card.createToken($("#paymentForm"), self.ProcessOrder);
+            //$("[name='btn-submit-order']").hide();
         };
 
-        self.ProcessOrder = function() {
+        self.ProcessOrder = function(status, response) {
+            $('#payment-processing-feedback').hide();
+            if (response.error) {
+                $('#payment-processing-message').text(response.error.message);            
+                $('#payment-processing-feedback').show();            
+                return;
+            }
+            console.log(response);
+            return;
             flow.exec(
                 function() {
                     var jsonOrder = {
@@ -181,7 +192,7 @@
                     <li style="width:270px; text-align:center;">
 				        <a name="glideToShipping" href="#" class="backbutton" data-bind="click: $root.BackToShippingInfo">&laquo; Make Changes to Shipping or Order</a>
                     </li>
-                </ul
+                </ul>
             </div>
         </div>
 	</div>
@@ -196,7 +207,7 @@
 
             <div id="billing-address-errors" style="width:570px; text-align:center;" class="alert alert-error hide">
                 <strong>Please enter valid Billing Address information</strong>  
-		    </div>
+            </div>
 
             <form id="billingAddressForm" class="form-horizontal checkout-form1">
                 <div style="height:105px;">
@@ -232,7 +243,7 @@
                             <label class="control-label" for="state">State</label>
                             <div class="controls">
                                 <select id="state" name="state"
-                                    data-bind="options: PushMkt.StatesOfAmerica, optionsText: 'Name', optionsValue: 'Abbreviation', value: $data.State, optionsCaption:'Choose a State' " />
+                                        data-bind="options: PushMkt.StatesOfAmerica, optionsText: 'Name', optionsValue: 'Abbreviation', value: $data.State, optionsCaption:'Choose a State' " />
                             </div>
                         </div>
                         <div class="control-group">
@@ -247,9 +258,13 @@
             
             <h4 style="margin-bottom:15px; margin-top:40px;">Payment Information</h4>
             
+
             <div id="paymentValidationErrors" style="width:570px; text-align:center;" class="alert alert-error hide">
-                <strong>Please enter valid Payment Information</strong>  
-		    </div>
+                <strong>Please enter valid Credit Card Information</strong>  
+            </div>
+            <div id="payment-processing-feedback" style="width:570px; text-align:center; display:none; clear:both;" class="alert alert-danger">
+                <strong><span id="payment-processing-message"></span></strong>  
+            </div>
 
             <form id="paymentForm" class="form-horizontal checkout-form2">
                 <div data-bind="with: $root.Cart().BillingInfo">
@@ -257,13 +272,15 @@
                         <div class="control-group" style="float:left; width:270px;">
                             <label class="control-label" for="cardNumber">Card Number</label>
                             <div class="controls">
-                                <input type="text" name="cardNumber" data-bind="value: $data.CardNumber" placeholder="Card Number" maxlength="16">
+                                <input type="text" name="cardNumber" data-bind="value: $data.CardNumber" 
+                                       placeholder="Card Number" data-stripe="number" maxlength="16" />
                             </div>
                         </div>
                         <div class="control-group" style="float:left; width:200px;">
                             <label class="control-label" for="CVV">CVV</label>
                             <div class="controls">
-                                <input type="text" style="width:75px;" name="CVV" data-bind="value: $data.CVV" placeholder="CVV" maxlength="16">
+                                <input type="text" style="width:75px;" name="CVV" data-stripe="cvc"
+                                       data-bind="value: $data.CVV" placeholder="CVV" maxlength="16" />
                             </div>
                         </div>
                     </div>
@@ -273,14 +290,16 @@
                             <label class="control-label" for="lastName">Expires Month</label>
                             <div class="controls">
                                 <select id="state" name="expirationMonth" style="width:100px;"
-                                    data-bind="options: PushMkt.ExpirationMonths, value: $data.ExpirationMonth, optionsCaption:'Month' " />
+                                        data-bind="options: PushMkt.ExpirationMonths, value: $data.ExpirationMonth, optionsCaption:'Month' " />
+                                <input id="exp-month" type="hidden" data-stripe="exp-month" />
                             </div>
                         </div>
                         <div class="control-group" style="float:left; width:240px;">
                             <label class="control-label" for="lastName">Expires Year</label>
                             <div class="controls">
                                 <select id="state" name="expirationYear" style="width:100px;"
-                                    data-bind="options: PushMkt.ExpirationYears, value: $data.ExpirationYear, optionsCaption:'Year' " />
+                                        data-bind="options: PushMkt.ExpirationYears, value: $data.ExpirationYear, optionsCaption:'Year' " />
+                                <input id="exp-year" type="hidden" data-stripe="exp-year" />                                
                             </div>
                         </div>
                     </div>

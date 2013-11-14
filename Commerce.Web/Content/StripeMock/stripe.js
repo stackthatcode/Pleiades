@@ -11,7 +11,11 @@ stripe.card = {
             object: "token",        // String identifier of the type of object, always "token"
             used: false,            // Boolean of whether this token has been used,  
         };
-        responseHandler(response);
+        response.error = { message: "Unable to process your Card.  Somethings wrong!" };
+        
+        // TODO: card 4111* is invalid
+        // TODO: card 4242* is valid        
+        responseHandler("OK", response);
     },
 };
 

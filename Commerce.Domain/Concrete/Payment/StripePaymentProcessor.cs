@@ -5,7 +5,7 @@ using Stripe;
 
 namespace Commerce.Application.Concrete.Payment
 {
-    public class StripePaymentProcessor : IPaymentsProcessor
+    public class StripePaymentProcessor : IPaymentProcessor
     {
         private readonly IConfigurationAdapter _configurationAdapter;
         private readonly StripeChargeService _stripeService;

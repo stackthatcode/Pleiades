@@ -4,7 +4,7 @@ using Commerce.Application.Model.Billing;
 
 namespace Commerce.Application.Concrete.Payment
 {
-    public class MockPaymentProcessor : IPaymentsProcessor
+    public class MockPaymentProcessor : IPaymentProcessor
     {
         // The various Payment Processor responses get decoded and/or logged/persisted in this implementation
         public Transaction Charge(string token, decimal amount)

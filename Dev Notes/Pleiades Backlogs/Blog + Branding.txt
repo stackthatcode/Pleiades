@@ -1,26 +1,181 @@
+Marketing Deliverables
+----------------------
+- Card Design => Business Cards from Moo - move the chip over to the right => DONE
+- Pushmarket Announcement Post => DONE
+- About Page => DONE
+
+- Order Moo cards => TODO
+- Software Services Page => TODO
+- Blog Theme => TODO
+- Fix "Automation Zealot" image => TODO
+
+Blog Post Goals
+~~~~~~~~~~~~~~~
+- Consulting Engagements
+- How Do I Keep Windows Tinted?
+- Enjoy the Process
+
+Problem:
+~~~~~~~~
+- How to stop positioning as software developer.
+
+Services Page
+=============
+Who are you?  Company.  What size?  Don't know... yet.  Where are you?
+
+0.) Want to take your business online, but Shopify just won't do it.  
+Want an E-Commerce solution that talks to your back-end systems.
+Want an E-Commerce solution that sells the way YOU want it.
+Know how to talk to your customers, but your e-commerce solution does not?
+And we're Open Sourced.  That means that you have 100% of the code.
+
+
+1.) Have a large legacy system and you're scared to make changes to it.  Have an existing business-critical, website. 
+- Write more on this
+
+
+2.) Have many disconnected systems and want them tied together seamlessly.  
+
+3.) Have a vision for a web-based product, but don't have the capacity or talent needed to create it.
+
+4.) NOTES TO MYSELF: Social Media coding...?  Mayhaps.  
+
+
+
+
+About Page
+==========
+Hello.  My name is Aleks Jones, and welcome to my blog.  My mission statement is simple, and clear: I take business processes and automate them, which enables my clients to act faster and compete more aggressively.  Hence, my cognomen, Automation Zealot.
+
+My main tool of choice is Microsoft's .NET platform, which means C#, ASP.NET MVC, WCF and SQL Server.  I also enjoy delivering compelling user experiences, courtesy of KnockoutJS, JQuery, and JavaScript.  Recently I tangoed with AngularJS to build a Single Page Application.
+
+I am currently engaged as a contract consultant with a Hedge Fund in downtown Chicago.  In my career, I've solved problems spanning a number of domains, including: high-volume transaction systems, banking, commercial real estate and warehourse management.   I've also worked with non-for-profits and early-stage startups.
+
+IMPORTANT UPDATE: I am pleased to announce that the first phase of Pushmarket's development is now complete.  What started as an exploratory side project is now poised to become a multi-tentancled monster of automation.  It really is darling.  Acquaint yourself with this beast.
+
+TODO: insert old Contact Info stuff
+
+
+
+
+Press Release
+=============
+To all my peers in the blogosphere, and everywhere in-between, I am proudly announcing completion of the first phase of Project Pushmarket's development.  I can't even begin to describe for you how rewarding that is.
+
+The foundation has been laid for our E-Commerce platform.  We have an elegant, easy-to-use, mobile-friendly platform for selling online.  It's great.  What's even greater is what's to come.
+
+The next phase of development is what will set Pushmarket apart from the crowd.  The next phase will turn Pushmarket into an engine for driving automation.  I'll take a moment to illustrate the power of automation for you.
+
+I spent a period of my career selling online.  The amount of busy work required to run a successful campaign was - and still is - staggering.  I experienced flashes of success, followed by long periods of frustration and nose-to-the-grindstone, soul-crushing, repetitive work.  
+
+Loading ads into network servers, wiring up analytics, adjusting ad spends, optimizing etc. etc.  Trying to do everything is... overwhelming.  
+
+On a Saturday morning, I had a moment of inspiration, and decided to try an experiment.
+
+I became possessed with an unusually boundless amount of energy.   For the next two and a half days, I wrote code, practically non-stop.  I developed a program that would later be called "Gerald".  It was an automated ad loader.  This friend of mine, Gerald proved to be successful beyond my wildest dreams.
+
+I loaded Gerald's queue with 150 ads, hit "launch", and literally walked away.  An hour later, when I returned, Gerald had loaded every single ad without so much as blinking.  He was sitting there, waiting for the next batch.  
+
+This same task normally took me several hours to do.  And it was a mind-numbing, awful job to do.
+
+Gerald, on the other hand, did everything for me.  Plus, he was fast and accurate.  Gerald never got tired.  Gerald kept asking for more, and more, and more to do.
+
+This is how the vision for Pushmarket emerged.  Gerald's DNA, automation, will be at the heart of the next phase of Pushmarket's development.  We are building an intelligent platform that will enable you to leverage your most precious asset: time.
+
+Speaking of time, I've got to run.  I'm working now with my business partner, a long-time, trusted associate of mine.  We have tons to do in preparation for the next phase.
+
+Grab an RSS feed.  Don't miss out on updates in Pushmarket's development.  We'll keep you posted.
+
+
+
+
+- Talks more about Gerald
+- Qualify what Phase 1
+- Talk more about what that uniqueness
+
+
+
+
+So, that's all we're going to cover, for now.
+Now that the foundation for Pushmarket has been laid, we're eager to 
+ expect to proceed with the next phase - rather aggressively.
+I came back a half-hour later and Gerald was chugging along,  while I breaked and made peanut butter and jelly sandwiches, Geralds was chugging along.  Between every successful campaign were long periods of work.  
+When it comes to selling online, the (biggest) problem is that doing EVERYTHING and connecting it TOGETHER takes a lot of time.  Unless you have I wanted to be in 10 places at the same time.
+There's nothing mysterious about a successful campaign.  Writing ads, loading them into an ad network, designing landing pages, and wiring up analytics, etc.  
+The actual process is almost always the same.
+I'm thinking back to when I started two years ago... although, really, the ultra-hard work began exactly one year ago.  After chartering the vision, and designing the architecture, all that was needed 
+, grit-your-teeth and roll-your-sleeves-and-get-it-done effort needed to finish.
+It's done.  I've taken the first step.  
+It's part of a much greater vision which I've been able to articulate to a handful of people.
+
+
+
+
+
+Later...
+~~~~~~~~
+- Updated Wordpress Theme => Responsive
+- Software Development Landing Page, with Email Form
+- Twitter feed...?
+
+Eternal Question: How Many Web Properties?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+AleksJones.com
+- Freelance Marketing
+- Blogging, for Freelance
+
+GoPushSoftware.com
+- Once Pushmarket becomes viable for the commercial market, this will help tremendously
+- Link to my personal blog, as needed
+
+
+
+
+Mini Card Content
+=================
+"Business. Automation. Cloud."
+
+"Automate Your Business in the Cloud"
+aleksjones.com/automate (or pushconsulting.com/automate)
+
+"Put Your Business in the Cloud. Now."
+aleksjones.com/automation
+
+Aleks Jones | Software Development & Automation
+			| 510-717-8112
+
+
+NEXT POSTS
+~~~~~~~~~~
+1.) Developers Don't Know How To Think Like Owners: a Frontal Assault on the Intellectual Conceit of the Software Industry
+2.) Money-Driven Development
+3.) Disposing of the Myth of Smart & Bitchy Programmers
+4.) Surveys on Failed Software Projects
+
+Freelance Target Markets
+------------------------
+- Businesses up to 150 people
+- Start-ups
+- Non-profits
+
+Services
+--------
+- Remote Contracting
+- Development of Cloud-based Apps (Azure)
+- Automation
+
 Blog + Brand == Freelance Gigs ==> Escape from Alcatraz
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Restless Developer
 - Sleepless Coder
-- Restless Coder's Abode
-- Restless Coder's Web Log
 - Stack That Code
 
 PushMarket (for Marketing)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-- C#
-- ASP.NET MVC 4
+- Bootstrap == Responsive + Mobile
 - HTML 5
-- Responsive
-- Angular.js
-- KnockoutJs
-- JQuery
-- Bootstrap
+- Angular.js, KnockoutJS & JQuery
+- C# + ASP.NET MVC 4
 - Entity Framework
 - SQL Server
-
-My NEXT POST
-~~~~~~~~~~~~
-Developers Don't Know How To Think Like Owners  aka  A Direct Assault on the Intellectual Conceit of the Software Industry
-
-
+- Github

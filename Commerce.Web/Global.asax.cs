@@ -56,6 +56,13 @@ namespace Commerce.Web
         protected void Application_Error(object sender, EventArgs e)
         {
             LoggerSingleton.Get().Error(Server.GetLastError());
+            Server.ClearError();
+            var redirectUrl = ConfigurationManager.AppSettings["AdminOrderDebug"];
+            if (redirectUrl != null) 
+            {
+                HttpContext.Current.Response.Redirect(redirectUrl);
+            }
+            // TODO: add logic to check for Admin vs. Public detection  
         }
 
         public static void RegisterAllRoutes()

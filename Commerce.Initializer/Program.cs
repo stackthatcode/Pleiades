@@ -61,7 +61,7 @@ namespace Commerce.Initializer
             // Components Initialization
 
             // Application Data Initialization
-            LoggerSingleton.Get().Info("Seeding PushMarket data - Starting...");
+            LoggerSingleton.Get().Info("Seeding Pushmarket data - Starting...");
 
             CreateAndRunBuilder<UserBuilder>();
             CreateAndRunBuilder<CategoryBuilder>();
@@ -84,7 +84,7 @@ namespace Commerce.Initializer
             CreateAndRunBuilder<StateTaxBuilder>();
             CreateAndRunBuilder<AnalyticsBuilder>();
 
-            LoggerSingleton.Get().Info("Seeding PushMarket data - Complete!");
+            LoggerSingleton.Get().Info("Seeding Pushmarket data - Complete!");
         }
 
         public static void DestroyDatabase()
@@ -108,9 +108,9 @@ namespace Commerce.Initializer
         public static void CreateDatabase()
         {
             // Build Database
-            LoggerSingleton.Get().Info("Creating PushMarket Database...");
+            LoggerSingleton.Get().Info("Creating Pushmarket Database...");
             DbContext.MasterDatabaseCreate();
-            LoggerSingleton.Get().Info("PushMarket Database Created");
+            LoggerSingleton.Get().Info("Pushmarket Database Created");
         }
     }
 }

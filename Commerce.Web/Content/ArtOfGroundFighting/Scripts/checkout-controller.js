@@ -136,10 +136,6 @@ app.controller('CheckoutController', function ($scope, $http) {
     };
 
     $scope.ProcessStripeResponse = function(status, response) {
-        var orderRequest = {
-            shippingInfo: $scope.ShippingInfo,
-            token: response.id,
-        };
         // For debugging purposes
         //response.error = { message: "oh shit!!!" };
 
@@ -149,7 +145,12 @@ app.controller('CheckoutController', function ($scope, $http) {
             $('#payment-processing-feedback').show();            
             return;
         }
-        
+
+        var orderRequest = {
+            shippingInfo: $scope.ShippingInfo,
+            token: response.id,
+        };
+                
         ngAjax.Post($http, "order", orderRequest,
             function(data) {
                 console.log(data);

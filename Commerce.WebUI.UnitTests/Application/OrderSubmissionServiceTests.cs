@@ -71,13 +71,13 @@ namespace Commerce.UnitTests.Application
         {
             // Arrange
             var request = _orderRequest;
-            var paymentProcessor = MockRepository.GenerateMock<IPaymentsProcessor>();
+            var paymentProcessor = MockRepository.GenerateMock<IPaymentProcessor>();
             paymentProcessor
                 .Expect(x => x.Charge(null, 206.975M))
                 .Return(new Transaction(TransactionType.AuthorizeAndCollect) { Success = false })
                 .IgnoreArguments();
 
-            var service = new OrderService(null, paymentProcessor, null, null);
+            var service = new OrderService(null, () => paymentProcessor, null, null);
             service.InventoryBySkuCodes = this.SkuFunctionGenerator_PlainVanilla();
             service.StateTaxByAbbr = this.StateTaxFunctionGenerator();
             service.ShippingMethodById = this.ShippingMethodFunctionGenerator();
@@ -113,7 +113,7 @@ namespace Commerce.UnitTests.Application
         {
             // Arrange
             var request = _orderRequest;
-            var paymentProcessor = MockRepository.GenerateMock<IPaymentsProcessor>();
+            var paymentProcessor = MockRepository.GenerateMock<IPaymentProcessor>();
             paymentProcessor
                 .Expect(x => x.Charge(_orderRequest.Token, 206.975m))
                 .Return(new Transaction(TransactionType.AuthorizeAndCollect) {Success = true, Amount = 206.975m});
@@ -124,7 +124,7 @@ namespace Commerce.UnitTests.Application
             var analyticsService = MockRepository.GenerateMock<IAnalyticsCollector>();
             analyticsService.Expect(x => x.Sale(null)).IgnoreArguments();   // Oh my!
 
-            var service = new OrderService(null, paymentProcessor, analyticsService, emailService);
+            var service = new OrderService(null, () => paymentProcessor, analyticsService, emailService);
             service.InventoryBySkuCodes = this.SkuFunctionGenerator_PlainVanilla();
             service.StateTaxByAbbr = this.StateTaxFunctionGenerator();
             service.ShippingMethodById = this.ShippingMethodFunctionGenerator();
@@ -146,7 +146,7 @@ namespace Commerce.UnitTests.Application
             // Arrange
             var request = _orderRequest;
 
-            var paymentProcessor = MockRepository.GenerateMock<IPaymentsProcessor>();
+            var paymentProcessor = MockRepository.GenerateMock<IPaymentProcessor>();
             paymentProcessor
                 .Expect(x => x.Charge(null, 206.975m))
                 .Return(new Transaction(TransactionType.AuthorizeAndCollect) { Success = true, Amount = 206.975m })
@@ -162,7 +162,7 @@ namespace Commerce.UnitTests.Application
             var analyticsService = MockRepository.GenerateMock<IAnalyticsCollector>();
             analyticsService.Expect(x => x.Sale(null)).IgnoreArguments();
 
-            var service = new OrderService(null, paymentProcessor, analyticsService, emailService);
+            var service = new OrderService(null, () => paymentProcessor, analyticsService, emailService);
             service.InventoryBySkuCodes = this.SkuFunctionGenerator_ChangingInventory();
             service.StateTaxByAbbr = this.StateTaxFunctionGenerator();
             service.ShippingMethodById = this.ShippingMethodFunctionGenerator();

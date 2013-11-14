@@ -1,29 +1,80 @@
 Burndown
 --------
+11/12/2013 - 0.5
+- fixed some Error Handling stuff
+11/13/2013 - 0.5
+- Defect on Create Order => DONE
+- Fixed some cosmetic issues on Create Order screen => DONE
+11/14/2013
 
-Last Week of Construction
-~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MVP Definition - Aleks TODO
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Aleks Review Partnership Agreement => TODO
+- Fix the Create Order Screen => IN PROGRESS
+- Email Sending Engine => TODO
+- Stripe Setup 
+* Confirm that Stripe Mock works on client-side => TODO
+* Research Refunds in DEV environment => TODO
+* Merchant Account => TODO
+* Run Live Transactions => TODO
+
+- Azure Hosting => TODO
+- Development Email Notifications => TODO
+- Dataplan => TODO
+
 
 Cherry on Top
 ~~~~~~~~~~~~~
 - Cure the defect in Totals => TODO
 - Donate $20 to FineUploader upon successful integration => TODO
 
+Action Items to Prepare PushMarket
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1.) Create an LLC
+2.) Business bank account
+3.) Content
+7.) QA
+8.) Research Traffic Sources
+- Press Release to Communities
+- Adwords?
+- Push to Etsy
+- Push to Pinterest
+- SEO
+- Ebay?
+- Facebook
+- Artist Themselves!
+- Twilio API
+
+
+Jeremy 
+~~~~~~
+- LLC 
+- 3D Printing
+- Bizspark
+- Content
+- Designing and Building Owlman Site
+
+- Contact Us Page Tasking => Email Form: use that thing from stache.io, Google Map, Street Address => IN PROGRESS
+- Shipping Page => TODO
+
+* http://stackoverflow.com/questions/10512845/how-to-send-email-wth-email-template-c-sharp/10512995#10512995
+- Notifications => TODO
+- Browser by Category
 
 
 
 PHASE 2 Backlog
 ---------------
-- Contact Us Page Tasking => Email Form: use that thing from stache.io, Google Map, Street Address => IN PROGRESS
-- Shipping Page => TODO
-- Email Sending Engine => TODO
-* http://stackoverflow.com/questions/10512845/how-to-send-email-wth-email-template-c-sharp/10512995#10512995
+* Clientside for Admin Payment => TODO
 * Test Create Order screen => TODO
 * Clientside for Admin Payment => TODO
 - Are you sure want to Refund that?
+
 - Azure Deployment
 => http://blog.stevensanderson.com/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/
 => http://haacked.com/archive/2011/10/10/preventing-csrf-with-ajax.aspx
+
 - NCrunch coverage analysis and remediation for Controllers and Routes
 - Analytics Integration - KISS, Mixpanel, whatevs
 - Automated Traffic Management
@@ -45,6 +96,7 @@ PHASE 2 Backlog
 - Prevent multiple Pop-ups from appearing
 - IsOnline - Check How This Functions => UPDATE - NEED TO FIX TOUCH Function
 - Intrusion Detection
+
 
 Research Backlog
 ----------------

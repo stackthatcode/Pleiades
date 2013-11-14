@@ -18,7 +18,7 @@ namespace Commerce.Application.Concrete.Orders
         public const string ErrorFailedPayment = "Something's wrong with your Payment Info. Sorry, please try again";
 
         PushMarketContext Context { get; set; }
-        IPaymentsProcessor PaymentProcessor { get; set; }
+        IPaymentProcessor PaymentProcessor { get; set; }
         IAnalyticsCollector AnalyticsService { get; set; }
         IEmailService EmailService { get; set; }
 
@@ -32,10 +32,12 @@ namespace Commerce.Application.Concrete.Orders
         public Action SaveChanges;
 
         public OrderService(PushMarketContext context, 
-                IPaymentsProcessor paymentProcessor, IAnalyticsCollector analyticsService, IEmailService emailService)
+                Func<IPaymentProcessor> paymentProcessorFactory, 
+                IAnalyticsCollector analyticsService, 
+                IEmailService emailService)
         {
             Context = context;
-            PaymentProcessor = paymentProcessor;
+            PaymentProcessor = paymentProcessorFactory.Invoke();
             AnalyticsService = analyticsService;
             EmailService = emailService;
 

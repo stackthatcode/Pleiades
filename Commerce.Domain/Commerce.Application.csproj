@@ -70,7 +70,7 @@
     <Compile Include="Interfaces\IAnalyticsRepository.cs" />
     <Compile Include="Interfaces\IOrderManager.cs" />
     <Compile Include="Concrete\Orders\OrderManager.cs" />
-    <Compile Include="Interfaces\IPaymentsProcessor.cs" />
+    <Compile Include="Interfaces\IPaymentProcessor.cs" />
     <Compile Include="Model\Analytics\RefundEvent.cs" />
     <Compile Include="Model\Analytics\DateTotal.cs" />
     <Compile Include="Model\Analytics\RefundItem.cs" />

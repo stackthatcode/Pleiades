@@ -75,11 +75,11 @@ namespace Commerce.Application
             builder.RegisterType<MockPaymentProcessor>();
             builder.RegisterType<StripePaymentProcessor>();
 
-            builder.Register<Func<IPaymentsProcessor>>(c =>
+            builder.Register<Func<IPaymentProcessor>>(c =>
                 {
                     return () => (ConfigurationManager.AppSettings["PaymentProcess"] ?? "") == "LIVE"
-                               ? (IPaymentsProcessor)c.Resolve<StripePaymentProcessor>()
-                               : (IPaymentsProcessor)c.Resolve<MockPaymentProcessor>();
+                               ? (IPaymentProcessor)c.Resolve<StripePaymentProcessor>()
+                               : (IPaymentProcessor)c.Resolve<MockPaymentProcessor>();
                 });
             builder
                 .Register(c => new StripeChargeService(c.Resolve<IConfigurationAdapter>().SecretKey))
