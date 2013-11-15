@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Transactions;
-using Commerce.Application.Interfaces;
-using Commerce.Application.Model.Lists;
-using Commerce.Application.Model.Products;
+using Commerce.Application.File;
+using Commerce.Application.Lists.Entities;
+using Commerce.Application.Products;
+using Commerce.Application.Products.Entities;
 using Pleiades.Application.Data;
 using Pleiades.Application.Helpers;
 using Pleiades.Application.Logging;

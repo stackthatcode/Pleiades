@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
+using Commerce.Application.Analytics;
+using Commerce.Application.Analytics.Entities;
 using Commerce.Application.Database;
-using Commerce.Application.Interfaces;
-using Commerce.Application.Model.Analytics;
-using Commerce.Application.Model.Orders;
-using Commerce.Application.Model.Products;
+using Commerce.Application.Orders.Entities;
+using Commerce.Application.Products;
 using Pleiades.Application.Data;
 using Pleiades.Application.Logging;
 

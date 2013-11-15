@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Transactions;
+using Commerce.Application.Lists;
+using Commerce.Application.Lists.Entities;
 using Pleiades.Application.Data;
 using Pleiades.Application.Helpers;
-using Commerce.Application.Interfaces;
-using Commerce.Application.Model.Lists;
 using Pleiades.Application.Logging;
 
 namespace Commerce.Initializer.Builders

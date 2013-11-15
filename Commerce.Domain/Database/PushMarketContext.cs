@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using Commerce.Application.Model.Analytics;
-using Commerce.Application.Model.Shopping;
+using Commerce.Application.Analytics;
+using Commerce.Application.Analytics.Entities;
+using Commerce.Application.Billing;
+using Commerce.Application.File.Entities;
+using Commerce.Application.Lists.Entities;
+using Commerce.Application.Orders.Entities;
+using Commerce.Application.Products;
+using Commerce.Application.Products.Entities;
+using Commerce.Application.Shopping;
+using Commerce.Application.Shopping.Entities;
 using Pleiades.Web.Security.Model;
-using Commerce.Application.Model.Billing;
-using Commerce.Application.Model.Lists;
-using Commerce.Application.Model.Orders;
-using Commerce.Application.Model.Products;
-using Commerce.Application.Model.Resources;
 
 namespace Commerce.Application.Database
 {

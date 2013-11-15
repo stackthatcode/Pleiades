@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
-using Commerce.Application.Interfaces;
-using Commerce.Application.Model.Resources;
+using Commerce.Application.File;
+using Commerce.Application.File.Entities;
 using Pleiades.Application.Logging;
 
 namespace Commerce.Web.Areas.Public.Controllers

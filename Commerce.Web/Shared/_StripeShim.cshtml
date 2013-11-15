@@ -1,7 +1,8 @@
 ﻿@using System.Configuration
 @using Commerce.Application.Concrete.Payment
+@using Commerce.Application.Payment
 
-@if (ConfigurationManager.AppSettings["PaymentProcessor"] == "LIVE")
+@if (StripeConfiguration.Settings.ClientSideDebugMode.ToBoolTryParse() == true)
 {
     @Html.Javascript("https://js.stripe.com/v2/")
     <script type="text/javascript">

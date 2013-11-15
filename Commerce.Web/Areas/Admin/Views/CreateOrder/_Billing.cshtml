@@ -99,9 +99,8 @@
 
             $("#exp-month").val(self.Cart().BillingInfo.ExpirationMonth());
             $("#exp-year").val(self.Cart().BillingInfo.ExpirationYear());
-            console.log($("#exp-month").val() + " " + $("#exp-year").val());
+            $("[name='btn-submit-order']").hide();
             Stripe.card.createToken($("#paymentForm"), self.ProcessOrder);
-            //$("[name='btn-submit-order']").hide();
         };
 
         self.ProcessOrder = function(status, response) {
@@ -109,16 +108,15 @@
             if (response.error) {
                 $('#payment-processing-message').text(response.error.message);            
                 $('#payment-processing-feedback').show();            
+                $("[name='btn-submit-order']").show();
                 return;
             }
-            console.log(response);
-            return;
             flow.exec(
                 function() {
                     var jsonOrder = {
                         Items: [],
                         ShippingInfo: CopyPropertiesFromKo(self.Cart().ShippingInfo),
-                        BillingInfo: CopyPropertiesFromKo(self.Cart().BillingInfo),
+                        Token: response.id,
                     };
 
                     AQ(self.Cart().Items()).each(function(x) {

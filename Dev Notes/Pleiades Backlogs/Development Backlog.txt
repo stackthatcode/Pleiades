@@ -5,22 +5,27 @@ Burndown
 11/13/2013 - 0.5
 - Defect on Create Order => DONE
 - Fixed some cosmetic issues on Create Order screen => DONE
-11/14/2013
-
+11/14/2013 - 1.0
+- Fix the Create Order Screen => DONE
+- Confirm that Stripe Mock works on client-side => DONE
+- Email Engine Configuration => DONE
+- Mock Email Sending => DONE
 
 MVP Definition - Aleks TODO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Aleks Review Partnership Agreement => TODO
-- Fix the Create Order Screen => IN PROGRESS
-- Email Sending Engine => TODO
+- Email Sending Engine => IN PROGRESS
+- Development Email Notifications => TODO
+
+
+
 - Stripe Setup 
-* Confirm that Stripe Mock works on client-side => TODO
 * Research Refunds in DEV environment => TODO
+* Add Refunds to the Mock Payment Processor
 * Merchant Account => TODO
 * Run Live Transactions => TODO
 
 - Azure Hosting => TODO
-- Development Email Notifications => TODO
 - Dataplan => TODO
 
 

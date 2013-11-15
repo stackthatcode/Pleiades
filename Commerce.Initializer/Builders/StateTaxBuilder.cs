@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Transactions;
+using Commerce.Application.Billing;
 using Commerce.Application.Database;
-using Commerce.Application.Model.Billing;
 using Pleiades.Application.Logging;
 
 namespace Commerce.Initializer.Builders

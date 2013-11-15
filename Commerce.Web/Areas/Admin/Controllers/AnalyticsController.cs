@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Commerce.Application.Interfaces;
-using Commerce.Application.Model.Analytics;
+using Commerce.Application.Analytics;
+using Commerce.Application.Analytics.Entities;
 using Pleiades.Web.Json;
 
 namespace Commerce.Web.Areas.Admin.Controllers

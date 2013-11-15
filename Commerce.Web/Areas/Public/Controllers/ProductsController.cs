@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Commerce.Application.Interfaces;
-using Commerce.Application.Model.Lists;
-using Commerce.Application.Model.Products;
+using Commerce.Application.Lists;
+using Commerce.Application.Lists.Entities;
+using Commerce.Application.Products;
 using Commerce.Web.Areas.Public.Models;
 using Pleiades.Application.Logging;
 using Pleiades.Web;

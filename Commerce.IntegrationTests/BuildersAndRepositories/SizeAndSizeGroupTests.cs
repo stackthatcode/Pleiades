@@ -1,9 +1,9 @@
 ﻿using System;
 using Autofac;
+using Commerce.Application.Lists;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using Pleiades.Application.Data;
-using Commerce.Application.Interfaces;
 using Commerce.Initializer.Builders;
 
 namespace Commerce.IntegrationTests.BuildersAndRepositories

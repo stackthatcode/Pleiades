@@ -3,22 +3,21 @@ using System.Configuration;
 using System.Data.Entity;
 using System.Web;
 using Autofac;
-using Commerce.Application.Concrete.Analytics;
-using Commerce.Application.Concrete.Payment;
-using Commerce.Application.Concrete.Shopping;
+using Commerce.Application.Analytics;
+using Commerce.Application.Email;
+using Commerce.Application.File;
+using Commerce.Application.Lists;
+using Commerce.Application.Lists.Entities;
+using Commerce.Application.Orders;
+using Commerce.Application.Payment;
+using Commerce.Application.Products;
+using Commerce.Application.Products.Entities;
+using Commerce.Application.Security;
+using Commerce.Application.Shopping;
 using Pleiades.Application.Data;
 using Pleiades.Application.Data.EF;
 using Pleiades.Web.Security.Interface;
-using Commerce.Application.Concrete.Infrastructure;
-using Commerce.Application.Concrete.Lists;
-using Commerce.Application.Concrete.Orders;
-using Commerce.Application.Concrete.Products;
-using Commerce.Application.Concrete.Security;
 using Commerce.Application.Database;
-using Commerce.Application.Concrete;
-using Commerce.Application.Interfaces;
-using Commerce.Application.Model.Lists;
-using Commerce.Application.Model.Products;
 using Stripe;
 
 namespace Commerce.Application
@@ -89,6 +88,8 @@ namespace Commerce.Application
             // Email Repositories
             builder.RegisterType<EmailGenerator>().As<IEmailGenerator>();
             builder.RegisterType<EmailService>().As<IEmailService>();
+            
+
 
             // Cart 
             builder.RegisterType<CartIdentificationService>().As<ICartIdentificationService>();

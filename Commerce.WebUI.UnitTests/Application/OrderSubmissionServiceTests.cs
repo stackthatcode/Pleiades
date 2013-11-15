@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using Commerce.Application.Analytics;
+using Commerce.Application.Billing;
+using Commerce.Application.Email;
+using Commerce.Application.Orders;
+using Commerce.Application.Orders.Entities;
+using Commerce.Application.Payment;
+using Commerce.Application.Products;
+using Commerce.Application.Products.Entities;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Commerce.Application.Concrete.Orders;
-using Commerce.Application.Interfaces;
-using Commerce.Application.Model.Products;
-using Commerce.Application.Model.Billing;
-using Commerce.Application.Model.Orders;
 
 namespace Commerce.UnitTests.Application
 {
@@ -55,7 +58,7 @@ namespace Commerce.UnitTests.Application
             // Arrange
             var request = _orderRequest;
             request.Token = null;
-            var service = new OrderService(null, null, null, null);
+            var service = new OrderService(null, null, null, null, null);
 
             // Act
             var result = service.Submit(request);
@@ -77,7 +80,7 @@ namespace Commerce.UnitTests.Application
                 .Return(new Transaction(TransactionType.AuthorizeAndCollect) { Success = false })
                 .IgnoreArguments();
 
-            var service = new OrderService(null, () => paymentProcessor, null, null);
+            var service = new OrderService(null, () => paymentProcessor, null, null, null);
             service.InventoryBySkuCodes = this.SkuFunctionGenerator_PlainVanilla();
             service.StateTaxByAbbr = this.StateTaxFunctionGenerator();
             service.ShippingMethodById = this.ShippingMethodFunctionGenerator();
@@ -97,7 +100,7 @@ namespace Commerce.UnitTests.Application
         {
             // Arrange
             var request = _orderRequest;
-            var service = new OrderService(null, null, null, null);
+            var service = new OrderService(null, null, null, null, null);
 
             // Act
             var result = service.Submit(request);
@@ -118,13 +121,16 @@ namespace Commerce.UnitTests.Application
                 .Expect(x => x.Charge(_orderRequest.Token, 206.975m))
                 .Return(new Transaction(TransactionType.AuthorizeAndCollect) {Success = true, Amount = 206.975m});
 
+            var emailGenerator = MockRepository.GenerateMock<IEmailGenerator>();
+            var message = new EmailMessage();
+            emailGenerator.Expect(x => x.OrderReceived(null)).IgnoreArguments().Return(message);
             var emailService = MockRepository.GenerateMock<IEmailService>();
-            emailService.Expect(x => x.SendOrderReceived());
+            emailService.Expect(x => x.Send(message));
 
             var analyticsService = MockRepository.GenerateMock<IAnalyticsCollector>();
             analyticsService.Expect(x => x.Sale(null)).IgnoreArguments();   // Oh my!
 
-            var service = new OrderService(null, () => paymentProcessor, analyticsService, emailService);
+            var service = new OrderService(null, () => paymentProcessor, analyticsService, emailService, emailGenerator);
             service.InventoryBySkuCodes = this.SkuFunctionGenerator_PlainVanilla();
             service.StateTaxByAbbr = this.StateTaxFunctionGenerator();
             service.ShippingMethodById = this.ShippingMethodFunctionGenerator();
@@ -156,13 +162,15 @@ namespace Commerce.UnitTests.Application
                 .Return(new Transaction(TransactionType.Refund) { Success = true, Amount = 66.66m })
                 .IgnoreArguments();
 
+            var emailGenerator = MockRepository.GenerateMock<IEmailGenerator>();
+            var message = new EmailMessage();
+            emailGenerator.Expect(x => x.OrderReceived(null)).IgnoreArguments().Return(message);
             var emailService = MockRepository.GenerateMock<IEmailService>();
-            emailService.Expect(x => x.SendOrderReceived());
 
             var analyticsService = MockRepository.GenerateMock<IAnalyticsCollector>();
             analyticsService.Expect(x => x.Sale(null)).IgnoreArguments();
 
-            var service = new OrderService(null, () => paymentProcessor, analyticsService, emailService);
+            var service = new OrderService(null, () => paymentProcessor, analyticsService, emailService, emailGenerator);
             service.InventoryBySkuCodes = this.SkuFunctionGenerator_ChangingInventory();
             service.StateTaxByAbbr = this.StateTaxFunctionGenerator();
             service.ShippingMethodById = this.ShippingMethodFunctionGenerator();

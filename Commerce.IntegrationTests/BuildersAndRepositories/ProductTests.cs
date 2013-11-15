@@ -1,9 +1,9 @@
 ﻿using Autofac;
+using Commerce.Application.Lists.Entities;
+using Commerce.Application.Products;
 using Commerce.Initializer.Builders.Products;
 using NUnit.Framework;
 using Pleiades.Application.Data;
-using Commerce.Application.Interfaces;
-using Commerce.Application.Model.Lists;
 using Commerce.Initializer.Builders;
 
 namespace Commerce.IntegrationTests.BuildersAndRepositories

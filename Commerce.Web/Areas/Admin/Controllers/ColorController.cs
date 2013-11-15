@@ -1,9 +1,10 @@
 ﻿using System.Drawing;
 using System.Web.Mvc;
+using Commerce.Application.File;
+using Commerce.Application.Lists;
+using Commerce.Application.Lists.Entities;
 using Pleiades.Application.Data;
 using Pleiades.Web;
-using Commerce.Application.Interfaces;
-using Commerce.Application.Model.Lists;
 using Commerce.Web.Areas.Admin.Models.Color;
 using Pleiades.Web.Json;
 

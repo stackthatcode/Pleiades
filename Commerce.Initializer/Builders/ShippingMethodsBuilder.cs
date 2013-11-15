@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Transactions;
 using Commerce.Application.Database;
-using Commerce.Application.Interfaces;
-using Commerce.Application.Model.Lists;
+using Commerce.Application.Orders.Entities;
 using Pleiades.Application.Data;
 using Pleiades.Application.Injection;
 using Pleiades.Application;
-using Commerce.Application.Concrete;
-using Commerce.Application.Model.Orders;
 using Pleiades.Application.Logging;
 
 namespace Commerce.Initializer.Builders

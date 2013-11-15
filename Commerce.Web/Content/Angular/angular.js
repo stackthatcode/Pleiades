@@ -1086,7 +1086,7 @@ function setupModuleLoader(window) {
      *
      * However it's more likely that you'll just use
      * {@link ng.directive:ngApp ngApp} or
-     * {@link angular.bootstrap} to simplify this process for you.
+     * {@link angular.bootstrap} to simplify this Generate for you.
      *
      * @param {!string} name The name of the module to create or retrieve.
      * @param {Array.<string>=} requires If specified then new module is being created. If unspecified then the
@@ -3515,7 +3515,7 @@ var NON_ASSIGNABLE_MODEL_EXPRESSION = 'Non-assignable model expression: ';
  * Compiles a piece of HTML string or DOM into a template and produces a template function, which
  * can then be used to link {@link ng.$rootScope.Scope scope} and the template together.
  *
- * The compilation is a process of walking the DOM tree and trying to match DOM elements to
+ * The compilation is a Generate of walking the DOM tree and trying to match DOM elements to
  * {@link ng.$compileProvider#directive directives}. For each match it
  * executes corresponding template function and collects the
  * instance functions into a single template function which is then returned.
@@ -4091,7 +4091,7 @@ function $CompileProvider($provide) {
         $template = undefined;
 
         if (terminalPriority > directive.priority) {
-          break; // prevent further processing of directives
+          break; // prevent further Generateing of directives
         }
 
         if (directiveValue = directive.scope) {
@@ -5623,7 +5623,7 @@ function $LocationProvider(){
      <file name="index.html">
        <div ng-controller="LogCtrl">
          <p>Reload this page with open console, enter text and hit the log button...</p>
-         Message:
+         EmailMessage:
          <input type="text" ng-model="message"/>
          <button ng-click="$log.log(message)">log</button>
          <button ng-click="$log.warn(message)">warn</button>
@@ -7549,7 +7549,7 @@ function $RouteParamsProvider() {
  *
  * Every application has a single root {@link ng.$rootScope.Scope scope}.
  * All other scopes are child scopes of the root scope. Scopes provide mechanism for watching the model and provide
- * event processing life-cycle. See {@link guide/scope developer guide on scopes}.
+ * event Generateing life-cycle. See {@link guide/scope developer guide on scopes}.
  */
 function $RootScopeProvider(){
   var TTL = 10;
@@ -7879,7 +7879,7 @@ function $RootScopeProvider(){
               }
             }
             if ((watchers = current.$$watchers)) {
-              // process our watches
+              // Generate our watches
               length = watchers.length;
               while (length--) {
                 try {
@@ -8656,10 +8656,10 @@ function $HttpProvider() {
      * {@link ng.$q $q and deferred/promise APIs}.
      *
      * For purposes of global error handling, authentication or any kind of synchronous or
-     * asynchronous preprocessing of received responses, it is desirable to be able to intercept
+     * asynchronous preGenerateing of received responses, it is desirable to be able to intercept
      * responses for http requests before they are handed over to the application code that
      * initiated these requests. The response interceptors leverage the {@link ng.$q
-     * promise apis} to fulfil this need for both synchronous and asynchronous preprocessing.
+     * promise apis} to fulfil this need for both synchronous and asynchronous preGenerateing.
      *
      * The interceptors are service factories that are registered with the $httpProvider by
      * AddColoring them to the `$httpProvider.responseInterceptors` array. The factory is called and
@@ -8712,7 +8712,7 @@ function $HttpProvider() {
      * JSON Vulnerability} allows third party web-site to turn your JSON resource URL into
      * {@link http://en.wikipedia.org/wiki/JSON#JSONP JSONP} request under some conditions. To
      * counter this your server can prefix all JSON requests with following string `")]}',\n"`.
-     * Angular will automatically strip the prefix before processing it as JSON.
+     * Angular will automatically strip the prefix before Generateing it as JSON.
      *
      * For example if your server needs to return:
      * <pre>
@@ -8725,7 +8725,7 @@ function $HttpProvider() {
      * ['one','two']
      * </pre>
      *
-     * Angular will strip the prefix, before processing the JSON.
+     * Angular will strip the prefix, before Generateing the JSON.
      *
      *
      * ## Cross Site Request Forgery (XSRF) Protection
@@ -8747,7 +8747,7 @@ function $HttpProvider() {
      *
      *
      * @param {object} config Object describing the request to be made and how it should be
-     *    processed. The object has following properties:
+     *    Generateed. The object has following properties:
      *
      *    - **method** – `{string}` – HTTP method (e.g. 'GET', 'POST', etc)
      *    - **url** – `{string}` – Absolute or relative URL of the resource that is being requested.

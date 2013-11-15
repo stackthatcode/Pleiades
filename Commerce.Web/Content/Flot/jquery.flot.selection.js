@@ -40,7 +40,7 @@ parameter with the ranges selected on the axes, like this:
 	});
 
 The "plotselected" event is only fired when the user has finished making the
-selection. A "plotselecting" event is fired during the process with the same
+selection. A "plotselecting" event is fired during the Generate with the same
 parameters as the "plotselected" event, in case you want to know what's
 happening while it's happening,
 

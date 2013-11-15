@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Transactions;
+using Commerce.Application.File;
+using Commerce.Application.Lists;
+using Commerce.Application.Lists.Entities;
 using Pleiades.Application.Data;
 using Pleiades.Application.Logging;
 using Pleiades.Application.Utility;
-using Commerce.Application.Interfaces;
-using Commerce.Application.Model.Lists;
-using DomainColor = Commerce.Application.Model.Lists.Color;
+using DomainColor = Commerce.Application.Lists.Entities.Color;
 
 namespace Commerce.Initializer.Builders
 {

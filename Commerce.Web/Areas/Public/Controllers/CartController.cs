@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using Commerce.Application.Database;
+using Commerce.Application.Shopping;
 using Pleiades.Web.Json;
-using Commerce.Application.Interfaces;
 
 namespace Commerce.Web.Areas.Public.Controllers
 {

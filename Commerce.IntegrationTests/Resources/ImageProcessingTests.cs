@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using Autofac;
+using Commerce.Application.File;
 using NUnit.Framework;
 using Pleiades.Application.Data;
-using Commerce.Application.Interfaces;
 
 
 namespace Commerce.IntegrationTests.Resources

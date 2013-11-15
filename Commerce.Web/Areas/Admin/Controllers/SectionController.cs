@@ -1,10 +1,10 @@
 ﻿using System.Web.Mvc;
 using Commerce.Application.Database;
+using Commerce.Application.Lists;
+using Commerce.Application.Lists.Entities;
 using Pleiades.Application;
 using Pleiades.Application.Data;
 using Pleiades.Web;
-using Commerce.Application.Interfaces;
-using Commerce.Application.Model.Lists;
 using Pleiades.Web.Json;
 
 namespace Commerce.Web.Areas.Admin.Controllers

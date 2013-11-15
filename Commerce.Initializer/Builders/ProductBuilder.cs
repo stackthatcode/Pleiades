@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using Commerce.Application.Model.Resources;
+using Commerce.Application.File;
+using Commerce.Application.File.Entities;
+using Commerce.Application.Lists.Entities;
+using Commerce.Application.Products;
+using Commerce.Application.Products.Entities;
 using Pleiades.Application.Data;
-using Commerce.Application.Interfaces;
-using Commerce.Application.Model.Lists;
-using Commerce.Application.Model.Products;
 using Pleiades.Application.Logging;
-using Color = Commerce.Application.Model.Lists.Color;
+using Color = Commerce.Application.Lists.Entities.Color;
 
 namespace Commerce.Initializer.Builders
 {

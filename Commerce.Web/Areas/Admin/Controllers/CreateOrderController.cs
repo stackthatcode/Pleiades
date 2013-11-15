@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using Commerce.Application.Orders;
+using Commerce.Application.Orders.Entities;
 using Pleiades.Web.Json;
 using Commerce.Application.Database;
-using Commerce.Application.Interfaces;
-using Commerce.Application.Model.Orders;
 
 namespace Commerce.Web.Areas.Admin.Controllers
 {
@@ -41,11 +41,6 @@ namespace Commerce.Web.Areas.Admin.Controllers
         {
             var response = this.OrderRepository.Submit(orderRequest);
             return new JsonNetResult(response);
-        }
-
-        public ActionResult Manage()
-        {
-            return View();
         }
     }
 }

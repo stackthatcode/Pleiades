@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Web.Mvc;
 using Commerce.Application.Database;
-using Commerce.Application.Model.Billing;
-using Commerce.Application.Model.Orders;
+using Commerce.Application.Orders;
+using Commerce.Application.Orders.Entities;
+using Commerce.Application.Shopping;
 using Pleiades.Web.Json;
-using Commerce.Application.Interfaces;
 using System.Linq;
 
 namespace Commerce.Web.Areas.Public.Controllers

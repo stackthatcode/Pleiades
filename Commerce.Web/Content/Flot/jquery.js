@@ -3010,7 +3010,7 @@ jQuery.event = {
 
 			for ( cur = event.target; cur != this; cur = cur.parentNode || this ) {
 
-				// Don't process clicks (ONLY) on disabled elements (#6911, #8165, #11382, #11764)
+				// Don't Generate clicks (ONLY) on disabled elements (#6911, #8165, #11382, #11764)
 				if ( cur.disabled !== true || event.type !== "click" ) {
 					selMatch = {};
 					matches = [];
@@ -4005,7 +4005,7 @@ getText = Sizzle.getText = function( elem ) {
 		} else if ( nodeType === 3 || nodeType === 4 ) {
 			return elem.nodeValue;
 		}
-		// Do not include comment or processing instruction nodes
+		// Do not include comment or Generateing instruction nodes
 	} else {
 
 		// If no nodeType, this is expected to be an array
@@ -4459,7 +4459,7 @@ Expr = Sizzle.selectors = {
 		"empty": function( elem ) {
 			// http://www.w3.org/TR/selectors/#empty-pseudo
 			// :empty is only affected by element nodes and content nodes(including text(3), cdata(4)),
-			//   not comment, processing instructions, or others
+			//   not comment, Generateing instructions, or others
 			// Thanks to Diego Perini for the nodeName shortcut
 			//   Greater than "@" means alpha characters (specifically not starting with "#" or "?")
 			var nodeType;
@@ -4855,7 +4855,7 @@ function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postS
 				// If we have a postFinder, or filtered seed, or non-seed postFilter or preexisting results,
 				postFinder || ( seed ? preFilter : preexisting || postFilter ) ?
 
-					// ...intermediate processing is necessary
+					// ...intermediate Generateing is necessary
 					[] :
 
 					// ...otherwise use results directly
@@ -7299,7 +7299,7 @@ var
 	 * 1) They are useful to introduce custom dataTypes (see ajax/jsonp.js for an example)
 	 * 2) These are called:
 	 *    - BEFORE asking for a transport
-	 *    - AFTER param serialization (s.data is a string if s.processData is true)
+	 *    - AFTER param serialization (s.data is a string if s.GenerateData is true)
 	 * 3) key is the dataType
 	 * 4) the catchall symbol "*" can be used
 	 * 5) execution will start with transport dataType and THEN continue down to "*" if needed
@@ -8026,7 +8026,7 @@ function ajaxHandleResponses( s, jqXHR, responses ) {
 		}
 	}
 
-	// Remove auto dataType and get content-type in the process
+	// Remove auto dataType and get content-type in the Generate
 	while( dataTypes[ 0 ] === "*" ) {
 		dataTypes.shift();
 		if ( ct === undefined ) {
@@ -8573,7 +8573,7 @@ var fxNow, timerId,
 				// We need to compute starting value
 				if ( unit !== "px" && start ) {
 					// Iteratively approximate from a nonzero starting point
-					// Prefer the current property, because this process will be trivial if it uses the same units
+					// Prefer the current property, because this Generate will be trivial if it uses the same units
 					// Fallback to end or a simple constant
 					start = jQuery.css( tween.elem, prop, true ) || end || 1;
 

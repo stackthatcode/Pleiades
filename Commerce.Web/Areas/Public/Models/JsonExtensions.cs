@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Commerce.Application.Model.Lists;
-using Commerce.Application.Model.Products;
+using Commerce.Application.Lists.Entities;
+using Commerce.Application.Products;
+using Commerce.Application.Products.Entities;
 using Pleiades.Web.Json;
 
 namespace Commerce.Web.Areas.Public.Models

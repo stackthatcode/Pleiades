@@ -62,7 +62,7 @@ function setupModuleLoader(window) {
      *
      * However it's more likely that you'll just use
      * {@link ng.directive:ngApp ngApp} or
-     * {@link angular.bootstrap} to simplify this process for you.
+     * {@link angular.bootstrap} to simplify this Generate for you.
      *
      * @param {!string} name The name of the module to create or retrieve.
      * @param {Array.<string>=} requires If specified then new module is being created. If unspecified then the

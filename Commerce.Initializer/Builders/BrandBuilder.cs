@@ -3,9 +3,10 @@ using System.Configuration;
 using System.Drawing;
 using System.IO;
 using System.Transactions;
+using Commerce.Application.File;
+using Commerce.Application.Lists;
+using Commerce.Application.Lists.Entities;
 using Pleiades.Application.Data;
-using Commerce.Application.Interfaces;
-using Commerce.Application.Model.Lists;
 using Pleiades.Application.Logging;
 using Pleiades.Application.Utility;
 
