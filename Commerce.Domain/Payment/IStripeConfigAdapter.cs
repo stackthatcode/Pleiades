@@ -1,6 +1,6 @@
 namespace Commerce.Application.Payment
 {
-    public interface IConfigurationAdapter
+    public interface IStripeConfigAdapter
     {
         string SecretKey { get; }
         string PublishableKey { get; }

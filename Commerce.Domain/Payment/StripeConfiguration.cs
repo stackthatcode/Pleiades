@@ -40,5 +40,12 @@ namespace Commerce.Application.Payment
             get { return _settings["ClientSideDebugMode"].ToString().ToUpper() == "TRUE"; }
             set { this["ClientSideDebugMode"] = value; }
         }
+
+        [ConfigurationProperty("MockServiceEnabled", IsRequired = true)]
+        public bool MockServiceEnabled
+        {
+            get { return _settings["MockServiceEnabled"].ToString().ToUpper() == "TRUE"; }
+            set { this["MockServiceEnabled"] = value; }
+        }
     }
 }

@@ -16,6 +16,7 @@ using Commerce.Application.Security;
 using Commerce.Application.Shopping;
 using Pleiades.Application.Data;
 using Pleiades.Application.Data.EF;
+using Pleiades.Application.Utility;
 using Pleiades.Web.Security.Interface;
 using Commerce.Application.Database;
 using Stripe;
@@ -72,24 +73,32 @@ namespace Commerce.Application
 
             // Payment Processors
             builder.RegisterType<MockPaymentProcessor>();
-            builder.RegisterType<StripePaymentProcessor>();
-
-            builder.Register<Func<IPaymentProcessor>>(c =>
-                {
-                    return () => (ConfigurationManager.AppSettings["PaymentProcess"] ?? "") == "LIVE"
-                               ? (IPaymentProcessor)c.Resolve<StripePaymentProcessor>()
-                               : (IPaymentProcessor)c.Resolve<MockPaymentProcessor>();
-                });
-            builder
-                .Register(c => new StripeChargeService(c.Resolve<IConfigurationAdapter>().SecretKey))
+            builder.RegisterType<StripeConfigAdapter>().As<IStripeConfigAdapter>();
+            builder.Register(
+                    c => new StripeChargeService(c.Resolve<IStripeConfigAdapter>().SecretKey))
                 .As<StripeChargeService>();
-            builder.RegisterType<ConfigurationAdapter>().As<IConfigurationAdapter>();
+
+            if (Payment.StripeConfiguration.Settings.MockServiceEnabled)
+            {
+                builder.RegisterType<MockPaymentProcessor>().As<IPaymentProcessor>();
+            }
+            else
+            {
+                builder.RegisterType<StripePaymentProcessor>().As<IPaymentProcessor>();
+            }
 
             // Email Repositories
             builder.RegisterType<EmailGenerator>().As<IEmailGenerator>();
             builder.RegisterType<EmailService>().As<IEmailService>();
-            
-
+            builder.RegisterType<MockEmailService>().As<IEmailService>();            
+            if (EmailConfiguration.Settings.MockServiceEnabled.ToBoolTryParse())
+            {
+                builder.RegisterType<MockEmailService>().As<IEmailService>();                   
+            }
+            else
+            {
+                builder.RegisterType<EmailService>().As<IEmailService>();                                   
+            }
 
             // Cart 
             builder.RegisterType<CartIdentificationService>().As<ICartIdentificationService>();

@@ -141,8 +141,8 @@
     <Compile Include="Orders\IOrderService.cs" />
     <Compile Include="Orders\OrderManager.cs" />
     <Compile Include="Orders\OrderService.cs" />
-    <Compile Include="Payment\ConfigurationAdapter.cs" />
-    <Compile Include="Payment\IConfigurationAdapter.cs" />
+    <Compile Include="Payment\StripeConfigAdapter.cs" />
+    <Compile Include="Payment\IStripeConfigAdapter.cs" />
     <Compile Include="Payment\IPaymentProcessor.cs" />
     <Compile Include="Payment\MockPaymentProcessor.cs" />
     <Compile Include="Payment\StripeConfiguration.cs" />

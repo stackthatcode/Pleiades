@@ -5,8 +5,8 @@ namespace Commerce.Application.Email
 {
     public class EmailConfiguration : ConfigurationSection
     {
-        static Hashtable _settings = (Hashtable)ConfigurationManager.GetSection("emailConfiguration");
-        static EmailConfiguration _singleton = new EmailConfiguration();
+        static readonly Hashtable _settings = (Hashtable)ConfigurationManager.GetSection("emailConfiguration");
+        static readonly EmailConfiguration _singleton = new EmailConfiguration();
 
         public static EmailConfiguration Settings
         {

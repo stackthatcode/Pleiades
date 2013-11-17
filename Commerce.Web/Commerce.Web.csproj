@@ -324,10 +324,6 @@
       <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
       <Name>Commerce.Application</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Commerce.StripeClient\Commerce.StripeClient.csproj">
-      <Project>{04FC7018-00C2-479F-8340-C11EF08518D5}</Project>
-      <Name>Commerce.StripeClient</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Data.EF\Pleiades.Application.Data.EF.csproj">
       <Project>{89303370-B830-4A89-8646-0F9D287AD657}</Project>
       <Name>Pleiades.Application.Data.EF</Name>

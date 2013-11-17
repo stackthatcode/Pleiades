@@ -10,18 +10,32 @@ Burndown
 - Confirm that Stripe Mock works on client-side => DONE
 - Email Engine Configuration => DONE
 - Mock Email Sending => DONE
+11/15/2013 - 0.5
+- Major namespace reorganization => DONE
 
 MVP Definition - Aleks TODO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Aleks Review Partnership Agreement => TODO
+- Fix Commerce Unit Tests => TODO
 - Email Sending Engine => IN PROGRESS
-- Development Email Notifications => TODO
+* Configuration
+
+
+Puzzle
+~~~~~~
+G1	G2	CAR
+G2	G1 	CAR
+G1	CAR	G2	
+G2	CAR	G1 	
+CAR	G1	G2	
+CAR	G2	G1 	
 
 
 
+- Development Email Notifications => IN PROGRESS
+- Aleks Review Partnership Agreement => TODO
 - Stripe Setup 
 * Research Refunds in DEV environment => TODO
-* Add Refunds to the Mock Payment Processor
+* Add Refunds to the Mock Payment Processor => TODO
 * Merchant Account => TODO
 * Run Live Transactions => TODO
 

@@ -6,12 +6,12 @@ namespace Commerce.Application.Payment
 {
     public class StripePaymentProcessor : IPaymentProcessor
     {
-        private readonly IConfigurationAdapter _configurationAdapter;
+        private readonly IStripeConfigAdapter _stripeConfigAdapter;
         private readonly StripeChargeService _stripeService;
 
-        public StripePaymentProcessor(IConfigurationAdapter configurationAdapter, StripeChargeService stripeService)
+        public StripePaymentProcessor(IStripeConfigAdapter stripeConfigAdapter, StripeChargeService stripeService)
         {
-            _configurationAdapter = configurationAdapter;
+            _stripeConfigAdapter = stripeConfigAdapter;
             _stripeService = stripeService;
         }
 

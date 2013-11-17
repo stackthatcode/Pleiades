@@ -1,6 +1,6 @@
 namespace Commerce.Application.Payment
 {
-    public class ConfigurationAdapter : IConfigurationAdapter
+    public class StripeConfigAdapter : IStripeConfigAdapter
     {
         public string SecretKey
         {

@@ -121,10 +121,6 @@
       <Project>{8E922D95-E286-4AF1-89E2-943EA247B806}</Project>
       <Name>Commerce.Initializer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Commerce.StripeClient\Commerce.StripeClient.csproj">
-      <Project>{04FC7018-00C2-479F-8340-C11EF08518D5}</Project>
-      <Name>Commerce.StripeClient</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Pleiades.Web.Security.Membership\Pleiades.Web.Security.Membership.csproj">
       <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
       <Name>Pleiades.Web.Security.Membership</Name>

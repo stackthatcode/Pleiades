@@ -58,7 +58,7 @@ namespace Commerce.UnitTests.Application
             // Arrange
             var request = _orderRequest;
             request.Token = null;
-            var service = new OrderService(null, null, null, null, null);
+            var service = new OrderService(null, () => null, null, null, null);
 
             // Act
             var result = service.Submit(request);
@@ -100,7 +100,7 @@ namespace Commerce.UnitTests.Application
         {
             // Arrange
             var request = _orderRequest;
-            var service = new OrderService(null, null, null, null, null);
+            var service = new OrderService(null, () => null, null, null, null);
 
             // Act
             var result = service.Submit(request);
