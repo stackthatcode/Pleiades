@@ -56,7 +56,7 @@
         self.RetrieveStatesOfAmerica = function (callback) {
             flow.exec(
                 function () {
-                    self.Service.AjaxGet("/Admin/CreateOrder/States", this);
+                    self.Service.AjaxGet("/Admin/AddOrderToDatabase/States", this);
                 },
                 function (data) {
                     PushMkt.StatesOfAmerica = data;
@@ -70,7 +70,7 @@
         self.RetrieveShippingMethods = function (callback) {
             flow.exec(
                 function () {
-                    self.Service.AjaxGet("/Admin/CreateOrder/ShippingMethods", this);
+                    self.Service.AjaxGet("/Admin/AddOrderToDatabase/ShippingMethods", this);
                 },
                 function (data) {
                     PushMkt.ShippingOptions = data;

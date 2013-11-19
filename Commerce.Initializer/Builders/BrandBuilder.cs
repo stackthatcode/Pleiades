@@ -61,7 +61,7 @@ namespace Commerce.Initializer.Builders
                 LoggerSingleton.Get().Info("Create the default Brands");
 
                 //_genericRepository.GetAll().ForEach(x => _genericRepository.Delete(x));
-                //_unitOfWork.SaveChanges();
+                //_unitOfWork.SaveChangesToDatabase();
 
                 AddBrand(Path.Combine(BrandLogoDirectory(), "Afflictionmma2.jpg"),
                          "Affliction",

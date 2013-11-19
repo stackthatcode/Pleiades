@@ -49,8 +49,8 @@ namespace Commerce.Web.Plumbing
                 var model = new ErrorModel();                
                 model.AspxErrorPath = filterContext.HttpContext.Request.Path;
 
-                if (filterContext.HttpContext.Request.UrlReferrer != null &&
-                    filterContext.HttpContext.Request.UrlReferrer.ToString().Contains("/Admin"))
+                if (filterContext.HttpContext.Request.Path != null &&
+                    filterContext.HttpContext.Request.Path.Contains("/Admin"))
                 {
                     model.NavigatedFromAdminArea = true;
 

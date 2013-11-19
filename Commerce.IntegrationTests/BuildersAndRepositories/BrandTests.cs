@@ -21,7 +21,7 @@ namespace Commerce.IntegrationTests.BuildersAndRepositories
                 var allBrands = brandRepository.RetrieveAll();                
                 Console.WriteLine("\n");
                 Console.WriteLine(JsonConvert.SerializeObject(allBrands, Formatting.Indented));
-                Assert.That(allBrands.Count, Is.EqualTo(5));
+                Assert.That(allBrands.Count, Is.EqualTo(10));
             }
         }
     }

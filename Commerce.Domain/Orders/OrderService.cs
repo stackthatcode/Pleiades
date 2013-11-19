@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Autofac.Features.Indexed;
 using Commerce.Application.Analytics;
 using Commerce.Application.Billing;
 using Commerce.Application.Database;
@@ -19,39 +20,53 @@ namespace Commerce.Application.Orders
         public const string ErrorMissingData = "Invalid or missing data passed";
         public const string ErrorFailedPayment = "Something's wrong with your Payment Info. Sorry, please try again";
 
-        PushMarketContext Context { get; set; }
-        IPaymentProcessor PaymentProcessor { get; set; }
-        IAnalyticsCollector AnalyticsService { get; set; }
-        IEmailService EmailService { get; set; }
-        private IEmailGenerator _emailGenerator;
+        private readonly PushMarketContext _context;
+        private readonly IPaymentProcessor _paymentProcessor;
+        private readonly IAnalyticsCollector _analyticsService;
+        private readonly IAdminEmailBuilder _adminEmailBuilder;
+        private readonly ICustomerEmailBuilder _customerEmailBuilder;
+        private readonly IEmailService _emailService;
+    
+        // Post Processing Pipline functions
+        public Action<Order> AddOrderToDatabase;
+        public Action<Order> InventoryCorrection;
+        public Action<Order> RefundDifference;
+        public Action SaveChangesToDatabase;
+        public Action<Order> EmailNotification;
+        public Action<Order> PublishToAnalytics;
 
-        // injectible functions
+        // Dependencies
         public Func<string, StateTax> StateTaxByAbbr;
         public Func<int, ShippingMethod> ShippingMethodById;
-        public Func<IEnumerable<string>, bool, List<ProductSku>> InventoryBySkuCodes;
         public Action<SubmitOrderResult> ResponseTesting;
-        public Action<Order> CreateOrder;
-        public Action<Order> RefundDifference;
-        public Action SaveChanges;
-
+        public Func<IEnumerable<string>, bool, List<ProductSku>> InventoryBySkuCodes;
+        
         public OrderService(PushMarketContext context, 
                 Func<IPaymentProcessor> paymentProcessorFactory, 
                 IAnalyticsCollector analyticsService, 
-                IEmailService emailService, IEmailGenerator emailGenerator)
+                IEmailService emailService, 
+                IAdminEmailBuilder adminEmailBuilder, 
+                ICustomerEmailBuilder customerEmailBuilder)
         {
-            Context = context;
-            PaymentProcessor = paymentProcessorFactory.Invoke();
-            AnalyticsService = analyticsService;
-            EmailService = emailService;
-            _emailGenerator = emailGenerator;
+            _context = context;
+            _paymentProcessor = paymentProcessorFactory.Invoke();
+            _analyticsService = analyticsService;
+            _emailService = emailService;
+            _adminEmailBuilder = adminEmailBuilder;
+            _customerEmailBuilder = customerEmailBuilder;
 
             // injectible function initialization
-            StateTaxByAbbr = (abbr) => Context.StateTaxes.First(x => x.Abbreviation == abbr);
-            ShippingMethodById = (id) => Context.ShippingMethods.First(x => x.Id == id);
+            StateTaxByAbbr = (abbr) => _context.StateTaxes.First(x => x.Abbreviation == abbr);
+            ShippingMethodById = (id) => _context.ShippingMethods.First(x => x.Id == id);
             InventoryBySkuCodes = InventoryBySkuCodesImpl;
-            CreateOrder = CreateOrderImpl;
+
+            // Initialize Order Post-processors
+            AddOrderToDatabase = AddOrderToDatabaseImpl;
+            InventoryCorrection = InventoryCorrectionImpl;
             RefundDifference = RefundDifferenceImpl;
-            SaveChanges = SaveChangesImpl;
+            SaveChangesToDatabase = SaveChangesToDatabaseImpl;
+            EmailNotification = EmailNotificationImpl;
+            PublishToAnalytics = PublishToAnalyticsImpl;
         }
 
         public SubmitOrderResult Submit(OrderRequest orderRequest)
@@ -69,7 +84,7 @@ namespace Commerce.Application.Orders
 
         public Order Retreive(string externalId)
         {
-            return this.Context.Orders.FirstOrDefault(x => x.ExternalId == externalId);
+            return this._context.Orders.FirstOrDefault(x => x.ExternalId == externalId);
         }
 
         public SubmitOrderResult Submit_worker(OrderRequest orderRequest)
@@ -83,34 +98,32 @@ namespace Commerce.Application.Orders
             var order = FromOrderRequest(orderRequest);
 
             // Payment Processing - Bounded Context
-            var paymentTransaction = PaymentProcessor.Charge(orderRequest.Token, order.Total.GrandTotal);
+            var paymentTransaction = _paymentProcessor.Charge(orderRequest.Token, order.Total.GrandTotal);
             if (paymentTransaction.Success == false)
             {
                 // Don't create the Order!
                 return new SubmitOrderResult(false, ErrorFailedPayment);
             }
-
-            // Payment Received + Create Order - Bounded Context
             order.AddTransaction(paymentTransaction);
-            CreateOrder(order);
+
+            // Add the Order to the Database Context
+            AddOrderToDatabase(order);
             
             // Inventory corrections - Bounded Context
-            CorrectOrderQuantities(order);
+            InventoryCorrection(order);
 
-            // Shipping nothing?  Kill the shipping
-            if (order.OrderLines.All(x => x.Quantity == 0))
-            {
-                order.ShippingMethod = null;
-            }
-
+            // TODO: research using an Auth / Charge pattern, here
+            // If the inventory has changed, then we have to Refund
             RefundDifference(order);
 
+            // Shipping nothing?  Kill the shipping
+            RemoveShippingOnEmptyOrder(order);
+
             // Send the Email - Bounded Context
-            var message = _emailGenerator.OrderReceived(order);
-            EmailService.Send(message);
+            EmailNotification(order);
 
             // Invoke the Analytics Service - Bounded Context
-            AnalyticsService.Sale(order);
+            PublishToAnalytics(order);
 
             // Last step, Split the Order Lines
             order.SplitLines();
@@ -120,19 +133,14 @@ namespace Commerce.Application.Orders
             return orderResponse;
         }
 
-        private void RefundDifferenceImpl(Order order)
+        // TODO: create a Composite of Order post-processors
+        private void AddOrderToDatabaseImpl(Order order)
         {
-            // Eventual Consistency w/ Payment Correction - Do we need to process a refund? - Bounded Context
-            if (order.Total.GrandTotal < order.OriginalGrandTotal)
-            {
-                var originalPayment = order.Transactions.First(x => x.TransactionType == TransactionType.AuthorizeAndCollect);
-                var refundAmount = order.OriginalGrandTotal - order.Total.GrandTotal;
-                var refundTransaction = PaymentProcessor.Refund(originalPayment, refundAmount);
-                order.AddTransaction(refundTransaction); // NOTE: if this failed, it will appear for the Customer
-            }
+            _context.Orders.Add(order);
+            _context.SaveChanges();
         }
 
-        private void CorrectOrderQuantities(Order order)
+        private void InventoryCorrectionImpl(Order order)
         {
             var inventory = InventoryBySkuCodes(order.AllSkuCodes, true);
 
@@ -160,14 +168,71 @@ namespace Commerce.Application.Orders
                 // Increment the Reserved Count in INVENTORY
                 sku.Reserved += line.Quantity;
             }
-            SaveChanges();
+            SaveChangesToDatabase();
+        }
+
+        private void RemoveShippingOnEmptyOrder(Order order)
+        {
+            if (order.OrderLines.All(x => x.Quantity == 0))
+            {
+                order.ShippingMethod = null;
+            }
+        }
+
+        private void RefundDifferenceImpl(Order order)
+        {
+            // Eventual Consistency w/ Payment Correction - Do we need to process a refund? - Bounded Context
+            if (order.Total.GrandTotal < order.OriginalGrandTotal)
+            {
+                var originalPayment = order.Transactions.First(x => x.TransactionType == TransactionType.AuthorizeAndCollect);
+                var refundAmount = order.OriginalGrandTotal - order.Total.GrandTotal;
+                var refundTransaction = _paymentProcessor.Refund(originalPayment, refundAmount);
+                order.AddTransaction(refundTransaction); // NOTE: if this failed, it will appear for the Customer
+            }
+        }
+
+        private void SaveChangesToDatabaseImpl()
+        {
+            _context.SaveChanges();
+        }
+
+        private void EmailNotificationImpl(Order order)
+        {
+            var message = _customerEmailBuilder.OrderReceived(order);
+            _emailService.Send(message);
+        }
+
+        private void PublishToAnalyticsImpl(Order order)
+        {
+            _analyticsService.Sale(order);
+        }
+
+
+            
+        // NOTE: can't this be moved into a Repository
+        // Injectible functions
+        private List<ProductSku> InventoryBySkuCodesImpl(IEnumerable<string> sku_codes, bool refresh)
+        {
+            var inventory =
+                _context.ProductSkus
+                    .Include(x => x.Product)
+                    .Include(x => x.Color)
+                    .Include(x => x.Size)
+                    .Include(x => x.Color.ProductImageBundle)
+                    .Where(x => x.IsDeleted == false && sku_codes.Contains(x.SkuCode)).ToList();
+
+            if (refresh)
+            {
+                _context.RefreshCollection(inventory);
+            }
+            return inventory;
         }
 
         private Order FromOrderRequest(OrderRequest orderRequest)
         {
             var skus = orderRequest.AllSkuCodes;
             var inventory = InventoryBySkuCodes(skus, false);
-            
+
             var orderLines =
                 orderRequest.Items
                     .Select(x => new OrderLine(inventory.First(y => y.SkuCode == x.SkuCode), x.Quantity))
@@ -193,40 +258,13 @@ namespace Commerce.Application.Orders
 
             order.ShippingMethod = shippingMethod;
             order.StateTax = stateTax;
-            
+
             order.OriginalGrandTotal = order.Total.GrandTotal;
             order.ExternalId = OrderNumberGenerator.Next();
             order.DateCreated = DateTime.UtcNow;
             return order;
         }
 
-        // Injectible functions
-        private List<ProductSku> InventoryBySkuCodesImpl(IEnumerable<string> sku_codes, bool refresh)
-        {
-            var inventory =
-                Context.ProductSkus
-                    .Include(x => x.Product)
-                    .Include(x => x.Color)
-                    .Include(x => x.Size)
-                    .Include(x => x.Color.ProductImageBundle)
-                    .Where(x => x.IsDeleted == false && sku_codes.Contains(x.SkuCode)).ToList();
 
-            if (refresh)
-            {
-                Context.RefreshCollection(inventory);
-            }
-            return inventory;
-        }
-
-        private void CreateOrderImpl(Order order)
-        {
-            Context.Orders.Add(order);
-            Context.SaveChanges();
-        }
-
-        private void SaveChangesImpl()
-        {
-            Context.SaveChanges();
-        }
     }
 }

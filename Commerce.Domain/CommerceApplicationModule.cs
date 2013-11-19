@@ -1,6 +1,4 @@
-﻿using System;
-using System.Configuration;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Web;
 using Autofac;
 using Commerce.Application.Analytics;
@@ -25,8 +23,7 @@ namespace Commerce.Application
 {
     public class CommerceApplicationModule : Module
     {
-        protected override void Load(ContainerBuilder builder)
-        {
+        protected override void Load(ContainerBuilder builder)        {
             // Context and Unit of Work
             builder.RegisterType<PushMarketContext>()
                 .As<PushMarketContext>()
@@ -72,13 +69,11 @@ namespace Commerce.Application
             builder.RegisterType<EFGenericRepository<Product>>().As<IGenericRepository<Product>>().InstancePerLifetimeScope();
 
             // Payment Processors
-            builder.RegisterType<MockPaymentProcessor>();
             builder.RegisterType<StripeConfigAdapter>().As<IStripeConfigAdapter>();
-            builder.Register(
-                    c => new StripeChargeService(c.Resolve<IStripeConfigAdapter>().SecretKey))
+            builder
+                .Register(c => new StripeChargeService(c.Resolve<IStripeConfigAdapter>().SecretKey))
                 .As<StripeChargeService>();
-
-            if (Payment.StripeConfiguration.Settings.MockServiceEnabled)
+            if (Payment.StripeConfiguration.Settings.MockServiceEnabled.ToBoolTryParse())
             {
                 builder.RegisterType<MockPaymentProcessor>().As<IPaymentProcessor>();
             }
@@ -88,12 +83,17 @@ namespace Commerce.Application
             }
 
             // Email Repositories
-            builder.RegisterType<EmailGenerator>().As<IEmailGenerator>();
-            builder.RegisterType<EmailService>().As<IEmailService>();
-            builder.RegisterType<MockEmailService>().As<IEmailService>();            
-            if (EmailConfiguration.Settings.MockServiceEnabled.ToBoolTryParse())
+            builder.Register(ctx => EmailConfigAdapter.Settings).As<IEmailConfigAdapter>();
+            builder
+                .RegisterType<CustomerEmailBuilder>()
+                .Keyed<IAdminEmailBuilder>(EmailBuilderType.Customer);
+            builder
+                .RegisterType<AdminEmailBuilder>()
+                .Keyed<IAdminEmailBuilder>(EmailBuilderType.Admin);
+            
+            if (EmailConfigAdapter.Settings.MockServiceEnabled.ToBoolTryParse())
             {
-                builder.RegisterType<MockEmailService>().As<IEmailService>();                   
+                builder.RegisterType<MockEmailService>().As<IEmailService>();
             }
             else
             {

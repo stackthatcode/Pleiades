@@ -1,3 +1,5 @@
+using Commerce.Application.Email.Model;
+
 namespace Commerce.Application.Email
 {
     // TODO: implement these details

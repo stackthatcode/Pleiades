@@ -10,14 +10,54 @@ Burndown
 - Confirm that Stripe Mock works on client-side => DONE
 - Email Engine Configuration => DONE
 - Mock Email Sending => DONE
-11/15/2013 - 0.5
+11/15/2013 - 1.0
 - Major namespace reorganization => DONE
+- Fix Commerce Unit Tests => DONE
+11/17/2013 - 3.0
+- Fixed integrations Tests
 
-MVP Definition - Aleks TODO
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Fix Commerce Unit Tests => TODO
+11/18/2013
+- Order Creation Defect - Split Function is not destroying original => DONE
+
+
+
+
+Completion Summary
+~~~~~~~~~~~~~~~~~~
+- Order Screen Defects => DONE
+- Stripe Setup => DONE
+* Plug-in a Merchant Account and start charging away => TODO
+- Fix Server Error Screen => DONE
+
+
+Aleks Front Range TODO
+~~~~~~~~~~~~~~~~~~~~~~
 - Email Sending Engine => IN PROGRESS
-* Configuration
+* Test Configuration => TODO
+* Create Templates => TODO
+* Integration Test the Templates => TODO
+* Wire Email Notifications into Order and Ship => IN PROGRESS
+
+* Research Refunds in DEV environment => TODO
+* Add Refunds to the Mock Payment Processor => TODO
+
+- Aleks Review Partnership Agreement => TODO
+
+- GO LIVE
+* Azure Hosting => TODO
+* Merchant Account => TODO
+* Run Live Transactions => TODO
+* Dataplan => TODO
+
+
+Aleks Backlog
+~~~~~~~~~~~~~
+- Unit Test the Cart => TODO
+- Unit Test Order DDD functions => TODO
+- Any other coverage holes...? => TODO
+- Mail Chimp => TODO
+* http://apidocs.mailchimp.com/api/
+
 
 
 Puzzle
@@ -30,17 +70,6 @@ CAR	G1	G2
 CAR	G2	G1 	
 
 
-
-- Development Email Notifications => IN PROGRESS
-- Aleks Review Partnership Agreement => TODO
-- Stripe Setup 
-* Research Refunds in DEV environment => TODO
-* Add Refunds to the Mock Payment Processor => TODO
-* Merchant Account => TODO
-* Run Live Transactions => TODO
-
-- Azure Hosting => TODO
-- Dataplan => TODO
 
 
 Cherry on Top

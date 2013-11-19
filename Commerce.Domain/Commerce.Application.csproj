@@ -79,14 +79,22 @@
     <Compile Include="Billing\TransactionType.cs" />
     <Compile Include="Billing\TransactionTypeExtensions.cs" />
     <Compile Include="CommerceApplicationModule.cs" />
-    <Compile Include="Email\EmailConfiguration.cs" />
-    <Compile Include="Email\EmailGenerator.cs" />
+    <Compile Include="Email\AdminEmailBuilder.cs" />
+    <Compile Include="Email\ICustomerEmailBuilder.cs" />
+    <Compile Include="Email\CustomerEmailBuilder.cs" />
+    <Compile Include="Email\IAdminEmailBuilder.cs" />
+    <Compile Include="Email\EmailConfigAdapter.cs" />
     <Compile Include="Email\EmailService.cs" />
-    <Compile Include="Email\IEmailGenerator.cs" />
+    <Compile Include="Email\IEmailConfigAdapter.cs" />
     <Compile Include="Email\IEmailService.cs" />
-    <Compile Include="Email\IMessageRenderingEngine.cs" />
-    <Compile Include="Email\EmailMessage.cs" />
+    <Compile Include="Email\Model\EmailMessage.cs" />
+    <Compile Include="Email\ITemplateEngine.cs" />
     <Compile Include="Email\MockEmailService.cs" />
+    <Compile Include="Email\Model\OrderItemRefundedModel.cs" />
+    <Compile Include="Email\Model\OrderItemShippedModel.cs" />
+    <Compile Include="Email\Model\SystemErrorModel.cs" />
+    <Compile Include="Email\EmailBuilderType.cs" />
+    <Compile Include="Email\Model\OrderReceivedModel.cs" />
     <Compile Include="File\BlankImageRepository.cs" />
     <Compile Include="File\Entities\FileResource.cs" />
     <Compile Include="File\Entities\ImageBundle.cs" />
@@ -178,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
+    <Folder Include="Email\Templates\Customer\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pleiades.Data.EF\Pleiades.Application.Data.EF.csproj">
@@ -202,6 +211,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Email\Templates\Admin\OrderItemRefunded.txt" />
+    <Content Include="Email\Templates\Admin\SystemError.txt" />
+    <Content Include="Email\Templates\Admin\OrderItemShipped.txt" />
+    <Content Include="Email\Templates\Admin\OrderReceived.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

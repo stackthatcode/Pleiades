@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BuildersAndRepositories\ProductTests.cs" />
+    <Compile Include="Infrastructure\TestEmailRenderingEngine.cs" />
     <Compile Include="Resources\ImageProcessingTests.cs" />
     <Compile Include="StripeClient\TestConfiguration.cs" />
     <Compile Include="TestContainer.cs" />

@@ -1,12 +1,10 @@
 using System.Collections.Generic;
+using Commerce.Application.Email.Model;
 using Commerce.Application.Orders.Entities;
 
 namespace Commerce.Application.Email
 {
-    //
-    // TODO: where do the Razor Templates live...?  In Commerce.Web?
-    //
-    public interface IEmailGenerator
+    public interface IAdminEmailBuilder
     {
         EmailMessage OrderReceived(Order order);
         EmailMessage OrderItemsShipped(Order order, List<OrderLine> orderLine);

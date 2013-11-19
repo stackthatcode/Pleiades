@@ -35,7 +35,7 @@ namespace Commerce.Initializer.Builders
                 // Clear everything out
                 //_sizeRepository.GetAll().ForEach(x => _sizeRepository.Delete(x));
                 //_sizeGroupRepository.GetAll().ForEach(x => _sizeGroupRepository.Delete(x));
-                //_unitOfWork.SaveChanges();
+                //_unitOfWork.SaveChangesToDatabase();
 
                 // Create size groups
                 var result0 = _jsonSizeRepository.Insert(new JsonSizeGroup { Name = "N/A", Default = true });

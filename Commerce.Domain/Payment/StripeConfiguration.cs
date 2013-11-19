@@ -5,8 +5,8 @@ namespace Commerce.Application.Payment
 {
     public class StripeConfiguration : ConfigurationSection
     {
-        static Hashtable _settings = (Hashtable)ConfigurationManager.GetSection("stripeConfiguration");
-        static StripeConfiguration _singleton = new StripeConfiguration();
+        static readonly Hashtable _settings = (Hashtable)ConfigurationManager.GetSection("stripeConfiguration");
+        static readonly StripeConfiguration _singleton = new StripeConfiguration();
 
         public static StripeConfiguration Settings
         {
@@ -35,16 +35,16 @@ namespace Commerce.Application.Payment
         }
 
         [ConfigurationProperty("ClientSideDebugMode", IsRequired = true)]
-        public bool ClientSideDebugMode
+        public string ClientSideDebugMode
         {
-            get { return _settings["ClientSideDebugMode"].ToString().ToUpper() == "TRUE"; }
+            get { return (string)_settings["ClientSideDebugMode"]; }
             set { this["ClientSideDebugMode"] = value; }
         }
 
         [ConfigurationProperty("MockServiceEnabled", IsRequired = true)]
-        public bool MockServiceEnabled
+        public string MockServiceEnabled
         {
-            get { return _settings["MockServiceEnabled"].ToString().ToUpper() == "TRUE"; }
+            get { return (string) _settings["MockServiceEnabled"]; }
             set { this["MockServiceEnabled"] = value; }
         }
     }

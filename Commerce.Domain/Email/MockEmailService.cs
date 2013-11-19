@@ -1,33 +1,32 @@
 using System;
 using System.IO;
+using Commerce.Application.Email.Model;
 
 namespace Commerce.Application.Email
 {
     public class MockEmailService : IEmailService
     {
-        private readonly string _outputDirectory;
-        private readonly IMessageRenderingEngine _messageRenderingEngine;
+        private readonly IEmailConfigAdapter _configAdapter;
 
-        public MockEmailService(string outputDirectory, IMessageRenderingEngine messageRenderingEngine)
+        public MockEmailService(IEmailConfigAdapter configAdapter)
         {
-            _outputDirectory = outputDirectory;
-            _messageRenderingEngine = messageRenderingEngine;
+            _configAdapter = configAdapter;
         }
 
         public void Send(EmailMessage emailMessage)
         {
             var timestamp = DateTime.Now;
-            var contents = 
+            var contents =
                 "Date: " + DateTime.Now + Environment.NewLine +
                 "To: " + emailMessage.To + Environment.NewLine +
-                "From: " + Environment.NewLine + Environment.NewLine + 
-                _messageRenderingEngine.Generate(emailMessage);
+                "From: " + Environment.NewLine + Environment.NewLine +
+                emailMessage.Body;
 
             var fileName = 
                 timestamp.Year + timestamp.Month.ToString("00") + timestamp.Day.ToString("00") + 
                 "_" + emailMessage.To + ".txt";
 
-            var filePath = Path.Combine(_outputDirectory, fileName);
+            var filePath = Path.Combine(_configAdapter.MockServiceOutputDirectory, fileName);
             System.IO.File.WriteAllText(filePath, contents);
         }
     }

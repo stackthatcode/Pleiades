@@ -49,7 +49,7 @@ namespace Commerce.Application.Orders.Entities
         public List<OrderLine> Split()
         {
             var output = new List<OrderLine>();
-            for (int counter = 0; counter < Quantity; counter++)
+            for (int counter = 1; counter < Quantity; counter++)
             {
                 output.Add(
                     new OrderLine
@@ -62,6 +62,7 @@ namespace Commerce.Application.Orders.Entities
                             Status = this.Status,
                         });
             }
+            this.Quantity = 1;
             return output;
         }
     }

@@ -9,6 +9,22 @@ Marketing Deliverables
 - Blog Theme => TODO
 - Fix "Automation Zealot" image => TODO
 
+
+Notice How This Guy MARKETS His Blog!
+=====================================
+// TODO: Get down with this: http://martinnormark.com/generate-html-e-mail-body-in-c-using-templates    
+
+
+Order Recv'd => 
+	Content for Customer
+	Rendered for Customer
+	Address to Customer
+
+	
+Event for Notification
+	=> 
+
+
 Blog Post Goals
 ~~~~~~~~~~~~~~~
 - Consulting Engagements

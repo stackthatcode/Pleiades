@@ -32,7 +32,7 @@ namespace Commerce.Initializer.Builders
 
                 //var all = _repository.GetAll();
                 //all.ForEach(x => _repository.Delete(x));
-                //_unitOfWork.SaveChanges();
+                //_unitOfWork.SaveChangesToDatabase();
 
                 var result1 = _jsonRepository.Insert(
                     new JsonCategory() { ParentId = null, Name = "Good Gear Section", SEO = "Men's Section" });

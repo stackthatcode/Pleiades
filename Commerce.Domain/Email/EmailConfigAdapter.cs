@@ -3,12 +3,12 @@ using System.Configuration;
 
 namespace Commerce.Application.Email
 {
-    public class EmailConfiguration : ConfigurationSection
+    public class EmailConfigAdapter : ConfigurationSection, IEmailConfigAdapter
     {
         static readonly Hashtable _settings = (Hashtable)ConfigurationManager.GetSection("emailConfiguration");
-        static readonly EmailConfiguration _singleton = new EmailConfiguration();
+        static readonly EmailConfigAdapter _singleton = new EmailConfigAdapter();
 
-        public static EmailConfiguration Settings
+        public static EmailConfigAdapter Settings
         {
             get { return _singleton; }
         }
