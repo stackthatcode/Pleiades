@@ -23,13 +23,13 @@ namespace Commerce.Application
 {
     public class CommerceApplicationModule : Module
     {
-        protected override void Load(ContainerBuilder builder)        {
+        protected override void Load(ContainerBuilder builder)        
+        {
             // Context and Unit of Work
             builder.RegisterType<PushMarketContext>()
                 .As<PushMarketContext>()
                 .As<DbContext>()
                 .InstancePerLifetimeScope();
-
             builder.RegisterType<EfUnitOfWork>()
                 .As<IUnitOfWork>()
                 .InstancePerLifetimeScope();
@@ -82,15 +82,12 @@ namespace Commerce.Application
                 builder.RegisterType<StripePaymentProcessor>().As<IPaymentProcessor>();
             }
 
-            // Email Repositories
+            // Email Functionality
+            builder.RegisterType<CustomerEmailBuilder>().As<ICustomerEmailBuilder>();
+            builder.RegisterType<AdminEmailBuilder>().As<IAdminEmailBuilder>();
+            builder.RegisterType<EmbeddedResourceRepository>().As<IEmbeddedResourceRepository>();
+            builder.RegisterType<RazorTemplateEngine>().As<ITemplateEngine>();
             builder.Register(ctx => EmailConfigAdapter.Settings).As<IEmailConfigAdapter>();
-            builder
-                .RegisterType<CustomerEmailBuilder>()
-                .Keyed<IAdminEmailBuilder>(EmailBuilderType.Customer);
-            builder
-                .RegisterType<AdminEmailBuilder>()
-                .Keyed<IAdminEmailBuilder>(EmailBuilderType.Admin);
-            
             if (EmailConfigAdapter.Settings.MockServiceEnabled.ToBoolTryParse())
             {
                 builder.RegisterType<MockEmailService>().As<IEmailService>();

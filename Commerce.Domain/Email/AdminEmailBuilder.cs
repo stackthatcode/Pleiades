@@ -30,7 +30,7 @@ namespace Commerce.Application.Email
             return new EmailMessage
                 {
                     To = to,
-                    From = _config.FromAddress,
+                    From = _config.CustomerServiceEmail,
                 };
         }
 

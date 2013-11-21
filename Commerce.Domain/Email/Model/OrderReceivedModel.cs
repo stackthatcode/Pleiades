@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Commerce.Application.Orders.Entities;
 
 namespace Commerce.Application.Email.Model
 {
     public class OrderReceivedModel
     {
+        public Order Order { get; set; }
     }
 }

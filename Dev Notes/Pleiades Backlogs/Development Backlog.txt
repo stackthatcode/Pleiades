@@ -1,45 +1,26 @@
-Burndown
---------
-11/12/2013 - 0.5
-- fixed some Error Handling stuff
-11/13/2013 - 0.5
-- Defect on Create Order => DONE
-- Fixed some cosmetic issues on Create Order screen => DONE
-11/14/2013 - 1.0
-- Fix the Create Order Screen => DONE
-- Confirm that Stripe Mock works on client-side => DONE
-- Email Engine Configuration => DONE
-- Mock Email Sending => DONE
-11/15/2013 - 1.0
-- Major namespace reorganization => DONE
-- Fix Commerce Unit Tests => DONE
-11/17/2013 - 3.0
-- Fixed integrations Tests
-
-11/18/2013
+11/18/2013 - 1.0
 - Order Creation Defect - Split Function is not destroying original => DONE
+- Email Architecture => DONE
+11/19/2013
+* Test Email Configuration => DONE
 
-
-
-
-Completion Summary
-~~~~~~~~~~~~~~~~~~
-- Order Screen Defects => DONE
-- Stripe Setup => DONE
-* Plug-in a Merchant Account and start charging away => TODO
-- Fix Server Error Screen => DONE
 
 
 Aleks Front Range TODO
 ~~~~~~~~~~~~~~~~~~~~~~
 - Email Sending Engine => IN PROGRESS
-* Test Configuration => TODO
 * Create Templates => TODO
 * Integration Test the Templates => TODO
 * Wire Email Notifications into Order and Ship => IN PROGRESS
 
 * Research Refunds in DEV environment => TODO
 * Add Refunds to the Mock Payment Processor => TODO
+
+- User Account Password Reset => TODO
+* Email Template for "Hey, You've Got a New Account"
+* Email Template for "You've Requested to Reset Your Password.  Click here to Reset your Password"
+* Screen for Resetting Password
+* PasswordResetLink Repository ( CreateNew, RetrieveOneTime, Expiration )
 
 - Aleks Review Partnership Agreement => TODO
 

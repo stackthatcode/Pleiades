@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Commerce.Application.Email.Model;
 using Commerce.Application.Orders.Entities;
 
@@ -8,17 +7,21 @@ namespace Commerce.Application.Email
     public class CustomerEmailBuilder : ICustomerEmailBuilder
     {
         private readonly IEmailConfigAdapter _config;
+        private readonly ITemplateEngine _templateEngine;
 
-        public CustomerEmailBuilder(IEmailConfigAdapter config)
+        public CustomerEmailBuilder(
+                IEmailConfigAdapter config, 
+                ITemplateEngine templateEngine)
         {
             _config = config;
+            _templateEngine = templateEngine;
         }
 
         private EmailMessage MessageFactory()
         {
             return new EmailMessage
             {
-                From = _config.FromAddress,
+                From = _config.CustomerServiceEmail,
             };
         }
 
@@ -26,6 +29,8 @@ namespace Commerce.Application.Email
         {
             var output = MessageFactory();
             output.To = order.EmailAddress;
+            output.Body = _templateEngine.Render(
+                order, "Commerce.Application.Email.Templates.Customer.OrderReceived.txt");
             return output;
         }
 
@@ -33,6 +38,8 @@ namespace Commerce.Application.Email
         {
             var output = MessageFactory();
             output.To = order.EmailAddress;
+            output.Body = _templateEngine.Render(
+                order, "Commerce.Application.Email.Templates.Customer.OrderReceived.txt");
             return output;
         }
 
@@ -40,6 +47,8 @@ namespace Commerce.Application.Email
         {
             var output = MessageFactory();
             output.To = order.EmailAddress;
+            output.Body = _templateEngine.Render(
+                order, "Commerce.Application.Email.Templates.Customer.OrderReceived.txt");
             return output;
         }
     }

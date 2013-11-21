@@ -301,6 +301,7 @@
     <Content Include="Content\Utilities\flow.js" />
     <Content Include="Content\Utilities\generalFunctions.js" />
     <Content Include="Global.asax" />
+    <EmbeddedResource Include="Resources\EmailSignature.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

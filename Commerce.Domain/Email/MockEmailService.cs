@@ -19,11 +19,12 @@ namespace Commerce.Application.Email
             var contents =
                 "Date: " + DateTime.Now + Environment.NewLine +
                 "To: " + emailMessage.To + Environment.NewLine +
-                "From: " + Environment.NewLine + Environment.NewLine +
+                "From: " + emailMessage.From + Environment.NewLine + Environment.NewLine +
                 emailMessage.Body;
 
             var fileName = 
-                timestamp.Year + timestamp.Month.ToString("00") + timestamp.Day.ToString("00") + 
+                timestamp.Year + timestamp.Month.ToString("00") + timestamp.Day.ToString("00") +
+                "_" + timestamp.Hour.ToString("00") + "." + timestamp.Minute + "." + timestamp.Second + 
                 "_" + emailMessage.To + ".txt";
 
             var filePath = Path.Combine(_configAdapter.MockServiceOutputDirectory, fileName);

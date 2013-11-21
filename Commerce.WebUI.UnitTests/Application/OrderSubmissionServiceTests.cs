@@ -165,8 +165,8 @@ namespace Commerce.UnitTests.Application
                 .IgnoreArguments();
 
             var message = new EmailMessage();
-            var adminEmailBuilder = MockRepository.GenerateMock<IAdminEmailBuilder>();
-            adminEmailBuilder.Expect(x => x.OrderReceived(null)).IgnoreArguments().Return(message);
+            var customerEmailBuilder = MockRepository.GenerateMock<ICustomerEmailBuilder>();
+            customerEmailBuilder.Expect(x => x.OrderReceived(null)).IgnoreArguments().Return(message);
             var emailService = MockRepository.GenerateMock<IEmailService>();
             emailService.Expect(x => x.Send(message));
 
@@ -174,7 +174,7 @@ namespace Commerce.UnitTests.Application
             analyticsService.Expect(x => x.Sale(null)).IgnoreArguments();
 
             var service = new OrderService(
-                null, () => paymentProcessor, analyticsService, emailService, adminEmailBuilder, null);
+                null, () => paymentProcessor, analyticsService, emailService, null, customerEmailBuilder);
             service.InventoryBySkuCodes = this.SkuFunctionGenerator_ChangingInventory();
             service.StateTaxByAbbr = this.StateTaxFunctionGenerator();
             service.ShippingMethodById = this.ShippingMethodFunctionGenerator();

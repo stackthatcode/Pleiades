@@ -209,8 +209,7 @@ namespace Commerce.Application.Orders
 
 
             
-        // NOTE: can't this be moved into a Repository
-        // Injectible functions
+        // NOTE: can't this be moved into a Repository...?
         private List<ProductSku> InventoryBySkuCodesImpl(IEnumerable<string> sku_codes, bool refresh)
         {
             var inventory =
@@ -264,7 +263,5 @@ namespace Commerce.Application.Orders
             order.DateCreated = DateTime.UtcNow;
             return order;
         }
-
-
     }
 }

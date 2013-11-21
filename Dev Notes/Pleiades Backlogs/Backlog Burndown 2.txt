@@ -548,3 +548,26 @@ kurt.wuckertjr@proforma.com => READY
 * Integrate Nuget Library => TODO
 * Wire in Refund with Token => TODO
 
+Burndown
+--------
+11/12/2013 - 0.5
+- fixed some Error Handling stuff
+11/13/2013 - 0.5
+- Defect on Create Order => DONE
+- Fixed some cosmetic issues on Create Order screen => DONE
+11/14/2013 - 1.0
+- Fix the Create Order Screen => DONE
+- Confirm that Stripe Mock works on client-side => DONE
+- Email Engine Configuration => DONE
+- Mock Email Sending => DONE
+11/15/2013 - 1.0
+- Major namespace reorganization => DONE
+- Fix Commerce Unit Tests => DONE
+11/17/2013 - 3.0
+- Fixed integrations Tests
+Completion Summary
+~~~~~~~~~~~~~~~~~~
+- Order Screen Defects => DONE
+- Stripe Setup => DONE
+* Plug-in a Merchant Account and start charging away => TODO
+- Fix Server Error Screen => DONE

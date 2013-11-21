@@ -48,11 +48,25 @@ namespace Commerce.Application.Email
             set { this["SmtpPassword"] = value; }
         }
 
-        [ConfigurationProperty("FromAddress", IsRequired = true)]
-        public string FromAddress
+        [ConfigurationProperty("CustomerServiceEmail", IsRequired = true)]
+        public string CustomerServiceEmail
         {
-            get { return (string)_settings["FromAddress"]; }
-            set { this["FromAddress"] = value; }            
+            get { return (string)_settings["CustomerServiceEmail"]; }
+            set { this["CustomerServiceEmail"] = value; }            
+        }
+
+        [ConfigurationProperty("SystemEmail", IsRequired = true)]
+        public string SystemEmail
+        {
+            get { return (string)_settings["SystemEmail"]; }
+            set { this["SystemEmail"] = value; }
+        }
+
+        [ConfigurationProperty("SignatureResource", IsRequired = true)]
+        public string SignatureResource
+        {
+            get { return (string)_settings["SignatureResource"]; }
+            set { this["SignatureResource"] = value; }            
         }
     }
 }
