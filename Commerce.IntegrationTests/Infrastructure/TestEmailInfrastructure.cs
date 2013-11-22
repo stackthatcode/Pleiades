@@ -36,36 +36,41 @@ namespace Commerce.IntegrationTests.Infrastructure
             };
         }
 
+        private Order OrderFactory()
+        {
+            var order = new Order();
+            order.ExternalId = "ARQ-23289";
+            order.Name = "Lucious Tucious";
+            order.EmailAddress = "aleksjones@gmail.com";
+            order.Address1 = "123 Test STreet";
+            order.Address2 = "Suite 300";
+            order.City = "Urbana";
+            order.State = "IL";
+            order.ZipCode = "60601";
+            order.OrderLines.Add(new OrderLine
+            {
+                Sku = _sku1,
+                OriginalSkuCode = _sku1.SkuCode,
+                Quantity = 1,
+                OriginalName = _sku1.Name
+
+            });
+            order.OrderLines.Add(new OrderLine
+            {
+                Sku = _sku2,
+                OriginalSkuCode = _sku2.SkuCode,
+                Quantity = 2,
+                OriginalName = _sku2.Name
+            });
+            return order;
+        }
+
         [Test]
-        public void Send_An_Order_Received_Email()
+        public void Send_An_Order_Received_Email_To_Customer()
         {
             using (var scope = TestContainer.LifetimeScope())
             {
-                var order = new Order();
-                order.ExternalId = "ARQ-23289";
-                order.Name = "Lucious Tucious";
-                order.EmailAddress = "aleksjones@gmail.com";
-                order.Address1 = "123 Test STreet";
-                order.Address2 = "Suite 300";
-                order.City = "Urbana";
-                order.State = "IL";
-                order.ZipCode = "60601";
-                order.OrderLines.Add(new OrderLine
-                    {
-                        Sku = _sku1, 
-                        OriginalSkuCode = _sku1.SkuCode, 
-                        Quantity = 1, 
-                        OriginalName = _sku1.Name
-
-                    });
-                order.OrderLines.Add(new OrderLine
-                    {
-                        Sku = _sku2,
-                        OriginalSkuCode = _sku2.SkuCode,
-                        Quantity = 2,
-                        OriginalName = _sku2.Name
-                    });
-
+                var order = OrderFactory();
                 var builder = scope.Resolve<ICustomerEmailBuilder>();
                 var message = builder.OrderReceived(order);
                 var service = scope.Resolve<IEmailService>();

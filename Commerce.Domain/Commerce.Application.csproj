@@ -95,8 +95,8 @@
     <Compile Include="Email\Model\EmailMessage.cs" />
     <Compile Include="Email\ITemplateEngine.cs" />
     <Compile Include="Email\MockEmailService.cs" />
-    <Compile Include="Email\Model\OrderItemRefundedModel.cs" />
-    <Compile Include="Email\Model\OrderItemShippedModel.cs" />
+    <Compile Include="Email\Model\OrderItemsRefundedModel.cs" />
+    <Compile Include="Email\Model\OrderItemsShippedModel.cs" />
     <Compile Include="Email\Model\SystemErrorModel.cs" />
     <Compile Include="Email\EmailBuilderType.cs" />
     <Compile Include="Email\Model\OrderReceivedModel.cs" />
@@ -142,6 +142,7 @@
     <Compile Include="Database\PushMarketContext.cs" />
     <Compile Include="Orders\Entities\Order.cs" />
     <Compile Include="Orders\Entities\OrderLine.cs" />
+    <Compile Include="Email\Model\OrderLineExtensions.cs" />
     <Compile Include="Orders\Entities\OrderLineStatus.cs" />
     <Compile Include="Orders\Entities\OrderLineStatusExtensions.cs" />
     <Compile Include="Orders\Entities\OrderNote.cs" />
@@ -218,12 +219,12 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Email\Templates\Admin\OrderItemRefunded.txt" />
+    <EmbeddedResource Include="Email\Templates\Admin\OrderItemsRefunded.txt" />
     <EmbeddedResource Include="Email\Templates\Admin\SystemError.txt" />
-    <EmbeddedResource Include="Email\Templates\Admin\OrderItemShipped.txt" />
+    <EmbeddedResource Include="Email\Templates\Admin\OrderItemsShipped.txt" />
     <EmbeddedResource Include="Email\Templates\Admin\OrderReceived.txt" />
-    <EmbeddedResource Include="Email\Templates\Customer\OrderItemRefunded.txt" />
-    <EmbeddedResource Include="Email\Templates\Customer\OrderItemShipped.txt" />
+    <EmbeddedResource Include="Email\Templates\Customer\OrderItemsRefunded.txt" />
+    <EmbeddedResource Include="Email\Templates\Customer\OrderItemsShipped.txt" />
     <EmbeddedResource Include="Email\Templates\Customer\OrderReceived.txt" />
   </ItemGroup>
   <ItemGroup>

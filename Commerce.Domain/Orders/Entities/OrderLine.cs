@@ -45,7 +45,6 @@ namespace Commerce.Application.Orders.Entities
             get { return Quantity*OriginalUnitPrice; }
         }
 
-
         public List<OrderLine> Split()
         {
             var output = new List<OrderLine>();

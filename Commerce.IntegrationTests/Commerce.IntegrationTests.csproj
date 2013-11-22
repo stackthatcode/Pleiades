@@ -86,6 +86,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Infrastructure\EmailSignature.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestImages\Image1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -1,7 +1,6 @@
-﻿
-Your Order has been Received!  
+﻿Your Order has been Received!  Your Order Number is: @Model.ExternalId.  
 
-Your Order Number is: @Model.ExternalId.  It will ship to the following address:
+It will ship to the following address:
 
 @Model.Name
 @Model.Address1 @Model.Address2
@@ -9,7 +8,5 @@ Your Order Number is: @Model.ExternalId.  It will ship to the following address:
 
 @foreach (var orderline in Model.OrderLines) 
 {
-	@("Qty: " + orderline.Quantity + " - " + orderline.OriginalName + "\n") 
+	@(orderline.OriginalName + " - quantity: " + orderline.Quantity + "\n") 
 }
-
-@Model.Footer

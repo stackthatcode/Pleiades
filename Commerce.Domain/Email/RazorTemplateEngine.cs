@@ -24,7 +24,7 @@ namespace Commerce.Application.Email
             var bodyTemplate = _resourceRepository.RetrieveTextFileResource(bodyTemplateResource);
             var bodyContent = Razor.Parse(bodyTemplate, model);
 
-            var signature = _resourceRepository.RetrieveTextFileResource(_emailConfigAdapter.SignatureResource);
+            var signature = System.IO.File.ReadAllText(_emailConfigAdapter.SignatureFilePath);
             var masterTemplate = _resourceRepository.RetrieveTextFileResource(MasterTemplate);
 
             // TODO: replace this with Razor, if possible...

@@ -1,21 +1,27 @@
 11/18/2013 - 1.0
 - Order Creation Defect - Split Function is not destroying original => DONE
 - Email Architecture => DONE
-11/19/2013
+11/19/2013 - 1.0
 * Test Email Configuration => DONE
-
+11/20/2013 - 1.0
+- Build Templating Engine => DONE
+- Integration Test the Templates => DONE
+11/21/2013
+- Create hook for Signature injection => DONE
 
 
 Aleks Front Range TODO
 ~~~~~~~~~~~~~~~~~~~~~~
-- Email Sending Engine => IN PROGRESS
-* Create Templates => TODO
-* Integration Test the Templates => TODO
+- Email Sending Engine
+* Create Templates => IN PROGRESS
 * Wire Email Notifications into Order and Ship => IN PROGRESS
 
 * Research Refunds in DEV environment => TODO
 * Add Refunds to the Mock Payment Processor => TODO
 
+
+New Specs
+~~~~~~~~~
 - User Account Password Reset => TODO
 * Email Template for "Hey, You've Got a New Account"
 * Email Template for "You've Requested to Reset Your Password.  Click here to Reset your Password"

@@ -29,8 +29,8 @@ namespace Commerce.Application.Email
         {
             var output = MessageFactory();
             output.To = order.EmailAddress;
-            output.Body = _templateEngine.Render(
-                order, "Commerce.Application.Email.Templates.Customer.OrderReceived.txt");
+            output.Body = _templateEngine.Render(order, 
+                "Commerce.Application.Email.Templates.Customer.OrderReceived.txt");
             return output;
         }
 
@@ -38,8 +38,15 @@ namespace Commerce.Application.Email
         {
             var output = MessageFactory();
             output.To = order.EmailAddress;
-            output.Body = _templateEngine.Render(
-                order, "Commerce.Application.Email.Templates.Customer.OrderReceived.txt");
+
+            var model = new OrderItemsShippedModel
+                {
+                    Order = order,
+                    ShippedOrderLines = orderLine.ToOrderLineGroupList(),
+                };
+
+            output.Body = _templateEngine.Render(model,
+                "Commerce.Application.Email.Templates.Customer.OrderItemsShipped.txt");
             return output;
         }
 
@@ -47,8 +54,15 @@ namespace Commerce.Application.Email
         {
             var output = MessageFactory();
             output.To = order.EmailAddress;
-            output.Body = _templateEngine.Render(
-                order, "Commerce.Application.Email.Templates.Customer.OrderReceived.txt");
+
+            var model = new OrderItemsRefundedModel
+            {
+                Order = order,
+                RefundedOrderLines = orderLine.ToOrderLineGroupList(),
+            };
+
+            output.Body = _templateEngine.Render(model,
+                "Commerce.Application.Email.Templates.Customer.OrderItemsRefunded.txt");
             return output;
         }
     }

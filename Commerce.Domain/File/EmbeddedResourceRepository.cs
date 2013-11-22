@@ -9,6 +9,7 @@ namespace Commerce.Application.File
         public string RetrieveTextFileResource(string resourceName)
         {
             var assembly = Assembly.GetExecutingAssembly();
+            var names = assembly.GetManifestResourceNames();
 
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             using (var reader = new StreamReader(stream))
