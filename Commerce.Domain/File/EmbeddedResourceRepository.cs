@@ -6,7 +6,7 @@ namespace Commerce.Application.File
 {
     public class EmbeddedResourceRepository : IEmbeddedResourceRepository
     {
-        public string RetrieveTextFileResource(string resourceName)
+        public string RetrieveTextFile(string resourceName)
         {
             var assembly = Assembly.GetExecutingAssembly();
             var names = assembly.GetManifestResourceNames();

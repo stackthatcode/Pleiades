@@ -198,13 +198,30 @@ namespace Commerce.Application.Orders
 
         private void EmailNotificationImpl(Order order)
         {
-            var message = _customerEmailBuilder.OrderReceived(order);
-            _emailService.Send(message);
+            try
+            {
+                var customerMessage = _customerEmailBuilder.OrderReceived(order);
+                _emailService.Send(customerMessage);
+
+                var adminMessage = _adminEmailBuilder.OrderReceived(order);
+                _emailService.Send(adminMessage);
+            }
+            catch (Exception ex)
+            {
+                LoggerSingleton.Get().Error(ex);
+            } 
         }
 
         private void PublishToAnalyticsImpl(Order order)
         {
-            _analyticsService.Sale(order);
+            try
+            {
+                _analyticsService.Sale(order);
+            }
+            catch(Exception ex)
+            {
+                LoggerSingleton.Get().Error(ex);
+            }
         }
 
 

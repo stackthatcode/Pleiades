@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Commerce.Application.Orders.Entities;
 using System.Linq;
 
-namespace Commerce.Application.Email.Model
+namespace Commerce.Application.Orders.Entities
 {
     public class OrderLineGroup
     {
@@ -14,18 +13,19 @@ namespace Commerce.Application.Email.Model
 
     public static class OrderLineExtensions
     {
-        public static List<OrderLineGroup> ToOrderLineGroupList(this IEnumerable<OrderLine> orderlines)
+        public static List<OrderLineGroup> ToOrderLineGroups(this IEnumerable<OrderLine> orderlines)
         {
-            var uniqueSkus = orderlines.Select(x => x.OriginalSkuCode).Distinct();
+            var orderLines = orderlines as OrderLine[] ?? orderlines.ToArray();
+            var uniqueSkus = orderLines.Select(x => x.OriginalSkuCode).Distinct();
             var output = new List<OrderLineGroup>();
             foreach (var skuCode in uniqueSkus)
             {
                 output.Add(new OrderLineGroup
                     {
                         SkuCode = skuCode,
-                        Name = orderlines.First(x => x.OriginalSkuCode == skuCode).OriginalSkuCode,
-                        Quantity = orderlines.Sum(x => x.Quantity),
-                        Price = orderlines.First(x => x.OriginalSkuCode == skuCode).OriginalUnitPrice
+                        Name = orderLines.First(x => x.OriginalSkuCode == skuCode).OriginalName,
+                        Quantity = orderLines.Where(x => x.OriginalSkuCode == skuCode).Sum(x => x.Quantity),
+                        Price = orderLines.First(x => x.OriginalSkuCode == skuCode).OriginalUnitPrice
                     });
             }
             return output;

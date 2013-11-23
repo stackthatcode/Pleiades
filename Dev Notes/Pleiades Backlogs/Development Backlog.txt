@@ -4,10 +4,16 @@
 11/19/2013 - 1.0
 * Test Email Configuration => DONE
 11/20/2013 - 1.0
-- Build Templating Engine => DONE
+- Build Templating Engine
 - Integration Test the Templates => DONE
-11/21/2013
+11/21/2013 - 1.0
 - Create hook for Signature injection => DONE
+11/22/2013 - 1.0
+- Work on Template location problem
+11/23/2013
+- Finished building the Template engine
+- Tested Customer Order Received
+- Tested Admin Order Received
 
 
 Aleks Front Range TODO
@@ -15,6 +21,7 @@ Aleks Front Range TODO
 - Email Sending Engine
 * Create Templates => IN PROGRESS
 * Wire Email Notifications into Order and Ship => IN PROGRESS
+* Create Actual Email Sender => TODO
 
 * Research Refunds in DEV environment => TODO
 * Add Refunds to the Mock Payment Processor => TODO

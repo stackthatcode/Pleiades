@@ -2,6 +2,6 @@
 {
     public interface IEmbeddedResourceRepository
     {
-        string RetrieveTextFileResource(string resourceName);
+        string RetrieveTextFile(string resourceName);
     }
 }

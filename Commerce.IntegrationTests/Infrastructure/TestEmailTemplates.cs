@@ -1,4 +1,6 @@
-﻿using Commerce.Application.Orders.Entities;
+﻿using System.Linq;
+using Commerce.Application.Billing;
+using Commerce.Application.Orders.Entities;
 using Commerce.Application.Products;
 using Commerce.Application.Products.Entities;
 using NUnit.Framework;
@@ -8,7 +10,7 @@ using Commerce.Application.Email;
 namespace Commerce.IntegrationTests.Infrastructure
 {
     [TestFixture]
-    public class TestEmailInfrastructure
+    public class TestEmailTemplates
     {
         private ProductSku _sku1;
         private ProductSku _sku2;
@@ -42,6 +44,7 @@ namespace Commerce.IntegrationTests.Infrastructure
             order.ExternalId = "ARQ-23289";
             order.Name = "Lucious Tucious";
             order.EmailAddress = "aleksjones@gmail.com";
+            order.Phone = "510-717-8112";
             order.Address1 = "123 Test STreet";
             order.Address2 = "Suite 300";
             order.City = "Urbana";
@@ -77,5 +80,51 @@ namespace Commerce.IntegrationTests.Infrastructure
                 service.Send(message);
             }
         }
+
+        [Test]
+        public void Send_An_Order_Items_Shipped_Email_To_Customer()
+        {
+            using (var scope = TestContainer.LifetimeScope())
+            {
+                var order = OrderFactory();
+                var shipment = new OrderShipment()
+                {
+                    Order = order,
+                    OrderLines = new[] { order.OrderLines[0] }.ToList()
+                };
+
+                var builder = scope.Resolve<ICustomerEmailBuilder>();
+                
+                var message = builder.OrderItemsShipped(shipment);
+                var service = scope.Resolve<IEmailService>();
+                service.Send(message);
+            }
+        }
+
+        [Test]
+        public void Send_An_Order_Refund_Email_To_Customer()
+        {
+            using (var scope = TestContainer.LifetimeScope())
+            {
+                var order = OrderFactory();
+                var refund = new OrderRefund()
+                {
+                    Order = order,
+                    OrderLines = new[] { order.OrderLines[0] }.ToList(),
+                    Transaction = new Transaction(TransactionType.Refund)
+                        {
+                            Amount = 120m,
+                        }
+                };
+
+                var builder = scope.Resolve<ICustomerEmailBuilder>();
+                var message = builder.OrderItemsRefunded(refund);
+                var service = scope.Resolve<IEmailService>();
+                service.Send(message);
+            }
+        }
+
+        //message.To = "admins@artofgroundfighting.com";
+                
     }
 }

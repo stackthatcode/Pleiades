@@ -62,11 +62,11 @@ namespace Commerce.Application.Email
             set { this["SystemEmail"] = value; }
         }
 
-        [ConfigurationProperty("SignatureFilePath", IsRequired = true)]
-        public string SignatureFilePath
+        [ConfigurationProperty("TemplateDirectory", IsRequired = true)]
+        public string TemplateDirectory
         {
-            get { return (string)_settings["SignatureFilePath"]; }
-            set { this["SignatureFilePath"] = value; }            
+            get { return (string)_settings["TemplateDirectory"]; }
+            set { this["TemplateDirectory"] = value; }            
         }
     }
 }

@@ -8,8 +8,8 @@ namespace Commerce.Application.Orders
     {
         List<Order> Find(DateTime? startDate, DateTime? endDate, bool? complete);
         Order Retrieve(string externalId);
-        Order Refund(string externalId, List<int> items);
-        Order Ship(string externalId, List<int> items);
+        OrderRefund Refund(string externalId, List<int> items);
+        OrderShipment Ship(string externalId, List<int> items);
 
         // DO WE NEED THESE...?
         void FailShipping(string externalId, List<int> items);

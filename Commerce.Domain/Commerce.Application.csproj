@@ -83,6 +83,7 @@
     <Compile Include="Billing\TransactionTypeExtensions.cs" />
     <Compile Include="CommerceApplicationModule.cs" />
     <Compile Include="Email\AdminEmailBuilder.cs" />
+    <Compile Include="Email\TemplateIdentifier.cs" />
     <Compile Include="File\EmbeddedResourceRepository.cs" />
     <Compile Include="Email\ICustomerEmailBuilder.cs" />
     <Compile Include="Email\CustomerEmailBuilder.cs" />
@@ -95,12 +96,8 @@
     <Compile Include="Email\Model\EmailMessage.cs" />
     <Compile Include="Email\ITemplateEngine.cs" />
     <Compile Include="Email\MockEmailService.cs" />
-    <Compile Include="Email\Model\OrderItemsRefundedModel.cs" />
-    <Compile Include="Email\Model\OrderItemsShippedModel.cs" />
     <Compile Include="Email\Model\SystemErrorModel.cs" />
-    <Compile Include="Email\EmailBuilderType.cs" />
-    <Compile Include="Email\Model\OrderReceivedModel.cs" />
-    <Compile Include="Email\RazorTemplateEngine.cs" />
+    <Compile Include="Email\TemplateEngine.cs" />
     <Compile Include="File\BlankImageRepository.cs" />
     <Compile Include="File\Entities\FileResource.cs" />
     <Compile Include="File\Entities\ImageBundle.cs" />
@@ -142,13 +139,15 @@
     <Compile Include="Database\PushMarketContext.cs" />
     <Compile Include="Orders\Entities\Order.cs" />
     <Compile Include="Orders\Entities\OrderLine.cs" />
-    <Compile Include="Email\Model\OrderLineExtensions.cs" />
+    <Compile Include="Orders\Entities\OrderLineGroup.cs" />
     <Compile Include="Orders\Entities\OrderLineStatus.cs" />
     <Compile Include="Orders\Entities\OrderLineStatusExtensions.cs" />
     <Compile Include="Orders\Entities\OrderNote.cs" />
     <Compile Include="Orders\Entities\OrderNumberGenerator.cs" />
+    <Compile Include="Orders\Entities\OrderRefund.cs" />
     <Compile Include="Orders\Entities\OrderRequest.cs" />
     <Compile Include="Orders\Entities\OrderRequestItem.cs" />
+    <Compile Include="Orders\Entities\OrderShipment.cs" />
     <Compile Include="Orders\Entities\ShippingInfo.cs" />
     <Compile Include="Orders\Entities\ShippingMethod.cs" />
     <Compile Include="Orders\Entities\SubmitOrderResult.cs" />
@@ -217,18 +216,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Email\Templates\Admin\OrderItemsRefunded.txt" />
-    <EmbeddedResource Include="Email\Templates\Admin\SystemError.txt" />
-    <EmbeddedResource Include="Email\Templates\Admin\OrderItemsShipped.txt" />
-    <EmbeddedResource Include="Email\Templates\Admin\OrderReceived.txt" />
-    <EmbeddedResource Include="Email\Templates\Customer\OrderItemsRefunded.txt" />
-    <EmbeddedResource Include="Email\Templates\Customer\OrderItemsShipped.txt" />
-    <EmbeddedResource Include="Email\Templates\Customer\OrderReceived.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Email\Templates\Shared\MasterTemplate.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,7 +7,7 @@ namespace Commerce.Application.Email
     public interface ICustomerEmailBuilder
     {
         EmailMessage OrderReceived(Order order);
-        EmailMessage OrderItemsShipped(Order order, List<OrderLine> orderLine);
-        EmailMessage OrderItemsRefunded(Order order, List<OrderLine> orderLine);
+        EmailMessage OrderItemsShipped(OrderShipment shipment);
+        EmailMessage OrderItemsRefunded(OrderRefund refund);
     }
 }

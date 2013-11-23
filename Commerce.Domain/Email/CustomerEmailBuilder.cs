@@ -29,40 +29,26 @@ namespace Commerce.Application.Email
         {
             var output = MessageFactory();
             output.To = order.EmailAddress;
-            output.Body = _templateEngine.Render(order, 
-                "Commerce.Application.Email.Templates.Customer.OrderReceived.txt");
+            output.Subject = "Your order has been received";
+            output.Body = _templateEngine.Render(order, TemplateIdentifier.CustomerOrderReceived);
             return output;
         }
 
-        public EmailMessage OrderItemsShipped(Order order, List<OrderLine> orderLine)
+        public EmailMessage OrderItemsShipped(OrderShipment shipment)
         {
             var output = MessageFactory();
-            output.To = order.EmailAddress;
-
-            var model = new OrderItemsShippedModel
-                {
-                    Order = order,
-                    ShippedOrderLines = orderLine.ToOrderLineGroupList(),
-                };
-
-            output.Body = _templateEngine.Render(model,
-                "Commerce.Application.Email.Templates.Customer.OrderItemsShipped.txt");
+            output.To = shipment.Order.EmailAddress;
+            output.Subject = "Items in your order have shipped";
+            output.Body = _templateEngine.Render(shipment, TemplateIdentifier.CustomerOrderItemsShipped);
             return output;
         }
 
-        public EmailMessage OrderItemsRefunded(Order order, List<OrderLine> orderLine)
+        public EmailMessage OrderItemsRefunded(OrderRefund refund)
         {
             var output = MessageFactory();
-            output.To = order.EmailAddress;
-
-            var model = new OrderItemsRefundedModel
-            {
-                Order = order,
-                RefundedOrderLines = orderLine.ToOrderLineGroupList(),
-            };
-
-            output.Body = _templateEngine.Render(model,
-                "Commerce.Application.Email.Templates.Customer.OrderItemsRefunded.txt");
+            output.To = refund.Order.EmailAddress;
+            output.Subject = "Items in your order have been refunded";
+            output.Body = _templateEngine.Render(refund, TemplateIdentifier.CustomerOrderReceived);
             return output;
         }
     }

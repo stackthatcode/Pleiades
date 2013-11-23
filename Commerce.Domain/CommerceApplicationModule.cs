@@ -86,7 +86,7 @@ namespace Commerce.Application
             builder.RegisterType<CustomerEmailBuilder>().As<ICustomerEmailBuilder>();
             builder.RegisterType<AdminEmailBuilder>().As<IAdminEmailBuilder>();
             builder.RegisterType<EmbeddedResourceRepository>().As<IEmbeddedResourceRepository>();
-            builder.RegisterType<RazorTemplateEngine>().As<ITemplateEngine>();
+            builder.RegisterType<TemplateEngine>().As<ITemplateEngine>();
             builder.Register(ctx => EmailConfigAdapter.Settings).As<IEmailConfigAdapter>();
             if (EmailConfigAdapter.Settings.MockServiceEnabled.ToBoolTryParse())
             {

@@ -19,7 +19,8 @@ namespace Commerce.Application.Email
             var contents =
                 "Date: " + DateTime.Now + Environment.NewLine +
                 "To: " + emailMessage.To + Environment.NewLine +
-                "From: " + emailMessage.From + Environment.NewLine + Environment.NewLine +
+                "From: " + emailMessage.From + Environment.NewLine + 
+                "Subject: " + emailMessage.Subject + Environment.NewLine + Environment.NewLine + 
                 emailMessage.Body;
 
             var fileName = 

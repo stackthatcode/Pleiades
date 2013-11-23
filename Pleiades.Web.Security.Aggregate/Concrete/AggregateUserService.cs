@@ -14,7 +14,7 @@ namespace Pleiades.Web.Security.Concrete
     //
     public class AggregateUserService : IAggregateUserService
     {
-        public const int MaxRootUsers = 1;
+        public const int MaxRootUsers = 2;
         public const int MaxAdminUsers = 5;
 
         public IPfMembershipService MembershipService { get; set; }
@@ -22,11 +22,13 @@ namespace Pleiades.Web.Security.Concrete
         public IWritableAggregateUserRepository WritableRepository { get; set; }
         public IFormsAuthenticationService FormsService { get; set; }
 
-        private static ConcurrentDictionary<string, CacheEntry<AggregateUser>> _cache;
+        private static readonly ConcurrentDictionary<string, CacheEntry<AggregateUser>> _cache;
 
         public AggregateUserService(
-                IPfMembershipService membershipService, IReadOnlyAggregateUserRepository aggregateUserRepository,
-                IWritableAggregateUserRepository writableAggregateUserRepository, IFormsAuthenticationService formsAuthenticationService)
+                IPfMembershipService membershipService, 
+                IReadOnlyAggregateUserRepository aggregateUserRepository,
+                IWritableAggregateUserRepository writableAggregateUserRepository, 
+                IFormsAuthenticationService formsAuthenticationService)
         {
             this.MembershipService = membershipService;
             this.ReadOnlyRepository = aggregateUserRepository;

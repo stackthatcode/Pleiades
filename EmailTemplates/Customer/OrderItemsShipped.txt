@@ -6,7 +6,7 @@ They will ship to the following address:
 @Model.Order.Address1 @Model.Order.Address2
 @Model.Order.City, @Model.Order.State @Model.Order.ZipCode
 
-@foreach (var orderline in Model.ShippedOrderLines) 
+@foreach (var orderline in Model.OrderLineGroups) 
 {
 	@("Qty: " + orderline.Quantity + " - " + orderline.OriginalName + "\n") 
 }

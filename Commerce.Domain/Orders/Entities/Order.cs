@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Commerce.Application.Billing;
+using Commerce.Application.Email.Model;
 using Commerce.Application.Products;
 using Newtonsoft.Json;
 
@@ -100,6 +101,12 @@ namespace Commerce.Application.Orders.Entities
                 this.OrderLines.AddRange(line.Split().Where(x => x.Id != line.Id));
             }
             return output;
+        }
+
+        [NotMapped]
+        public List<OrderLineGroup> OrderLineGroups
+        {
+            get { return OrderLines.ToOrderLineGroups(); }
         }
 
         public List<string> AllSkuCodes

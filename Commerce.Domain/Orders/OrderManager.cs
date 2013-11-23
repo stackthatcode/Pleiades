@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Commerce.Application.Billing;
 using Commerce.Application.Database;
 using Commerce.Application.Orders.Entities;
 using Commerce.Application.Payment;
@@ -55,34 +56,40 @@ namespace Commerce.Application.Orders
         }
 
 
-        public Order Ship(string externalId, List<int> items)
+        public OrderShipment Ship(string externalId, List<int> items)
         {
             var order = this.Retrieve(externalId);
-            order.ReadyToShipItems
+            var actualItems = order.ReadyToShipItems
                 .Where(x => items.Contains(x.Id))
-                .ToList()
-                .ForEach(x => x.Status = OrderLineStatus.Shipped);
+                .ToList();
+
+            actualItems.ForEach(x => x.Status = OrderLineStatus.Shipped);
             order.LastModified = DateTime.Now;
             order.UpdateComplete();
-            return order;
+            return new OrderShipment()
+                {
+                    Order = order,
+                    OrderLines = actualItems
+                };
         }
 
-        public Order Refund(string externalId, List<int> items)
+        public OrderRefund Refund(string externalId, List<int> items)
         {
             var order = this.Retrieve(externalId);
             var currentTotal = order.Total.GrandTotal;
 
-            var refundableItems = order.RefundableLines
+            var refundItems = order.RefundableLines
                 .Where(x => items.Contains(x.Id))
                 .ToList();
 
-            refundableItems.ForEach(x => x.Status = OrderLineStatus.Refunded);
+            refundItems.ForEach(x => x.Status = OrderLineStatus.Refunded);
             var postRefundTotal = order.Total.GrandTotal;
             var refundAmount = currentTotal - postRefundTotal;
+
             if (refundAmount == 0)
             {
-                refundableItems.ForEach(x => _context.RefreshEntity(x));
-                return order;
+                refundItems.ForEach(x => _context.RefreshEntity(x));
+                return null;
             }
 
             var paymentTransaction = order.Payment;
@@ -90,14 +97,19 @@ namespace Commerce.Application.Orders
             order.Transactions.Add(result);            
             if (!result.Success)
             {
-                refundableItems.ForEach(x => _context.RefreshEntity(x));
+                refundItems.ForEach(x => _context.RefreshEntity(x));
             }
             else
             {
                 order.UpdateComplete();
                 order.LastModified = DateTime.Now;  
             }
-            return order;
+            return new OrderRefund()
+                {
+                    Order = order,
+                    OrderLines = refundItems,
+                    Transaction = result,
+                };
         }
 
         public void FailShipping(string externalId, List<int> items)

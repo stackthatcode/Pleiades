@@ -300,8 +300,34 @@
     <Content Include="Content\Utilities\aQuery-1.0-min.js" />
     <Content Include="Content\Utilities\flow.js" />
     <Content Include="Content\Utilities\generalFunctions.js" />
+    <None Include="EmailTemplates\Admin\OrderItemsRefunded.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EmailTemplates\Admin\OrderItemsShipped.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EmailTemplates\Admin\OrderReceived.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EmailTemplates\Admin\SystemError.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EmailTemplates\Customer\OrderItemsRefunded.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EmailTemplates\Customer\OrderItemsShipped.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="EmailTemplates\Customer\OrderReceived.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="EmailTemplates\Shared\EmailSignature.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\Shared\MasterTemplate.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Global.asax" />
-    <EmbeddedResource Include="Resources\EmailSignature.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

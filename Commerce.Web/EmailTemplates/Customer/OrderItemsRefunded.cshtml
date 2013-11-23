@@ -1,0 +1,9 @@
+﻿@model Commerce.Application.Orders.Entities.OrderRefund
+Items from your Order #@Model.Order.ExternalId have been Refunded.
+
+@foreach (var orderline in Model.OrderLineGroups) 
+{
+	@("Qty: " + orderline.Quantity + " - " + orderline.Name + "\n") 
+}
+
+Total Amount: @Model.Transaction.Amount.ToString("$0.00")

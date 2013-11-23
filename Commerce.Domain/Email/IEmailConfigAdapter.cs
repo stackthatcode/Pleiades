@@ -8,7 +8,7 @@
 
         string CustomerServiceEmail { get; set; }
         string SystemEmail { get; set; }
-        string SignatureFilePath { get; set; }
+        string TemplateDirectory { get; set; }
 
         string MockServiceEnabled { get; set; }
         string MockServiceOutputDirectory { get; set; }

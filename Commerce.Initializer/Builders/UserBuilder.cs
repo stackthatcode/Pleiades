@@ -9,9 +9,9 @@ namespace Commerce.Initializer.Builders
 {
     public class UserBuilder : IBuilder
     {
-        private IAggregateUserService _userService;
-        private IReadOnlyAggregateUserRepository _userRepository;
-        private IPfMembershipService _membershipService;
+        private readonly IAggregateUserService _userService;
+        private readonly IReadOnlyAggregateUserRepository _userRepository;
+        private readonly IPfMembershipService _membershipService;
 
         public UserBuilder(
             IAggregateUserService userService, IReadOnlyAggregateUserRepository userRepository,
@@ -28,39 +28,46 @@ namespace Commerce.Initializer.Builders
             
             var users = _userRepository.Retreive(new List<UserRole>() { UserRole.Root });
 
-            if (users.ToList().Count() < 1)
+            if (!users.ToList().Any())
             {
-                var membershipUser = _membershipService.GetUserByEmail("aleksjones@gmail.com");
-                if (membershipUser != null)
-                {
-                    _membershipService.DeleteUser(membershipUser.UserName);
-                }
+                AddRootUser( "aleksjones@gmail.com", "Aleksandr", "Jones", "123456", "First Karate Teacher", "Sugiyama");
+                AddRootUser("jeremysimon@me.com", "Jeremy", "Simon", "123456", "First Spiritual Teacher", "Murphy");
+            }
+        }
 
-                var identityuser1 = new IdentityProfileChange
+        private void AddRootUser(string email, string firstName, string lastName, string password, string passwordQuestion,
+                                 string passwordAnswer)
+        {
+            var membershipUser = _membershipService.GetUserByEmail(email);
+            if (membershipUser != null)
+            {
+                _membershipService.DeleteUser(membershipUser.UserName);
+            }
+
+            var identityuser1 = new IdentityProfileChange
                 {
                     AccountStatus = AccountStatus.Active,
                     AccountLevel = AccountLevel.NotApplicable,
                     UserRole = UserRole.Root,
-                    FirstName = "Aleksandr",
-                    LastName = "Jones",
+                    FirstName = firstName,
+                    LastName = lastName,
                 };
 
-                var membershipuser1 = new PfCreateNewMembershipUserRequest
+            var membershipuser1 = new PfCreateNewMembershipUserRequest
                 {
-                    Email = "aleksjones@gmail.com",
-                    Password = "123456",
+                    Email = email,
+                    Password = password,
                     IsApproved = true,
-                    PasswordQuestion = "First Karate Teacher",
-                    PasswordAnswer = "Sugiyama",
+                    PasswordQuestion = passwordQuestion,
+                    PasswordAnswer = passwordAnswer,
                 };
 
-                string outstatus1;
-                var user = _userService.Create(membershipuser1, identityuser1, out outstatus1);
+            string outstatus1;
+            var user = _userService.Create(membershipuser1, identityuser1, out outstatus1);
 
-                if (user == null)
-                {
-                    throw new Exception("Failed to create Root User: " + outstatus1);
-                }
+            if (user == null)
+            {
+                throw new Exception("Failed to create Root User: " + outstatus1);
             }
         }
     }

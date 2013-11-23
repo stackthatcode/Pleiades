@@ -40,18 +40,19 @@ namespace Commerce.Web.Areas.Admin.Controllers
         public JsonNetResult Ship(string externalId, string orderLineIds)
         {
             var orderLines = orderLineIds.Split(',').Select(Int32.Parse).ToList();
-            var order = _orderManager.Ship(externalId, orderLines);
+            var shipment = _orderManager.Ship(externalId, orderLines);
             _context.SaveChanges();
-            return new JsonNetResult(order);
+            return new JsonNetResult(shipment.Order);
         }
 
         [HttpPost]
         public JsonNetResult Refund(string externalId, string orderLineIds)
         {
             var orderLines = orderLineIds.Split(',').Select(Int32.Parse).ToList();
-            var order = _orderManager.Refund(externalId, orderLines);
+            var refund = _orderManager.Refund(externalId, orderLines);
             _context.SaveChanges();
-            return new JsonNetResult(order);
+            //var order = _orderManager.Retrieve(externalId);
+            return new JsonNetResult(refund.Order);
         }
     }
 }
