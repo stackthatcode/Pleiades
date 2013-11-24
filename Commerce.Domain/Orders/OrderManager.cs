@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using Commerce.Application.Billing;
 using Commerce.Application.Database;
+using Commerce.Application.Email;
 using Commerce.Application.Orders.Entities;
 using Commerce.Application.Payment;
 
@@ -13,10 +13,21 @@ namespace Commerce.Application.Orders
     {
         private readonly PushMarketContext _context;
         private readonly IPaymentProcessor _paymentProcessor;
+        private readonly IAdminEmailBuilder _adminEmailBuilder;
+        private readonly ICustomerEmailBuilder _customerEmailBuilder;
+        private readonly IEmailService _emailService;
 
-        public OrderManager(PushMarketContext context, Func<IPaymentProcessor> paymentProcessor)
+        public OrderManager(
+                PushMarketContext context,  
+                Func<IPaymentProcessor> paymentProcessor, 
+                IAdminEmailBuilder adminEmailBuilder, 
+                ICustomerEmailBuilder customerEmailBuilder, 
+                IEmailService emailService)
         {
             _context = context;
+            _adminEmailBuilder = adminEmailBuilder;
+            _customerEmailBuilder = customerEmailBuilder;
+            _emailService = emailService;
             _paymentProcessor = paymentProcessor();
         }
 
@@ -55,7 +66,6 @@ namespace Commerce.Application.Orders
                     .FirstOrDefault(x => x.ExternalId == externalId);
         }
 
-
         public OrderShipment Ship(string externalId, List<int> items)
         {
             var order = this.Retrieve(externalId);
@@ -66,11 +76,18 @@ namespace Commerce.Application.Orders
             actualItems.ForEach(x => x.Status = OrderLineStatus.Shipped);
             order.LastModified = DateTime.Now;
             order.UpdateComplete();
-            return new OrderShipment()
+
+            var output = new OrderShipment()
                 {
                     Order = order,
                     OrderLines = actualItems
                 };
+
+            var adminMessage = _adminEmailBuilder.OrderItemsShipped(output);
+            var customerMessage = _customerEmailBuilder.OrderItemsShipped(output);
+            _emailService.Send(adminMessage);
+            _emailService.Send(customerMessage);
+            return output;
         }
 
         public OrderRefund Refund(string externalId, List<int> items)
@@ -104,12 +121,18 @@ namespace Commerce.Application.Orders
                 order.UpdateComplete();
                 order.LastModified = DateTime.Now;  
             }
-            return new OrderRefund()
+            var output = new OrderRefund()
                 {
                     Order = order,
                     OrderLines = refundItems,
                     Transaction = result,
                 };
+
+            var adminMessage = _adminEmailBuilder.OrderItemsRefunded(output);
+            var customerMessage = _customerEmailBuilder.OrderItemsRefunded(output);
+            _emailService.Send(adminMessage);
+            _emailService.Send(customerMessage);
+            return output;
         }
 
         public void FailShipping(string externalId, List<int> items)

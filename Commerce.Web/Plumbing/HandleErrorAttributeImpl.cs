@@ -11,26 +11,20 @@ namespace Commerce.Web.Plumbing
     {
         public override void OnException(ExceptionContext filterContext)
         {
-            if (filterContext.ExceptionHandled || !filterContext.HttpContext.IsCustomErrorEnabled)
-            {
-                return;
-            }
+            if (filterContext.ExceptionHandled || !filterContext.HttpContext.IsCustomErrorEnabled) return;
+            if (new HttpException(null, filterContext.Exception).GetHttpCode() != 500) return;
+            if (!ExceptionType.IsInstanceOfType(filterContext.Exception)) return;
 
-            if (new HttpException(null, filterContext.Exception).GetHttpCode() != 500)
-            {
-                return;
-            }
-            
-            if (!ExceptionType.IsInstanceOfType(filterContext.Exception))
-            {
-                return;
-            }
-
+            // Log the Exception
             LoggerSingleton.Get().Error(
                     "URL:" + filterContext.HttpContext.Request.Url + " - " +
                     "IsAjaxRequest: " + filterContext.HttpContext.Request.IsAjaxRequest());
             LoggerSingleton.Get().Error(filterContext.Exception);
 
+            // Notify System Admins
+            ErrorNotification.Send(filterContext.Exception);
+
+            // And now respond
             if (filterContext.HttpContext.Request.IsAjaxRequest())
             {
                 filterContext.Result = new JsonResult

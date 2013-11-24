@@ -13,6 +13,8 @@ namespace Commerce.Application.Billing
 
         // Payment Processor Response
         public bool Success { get; set; }
+
+        
         public string OriginalReferenceCode { get; set; }
         public string ReferenceCode { get; set; }
 

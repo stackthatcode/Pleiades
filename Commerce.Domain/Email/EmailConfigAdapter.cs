@@ -13,11 +13,11 @@ namespace Commerce.Application.Email
             get { return _singleton; }
         }
 
-        [ConfigurationProperty("MockServiceEnabled", IsRequired = true)]
-        public string MockServiceEnabled
+        [ConfigurationProperty("ServerSideMockEnabled", IsRequired = true)]
+        public string ServerSideMockEnabled
         {
-            get { return (string)_settings["MockServiceEnabled"]; }
-            set { this["MockServiceEnabled"] = value; }
+            get { return (string)_settings["ServerSideMockEnabled"]; }
+            set { this["ServerSideMockEnabled"] = value; }
         }
 
         [ConfigurationProperty("MockServiceOutputDirectory", IsRequired = true)]
@@ -32,6 +32,13 @@ namespace Commerce.Application.Email
         {
             get { return (string)_settings["SmtpHost"]; }
             set { this["SmtpHost"] = value; }
+        }
+
+        [ConfigurationProperty("SmtpPort", IsRequired = true)]
+        public string SmtpPort
+        {
+            get { return (string)_settings["SmtpPort"]; }
+            set { this["SmtpPort"] = value; }
         }
 
         [ConfigurationProperty("SmtpUserName", IsRequired = true)]

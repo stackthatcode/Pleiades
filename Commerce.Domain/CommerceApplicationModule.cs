@@ -73,7 +73,7 @@ namespace Commerce.Application
             builder
                 .Register(c => new StripeChargeService(c.Resolve<IStripeConfigAdapter>().SecretKey))
                 .As<StripeChargeService>();
-            if (Payment.StripeConfiguration.Settings.MockServiceEnabled.ToBoolTryParse())
+            if (Payment.StripeConfiguration.Settings.ServerSideMockEnabled.ToBoolTryParse())
             {
                 builder.RegisterType<MockPaymentProcessor>().As<IPaymentProcessor>();
             }
@@ -88,7 +88,7 @@ namespace Commerce.Application
             builder.RegisterType<EmbeddedResourceRepository>().As<IEmbeddedResourceRepository>();
             builder.RegisterType<TemplateEngine>().As<ITemplateEngine>();
             builder.Register(ctx => EmailConfigAdapter.Settings).As<IEmailConfigAdapter>();
-            if (EmailConfigAdapter.Settings.MockServiceEnabled.ToBoolTryParse())
+            if (EmailConfigAdapter.Settings.ServerSideMockEnabled.ToBoolTryParse())
             {
                 builder.RegisterType<MockEmailService>().As<IEmailService>();
             }

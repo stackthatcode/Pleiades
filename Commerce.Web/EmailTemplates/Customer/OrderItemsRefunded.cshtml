@@ -3,7 +3,7 @@ Items from your Order #@Model.Order.ExternalId have been Refunded.
 
 @foreach (var orderline in Model.OrderLineGroups) 
 {
-	@("Qty: " + orderline.Quantity + " - " + orderline.Name + "\n") 
+	@(orderline.Name + " (" + orderline.SkuCode + ") - quantity: " + orderline.Quantity + "\n") 
 }
 
 Total Amount: @Model.Transaction.Amount.ToString("$0.00")

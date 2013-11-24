@@ -30,11 +30,11 @@ namespace Commerce.Application.Payment
             {
                 Amount = amount,
                 OriginalReferenceCode = originalTransaction.ReferenceCode,
-
+                ReferenceCode = Guid.NewGuid().ToString(),
+                
                 // Stubbed out Stripe details
                 ProcessorResponse = "REFUND-7777",
                 Details = "Refund granted",
-                ReferenceCode = Guid.NewGuid().ToString(),
                 Success = true,
             };
         }

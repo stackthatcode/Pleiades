@@ -4,11 +4,10 @@ using Pleiades.Application.Injection;
 using Pleiades.Web.Autofac;
 using Pleiades.Web.Security;
 using Commerce.Application;
-using Commerce.Web.Plumbing;
 
-namespace Commerce.Web
+namespace Commerce.Web.Plumbing
 {
-    public class CommerceWebUIModule : Autofac.Module
+    public class CommerceWebModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

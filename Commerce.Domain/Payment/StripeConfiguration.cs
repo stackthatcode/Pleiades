@@ -34,18 +34,18 @@ namespace Commerce.Application.Payment
             set { this["StripeUrl"] = value; }
         }
 
-        [ConfigurationProperty("ClientSideDebugMode", IsRequired = true)]
-        public string ClientSideDebugMode
+        [ConfigurationProperty("ClientSideMockEnabled", IsRequired = true)]
+        public string ClientSideMockEnabled
         {
-            get { return (string)_settings["ClientSideDebugMode"]; }
-            set { this["ClientSideDebugMode"] = value; }
+            get { return (string)_settings["ClientSideMockEnabled"]; }
+            set { this["ClientSideMockEnabled"] = value; }
         }
 
-        [ConfigurationProperty("MockServiceEnabled", IsRequired = true)]
-        public string MockServiceEnabled
+        [ConfigurationProperty("ServerSideMockEnabled", IsRequired = true)]
+        public string ServerSideMockEnabled
         {
-            get { return (string) _settings["MockServiceEnabled"]; }
-            set { this["MockServiceEnabled"] = value; }
+            get { return (string) _settings["ServerSideMockEnabled"]; }
+            set { this["ServerSideMockEnabled"] = value; }
         }
     }
 }

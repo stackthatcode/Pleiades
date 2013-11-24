@@ -1,0 +1,344 @@
+2013-11-24 08:06:52.6409|Error|390cda87-37dd-43d1-a7a0-580aef039ba4|URL:http://localhost/Commerce.Web/Admin/Manager/Error - IsAjaxRequest: False 
+2013-11-24 08:06:52.7339|Error|390cda87-37dd-43d1-a7a0-580aef039ba4|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Areas.Admin.Controllers.ManagerController.Error() in C:\DEV\Pleiades\Commerce.Web\Areas\Admin\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-11-24 08:25:48.0079|Error|b6c9902f-1cf5-4f0d-b094-7525176c1795|URL:http://localhost/Commerce.Web/Admin/Manager/Error - IsAjaxRequest: False 
+2013-11-24 08:25:48.0219|Error|b6c9902f-1cf5-4f0d-b094-7525176c1795|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Areas.Admin.Controllers.ManagerController.Error() in C:\DEV\Pleiades\Commerce.Web\Areas\Admin\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-11-24 08:27:42.3104|Error|cb09529e-6805-466b-93c5-5dc6db55405e|URL:http://localhost/Commerce.Web/Admin/Manager/Error - IsAjaxRequest: False 
+2013-11-24 08:27:42.3234|Error|cb09529e-6805-466b-93c5-5dc6db55405e|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Areas.Admin.Controllers.ManagerController.Error() in C:\DEV\Pleiades\Commerce.Web\Areas\Admin\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-11-24 08:53:21.6634|Debug|8e30f666-915a-48b4-9558-7bcf908cc4eb|Image - Download: 9155e439-a074-44ae-9940-bc4fcc23f5e6 thumbnail 
+2013-11-24 08:53:21.6634|Debug|05f8d6dd-c8cc-42bc-9648-5b99c4ef1e03|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac thumbnail 
+2013-11-24 08:53:21.9565|Debug|45eb8083-f156-443f-9150-b9bd765c9fdb|Image - Download: 119efe9b-7396-46db-9dd0-5f9c744fef11 thumbnail 
+2013-11-24 08:53:21.9725|Debug|b808f8e6-1edb-4cab-9332-b52ffea142fc|Image - Download: 5e70988c-76eb-4455-8316-9bbc83a9b669 thumbnail 
+2013-11-24 08:53:22.0005|Debug|387b05fa-ef0e-402a-949b-115b6be2f4ef|Image - Download: 7f43d568-e31f-44f4-8a6e-33a94053e09b thumbnail 
+2013-11-24 08:53:22.0005|Debug|81bd97db-d597-49bf-8607-c2e40238bf9b|Image - Download: d14dcd94-42c7-4688-bd18-9a7e9d63f5fa thumbnail 
+2013-11-24 08:53:22.0335|Debug|9b364979-6a86-4dae-bd47-29e90b711bd1|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f thumbnail 
+2013-11-24 08:53:22.0605|Debug|37ba359a-834e-4b08-bb68-81aceea2da5f|Image - Download: 1ae77103-823e-429e-9085-ce14c65010cb thumbnail 
+2013-11-24 08:53:22.0975|Debug|9a003166-711e-4b62-add9-0e2f25911bc5|Image - Download: 5c4b63de-36ba-4e2c-b35c-a8ea23294415 thumbnail 
+2013-11-24 08:53:22.1505|Debug|4919338e-31d6-4dce-9cca-c5934aada1aa|Image - Download: 4539092c-b5d7-44b4-990c-175828208dc5 thumbnail 
+2013-11-24 08:53:23.1115|Debug|ac1ada94-074d-4625-abe6-929ad7ee6add|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac thumbnail 
+2013-11-24 08:53:23.1345|Debug|ae7937b9-121f-4018-83cd-9b5224e41f1b|Image - Download: dac00b7d-762b-4471-a23b-e64c8ed87aac thumbnail 
+2013-11-24 08:53:25.2917|Debug|bd94f28d-17ee-4504-a8e0-959a8a365a4c|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac thumbnail 
+2013-11-24 08:53:25.2997|Debug|1ac8054a-55dd-4340-9c59-bf011c54eac3|Image - Download: dac00b7d-762b-4471-a23b-e64c8ed87aac thumbnail 
+2013-11-24 08:53:27.5928|Debug|d99ce45d-ceaf-4821-9225-3ef1bb0f9a34|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac thumbnail 
+2013-11-24 08:53:27.5928|Debug|fedfc8e3-35b5-4705-a143-713199295949|Image - Download: dac00b7d-762b-4471-a23b-e64c8ed87aac thumbnail 
+2013-11-24 08:54:11.8183|Debug|05c6245a-d713-44d1-adb6-ccb5fccc4f30|Image - Download: 5e70988c-76eb-4455-8316-9bbc83a9b669 thumbnail 
+2013-11-24 08:54:11.8533|Debug|3e59a692-e0a5-477f-bf2b-6f78ec595a46|Image - Download: 9155e439-a074-44ae-9940-bc4fcc23f5e6 thumbnail 
+2013-11-24 08:54:11.8643|Debug|dec6e20c-36fe-4085-91c4-0e408e34d612|Image - Download: d14dcd94-42c7-4688-bd18-9a7e9d63f5fa thumbnail 
+2013-11-24 08:54:11.8343|Debug|56c1e378-c59d-4bda-a185-14c71f6f6088|Image - Download: 119efe9b-7396-46db-9dd0-5f9c744fef11 thumbnail 
+2013-11-24 08:54:11.8643|Debug|9afbb3ea-d3ec-4694-962a-b30894ec04d4|Image - Download: 7f43d568-e31f-44f4-8a6e-33a94053e09b thumbnail 
+2013-11-24 08:54:11.9573|Debug|85e7c37a-62f0-4183-ba21-f88e76cde9c8|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac thumbnail 
+2013-11-24 08:54:12.2883|Debug|cee1c832-d0cc-4a21-a650-b7d349d67338|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f thumbnail 
+2013-11-24 08:54:12.4093|Debug|b0ab07a8-23ad-4204-896d-d38fb3f73365|Image - Download: 5c4b63de-36ba-4e2c-b35c-a8ea23294415 thumbnail 
+2013-11-24 08:54:12.4864|Debug|acb94de1-0785-4578-bd21-055e16c8602c|Image - Download: 1ae77103-823e-429e-9085-ce14c65010cb thumbnail 
+2013-11-24 08:54:12.5704|Debug|7e10ee8f-46a5-4af8-a63e-8ba4af00a58d|Image - Download: 4539092c-b5d7-44b4-990c-175828208dc5 thumbnail 
+2013-11-24 08:54:18.4877|Debug|74d39399-0387-49c2-8ebe-e317f0a293b5|Image - Download: 9155e439-a074-44ae-9940-bc4fcc23f5e6 thumbnail 
+2013-11-24 08:54:18.5097|Debug|7a5a03c2-b7a1-49f7-b3c8-0f43ca5192d1|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac thumbnail 
+2013-11-24 08:54:18.5097|Debug|1f207db3-4da9-4662-933e-cdf6db5b994f|Image - Download: 5e70988c-76eb-4455-8316-9bbc83a9b669 thumbnail 
+2013-11-24 08:54:18.5417|Debug|2db05b3c-2b1c-4155-a751-3d8b5e085a06|Image - Download: 119efe9b-7396-46db-9dd0-5f9c744fef11 thumbnail 
+2013-11-24 08:54:18.6267|Debug|68a17209-b9d0-46a8-9035-25bea93c63f0|Image - Download: d14dcd94-42c7-4688-bd18-9a7e9d63f5fa thumbnail 
+2013-11-24 08:54:18.6857|Debug|d40b48f3-ff25-46cf-86fd-d807aa4fe6dd|Image - Download: 7f43d568-e31f-44f4-8a6e-33a94053e09b thumbnail 
+2013-11-24 08:54:18.7107|Debug|79a46cf1-4588-4b87-b9b3-fc8bfbd7a6c2|Image - Download: 1ae77103-823e-429e-9085-ce14c65010cb thumbnail 
+2013-11-24 08:54:18.7317|Debug|d1f2387d-9594-471f-9568-f789c2d954c7|Image - Download: 5c4b63de-36ba-4e2c-b35c-a8ea23294415 thumbnail 
+2013-11-24 08:54:18.7317|Debug|60951fb5-9186-4fc4-8e28-15fa9d1814d6|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f thumbnail 
+2013-11-24 08:54:18.7317|Debug|2f67cd56-7625-481a-b5d3-67485263c70e|Image - Download: 4539092c-b5d7-44b4-990c-175828208dc5 thumbnail 
+2013-11-24 08:54:20.2528|Debug|49cb98bb-3e1d-4810-a763-3863a951a3c4|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac thumbnail 
+2013-11-24 08:54:20.2528|Debug|4b438cf2-09fc-4d03-a0c2-b14ae36bcbd6|Image - Download: dac00b7d-762b-4471-a23b-e64c8ed87aac thumbnail 
+2013-11-24 08:54:22.3469|Debug|db8b319b-60fb-4d40-8a21-3e971a3f0cb9|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac thumbnail 
+2013-11-24 08:54:22.3469|Debug|44ec8f1c-c53d-4cc2-aa64-d78a583f6acf|Image - Download: dac00b7d-762b-4471-a23b-e64c8ed87aac thumbnail 
+2013-11-24 08:54:24.6540|Debug|d38d84e7-7398-4c75-8029-6b5c6c871201|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac thumbnail 
+2013-11-24 08:54:24.6791|Debug|d5861b55-2582-4825-8ed8-74f698e40d7b|Image - Download: dac00b7d-762b-4471-a23b-e64c8ed87aac thumbnail 
+2013-11-24 09:01:17.8947|Debug|2b7f361c-3c89-43c6-9941-178b8de8eefa|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac small 
+2013-11-24 09:01:17.8947|Debug|acf33cbf-b35f-4d6d-b3b9-6e1fa06e0e67|Image - Download: 5e70988c-76eb-4455-8316-9bbc83a9b669 small 
+2013-11-24 09:01:18.0267|Debug|2e300be7-2557-4959-a596-0b7e34b48d5d|Image - Download: 119efe9b-7396-46db-9dd0-5f9c744fef11 small 
+2013-11-24 09:01:18.0267|Debug|f3121f90-6b65-4d21-97bb-40e32749dc7b|Image - Download: d14dcd94-42c7-4688-bd18-9a7e9d63f5fa small 
+2013-11-24 09:01:18.0597|Debug|7a2293cd-37e6-4d94-ace9-3e963b5ab911|Image - Download: 7f43d568-e31f-44f4-8a6e-33a94053e09b small 
+2013-11-24 09:01:18.0597|Debug|72eb3d28-1501-45a3-b09c-76a85e28c7d6|Image - Download: 9155e439-a074-44ae-9940-bc4fcc23f5e6 small 
+2013-11-24 09:01:18.0837|Debug|73bba320-c925-4635-8d0a-6b1cacacf1c2|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f small 
+2013-11-24 09:01:18.0847|Debug|6691724c-a7c6-4e5e-ad15-3837c127808c|Image - Download: 1ae77103-823e-429e-9085-ce14c65010cb small 
+2013-11-24 09:01:18.1197|Debug|63ca894b-883f-4614-8745-cf460dfe647c|Image - Download: 5c4b63de-36ba-4e2c-b35c-a8ea23294415 small 
+2013-11-24 09:01:18.1387|Debug|8343b2c1-6fc4-4154-8be5-a2453dcaa490|Image - Download: 4539092c-b5d7-44b4-990c-175828208dc5 small 
+2013-11-24 09:01:22.3039|Debug|8653c8ba-4dda-4c01-92e0-1d006a2cff8d|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac large 
+2013-11-24 09:01:22.3039|Debug|760f0e36-b485-44fc-b2fb-7ee8f3c52504|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac thumbnail 
+2013-11-24 09:01:22.3209|Debug|6634d0f3-1689-4283-a339-256b90da8871|Image - Download: 43c84aef-4bb0-4698-96f6-ed4415d5c985 thumbnail 
+2013-11-24 09:01:22.3209|Debug|249cfd5c-2360-4fac-8034-8e06683a847d|Image - Download: 78de82a3-2328-4728-85ae-29ac74e60ec3 thumbnail 
+2013-11-24 09:01:22.3409|Debug|f88c5a4d-5a5b-48d5-b883-d4abae88d02d|Image - Download: dfb30573-7ab3-4ada-9978-6ec3d711992b thumbnail 
+2013-11-24 09:01:22.3409|Debug|b0093458-1f36-4b08-94a7-42a71057954c|Image - Download: 659ce7dc-7639-4b42-a8cf-0cb6b77bd745 large 
+2013-11-24 09:01:22.3509|Debug|569d8b67-af89-4dd5-8dfa-1a19422872e0|Image - Download: 4d558f42-0412-4ff9-9044-fd9added8ae6 thumbnail 
+2013-11-24 09:01:22.3619|Debug|78a160ea-8ace-4480-8dd3-45a526a3540f|Image - Download: b4c41e37-ee92-43c8-a65f-01409618d076 thumbnail 
+2013-11-24 09:01:22.4509|Debug|bdfad113-9d2a-43f5-9e02-ad2446704866|Image - Download: 8d32e914-ae98-47c0-bc73-55e27634cf10 thumbnail 
+2013-11-24 09:01:24.1390|Debug|18f32b45-c65b-404d-bab4-67e5f49231fb|Image - Download: dac00b7d-762b-4471-a23b-e64c8ed87aac large 
+2013-11-24 09:01:24.1390|Debug|f6379e01-c628-4ef8-87f5-8fd08c288629|Image - Download: 8d159c19-bbf6-4415-a138-b5c3f13a096a thumbnail 
+2013-11-24 09:01:24.1730|Debug|6005dd06-cffd-46c5-b62c-53582daf295b|Image - Download: 8fb13d32-f2c1-4176-b46f-6ab9ab78869a thumbnail 
+2013-11-24 09:01:24.1860|Debug|d1211215-4fc4-4e6e-a8fb-b8a1f626e4e1|Image - Download: 7cc63d55-d79b-40f5-bcd5-dc45755b6c17 thumbnail 
+2013-11-24 09:01:24.1860|Debug|ea5f7ff4-5429-488d-aa70-523b55d57d50|Image - Download: dac00b7d-762b-4471-a23b-e64c8ed87aac thumbnail 
+2013-11-24 09:01:24.1860|Debug|8bc86cdf-80bd-40cd-aebb-45b1461955be|Image - Download: 5bd3c977-28ac-4247-a8e7-d70693d3c17f thumbnail 
+2013-11-24 09:01:25.7951|Debug|b26f132d-73bd-47f3-be0b-297c916e9b86|Image - Download: 9155e439-a074-44ae-9940-bc4fcc23f5e6 small 
+2013-11-24 09:01:25.7951|Debug|4abd2c03-a37a-4a83-ae31-8da92c575e37|Image - Download: 119efe9b-7396-46db-9dd0-5f9c744fef11 small 
+2013-11-24 09:01:25.7951|Debug|2f14462a-fd94-4529-8dcc-7acb022d3583|Image - Download: d14dcd94-42c7-4688-bd18-9a7e9d63f5fa small 
+2013-11-24 09:01:25.8251|Debug|e170d497-2f19-4793-9dd4-517174bf9ba5|Image - Download: 7f43d568-e31f-44f4-8a6e-33a94053e09b small 
+2013-11-24 09:01:25.8391|Debug|0ceee4dc-0a06-4e38-8821-3bc384a6d307|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f small 
+2013-11-24 09:01:25.8601|Debug|7c551d55-bb3a-4e9a-85ef-18a046f4c865|Image - Download: 4539092c-b5d7-44b4-990c-175828208dc5 small 
+2013-11-24 09:01:25.8601|Debug|b8b39568-60b2-47ae-a085-cbd52724fdb9|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac small 
+2013-11-24 09:01:25.8391|Debug|74529312-991b-4e43-b7cd-ba0bce9b8ccc|Image - Download: 5e70988c-76eb-4455-8316-9bbc83a9b669 small 
+2013-11-24 09:01:25.8391|Debug|df6c083b-3319-40fc-810b-1b20e3f33c16|Image - Download: 1ae77103-823e-429e-9085-ce14c65010cb small 
+2013-11-24 09:01:25.8391|Debug|76de97a7-d736-493a-8623-9c9c4b6996bb|Image - Download: 5c4b63de-36ba-4e2c-b35c-a8ea23294415 small 
+2013-11-24 09:01:28.1013|Debug|47221c02-d750-468b-bad8-200efe1f915b|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f large 
+2013-11-24 09:01:28.1013|Debug|42dd92d0-cd4b-4608-aacd-3e5d57b4efa6|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f thumbnail 
+2013-11-24 09:01:28.1013|Debug|841409ca-b69e-4ccd-8adf-036478820b9c|Image - Download: ee41a140-d8aa-4b8c-94b0-dae749e47af5 large 
+2013-11-24 09:01:28.1163|Debug|008c9b40-0356-4d12-b4f1-9b8d6fbeff94|Image - Download: b3988946-423c-4eae-a7b2-0c1496c49653 thumbnail 
+2013-11-24 09:01:33.3056|Debug|60a6ee60-3367-4326-ab6d-bd2435d68e91|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f thumbnail 
+2013-11-24 09:01:33.3126|Debug|162931f0-d77a-4495-8aa8-fe600075e37c|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f large 
+2013-11-24 09:01:36.4787|Debug|16469d04-4354-41de-84e7-893513f21b6e|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f thumbnail 
+2013-11-24 09:01:36.4787|Debug|ba91cf32-1f24-498c-b5ab-d6d48aef868e|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f large 
+2013-11-24 09:05:12.5481|Debug|617ef699-5912-4350-a381-3113d4810cf1|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f large 
+2013-11-24 09:05:12.5481|Debug|4cb1eeac-dfa3-4f31-968a-52bb9e209af3|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f thumbnail 
+2013-11-24 09:05:14.6432|Debug|22e77b0e-935e-409a-9225-7f1ac71f50dd|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f large 
+2013-11-24 09:05:14.6432|Debug|02ff6eb3-b516-44bd-bbb0-10d42ac44d01|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f thumbnail 
+2013-11-24 09:05:16.9594|Debug|6e5204e8-c562-4300-9d77-94f6ba8d3fcc|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f large 
+2013-11-24 09:05:41.6508|Debug|f87e7e66-56da-4679-b7b5-fe10e6b2ab50|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f thumbnail 
+2013-11-24 09:05:41.6508|Debug|445a409a-117b-46e2-9eb6-c1e91615d946|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f large 
+2013-11-24 09:08:22.0299|Debug|c4ee0c18-bafa-40af-844e-b28a7a2fc5e4|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f large 
+2013-11-24 09:08:22.0299|Debug|19f9aed2-cc22-4eed-9b8d-33f1e380e87f|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f thumbnail 
+2013-11-24 09:11:54.2941|Debug|9684eec2-01b0-43e9-86af-1975a9ec62fe|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f large 
+2013-11-24 09:11:54.2941|Debug|b66af066-3d54-47b0-b008-7c6e16ac021f|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f thumbnail 
+2013-11-24 09:17:00.4866|Debug|93eb79a6-358a-47db-94b4-047247dfc2dc|Image - Download: d14dcd94-42c7-4688-bd18-9a7e9d63f5fa small 
+2013-11-24 09:17:00.6486|Debug|ddecad8d-50ff-4285-a1ef-496f160299fd|Image - Download: 9155e439-a074-44ae-9940-bc4fcc23f5e6 small 
+2013-11-24 09:17:00.6626|Debug|c08fe7aa-2abf-4929-ae06-5e5c5570e18e|Image - Download: 7f43d568-e31f-44f4-8a6e-33a94053e09b small 
+2013-11-24 09:17:00.6486|Debug|523785db-ac40-4d87-beb0-e287b3a04260|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac small 
+2013-11-24 09:17:00.6486|Debug|ca01b26c-0621-4678-8c93-999b28ae2e65|Image - Download: 5e70988c-76eb-4455-8316-9bbc83a9b669 small 
+2013-11-24 09:17:00.6486|Debug|e9107496-c256-4c86-bef8-6c7723a186ca|Image - Download: 119efe9b-7396-46db-9dd0-5f9c744fef11 small 
+2013-11-24 09:17:00.9326|Debug|c9a35e83-88d6-49bb-86fb-8bd0b0291430|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f small 
+2013-11-24 09:17:01.1796|Debug|90a9ec6d-4a41-403f-9c59-c4560df4953a|Image - Download: 1ae77103-823e-429e-9085-ce14c65010cb small 
+2013-11-24 09:17:01.2486|Debug|f4a02376-52ac-42d7-bdcf-404fd75432b5|Image - Download: 4539092c-b5d7-44b4-990c-175828208dc5 small 
+2013-11-24 09:17:01.2486|Debug|1eb6e65d-3f4f-461b-ab14-3b08894b389b|Image - Download: 5c4b63de-36ba-4e2c-b35c-a8ea23294415 small 
+2013-11-24 09:17:05.2559|Debug|53d61949-9cf4-4fe8-bb11-6808c6f9cbe0|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f large 
+2013-11-24 09:17:05.2919|Debug|c3175dca-9592-4444-a14c-8fd2190ed59b|Image - Download: ee41a140-d8aa-4b8c-94b0-dae749e47af5 large 
+2013-11-24 09:17:05.2919|Debug|96ef7773-fe56-4f39-af92-cb4f43456e23|Image - Download: b3988946-423c-4eae-a7b2-0c1496c49653 thumbnail 
+2013-11-24 09:17:05.3419|Debug|13175a0f-8a46-4193-b923-2de49b1cdadc|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f thumbnail 
+2013-11-24 09:17:25.0870|Debug|515e22ad-c794-4bc3-8fa0-1b3169bb455a|Image - Download: d14dcd94-42c7-4688-bd18-9a7e9d63f5fa thumbnail 
+2013-11-24 09:17:25.1090|Debug|20a0ef8d-0d99-450f-b7c0-b4cd1ca801fc|Image - Download: 7f43d568-e31f-44f4-8a6e-33a94053e09b thumbnail 
+2013-11-24 09:17:25.1220|Debug|0769f03a-385b-4214-aa36-059dc9943cba|Image - Download: 5e70988c-76eb-4455-8316-9bbc83a9b669 thumbnail 
+2013-11-24 09:17:25.1410|Debug|5be69886-b062-45d8-8cdc-af61376a56e2|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac thumbnail 
+2013-11-24 09:17:25.1410|Debug|d8e0073c-d326-44dc-947a-a722fa151fac|Image - Download: 9155e439-a074-44ae-9940-bc4fcc23f5e6 thumbnail 
+2013-11-24 09:17:25.2500|Debug|0dd15902-c9cb-4f3b-b429-8fcb185a0e51|Image - Download: 119efe9b-7396-46db-9dd0-5f9c744fef11 thumbnail 
+2013-11-24 09:17:25.5010|Debug|5ff05e71-acd0-4d58-af0f-882ef2a08cc7|Image - Download: 4539092c-b5d7-44b4-990c-175828208dc5 thumbnail 
+2013-11-24 09:17:25.5300|Debug|a7e4bbac-dfae-44f2-8399-a5369b49f069|Image - Download: 1ae77103-823e-429e-9085-ce14c65010cb thumbnail 
+2013-11-24 09:17:25.6000|Debug|31b9c262-2ad5-4909-9aba-6f9a4c4d6ffb|Image - Download: 5c4b63de-36ba-4e2c-b35c-a8ea23294415 thumbnail 
+2013-11-24 09:17:25.6000|Debug|4e802d4a-3cdf-4340-a9c2-76c381c34884|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f thumbnail 
+2013-11-24 09:18:46.8067|Debug|0c68efc0-26e2-4c1b-ae23-97ad97b53ca3|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f small 
+2013-11-24 09:18:46.8067|Debug|16d89315-45b3-4c46-9484-178e0fe658b9|Image - Download: b3988946-423c-4eae-a7b2-0c1496c49653 thumbnail 
+2013-11-24 09:18:47.5997|Debug|ba63d88c-fcbc-49e6-b87e-f7a7a0f64b7b|Image - Download: b3988946-423c-4eae-a7b2-0c1496c49653 thumbnail 
+2013-11-24 09:18:49.8279|Debug|c40f0800-b2a9-4888-b5b2-2b7d74e7225d|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f thumbnail 
+2013-11-24 09:20:01.2959|Debug|191a6771-a571-4802-b882-79c311aa1541|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac small 
+2013-11-24 09:20:01.2959|Debug|cb6942a7-6e7e-4850-94b9-15144fbdaa83|Image - Download: 9155e439-a074-44ae-9940-bc4fcc23f5e6 small 
+2013-11-24 09:20:01.3689|Debug|92a69bde-5575-47c5-b47d-8dfd6dd7c96b|Image - Download: 7f43d568-e31f-44f4-8a6e-33a94053e09b small 
+2013-11-24 09:20:01.5110|Debug|d8654bd8-212c-4543-b7d9-91aae3a70b88|Image - Download: d14dcd94-42c7-4688-bd18-9a7e9d63f5fa small 
+2013-11-24 09:20:01.5110|Debug|fb9fdea9-6fe7-4287-a9c1-beaf119e7826|Image - Download: 119efe9b-7396-46db-9dd0-5f9c744fef11 small 
+2013-11-24 09:20:01.5500|Debug|1aa7ef4d-ad6e-4561-b8a1-9b1c259f8531|Image - Download: 1ae77103-823e-429e-9085-ce14c65010cb small 
+2013-11-24 09:20:01.5790|Debug|8ce71746-f395-49c4-bf94-dab54999fd51|Image - Download: 5e70988c-76eb-4455-8316-9bbc83a9b669 small 
+2013-11-24 09:20:01.7420|Debug|d7786ee6-3a74-4df9-b5d3-ce9f8ab75a83|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f small 
+2013-11-24 09:20:01.7480|Debug|0418d34b-b621-41dc-9ff4-d0fc8e802c6e|Image - Download: 5c4b63de-36ba-4e2c-b35c-a8ea23294415 small 
+2013-11-24 09:20:01.7900|Debug|6d257123-2a43-4d9f-8c9a-1b7660de02de|Image - Download: 4539092c-b5d7-44b4-990c-175828208dc5 small 
+2013-11-24 09:20:08.2443|Debug|8c68538a-92d4-4677-8df6-863b4c7e7e17|Image - Download: 5e70988c-76eb-4455-8316-9bbc83a9b669 small 
+2013-11-24 09:20:08.2603|Debug|01627293-b73d-4ce2-9da7-928bc675cd63|Image - Download: 119efe9b-7396-46db-9dd0-5f9c744fef11 small 
+2013-11-24 09:20:08.2923|Debug|f03391b5-604f-473e-be27-2f9a159070ae|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac small 
+2013-11-24 09:20:08.3393|Debug|ac13eb53-980a-4ac2-8ef6-5c317176eb13|Image - Download: 7f43d568-e31f-44f4-8a6e-33a94053e09b small 
+2013-11-24 09:20:08.3653|Debug|5bbe4407-8516-4d86-b59b-a0694c6e0cb3|Image - Download: d14dcd94-42c7-4688-bd18-9a7e9d63f5fa small 
+2013-11-24 09:20:08.4093|Debug|6dc9165c-efbf-4642-9d9b-46570f8b9975|Image - Download: 9155e439-a074-44ae-9940-bc4fcc23f5e6 small 
+2013-11-24 09:20:08.5734|Debug|3203fda7-90d4-49ba-a591-d637da2fb97b|Image - Download: 1ae77103-823e-429e-9085-ce14c65010cb small 
+2013-11-24 09:20:08.6174|Debug|a738042e-747d-48a7-ae71-fc8634ca935a|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f small 
+2013-11-24 09:20:08.6534|Debug|f4c879ea-d224-4133-b68e-219b7b14e51b|Image - Download: 4539092c-b5d7-44b4-990c-175828208dc5 small 
+2013-11-24 09:20:08.6534|Debug|478099b3-c051-43fc-b215-b18dd144ef0b|Image - Download: 5c4b63de-36ba-4e2c-b35c-a8ea23294415 small 
+2013-11-24 09:20:13.1156|Debug|d8a48668-03fc-4015-ae15-31ccfa7a9ff3|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f thumbnail 
+2013-11-24 09:20:13.1296|Debug|ddf185f3-66fc-49f2-bbc2-0e6054a82924|Image - Download: ee41a140-d8aa-4b8c-94b0-dae749e47af5 large 
+2013-11-24 09:20:13.1296|Debug|3191fb0b-b236-4c55-88f3-94a69519b14a|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f large 
+2013-11-24 09:20:13.1296|Debug|68d218bc-4f9b-4afa-affb-9298a1726a5d|Image - Download: b3988946-423c-4eae-a7b2-0c1496c49653 thumbnail 
+2013-11-24 10:22:22.4501|Error|ff5c98f0-ace0-4edc-805e-53bd50877c1a|URL:http://localhost/Commerce.Web/Admin/ManageOrder/Refund?externalId=JHF-92919&orderLineIds=5 - IsAjaxRequest: True 
+2013-11-24 10:22:22.4971|Error|ff5c98f0-ace0-4edc-805e-53bd50877c1a|Stripe.StripeException:No such charge: tok_10304h2T1mtxUjKf1VVVg1lb
+   at Stripe.Requestor.ExecuteWebRequest(WebRequest webRequest)
+   at Stripe.Requestor.PostString(String url, String apiKey)
+   at Stripe.StripeChargeService.Refund(String chargeId, Nullable`1 refundAmountInCents, Nullable`1 refundApplicationFee)
+   at Commerce.Application.Payment.StripePaymentProcessor.Refund(Transaction originalTransaction, Decimal amount) in C:\DEV\Pleiades\Commerce.Domain\Payment\StripePaymentProcessor.cs:line 55
+   at Commerce.Application.Orders.OrderManager.Refund(String externalId, List`1 items) in C:\DEV\Pleiades\Commerce.Domain\Orders\OrderManager.cs:line 113
+   at Commerce.Web.Areas.Admin.Controllers.ManageOrderController.Refund(String externalId, String orderLineIds) in C:\DEV\Pleiades\Commerce.Web\Areas\Admin\Controllers\ManageOrderController.cs:line 52
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-11-24 10:25:15.2880|Debug|cfd4b546-818a-4252-8592-bd0c1a69bdea|Image - Download: 5e70988c-76eb-4455-8316-9bbc83a9b669 small 
+2013-11-24 10:25:15.2880|Debug|6e2adcc4-3406-4f08-ad68-aba3fcac7afb|Image - Download: 9155e439-a074-44ae-9940-bc4fcc23f5e6 small 
+2013-11-24 10:25:15.2880|Debug|54917e22-f19c-4cef-9459-b75d2146995a|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac small 
+2013-11-24 10:25:15.5850|Debug|85024509-948f-4b96-84e6-9184d6c2b8ca|Image - Download: 119efe9b-7396-46db-9dd0-5f9c744fef11 small 
+2013-11-24 10:25:15.6110|Debug|3084abdb-9431-4e38-bb8b-b2bb0d90e447|Image - Download: d14dcd94-42c7-4688-bd18-9a7e9d63f5fa small 
+2013-11-24 10:25:15.6490|Debug|b09858b8-a16d-44b5-bae9-9c997ff77ad2|Image - Download: 7f43d568-e31f-44f4-8a6e-33a94053e09b small 
+2013-11-24 10:25:15.8390|Debug|18b3f8b4-05f9-4da1-b540-ce30b6873cba|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f small 
+2013-11-24 10:25:15.8430|Debug|32aee9cd-d5b9-4e33-9ced-b95ef5164ea8|Image - Download: 1ae77103-823e-429e-9085-ce14c65010cb small 
+2013-11-24 10:25:15.8890|Debug|56fd99c8-f3e1-4f3f-bb49-554a9452a37e|Image - Download: 5c4b63de-36ba-4e2c-b35c-a8ea23294415 small 
+2013-11-24 10:25:15.9930|Debug|aa6a11eb-d17b-4668-93ee-2110480829df|Image - Download: 4539092c-b5d7-44b4-990c-175828208dc5 small 
+2013-11-24 10:25:19.2372|Debug|e32d44d4-fbc5-4370-a7db-e391b01ac2f6|Image - Download: 9155e439-a074-44ae-9940-bc4fcc23f5e6 large 
+2013-11-24 10:25:19.2372|Debug|3f3b26d5-d5e8-45a6-9b07-54842ecd904f|Image - Download: d1db7894-b926-43bc-aa78-bffc7c4291e2 large 
+2013-11-24 10:25:19.3542|Debug|fdc86404-8b87-4d57-97a9-3757deb41e13|Image - Download: 9155e439-a074-44ae-9940-bc4fcc23f5e6 thumbnail 
+2013-11-24 10:25:19.4622|Debug|8a178f71-402b-4267-b288-b9c636542b74|Image - Download: 4ae45c98-cc52-4f3a-a615-1832e3e6f054 thumbnail 
+2013-11-24 10:25:19.4902|Debug|b3388a78-d865-43c1-82c3-3e888d490c23|Image - Download: cf9580cc-62c7-4ef4-8fdc-82704219d6a2 thumbnail 
+2013-11-24 10:25:19.7282|Debug|70d2b1ed-0be9-4c14-b460-19a773410d9d|Image - Download: 5edb9c28-66b9-401f-93d7-7723c2b9aa86 thumbnail 
+2013-11-24 10:25:19.7282|Debug|063f7272-368c-42ce-8f7f-ca20e25d8a3e|Image - Download: 97a08706-3d2c-4d63-82a0-6bfd677f8390 thumbnail 
+2013-11-24 10:25:24.8435|Debug|880371d8-aa33-484b-85d4-7c152610018c|Image - Download: 9155e439-a074-44ae-9940-bc4fcc23f5e6 thumbnail 
+2013-11-24 10:25:24.9165|Debug|ca43275a-6e1c-434d-9fc6-97c7824270aa|Image - Download: 9155e439-a074-44ae-9940-bc4fcc23f5e6 large 
+2013-11-24 10:25:49.5079|Debug|5364c29f-d4a2-4332-bcf0-c649927e3088|Image - Download: 9155e439-a074-44ae-9940-bc4fcc23f5e6 thumbnail 
+2013-11-24 10:25:49.5850|Debug|627bdc48-3b78-444c-8d72-8e93d59b46f6|Image - Download: 9155e439-a074-44ae-9940-bc4fcc23f5e6 large 
+2013-11-24 10:31:50.2706|Debug|bc8830d5-07d5-4675-8811-ebe914476257|Image - Download: 5e70988c-76eb-4455-8316-9bbc83a9b669 small 
+2013-11-24 10:31:50.2896|Debug|dfed7276-13ed-4b25-a84b-50a2d8457844|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac small 
+2013-11-24 10:31:50.4096|Debug|3ade83c4-80ff-4b01-a3f6-2e6bb625c41e|Image - Download: 7f43d568-e31f-44f4-8a6e-33a94053e09b small 
+2013-11-24 10:31:50.4346|Debug|9ac1b74d-750f-401a-ad40-8e34cde9feea|Image - Download: 119efe9b-7396-46db-9dd0-5f9c744fef11 small 
+2013-11-24 10:31:50.4346|Debug|81cc4d0a-b6cb-4a70-937b-25c010f5f8b2|Image - Download: d14dcd94-42c7-4688-bd18-9a7e9d63f5fa small 
+2013-11-24 10:31:50.4666|Debug|e7634fe2-82d5-4880-92f9-b1e07b95d2d4|Image - Download: 9155e439-a074-44ae-9940-bc4fcc23f5e6 small 
+2013-11-24 10:31:50.4826|Debug|944f375e-046c-416b-a088-d42c271723b4|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f small 
+2013-11-24 10:31:50.5036|Debug|7fde6234-59d6-4d91-80dd-c725f232f25c|Image - Download: 1ae77103-823e-429e-9085-ce14c65010cb small 
+2013-11-24 10:31:50.5036|Debug|610a8d2c-274a-4b60-bf6b-4ad2154a4211|Image - Download: 5c4b63de-36ba-4e2c-b35c-a8ea23294415 small 
+2013-11-24 10:31:50.5626|Debug|934abf1c-7dac-4e8f-ab63-11344f708e4d|Image - Download: 4539092c-b5d7-44b4-990c-175828208dc5 small 
+2013-11-24 10:31:54.6338|Debug|c4fb8bf6-5a1c-4f0e-80fa-1a15020c973e|Image - Download: 5e70988c-76eb-4455-8316-9bbc83a9b669 large 
+2013-11-24 10:31:54.6338|Debug|c1943bc0-5394-446d-b93d-f22d36d55795|Image - Download: 96fa9bf4-65f6-437e-bee0-340206a93dc7 thumbnail 
+2013-11-24 10:31:54.6338|Debug|c32f9b39-edd0-4cef-949a-141a8dde4b59|Image - Download: 8bb40e63-3a9f-495d-a0d1-d0acc98896b4 thumbnail 
+2013-11-24 10:31:54.6418|Debug|6ce56cff-f30c-48c1-b91d-b9608f0d4fb4|Image - Download: 5e70988c-76eb-4455-8316-9bbc83a9b669 thumbnail 
+2013-11-24 10:31:54.6608|Debug|f7828da7-1516-4ed2-bf3d-fe48a5b81b7b|Image - Download: d1db7894-b926-43bc-aa78-bffc7c4291e2 large 
+2013-11-24 10:31:54.6338|Debug|ce968489-feb5-4872-9d3f-0317c7a6cd18|Image - Download: e0805ba2-b084-477d-84c2-74db9ac37604 thumbnail 
+2013-11-24 10:31:54.7208|Debug|99cf532d-8abd-46ec-8866-1f80f4461a55|Image - Download: a22128ee-ab29-49e6-929d-1ef860dfc65f thumbnail 
+2013-11-24 10:31:54.7388|Debug|89b20868-ae54-4773-b6c1-316a9b714129|Image - Download: bbc80c4b-b058-40df-8787-b128ced3fc34 thumbnail 
+2013-11-24 10:31:57.5860|Debug|2b602526-04e3-48b8-9bd5-e6f193acf3f5|Image - Download: 4448c1db-41e4-455e-b4dd-74ebf4500091 large 
+2013-11-24 10:31:57.6050|Debug|29a098c4-8bba-430a-8612-5c554b3f91c6|Image - Download: 37b4598b-5c28-4b2c-907b-70a3b36ab5ec thumbnail 
+2013-11-24 10:31:57.6060|Debug|686a2013-918e-4953-8376-94c9c4cd53db|Image - Download: 166dfeda-4c79-418d-bf02-8e70b3964c94 thumbnail 
+2013-11-24 10:31:57.6270|Debug|26699cd7-57d3-4fc9-9174-d630bbdcf22f|Image - Download: 99330240-75e9-4bd0-a6ae-180595b3ea5b thumbnail 
+2013-11-24 10:31:57.6460|Debug|546a2073-2437-415a-bd32-1eb6c5fd2e65|Image - Download: 4448c1db-41e4-455e-b4dd-74ebf4500091 thumbnail 
+2013-11-24 10:32:03.7634|Debug|69b7c0a3-5541-4416-8c41-3b34f011543a|Image - Download: 4448c1db-41e4-455e-b4dd-74ebf4500091 large 
+2013-11-24 10:32:03.7714|Debug|a1dec8b5-0caf-428e-8cfa-3dfc651f6fa3|Image - Download: 4448c1db-41e4-455e-b4dd-74ebf4500091 thumbnail 
+2013-11-24 10:32:08.1986|Debug|ce3da75f-6fa5-4d68-aa29-ff21e84a8015|Image - Download: 4448c1db-41e4-455e-b4dd-74ebf4500091 thumbnail 
+2013-11-24 10:32:08.1986|Debug|40b45240-3eba-495e-a0f7-62e3c2b735c3|Image - Download: 4448c1db-41e4-455e-b4dd-74ebf4500091 large 
+2013-11-24 10:37:46.0779|Error|48939011-e9fc-4970-bd50-d84fb5167ec6|URL:http://localhost/Commerce.Web/Admin/ManageOrder/Refund?externalId=HCD-61544&orderLineIds=7 - IsAjaxRequest: True 
+2013-11-24 10:37:46.0999|Error|48939011-e9fc-4970-bd50-d84fb5167ec6|Stripe.StripeException:Charge ch_1030602T1mtxUjKfqEkgcFPF has already been refunded.
+   at Stripe.Requestor.ExecuteWebRequest(WebRequest webRequest)
+   at Stripe.Requestor.PostString(String url, String apiKey)
+   at Stripe.StripeChargeService.Refund(String chargeId, Nullable`1 refundAmountInCents, Nullable`1 refundApplicationFee)
+   at Commerce.Application.Payment.StripePaymentProcessor.Refund(Transaction originalTransaction, Decimal amount) in C:\DEV\Pleiades\Commerce.Domain\Payment\StripePaymentProcessor.cs:line 56
+   at Commerce.Application.Orders.OrderManager.Refund(String externalId, List`1 items) in C:\DEV\Pleiades\Commerce.Domain\Orders\OrderManager.cs:line 113
+   at Commerce.Web.Areas.Admin.Controllers.ManageOrderController.Refund(String externalId, String orderLineIds) in C:\DEV\Pleiades\Commerce.Web\Areas\Admin\Controllers\ManageOrderController.cs:line 52
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-11-24 10:41:52.5040|Debug|db896169-ab03-4902-aa9f-59bbd7937093|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac small 
+2013-11-24 10:41:52.5040|Debug|7cf3293f-cc2f-49d4-8402-f4fb9eaebb4f|Image - Download: 9155e439-a074-44ae-9940-bc4fcc23f5e6 small 
+2013-11-24 10:41:52.7840|Debug|c45f58fb-8759-420a-bfcd-259f57e2aae3|Image - Download: 5e70988c-76eb-4455-8316-9bbc83a9b669 small 
+2013-11-24 10:41:52.8050|Debug|a82bf97d-90b3-4525-afdf-f23bfe5f7377|Image - Download: 119efe9b-7396-46db-9dd0-5f9c744fef11 small 
+2013-11-24 10:41:52.9841|Debug|2a61f5f7-a521-44b9-835c-29dbc11a3749|Image - Download: 7f43d568-e31f-44f4-8a6e-33a94053e09b small 
+2013-11-24 10:41:53.0211|Debug|f10056bf-a624-48fc-9397-a1637654fa2b|Image - Download: d14dcd94-42c7-4688-bd18-9a7e9d63f5fa small 
+2013-11-24 10:41:53.2761|Debug|1c7e611d-a2cc-4498-811b-3551bcf39df6|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f small 
+2013-11-24 10:41:53.2861|Debug|7b35de07-3e59-4203-9f7f-223bff603ca9|Image - Download: 1ae77103-823e-429e-9085-ce14c65010cb small 
+2013-11-24 10:41:53.4771|Debug|5aef9944-53ad-4bed-a645-c98c8537dbe6|Image - Download: 5c4b63de-36ba-4e2c-b35c-a8ea23294415 small 
+2013-11-24 10:41:53.4771|Debug|61d96e92-ab98-4d6b-81d2-70a2ad3e8e98|Image - Download: 4539092c-b5d7-44b4-990c-175828208dc5 small 
+2013-11-24 10:41:56.8843|Debug|b43f194a-1dbc-4e5b-a7fa-639350988707|Image - Download: 4539092c-b5d7-44b4-990c-175828208dc5 thumbnail 
+2013-11-24 10:41:56.8843|Debug|9178f7ca-4c96-4ee4-9ffd-c4d40d60cd71|Image - Download: 670a5172-01ce-4b4e-8e76-e2032b880755 thumbnail 
+2013-11-24 10:41:56.8843|Debug|43990c86-6fae-4691-b92c-185f41945d66|Image - Download: 1fe9bc71-17bb-4f1c-8136-f0d0b32d8b85 large 
+2013-11-24 10:41:56.8843|Debug|32f95296-14bb-48e3-81b5-6d60583fa429|Image - Download: 4539092c-b5d7-44b4-990c-175828208dc5 large 
+2013-11-24 10:42:00.3115|Debug|0c6ff4ca-5078-4665-9f77-fb8cf86e75a7|Image - Download: 7f43d568-e31f-44f4-8a6e-33a94053e09b small 
+2013-11-24 10:42:00.3255|Debug|24b6dd0f-a7d3-43ab-ab06-dffe26f484c1|Image - Download: 119efe9b-7396-46db-9dd0-5f9c744fef11 small 
+2013-11-24 10:42:00.3115|Debug|777f89c4-be5e-4e98-befc-d1aad1019cda|Image - Download: d14dcd94-42c7-4688-bd18-9a7e9d63f5fa small 
+2013-11-24 10:42:00.3355|Debug|18bb901e-7fe2-418d-bd40-5531c6e7eb85|Image - Download: 9155e439-a074-44ae-9940-bc4fcc23f5e6 small 
+2013-11-24 10:42:00.5115|Debug|d20fa0cd-7292-42eb-b79d-514e2ed91792|Image - Download: 5e70988c-76eb-4455-8316-9bbc83a9b669 small 
+2013-11-24 10:42:00.5115|Debug|e14364b7-d2ec-465d-926a-bb3eb7c3d33a|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac small 
+2013-11-24 10:42:00.5915|Debug|6ebc02e9-af74-4638-b4d7-3cc1cb5eba46|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f small 
+2013-11-24 10:42:00.6705|Debug|be2ea27d-d77d-4ece-acc9-f61025adfdf1|Image - Download: 1ae77103-823e-429e-9085-ce14c65010cb small 
+2013-11-24 10:42:00.7685|Debug|8af42802-9497-4fbd-8868-03c0cbf2f213|Image - Download: 5c4b63de-36ba-4e2c-b35c-a8ea23294415 small 
+2013-11-24 10:42:00.8175|Debug|7526f705-eb4c-461a-bded-d6bd0eeb225e|Image - Download: 4539092c-b5d7-44b4-990c-175828208dc5 small 
+2013-11-24 10:42:02.8566|Debug|a6d24af2-092a-4cd2-9683-bb3b80968a18|Image - Download: 818b3177-3a0b-415b-a703-33ae56f43281 large 
+2013-11-24 10:42:02.8876|Debug|d83910e0-8302-44fa-8fdc-fe3207ad1e0a|Image - Download: 5c4b63de-36ba-4e2c-b35c-a8ea23294415 large 
+2013-11-24 10:42:02.9016|Debug|fdb6ffa0-803c-4748-bc7a-d920d8b1f6e9|Image - Download: 5c4b63de-36ba-4e2c-b35c-a8ea23294415 thumbnail 
+2013-11-24 10:42:08.4719|Debug|982c04eb-2a41-45d6-9fb4-4082a367313a|Image - Download: 119efe9b-7396-46db-9dd0-5f9c744fef11 small 
+2013-11-24 10:42:08.4939|Debug|9b23d5fa-bac2-4f39-8933-000aa6e5863e|Image - Download: 7f43d568-e31f-44f4-8a6e-33a94053e09b small 
+2013-11-24 10:42:08.5719|Debug|0e4e20be-9310-4825-aa23-18b018de8772|Image - Download: d14dcd94-42c7-4688-bd18-9a7e9d63f5fa small 
+2013-11-24 10:42:08.6110|Debug|7834b676-bfc1-4d4f-9f9c-94419bbc062e|Image - Download: 9155e439-a074-44ae-9940-bc4fcc23f5e6 small 
+2013-11-24 10:42:08.7100|Debug|2f3482b8-92f7-4fcc-880a-ff36369caec6|Image - Download: bc6e826e-043b-4a22-92c8-af006fef1dac small 
+2013-11-24 10:42:08.7100|Debug|6284b681-315d-4e96-8c07-b2a4303c2c07|Image - Download: 5e70988c-76eb-4455-8316-9bbc83a9b669 small 
+2013-11-24 10:42:08.9410|Debug|c131ecb7-daa5-46df-ae3b-204b84d1a6c4|Image - Download: 80b90670-c1c8-487b-b252-3928f3c9093f small 
+2013-11-24 10:42:08.9470|Debug|82e322e8-ed9d-4974-8fc2-04d2b0026b2b|Image - Download: 1ae77103-823e-429e-9085-ce14c65010cb small 
+2013-11-24 10:42:09.0280|Debug|0984213b-0dea-4322-9788-6f77b9b6a185|Image - Download: 4539092c-b5d7-44b4-990c-175828208dc5 small 
+2013-11-24 10:42:09.0490|Debug|fa7f1031-30f8-4afb-b9e1-736a0384aaac|Image - Download: 5c4b63de-36ba-4e2c-b35c-a8ea23294415 small 
+2013-11-24 10:42:11.3851|Debug|2b758118-b613-4c86-9f0c-9d7308311f8d|Image - Download: d14dcd94-42c7-4688-bd18-9a7e9d63f5fa thumbnail 
+2013-11-24 10:42:11.3851|Debug|3d9b139b-f6af-42b7-9ed7-8311d77297ce|Image - Download: 561d8123-2083-41cd-8b81-c2af4f9351f6 thumbnail 
+2013-11-24 10:42:11.5471|Debug|836b20e1-70cb-455f-bb23-0f157e0c5c02|Image - Download: f1ff4351-33cb-4101-b4ec-e41ef9bcc707 thumbnail 
+2013-11-24 10:42:11.6321|Debug|d40376c6-409e-4e81-ba28-4ea61e91774c|Image - Download: d1db7894-b926-43bc-aa78-bffc7c4291e2 large 
+2013-11-24 10:42:11.6321|Debug|40113e5d-d044-40c6-b222-ddac417e81c7|Image - Download: d14dcd94-42c7-4688-bd18-9a7e9d63f5fa large 
+2013-11-24 10:42:11.6931|Debug|a92e4db0-a604-4cd1-8f74-8012ff2b8a00|Image - Download: 071f5395-ffb9-465b-8733-a7dc00879796 thumbnail 
+2013-11-24 10:42:11.8881|Debug|ef277cad-abf9-45a5-8e8d-1728313b698a|Image - Download: b39cf62c-aa13-4cd0-b76d-f304eb1ba245 thumbnail 
+2013-11-24 10:42:20.2346|Debug|dad05c8a-65d8-4140-a1a4-b65eb0da55b4|Image - Download: 119efe9b-7396-46db-9dd0-5f9c744fef11 large 
+2013-11-24 10:42:20.2346|Debug|c3baae1f-b752-4daa-80f4-59e4fbbf7a3e|Image - Download: 119efe9b-7396-46db-9dd0-5f9c744fef11 thumbnail 
+2013-11-24 10:42:27.0320|Debug|49841476-2ad2-4de4-b45e-426bc5b478de|Image - Download: 119efe9b-7396-46db-9dd0-5f9c744fef11 large 
+2013-11-24 10:42:27.0580|Debug|355d2916-c599-4cca-a559-28be8bf49c49|Image - Download: 119efe9b-7396-46db-9dd0-5f9c744fef11 thumbnail 

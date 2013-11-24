@@ -24,9 +24,9 @@ namespace Commerce.Application.Email
                 emailMessage.Body;
 
             var fileName = 
-                timestamp.Year + timestamp.Month.ToString("00") + timestamp.Day.ToString("00") +
-                "_" + timestamp.Hour.ToString("00") + "." + timestamp.Minute + "." + timestamp.Second + 
-                "_" + emailMessage.To + ".txt";
+                timestamp.Year + timestamp.Month.ToString("00") + timestamp.Day.ToString("00") + "_" + 
+                timestamp.Hour.ToString("00") + "." + timestamp.Minute.ToString("00") + "." + timestamp.Second.ToString("00") + "." + 
+                timestamp.Millisecond.ToString("000") + "_" + emailMessage.To + ".txt";
 
             var filePath = Path.Combine(_configAdapter.MockServiceOutputDirectory, fileName);
             System.IO.File.WriteAllText(filePath, contents);

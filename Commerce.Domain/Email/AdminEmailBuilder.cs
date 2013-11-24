@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Commerce.Application.Email.Model;
 using Commerce.Application.Orders.Entities;
+using Pleiades.Application.Logging;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 
@@ -37,10 +39,12 @@ namespace Commerce.Application.Email
                 };
         }
 
+        public const string SubjectPrefix = "Admin Notification: ";
+
         public EmailMessage OrderReceived(Order order)
         {
             var output = MessageFactory();
-            output.Subject = "Order "+ order.ExternalId + " has been received";
+            output.Subject = SubjectPrefix + "Order "+ order.ExternalId + " has been received";
             output.Body = _templateEngine.Render(order, TemplateIdentifier.AdminOrderReceived);
             return output;
         }
@@ -48,7 +52,7 @@ namespace Commerce.Application.Email
         public EmailMessage OrderItemsShipped(OrderShipment shipment)
         {
             var output = MessageFactory();
-            output.Subject = "Order " + shipment.Order.ExternalId + " has items shipped";
+            output.Subject = SubjectPrefix + "Order " + shipment.Order.ExternalId + " has items shipped";
             output.Body = _templateEngine.Render(shipment, TemplateIdentifier.AdminOrderItemsShipped);
             return output;
         }
@@ -56,16 +60,18 @@ namespace Commerce.Application.Email
         public EmailMessage OrderItemsRefunded(OrderRefund refund)
         {
             var output = MessageFactory();
-            output.Subject = "Order " + refund.Order.ExternalId + " has items refunded";
+            output.Subject = SubjectPrefix + "Order " + refund.Order.ExternalId + " has items refunded";
             output.Body = _templateEngine.Render(refund, TemplateIdentifier.AdminOrderItemsRefunded);
             return output;
         }
 
-        public EmailMessage SystemError(string synopsis)
+        public EmailMessage SystemError(Guid activityId, Exception exception)
         {
             var output = MessageFactory();
-            output.Subject = "A System Error has occurred";
-            output.Body = _templateEngine.Render(synopsis, TemplateIdentifier.AdminSystemError);
+            var subject = SubjectPrefix + "A System Error has occurred - " + activityId.ToString();
+            output.Subject = subject;
+            var body = subject + Environment.NewLine + Environment.NewLine + exception.FullStackTraceDump();
+            output.Body = _templateEngine.Render(body, TemplateIdentifier.AdminSystemError);
             return output;
         }
     }

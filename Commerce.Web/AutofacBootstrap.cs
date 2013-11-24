@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Commerce.Web.Plumbing;
 using Pleiades.Application.Injection;
 using Pleiades.Web.Autofac;
 using Autofac;
@@ -12,7 +13,7 @@ namespace Commerce.Web
         {
             // Build the container
             var builder = new ContainerBuilder();
-            builder.RegisterModule<CommerceWebUIModule>();
+            builder.RegisterModule<CommerceWebModule>();
             var container = builder.Build();
 
             // Wire container into ASP.NET MVC

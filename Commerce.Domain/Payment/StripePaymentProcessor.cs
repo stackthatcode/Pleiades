@@ -1,5 +1,6 @@
 using System;
 using Commerce.Application.Billing;
+using Pleiades.Application.Logging;
 using Stripe;
 
 namespace Commerce.Application.Payment
@@ -31,14 +32,16 @@ namespace Commerce.Application.Payment
                 return new Transaction(TransactionType.AuthorizeAndCollect)
                     {
                         Amount = amount,
-                        OriginalReferenceCode = token,
+                        OriginalReferenceCode = result.Id,                        
+                        ReferenceCode = result.Id,
                         Success = true,
                         ProcessorResponse = "",
-                        Details = "Payment Received - Invoice# " + result.InvoiceId
+                        Details = "Charged Token# " + token
                     };
             }
             catch (Exception ex)
             {
+                LoggerSingleton.Get().Error(ex);
                 return new Transaction(TransactionType.AuthorizeAndCollect)
                 {
                     Amount = amount,
@@ -52,14 +55,31 @@ namespace Commerce.Application.Payment
 
         public Transaction Refund(Transaction originalTransaction, decimal amount)
         {
-            var result = _stripeService.Refund(originalTransaction.OriginalReferenceCode, (int)(100*amount));
-            return new Transaction(TransactionType.Refund)
+            try
+            {
+                var result = _stripeService.Refund(originalTransaction.OriginalReferenceCode, (int) (100*amount));
+                return new Transaction(TransactionType.Refund)
+                    {
+                        Amount = amount,
+                        ProcessorResponse = "",
+                        ReferenceCode = result.Id,
+                        Success = true,
+                        OriginalReferenceCode = originalTransaction.OriginalReferenceCode,
+                        Details = "Refund",
+                    };
+            }
+            catch (Exception ex)
+            {
+                LoggerSingleton.Get().Error(ex);
+                return new Transaction(TransactionType.Refund)
                 {
                     Amount = amount,
                     ProcessorResponse = "",
-                    ReferenceCode = result.Id,
-                    OriginalReferenceCode = originalTransaction.ReferenceCode,
+                    Success = false,
+                    OriginalReferenceCode = originalTransaction.OriginalReferenceCode,
+                    Details = "Refund Failure : " + ex.Message
                 };
+            }
         }
     }
 }

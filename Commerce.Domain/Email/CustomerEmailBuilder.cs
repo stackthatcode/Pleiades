@@ -48,7 +48,7 @@ namespace Commerce.Application.Email
             var output = MessageFactory();
             output.To = refund.Order.EmailAddress;
             output.Subject = "Items in your order have been refunded";
-            output.Body = _templateEngine.Render(refund, TemplateIdentifier.CustomerOrderReceived);
+            output.Body = _templateEngine.Render(refund, TemplateIdentifier.CustomerOrderItemsRefunded);
             return output;
         }
     }

@@ -153,7 +153,7 @@
     <Compile Include="Areas\Public\Controllers\SectionController.cs" />
     <Compile Include="Areas\Public\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Public\Models\JsonExtensions.cs" />
-    <Compile Include="Plumbing\CommerceWebUIModule.cs">
+    <Compile Include="Plumbing\CommerceWebModule.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Plumbing\ErrorModel.cs" />
@@ -173,6 +173,7 @@
     <Compile Include="Helpers\ScriptTagGenerator.cs" />
     <Compile Include="Helpers\StyleTagGenerator.cs" />
     <Compile Include="Areas\Admin\AdminNavigation.cs" />
+    <Compile Include="Plumbing\ErrorNotification.cs" />
     <Compile Include="Plumbing\HandleErrorAttributeImpl.cs" />
     <Compile Include="Areas\Public\PublicNavigation.cs" />
     <Compile Include="Plumbing\SecurityContextFactory.cs" />

@@ -1,6 +1,6 @@
 ﻿@using Commerce.Application.Payment
 
-@if (StripeConfiguration.Settings.ClientSideDebugMode.ToBoolTryParse())
+@if (StripeConfiguration.Settings.ClientSideMockEnabled.ToBoolTryParse())
 {
     @Html.Javascript("~/Content/StripeMock/stripe.js")
     <script type="text/javascript">

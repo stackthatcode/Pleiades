@@ -55,7 +55,10 @@ namespace Commerce.Web
 
         protected void Application_Error(object sender, EventArgs e)
         {
-            LoggerSingleton.Get().Error(Server.GetLastError());
+            var lastError = Server.GetLastError();
+            LoggerSingleton.Get().Error(lastError);
+            ErrorNotification.Send(lastError);
+
             Server.ClearError();
             var redirectUrl = ConfigurationManager.AppSettings["AdminOrderDebug"];
             if (redirectUrl != null) 

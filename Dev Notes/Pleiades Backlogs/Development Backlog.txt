@@ -10,42 +10,66 @@
 - Create hook for Signature injection => DONE
 11/22/2013 - 1.0
 - Work on Template location problem
-11/23/2013
+11/23/2013 - 4.75
 - Finished building the Template engine
-- Tested Customer Order Received
-- Tested Admin Order Received
+- Built & Tested Customer Order Received
+- Built & Tested Customer Order Refund
+- Built & Tested Customer Order Shipped
+- Built & Tested Admin Order Received
+11/24/2013 - 4.00
+- Built & Tested Admin Order Refunded
+- Built & Tested Admin Order Shipped
+- Built & Tested Admin System Error
+- Built Error Notification infrastructure
+* Create Actual Email Sender => DONE
+- Email Sending Engine => DONE
+- Wire Email Notifications into Order => DONE
+* Ship and Refund Notifications => DONE
+* Research Refunds in Stripe DEV environment => DONE
+* Add Refunds to the Mock Payment Processor => DONE
 
 
-Aleks Front Range TODO
+
+Aleks Development TODO
 ~~~~~~~~~~~~~~~~~~~~~~
-- Email Sending Engine
-* Create Templates => IN PROGRESS
-* Wire Email Notifications into Order and Ship => IN PROGRESS
-* Create Actual Email Sender => TODO
+- Azure Hosting => TODO
 
-* Research Refunds in DEV environment => TODO
-* Add Refunds to the Mock Payment Processor => TODO
+Aleks GO LIVE TODO
+~~~~~~~~~~~~~~~~~~
+- Quality Assurance on Everything => TODO
+- Wire Merchant Account into Stripe => TODO
+- Run Live Transactions => TODO
 
+Aleks Business TODO
+~~~~~~~~~~~~~~~~~~~
+- Move this log into Dropbox Folder
+- Aleks Review Partnership Agreement => TODO
+- Dataplan => TODO
+- Bizspark - submit our company => TODO
+
+Bug Tracker TODO
+~~~~~~~~~~~~~~~~
+- Refund Math is waaaaay off => TODO
+- Inventory is not using Available for Store Front => TODO
+- Due to changes in inventory, items were removed from your cart. => TODO
+	* Respond to Server-size Failure on CreateOrder i.e. if Stripe succeeds, but we FAIL => TODO
+	* http://localhost/Commerce.Web/Admin/Product/Editor for DUMMY
+- No Invoice Number appears in Manager ORder => tODO
 
 New Specs
 ~~~~~~~~~
+- Show Ajax wheel while waiting for Stripe => TODO
+- Add Time to Manage Order Screen => TODO
+- Add Current Order Total to Manage Order Search Screen => TODO
 - User Account Password Reset => TODO
-* Email Template for "Hey, You've Got a New Account"
-* Email Template for "You've Requested to Reset Your Password.  Click here to Reset your Password"
-* Screen for Resetting Password
-* PasswordResetLink Repository ( CreateNew, RetrieveOneTime, Expiration )
-
-- Aleks Review Partnership Agreement => TODO
-
-- GO LIVE
-* Azure Hosting => TODO
-* Merchant Account => TODO
-* Run Live Transactions => TODO
-* Dataplan => TODO
+	* Email Template for "Hey, You've Got a New Account"
+	* Email Template for "You've Requested to Reset Your Password.  Click here to Reset your Password"
+	* Screen for Resetting Password
+	* PasswordResetLink Repository ( CreateNew, RetrieveOneTime, Expiration )
 
 
-Aleks Backlog
-~~~~~~~~~~~~~
+Aleks Tech Debt Backlog
+~~~~~~~~~~~~~~~~~~~~~~~
 - Unit Test the Cart => TODO
 - Unit Test Order DDD functions => TODO
 - Any other coverage holes...? => TODO
@@ -108,8 +132,9 @@ Jeremy
 
 PHASE 2 Backlog
 ---------------
-* Clientside for Admin Payment => TODO
-* Test Create Order screen => TODO
+* Clientside for Admin Payment => DONE
+* Test Create Order screen => DONE
+
 * Clientside for Admin Payment => TODO
 - Are you sure want to Refund that?
 

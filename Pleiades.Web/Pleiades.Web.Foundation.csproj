@@ -74,6 +74,7 @@
     <Compile Include="FineUploader\FineUploadResult.cs" />
     <Compile Include="Json\JsonNetResult.cs" />
     <Compile Include="Logging\ActivityId.cs" />
+    <Compile Include="Logging\InsulatedExecution.cs" />
     <Compile Include="Logging\NLoggerImpl.cs" />
     <Compile Include="MvcHelpers\MvcReflection.cs" />
     <Compile Include="MvcHelpers\RouteValueDictionaryBuilder.cs" />
