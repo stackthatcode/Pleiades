@@ -42,7 +42,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
             var orderLines = orderLineIds.Split(',').Select(Int32.Parse).ToList();
             var shipment = _orderManager.Ship(externalId, orderLines);
             _context.SaveChanges();
-            return new JsonNetResult(shipment.Order);
+            return new JsonNetResult(shipment);
         }
 
         [HttpPost]
@@ -52,7 +52,7 @@ namespace Commerce.Web.Areas.Admin.Controllers
             var refund = _orderManager.Refund(externalId, orderLines);
             _context.SaveChanges();
             //var order = _orderManager.Retrieve(externalId);
-            return new JsonNetResult(refund.Order);
+            return new JsonNetResult(refund);
         }
     }
 }

@@ -1,8 +1,0 @@
-
-Test Coverage Assessment 12/2012
---------------------------------
-- Pleiades.UnitTests => HttpContext stub
-- Pleiades.IntegrationTests.DataEF => EFRepoistory in PleiadesFrameworkTestDb
-- Pleiades.Web.Security.UnitTests => AggregateUserService, OwnerAuthorizationService, MembershipProvider w/ mocking and Authorization Rules
-- Commerce.IntegrationTests => Repositories, AggregateUserService end-to-end, MembershipServiceTests end-to-end
-- Commerce.WebUI.UnitTests => Routes, Controllers, SecurityResponder, SecurityContextFactory

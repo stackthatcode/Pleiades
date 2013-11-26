@@ -37,11 +37,16 @@ namespace Commerce.Application.Billing
             }
         }
 
+        public decimal SubTotalInclTax
+        {
+            get { return SubTotal + Tax; }
+        }
+
         public decimal ShippingCost
         {
             get
             {
-                return (SubTotal != 0 && _shippingMethod != null && _shippingMethod() != null) ? _shippingMethod().Cost : 0;
+                return (_shippingMethod != null && _shippingMethod() != null) ? _shippingMethod().Cost : 0;
             }
         }
 
@@ -49,7 +54,7 @@ namespace Commerce.Application.Billing
         {
             get
             {
-                return SubTotal + Tax + ShippingCost;
+                return SubTotalInclTax + ShippingCost;
             }
         }
     }

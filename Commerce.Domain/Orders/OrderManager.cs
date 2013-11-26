@@ -6,6 +6,7 @@ using Commerce.Application.Database;
 using Commerce.Application.Email;
 using Commerce.Application.Orders.Entities;
 using Commerce.Application.Payment;
+using Commerce.Application.Products;
 
 namespace Commerce.Application.Orders
 {
@@ -13,6 +14,7 @@ namespace Commerce.Application.Orders
     {
         private readonly PushMarketContext _context;
         private readonly IPaymentProcessor _paymentProcessor;
+        private readonly IInventoryRepository _inventoryRepository;
         private readonly IAdminEmailBuilder _adminEmailBuilder;
         private readonly ICustomerEmailBuilder _customerEmailBuilder;
         private readonly IEmailService _emailService;
@@ -22,12 +24,14 @@ namespace Commerce.Application.Orders
                 Func<IPaymentProcessor> paymentProcessor, 
                 IAdminEmailBuilder adminEmailBuilder, 
                 ICustomerEmailBuilder customerEmailBuilder, 
-                IEmailService emailService)
+                IEmailService emailService, 
+                IInventoryRepository inventoryRepository)
         {
             _context = context;
             _adminEmailBuilder = adminEmailBuilder;
             _customerEmailBuilder = customerEmailBuilder;
             _emailService = emailService;
+            _inventoryRepository = inventoryRepository;
             _paymentProcessor = paymentProcessor();
         }
 
@@ -66,6 +70,9 @@ namespace Commerce.Application.Orders
                     .FirstOrDefault(x => x.ExternalId == externalId);
         }
 
+        //
+        // TODO: how to prevent non-split Order Lines from interfering with this...?
+        //
         public OrderShipment Ship(string externalId, List<int> items)
         {
             var order = this.Retrieve(externalId);
@@ -73,7 +80,18 @@ namespace Commerce.Application.Orders
                 .Where(x => items.Contains(x.Id))
                 .ToList();
 
-            actualItems.ForEach(x => x.Status = OrderLineStatus.Shipped);
+            // This only works on single items!  Should we ever have Quantity in Order Line...? 
+            foreach (var item in actualItems)
+            {
+                var sku = _inventoryRepository.RetreiveBySkuCode(item.OriginalSkuCode);
+                if (sku.Available >= item.Quantity)
+                {
+                    item.Status = OrderLineStatus.Shipped;
+                    sku.InStock = sku.InStock - item.Quantity;
+                    sku.Reserved = sku.Reserved - item.Quantity;
+                }
+            }
+            
             order.LastModified = DateTime.Now;
             order.UpdateComplete();
 
@@ -111,7 +129,14 @@ namespace Commerce.Application.Orders
 
             var paymentTransaction = order.Payment;
             var result = _paymentProcessor.Refund(paymentTransaction, refundAmount);
-            order.Transactions.Add(result);            
+            order.Transactions.Add(result);
+            var output = new OrderRefund()
+            {
+                Order = order,
+                OrderLines = refundItems,
+                Transaction = result,
+            };
+
             if (!result.Success)
             {
                 refundItems.ForEach(x => _context.RefreshEntity(x));
@@ -119,19 +144,14 @@ namespace Commerce.Application.Orders
             else
             {
                 order.UpdateComplete();
-                order.LastModified = DateTime.Now;  
-            }
-            var output = new OrderRefund()
-                {
-                    Order = order,
-                    OrderLines = refundItems,
-                    Transaction = result,
-                };
+                order.LastModified = DateTime.Now;
 
-            var adminMessage = _adminEmailBuilder.OrderItemsRefunded(output);
-            var customerMessage = _customerEmailBuilder.OrderItemsRefunded(output);
-            _emailService.Send(adminMessage);
-            _emailService.Send(customerMessage);
+                var adminMessage = _adminEmailBuilder.OrderItemsRefunded(output);
+                var customerMessage = _customerEmailBuilder.OrderItemsRefunded(output);
+                _emailService.Send(adminMessage);
+                _emailService.Send(customerMessage);
+            }
+
             return output;
         }
 

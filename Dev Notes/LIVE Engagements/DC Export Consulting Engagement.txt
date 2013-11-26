@@ -1,6 +1,0 @@
-DC Export
-=========
-0.25 First Engagement
-0.25 Email
-0.50 6/14 Work
-

@@ -11,7 +11,7 @@ namespace Commerce.Application.Orders.Entities
         public OrderNote(string content)
         {
             this.Content = content;
-            this.DateCreated = DateTime.UtcNow;
+            this.DateCreated = DateTime.Now;
         }
     }
 }

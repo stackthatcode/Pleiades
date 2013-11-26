@@ -1,0 +1,69 @@
+2013-11-26 07:15:25.2197|Debug|eea02da0-59bf-405c-8c8e-ed5178ab648a|Image - Download: e951e548-ed5b-43ec-8253-64540fb4a639 thumbnail 
+2013-11-26 07:15:25.3408|Debug|73f3ed82-2db5-4650-8713-f33d733c9171|Image - Download: e50e2ca8-f828-4ef6-b440-e75f5d18ac4c thumbnail 
+2013-11-26 07:15:25.3498|Debug|0119f564-9391-49c1-8200-367d19e0f3f3|Image - Download: 5fe80f9e-d6d6-4043-86da-749cd2aa00d9 thumbnail 
+2013-11-26 07:15:25.3498|Debug|790fcd68-7113-4b6e-9ec2-1a64ea34ef72|Image - Download: 7c13172a-2c43-4508-b411-a9557fb3702f thumbnail 
+2013-11-26 07:15:25.3698|Debug|c5fe2a3f-cbef-41e9-b34d-fb0837dca9e2|Image - Download: 9cb5190d-8aa4-4be9-8764-cd228345a50f thumbnail 
+2013-11-26 07:15:25.4058|Debug|53d3dd55-5633-4de1-ab5d-22862e6d881c|Image - Download: 64097422-f530-40c8-8762-48b9237e7ac1 thumbnail 
+2013-11-26 07:15:25.4218|Debug|4ccd336b-5b2b-449f-921c-b36982333bf6|Image - Download: e750923b-5665-4bc2-96bd-081baff08d61 thumbnail 
+2013-11-26 07:15:25.4388|Debug|fa70839c-ac28-4dfd-b856-6ac992ffcdaf|Image - Download: b7885c90-8a96-470a-a4bb-c900ceb1dee7 thumbnail 
+2013-11-26 07:15:25.4898|Debug|4b9aaac3-9d5a-4857-941c-9d0da37b34bb|Image - Download: a751845c-22de-4a29-a8f2-cf406568ae7c thumbnail 
+2013-11-26 07:15:25.5048|Debug|bdfb3146-b9a5-4b65-9257-3ccc0eebe9ca|Image - Download: d6dea20a-a300-4fa4-9607-0779bdb568c9 thumbnail 
+2013-11-26 07:15:35.2123|Debug|3f144384-bbb6-4340-be4b-0e111b5112dd|Image - Download: e951e548-ed5b-43ec-8253-64540fb4a639 thumbnail 
+2013-11-26 07:15:37.2384|Debug|9b08abd9-af75-4e87-8ae9-a7a0cbc70b7f|Image - Download: e951e548-ed5b-43ec-8253-64540fb4a639 thumbnail 
+2013-11-26 07:15:37.6595|Debug|bbe48ee3-461a-4212-bd24-495205249396|Image - Download: e951e548-ed5b-43ec-8253-64540fb4a639 thumbnail 
+2013-11-26 07:15:37.6955|Debug|84a8c79e-47c7-4dd9-b312-9274fc893baa|Image - Download: 630ad9fd-9783-4c36-a15b-dda49955fd52 thumbnail 
+2013-11-26 07:15:37.6955|Debug|ead9b06b-5835-4e1a-95f5-41c51fc2af9b|Image - Download: 1acd7fc8-ae9a-4c2e-a69e-bdfedcb900b7 thumbnail 
+2013-11-26 07:16:25.1232|Error|a08c76f0-db11-419d-9b87-53ff76fe66f9|System.Net.WebException:The remote name could not be resolved: 'api.stripe.com'
+   at System.Net.HttpWebRequest.GetResponse()
+   at Stripe.Requestor.ExecuteWebRequest(WebRequest webRequest)
+   at Stripe.Requestor.PostString(String url, String apiKey)
+   at Stripe.StripeChargeService.Refund(String chargeId, Nullable`1 refundAmountInCents, Nullable`1 refundApplicationFee)
+   at Commerce.Application.Payment.StripePaymentProcessor.Refund(Transaction originalTransaction, Decimal amount) in C:\DEV\Pleiades\Commerce.Domain\Payment\StripePaymentProcessor.cs:line 60 
+2013-11-26 07:16:40.9881|Error|8fd93cf6-e078-48e6-8638-5a26f3db0903|System.Net.WebException:The remote name could not be resolved: 'api.stripe.com'
+   at System.Net.HttpWebRequest.GetResponse()
+   at Stripe.Requestor.ExecuteWebRequest(WebRequest webRequest)
+   at Stripe.Requestor.PostString(String url, String apiKey)
+   at Stripe.StripeChargeService.Refund(String chargeId, Nullable`1 refundAmountInCents, Nullable`1 refundApplicationFee)
+   at Commerce.Application.Payment.StripePaymentProcessor.Refund(Transaction originalTransaction, Decimal amount) in C:\DEV\Pleiades\Commerce.Domain\Payment\StripePaymentProcessor.cs:line 60 
+2013-11-26 07:17:21.3064|Error|cd54aba3-28f2-425a-af6d-194d388bb9ba|System.Net.WebException:The remote name could not be resolved: 'api.stripe.com'
+   at System.Net.HttpWebRequest.GetResponse()
+   at Stripe.Requestor.ExecuteWebRequest(WebRequest webRequest)
+   at Stripe.Requestor.PostString(String url, String apiKey)
+   at Stripe.StripeChargeService.Refund(String chargeId, Nullable`1 refundAmountInCents, Nullable`1 refundApplicationFee)
+   at Commerce.Application.Payment.StripePaymentProcessor.Refund(Transaction originalTransaction, Decimal amount) in C:\DEV\Pleiades\Commerce.Domain\Payment\StripePaymentProcessor.cs:line 60 
+2013-11-26 07:19:21.4983|Error|4393b8cc-6756-4756-b30e-4139741171da|System.Net.WebException:The remote name could not be resolved: 'api.stripe.com'
+   at System.Net.HttpWebRequest.GetResponse()
+   at Stripe.Requestor.ExecuteWebRequest(WebRequest webRequest)
+   at Stripe.Requestor.PostString(String url, String apiKey)
+   at Stripe.StripeChargeService.Refund(String chargeId, Nullable`1 refundAmountInCents, Nullable`1 refundApplicationFee)
+   at Commerce.Application.Payment.StripePaymentProcessor.Refund(Transaction originalTransaction, Decimal amount) in C:\DEV\Pleiades\Commerce.Domain\Payment\StripePaymentProcessor.cs:line 60 
+2013-11-26 07:19:57.7343|Error|4393b8cc-6756-4756-b30e-4139741171da|System.Net.WebException:The remote name could not be resolved: 'api.stripe.com'
+   at System.Net.HttpWebRequest.GetResponse()
+   at Stripe.Requestor.ExecuteWebRequest(WebRequest webRequest)
+   at Stripe.Requestor.PostString(String url, String apiKey)
+   at Stripe.StripeChargeService.Refund(String chargeId, Nullable`1 refundAmountInCents, Nullable`1 refundApplicationFee)
+   at Commerce.Application.Payment.StripePaymentProcessor.Refund(Transaction originalTransaction, Decimal amount) in C:\DEV\Pleiades\Commerce.Domain\Payment\StripePaymentProcessor.cs:line 60 
+2013-11-26 07:22:39.5106|Error|398917f6-e32a-4fe1-ba32-08fe4291439b|System.Net.WebException:The remote name could not be resolved: 'api.stripe.com'
+   at System.Net.HttpWebRequest.GetResponse()
+   at Stripe.Requestor.ExecuteWebRequest(WebRequest webRequest)
+   at Stripe.Requestor.PostString(String url, String apiKey)
+   at Stripe.StripeChargeService.Refund(String chargeId, Nullable`1 refundAmountInCents, Nullable`1 refundApplicationFee)
+   at Commerce.Application.Payment.StripePaymentProcessor.Refund(Transaction originalTransaction, Decimal amount) in C:\DEV\Pleiades\Commerce.Domain\Payment\StripePaymentProcessor.cs:line 60 
+2013-11-26 07:28:13.8167|Error|ac7238f2-abac-4c25-9424-e52331d13729|System.Net.WebException:The remote name could not be resolved: 'api.stripe.com'
+   at System.Net.HttpWebRequest.GetResponse()
+   at Stripe.Requestor.ExecuteWebRequest(WebRequest webRequest)
+   at Stripe.Requestor.PostString(String url, String apiKey)
+   at Stripe.StripeChargeService.Refund(String chargeId, Nullable`1 refundAmountInCents, Nullable`1 refundApplicationFee)
+   at Commerce.Application.Payment.StripePaymentProcessor.Refund(Transaction originalTransaction, Decimal amount) in C:\DEV\Pleiades\Commerce.Domain\Payment\StripePaymentProcessor.cs:line 60 
+2013-11-26 07:31:19.8543|Error|d8a7384c-d164-43bf-b530-c4b0443649d9|System.Net.WebException:The remote name could not be resolved: 'api.stripe.com'
+   at System.Net.HttpWebRequest.GetResponse()
+   at Stripe.Requestor.ExecuteWebRequest(WebRequest webRequest)
+   at Stripe.Requestor.PostString(String url, String apiKey)
+   at Stripe.StripeChargeService.Refund(String chargeId, Nullable`1 refundAmountInCents, Nullable`1 refundApplicationFee)
+   at Commerce.Application.Payment.StripePaymentProcessor.Refund(Transaction originalTransaction, Decimal amount) in C:\DEV\Pleiades\Commerce.Domain\Payment\StripePaymentProcessor.cs:line 60 
+2013-11-26 07:31:36.8443|Error|e9d088b8-6af7-40f2-b471-5bfb856385fb|System.Net.WebException:The remote name could not be resolved: 'api.stripe.com'
+   at System.Net.HttpWebRequest.GetResponse()
+   at Stripe.Requestor.ExecuteWebRequest(WebRequest webRequest)
+   at Stripe.Requestor.PostString(String url, String apiKey)
+   at Stripe.StripeChargeService.Refund(String chargeId, Nullable`1 refundAmountInCents, Nullable`1 refundApplicationFee)
+   at Commerce.Application.Payment.StripePaymentProcessor.Refund(Transaction originalTransaction, Decimal amount) in C:\DEV\Pleiades\Commerce.Domain\Payment\StripePaymentProcessor.cs:line 60 

@@ -23,9 +23,14 @@
         };
 
         self.SelectedOrderLines = function () {
-            var orderLines = [];
-            AQ(self.OrderData().OrderLines)
+            return AQ(self.OrderData().OrderLines)
                 .where(function (x) { return x.Selected() == true; })
+                .toArray();
+        };
+
+        self.SelectedOrderLinesCommaDelim = function () {
+            var orderLines = [];
+            AQ(self.SelectedOrderLines())
                 .each(function (item) { orderLines.push(item.Id); })
                 .toArray();
             return orderLines.join(",");
@@ -33,7 +38,7 @@
 
         self.Ship = function () {
             var externalId = self.SelectedOrderId();
-            var orderLines = self.SelectedOrderLines();
+            var orderLines = self.SelectedOrderLinesCommaDelim();
             if (orderLines == "") return;
 
             flow.exec(
@@ -42,16 +47,26 @@
                     self.Root.Service.AjaxPost(url, {}, this);
                 },
                 function (data) {
-                    self.SelectedOrderId(data.ExternalId);
-                    AQ(data.OrderLines).each(function (x) { x.Selected = ko.observable(false); });
-                    self.OrderData(data);
+                    var order = data.Order;
+                    self.SelectedOrderId(order.ExternalId);
+                    AQ(order.OrderLines).each(function (x) { x.Selected = ko.observable(false); });
+                    self.OrderData(order);
                 }
             );
         };
+        
+        self.RefundConfirmation = function () {
+            $("#modal-dialog-refundconfirmation").modal('show');
+        };
+
+        self.HideRefundConfirmation = function () {
+            $("#modal-dialog-refundconfirmation").modal('hide');
+        };
 
         self.Refund = function () {
+            self.HideRefundConfirmation();
             var externalId = self.SelectedOrderId();
-            var orderLines = self.SelectedOrderLines();
+            var orderLines = self.SelectedOrderLinesCommaDelim();
             if (orderLines == "") return;
 
             flow.exec(
@@ -60,9 +75,10 @@
                     self.Root.Service.AjaxPost(url, {}, this);
                 },
                 function (data) {
-                    self.SelectedOrderId(data.ExternalId);
-                    AQ(data.OrderLines).each(function (x) { x.Selected = ko.observable(false); });
-                    self.OrderData(data);
+                    var order = data.Order;
+                    self.SelectedOrderId(order.ExternalId);
+                    AQ(order.OrderLines).each(function (x) { x.Selected = ko.observable(false); });
+                    self.OrderData(order);
                 }
             );
         };
@@ -84,6 +100,30 @@
             );
         };
     };
+</script>
+
+
+<script type="text/html" id="Modal-Dialog-RefundConfirmation">
+    <div id="modal-dialog-refundconfirmation" class="modal hide fade"  data-bind="{ with: $root.OrderDetailView }">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>Refund Confirmation?</h3>
+        </div>
+
+        <div class="modal-body">
+            <p>Are You Sure You Want to Refund the following Items:</p>
+            <div data-bind="foreach: SelectedOrderLines()">
+                <div data-bind="text: $data.OriginalName"></div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <a href="#" id="modal-action" class="btn btn-inverse" data-bind="click: HideRefundConfirmation">
+                <i class="icon-remove icon-white"></i> Cancel</a>
+            <a href="#" id="modal-action" class="btn btn-primary" data-bind="click: Refund">
+                <i class="icon-ok icon-white"></i> Ok</a>
+        </div>
+    </div>
 </script>
 
 <script type="text/html" id="Top-Workspace-OrderDetail">
@@ -108,7 +148,7 @@
             
             <div style="float:right; text-align: right;">
                 <a href="#" class="btn btn-primary" data-bind="click: Ship">Ship <i class="icon-white icon-plane"></i></a>
-                <a href="#" class="btn btn-primary" data-bind="click: Refund">Refund <i class="icon-white icon-share-alt"></i></a>
+                <a href="#" class="btn btn-primary" data-bind="click: RefundConfirmation">Refund <i class="icon-white icon-share-alt"></i></a>
                 <!--<a href="#" class="btn btn-primary">Items Returned <i class="icon-white icon-tags"></i></a> -->
             </div>
         </div>
@@ -243,4 +283,6 @@
             </div>        
         </div>        
     </div>
+            
+    <div data-bind="template: { name: 'Modal-Dialog-RefundConfirmation' }"></div>
 </script>

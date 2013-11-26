@@ -63,6 +63,10 @@ function ToShortDate(input) {
     return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
 }
 
+function ToCheaplyCleanedTime(input) {
+    return input.substring(0, input.indexOf(".")).replace("T", " ");
+}
+
 function namespace(namespaceString) {
     var parts = namespaceString.split('.'),
         parent = window,

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using Autofac.Features.Indexed;
 using Commerce.Application.Analytics;
 using Commerce.Application.Billing;
 using Commerce.Application.Database;
@@ -34,6 +33,7 @@ namespace Commerce.Application.Orders
         public Action SaveChangesToDatabase;
         public Action<Order> EmailNotification;
         public Action<Order> PublishToAnalytics;
+        public Action<Order> SplitOrderLine;
 
         // Dependencies
         public Func<string, StateTax> StateTaxByAbbr;
@@ -67,6 +67,7 @@ namespace Commerce.Application.Orders
             SaveChangesToDatabase = SaveChangesToDatabaseImpl;
             EmailNotification = EmailNotificationImpl;
             PublishToAnalytics = PublishToAnalyticsImpl;
+            SplitOrderLine = SplitOrderLineImpl;
         }
 
         public SubmitOrderResult Submit(OrderRequest orderRequest)
@@ -126,11 +127,10 @@ namespace Commerce.Application.Orders
             PublishToAnalytics(order);
 
             // Last step, Split the Order Lines
-            order.SplitLines();
+            SplitOrderLine(order);
 
             // FIN! - return OrderRequestResponse - Bounded Context
-            var orderResponse = new SubmitOrderResult(order);
-            return orderResponse;
+            return new SubmitOrderResult(order);
         }
 
         // TODO: create a Composite of Order post-processors
@@ -224,7 +224,11 @@ namespace Commerce.Application.Orders
             }
         }
 
-
+        private void SplitOrderLineImpl(Order order)
+        {
+            order.SplitLines();
+            SaveChangesToDatabase();
+        }
             
         // NOTE: can't this be moved into a Repository...?
         private List<ProductSku> InventoryBySkuCodesImpl(IEnumerable<string> sku_codes, bool refresh)
@@ -277,7 +281,7 @@ namespace Commerce.Application.Orders
 
             order.OriginalGrandTotal = order.Total.GrandTotal;
             order.ExternalId = OrderNumberGenerator.Next();
-            order.DateCreated = DateTime.UtcNow;
+            order.DateCreated = DateTime.Now;
             return order;
         }
     }
