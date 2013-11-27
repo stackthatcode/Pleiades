@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using Commerce.Application.Analytics;
 using Commerce.Application.Analytics.Entities;
 using Commerce.Application.Billing;
 using Commerce.Application.File.Entities;
@@ -11,9 +10,9 @@ using Commerce.Application.Lists.Entities;
 using Commerce.Application.Orders.Entities;
 using Commerce.Application.Products;
 using Commerce.Application.Products.Entities;
-using Commerce.Application.Shopping;
 using Commerce.Application.Shopping.Entities;
 using Pleiades.Web.Security.Model;
+
 
 namespace Commerce.Application.Database
 {

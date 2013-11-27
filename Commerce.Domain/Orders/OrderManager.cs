@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Commerce.Application.Analytics;
+using Commerce.Application.Analytics.Entities;
 using Commerce.Application.Database;
 using Commerce.Application.Email;
 using Commerce.Application.Orders.Entities;
@@ -18,6 +20,7 @@ namespace Commerce.Application.Orders
         private readonly IAdminEmailBuilder _adminEmailBuilder;
         private readonly ICustomerEmailBuilder _customerEmailBuilder;
         private readonly IEmailService _emailService;
+        private readonly IAnalyticsCollector _analyticsCollector;
 
         public OrderManager(
                 PushMarketContext context,  
@@ -25,13 +28,15 @@ namespace Commerce.Application.Orders
                 IAdminEmailBuilder adminEmailBuilder, 
                 ICustomerEmailBuilder customerEmailBuilder, 
                 IEmailService emailService, 
-                IInventoryRepository inventoryRepository)
+                IInventoryRepository inventoryRepository, 
+                IAnalyticsCollector analyticsCollector)
         {
             _context = context;
             _adminEmailBuilder = adminEmailBuilder;
             _customerEmailBuilder = customerEmailBuilder;
             _emailService = emailService;
             _inventoryRepository = inventoryRepository;
+            _analyticsCollector = analyticsCollector;
             _paymentProcessor = paymentProcessor();
         }
 
@@ -62,12 +67,16 @@ namespace Commerce.Application.Orders
 
         public Order Retrieve(string externalId)
         {
-            return _context.Orders
+            var order =
+                _context.Orders
                     .Include(x => x.OrderLines)
                     .Include(x => x.StateTax)
                     .Include(x => x.ShippingMethod)
                     .Include(x => x.Transactions)
                     .FirstOrDefault(x => x.ExternalId == externalId);
+
+            order.OrderLines = order.OrderLines.OrderBy(x => x.OriginalSkuCode).ToList();
+            return order;
         }
 
         //
@@ -84,7 +93,7 @@ namespace Commerce.Application.Orders
             foreach (var item in actualItems)
             {
                 var sku = _inventoryRepository.RetreiveBySkuCode(item.OriginalSkuCode);
-                if (sku.Available >= item.Quantity)
+                if (sku.Reserved >= item.Quantity)
                 {
                     item.Status = OrderLineStatus.Shipped;
                     sku.InStock = sku.InStock - item.Quantity;
@@ -130,7 +139,7 @@ namespace Commerce.Application.Orders
             var paymentTransaction = order.Payment;
             var result = _paymentProcessor.Refund(paymentTransaction, refundAmount);
             order.Transactions.Add(result);
-            var output = new OrderRefund()
+            var refund = new OrderRefund()
             {
                 Order = order,
                 OrderLines = refundItems,
@@ -146,13 +155,25 @@ namespace Commerce.Application.Orders
                 order.UpdateComplete();
                 order.LastModified = DateTime.Now;
 
-                var adminMessage = _adminEmailBuilder.OrderItemsRefunded(output);
-                var customerMessage = _customerEmailBuilder.OrderItemsRefunded(output);
+                var analyticsRefundItems =
+                    refund.OrderLines
+                        .ToOrderLineGroups() 
+                        .Select(x => new RefundItem
+                        {
+                            Quantity = x.Quantity,
+                            SkuCode = x.SkuCode,
+                            UnitPrice = x.Price,
+                        })
+                        .ToList();
+                _analyticsCollector.Refund(DateTime.Now, order.Id, refund.Transaction.Amount, analyticsRefundItems);
+
+                var adminMessage = _adminEmailBuilder.OrderItemsRefunded(refund);
+                var customerMessage = _customerEmailBuilder.OrderItemsRefunded(refund);
                 _emailService.Send(adminMessage);
                 _emailService.Send(customerMessage);
             }
 
-            return output;
+            return refund;
         }
 
         public void FailShipping(string externalId, List<int> items)

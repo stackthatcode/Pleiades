@@ -132,6 +132,7 @@ app.controller('CheckoutController', function ($scope, $http) {
 
         $("#exp-month").val($scope.BillingInfo.ExpirationMonth);
         $("#exp-year").val($scope.BillingInfo.ExpirationYear);
+        ngAjax.ShowLoading();
         Stripe.card.createToken($("#paymentForm"), $scope.ProcessStripeResponse);
     };
 
@@ -139,6 +140,7 @@ app.controller('CheckoutController', function ($scope, $http) {
         // For debugging purposes
         //response.error = { message: "oh shit!!!" };
 
+        ngAjax.HideLoading();
         $('#payment-processing-feedback').hide();
         if (response.error) {
             $('#payment-processing-message').text(response.error.message);            

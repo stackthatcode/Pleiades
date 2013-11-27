@@ -53,7 +53,7 @@ namespace Commerce.Initializer.Builders
             var output = new List<ProductSku>();
             for (int counter = 0; counter < 10; counter++)
             {
-                var index = random.Next(0, input.Count - 1);
+                var index = random.Next(0, input.Count);
                 if (output.All(x => x.SkuCode != input[index].SkuCode))
                 {
                     output.Add(input[index]);
@@ -67,7 +67,7 @@ namespace Commerce.Initializer.Builders
             LoggerSingleton.Get().Info("Create Analytics Test Data for Sku: " + productSku.SkuCode);
 
             var random = new Random();
-            for (var current = startDate; current <= endDate; current = current.AddDays(random.Next(0, 3)))
+            for (var current = startDate; current <= endDate; current = current.AddDays(random.Next(0, 5)))
             {
                 LoggerSingleton.Get().Info("Date: " + current);
 
@@ -82,14 +82,17 @@ namespace Commerce.Initializer.Builders
 
                 if (random.Next(1, 6) == 5)
                 {
+                    var refundedQuantity = 1;
+
                     _analyticsCollector.Refund(
                         current,
                         orderId,
+                        order.OrderLines.Sum(x => refundedQuantity * x.OriginalUnitPrice),
                         new List<RefundItem>()
                             {
                                 new RefundItem
                                     {
-                                        Quantity = 1, 
+                                        Quantity = refundedQuantity, 
                                         SkuCode = productSku.SkuCode, 
                                         UnitPrice = productSku.Product.UnitPrice
                                     }

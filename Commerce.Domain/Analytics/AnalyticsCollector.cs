@@ -43,7 +43,7 @@ namespace Commerce.Application.Analytics
             }
         }
 
-        public void Refund(DateTime date, int orderId, List<RefundItem> items)
+        public void Refund(DateTime date, int orderId, decimal refundAmount, List<RefundItem> items)
         {
             foreach (var item in items)
             {
@@ -61,7 +61,8 @@ namespace Commerce.Application.Analytics
             _context.RefundEvents.Add(
                 new RefundEvent
                     {
-                        Amount = items.Sum(x => x.Quantity * x.UnitPrice),
+                        // NOTICE: the Refund Amount does NOT include taxes - that's at the Transaction Level
+                        Amount = refundAmount,
                         Date = date,
                         OrderId = orderId,
                         Quantity = items.Sum(x => x.Quantity)

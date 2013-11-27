@@ -8,6 +8,6 @@ namespace Commerce.Application.Analytics
     public interface IAnalyticsCollector
     {
         void Sale(Order order);
-        void Refund(DateTime date, int orderId, List<RefundItem> items);
+        void Refund(DateTime date, int orderId, decimal refundAmount, List<RefundItem> items);
     }
 }

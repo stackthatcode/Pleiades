@@ -11,12 +11,12 @@
     <script type="text/javascript">
         var PushMkt = PushMkt || {};
 
-        PushMkt.Dashboard = function () {
+        PushMkt.Dashboard = function() {
             self = this;
 
             self.Service = new PushLibrary.Ajax();
 
-            self.InitializeControls = function () {
+            self.InitializeControls = function() {
                 var nowTemp = new Date();
                 var now = (nowTemp.getMonth() + 1) + "/" + nowTemp.getDate() + "/" + nowTemp.getFullYear();
 
@@ -31,55 +31,55 @@
                 $("#refresh").click(self.RefreshData);
             };
 
-            self.RefreshData = function () {
+            self.RefreshData = function() {
                 var startDate = $("#data-picker-start").val();
                 var endDate = $("#data-picker-end").val();
                 // TODO: please enter a valid date?
 
                 flow.exec(
-                    function () {
+                    function() {
                         self.LoadSalesAndRefundsGraphs(startDate, endDate, this);
                     },
-                    function () {
+                    function() {
                         self.LoadSkuGraphs(startDate, endDate, this);
                         console.log("Done!");
                     }
                 );
             };
 
-            self.LoadSalesAndRefundsGraphs = function (startDate, endDate, callback) {
+            self.LoadSalesAndRefundsGraphs = function(startDate, endDate, callback) {
                 var salesDollars = [], refundsDollars = [], salesQuantity = [], refundQuantity = [];
                 flow.exec(
-                    function () {
+                    function() {
                         self.AnalyticDataService('TotalSalesAmountsByDate', startDate, endDate, this);
                     },
-                    function (data) {
+                    function(data) {
                         salesDollars = data;
                         self.AnalyticDataService('TotalRefundAmountsByDate', startDate, endDate, this);
                     },
-                    function (data) {
+                    function(data) {
                         refundsDollars = data;
                         $.plot(
                             "#SalesAndRefundsDollar",
                             [
                                 { data: salesDollars, label: "Sales $(USD)" },
-                                { data: refundsDollars, label: "Refunds $(USD)"}],
+                                { data: refundsDollars, label: "Refunds $(USD)" }],
                             {
                                 xaxis: { mode: "time" }
                             });
                         self.AnalyticDataService('TotalSalesQuantitiesByDate', startDate, endDate, this);
                     },
-                    function (data) {
+                    function(data) {
                         salesQuantity = data;
                         self.AnalyticDataService('TotalRefundQuantitiesByDate', startDate, endDate, this);
                     },
-                    function (data) {
+                    function(data) {
                         refundQuantity = data;
                         $.plot(
                             "#SalesAndRefundsQuantity",
                             [
                                 { data: salesQuantity, label: "Sales Items" },
-                                { data: refundQuantity, label: "Refunds Items"}],
+                                { data: refundQuantity, label: "Refunds Items" }],
                             {
                                 xaxis: { mode: "time" }
                             });
@@ -88,57 +88,73 @@
                 );
             };
 
-            self.LoadSkuGraphs = function (startDate, endDate, callback) {
-                var salesDollarsBySku = [], refundDollarsBySku = [];
-                
-                flow.exec(
-                    function () {
-                        self.AnalyticDataService('TotalSalesAmountsBySku', startDate, endDate, this);
-                    },
-                    function (data) {
-                        console.log(data);
+            self.LabelFormatter = function(label, series) {
+                return "<div style='font-size:8pt; text-align:center; padding:2px; color:white;'>" + 
+                        Math.round(series.percent) + "%</div>";
+            };
 
-                        salesDollarsBySku = data;                        
-                        $.plot(
-                            "#SaleDollarsBySku",                            
-                            salesDollarsBySku,
-                            {
-                                series: {
-                                    pie: {
-                                        innerRadius: 0.5,
-                                        show: true,
-                                    }
-                                }
-                            });
-                        self.AnalyticDataService('TotalRefundAmountsBySku', startDate, endDate, this);
-                    },
-                    function (data) {
-                        refundDollarsBySku = data;                        
-                        $.plot(
-                            "#RefundDollarsBySku",                            
-                            refundDollarsBySku,
-                            {
-                                series: {
-                                    pie: {
-                                        show: true,
+            self.RenderPieChart = function(container, data, empty) {
+                if (!data.length) {
+                    $(container).hide();
+                    $(empty).show();
+                    return;
+                }
+                
+                $(container).show();
+                $(empty).hide();                
+                $.plot(container,
+                    data,
+                    {
+                        series: {
+                            pie: {
+                                show: true,
+                                radius: 1,
+                                label: {
+                                    show: true,
+                                    radius: 3 / 4,
+                                    formatter: self.LabelFormatter,
+                                    background: {
+                                        opacity: 0.5,
+                                        color: '#000'
                                     }
                                 },
-                                legend: {
-                                    show: false
-                                }
-                            });
+                            },
+                        },
+                        legend: {
+                            show: true
+                        },
+                    });
+            };
+
+            self.LoadSkuGraphs = function(startDate, endDate, callback) {
+                var salesDollarsBySku = [], refundDollarsBySku = [];
+
+                flow.exec(
+                    function() {
+                        self.AnalyticDataService('TotalSalesAmountsBySku', startDate, endDate, this);
+                    },
+                    function(data) {
+                        console.log(data);
+
+                        salesDollarsBySku = data;
+                        self.RenderPieChart("#SaleDollarsBySku", salesDollarsBySku, "#SaleDollarsBySkuEmpty");
+                        self.AnalyticDataService('TotalRefundAmountsBySku', startDate, endDate, this);
+                    },
+                    function(data) {
+                        refundDollarsBySku = data;
+                        self.RenderPieChart("#RefundDollarsBySku", refundDollarsBySku, "#RefundDollarsBySkuEmpty");
                         if (callback) callback();
                     }
                 );
             };
 
-            self.AnalyticDataService = function (analytic, startDate, endDate, callback) {
+            self.AnalyticDataService = function(analytic, startDate, endDate, callback) {
                 var url = "/Admin/Analytics/Data?analytic=" + analytic + "&startDate=" + startDate + "&endDate=" + endDate;
                 self.Service.AjaxGet(url, callback);
             };
         };
 
-        $(function () {
+        $(function() {
             var dashboard = new PushMkt.Dashboard();
             dashboard.InitializeControls();
             dashboard.RefreshData();
@@ -191,9 +207,13 @@
                 <h4 style="color:#666;">Total Sales &amp; Refund Dollars By Date</h4> 
                 <div id="SalesAndRefundsDollar" style="height:330px; width:460px;"></div>
             </div>
-            <div class="span6" style="text-align:center;">
+            <div class="span6" style="text-align:center; height:330px; ">
                 <h4 style="color:#666;">Top 5 Sellers By Sku</h4> 
-                <div id="SaleDollarsBySku" style="height:330px; width:460px;"></div>
+                <div id="SaleDollarsBySku" style="height:330px; width:460px; display:none;">
+                </div>
+                <div id="SaleDollarsBySkuEmpty" style="height:300px; width:460px; border:1px dotted #999999;">
+                    <h2 style="color:#999; margin-top:110px;">No Data Available for<br /> Time Period</h2>
+                </div>
             </div>
         </div>
         
@@ -205,8 +225,13 @@
                 <div id="SalesAndRefundsQuantity" style="height:330px; width:460px;"></div>
             </div>
             <div class="span6" style="text-align:center;">
-                <h4 style="color:#666;">Top 5 Refunds By Sku</h4> 
-                <div id="RefundDollarsBySku" style="height:330px; width:460px;"></div>
+                <h4 style="color:#666;">Top 5 Refunds By Sku</h4>                 
+                <div id="RefundDollarsBySku" style="height:330px; width:460px; display:none;">
+                </div>
+                <div id="RefundDollarsBySkuEmpty" style="height:300px; width:460px; border:1px dotted #999999;">
+                    <h2 style="color:#999; margin-top:110px;">No Data Available for<br /> Time Period</h2>
+                </div>
+
             </div>
         </div>
         
