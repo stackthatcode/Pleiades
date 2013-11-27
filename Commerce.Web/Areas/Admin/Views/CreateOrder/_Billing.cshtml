@@ -100,10 +100,13 @@
             $("#exp-month").val(self.Cart().BillingInfo.ExpirationMonth());
             $("#exp-year").val(self.Cart().BillingInfo.ExpirationYear());
             $("[name='btn-submit-order']").hide();
+
+            self.Service.ShowLoading();
             Stripe.card.createToken($("#paymentForm"), self.ProcessOrder);
         };
 
         self.ProcessOrder = function(status, response) {
+            self.Service.HideLoading();
             $('#payment-processing-feedback').hide();
             if (response.error) {
                 $('#payment-processing-message').text(response.error.message);            

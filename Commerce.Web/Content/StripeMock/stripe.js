@@ -14,8 +14,8 @@ stripe.card = {
         
         //response.error = { message: "Unable to Generate your Card.  Somethings wrong!" };
         // TODO: card 4111* is invalid
-        // TODO: card 4242* is valid        
-        responseHandler("OK", response);
+        // TODO: card 4242* is valid
+        setTimeout(function() { responseHandler("OK", response); }, 5000);
     },
 };
 
