@@ -51,6 +51,7 @@
     <Compile Include="Concrete\AggregateUserService.cs" />
     <Compile Include="Default\DefaultSecurityContextBuilder.cs" />
     <Compile Include="Default\DefaultSecurityHttpResponder.cs" />
+    <Compile Include="Interface\IPasswordResetLinkRepository.cs" />
     <Compile Include="Interface\IWritableAggregateUserRepository.cs" />
     <Compile Include="Model\SecurityCode.cs" />
     <Compile Include="Rules\FluentSecurityRules.cs" />

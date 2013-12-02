@@ -86,7 +86,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\CartManagementServiceTests.cs" />
     <Compile Include="Application\ImageProcessorTests.cs" />
+    <Compile Include="Application\OrderManagerTests.cs" />
     <Compile Include="Controllers\Admin\HomeControllerTests.cs" />
     <Compile Include="Controllers\Public\AuthControllerTests.cs" />
     <Compile Include="Controllers\Admin\ManagerControllerTests.cs" />
