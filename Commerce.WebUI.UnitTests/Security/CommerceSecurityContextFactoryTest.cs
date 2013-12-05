@@ -1,10 +1,8 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using Commerce.Web.Controllers;
 using NUnit.Framework;
 using Rhino.Mocks;
 using Pleiades.Web.Security.Model;
-using Commerce.Web.Areas.Admin.Controllers;
-using Commerce.Web.Areas.Public.Controllers;
 using Commerce.Web.Plumbing;
 using PageController = Commerce.Web.Areas.Admin.Controllers.HomeController;
 
@@ -37,7 +35,7 @@ namespace Commerce.Web.UnitTests.Security
         {
             // Arrange
             var context = MockRepository.GenerateStub<AuthorizationContext>();
-            context.Controller = new Areas.Public.Controllers.PageController();
+            context.Controller = new Areas.Admin.Controllers.HomeController();
             var factory = new SecurityContextFactory();
             var user = new AggregateUser();
 

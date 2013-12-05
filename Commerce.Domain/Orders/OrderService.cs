@@ -9,7 +9,7 @@ using Commerce.Application.Email;
 using Commerce.Application.Orders.Entities;
 using Commerce.Application.Payment;
 using Commerce.Application.Products;
-using Pleiades.Application.Logging;
+using Pleiades.App.Logging;
 
 namespace Commerce.Application.Orders
 {

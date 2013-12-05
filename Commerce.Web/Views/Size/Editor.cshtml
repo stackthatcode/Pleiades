@@ -1,0 +1,532 @@
+﻿@using Pleiades.Web.MvcHelpers
+
+@section _Scripts {
+	<script type="text/javascript">
+	    function SizeService() {
+	        var self = new PushLibrary.Ajax();
+
+	        self.Sizes = function(callback) {
+	            self.AjaxGet("/Size/SizeGroups", callback);
+	        };
+
+	        self.SizeGroup = function(id, callback) {
+	            self.AjaxGet("/Size/SizeGroup/" + id, callback);
+	        };
+
+	        self.InsertGroup = function(group, callback) {
+	            self.AjaxPost("/Size/InsertGroup", group, callback);
+	        };
+
+	        self.InsertSize = function(size, callback) {
+	            self.AjaxPost("/Size/InsertSize", size, callback);
+	        };
+
+	        self.UpdateGroup = function(group, callback) {
+	            self.AjaxPost("/Size/UpdateGroup", group, callback);
+	        };
+
+	        self.UpdateSize = function(size, callback) {
+	            self.AjaxPost("/Size/UpdateSize", size, callback);
+	        };
+
+	        self.DeleteGroup = function(group, callback) {
+	            self.AjaxPost("/Size/DeleteGroup", group, callback);
+	        };
+
+	        self.DeleteSize = function(size, callback) {
+	            self.AjaxPost("/Size/DeleteSize", size, callback);
+	        };
+
+	        return self;
+	    }
+    </script>
+    <script type="text/javascript">
+		// KO enabling/disabling of server JSON
+        var SizeGroupToKnockout = function(sizeGroup) {
+			var output = {
+				Id: ko.observable(sizeGroup.Id),
+				Name: ko.observable(sizeGroup.Name),
+                Sizes: ko.observableArray(),
+            };
+
+			$.each(sizeGroup.Sizes, function (index, element) {
+				output.Sizes.push(SizeToKnockout(element));
+			});
+
+            return output;
+        }
+
+        var SizeToKnockout = function(size) {
+			return {
+				Id: ko.observable(size.Id),
+				ParentGroupId: ko.observable(size.ParentGroupId),
+				Name: ko.observable(size.Name),
+				Description: ko.observable(size.Description),
+				SEO: ko.observable(size.SEO),
+				SkuCode: ko.observable(size.SkuCode),
+			};
+		}
+			
+		var SizeGroupToServerJson = function(sizeGroup) {
+			return {
+				Id: sizeGroup.Id(),
+				Name: sizeGroup.Name(),
+				Sizes: null,    // We're never going to send these back
+			};
+		};
+			
+		var SizeToServerJson = function(size) {
+			return {
+				Id: size.Id(),
+                ParentGroupId: size.ParentGroupId(),
+				Name: size.Name(),
+                Description: size.Description(),
+                SEO: size.SEO(),
+                SkuCode: size.SkuCode(),
+			};
+		};
+    </script>
+	<script type="text/javascript">	
+       function SizeViewModel(serviceAdapter, crossCuttingUI, gliderWidget) {	
+			var self = this;
+
+			// UI state management
+			self.ExpandToggle = function(record) {
+				var current = self.ParentViewModel.ExpandData.get(record.Id)();
+				self.ParentViewModel.ExpandData.set(record.Id, !current);
+			}
+			
+			self.EditGroup = function(record) {
+				self.ClearUnsavedRecordFromModel();				
+				record.EditName = ko.observable(record.Name());
+				self.ChildViewSelectedRecord(record);
+			}
+
+			self.EditSize = function(record) {
+				self.ClearUnsavedRecordFromModel();				
+				record.EditName = ko.observable(record.Name());
+				record.EditDescription = ko.observable(record.Description());
+				record.EditSEO = ko.observable(record.SEO());
+				record.EditSkuCode = ko.observable(record.SkuCode());
+				self.ChildViewSelectedRecord(record);
+			}
+			
+			self.AddParentRecord = function() {
+				flow.exec(
+					function() {
+						var sizeGroup = { Id: null, Name: "New Size Group", Sizes: [] };
+						var knockedoutData = SizeGroupToKnockout(sizeGroup);
+						self.ChildViewModel(knockedoutData);
+						self.Glider.GlideToChild(this);
+					},
+					function() {
+						self.EditGroup(self.ChildViewModel());
+					}
+				);
+			}
+			
+			self.AddChildRecord = function() {
+				var size = SizeToKnockout({ 
+                    Id: null, ParentGroupId: self.ChildViewModel().Id(), Name: "", SkuCode: "", 
+                    Description: "" 
+                });
+				
+				self.ChildViewModel().Sizes.unshift(size);
+				self.EditSize(size);
+				window.scrollTo(0, 0);
+			}
+
+			self.CancelEdit = function(record) {
+				self.ClearUnsavedRecordFromModel();
+				self.ChildViewSelectedRecord(null);
+			}
+			
+			self.ClearUnsavedRecordFromModel = function() {
+				if (self.ChildViewSelectedRecord() && self.ChildViewSelectedRecord().Id() === null) {
+					self.ChildViewModel().Sizes.remove(self.ChildViewSelectedRecord());
+				}
+			}
+
+		    // asynchronous, service-bound operations            
+			self.GlideToChildView = function(parentRecord) {
+				flow.exec(
+					function() {
+						self.ServiceAdapter.SizeGroup(parentRecord.Id, this);
+					},
+					function(data) {
+						var knockedoutData = SizeGroupToKnockout(data);				
+						self.ChildViewModel(knockedoutData);
+						self.Glider.GlideToChild();
+					}
+				);
+			}
+			
+			self.GlideToParentView = function() {
+				var parentRecordId = self.ChildViewModel().Id();
+				flow.exec(
+                    function() {
+				        $("#glideToParent").hide();
+                        self.Glider.GlideToParent(this);
+                    },
+					function() {
+						self.RetrieveSizeGroups(this);
+					},
+					function() {
+						// animate back
+						self.ScrollTracker.TrackToIdIfNotNull(parentRecordId);
+					}
+				);
+			}
+
+			self.RetrieveSizeGroups = function(callback) {
+				flow.exec(
+					function() {
+						self.ChildViewSelectedRecord(null);		// Clear out the ChildView state
+						self.ChildViewModel(null);
+						self.ServiceAdapter.Sizes(this);						
+					},					
+					function(data) {												
+					    // expand/collapse - Add expand state to our observable dictionary if it's not *yet* Added
+						$.each(data, function(index, elem) {
+                            if (!self.ParentViewModel.ExpandData.get(elem.Id)()) {
+								self.ParentViewModel.ExpandData.set(elem.Id, false);
+							}							
+							elem.Expanded = ko.computed(function() { return self.ParentViewModel.ExpandData.get(elem.Id)(); });
+						});
+						
+						self.ParentViewModel.Data(data);
+				        if (callback) callback();
+					}
+				);
+			}
+			
+			self.SaveGroup = function() {
+				flow.exec(
+					function() {
+						var record = self.ChildViewSelectedRecord();
+						if ($.trim(record.EditName()) == "") {
+                        	$("#validation").show();
+							return;
+						}
+						record.Name(record.EditName());
+                        
+                        if (record.Id()) {
+						    self.ServiceAdapter.UpdateGroup(SizeGroupToServerJson(record), this);
+                        } else {
+						    self.ServiceAdapter.InsertGroup(SizeGroupToServerJson(record), this);
+                        }
+					},
+					function(data) {						
+						self.ChildViewSelectedRecord().Id(data.Id);				
+						self.ChildViewSelectedRecord(null);
+					}
+				);
+			}
+			
+			self.SaveSize = function() {
+				flow.exec(
+					function() {
+						var record = self.ChildViewSelectedRecord();
+						if ($.trim(record.EditName()) == "" || $.trim(record.EditDescription()) == "" || $.trim(record.EditSkuCode()) == "") {
+							$("#validation").show();
+							return;
+						}
+						record.Name(record.EditName());
+						record.SEO(record.EditSEO());
+						record.Description(record.EditDescription());
+						record.SkuCode(record.EditSkuCode());
+
+                        if (record.Id()) {
+						    self.ServiceAdapter.UpdateSize(SizeToServerJson(record), this);
+                        } else {
+						    self.ServiceAdapter.InsertSize(SizeToServerJson(record), this);
+                        }
+					},
+					function(data) {						
+						self.ChildViewSelectedRecord().Id(data.Id);				
+						self.ChildViewSelectedRecord(null);
+					}
+				);
+			}
+
+            self.DeleteSize = function() {				
+                var record = self.ChildViewSelectedRecord();
+				flow.exec(
+					function() {
+						self.ServiceAdapter.DeleteSize(SizeToServerJson(record), this);
+					},
+					function() {
+                        self.ServiceAdapter.SizeGroup(record.ParentGroupId(), this);
+					},
+					function(parentRecord) {
+						self.ChildViewModel(SizeGroupToKnockout(parentRecord));
+					}
+				);
+            }
+
+			self.DeleteGroup = function() {
+				self.ModalViewModel("Delete");
+				$('#modal-delete').modal();
+		    }
+
+			self.DeleteConfirm = function() { 
+				$('#modal-delete').modal('hide');
+			    flow.exec(
+                    function() {
+				        var record = self.ChildViewSelectedRecord();
+				        self.ServiceAdapter.DeleteGroup(SizeGroupToServerJson(record), this);
+                    },
+                    function() {
+				        $("#glideToParent").hide();
+                        self.Glider.GlideToParent(this);
+                    },
+                    function() {
+						self.RetrieveSizeGroups(this);
+                    },
+                    function() {
+                        self.ChildViewModel(null);
+				        self.ChildViewSelectedRecord(null);
+				    }
+                );
+			}
+
+
+			// Initialization
+			self.ServiceAdapter = new SizeService();
+            self.Glider = new PushLibrary.GliderWidget("#gliding-container", "#parent-editor", "#child-editor");
+            self.ScrollTracker = new PushLibrary.ScrollTracker("#gliding-container");
+
+			// load ko.observables into view model
+			self.ParentViewModel = { 
+				Data: ko.observableArray(), 
+				ExpandData: ko.observableDictionary(), 
+			};
+			self.ChildViewModel = ko.observable(null); 
+			self.ChildViewSelectedRecord = ko.observable(null);
+			self.ModalViewModel = ko.observable(null);
+				
+			// load the Size Groups
+            self.RetrieveSizeGroups();
+		}
+		
+		$(function() {
+			var model = new SizeViewModel();
+			ko.applyBindings(model);
+		});
+	</script>
+}	
+
+@section _Templates {
+	<!-- KNOCKOUT TEMPLATE - TOP WORKSPACE -->
+	<script type="text/html" id="Top-Workspace">
+		<!-- PARENT VIEW HEADER -->
+		<div id="heading" class="container" data-bind="ifnot: $root.ChildViewModel()">
+			<div class="row">
+				<div class="span9">
+					<h1>Sizes > All</h1>
+				</div>
+				<div class="span3" style="margin-top:15px; text-align:right;">
+					<a class="btn btn-primary btn-block" data-bind="click: $root.AddParentRecord">Add New Size Group <i class="icon-arrow-right icon-white"></i></a>
+				</div>
+			</div>
+		</div>
+		
+		<!-- CHILD VIEW HEADER -->
+		<div id="heading" class="container" data-bind="if: $root.ChildViewModel()">
+			<div class="row" style="position:relative;">				
+				<div class="span9">
+					<h1>Sizes &gt; <span data-bind="text: $root.ChildViewModel().Name"></span></h1>
+				</div>
+				<div class="span3" style="margin-top:15px; text-align:right;" data-bind="visible: $root.ChildViewModel().Id">
+					<a class="btn btn-primary btn-block" data-bind="click: $root.AddChildRecord"><i class="icon-plus icon-white"></i> Add Size</a>
+				</div>
+			</div>
+            <div class="row">
+                <div class="span9" style="height:40px;">
+                    <ul class="nav nav-pills" style="height:40px;">
+                        <li style="width:140px;">
+				            <a id="glideToParent" class="backbutton" data-bind="click: $root.GlideToParentView">&laquo; Back to Sizes</a>
+                            &nbsp;
+                        </li>
+                    </ul>
+                </div>
+             </div>
+		</div>
+	</script>
+	
+	<!-- KNOCKOUT TEMPLATE - PARENT EDITOR -->
+	<script type="text/html" id="Parent-Editor">
+		<div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $data.Data().length == 0">
+			<strong>There are no Size Groups.  Click "Add New Size Group" to create a new one.</strong>  
+		</div>
+		
+		<table id="parent-editor-table" class="table table-hover" data-bind="visible: $data.Data().length > 0">
+		<tbody data-bind="foreach: $data.Data()">
+			<tr>
+			<td>
+				<div style="width:600px; float:left;">
+					<input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id }" />
+					<h4 data-bind="text: $data.Name"></h4>
+					
+					<!-- ko if: $data.Expanded() -->
+					<div data-bind="foreach: $data.Sizes">
+						<h4 style="padding-left:40px;">&raquo; <span data-bind="text: Name"></span> - <span data-bind="text: Description"></span></h4>
+					</div>
+					<!-- /ko -->
+				</div>
+				
+				<div style="width:300px; text-align:right; float:left; padding-top:5px;">
+					<a class="btn" href="#" data-bind="click: $root.ExpandToggle">
+						<i class="icon-chevron-down" data-bind="visible: $data.Expanded()"></i>
+						<i class="icon-chevron-up" data-bind="visible: !$data.Expanded()"></i>
+					</a>
+					
+					<a class="btn btn-inverse" data-bind="click: $root.GlideToChildView">Edit Group of Sizes<i class="icon-arrow-right icon-white"></i></a>
+				</div>
+			</td>
+			</tr>
+		</tbody>
+		</table>
+	</script>
+	
+	<!-- KNOCKOUT TEMPLATE - CHILD EDITOR -->
+	<script type="text/html" id="Child-Editor">
+		<table class="table table-hover" style="margin-bottom:0px;">
+			<tbody data-bind="template: { name: 'Editor-Row-Template-Group', data: $data }">
+			</tbody>
+		</table>
+		
+		<table class="table table-hover">
+			<tbody data-bind="template: { name: 'Editor-Row-Template-Size', foreach: $data.Sizes }">
+			</tbody>
+		</table>
+
+        <div style="margin-top:30px; text-align:center;" class="alert alert-info" data-bind="visible: $data.Id() && $data.Sizes().length == 0">
+			<strong>This Group has no Sizes.  Click "Add New Size" to start adding new ones.</strong>  
+	    </div>
+
+	</script>
+	
+	<!-- KNOCKOUT TEMPLATE - EDITOR ROW - SIZE GROUP -->
+	<script type="text/html" id="Editor-Row-Template-Group">
+		<tr data-bind="if: $root.ChildViewSelectedRecord() != $data, click: $root.EditGroup">
+		    <td>
+                <div style="width:600px; float:left;">
+				    <input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id() }" />				
+				    <h4><span data-bind="text: $data.Name()"></span></h4>	
+			    </div>
+                <div style="width:300px; float:left; padding-top:10px; text-align:right;">
+				    <p>Touch Row to Edit</p>
+                </div>
+		    </td>
+		</tr>
+
+		<!-- EDITOR TEMPLATE -->
+        <tr data-bind="if: $root.ChildViewSelectedRecord() == $data">
+        <td>
+			<form>
+			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">				
+                <strong>Please enter the Size Group Name.</strong>
+			</div>
+		
+			<div>
+				<!-- EDITOR FIELDS -->
+				<div style="width:600px; float:left; text-align:right; padding-top:5px;">
+					<input id="entry" class="input-large" style="float:left; width:250px; margin-right:20px;" type="text" placeholder="Enter Size Group Name" data-bind="value: $data.EditName" />
+				</div>
+
+				<!-- BUTTONS -->
+				<span class="span4" style="padding-top:5px; text-align:right;">
+					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveGroup"><i class="icon-ok icon-white"></i> Save</a>
+					<a class="btn btn-primary" href="#" data-bind="click: $root.DeleteGroup"><i class="icon-trash icon-white"></i> Delete</a>
+					<a class="btn btn-inverse" href="#" data-bind="click: $root.CancelEdit"><i class="icon-remove icon-white"></i> Cancel</a>
+				</span>
+			</div>		
+			</form>
+		</td>
+		</tr>
+	</script>
+    
+	<!-- KNOCKOUT TEMPLATE - EDITOR ROW - SIZE -->
+	<script type="text/html" id="Editor-Row-Template-Size">
+		<tr data-bind="if: $root.ChildViewSelectedRecord() != $data, click: $root.EditSize">
+		<td>
+            <div style="width:600px; float:left; spadding-top:5px;">
+				<input type="hidden" data-bind="attr: { id: 'tracker' + $data.Id() }" />
+                <h4>&raquo; 
+                    <span data-bind="text: $data.Name()"></span> - 
+                    <span data-bind="text: $data.Description()"></span> - 
+                    <span data-bind="text: $data.SkuCode()"></span> 
+                </h4>	
+			</div>
+            <div style="width:300px; float:left; text-align:right; padding-top:10px;">
+				<p>Touch Row to Edit</p>
+			</div>
+		</td>
+		</tr>
+
+		<!-- EDITOR TEMPLATE -->
+        <tr data-bind="if: $root.ChildViewSelectedRecord() == $data">
+        <td>
+			<form>
+			<div id="validation" style="text-align:center; clear:both; display: none;" class="alert alert-error">
+				<strong>Please fill in all the fields for this Size.</strong>  
+			</div>		    
+			<div>
+				<!-- EDITOR FIELDS -->
+                <div style="width:600px; float:left; spadding-top:5px;">
+                	<input id="entry" class="input-large" style="float:left; width:100px; margin-right:20px;" type="text" placeholder="Enter Abbreviation" data-bind="value: $data.EditName" maxlength="6" />
+					<input id="entry" class="input-large" style="float:left; width:250px; margin-right:20px;" type="text" placeholder="Enter Size Description" data-bind="value: $data.EditDescription" maxlength="20" />
+					<input id="entry" class="input-large" style="float:left; width:125px; margin-right:20px;" type="text" placeholder="Enter Sku Code" data-bind="value: $data.EditSkuCode" maxlength="6" />
+				</div>
+
+				<!-- BUTTONS -->
+                <div style="width:300px; float:left; spadding-top:5px; text-align:right;">
+					<a class="btn btn-primary" href="#" data-bind="click: $root.SaveSize"><i class="icon-ok icon-white"></i> Save</a>
+					<a class="btn btn-primary" href="#" data-bind="click: $root.DeleteSize"><i class="icon-trash icon-white"></i> Delete</a>
+					<a class="btn btn-inverse" href="#" data-bind="click: $root.CancelEdit"><i class="icon-remove icon-white"></i> Cancel</a>
+				</div>
+			</div>					
+			<div style="clear:both; height:5px;width:1px;" />			
+			</form>
+		</td>
+		</tr>
+	</script>
+	
+	<!-- KNOCKOUT TEMPLATE - MODAL DIALOG -->
+	<script type="text/html" id="Modal-Dialog">
+		<div id="modal-delete" class="modal hide fade" data-bind="if: $root.ChildViewSelectedRecord()">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3>Delete <span data-bind="text: $root.ChildViewSelectedRecord().Name()"></span></h3>
+			</div>
+			<div class="modal-body">
+				<p>Are you sure you want to Delete this Size Group and all of its Sizes?</p>			
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn btn-inverse" data-dismiss="modal"><i class="icon-remove icon-white"></i> Cancel</a>
+				<a href="#" id="modal-action" class="btn btn-primary" data-bind="click: $root.DeleteConfirm"><i class="icon-ok icon-white"></i> Ok</a>
+			</div>
+		</div>		
+	</script>
+}
+
+@section _Body {	
+    <div class="workspace-heading-parent">
+		<div class="workspace-heading" data-bind="template: { name: 'Top-Workspace', data: $root }"></div>
+	</div>
+	
+	<div id="gliding-container" class="container">
+		<div id="parent-editor">
+			<div style="margin-bottom:200px;" data-bind="template: { name: 'Parent-Editor', data: $root.ParentViewModel }">
+			</div>
+		</div>
+		
+		<div id="child-editor" data-bind="if: $root.ChildViewModel()">
+			<div style="margin-bottom:200px;" data-bind="template: { name: 'Child-Editor', data: $root.ChildViewModel() }">
+			</div>
+		</div>
+    </div>
+
+    <div id="modal-enclave" data-bind="template: { name: 'Modal-Dialog' }"></div>    
+}

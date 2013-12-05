@@ -1,0 +1,304 @@
+﻿
+    <style>
+        table.skutable tbody tr td:nth-child(1)
+        {
+            width:200px;
+        }
+        table.skutable tbody tr td:nth-child(2)
+        {
+            width:150px;
+            text-align: right;
+        }
+        table.skutable tbody tr td:nth-child(3)
+        {
+            width:150px;
+            text-align: right;
+        }
+        table.skutable tbody tr td:nth-child(4)
+        {
+            width:150px;
+            text-align: right;
+        }
+        table.skutable tbody tr td:nth-child(5)
+        {
+            width:150px;
+            text-align: right;
+        }        
+        table.editcart tr td
+        {
+            border-top: none; 
+        }
+        div.color-chooser
+        {
+            margin-right:10px; 
+            height:37px; 
+            padding:3px; 
+            width:37px; 
+            text-align:center; 
+            overflow:hidden;
+            cursor: pointer;
+        }
+        .selected
+        {
+            border: 2px solid #F00;
+        }
+        .not-selected
+        {
+            border: 2px solid #EEE;
+        }
+        .label
+        {
+            cursor: pointer;
+        }
+        
+        .workspace-heading {
+            height: 125px;
+        }
+        
+        #gliding-container {
+            margin-top: 20px;
+        }
+    </style>
+    
+    <!-- Function to add Product Search & Selection -->
+<script type="text/javascript">
+    var PushMkt = PushMkt || {};
+
+    PushMkt.AddSearchFunctions = function(model) {
+        self = model;
+        self.SearchData = ko.observableArray();
+        self.Cart = ko.observable(new PushMkt.Cart());
+
+        self.ViewCart = function() {
+            if (self.Cart().NumberOfDistinctItems() == 0) {
+                self.ShowModal("Notification", "The Shopping Cart is Empty", "Add Items to the Order");
+                return;
+            }
+            ;
+
+            $("[name='btn-view-cart']").hide();
+
+            $.each(self.SearchData(), function(index, elem) {
+                elem.ExpandInventory(false);
+                elem.Inventory.removeAll();
+            });
+            self.GlideRight("ReviewProducts");
+        };
+
+        self.SearchClick = function(callback) {
+            flow.exec(
+                function() {
+                    var brandId = $("#SearchBrand").val();
+                    var categoryId = $("#SearchCategory").val();
+                    var searchText = $("#SearchText").val();
+                    self.Service.AjaxGet("/Product/Search" +
+                        "?brandId=" + brandId + "&categoryId=" + categoryId + "&searchText=" + searchText, this);
+                },
+                function(data) {
+                    $.each(data, function(index, elem) {
+                        elem.ExpandInventory = ko.observable(false);
+                        elem.Inventory = ko.observableArray([]);
+                    });
+                    self.SearchData(data);
+                    if (callback) {
+                        callback();
+                    }
+                }
+            );
+        };
+
+        self.ShowInventory = function(data) {
+            flow.exec(
+                function() {
+                    self.Service.AjaxGet("/Product/Inventory/" + data.Id, this);
+                },
+                function(inventory) {
+                    data.ExpandInventory(true);
+
+                    $.each(inventory, function(index, inventoryItem) {
+                        inventoryItem.SelectedQuantity = ko.observable(0);
+                        inventoryItem.QuantityOptions = ko.observableArray();
+
+                        inventoryItem.ComputedAvailable = ko.computed(
+                            function() {
+                                var quantityInCart = self.Cart().QuantityBySkuCode(inventoryItem.SkuCode);
+                                //var available = inventoryItem.Available > 10 ? 10 : inventoryItem.Available;
+                                return inventoryItem.Available - quantityInCart;
+                            }
+                        );
+
+                        inventoryItem.GenerateQuantityOptions = function() {
+                            inventoryItem.QuantityOptions.removeAll();
+
+                            for (var quantity = 1; quantity <= inventoryItem.ComputedAvailable(); quantity++) {
+                                inventoryItem.QuantityOptions.push(quantity);
+                            }
+                        };
+                        inventoryItem.GenerateQuantityOptions();
+
+                        data.Inventory.push(inventoryItem);
+                    });
+                }
+            );
+        };
+
+        self.HideInventory = function(data) {
+            data.ExpandInventory(false);
+            data.Inventory.removeAll();
+        };
+
+        self.AddToCart = function(inventoryItem, product) {
+            var selectedQuantity = inventoryItem.SelectedQuantity();
+            var skuCode = inventoryItem.SkuCode;
+            var quantityInCart = self.Cart().QuantityBySkuCode(skuCode);
+
+            if (!selectedQuantity) {
+                return;
+            }
+            if (self.Cart().NumberOfDistinctItems() >= 20) {
+                self.ShowModal("Notification", "The Shopping Cart is Full", "You can only Add 20 distinct Skus per Order");
+                return;
+            }
+            if (quantityInCart + selectedQuantity > inventoryItem.Available) {
+                self.ShowModal("Notification",
+                    "Stock Availability", "Only " + inventoryItem.Available + " of that item available for purchase. Adjusting quantity.");
+                return;
+            }
+
+            if (quantityInCart) {
+                var itemInCart = self.Cart().ItemBySkuCode(skuCode);
+                itemInCart.Quantity(itemInCart.Quantity() + selectedQuantity);
+
+            } else {
+                var newCartItem = new PushMkt.CartItem(product, inventoryItem, selectedQuantity);
+                self.Cart().Items.push(newCartItem);
+            }
+
+            inventoryItem.GenerateQuantityOptions();
+            inventoryItem.SelectedQuantity(null);
+
+            $("#AddFeedback").show();
+            $("#AddFeedback").fadeOut({ duration: 1000 });
+        };
+    };
+</script>
+
+<!-- KNOCKOUT TEMPLATES - Select Products -->
+<script type="text/html" id="Top-Workspace-SelectProducts">
+    <div class="workspace-heading" style="height:125px;">
+		<div id="heading" class="container">
+            <div class="row">
+				<div class="span7">
+					<h1>Create Order &gt; Add Items</h1>
+				</div>
+                <div class="span2" style="margin-top:20px; text-align:right;">
+                    <div id="AddFeedback" style="display:none;">
+                        <span class="label label-info"> <i class="icon-star icon-white"></i>Item Added! &nbsp;</span>
+                    </div>
+                </div>
+				<div class="span3" style="margin-top:15px; text-align:right;">
+					<a name="btn-view-cart" class="btn btn-primary" style="width:190px;" data-bind="click: $root.ViewCart">
+                        <i class="icon-shopping-cart icon-white"></i> View Cart (<span data-bind="text: $root.Cart().TotalQuantity()"></span> Items) &nbsp;
+                        <i class="icon-arrow-right icon-white"></i></a>
+				</div>
+			</div>
+                
+        <div style="height:20px;"></div>
+            <div class="row">
+				<div class="span3">
+                    <select id="SearchCategory" data-bind="foreach: $data.CategoryArray">
+                        <option data-bind="value: $data.value, text: $data.text"  />
+                    </select>
+                </div>
+				<div class="span3">
+                    <select id="SearchBrand" data-bind="foreach: $data.BrandArray">
+                        <option data-bind="value: $data.value, text: $data.text"  />
+                    </select>
+                </div>
+                <div class="span3">
+                    <input id="SearchText" type="text" class="input-large" placeholder="Description, Name, Sku..." />
+                </div>
+				<div class="span3">
+					<a class="btn btn-inverse btn-block" data-bind="click: function() { $data.SearchClick(); }">Search <i class="icon-search icon-white"></i></a>
+                </div>
+            </div>
+		</div>
+    </div>
+</script>
+<script type="text/html" id="Main-Editor-SelectProducts">
+    <div style="margin-top:0px; margin-bottom:200px;">
+        <div style="margin-top:20px; text-align:center;" class="alert alert-info" data-bind="visible: $root.SearchData().length == 0">
+			<strong>There are no Products in your current search.  Click "Search" to run a search or click "Add New Product" to create a new one.</strong>  
+		</div>
+		    
+		<table id="parent-editor-table" class="table" data-bind="visible: $root.SearchData().length > 0">
+		<tbody data-bind="foreach: $root.SearchData()">
+			<tr>
+			<td style="vertical-align:top;">
+				<div style="width:100px">
+                	<div data-bind="template: { name: 'Image-Bundle-Thumbnail-Viewer', data: { ImageBundleExternalId: $data.ImageBundleExternalId, LightboxSuffixId: 'Parent' } }">
+			        </div>
+                </div>
+            </td>
+
+            <td style="vertical-align:top; padding-top:20px;">
+                <div style="width:808px;">
+                    <div style="width:604px;float:left;">
+					    <p>
+                            <h4 data-bind="text: $data.Name" style="margin-bottom:5px;"></h4>
+                            <span style="margin-right:10px;" data-bind="text: 'Brand: ' + $data.BrandName"></span>
+                            <span style="margin-right:10px;" data-bind="text: 'Cost: ' + ToMoney($data.UnitCost)"></span>
+                            <span data-bind="text: 'Price: ' + ToMoney($data.UnitPrice)"></span>
+                        </p>
+                    </div>
+
+                    <div style="width:204px;float:left; text-align:right;">
+					    <div data-bind="ifnot: $data.ExpandInventory">
+                            <a name="btn-expand-inventory" class="btn btn-white" href="#" data-bind="click: function() { $root.ShowInventory($data) }">
+                            <i class="icon-chevron-up icon-black"></i> Show Inventory</a>
+                        </div>
+
+					    <div data-bind="if: $data.ExpandInventory">
+                            <a class="btn btn-white" href="#" data-bind="click: function() { $root.HideInventory($data) }">
+                            <i class="icon-chevron-down icon-black"></i> Hide Inventory</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div name="expanded-inventory" data-bind="if: $data.ExpandInventory">
+                    <table style="width:800px;" class="skutable table-striped table-hover table-condensed">
+                    <thead>
+                        <th>Sku Code</th>
+                        <th style="text-align:right;">Reserved</th>
+                        <th style="text-align:right;">In Stock</th>
+                        <th style="text-align:right;">Available</th>
+                        <th style="text-align:right;">Quantity</th>
+                        <th style="text-align:right;">Add to Cart</th>
+                    </thead>
+                    <tbody data-bind="foreach: $data.Inventory">
+                    <tr style="height:40px;">
+                        <td style="width:200px;"><span data-bind="text: $data.SkuCode"></span></td>
+                        <td style="width:100px;"><span data-bind="text: $data.Reserved"></span></td>
+                        <td style="width:100px;"><span data-bind="text: $data.InStock"></span></td>
+                        <td style="width:100px;"><span data-bind="text: $data.ComputedAvailable"></span></td>
+                        <td style="width:150px;">
+                            <div data-bind="if: $data.QuantityOptions().length">
+                                <select name="quantity-select" style="width:125px; margin-bottom:0px;" 
+                                    data-bind='options: $data.QuantityOptions, optionsCaption: "How many...", value: $data.SelectedQuantity'>
+                                </select>
+                            </div>
+                            <div data-bind="ifnot: $data.QuantityOptions().length">
+                                <span style="margin-right:10px;">N/A</span>
+                            </div>
+                        </td>
+                        <td style="width:100px; text-align:right;"><a name="add-to-cart" href="#" data-bind="click: function() { $root.AddToCart($data, $parent); }" style="color:#333;"><i class="icon-shopping-cart icon-blue"></i> Add to Cart</a></td>
+                    </tr>
+                    </tbody>
+                    </table>
+                </div>
+			</td>
+			</tr>
+		</tbody>
+		</table>
+    </div>
+</script>

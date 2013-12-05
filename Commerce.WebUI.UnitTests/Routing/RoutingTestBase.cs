@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Commerce.Web.Areas.Public;
+using Commerce.Web;
+using Commerce.Web.Plumbing;
 using NUnit.Framework;
-using Commerce.Web.Areas.Admin;
 using Pleiades.TestHelpers.Web;
 
-namespace Commerce.Web.UnitTests.Routing
+namespace Commerce.UnitTests.Routing
 {
     public class RoutingTestBase
     {
@@ -18,7 +18,7 @@ namespace Commerce.Web.UnitTests.Routing
             RoutingHelper.BuildAreaRegistrations(
                 new List<AreaRegistration>() 
                 { 
-                    new AdminAreaRegistration(),
+                    new RouteRegistration(),
                     new PublicAreaRegistration(),
                 });
 

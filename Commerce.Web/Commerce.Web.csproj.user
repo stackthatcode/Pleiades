@@ -15,7 +15,7 @@
           <SQLDebugging>False</SQLDebugging>
           <ExternalProgram>
           </ExternalProgram>
-          <StartExternalURL>http://localhost/Commerce.Web/Admin</StartExternalURL>
+          <StartExternalURL>http://localhost/Commerce.Web</StartExternalURL>
           <StartCmdLineArguments>
           </StartCmdLineArguments>
           <StartWorkingDirectory>

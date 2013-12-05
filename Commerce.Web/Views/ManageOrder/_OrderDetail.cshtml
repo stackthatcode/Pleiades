@@ -1,0 +1,288 @@
+﻿<script type="text/javascript">
+    var PushMkt = PushMkt || {};
+
+    PushMkt.AddOrderDetailView = function ($root) {
+        var self = {};
+        self.Root = $root;
+        self.Root.OrderDetailView = self;
+
+        self.TopWorkspaceTemplate = "Top-Workspace-OrderDetail";
+        self.MainEditorTemplate = "Main-Editor-OrderDetail";
+
+        self.SelectedOrderId = ko.observable(null);
+        self.OrderData = ko.observable(null);
+
+        self.GoBackToSearch = function () {
+            self.GlideLeft(
+                self.Root.AddFindOrderView.TopWorkspaceTemplate,
+                self.Root.AddFindOrderView.MainEditorTemplate);
+        };
+
+        self.ItemSelect = function (data) {
+            data.Selected(!data.Selected());
+        };
+
+        self.SelectedOrderLines = function () {
+            return AQ(self.OrderData().OrderLines)
+                .where(function (x) { return x.Selected() == true; })
+                .toArray();
+        };
+
+        self.SelectedOrderLinesCommaDelim = function () {
+            var orderLines = [];
+            AQ(self.SelectedOrderLines())
+                .each(function (item) { orderLines.push(item.Id); })
+                .toArray();
+            return orderLines.join(",");
+        };
+
+        self.Ship = function () {
+            var externalId = self.SelectedOrderId();
+            var orderLines = self.SelectedOrderLinesCommaDelim();
+            if (orderLines == "") return;
+
+            flow.exec(
+                function () {
+                    var url = "/ManageOrder/Ship?externalId=" + externalId + "&orderLineIds=" + orderLines;
+                    self.Root.Service.AjaxPost(url, {}, this);
+                },
+                function (data) {
+                    var order = data.Order;
+                    self.SelectedOrderId(order.ExternalId);
+                    AQ(order.OrderLines).each(function (x) { x.Selected = ko.observable(false); });
+                    self.OrderData(order);
+                }
+            );
+        };
+        
+        self.RefundConfirmation = function () {
+            $("#modal-dialog-refundconfirmation").modal('show');
+        };
+
+        self.HideRefundConfirmation = function () {
+            $("#modal-dialog-refundconfirmation").modal('hide');
+        };
+
+        self.Refund = function () {
+            self.HideRefundConfirmation();
+            var externalId = self.SelectedOrderId();
+            var orderLines = self.SelectedOrderLinesCommaDelim();
+            if (orderLines == "") return;
+
+            flow.exec(
+                function () {
+                    var url = "/ManageOrder/Refund?externalId=" + externalId + "&orderLineIds=" + orderLines;
+                    self.Root.Service.AjaxPost(url, {}, this);
+                },
+                function (data) {
+                    var order = data.Order;
+                    self.SelectedOrderId(order.ExternalId);
+                    AQ(order.OrderLines).each(function (x) { x.Selected = ko.observable(false); });
+                    self.OrderData(order);
+                }
+            );
+        };
+
+        self.Load = function (externalId, callback) {
+            flow.exec(
+                function () {
+                    var url = "/ManageOrder/Get?externalId=" + externalId;
+                    self.Root.Service.AjaxGet(url, this);
+                },
+                function (data) {
+                    //console.log(data);
+
+                    self.SelectedOrderId(data.ExternalId);
+                    AQ(data.OrderLines).each(function (x) { x.Selected = ko.observable(false); });
+                    self.OrderData(data);
+                    if (callback) callback();
+                }
+            );
+        };
+    };
+</script>
+
+
+<script type="text/html" id="Modal-Dialog-RefundConfirmation">
+    <div id="modal-dialog-refundconfirmation" class="modal hide fade"  data-bind="{ with: $root.OrderDetailView }">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>Refund Confirmation?</h3>
+        </div>
+
+        <div class="modal-body">
+            <p>Are You Sure You Want to Refund the following Items:</p>
+            <div data-bind="foreach: SelectedOrderLines()">
+                <div data-bind="text: $data.OriginalName"></div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <a href="#" id="modal-action" class="btn btn-inverse" data-bind="click: HideRefundConfirmation">
+                <i class="icon-remove icon-white"></i> Cancel</a>
+            <a href="#" id="modal-action" class="btn btn-primary" data-bind="click: Refund">
+                <i class="icon-ok icon-white"></i> Ok</a>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="Top-Workspace-OrderDetail">
+    <div class="workspace-heading" style="height:125px;" data-bind="{ with: $root.OrderDetailView }">
+        <div id="heading" class="container">
+            <div class="row">
+                <div class="span9">
+                    <h1>Manage Orders &gt; <span data-bind="text: SelectedOrderId"></span></h1>
+                </div>
+                <div class="span3" style="margin-top:20px; text-align:right;">                   
+                </div>
+            </div>
+
+            <div style="height:20px;"></div>
+            
+            <ul class="nav nav-pills" style="float:left; height:40px;">
+                <li style="width:140px;">
+                    <a id="glideToParent" class="backbutton" data-bind="click: $root.BackToSearch">&laquo; Back to Search</a>
+                    &nbsp;
+                </li>
+            </ul>
+            
+            <div style="float:right; text-align: right;">
+                <a href="#" class="btn btn-primary" data-bind="click: Ship">Ship <i class="icon-white icon-plane"></i></a>
+                <a href="#" class="btn btn-primary" data-bind="click: RefundConfirmation">Refund <i class="icon-white icon-share-alt"></i></a>
+                <!--<a href="#" class="btn btn-primary">Items Returned <i class="icon-white icon-tags"></i></a> -->
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="Main-Editor-OrderDetail">
+    <div style="margin-top:20px; margin-bottom:200px; padding-top:20px;" data-bind="{ with: $root.OrderDetailView }">
+        <div style="text-align:center;" class="alert alert-info" data-bind="visible: !OrderData()">
+            <strong>This Order no longer exists.</strong>  
+        </div>
+		
+        <div data-bind="with: $data.OrderData">
+            <div class="row">
+                <div class="span5">
+                    <h3 style="color: #666; font-weight: bold; margin-top:0; margin-bottom:0px;" data-bind="text: 'Order Number: ' + ExternalId"></h3>
+                    <div style="height:20px;"></div>
+                </div>
+                <div class="span7" style="text-align:left;">
+                    <h3 style="color: #666; font-weight: bold; margin-top:0; margin-bottom:0px;" data-bind="if: Complete">Status: Complete</h3>
+                    <h3 style="color: #666; font-weight: bold; margin-top:0; margin-bottom:0px;" data-bind="ifnot: Complete">Status: Incomplete</h3>
+                </div>
+            </div>
+
+            <div class="row" data-bind="if: $data">            
+                <div class="span5">                    
+                    <h4>Shipping Information</h4>
+                    <table style="color:#555;">
+                        <tr>
+                            <td style="width:125px;">Name:</td>
+                            <td><span style="font-weight: bold;" data-bind="text: Name"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td> 
+                            <td><span style="font-weight: bold;" data-bind="text: EmailAddress"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Phone:</td> 
+                            <td><span style="font-weight: bold;" data-bind="text: Phone"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Address1:</td> 
+                            <td><span style="font-weight: bold;" data-bind="text: Address1"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Address2:</td> 
+                            <td><span style="font-weight: bold;" data-bind="text: Address2"></span></td>
+                        </tr>
+                        <tr>
+                            <td>City:</td> 
+                            <td><span style="font-weight: bold;" data-bind="text: City"></span></td>
+                        </tr>
+                        <tr>
+                            <td>State:</td> 
+                            <td><span style="font-weight: bold;" data-bind="text: State"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Zip Code:</td> 
+                            <td><span style="font-weight: bold;" data-bind="text: ZipCode"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Shipping:</td> 
+                            <td><span style="font-weight: bold;" data-bind="text: ShippingMethod.Description"></span></td>
+                        </tr>
+                    </table>
+                
+                    <div style="height:20px;"></div>
+
+                    <h4>Totals</h4>                    
+                    <table style="color:#555;">
+                        <tr>
+                            <td style="width:125px;">Subtotal:</td>
+                            <td><span style="font-weight: bold;" data-bind="text: ToMoney(Total.SubTotal)"></span></td>
+                        </tr>
+                        <tr>
+                            <td style="width:125px;">Shipping Cost:</td>
+                            <td><span style="font-weight: bold;" data-bind="text: ToMoney(Total.ShippingCost)"></span></td>
+                        </tr>
+                        <tr>
+                            <td style="width:125px;">Tax (<span data-bind="text: ToMoney(StateTax.TaxRate)"></span>%):</td>
+                            <td><span style="font-weight: bold;" data-bind="text: ToMoney(Total.Tax)"></span></td>
+                        </tr>
+                        <tr>
+                            <td style="width:125px;">Current Total:</td>
+                            <td><span style="font-weight: bold;" data-bind="text: ToMoney(Total.GrandTotal)"></span></td>
+                        </tr>
+                        <tr>
+                            <td style="width:125px;">Original Total:</td>
+                            <td><span style="font-weight: bold;" data-bind="text: ToMoney(OriginalGrandTotal)"></span></td>
+                        </tr>
+                    </table>
+                
+                    <div style="height:20px;"></div>
+                
+                    <h4>Transactions</h4>
+                
+                    <table class="table table-striped">
+                        <tbody data-bind="foreach: Transactions">
+                            <tr>
+                                <td>
+                                    <span data-bind="if: Success == true"><i class="icon-search icon-star"></i></span>
+                                    <span data-bind="ifnot: Success == true"><i class="icon-search icon-remove"></i></span>
+                                </td>                            
+                                <td><span data-bind="text: ToShortDate(TransactionDate)"></span></td>
+                                <td><span data-bind="text: Details"></span></td>
+                                <td><span data-bind="text: ToMoney(Amount)"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="span7" data-bind="if: OrderLines.length">
+                    <h4>Order Lines</h4>
+                
+                    <table class="table table-hover">
+                        <thead>
+                            <th>Sku #</th>
+                            <th></th>
+                            <th>Status</th>
+                            <th style="text-align: right;">Unit Price</th>
+                        </thead>
+                        <tbody data-bind="foreach: OrderLines">
+                            <tr data-bind="click: function() { $root.OrderDetailView.ItemSelect($data); }">
+                                <td><span data-bind="text: OriginalSkuCode"></span></td>
+                                <td style="width:75px;"><div data-bind="if: $data.Selected"><span class="label label-info">Selected</span></div></td>
+                                <td><span data-bind="text: StatusDescription"></span></td>
+                                <td style="text-align: right;"><span data-bind="text: ToMoney(OriginalUnitPrice)"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>        
+        </div>        
+    </div>
+            
+    <div data-bind="template: { name: 'Modal-Dialog-RefundConfirmation' }"></div>
+</script>

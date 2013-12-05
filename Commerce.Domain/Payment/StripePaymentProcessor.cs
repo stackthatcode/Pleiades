@@ -1,6 +1,6 @@
 using System;
 using Commerce.Application.Billing;
-using Pleiades.Application.Logging;
+using Pleiades.App.Logging;
 using Stripe;
 
 namespace Commerce.Application.Payment

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Pleiades.Application;
-using Pleiades.Application.Data.EF;
+﻿using Pleiades.App.Data;
+using Pleiades.IntegrationTests.DataEF;
 
-namespace Pleiades.IntegrationTests.DataEF
+namespace Pleiades.DataEF
 {
     public class MyEntityRepository : EFGenericRepository<MyEntity>
     {

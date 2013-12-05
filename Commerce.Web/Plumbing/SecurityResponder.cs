@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using Commerce.Web.Areas.Admin;
 using Pleiades.Web.Security.Default;
 
 namespace Commerce.Web.Plumbing

@@ -62,12 +62,6 @@
     <Compile Include="Utility\HttpContextExtensions.cs" />
     <Compile Include="Utility\MachineKeyGenerator.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Application.Foundation.csproj">
-      <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
-      <Name>Pleiades.Application.Foundation</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

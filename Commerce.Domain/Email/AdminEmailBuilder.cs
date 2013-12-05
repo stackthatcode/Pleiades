@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Commerce.Application.Email.Model;
 using Commerce.Application.Orders.Entities;
-using Pleiades.Application.Logging;
+using Pleiades.App.Logging;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 

@@ -2,7 +2,7 @@ using System;
 using Commerce.Application.Email.Model;
 using System.Net.Mail;
 using System.Net;
-using Pleiades.Application.Logging;
+using Pleiades.App.Logging;
 
 namespace Commerce.Application.Email
 {

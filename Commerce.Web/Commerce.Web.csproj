@@ -132,58 +132,43 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\AnalyticsController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ManageOrderController.cs" />
-    <Compile Include="Areas\Admin\Controllers\UnsecuredController.cs" />
-    <Compile Include="Areas\Admin\Controllers\BrandController.cs" />
-    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ColorController.cs" />
-    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ManagerController.cs" />
-    <Compile Include="Areas\Admin\Controllers\CreateOrderController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
-    <Compile Include="Areas\Admin\Controllers\SectionController.cs" />
-    <Compile Include="Areas\Admin\Controllers\SizeController.cs" />
-    <Compile Include="Areas\Public\Controllers\CartController.cs" />
-    <Compile Include="Areas\Public\Controllers\OrderController.cs" />
-    <Compile Include="Areas\Public\Controllers\ListController.cs" />
-    <Compile Include="Areas\Public\Controllers\ImageController.cs" />
-    <Compile Include="Areas\Public\Controllers\SectionController.cs" />
-    <Compile Include="Areas\Public\Controllers\ProductsController.cs" />
-    <Compile Include="Areas\Public\Models\JsonExtensions.cs" />
-    <Compile Include="Plumbing\CommerceWebModule.cs">
+    <Compile Include="Plumbing\RouteRegistration.cs" />
+    <Compile Include="Controllers\AnalyticsController.cs" />
+    <Compile Include="Controllers\ManageOrderController.cs" />
+    <Compile Include="Controllers\UnsecuredController.cs" />
+    <Compile Include="Controllers\BrandController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ColorController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
+    <Compile Include="Controllers\CreateOrderController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SectionController.cs" />
+    <Compile Include="Controllers\SizeController.cs" />
+    <Compile Include="Injection\CommerceWebModule.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Plumbing\ErrorModel.cs" />
-    <Compile Include="Areas\Public\PublicAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Models\Auth\LogOnViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\Color\CreateBitmap.cs" />
-    <Compile Include="Areas\Admin\Models\Manager\ChangePasswordModel.cs" />
-    <Compile Include="Areas\Admin\Models\Manager\CreateAdminModel.cs" />
-    <Compile Include="Areas\Admin\Models\Manager\EditUserModel.cs" />
-    <Compile Include="Areas\Admin\Models\Manager\ResetPasswordModel.cs" />
-    <Compile Include="Areas\Admin\Models\Manager\ViewUserModel.cs" />
-    <Compile Include="Areas\Public\Controllers\PageController.cs" />
+    <Compile Include="Models\Auth\LogOnViewModel.cs" />
+    <Compile Include="Models\Color\CreateBitmap.cs" />
+    <Compile Include="Models\Manager\ChangePasswordModel.cs" />
+    <Compile Include="Models\Manager\CreateAdminModel.cs" />
+    <Compile Include="Models\Manager\EditUserModel.cs" />
+    <Compile Include="Models\Manager\ResetPasswordModel.cs" />
+    <Compile Include="Models\Manager\ViewUserModel.cs" />
     <Compile Include="AutofacBootstrap.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\ScriptTagGenerator.cs" />
-    <Compile Include="Helpers\StyleTagGenerator.cs" />
-    <Compile Include="Areas\Admin\AdminNavigation.cs" />
+    <Compile Include="AdminNavigation.cs" />
     <Compile Include="Plumbing\ErrorNotification.cs" />
     <Compile Include="Plumbing\HandleErrorAttributeImpl.cs" />
-    <Compile Include="Areas\Public\PublicNavigation.cs" />
     <Compile Include="Plumbing\SecurityContextFactory.cs" />
     <Compile Include="Plumbing\SecurityResponder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\Angular\angular-cookies.js" />
     <Content Include="Content\Angular\angular-cookies.min.js" />
     <Content Include="Content\Angular\angular-loader.js" />
@@ -301,33 +286,6 @@
     <Content Include="Content\Utilities\aQuery-1.0-min.js" />
     <Content Include="Content\Utilities\flow.js" />
     <Content Include="Content\Utilities\generalFunctions.js" />
-    <None Include="EmailTemplates\Admin\OrderItemsRefunded.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="EmailTemplates\Admin\OrderItemsShipped.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="EmailTemplates\Admin\OrderReceived.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="EmailTemplates\Admin\SystemError.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="EmailTemplates\Customer\OrderItemsRefunded.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="EmailTemplates\Customer\OrderItemsShipped.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="EmailTemplates\Customer\OrderReceived.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <Content Include="EmailTemplates\Shared\EmailSignature.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="EmailTemplates\Shared\MasterTemplate.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -352,13 +310,9 @@
       <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
       <Name>Commerce.Application</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Data.EF\Pleiades.Application.Data.EF.csproj">
-      <Project>{89303370-B830-4A89-8646-0F9D287AD657}</Project>
-      <Name>Pleiades.Application.Data.EF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Application.Foundation.csproj">
+    <ProjectReference Include="..\Pleiades.App.Foundation\Pleiades.App.Foundation.csproj">
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
-      <Name>Pleiades.Application.Foundation</Name>
+      <Name>Pleiades.App.Foundation</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pleiades.Web.Security.Aggregate\Pleiades.Web.Security.Aggregate.csproj">
       <Project>{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}</Project>
@@ -374,102 +328,68 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Unsecured\Login.cshtml" />
-    <Content Include="Areas\Admin\Views\Brand\Editor.cshtml" />
-    <Content Include="Areas\Admin\Views\Category\Editor.cshtml" />
-    <Content Include="Areas\Admin\Views\Color\Editor.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Image\UploadTest.cshtml" />
-    <Content Include="Areas\Admin\Views\Manager\ChangePassword.cshtml" />
-    <Content Include="Areas\Admin\Views\Manager\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Manager\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Manager\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Manager\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Manager\List.cshtml" />
-    <Content Include="Areas\Admin\Views\Manager\Reset.cshtml" />
-    <Content Include="Areas\Admin\Views\Manager\_AdminUserDetails.cshtml" />
-    <Content Include="Areas\Admin\Views\CreateOrder\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\CreateOrder\_Billing.cshtml" />
-    <Content Include="Areas\Admin\Views\CreateOrder\_CartFactory.cshtml" />
-    <Content Include="Areas\Admin\Views\CreateOrder\_Completion.cshtml" />
-    <Content Include="Areas\Admin\Views\CreateOrder\_ReferenceData.cshtml" />
-    <Content Include="Areas\Admin\Views\CreateOrder\_ReviewOrder.cshtml" />
-    <Content Include="Areas\Admin\Views\CreateOrder\_SelectProducts.cshtml" />
-    <Content Include="Areas\Admin\Views\CreateOrder\_Shipping.cshtml" />
-    <Content Include="Areas\Admin\Views\Product\Editor.cshtml" />
-    <Content Include="Areas\Admin\Views\Product\_Colors.cshtml" />
-    <Content Include="Areas\Admin\Views\Product\_Images.cshtml" />
-    <Content Include="Areas\Admin\Views\Product\_Inventory.cshtml" />
-    <Content Include="Areas\Admin\Views\Product\_SearchAndInfo.cshtml" />
-    <Content Include="Areas\Admin\Views\Product\_Sizes.cshtml" />
-    <Content Include="Areas\Admin\Views\Section\Editor.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_ColorPickerShim.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_PushLibraryShim.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_FineUploaderShim.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Footer.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Header.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_HeaderWithMenu.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_ImageBundleViewer.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Size\Editor.cshtml" />
-    <Content Include="Areas\Admin\Views\_viewstart.cshtml" />
-    <Content Include="Areas\Public\Views\Page\Index.cshtml" />
+    <Content Include="Views\Unsecured\Login.cshtml" />
+    <Content Include="Views\Brand\Editor.cshtml" />
+    <Content Include="Views\Category\Editor.cshtml" />
+    <Content Include="Views\Color\Editor.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Image\UploadTest.cshtml" />
+    <Content Include="Views\Manager\ChangePassword.cshtml" />
+    <Content Include="Views\Manager\Create.cshtml" />
+    <Content Include="Views\Manager\Delete.cshtml" />
+    <Content Include="Views\Manager\Details.cshtml" />
+    <Content Include="Views\Manager\Edit.cshtml" />
+    <Content Include="Views\Manager\List.cshtml" />
+    <Content Include="Views\Manager\Reset.cshtml" />
+    <Content Include="Views\Manager\_AdminUserDetails.cshtml" />
+    <Content Include="Views\CreateOrder\Create.cshtml" />
+    <Content Include="Views\CreateOrder\_Billing.cshtml" />
+    <Content Include="Views\CreateOrder\_CartFactory.cshtml" />
+    <Content Include="Views\CreateOrder\_Completion.cshtml" />
+    <Content Include="Views\CreateOrder\_ReferenceData.cshtml" />
+    <Content Include="Views\CreateOrder\_ReviewOrder.cshtml" />
+    <Content Include="Views\CreateOrder\_SelectProducts.cshtml" />
+    <Content Include="Views\CreateOrder\_Shipping.cshtml" />
+    <Content Include="Views\Product\Editor.cshtml" />
+    <Content Include="Views\Product\_Colors.cshtml" />
+    <Content Include="Views\Product\_Images.cshtml" />
+    <Content Include="Views\Product\_Inventory.cshtml" />
+    <Content Include="Views\Product\_SearchAndInfo.cshtml" />
+    <Content Include="Views\Product\_Sizes.cshtml" />
+    <Content Include="Views\Section\Editor.cshtml" />
+    <Content Include="Views\Shared\_ColorPickerShim.cshtml" />
+    <Content Include="Views\Shared\_PushLibraryShim.cshtml" />
+    <Content Include="Views\Shared\_FineUploaderShim.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_HeaderWithMenu.cshtml" />
+    <Content Include="Views\Shared\_ImageBundleViewer.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Size\Editor.cshtml" />
+    <Content Include="Views\_viewstart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Web.config" />
+    <Content Include="Views\Shared\_EndlessGlider.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Public\Views\Web.config" />
+    <Content Include="Views\Shared\_ModalDialog.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Shared\_EndlessGlider.cshtml" />
+    <Content Include="Views\CreateOrder\_TestingFunctions.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Shared\_ModalDialog.cshtml" />
+    <Content Include="Views\Shared\_HeaderBare.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\CreateOrder\_TestingFunctions.cshtml" />
+    <Content Include="Views\Shared\_LayoutBare.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Public\Views\Page\ServerError.cshtml" />
+    <Content Include="Views\Unsecured\ServerError.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Public\Views\Shared\_Footer.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Public\Views\Shared\_Header.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Admin\Views\Shared\_HeaderBare.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Public\Views\Page\NotFound.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Public\Views\Shared\_NgLayout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Public\Views\_viewstart.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Admin\Views\Shared\_LayoutBare.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Admin\Views\Unsecured\ServerError.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Public\Views\Shared\_NgShimHead.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Public\Views\Shared\_Layout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Public\Views\Shared\_NgShimBody.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Admin\Views\ManageOrder\Editor.cshtml" />
-    <Content Include="Areas\Admin\Views\ManageOrder\_FindOrders.cshtml" />
-    <Content Include="Areas\Admin\Views\ManageOrder\_OrderDetail.cshtml" />
+    <Content Include="Views\ManageOrder\Editor.cshtml" />
+    <Content Include="Views\ManageOrder\_FindOrders.cshtml" />
+    <Content Include="Views\ManageOrder\_OrderDetail.cshtml" />
     <None Include="Content\ArtOfGroundFighting\Fonts\Bevan.woff" />
     <None Include="Content\ArtOfGroundFighting\Fonts\OpenSans-400.woff" />
     <None Include="Content\ArtOfGroundFighting\Fonts\OpenSans-700.woff" />

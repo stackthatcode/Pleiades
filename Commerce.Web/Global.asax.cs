@@ -5,14 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Pleiades.Application.Logging;
-using Pleiades.Application.Utility;
-using Pleiades.Web.Logging;
+using Pleiades.App.Logging;
+using Pleiades.App.Utility;
+using Pleiades.Web.Activity;
 using Pleiades.Web.Plumbing;
 using Pleiades.Web.Security.Aspect;
 using Commerce.Application.Database;
-using Commerce.Web.Areas.Admin;
-using Commerce.Web.Areas.Public;
 using Commerce.Web.Plumbing;
 
 namespace Commerce.Web
@@ -25,7 +23,7 @@ namespace Commerce.Web
             Database.SetInitializer<PushMarketContext>(null);
 
             // Routes
-            RegisterAllRoutes();
+            RouteRegistration.RegisterRoutes(RouteTable.Routes);
             RegisterSystemRoutes();
 
             // Components
@@ -60,35 +58,26 @@ namespace Commerce.Web
             ErrorNotification.Send(lastError);
 
             Server.ClearError();
-            var redirectUrl = ConfigurationManager.AppSettings["AdminOrderDebug"];
+            var redirectUrl = ConfigurationManager.AppSettings["AdminErrorRedirect"];
             if (redirectUrl != null) 
             {
                 HttpContext.Current.Response.Redirect(redirectUrl);
             }
-            // TODO: add logic to check for Admin vs. Public detection  
         }
-
-        public static void RegisterAllRoutes()
-        {
-            var adminArea = new AdminAreaRegistration();
-            var adminAreaContext = new AreaRegistrationContext(adminArea.AreaName, RouteTable.Routes);
-            adminArea.RegisterArea(adminAreaContext);
-
-            var publicArea = new PublicAreaRegistration();
-            var publicAreaContext = new AreaRegistrationContext(publicArea.AreaName, RouteTable.Routes);
-            publicArea.RegisterArea(publicAreaContext);
-        }
-
+        
+        // TODO: how do we manage 404's in the Admin Site...?
         public static void RegisterSystemRoutes()
         {
-            RouteTable.Routes.MapRoute(
-                "404-PageNotFound",
-                "{*url}",
-                new {area="Public", controller = "System", action = "NotFound"},
-                new [] {"Commerce.Web.Areas.Public.Controllers"}
-                );
+            // TODO: need a 404 for the Admin
+            
+            //RouteTable.Routes.MapRoute(
+            //    "404-PageNotFound",
+            //    "{*url}",
+            //    new {area="Public", controller = "System", action = "NotFound"},
+            //    new [] {"Commerce.Web.Areas.Public.Controllers"}
+            //    );
 
-            RouteTable.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            //RouteTable.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
         }
 
         public void RegisterGlobalFilters()

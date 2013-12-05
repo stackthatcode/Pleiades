@@ -115,10 +115,6 @@
       <Project>{C719AC5A-4969-4365-BDE6-A668C4929DB6}</Project>
       <Name>Commerce.Web</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pleiades.Framework\Pleiades.Application.Foundation.csproj">
-      <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
-      <Name>Pleiades.Application.Foundation</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Pleiades.TestHelpers\Pleiades.TestHelpers.csproj">
       <Project>{A839CD41-8163-4667-A4B3-9B7593FC0350}</Project>
       <Name>Pleiades.TestHelpers</Name>

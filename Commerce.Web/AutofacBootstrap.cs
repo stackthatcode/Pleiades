@@ -1,9 +1,8 @@
 ﻿using System.Web.Mvc;
-using Commerce.Web.Plumbing;
-using Pleiades.Application.Injection;
-using Pleiades.Web.Autofac;
+using Commerce.Web.Injection;
 using Autofac;
 using Autofac.Integration.Mvc;
+using Pleiades.App.Injection;
 
 namespace Commerce.Web
 {

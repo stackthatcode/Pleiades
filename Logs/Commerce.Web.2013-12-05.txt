@@ -1,0 +1,174 @@
+2013-12-05 07:18:13.6182|Error|3b30d06d-2ade-436d-a09b-4d5490a3107f|URL:http://localhost/Commerce.Web/Unsecured/Login - IsAjaxRequest: False 
+2013-12-05 07:18:13.6182|Error|3b30d06d-2ade-436d-a09b-4d5490a3107f|System.Web.HttpCompileException:c:\DEV\Pleiades\Commerce.Web\Views\Unsecured\Login.cshtml(45): error CS0103: The name 'PublicNavigation' does not exist in the current context
+   at System.Web.Compilation.AssemblyBuilder.Compile()
+   at System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   at System.Web.Mvc.BuildManagerWrapper.System.Web.Mvc.IBuildManager.FileExists(String virtualPath)
+   at System.Web.Mvc.BuildManagerViewEngine.FileExists(ControllerContext controllerContext, String virtualPath)
+   at System.Web.Mvc.VirtualPathProviderViewEngine.<>c__DisplayClass4.<GetPathFromGeneralName>b__0(String path)
+   at System.Web.WebPages.DefaultDisplayMode.GetDisplayInfo(HttpContextBase httpContext, String virtualPath, Func`2 virtualPathExists)
+   at System.Web.WebPages.DisplayModeProvider.<>c__DisplayClassb.<GetDisplayInfoForVirtualPath>b__8(IDisplayMode mode)
+   at System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at System.Web.WebPages.DisplayModeProvider.GetDisplayInfoForVirtualPath(String virtualPath, HttpContextBase httpContext, Func`2 virtualPathExists, IDisplayMode currentDisplayMode, Boolean requireConsistentDisplayMode)
+   at System.Web.Mvc.VirtualPathProviderViewEngine.GetPathFromGeneralName(ControllerContext controllerContext, List`1 locations, String name, String controllerName, String areaName, String cacheKey, String[]& searchedLocations)
+   at System.Web.Mvc.VirtualPathProviderViewEngine.GetPath(ControllerContext controllerContext, String[] locations, String[] areaLocations, String locationsPropertyName, String name, String controllerName, String cacheKeyPrefix, Boolean useCache, String[]& searchedLocations)
+   at System.Web.Mvc.VirtualPathProviderViewEngine.FindView(ControllerContext controllerContext, String viewName, String masterName, Boolean useCache)
+   at System.Web.Mvc.ViewEngineCollection.<>c__DisplayClassc.<FindView>b__b(IViewEngine e)
+   at System.Web.Mvc.ViewEngineCollection.Find(Func`2 lookup, Boolean trackSearchedPaths)
+   at System.Web.Mvc.ViewEngineCollection.FindView(ControllerContext controllerContext, String viewName, String masterName)
+   at System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-12-05 07:18:13.6272|Error|3b30d06d-2ade-436d-a09b-4d5490a3107f|System.IO.DirectoryNotFoundException:Could not find a part of the path 'C:\DEV\Pleiades\Commerce.Web\EmailTemplates\Admin\SystemError.cshtml'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding)
+   at System.IO.File.InternalReadAllLines(String path, Encoding encoding)
+   at System.IO.File.ReadAllLines(String path)
+   at Commerce.Application.Email.TemplateEngine.RetreiveTemplate(TemplateIdentifier templateIdentifier) in C:\DEV\Pleiades\Commerce.Domain\Email\TemplateEngine.cs:line 73
+   at Commerce.Application.Email.TemplateEngine.Render[T](T model, TemplateIdentifier templateIdentifier) in C:\DEV\Pleiades\Commerce.Domain\Email\TemplateEngine.cs:line 26
+   at Commerce.Application.Email.AdminEmailBuilder.SystemError(Guid activityId, Exception exception) in C:\DEV\Pleiades\Commerce.Domain\Email\AdminEmailBuilder.cs:line 74
+   at Commerce.Web.Plumbing.ErrorNotification.Send(Exception ex) in C:\DEV\Pleiades\Commerce.Web\Plumbing\ErrorNotification.cs:line 19 
+2013-12-05 07:23:55.8598|Error|4434c451-1e41-49f4-b632-93d33e33a7b3|URL:http://localhost/Commerce.Web/Unsecured/Login?returnUrl=%252fCommerce.Web%252f - IsAjaxRequest: False 
+2013-12-05 07:23:55.8738|Error|4434c451-1e41-49f4-b632-93d33e33a7b3|System.Web.HttpCompileException:c:\DEV\Pleiades\Commerce.Web\Views\Unsecured\Login.cshtml(44): error CS0103: The name 'PublicNavigation' does not exist in the current context
+   at System.Web.Compilation.AssemblyBuilder.Compile()
+   at System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   at System.Web.Mvc.BuildManagerWrapper.System.Web.Mvc.IBuildManager.FileExists(String virtualPath)
+   at System.Web.Mvc.BuildManagerViewEngine.FileExists(ControllerContext controllerContext, String virtualPath)
+   at System.Web.Mvc.VirtualPathProviderViewEngine.<>c__DisplayClass4.<GetPathFromGeneralName>b__0(String path)
+   at System.Web.WebPages.DefaultDisplayMode.GetDisplayInfo(HttpContextBase httpContext, String virtualPath, Func`2 virtualPathExists)
+   at System.Web.WebPages.DisplayModeProvider.<>c__DisplayClassb.<GetDisplayInfoForVirtualPath>b__8(IDisplayMode mode)
+   at System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at System.Web.WebPages.DisplayModeProvider.GetDisplayInfoForVirtualPath(String virtualPath, HttpContextBase httpContext, Func`2 virtualPathExists, IDisplayMode currentDisplayMode, Boolean requireConsistentDisplayMode)
+   at System.Web.Mvc.VirtualPathProviderViewEngine.GetPathFromGeneralName(ControllerContext controllerContext, List`1 locations, String name, String controllerName, String areaName, String cacheKey, String[]& searchedLocations)
+   at System.Web.Mvc.VirtualPathProviderViewEngine.GetPath(ControllerContext controllerContext, String[] locations, String[] areaLocations, String locationsPropertyName, String name, String controllerName, String cacheKeyPrefix, Boolean useCache, String[]& searchedLocations)
+   at System.Web.Mvc.VirtualPathProviderViewEngine.FindView(ControllerContext controllerContext, String viewName, String masterName, Boolean useCache)
+   at System.Web.Mvc.ViewEngineCollection.<>c__DisplayClassc.<FindView>b__b(IViewEngine e)
+   at System.Web.Mvc.ViewEngineCollection.Find(Func`2 lookup, Boolean trackSearchedPaths)
+   at System.Web.Mvc.ViewEngineCollection.FindView(ControllerContext controllerContext, String viewName, String masterName)
+   at System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-12-05 07:23:57.5539|Error|4434c451-1e41-49f4-b632-93d33e33a7b3|System.IO.DirectoryNotFoundException:Could not find a part of the path 'C:\DEV\Pleiades\Commerce.Web\EmailTemplates\Admin\SystemError.cshtml'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding)
+   at System.IO.File.InternalReadAllLines(String path, Encoding encoding)
+   at System.IO.File.ReadAllLines(String path)
+   at Commerce.Application.Email.TemplateEngine.RetreiveTemplate(TemplateIdentifier templateIdentifier) in C:\DEV\Pleiades\Commerce.Domain\Email\TemplateEngine.cs:line 73
+   at Commerce.Application.Email.TemplateEngine.Render[T](T model, TemplateIdentifier templateIdentifier) in C:\DEV\Pleiades\Commerce.Domain\Email\TemplateEngine.cs:line 26
+   at Commerce.Application.Email.AdminEmailBuilder.SystemError(Guid activityId, Exception exception) in C:\DEV\Pleiades\Commerce.Domain\Email\AdminEmailBuilder.cs:line 74
+   at Commerce.Web.Plumbing.ErrorNotification.Send(Exception ex) in C:\DEV\Pleiades\Commerce.Web\Plumbing\ErrorNotification.cs:line 19 
+2013-12-05 07:27:23.1956|Error|6a8a10b3-6de6-4aff-854e-47654b2809ed|URL:http://localhost/Commerce.Web/ - IsAjaxRequest: False 
+2013-12-05 07:27:23.2136|Error|6a8a10b3-6de6-4aff-854e-47654b2809ed|System.Web.HttpCompileException:c:\DEV\Pleiades\Commerce.Web\Views\Home\Index.cshtml(2): error CS0234: The type or namespace name 'Areas' does not exist in the namespace 'Commerce.Web' (are you missing an assembly reference?)
+   at System.Web.Compilation.AssemblyBuilder.Compile()
+   at System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   at System.Web.Mvc.BuildManagerWrapper.System.Web.Mvc.IBuildManager.FileExists(String virtualPath)
+   at System.Web.Mvc.BuildManagerViewEngine.FileExists(ControllerContext controllerContext, String virtualPath)
+   at System.Web.Mvc.VirtualPathProviderViewEngine.<>c__DisplayClass4.<GetPathFromGeneralName>b__0(String path)
+   at System.Web.WebPages.DefaultDisplayMode.GetDisplayInfo(HttpContextBase httpContext, String virtualPath, Func`2 virtualPathExists)
+   at System.Web.WebPages.DisplayModeProvider.<>c__DisplayClassb.<GetDisplayInfoForVirtualPath>b__8(IDisplayMode mode)
+   at System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at System.Web.WebPages.DisplayModeProvider.GetDisplayInfoForVirtualPath(String virtualPath, HttpContextBase httpContext, Func`2 virtualPathExists, IDisplayMode currentDisplayMode, Boolean requireConsistentDisplayMode)
+   at System.Web.Mvc.VirtualPathProviderViewEngine.GetPathFromGeneralName(ControllerContext controllerContext, List`1 locations, String name, String controllerName, String areaName, String cacheKey, String[]& searchedLocations)
+   at System.Web.Mvc.VirtualPathProviderViewEngine.GetPath(ControllerContext controllerContext, String[] locations, String[] areaLocations, String locationsPropertyName, String name, String controllerName, String cacheKeyPrefix, Boolean useCache, String[]& searchedLocations)
+   at System.Web.Mvc.VirtualPathProviderViewEngine.FindView(ControllerContext controllerContext, String viewName, String masterName, Boolean useCache)
+   at System.Web.Mvc.ViewEngineCollection.<>c__DisplayClassc.<FindView>b__b(IViewEngine e)
+   at System.Web.Mvc.ViewEngineCollection.Find(Func`2 lookup, Boolean trackSearchedPaths)
+   at System.Web.Mvc.ViewEngineCollection.FindView(ControllerContext controllerContext, String viewName, String masterName)
+   at System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-12-05 07:27:23.2556|Error|6a8a10b3-6de6-4aff-854e-47654b2809ed|System.IO.DirectoryNotFoundException:Could not find a part of the path 'C:\DEV\Pleiades\Commerce.Web\EmailTemplates\Admin\SystemError.cshtml'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding)
+   at System.IO.File.InternalReadAllLines(String path, Encoding encoding)
+   at System.IO.File.ReadAllLines(String path)
+   at Commerce.Application.Email.TemplateEngine.RetreiveTemplate(TemplateIdentifier templateIdentifier) in C:\DEV\Pleiades\Commerce.Domain\Email\TemplateEngine.cs:line 73
+   at Commerce.Application.Email.TemplateEngine.Render[T](T model, TemplateIdentifier templateIdentifier) in C:\DEV\Pleiades\Commerce.Domain\Email\TemplateEngine.cs:line 26
+   at Commerce.Application.Email.AdminEmailBuilder.SystemError(Guid activityId, Exception exception) in C:\DEV\Pleiades\Commerce.Domain\Email\AdminEmailBuilder.cs:line 74
+   at Commerce.Web.Plumbing.ErrorNotification.Send(Exception ex) in C:\DEV\Pleiades\Commerce.Web\Plumbing\ErrorNotification.cs:line 19 
+2013-12-05 07:28:31.6585|Error|98652b65-ba77-467b-8929-90ffd4a87267|System.Web.HttpException:The controller for path '/Commerce.Web/Admin/Analytics/Data' was not found or does not implement IController.
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) 
+2013-12-05 07:28:31.6746|Error|98652b65-ba77-467b-8929-90ffd4a87267|System.IO.DirectoryNotFoundException:Could not find a part of the path 'C:\DEV\Pleiades\Commerce.Web\EmailTemplates\Admin\SystemError.cshtml'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding)
+   at System.IO.File.InternalReadAllLines(String path, Encoding encoding)
+   at System.IO.File.ReadAllLines(String path)
+   at Commerce.Application.Email.TemplateEngine.RetreiveTemplate(TemplateIdentifier templateIdentifier) in C:\DEV\Pleiades\Commerce.Domain\Email\TemplateEngine.cs:line 73
+   at Commerce.Application.Email.TemplateEngine.Render[T](T model, TemplateIdentifier templateIdentifier) in C:\DEV\Pleiades\Commerce.Domain\Email\TemplateEngine.cs:line 26
+   at Commerce.Application.Email.AdminEmailBuilder.SystemError(Guid activityId, Exception exception) in C:\DEV\Pleiades\Commerce.Domain\Email\AdminEmailBuilder.cs:line 74
+   at Commerce.Web.Plumbing.ErrorNotification.Send(Exception ex) in C:\DEV\Pleiades\Commerce.Web\Plumbing\ErrorNotification.cs:line 19 
+2013-12-05 07:33:00.9540|Debug|d57836ee-3e45-4761-b3a7-60f3ce88415f|Image - Download: e951e548-ed5b-43ec-8253-64540fb4a639 thumbnail 
+2013-12-05 07:33:00.9620|Debug|2f274458-57c9-426f-b5ad-8b05099d8276|Image - Download: 5fe80f9e-d6d6-4043-86da-749cd2aa00d9 thumbnail 
+2013-12-05 07:33:00.9620|Debug|db849bd3-f22c-4d31-a50b-3ba3569a588a|Image - Download: e50e2ca8-f828-4ef6-b440-e75f5d18ac4c thumbnail 
+2013-12-05 07:33:00.9710|Debug|36a7e19d-72d6-4e6b-a68f-be400f798ac7|Image - Download: 64097422-f530-40c8-8762-48b9237e7ac1 thumbnail 
+2013-12-05 07:33:00.9710|Debug|b52c3d01-18f6-4c02-bb5b-3b62c107dc3c|Image - Download: 9cb5190d-8aa4-4be9-8764-cd228345a50f thumbnail 
+2013-12-05 07:33:00.9710|Debug|54107d1a-3ebf-4d71-9aa3-3ad24977e997|Image - Download: 7c13172a-2c43-4508-b411-a9557fb3702f thumbnail 
+2013-12-05 07:33:01.5230|Debug|ff86da0e-e00f-4544-9f3f-82c1b7a264f8|Image - Download: e750923b-5665-4bc2-96bd-081baff08d61 thumbnail 
+2013-12-05 07:33:01.5580|Debug|7e5bc10b-3c7f-4bd6-84f5-ec90c93164c7|Image - Download: d6dea20a-a300-4fa4-9607-0779bdb568c9 thumbnail 
+2013-12-05 07:33:01.5760|Debug|e4116e12-48ac-4cb9-a5d4-e8da0cc3339d|Image - Download: b7885c90-8a96-470a-a4bb-c900ceb1dee7 thumbnail 
+2013-12-05 07:33:01.6130|Debug|df0e0b3d-1318-41ed-a721-4b4b02067f0a|Image - Download: a751845c-22de-4a29-a8f2-cf406568ae7c thumbnail 
+2013-12-05 07:33:05.4032|Debug|c9f13e90-ea83-4216-916a-429606622b29|Image - Download: 630ad9fd-9783-4c36-a15b-dda49955fd52 thumbnail 
+2013-12-05 07:33:05.4032|Debug|75a1a559-d850-494d-b18c-87ac5e5b4df6|Image - Download: 1acd7fc8-ae9a-4c2e-a69e-bdfedcb900b7 thumbnail 
+2013-12-05 07:33:06.7933|Debug|bae9e6de-803c-4ebe-920e-7f323de45edc|Image - Download: e951e548-ed5b-43ec-8253-64540fb4a639 small 
+2013-12-05 07:33:06.7933|Debug|ceed5457-7a8c-43fb-b7e4-49f61ea0f975|Image - Download: 5b3a43b5-710c-48e1-acf8-947c8f10aec2 small 
+2013-12-05 07:33:06.8233|Debug|e3f37f9b-f90d-475e-acde-424cf92d9c75|Image - Download: 26608390-f9a4-4023-ae3e-ef9c7eb7d91d small 
+2013-12-05 07:33:06.8233|Debug|7e663d06-bdc5-41be-872f-b5e047832d19|Image - Download: b2b465d6-ec6c-4add-b073-f9bb9377480d small 
+2013-12-05 07:33:06.8233|Debug|d419d76e-9a16-44ff-a2a4-8dac8db0aca6|Image - Download: d041b4a2-593a-4d37-beee-3be37787635a small 
+2013-12-05 07:33:06.8403|Debug|e2f7de35-74e7-4d0c-826c-217e3125cd54|Image - Download: 630ad9fd-9783-4c36-a15b-dda49955fd52 thumbnail 
+2013-12-05 07:33:06.8593|Debug|f49ba79c-6168-4417-883e-a30ace1adfb0|Image - Download: 7327e16a-e1a8-48b6-9475-456d82c97ffb small 
+2013-12-05 07:33:06.8863|Debug|2e912399-3d05-427a-9b68-7169a31bc74d|Image - Download: 16743be5-2839-496f-976f-62cdde5a81bf small 
+2013-12-05 07:33:06.9023|Debug|2214cf81-1925-40f9-b0c2-3cd76515a937|Image - Download: d81b98b4-88d9-4830-81b3-954cec2548b0 small 
+2013-12-05 07:33:06.9773|Debug|4b00dc3d-81e6-41ca-9e41-3bdc3d7b4433|Image - Download: 1acd7fc8-ae9a-4c2e-a69e-bdfedcb900b7 thumbnail 
+2013-12-05 07:33:06.9773|Debug|9b7793a6-ff40-41ea-8007-a0102151a178|Image - Download: 43f248a3-55e2-4770-bf32-45ad991b9be4 small 
+2013-12-05 07:33:07.0033|Debug|9c246690-4303-45cd-81f4-d3c6cf9e5519|Image - Download: 9c3dc3e9-9b32-4911-b810-4aac58377ea6 small 

@@ -2,7 +2,7 @@
 using System.Linq;
 using Autofac;
 using NUnit.Framework;
-using Pleiades.Application.Data;
+using Pleiades.App.Data;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 
