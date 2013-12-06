@@ -71,16 +71,17 @@ namespace Commerce.ArtOfGroundFighting
             GlobalFilters.Filters.Add(new HandleErrorAttributeImpl());
         }
 
+        // TODO: evaluate if we need this
         public static void RegisterSystemRoutes()
         {
-            RouteTable.Routes.MapRoute(
-                "404-PageNotFound",
-                "{*url}",
-                new { area = "Public", controller = "System", action = "NotFound" },
-                new[] { "Commerce.Web.Areas.Public.Controllers" }
-                );
+            //RouteTable.Routes.MapRoute(
+            //    "404-PageNotFound",
+            //    "{*url}",
+            //    new { area = "Public", controller = "System", action = "NotFound" },
+            //    new[] { "Commerce.Web.Areas.Public.Controllers" }
+            //    );
 
-            RouteTable.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            //RouteTable.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
         }
 
         public void MakeBundles()

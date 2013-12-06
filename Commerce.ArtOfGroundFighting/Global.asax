@@ -1,1 +1,3 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Commerce.ArtOfGroundFighting.MvcApplication" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" 
+    Inherits="Commerce.ArtOfGroundFighting.ArtOfGroundFightingApplication" 
+    Language="C#" %>
