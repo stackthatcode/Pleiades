@@ -55,14 +55,14 @@ namespace Commerce.Web.Controllers
                 return Redirect(url);
             }
 
-            return new RedirectToRouteResult(AdminNavigation.Home());
+            return new RedirectToRouteResult(Navigation.Home());
         }
 
         [HttpGet]
         public ActionResult Logout()
         {
             this.FormsAuthenticationService.ClearAuthenticationCookie();
-            return new RedirectToRouteResult(AdminNavigation.Login());
+            return new RedirectToRouteResult(Navigation.Login());
         }
 
         public ActionResult ServerError()

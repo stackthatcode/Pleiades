@@ -5,9 +5,9 @@ using Pleiades.App.Injection;
 using Pleiades.Web.Security;
 using Commerce.Application;
 
-namespace Commerce.Web.Injection
+namespace Commerce.Web.Autofac
 {
-    public class CommerceWebModule : Module
+    public class CompositionRoot : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

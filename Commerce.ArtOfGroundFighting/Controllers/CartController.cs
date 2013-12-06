@@ -3,7 +3,7 @@ using Commerce.Application.Database;
 using Commerce.Application.Shopping;
 using Pleiades.Web.Json;
 
-namespace Commerce.Web.Areas.Public.Controllers
+namespace Commerce.ArtOfGroundFighting.Controllers
 {
     public class CartController : Controller
     {

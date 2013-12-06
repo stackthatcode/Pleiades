@@ -45,7 +45,7 @@ namespace Commerce.Web.Plumbing
 
                 filterContext.Result = new ViewResult
                 {
-                    ViewName = AdminNavigation.ServerErrorView(),
+                    ViewName = Navigation.ServerErrorView(),
                     ViewData = new ViewDataDictionary<ErrorModel>(model),
                 };
             }

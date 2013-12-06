@@ -2,9 +2,9 @@
 using System.Web.Mvc;
 using Commerce.Application.File;
 using Commerce.Application.File.Entities;
-using Pleiades.Application.Logging;
+using Pleiades.App.Logging;
 
-namespace Commerce.Web.Areas.Public.Controllers
+namespace Commerce.ArtOfGroundFighting.Controllers
 {
     public class ImageController : Controller
     {

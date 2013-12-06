@@ -6,7 +6,7 @@ namespace Commerce.Web
 {
     // TODO: add ControllerObject.ToRoute() extension method
 
-    public class AdminNavigation
+    public class Navigation
     {
         public static string ServerErrorView()
         {

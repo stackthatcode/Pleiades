@@ -1,4 +1,4 @@
-﻿namespace Commerce.Web.Plumbing
+﻿namespace Commerce.ArtOfGroundFighting.Plumbing
 {
     public class ErrorModel
     {

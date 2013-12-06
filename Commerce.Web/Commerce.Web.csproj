@@ -146,7 +146,7 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SectionController.cs" />
     <Compile Include="Controllers\SizeController.cs" />
-    <Compile Include="Injection\CommerceWebModule.cs">
+    <Compile Include="Autofac\CompositionRoot.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Plumbing\ErrorModel.cs" />
@@ -157,11 +157,11 @@
     <Compile Include="Models\Manager\EditUserModel.cs" />
     <Compile Include="Models\Manager\ResetPasswordModel.cs" />
     <Compile Include="Models\Manager\ViewUserModel.cs" />
-    <Compile Include="AutofacBootstrap.cs" />
+    <Compile Include="Autofac\Bootstrap.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="AdminNavigation.cs" />
+    <Compile Include="Navigation.cs" />
     <Compile Include="Plumbing\ErrorNotification.cs" />
     <Compile Include="Plumbing\HandleErrorAttributeImpl.cs" />
     <Compile Include="Plumbing\SecurityContextFactory.cs" />

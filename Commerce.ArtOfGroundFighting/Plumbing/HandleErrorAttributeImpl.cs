@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using Pleiades.App.Logging;
 using Pleiades.Web.Activity;
 
-namespace Commerce.Web.Plumbing
+namespace Commerce.ArtOfGroundFighting.Plumbing
 {
     public class HandleErrorAttributeImpl : HandleErrorAttribute
     {
@@ -40,28 +40,13 @@ namespace Commerce.Web.Plumbing
             {
                 var model = new ErrorModel();                
                 model.AspxErrorPath = filterContext.HttpContext.Request.Path;
+                model.NavigatedFromAdminArea = false;
 
-                if (filterContext.HttpContext.Request.Path != null &&
-                    filterContext.HttpContext.Request.Path.Contains("/Admin"))
+                filterContext.Result = new ViewResult
                 {
-                    model.NavigatedFromAdminArea = true;
-
-                    filterContext.Result = new ViewResult
-                    {
-                        ViewName = AdminNavigation.ServerErrorView(),
-                        ViewData = new ViewDataDictionary<ErrorModel>(model),
-                    };
-                }
-                else
-                {
-                    model.NavigatedFromAdminArea = false;
-
-                    filterContext.Result = new ViewResult
-                    {
-                        ViewName = PublicNavigation.ServerErrorView(),
-                        ViewData = new ViewDataDictionary<ErrorModel>(model),
-                    };
-                }
+                    ViewName = PublicNavigation.ServerErrorView(),
+                    ViewData = new ViewDataDictionary<ErrorModel>(model),
+                };
             }
 
             filterContext.ExceptionHandled = true;

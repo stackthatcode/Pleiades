@@ -1,18 +1,17 @@
 ﻿using System.Web.Mvc;
-using Commerce.Web.Injection;
 using Autofac;
 using Autofac.Integration.Mvc;
 using Pleiades.App.Injection;
 
-namespace Commerce.Web
+namespace Commerce.ArtOfGroundFighting.Plumbing
 {
-    public class AutofacBootstrap
+    public class Bootstrap
     {
         public static IContainerAdapter RegisterAndWireIocContainer()
         {
             // Build the container
             var builder = new ContainerBuilder();
-            builder.RegisterModule<CommerceWebModule>();
+            builder.RegisterModule<CompositionRoot>();
             var container = builder.Build();
 
             // Wire container into ASP.NET MVC

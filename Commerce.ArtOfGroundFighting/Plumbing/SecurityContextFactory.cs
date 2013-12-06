@@ -1,10 +1,11 @@
-﻿using System.Web.Mvc;
-using Commerce.Web.Controllers;
+﻿using System.Security;
+using System.Web.Mvc;
+using Commerce.ArtOfGroundFighting.Controllers;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
-using Pleiades.Web.Security.Rules;
+using SecurityContext = Pleiades.Web.Security.Rules.SecurityContext;
 
-namespace Commerce.Web.Plumbing
+namespace Commerce.ArtOfGroundFighting.Plumbing
 {
     public class SecurityContextFactory : ISecurityContextBuilder 
     {
@@ -25,22 +26,8 @@ namespace Commerce.Web.Plumbing
                 };
             }
 
-            if (filterContext.Controller is UnsecuredController)
-            {
-                return new SecurityContext(user)
-                {
-                    AuthorizationZone = AuthorizationZone.Public,
-                    AccountLevelRestriction = AccountLevel.NotApplicable,
-                    IsPaymentArea = false,
-                };
-            }
-
-            return new SecurityContext(user)
-            {
-                AuthorizationZone = AuthorizationZone.Administrative,
-                AccountLevelRestriction = AccountLevel.NotApplicable,
-                IsPaymentArea = false,
-            };
+            throw new SecurityException(
+                "User Attempted to access unauthorized Controller: " + filterContext.Controller.GetType());
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Commerce.Web.Plumbing
     public class RouteRegistration
     {
         public static void RegisterRoutes(RouteCollection routes)
-        {             
+        {
             // Default Route - *KEEP*
             routes.MapRoute(
                 "Home Route",

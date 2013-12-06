@@ -8,7 +8,7 @@ namespace Commerce.Web.Plumbing
         protected override void AccessDeniedSolicitLogon(AuthorizationContext filterContext)
         {
             filterContext.HttpContext.Response.StatusCode = 302;
-            var route = AdminNavigation.Login();
+            var route = Navigation.Login();
             route["returnUrl"] = filterContext.HttpContext.Server.UrlEncode(filterContext.HttpContext.Request.RawUrl);
             filterContext.Result = new RedirectToRouteResult(route);
         }

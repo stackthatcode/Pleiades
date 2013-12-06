@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Commerce.Web.Autofac;
 using Pleiades.App.Logging;
 using Pleiades.App.Utility;
 using Pleiades.Web.Activity;
@@ -27,7 +28,7 @@ namespace Commerce.Web
             RegisterSystemRoutes();
 
             // Components
-            AutofacBootstrap.RegisterAndWireIocContainer();
+            Bootstrap.RegisterAndWireIocContainer();
 
             // Bit of glue to make JSON POST-ing work
             ValueProviderFactories.Factories.Add(new JsonValueProviderFactory());

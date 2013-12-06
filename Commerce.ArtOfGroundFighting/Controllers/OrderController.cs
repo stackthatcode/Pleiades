@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Commerce.Application.Database;
 using Commerce.Application.Orders;
 using Commerce.Application.Orders.Entities;
@@ -7,7 +6,7 @@ using Commerce.Application.Shopping;
 using Pleiades.Web.Json;
 using System.Linq;
 
-namespace Commerce.Web.Areas.Public.Controllers
+namespace Commerce.ArtOfGroundFighting.Controllers
 {
     public class OrderController : Controller
     {

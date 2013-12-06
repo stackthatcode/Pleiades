@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Web.Mvc;
-using Commerce.Web.Plumbing;
+using Commerce.ArtOfGroundFighting.Plumbing;
 
-namespace Commerce.Web.Areas.Public.Controllers
+namespace Commerce.ArtOfGroundFighting.Controllers
 {
     public class PageController : Controller
     {
