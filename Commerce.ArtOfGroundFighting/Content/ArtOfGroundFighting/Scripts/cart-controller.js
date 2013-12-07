@@ -3,9 +3,11 @@
 var ngAjax = namespace("PushLibrary.NgAjax");
 var urlLocator = namespace("CommerceWeb.UrlLocator");
 var app = angular.module('push-market');
-
+var imageLocator = namespace("PushLibrary.ImageLocator");
+    
 app.controller('CartController', function ($scope, $http) {
-
+    $scope.ImageUrlGenator = imageLocator.GenerateUrl;
+    
     $scope.ToMoney = function (input) {
         return input ? input.toString().toMoney() : "";
     };

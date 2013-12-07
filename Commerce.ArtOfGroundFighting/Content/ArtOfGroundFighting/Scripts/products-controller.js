@@ -2,10 +2,13 @@
 
 var ngAjax = namespace("PushLibrary.NgAjax");
 var urlLocator = namespace("CommerceWeb.UrlLocator");
+var imageLocator = namespace("PushLibrary.ImageLocator");
 var app = angular.module('push-market');
 
-app.controller('ListController', function($scope, $http) {
-    ngAjax.Get($http, 'products', function(data) {
+app.controller('ListController', function ($scope, $http) {
+    $scope.ImageUrlGenator = imageLocator.GenerateUrl;
+    
+    ngAjax.Get($http, 'products', function (data) {
         $scope.products = data;
     });
 });
@@ -21,6 +24,8 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
     $scope.SelectedQuantityValue = null;
 
     var parentScope = $scope;
+
+    $scope.ImageUrlGenator = imageLocator.GenerateUrl;
 
     $scope.HasColors = function () {
         return $scope.Product && $scope.Product.Colors;
@@ -77,10 +82,6 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
 
     $scope.SelectImage = function (id) {
         parentScope.SelectedImageId = id;
-    };
-
-    $scope.ImageUrl = function (ibexternalId, size) {
-        return ibexternalId && ("image/" + ibexternalId + "?size=" + size);
     };
 
     $scope.HasSizes = function () {

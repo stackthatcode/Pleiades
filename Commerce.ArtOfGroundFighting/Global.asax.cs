@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
 using Commerce.Application.Database;
 using Commerce.ArtOfGroundFighting.Plumbing;
@@ -23,8 +24,7 @@ namespace Commerce.ArtOfGroundFighting
 
             // Routes
             RouteRegistration.RegisterRoutes(RouteTable.Routes);
-            RegisterSystemRoutes();
-
+            
             // Components
             Bootstrap.RegisterAndWireIocContainer();
 
@@ -71,32 +71,19 @@ namespace Commerce.ArtOfGroundFighting
             GlobalFilters.Filters.Add(new HandleErrorAttributeImpl());
         }
 
-        // TODO: evaluate if we need this
-        public static void RegisterSystemRoutes()
-        {
-            //RouteTable.Routes.MapRoute(
-            //    "404-PageNotFound",
-            //    "{*url}",
-            //    new { area = "Public", controller = "System", action = "NotFound" },
-            //    new[] { "Commerce.Web.Areas.Public.Controllers" }
-            //    );
-
-            //RouteTable.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-        }
-
         public void MakeBundles()
         {
-            //BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = true;
 
-            //BundleTable.Bundles.Add(
-            //    new ScriptBundle("~/Bundles/Foundation")
-            //        .Include("~/Content/JQuery/jquery-2.0.3.min.js")
-            //        .Include("~/Content/JQuery/jquery.validate.min.js")
-            //        .Include("~/Content/Utilities/*.js"));
+            BundleTable.Bundles.Add(
+                new ScriptBundle("~/Bundles/Foundation")
+                    .Include("~/Content/JQuery/jquery-2.0.3.min.js")
+                    .Include("~/Content/JQuery/jquery.validate.min.js")
+                    .Include("~/Content/Utilities/*.js"));
 
-            //BundleTable.Bundles.Add(
-            //    new ScriptBundle("~/Bundles/BootstrapBaseScript_3_0_0")
-            //        .Include("~/Content/Bootstrap_3_0_0/js/bootstrap.min.js"));
+            BundleTable.Bundles.Add(
+                new ScriptBundle("~/Bundles/BootstrapBaseScript_3_0_0")
+                    .Include("~/Content/Bootstrap_3_0_0/js/bootstrap.min.js"));
         }
     }
 }

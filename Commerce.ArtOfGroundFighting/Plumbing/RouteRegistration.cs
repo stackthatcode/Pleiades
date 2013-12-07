@@ -18,6 +18,11 @@ namespace Commerce.ArtOfGroundFighting.Plumbing
                 new { controller = "Page", action = "Index" });
 
             routes.MapRoute(
+                "System Pages",
+                "system/{action}",
+                new { controller = "System", action = "ServerError" });
+
+            routes.MapRoute(
                 "REST Routes with Id",
                 "{controller}/{id}",
                 new { action = "action-with-id" });

@@ -44,7 +44,7 @@ namespace Commerce.ArtOfGroundFighting.Plumbing
 
                 filterContext.Result = new ViewResult
                 {
-                    ViewName = PublicNavigation.ServerErrorView(),
+                    ViewName = Navigation.ServerErrorView(),
                     ViewData = new ViewDataDictionary<ErrorModel>(model),
                 };
             }

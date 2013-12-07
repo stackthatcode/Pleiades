@@ -1,0 +1,116 @@
+2013-12-07 08:52:10.8083|Error|1f153fe4-7431-4c10-9d5a-fd25c765cb9f|URL:http://localhost/Commerce.Web/Manager/Error - IsAjaxRequest: False 
+2013-12-07 08:52:10.8103|Error|1f153fe4-7431-4c10-9d5a-fd25c765cb9f|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Controllers.ManagerController.Error() in C:\DEV\Pleiades\Commerce.Web\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-12-07 08:52:10.8263|Error|1f153fe4-7431-4c10-9d5a-fd25c765cb9f|System.TypeLoadException:Could not load type 'System.Web.Razor.Parser.MarkupParser' from assembly 'System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'.
+   at System.Signature.GetSignature(SignatureStruct& signature, Void* pCorSig, Int32 cCorSig, RuntimeFieldHandleInternal fieldHandle, IRuntimeMethodInfo methodHandle, RuntimeType declaringType)
+   at System.Signature..ctor(IRuntimeMethodInfo methodHandle, RuntimeType declaringType)
+   at System.Reflection.RuntimeMethodInfo.FetchNonReturnParameters()
+   at System.Reflection.RuntimeMethodInfo.GetParameters()
+   at System.Diagnostics.StackTrace.ToString(TraceFormat traceFormat)
+   at System.Environment.GetStackTrace(Exception e, Boolean needFileInfo)
+   at System.Exception.GetStackTrace(Boolean needFileInfo)
+   at System.Exception.get_StackTrace()
+   at Pleiades.App.Logging.ExtensionMethods.FullStackTraceDump(Exception exception) in C:\DEV\Pleiades\Pleiades.App.Foundation\Logging\ExtensionMethods.cs:line 9
+   at Pleiades.App.Logging.ExtensionMethods.FullStackTraceDump(Exception exception) in C:\DEV\Pleiades\Pleiades.App.Foundation\Logging\ExtensionMethods.cs:line 14
+   at Pleiades.App.Logging.NLoggerImpl.Error(Exception exception) in C:\DEV\Pleiades\Pleiades.App.Foundation\Logging\NLoggerImpl.cs:line 59
+   at Commerce.Web.Plumbing.ErrorNotification.Send(Exception ex) in C:\DEV\Pleiades\Commerce.Web\Plumbing\ErrorNotification.cs:line 25
+   at Commerce.Web.Plumbing.HandleErrorAttributeImpl.OnException(ExceptionContext filterContext) in C:\DEV\Pleiades\Commerce.Web\Plumbing\HandleErrorAttributeImpl.cs:line 23
+   at System.Web.Mvc.ControllerActionInvoker.InvokeExceptionFilters(ControllerContext controllerContext, IList`1 filters, Exception exception)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) 
+2013-12-07 08:55:59.3394|Error|ab03b6b3-6a7e-4cd0-8ecb-fefd8e56dc3d|URL:http://localhost/Commerce.Web/Manager/Error - IsAjaxRequest: False 
+2013-12-07 08:55:59.3674|Error|ab03b6b3-6a7e-4cd0-8ecb-fefd8e56dc3d|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Controllers.ManagerController.Error() in C:\DEV\Pleiades\Commerce.Web\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-12-07 09:10:44.9311|Error|7f157419-f163-4da7-8f69-1aca0ca5ad59|System.Web.HttpException:The controller for path '/Commerce.Web/Admin' was not found or does not implement IController.
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) 
+2013-12-07 09:11:44.2095|Error|ab4f7040-97c0-4a76-9381-cb611b19450d|URL:http://localhost/Commerce.Web/Manager/Error - IsAjaxRequest: False 
+2013-12-07 09:11:44.2745|Error|ab4f7040-97c0-4a76-9381-cb611b19450d|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Controllers.ManagerController.Error() in C:\DEV\Pleiades\Commerce.Web\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-12-07 09:13:09.6113|Debug|427b6250-2fbf-4281-8ae0-ebe77fec18fc|Image - Download: 64097422-f530-40c8-8762-48b9237e7ac1 thumbnail 
+2013-12-07 09:13:09.6153|Debug|3afc54b1-ba19-44a7-ade2-2a96391b35a5|Image - Download: 9cb5190d-8aa4-4be9-8764-cd228345a50f thumbnail 
+2013-12-07 09:13:09.6113|Debug|399efd2c-368d-4fe3-b588-6cb9f1f212e3|Image - Download: e951e548-ed5b-43ec-8253-64540fb4a639 thumbnail 
+2013-12-07 09:13:09.6153|Debug|5331f93e-4bd0-4607-8a58-04a25631625f|Image - Download: e50e2ca8-f828-4ef6-b440-e75f5d18ac4c thumbnail 
+2013-12-07 09:13:09.6153|Debug|9515ed8a-b51e-4b14-aa29-dd2d5485a37d|Image - Download: 5fe80f9e-d6d6-4043-86da-749cd2aa00d9 thumbnail 
+2013-12-07 09:13:09.6583|Debug|92d03a3c-0c7b-416f-b5ef-449a02530cc8|Image - Download: 7c13172a-2c43-4508-b411-a9557fb3702f thumbnail 
+2013-12-07 09:13:10.3534|Debug|721194f9-ea2b-4ffd-a919-bc7ca2c96f9c|Image - Download: d6dea20a-a300-4fa4-9607-0779bdb568c9 thumbnail 
+2013-12-07 09:13:10.4064|Debug|69dc4e04-1997-45ef-9100-40e2edde45be|Image - Download: a751845c-22de-4a29-a8f2-cf406568ae7c thumbnail 
+2013-12-07 09:13:10.4064|Debug|20000c79-93f5-44da-98e1-dad6e7ded63e|Image - Download: b7885c90-8a96-470a-a4bb-c900ceb1dee7 thumbnail 
+2013-12-07 09:13:10.4104|Debug|75dafbd1-8ff2-4503-8237-6e5d61c69297|Image - Download: e750923b-5665-4bc2-96bd-081baff08d61 thumbnail 
+2013-12-07 09:25:14.0138|Debug|9bd60fe9-b68d-4866-838d-ac14ef459987|Image - Download: 7c13172a-2c43-4508-b411-a9557fb3702f thumbnail 
+2013-12-07 09:25:14.0138|Debug|ea983368-4f9b-4538-be6e-9a9816e39385|Image - Download: 9cb5190d-8aa4-4be9-8764-cd228345a50f thumbnail 
+2013-12-07 09:25:14.0018|Debug|7d025012-68b6-4c09-923c-a35ee08f9306|Image - Download: e50e2ca8-f828-4ef6-b440-e75f5d18ac4c thumbnail 
+2013-12-07 09:25:14.0018|Debug|b8854305-468c-40aa-8938-68c5806c517e|Image - Download: e951e548-ed5b-43ec-8253-64540fb4a639 thumbnail 
+2013-12-07 09:25:14.0018|Debug|2d26172b-4575-4c8f-a76d-f75f899ad75a|Image - Download: 5fe80f9e-d6d6-4043-86da-749cd2aa00d9 thumbnail 
+2013-12-07 09:25:15.2088|Debug|7264cbc4-3991-45c5-ad4b-6a80bcc6c274|Image - Download: a751845c-22de-4a29-a8f2-cf406568ae7c thumbnail 
+2013-12-07 09:25:15.2088|Debug|837dd1b1-299d-47c4-ab5b-1f788d895928|Image - Download: d6dea20a-a300-4fa4-9607-0779bdb568c9 thumbnail 
+2013-12-07 09:25:15.2368|Debug|962665ce-d6d6-4524-aeaf-47900ea53ec6|Image - Download: b7885c90-8a96-470a-a4bb-c900ceb1dee7 thumbnail 
+2013-12-07 09:25:15.3368|Debug|268bcd10-9476-4a41-8b0f-773485cd34ed|Image - Download: e750923b-5665-4bc2-96bd-081baff08d61 thumbnail 
+2013-12-07 09:25:15.3368|Debug|6e3f6718-86da-454e-a40c-c2ba5c327929|Image - Download: 64097422-f530-40c8-8762-48b9237e7ac1 thumbnail 

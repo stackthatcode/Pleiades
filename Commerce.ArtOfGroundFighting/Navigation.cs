@@ -4,7 +4,7 @@ using Pleiades.Web.MvcHelpers;
 
 namespace Commerce.ArtOfGroundFighting
 {
-    public class PublicNavigation
+    public class Navigation
     {
         public static string ServerErrorView()
         {

@@ -14,7 +14,7 @@
                     <div class="span12">
                         <ul class="nav nav-pills">
                             <li style="width:150px;">
-				                <a id="glideToParent" class="backbutton"  href="@Url.RouteUrl(AdminNavigation.ManagerList())">&laquo; Back to Admins</a>
+				                <a id="glideToParent" class="backbutton"  href="@Url.RouteUrl(Navigation.ManagerList())">&laquo; Back to Admins</a>
                                 &nbsp;
                             </li>
                         </ul>
@@ -59,7 +59,7 @@
             <tr>
                 <td></td>
                 <td align="left">
-                    <a href="@Url.RouteUrl(AdminNavigation.ManagerDetails(this.ViewContext.RouteData.Values["id"]))" class="btn btn-inverse">
+                    <a href="@Url.RouteUrl(Navigation.ManagerDetails(this.ViewContext.RouteData.Values["id"]))" class="btn btn-inverse">
                         <i class="icon-remove icon-white"></i> Cancel
                     </a>
                     <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i> Save</button>

@@ -49,7 +49,7 @@
                 <td align="center">@user.IsApproved</td>
                 <td align="center">@user.IsOnline</td>
                 <td align="center">@user.IsLockedOut</td>
-                <td style="text-align:right;">@Html.RouteLink("View", AdminNavigation.ManagerDetails(user.AggregateUserId))</td>
+                <td style="text-align:right;">@Html.RouteLink("View", Navigation.ManagerDetails(user.AggregateUserId))</td>
            </tr>
         } 
         </tbody>

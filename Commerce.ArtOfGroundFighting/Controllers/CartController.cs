@@ -20,7 +20,9 @@ namespace Commerce.ArtOfGroundFighting.Controllers
         [ActionName("action")]
         public JsonNetResult Get()
         {
-            return new JsonNetResult(_cartManagementService.Retrieve());
+            var result = _cartManagementService.Retrieve();
+            _pushMarketContext.SaveChanges();
+            return new JsonNetResult(result);
         }
 
         [HttpPost]

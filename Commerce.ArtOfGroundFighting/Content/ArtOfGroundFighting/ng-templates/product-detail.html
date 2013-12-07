@@ -13,14 +13,15 @@
 
     <div class="row">
         <div class="col-lg-7">
-            <img class="img-responsive product-thumbnail" ng-src="{{ ImageUrl(SelectedImageId, 'large') }}" />
+            <img class="img-responsive product-thumbnail" ng-src="{{ ImageUrlGenator(SelectedImageId, 'large') }}" />
             
             <div style="height: 20px;"></div>
 
             <div ng-show="SelectedImages.length > 1" ng-repeat="image in SelectedImages" style="float:left; margin-right: 10px;">
                 <a class="thumbnail-image">
-                    <img  style="border: #CCC dotted 1px;" ng-click="SelectImage(image.ImageBundleExternalId)" 
-                          ng-src="{{ ImageUrl(image.ImageBundleExternalId, 'thumbnail') }}" />
+                    <img style="border: #CCC dotted 1px;" 
+                         ng-click="SelectImage(image.ImageBundleExternalId)" 
+                         ng-src="{{ ImageUrlGenator(image.ImageBundleExternalId, 'thumbnail') }}" />
                 </a>
             </div>
             
@@ -43,12 +44,12 @@
                 <div ng-repeat="color in Product.Colors" style="float:left; margin-right:12px;">
                     <a class="thumbnail-color-selected" style="float:left;" ng-show="IsSelectedColorId(color.Id)">
                         <div style="overflow:hidden; height:50px; width:50px;">
-                            <img ng-click="SelectColor(color.Id)" ng-src="{{ ImageUrl(color.ImageBundleExternalId, 'thumbnail') }}" />
+                            <img ng-click="SelectColor(color.Id)" ng-src="{{ ImageUrlGenator(color.ImageBundleExternalId, 'thumbnail') }}" />
                         </div>
                     </a>
                     <a class="thumbnail-color" style="float:left;" ng-show="!IsSelectedColorId(color.Id)">
                         <div style="overflow:hidden; height:50px; width:50px;">
-                            <img ng-click="SelectColor(color.Id)" ng-src="{{ ImageUrl(color.ImageBundleExternalId, 'thumbnail') }}" />
+                            <img ng-click="SelectColor(color.Id)" ng-src="{{ ImageUrlGenator(color.ImageBundleExternalId, 'thumbnail') }}" />
                         </div>
                     </a>
                 </div>
@@ -61,9 +62,11 @@
                         style="width:250px; height:40px; font-size:18px; font-weight:bold;">
                     <option value="">Choose your Size</option>
                 </select>
+
                 <div ng-show="AddToCartValidationEmailMessage">
                     <h4 class="cart-validation-message">{{ AddToCartValidationEmailMessage }}</h4>
                 </div>
+
                 <div style="clear:both; height: 20px;"></div>
             </div>
             
@@ -97,7 +100,7 @@
                 <div style="clear:both; height:30px;"></div>
             </div>
             
-            <img class="img-responsive" ng-src="{{ ImageUrl(Product.Brand.ImageBundleExternalId, 'large') }}" />
+            <img class="img-responsive" ng-src="{{ ImageUrlGenator(Product.Brand.ImageBundleExternalId, 'large') }}" />
             <div style="height:15px;"></div>
             <p><strong>{{ Product.Brand.Name }}</strong> - <strong>{{ Product.Brand.Description }}</strong> </p>                
         </div>

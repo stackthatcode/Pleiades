@@ -25,7 +25,7 @@ var CartResponseCodeData = [
     {
         Id: "5",
         ResponseFunction: function () {
-            ngAjax.ModalGeneric("No Items Added to Cart", "You already have the maximum SaleAmount of that Item in your cart.");
+            ngAjax.ModalGeneric("No Items Added to Cart", "You already have the maximum available quantity in your cart.");
         }
     },
     {

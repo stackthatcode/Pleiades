@@ -34,7 +34,7 @@ namespace Commerce.ArtOfGroundFighting.Models
                         SizeId = item.Size != null ? item.Size.Id : (int?)null,
                         ColorId = item.Color != null ? item.Color.Id : (int?)null,
                         SkuCode = item.OriginalSkuCode,
-                        Quantity = item.InStock,
+                        Quantity = item.Available,
                     }),
                 Images = images.Select(
                     image => new

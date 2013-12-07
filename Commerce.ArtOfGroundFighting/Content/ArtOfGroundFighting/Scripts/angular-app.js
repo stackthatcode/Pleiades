@@ -1,6 +1,7 @@
 'use strict';
 
-var templateUrlBase = 'Content/ArtOfGroundFighting/ng-templates/';
+var urlLocator = namespace("CommerceWeb.UrlLocator");
+var templateUrlBase = urlLocator.templateBaseUrl;
 
 angular.module('push-market', []).
     config(['$routeProvider', function($routeProvider) {

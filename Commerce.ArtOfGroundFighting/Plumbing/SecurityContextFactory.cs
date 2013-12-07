@@ -16,7 +16,8 @@ namespace Commerce.ArtOfGroundFighting.Plumbing
                 filterContext.Controller is ImageController ||
                 filterContext.Controller is CartController ||
                 filterContext.Controller is ListController ||
-                filterContext.Controller is OrderController)
+                filterContext.Controller is OrderController ||
+                filterContext.Controller is SystemController)
             {
                 return new SecurityContext(user)
                 {
@@ -26,8 +27,7 @@ namespace Commerce.ArtOfGroundFighting.Plumbing
                 };
             }
 
-            throw new SecurityException(
-                "User Attempted to access unauthorized Controller: " + filterContext.Controller.GetType());
+            throw new SecurityException("User Attempted to access unauthorized Controller: " + filterContext.Controller.GetType());
         }
     }
 }

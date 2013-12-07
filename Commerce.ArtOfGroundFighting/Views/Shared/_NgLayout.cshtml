@@ -25,22 +25,22 @@
         @Html.Javascript("~/Content/Bootstrap_3_0_0/js/bootstrap.min.js")
         @Html.Javascript("~/Content/Bootstrap_3_0_0/js/bootstrap-lightbox.js")
 
-        <!-- TODO: bundle these together -->
         @Html.Javascript("~/Content/angular/angular.min.js")
+
         @Html.Javascript("~/Content/ArtOfGroundFighting/Scripts/angular-app.js")
         @Html.Javascript("~/Content/ArtOfGroundFighting/Scripts/products-controller.js")
         @Html.Javascript("~/Content/ArtOfGroundFighting/Scripts/cart-functions.js")
         @Html.Javascript("~/Content/ArtOfGroundFighting/Scripts/cart-controller.js")
         @Html.Javascript("~/Content/ArtOfGroundFighting/Scripts/checkout-controller.js")
         @Html.Javascript("~/Content/ArtOfGroundFighting/Scripts/order-controller.js")
-
+        
         @Html.Partial("~/Shared/_StripeShim.cshtml")
     </head>
 
     <body>
-        @Html.Partial("_Header")        
+        @Html.Partial("_NgHeader")        
         @RenderSection("_Body")	      
-        @Html.Partial("_Footer")
+        @Html.Partial("_NgFooter")
         @Html.Partial("_NgShimBody")
     </body>
 </html>

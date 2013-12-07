@@ -1,6 +1,6 @@
 ﻿@using Commerce.Web
 
-@model ErrorModel
+@model Commerce.Web.Plumbing.ErrorModel
 @{
     Layout = "~/Views/Shared/_LayoutBare.cshtml";
 }
@@ -24,7 +24,7 @@
                     </a>
                 }
                 
-                <a href="@Url.RouteUrl(AdminNavigation.Home())" class="btn btn-primary btn-large btn-block" style="float: left; width: 250px; margin-top: 0px;">
+                <a href="@Url.RouteUrl(Navigation.Home())" class="btn btn-primary btn-large btn-block" style="float: left; width: 250px; margin-top: 0px;">
                     <i class="icon-white icon-home"></i> &nbsp;Navigate Home  
                 </a>                
             </div>
