@@ -25,8 +25,7 @@ namespace Commerce.Web
 
             // Routes
             RouteRegistration.RegisterRoutes(RouteTable.Routes);
-            RegisterSystemRoutes();
-
+            
             // Components
             Bootstrap.RegisterAndWireIocContainer();
 
@@ -66,20 +65,6 @@ namespace Commerce.Web
             }
         }
         
-        // TODO: how do we manage 404's in the Admin Site...?
-        public static void RegisterSystemRoutes()
-        {
-            // TODO: need a 404 for the Admin
-            
-            //RouteTable.Routes.MapRoute(
-            //    "404-PageNotFound",
-            //    "{*url}",
-            //    new {area="Public", controller = "System", action = "NotFound"},
-            //    new [] {"Commerce.Web.Areas.Public.Controllers"}
-            //    );
-
-            //RouteTable.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-        }
 
         public void RegisterGlobalFilters()
         {

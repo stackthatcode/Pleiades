@@ -3,7 +3,7 @@ using Autofac;
 using Commerce.Application.Lists;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using Pleiades.Application.Data;
+using Pleiades.App.Data;
 using Commerce.Initializer.Builders;
 
 namespace Commerce.IntegrationTests.BuildersAndRepositories

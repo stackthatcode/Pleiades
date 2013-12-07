@@ -1,12 +1,12 @@
 ﻿using System.Web.Mvc;
-using Commerce.Web.Areas.Admin;
+using Commerce.Web;
 using NUnit.Framework;
 using Pleiades.TestHelpers.Web;
 using Rhino.Mocks;
 using Pleiades.Web.Security.Model;
 using Commerce.Web.Plumbing;
 
-namespace Commerce.Web.UnitTests.Security
+namespace Commerce.UnitTests.Security
 {
     [TestFixture]
     public class CommerceSecurityResponderTest
@@ -22,7 +22,7 @@ namespace Commerce.Web.UnitTests.Security
             var responder = new SecurityResponder();
             responder.Process(SecurityCode.AccessDeniedSolicitLogon, context);
 
-            var expectedRouteDict = AdminNavigation.Login();
+            var expectedRouteDict = Navigation.Login();
             // expectedRouteDict["returlUrl"] = "http://go.com";  TODO => Figure out how to mock Server.UrlEncode
 
             // Assesrt

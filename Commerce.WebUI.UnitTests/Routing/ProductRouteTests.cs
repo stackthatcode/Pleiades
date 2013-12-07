@@ -4,6 +4,7 @@ using Pleiades.TestHelpers.Web;
 
 namespace Commerce.UnitTests.Routing
 {
+    [Ignore("ArtOfGroundFighting.com Routes")]
     [TestFixture]
     public class ProductRouteTests : RoutingTestBase
     {
@@ -16,13 +17,12 @@ namespace Commerce.UnitTests.Routing
                 RoutingHelper.VerifyInboundRoute(
                 RouteTable.Routes,
                 inboundUrl: "~/Products/3",
-                expectedRouteValues: new { controller = "Products", action = "action-with-id" },
-                expectedDataTokens: new { area = "Public" });
+                expectedRouteValues: new { controller = "Products", action = "action-with-id" });
 
             // Outbound
             string url = RoutingHelper.GenerateOutboundUrl(
                 RouteTable.Routes,
-                new { area = "Public", controller = "Products", id = 3 });
+                new {controller = "Products", id = 3 });
 
             url.ShouldEqual("/Products/3");
         }
@@ -48,8 +48,7 @@ namespace Commerce.UnitTests.Routing
                     RouteTable.Routes,
                     inboundUrl: "~/",
                     expectedRouteValues:
-                        new { controller = "Page", action = "Index", category = (string)null },
-                    expectedDataTokens: new { area = "Public" });
+                        new { controller = "Page", action = "Index", category = (string)null });
         }
     }
 }

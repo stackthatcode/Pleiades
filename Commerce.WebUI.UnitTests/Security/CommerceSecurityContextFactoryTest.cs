@@ -4,9 +4,8 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using Pleiades.Web.Security.Model;
 using Commerce.Web.Plumbing;
-using PageController = Commerce.Web.Areas.Admin.Controllers.HomeController;
 
-namespace Commerce.Web.UnitTests.Security
+namespace Commerce.UnitTests.Security
 {
     [TestFixture]
     public class CommerceSecurityContextFactoryTest
@@ -31,11 +30,11 @@ namespace Commerce.Web.UnitTests.Security
         }
 
         [Test]
-        public void ProductControllerIsPublic()
+        public void ProductControllerIsAdminstrativeZone()
         {
             // Arrange
             var context = MockRepository.GenerateStub<AuthorizationContext>();
-            context.Controller = new Areas.Admin.Controllers.HomeController();
+            context.Controller = new Web.Controllers.ProductController(null, null, null, null, null, null, null);
             var factory = new SecurityContextFactory();
             var user = new AggregateUser();
 
@@ -43,7 +42,7 @@ namespace Commerce.Web.UnitTests.Security
             var result = factory.Create(context, user);
 
             // Assert
-            Assert.AreEqual(AuthorizationZone.Public, result.AuthorizationZone);
+            Assert.AreEqual(AuthorizationZone.Administrative, result.AuthorizationZone);
             Assert.AreEqual(AccountLevel.NotApplicable, result.AccountLevelRestriction);
             Assert.AreEqual(false, result.IsPaymentArea);
             Assert.AreEqual(user, result.User);
@@ -54,7 +53,7 @@ namespace Commerce.Web.UnitTests.Security
         {
             //// Arrange
             var context = MockRepository.GenerateStub<AuthorizationContext>();
-            context.Controller = new PageController();
+            context.Controller = new HomeController();
             var factory = new SecurityContextFactory();
             var user = new AggregateUser();
 

@@ -3,7 +3,7 @@ using System.Drawing;
 using Autofac;
 using Commerce.Application.File;
 using NUnit.Framework;
-using Pleiades.Application.Data;
+using Pleiades.App.Data;
 
 
 namespace Commerce.IntegrationTests.Resources

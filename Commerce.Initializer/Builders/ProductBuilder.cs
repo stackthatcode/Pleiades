@@ -7,8 +7,8 @@ using Commerce.Application.File.Entities;
 using Commerce.Application.Lists.Entities;
 using Commerce.Application.Products;
 using Commerce.Application.Products.Entities;
-using Pleiades.Application.Data;
-using Pleiades.Application.Logging;
+using Pleiades.App.Data;
+using Pleiades.App.Logging;
 using Color = Commerce.Application.Lists.Entities.Color;
 
 namespace Commerce.Initializer.Builders

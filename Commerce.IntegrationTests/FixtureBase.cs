@@ -2,7 +2,7 @@
 using System.IO;
 using System.Configuration;
 using NUnit.Framework;
-using Pleiades.Application.Utility;
+using Pleiades.App.Utility;
 using Commerce.Application.Database;
 
 namespace Commerce.IntegrationTests

@@ -1,8 +1,7 @@
 ﻿using Autofac;
 using Commerce.Initializer.Builders;
 using Commerce.Initializer.Builders.Products;
-using Pleiades.Application.Injection;
-using Pleiades.Web.Autofac;
+using Pleiades.App.Injection;
 using Pleiades.Web.Security;
 using Commerce.Application;
 

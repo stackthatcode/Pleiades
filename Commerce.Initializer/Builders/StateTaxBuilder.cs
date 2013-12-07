@@ -2,7 +2,7 @@
 using System.Transactions;
 using Commerce.Application.Billing;
 using Commerce.Application.Database;
-using Pleiades.Application.Logging;
+using Pleiades.App.Logging;
 
 namespace Commerce.Initializer.Builders
 {
