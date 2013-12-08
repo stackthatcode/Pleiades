@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Web.Foundation", "Pleiades.Web\Pleiades.Web.Foundation.csproj", "{804F063C-505F-441E-B205-688C42E637AD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pleiades", "Pleiades", "{8F70F38E-584A-42A3-BA71-9D356C46679E}"
@@ -28,6 +30,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.App.Foundation", "Pleiades.App.Foundation\Pleiades.App.Foundation.csproj", "{10CEE227-9B7C-4D97-B53A-229E8D45B15F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commerce.ArtOfGroundFighting", "Commerce.ArtOfGroundFighting\Commerce.ArtOfGroundFighting.csproj", "{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commerce.Initializer", "Commerce.Initializer\Commerce.Initializer.csproj", "{8E922D95-E286-4AF1-89E2-943EA247B806}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -139,6 +143,16 @@ Global
 		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}.Release|x86.ActiveCfg = Release|Any CPU
+		{8E922D95-E286-4AF1-89E2-943EA247B806}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{8E922D95-E286-4AF1-89E2-943EA247B806}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{8E922D95-E286-4AF1-89E2-943EA247B806}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{8E922D95-E286-4AF1-89E2-943EA247B806}.Debug|x86.ActiveCfg = Debug|x86
+		{8E922D95-E286-4AF1-89E2-943EA247B806}.Debug|x86.Build.0 = Debug|x86
+		{8E922D95-E286-4AF1-89E2-943EA247B806}.Release|Any CPU.ActiveCfg = Release|x86
+		{8E922D95-E286-4AF1-89E2-943EA247B806}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{8E922D95-E286-4AF1-89E2-943EA247B806}.Release|Mixed Platforms.Build.0 = Release|x86
+		{8E922D95-E286-4AF1-89E2-943EA247B806}.Release|x86.ActiveCfg = Release|x86
+		{8E922D95-E286-4AF1-89E2-943EA247B806}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -151,6 +165,7 @@ Global
 		{3E11D8A9-5D48-4D12-9951-959A53A8B6A6} = {71EE4FED-313F-4B48-BB40-05831D6E1113}
 		{C719AC5A-4969-4365-BDE6-A668C4929DB6} = {71EE4FED-313F-4B48-BB40-05831D6E1113}
 		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561} = {71EE4FED-313F-4B48-BB40-05831D6E1113}
+		{8E922D95-E286-4AF1-89E2-943EA247B806} = {71EE4FED-313F-4B48-BB40-05831D6E1113}
 		{D4EBBD91-DDCA-4E18-A04D-50008A9158F3} = {3D30D9F1-2727-4E76-AD66-E3E03B99A444}
 		{11018755-DEC2-493C-82D1-58DCC1AF5927} = {3D30D9F1-2727-4E76-AD66-E3E03B99A444}
 		{A839CD41-8163-4667-A4B3-9B7593FC0350} = {3D30D9F1-2727-4E76-AD66-E3E03B99A444}
