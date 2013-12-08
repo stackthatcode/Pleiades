@@ -114,3 +114,12 @@
 2013-12-07 09:25:15.2368|Debug|962665ce-d6d6-4524-aeaf-47900ea53ec6|Image - Download: b7885c90-8a96-470a-a4bb-c900ceb1dee7 thumbnail 
 2013-12-07 09:25:15.3368|Debug|268bcd10-9476-4a41-8b0f-773485cd34ed|Image - Download: e750923b-5665-4bc2-96bd-081baff08d61 thumbnail 
 2013-12-07 09:25:15.3368|Debug|6e3f6718-86da-454e-a40c-c2ba5c327929|Image - Download: 64097422-f530-40c8-8762-48b9237e7ac1 thumbnail 
+2013-12-07 10:13:00.8947|Error|81b2e985-aa9a-47d2-b3d0-b294caf0df72|System.Web.HttpException:The controller for path '/Commerce.Web/Admin' was not found or does not implement IController.
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously) 
