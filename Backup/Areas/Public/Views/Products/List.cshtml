@@ -1,0 +1,44 @@
+﻿@model Commerce.WebUI.Areas.Public.Models.ProductListModel
+
+@{
+    ViewBag.Title = "List";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>pushmarket</title>
+    <meta charset="utf-8">
+	
+    <!-- TODO: package these as Bundles -->
+	@Html.Javascript("/jquery/jquery-1.8.2.min.js") 	
+    @Html.Javascript("/jquery/jquery.animate-colors-min.js")
+	
+    <!-- TODO: package these as a Bundle -->
+    @Html.Javascript("/knockout/knockout-2.1.0.js")	
+	@Html.Javascript("/knockout/ko.observableDictionary.js")	
+
+    <!-- TODO: package these as Bundles -->
+	@Html.Javascript("/bootstrap/js/bootstrap-modal.js")
+	@Html.Javascript("/bootstrap/js/bootstrap-alert.js")	
+	@Html.Javascript("/bootstrap/js/bootstrap-dropdown.js")	
+	@Html.Javascript("/bootstrap/js/bootstrap-tooltip.js")	
+	@Html.Javascript("/bootstrap/js/bootstrap-popover.js")	
+    @Html.Stylesheet("/bootstrap/css/bootstrap.css")
+
+	@Html.Javascript("/scripts/flow.js")
+	@Html.Javascript("/scripts/pushmarket-common.js")
+	@Html.Javascript("/scripts/ajax-service.js")
+    @Html.Stylesheet("/style/pushmarket.css")
+
+    @RenderSection("_Scripts", false)
+    @RenderSection("_Templates", false)
+  </head>
+  
+  <body>
+    <h1>Welcome Back to Pleiades!- Under Construction</h1>
+    @Html.RouteLink("Go To Admin Area", AdminNavigation.Home())
+    @Html.RouteLink("Go To Admin Login", AdminNavigation.Login())  
+  </body>
+</html>

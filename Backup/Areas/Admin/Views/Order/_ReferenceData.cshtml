@@ -1,0 +1,353 @@
+﻿<script type="text/javascript">
+    var PushMkt = PushMkt || {}
+
+    PushMkt.AddListFunctions = function (model) {
+        var self = model;
+        self.BrandArray = ko.observableArray();
+        self.CategoryArray = ko.observableArray();
+
+        self.RetrieveCategoriesList = function (callback) {
+            flow.exec(
+                function () {
+                    self.Service.AjaxGet("/Admin/Product/Categories", this);
+                },
+                function (data) {
+                    self.CategoryArray.removeAll();
+                    self.CategoryArray.push({
+                        value: null,
+                        text: "(Select a Category)" 
+                    });
+
+                    var addCategory = function (category, indent) {
+                        self.CategoryArray.push({
+                            value: category.Id,
+                            text: indent + category.Name 
+                        });
+                        $.each(category.Categories, function (index, elem) { addCategory(elem, indent + '....'); });
+                    }
+                    $.each(data, function (index, elem) { addCategory(elem, ''); });
+                    if (callback) {
+                        callback();
+                    }
+                }
+            );
+        }
+
+        self.RetrieveBrandsList = function (callback) {
+            flow.exec(
+                function () {
+                    self.Service.AjaxGet("/Admin/Product/Brands", this);
+                },
+                function (data) {
+                    self.BrandArray.removeAll();
+                    self.BrandArray.push({ value: null, text: "(Select a Brand)" });
+
+                    $.each(data, function (index, elem) {
+                        self.BrandArray.push({ value: elem.Id, text: elem.Name });
+                    });
+
+                    if (callback) {
+                        callback();
+                    }
+                }
+            );
+        }
+        
+        self.RetrieveStatesOfAmerica = function (callback) {
+            flow.exec(
+                function () {
+                    self.Service.AjaxGet("/Admin/Order/States", this);
+                },
+                function (data) {
+                    PushMkt.StatesOfAmerica = data;
+                    if (callback) {
+                        callback();
+                    }
+                }
+            );
+        }
+        
+        self.RetrieveShippingMethods = function (callback) {
+            flow.exec(
+                function () {
+                    self.Service.AjaxGet("/Admin/Order/ShippingMethods", this);
+                },
+                function (data) {
+                    PushMkt.ShippingOptions = data;
+                    if (callback) {
+                        callback();
+                    }
+                }
+            );
+        }
+    }
+
+    // Reference data
+    /*
+    PushMkt.ShippingOptions = [
+        { Id: "1", Name: "UPS Ground (7-10 days)", Cost: 7.95 },
+        { Id: "2", Name: "UPS Ground Quicker (3-5 days)", Cost: 14.95 },
+        { Id: "3", Name: "UPS Ground Express (next day)", Cost: 21.95 },
+    ];
+
+    // States of America
+    PushMkt.StatesOfAmerica =
+    [
+        {
+            "name": "Alabama",
+            "abbreviation": "AL",
+            "tax": 4.0,
+        },
+        {
+            "name": "Alaska",
+            "abbreviation": "AK",
+            "tax": 0.00,
+        },
+        {
+            "name": "Arizona",
+            "abbreviation": "AZ",
+            "tax": 6.6,
+        },
+        {
+            "name": "Arkansas",
+            "abbreviation": "AR",
+            "tax": 6.0,
+        },
+        {
+            "name": "California",
+            "abbreviation": "CA",
+            "tax": 7.5,
+        },
+        {
+            "name": "Colorado",
+            "abbreviation": "CO",
+            "tax": 2.9,
+        },
+        {
+            "name": "Connecticut",
+            "abbreviation": "CT",
+            "tax": 6.35,
+        },
+        {
+            "name": "Delaware",
+            "abbreviation": "DE",
+            "tax": 0.00,
+        },
+        {
+            "name": "District Of Columbia",
+            "abbreviation": "DC",
+            "tax": 6.00,
+        },
+        {
+            "name": "Florida",
+            "abbreviation": "FL",
+            "tax": 6.35,
+        },
+        {
+            "name": "Georgia",
+            "abbreviation": "GA",
+            "tax": 4.00,
+        },
+        {
+            "name": "Hawaii",
+            "abbreviation": "HI",
+            "tax": 4.00,
+        },
+        {
+            "name": "Idaho",
+            "abbreviation": "ID",
+            "tax": 6.00,
+        },
+        {
+            "name": "Illinois",
+            "abbreviation": "IL",
+            "tax": 6.25,
+        },
+        {
+            "name": "Indiana",
+            "abbreviation": "IN",
+            "tax": 7.00,
+        },
+        {
+            "name": "Iowa",
+            "abbreviation": "IA",
+            "tax": 6.00,
+        },
+        {
+            "name": "Kansas",
+            "abbreviation": "KS",
+            "tax": 6.30,
+        },
+        {
+            "name": "Kentucky",
+            "abbreviation": "KY",
+            "tax": 6.00,
+        },
+        {
+            "name": "Louisiana",
+            "abbreviation": "LA",
+            "tax": 4.00,
+        },
+        {
+            "name": "Maine",
+            "abbreviation": "ME",
+            "tax": 5.00,
+        },
+        {
+            "name": "Maryland",
+            "abbreviation": "MD",
+            "tax": 6.00,
+        },
+        {
+            "name": "Massachusetts",
+            "abbreviation": "MA",
+            "tax": 6.25,
+        },
+        {
+            "name": "Michigan",
+            "abbreviation": "MI",
+            "tax": 6.00,
+        },
+        {
+            "name": "Minnesota",
+            "abbreviation": "MN",
+            "tax": 6.875,
+        },
+        {
+            "name": "Mississippi",
+            "abbreviation": "MS",
+            "tax": 7.00,
+        },
+        {
+            "name": "Missouri",
+            "abbreviation": "MO",
+            "tax": 4.225,
+        },
+        {
+            "name": "Montana",
+            "abbreviation": "MT",
+            "tax": 0.00,
+        },
+        {
+            "name": "Nebraska",
+            "abbreviation": "NE",
+            "tax": 5.50,
+        },
+        {
+            "name": "Nevada",
+            "abbreviation": "NV",
+            "tax": 6.85,
+        },
+        {
+            "name": "New Hampshire",
+            "abbreviation": "NH",
+            "tax": 0.00,
+        },
+        {
+            "name": "New Jersey",
+            "abbreviation": "NJ",
+            "tax": 7.00,
+        },
+        {
+            "name": "New Mexico",
+            "abbreviation": "NM",
+            "tax": 5.125,
+        },
+        {
+            "name": "New York",
+            "abbreviation": "NY",
+            "tax": 4.00,
+        },
+        {
+            "name": "North Carolina",
+            "abbreviation": "NC",
+            "tax": 4.75,
+        },
+        {
+            "name": "North Dakota",
+            "abbreviation": "ND",
+            "tax": 5.00,
+        },
+        {
+            "name": "Ohio",
+            "abbreviation": "OH",
+            "tax": 5.50,
+        },
+        {
+            "name": "Oklahoma",
+            "abbreviation": "OK",
+            "tax": 4.50,
+        },
+        {
+            "name": "Oregon",
+            "abbreviation": "OR",
+            "tax": 0.00,
+        },
+        {
+            "name": "Pennsylvania",
+            "abbreviation": "PA",
+            "tax": 6.00,
+        },
+        {
+            "name": "Rhode Island",
+            "abbreviation": "RI",
+            "tax": 7.00,
+        },
+        {
+            "name": "South Carolina",
+            "abbreviation": "SC",
+            "tax": 6.00,
+        },
+        {
+            "name": "South Dakota",
+            "abbreviation": "SD",
+            "tax": 4.00,
+        },
+        {
+            "name": "Tennessee",
+            "abbreviation": "TN",
+            "tax": 7.00,
+        },
+        {
+            "name": "Texas",
+            "abbreviation": "TX",
+            "tax": 6.25,
+        },
+        {
+            "name": "Utah",
+            "abbreviation": "UT",
+            "tax": 4.70,
+        },
+        {
+            "name": "Vermont",
+            "abbreviation": "VT",
+            "tax": 6.00,
+        },
+        {
+            "name": "Virginia",
+            "abbreviation": "VA",
+            "tax": 4.00,
+        },
+        {
+            "name": "Washington",
+            "abbreviation": "WA",
+            "tax": 6.50,
+        },
+        {
+            "name": "West Virginia",
+            "abbreviation": "WV",
+            "tax": 6.00,
+        },
+        {
+            "name": "Wisconsin",
+            "abbreviation": "WI",
+            "tax": 5.00,
+        },
+        {
+            "name": "Wyoming",
+            "abbreviation": "WY",
+            "tax": 4.00,
+        }
+    ];
+    */
+</script>
