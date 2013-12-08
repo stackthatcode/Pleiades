@@ -2,9 +2,9 @@
 using System.Transactions;
 using Commerce.Application.Lists;
 using Commerce.Application.Lists.Entities;
-using Pleiades.Application.Data;
-using Pleiades.Application.Helpers;
-using Pleiades.Application.Logging;
+using Pleiades.App.Data;
+using Pleiades.App.Helpers;
+using Pleiades.App.Logging;
 
 namespace Commerce.Initializer.Builders
 {

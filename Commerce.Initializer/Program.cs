@@ -2,12 +2,11 @@
 using System.Configuration;
 using System.IO;
 using Commerce.Initializer.Builders.Products;
-using Pleiades.Application.Injection;
-using Pleiades.Application.Logging;
-using Pleiades.Application.Utility;
+using Pleiades.App.Injection;
+using Pleiades.App.Logging;
+using Pleiades.App.Utility;
 using Commerce.Application.Database;
 using Commerce.Initializer.Builders;
-using Pleiades.Web.Logging;
 
 namespace Commerce.Initializer
 {

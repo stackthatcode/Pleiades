@@ -2,12 +2,12 @@
 using System.Web.Routing;
 using Commerce.Web;
 using Commerce.Web.Controllers;
+using Commerce.Web.Models.Auth;
 using NUnit.Framework;
 using Pleiades.TestHelpers.Web;
 using Pleiades.Web.Security.Model;
 using Rhino.Mocks;
 using Pleiades.Web.Security.Interface;
-using Commerce.Web.Areas.Admin.Models;
 
 namespace Commerce.UnitTests.Controllers.Public
 {
@@ -62,7 +62,7 @@ namespace Commerce.UnitTests.Controllers.Public
 
             // Assert
             service.VerifyAllExpectations();
-            result.ShouldBeRedirectionTo(AdminNavigation.Home());
+            result.ShouldBeRedirectionTo(Navigation.Home());
         }
 
         [Test]
@@ -106,7 +106,7 @@ namespace Commerce.UnitTests.Controllers.Public
             
             // Assert
             service.VerifyAllExpectations();
-            result.ShouldBeRedirectionTo(AdminNavigation.Login());
+            result.ShouldBeRedirectionTo(Navigation.Login());
         }
     }
 }

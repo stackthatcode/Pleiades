@@ -1,6 +1,7 @@
 ﻿using System;
 using Autofac;
 using Commerce.Application.Lists;
+using Commerce.Initializer.Builders;
 using Newtonsoft.Json;
 using NUnit.Framework;
 

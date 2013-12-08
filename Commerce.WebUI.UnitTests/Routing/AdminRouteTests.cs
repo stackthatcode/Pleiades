@@ -15,15 +15,14 @@ namespace Commerce.Web.UnitTests.Routing
             var routeData2 = 
                 RoutingHelper.VerifyInboundRoute(
                     RouteTable.Routes,
-                    inboundUrl: "~/Admin",
-                    expectedRouteValues: new { controller = "Home", action = "Index" },
-                    expectedDataTokens: new { area = "Admin" });
+                    inboundUrl: "~/",
+                    expectedRouteValues: new { controller = "Home", action = "Index" });
 
             // Outbound
             string url = RoutingHelper.GenerateOutboundUrl(
                 RouteTable.Routes,
-                new { area = "Admin", controller = "Home", action = "Index" });
-            url.ShouldEqual("/Admin");
+                new { controller = "Home", action = "Index" });
+            url.ShouldEqual("/");
         }
 
         [Test]
@@ -32,15 +31,14 @@ namespace Commerce.Web.UnitTests.Routing
             // Inbound 
             var routeData2 = RoutingHelper.VerifyInboundRoute(
                 RouteTable.Routes,
-                inboundUrl: "~/Admin/TestController/TestAction/3",
-                expectedRouteValues: new { controller = "TestController", action = "TestAction", id = "3" },
-                expectedDataTokens: new { area = "Admin" });
+                inboundUrl: "~/TestController/TestAction/3",
+                expectedRouteValues: new { controller = "TestController", action = "TestAction", id = "3" });
 
             // Outbound
             string url = RoutingHelper.GenerateOutboundUrl(
                 RouteTable.Routes,
-                new { area = "Admin", controller = "TestController", action = "TestAction", id = "3" });
-            url.ShouldEqual("/Admin/TestController/TestAction/3");
+                new { controller = "TestController", action = "TestAction", id = "3" });
+            url.ShouldEqual("/TestController/TestAction/3");
         }
 
         [Test]
@@ -49,15 +47,14 @@ namespace Commerce.Web.UnitTests.Routing
             // Inbound 
             var routeData2 = RoutingHelper.VerifyInboundRoute(
                 RouteTable.Routes,
-                inboundUrl: "~/Admin/TestController/TestAction",
-                expectedRouteValues: new { controller = "TestController", action = "TestAction" },
-                expectedDataTokens: new { area = "Admin" });
+                inboundUrl: "~/TestController/TestAction",
+                expectedRouteValues: new { controller = "TestController", action = "TestAction" });
 
             // Outbound
             string url = RoutingHelper.GenerateOutboundUrl(
                 RouteTable.Routes,
-                new { area = "Admin", controller = "TestController", action = "TestAction" });
-            url.ShouldEqual("/Admin/TestController/TestAction");
+                new { controller = "TestController", action = "TestAction" });
+            url.ShouldEqual("/TestController/TestAction");
         }
     }
 }

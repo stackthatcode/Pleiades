@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using Commerce.Web.Controllers;
 using Commerce.Web.Models.Manager;
 using NUnit.Framework;
+using Pleiades.App.Data;
 using Rhino.Mocks;
 using Pleiades.TestHelpers.Web;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
-using Commerce.Web.Areas.Admin.Models;
 
 namespace Commerce.UnitTests.Controllers.Admin
 {

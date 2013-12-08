@@ -6,9 +6,9 @@ using System.Transactions;
 using Commerce.Application.File;
 using Commerce.Application.Lists;
 using Commerce.Application.Lists.Entities;
-using Pleiades.Application.Data;
-using Pleiades.Application.Logging;
-using Pleiades.Application.Utility;
+using Pleiades.App.Data;
+using Pleiades.App.Logging;
+using Pleiades.App.Utility;
 
 
 namespace Commerce.Initializer.Builders

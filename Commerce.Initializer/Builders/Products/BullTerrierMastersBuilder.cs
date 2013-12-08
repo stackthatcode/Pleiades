@@ -4,8 +4,8 @@ using Commerce.Application.File;
 using Commerce.Application.Lists.Entities;
 using Commerce.Application.Products;
 using Commerce.Application.Products.Entities;
-using Pleiades.Application.Data;
-using Pleiades.Application.Logging;
+using Pleiades.App.Data;
+using Pleiades.App.Logging;
 
 namespace Commerce.Initializer.Builders.Products
 {

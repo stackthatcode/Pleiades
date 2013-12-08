@@ -3,7 +3,7 @@ using Commerce.Application.Lists.Entities;
 using Commerce.Application.Products;
 using Commerce.Initializer.Builders.Products;
 using NUnit.Framework;
-using Pleiades.Application.Data;
+using Pleiades.App.Data;
 using Commerce.Initializer.Builders;
 
 namespace Commerce.IntegrationTests.BuildersAndRepositories

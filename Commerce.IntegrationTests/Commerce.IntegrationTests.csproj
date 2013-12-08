@@ -118,6 +118,10 @@
       <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
       <Name>Commerce.Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Commerce.Initializer\Commerce.Initializer.csproj">
+      <Project>{8E922D95-E286-4AF1-89E2-943EA247B806}</Project>
+      <Name>Commerce.Initializer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pleiades.App.Foundation\Pleiades.App.Foundation.csproj">
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
       <Name>Pleiades.App.Foundation</Name>
@@ -134,6 +138,9 @@
       <Project>{804F063C-505F-441E-B205-688C42E637AD}</Project>
       <Name>Pleiades.Web.Foundation</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

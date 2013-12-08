@@ -7,8 +7,8 @@ using Commerce.Application.Analytics.Entities;
 using Commerce.Application.Database;
 using Commerce.Application.Orders.Entities;
 using Commerce.Application.Products;
-using Pleiades.Application.Data;
-using Pleiades.Application.Logging;
+using Pleiades.App.Data;
+using Pleiades.App.Logging;
 
 namespace Commerce.Initializer.Builders
 {

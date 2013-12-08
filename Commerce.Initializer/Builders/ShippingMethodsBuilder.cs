@@ -1,11 +1,7 @@
-﻿using System;
-using System.Transactions;
+﻿using System.Transactions;
 using Commerce.Application.Database;
 using Commerce.Application.Orders.Entities;
-using Pleiades.Application.Data;
-using Pleiades.Application.Injection;
-using Pleiades.Application;
-using Pleiades.Application.Logging;
+using Pleiades.App.Logging;
 
 namespace Commerce.Initializer.Builders
 {

@@ -1,5 +1,5 @@
-﻿using NUnit.Framework;
-using Commerce.Web.Areas.Admin.Controllers;
+﻿using Commerce.Web.Controllers;
+using NUnit.Framework;
 using Pleiades.TestHelpers.Web;
 
 namespace Commerce.UnitTests.Controllers.Admin

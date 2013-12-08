@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Pleiades.Application.Logging;
+using Pleiades.App.Logging;
 using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Interface;
 

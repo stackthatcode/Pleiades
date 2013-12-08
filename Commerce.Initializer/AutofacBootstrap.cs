@@ -1,6 +1,5 @@
 ﻿using Autofac;
-using Pleiades.Application.Injection;
-using Pleiades.Web.Autofac;
+using Pleiades.App.Injection;
 
 namespace Commerce.Initializer
 {

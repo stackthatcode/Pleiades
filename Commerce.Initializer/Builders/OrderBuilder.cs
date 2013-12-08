@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Transactions;
 using Commerce.Application.Database;
-using Pleiades.Application.Injection;
-using Pleiades.Application.Logging;
+using Pleiades.App.Injection;
+using Pleiades.App.Logging;
 
 namespace Commerce.Initializer.Builders
 {

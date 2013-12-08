@@ -4,9 +4,9 @@ using Commerce.Application.File;
 using Commerce.Application.Lists.Entities;
 using Commerce.Application.Products;
 using Commerce.Application.Products.Entities;
-using Pleiades.Application.Data;
-using Pleiades.Application.Helpers;
-using Pleiades.Application.Logging;
+using Pleiades.App.Data;
+using Pleiades.App.Helpers;
+using Pleiades.App.Logging;
 
 namespace Commerce.Initializer.Builders.Products
 {

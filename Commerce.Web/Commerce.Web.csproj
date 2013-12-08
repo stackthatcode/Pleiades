@@ -169,37 +169,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Angular\angular-cookies.js" />
-    <Content Include="Content\Angular\angular-cookies.min.js" />
-    <Content Include="Content\Angular\angular-loader.js" />
-    <Content Include="Content\Angular\angular-loader.min.js" />
-    <Content Include="Content\Angular\angular-resource.js" />
-    <Content Include="Content\Angular\angular-resource.min.js" />
-    <Content Include="Content\Angular\angular-sanitize.js" />
-    <Content Include="Content\Angular\angular-sanitize.min.js" />
-    <Content Include="Content\Angular\angular.js" />
-    <Content Include="Content\Angular\angular.min.js" />
-    <Content Include="Content\Angular\version.txt" />
-    <Content Include="Content\ArtOfGroundFighting\Images\about.png" />
-    <Content Include="Content\ArtOfGroundFighting\Images\ajax_loader.gif" />
-    <Content Include="Content\ArtOfGroundFighting\Images\ohnoes.png" />
-    <Content Include="Content\ArtOfGroundFighting\Images\vintage-logo-sm.png" />
-    <Content Include="Content\ArtOfGroundFighting\ng-templates\about.html" />
-    <Content Include="Content\ArtOfGroundFighting\ng-templates\cart.html" />
-    <Content Include="Content\ArtOfGroundFighting\ng-templates\contact.html" />
-    <Content Include="Content\ArtOfGroundFighting\ng-templates\content-parent.html" />
-    <Content Include="Content\ArtOfGroundFighting\ng-templates\checkout.html" />
-    <Content Include="Content\ArtOfGroundFighting\ng-templates\thank-you.html" />
-    <Content Include="Content\ArtOfGroundFighting\ng-templates\product-detail.html" />
-    <Content Include="Content\ArtOfGroundFighting\ng-templates\product-list.html" />
-    <Content Include="Content\ArtOfGroundFighting\ng-templates\shipping.html" />
-    <Content Include="Content\ArtOfGroundFighting\Scripts\angular-app.js" />
-    <Content Include="Content\ArtOfGroundFighting\Scripts\cart-controller.js" />
-    <Content Include="Content\ArtOfGroundFighting\Scripts\checkout-controller.js" />
-    <Content Include="Content\ArtOfGroundFighting\Scripts\order-controller.js" />
-    <Content Include="Content\ArtOfGroundFighting\Scripts\products-controller.js" />
-    <Content Include="Content\ArtOfGroundFighting\Scripts\cart-functions.js" />
-    <Content Include="Content\ArtOfGroundFighting\Style\artofgroundfighting.css" />
     <Content Include="Content\Bootstrap_2_3_2\css\bootstrap-lightbox.min.css" />
     <Content Include="Content\Bootstrap_2_3_2\css\bootstrap-responsive.css" />
     <Content Include="Content\Bootstrap_2_3_2\css\bootstrap-responsive.min.css" />
@@ -217,15 +186,6 @@
     <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-popover.js" />
     <Content Include="Content\Bootstrap_2_3_2\js\bootstrap-tooltip.js" />
     <Content Include="Content\Bootstrap_2_3_2\js\bootstrap.min.js" />
-    <Content Include="Content\Bootstrap_3_0_0\css\bootstrap-lightbox.css" />
-    <Content Include="Content\Bootstrap_3_0_0\css\bootstrap-theme.css" />
-    <Content Include="Content\Bootstrap_3_0_0\css\bootstrap-theme.min.css" />
-    <Content Include="Content\Bootstrap_3_0_0\css\bootstrap.css" />
-    <Content Include="Content\Bootstrap_3_0_0\css\bootstrap.min.css" />
-    <Content Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\Bootstrap_3_0_0\js\bootstrap-lightbox.js" />
-    <Content Include="Content\Bootstrap_3_0_0\js\bootstrap.js" />
-    <Content Include="Content\Bootstrap_3_0_0\js\bootstrap.min.js" />
     <Content Include="Content\Commerce.Web\Images\200x200.gif" />
     <Content Include="Content\Commerce.Web\Images\75x75.gif" />
     <Content Include="Content\Commerce.Web\Images\800x600.gif" />
@@ -281,7 +241,6 @@
     <Content Include="Content\PushLibraryKo\endless-ko-glider.js" />
     <Content Include="Content\PushLibraryKo\knockout-glider.js" />
     <Content Include="Content\PushLibraryKo\scroll-tracker.js" />
-    <Content Include="Content\PushLibraryNg\endless-ng-glider.js" />
     <Content Include="Content\StripeMock\stripe.js" />
     <Content Include="Content\Utilities\aQuery-1.0-min.js" />
     <Content Include="Content\Utilities\flow.js" />
@@ -390,13 +349,6 @@
     <Content Include="Views\ManageOrder\Editor.cshtml" />
     <Content Include="Views\ManageOrder\_FindOrders.cshtml" />
     <Content Include="Views\ManageOrder\_OrderDetail.cshtml" />
-    <None Include="Content\ArtOfGroundFighting\Fonts\Bevan.woff" />
-    <None Include="Content\ArtOfGroundFighting\Fonts\OpenSans-400.woff" />
-    <None Include="Content\ArtOfGroundFighting\Fonts\OpenSans-700.woff" />
-    <None Include="Content\ArtOfGroundFighting\Fonts\OpenSans-800.woff" />
-    <None Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.eot" />
-    <None Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.ttf" />
-    <None Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Content\JQuery\jquery-2.0.3.min.map" />
     <Content Include="Shared\_StripeShim.cshtml" />
   </ItemGroup>
