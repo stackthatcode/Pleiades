@@ -69,10 +69,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Azure\TestAzureFileRepository.cs" />
     <Compile Include="BuildersAndRepositories\ProductTests.cs" />
     <Compile Include="Infrastructure\TestEmailTemplates.cs" />
     <Compile Include="Resources\ImageProcessingTests.cs" />
     <Compile Include="StripeClient\TestConfiguration.cs" />
+    <Compile Include="TestContainerAzure.cs" />
     <Compile Include="TestContainer.cs" />
     <Compile Include="BuildersAndRepositories\BrandTests.cs" />
     <Compile Include="BuildersAndRepositories\CategoryTests.cs" />
@@ -86,6 +88,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Azure\Afflictionmma2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestImages\Image1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -114,6 +119,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Commerce.Application.Azure\Commerce.Application.Azure.csproj">
+      <Project>{f60c8f77-c6da-469f-986c-7fb2bb422b36}</Project>
+      <Name>Commerce.Application.Azure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Commerce.Domain\Commerce.Application.csproj">
       <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
       <Name>Commerce.Application</Name>

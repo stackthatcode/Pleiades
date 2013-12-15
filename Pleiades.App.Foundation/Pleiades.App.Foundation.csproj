@@ -45,6 +45,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,6 +57,7 @@
     <Compile Include="Data\EFUnitOfWork.cs" />
     <Compile Include="Data\IGenericRepository.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
+    <Compile Include="Helpers\BitmapExtensions.cs" />
     <Compile Include="Injection\AutofacContainer.cs" />
     <Compile Include="Injection\IContainerAdapter.cs" />
     <Compile Include="Logging\ConsoleAndDebugLogger.cs" />

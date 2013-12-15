@@ -10,7 +10,7 @@ namespace Commerce.Application.File
         FileResource AddNew(byte[] bytes);
         byte[] RetrieveBytes(Guid externalId);
         FileResource Copy(FileResource original);
-        void Delete(int Id);
+        void Delete(Guid externalId);
         string PhysicalFilePath(Guid externalId);
     }
 }

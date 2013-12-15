@@ -59,9 +59,10 @@ namespace Commerce.Application.File
             return System.IO.File.ReadAllBytes(fullFilePath);
         }
 
-        public void Delete(int Id)
+        public void Delete(Guid externalId)
         {
-            var dataFileResource = this.Context.FileResources.First(x => x.Id == Id);
+            var dataFileResource = 
+                this.Context.FileResources.First(x => x.ExternalId == externalId);
             dataFileResource.Deleted = true;
         }
 

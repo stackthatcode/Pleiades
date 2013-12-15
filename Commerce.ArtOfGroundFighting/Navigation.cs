@@ -18,12 +18,12 @@ namespace Commerce.ArtOfGroundFighting
 
         public static RouteValueDictionary Home()
         {
-            return RouteValueDictionaryBuilder.FromController<PageController>(x => x.Index());
+            return RouteValueDictionaryExtensions.FromController<PageController>(x => x.Index());
         }
 
         public static RouteValueDictionary TestHttp500()
         {
-            return RouteValueDictionaryBuilder.FromController<PageController>(x => x.TestHttp500());
+            return RouteValueDictionaryExtensions.FromController<PageController>(x => x.TestHttp500());
         }
     }
 }

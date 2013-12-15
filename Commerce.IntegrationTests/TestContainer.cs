@@ -5,20 +5,19 @@ namespace Commerce.IntegrationTests
 {
     public class TestContainer
     {
-        static IContainer _container = null;
-        static ILifetimeScope _rootScope = null;
+        static readonly ILifetimeScope RootScope = null;
 
         public static ILifetimeScope LifetimeScope()
         {
-            return _rootScope.BeginLifetimeScope();
+            return RootScope.BeginLifetimeScope();
         }
 
         static TestContainer()
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule<CommerceInitializerModules>();
-            _container = builder.Build();
-            _rootScope = _container.BeginLifetimeScope();
+            IContainer container = builder.Build();
+            RootScope = container.BeginLifetimeScope();
         }
     }
 }
