@@ -1,0 +1,106 @@
+﻿@using Commerce.Web
+@using Pleiades.Web.Security.Utility
+
+    <script type="text/javascript">
+        $(document).ready(
+            function () {
+                $("#logged-in").popover({
+                    html: true, 
+                    content: function() {
+                            return $('#popover_content_wrapper').html();
+                    },
+                    placement: "bottom",
+                });
+                
+                $("#logged-in").click(function() {
+                    $("#logged-in").popover("show");
+                    $(".popover").click(function() {
+                        $("#logged-in").popover('hide');
+                    });
+                });
+            }
+        );
+    </script>
+
+    <style>
+        #logged-in:hover
+        {
+            text-decoration:none;            
+        }
+        .popover 
+        {
+            width: 300px;
+        }
+    </style>
+    <div id="top-menu-bar" class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <img src="@Url.Content("~/Content/Commerce.Web/Images/webicon-2.png")" style="float:left;" />
+		  <a class="brand" href="@Url.RouteUrl(Navigation.Home())" style="color:#FFF;">Pushmarket</a>
+
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Orders  <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="@Url.RouteUrl(Navigation.ManageOrders())">Manage Orders</a></li>
+                    <li><a href="@Url.RouteUrl(Navigation.CreateNewOrder())">Create New Order</a></li>
+                  </ul>
+              </li>
+              <li><a href="@Url.RouteUrl(Navigation.ProductEditor())">Products</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Lists <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="@Url.RouteUrl(Navigation.SectionEditor())">Sections</a></li>
+                    <li><a href="@Url.RouteUrl(Navigation.CategoryEditor())">Categories</a></li>
+                    <li><a href="@Url.RouteUrl(Navigation.BrandEditor())">Brands</a></li>
+                    <li><a href="@Url.RouteUrl(Navigation.SizeEditor())">Sizes</a></li>
+                    <li><a href="@Url.RouteUrl(Navigation.ColorEditor())">Colors</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b>
+                   </a>
+                   <ul class="dropdown-menu">
+                       <li><a href="@Url.RouteUrl(Navigation.ManagerList())">Admins</a></li>                        
+                       <li><a href="@Url.RouteUrl(Navigation.ErrorTest())">Error Test</a></li>
+                   </ul>
+              </li>
+			</ul>
+
+			<p class="navbar-text pull-right">
+                Logged in as <a id="logged-in" style="color:#08C; cursor:pointer;" class="navbar-link">
+                    @(HttpContext.Current.RetreiveAggregateUserFromContext().Membership.Email)</a>
+            </p>
+            
+            <div id="popover_content_wrapper" style="display:none; position: absolute; left:-200px; width:250px;">
+                <div class="arrow"></div>
+                <div style="color:#333; line-height:24px;">
+                    <table>
+                        <tr>
+                            <td style="width:80px;">Name:</td>
+                            <td><strong>@(HttpContext.Current.RetreiveAggregateUserFromContext().IdentityProfile.FirstName) 
+                                    @(HttpContext.Current.RetreiveAggregateUserFromContext().IdentityProfile.LastName)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>User Type:</td>
+                            <td><strong>@(HttpContext.Current.RetreiveAggregateUserFromContext().IdentityProfile.UserRole)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Created:</td>
+                            <td><strong>@(HttpContext.Current.RetreiveAggregateUserFromContext().Membership.CreationDate)</strong></td>
+                        </tr>
+                    </table>
+                    
+                    <br />
+                    <div style="width:100%; text-align:center;">
+                        <button type="button" style="width:100px;" class="btn btn-inverse">Close</button>
+                        <a href="@Url.RouteUrl(Navigation.Logout())" id="logout" style="width:100px;" class="btn btn-primary">Logout</a>
+                    </div>                   
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>

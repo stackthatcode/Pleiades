@@ -11,7 +11,7 @@ using Pleiades.App.Logging;
 using Pleiades.App.Utility;
 
 
-namespace Commerce.Initializer.Builders
+namespace ArtOfGroundFighting.Initializer.Builders
 {
     public class BrandBuilder : IBuilder
     {

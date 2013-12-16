@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7E8B1EF6-1AD4-4CC8-A13A-8700C496C87F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ArtOfGroundFighting.IntegrationTests</RootNamespace>
+    <AssemblyName>ArtOfGroundFighting.IntegrationTests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.1.1\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc">
+      <HintPath>..\packages\Autofac.Mvc4.3.1.0\lib\net40\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BuildersAndRepositories\BrandTests.cs" />
+    <Compile Include="BuildersAndRepositories\CategoryTests.cs" />
+    <Compile Include="BuildersAndRepositories\ColorTests.cs" />
+    <Compile Include="BuildersAndRepositories\ProductTests.cs" />
+    <Compile Include="BuildersAndRepositories\SizeAndSizeGroupTests.cs" />
+    <Compile Include="FixtureBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestContainer.cs" />
+    <Compile Include="TestContainerAzure.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Commerce.Application.Azure\Commerce.Application.Azure.csproj">
+      <Project>{f60c8f77-c6da-469f-986c-7fb2bb422b36}</Project>
+      <Name>Commerce.Application.Azure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Commerce.ArtOfGroundFighting\ArtOfGroundFighting.Web.csproj">
+      <Project>{ec5dc292-82c2-4c82-9b64-9b0cbaf8e561}</Project>
+      <Name>ArtOfGroundFighting.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Commerce.Domain\Commerce.Application.csproj">
+      <Project>{3e11d8a9-5d48-4d12-9951-959a53a8b6a6}</Project>
+      <Name>Commerce.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Commerce.Initializer\ArtOfGroundFighting.Initializer.csproj">
+      <Project>{8e922d95-e286-4af1-89e2-943ea247b806}</Project>
+      <Name>ArtOfGroundFighting.Initializer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pleiades.App.Foundation\Pleiades.App.Foundation.csproj">
+      <Project>{10cee227-9b7c-4d97-b53a-229e8d45b15f}</Project>
+      <Name>Pleiades.App.Foundation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pleiades.Web.Security.Aggregate\Pleiades.Web.Security.Aggregate.csproj">
+      <Project>{3b3be1c6-3d4e-4c72-915e-66852ec3578f}</Project>
+      <Name>Pleiades.Web.Security.Aggregate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pleiades.Web.Security.Membership\Pleiades.Web.Security.Membership.csproj">
+      <Project>{99dcceb1-8b5b-4fe1-af0c-b0126fc4ad82}</Project>
+      <Name>Pleiades.Web.Security.Membership</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,4 +1,4 @@
-﻿namespace Commerce.Initializer.Builders
+﻿namespace ArtOfGroundFighting.Initializer.Builders
 {
     public interface IBuilder
     {

@@ -10,7 +10,7 @@ using Commerce.Application.Products;
 using Pleiades.App.Data;
 using Pleiades.App.Logging;
 
-namespace Commerce.Initializer.Builders
+namespace ArtOfGroundFighting.Initializer.Builders
 {
     public class AnalyticsBuilder : IBuilder
     {

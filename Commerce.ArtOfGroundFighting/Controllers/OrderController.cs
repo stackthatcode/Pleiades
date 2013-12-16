@@ -6,7 +6,7 @@ using Commerce.Application.Shopping;
 using Pleiades.Web.Json;
 using System.Linq;
 
-namespace Commerce.ArtOfGroundFighting.Controllers
+namespace ArtOfGroundFighting.Web.Controllers
 {
     public class OrderController : Controller
     {

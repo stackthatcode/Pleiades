@@ -1,11 +1,11 @@
 ﻿using System.Security;
 using System.Web.Mvc;
-using Commerce.ArtOfGroundFighting.Controllers;
+using ArtOfGroundFighting.Web.Controllers;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 using SecurityContext = Pleiades.Web.Security.Rules.SecurityContext;
 
-namespace Commerce.ArtOfGroundFighting.Plumbing
+namespace ArtOfGroundFighting.Web.Plumbing
 {
     public class SecurityContextFactory : ISecurityContextBuilder 
     {

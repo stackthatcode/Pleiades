@@ -1,0 +1,73 @@
+﻿@using System.Configuration
+@section _Scripts {
+    @Html.Partial("_EndlessGlider")
+    @Html.Partial("_ModalDialog")
+    @Html.Partial("_ImageBundleViewer") 
+    @Html.Partial("_FindOrders")
+    @Html.Partial("_OrderDetail")
+    
+    @Html.Javascript("~/Content/Bootstrap_2_3_2/js/bootstrap-datepicker.js")
+    @Html.Stylesheet("~/Content/Bootstrap_2_3_2/css/datepicker.css")
+
+    <script type="text/javascript">
+        var PushMkt = PushMkt || {};
+        PushMkt.ManageOrderViewModel = function () {
+            var self = this;
+            PushMkt.AddFindOrderView(self);
+            PushMkt.AddOrderDetailView(self);
+
+            self.Service = new PushLibrary.Ajax();
+            
+            self.ModalViewModel = new PushMkt.ModalDialogViewModel();
+            self.ShowModal = function (template, header, body, list, callback) {
+                self.ModalViewModel.ShowModal(template, header, body, list, callback);
+            };
+
+            // Glider functions
+            self.EndlessGlider = new PushMkt.EndlessGlider();
+
+            self.GlideLeft = function (workspaceTemplate, editorTemplate, userCallback) {
+                self.EndlessGlider.GlideToLeft(workspaceTemplate, editorTemplate, userCallback);
+            };
+            self.GlideRight = function (workspaceTemplate, editorTemplate, userCallback) {
+                self.EndlessGlider.GlideToRight(workspaceTemplate, editorTemplate, userCallback);
+            };
+
+            // Navigation between Views
+            self.EditOrderClick = function (data) {
+                self.OrderDetailView.Load(data.ExternalId, function () {
+                    self.GlideRight(self.OrderDetailView.TopWorkspaceTemplate, self.OrderDetailView.MainEditorTemplate);
+                });
+            };
+
+            self.BackToSearch = function () {
+                self.GlideLeft(
+                    self.FindOrderView.TopWorkspaceTemplate,
+                    self.FindOrderView.MainEditorTemplate,
+                    function () {
+                        self.OrderDetailView.SelectedOrderId(null);
+                        self.FindOrderView.SearchClick();
+                    });
+            };
+
+            self.EndlessGlider.Init(self.FindOrderView.TopWorkspaceTemplate, self.FindOrderView.MainEditorTemplate);
+        };
+
+        $(function() {
+            var model = new PushMkt.ManageOrderViewModel();
+            ko.applyBindings(model);
+            window.tmp = model;
+        });
+    </script>
+}
+
+@section _Templates {
+}
+
+@section _Body {
+    <div data-bind="template: { data: $root.EndlessGlider, name: 'Endless-Glider-Scaffolding' }">
+    </div>
+    
+    <div data-bind="template: { data: $root.ModalViewModel , name: 'Modal-Dialog-Scaffolding' }">
+    </div>
+}

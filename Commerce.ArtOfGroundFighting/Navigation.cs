@@ -1,8 +1,8 @@
 ﻿using System.Web.Routing;
-using Commerce.ArtOfGroundFighting.Controllers;
+using ArtOfGroundFighting.Web.Controllers;
 using Pleiades.Web.MvcHelpers;
 
-namespace Commerce.ArtOfGroundFighting
+namespace ArtOfGroundFighting.Web
 {
     public class Navigation
     {

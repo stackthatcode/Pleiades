@@ -4,7 +4,7 @@ using Pleiades.App.Data;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
 
-namespace Commerce.IntegrationTests.Services
+namespace ArtOfGroundFighting.IntegrationTests.Services
 {
     [TestFixture]
     public class MembershipRepositoryTests : FixtureBase

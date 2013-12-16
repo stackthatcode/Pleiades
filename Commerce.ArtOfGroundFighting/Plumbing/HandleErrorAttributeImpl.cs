@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using Pleiades.App.Logging;
 using Pleiades.Web.Activity;
 
-namespace Commerce.ArtOfGroundFighting.Plumbing
+namespace ArtOfGroundFighting.Web.Plumbing
 {
     public class HandleErrorAttributeImpl : HandleErrorAttribute
     {

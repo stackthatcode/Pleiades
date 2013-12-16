@@ -5,15 +5,15 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using ArtOfGroundFighting.Web.Plumbing;
 using Commerce.Application.Database;
-using Commerce.ArtOfGroundFighting.Plumbing;
 using Pleiades.App.Logging;
 using Pleiades.App.Utility;
 using Pleiades.Web.Activity;
 using Pleiades.Web.Plumbing;
 using Pleiades.Web.Security.Aspect;
 
-namespace Commerce.ArtOfGroundFighting
+namespace ArtOfGroundFighting.Web
 {
     public class ArtOfGroundFightingApplication : HttpApplication
     {

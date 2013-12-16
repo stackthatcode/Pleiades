@@ -5,7 +5,7 @@ using NUnit.Framework;
 using Pleiades.App.Utility;
 using Commerce.Application.Database;
 
-namespace Commerce.IntegrationTests
+namespace ArtOfGroundFighting.IntegrationTests
 {
     [TestFixture]
     public class FixtureBase

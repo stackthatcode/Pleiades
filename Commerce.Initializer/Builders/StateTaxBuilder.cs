@@ -4,7 +4,7 @@ using Commerce.Application.Billing;
 using Commerce.Application.Database;
 using Pleiades.App.Logging;
 
-namespace Commerce.Initializer.Builders
+namespace ArtOfGroundFighting.Initializer.Builders
 {
     public class StateTaxBuilder : IBuilder
     {

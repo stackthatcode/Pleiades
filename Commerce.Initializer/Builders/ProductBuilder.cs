@@ -11,7 +11,7 @@ using Pleiades.App.Data;
 using Pleiades.App.Logging;
 using Color = Commerce.Application.Lists.Entities.Color;
 
-namespace Commerce.Initializer.Builders
+namespace ArtOfGroundFighting.Initializer.Builders
 {
     public class ProductBuilder : IBuilder
     {

@@ -5,7 +5,7 @@ using Commerce.Application.Email;
 using Pleiades.App.Logging;
 using Pleiades.Web.Activity;
 
-namespace Commerce.ArtOfGroundFighting.Plumbing
+namespace ArtOfGroundFighting.Web.Plumbing
 {
     public class ErrorNotification
     {

@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ArtOfGroundFighting.Web</RootNamespace>
+    <AssemblyName>ArtOfGroundFighting.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.1.1\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc">
+      <HintPath>..\packages\Autofac.Mvc4.3.1.0\lib\net40\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="RouteDebug">
+      <HintPath>..\Lib\RouteDebug.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Optimization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Navigation.cs" />
+    <Compile Include="Plumbing\Bootstrap.cs" />
+    <Compile Include="Plumbing\CompositionRoot.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\ListController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\PageController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\SystemController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JsonExtensions.cs" />
+    <Compile Include="Plumbing\ErrorModel.cs" />
+    <Compile Include="Plumbing\ErrorNotification.cs" />
+    <Compile Include="Plumbing\HandleErrorAttributeImpl.cs" />
+    <Compile Include="Plumbing\RouteRegistration.cs" />
+    <Compile Include="Plumbing\SecurityContextFactory.cs" />
+    <Compile Include="Plumbing\SecurityResponder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Angular\angular-cookies.js" />
+    <Content Include="Content\Angular\angular-cookies.min.js" />
+    <Content Include="Content\Angular\angular-loader.js" />
+    <Content Include="Content\Angular\angular-loader.min.js" />
+    <Content Include="Content\Angular\angular-resource.js" />
+    <Content Include="Content\Angular\angular-resource.min.js" />
+    <Content Include="Content\Angular\angular-sanitize.js" />
+    <Content Include="Content\Angular\angular-sanitize.min.js" />
+    <Content Include="Content\Angular\angular.js" />
+    <Content Include="Content\Angular\angular.min.js" />
+    <Content Include="Content\Angular\version.txt" />
+    <Content Include="Content\ArtOfGroundFighting\Images\about.png" />
+    <Content Include="Content\ArtOfGroundFighting\Images\ajax_loader.gif" />
+    <Content Include="Content\ArtOfGroundFighting\Images\vintage-logo-sm.png" />
+    <Content Include="Content\ArtOfGroundFighting\Images\ohnoes.png" />
+    <Content Include="Content\ArtOfGroundFighting\ng-templates\about.html" />
+    <Content Include="Content\ArtOfGroundFighting\ng-templates\cart.html" />
+    <Content Include="Content\ArtOfGroundFighting\ng-templates\checkout.html" />
+    <Content Include="Content\ArtOfGroundFighting\ng-templates\contact.html" />
+    <Content Include="Content\ArtOfGroundFighting\ng-templates\content-parent.html" />
+    <Content Include="Content\ArtOfGroundFighting\ng-templates\product-detail.html" />
+    <Content Include="Content\ArtOfGroundFighting\ng-templates\product-list.html" />
+    <Content Include="Content\ArtOfGroundFighting\ng-templates\shipping.html" />
+    <Content Include="Content\ArtOfGroundFighting\ng-templates\thank-you.html" />
+    <Content Include="Content\ArtOfGroundFighting\Scripts\angular-app.js" />
+    <Content Include="Content\ArtOfGroundFighting\Scripts\cart-controller.js" />
+    <Content Include="Content\ArtOfGroundFighting\Scripts\cart-functions.js" />
+    <Content Include="Content\ArtOfGroundFighting\Scripts\checkout-controller.js" />
+    <Content Include="Content\ArtOfGroundFighting\Scripts\order-controller.js" />
+    <Content Include="Content\ArtOfGroundFighting\Scripts\products-controller.js" />
+    <Content Include="Content\ArtOfGroundFighting\Style\artofgroundfighting.css" />
+    <Content Include="Content\Bootstrap_3_0_0\css\bootstrap-lightbox.css" />
+    <Content Include="Content\Bootstrap_3_0_0\css\bootstrap-theme.css" />
+    <Content Include="Content\Bootstrap_3_0_0\css\bootstrap-theme.min.css" />
+    <Content Include="Content\Bootstrap_3_0_0\css\bootstrap.css" />
+    <Content Include="Content\Bootstrap_3_0_0\css\bootstrap.min.css" />
+    <Content Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Bootstrap_3_0_0\js\bootstrap-lightbox.js" />
+    <Content Include="Content\Bootstrap_3_0_0\js\bootstrap.js" />
+    <Content Include="Content\Bootstrap_3_0_0\js\bootstrap.min.js" />
+    <Content Include="Content\JQuery\jquery-2.0.3.min.js" />
+    <Content Include="Content\JQuery\jquery-ui-1.10.0.custom.min.css" />
+    <Content Include="Content\JQuery\jquery-ui-1.10.0.custom.min.js" />
+    <Content Include="Content\JQuery\jquery.animate-colors-min.js" />
+    <Content Include="Content\JQuery\jquery.validate.min.js" />
+    <Content Include="Content\PushLibraryNg\endless-ng-glider.js" />
+    <Content Include="Content\StripeMock\stripe.js" />
+    <Content Include="Content\Utilities\aQuery-1.0-min.js" />
+    <Content Include="Content\Utilities\flow.js" />
+    <Content Include="Content\Utilities\generalFunctions.js" />
+    <Content Include="EmailTemplates\Shared\EmailSignature.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\Shared\MasterTemplate.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Global.asax" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EmailTemplates\Admin\OrderItemsRefunded.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\Admin\OrderItemsShipped.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\Admin\OrderReceived.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\Admin\SystemError.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\Customer\OrderItemsRefunded.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\Customer\OrderItemsShipped.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\Customer\OrderReceived.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\_viewstart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Page\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Page\NotFound.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Page\ServerError.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_NgFooter.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_NgHeader.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_NgLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_NgShimBody.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_NgShimHead.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Shared\_StripeShim.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\ArtOfGroundFighting\Fonts\Bevan.woff" />
+    <None Include="Content\ArtOfGroundFighting\Fonts\OpenSans-400.woff" />
+    <None Include="Content\ArtOfGroundFighting\Fonts\OpenSans-700.woff" />
+    <None Include="Content\ArtOfGroundFighting\Fonts\OpenSans-800.woff" />
+    <None Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Content\JQuery\jquery-2.0.3.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Commerce.Domain\Commerce.Application.csproj">
+      <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
+      <Name>Commerce.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pleiades.App.Foundation\Pleiades.App.Foundation.csproj">
+      <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
+      <Name>Pleiades.App.Foundation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pleiades.Web.Security.Aggregate\Pleiades.Web.Security.Aggregate.csproj">
+      <Project>{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}</Project>
+      <Name>Pleiades.Web.Security.Aggregate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pleiades.Web.Security.Membership\Pleiades.Web.Security.Membership.csproj">
+      <Project>{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}</Project>
+      <Name>Pleiades.Web.Security.Membership</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pleiades.Web\Pleiades.Web.Foundation.csproj">
+      <Project>{804F063C-505F-441E-B205-688C42E637AD}</Project>
+      <Name>Pleiades.Web.Foundation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>23349</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/ArtOfGroundFighting.com</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost/ArtOfGroundFighting.com</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy $(SolutionDir)\lib $(TargetDir) /Y /S</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

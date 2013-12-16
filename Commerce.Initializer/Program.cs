@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
-using Commerce.Initializer.Builders.Products;
+using ArtOfGroundFighting.Initializer.Builders;
+using ArtOfGroundFighting.Initializer.Builders.Products;
 using Pleiades.App.Injection;
 using Pleiades.App.Logging;
 using Pleiades.App.Utility;
 using Commerce.Application.Database;
-using Commerce.Initializer.Builders;
 
-namespace Commerce.Initializer
+namespace ArtOfGroundFighting.Initializer
 {
     class Program
     {

@@ -2,7 +2,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace Commerce.ArtOfGroundFighting.Controllers
+namespace ArtOfGroundFighting.Web.Controllers
 {
     public class SystemController : Controller
     {

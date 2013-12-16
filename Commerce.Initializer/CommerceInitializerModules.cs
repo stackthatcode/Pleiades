@@ -1,11 +1,11 @@
-﻿using Autofac;
-using Commerce.Initializer.Builders;
-using Commerce.Initializer.Builders.Products;
+﻿using ArtOfGroundFighting.Initializer.Builders;
+using ArtOfGroundFighting.Initializer.Builders.Products;
+using Autofac;
 using Pleiades.App.Injection;
 using Pleiades.Web.Security;
 using Commerce.Application;
 
-namespace Commerce.Initializer
+namespace ArtOfGroundFighting.Initializer
 {
     public class CommerceInitializerModules : Autofac.Module
     {

@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using Pleiades.Web.Security.Default;
 
-namespace Commerce.ArtOfGroundFighting.Plumbing
+namespace ArtOfGroundFighting.Web.Plumbing
 {
     public class SecurityResponder : DefaultSecurityHttpResponder
     {

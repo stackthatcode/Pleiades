@@ -10,7 +10,7 @@ using NUnit.Framework;
 using Autofac;
 using Commerce.Application.Email;
 
-namespace Commerce.IntegrationTests.Infrastructure
+namespace ArtOfGroundFighting.IntegrationTests.Infrastructure
 {
     [TestFixture]
     public class TestEmailTemplates

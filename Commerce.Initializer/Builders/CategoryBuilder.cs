@@ -6,7 +6,7 @@ using Pleiades.App.Data;
 using Pleiades.App.Helpers;
 using Pleiades.App.Logging;
 
-namespace Commerce.Initializer.Builders
+namespace ArtOfGroundFighting.Initializer.Builders
 {
     public class CategoryBuilder : IBuilder
     {

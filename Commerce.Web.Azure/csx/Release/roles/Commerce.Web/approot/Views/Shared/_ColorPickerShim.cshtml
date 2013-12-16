@@ -1,0 +1,26 @@
+﻿    @Html.Javascript("~/Content/Farbtastic/farbtasticSecure.js")
+    @Html.Stylesheet("~/Content/Farbtastic/farbtasticSecure.css")
+
+    <script type="text/javascript">
+        var PushMkt = namespace("PushMkt");
+
+        PushMkt.CreateColorPicker = function() {
+            $('#picker').farbtastic('#color');
+        };
+
+        PushMkt.GetSelectedColor = function() {
+            return $(".form-item > #color").val();
+        };
+    </script>
+
+    <!-- KnockoutJS Template -->
+	<script type="text/html" id="Color-Picker">
+        <div style="width:195px;">
+            <div class="form-item">
+                <label for="color">Color Picker:</label>
+                <input type="text" id="color" name="color" value="#FFFFFF" style="width:180px;" />
+            </div>
+            <div id="picker"></div>
+        </div>
+    </script>
+

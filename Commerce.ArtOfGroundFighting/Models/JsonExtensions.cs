@@ -5,7 +5,7 @@ using Commerce.Application.Products;
 using Commerce.Application.Products.Entities;
 using Pleiades.Web.Json;
 
-namespace Commerce.ArtOfGroundFighting.Models
+namespace ArtOfGroundFighting.Web.Models
 {
     public static class JsonExtensions
     {

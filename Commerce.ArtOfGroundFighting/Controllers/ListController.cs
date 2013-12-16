@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using Commerce.Application.Database;
 using Pleiades.Web.Json;
 
-namespace Commerce.ArtOfGroundFighting.Controllers
+namespace ArtOfGroundFighting.Web.Controllers
 {
     public class ListController : Controller
     {

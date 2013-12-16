@@ -6,7 +6,7 @@ using Pleiades.App.Data;
 using Pleiades.App.Logging;
 using Pleiades.App.Utility;
 
-namespace Commerce.Initializer.Builders
+namespace ArtOfGroundFighting.Initializer.Builders
 {
     public class SizeBuilder : IBuilder
     {

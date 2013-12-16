@@ -7,7 +7,7 @@ using Commerce.Application.Products.Entities;
 using Pleiades.App.Data;
 using Pleiades.App.Logging;
 
-namespace Commerce.Initializer.Builders.Products
+namespace ArtOfGroundFighting.Initializer.Builders.Products
 {
     public class BullTerrierZebraBuilder : ProductBuilder
     {

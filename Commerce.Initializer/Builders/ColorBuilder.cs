@@ -8,7 +8,7 @@ using Pleiades.App.Logging;
 using Pleiades.App.Utility;
 using DomainColor = Commerce.Application.Lists.Entities.Color;
 
-namespace Commerce.Initializer.Builders
+namespace ArtOfGroundFighting.Initializer.Builders
 {
     public class ColorBuilder : IBuilder
     {

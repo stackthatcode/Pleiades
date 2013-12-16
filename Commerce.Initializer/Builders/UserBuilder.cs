@@ -5,7 +5,7 @@ using Pleiades.App.Logging;
 using Pleiades.Web.Security.Model;
 using Pleiades.Web.Security.Interface;
 
-namespace Commerce.Initializer.Builders
+namespace ArtOfGroundFighting.Initializer.Builders
 {
     public class UserBuilder : IBuilder
     {

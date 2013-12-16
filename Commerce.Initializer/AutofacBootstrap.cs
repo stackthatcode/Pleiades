@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Pleiades.App.Injection;
 
-namespace Commerce.Initializer
+namespace ArtOfGroundFighting.Initializer
 {
     public class AutofacBootstrap
     {

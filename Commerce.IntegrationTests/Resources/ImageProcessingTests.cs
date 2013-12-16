@@ -6,7 +6,7 @@ using NUnit.Framework;
 using Pleiades.App.Data;
 
 
-namespace Commerce.IntegrationTests.Resources
+namespace ArtOfGroundFighting.IntegrationTests.Resources
 {
     [TestFixture]
     public class ImageProcessingTests : FixtureBase

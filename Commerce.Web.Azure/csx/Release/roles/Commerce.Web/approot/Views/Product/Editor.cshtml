@@ -1,0 +1,234 @@
+﻿@section _Scripts {
+    @Html.Javascript("~/Content/JQuery/jquery-ui-1.10.0.custom.min.js")
+    @Html.Partial("_EndlessGlider")
+    @Html.Partial("_ModalDialog")
+    @Html.Partial("_ColorPickerShim")
+    @Html.Partial("_FineUploaderShim")
+	@Html.Partial("_ImageBundleViewer")
+
+
+    <!-- AJAX service facade -->
+    <script type="text/javascript">
+        function ProductService() {
+            var self = new PushLibrary.Ajax();
+
+            // Search
+            self.Search = function (brandId, categoryId, searchText, callback) {
+                self.AjaxGet("/Product/Search?brandId=" + 
+                    brandId + "&categoryId=" + categoryId + "&searchText=" + searchText, callback);
+            };
+
+            self.Categories = function (callback) {
+                self.AjaxGet("/Product/Categories", callback);
+            };
+
+            self.Brands = function (callback) {
+                self.AjaxGet("/Product/Brands", callback);
+            };
+
+            self.SizeGroups = function (callback) {
+                self.AjaxGet("/Product/SizeGroups", callback);
+            };
+
+
+
+            // Info
+            self.Info = function (productId, callback) {
+                self.AjaxGet("/Product/Info/" + productId, callback);
+            };
+
+            self.Update = function (product, callback) {
+                self.AjaxPost("/Product/Update", product, callback);
+            };
+
+            self.Delete = function (id, callback) {
+                self.AjaxPost("/Product/Delete/" + id, {}, callback);
+            };
+
+            self.Save = function (product, callback) {
+                self.AjaxPost("/Product/Save", product, callback);
+            };
+
+
+
+            // Sizes
+            self.SizeGroups = function(callback) {
+                self.AjaxGet("/Size/SizeGroups", callback);
+            };
+
+            self.AddProductSize = function (productId, sizeId, callback) {
+                self.AjaxPost("/Product/AddProductSize/" + productId + "?sizeId=" + sizeId, {}, callback);
+            };
+
+            self.Sizes = function (productId, callback) {
+                self.AjaxGet("/Product/Sizes/" + productId, callback);
+            };
+
+            self.DeleteProductSize = function (productId, sizeId, callback) {
+                self.AjaxPost("/Product/DeleteProductSize/" + productId + "?sizeId=" + sizeId, {}, callback);
+            };
+
+            self.UpdateSizeOrder = function (productId, sortedIds, callback) {
+                self.AjaxPost("/Product/UpdateSizeOrder/" + productId + "?sorted=" + sortedIds, {}, callback);
+            };
+
+
+
+            // Colors
+            self.Colors = function (productId, callback) {
+                self.AjaxGet("/Product/Colors/" + productId, callback);
+            };
+
+            self.ColorsList = function (callback) {
+                self.AjaxGet("/Color/Colors", callback);
+            };
+
+            self.AddColorToColorList = function (color, callback) {
+                self.AjaxPost("/Color/Insert", color, callback);
+            };
+
+            self.AddProductColor = function (productId, colorId, callback) {
+                self.AjaxPost("/Product/AddProductColor/" + productId + "?colorId=" + colorId, {}, callback);
+            };
+
+            self.UpdateColorOrder = function (productId, sorted, callback) {
+                self.AjaxPost("/Product/UpdateColorOrder/" + productId + "?sorted=" + sorted, {}, callback);
+            };
+
+            self.DeleteProductColor = function (productId, productColorId, callback) {
+                self.AjaxPost("/Product/DeleteProductColor/" + productId + "?productColorId=" + productColorId, {}, callback);
+            };
+
+            self.ChangeImageColor = function (productId, productImageId, newColorId, callback) {
+                self.AjaxPost(
+                "/Product/ChangeImageColor/" + productId +
+                    "?productImageId=" + productImageId + "&newColorId=" + newColorId, {}, callback);
+            };
+
+            self.AssignImagesToColor = function (productId, callback) {
+                self.AjaxPost("/Product/AssignImagesToColor/" + productId, {}, callback);
+            };
+
+            self.UnassignImagesFromColor = function (productId, callback) {
+                self.AjaxPost("/Product/UnassignImagesFromColor/" + productId, {}, callback);
+            };
+
+
+
+            // Images
+            self.Images = function (productId, callback) {
+                self.AjaxGet("/Product/Images/" + productId, callback);
+            };
+
+            self.AddProductImage = function (productId, image, callback) {
+                self.AjaxPost("/Product/AddProductImage/" + productId, image, callback);
+            };
+
+            self.UpdateImageOrder = function (productId, sorted, callback) {
+                self.AjaxPost("/Product/UpdateImageOrder/" + productId + "?sorted=" + sorted, {}, callback);
+            };
+
+            self.CreateBitmap = function (createRequest, callback) {
+                self.AjaxPost("/Product/CreateBitmap", createRequest, callback);
+            };
+
+            self.DeleteProductImage = function (productId, productImageId, callback) {
+                self.AjaxPost("/Product/DeleteProductImage/" + productId + "?productImageId=" + productImageId, {}, callback);
+            };
+
+
+
+            // Inventory
+            self.InventoryTotal = function (productId, callback) {
+                return self.AjaxGet("/Product/" + productId + "/InventoryTotal", callback);
+            };
+
+            self.Inventory = function (productId, callback) {
+                return self.AjaxGet("/Product/" + productId + "/Inventory?regenerate=true", callback);
+            };
+
+            self.UpdateInventory = function (productId, total, callback) {
+                return self.AjaxPost("/Product/" + productId + "/Inventory?inventoryTotal=" + total, {}, callback);
+            };
+
+            return self;
+        }
+    </script>
+
+    <!-- Root View Model -->
+    <script type="text/javascript">
+        var PushMkt = PushMkt || {};
+        PushMkt.ProductModel = function() {
+            var self = this;
+
+            // We're using a "plain-vanilla" Ajax Service
+            self.ProductService = new ProductService();
+
+            // Modal state + functions
+            self.ModalViewModel = ko.observable({ Template: null, Data: null });
+
+            // Glider functions
+            self.EndlessGlider = new PushMkt.EndlessGlider();
+            self.EndlessGlider.Init("Top-Workspace-Parent", "Main-Editor-Search");
+
+            // ... and pass throughs
+            self.GlideLeft = function(topWorkspace, mainEditor, userCallback) {
+                self.EndlessGlider.GlideToLeft("Top-Workspace-" + topWorkspace, "Main-Editor-" + mainEditor, userCallback);
+            };
+
+            self.GlideRight = function(topWorkspace, mainEditor, userCallback) {
+                self.EndlessGlider.GlideToRight("Top-Workspace-" + topWorkspace, "Main-Editor-" + mainEditor, userCallback);
+            };
+
+            self.GetActiveMainEditor = ko.computed(function() {
+                var editor = self.EndlessGlider.GetActiveEditorTemplate() || "";
+                return editor.replace("Main-Editor-", "");
+            });
+
+            self.SetActiveMainEditor = function(mainEditor) {
+                self.EndlessGlider.SetActiveEditorTemplate("Main-Editor-" + mainEditor);
+            };
+
+            self.ScrollTracker = new PushLibrary.ScrollTracker("#gliding-container");
+
+            PushMkt.AddSearchFunctions(self);
+            PushMkt.AddInfoFunctions(self);
+            PushMkt.AddColorFunctions(self);
+            PushMkt.AddImageFunctions(self);
+            PushMkt.AddSizeFunctions(self);
+            PushMkt.AddInventoryFunctions(self);
+
+            flow.exec(
+                function() {
+                    self.RetrieveCategoriesList(this);
+                },
+                function() {
+                    self.RetrieveBrandsList(this);
+                }
+            );
+        };
+
+        var model;
+        $(function () {
+            model = new PushMkt.ProductModel();
+            ko.applyBindings(model);
+        });
+    </script>
+}
+
+@section _Templates {
+    @Html.Partial("_EndlessGlider")
+    @Html.Partial("_SearchAndInfo")
+    @Html.Partial("_Colors")
+    @Html.Partial("_Sizes")
+    @Html.Partial("_Images")
+    @Html.Partial("_Inventory")
+}
+
+@section _Body {
+    <div data-bind="template: { data: $root.EndlessGlider, name: 'Endless-Glider-Scaffolding' }">
+    </div>
+    
+    <div data-bind="template: { data: $root.ModalViewModel , name: 'Modal-Dialog-Scaffolding' }">
+    </div>
+}

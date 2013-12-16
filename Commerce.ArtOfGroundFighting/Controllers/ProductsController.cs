@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Web.Mvc;
+using ArtOfGroundFighting.Web.Models;
 using Commerce.Application.Lists;
 using Commerce.Application.Lists.Entities;
 using Commerce.Application.Products;
-using Commerce.ArtOfGroundFighting.Models;
 using Pleiades.App.Logging;
 using Pleiades.Web.Json;
 
-namespace Commerce.ArtOfGroundFighting.Controllers
+namespace ArtOfGroundFighting.Web.Controllers
 {
     public class ProductsController : Controller
     {

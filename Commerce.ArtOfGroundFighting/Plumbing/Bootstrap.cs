@@ -3,7 +3,7 @@ using Autofac;
 using Autofac.Integration.Mvc;
 using Pleiades.App.Injection;
 
-namespace Commerce.ArtOfGroundFighting.Plumbing
+namespace ArtOfGroundFighting.Web.Plumbing
 {
     public class Bootstrap
     {

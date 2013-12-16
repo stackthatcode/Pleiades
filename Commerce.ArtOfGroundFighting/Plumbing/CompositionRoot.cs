@@ -4,7 +4,7 @@ using Pleiades.App.Injection;
 using Pleiades.Web.Security;
 using Commerce.Application;
 
-namespace Commerce.ArtOfGroundFighting.Plumbing
+namespace ArtOfGroundFighting.Web.Plumbing
 {
     public class CompositionRoot : Module
     {

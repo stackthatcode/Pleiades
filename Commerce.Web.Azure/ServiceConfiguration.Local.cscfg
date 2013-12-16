@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="Commerce.Web.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2013-10.2.2">
+  <Role name="Commerce.Web">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="commercewebrole" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBpQYJKoZIhvcNAQcDoIIBljCCAZICAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCED+l8s3c1Ei3Sue539m2cQswDQYJKoZIhvcNAQEBBQAEggEAN2pK+dO56zy9ny4WzhMldPc77Wi2rj4z07M2McYIP9QwKNhhwnjKIHPx9HsAGgtsk94rPph7dxlhAoezdZqNZ5YCmmIvfBT5VOAD+qlaoRbKZg13U7l5cXvizxN2cilme1QhTL2N7FY1Ke/HJZ2z4/lr21SEv5635ye5MFeqkhcXsCW1vgHdWxWGiTv0xwELI3fmqOn2rAxTjtvM8+w/f/0JNda+5l2LRu+AHs1UMHs2dLpt+VnNuaz0eZxbWqKEMyljJMIclYSU3HPlcAJq9DcIkmOWFBecNShX/AQcbH+TqC7mUti9tn/LwUzR15VM7yRVejdUzbZ8C6ajDwZXTTA7BgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECC8uugp0yXuWgBjRhx8L2YE4/s4UYNg4RH+RorKA8a3Fa6I=" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2014-12-14T23:59:59.0000000-06:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="18A56CC3F90A7DD6C1300A4AD80930ED8B19EE64" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

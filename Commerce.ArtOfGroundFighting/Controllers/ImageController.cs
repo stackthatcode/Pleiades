@@ -4,7 +4,7 @@ using Commerce.Application.File;
 using Commerce.Application.File.Entities;
 using Pleiades.App.Logging;
 
-namespace Commerce.ArtOfGroundFighting.Controllers
+namespace ArtOfGroundFighting.Web.Controllers
 {
     public class ImageController : Controller
     {

@@ -3,7 +3,7 @@ using Commerce.Application.Database;
 using Commerce.Application.Orders.Entities;
 using Pleiades.App.Logging;
 
-namespace Commerce.Initializer.Builders
+namespace ArtOfGroundFighting.Initializer.Builders
 {
     public class ShippingMethodsBuilder : IBuilder
     {

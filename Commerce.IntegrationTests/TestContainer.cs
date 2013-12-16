@@ -1,7 +1,7 @@
 ﻿using Autofac;
-using Commerce.Initializer;
+using Commerce.Application;
 
-namespace Commerce.IntegrationTests
+namespace ArtOfGroundFighting.IntegrationTests
 {
     public class TestContainer
     {
@@ -15,8 +15,8 @@ namespace Commerce.IntegrationTests
         static TestContainer()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterModule<CommerceInitializerModules>();
-            IContainer container = builder.Build();
+            builder.RegisterModule<CommerceApplicationModule>();
+            var container = builder.Build();
             RootScope = container.BeginLifetimeScope();
         }
     }
