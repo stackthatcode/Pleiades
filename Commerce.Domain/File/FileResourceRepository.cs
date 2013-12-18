@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using Commerce.Application.Database;
 using Commerce.Application.File.Entities;
+using Pleiades.App.Data;
+using Pleiades.App.Utility;
 
 namespace Commerce.Application.File
 {
@@ -98,6 +100,14 @@ namespace Commerce.Application.File
         public string PhysicalFilePath(Guid externalId)
         {
             return Path.Combine(this.ResourceStorage, RelativeFilePath(externalId));
+        }
+
+        public void NuclearDelete()
+        {
+            DirectoryHelpers.DeleteAll(this.ResourceStorage);
+
+            var files = this.Context.FileResources.ToList();            
+            files.ForEach(x => this.Context.Delete(x));
         }
 
         public string StorageDirectory(Guid externalId)

@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Commerce.Application.Azure.Config;
 using Commerce.Application.Azure.File;
+using Commerce.Application.Database;
 using Commerce.Application.File;
 
 namespace Commerce.Application.Azure
@@ -15,7 +16,9 @@ namespace Commerce.Application.Azure
 
             // Resource Repositories
             builder.Register(ctx => new AzureFileResourceRepository(
-                        configuration.StorageConnectionString, configuration.StorageContainerName))
+                        configuration.StorageConnectionString, 
+                        configuration.StorageContainerName,
+                        ctx.Resolve<PushMarketContext>()))
                 .As<IFileResourceRepository>()
                 .InstancePerLifetimeScope();
         }

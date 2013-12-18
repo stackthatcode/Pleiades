@@ -30,6 +30,18 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ArtOfGroundFighting.Azure|AnyCPU'">
+    <OutputPath>bin\ArtOfGroundFighting.Azure\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Azure|AnyCPU'">
+    <OutputPath>bin\Azure\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -73,7 +85,6 @@
     <Compile Include="Infrastructure\TestEmailTemplates.cs" />
     <Compile Include="Resources\ImageProcessingTests.cs" />
     <Compile Include="StripeClient\TestConfiguration.cs" />
-    <Compile Include="TestContainerAzure.cs" />
     <Compile Include="TestContainer.cs" />
     <Compile Include="Services\AggregateUserServiceTests.cs" />
     <Compile Include="FixtureBase.cs" />

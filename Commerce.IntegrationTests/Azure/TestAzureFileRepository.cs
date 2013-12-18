@@ -4,15 +4,16 @@ using Autofac;
 using Commerce.Application.File;
 using NUnit.Framework;
 
-namespace ArtOfGroundFighting.IntegrationTests.Azure
+namespace Commerce.IntegrationTests.Azure
 {
     [TestFixture]
+    [Explicit]
     public class TestAzureFileRepository
     {
         [Test]
         public void SaveFileToBlobStorage()
         {
-            using (var lifetime = TestContainerAzure.LifetimeScope())
+            using (var lifetime = TestContainer.AzureLifetimeScope())
             {
                 var repository = lifetime.Resolve<IFileResourceRepository>();
                 var bitmap = new Bitmap(@"Azure\Afflictionmma2.jpg");

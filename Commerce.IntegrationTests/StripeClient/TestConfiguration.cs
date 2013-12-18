@@ -1,7 +1,7 @@
 ﻿using Commerce.Application.Payment;
 using NUnit.Framework;
 
-namespace ArtOfGroundFighting.IntegrationTests.StripeClient
+namespace Commerce.IntegrationTests.StripeClient
 {
     [TestFixture]
     public class TestConfiguration

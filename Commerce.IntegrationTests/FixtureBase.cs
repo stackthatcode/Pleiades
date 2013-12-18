@@ -1,45 +1,52 @@
 ﻿using System;
-using System.IO;
 using System.Configuration;
+using Autofac;
 using NUnit.Framework;
 using Pleiades.App.Utility;
 using Commerce.Application.Database;
+using Commerce.Application.File;
 
-namespace ArtOfGroundFighting.IntegrationTests
+namespace Commerce.IntegrationTests
 {
     [TestFixture]
     public class FixtureBase
     {
-        public bool RecreateDatabaseAndResources = true;
-        public PushMarketContext Context = new PushMarketContext();
+        public bool RecreateDatabaseAndResources = Boolean.Parse(
+                    ConfigurationManager.AppSettings["RecreateDatabaseAndResources"]);
 
         [TestFixtureSetUp]
         public void FixtureBaseSetup()
         {
-            // Clean-out the Database
-            if (RecreateDatabaseAndResources && Context.Database.Exists())
+            using (var scope = TestContainer.LifetimeScope())
             {
-                Console.WriteLine("Deleting Database for Integration Testing");
-                Context.Database.Delete();
+                var context = scope.Resolve<PushMarketContext>();
+
+                // Clean-out the Database
+                if (RecreateDatabaseAndResources && context.Database.Exists())
+                {
+                    Console.WriteLine("Deleting Database for Integration Testing");
+                    context.Database.Delete();
+                }
+
+                if (!context.Database.Exists())
+                {
+                    Console.WriteLine("Creating Database for Integration Testing");
+                    context.MasterDatabaseCreate();
+                }
+                else
+                {
+                    // Clean-out the Resource Directory
+                    Console.WriteLine("Deleting Resource Files for Integration Testing");
+                    var fileRepository = scope.Resolve<IFileResourceRepository>();
+                    fileRepository.NuclearDelete();
+                    
+                    Console.WriteLine("Deleting User Data for Integration Testing");
+                    context.AggregateUsers.ForEach(x => context.AggregateUsers.Remove(x));
+                    context.IdentityProfiles.ForEach(x => context.IdentityProfiles.Remove(x));
+                    context.MembershipUsers.ForEach(x => context.MembershipUsers.Remove(x));
+                    context.SaveChanges();
+                }
             }
-
-            Console.WriteLine("Creating Database for Integration Testing");
-            Context.MasterDatabaseCreate();
-
-            // Clean-out the Resource Directory
-            Console.WriteLine("Deleting Resource Files for Integration Testing");
-            var resourceDirectory = ConfigurationManager.AppSettings["ResourceStorage"];
-            var directoryInfo = new DirectoryInfo(resourceDirectory);
-            directoryInfo.GetFiles("*.*", SearchOption.AllDirectories).ForEach(x => x.Delete());
-            directoryInfo.GetDirectories().ForEach(x => x.Delete());
-
-            RecreateDatabaseAndResources = true;
-
-            Console.WriteLine("Deleting User Data for Integration Testing");
-            Context.AggregateUsers.ForEach(x => Context.AggregateUsers.Remove(x));
-            Context.IdentityProfiles.ForEach(x => Context.IdentityProfiles.Remove(x));
-            Context.MembershipUsers.ForEach(x => Context.MembershipUsers.Remove(x));
-            Context.SaveChanges();
         }
     }
 }

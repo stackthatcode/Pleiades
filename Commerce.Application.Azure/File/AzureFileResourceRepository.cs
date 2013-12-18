@@ -2,28 +2,36 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
+using Commerce.Application.Database;
 using Commerce.Application.File;
 using Commerce.Application.File.Entities;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+using Pleiades.App.Data;
 using Pleiades.App.Helpers;
 
 namespace Commerce.Application.Azure.File
 {
     public class AzureFileResourceRepository : IFileResourceRepository
     {
+        private readonly PushMarketContext _dataContext;
         private readonly CloudBlobContainer _container;
         private const string RelativeFilePath = "** AZURE STORAGE **";
 
-        public AzureFileResourceRepository(string storageConnectionString, string storageContainerName)
+        public AzureFileResourceRepository(
+                string storageConnectionString, 
+                string storageContainerName,
+                PushMarketContext dataContext)
         {
+            _dataContext = dataContext;
             var storageAccount = CloudStorageAccount.Parse(storageConnectionString);
             var blobClient = storageAccount.CreateCloudBlobClient();
             _container = blobClient.GetContainerReference(storageContainerName);
         }
 
         public FileResource AddNew(Bitmap bitmap)
-        {   
+        {
             var bytes = bitmap.ToByteArray(ImageFormat.Png);
             return AddNew(bytes);
         }
@@ -74,6 +82,9 @@ namespace Commerce.Application.Azure.File
 
         public void Delete(Guid externalId)
         {
+            var fileResource = _dataContext.FileResources.First(x => x.ExternalId == externalId);
+            fileResource.Deleted = true;
+
             var blob = _container.GetBlockBlobReference(externalId.ToString());
             blob.DeleteIfExists();
         }
@@ -82,6 +93,18 @@ namespace Commerce.Application.Azure.File
         public string PhysicalFilePath(Guid externalId)
         {
             throw new NotImplementedException();
+        }
+
+        public void NuclearDelete()
+        {
+            var files = _dataContext.FileResources.ToList();
+            files.ForEach(x => _dataContext.Delete(x));
+
+            foreach (var blob in _container.ListBlobs())
+            {
+                var blobRef = _container.GetBlockBlobReference(blob.Uri.ToString());
+                blobRef.Delete();
+            }
         }
     }
 }

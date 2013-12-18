@@ -29,6 +29,18 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ArtOfGroundFighting.Azure|AnyCPU'">
+    <OutputPath>bin\ArtOfGroundFighting.Azure\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Azure|AnyCPU'">
+    <OutputPath>bin\Azure\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.3.1.1\lib\net40\Autofac.dll</HintPath>
@@ -58,15 +70,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuildersAndRepositories\BrandTests.cs" />
-    <Compile Include="BuildersAndRepositories\CategoryTests.cs" />
-    <Compile Include="BuildersAndRepositories\ColorTests.cs" />
-    <Compile Include="BuildersAndRepositories\ProductTests.cs" />
-    <Compile Include="BuildersAndRepositories\SizeAndSizeGroupTests.cs" />
+    <Compile Include="Builders\BrandTests.cs" />
+    <Compile Include="Builders\CategoryTests.cs" />
+    <Compile Include="Builders\ColorTests.cs" />
+    <Compile Include="Builders\ProductTests.cs" />
+    <Compile Include="Builders\SizeAndSizeGroupTests.cs" />
     <Compile Include="FixtureBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestContainer.cs" />
-    <Compile Include="TestContainerAzure.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config">
