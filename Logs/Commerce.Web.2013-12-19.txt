@@ -1,0 +1,41 @@
+2013-12-19 07:36:26.1751|Error|f5534ca4-45a9-447c-a8eb-89df984162bb|URL:http://localhost/Commerce.Web/Manager/Error - IsAjaxRequest: False 
+2013-12-19 07:36:26.3571|Error|f5534ca4-45a9-447c-a8eb-89df984162bb|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Controllers.ManagerController.Error() in c:\DEV\Pleiades\Commerce.Web\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-12-19 07:37:34.9582|Error|6019bf52-18e6-4ab5-bafd-c0c93cc76522|URL:http://localhost/Commerce.Web/Manager/Error - IsAjaxRequest: False 
+2013-12-19 07:37:35.1313|Error|6019bf52-18e6-4ab5-bafd-c0c93cc76522|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Controllers.ManagerController.Error() in c:\DEV\Pleiades\Commerce.Web\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-12-19 07:49:28.5668|Error|0a5b957c-0dec-4f06-a06c-ae211fbc0be7|URL:http://localhost/Commerce.Web/Manager/Error - IsAjaxRequest: False 
+2013-12-19 07:49:28.6228|Error|0a5b957c-0dec-4f06-a06c-ae211fbc0be7|System.Configuration.ConfigurationErrorsException:Could not create Microsoft.WindowsAzure.Diagnostics.DiagnosticMonitorTraceListener, Microsoft.WindowsAzure.Diagnostics, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.
+   at System.Diagnostics.TraceUtils.GetRuntimeObject(String className, Type baseType, String initializeData)
+   at System.Diagnostics.TypedElement.BaseGetRuntimeObject()
+   at System.Diagnostics.ListenerElement.GetRuntimeObject()
+   at System.Diagnostics.ListenerElementsCollection.GetRuntimeObject()
+   at System.Diagnostics.TraceInternal.get_Listeners()
+   at System.Diagnostics.TraceInternal.WriteLine(String message)
+   at Pleiades.Web.Security.Concrete.AggregateUserService.LoadAuthentedUserIntoContext(HttpContextBase context) in c:\DEV\Pleiades\Pleiades.Web.Security.Aggregate\Concrete\AggregateUserService.cs:line 119
+   at Pleiades.Web.Security.Aspect.SecurityAttribute.OnAuthorization(AuthorizationContext filterContext) in c:\DEV\Pleiades\Pleiades.Web.Security.Aggregate\Aspect\SecurityAttribute.cs:line 23
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAuthorizationFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__1e(AsyncCallback asyncCallback, Object asyncState)
+
+INNER EXCEPTION
+System.InvalidOperationException:Not running in a hosted service or the Development Fabric.
+   at Microsoft.WindowsAzure.Diagnostics.DiagnosticMonitor.GetDefaultStartupInfoForCurrentRoleInstance()
+   at Microsoft.WindowsAzure.Diagnostics.DiagnosticMonitorTraceListener..ctor() 

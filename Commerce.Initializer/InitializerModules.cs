@@ -7,7 +7,7 @@ using Commerce.Application;
 
 namespace ArtOfGroundFighting.Initializer
 {
-    public class CommerceInitializerModules : Autofac.Module
+    public class InitializerModules : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
         {

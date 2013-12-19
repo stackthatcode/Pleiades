@@ -97,7 +97,7 @@
     <Compile Include="Builders\ShippingMethodsBuilder.cs" />
     <Compile Include="Builders\SizeBuilder.cs" />
     <Compile Include="Builders\UserBuilder.cs" />
-    <Compile Include="CommerceInitializerModules.cs" />
+    <Compile Include="InitializerModules.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

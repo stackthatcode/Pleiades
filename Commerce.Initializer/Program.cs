@@ -3,6 +3,7 @@ using System.Configuration;
 using System.IO;
 using ArtOfGroundFighting.Initializer.Builders;
 using ArtOfGroundFighting.Initializer.Builders.Products;
+using Commerce.Application.File;
 using Pleiades.App.Injection;
 using Pleiades.App.Logging;
 using Pleiades.App.Utility;
@@ -98,9 +99,10 @@ namespace ArtOfGroundFighting.Initializer
             // Clean-out the Resource Directory
             var resourceDirectory = ConfigurationManager.AppSettings["ResourceStorage"];
             LoggerSingleton.Get().Info("Cleaning out Resource Directory: " + resourceDirectory + "...");
-            var directoryInfo = new DirectoryInfo(resourceDirectory);
-            directoryInfo.GetFiles("*.*", SearchOption.AllDirectories).ForEach(x => x.Delete());
-            directoryInfo.GetDirectories().ForEach(x => x.Delete());
+
+            var fileResourceRepository = ServiceLocator.Resolve<IFileResourceRepository>();
+            fileResourceRepository.NuclearDelete();
+
             LoggerSingleton.Get().Info("Resource Directory Cleaned");
         }
 

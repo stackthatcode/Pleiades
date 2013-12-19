@@ -8,7 +8,7 @@ namespace ArtOfGroundFighting.Initializer
         public static IContainerAdapter CreateContainer()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterModule<CommerceInitializerModules>();
+            builder.RegisterModule<InitializerModules>();
             var container = builder.Build();
             var containerAdapter = new AutofacContainer(container.BeginLifetimeScope());
             return containerAdapter;

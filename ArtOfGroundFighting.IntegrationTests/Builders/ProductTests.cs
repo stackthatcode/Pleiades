@@ -1,10 +1,9 @@
-﻿using ArtOfGroundFighting.IntegrationTests;
-using Autofac;
+﻿using Autofac;
+using NUnit.Framework;
+using Pleiades.App.Data;
 using Commerce.Application.Lists.Entities;
 using Commerce.Application.Products;
 using ArtOfGroundFighting.Initializer.Builders.Products;
-using NUnit.Framework;
-using Pleiades.App.Data;
 using ArtOfGroundFighting.Initializer.Builders;
 
 namespace ArtOfGroundFighting.IntegrationTests.Builders

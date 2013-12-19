@@ -1,10 +1,10 @@
-Date: 12/16/2013 5:52:16 PM
+Date: 12/19/2013 7:49:30 AM
 To: aleksjones@gmail.com,jeremysimon@me.com
 From: artofgroundfighting@gmail.com
-Subject: Admin Notification: A System Error has occurred - ec9d1e25-ebc9-4a48-ad38-b1f5f5c4d602
+Subject: Admin Notification: A System Error has occurred - 0a5b957c-0dec-4f06-a06c-ae211fbc0be7
 
 
-Admin Notification: A System Error has occurred - ec9d1e25-ebc9-4a48-ad38-b1f5f5c4d602
+Admin Notification: A System Error has occurred - 0a5b957c-0dec-4f06-a06c-ae211fbc0be7
 
 System.Configuration.ConfigurationErrorsException:Could not create Microsoft.WindowsAzure.Diagnostics.DiagnosticMonitorTraceListener, Microsoft.WindowsAzure.Diagnostics, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.
    at System.Diagnostics.TraceUtils.GetRuntimeObject(String className, Type baseType, String initializeData)

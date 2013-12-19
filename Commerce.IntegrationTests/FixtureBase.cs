@@ -11,7 +11,8 @@ namespace Commerce.IntegrationTests
     [TestFixture]
     public class FixtureBase
     {
-        public bool RecreateDatabaseAndResources = Boolean.Parse(
+        public bool RecreateDatabaseAndResources = 
+                Boolean.Parse(
                     ConfigurationManager.AppSettings["RecreateDatabaseAndResources"]);
 
         [TestFixtureSetUp]
@@ -34,18 +35,18 @@ namespace Commerce.IntegrationTests
                     context.MasterDatabaseCreate();
                 }
                 else
-                {
-                    // Clean-out the Resource Directory
-                    Console.WriteLine("Deleting Resource Files for Integration Testing");
-                    var fileRepository = scope.Resolve<IFileResourceRepository>();
-                    fileRepository.NuclearDelete();
-                    
+                {                    
                     Console.WriteLine("Deleting User Data for Integration Testing");
                     context.AggregateUsers.ForEach(x => context.AggregateUsers.Remove(x));
                     context.IdentityProfiles.ForEach(x => context.IdentityProfiles.Remove(x));
                     context.MembershipUsers.ForEach(x => context.MembershipUsers.Remove(x));
                     context.SaveChanges();
                 }
+
+                // Clean-out the Resource Directory
+                Console.WriteLine("Deleting Resource Files for Integration Testing");
+                var fileRepository = scope.Resolve<IFileResourceRepository>();
+                fileRepository.NuclearDelete();
             }
         }
     }

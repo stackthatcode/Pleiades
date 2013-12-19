@@ -1,0 +1,22 @@
+Date: 12/19/2013 7:36:55 AM
+To: aleksjones@gmail.com,jeremysimon@me.com
+From: artofgroundfighting@gmail.com
+Subject: Admin Notification: A System Error has occurred - f5534ca4-45a9-447c-a8eb-89df984162bb
+
+
+Admin Notification: A System Error has occurred - f5534ca4-45a9-447c-a8eb-89df984162bb
+
+System.NotImplementedException:Oh noes!
+   at Commerce.Web.Controllers.ManagerController.Error() in c:\DEV\Pleiades\Commerce.Web\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+TheArtofGroundFighting.com | "Designed By Fighters, Worn By Fighters"
+Call us at 1-800-CHOKE-4U | Email: service@artofgroundfighting.com

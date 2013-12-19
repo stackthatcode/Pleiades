@@ -7,10 +7,25 @@ namespace Commerce.Application.Email
     public class MockEmailService : IEmailService
     {
         private readonly IEmailConfigAdapter _configAdapter;
+        private readonly TimeSpan _emailLifespan = new TimeSpan(-1, 0, 0, 0);
 
         public MockEmailService(IEmailConfigAdapter configAdapter)
         {
             _configAdapter = configAdapter;
+            CleanUpMailDump();
+        }
+
+        // TODO: this is a perfect candidate for Worker Roles
+        public void CleanUpMailDump()
+        {
+            var directoryInfo = new DirectoryInfo(_configAdapter.MockServiceOutputDirectory);
+            foreach (var fileInfo in directoryInfo.GetFiles("*.*", SearchOption.AllDirectories))
+            {
+                if (fileInfo.CreationTime < DateTime.Now.Add(_emailLifespan))
+                {
+                    fileInfo.Delete();
+                }
+            }
         }
 
         public void Send(EmailMessage emailMessage)
