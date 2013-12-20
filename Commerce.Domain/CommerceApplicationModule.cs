@@ -1,7 +1,12 @@
-﻿using System.Data.Entity;
+﻿using System.Configuration;
+using System.Data.Entity;
 using System.Web;
 using Autofac;
+using Pleiades.App.Data;
+using Pleiades.App.Utility;
+using Pleiades.Web.Security.Interface;
 using Commerce.Application.Analytics;
+using Commerce.Application.Azure;
 using Commerce.Application.Email;
 using Commerce.Application.File;
 using Commerce.Application.Lists;
@@ -12,9 +17,6 @@ using Commerce.Application.Products;
 using Commerce.Application.Products.Entities;
 using Commerce.Application.Security;
 using Commerce.Application.Shopping;
-using Pleiades.App.Data;
-using Pleiades.App.Utility;
-using Pleiades.Web.Security.Interface;
 using Commerce.Application.Database;
 using Stripe;
 
@@ -33,9 +35,43 @@ namespace Commerce.Application
                 .As<IUnitOfWork>()
                 .InstancePerLifetimeScope();
 
+            RegisterDatabaseRepositories(builder);
+
+            // Payment Processors
+            RegisterPaymentProcessors(builder);
+
+            // Email
+            RegisterEmailComponents(builder);
+
+            // Cart 
+            builder.RegisterType<CartIdentificationService>().As<ICartIdentificationService>();
+            builder.RegisterType<CartManagementService>().As<ICartManagementService>();
+            builder.RegisterType<CartRepository>().As<ICartRepository>();
+
+            // Analytics
+            builder.RegisterType<AnalyticsCollector>().As<IAnalyticsCollector>();
+            builder.RegisterType<AnalyticsAggregator>().As<IAnalyticsAggregator>();
+
+            // HttpContext
+            builder.Register<HttpContextBase>(c => new HttpContextWrapper(HttpContext.Current));
+
+            // Azure Infrastructure
+            var azureHosted = ConfigurationManager.AppSettings["AzureHosted"].ToBoolTryParse();
+            if (azureHosted)
+            {
+                RegisterAzureComponents(builder);
+            }
+        }
+
+        private static void RegisterDatabaseRepositories(ContainerBuilder builder)
+        {
             // User Repositories
-            builder.RegisterType<AggregateReadOnlyRepository>().As<IReadOnlyAggregateUserRepository>().InstancePerLifetimeScope();
-            builder.RegisterType<AggregateWriteableRepository>().As<IWritableAggregateUserRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<AggregateReadOnlyRepository>()
+                .As<IReadOnlyAggregateUserRepository>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<AggregateWriteableRepository>()
+                .As<IWritableAggregateUserRepository>()
+                .InstancePerLifetimeScope();
             builder.RegisterType<MembershipReadableRepository>().As<IMembershipReadOnlyRepository>().InstancePerLifetimeScope();
             builder.RegisterType<MembershipWritableRepository>().As<IMembershipWritableRepository>().InstancePerLifetimeScope();
 
@@ -52,7 +88,7 @@ namespace Commerce.Application
             // Order Stuff
             builder.RegisterType<OrderService>().As<IOrderService>().InstancePerLifetimeScope();
             builder.RegisterType<OrderManager>().As<IOrderManager>().InstancePerLifetimeScope();
-            
+
             // Resource Repositories
             builder.RegisterType<FileResourceRepository>().As<IFileResourceRepository>().InstancePerLifetimeScope();
             builder.RegisterType<ImageBundleRepository>().As<IImageBundleRepository>().InstancePerLifetimeScope();
@@ -64,10 +100,14 @@ namespace Commerce.Application
             builder.RegisterType<EFGenericRepository<Color>>().As<IGenericRepository<Color>>().InstancePerLifetimeScope();
             builder.RegisterType<EFGenericRepository<Category>>().As<IGenericRepository<Category>>().InstancePerLifetimeScope();
             builder.RegisterType<EFGenericRepository<Size>>().As<IGenericRepository<Size>>().InstancePerLifetimeScope();
-            builder.RegisterType<EFGenericRepository<SizeGroup>>().As<IGenericRepository<SizeGroup>>().InstancePerLifetimeScope();
+            builder.RegisterType<EFGenericRepository<SizeGroup>>()
+                .As<IGenericRepository<SizeGroup>>()
+                .InstancePerLifetimeScope();
             builder.RegisterType<EFGenericRepository<Product>>().As<IGenericRepository<Product>>().InstancePerLifetimeScope();
+        }
 
-            // Payment Processors
+        private static void RegisterPaymentProcessors(ContainerBuilder builder)
+        {
             builder.RegisterType<StripeConfigAdapter>().As<IStripeConfigAdapter>();
             builder
                 .Register(c => new StripeChargeService(c.Resolve<IStripeConfigAdapter>().SecretKey))
@@ -79,34 +119,39 @@ namespace Commerce.Application
             else
             {
                 builder.RegisterType<StripePaymentProcessor>().As<IPaymentProcessor>();
-            }
+            }            
+        }
 
+        private static void RegisterEmailComponents(ContainerBuilder builder)
+        {
             // Email Functionality
             builder.RegisterType<CustomerEmailBuilder>().As<ICustomerEmailBuilder>();
             builder.RegisterType<AdminEmailBuilder>().As<IAdminEmailBuilder>();
             builder.RegisterType<EmbeddedResourceRepository>().As<IEmbeddedResourceRepository>();
             builder.RegisterType<TemplateEngine>().As<ITemplateEngine>();
             builder.Register(ctx => EmailConfigAdapter.Settings).As<IEmailConfigAdapter>();
+
             if (EmailConfigAdapter.Settings.ServerSideMockEnabled.ToBoolTryParse())
             {
                 builder.RegisterType<MockEmailService>().As<IEmailService>();
             }
             else
             {
-                builder.RegisterType<EmailService>().As<IEmailService>();                                   
+                builder.RegisterType<EmailService>().As<IEmailService>();
             }
+        }
 
-            // Cart 
-            builder.RegisterType<CartIdentificationService>().As<ICartIdentificationService>();
-            builder.RegisterType<CartManagementService>().As<ICartManagementService>();
-            builder.RegisterType<CartRepository>().As<ICartRepository>();
+        public static void RegisterAzureComponents(ContainerBuilder builder)
+        {
+            var configuration = AzureConfiguration.Settings;
 
-            // Analytics
-            builder.RegisterType<AnalyticsCollector>().As<IAnalyticsCollector>();
-            builder.RegisterType<AnalyticsAggregator>().As<IAnalyticsAggregator>();
-
-            // HttpContext
-            builder.Register<HttpContextBase>(c => new HttpContextWrapper(HttpContext.Current));
+            // Resource Repositories
+            builder.Register(ctx => new AzureFileResourceRepository(
+                        configuration.StorageConnectionString,
+                        configuration.StorageContainerName,
+                        ctx.Resolve<PushMarketContext>()))
+                .As<IFileResourceRepository>()
+                .InstancePerLifetimeScope();            
         }
     }
 }

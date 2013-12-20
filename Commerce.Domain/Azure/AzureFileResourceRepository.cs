@@ -11,7 +11,7 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using Pleiades.App.Data;
 using Pleiades.App.Helpers;
 
-namespace Commerce.Application.Azure.File
+namespace Commerce.Application.Azure
 {
     public class AzureFileResourceRepository : IFileResourceRepository
     {

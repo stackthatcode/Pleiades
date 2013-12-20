@@ -7,7 +7,7 @@ using Commerce.Application;
 
 namespace Commerce.Web.Autofac
 {
-    public class CompositionRoot : Module
+    public class CommerceWebModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -18,10 +18,10 @@ namespace Commerce.Web.Autofac
             builder.RegisterControllers(typeof(CommerceWebApplication).Assembly);
 
             // External Modules
-            builder.RegisterModule<WebSecurityAggregateModule>();
             builder.RegisterModule<CommerceApplicationModule>();
 
             // Aggregrate User Registration framework
+            builder.RegisterModule<WebSecurityAggregateModule>();
             WebSecurityAggregateBroker.RegisterSecurityContextFactory<SecurityContextFactory>();
             WebSecurityAggregateBroker.RegisterSecurityResponder<SecurityResponder>();
             WebSecurityAggregateBroker.Build(builder);

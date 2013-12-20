@@ -92,10 +92,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Commerce.Application.Azure\Commerce.Application.Azure.csproj">
-      <Project>{f60c8f77-c6da-469f-986c-7fb2bb422b36}</Project>
-      <Name>Commerce.Application.Azure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Commerce.ArtOfGroundFighting\ArtOfGroundFighting.Web.csproj">
       <Project>{ec5dc292-82c2-4c82-9b64-9b0cbaf8e561}</Project>
       <Name>ArtOfGroundFighting.Web</Name>

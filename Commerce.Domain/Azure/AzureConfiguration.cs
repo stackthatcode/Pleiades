@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Configuration;
 
-namespace Commerce.Application.Azure.Config
+namespace Commerce.Application.Azure
 {
     public class AzureConfiguration : ConfigurationSection
     {

@@ -25,7 +25,9 @@ namespace Commerce.IntegrationTests
             builder.RegisterModule<CommerceApplicationModule>();
             builder.RegisterModule<WebSecurityAggregateModule>();
             if (registerAzure)
-                builder.RegisterModule<CommerceApplicationAzureModule>();
+            {
+                CommerceApplicationModule.RegisterAzureComponents(builder);
+            }
             return builder.Build();
         }
 

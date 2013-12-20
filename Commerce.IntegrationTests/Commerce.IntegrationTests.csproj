@@ -125,10 +125,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Commerce.Application.Azure\Commerce.Application.Azure.csproj">
-      <Project>{f60c8f77-c6da-469f-986c-7fb2bb422b36}</Project>
-      <Name>Commerce.Application.Azure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Commerce.Domain\Commerce.Application.csproj">
       <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
       <Name>Commerce.Application</Name>

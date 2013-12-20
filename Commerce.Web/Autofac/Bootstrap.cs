@@ -11,7 +11,7 @@ namespace Commerce.Web.Autofac
         {
             // Build the container
             var builder = new ContainerBuilder();
-            builder.RegisterModule<CompositionRoot>();
+            builder.RegisterModule<CommerceWebModule>();
             var container = builder.Build();
 
             // Wire container into ASP.NET MVC

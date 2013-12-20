@@ -176,7 +176,7 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SectionController.cs" />
     <Compile Include="Controllers\SizeController.cs" />
-    <Compile Include="Autofac\CompositionRoot.cs">
+    <Compile Include="Autofac\CommerceWebModule.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Plumbing\ErrorModel.cs" />

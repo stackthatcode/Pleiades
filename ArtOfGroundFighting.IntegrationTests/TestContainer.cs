@@ -23,10 +23,11 @@ namespace ArtOfGroundFighting.IntegrationTests
         static private ILifetimeScope CreateRootScope(bool registerAzure)
         {
             var builder = new ContainerBuilder();
-
             builder.RegisterModule<InitializerModules>();
             if (registerAzure)
-                builder.RegisterModule<CommerceApplicationAzureModule>();
+            {
+                CommerceApplicationModule.RegisterAzureComponents(builder);
+            }
             return builder.Build();
         }
 
