@@ -381,6 +381,10 @@
     <Content Include="Views\ManageOrder\_OrderDetail.cshtml" />
     <None Include="Content\JQuery\jquery-2.0.3.min.map" />
     <Content Include="Shared\_StripeShim.cshtml" />
+    <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <None Include="Web.Azure.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
