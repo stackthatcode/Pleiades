@@ -16,16 +16,12 @@ namespace ArtOfGroundFighting.Initializer.Builders
 
         public void Run()
         {
-            using (var tx = new TransactionScope())
-            {
-                LoggerSingleton.Get().Info("Create the default Shipping Methods");
+            LoggerSingleton.Get().Info("Create the default Shipping Methods");
 
-                _context.ShippingMethods.Add(new ShippingMethod { Description = "UPS Ground (7-10 days)", Cost = 7.95m });
-                _context.ShippingMethods.Add(new ShippingMethod { Description = "UPS Ground Quicker (3-5 days) ", Cost = 14.95m });
-                _context.ShippingMethods.Add(new ShippingMethod { Description = "UPS Ground Express (next day)", Cost = 21.95m });
-                _context.SaveChanges();
-                tx.Complete();
-            }
+            _context.ShippingMethods.Add(new ShippingMethod { Description = "UPS Ground (7-10 days)", Cost = 7.95m });
+            _context.ShippingMethods.Add(new ShippingMethod { Description = "UPS Ground Quicker (3-5 days) ", Cost = 14.95m });
+            _context.ShippingMethods.Add(new ShippingMethod { Description = "UPS Ground Express (next day)", Cost = 21.95m });
+            _context.SaveChanges();
         }
     }
 }

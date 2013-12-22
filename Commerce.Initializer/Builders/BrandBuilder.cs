@@ -56,85 +56,80 @@ namespace ArtOfGroundFighting.Initializer.Builders
 
         public void Run()
         {
-            using (var tx = new TransactionScope())
-            {
-                LoggerSingleton.Get().Info("Create the default Brands");
+            LoggerSingleton.Get().Info("Create the default Brands");
 
-                //_genericRepository.GetAll().ForEach(x => _genericRepository.Delete(x));
-                //_unitOfWork.SaveChangesToDatabase();
+            //_genericRepository.GetAll().ForEach(x => _genericRepository.Delete(x));
+            //_unitOfWork.SaveChangesToDatabase();
 
-                AddBrand(Path.Combine(BrandLogoDirectory(), "Afflictionmma2.jpg"),
-                         "Affliction",
-                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
-                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-                         "afflication-mma",
-                         "AFFL");
+            AddBrand(Path.Combine(BrandLogoDirectory(), "Afflictionmma2.jpg"),
+                        "Affliction",
+                        @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                        @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                        "afflication-mma",
+                        "AFFL");
 
-                AddBrand(Path.Combine(BrandLogoDirectory(), "badboy.jpg"),
-                         "Bad Boy",
-                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
-                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-                         "bad-boy-mma",
-                         "BBOY");
+            AddBrand(Path.Combine(BrandLogoDirectory(), "badboy.jpg"),
+                        "Bad Boy",
+                        @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                        @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                        "bad-boy-mma",
+                        "BBOY");
 
-                AddBrand(Path.Combine(BrandLogoDirectory(), "bullterriergearl.gif"),
-                         "Bull Terrier",
-                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
-                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-                         "bull-terrier-mma",
-                         "BBOY");
+            AddBrand(Path.Combine(BrandLogoDirectory(), "bullterriergearl.gif"),
+                        "Bull Terrier",
+                        @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                        @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                        "bull-terrier-mma",
+                        "BBOY");
 
-                AddBrand(Path.Combine(BrandLogoDirectory(), "dethrone2.png"),
-                         "Dethrone",
-                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
-                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-                         "dethrone-mma",
-                         "DETHRONE");
+            AddBrand(Path.Combine(BrandLogoDirectory(), "dethrone2.png"),
+                        "Dethrone",
+                        @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                        @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                        "dethrone-mma",
+                        "DETHRONE");
 
-                AddBrand(Path.Combine(BrandLogoDirectory(), "fuji.jpg"),
-                         "Fuji",
-                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
-                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-                         "fuji-mma",
-                         "FUJI");
+            AddBrand(Path.Combine(BrandLogoDirectory(), "fuji.jpg"),
+                        "Fuji",
+                        @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                        @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                        "fuji-mma",
+                        "FUJI");
 
-                AddBrand(Path.Combine(BrandLogoDirectory(), "tatami.jpg"),
-                         "Tatami",
-                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
-                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-                         "tatami-mma",
-                         "TATAMI");
+            AddBrand(Path.Combine(BrandLogoDirectory(), "tatami.jpg"),
+                        "Tatami",
+                        @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                        @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                        "tatami-mma",
+                        "TATAMI");
 
-                AddBrand(Path.Combine(BrandLogoDirectory(), "hayabusa-logo.jpg"),
-                         "Hayabusa",
-                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
-                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-                         "tatami-mma",
-                         "HAYABUSA");
+            AddBrand(Path.Combine(BrandLogoDirectory(), "hayabusa-logo.jpg"),
+                        "Hayabusa",
+                        @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                        @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                        "tatami-mma",
+                        "HAYABUSA");
 
-                AddBrand(Path.Combine(BrandLogoDirectory(), "RingToCageLogo.jpg"),
-                         "Ring to Cage",
-                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
-                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-                         "tatami-mma",
-                         "RINGTOCAGE");
+            AddBrand(Path.Combine(BrandLogoDirectory(), "RingToCageLogo.jpg"),
+                        "Ring to Cage",
+                        @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                        @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                        "tatami-mma",
+                        "RINGTOCAGE");
 
-                AddBrand(Path.Combine(BrandLogoDirectory(), "shock_doctor_logo.jpg"),
-                         "Shock Doctor",
-                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
-                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-                         "shock-doctor",
-                         "SHOCKDOCTOR");
+            AddBrand(Path.Combine(BrandLogoDirectory(), "shock_doctor_logo.jpg"),
+                        "Shock Doctor",
+                        @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                        @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                        "shock-doctor",
+                        "SHOCKDOCTOR");
 
-                AddBrand(Path.Combine(BrandLogoDirectory(), "logotapout.jpg"),
-                         "Tapout",
-                         @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
-                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-                         "tapout",
-                         "TAPOUT");
-
-                tx.Complete();
-            }
+            AddBrand(Path.Combine(BrandLogoDirectory(), "logotapout.jpg"),
+                        "Tapout",
+                        @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                        @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
+                        "tapout",
+                        "TAPOUT");
         }
     }
 }

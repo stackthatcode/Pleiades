@@ -46,63 +46,59 @@ namespace ArtOfGroundFighting.Initializer.Builders.Products
         }
 
         public override void Run()
-        {            
-            using (var tx = new TransactionScope())
+        {
+            string name = "Ring-to-Cage Jiu-Jitsu Training Dummy";
+            LoggerSingleton.Get().Info("Creating Product: " + name);
+
+            // Get reference data
+            var brand = _brandRepository.FirstOrDefault(x => x.SkuCode == "RINGTOCAGE");
+            var black = _colorRepository.FirstOrDefault(x => x.SkuCode == "BLACK");
+            var category1 = _categoryRepository.FirstOrDefault(x => x.Name == "Training Dummies");
+
+            var product1 = new Product()
             {
-                string name = "Ring-to-Cage Jiu-Jitsu Training Dummy";
-                LoggerSingleton.Get().Info("Creating Product: " + name);
+                Name = name,
+                Description = "Train even without a partner." +
+                    @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                    @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco" +
+                    @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt",
+                Synopsis = "Super Star BJJ Athletes need to wear this Gi.",
+                SEO = "RINGTOCAGE-DUMMY",
+                SkuCode = "RINGTOCAGE-DUMMY",
+                Active = true,
+                UnitPrice = 295.00m,
+                UnitCost = 160.00m,
+                Brand = brand,
+                Category = category1,
+                AssignImagesToColors = true,
+                IsDeleted = false,
+                DateCreated = DateTime.Now,
+                LastModified = DateTime.Now,
+            };
 
-                // Get reference data
-                var brand = _brandRepository.FirstOrDefault(x => x.SkuCode == "RINGTOCAGE");
-                var black = _colorRepository.FirstOrDefault(x => x.SkuCode == "BLACK");
-                var category1 = _categoryRepository.FirstOrDefault(x => x.Name == "Training Dummies");
+            _genericProductRepository.Insert(product1);
+            _unitOfWork.SaveChanges();
+            var product1Id = product1.Id;
 
-                var product1 = new Product()
-                {
-                    Name = name,
-                    Description = "Train even without a partner." +
-                        @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
-                        @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco" +
-                        @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt",
-                    Synopsis = "Super Star BJJ Athletes need to wear this Gi.",
-                    SEO = "RINGTOCAGE-DUMMY",
-                    SkuCode = "RINGTOCAGE-DUMMY",
-                    Active = true,
-                    UnitPrice = 295.00m,
-                    UnitCost = 160.00m,
-                    Brand = brand,
-                    Category = category1,
-                    AssignImagesToColors = true,
-                    IsDeleted = false,
-                    DateCreated = DateTime.Now,
-                    LastModified = DateTime.Now,
-                };
+            var productColor11 = this.AddProductColor(product1Id, black);
+            _unitOfWork.SaveChanges();
 
-                _genericProductRepository.Insert(product1);
-                _unitOfWork.SaveChanges();
-                var product1Id = product1.Id;
+            var bundleList1 = AddImagesFromDirectory(@"Content\JiuJitsuDummy");
+            _unitOfWork.SaveChanges();
 
-                var productColor11 = this.AddProductColor(product1Id, black);
-                _unitOfWork.SaveChanges();
+            bundleList1.ForEach(x => this.AddProductImage(product1Id, productColor11().Id, x));
+            _unitOfWork.SaveChanges();
 
-                var bundleList1 = AddImagesFromDirectory(@"Content\JiuJitsuDummy");
-                _unitOfWork.SaveChanges();
+            _inventoryRepository.Generate(product1.Id);
+            _unitOfWork.SaveChanges();
 
-                bundleList1.ForEach(x => this.AddProductImage(product1Id, productColor11().Id, x));
-                _unitOfWork.SaveChanges();
-
-                _inventoryRepository.Generate(product1.Id);
-                _unitOfWork.SaveChanges();
-
-                var random = new Random();
-                _inventoryRepository.RetreiveByProductId(product1.Id, false).ForEach(x =>
-                {
-                    x.Reserved = 0;
-                    x.InStock = random.Next(0, 2);
-                });
-                _unitOfWork.SaveChanges();
-                tx.Complete();
-            }
+            var random = new Random();
+            _inventoryRepository.RetreiveByProductId(product1.Id, false).ForEach(x =>
+            {
+                x.Reserved = 0;
+                x.InStock = random.Next(0, 2);
+            });
+            _unitOfWork.SaveChanges();
         }
     }
 }

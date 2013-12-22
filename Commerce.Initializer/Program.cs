@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Configuration;
-using System.IO;
+using System.Diagnostics;
 using ArtOfGroundFighting.Initializer.Builders;
 using ArtOfGroundFighting.Initializer.Builders.Products;
 using Commerce.Application.File;
 using Pleiades.App.Injection;
 using Pleiades.App.Logging;
-using Pleiades.App.Utility;
 using Commerce.Application.Database;
 
 namespace ArtOfGroundFighting.Initializer
@@ -33,12 +32,16 @@ namespace ArtOfGroundFighting.Initializer
             try
             {
                 // Logger
-                LoggerSingleton.Get = NLoggerImpl.RegistrationFactory("Commerce.Initializer");
+                LoggerSingleton.Get = NLoggerImpl.RegistrationFactory("ArtOfGroundFighting.Initializer");
                 LoggerSingleton.Get().Info("PROCESS START:" + DateTime.Now + Environment.NewLine);
                 DoStuff();
             }
             catch (Exception ex)
             {
+                Debug.Write(ex.Message);
+                Debug.Write(ex.FullStackTraceDump());
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.FullStackTraceDump());
                 LoggerSingleton.Get().Error(ex);
             }
             finally
@@ -101,7 +104,7 @@ namespace ArtOfGroundFighting.Initializer
             LoggerSingleton.Get().Info("Cleaning out Resource Directory: " + resourceDirectory + "...");
 
             var fileResourceRepository = ServiceLocator.Resolve<IFileResourceRepository>();
-            fileResourceRepository.NuclearDelete();
+            fileResourceRepository.NuclearDelete(false);
 
             LoggerSingleton.Get().Info("Resource Directory Cleaned");
         }

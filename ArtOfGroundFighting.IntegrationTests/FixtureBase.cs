@@ -45,7 +45,7 @@ namespace ArtOfGroundFighting.IntegrationTests
                 // Clean-out the Resource Directory
                 Console.WriteLine("Deleting Resource Files for Integration Testing");
                 var fileRepository = scope.Resolve<IFileResourceRepository>();
-                fileRepository.NuclearDelete();
+                fileRepository.NuclearDelete(false);
             }
         }
     }

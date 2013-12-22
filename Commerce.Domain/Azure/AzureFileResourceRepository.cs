@@ -95,10 +95,13 @@ namespace Commerce.Application.Azure
             throw new NotImplementedException();
         }
 
-        public void NuclearDelete()
+        public void NuclearDelete(bool deleteDataRecords)
         {
-            var files = _dataContext.FileResources.ToList();
-            files.ForEach(x => _dataContext.Delete(x));
+            if (deleteDataRecords)
+            {
+                var files = _dataContext.FileResources.ToList();
+                files.ForEach(x => _dataContext.Delete(x));
+            }
 
             foreach (var blob in _container.ListBlobs())
             {

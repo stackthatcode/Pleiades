@@ -46,67 +46,63 @@ namespace ArtOfGroundFighting.Initializer.Builders.Products
         }
 
         public override void Run()
-        {            
-            using (var tx = new TransactionScope())
+        {
+            string name = "Hayabusa Head Gear";
+
+            LoggerSingleton.Get().Info("Creating Product: " + name);
+
+            // Get reference data
+            var brand = _brandRepository.FirstOrDefault(x => x.Name == "Hayabusa");
+            var sizeGroup = _sizeGroupRepository.FirstOrDefault(x => x.Name == "Default Clothing");
+            var black = _colorRepository.FirstOrDefault(x => x.SkuCode == "BLACK");
+            var category1 = _categoryRepository.FirstOrDefault(x => x.Name == "Head Gear");
+
+            var product1 = new Product()
             {
-                string name = "Hayabusa Head Gear";
+                Name = name,
+                Description = "Protect your gourd at all costs!." +
+                    @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                        @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco" +
+                    @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt",
+                Synopsis = "Super Star BJJ Athletes need to wear this Gi.",
+                SEO = "hayabusa-head-gear",
+                SkuCode = "HAYA-HEADGEAR",
+                Active = true,
+                UnitPrice = 99.00m,
+                UnitCost = 40.00m,
+                Brand = brand,
+                Category = category1,
+                AssignImagesToColors = true,
+                IsDeleted = false,
+                DateCreated = DateTime.Now,
+                LastModified = DateTime.Now,
+            };
+            _genericProductRepository.Insert(product1);
+            _unitOfWork.SaveChanges();
+            var product1Id = product1.Id;
 
-                LoggerSingleton.Get().Info("Creating Product: " + name);
+            var productColor11 = this.AddProductColor(product1Id, black);
+            _unitOfWork.SaveChanges();
 
-                // Get reference data
-                var brand = _brandRepository.FirstOrDefault(x => x.Name == "Hayabusa");
-                var sizeGroup = _sizeGroupRepository.FirstOrDefault(x => x.Name == "Default Clothing");
-                var black = _colorRepository.FirstOrDefault(x => x.SkuCode == "BLACK");
-                var category1 = _categoryRepository.FirstOrDefault(x => x.Name == "Head Gear");
+            var bundleList1 = AddImagesFromDirectory(@"Content\HayabusaHeadGear");
+            _unitOfWork.SaveChanges();
 
-                var product1 = new Product()
-                {
-                    Name = name,
-                    Description = "Protect your gourd at all costs!." +
-                     @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
-                         @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco" +
-                        @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt",
-                    Synopsis = "Super Star BJJ Athletes need to wear this Gi.",
-                    SEO = "hayabusa-head-gear",
-                    SkuCode = "HAYA-HEADGEAR",
-                    Active = true,
-                    UnitPrice = 99.00m,
-                    UnitCost = 40.00m,
-                    Brand = brand,
-                    Category = category1,
-                    AssignImagesToColors = true,
-                    IsDeleted = false,
-                    DateCreated = DateTime.Now,
-                    LastModified = DateTime.Now,
-                };
-                _genericProductRepository.Insert(product1);
-                _unitOfWork.SaveChanges();
-                var product1Id = product1.Id;
+            bundleList1.ForEach(x => this.AddProductImage(product1Id, productColor11().Id, x));
+            _unitOfWork.SaveChanges();
 
-                var productColor11 = this.AddProductColor(product1Id, black);
-                _unitOfWork.SaveChanges();
+            this.AddSizes(product1Id, sizeGroup);
+            _unitOfWork.SaveChanges();
 
-                var bundleList1 = AddImagesFromDirectory(@"Content\HayabusaHeadGear");
-                _unitOfWork.SaveChanges();
+            _inventoryRepository.Generate(product1.Id);
+            _unitOfWork.SaveChanges();
 
-                bundleList1.ForEach(x => this.AddProductImage(product1Id, productColor11().Id, x));
-                _unitOfWork.SaveChanges();
-
-                this.AddSizes(product1Id, sizeGroup);
-                _unitOfWork.SaveChanges();
-
-                _inventoryRepository.Generate(product1.Id);
-                _unitOfWork.SaveChanges();
-
-                var random = new Random();
-                _inventoryRepository.RetreiveByProductId(product1.Id, false).ForEach(x =>
-                {
-                    x.Reserved = 0;
-                    x.InStock = random.Next(0, 3);
-                });
-                _unitOfWork.SaveChanges();
-                tx.Complete();
-            }
+            var random = new Random();
+            _inventoryRepository.RetreiveByProductId(product1.Id, false).ForEach(x =>
+            {
+                x.Reserved = 0;
+                x.InStock = random.Next(0, 3);
+            });
+            _unitOfWork.SaveChanges();
         }
     }
 }

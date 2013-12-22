@@ -12,6 +12,6 @@ namespace Commerce.Application.File
         FileResource Copy(FileResource original);
         void Delete(Guid externalId);
         string PhysicalFilePath(Guid externalId);
-        void NuclearDelete();
+        void NuclearDelete(bool deleteDataRecords);
     }
 }

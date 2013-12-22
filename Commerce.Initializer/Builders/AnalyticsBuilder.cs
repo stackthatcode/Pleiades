@@ -38,12 +38,8 @@ namespace ArtOfGroundFighting.Initializer.Builders
 
             foreach (var sku in topSellers)
             {
-                using (var tx = new TransactionScope())
-                {
-                    PopulateSalesAndRefunds(sku, startDate, endDate);
-                    _unitOfWork.SaveChanges();
-                    tx.Complete();
-                }
+                PopulateSalesAndRefunds(sku, startDate, endDate);
+                _unitOfWork.SaveChanges();
             }
         }
 

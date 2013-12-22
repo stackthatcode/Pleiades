@@ -41,33 +41,25 @@ namespace ArtOfGroundFighting.Initializer.Builders
 
         public void Run()
         {
-            using (var tx = new TransactionScope())
-            {
-                //_genericRepository.GetAll().ForEach(x => _genericRepository.Delete(x));
-                //_unitOfWork.SaveChangesToDatabase();
+            LoggerSingleton.Get().Info("Create the default Colors");
 
-                LoggerSingleton.Get().Info("Create the default Colors");
+            AddColor(new JsonColor() { Name = "Red", SkuCode = "RED", SEO = "red"}, 
+                System.Drawing.Color.FromArgb(255, 0, 0));
 
-                AddColor(new JsonColor() { Name = "Red", SkuCode = "RED", SEO = "red"}, 
-                    System.Drawing.Color.FromArgb(255, 0, 0));
-
-                AddColor(new JsonColor() { Name = "Orange", SkuCode = "ORANGE", SEO = "orange" },
-                    System.Drawing.Color.FromArgb(255, 144, 0));
+            AddColor(new JsonColor() { Name = "Orange", SkuCode = "ORANGE", SEO = "orange" },
+                System.Drawing.Color.FromArgb(255, 144, 0));
                 
-                AddColor(new JsonColor() { Name = "White", SkuCode = "WHITE", SEO = "white" },
-                    System.Drawing.Color.FromArgb(255, 255, 255));
+            AddColor(new JsonColor() { Name = "White", SkuCode = "WHITE", SEO = "white" },
+                System.Drawing.Color.FromArgb(255, 255, 255));
 
-                AddColor(new JsonColor() { Name = "Blue", SkuCode = "BLUE", SEO = "blue" },
-                    System.Drawing.Color.FromArgb(0, 0, 255));
+            AddColor(new JsonColor() { Name = "Blue", SkuCode = "BLUE", SEO = "blue" },
+                System.Drawing.Color.FromArgb(0, 0, 255));
 
-                AddColor(new JsonColor() { Name = "Black", SkuCode = "BLACK", SEO = "black" },
-                    System.Drawing.Color.FromArgb(0, 0, 0));
+            AddColor(new JsonColor() { Name = "Black", SkuCode = "BLACK", SEO = "black" },
+                System.Drawing.Color.FromArgb(0, 0, 0));
 
-                AddColor(new JsonColor() { Name = "Green", SkuCode = "GREEN", SEO = "green" },
-                    System.Drawing.Color.FromArgb(0, 255, 0));                
-
-                tx.Complete();
-            }
+            AddColor(new JsonColor() { Name = "Green", SkuCode = "GREEN", SEO = "green" },
+                System.Drawing.Color.FromArgb(0, 255, 0));                
         }
     }
 }

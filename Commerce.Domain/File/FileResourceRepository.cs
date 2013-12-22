@@ -102,12 +102,14 @@ namespace Commerce.Application.File
             return Path.Combine(this.ResourceStorage, RelativeFilePath(externalId));
         }
 
-        public void NuclearDelete()
+        public void NuclearDelete(bool deleteDataRecords)
         {
             DirectoryHelpers.DeleteAll(this.ResourceStorage);
-
-            var files = this.Context.FileResources.ToList();            
-            files.ForEach(x => this.Context.Delete(x));
+            if (deleteDataRecords)
+            {
+                var files = this.Context.FileResources.ToList();
+                files.ForEach(x => this.Context.Delete(x));
+            }
         }
 
         public string StorageDirectory(Guid externalId)

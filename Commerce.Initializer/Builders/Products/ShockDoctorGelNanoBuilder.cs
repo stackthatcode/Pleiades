@@ -47,59 +47,56 @@ namespace ArtOfGroundFighting.Initializer.Builders.Products
 
         public override void Run()
         {            
-            using (var tx = new TransactionScope())
+         
+            string name = "Shock Doctor Gel Nano Mouth Guard";
+            LoggerSingleton.Get().Info("Creating Product: " + name);
+
+            // Get reference data
+            var brand = _brandRepository.FirstOrDefault(x => x.Name == "Shock Doctor");
+            var category1 = _categoryRepository.FirstOrDefault(x => x.Name == "Mouth Guards");
+
+            var product1 = new Product()
             {
-                string name = "Shock Doctor Gel Nano Mouth Guard";
-                LoggerSingleton.Get().Info("Creating Product: " + name);
+                Name = name,
+                Description = 
+                    @"Protect the protector of your chops." +
+                    @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
+                    @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco" +
+                    @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt",
+                Synopsis = "Super Star BJJ Athletes need to wear this Gi.",
+                SEO = "SHOCKDOC-GELNANO",
+                SkuCode = "SHOCKDOC-GELNANO",
+                Active = true,
+                UnitPrice = 8.00m,
+                UnitCost = 1.00m,
+                Brand = brand,
+                Category = category1,
+                AssignImagesToColors = true,
+                IsDeleted = false,
+                DateCreated = DateTime.Now,
+                LastModified = DateTime.Now,
+            };
 
-                // Get reference data
-                var brand = _brandRepository.FirstOrDefault(x => x.Name == "Shock Doctor");
-                var category1 = _categoryRepository.FirstOrDefault(x => x.Name == "Mouth Guards");
+            _genericProductRepository.Insert(product1);
+            _unitOfWork.SaveChanges();
 
-                var product1 = new Product()
-                {
-                    Name = name,
-                    Description = 
-                        @"Protect the protector of your chops." +
-                        @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt" +
-                        @"ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco" +
-                        @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt",
-                    Synopsis = "Super Star BJJ Athletes need to wear this Gi.",
-                    SEO = "SHOCKDOC-GELNANO",
-                    SkuCode = "SHOCKDOC-GELNANO",
-                    Active = true,
-                    UnitPrice = 8.00m,
-                    UnitCost = 1.00m,
-                    Brand = brand,
-                    Category = category1,
-                    AssignImagesToColors = true,
-                    IsDeleted = false,
-                    DateCreated = DateTime.Now,
-                    LastModified = DateTime.Now,
-                };
+            var product1Id = product1.Id;
+            var bundleList1 = AddImagesFromDirectory(@"Content\ShockDoctorGelNano");
+            _unitOfWork.SaveChanges();
 
-                _genericProductRepository.Insert(product1);
-                _unitOfWork.SaveChanges();
+            bundleList1.ForEach(x => this.AddProductImage(product1Id, null, x));
+            _unitOfWork.SaveChanges();
 
-                var product1Id = product1.Id;
-                var bundleList1 = AddImagesFromDirectory(@"Content\ShockDoctorGelNano");
-                _unitOfWork.SaveChanges();
+            _inventoryRepository.Generate(product1.Id);
+            _unitOfWork.SaveChanges();
 
-                bundleList1.ForEach(x => this.AddProductImage(product1Id, null, x));
-                _unitOfWork.SaveChanges();
-
-                _inventoryRepository.Generate(product1.Id);
-                _unitOfWork.SaveChanges();
-
-                var random = new Random();
-                _inventoryRepository.RetreiveByProductId(product1.Id, false).ForEach(x =>
-                {
-                    x.Reserved = 0;
-                    x.InStock = random.Next(0, 2);
-                });
-                _unitOfWork.SaveChanges();
-                tx.Complete();
-            }
+            var random = new Random();
+            _inventoryRepository.RetreiveByProductId(product1.Id, false).ForEach(x =>
+            {
+                x.Reserved = 0;
+                x.InStock = random.Next(0, 2);
+            });
+            _unitOfWork.SaveChanges();
         }
     }
 }
