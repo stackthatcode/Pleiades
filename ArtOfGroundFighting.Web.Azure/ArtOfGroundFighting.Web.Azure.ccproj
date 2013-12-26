@@ -11,7 +11,7 @@
     <RootNamespace>Commerce.Web.Azure</RootNamespace>
     <AssemblyName>Commerce.Web.Azure</AssemblyName>
     <StartDevelopmentStorage>True</StartDevelopmentStorage>
-    <Name>Commerce.Web.Azure</Name>
+    <Name>ArtOfGroundFighting.Web.Azure</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

@@ -272,6 +272,7 @@
     <None Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Content\JQuery\jquery-2.0.3.min.map" />
+    <Content Include="PostBuildScript.bat" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -353,7 +354,8 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(SolutionDir)\lib $(TargetDir) /Y /S</PostBuildEvent>
+    <PostBuildEvent>call "$(ProjectDir)PostBuildScript.bat" $(ProjectDir) $(SolutionDir) $(TargetDir)
+</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

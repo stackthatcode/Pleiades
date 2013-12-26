@@ -1,0 +1,183 @@
+2013-12-24 07:52:47.7381|Error|8de97b48-8fae-407d-8227-f0c035d18a89|URL:http://localhost/ArtOfGroundFighting.com - IsAjaxRequest: False 
+2013-12-24 07:52:47.7711|Error|8de97b48-8fae-407d-8227-f0c035d18a89|System.Data.EntityException:The underlying provider failed on Open.
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure)
+   at System.Data.EntityClient.EntityConnection.Open()
+   at System.Data.Objects.ObjectContext.EnsureConnection()
+   at System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
+   at Commerce.Application.Security.AggregateReadOnlyRepository.RetrieveByMembershipUserName(String membershipUsername) in c:\DEV\Pleiades\Commerce.Domain\Security\AggregateReadOnlyRepository.cs:line 28
+   at Pleiades.Web.Security.Concrete.AggregateUserService.LoadAuthentedUserIntoContext(HttpContextBase context) in c:\DEV\Pleiades\Pleiades.Web.Security.Aggregate\Concrete\AggregateUserService.cs:line 120
+   at Pleiades.Web.Security.Aspect.SecurityAttribute.OnAuthorization(AuthorizationContext filterContext) in c:\DEV\Pleiades\Pleiades.Web.Security.Aggregate\Aspect\SecurityAttribute.cs:line 23
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAuthorizationFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__1e(AsyncCallback asyncCallback, Object asyncState)
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Cannot open database "PleiadesDb" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\DefaultAppPool'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure) 
+2013-12-24 07:52:47.8211|Error|8de97b48-8fae-407d-8227-f0c035d18a89|System.Data.EntityException:The underlying provider failed on Open.
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure)
+   at System.Data.EntityClient.EntityConnection.Open()
+   at System.Data.Objects.ObjectContext.EnsureConnection()
+   at System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.String.Join(String separator, IEnumerable`1 values)
+   at Commerce.Application.Email.AdminEmailBuilder.MessageFactory() in c:\DEV\Pleiades\Commerce.Domain\Email\AdminEmailBuilder.cs:line 34
+   at Commerce.Application.Email.AdminEmailBuilder.SystemError(Guid activityId, Exception exception) in c:\DEV\Pleiades\Commerce.Domain\Email\AdminEmailBuilder.cs:line 70
+   at ArtOfGroundFighting.Web.Plumbing.ErrorNotification.Send(Exception ex) in c:\DEV\Pleiades\Commerce.ArtOfGroundFighting\Plumbing\ErrorNotification.cs:line 19
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Cannot open database "PleiadesDb" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\DefaultAppPool'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure) 
+2013-12-24 07:52:56.1493|Error|6674f22e-1b78-4533-8e23-1081c6caf184|URL:http://localhost/ArtOfGroundFighting.com/page - IsAjaxRequest: False 
+2013-12-24 07:52:56.1493|Error|6674f22e-1b78-4533-8e23-1081c6caf184|System.Data.EntityException:The underlying provider failed on Open.
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure)
+   at System.Data.EntityClient.EntityConnection.Open()
+   at System.Data.Objects.ObjectContext.EnsureConnection()
+   at System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
+   at Commerce.Application.Security.AggregateReadOnlyRepository.RetrieveByMembershipUserName(String membershipUsername) in c:\DEV\Pleiades\Commerce.Domain\Security\AggregateReadOnlyRepository.cs:line 28
+   at Pleiades.Web.Security.Concrete.AggregateUserService.LoadAuthentedUserIntoContext(HttpContextBase context) in c:\DEV\Pleiades\Pleiades.Web.Security.Aggregate\Concrete\AggregateUserService.cs:line 120
+   at Pleiades.Web.Security.Aspect.SecurityAttribute.OnAuthorization(AuthorizationContext filterContext) in c:\DEV\Pleiades\Pleiades.Web.Security.Aggregate\Aspect\SecurityAttribute.cs:line 23
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAuthorizationFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__1e(AsyncCallback asyncCallback, Object asyncState)
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Cannot open database "PleiadesDb" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\DefaultAppPool'.
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure) 
+2013-12-24 07:52:56.1693|Error|6674f22e-1b78-4533-8e23-1081c6caf184|System.Data.EntityException:The underlying provider failed on Open.
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure)
+   at System.Data.EntityClient.EntityConnection.Open()
+   at System.Data.Objects.ObjectContext.EnsureConnection()
+   at System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.String.Join(String separator, IEnumerable`1 values)
+   at Commerce.Application.Email.AdminEmailBuilder.MessageFactory() in c:\DEV\Pleiades\Commerce.Domain\Email\AdminEmailBuilder.cs:line 34
+   at Commerce.Application.Email.AdminEmailBuilder.SystemError(Guid activityId, Exception exception) in c:\DEV\Pleiades\Commerce.Domain\Email\AdminEmailBuilder.cs:line 70
+   at ArtOfGroundFighting.Web.Plumbing.ErrorNotification.Send(Exception ex) in c:\DEV\Pleiades\Commerce.ArtOfGroundFighting\Plumbing\ErrorNotification.cs:line 19
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Cannot open database "PleiadesDb" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\DefaultAppPool'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure) 
+2013-12-24 07:53:41.5585|Error|c3fb2483-54a7-40e9-a5f9-899c9dd2f88c|URL:http://localhost/ArtOfGroundFighting.com/page - IsAjaxRequest: False 
+2013-12-24 07:53:41.5675|Error|c3fb2483-54a7-40e9-a5f9-899c9dd2f88c|System.Data.EntityException:The underlying provider failed on Open.
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure)
+   at System.Data.EntityClient.EntityConnection.Open()
+   at System.Data.Objects.ObjectContext.EnsureConnection()
+   at System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
+   at Commerce.Application.Security.AggregateReadOnlyRepository.RetrieveByMembershipUserName(String membershipUsername) in c:\DEV\Pleiades\Commerce.Domain\Security\AggregateReadOnlyRepository.cs:line 28
+   at Pleiades.Web.Security.Concrete.AggregateUserService.LoadAuthentedUserIntoContext(HttpContextBase context) in c:\DEV\Pleiades\Pleiades.Web.Security.Aggregate\Concrete\AggregateUserService.cs:line 120
+   at Pleiades.Web.Security.Aspect.SecurityAttribute.OnAuthorization(AuthorizationContext filterContext) in c:\DEV\Pleiades\Pleiades.Web.Security.Aggregate\Aspect\SecurityAttribute.cs:line 23
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAuthorizationFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__1e(AsyncCallback asyncCallback, Object asyncState)
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Cannot open database "PleiadesDb" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\DefaultAppPool'.
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure) 
+2013-12-24 07:53:41.5775|Error|c3fb2483-54a7-40e9-a5f9-899c9dd2f88c|System.Data.EntityException:The underlying provider failed on Open.
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure)
+   at System.Data.EntityClient.EntityConnection.Open()
+   at System.Data.Objects.ObjectContext.EnsureConnection()
+   at System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.String.Join(String separator, IEnumerable`1 values)
+   at Commerce.Application.Email.AdminEmailBuilder.MessageFactory() in c:\DEV\Pleiades\Commerce.Domain\Email\AdminEmailBuilder.cs:line 34
+   at Commerce.Application.Email.AdminEmailBuilder.SystemError(Guid activityId, Exception exception) in c:\DEV\Pleiades\Commerce.Domain\Email\AdminEmailBuilder.cs:line 70
+   at ArtOfGroundFighting.Web.Plumbing.ErrorNotification.Send(Exception ex) in c:\DEV\Pleiades\Commerce.ArtOfGroundFighting\Plumbing\ErrorNotification.cs:line 19
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Cannot open database "PleiadesDb" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\DefaultAppPool'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure) 
+2013-12-24 13:58:34.0817|Debug|6cff7b1b-1c50-4430-8f52-9a2454bddc93|Image - Download: b6e85584-aefb-4092-849b-18c36354e610 small 
+2013-12-24 13:58:34.0817|Debug|f5abeb60-f99a-4d1f-a85a-5dbabf4d1074|Image - Download: 179d5474-a4b0-431c-aad6-163d3bf1e936 small 
+2013-12-24 13:58:34.0817|Debug|71c22a3b-ae77-43b5-925b-a00df94f61ba|Image - Download: e81ba7b1-aade-4201-9f49-9b5f9211115b small 
+2013-12-24 13:58:34.0817|Debug|e97d859f-5836-4f0c-aab2-91992b90d203|Image - Download: 810eb17d-3744-4f6c-af39-254e04350e90 small 
+2013-12-24 13:58:34.2807|Debug|4e970bfa-7888-4fc5-951a-2e1cc8f28ee6|Image - Download: 3de0b592-1ac5-47a5-a3b6-5904d73661c3 small 
+2013-12-24 13:58:34.2847|Debug|537db1fc-79a2-4270-814e-6525b555c11e|Image - Download: 435960f3-0c4b-4c54-8e7c-3c3fbac88fb9 small 
+2013-12-24 13:58:34.2847|Debug|0d9da2bd-55e2-4a66-a191-96b2d8ad7c2d|Image - Download: 093d1a00-4466-45d4-a391-4547850efaf4 small 
+2013-12-24 13:58:34.2847|Debug|2ec1f584-3ad6-4425-8a55-39cdcd71a672|Image - Download: 04ec4c42-6fda-4494-86f9-829ea6e237cc small 
+2013-12-24 13:58:34.2977|Debug|fc6476dd-fd0e-44d6-b685-e57f249ca396|Image - Download: a0e06fa0-c022-4d26-a089-e9d53ac12967 small 
+2013-12-24 13:58:34.3147|Debug|c1af7cb5-5602-4237-87da-5cdc981949fb|Image - Download: a24580de-1119-40bf-bf39-761c06dee861 small 

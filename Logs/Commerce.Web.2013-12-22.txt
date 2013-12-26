@@ -1,0 +1,124 @@
+2013-12-22 10:05:07.5111|Error|a59d2756-2342-47df-a67e-afba791d4cf9|URL:http://localhost/Commerce.Web/Unsecured/Login?returnUrl=%252fCommerce.Web%252f - IsAjaxRequest: False 
+2013-12-22 10:05:07.5601|Error|a59d2756-2342-47df-a67e-afba791d4cf9|System.Data.EntityException:The underlying provider failed on Open.
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure)
+   at System.Data.EntityClient.EntityConnection.Open()
+   at System.Data.Objects.ObjectContext.EnsureConnection()
+   at System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
+   at Commerce.Application.Security.MembershipWritableRepository.Pleiades.Web.Security.Interface.IMembershipWritableRepository.GetUserByEmail(String email) in c:\DEV\Pleiades\Commerce.Domain\Security\MembershipWritableRepository.cs:line 30
+   at Pleiades.Web.Security.Concrete.PfMembershipService.ValidateUserByEmailAddr(String emailAddress, String password) in c:\DEV\Pleiades\Pleiades.Web.Security.Membership\Concrete\PfMembershipService.cs:line 105
+   at Pleiades.Web.Security.Concrete.AggregateUserService.Authenticate(String username, String password, Boolean persistenceCookie, List`1 expectedRoles) in c:\DEV\Pleiades\Pleiades.Web.Security.Aggregate\Concrete\AggregateUserService.cs:line 72
+   at Commerce.Web.Controllers.UnsecuredController.Login(LogOnViewModel model, String returnUrl) in c:\DEV\Pleiades\Commerce.Web\Controllers\UnsecuredController.cs:line 43
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Cannot open database "Pushmarket" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\DefaultAppPool'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure) 
+2013-12-22 10:05:07.6051|Error|a59d2756-2342-47df-a67e-afba791d4cf9|System.Data.EntityException:The underlying provider failed on Open.
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure)
+   at System.Data.EntityClient.EntityConnection.Open()
+   at System.Data.Objects.ObjectContext.EnsureConnection()
+   at System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.String.Join(String separator, IEnumerable`1 values)
+   at Commerce.Application.Email.AdminEmailBuilder.MessageFactory() in c:\DEV\Pleiades\Commerce.Domain\Email\AdminEmailBuilder.cs:line 34
+   at Commerce.Application.Email.AdminEmailBuilder.SystemError(Guid activityId, Exception exception) in c:\DEV\Pleiades\Commerce.Domain\Email\AdminEmailBuilder.cs:line 70
+   at Commerce.Web.Plumbing.ErrorNotification.Send(Exception ex) in c:\DEV\Pleiades\Commerce.Web\Plumbing\ErrorNotification.cs:line 19
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Cannot open database "Pushmarket" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\DefaultAppPool'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure) 
+2013-12-22 16:50:23.4555|Debug|deefa220-91a7-4b4c-96b5-d0d84c3debb5|Image - Download: 810eb17d-3744-4f6c-af39-254e04350e90 thumbnail 
+2013-12-22 16:50:23.4555|Debug|df3a08c5-069c-4111-92cc-f4732275e5fc|Image - Download: 147cdc07-6bee-4005-89a2-98e87991ada5 thumbnail 
+2013-12-22 16:50:23.4565|Debug|38487e94-4a3d-4a2b-88de-8aa416144506|Image - Download: e81ba7b1-aade-4201-9f49-9b5f9211115b thumbnail 
+2013-12-22 16:50:23.4555|Debug|774e875b-c7ae-46e3-818d-1d81c97fc511|Image - Download: 04ec4c42-6fda-4494-86f9-829ea6e237cc thumbnail 
+2013-12-22 16:50:23.4555|Debug|d0af00d8-5fb7-43ed-8d20-d9ee954f042c|Image - Download: 179d5474-a4b0-431c-aad6-163d3bf1e936 thumbnail 
+2013-12-22 16:50:23.7135|Debug|bed8371a-7e49-478f-adea-40de505a665a|Image - Download: b6e85584-aefb-4092-849b-18c36354e610 thumbnail 
+2013-12-22 16:50:23.7135|Debug|a854aef5-0b91-4f61-ad50-3c87ce097a50|Image - Download: a0e06fa0-c022-4d26-a089-e9d53ac12967 thumbnail 
+2013-12-22 16:50:23.7135|Debug|9bd74cd7-37a9-40ab-8a89-c416af098805|Image - Download: 435960f3-0c4b-4c54-8e7c-3c3fbac88fb9 thumbnail 
+2013-12-22 16:50:23.7135|Debug|e54f700f-07b5-4ec0-b70f-ca2ed2c5ee29|Image - Download: 093d1a00-4466-45d4-a391-4547850efaf4 thumbnail 
+2013-12-22 16:50:23.7135|Debug|bf29aab2-99b0-4075-a4ba-27c85cdab9bc|Image - Download: a24580de-1119-40bf-bf39-761c06dee861 thumbnail 
+2013-12-22 16:50:25.1166|Debug|0bc902bc-6d0e-4649-9b43-a3ac1a1c05ce|Image - Download: e81ba7b1-aade-4201-9f49-9b5f9211115b large 
+2013-12-22 16:50:27.3058|Debug|d1e1a383-fd4d-441c-8885-c70e3200d96f|Image - Download: 04ec4c42-6fda-4494-86f9-829ea6e237cc large 
+2013-12-22 16:55:05.5915|Debug|9beaebc8-7d7e-4e83-852e-eecdd2554ebe|Image - Download: 179d5474-a4b0-431c-aad6-163d3bf1e936 thumbnail 
+2013-12-22 16:55:05.6025|Debug|d2b66edd-9be9-4305-b0ad-be2cae028c42|Image - Download: e81ba7b1-aade-4201-9f49-9b5f9211115b thumbnail 
+2013-12-22 16:55:05.6185|Debug|65a0ed9c-2474-44e2-bead-506b197b53cf|Image - Download: 04ec4c42-6fda-4494-86f9-829ea6e237cc thumbnail 
+2013-12-22 16:55:05.6185|Debug|1d25b5b5-5948-4251-8c0e-01a79255b064|Image - Download: 147cdc07-6bee-4005-89a2-98e87991ada5 thumbnail 
+2013-12-22 16:55:05.6375|Debug|3aa3274f-c42d-408b-9ce7-9ea83d3bb358|Image - Download: 810eb17d-3744-4f6c-af39-254e04350e90 thumbnail 
+2013-12-22 16:55:05.6505|Debug|3ac7a744-9d3d-4753-8506-3c6a4546185d|Image - Download: b6e85584-aefb-4092-849b-18c36354e610 thumbnail 
+2013-12-22 16:55:05.6645|Debug|66f5d033-f217-4c24-8416-e1d118aea250|Image - Download: 435960f3-0c4b-4c54-8e7c-3c3fbac88fb9 thumbnail 
+2013-12-22 16:55:05.6775|Debug|9b583a73-c112-4b42-be95-c6724e4faf4b|Image - Download: a0e06fa0-c022-4d26-a089-e9d53ac12967 thumbnail 
+2013-12-22 16:55:05.6775|Debug|1ee70f39-0c2c-49a9-ab9e-f7c383958d54|Image - Download: 093d1a00-4466-45d4-a391-4547850efaf4 thumbnail 
+2013-12-22 16:55:05.6975|Debug|26575cc3-1f4a-4502-8e44-2481340a077a|Image - Download: a24580de-1119-40bf-bf39-761c06dee861 thumbnail 
+2013-12-22 16:55:16.7026|Debug|27a650bd-0bd9-47a7-8d21-fbebed6ff950|Image - Download: 338e7c0a-30cc-4002-a5f4-75decd5b1e6e thumbnail 
+2013-12-22 16:55:16.7156|Debug|dec75a31-4a98-4787-a402-d9bdfdec9262|Image - Download: da510dc2-1726-499e-afbd-51c427abc036 thumbnail 
+2013-12-22 16:55:17.8840|Debug|18736cdf-c109-4ec9-b368-5ec0bb625244|Image - Download: 179d5474-a4b0-431c-aad6-163d3bf1e936 small 
+2013-12-22 16:55:17.8840|Debug|52d82063-2273-4533-8392-5ec8ec206d70|Image - Download: f2dea32f-58f5-4d73-84f2-7c630e95d423 small 
+2013-12-22 16:55:17.8950|Debug|3819112c-c7d6-4447-bd5f-3fb67032e1bc|Image - Download: a9052ff9-802c-4d10-aafe-b55051f28fe2 small 
+2013-12-22 16:55:17.8950|Debug|73a27d8b-a203-41bd-b72e-6b526d20dd47|Image - Download: 5dc95e4a-862b-4417-9c22-42e90fc41366 small 
+2013-12-22 16:55:17.9110|Debug|2849ea56-e66d-4a87-8a6c-06646375aca7|Image - Download: 97e45a28-0ce8-481a-87cb-4a8ec779fb03 small 
+2013-12-22 16:55:17.9110|Debug|755787ce-3515-474d-8531-2da5c0a92752|Image - Download: 338e7c0a-30cc-4002-a5f4-75decd5b1e6e thumbnail 
+2013-12-22 16:55:17.9250|Debug|29124d9f-d93d-45aa-9f20-31bcdc1c6dac|Image - Download: b6f9a8f4-d25a-4f1d-b1cf-ed830b270192 small 
+2013-12-22 16:55:17.9410|Debug|cef2d48e-1f35-4a4d-bc28-a6e1167f113e|Image - Download: aa04152e-a129-4cd6-b2f7-e30dbaafa369 small 
+2013-12-22 16:55:17.9410|Debug|91f53276-67ed-4c88-a8e8-bff66054f130|Image - Download: 90401ead-386d-432f-87b4-b661470d6bf0 small 
+2013-12-22 16:55:17.9250|Debug|544a060e-3a9e-4824-aff0-4257890398cb|Image - Download: 436ee1e5-c3f5-4c62-bf1c-2f1ca021c6ed small 
+2013-12-22 16:55:17.9410|Debug|6a2b3e7e-e6f5-4322-a410-3995794f2d44|Image - Download: 12dac320-644b-4bd0-8218-983fcca7e206 small 
+2013-12-22 16:55:17.9580|Debug|144be2de-218d-47cc-8ff6-31557df8313f|Image - Download: da510dc2-1726-499e-afbd-51c427abc036 thumbnail 
+2013-12-22 16:56:10.2778|Debug|601af293-72b2-4439-97d8-7588add53a65|Image - Download: 179d5474-a4b0-431c-aad6-163d3bf1e936 thumbnail 
+2013-12-22 16:56:12.7106|Debug|973a7ce1-14e4-41f2-8a2e-df0e49357669|Image - Download: 179d5474-a4b0-431c-aad6-163d3bf1e936 thumbnail 
+2013-12-22 16:56:12.7176|Debug|abfc3627-95ed-454e-a850-bd1fb859ba6a|Image - Download: e81ba7b1-aade-4201-9f49-9b5f9211115b thumbnail 
+2013-12-22 16:56:12.7176|Debug|20cd27b1-ef3c-45b3-b77e-a43a61532543|Image - Download: 04ec4c42-6fda-4494-86f9-829ea6e237cc thumbnail 
+2013-12-22 16:56:12.7286|Debug|ec435cfb-20fe-4348-af8c-f78625bd8297|Image - Download: 147cdc07-6bee-4005-89a2-98e87991ada5 thumbnail 
+2013-12-22 16:56:12.7286|Debug|18adb25f-c2a0-4c8a-a0cf-f0d218ac7175|Image - Download: 810eb17d-3744-4f6c-af39-254e04350e90 thumbnail 
+2013-12-22 16:56:12.7456|Debug|6eabf0d0-2f60-4e9f-bc13-b98acfe12984|Image - Download: b6e85584-aefb-4092-849b-18c36354e610 thumbnail 
+2013-12-22 16:56:12.7596|Debug|13017432-d273-44c1-9c42-cbfbc63b63fd|Image - Download: 435960f3-0c4b-4c54-8e7c-3c3fbac88fb9 thumbnail 
+2013-12-22 16:56:12.7596|Debug|c72d0f4e-6670-4c6b-9182-6ee2365329ba|Image - Download: a0e06fa0-c022-4d26-a089-e9d53ac12967 thumbnail 
+2013-12-22 16:56:12.7756|Debug|da232fac-a021-4c39-a57f-d18e78d8971d|Image - Download: 093d1a00-4466-45d4-a391-4547850efaf4 thumbnail 
+2013-12-22 16:56:12.7756|Debug|27e35745-6229-4ece-8459-03dfcb0b95ec|Image - Download: a24580de-1119-40bf-bf39-761c06dee861 thumbnail 
+2013-12-22 16:56:39.3469|Debug|e372b230-017f-4772-9d50-1f48148888d1|Image - Download: 147cdc07-6bee-4005-89a2-98e87991ada5 small 
+2013-12-22 16:56:39.3579|Debug|5db34e40-fd53-4d23-a63f-9269fe98b736|Image - Download: 3de0b592-1ac5-47a5-a3b6-5904d73661c3 small 
+2013-12-22 16:56:39.3579|Debug|c91de49a-a085-4080-93b8-d77f0ca70e50|Image - Download: 567a5e24-7f3c-48de-a261-19d8c4c666e8 small 
+2013-12-22 16:56:39.3739|Debug|9dfc172c-1b16-4a43-8202-7b22ef43e377|Image - Download: 167bea23-c6da-4f2c-8ea1-59295d11ef55 small 
+2013-12-22 16:56:39.3919|Debug|da890169-dc06-4419-bcb3-f445d5c2cedd|Image - Download: d2dfcd3f-edc5-4624-9f73-8ec8af5272c5 thumbnail 
+2013-12-22 16:56:45.5843|Debug|902fa142-964b-4760-906e-75f854865274|Image - Download: d2dfcd3f-edc5-4624-9f73-8ec8af5272c5 thumbnail 
+2013-12-22 16:56:45.5843|Debug|d8bb75ad-caf6-4603-aac2-0c15b8e50360|Image - Download: 3de0b592-1ac5-47a5-a3b6-5904d73661c3 small 
+2013-12-22 16:56:45.5973|Debug|50a99021-6afd-4bbd-a763-074f4c165fcb|Image - Download: 147cdc07-6bee-4005-89a2-98e87991ada5 small 
+2013-12-22 16:56:45.6153|Debug|5c4e7d2a-f5cb-4c2f-869f-247cb06e29d4|Image - Download: 567a5e24-7f3c-48de-a261-19d8c4c666e8 small 
+2013-12-22 16:56:45.6153|Debug|90e74aa6-fbd4-44ec-a262-4df365ec3cbb|Image - Download: 167bea23-c6da-4f2c-8ea1-59295d11ef55 small 
+2013-12-22 21:09:22.7649|Debug|010361b6-8fb8-48a7-864f-a0876b786fb2|Image - Download: 810eb17d-3744-4f6c-af39-254e04350e90 thumbnail 
+2013-12-22 21:09:22.7649|Debug|0ddf5d59-884a-4411-b48d-277d10e1082f|Image - Download: 179d5474-a4b0-431c-aad6-163d3bf1e936 thumbnail 
+2013-12-22 21:09:22.7649|Debug|7be3fbc3-3b12-472e-8d5e-53d22c4f8892|Image - Download: e81ba7b1-aade-4201-9f49-9b5f9211115b thumbnail 
+2013-12-22 21:09:22.7649|Debug|4ea045c1-dd61-42e9-8f3e-bed55d679c20|Image - Download: 3de0b592-1ac5-47a5-a3b6-5904d73661c3 thumbnail 
+2013-12-22 21:09:22.7649|Debug|2cc4b177-2763-4a42-a9cc-dcfd61cf5986|Image - Download: 04ec4c42-6fda-4494-86f9-829ea6e237cc thumbnail 
+2013-12-22 21:09:23.0809|Debug|860b26a4-fe3c-4b83-a603-2d90d7a707f3|Image - Download: b6e85584-aefb-4092-849b-18c36354e610 thumbnail 
+2013-12-22 21:09:23.0889|Debug|dc06a663-4717-4362-94e3-4c48b369365f|Image - Download: a0e06fa0-c022-4d26-a089-e9d53ac12967 thumbnail 
+2013-12-22 21:09:23.1079|Debug|5008c654-2658-4e60-81ae-e53281d5c277|Image - Download: 435960f3-0c4b-4c54-8e7c-3c3fbac88fb9 thumbnail 
+2013-12-22 21:09:23.1179|Debug|0a3e46a3-39c4-48ed-a1c1-1e690d2f4fca|Image - Download: 093d1a00-4466-45d4-a391-4547850efaf4 thumbnail 
+2013-12-22 21:09:23.1179|Debug|6b0f140e-0e96-41b4-98c4-1a8fc47e3e4d|Image - Download: a24580de-1119-40bf-bf39-761c06dee861 thumbnail 

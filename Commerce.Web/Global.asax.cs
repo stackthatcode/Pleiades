@@ -5,12 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Commerce.Web.Autofac;
 using Pleiades.App.Logging;
 using Pleiades.App.Utility;
 using Pleiades.Web.Activity;
 using Pleiades.Web.Plumbing;
 using Pleiades.Web.Security.Aspect;
+using Commerce.Web.Autofac;
 using Commerce.Application.Database;
 using Commerce.Web.Plumbing;
 

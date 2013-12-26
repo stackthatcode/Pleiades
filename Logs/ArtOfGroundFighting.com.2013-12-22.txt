@@ -1,0 +1,75 @@
+2013-12-22 10:05:18.7651|Error|35c2cb3c-ca84-4d82-ba4f-534bfcdf5552|URL:http://localhost/ArtOfGroundFighting.com/products - IsAjaxRequest: True 
+2013-12-22 10:05:18.8001|Error|35c2cb3c-ca84-4d82-ba4f-534bfcdf5552|System.Data.EntityException:The underlying provider failed on Open.
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure)
+   at System.Data.EntityClient.EntityConnection.Open()
+   at System.Data.Objects.ObjectContext.EnsureConnection()
+   at System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Commerce.Application.Products.ProductRepository.FindProducts(Nullable`1 categoryId, Nullable`1 brandId, String searchText)
+   at ArtOfGroundFighting.Web.Controllers.ProductsController.Get() in c:\DEV\Pleiades\Commerce.ArtOfGroundFighting\Controllers\ProductsController.cs:line 31
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Cannot open database "Pushmarket" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\DefaultAppPool'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure) 
+2013-12-22 10:05:18.8442|Error|35c2cb3c-ca84-4d82-ba4f-534bfcdf5552|System.Data.EntityException:The underlying provider failed on Open.
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure)
+   at System.Data.EntityClient.EntityConnection.Open()
+   at System.Data.Objects.ObjectContext.EnsureConnection()
+   at System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.String.Join(String separator, IEnumerable`1 values)
+   at Commerce.Application.Email.AdminEmailBuilder.MessageFactory()
+   at Commerce.Application.Email.AdminEmailBuilder.SystemError(Guid activityId, Exception exception)
+   at ArtOfGroundFighting.Web.Plumbing.ErrorNotification.Send(Exception ex) in c:\DEV\Pleiades\Commerce.ArtOfGroundFighting\Plumbing\ErrorNotification.cs:line 19
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Cannot open database "Pushmarket" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\DefaultAppPool'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.EntityClient.EntityConnection.OpenStoreConnectionIf(Boolean openCondition, DbConnection storeConnectionToOpen, DbConnection originalConnection, String exceptionCode, String attemptedOperation, Boolean& closeStoreConnectionOnFailure) 
+2013-12-22 10:16:00.1921|Debug|f596465d-7d00-497c-a883-6f7564650c93|Image - Download: 04ec4c42-6fda-4494-86f9-829ea6e237cc small 
+2013-12-22 10:16:00.1921|Debug|0689797f-631e-4c0d-bb8d-5152756bd375|Image - Download: 147cdc07-6bee-4005-89a2-98e87991ada5 small 
+2013-12-22 10:16:00.1921|Debug|991a767e-68e9-4dfb-8354-8fe5c4cedd61|Image - Download: 179d5474-a4b0-431c-aad6-163d3bf1e936 small 
+2013-12-22 10:16:00.1921|Debug|1c65eae9-d3ce-4912-8ec7-12d569f8205a|Image - Download: 810eb17d-3744-4f6c-af39-254e04350e90 small 
+2013-12-22 10:16:00.1921|Debug|a93f04cf-4c8c-4a95-9bd6-6674823bebf7|Image - Download: e81ba7b1-aade-4201-9f49-9b5f9211115b small 
+2013-12-22 10:16:00.1921|Debug|56a8d2a6-85f8-4f92-9129-6b082f7cc19f|Image - Download: b6e85584-aefb-4092-849b-18c36354e610 small 
+2013-12-22 10:16:00.4252|Debug|b9ad8ca9-29da-4140-9652-b5ec02099e63|Image - Download: a0e06fa0-c022-4d26-a089-e9d53ac12967 small 
+2013-12-22 10:16:00.4272|Debug|8efa3211-1fde-418c-85f2-4e9941178922|Image - Download: a24580de-1119-40bf-bf39-761c06dee861 small 
+2013-12-22 10:16:00.4272|Debug|7fce73b1-e9d0-43d3-be8d-aa7c58a5b02f|Image - Download: 435960f3-0c4b-4c54-8e7c-3c3fbac88fb9 small 
+2013-12-22 10:16:00.4272|Debug|4de86a53-8f09-4e77-a98a-e2830c191fe8|Image - Download: 093d1a00-4466-45d4-a391-4547850efaf4 small 
+2013-12-22 16:56:54.7634|Debug|5838f1be-3dd0-454b-8055-87093a26522a|Image - Download: 04ec4c42-6fda-4494-86f9-829ea6e237cc small 
+2013-12-22 16:56:54.7634|Debug|be45bffc-2ef6-491c-8f75-ea22f11befaf|Image - Download: 179d5474-a4b0-431c-aad6-163d3bf1e936 small 
+2013-12-22 16:56:54.7634|Debug|b1f88173-70c1-4ce1-95a3-ee36547d826b|Image - Download: b6e85584-aefb-4092-849b-18c36354e610 small 
+2013-12-22 16:56:54.7634|Debug|5399f2a8-4c2e-42ae-ab22-7740a2a0a9f4|Image - Download: e81ba7b1-aade-4201-9f49-9b5f9211115b small 
+2013-12-22 16:56:54.7634|Debug|3e56875f-9394-400d-9944-fb4526f3ada0|Image - Download: 810eb17d-3744-4f6c-af39-254e04350e90 small 
+2013-12-22 16:56:54.7634|Debug|f358549b-4a69-4463-b907-f983f99f9178|Image - Download: 3de0b592-1ac5-47a5-a3b6-5904d73661c3 small 
+2013-12-22 16:56:55.0134|Debug|b684b4d2-4879-4327-a1fc-4f5280b0ccac|Image - Download: 093d1a00-4466-45d4-a391-4547850efaf4 small 
+2013-12-22 16:56:55.0134|Debug|bb2275f7-ae55-463e-9c52-a623bbf036a6|Image - Download: 435960f3-0c4b-4c54-8e7c-3c3fbac88fb9 small 
+2013-12-22 16:56:55.0134|Debug|6e45a4c4-5ed5-4856-95fb-c3b73e7fbc21|Image - Download: a24580de-1119-40bf-bf39-761c06dee861 small 
+2013-12-22 16:56:55.0134|Debug|604d78c2-fcd0-40de-bb40-2cd6556fed8a|Image - Download: a0e06fa0-c022-4d26-a089-e9d53ac12967 small 

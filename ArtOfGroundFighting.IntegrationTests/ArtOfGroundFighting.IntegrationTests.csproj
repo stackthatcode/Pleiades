@@ -90,17 +90,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Commerce.ArtOfGroundFighting\ArtOfGroundFighting.Web.csproj">
-      <Project>{ec5dc292-82c2-4c82-9b64-9b0cbaf8e561}</Project>
-      <Name>ArtOfGroundFighting.Web</Name>
+    <ProjectReference Include="..\ArtOfGroundFighting.Initializer\ArtOfGroundFighting.Initializer.csproj">
+      <Project>{8e922d95-e286-4af1-89e2-943ea247b806}</Project>
+      <Name>ArtOfGroundFighting.Initializer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Commerce.Domain\Commerce.Application.csproj">
       <Project>{3e11d8a9-5d48-4d12-9951-959a53a8b6a6}</Project>
       <Name>Commerce.Application</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Commerce.Initializer\ArtOfGroundFighting.Initializer.csproj">
-      <Project>{8e922d95-e286-4af1-89e2-943ea247b806}</Project>
-      <Name>ArtOfGroundFighting.Initializer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pleiades.App.Foundation\Pleiades.App.Foundation.csproj">
       <Project>{10cee227-9b7c-4d97-b53a-229e8d45b15f}</Project>

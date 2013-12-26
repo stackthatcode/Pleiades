@@ -1,8 +1,6 @@
 ﻿using Autofac;
 using ArtOfGroundFighting.Initializer;
 using Commerce.Application;
-using Commerce.Application.Azure;
-using Pleiades.Web.Security;
 
 namespace ArtOfGroundFighting.IntegrationTests
 {
