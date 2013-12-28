@@ -51,6 +51,12 @@ namespace Commerce.Web
             }
         }
 
+        protected void RegisterLogger()
+        {
+            var loggerName = (ConfigurationManager.AppSettings["StorefrontName"] ?? "Commerce") + ".Admin";
+            LoggerSingleton.Get = NLoggerImpl.RegistrationFactory(loggerName, ActivityId.MessageFormatter);
+        }
+
         protected void Application_Error(object sender, EventArgs e)
         {
             var lastError = Server.GetLastError();

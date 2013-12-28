@@ -45,7 +45,7 @@ namespace Commerce.Application.Email
         {
             var output = MessageFactory();
             output.Subject = SubjectPrefix + "Order "+ order.ExternalId + " has been received";
-            output.Body = _templateEngine.Render(order, TemplateIdentifier.AdminOrderReceived);
+            output.Body = _templateEngine.Render(order, TemplateIdentifier.AdminOrderReceived, false);
             return output;
         }
 
@@ -53,7 +53,7 @@ namespace Commerce.Application.Email
         {
             var output = MessageFactory();
             output.Subject = SubjectPrefix + "Order " + shipment.Order.ExternalId + " has items shipped";
-            output.Body = _templateEngine.Render(shipment, TemplateIdentifier.AdminOrderItemsShipped);
+            output.Body = _templateEngine.Render(shipment, TemplateIdentifier.AdminOrderItemsShipped, false);
             return output;
         }
 
@@ -61,7 +61,7 @@ namespace Commerce.Application.Email
         {
             var output = MessageFactory();
             output.Subject = SubjectPrefix + "Order " + refund.Order.ExternalId + " has items refunded";
-            output.Body = _templateEngine.Render(refund, TemplateIdentifier.AdminOrderItemsRefunded);
+            output.Body = _templateEngine.Render(refund, TemplateIdentifier.AdminOrderItemsRefunded, false);
             return output;
         }
 
@@ -71,7 +71,7 @@ namespace Commerce.Application.Email
             var subject = SubjectPrefix + "A System Error has occurred - " + activityId.ToString();
             output.Subject = subject;
             var body = subject + Environment.NewLine + Environment.NewLine + exception.FullStackTraceDump();
-            output.Body = _templateEngine.Render(body, TemplateIdentifier.AdminSystemError);
+            output.Body = _templateEngine.Render(body, TemplateIdentifier.AdminSystemError, false);
             return output;
         }
     }

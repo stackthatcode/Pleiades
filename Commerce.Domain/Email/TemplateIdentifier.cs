@@ -3,7 +3,6 @@ namespace Commerce.Application.Email
     public enum TemplateIdentifier
     {
         MasterTemplate,
-        EmailSignature,
 
         AdminOrderReceived,
         AdminOrderItemsRefunded,

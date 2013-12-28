@@ -1,0 +1,55 @@
+2013-12-27 08:22:50.4480|Error|38fa4e5b-753e-4f96-915f-0f6ee52a0f22|URL:http://localhost/Commerce.Web/ - IsAjaxRequest: False 
+2013-12-27 08:22:50.4640|Error|38fa4e5b-753e-4f96-915f-0f6ee52a0f22|System.Web.HttpCompileException:c:\DEV\Pleiades\Commerce.Web\Views\Shared\_Layout.cshtml(2): error CS0234: The type or namespace name 'MvcHelpers' does not exist in the namespace 'Commerce.Web' (are you missing an assembly reference?)
+   at System.Web.Compilation.AssemblyBuilder.Compile()
+   at System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   at System.Web.WebPages.BuildManagerWrapper.CreateInstanceOfType[T](String virtualPath)
+   at System.Web.WebPages.VirtualPathFactoryManager.CreateInstanceOfType[T](String virtualPath)
+   at System.Web.WebPages.WebPageBase.CreatePageFromVirtualPath(String virtualPath, HttpContextBase httpContext, Func`2 virtualPathExists, DisplayModeProvider displayModeProvider, IDisplayMode displayMode)
+   at System.Web.WebPages.WebPageBase.<>c__DisplayClass7.<RenderPageCore>b__6(TextWriter writer)
+   at System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   at System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   at System.Web.WebPages.WebPageBase.PopContext()
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+2013-12-27 08:22:50.7260|Error|38fa4e5b-753e-4f96-915f-0f6ee52a0f22|System.IO.DirectoryNotFoundException:Could not find a part of the path 'c:\windows\system32\inetsrv\EmailTemplates\Admin\SystemError.cshtml'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize, Boolean checkHost)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding)
+   at System.IO.File.InternalReadAllLines(String path, Encoding encoding)
+   at Commerce.Application.Email.TemplateEngine.RetreiveTemplate(TemplateIdentifier templateIdentifier) in c:\DEV\Pleiades\Commerce.Domain\Email\TemplateEngine.cs:line 64
+   at Commerce.Application.Email.TemplateEngine.Render[T](T model, TemplateIdentifier templateIdentifier, Boolean useMasterTemplate) in c:\DEV\Pleiades\Commerce.Domain\Email\TemplateEngine.cs:line 25
+   at Commerce.Application.Email.AdminEmailBuilder.SystemError(Guid activityId, Exception exception) in c:\DEV\Pleiades\Commerce.Domain\Email\AdminEmailBuilder.cs:line 74
+   at Commerce.Web.Plumbing.ErrorNotification.Send(Exception ex) in c:\DEV\Pleiades\Commerce.Web\Plumbing\ErrorNotification.cs:line 19 
+2013-12-27 18:08:15.5373|Debug|fa9f15be-8b95-4842-99d1-90b509257d6a|Image - Download: 754b5275-db3e-468d-91d6-f26b517a924b thumbnail 
+2013-12-27 18:08:15.5373|Debug|9edd1c52-37c6-4936-8542-3a8c988e11b3|Image - Download: 80e1adaa-f49a-4b76-b85c-be8848d65a8d thumbnail 
+2013-12-27 18:08:15.5373|Debug|3ce92b12-ff4d-4828-800f-5f736021e6d5|Image - Download: 5758f2da-5a13-44c5-98a7-9b34c2180ffb thumbnail 
+2013-12-27 18:08:15.5373|Debug|898f26dd-65b3-4354-af9d-649520f2491a|Image - Download: 0366be6d-aca3-457b-882f-d467fefde325 thumbnail 
+2013-12-27 18:08:15.5373|Debug|233a87f5-5f2e-45f6-87e6-635fc1039974|Image - Download: 4e01ab30-3474-4007-940d-a434738e27f8 thumbnail 
+2013-12-27 18:08:15.5373|Debug|b03991ae-2fe5-4097-9e90-1da5265d890e|Image - Download: bd12b970-0ff4-4d5e-9fa4-02bdd9366fc4 thumbnail 
+2013-12-27 18:08:15.7843|Debug|943c12ab-bfa4-4c9d-9f49-7e468506c571|Image - Download: b41046d5-76dc-417e-adfe-3a9d49998066 thumbnail 
+2013-12-27 18:08:15.7843|Debug|38e60535-1536-4f01-96dd-f7e3acfc6b4c|Image - Download: 1ec97734-4b69-4760-a298-0d8d12c8bf8b thumbnail 
+2013-12-27 18:08:15.7843|Debug|d567c89a-1849-439c-9d75-d8334fba5c90|Image - Download: 8f722a8a-ed87-4043-bc50-092f3c3e0d90 thumbnail 
+2013-12-27 18:08:15.7843|Debug|1098b997-fab1-47ce-95dc-484769766369|Image - Download: e86d68a4-e1a6-40f3-90b3-6a224af20d2a thumbnail 
+2013-12-27 18:08:24.2548|Debug|63edd7ae-441e-4047-b655-02aa23e28f7a|Image - Download: 754b5275-db3e-468d-91d6-f26b517a924b small 
+2013-12-27 18:08:24.2548|Debug|cd155be0-bfe0-4f9e-bbaf-f8a236b5b160|Image - Download: 30db7d95-7844-4757-afc1-110134f0a5b9 small 
+2013-12-27 18:08:24.2548|Debug|2b5ca93a-d9ea-43ac-a2b1-39fc9c1a31a7|Image - Download: 865af948-9d7c-4f8e-8b3f-1a87ec98bb9c small 
+2013-12-27 18:08:24.2728|Debug|75fa64c3-68b5-4e24-8815-066d9c4c49d8|Image - Download: 2f13939b-8817-4f6c-b4e9-e5ab0f61ff25 small 
+2013-12-27 18:08:24.2868|Debug|ad02cc5e-2814-4fe2-bff6-3ebf04a48ea0|Image - Download: f7bc6377-6777-40d2-a29b-ddb1b72bd40b small 
+2013-12-27 18:08:24.2868|Debug|8f55c8b4-b475-4ba3-98d0-19422b0c73a9|Image - Download: 6faa2e2b-b78e-4f08-8aaf-02fc6f16d367 thumbnail 
+2013-12-27 18:08:24.3028|Debug|6b0650bd-f22b-4a06-8605-21bf74015fd5|Image - Download: d1e4bd8c-1f7b-4cda-a909-22d9fb239985 small 
+2013-12-27 18:08:24.3028|Debug|84b11eea-cb37-4697-b3e3-27f71109f8e5|Image - Download: 7db30440-84a2-40e4-8d5a-06aad2d01c45 small 
+2013-12-27 18:08:24.3188|Debug|67384991-2f35-4c66-bf5c-4ea88cbed2e6|Image - Download: 335d93c3-f37a-4427-b3d7-ea91d3a7b6d9 small 
+2013-12-27 18:08:24.3188|Debug|5658f95d-3a7f-4edf-920d-0f0b718fda07|Image - Download: 026f1c2f-a683-489c-966d-04b2dbb1bedd small 
+2013-12-27 18:08:24.3328|Debug|13399fad-716a-4718-bebe-d981abe078c7|Image - Download: 344e0779-e805-45f1-af3f-76e4cf574825 thumbnail 
+2013-12-27 18:08:24.3328|Debug|f1bf652d-00d9-4eaa-adee-440adcad74ad|Image - Download: 74316948-85c4-4506-8f39-ce08444a8477 small 

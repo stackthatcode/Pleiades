@@ -32,7 +32,7 @@ namespace ArtOfGroundFighting.Initializer
             try
             {
                 // Logger
-                LoggerSingleton.Get = NLoggerImpl.RegistrationFactory("ArtOfGroundFighting.Initializer");
+                LoggerSingleton.Get = NLoggerImpl.RegistrationFactory("Initializer");
                 LoggerSingleton.Get().Info("PROCESS START:" + DateTime.Now + Environment.NewLine);
                 DoStuff();
             }
@@ -52,8 +52,8 @@ namespace ArtOfGroundFighting.Initializer
 
         public static void DoStuff()
         {
-            LoggerSingleton.Get().Info(ConfigurationManager.AppSettings["ApplicationName"]);
-            LoggerSingleton.Get().Info(ConfigurationManager.AppSettings["CompanyName"]);
+            LoggerSingleton.Get().Info(ConfigurationManager.AppSettings["PushMarketSoftwareName"]);
+            LoggerSingleton.Get().Info(ConfigurationManager.AppSettings["PushMarketCompanyName"]);
             LoggerSingleton.Get().Info("...");
 
             // Database Destruction, Resource Directory too

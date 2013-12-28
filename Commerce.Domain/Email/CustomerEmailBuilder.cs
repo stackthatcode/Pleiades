@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Commerce.Application.Email.Model;
+﻿using Commerce.Application.Email.Model;
 using Commerce.Application.Orders.Entities;
 
 namespace Commerce.Application.Email
@@ -30,7 +29,7 @@ namespace Commerce.Application.Email
             var output = MessageFactory();
             output.To = order.EmailAddress;
             output.Subject = "Your order has been received";
-            output.Body = _templateEngine.Render(order, TemplateIdentifier.CustomerOrderReceived);
+            output.Body = _templateEngine.Render(order, TemplateIdentifier.CustomerOrderReceived, true);
             return output;
         }
 
@@ -39,7 +38,7 @@ namespace Commerce.Application.Email
             var output = MessageFactory();
             output.To = shipment.Order.EmailAddress;
             output.Subject = "Items in your order have shipped";
-            output.Body = _templateEngine.Render(shipment, TemplateIdentifier.CustomerOrderItemsShipped);
+            output.Body = _templateEngine.Render(shipment, TemplateIdentifier.CustomerOrderItemsShipped, true);
             return output;
         }
 
@@ -48,7 +47,7 @@ namespace Commerce.Application.Email
             var output = MessageFactory();
             output.To = refund.Order.EmailAddress;
             output.Subject = "Items in your order have been refunded";
-            output.Body = _templateEngine.Render(refund, TemplateIdentifier.CustomerOrderItemsRefunded);
+            output.Body = _templateEngine.Render(refund, TemplateIdentifier.CustomerOrderItemsRefunded, true);
             return output;
         }
     }

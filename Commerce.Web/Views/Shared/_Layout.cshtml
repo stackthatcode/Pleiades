@@ -1,9 +1,10 @@
 ﻿@using System.Configuration
+@using Pleiades.Web.MvcHelpers
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>@ConfigurationManager.AppSettings["ApplicationName"] - Site Management</title>
+    <title>@ConfigurationManager.AppSettings["PushMarketSoftwareName"] - Site Management</title>
     @if (ConfigurationManager.AppSettings["BundleOptimizationDebug"] == "true") {
         @Html.Javascript("~/Content/JQuery/jquery-2.0.3.min.js")
         @Html.Javascript("~/Content/JQuery/jquery.validate.min.js")

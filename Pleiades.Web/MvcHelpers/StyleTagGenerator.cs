@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
-namespace Commerce.Web.MvcHelpers
+namespace Pleiades.Web.MvcHelpers
 {
     public static class StyleTagGenerator
     {        

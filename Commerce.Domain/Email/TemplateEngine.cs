@@ -15,13 +15,12 @@ namespace Commerce.Application.Email
         private const string ContentPlaceholder = "@@Content";
         private const string SignaturePlaceholder = "@@Signature";
 
-        public TemplateEngine(
-                IEmailConfigAdapter emailConfigAdapter)
+        public TemplateEngine(IEmailConfigAdapter emailConfigAdapter)
         {
             _emailConfigAdapter = emailConfigAdapter;
         }
-
-        public string Render<T>(T model, TemplateIdentifier templateIdentifier)
+        
+        public string Render<T>(T model, TemplateIdentifier templateIdentifier, bool useMasterTemplate = false)
         {
             var bodyTemplate = RetreiveTemplate(templateIdentifier);
             var bodyContent = "";
@@ -40,13 +39,7 @@ namespace Commerce.Application.Email
             }
 
             var masterTemplate = RetreiveTemplate(TemplateIdentifier.MasterTemplate);
-            var signature = RetreiveTemplate(TemplateIdentifier.EmailSignature);
-
-            // TODO: replace this with Razor Master Page, if possible...
-            var result =
-                masterTemplate
-                    .Replace(ContentPlaceholder, bodyContent)
-                    .Replace(SignaturePlaceholder, signature);
+            var result = masterTemplate.Replace(ContentPlaceholder, bodyContent);
             return result;
         }
 
@@ -54,14 +47,12 @@ namespace Commerce.Application.Email
             _templateMap = 
                 new Dictionary<TemplateIdentifier, string>
                 {
-                    { TemplateIdentifier.MasterTemplate, @"Shared\MasterTemplate.txt" },
-                    { TemplateIdentifier.EmailSignature, @"Shared\EmailSignature.txt" },
-
                     { TemplateIdentifier.AdminOrderReceived, @"Admin\OrderReceived.cshtml" },
                     { TemplateIdentifier.AdminOrderItemsRefunded, @"Admin\OrderItemsRefunded.cshtml" },
                     { TemplateIdentifier.AdminOrderItemsShipped, @"Admin\OrderItemsShipped.cshtml" },
                     { TemplateIdentifier.AdminSystemError, @"Admin\SystemError.cshtml" },
 
+                    { TemplateIdentifier.MasterTemplate, @"Shared\MasterTemplate.txt" },
                     { TemplateIdentifier.CustomerOrderReceived, @"Customer\OrderReceived.cshtml" },
                     { TemplateIdentifier.CustomerOrderItemsRefunded, @"Customer\OrderItemsRefunded.cshtml" },
                     { TemplateIdentifier.CustomerOrderItemsShipped, @"Customer\OrderItemsShipped.cshtml" },

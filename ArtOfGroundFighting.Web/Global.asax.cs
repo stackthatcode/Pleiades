@@ -41,7 +41,8 @@ namespace ArtOfGroundFighting.Web
             MakeBundles();
 
             // Logger
-            LoggerSingleton.Get = NLoggerImpl.RegistrationFactory("Commerce.Web", ActivityId.MessageFormatter);
+            LoggerSingleton.Get = NLoggerImpl
+                .RegistrationFactory("ArtOfGroundFighting.Web", ActivityId.MessageFormatter);
 
             // Phil Haack's Tool
             if (ConfigurationManager.AppSettings["EnableRouteDebug"].ToBoolTryParse())
