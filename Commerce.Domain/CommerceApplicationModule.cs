@@ -125,11 +125,12 @@ namespace Commerce.Application
         private static void RegisterEmailComponents(ContainerBuilder builder)
         {
             // Email Functionality
+            builder.Register(ctx => EmailConfigAdapter.Settings).As<IEmailConfigAdapter>();
             builder.RegisterType<CustomerEmailBuilder>().As<ICustomerEmailBuilder>();
             builder.RegisterType<AdminEmailBuilder>().As<IAdminEmailBuilder>();
             builder.RegisterType<EmbeddedResourceRepository>().As<IEmbeddedResourceRepository>();
             builder.RegisterType<TemplateEngine>().As<ITemplateEngine>();
-            builder.Register(ctx => EmailConfigAdapter.Settings).As<IEmailConfigAdapter>();
+            builder.RegisterType<WebAppTemplateLocator>().As<ITemplateLocator>();
 
             if (EmailConfigAdapter.Settings.ServerSideMockEnabled.ToBoolTryParse())
             {

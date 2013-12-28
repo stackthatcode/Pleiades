@@ -195,22 +195,8 @@
     <Content Include="Content\Utilities\aQuery-1.0-min.js" />
     <Content Include="Content\Utilities\flow.js" />
     <Content Include="Content\Utilities\generalFunctions.js" />
-    <Content Include="EmailTemplates\Shared\MasterTemplate.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="EmailTemplates\Customer\OrderItemsRefunded.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="EmailTemplates\Customer\OrderItemsShipped.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="EmailTemplates\Customer\OrderReceived.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -258,7 +244,6 @@
     <None Include="Content\Bootstrap_3_0_0\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Content\JQuery\jquery-2.0.3.min.map" />
     <Content Include="PostBuildScript.bat" />
-    <Content Include="PostBuildScript - Copy.bat" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

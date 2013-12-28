@@ -267,9 +267,6 @@
     <Content Include="Content\Utilities\aQuery-1.0-min.js" />
     <Content Include="Content\Utilities\flow.js" />
     <Content Include="Content\Utilities\generalFunctions.js" />
-    <Content Include="EmailTemplates\Shared\MasterTemplate.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -368,27 +365,7 @@
     <Content Include="Views\ManageOrder\_OrderDetail.cshtml" />
     <None Include="Content\JQuery\jquery-2.0.3.min.map" />
     <Content Include="Shared\_StripeShim.cshtml" />
-    <Content Include="EmailTemplates\Admin\OrderItemsRefunded.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="EmailTemplates\Admin\OrderItemsShipped.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="EmailTemplates\Admin\OrderReceived.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="EmailTemplates\Admin\SystemError.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="EmailTemplates\Customer\OrderItemsRefunded.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="EmailTemplates\Customer\OrderItemsShipped.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="EmailTemplates\Customer\OrderReceived.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="PostBuildScript.bat" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -447,7 +424,8 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(SolutionDir)\lib $(TargetDir) /Y /S</PostBuildEvent>
+    <PostBuildEvent>call "$(ProjectDir)PostBuildScript.bat" $(ProjectDir) $(SolutionDir) $(TargetDir)
+</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

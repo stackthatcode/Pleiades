@@ -137,10 +137,6 @@
       <Project>{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}</Project>
       <Name>Commerce.Application</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Commerce.Web\Commerce.Web.csproj">
-      <Project>{C719AC5A-4969-4365-BDE6-A668C4929DB6}</Project>
-      <Name>Commerce.Web</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Pleiades.App.Foundation\Pleiades.App.Foundation.csproj">
       <Project>{10CEE227-9B7C-4D97-B53A-229E8D45B15F}</Project>
       <Name>Pleiades.App.Foundation</Name>
@@ -175,7 +171,31 @@
       <DependentUpon>App.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
+    <Content Include="EmailTemplates\Customer\OrderItemsRefunded.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\Customer\OrderItemsShipped.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\Customer\OrderReceived.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\Admin\OrderItemsRefunded.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\Admin\OrderItemsShipped.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\Admin\OrderReceived.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\Admin\SystemError.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
+    <Content Include="EmailTemplates\Shared\MasterTemplate.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="PostBuildScript.bat" />
     <None Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
   </ItemGroup>
@@ -328,6 +348,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SlowCheetahTargets)" Condition="Exists('$(SlowCheetahTargets)')" Label="SlowCheetah" />
+  <PropertyGroup>
+    <PostBuildEvent>call "$(ProjectDir)PostBuildScript.bat" "$(ProjectDir)" "$(SolutionDir)" "$(TargetDir)"
+</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

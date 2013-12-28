@@ -112,7 +112,9 @@
     <Compile Include="Billing\TransactionTypeExtensions.cs" />
     <Compile Include="CommerceApplicationModule.cs" />
     <Compile Include="Email\AdminEmailBuilder.cs" />
+    <Compile Include="Email\ITemplateLocator.cs" />
     <Compile Include="Email\TemplateIdentifier.cs" />
+    <Compile Include="Email\WebAppTemplateLocator.cs" />
     <Compile Include="File\EmbeddedResourceRepository.cs" />
     <Compile Include="Email\ICustomerEmailBuilder.cs" />
     <Compile Include="Email\CustomerEmailBuilder.cs" />

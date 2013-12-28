@@ -10,19 +10,18 @@ namespace Commerce.Application.Email
 {
     public class TemplateEngine : ITemplateEngine
     {
-        private readonly IEmailConfigAdapter _emailConfigAdapter;
+        private readonly ITemplateLocator _templateLocator;
 
         private const string ContentPlaceholder = "@@Content";
-        private const string SignaturePlaceholder = "@@Signature";
 
-        public TemplateEngine(IEmailConfigAdapter emailConfigAdapter)
+        public TemplateEngine(ITemplateLocator templateLocator)
         {
-            _emailConfigAdapter = emailConfigAdapter;
+            _templateLocator = templateLocator;
         }
-        
+
         public string Render<T>(T model, TemplateIdentifier templateIdentifier, bool useMasterTemplate = false)
         {
-            var bodyTemplate = RetreiveTemplate(templateIdentifier);
+            var bodyTemplate = _templateLocator.Retreive(templateIdentifier);
             var bodyContent = "";
 
             try
@@ -38,34 +37,9 @@ namespace Commerce.Application.Email
                 throw;
             }
 
-            var masterTemplate = RetreiveTemplate(TemplateIdentifier.MasterTemplate);
+            var masterTemplate = _templateLocator.Retreive(TemplateIdentifier.MasterTemplate);
             var result = masterTemplate.Replace(ContentPlaceholder, bodyContent);
             return result;
-        }
-
-        private readonly Dictionary<TemplateIdentifier, string> 
-            _templateMap = 
-                new Dictionary<TemplateIdentifier, string>
-                {
-                    { TemplateIdentifier.AdminOrderReceived, @"Admin\OrderReceived.cshtml" },
-                    { TemplateIdentifier.AdminOrderItemsRefunded, @"Admin\OrderItemsRefunded.cshtml" },
-                    { TemplateIdentifier.AdminOrderItemsShipped, @"Admin\OrderItemsShipped.cshtml" },
-                    { TemplateIdentifier.AdminSystemError, @"Admin\SystemError.cshtml" },
-
-                    { TemplateIdentifier.MasterTemplate, @"Shared\MasterTemplate.txt" },
-                    { TemplateIdentifier.CustomerOrderReceived, @"Customer\OrderReceived.cshtml" },
-                    { TemplateIdentifier.CustomerOrderItemsRefunded, @"Customer\OrderItemsRefunded.cshtml" },
-                    { TemplateIdentifier.CustomerOrderItemsShipped, @"Customer\OrderItemsShipped.cshtml" },
-                };
-
-        public string RetreiveTemplate(TemplateIdentifier templateIdentifier)
-        {
-            var path = Path.Combine(_emailConfigAdapter.TemplateDirectory, _templateMap[templateIdentifier]);
-            var template = System.IO.File.ReadAllLines(path);
-
-            var parsedTemplate = template[0].Contains("@model") ? template.Skip(1).ToList() : template.ToList();
-            var output = string.Join(Environment.NewLine, parsedTemplate);
-            return output;
         }
     };
 }

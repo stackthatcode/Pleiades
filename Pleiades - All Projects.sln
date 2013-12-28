@@ -24,6 +24,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.Web.Security.UnitTests", "Pleiades.Web.Security.UnitTests\Pleiades.Web.Security.UnitTests.csproj", "{11018755-DEC2-493C-82D1-58DCC1AF5927}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commerce.Web", "Commerce.Web\Commerce.Web.csproj", "{C719AC5A-4969-4365-BDE6-A668C4929DB6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8E922D95-E286-4AF1-89E2-943EA247B806} = {8E922D95-E286-4AF1-89E2-943EA247B806}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pleiades.TestHelpers", "Pleiades.TestHelpers\Pleiades.TestHelpers.csproj", "{A839CD41-8163-4667-A4B3-9B7593FC0350}"
 EndProject
@@ -40,11 +43,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3dPrintedStuff", "3dPrintedStuff", "{018A7CC9-E636-4381-A629-7AB237D45E7E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtOfGroundFighting.Initializer", "ArtOfGroundFighting.Initializer\ArtOfGroundFighting.Initializer.csproj", "{8E922D95-E286-4AF1-89E2-943EA247B806}"
-	ProjectSection(ProjectDependencies) = postProject
-		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561} = {EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtOfGroundFighting.Web", "ArtOfGroundFighting.Web\ArtOfGroundFighting.Web.csproj", "{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8E922D95-E286-4AF1-89E2-943EA247B806} = {8E922D95-E286-4AF1-89E2-943EA247B806}
+	EndProjectSection
 EndProject
 Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "ArtOfGroundFighting.Web.Azure", "ArtOfGroundFighting.Web.Azure\ArtOfGroundFighting.Web.Azure.ccproj", "{C325FD87-A408-4D63-8753-582D826E9E7C}"
 EndProject

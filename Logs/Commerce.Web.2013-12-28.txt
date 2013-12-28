@@ -1,0 +1,24 @@
+3cc823d3-6f71-4848-97eb-2817c2a4e2ef|URL:http://localhost/Commerce.Web/Manager/Error - IsAjaxRequest: False 
+3cc823d3-6f71-4848-97eb-2817c2a4e2ef|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Controllers.ManagerController.Error() in c:\DEV\Pleiades\Commerce.Web\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+3cc823d3-6f71-4848-97eb-2817c2a4e2ef|System.IO.DirectoryNotFoundException:Could not find a part of the path 'c:\windows\system32\inetsrv\EmailTemplates\Admin\SystemError.cshtml'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize, Boolean checkHost)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding)
+   at System.IO.File.InternalReadAllLines(String path, Encoding encoding)
+   at Commerce.Application.Email.TemplateEngine.RetreiveTemplate(TemplateIdentifier templateIdentifier) in c:\DEV\Pleiades\Commerce.Domain\Email\TemplateEngine.cs:line 64
+   at Commerce.Application.Email.TemplateEngine.Render[T](T model, TemplateIdentifier templateIdentifier, Boolean useMasterTemplate) in c:\DEV\Pleiades\Commerce.Domain\Email\TemplateEngine.cs:line 25
+   at Commerce.Application.Email.AdminEmailBuilder.SystemError(Guid activityId, Exception exception) in c:\DEV\Pleiades\Commerce.Domain\Email\AdminEmailBuilder.cs:line 74
+   at Commerce.Web.Plumbing.ErrorNotification.Send(Exception ex) in c:\DEV\Pleiades\Commerce.Web\Plumbing\ErrorNotification.cs:line 19 
