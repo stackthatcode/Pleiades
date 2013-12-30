@@ -21,13 +21,13 @@ namespace Commerce.Application.Azure
 
         public AzureFileResourceRepository(
                 string storageConnectionString, 
-                string storageContainerName,
+                string ResourcesStorageContainer,
                 PushMarketContext dataContext)
         {
             _dataContext = dataContext;
             var storageAccount = CloudStorageAccount.Parse(storageConnectionString);
             var blobClient = storageAccount.CreateCloudBlobClient();
-            _container = blobClient.GetContainerReference(storageContainerName);
+            _container = blobClient.GetContainerReference(ResourcesStorageContainer);
         }
 
         public FileResource AddNew(Bitmap bitmap)

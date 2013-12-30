@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Azure\TestAzureFileRepository.cs" />
+    <Compile Include="Azure\TestAzureLogging.cs" />
     <Compile Include="Infrastructure\TestEmailTemplates.cs" />
     <Compile Include="Resources\ImageProcessingTests.cs" />
     <Compile Include="StripeClient\TestConfiguration.cs" />

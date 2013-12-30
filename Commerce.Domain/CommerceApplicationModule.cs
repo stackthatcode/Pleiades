@@ -149,7 +149,7 @@ namespace Commerce.Application
             // Resource Repositories
             builder.Register(ctx => new AzureFileResourceRepository(
                         configuration.StorageConnectionString,
-                        configuration.StorageContainerName,
+                        configuration.ResourcesStorageContainer,
                         ctx.Resolve<PushMarketContext>()))
                 .As<IFileResourceRepository>()
                 .InstancePerLifetimeScope();            

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Web;
 
 namespace Commerce.Application.Email
 {
@@ -32,7 +33,8 @@ namespace Commerce.Application.Email
 
         public string Retreive(TemplateIdentifier templateIdentifier)
         {
-            var path = Path.Combine(_emailConfigAdapter.TemplateDirectory, _templateMap[templateIdentifier]);
+            var basePath = HttpContext.Current.Request.MapPath("~/");
+            var path = Path.Combine(basePath, _emailConfigAdapter.TemplateDirectory, _templateMap[templateIdentifier]);
             var template = System.IO.File.ReadAllLines(path);
 
             var parsedTemplate = template[0].Contains("@model") ? template.Skip(1).ToList() : template.ToList();

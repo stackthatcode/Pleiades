@@ -1,12 +1,9 @@
-﻿Your Order has been Received!  Your Order Number is: @Model.Order.ExternalId.  
-
-It will ship to the following address:
+﻿@model Commerce.Application.Orders.Entities.OrderShipment
+Items from your Order #@Model.Order.ExternalId have Shipped.  They will ship to the following address:
 
 @Model.Order.Name
 @Model.Order.Address1 @Model.Order.Address2
 @Model.Order.City, @Model.Order.State @Model.Order.ZipCode
-
-Your Order contains the following items:
 
 @foreach (var orderline in Model.OrderLineGroups) 
 {

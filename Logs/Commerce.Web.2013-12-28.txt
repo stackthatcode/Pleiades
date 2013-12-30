@@ -22,3 +22,99 @@
    at Commerce.Application.Email.TemplateEngine.Render[T](T model, TemplateIdentifier templateIdentifier, Boolean useMasterTemplate) in c:\DEV\Pleiades\Commerce.Domain\Email\TemplateEngine.cs:line 25
    at Commerce.Application.Email.AdminEmailBuilder.SystemError(Guid activityId, Exception exception) in c:\DEV\Pleiades\Commerce.Domain\Email\AdminEmailBuilder.cs:line 74
    at Commerce.Web.Plumbing.ErrorNotification.Send(Exception ex) in c:\DEV\Pleiades\Commerce.Web\Plumbing\ErrorNotification.cs:line 19 
+5e7da9ba-13fb-423c-886f-75c079b30c0a|URL:http://localhost/Commerce.Web/ - IsAjaxRequest: False 
+5e7da9ba-13fb-423c-886f-75c079b30c0a|System.InvalidOperationException:The partial view '~/Shared/_StripeShim.cshtml' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Shared/_StripeShim.cshtml
+   at System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
+   at System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   at System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   at ASP._Page_Views_Shared__Layout_cshtml.Execute() in c:\DEV\Pleiades\Commerce.Web\Views\Shared\_Layout.cshtml:line 38
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   at System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   at System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   at System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   at System.Web.WebPages.WebPageBase.PopContext()
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+5e7da9ba-13fb-423c-886f-75c079b30c0a|System.IO.DirectoryNotFoundException:Could not find a part of the path 'c:\windows\system32\inetsrv\EmailTemplates\Admin\SystemError.cshtml'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize, Boolean checkHost)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding)
+   at System.IO.File.InternalReadAllLines(String path, Encoding encoding)
+   at Commerce.Application.Email.WebAppTemplateLocator.Retreive(TemplateIdentifier templateIdentifier) in c:\DEV\Pleiades\Commerce.Domain\Email\WebAppTemplateLocator.cs:line 36
+   at Commerce.Application.Email.TemplateEngine.Render[T](T model, TemplateIdentifier templateIdentifier, Boolean useMasterTemplate) in c:\DEV\Pleiades\Commerce.Domain\Email\TemplateEngine.cs:line 24
+   at Commerce.Application.Email.AdminEmailBuilder.SystemError(Guid activityId, Exception exception) in c:\DEV\Pleiades\Commerce.Domain\Email\AdminEmailBuilder.cs:line 74
+   at Commerce.Web.Plumbing.ErrorNotification.Send(Exception ex) in c:\DEV\Pleiades\Commerce.Web\Plumbing\ErrorNotification.cs:line 19 
+666ceefc-98f7-4f2a-bbc9-f7f4bcb023e6|URL:http://localhost/Commerce.Web/ - IsAjaxRequest: False 
+666ceefc-98f7-4f2a-bbc9-f7f4bcb023e6|System.InvalidOperationException:The partial view '~/Shared/_StripeShim.cshtml' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Shared/_StripeShim.cshtml
+   at System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
+   at System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   at System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   at ASP._Page_Views_Shared__Layout_cshtml.Execute() in c:\DEV\Pleiades\Commerce.Web\Views\Shared\_Layout.cshtml:line 38
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   at System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   at System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   at System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   at System.Web.WebPages.WebPageBase.PopContext()
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+666ceefc-98f7-4f2a-bbc9-f7f4bcb023e6|System.IO.DirectoryNotFoundException:Could not find a part of the path 'c:\windows\system32\inetsrv\EmailTemplates\Admin\SystemError.cshtml'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize, Boolean checkHost)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize)
+   at System.IO.StreamReader..ctor(String path, Encoding encoding)
+   at System.IO.File.InternalReadAllLines(String path, Encoding encoding)
+   at Commerce.Application.Email.WebAppTemplateLocator.Retreive(TemplateIdentifier templateIdentifier) in c:\DEV\Pleiades\Commerce.Domain\Email\WebAppTemplateLocator.cs:line 36
+   at Commerce.Application.Email.TemplateEngine.Render[T](T model, TemplateIdentifier templateIdentifier, Boolean useMasterTemplate) in c:\DEV\Pleiades\Commerce.Domain\Email\TemplateEngine.cs:line 24
+   at Commerce.Application.Email.AdminEmailBuilder.SystemError(Guid activityId, Exception exception) in c:\DEV\Pleiades\Commerce.Domain\Email\AdminEmailBuilder.cs:line 74
+   at Commerce.Web.Plumbing.ErrorNotification.Send(Exception ex) in c:\DEV\Pleiades\Commerce.Web\Plumbing\ErrorNotification.cs:line 19 
+2f0dc893-5868-40a4-824d-c191e05082f9|URL:http://localhost/Commerce.Web/ - IsAjaxRequest: False 
+2f0dc893-5868-40a4-824d-c191e05082f9|System.InvalidOperationException:The partial view '~/Shared/_StripeShim.cshtml' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Shared/_StripeShim.cshtml
+   at System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
+   at System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   at System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   at ASP._Page_Views_Shared__Layout_cshtml.Execute() in c:\DEV\Pleiades\Commerce.Web\Views\Shared\_Layout.cshtml:line 38
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   at System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   at System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   at System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   at System.Web.WebPages.WebPageBase.PopContext()
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 
+5c1e90c8-674e-436b-acd9-2c18de34a6cc|URL:http://localhost/Commerce.Web/ - IsAjaxRequest: False 
+5c1e90c8-674e-436b-acd9-2c18de34a6cc|System.InvalidOperationException:The partial view '~/Shared/_StripeShim.cshtml' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Shared/_StripeShim.cshtml
+   at System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
+   at System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   at System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   at ASP._Page_Views_Shared__Layout_cshtml.Execute() in c:\DEV\Pleiades\Commerce.Web\Views\Shared\_Layout.cshtml:line 38
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   at System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   at System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   at System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   at System.Web.WebPages.WebPageBase.PopContext()
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult) 

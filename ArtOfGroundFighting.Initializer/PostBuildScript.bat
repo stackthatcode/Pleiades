@@ -15,3 +15,8 @@ REM Copies the Config Files into Commerce.Web root
 copy %1App.Debug.config %1\..\Commerce.Web\Web.Debug.config
 copy %1App.AzureSandbox.config %1\..\Commerce.Web\Web.AzureSandbox.config
 copy %1App.Azure.config %1\..\Commerce.Web\Web.Azure.config
+
+REM Copies the Email templates
+xcopy %1EmailTemplates %1\..\Commerce.Web\EmailTemplates /Y /S
+xcopy %1EmailTemplates %1\..\ArtOfGroundFighting.Web\EmailTemplates /Y /S
+

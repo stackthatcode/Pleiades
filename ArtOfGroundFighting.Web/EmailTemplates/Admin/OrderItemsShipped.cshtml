@@ -1,0 +1,11 @@
+﻿@model Commerce.Application.Orders.Entities.OrderShipment
+Items from Order #@Model.Order.ExternalId have Shipped.  They will ship to the following address:
+
+@Model.Order.Name
+@Model.Order.Address1 @Model.Order.Address2
+@Model.Order.City, @Model.Order.State @Model.Order.ZipCode
+
+@foreach (var orderline in Model.OrderLineGroups) 
+{
+	@(orderline.Name + " (" + orderline.SkuCode + ") - quantity: " + orderline.Quantity + "\n") 
+}

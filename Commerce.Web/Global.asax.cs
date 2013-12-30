@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Pleiades.App.Logging;
 using Pleiades.App.Utility;
 using Pleiades.Web.Activity;
+using Pleiades.App.Logging;
 using Pleiades.Web.Plumbing;
 using Pleiades.Web.Security.Aspect;
 using Commerce.Web.Autofac;
@@ -42,7 +42,7 @@ namespace Commerce.Web
             MakeBundles();
 
             // Logger
-            LoggerSingleton.Get = NLoggerImpl.RegistrationFactory("Commerce.Web", ActivityId.MessageFormatter);
+            LoggerRegistration.Register();
 
             // Phil Haack's Tool
             if (ConfigurationManager.AppSettings["EnableRouteDebug"].ToBoolTryParse())
@@ -51,11 +51,6 @@ namespace Commerce.Web
             }
         }
 
-        protected void RegisterLogger()
-        {
-            var loggerName = (ConfigurationManager.AppSettings["StorefrontName"] ?? "Commerce") + ".Admin";
-            LoggerSingleton.Get = NLoggerImpl.RegistrationFactory(loggerName, ActivityId.MessageFormatter);
-        }
 
         protected void Application_Error(object sender, EventArgs e)
         {

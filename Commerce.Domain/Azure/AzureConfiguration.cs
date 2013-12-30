@@ -20,11 +20,18 @@ namespace Commerce.Application.Azure
             set { this["StorageConnectionString"] = value; }
         }
 
-        [ConfigurationProperty("StorageContainerName", IsRequired = true)]
-        public string StorageContainerName
+        [ConfigurationProperty("ResourcesStorageContainer", IsRequired = true)]
+        public string ResourcesStorageContainer
         {
-            get { return (string)_settings["StorageContainerName"]; }
-            set { this["StorageContainerName"] = value; }
+            get { return (string)_settings["ResourcesStorageContainer"]; }
+            set { this["ResourcesStorageContainer"] = value; }
+        }
+
+        [ConfigurationProperty("LogEntryTable", IsRequired = true)]
+        public string LogEntryTable
+        {
+            get { return (string)_settings["LogEntryTable"]; }
+            set { this["LogEntryTable"] = value; }
         }
     }
 }

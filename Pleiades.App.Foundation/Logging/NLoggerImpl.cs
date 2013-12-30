@@ -6,6 +6,7 @@ namespace Pleiades.App.Logging
     public class NLoggerImpl : ILogger
     {
         private readonly string _loggerName;
+        private readonly Func<string, string> _messageFormatter = x => x;
 
         public static Func<ILogger> RegistrationFactory(string loggerName, Func<string, string> formatter = null)
         {
@@ -13,14 +14,12 @@ namespace Pleiades.App.Logging
             return () => logger;
         }
 
-        public Func<string, string> MessageFormatter = x => x;
-
         public NLoggerImpl(string loggerName, Func<string, string> formatter)
         {
             _loggerName = loggerName;
             if (formatter != null)
             {
-                MessageFormatter = formatter;
+                _messageFormatter = formatter;
             }
         }
 
@@ -31,37 +30,37 @@ namespace Pleiades.App.Logging
 
         public void Trace(string message)
         {
-            GetLogger.Trace(MessageFormatter(message));
+            GetLogger.Trace(_messageFormatter(message));
         }
 
         public void Debug(string message)
         {
-            GetLogger.Debug(MessageFormatter(message));
+            GetLogger.Debug(_messageFormatter(message));
         }
 
         public void Info(string message)
         {
-            GetLogger.Info(MessageFormatter(message));
+            GetLogger.Info(_messageFormatter(message));
         }
 
         public void Warn(string message)
         {
-            GetLogger.Warn(MessageFormatter(message));
+            GetLogger.Warn(_messageFormatter(message));
         }
 
         public void Error(string message)
         {
-            GetLogger.Error(MessageFormatter(message));
+            GetLogger.Error(_messageFormatter(message));
         }
 
         public void Error(Exception exception)
         {
-            GetLogger.Error(MessageFormatter(exception.FullStackTraceDump()));
+            GetLogger.Error(_messageFormatter(exception.FullStackTraceDump()));
         }
 
         public void Fatal(string message)
         {
-            GetLogger.Fatal(MessageFormatter(message));
+            GetLogger.Fatal(_messageFormatter(message));
         }
     }
 }

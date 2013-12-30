@@ -37,9 +37,16 @@ namespace Commerce.Application.Email
                 throw;
             }
 
-            var masterTemplate = _templateLocator.Retreive(TemplateIdentifier.MasterTemplate);
-            var result = masterTemplate.Replace(ContentPlaceholder, bodyContent);
-            return result;
+            if (useMasterTemplate)
+            {
+                var masterTemplate = _templateLocator.Retreive(TemplateIdentifier.MasterTemplate);
+                var bodyWithMasterTemplate = masterTemplate.Replace(ContentPlaceholder, bodyContent);
+                return bodyWithMasterTemplate;
+            }
+            else
+            {
+                return bodyContent;
+            }
         }
     };
 }

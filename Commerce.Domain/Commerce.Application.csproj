@@ -104,6 +104,9 @@
     <Compile Include="Analytics\IAnalyticsRepository.cs" />
     <Compile Include="Azure\AzureConfiguration.cs" />
     <Compile Include="Azure\AzureFileResourceRepository.cs" />
+    <Compile Include="Azure\AzureLogEntryRepository.cs" />
+    <Compile Include="Azure\AzureLogger.cs" />
+    <Compile Include="Azure\LogEntry.cs" />
     <Compile Include="Billing\BillingInfo.cs" />
     <Compile Include="Billing\StateTax.cs" />
     <Compile Include="Billing\Total.cs" />
@@ -203,8 +206,8 @@
     <Compile Include="Products\InventoryRepository.cs" />
     <Compile Include="Products\IProductRepository.cs" />
     <Compile Include="Products\ProductRepository.cs" />
-    <Compile Include="Products\ProductSize.cs" />
-    <Compile Include="Products\ProductSku.cs" />
+    <Compile Include="Products\Entities\ProductSize.cs" />
+    <Compile Include="Products\Entities\ProductSku.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AggregateReadOnlyRepository.cs" />
     <Compile Include="Security\AggregateWriteableRepository.cs" />
