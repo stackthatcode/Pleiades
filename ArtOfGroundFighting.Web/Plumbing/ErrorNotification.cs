@@ -13,12 +13,14 @@ namespace ArtOfGroundFighting.Web.Plumbing
         {
             try
             {
-                var activityId = ActivityId.Current;
-                var container = AutofacDependencyResolver.Current.ApplicationContainer;
-                var builder = container.Resolve<IAdminEmailBuilder>();
-                var message = builder.SystemError(activityId, ex);
-                var service = container.Resolve<IEmailService>();
-                service.Send(message);
+                using (var scope = AutofacDependencyResolver.Current.ApplicationContainer.BeginLifetimeScope())
+                {
+                    var activityId = ActivityId.Current;
+                    var builder = scope.Resolve<IAdminEmailBuilder>();
+                    var message = builder.SystemError(activityId, ex);
+                    var service = scope.Resolve<IEmailService>();
+                    service.Send(message);
+                }
             }
             catch (Exception innerException)
             {

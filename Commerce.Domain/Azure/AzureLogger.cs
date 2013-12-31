@@ -25,39 +25,54 @@ namespace Commerce.Application.Azure
             }
         }
 
+        private void ExceptionEater(Action doSomething)
+        {
+            try
+            {
+                doSomething();
+            }
+            catch (Exception ex)
+            {               
+                Console.WriteLine(ex.FullStackTraceDump());
+                System.Diagnostics.Debug.WriteLine(ex.FullStackTraceDump());
+            }
+        }
+
         public void Trace(string message)
         {
-            _repository.AddEntry(_loggerName, "Trace", _messageFormatter(message));
+            ExceptionEater(() => _repository.AddEntry(_loggerName, "Trace", _messageFormatter(message)));
         }
 
         public void Debug(string message)
         {
-            _repository.AddEntry(_loggerName, "Debug", _messageFormatter(message));
+            ExceptionEater(() => _repository.AddEntry(_loggerName, "Debug", _messageFormatter(message)));
         }
 
         public void Info(string message)
         {
-            _repository.AddEntry(_loggerName, "Info", _messageFormatter(message));
+            ExceptionEater(() => _repository.AddEntry(_loggerName, "Info", _messageFormatter(message)));
         }
 
         public void Warn(string message)
         {
-            _repository.AddEntry(_loggerName, "Warn", _messageFormatter(message));
+            ExceptionEater(() => _repository.AddEntry(_loggerName, "Warn", _messageFormatter(message)));
         }
 
         public void Error(string message)
         {
-            _repository.AddEntry(_loggerName, "Error", _messageFormatter(message));
+            ExceptionEater(() => _repository.AddEntry(_loggerName, "Error", _messageFormatter(message)));
         }
 
         public void Error(Exception exception)
         {
-            _repository.AddEntry(_loggerName, "Error", _messageFormatter(exception.FullStackTraceDump()));
+            ExceptionEater(
+                () => _repository.AddEntry(
+                    _loggerName, "Error", _messageFormatter(exception.FullStackTraceDump())));
         }
 
         public void Fatal(string message)
         {
-            _repository.AddEntry(_loggerName, "Fatal", _messageFormatter(message));
+            ExceptionEater(() => _repository.AddEntry(_loggerName, "Fatal", _messageFormatter(message)));
         }
     }
 }

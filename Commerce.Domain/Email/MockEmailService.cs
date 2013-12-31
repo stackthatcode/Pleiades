@@ -12,18 +12,25 @@ namespace Commerce.Application.Email
         public MockEmailService(IEmailConfigAdapter configAdapter)
         {
             _configAdapter = configAdapter;
+            
             CleanUpMailDump();
         }
 
-        // TODO: this is a perfect candidate for Worker Roles
         public void CleanUpMailDump()
-        {
+        {            
             var directoryInfo = new DirectoryInfo(_configAdapter.MockServiceOutputDirectory);
-            foreach (var fileInfo in directoryInfo.GetFiles("*.*", SearchOption.AllDirectories))
+            if (!directoryInfo.Exists)
             {
-                if (fileInfo.CreationTime < DateTime.Now.Add(_emailLifespan))
+                Directory.CreateDirectory(_configAdapter.MockServiceOutputDirectory);
+            }
+            else
+            {
+                foreach (var fileInfo in directoryInfo.GetFiles("*.*", SearchOption.AllDirectories))
                 {
-                    fileInfo.Delete();
+                    if (fileInfo.CreationTime < DateTime.Now.Add(_emailLifespan))
+                    {
+                        fileInfo.Delete();
+                    }
                 }
             }
         }
@@ -39,9 +46,15 @@ namespace Commerce.Application.Email
                 emailMessage.Body;
 
             var fileName = 
-                timestamp.Year + timestamp.Month.ToString("00") + timestamp.Day.ToString("00") + "_" + 
-                timestamp.Hour.ToString("00") + "." + timestamp.Minute.ToString("00") + "." + timestamp.Second.ToString("00") + "." + 
-                timestamp.Millisecond.ToString("000") + "_" + emailMessage.To + ".txt";
+                timestamp.Year + 
+                timestamp.Month.ToString("00") + 
+                timestamp.Day.ToString("00") + "_" + 
+                timestamp.Hour.ToString("00") + "." + 
+                timestamp.Minute.ToString("00") + "." + 
+                timestamp.Second.ToString("00") + "." + 
+                timestamp.Millisecond.ToString("000") + 
+                Guid.NewGuid().ToString().Substring(0, 4) + "_" + 
+                emailMessage.To + ".txt";
 
             var filePath = Path.Combine(_configAdapter.MockServiceOutputDirectory, fileName);
             System.IO.File.WriteAllText(filePath, contents);

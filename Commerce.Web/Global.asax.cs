@@ -5,11 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Pleiades.App.Utility;
-using Pleiades.Web.Activity;
 using Pleiades.App.Logging;
 using Pleiades.Web.Plumbing;
 using Pleiades.Web.Security.Aspect;
+using Pleiades.App.Utility;
 using Commerce.Web.Autofac;
 using Commerce.Application.Database;
 using Commerce.Web.Plumbing;
@@ -51,7 +50,6 @@ namespace Commerce.Web
             }
         }
 
-
         protected void Application_Error(object sender, EventArgs e)
         {
             var lastError = Server.GetLastError();
@@ -60,16 +58,14 @@ namespace Commerce.Web
 
             Server.ClearError();
             var redirectUrl = ConfigurationManager.AppSettings["AdminErrorRedirect"];
-            if (redirectUrl != null) 
+            if (redirectUrl != null)
             {
                 HttpContext.Current.Response.Redirect(redirectUrl);
             }
         }
         
-
         public void RegisterGlobalFilters()
         {
-            // MVC "classic" filters
             GlobalFilters.Filters.Add(new SecurityAttribute());
             GlobalFilters.Filters.Add(new HandleErrorAttributeImpl());
         }

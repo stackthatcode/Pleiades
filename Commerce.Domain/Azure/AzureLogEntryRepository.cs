@@ -28,12 +28,11 @@ namespace Commerce.Application.Azure
             var logTimeStamp = DateTime.Now;
             var entry = new LogEntry()
             {
-                LoggerName = loggerName,
                 Level = level,
                 Message = message,
-                DateTime = logTimeStamp,
-                RowKey = Guid.NewGuid().ToString(),
-                PartitionKey = string.Format("{0}-{1:yyyy-MM-dd}", loggerName, logTimeStamp)
+                RowKey = string.Format("{0:yyyy-MM-dd HH:mm:ss.fff}", logTimeStamp) + 
+                    Guid.NewGuid().ToString().Substring(0, 8),
+                PartitionKey = string.Format(loggerName)
             };
 
             // Create the TableOperation that inserts the customer entity.

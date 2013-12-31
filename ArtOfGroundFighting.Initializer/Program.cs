@@ -100,13 +100,12 @@ namespace ArtOfGroundFighting.Initializer
         public static void DestroyResourceFiles()
         {
             // Clean-out the Resource Directory
-            var resourceDirectory = ConfigurationManager.AppSettings["ResourceStorage"];
-            LoggerSingleton.Get().Info("Cleaning out Resource Directory: " + resourceDirectory + "...");
-
+            LoggerSingleton.Get().Info("Cleaning out Resource Files");
+            
             var fileResourceRepository = ServiceLocator.Resolve<IFileResourceRepository>();
             fileResourceRepository.NuclearDelete(false);
 
-            LoggerSingleton.Get().Info("Resource Directory Cleaned");
+            LoggerSingleton.Get().Info("Resource Files Cleaned");
         }
 
         public static void CreateDatabase()
