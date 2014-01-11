@@ -1,0 +1,18 @@
+﻿@model Commerce.Application.Orders.Entities.Order
+The Order Number is: @Model.ExternalId.  Order Amount is: @Model.Total.GrandTotal.ToString("$0.00").  It will ship to the following address:
+
+@Model.Name
+@Model.Address1 @Model.Address2
+@Model.City, @Model.State @Model.ZipCode
+
+Contact Information:
+
+@Model.EmailAddress
+@Model.Phone
+
+The Order contains the following items:
+
+@foreach (var orderline in Model.OrderLineGroups) 
+{
+	@(orderline.Name + " (" + orderline.SkuCode + ") - quantity: " + orderline.Quantity + "\n") 
+}

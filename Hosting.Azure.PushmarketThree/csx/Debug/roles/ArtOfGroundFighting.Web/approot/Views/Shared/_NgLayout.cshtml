@@ -1,0 +1,46 @@
+﻿@using System.Configuration
+@using Pleiades.Web.MvcHelpers
+<!DOCTYPE html>
+<html ng-app="push-market">
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Welcome to the Art of Ground Fighting.com</title>
+        @if (ConfigurationManager.AppSettings["BundleOptimizationDebug"] == "true") {
+            @Html.Javascript("~/Content/JQuery/jquery-2.0.3.min.js")
+            @Html.Javascript("~/Content/JQuery/jquery.validate.min.js")
+            @Html.Javascript("~/Content/Utilities/aQuery-1.0-min.js")        
+            @Html.Javascript("~/Content/Utilities/flow.js")        
+            @Html.Javascript("~/Content/Utilities/generalFunctions.js")        
+        }
+        else
+        {
+            @Scripts.Render("~/Bundles/Foundation")
+        }
+        @Html.Partial("_NgShimHead")
+        
+        @Html.Stylesheet("~/Content/Bootstrap_3_0_0/css/bootstrap.min.css")
+        @Html.Stylesheet("~/Content/Bootstrap_3_0_0/css/bootstrap-lightbox.css")
+        @Html.Stylesheet("~/Content/ArtOfGroundFighting/Style/artofgroundfighting.css")
+
+        @Html.Javascript("~/Content/Bootstrap_3_0_0/js/bootstrap.min.js")
+        @Html.Javascript("~/Content/Bootstrap_3_0_0/js/bootstrap-lightbox.js")
+
+        @Html.Javascript("~/Content/angular/angular.min.js")
+
+        @Html.Javascript("~/Content/ArtOfGroundFighting/Scripts/angular-app.js")
+        @Html.Javascript("~/Content/ArtOfGroundFighting/Scripts/products-controller.js")
+        @Html.Javascript("~/Content/ArtOfGroundFighting/Scripts/cart-functions.js")
+        @Html.Javascript("~/Content/ArtOfGroundFighting/Scripts/cart-controller.js")
+        @Html.Javascript("~/Content/ArtOfGroundFighting/Scripts/checkout-controller.js")
+        @Html.Javascript("~/Content/ArtOfGroundFighting/Scripts/order-controller.js")
+        
+        @Html.Partial("~/Shared/_StripeShim.cshtml")
+    </head>
+
+    <body>
+        @Html.Partial("_NgHeader")        
+        @RenderSection("_Body")	      
+        @Html.Partial("_NgFooter")
+        @Html.Partial("_NgShimBody")
+    </body>
+</html>

@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Reflection;
-using Commerce.Application.Email;
 
 namespace Commerce.Application.File
 {

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition name="Hosting.Azure.PushmarketThree" schemaVersion="2013-10.2.2"
+                   xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
+  <WebRole name="ArtOfGroundFighting.Web" vmsize="Small">
+    <Sites>
+      <Site name="ArtOfGroundFighting.Admin" physicalDirectory="C:\DEV\Pushmarket\Deployments\ArtOfGroundFighting.Admin">
+        <Bindings>
+          <Binding name="AdminEndpoint" endpointName="AdminEndpoint" />
+        </Bindings>
+      </Site>
+      <Site name="ArtOfGroundFighting.Storefront" physicalDirectory="C:\DEV\Pushmarket\Deployments\ArtOfGroundFighting.Storefront">
+        <Bindings>
+          <Binding name="StorefrontEndpoint" endpointName="StorefrontEndpoint" />
+        </Bindings>
+      </Site>
+    </Sites>
+    
+    <Endpoints>
+      <InputEndpoint name="AdminEndpoint" protocol="http" port="8080" />
+      <InputEndpoint name="StorefrontEndpoint" protocol="http" port="80" />
+    </Endpoints>
+    
+    <Imports>
+      <Import moduleName="Diagnostics" />
+      <Import moduleName="RemoteAccess" />
+      <Import moduleName="RemoteForwarder" />
+    </Imports>
+  </WebRole>
+</ServiceDefinition>

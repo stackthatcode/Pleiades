@@ -1,0 +1,40 @@
+﻿@using Pleiades.Web.MvcHelpers
+@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    @Html.Stylesheet("~/Content/Bootstrap_3_0_0/css/bootstrap.min.css")
+</head>
+
+<body>
+    <header class="navbar navbar-inverse navbar-fixed-top" style="z-index:500;">
+        <div class="container">
+            <div class="navbar-header" style="float:left;">
+                <a class="navbar-brand" style="color: #FFF;">HTTP 404 - Page Not Found</a>
+            </div>
+        </div>
+    </header>
+
+        <div class="hidden-xs" style="height:150px; width:100px;"></div>
+    <div class="visible-xs" style="height:75px; width:100px;"></div>
+
+    <div class="container">        
+        <div class="jumbotron">                        
+            <h1 style="font-weight:bold;">Page Not Found.</h1>
+            
+            <div style="height:20px; width:100px; clear:both;"></div>
+            
+            <p style="color:#666;">
+                <strong>Are you lost?  Hit Back or try entering a different URL.</strong>
+            </p>
+            <img src="@Url.Content("~/Content/ArtOfGroundFighting/Images/ohnoes.png")" />
+        </div>
+    </div>
+
+</body>
+</html>

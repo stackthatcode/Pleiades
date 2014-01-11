@@ -7,6 +7,7 @@ namespace Commerce.Application.Azure
     public class AzureLogEntryRepository
     {
         private readonly CloudTable _logEntryTable;
+        private const string TableName = "ApplicationLog";
 
         public AzureLogEntryRepository(AzureConfiguration configuration)
         {
@@ -17,7 +18,7 @@ namespace Commerce.Application.Azure
             var tableClient = storageAccount.CreateCloudTableClient();
 
             // Get table reference 
-            _logEntryTable = tableClient.GetTableReference(configuration.LogEntryTable);
+            _logEntryTable = tableClient.GetTableReference(TableName);
 
             //Create the table if it doesn't exist.
             _logEntryTable.CreateIfNotExists();
@@ -30,7 +31,7 @@ namespace Commerce.Application.Azure
             {
                 Level = level,
                 Message = message,
-                RowKey = string.Format("{0:yyyy-MM-dd HH:mm:ss.fff}", logTimeStamp) + 
+                RowKey = string.Format("{0:yyyy-MM-dd HH:mm:ss.fff}", logTimeStamp) + " " +
                     Guid.NewGuid().ToString().Substring(0, 8),
                 PartitionKey = string.Format(loggerName)
             };

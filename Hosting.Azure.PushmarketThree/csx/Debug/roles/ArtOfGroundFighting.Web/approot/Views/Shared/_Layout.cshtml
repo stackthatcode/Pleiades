@@ -1,0 +1,18 @@
+﻿@using Pleiades.Web.MvcHelpers
+<!DOCTYPE html>
+<html ng-app>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>The Art of Ground Fighting.com</title>
+    @Scripts.Render("~/Bundles/Foundation")
+    @Html.Stylesheet("~/Content/Bootstrap_3_0_0/css/bootstrap.min.css")
+    @Html.Stylesheet("~/Content/ArtOfGroundFighting/Style/artofgroundfighting.css")
+</head>
+
+<body>
+    @Html.Partial("_NgHeader")
+    @RenderSection("_Body")
+    @Html.Partial("_NgFooter")
+    @Html.Javascript("~/Content/Bootstrap_3_0_0/js/bootstrap.min.js")
+</body>
+</html>

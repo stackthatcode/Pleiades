@@ -1,0 +1,28 @@
+Date: 12/31/2013 6:51:51 AM
+To: aleksjones@gmail.com,jeremysimon@me.com
+From: artofgroundfighting@gmail.com
+Subject: Admin Notification: A System Error has occurred - b8e62ff8-922c-4cc4-88fa-e820765530c3
+
+
+Admin Notification: A System Error has occurred - b8e62ff8-922c-4cc4-88fa-e820765530c3
+
+Microsoft.WindowsAzure.Storage.StorageException:The remote server returned an error: (404) Not Found.
+   at Microsoft.WindowsAzure.Storage.Core.Executor.Executor.ExecuteSync[T](RESTCommand`1 cmd, IRetryPolicy policy, OperationContext operationContext)
+   at Microsoft.WindowsAzure.Storage.Blob.CloudBlockBlob.DownloadRangeToStream(Stream target, Nullable`1 offset, Nullable`1 length, AccessCondition accessCondition, BlobRequestOptions options, OperationContext operationContext)
+   at Microsoft.WindowsAzure.Storage.Blob.CloudBlockBlob.DownloadToStream(Stream target, AccessCondition accessCondition, BlobRequestOptions options, OperationContext operationContext)
+   at Commerce.Application.Azure.AzureFileResourceRepository.RetrieveBytes(Guid externalId) in c:\DEV\Pleiades\Commerce.Domain\Azure\AzureFileResourceRepository.cs:line 60
+   at Commerce.Web.Controllers.ImageController.Download(Guid externalResourceId, String size) in c:\DEV\Pleiades\Commerce.Web\Controllers\ImageController.cs:line 88
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+INNER EXCEPTION
+System.Net.WebException:The remote server returned an error: (404) Not Found.
+   at System.Net.HttpWebRequest.GetResponse()
+   at Microsoft.WindowsAzure.Storage.Core.Executor.Executor.ExecuteSync[T](RESTCommand`1 cmd, IRetryPolicy policy, OperationContext operationContext)

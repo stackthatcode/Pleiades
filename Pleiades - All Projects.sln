@@ -49,16 +49,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtOfGroundFighting.Web", "
 		{8E922D95-E286-4AF1-89E2-943EA247B806} = {8E922D95-E286-4AF1-89E2-943EA247B806}
 	EndProjectSection
 EndProject
-Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "ArtOfGroundFighting.Web.Azure", "ArtOfGroundFighting.Web.Azure\ArtOfGroundFighting.Web.Azure.ccproj", "{C325FD87-A408-4D63-8753-582D826E9E7C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{3A2BE08D-C01B-480E-83AD-72D8D64C8E3E}"
+EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Hosting.Azure.PushmarketThree", "Hosting.Azure.PushmarketThree\Hosting.Azure.PushmarketThree.ccproj", "{50F66AF5-AC56-4F6E-997A-8A2A3248D4BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Azure|Any CPU = Azure|Any CPU
 		Azure|Mixed Platforms = Azure|Mixed Platforms
 		Azure|x86 = Azure|x86
-		AzureSandbox|Any CPU = AzureSandbox|Any CPU
-		AzureSandbox|Mixed Platforms = AzureSandbox|Mixed Platforms
-		AzureSandbox|x86 = AzureSandbox|x86
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x86 = Debug|x86
@@ -69,11 +68,6 @@ Global
 		{804F063C-505F-441E-B205-688C42E637AD}.Azure|Mixed Platforms.ActiveCfg = Azure|Any CPU
 		{804F063C-505F-441E-B205-688C42E637AD}.Azure|Mixed Platforms.Build.0 = Azure|Any CPU
 		{804F063C-505F-441E-B205-688C42E637AD}.Azure|x86.ActiveCfg = Azure|Any CPU
-		{804F063C-505F-441E-B205-688C42E637AD}.AzureSandbox|Any CPU.ActiveCfg = AzureSandbox|Any CPU
-		{804F063C-505F-441E-B205-688C42E637AD}.AzureSandbox|Any CPU.Build.0 = AzureSandbox|Any CPU
-		{804F063C-505F-441E-B205-688C42E637AD}.AzureSandbox|Mixed Platforms.ActiveCfg = AzureSandbox|Any CPU
-		{804F063C-505F-441E-B205-688C42E637AD}.AzureSandbox|Mixed Platforms.Build.0 = AzureSandbox|Any CPU
-		{804F063C-505F-441E-B205-688C42E637AD}.AzureSandbox|x86.ActiveCfg = AzureSandbox|Any CPU
 		{804F063C-505F-441E-B205-688C42E637AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{804F063C-505F-441E-B205-688C42E637AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{804F063C-505F-441E-B205-688C42E637AD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -84,11 +78,6 @@ Global
 		{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}.Azure|Mixed Platforms.ActiveCfg = Azure|Any CPU
 		{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}.Azure|Mixed Platforms.Build.0 = Azure|Any CPU
 		{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}.Azure|x86.ActiveCfg = Azure|Any CPU
-		{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}.AzureSandbox|Any CPU.ActiveCfg = AzureSandbox|Any CPU
-		{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}.AzureSandbox|Any CPU.Build.0 = AzureSandbox|Any CPU
-		{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}.AzureSandbox|Mixed Platforms.ActiveCfg = AzureSandbox|Any CPU
-		{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}.AzureSandbox|Mixed Platforms.Build.0 = AzureSandbox|Any CPU
-		{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}.AzureSandbox|x86.ActiveCfg = AzureSandbox|Any CPU
 		{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99DCCEB1-8B5B-4FE1-AF0C-B0126FC4AD82}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -99,11 +88,6 @@ Global
 		{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}.Azure|Mixed Platforms.ActiveCfg = Azure|Any CPU
 		{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}.Azure|Mixed Platforms.Build.0 = Azure|Any CPU
 		{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}.Azure|x86.ActiveCfg = Azure|Any CPU
-		{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}.AzureSandbox|Any CPU.ActiveCfg = AzureSandbox|Any CPU
-		{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}.AzureSandbox|Any CPU.Build.0 = AzureSandbox|Any CPU
-		{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}.AzureSandbox|Mixed Platforms.ActiveCfg = AzureSandbox|Any CPU
-		{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}.AzureSandbox|Mixed Platforms.Build.0 = AzureSandbox|Any CPU
-		{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}.AzureSandbox|x86.ActiveCfg = AzureSandbox|Any CPU
 		{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B3BE1C6-3D4E-4C72-915E-66852EC3578F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -114,11 +98,6 @@ Global
 		{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}.Azure|Mixed Platforms.ActiveCfg = Azure|Any CPU
 		{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}.Azure|Mixed Platforms.Build.0 = Azure|Any CPU
 		{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}.Azure|x86.ActiveCfg = Azure|Any CPU
-		{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}.AzureSandbox|Any CPU.ActiveCfg = AzureSandbox|Any CPU
-		{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}.AzureSandbox|Any CPU.Build.0 = AzureSandbox|Any CPU
-		{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}.AzureSandbox|Mixed Platforms.ActiveCfg = AzureSandbox|Any CPU
-		{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}.AzureSandbox|Mixed Platforms.Build.0 = AzureSandbox|Any CPU
-		{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}.AzureSandbox|x86.ActiveCfg = AzureSandbox|Any CPU
 		{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E11D8A9-5D48-4D12-9951-959A53A8B6A6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -129,11 +108,6 @@ Global
 		{D4EBBD91-DDCA-4E18-A04D-50008A9158F3}.Azure|Mixed Platforms.ActiveCfg = Azure|Any CPU
 		{D4EBBD91-DDCA-4E18-A04D-50008A9158F3}.Azure|Mixed Platforms.Build.0 = Azure|Any CPU
 		{D4EBBD91-DDCA-4E18-A04D-50008A9158F3}.Azure|x86.ActiveCfg = Azure|Any CPU
-		{D4EBBD91-DDCA-4E18-A04D-50008A9158F3}.AzureSandbox|Any CPU.ActiveCfg = AzureSandbox|Any CPU
-		{D4EBBD91-DDCA-4E18-A04D-50008A9158F3}.AzureSandbox|Any CPU.Build.0 = AzureSandbox|Any CPU
-		{D4EBBD91-DDCA-4E18-A04D-50008A9158F3}.AzureSandbox|Mixed Platforms.ActiveCfg = AzureSandbox|Any CPU
-		{D4EBBD91-DDCA-4E18-A04D-50008A9158F3}.AzureSandbox|Mixed Platforms.Build.0 = AzureSandbox|Any CPU
-		{D4EBBD91-DDCA-4E18-A04D-50008A9158F3}.AzureSandbox|x86.ActiveCfg = AzureSandbox|Any CPU
 		{D4EBBD91-DDCA-4E18-A04D-50008A9158F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D4EBBD91-DDCA-4E18-A04D-50008A9158F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4EBBD91-DDCA-4E18-A04D-50008A9158F3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -144,11 +118,6 @@ Global
 		{11018755-DEC2-493C-82D1-58DCC1AF5927}.Azure|Mixed Platforms.ActiveCfg = Azure|Any CPU
 		{11018755-DEC2-493C-82D1-58DCC1AF5927}.Azure|Mixed Platforms.Build.0 = Azure|Any CPU
 		{11018755-DEC2-493C-82D1-58DCC1AF5927}.Azure|x86.ActiveCfg = Azure|Any CPU
-		{11018755-DEC2-493C-82D1-58DCC1AF5927}.AzureSandbox|Any CPU.ActiveCfg = AzureSandbox|Any CPU
-		{11018755-DEC2-493C-82D1-58DCC1AF5927}.AzureSandbox|Any CPU.Build.0 = AzureSandbox|Any CPU
-		{11018755-DEC2-493C-82D1-58DCC1AF5927}.AzureSandbox|Mixed Platforms.ActiveCfg = AzureSandbox|Any CPU
-		{11018755-DEC2-493C-82D1-58DCC1AF5927}.AzureSandbox|Mixed Platforms.Build.0 = AzureSandbox|Any CPU
-		{11018755-DEC2-493C-82D1-58DCC1AF5927}.AzureSandbox|x86.ActiveCfg = AzureSandbox|Any CPU
 		{11018755-DEC2-493C-82D1-58DCC1AF5927}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{11018755-DEC2-493C-82D1-58DCC1AF5927}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11018755-DEC2-493C-82D1-58DCC1AF5927}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -159,11 +128,6 @@ Global
 		{C719AC5A-4969-4365-BDE6-A668C4929DB6}.Azure|Mixed Platforms.ActiveCfg = Azure|Any CPU
 		{C719AC5A-4969-4365-BDE6-A668C4929DB6}.Azure|Mixed Platforms.Build.0 = Azure|Any CPU
 		{C719AC5A-4969-4365-BDE6-A668C4929DB6}.Azure|x86.ActiveCfg = Azure|Any CPU
-		{C719AC5A-4969-4365-BDE6-A668C4929DB6}.AzureSandbox|Any CPU.ActiveCfg = AzureSandbox|Any CPU
-		{C719AC5A-4969-4365-BDE6-A668C4929DB6}.AzureSandbox|Any CPU.Build.0 = AzureSandbox|Any CPU
-		{C719AC5A-4969-4365-BDE6-A668C4929DB6}.AzureSandbox|Mixed Platforms.ActiveCfg = AzureSandbox|Any CPU
-		{C719AC5A-4969-4365-BDE6-A668C4929DB6}.AzureSandbox|Mixed Platforms.Build.0 = AzureSandbox|Any CPU
-		{C719AC5A-4969-4365-BDE6-A668C4929DB6}.AzureSandbox|x86.ActiveCfg = AzureSandbox|Any CPU
 		{C719AC5A-4969-4365-BDE6-A668C4929DB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C719AC5A-4969-4365-BDE6-A668C4929DB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C719AC5A-4969-4365-BDE6-A668C4929DB6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -174,11 +138,6 @@ Global
 		{A839CD41-8163-4667-A4B3-9B7593FC0350}.Azure|Mixed Platforms.ActiveCfg = Azure|Any CPU
 		{A839CD41-8163-4667-A4B3-9B7593FC0350}.Azure|Mixed Platforms.Build.0 = Azure|Any CPU
 		{A839CD41-8163-4667-A4B3-9B7593FC0350}.Azure|x86.ActiveCfg = Azure|Any CPU
-		{A839CD41-8163-4667-A4B3-9B7593FC0350}.AzureSandbox|Any CPU.ActiveCfg = AzureSandbox|Any CPU
-		{A839CD41-8163-4667-A4B3-9B7593FC0350}.AzureSandbox|Any CPU.Build.0 = AzureSandbox|Any CPU
-		{A839CD41-8163-4667-A4B3-9B7593FC0350}.AzureSandbox|Mixed Platforms.ActiveCfg = AzureSandbox|Any CPU
-		{A839CD41-8163-4667-A4B3-9B7593FC0350}.AzureSandbox|Mixed Platforms.Build.0 = AzureSandbox|Any CPU
-		{A839CD41-8163-4667-A4B3-9B7593FC0350}.AzureSandbox|x86.ActiveCfg = AzureSandbox|Any CPU
 		{A839CD41-8163-4667-A4B3-9B7593FC0350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A839CD41-8163-4667-A4B3-9B7593FC0350}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A839CD41-8163-4667-A4B3-9B7593FC0350}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -189,11 +148,6 @@ Global
 		{10CEE227-9B7C-4D97-B53A-229E8D45B15F}.Azure|Mixed Platforms.ActiveCfg = Azure|Any CPU
 		{10CEE227-9B7C-4D97-B53A-229E8D45B15F}.Azure|Mixed Platforms.Build.0 = Azure|Any CPU
 		{10CEE227-9B7C-4D97-B53A-229E8D45B15F}.Azure|x86.ActiveCfg = Azure|Any CPU
-		{10CEE227-9B7C-4D97-B53A-229E8D45B15F}.AzureSandbox|Any CPU.ActiveCfg = AzureSandbox|Any CPU
-		{10CEE227-9B7C-4D97-B53A-229E8D45B15F}.AzureSandbox|Any CPU.Build.0 = AzureSandbox|Any CPU
-		{10CEE227-9B7C-4D97-B53A-229E8D45B15F}.AzureSandbox|Mixed Platforms.ActiveCfg = AzureSandbox|Any CPU
-		{10CEE227-9B7C-4D97-B53A-229E8D45B15F}.AzureSandbox|Mixed Platforms.Build.0 = AzureSandbox|Any CPU
-		{10CEE227-9B7C-4D97-B53A-229E8D45B15F}.AzureSandbox|x86.ActiveCfg = AzureSandbox|Any CPU
 		{10CEE227-9B7C-4D97-B53A-229E8D45B15F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{10CEE227-9B7C-4D97-B53A-229E8D45B15F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10CEE227-9B7C-4D97-B53A-229E8D45B15F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -204,11 +158,6 @@ Global
 		{FE635455-8016-4AB0-BA25-5A459A76ABA1}.Azure|Mixed Platforms.ActiveCfg = Azure|Any CPU
 		{FE635455-8016-4AB0-BA25-5A459A76ABA1}.Azure|Mixed Platforms.Build.0 = Azure|Any CPU
 		{FE635455-8016-4AB0-BA25-5A459A76ABA1}.Azure|x86.ActiveCfg = Azure|Any CPU
-		{FE635455-8016-4AB0-BA25-5A459A76ABA1}.AzureSandbox|Any CPU.ActiveCfg = AzureSandbox|Any CPU
-		{FE635455-8016-4AB0-BA25-5A459A76ABA1}.AzureSandbox|Any CPU.Build.0 = AzureSandbox|Any CPU
-		{FE635455-8016-4AB0-BA25-5A459A76ABA1}.AzureSandbox|Mixed Platforms.ActiveCfg = AzureSandbox|Any CPU
-		{FE635455-8016-4AB0-BA25-5A459A76ABA1}.AzureSandbox|Mixed Platforms.Build.0 = AzureSandbox|Any CPU
-		{FE635455-8016-4AB0-BA25-5A459A76ABA1}.AzureSandbox|x86.ActiveCfg = AzureSandbox|Any CPU
 		{FE635455-8016-4AB0-BA25-5A459A76ABA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FE635455-8016-4AB0-BA25-5A459A76ABA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE635455-8016-4AB0-BA25-5A459A76ABA1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -219,11 +168,6 @@ Global
 		{080581DA-D122-4195-A615-DF9B85DEE99E}.Azure|Mixed Platforms.ActiveCfg = Azure|Any CPU
 		{080581DA-D122-4195-A615-DF9B85DEE99E}.Azure|Mixed Platforms.Build.0 = Azure|Any CPU
 		{080581DA-D122-4195-A615-DF9B85DEE99E}.Azure|x86.ActiveCfg = Azure|Any CPU
-		{080581DA-D122-4195-A615-DF9B85DEE99E}.AzureSandbox|Any CPU.ActiveCfg = AzureSandbox|Any CPU
-		{080581DA-D122-4195-A615-DF9B85DEE99E}.AzureSandbox|Any CPU.Build.0 = AzureSandbox|Any CPU
-		{080581DA-D122-4195-A615-DF9B85DEE99E}.AzureSandbox|Mixed Platforms.ActiveCfg = AzureSandbox|Any CPU
-		{080581DA-D122-4195-A615-DF9B85DEE99E}.AzureSandbox|Mixed Platforms.Build.0 = AzureSandbox|Any CPU
-		{080581DA-D122-4195-A615-DF9B85DEE99E}.AzureSandbox|x86.ActiveCfg = AzureSandbox|Any CPU
 		{080581DA-D122-4195-A615-DF9B85DEE99E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{080581DA-D122-4195-A615-DF9B85DEE99E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{080581DA-D122-4195-A615-DF9B85DEE99E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -234,11 +178,6 @@ Global
 		{7E8B1EF6-1AD4-4CC8-A13A-8700C496C87F}.Azure|Mixed Platforms.ActiveCfg = Azure|Any CPU
 		{7E8B1EF6-1AD4-4CC8-A13A-8700C496C87F}.Azure|Mixed Platforms.Build.0 = Azure|Any CPU
 		{7E8B1EF6-1AD4-4CC8-A13A-8700C496C87F}.Azure|x86.ActiveCfg = Azure|Any CPU
-		{7E8B1EF6-1AD4-4CC8-A13A-8700C496C87F}.AzureSandbox|Any CPU.ActiveCfg = AzureSandbox|Any CPU
-		{7E8B1EF6-1AD4-4CC8-A13A-8700C496C87F}.AzureSandbox|Any CPU.Build.0 = AzureSandbox|Any CPU
-		{7E8B1EF6-1AD4-4CC8-A13A-8700C496C87F}.AzureSandbox|Mixed Platforms.ActiveCfg = AzureSandbox|Any CPU
-		{7E8B1EF6-1AD4-4CC8-A13A-8700C496C87F}.AzureSandbox|Mixed Platforms.Build.0 = AzureSandbox|Any CPU
-		{7E8B1EF6-1AD4-4CC8-A13A-8700C496C87F}.AzureSandbox|x86.ActiveCfg = AzureSandbox|Any CPU
 		{7E8B1EF6-1AD4-4CC8-A13A-8700C496C87F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7E8B1EF6-1AD4-4CC8-A13A-8700C496C87F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E8B1EF6-1AD4-4CC8-A13A-8700C496C87F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -250,12 +189,6 @@ Global
 		{8E922D95-E286-4AF1-89E2-943EA247B806}.Azure|Mixed Platforms.Build.0 = Azure|x86
 		{8E922D95-E286-4AF1-89E2-943EA247B806}.Azure|x86.ActiveCfg = Azure|x86
 		{8E922D95-E286-4AF1-89E2-943EA247B806}.Azure|x86.Build.0 = Azure|x86
-		{8E922D95-E286-4AF1-89E2-943EA247B806}.AzureSandbox|Any CPU.ActiveCfg = AzureSandbox|Any CPU
-		{8E922D95-E286-4AF1-89E2-943EA247B806}.AzureSandbox|Any CPU.Build.0 = AzureSandbox|Any CPU
-		{8E922D95-E286-4AF1-89E2-943EA247B806}.AzureSandbox|Mixed Platforms.ActiveCfg = AzureSandbox|x86
-		{8E922D95-E286-4AF1-89E2-943EA247B806}.AzureSandbox|Mixed Platforms.Build.0 = AzureSandbox|x86
-		{8E922D95-E286-4AF1-89E2-943EA247B806}.AzureSandbox|x86.ActiveCfg = AzureSandbox|x86
-		{8E922D95-E286-4AF1-89E2-943EA247B806}.AzureSandbox|x86.Build.0 = AzureSandbox|x86
 		{8E922D95-E286-4AF1-89E2-943EA247B806}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8E922D95-E286-4AF1-89E2-943EA247B806}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E922D95-E286-4AF1-89E2-943EA247B806}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
@@ -267,31 +200,21 @@ Global
 		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}.Azure|Mixed Platforms.ActiveCfg = Azure|Any CPU
 		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}.Azure|Mixed Platforms.Build.0 = Azure|Any CPU
 		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}.Azure|x86.ActiveCfg = Azure|Any CPU
-		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}.AzureSandbox|Any CPU.ActiveCfg = AzureSandbox|Any CPU
-		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}.AzureSandbox|Any CPU.Build.0 = AzureSandbox|Any CPU
-		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}.AzureSandbox|Mixed Platforms.ActiveCfg = AzureSandbox|Any CPU
-		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}.AzureSandbox|Mixed Platforms.Build.0 = AzureSandbox|Any CPU
-		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}.AzureSandbox|x86.ActiveCfg = AzureSandbox|Any CPU
 		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C325FD87-A408-4D63-8753-582D826E9E7C}.Azure|Any CPU.ActiveCfg = Azure|Any CPU
-		{C325FD87-A408-4D63-8753-582D826E9E7C}.Azure|Any CPU.Build.0 = Azure|Any CPU
-		{C325FD87-A408-4D63-8753-582D826E9E7C}.Azure|Mixed Platforms.ActiveCfg = Azure|Any CPU
-		{C325FD87-A408-4D63-8753-582D826E9E7C}.Azure|Mixed Platforms.Build.0 = Azure|Any CPU
-		{C325FD87-A408-4D63-8753-582D826E9E7C}.Azure|x86.ActiveCfg = Azure|Any CPU
-		{C325FD87-A408-4D63-8753-582D826E9E7C}.AzureSandbox|Any CPU.ActiveCfg = AzureSandbox|Any CPU
-		{C325FD87-A408-4D63-8753-582D826E9E7C}.AzureSandbox|Any CPU.Build.0 = AzureSandbox|Any CPU
-		{C325FD87-A408-4D63-8753-582D826E9E7C}.AzureSandbox|Mixed Platforms.ActiveCfg = AzureSandbox|Any CPU
-		{C325FD87-A408-4D63-8753-582D826E9E7C}.AzureSandbox|Mixed Platforms.Build.0 = AzureSandbox|Any CPU
-		{C325FD87-A408-4D63-8753-582D826E9E7C}.AzureSandbox|x86.ActiveCfg = AzureSandbox|Any CPU
-		{C325FD87-A408-4D63-8753-582D826E9E7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C325FD87-A408-4D63-8753-582D826E9E7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C325FD87-A408-4D63-8753-582D826E9E7C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{C325FD87-A408-4D63-8753-582D826E9E7C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{C325FD87-A408-4D63-8753-582D826E9E7C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{50F66AF5-AC56-4F6E-997A-8A2A3248D4BD}.Azure|Any CPU.ActiveCfg = Release|Any CPU
+		{50F66AF5-AC56-4F6E-997A-8A2A3248D4BD}.Azure|Any CPU.Build.0 = Release|Any CPU
+		{50F66AF5-AC56-4F6E-997A-8A2A3248D4BD}.Azure|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{50F66AF5-AC56-4F6E-997A-8A2A3248D4BD}.Azure|Mixed Platforms.Build.0 = Release|Any CPU
+		{50F66AF5-AC56-4F6E-997A-8A2A3248D4BD}.Azure|x86.ActiveCfg = Release|Any CPU
+		{50F66AF5-AC56-4F6E-997A-8A2A3248D4BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50F66AF5-AC56-4F6E-997A-8A2A3248D4BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50F66AF5-AC56-4F6E-997A-8A2A3248D4BD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{50F66AF5-AC56-4F6E-997A-8A2A3248D4BD}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{50F66AF5-AC56-4F6E-997A-8A2A3248D4BD}.Debug|x86.ActiveCfg = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -311,6 +234,6 @@ Global
 		{7E8B1EF6-1AD4-4CC8-A13A-8700C496C87F} = {16D36CC9-2924-4BBC-BA99-EB21CC1A911C}
 		{8E922D95-E286-4AF1-89E2-943EA247B806} = {16D36CC9-2924-4BBC-BA99-EB21CC1A911C}
 		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561} = {16D36CC9-2924-4BBC-BA99-EB21CC1A911C}
-		{C325FD87-A408-4D63-8753-582D826E9E7C} = {16D36CC9-2924-4BBC-BA99-EB21CC1A911C}
+		{50F66AF5-AC56-4F6E-997A-8A2A3248D4BD} = {3A2BE08D-C01B-480E-83AD-72D8D64C8E3E}
 	EndGlobalSection
 EndGlobal

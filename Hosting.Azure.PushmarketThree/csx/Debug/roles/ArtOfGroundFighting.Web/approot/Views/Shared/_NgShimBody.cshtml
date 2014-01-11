@@ -1,0 +1,60 @@
+﻿@using ArtOfGroundFighting.Web
+
+<div id="push-library-shim">
+    <div style="position:relative; z-index: 1000">
+        <div id="spinner-layer" class="spinner-layer" style="display:none;">
+            <div id="spinner" class="spinner">
+                <img id="img-spinner" style="height:200px; width:200px;" alt="Loading"
+                        src="@Url.Content("~/Content/ArtOfGroundFighting/Images/ajax_loader.gif")" />
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dedicated Error Dialog Box -->
+    <div id="modal-error" tabindex="-1" role="dialog" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">                
+                <div class="modal-header" style="background-color:#333;">
+                    <h2 style="font-weight:bold; color:#FFF;">Oh Noes!</h2>
+                </div>
+                <div class="modal-body">
+                    <div style="clear:both; height:142px;">
+                        <img src="@Url.Content("~/Content/ArtOfGroundFighting/Images/ohnoes.png")" style="float:left; margin-right:20px; margin-bottom:20px;" />
+                        <p style="color:#333;">We've just encountered some technical difficulties.</p>
+                        <p>Don't worry, our internal systems team is working hard to make things right.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a id="modal-error-action" class="btn btn-default" href="@Url.RouteUrl(Navigation.Home())">
+                        <i class="icon-home icon-white"></i> Take Me Home
+                    </a>
+                    <a id="modal-error-action" class="btn btn-danger" onclick="window.location.reload()">
+                        <i class="icon-ok icon-white"></i> Ok, Reload Page
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Generic EmailMessage Dialog Box -->
+    <div id="modal-generic" tabindex="-1" role="dialog" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">                
+                <div class="modal-header" style="background-color:#333;">
+                    <h2 style="font-weight:bold; color:#FFF;" id="modal-generic-header">Generic Header</h2>
+                </div>
+                <div class="modal-body">
+                    <div style="clear:both; height:142px;" id="modal-generic-body">
+                        <p>Generic Modal Content</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a id="modal-error-action" class="btn btn-danger" onclick="$('#modal-generic').modal('hide');">
+                        <i class="icon-ok icon-white"></i> Ok, Thanks
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,1314 @@
+2013-12-31 06:59:53.7732|Info|PROCESS START:12/31/2013 6:59:53 AM
+
+2013-12-31 06:59:53.8123|Info|Pushmarket E-Commerce Automation
+2013-12-31 06:59:53.8123|Info|Push Software Consulting, LLC
+2013-12-31 06:59:53.8233|Info|...
+2013-12-31 06:59:53.8233|Info|Attemping to Delete Database...
+2013-12-31 07:00:14.9663|Error|System.Data.SqlClient.SqlException:Cannot drop database "AogfLive" because it is currently in use.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.SqlClient.SqlProviderServices.<>c__DisplayClass1c.<DropDatabase>b__1b(SqlConnection conn)
+   at System.Data.SqlClient.SqlProviderServices.UsingConnection(SqlConnection sqlConnection, Action`1 act)
+   at System.Data.SqlClient.SqlProviderServices.UsingMasterConnection(SqlConnection sqlConnection, Action`1 act)
+   at System.Data.SqlClient.SqlProviderServices.DropDatabase(SqlConnection sqlConnection, Nullable`1 commandTimeout, String databaseName)
+   at System.Data.SqlClient.SqlProviderServices.DbDeleteDatabase(DbConnection connection, Nullable`1 commandTimeout, StoreItemCollection storeItemCollection)
+   at System.Data.Objects.ObjectContext.DeleteDatabase()
+   at System.Data.Entity.Internal.DatabaseOperations.DeleteIfExists(ObjectContext objectContext)
+   at System.Data.Entity.Database.Delete()
+   at ArtOfGroundFighting.Initializer.Program.DestroyDatabase() in c:\DEV\Pleiades\ArtOfGroundFighting.Initializer\Program.cs:line 96
+   at ArtOfGroundFighting.Initializer.Program.DoStuff() in c:\DEV\Pleiades\ArtOfGroundFighting.Initializer\Program.cs:line 60
+   at ArtOfGroundFighting.Initializer.Program.Main(String[] args) in c:\DEV\Pleiades\ArtOfGroundFighting.Initializer\Program.cs:line 37
+2013-12-31 07:00:14.9843|Info|
+PROCESS FINISH:12/31/2013 7:00:14 AM
+
+2013-12-31 07:00:21.8604|Info|PROCESS START:12/31/2013 7:00:21 AM
+
+2013-12-31 07:00:21.9074|Info|Pushmarket E-Commerce Automation
+2013-12-31 07:00:21.9074|Info|Push Software Consulting, LLC
+2013-12-31 07:00:21.9074|Info|...
+2013-12-31 07:00:21.9074|Info|Attemping to Delete Database...
+2013-12-31 07:00:22.9545|Info|Database Deleted
+2013-12-31 07:00:22.9545|Info|Cleaning out Resource Files
+2013-12-31 07:00:48.6491|Info|Resource Files Cleaned
+2013-12-31 07:00:48.6601|Info|Creating Pushmarket Database...
+2013-12-31 07:00:50.5921|Info|Pushmarket Database Created
+2013-12-31 07:00:50.5921|Info|Seeding Pushmarket data - Starting...
+2013-12-31 07:00:50.6081|Info|Create the default Root User
+2013-12-31 07:00:50.9172|Info|Create the default Categories
+2013-12-31 07:00:51.1302|Info|Create the default Size Groups and Sizes
+2013-12-31 07:00:51.2262|Info|Create the default Brands
+2013-12-31 07:00:51.2312|Info|brandImage File Path - Content\BrandLogos\Afflictionmma2.jpg
+2013-12-31 07:00:52.5446|Info|brandImage File Path - Content\BrandLogos\badboy.jpg
+2013-12-31 07:00:53.3342|Info|brandImage File Path - Content\BrandLogos\bullterriergearl.gif
+2013-12-31 07:00:53.6919|Info|brandImage File Path - Content\BrandLogos\dethrone2.png
+2013-12-31 07:00:57.1604|Info|brandImage File Path - Content\BrandLogos\fuji.jpg
+2013-12-31 07:00:59.2107|Info|brandImage File Path - Content\BrandLogos\tatami.jpg
+2013-12-31 07:01:00.0046|Info|brandImage File Path - Content\BrandLogos\hayabusa-logo.jpg
+2013-12-31 07:01:00.8237|Info|brandImage File Path - Content\BrandLogos\RingToCageLogo.jpg
+2013-12-31 07:01:02.6533|Info|brandImage File Path - Content\BrandLogos\shock_doctor_logo.jpg
+2013-12-31 07:01:03.7735|Info|brandImage File Path - Content\BrandLogos\logotapout.jpg
+2013-12-31 07:01:05.2899|Info|Create the default Colors
+2013-12-31 07:01:10.9630|Info|Seeding Pushmarket data - Complete!
+2013-12-31 07:01:10.9709|Info|
+PROCESS FINISH:12/31/2013 7:01:10 AM
+
+2013-12-31 07:51:03.4560|Info|PROCESS START:12/31/2013 7:51:03 AM
+
+2013-12-31 07:51:03.4920|Info|Pushmarket E-Commerce Automation
+2013-12-31 07:51:03.4920|Info|Push Software Consulting, LLC
+2013-12-31 07:51:03.5020|Info|...
+2013-12-31 07:51:03.5020|Info|Attemping to Delete Database...
+2013-12-31 07:51:10.2987|Info|Database Deleted
+2013-12-31 07:51:10.3067|Info|Cleaning out Resource Files
+2013-12-31 07:51:24.3554|Info|Resource Files Cleaned
+2013-12-31 07:51:24.3644|Info|Creating Pushmarket Database...
+2013-12-31 07:52:08.0961|Info|Pushmarket Database Created
+2013-12-31 07:52:08.1042|Info|Seeding Pushmarket data - Starting...
+2013-12-31 07:52:08.1591|Info|Create the default Root User
+2013-12-31 07:52:11.7827|Info|Create the default Categories
+2013-12-31 07:52:29.2588|Info|Create the default Size Groups and Sizes
+2013-12-31 07:52:37.5170|Info|Create the default Brands
+2013-12-31 07:52:37.5260|Info|brandImage File Path - Content\BrandLogos\Afflictionmma2.jpg
+2013-12-31 07:52:42.2775|Info|brandImage File Path - Content\BrandLogos\badboy.jpg
+2013-12-31 07:52:46.1087|Info|brandImage File Path - Content\BrandLogos\bullterriergearl.gif
+2013-12-31 07:52:49.4040|Info|brandImage File Path - Content\BrandLogos\dethrone2.png
+2013-12-31 07:52:55.9013|Info|brandImage File Path - Content\BrandLogos\fuji.jpg
+2013-12-31 07:53:01.1131|Info|brandImage File Path - Content\BrandLogos\tatami.jpg
+2013-12-31 07:53:04.9909|Info|brandImage File Path - Content\BrandLogos\hayabusa-logo.jpg
+2013-12-31 07:53:08.7796|Info|brandImage File Path - Content\BrandLogos\RingToCageLogo.jpg
+2013-12-31 07:53:13.6780|Info|brandImage File Path - Content\BrandLogos\shock_doctor_logo.jpg
+2013-12-31 07:53:17.8620|Info|brandImage File Path - Content\BrandLogos\logotapout.jpg
+2013-12-31 07:53:22.3567|Info|Create the default Colors
+2013-12-31 07:53:45.6768|Info|Seeding Pushmarket data - Complete!
+2013-12-31 07:53:45.6858|Info|
+PROCESS FINISH:12/31/2013 7:53:45 AM
+
+2013-12-31 09:40:33.6570|Info|PROCESS START:12/31/2013 9:40:33 AM
+
+2013-12-31 09:40:33.7300|Info|Pushmarket E-Commerce Automation
+2013-12-31 09:40:33.7300|Info|Push Software Consulting, LLC
+2013-12-31 09:40:33.7440|Info|...
+2013-12-31 09:40:33.7610|Info|Attemping to Delete Database...
+2013-12-31 09:40:38.0485|Error|System.Data.ProviderIncompatibleException:An error occurred while getting provider information from the database. This can be caused by Entity Framework using an incorrect connection string. Check the inner exceptions for details and ensure that the connection string is correct.
+   at System.Data.Entity.ModelConfiguration.Utilities.DbProviderServicesExtensions.GetProviderManifestTokenChecked(DbProviderServices providerServices, DbConnection connection)
+   at System.Data.Entity.ModelConfiguration.Utilities.DbConnectionExtensions.GetProviderInfo(DbConnection connection, DbProviderManifest& providerManifest)
+   at System.Data.Entity.DbModelBuilder.Build(DbConnection providerConnection)
+   at System.Data.Entity.Internal.LazyInternalContext.CreateModel(LazyInternalContext internalContext)
+   at System.Data.Entity.Internal.RetryLazy`2.GetValue(TInput input)
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.CreateObjectContextForDdlOps()
+   at System.Data.Entity.Database.Delete()
+   at ArtOfGroundFighting.Initializer.Program.DestroyDatabase() in c:\DEV\Pleiades\ArtOfGroundFighting.Initializer\Program.cs:line 96
+   at ArtOfGroundFighting.Initializer.Program.DoStuff() in c:\DEV\Pleiades\ArtOfGroundFighting.Initializer\Program.cs:line 60
+   at ArtOfGroundFighting.Initializer.Program.Main(String[] args) in c:\DEV\Pleiades\ArtOfGroundFighting.Initializer\Program.cs:line 37
+
+INNER EXCEPTION
+System.Data.ProviderIncompatibleException:The provider did not return a ProviderManifestToken string.
+   at System.Data.Common.DbProviderServices.GetProviderManifestToken(DbConnection connection)
+   at System.Data.Entity.ModelConfiguration.Utilities.DbProviderServicesExtensions.GetProviderManifestTokenChecked(DbProviderServices providerServices, DbConnection connection)
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Cannot open server 'vjsgtqhtsd' requested by the login. Client with IP address '67.184.152.105' is not allowed to access the server.  To enable access, use the Windows Azure Management Portal or run sp_set_firewall_rule on the master database to create a firewall rule for this IP address or address range.  It may take up to five minutes for this change to take effect.
+Login failed for user 'aogfdb'.
+This session has been assigned a tracing ID of '354c5348-0d18-4d4e-8656-29515756a3c7'.  Provide this tracing ID to customer support when you need assistance.
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.SqlClient.SqlProviderServices.UsingConnection(SqlConnection sqlConnection, Action`1 act)
+   at System.Data.SqlClient.SqlProviderServices.UsingMasterConnection(SqlConnection sqlConnection, Action`1 act)
+   at System.Data.SqlClient.SqlProviderServices.GetDbProviderManifestToken(DbConnection connection)
+   at System.Data.Common.DbProviderServices.GetProviderManifestToken(DbConnection connection)
+2013-12-31 09:40:38.0935|Info|
+PROCESS FINISH:12/31/2013 9:40:38 AM
+
+2013-12-31 09:41:49.2396|Info|PROCESS START:12/31/2013 9:41:48 AM
+
+2013-12-31 09:41:49.2956|Info|Pushmarket E-Commerce Automation
+2013-12-31 09:41:49.3086|Info|Push Software Consulting, LLC
+2013-12-31 09:41:49.3086|Info|...
+2013-12-31 09:41:49.3086|Info|Attemping to Delete Database...
+2013-12-31 09:41:55.9515|Info|Database Deleted
+2013-12-31 09:41:55.9575|Info|Cleaning out Resource Files
+2013-12-31 09:41:59.6830|Info|Resource Files Cleaned
+2013-12-31 09:41:59.6830|Info|Creating Pushmarket Database...
+2013-12-31 09:42:38.7337|Info|Pushmarket Database Created
+2013-12-31 09:42:38.7477|Info|Seeding Pushmarket data - Starting...
+2013-12-31 09:42:38.7727|Info|Create the default Root User
+2013-12-31 09:42:42.1672|Info|Create the default Categories
+2013-12-31 09:42:57.9534|Info|Create the default Size Groups and Sizes
+2013-12-31 09:43:05.6304|Info|Create the default Brands
+2013-12-31 09:43:05.6304|Info|brandImage File Path - Content\BrandLogos\Afflictionmma2.jpg
+2013-12-31 09:43:09.8689|Info|brandImage File Path - Content\BrandLogos\badboy.jpg
+2013-12-31 09:43:12.8243|Info|brandImage File Path - Content\BrandLogos\bullterriergearl.gif
+2013-12-31 09:43:15.8026|Info|brandImage File Path - Content\BrandLogos\dethrone2.png
+2013-12-31 09:43:19.0541|Info|brandImage File Path - Content\BrandLogos\fuji.jpg
+2013-12-31 09:43:22.4335|Info|brandImage File Path - Content\BrandLogos\tatami.jpg
+2013-12-31 09:43:25.4329|Info|brandImage File Path - Content\BrandLogos\hayabusa-logo.jpg
+2013-12-31 09:43:28.4203|Info|brandImage File Path - Content\BrandLogos\RingToCageLogo.jpg
+2013-12-31 09:43:31.5056|Info|brandImage File Path - Content\BrandLogos\shock_doctor_logo.jpg
+2013-12-31 09:43:34.4780|Info|brandImage File Path - Content\BrandLogos\logotapout.jpg
+2013-12-31 09:43:37.4904|Info|Create the default Colors
+2013-12-31 09:43:59.9103|Info|Creating Product: Tatami Estilo 3.0 Premier BJJ Gi
+2013-12-31 09:44:08.4084|Info|Adding Image for Content\TatamiEstilo\Black\tat-1010_black_01_xl.jpg
+2013-12-31 09:44:09.0264|Info|Adding Image for Content\TatamiEstilo\Black\tat-1010_black_02_xl.jpg
+2013-12-31 09:44:09.6415|Info|Adding Image for Content\TatamiEstilo\Black\tat-1010_black_03_xl.jpg
+2013-12-31 09:44:10.3286|Info|Adding Image for Content\TatamiEstilo\Black\tat-1010_black_04_xl.jpg
+2013-12-31 09:44:10.9507|Info|Adding Image for Content\TatamiEstilo\Black\tat-1010_black_05_xl.jpg
+2013-12-31 09:44:24.6000|Info|Adding Image for Content\TatamiEstilo\Blue\tat-1010_blue_01_xl.jpg
+2013-12-31 09:44:25.4112|Info|Adding Image for Content\TatamiEstilo\Blue\tat-1010_blue_02_xl.jpg
+2013-12-31 09:44:26.2015|Info|Adding Image for Content\TatamiEstilo\Blue\tat-1010_blue_03_xl.jpg
+2013-12-31 09:44:27.0801|Info|Adding Image for Content\TatamiEstilo\Blue\tat-1010_blue_04_xl.jpg
+2013-12-31 09:44:27.9125|Info|Adding Image for Content\TatamiEstilo\Blue\tat-1010_blue_05_xl.jpg
+2013-12-31 09:44:52.9688|Info|Creating Product: Bull Terrier Mushin Gi
+2013-12-31 09:44:57.9400|Info|Adding Image for Content\BullTerrierMuhsin\Black\70726f647563742f32303132313230375f3261393536332e6a7067003330300000660066.jpg
+2013-12-31 09:44:58.4451|Info|Adding Image for Content\BullTerrierMuhsin\Black\70726f647563742f32303132313230375f3339333837622e6a7067003330300000660066.jpg
+2013-12-31 09:44:59.0573|Info|Adding Image for Content\BullTerrierMuhsin\Black\70726f647563742f32303132313230375f3662616662642e6a7067003330300000660066.jpg
+2013-12-31 09:44:59.4986|Info|Adding Image for Content\BullTerrierMuhsin\Black\70726f647563742f32303132313230375f3730653835362e6a7067003330300000660066.jpg
+2013-12-31 09:45:21.5582|Info|Creating Product: Bull Terrier Super Star Gi
+2013-12-31 09:45:30.1663|Info|Adding Image for Content\BullTerrierSuperstar\White\1363199386.jpg
+2013-12-31 09:45:31.3681|Info|Adding Image for Content\BullTerrierSuperstar\White\1363199391.jpg
+2013-12-31 09:45:32.1395|Info|Adding Image for Content\BullTerrierSuperstar\White\1363199395.jpg
+2013-12-31 09:45:32.8154|Info|Adding Image for Content\BullTerrierSuperstar\White\1363199398.jpg
+2013-12-31 09:45:43.9634|Info|Adding Image for Content\BullTerrierSuperstar\Blue\70726f647563742f32303132313230375f3330616134652e6a7067003330300000660066.jpg
+2013-12-31 09:45:44.6015|Info|Adding Image for Content\BullTerrierSuperstar\Blue\70726f647563742f32303132313230375f3338323335662e6a7067003330300000660066.jpg
+2013-12-31 09:45:45.2894|Info|Adding Image for Content\BullTerrierSuperstar\Blue\70726f647563742f32303132313230375f3465613639322e6a7067003330300000660066.jpg
+2013-12-31 09:45:45.8723|Info|Adding Image for Content\BullTerrierSuperstar\Blue\70726f647563742f32303132313230375f3862376564642e6a7067003330300000660066.jpg
+2013-12-31 09:46:06.7022|Info|Creating Product: Bull Terrier Zebra Gi
+2013-12-31 09:46:11.6967|Info|Adding Image for Content\BullTerrierZebra\20130728_3e9d27.jpg
+2013-12-31 09:46:12.5348|Info|Adding Image for Content\BullTerrierZebra\20130728_818d44.jpg
+2013-12-31 09:46:13.3890|Info|Adding Image for Content\BullTerrierZebra\20130728_86e9af.jpg
+2013-12-31 09:46:14.2791|Info|Adding Image for Content\BullTerrierZebra\20130728_d7a719.jpg
+2013-12-31 09:46:34.5689|Info|Creating Product: Bull Terrier Masters Gi
+2013-12-31 09:46:39.6035|Info|Adding Image for Content\BullTerrierMasters\20121217_80c344.jpg
+2013-12-31 09:46:40.6684|Info|Adding Image for Content\BullTerrierMasters\20121217_8877df.jpg
+2013-12-31 09:46:41.9903|Info|Adding Image for Content\BullTerrierMasters\20121217_90a34b.jpg
+2013-12-31 09:46:43.1698|Info|Adding Image for Content\BullTerrierMasters\20121217_97ea13.jpg
+2013-12-31 09:47:03.3792|Info|Creating Product: Hayabusa Head Gear
+2013-12-31 09:47:08.3986|Info|Adding Image for Content\HayabusaHeadGear\hay-1097_01_xl.jpg
+2013-12-31 09:47:09.3337|Info|Adding Image for Content\HayabusaHeadGear\hay-1097_black_02_xl.jpg
+2013-12-31 09:47:10.0798|Info|Adding Image for Content\HayabusaHeadGear\hay-1097_black_03_xl.jpg
+2013-12-31 09:47:27.4806|Info|Creating Product: Ring-to-Cage Jiu-Jitsu Training Dummy
+2013-12-31 09:47:32.1848|Info|Adding Image for Content\JiuJitsuDummy\RC24MS.jpg
+2013-12-31 09:47:39.0473|Info|Creating Product: Shock Doctor Anti-Microbial Mouthguard Case
+2013-12-31 09:47:46.1565|Info|Adding Image for Content\ShockDoctorMouthguardCase\Orange\shock_doctor_mouthguard_case.jpg
+2013-12-31 09:47:50.7520|Info|Adding Image for Content\ShockDoctorMouthguardCase\Blue\Shockdoctor_Mouthguard_Case-1.jpg
+2013-12-31 09:47:58.0378|Info|Creating Product: Shock Doctor Gel Nano Mouth Guard
+2013-12-31 09:47:59.3046|Info|Adding Image for Content\ShockDoctorGelNano\Shock-Doctor-Gel-Nano.jpg
+2013-12-31 09:48:05.4458|Info|Creating Product: Tapout Mouthguard Case
+2013-12-31 09:48:11.1323|Info|Adding Image for Content\TapoutMouthguardCase\tapout-mouthguard-case.jpg
+2013-12-31 09:48:17.6527|Info|Create the default Shipping Methods
+2013-12-31 09:48:18.9381|Info|Create the default State Taxes
+2013-12-31 09:48:32.0955|Info|Create Analytics Test Data
+2013-12-31 09:48:32.3695|Info|Create Analytics Test Data for Sku: HAYA-HEADGEAR-BLACK-SM
+2013-12-31 09:48:32.3695|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 09:48:32.4665|Info|Date: 10/2/2013 12:00:00 AM
+2013-12-31 09:48:32.4965|Info|Date: 10/4/2013 12:00:00 AM
+2013-12-31 09:48:32.5406|Info|Date: 10/8/2013 12:00:00 AM
+2013-12-31 09:48:32.5406|Info|Date: 10/8/2013 12:00:00 AM
+2013-12-31 09:48:32.6076|Info|Date: 10/12/2013 12:00:00 AM
+2013-12-31 09:48:32.6216|Info|Date: 10/14/2013 12:00:00 AM
+2013-12-31 09:48:32.6386|Info|Date: 10/18/2013 12:00:00 AM
+2013-12-31 09:48:32.6686|Info|Date: 10/19/2013 12:00:00 AM
+2013-12-31 09:48:32.6886|Info|Date: 10/19/2013 12:00:00 AM
+2013-12-31 09:48:32.6956|Info|Date: 10/22/2013 12:00:00 AM
+2013-12-31 09:48:32.7256|Info|Date: 10/24/2013 12:00:00 AM
+2013-12-31 09:48:32.7596|Info|Date: 10/25/2013 12:00:00 AM
+2013-12-31 09:48:32.7796|Info|Date: 10/28/2013 12:00:00 AM
+2013-12-31 09:48:32.7996|Info|Date: 10/29/2013 12:00:00 AM
+2013-12-31 09:48:32.8296|Info|Date: 10/29/2013 12:00:00 AM
+2013-12-31 09:48:32.8606|Info|Date: 11/1/2013 12:00:00 AM
+2013-12-31 09:48:32.8776|Info|Date: 11/1/2013 12:00:00 AM
+2013-12-31 09:48:32.9006|Info|Date: 11/4/2013 12:00:00 AM
+2013-12-31 09:48:32.9406|Info|Date: 11/7/2013 12:00:00 AM
+2013-12-31 09:48:32.9606|Info|Date: 11/7/2013 12:00:00 AM
+2013-12-31 09:48:32.9816|Info|Date: 11/9/2013 12:00:00 AM
+2013-12-31 09:48:33.0066|Info|Date: 11/13/2013 12:00:00 AM
+2013-12-31 09:48:33.0266|Info|Date: 11/16/2013 12:00:00 AM
+2013-12-31 09:48:33.0416|Info|Date: 11/16/2013 12:00:00 AM
+2013-12-31 09:48:33.0636|Info|Date: 11/20/2013 12:00:00 AM
+2013-12-31 09:48:33.0866|Info|Date: 11/20/2013 12:00:00 AM
+2013-12-31 09:48:33.1096|Info|Date: 11/21/2013 12:00:00 AM
+2013-12-31 09:48:33.1346|Info|Date: 11/23/2013 12:00:00 AM
+2013-12-31 09:48:33.1536|Info|Date: 11/27/2013 12:00:00 AM
+2013-12-31 09:48:33.1716|Info|Date: 11/29/2013 12:00:00 AM
+2013-12-31 09:48:33.1826|Info|Date: 12/2/2013 12:00:00 AM
+2013-12-31 09:48:33.1966|Info|Date: 12/5/2013 12:00:00 AM
+2013-12-31 09:48:33.2116|Info|Date: 12/5/2013 12:00:00 AM
+2013-12-31 09:48:33.2456|Info|Date: 12/5/2013 12:00:00 AM
+2013-12-31 09:48:33.2636|Info|Date: 12/6/2013 12:00:00 AM
+2013-12-31 09:48:33.2767|Info|Date: 12/10/2013 12:00:00 AM
+2013-12-31 09:48:33.3087|Info|Date: 12/10/2013 12:00:00 AM
+2013-12-31 09:48:33.3247|Info|Date: 12/12/2013 12:00:00 AM
+2013-12-31 09:48:33.3407|Info|Date: 12/16/2013 12:00:00 AM
+2013-12-31 09:48:33.3657|Info|Date: 12/17/2013 12:00:00 AM
+2013-12-31 09:48:33.3707|Info|Date: 12/18/2013 12:00:00 AM
+2013-12-31 09:48:33.3997|Info|Date: 12/21/2013 12:00:00 AM
+2013-12-31 09:48:33.4207|Info|Date: 12/22/2013 12:00:00 AM
+2013-12-31 09:48:33.4327|Info|Date: 12/23/2013 12:00:00 AM
+2013-12-31 09:48:33.4447|Info|Date: 12/24/2013 12:00:00 AM
+2013-12-31 09:48:33.4447|Info|Date: 12/27/2013 12:00:00 AM
+2013-12-31 09:48:33.4817|Info|Date: 12/31/2013 12:00:00 AM
+2013-12-31 09:49:01.5073|Info|Create Analytics Test Data for Sku: BULL-MUSHIN-BLUE-MD
+2013-12-31 09:49:01.5183|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 09:49:01.6193|Info|Date: 10/2/2013 12:00:00 AM
+2013-12-31 09:49:01.6513|Info|Date: 10/2/2013 12:00:00 AM
+2013-12-31 09:49:01.7163|Info|Date: 10/5/2013 12:00:00 AM
+2013-12-31 09:49:01.7393|Info|Date: 10/5/2013 12:00:00 AM
+2013-12-31 09:49:01.7693|Info|Date: 10/7/2013 12:00:00 AM
+2013-12-31 09:49:01.7963|Info|Date: 10/11/2013 12:00:00 AM
+2013-12-31 09:49:01.8483|Info|Date: 10/15/2013 12:00:00 AM
+2013-12-31 09:49:01.8713|Info|Date: 10/16/2013 12:00:00 AM
+2013-12-31 09:49:01.8963|Info|Date: 10/20/2013 12:00:00 AM
+2013-12-31 09:49:01.9003|Info|Date: 10/24/2013 12:00:00 AM
+2013-12-31 09:49:01.9363|Info|Date: 10/24/2013 12:00:00 AM
+2013-12-31 09:49:01.9613|Info|Date: 10/27/2013 12:00:00 AM
+2013-12-31 09:49:01.9613|Info|Date: 10/29/2013 12:00:00 AM
+2013-12-31 09:49:01.9963|Info|Date: 11/2/2013 12:00:00 AM
+2013-12-31 09:49:02.0183|Info|Date: 11/5/2013 12:00:00 AM
+2013-12-31 09:49:02.0393|Info|Date: 11/5/2013 12:00:00 AM
+2013-12-31 09:49:02.0623|Info|Date: 11/7/2013 12:00:00 AM
+2013-12-31 09:49:02.0834|Info|Date: 11/10/2013 12:00:00 AM
+2013-12-31 09:49:02.0874|Info|Date: 11/12/2013 12:00:00 AM
+2013-12-31 09:49:02.1174|Info|Date: 11/13/2013 12:00:00 AM
+2013-12-31 09:49:02.1404|Info|Date: 11/17/2013 12:00:00 AM
+2013-12-31 09:49:02.1554|Info|Date: 11/19/2013 12:00:00 AM
+2013-12-31 09:49:02.1684|Info|Date: 11/22/2013 12:00:00 AM
+2013-12-31 09:49:02.1954|Info|Date: 11/25/2013 12:00:00 AM
+2013-12-31 09:49:02.2194|Info|Date: 11/25/2013 12:00:00 AM
+2013-12-31 09:49:02.2464|Info|Date: 11/25/2013 12:00:00 AM
+2013-12-31 09:49:02.2634|Info|Date: 11/26/2013 12:00:00 AM
+2013-12-31 09:49:02.2804|Info|Date: 11/30/2013 12:00:00 AM
+2013-12-31 09:49:02.3094|Info|Date: 12/4/2013 12:00:00 AM
+2013-12-31 09:49:02.3444|Info|Date: 12/7/2013 12:00:00 AM
+2013-12-31 09:49:02.3864|Info|Date: 12/8/2013 12:00:00 AM
+2013-12-31 09:49:02.4074|Info|Date: 12/12/2013 12:00:00 AM
+2013-12-31 09:49:02.4314|Info|Date: 12/16/2013 12:00:00 AM
+2013-12-31 09:49:02.4494|Info|Date: 12/19/2013 12:00:00 AM
+2013-12-31 09:49:02.4624|Info|Date: 12/19/2013 12:00:00 AM
+2013-12-31 09:49:02.4804|Info|Date: 12/22/2013 12:00:00 AM
+2013-12-31 09:49:02.5094|Info|Date: 12/26/2013 12:00:00 AM
+2013-12-31 09:49:02.5274|Info|Date: 12/26/2013 12:00:00 AM
+2013-12-31 09:49:02.5444|Info|Date: 12/26/2013 12:00:00 AM
+2013-12-31 09:49:02.5614|Info|Date: 12/28/2013 12:00:00 AM
+2013-12-31 09:49:02.5764|Info|Date: 12/30/2013 12:00:00 AM
+2013-12-31 09:49:26.5014|Info|Create Analytics Test Data for Sku: BULL-MUSHIN-BLACK-LG
+2013-12-31 09:49:26.5224|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 09:49:26.5855|Info|Date: 10/4/2013 12:00:00 AM
+2013-12-31 09:49:26.6485|Info|Date: 10/7/2013 12:00:00 AM
+2013-12-31 09:49:26.6835|Info|Date: 10/11/2013 12:00:00 AM
+2013-12-31 09:49:26.7285|Info|Date: 10/13/2013 12:00:00 AM
+2013-12-31 09:49:26.7555|Info|Date: 10/14/2013 12:00:00 AM
+2013-12-31 09:49:26.7965|Info|Date: 10/18/2013 12:00:00 AM
+2013-12-31 09:49:26.8285|Info|Date: 10/20/2013 12:00:00 AM
+2013-12-31 09:49:26.8435|Info|Date: 10/21/2013 12:00:00 AM
+2013-12-31 09:49:26.8625|Info|Date: 10/24/2013 12:00:00 AM
+2013-12-31 09:49:26.8805|Info|Date: 10/24/2013 12:00:00 AM
+2013-12-31 09:49:26.8955|Info|Date: 10/24/2013 12:00:00 AM
+2013-12-31 09:49:26.9185|Info|Date: 10/26/2013 12:00:00 AM
+2013-12-31 09:49:26.9235|Info|Date: 10/27/2013 12:00:00 AM
+2013-12-31 09:49:26.9375|Info|Date: 10/27/2013 12:00:00 AM
+2013-12-31 09:49:26.9635|Info|Date: 10/27/2013 12:00:00 AM
+2013-12-31 09:49:26.9815|Info|Date: 10/27/2013 12:00:00 AM
+2013-12-31 09:49:26.9855|Info|Date: 10/30/2013 12:00:00 AM
+2013-12-31 09:49:27.0025|Info|Date: 11/1/2013 12:00:00 AM
+2013-12-31 09:49:27.0165|Info|Date: 11/4/2013 12:00:00 AM
+2013-12-31 09:49:27.0475|Info|Date: 11/4/2013 12:00:00 AM
+2013-12-31 09:49:27.0725|Info|Date: 11/4/2013 12:00:00 AM
+2013-12-31 09:49:27.0905|Info|Date: 11/7/2013 12:00:00 AM
+2013-12-31 09:49:27.1125|Info|Date: 11/10/2013 12:00:00 AM
+2013-12-31 09:49:27.1385|Info|Date: 11/11/2013 12:00:00 AM
+2013-12-31 09:49:27.1415|Info|Date: 11/12/2013 12:00:00 AM
+2013-12-31 09:49:27.1845|Info|Date: 11/15/2013 12:00:00 AM
+2013-12-31 09:49:27.1895|Info|Date: 11/16/2013 12:00:00 AM
+2013-12-31 09:49:27.2165|Info|Date: 11/19/2013 12:00:00 AM
+2013-12-31 09:49:27.2385|Info|Date: 11/23/2013 12:00:00 AM
+2013-12-31 09:49:27.2545|Info|Date: 11/26/2013 12:00:00 AM
+2013-12-31 09:49:27.2645|Info|Date: 11/29/2013 12:00:00 AM
+2013-12-31 09:49:27.2845|Info|Date: 12/1/2013 12:00:00 AM
+2013-12-31 09:49:27.2995|Info|Date: 12/5/2013 12:00:00 AM
+2013-12-31 09:49:27.3205|Info|Date: 12/5/2013 12:00:00 AM
+2013-12-31 09:49:27.3335|Info|Date: 12/9/2013 12:00:00 AM
+2013-12-31 09:49:27.3645|Info|Date: 12/11/2013 12:00:00 AM
+2013-12-31 09:49:27.3795|Info|Date: 12/12/2013 12:00:00 AM
+2013-12-31 09:49:27.4005|Info|Date: 12/12/2013 12:00:00 AM
+2013-12-31 09:49:27.4156|Info|Date: 12/15/2013 12:00:00 AM
+2013-12-31 09:49:27.4256|Info|Date: 12/19/2013 12:00:00 AM
+2013-12-31 09:49:27.4376|Info|Date: 12/22/2013 12:00:00 AM
+2013-12-31 09:49:27.4556|Info|Date: 12/22/2013 12:00:00 AM
+2013-12-31 09:49:27.4686|Info|Date: 12/24/2013 12:00:00 AM
+2013-12-31 09:49:27.4686|Info|Date: 12/28/2013 12:00:00 AM
+2013-12-31 09:49:53.0476|Info|Create Analytics Test Data for Sku: TAT-1010-BLACK-XL
+2013-12-31 09:49:53.0756|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 09:49:53.1656|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 09:49:53.2356|Info|Date: 10/4/2013 12:00:00 AM
+2013-12-31 09:49:53.2806|Info|Date: 10/7/2013 12:00:00 AM
+2013-12-31 09:49:53.3316|Info|Date: 10/8/2013 12:00:00 AM
+2013-12-31 09:49:53.3616|Info|Date: 10/8/2013 12:00:00 AM
+2013-12-31 09:49:53.3916|Info|Date: 10/10/2013 12:00:00 AM
+2013-12-31 09:49:53.4166|Info|Date: 10/13/2013 12:00:00 AM
+2013-12-31 09:49:53.4457|Info|Date: 10/13/2013 12:00:00 AM
+2013-12-31 09:49:53.4667|Info|Date: 10/14/2013 12:00:00 AM
+2013-12-31 09:49:53.4877|Info|Date: 10/17/2013 12:00:00 AM
+2013-12-31 09:49:53.5147|Info|Date: 10/20/2013 12:00:00 AM
+2013-12-31 09:49:53.5347|Info|Date: 10/22/2013 12:00:00 AM
+2013-12-31 09:49:53.5557|Info|Date: 10/25/2013 12:00:00 AM
+2013-12-31 09:49:53.5777|Info|Date: 10/29/2013 12:00:00 AM
+2013-12-31 09:49:53.5997|Info|Date: 10/30/2013 12:00:00 AM
+2013-12-31 09:49:53.6267|Info|Date: 11/3/2013 12:00:00 AM
+2013-12-31 09:49:53.6467|Info|Date: 11/5/2013 12:00:00 AM
+2013-12-31 09:49:53.6607|Info|Date: 11/9/2013 12:00:00 AM
+2013-12-31 09:49:53.6897|Info|Date: 11/9/2013 12:00:00 AM
+2013-12-31 09:49:53.6927|Info|Date: 11/10/2013 12:00:00 AM
+2013-12-31 09:49:53.7187|Info|Date: 11/12/2013 12:00:00 AM
+2013-12-31 09:49:53.7547|Info|Date: 11/13/2013 12:00:00 AM
+2013-12-31 09:49:53.7757|Info|Date: 11/17/2013 12:00:00 AM
+2013-12-31 09:49:53.8037|Info|Date: 11/18/2013 12:00:00 AM
+2013-12-31 09:49:53.8197|Info|Date: 11/21/2013 12:00:00 AM
+2013-12-31 09:49:53.8377|Info|Date: 11/22/2013 12:00:00 AM
+2013-12-31 09:49:53.8617|Info|Date: 11/24/2013 12:00:00 AM
+2013-12-31 09:49:53.8807|Info|Date: 11/25/2013 12:00:00 AM
+2013-12-31 09:49:53.9117|Info|Date: 11/27/2013 12:00:00 AM
+2013-12-31 09:49:53.9287|Info|Date: 12/1/2013 12:00:00 AM
+2013-12-31 09:49:53.9467|Info|Date: 12/5/2013 12:00:00 AM
+2013-12-31 09:49:53.9727|Info|Date: 12/7/2013 12:00:00 AM
+2013-12-31 09:49:53.9927|Info|Date: 12/8/2013 12:00:00 AM
+2013-12-31 09:49:54.0087|Info|Date: 12/11/2013 12:00:00 AM
+2013-12-31 09:49:54.0317|Info|Date: 12/11/2013 12:00:00 AM
+2013-12-31 09:49:54.0357|Info|Date: 12/15/2013 12:00:00 AM
+2013-12-31 09:49:54.0497|Info|Date: 12/15/2013 12:00:00 AM
+2013-12-31 09:49:54.0977|Info|Date: 12/15/2013 12:00:00 AM
+2013-12-31 09:49:54.1137|Info|Date: 12/16/2013 12:00:00 AM
+2013-12-31 09:49:54.1407|Info|Date: 12/20/2013 12:00:00 AM
+2013-12-31 09:49:54.1607|Info|Date: 12/23/2013 12:00:00 AM
+2013-12-31 09:49:54.1887|Info|Date: 12/24/2013 12:00:00 AM
+2013-12-31 09:49:54.2088|Info|Date: 12/26/2013 12:00:00 AM
+2013-12-31 09:49:54.2288|Info|Date: 12/26/2013 12:00:00 AM
+2013-12-31 09:49:54.2498|Info|Date: 12/27/2013 12:00:00 AM
+2013-12-31 09:49:54.2538|Info|Date: 12/29/2013 12:00:00 AM
+2013-12-31 09:49:54.2688|Info|Date: 12/30/2013 12:00:00 AM
+2013-12-31 09:50:21.2708|Info|Create Analytics Test Data for Sku: BULL-MUSHIN-WHITE-XL
+2013-12-31 09:50:21.2829|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 09:50:21.3718|Info|Date: 10/1/2013 12:00:00 AM
+2013-12-31 09:50:21.4848|Info|Date: 10/5/2013 12:00:00 AM
+2013-12-31 09:50:21.5319|Info|Date: 10/8/2013 12:00:00 AM
+2013-12-31 09:50:21.5829|Info|Date: 10/12/2013 12:00:00 AM
+2013-12-31 09:50:21.6439|Info|Date: 10/12/2013 12:00:00 AM
+2013-12-31 09:50:21.6989|Info|Date: 10/15/2013 12:00:00 AM
+2013-12-31 09:50:21.7439|Info|Date: 10/18/2013 12:00:00 AM
+2013-12-31 09:50:21.7699|Info|Date: 10/20/2013 12:00:00 AM
+2013-12-31 09:50:21.7939|Info|Date: 10/23/2013 12:00:00 AM
+2013-12-31 09:50:21.8219|Info|Date: 10/26/2013 12:00:00 AM
+2013-12-31 09:50:21.8469|Info|Date: 10/28/2013 12:00:00 AM
+2013-12-31 09:50:21.8669|Info|Date: 10/29/2013 12:00:00 AM
+2013-12-31 09:50:21.8829|Info|Date: 11/1/2013 12:00:00 AM
+2013-12-31 09:50:21.9019|Info|Date: 11/2/2013 12:00:00 AM
+2013-12-31 09:50:21.9249|Info|Date: 11/4/2013 12:00:00 AM
+2013-12-31 09:50:21.9439|Info|Date: 11/4/2013 12:00:00 AM
+2013-12-31 09:50:21.9729|Info|Date: 11/4/2013 12:00:00 AM
+2013-12-31 09:50:21.9779|Info|Date: 11/6/2013 12:00:00 AM
+2013-12-31 09:50:21.9989|Info|Date: 11/9/2013 12:00:00 AM
+2013-12-31 09:50:22.0169|Info|Date: 11/9/2013 12:00:00 AM
+2013-12-31 09:50:22.0419|Info|Date: 11/10/2013 12:00:00 AM
+2013-12-31 09:50:22.0569|Info|Date: 11/10/2013 12:00:00 AM
+2013-12-31 09:50:22.0939|Info|Date: 11/13/2013 12:00:00 AM
+2013-12-31 09:50:22.1059|Info|Date: 11/16/2013 12:00:00 AM
+2013-12-31 09:50:22.1209|Info|Date: 11/17/2013 12:00:00 AM
+2013-12-31 09:50:22.1439|Info|Date: 11/18/2013 12:00:00 AM
+2013-12-31 09:50:22.1619|Info|Date: 11/18/2013 12:00:00 AM
+2013-12-31 09:50:22.1859|Info|Date: 11/20/2013 12:00:00 AM
+2013-12-31 09:50:22.2159|Info|Date: 11/21/2013 12:00:00 AM
+2013-12-31 09:50:22.2329|Info|Date: 11/21/2013 12:00:00 AM
+2013-12-31 09:50:22.2509|Info|Date: 11/24/2013 12:00:00 AM
+2013-12-31 09:50:22.2559|Info|Date: 11/26/2013 12:00:00 AM
+2013-12-31 09:50:22.2779|Info|Date: 11/28/2013 12:00:00 AM
+2013-12-31 09:50:22.3039|Info|Date: 11/28/2013 12:00:00 AM
+2013-12-31 09:50:22.3039|Info|Date: 11/28/2013 12:00:00 AM
+2013-12-31 09:50:22.3200|Info|Date: 11/30/2013 12:00:00 AM
+2013-12-31 09:50:22.3440|Info|Date: 12/4/2013 12:00:00 AM
+2013-12-31 09:50:22.3490|Info|Date: 12/4/2013 12:00:00 AM
+2013-12-31 09:50:22.3660|Info|Date: 12/5/2013 12:00:00 AM
+2013-12-31 09:50:22.3890|Info|Date: 12/8/2013 12:00:00 AM
+2013-12-31 09:50:22.4060|Info|Date: 12/11/2013 12:00:00 AM
+2013-12-31 09:50:22.4120|Info|Date: 12/12/2013 12:00:00 AM
+2013-12-31 09:50:22.4440|Info|Date: 12/16/2013 12:00:00 AM
+2013-12-31 09:50:22.4640|Info|Date: 12/17/2013 12:00:00 AM
+2013-12-31 09:50:22.4820|Info|Date: 12/17/2013 12:00:00 AM
+2013-12-31 09:50:22.4940|Info|Date: 12/18/2013 12:00:00 AM
+2013-12-31 09:50:22.4940|Info|Date: 12/22/2013 12:00:00 AM
+2013-12-31 09:50:22.5070|Info|Date: 12/22/2013 12:00:00 AM
+2013-12-31 09:50:22.5228|Info|Date: 12/23/2013 12:00:00 AM
+2013-12-31 09:50:22.5388|Info|Date: 12/27/2013 12:00:00 AM
+2013-12-31 09:50:22.5518|Info|Date: 12/27/2013 12:00:00 AM
+2013-12-31 09:50:22.5778|Info|Date: 12/27/2013 12:00:00 AM
+2013-12-31 09:50:22.5948|Info|Date: 12/30/2013 12:00:00 AM
+2013-12-31 09:50:22.5998|Info|Date: 12/30/2013 12:00:00 AM
+2013-12-31 09:50:22.6148|Info|Date: 12/31/2013 12:00:00 AM
+2013-12-31 09:50:22.6338|Info|Date: 12/31/2013 12:00:00 AM
+2013-12-31 09:50:22.6528|Info|Date: 12/31/2013 12:00:00 AM
+2013-12-31 09:50:57.4694|Info|Create Analytics Test Data for Sku: TAT-1010-BLACK-MD
+2013-12-31 09:50:57.4824|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 09:50:57.5535|Info|Date: 10/3/2013 12:00:00 AM
+2013-12-31 09:50:57.6055|Info|Date: 10/7/2013 12:00:00 AM
+2013-12-31 09:50:57.6405|Info|Date: 10/11/2013 12:00:00 AM
+2013-12-31 09:50:57.6975|Info|Date: 10/13/2013 12:00:00 AM
+2013-12-31 09:50:57.7225|Info|Date: 10/13/2013 12:00:00 AM
+2013-12-31 09:50:57.7495|Info|Date: 10/17/2013 12:00:00 AM
+2013-12-31 09:50:57.7655|Info|Date: 10/19/2013 12:00:00 AM
+2013-12-31 09:50:57.7935|Info|Date: 10/23/2013 12:00:00 AM
+2013-12-31 09:50:57.8075|Info|Date: 10/27/2013 12:00:00 AM
+2013-12-31 09:50:57.8295|Info|Date: 10/30/2013 12:00:00 AM
+2013-12-31 09:50:57.8515|Info|Date: 11/3/2013 12:00:00 AM
+2013-12-31 09:50:57.8555|Info|Date: 11/5/2013 12:00:00 AM
+2013-12-31 09:50:57.8825|Info|Date: 11/8/2013 12:00:00 AM
+2013-12-31 09:50:57.9025|Info|Date: 11/8/2013 12:00:00 AM
+2013-12-31 09:50:57.9195|Info|Date: 11/10/2013 12:00:00 AM
+2013-12-31 09:50:57.9385|Info|Date: 11/11/2013 12:00:00 AM
+2013-12-31 09:50:57.9635|Info|Date: 11/13/2013 12:00:00 AM
+2013-12-31 09:50:57.9815|Info|Date: 11/13/2013 12:00:00 AM
+2013-12-31 09:50:58.0045|Info|Date: 11/13/2013 12:00:00 AM
+2013-12-31 09:50:58.0245|Info|Date: 11/15/2013 12:00:00 AM
+2013-12-31 09:50:58.0435|Info|Date: 11/19/2013 12:00:00 AM
+2013-12-31 09:50:58.0595|Info|Date: 11/22/2013 12:00:00 AM
+2013-12-31 09:50:58.0755|Info|Date: 11/25/2013 12:00:00 AM
+2013-12-31 09:50:58.1095|Info|Date: 11/25/2013 12:00:00 AM
+2013-12-31 09:50:58.1205|Info|Date: 11/26/2013 12:00:00 AM
+2013-12-31 09:50:58.1365|Info|Date: 11/27/2013 12:00:00 AM
+2013-12-31 09:50:58.1585|Info|Date: 11/28/2013 12:00:00 AM
+2013-12-31 09:50:58.1815|Info|Date: 11/29/2013 12:00:00 AM
+2013-12-31 09:50:58.2095|Info|Date: 12/3/2013 12:00:00 AM
+2013-12-31 09:50:58.2305|Info|Date: 12/5/2013 12:00:00 AM
+2013-12-31 09:50:58.2465|Info|Date: 12/9/2013 12:00:00 AM
+2013-12-31 09:50:58.2825|Info|Date: 12/13/2013 12:00:00 AM
+2013-12-31 09:50:58.2995|Info|Date: 12/14/2013 12:00:00 AM
+2013-12-31 09:50:58.3285|Info|Date: 12/16/2013 12:00:00 AM
+2013-12-31 09:50:58.3436|Info|Date: 12/16/2013 12:00:00 AM
+2013-12-31 09:50:58.3586|Info|Date: 12/16/2013 12:00:00 AM
+2013-12-31 09:50:58.3736|Info|Date: 12/18/2013 12:00:00 AM
+2013-12-31 09:50:58.3916|Info|Date: 12/19/2013 12:00:00 AM
+2013-12-31 09:50:58.4086|Info|Date: 12/23/2013 12:00:00 AM
+2013-12-31 09:50:58.4256|Info|Date: 12/26/2013 12:00:00 AM
+2013-12-31 09:50:58.4556|Info|Date: 12/26/2013 12:00:00 AM
+2013-12-31 09:50:58.4706|Info|Date: 12/27/2013 12:00:00 AM
+2013-12-31 09:50:58.4926|Info|Date: 12/28/2013 12:00:00 AM
+2013-12-31 09:50:58.4956|Info|Date: 12/31/2013 12:00:00 AM
+2013-12-31 09:51:25.0099|Info|Create Analytics Test Data for Sku: BULL-MUSHIN-BLUE-LG
+2013-12-31 09:51:25.0199|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 09:51:25.1539|Info|Date: 10/2/2013 12:00:00 AM
+2013-12-31 09:51:25.2419|Info|Date: 10/3/2013 12:00:00 AM
+2013-12-31 09:51:25.2989|Info|Date: 10/3/2013 12:00:00 AM
+2013-12-31 09:51:25.3529|Info|Date: 10/3/2013 12:00:00 AM
+2013-12-31 09:51:25.3869|Info|Date: 10/4/2013 12:00:00 AM
+2013-12-31 09:51:25.4099|Info|Date: 10/7/2013 12:00:00 AM
+2013-12-31 09:51:25.4399|Info|Date: 10/10/2013 12:00:00 AM
+2013-12-31 09:51:25.4649|Info|Date: 10/12/2013 12:00:00 AM
+2013-12-31 09:51:25.4859|Info|Date: 10/12/2013 12:00:00 AM
+2013-12-31 09:51:25.5069|Info|Date: 10/14/2013 12:00:00 AM
+2013-12-31 09:51:25.5219|Info|Date: 10/17/2013 12:00:00 AM
+2013-12-31 09:51:25.5499|Info|Date: 10/21/2013 12:00:00 AM
+2013-12-31 09:51:25.5729|Info|Date: 10/22/2013 12:00:00 AM
+2013-12-31 09:51:25.5980|Info|Date: 10/24/2013 12:00:00 AM
+2013-12-31 09:51:25.6260|Info|Date: 10/25/2013 12:00:00 AM
+2013-12-31 09:51:25.6500|Info|Date: 10/29/2013 12:00:00 AM
+2013-12-31 09:51:25.6730|Info|Date: 10/31/2013 12:00:00 AM
+2013-12-31 09:51:25.6910|Info|Date: 11/4/2013 12:00:00 AM
+2013-12-31 09:51:25.7250|Info|Date: 11/4/2013 12:00:00 AM
+2013-12-31 09:51:25.7510|Info|Date: 11/6/2013 12:00:00 AM
+2013-12-31 09:51:25.7720|Info|Date: 11/10/2013 12:00:00 AM
+2013-12-31 09:51:25.7910|Info|Date: 11/12/2013 12:00:00 AM
+2013-12-31 09:51:25.8150|Info|Date: 11/14/2013 12:00:00 AM
+2013-12-31 09:51:25.8400|Info|Date: 11/15/2013 12:00:00 AM
+2013-12-31 09:51:25.8640|Info|Date: 11/18/2013 12:00:00 AM
+2013-12-31 09:51:25.8970|Info|Date: 11/19/2013 12:00:00 AM
+2013-12-31 09:51:25.9200|Info|Date: 11/21/2013 12:00:00 AM
+2013-12-31 09:51:25.9200|Info|Date: 11/22/2013 12:00:00 AM
+2013-12-31 09:51:25.9570|Info|Date: 11/25/2013 12:00:00 AM
+2013-12-31 09:51:25.9720|Info|Date: 11/26/2013 12:00:00 AM
+2013-12-31 09:51:26.0070|Info|Date: 11/27/2013 12:00:00 AM
+2013-12-31 09:51:26.0230|Info|Date: 11/28/2013 12:00:00 AM
+2013-12-31 09:51:26.0430|Info|Date: 12/2/2013 12:00:00 AM
+2013-12-31 09:51:26.0640|Info|Date: 12/5/2013 12:00:00 AM
+2013-12-31 09:51:26.0810|Info|Date: 12/9/2013 12:00:00 AM
+2013-12-31 09:51:26.0980|Info|Date: 12/13/2013 12:00:00 AM
+2013-12-31 09:51:26.1220|Info|Date: 12/17/2013 12:00:00 AM
+2013-12-31 09:51:26.1490|Info|Date: 12/20/2013 12:00:00 AM
+2013-12-31 09:51:26.1800|Info|Date: 12/24/2013 12:00:00 AM
+2013-12-31 09:51:26.1930|Info|Date: 12/24/2013 12:00:00 AM
+2013-12-31 09:51:26.2070|Info|Date: 12/27/2013 12:00:00 AM
+2013-12-31 09:51:26.2280|Info|Date: 12/30/2013 12:00:00 AM
+2013-12-31 09:51:26.2320|Info|Date: 12/30/2013 12:00:00 AM
+2013-12-31 09:51:26.2641|Info|Date: 12/30/2013 12:00:00 AM
+2013-12-31 09:51:26.2850|Info|Date: 12/30/2013 12:00:00 AM
+2013-12-31 09:51:26.3121|Info|Date: 12/31/2013 12:00:00 AM
+2013-12-31 09:51:55.8775|Info|Create Analytics Test Data for Sku: BULL-MUSHIN-WHITE-XXL
+2013-12-31 09:51:55.8905|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 09:51:56.0415|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 09:51:56.1135|Info|Date: 10/3/2013 12:00:00 AM
+2013-12-31 09:51:56.1485|Info|Date: 10/3/2013 12:00:00 AM
+2013-12-31 09:51:56.1805|Info|Date: 10/7/2013 12:00:00 AM
+2013-12-31 09:51:56.2105|Info|Date: 10/9/2013 12:00:00 AM
+2013-12-31 09:51:56.2355|Info|Date: 10/9/2013 12:00:00 AM
+2013-12-31 09:51:56.2705|Info|Date: 10/13/2013 12:00:00 AM
+2013-12-31 09:51:56.2935|Info|Date: 10/16/2013 12:00:00 AM
+2013-12-31 09:51:56.3245|Info|Date: 10/16/2013 12:00:00 AM
+2013-12-31 09:51:56.3475|Info|Date: 10/17/2013 12:00:00 AM
+2013-12-31 09:51:56.3865|Info|Date: 10/19/2013 12:00:00 AM
+2013-12-31 09:51:56.4065|Info|Date: 10/21/2013 12:00:00 AM
+2013-12-31 09:51:56.4295|Info|Date: 10/25/2013 12:00:00 AM
+2013-12-31 09:51:56.4545|Info|Date: 10/25/2013 12:00:00 AM
+2013-12-31 09:51:56.4755|Info|Date: 10/29/2013 12:00:00 AM
+2013-12-31 09:51:56.5225|Info|Date: 10/31/2013 12:00:00 AM
+2013-12-31 09:51:56.5625|Info|Date: 10/31/2013 12:00:00 AM
+2013-12-31 09:51:56.5905|Info|Date: 11/3/2013 12:00:00 AM
+2013-12-31 09:51:56.6185|Info|Date: 11/7/2013 12:00:00 AM
+2013-12-31 09:51:56.6406|Info|Date: 11/7/2013 12:00:00 AM
+2013-12-31 09:51:56.6626|Info|Date: 11/7/2013 12:00:00 AM
+2013-12-31 09:51:56.6666|Info|Date: 11/9/2013 12:00:00 AM
+2013-12-31 09:51:56.7286|Info|Date: 11/12/2013 12:00:00 AM
+2013-12-31 09:51:56.7496|Info|Date: 11/15/2013 12:00:00 AM
+2013-12-31 09:51:56.7746|Info|Date: 11/15/2013 12:00:00 AM
+2013-12-31 09:51:56.8026|Info|Date: 11/16/2013 12:00:00 AM
+2013-12-31 09:51:56.8296|Info|Date: 11/19/2013 12:00:00 AM
+2013-12-31 09:51:56.8626|Info|Date: 11/21/2013 12:00:00 AM
+2013-12-31 09:51:56.8926|Info|Date: 11/21/2013 12:00:00 AM
+2013-12-31 09:51:56.9306|Info|Date: 11/21/2013 12:00:00 AM
+2013-12-31 09:51:56.9636|Info|Date: 11/22/2013 12:00:00 AM
+2013-12-31 09:51:56.9786|Info|Date: 11/23/2013 12:00:00 AM
+2013-12-31 09:51:56.9996|Info|Date: 11/23/2013 12:00:00 AM
+2013-12-31 09:51:57.0226|Info|Date: 11/27/2013 12:00:00 AM
+2013-12-31 09:51:57.0436|Info|Date: 12/1/2013 12:00:00 AM
+2013-12-31 09:51:57.0726|Info|Date: 12/3/2013 12:00:00 AM
+2013-12-31 09:51:57.1066|Info|Date: 12/6/2013 12:00:00 AM
+2013-12-31 09:51:57.1336|Info|Date: 12/6/2013 12:00:00 AM
+2013-12-31 09:51:57.1546|Info|Date: 12/9/2013 12:00:00 AM
+2013-12-31 09:51:57.1796|Info|Date: 12/10/2013 12:00:00 AM
+2013-12-31 09:51:57.2136|Info|Date: 12/12/2013 12:00:00 AM
+2013-12-31 09:51:57.2406|Info|Date: 12/15/2013 12:00:00 AM
+2013-12-31 09:51:57.2736|Info|Date: 12/17/2013 12:00:00 AM
+2013-12-31 09:51:57.2966|Info|Date: 12/18/2013 12:00:00 AM
+2013-12-31 09:51:57.3146|Info|Date: 12/20/2013 12:00:00 AM
+2013-12-31 09:51:57.3376|Info|Date: 12/23/2013 12:00:00 AM
+2013-12-31 09:51:57.3606|Info|Date: 12/25/2013 12:00:00 AM
+2013-12-31 09:51:57.3816|Info|Date: 12/27/2013 12:00:00 AM
+2013-12-31 09:51:57.4076|Info|Date: 12/28/2013 12:00:00 AM
+2013-12-31 09:51:57.4307|Info|Date: 12/30/2013 12:00:00 AM
+2013-12-31 09:52:27.2702|Info|Create Analytics Test Data for Sku: BULL-ZEBRA-WHITE-MD
+2013-12-31 09:52:27.2902|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 09:52:27.3832|Info|Date: 10/4/2013 12:00:00 AM
+2013-12-31 09:52:27.4422|Info|Date: 10/4/2013 12:00:00 AM
+2013-12-31 09:52:27.4952|Info|Date: 10/8/2013 12:00:00 AM
+2013-12-31 09:52:27.5372|Info|Date: 10/11/2013 12:00:00 AM
+2013-12-31 09:52:27.5662|Info|Date: 10/15/2013 12:00:00 AM
+2013-12-31 09:52:27.6122|Info|Date: 10/17/2013 12:00:00 AM
+2013-12-31 09:52:27.6502|Info|Date: 10/19/2013 12:00:00 AM
+2013-12-31 09:52:27.6932|Info|Date: 10/21/2013 12:00:00 AM
+2013-12-31 09:52:27.7182|Info|Date: 10/21/2013 12:00:00 AM
+2013-12-31 09:52:27.7372|Info|Date: 10/21/2013 12:00:00 AM
+2013-12-31 09:52:27.7633|Info|Date: 10/21/2013 12:00:00 AM
+2013-12-31 09:52:27.7863|Info|Date: 10/23/2013 12:00:00 AM
+2013-12-31 09:52:27.8153|Info|Date: 10/23/2013 12:00:00 AM
+2013-12-31 09:52:27.8333|Info|Date: 10/25/2013 12:00:00 AM
+2013-12-31 09:52:27.8573|Info|Date: 10/25/2013 12:00:00 AM
+2013-12-31 09:52:27.8813|Info|Date: 10/29/2013 12:00:00 AM
+2013-12-31 09:52:27.9123|Info|Date: 11/2/2013 12:00:00 AM
+2013-12-31 09:52:27.9353|Info|Date: 11/3/2013 12:00:00 AM
+2013-12-31 09:52:27.9563|Info|Date: 11/7/2013 12:00:00 AM
+2013-12-31 09:52:27.9983|Info|Date: 11/7/2013 12:00:00 AM
+2013-12-31 09:52:28.0143|Info|Date: 11/9/2013 12:00:00 AM
+2013-12-31 09:52:28.0363|Info|Date: 11/12/2013 12:00:00 AM
+2013-12-31 09:52:28.0663|Info|Date: 11/14/2013 12:00:00 AM
+2013-12-31 09:52:28.0883|Info|Date: 11/18/2013 12:00:00 AM
+2013-12-31 09:52:28.1133|Info|Date: 11/18/2013 12:00:00 AM
+2013-12-31 09:52:28.1163|Info|Date: 11/22/2013 12:00:00 AM
+2013-12-31 09:52:28.1563|Info|Date: 11/25/2013 12:00:00 AM
+2013-12-31 09:52:28.1723|Info|Date: 11/28/2013 12:00:00 AM
+2013-12-31 09:52:28.1943|Info|Date: 12/1/2013 12:00:00 AM
+2013-12-31 09:52:28.2263|Info|Date: 12/4/2013 12:00:00 AM
+2013-12-31 09:52:28.2433|Info|Date: 12/8/2013 12:00:00 AM
+2013-12-31 09:52:28.2723|Info|Date: 12/10/2013 12:00:00 AM
+2013-12-31 09:52:28.2723|Info|Date: 12/12/2013 12:00:00 AM
+2013-12-31 09:52:28.2893|Info|Date: 12/15/2013 12:00:00 AM
+2013-12-31 09:52:28.3343|Info|Date: 12/16/2013 12:00:00 AM
+2013-12-31 09:52:28.3373|Info|Date: 12/16/2013 12:00:00 AM
+2013-12-31 09:52:28.3693|Info|Date: 12/19/2013 12:00:00 AM
+2013-12-31 09:52:28.3863|Info|Date: 12/19/2013 12:00:00 AM
+2013-12-31 09:52:28.4103|Info|Date: 12/23/2013 12:00:00 AM
+2013-12-31 09:52:28.4323|Info|Date: 12/24/2013 12:00:00 AM
+2013-12-31 09:52:28.4493|Info|Date: 12/26/2013 12:00:00 AM
+2013-12-31 09:52:28.4663|Info|Date: 12/26/2013 12:00:00 AM
+2013-12-31 09:52:28.4974|Info|Date: 12/29/2013 12:00:00 AM
+2013-12-31 09:52:28.5113|Info|Date: 12/30/2013 12:00:00 AM
+2013-12-31 09:52:28.5443|Info|Date: 12/30/2013 12:00:00 AM
+2013-12-31 09:52:55.9509|Info|Seeding Pushmarket data - Complete!
+2013-12-31 09:52:55.9639|Info|
+PROCESS FINISH:12/31/2013 9:52:55 AM
+
+2013-12-31 10:27:18.2676|Info|PROCESS START:12/31/2013 10:27:18 AM
+
+2013-12-31 10:27:18.3756|Info|Pushmarket E-Commerce Automation
+2013-12-31 10:27:18.3906|Info|Push Software Consulting, LLC
+2013-12-31 10:27:18.4246|Info|...
+2013-12-31 10:27:18.4526|Info|Attemping to Delete Database...
+2013-12-31 10:27:20.3987|Error|System.Data.ProviderIncompatibleException:An error occurred while getting provider information from the database. This can be caused by Entity Framework using an incorrect connection string. Check the inner exceptions for details and ensure that the connection string is correct.
+   at System.Data.Entity.ModelConfiguration.Utilities.DbProviderServicesExtensions.GetProviderManifestTokenChecked(DbProviderServices providerServices, DbConnection connection)
+   at System.Data.Entity.ModelConfiguration.Utilities.DbConnectionExtensions.GetProviderInfo(DbConnection connection, DbProviderManifest& providerManifest)
+   at System.Data.Entity.DbModelBuilder.Build(DbConnection providerConnection)
+   at System.Data.Entity.Internal.LazyInternalContext.CreateModel(LazyInternalContext internalContext)
+   at System.Data.Entity.Internal.RetryLazy`2.GetValue(TInput input)
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.CreateObjectContextForDdlOps()
+   at System.Data.Entity.Database.Delete()
+   at ArtOfGroundFighting.Initializer.Program.DestroyDatabase() in c:\DEV\Pleiades\ArtOfGroundFighting.Initializer\Program.cs:line 96
+   at ArtOfGroundFighting.Initializer.Program.DoStuff() in c:\DEV\Pleiades\ArtOfGroundFighting.Initializer\Program.cs:line 60
+   at ArtOfGroundFighting.Initializer.Program.Main(String[] args) in c:\DEV\Pleiades\ArtOfGroundFighting.Initializer\Program.cs:line 37
+
+INNER EXCEPTION
+System.Data.ProviderIncompatibleException:The provider did not return a ProviderManifestToken string.
+   at System.Data.Common.DbProviderServices.GetProviderManifestToken(DbConnection connection)
+   at System.Data.Entity.ModelConfiguration.Utilities.DbProviderServicesExtensions.GetProviderManifestTokenChecked(DbProviderServices providerServices, DbConnection connection)
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Cannot open server 'fdl2egke7x' requested by the login. Client with IP address '67.184.152.105' is not allowed to access the server.  To enable access, use the Windows Azure Management Portal or run sp_set_firewall_rule on the master database to create a firewall rule for this IP address or address range.  It may take up to five minutes for this change to take effect.
+Login failed for user 'aogfdb'.
+This session has been assigned a tracing ID of 'c495e09d-5928-49b4-8c06-d87586a1eed5'.  Provide this tracing ID to customer support when you need assistance.
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.SqlClient.SqlProviderServices.UsingConnection(SqlConnection sqlConnection, Action`1 act)
+   at System.Data.SqlClient.SqlProviderServices.UsingMasterConnection(SqlConnection sqlConnection, Action`1 act)
+   at System.Data.SqlClient.SqlProviderServices.GetDbProviderManifestToken(DbConnection connection)
+   at System.Data.Common.DbProviderServices.GetProviderManifestToken(DbConnection connection)
+2013-12-31 10:27:20.4503|Info|
+PROCESS FINISH:12/31/2013 10:27:20 AM
+
+2013-12-31 10:27:52.3276|Info|PROCESS START:12/31/2013 10:27:52 AM
+
+2013-12-31 10:27:52.3746|Info|Pushmarket E-Commerce Automation
+2013-12-31 10:27:52.3856|Info|Push Software Consulting, LLC
+2013-12-31 10:27:52.3856|Info|...
+2013-12-31 10:27:52.3986|Info|Attemping to Delete Database...
+2013-12-31 10:27:53.6508|Error|System.Data.ProviderIncompatibleException:An error occurred while getting provider information from the database. This can be caused by Entity Framework using an incorrect connection string. Check the inner exceptions for details and ensure that the connection string is correct.
+   at System.Data.Entity.ModelConfiguration.Utilities.DbProviderServicesExtensions.GetProviderManifestTokenChecked(DbProviderServices providerServices, DbConnection connection)
+   at System.Data.Entity.ModelConfiguration.Utilities.DbConnectionExtensions.GetProviderInfo(DbConnection connection, DbProviderManifest& providerManifest)
+   at System.Data.Entity.DbModelBuilder.Build(DbConnection providerConnection)
+   at System.Data.Entity.Internal.LazyInternalContext.CreateModel(LazyInternalContext internalContext)
+   at System.Data.Entity.Internal.RetryLazy`2.GetValue(TInput input)
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.CreateObjectContextForDdlOps()
+   at System.Data.Entity.Database.Delete()
+   at ArtOfGroundFighting.Initializer.Program.DestroyDatabase() in c:\DEV\Pleiades\ArtOfGroundFighting.Initializer\Program.cs:line 96
+   at ArtOfGroundFighting.Initializer.Program.DoStuff() in c:\DEV\Pleiades\ArtOfGroundFighting.Initializer\Program.cs:line 60
+   at ArtOfGroundFighting.Initializer.Program.Main(String[] args) in c:\DEV\Pleiades\ArtOfGroundFighting.Initializer\Program.cs:line 37
+
+INNER EXCEPTION
+System.Data.ProviderIncompatibleException:The provider did not return a ProviderManifestToken string.
+   at System.Data.Common.DbProviderServices.GetProviderManifestToken(DbConnection connection)
+   at System.Data.Entity.ModelConfiguration.Utilities.DbProviderServicesExtensions.GetProviderManifestTokenChecked(DbProviderServices providerServices, DbConnection connection)
+
+INNER EXCEPTION
+System.Data.SqlClient.SqlException:Cannot open server 'fdl2egke7x' requested by the login. Client with IP address '67.184.152.105' is not allowed to access the server.  To enable access, use the Windows Azure Management Portal or run sp_set_firewall_rule on the master database to create a firewall rule for this IP address or address range.  It may take up to five minutes for this change to take effect.
+Login failed for user 'aogfdb'.
+This session has been assigned a tracing ID of '805911b1-d4d8-4129-8277-48a0b2e5f97e'.  Provide this tracing ID to customer support when you need assistance.
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.SqlClient.SqlProviderServices.UsingConnection(SqlConnection sqlConnection, Action`1 act)
+   at System.Data.SqlClient.SqlProviderServices.UsingMasterConnection(SqlConnection sqlConnection, Action`1 act)
+   at System.Data.SqlClient.SqlProviderServices.GetDbProviderManifestToken(DbConnection connection)
+   at System.Data.Common.DbProviderServices.GetProviderManifestToken(DbConnection connection)
+2013-12-31 10:27:53.7474|Info|
+PROCESS FINISH:12/31/2013 10:27:53 AM
+
+2013-12-31 10:28:13.8638|Info|PROCESS START:12/31/2013 10:28:13 AM
+
+2013-12-31 10:28:13.8998|Info|Pushmarket E-Commerce Automation
+2013-12-31 10:28:13.9118|Info|Push Software Consulting, LLC
+2013-12-31 10:28:13.9118|Info|...
+2013-12-31 10:28:13.9308|Info|Attemping to Delete Database...
+2013-12-31 10:28:17.8024|Info|Database Deleted
+2013-12-31 10:28:17.8134|Info|Cleaning out Resource Files
+2013-12-31 10:28:32.6671|Info|Resource Files Cleaned
+2013-12-31 10:28:32.6671|Info|Creating Pushmarket Database...
+2013-12-31 10:28:39.4343|Info|Pushmarket Database Created
+2013-12-31 10:28:39.4343|Info|Seeding Pushmarket data - Starting...
+2013-12-31 10:28:39.4563|Info|Create the default Root User
+2013-12-31 10:28:40.4494|Info|Create the default Categories
+2013-12-31 10:28:42.0377|Info|Create the default Size Groups and Sizes
+2013-12-31 10:28:42.8365|Info|Create the default Brands
+2013-12-31 10:28:42.8365|Info|brandImage File Path - Content\BrandLogos\Afflictionmma2.jpg
+2013-12-31 10:28:43.5997|Info|brandImage File Path - Content\BrandLogos\badboy.jpg
+2013-12-31 10:28:44.1027|Info|brandImage File Path - Content\BrandLogos\bullterriergearl.gif
+2013-12-31 10:28:44.6135|Info|brandImage File Path - Content\BrandLogos\dethrone2.png
+2013-12-31 10:28:45.3949|Info|brandImage File Path - Content\BrandLogos\fuji.jpg
+2013-12-31 10:28:46.0590|Info|brandImage File Path - Content\BrandLogos\tatami.jpg
+2013-12-31 10:28:46.5839|Info|brandImage File Path - Content\BrandLogos\hayabusa-logo.jpg
+2013-12-31 10:28:47.2309|Info|brandImage File Path - Content\BrandLogos\RingToCageLogo.jpg
+2013-12-31 10:28:47.7909|Info|brandImage File Path - Content\BrandLogos\shock_doctor_logo.jpg
+2013-12-31 10:28:48.3235|Info|brandImage File Path - Content\BrandLogos\logotapout.jpg
+2013-12-31 10:28:48.8959|Info|Create the default Colors
+2013-12-31 10:28:55.4530|Info|Creating Product: Tatami Estilo 3.0 Premier BJJ Gi
+2013-12-31 10:28:57.2117|Info|Adding Image for Content\TatamiEstilo\Black\tat-1010_black_01_xl.jpg
+2013-12-31 10:28:57.8107|Info|Adding Image for Content\TatamiEstilo\Black\tat-1010_black_02_xl.jpg
+2013-12-31 10:28:58.4523|Info|Adding Image for Content\TatamiEstilo\Black\tat-1010_black_03_xl.jpg
+2013-12-31 10:28:59.1396|Info|Adding Image for Content\TatamiEstilo\Black\tat-1010_black_04_xl.jpg
+2013-12-31 10:28:59.7267|Info|Adding Image for Content\TatamiEstilo\Black\tat-1010_black_05_xl.jpg
+2013-12-31 10:29:03.2579|Info|Adding Image for Content\TatamiEstilo\Blue\tat-1010_blue_01_xl.jpg
+2013-12-31 10:29:04.0720|Info|Adding Image for Content\TatamiEstilo\Blue\tat-1010_blue_02_xl.jpg
+2013-12-31 10:29:04.9392|Info|Adding Image for Content\TatamiEstilo\Blue\tat-1010_blue_03_xl.jpg
+2013-12-31 10:29:05.8313|Info|Adding Image for Content\TatamiEstilo\Blue\tat-1010_blue_04_xl.jpg
+2013-12-31 10:29:06.7034|Info|Adding Image for Content\TatamiEstilo\Blue\tat-1010_blue_05_xl.jpg
+2013-12-31 10:29:10.8842|Info|Creating Product: Bull Terrier Mushin Gi
+2013-12-31 10:29:11.5312|Info|Adding Image for Content\BullTerrierMuhsin\Black\70726f647563742f32303132313230375f3261393536332e6a7067003330300000660066.jpg
+2013-12-31 10:29:12.0022|Info|Adding Image for Content\BullTerrierMuhsin\Black\70726f647563742f32303132313230375f3339333837622e6a7067003330300000660066.jpg
+2013-12-31 10:29:12.5863|Info|Adding Image for Content\BullTerrierMuhsin\Black\70726f647563742f32303132313230375f3662616662642e6a7067003330300000660066.jpg
+2013-12-31 10:29:13.0361|Info|Adding Image for Content\BullTerrierMuhsin\Black\70726f647563742f32303132313230375f3730653835362e6a7067003330300000660066.jpg
+2013-12-31 10:29:15.3998|Info|Creating Product: Bull Terrier Super Star Gi
+2013-12-31 10:29:16.4357|Info|Adding Image for Content\BullTerrierSuperstar\White\1363199386.jpg
+2013-12-31 10:29:17.5568|Info|Adding Image for Content\BullTerrierSuperstar\White\1363199391.jpg
+2013-12-31 10:29:18.2205|Info|Adding Image for Content\BullTerrierSuperstar\White\1363199395.jpg
+2013-12-31 10:29:18.8996|Info|Adding Image for Content\BullTerrierSuperstar\White\1363199398.jpg
+2013-12-31 10:29:20.3232|Info|Adding Image for Content\BullTerrierSuperstar\Blue\70726f647563742f32303132313230375f3330616134652e6a7067003330300000660066.jpg
+2013-12-31 10:29:20.9346|Info|Adding Image for Content\BullTerrierSuperstar\Blue\70726f647563742f32303132313230375f3338323335662e6a7067003330300000660066.jpg
+2013-12-31 10:29:21.5891|Info|Adding Image for Content\BullTerrierSuperstar\Blue\70726f647563742f32303132313230375f3465613639322e6a7067003330300000660066.jpg
+2013-12-31 10:29:22.1774|Info|Adding Image for Content\BullTerrierSuperstar\Blue\70726f647563742f32303132313230375f3862376564642e6a7067003330300000660066.jpg
+2013-12-31 10:29:25.3400|Info|Creating Product: Bull Terrier Zebra Gi
+2013-12-31 10:29:26.0691|Info|Adding Image for Content\BullTerrierZebra\20130728_3e9d27.jpg
+2013-12-31 10:29:26.8380|Info|Adding Image for Content\BullTerrierZebra\20130728_818d44.jpg
+2013-12-31 10:29:27.6048|Info|Adding Image for Content\BullTerrierZebra\20130728_86e9af.jpg
+2013-12-31 10:29:28.4392|Info|Adding Image for Content\BullTerrierZebra\20130728_d7a719.jpg
+2013-12-31 10:29:31.9067|Info|Creating Product: Bull Terrier Masters Gi
+2013-12-31 10:29:32.6448|Info|Adding Image for Content\BullTerrierMasters\20121217_80c344.jpg
+2013-12-31 10:29:33.6720|Info|Adding Image for Content\BullTerrierMasters\20121217_8877df.jpg
+2013-12-31 10:29:34.8425|Info|Adding Image for Content\BullTerrierMasters\20121217_90a34b.jpg
+2013-12-31 10:29:35.7842|Info|Adding Image for Content\BullTerrierMasters\20121217_97ea13.jpg
+2013-12-31 10:29:38.6223|Info|Creating Product: Hayabusa Head Gear
+2013-12-31 10:29:39.3409|Info|Adding Image for Content\HayabusaHeadGear\hay-1097_01_xl.jpg
+2013-12-31 10:29:40.1950|Info|Adding Image for Content\HayabusaHeadGear\hay-1097_black_02_xl.jpg
+2013-12-31 10:29:40.9145|Info|Adding Image for Content\HayabusaHeadGear\hay-1097_black_03_xl.jpg
+2013-12-31 10:29:43.9060|Info|Creating Product: Ring-to-Cage Jiu-Jitsu Training Dummy
+2013-12-31 10:29:44.5679|Info|Adding Image for Content\JiuJitsuDummy\RC24MS.jpg
+2013-12-31 10:29:46.5068|Info|Creating Product: Shock Doctor Anti-Microbial Mouthguard Case
+2013-12-31 10:29:47.5436|Info|Adding Image for Content\ShockDoctorMouthguardCase\Orange\shock_doctor_mouthguard_case.jpg
+2013-12-31 10:29:48.5946|Info|Adding Image for Content\ShockDoctorMouthguardCase\Blue\Shockdoctor_Mouthguard_Case-1.jpg
+2013-12-31 10:29:49.8474|Info|Creating Product: Shock Doctor Gel Nano Mouth Guard
+2013-12-31 10:29:49.9575|Info|Adding Image for Content\ShockDoctorGelNano\Shock-Doctor-Gel-Nano.jpg
+2013-12-31 10:29:51.4956|Info|Creating Product: Tapout Mouthguard Case
+2013-12-31 10:29:52.1275|Info|Adding Image for Content\TapoutMouthguardCase\tapout-mouthguard-case.jpg
+2013-12-31 10:29:52.9633|Info|Create the default Shipping Methods
+2013-12-31 10:29:53.1244|Info|Create the default State Taxes
+2013-12-31 10:29:54.3739|Info|Create Analytics Test Data
+2013-12-31 10:29:54.4109|Info|Create Analytics Test Data for Sku: BULL-ZEBRA-WHITE-XL
+2013-12-31 10:29:54.4219|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 10:29:54.4599|Info|Date: 10/1/2013 12:00:00 AM
+2013-12-31 10:29:54.4819|Info|Date: 10/2/2013 12:00:00 AM
+2013-12-31 10:29:54.4879|Info|Date: 10/3/2013 12:00:00 AM
+2013-12-31 10:29:54.4999|Info|Date: 10/5/2013 12:00:00 AM
+2013-12-31 10:29:54.5249|Info|Date: 10/7/2013 12:00:00 AM
+2013-12-31 10:29:54.5449|Info|Date: 10/11/2013 12:00:00 AM
+2013-12-31 10:29:54.5630|Info|Date: 10/12/2013 12:00:00 AM
+2013-12-31 10:29:54.5789|Info|Date: 10/13/2013 12:00:00 AM
+2013-12-31 10:29:54.6129|Info|Date: 10/14/2013 12:00:00 AM
+2013-12-31 10:29:54.6259|Info|Date: 10/16/2013 12:00:00 AM
+2013-12-31 10:29:54.6409|Info|Date: 10/19/2013 12:00:00 AM
+2013-12-31 10:29:54.6409|Info|Date: 10/23/2013 12:00:00 AM
+2013-12-31 10:29:54.6740|Info|Date: 10/25/2013 12:00:00 AM
+2013-12-31 10:29:54.6960|Info|Date: 10/25/2013 12:00:00 AM
+2013-12-31 10:29:54.7120|Info|Date: 10/25/2013 12:00:00 AM
+2013-12-31 10:29:54.7250|Info|Date: 10/26/2013 12:00:00 AM
+2013-12-31 10:29:54.7480|Info|Date: 10/26/2013 12:00:00 AM
+2013-12-31 10:29:54.7540|Info|Date: 10/29/2013 12:00:00 AM
+2013-12-31 10:29:54.7840|Info|Date: 11/1/2013 12:00:00 AM
+2013-12-31 10:29:54.7970|Info|Date: 11/4/2013 12:00:00 AM
+2013-12-31 10:29:54.8220|Info|Date: 11/6/2013 12:00:00 AM
+2013-12-31 10:29:54.8390|Info|Date: 11/6/2013 12:00:00 AM
+2013-12-31 10:29:54.8520|Info|Date: 11/9/2013 12:00:00 AM
+2013-12-31 10:29:54.8720|Info|Date: 11/10/2013 12:00:00 AM
+2013-12-31 10:29:54.9000|Info|Date: 11/10/2013 12:00:00 AM
+2013-12-31 10:29:54.9100|Info|Date: 11/12/2013 12:00:00 AM
+2013-12-31 10:29:54.9240|Info|Date: 11/14/2013 12:00:00 AM
+2013-12-31 10:29:54.9400|Info|Date: 11/16/2013 12:00:00 AM
+2013-12-31 10:29:54.9600|Info|Date: 11/20/2013 12:00:00 AM
+2013-12-31 10:29:54.9790|Info|Date: 11/21/2013 12:00:00 AM
+2013-12-31 10:29:54.9840|Info|Date: 11/25/2013 12:00:00 AM
+2013-12-31 10:29:55.0000|Info|Date: 11/27/2013 12:00:00 AM
+2013-12-31 10:29:55.0300|Info|Date: 11/30/2013 12:00:00 AM
+2013-12-31 10:29:55.0460|Info|Date: 12/2/2013 12:00:00 AM
+2013-12-31 10:29:55.0460|Info|Date: 12/3/2013 12:00:00 AM
+2013-12-31 10:29:55.0630|Info|Date: 12/7/2013 12:00:00 AM
+2013-12-31 10:29:55.0960|Info|Date: 12/10/2013 12:00:00 AM
+2013-12-31 10:29:55.1150|Info|Date: 12/14/2013 12:00:00 AM
+2013-12-31 10:29:55.1300|Info|Date: 12/18/2013 12:00:00 AM
+2013-12-31 10:29:55.1410|Info|Date: 12/18/2013 12:00:00 AM
+2013-12-31 10:29:55.1580|Info|Date: 12/20/2013 12:00:00 AM
+2013-12-31 10:29:55.1930|Info|Date: 12/20/2013 12:00:00 AM
+2013-12-31 10:29:55.2040|Info|Date: 12/22/2013 12:00:00 AM
+2013-12-31 10:29:55.2190|Info|Date: 12/23/2013 12:00:00 AM
+2013-12-31 10:29:55.2330|Info|Date: 12/27/2013 12:00:00 AM
+2013-12-31 10:29:55.2680|Info|Date: 12/28/2013 12:00:00 AM
+2013-12-31 10:29:57.3262|Info|Create Analytics Test Data for Sku: BULL-MUSHIN-BLACK-XXL
+2013-12-31 10:29:57.3262|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 10:29:57.3752|Info|Date: 10/3/2013 12:00:00 AM
+2013-12-31 10:29:57.4052|Info|Date: 10/3/2013 12:00:00 AM
+2013-12-31 10:29:57.4332|Info|Date: 10/7/2013 12:00:00 AM
+2013-12-31 10:29:57.4632|Info|Date: 10/11/2013 12:00:00 AM
+2013-12-31 10:29:57.4802|Info|Date: 10/11/2013 12:00:00 AM
+2013-12-31 10:29:57.5112|Info|Date: 10/14/2013 12:00:00 AM
+2013-12-31 10:29:57.5302|Info|Date: 10/16/2013 12:00:00 AM
+2013-12-31 10:29:57.5472|Info|Date: 10/19/2013 12:00:00 AM
+2013-12-31 10:29:57.5772|Info|Date: 10/19/2013 12:00:00 AM
+2013-12-31 10:29:57.5942|Info|Date: 10/20/2013 12:00:00 AM
+2013-12-31 10:29:57.6142|Info|Date: 10/20/2013 12:00:00 AM
+2013-12-31 10:29:57.6542|Info|Date: 10/21/2013 12:00:00 AM
+2013-12-31 10:29:57.6742|Info|Date: 10/23/2013 12:00:00 AM
+2013-12-31 10:29:57.6922|Info|Date: 10/24/2013 12:00:00 AM
+2013-12-31 10:29:57.7242|Info|Date: 10/27/2013 12:00:00 AM
+2013-12-31 10:29:57.7552|Info|Date: 10/27/2013 12:00:00 AM
+2013-12-31 10:29:57.7792|Info|Date: 10/28/2013 12:00:00 AM
+2013-12-31 10:29:57.8122|Info|Date: 11/1/2013 12:00:00 AM
+2013-12-31 10:29:57.8342|Info|Date: 11/1/2013 12:00:00 AM
+2013-12-31 10:29:57.8642|Info|Date: 11/3/2013 12:00:00 AM
+2013-12-31 10:29:57.8823|Info|Date: 11/5/2013 12:00:00 AM
+2013-12-31 10:29:57.9053|Info|Date: 11/9/2013 12:00:00 AM
+2013-12-31 10:29:57.9243|Info|Date: 11/13/2013 12:00:00 AM
+2013-12-31 10:29:57.9533|Info|Date: 11/13/2013 12:00:00 AM
+2013-12-31 10:29:57.9773|Info|Date: 11/16/2013 12:00:00 AM
+2013-12-31 10:29:58.0013|Info|Date: 11/18/2013 12:00:00 AM
+2013-12-31 10:29:58.0183|Info|Date: 11/21/2013 12:00:00 AM
+2013-12-31 10:29:58.0353|Info|Date: 11/23/2013 12:00:00 AM
+2013-12-31 10:29:58.0603|Info|Date: 11/25/2013 12:00:00 AM
+2013-12-31 10:29:58.0783|Info|Date: 11/28/2013 12:00:00 AM
+2013-12-31 10:29:58.1213|Info|Date: 11/28/2013 12:00:00 AM
+2013-12-31 10:29:58.1413|Info|Date: 11/30/2013 12:00:00 AM
+2013-12-31 10:29:58.1713|Info|Date: 12/3/2013 12:00:00 AM
+2013-12-31 10:29:58.1873|Info|Date: 12/6/2013 12:00:00 AM
+2013-12-31 10:29:58.2053|Info|Date: 12/7/2013 12:00:00 AM
+2013-12-31 10:29:58.2273|Info|Date: 12/11/2013 12:00:00 AM
+2013-12-31 10:29:58.2553|Info|Date: 12/12/2013 12:00:00 AM
+2013-12-31 10:29:58.2773|Info|Date: 12/14/2013 12:00:00 AM
+2013-12-31 10:29:58.2953|Info|Date: 12/18/2013 12:00:00 AM
+2013-12-31 10:29:58.3313|Info|Date: 12/22/2013 12:00:00 AM
+2013-12-31 10:29:58.3433|Info|Date: 12/25/2013 12:00:00 AM
+2013-12-31 10:29:58.3623|Info|Date: 12/28/2013 12:00:00 AM
+2013-12-31 10:29:58.3913|Info|Date: 12/30/2013 12:00:00 AM
+2013-12-31 10:30:00.5416|Info|Create Analytics Test Data for Sku: BULL-MUSHIN-BLACK-SM
+2013-12-31 10:30:00.5416|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 10:30:00.5536|Info|Date: 10/2/2013 12:00:00 AM
+2013-12-31 10:30:00.5696|Info|Date: 10/2/2013 12:00:00 AM
+2013-12-31 10:30:00.6026|Info|Date: 10/3/2013 12:00:00 AM
+2013-12-31 10:30:00.6296|Info|Date: 10/5/2013 12:00:00 AM
+2013-12-31 10:30:00.6516|Info|Date: 10/5/2013 12:00:00 AM
+2013-12-31 10:30:00.6646|Info|Date: 10/5/2013 12:00:00 AM
+2013-12-31 10:30:00.6786|Info|Date: 10/6/2013 12:00:00 AM
+2013-12-31 10:30:00.7066|Info|Date: 10/6/2013 12:00:00 AM
+2013-12-31 10:30:00.7086|Info|Date: 10/7/2013 12:00:00 AM
+2013-12-31 10:30:00.7586|Info|Date: 10/10/2013 12:00:00 AM
+2013-12-31 10:30:00.7736|Info|Date: 10/13/2013 12:00:00 AM
+2013-12-31 10:30:00.7916|Info|Date: 10/16/2013 12:00:00 AM
+2013-12-31 10:30:00.8126|Info|Date: 10/19/2013 12:00:00 AM
+2013-12-31 10:30:00.8396|Info|Date: 10/21/2013 12:00:00 AM
+2013-12-31 10:30:00.8547|Info|Date: 10/25/2013 12:00:00 AM
+2013-12-31 10:30:00.8797|Info|Date: 10/25/2013 12:00:00 AM
+2013-12-31 10:30:00.9017|Info|Date: 10/27/2013 12:00:00 AM
+2013-12-31 10:30:00.9277|Info|Date: 10/31/2013 12:00:00 AM
+2013-12-31 10:30:00.9447|Info|Date: 11/1/2013 12:00:00 AM
+2013-12-31 10:30:00.9757|Info|Date: 11/5/2013 12:00:00 AM
+2013-12-31 10:30:00.9927|Info|Date: 11/6/2013 12:00:00 AM
+2013-12-31 10:30:01.0207|Info|Date: 11/7/2013 12:00:00 AM
+2013-12-31 10:30:01.0207|Info|Date: 11/7/2013 12:00:00 AM
+2013-12-31 10:30:01.0717|Info|Date: 11/11/2013 12:00:00 AM
+2013-12-31 10:30:01.0867|Info|Date: 11/15/2013 12:00:00 AM
+2013-12-31 10:30:01.1137|Info|Date: 11/18/2013 12:00:00 AM
+2013-12-31 10:30:01.1367|Info|Date: 11/19/2013 12:00:00 AM
+2013-12-31 10:30:01.1647|Info|Date: 11/22/2013 12:00:00 AM
+2013-12-31 10:30:01.1977|Info|Date: 11/25/2013 12:00:00 AM
+2013-12-31 10:30:01.2287|Info|Date: 11/25/2013 12:00:00 AM
+2013-12-31 10:30:01.2717|Info|Date: 11/25/2013 12:00:00 AM
+2013-12-31 10:30:01.3037|Info|Date: 11/25/2013 12:00:00 AM
+2013-12-31 10:30:01.3217|Info|Date: 11/26/2013 12:00:00 AM
+2013-12-31 10:30:01.3617|Info|Date: 11/26/2013 12:00:00 AM
+2013-12-31 10:30:01.3927|Info|Date: 11/27/2013 12:00:00 AM
+2013-12-31 10:30:01.4277|Info|Date: 11/27/2013 12:00:00 AM
+2013-12-31 10:30:01.4597|Info|Date: 11/29/2013 12:00:00 AM
+2013-12-31 10:30:01.4857|Info|Date: 11/29/2013 12:00:00 AM
+2013-12-31 10:30:01.5097|Info|Date: 11/29/2013 12:00:00 AM
+2013-12-31 10:30:01.5277|Info|Date: 12/1/2013 12:00:00 AM
+2013-12-31 10:30:01.5507|Info|Date: 12/1/2013 12:00:00 AM
+2013-12-31 10:30:01.5717|Info|Date: 12/3/2013 12:00:00 AM
+2013-12-31 10:30:01.5897|Info|Date: 12/6/2013 12:00:00 AM
+2013-12-31 10:30:01.6097|Info|Date: 12/6/2013 12:00:00 AM
+2013-12-31 10:30:01.6368|Info|Date: 12/6/2013 12:00:00 AM
+2013-12-31 10:30:01.6548|Info|Date: 12/6/2013 12:00:00 AM
+2013-12-31 10:30:01.6678|Info|Date: 12/6/2013 12:00:00 AM
+2013-12-31 10:30:01.6898|Info|Date: 12/8/2013 12:00:00 AM
+2013-12-31 10:30:01.7128|Info|Date: 12/9/2013 12:00:00 AM
+2013-12-31 10:30:01.7278|Info|Date: 12/10/2013 12:00:00 AM
+2013-12-31 10:30:01.7548|Info|Date: 12/13/2013 12:00:00 AM
+2013-12-31 10:30:01.7918|Info|Date: 12/17/2013 12:00:00 AM
+2013-12-31 10:30:01.8178|Info|Date: 12/20/2013 12:00:00 AM
+2013-12-31 10:30:01.8178|Info|Date: 12/22/2013 12:00:00 AM
+2013-12-31 10:30:01.8588|Info|Date: 12/23/2013 12:00:00 AM
+2013-12-31 10:30:01.8758|Info|Date: 12/26/2013 12:00:00 AM
+2013-12-31 10:30:01.8958|Info|Date: 12/30/2013 12:00:00 AM
+2013-12-31 10:30:05.1223|Info|Create Analytics Test Data for Sku: SHOCKDOC-CASE-BLUE
+2013-12-31 10:30:05.1243|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 10:30:05.1733|Info|Date: 10/3/2013 12:00:00 AM
+2013-12-31 10:30:05.2063|Info|Date: 10/4/2013 12:00:00 AM
+2013-12-31 10:30:05.2303|Info|Date: 10/6/2013 12:00:00 AM
+2013-12-31 10:30:05.2493|Info|Date: 10/7/2013 12:00:00 AM
+2013-12-31 10:30:05.2823|Info|Date: 10/8/2013 12:00:00 AM
+2013-12-31 10:30:05.3053|Info|Date: 10/10/2013 12:00:00 AM
+2013-12-31 10:30:05.3284|Info|Date: 10/11/2013 12:00:00 AM
+2013-12-31 10:30:05.3684|Info|Date: 10/12/2013 12:00:00 AM
+2013-12-31 10:30:05.3924|Info|Date: 10/12/2013 12:00:00 AM
+2013-12-31 10:30:05.4254|Info|Date: 10/12/2013 12:00:00 AM
+2013-12-31 10:30:05.4544|Info|Date: 10/15/2013 12:00:00 AM
+2013-12-31 10:30:05.4784|Info|Date: 10/17/2013 12:00:00 AM
+2013-12-31 10:30:05.5144|Info|Date: 10/21/2013 12:00:00 AM
+2013-12-31 10:30:05.5354|Info|Date: 10/23/2013 12:00:00 AM
+2013-12-31 10:30:05.5644|Info|Date: 10/25/2013 12:00:00 AM
+2013-12-31 10:30:05.5954|Info|Date: 10/26/2013 12:00:00 AM
+2013-12-31 10:30:05.6254|Info|Date: 10/30/2013 12:00:00 AM
+2013-12-31 10:30:05.6674|Info|Date: 11/3/2013 12:00:00 AM
+2013-12-31 10:30:05.6964|Info|Date: 11/5/2013 12:00:00 AM
+2013-12-31 10:30:05.7294|Info|Date: 11/9/2013 12:00:00 AM
+2013-12-31 10:30:05.7534|Info|Date: 11/9/2013 12:00:00 AM
+2013-12-31 10:30:05.7694|Info|Date: 11/11/2013 12:00:00 AM
+2013-12-31 10:30:05.7994|Info|Date: 11/15/2013 12:00:00 AM
+2013-12-31 10:30:05.8214|Info|Date: 11/15/2013 12:00:00 AM
+2013-12-31 10:30:05.8374|Info|Date: 11/15/2013 12:00:00 AM
+2013-12-31 10:30:05.8764|Info|Date: 11/18/2013 12:00:00 AM
+2013-12-31 10:30:05.8974|Info|Date: 11/18/2013 12:00:00 AM
+2013-12-31 10:30:05.9424|Info|Date: 11/19/2013 12:00:00 AM
+2013-12-31 10:30:05.9614|Info|Date: 11/22/2013 12:00:00 AM
+2013-12-31 10:30:06.0044|Info|Date: 11/22/2013 12:00:00 AM
+2013-12-31 10:30:06.0224|Info|Date: 11/23/2013 12:00:00 AM
+2013-12-31 10:30:06.0414|Info|Date: 11/26/2013 12:00:00 AM
+2013-12-31 10:30:06.0634|Info|Date: 11/26/2013 12:00:00 AM
+2013-12-31 10:30:06.0924|Info|Date: 11/29/2013 12:00:00 AM
+2013-12-31 10:30:06.1104|Info|Date: 12/3/2013 12:00:00 AM
+2013-12-31 10:30:06.1414|Info|Date: 12/4/2013 12:00:00 AM
+2013-12-31 10:30:06.1655|Info|Date: 12/6/2013 12:00:00 AM
+2013-12-31 10:30:06.1945|Info|Date: 12/9/2013 12:00:00 AM
+2013-12-31 10:30:06.2165|Info|Date: 12/10/2013 12:00:00 AM
+2013-12-31 10:30:06.2415|Info|Date: 12/12/2013 12:00:00 AM
+2013-12-31 10:30:06.2675|Info|Date: 12/15/2013 12:00:00 AM
+2013-12-31 10:30:06.2945|Info|Date: 12/17/2013 12:00:00 AM
+2013-12-31 10:30:06.3095|Info|Date: 12/21/2013 12:00:00 AM
+2013-12-31 10:30:06.3395|Info|Date: 12/21/2013 12:00:00 AM
+2013-12-31 10:30:06.3665|Info|Date: 12/23/2013 12:00:00 AM
+2013-12-31 10:30:06.3825|Info|Date: 12/24/2013 12:00:00 AM
+2013-12-31 10:30:06.3875|Info|Date: 12/24/2013 12:00:00 AM
+2013-12-31 10:30:06.4295|Info|Date: 12/25/2013 12:00:00 AM
+2013-12-31 10:30:06.4555|Info|Date: 12/29/2013 12:00:00 AM
+2013-12-31 10:30:06.4765|Info|Date: 12/31/2013 12:00:00 AM
+2013-12-31 10:30:06.5035|Info|Date: 12/31/2013 12:00:00 AM
+2013-12-31 10:30:09.1862|Info|Create Analytics Test Data for Sku: BULL-MUSHIN-WHITE-LG
+2013-12-31 10:30:09.1862|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 10:30:09.2152|Info|Date: 10/1/2013 12:00:00 AM
+2013-12-31 10:30:09.2502|Info|Date: 10/1/2013 12:00:00 AM
+2013-12-31 10:30:09.2802|Info|Date: 10/1/2013 12:00:00 AM
+2013-12-31 10:30:09.3252|Info|Date: 10/2/2013 12:00:00 AM
+2013-12-31 10:30:09.3742|Info|Date: 10/5/2013 12:00:00 AM
+2013-12-31 10:30:09.3973|Info|Date: 10/7/2013 12:00:00 AM
+2013-12-31 10:30:09.4133|Info|Date: 10/9/2013 12:00:00 AM
+2013-12-31 10:30:09.4373|Info|Date: 10/12/2013 12:00:00 AM
+2013-12-31 10:30:09.4633|Info|Date: 10/16/2013 12:00:00 AM
+2013-12-31 10:30:09.4933|Info|Date: 10/16/2013 12:00:00 AM
+2013-12-31 10:30:09.5223|Info|Date: 10/19/2013 12:00:00 AM
+2013-12-31 10:30:09.5613|Info|Date: 10/19/2013 12:00:00 AM
+2013-12-31 10:30:09.5903|Info|Date: 10/19/2013 12:00:00 AM
+2013-12-31 10:30:09.6263|Info|Date: 10/20/2013 12:00:00 AM
+2013-12-31 10:30:09.6473|Info|Date: 10/24/2013 12:00:00 AM
+2013-12-31 10:30:09.6633|Info|Date: 10/27/2013 12:00:00 AM
+2013-12-31 10:30:09.6983|Info|Date: 10/29/2013 12:00:00 AM
+2013-12-31 10:30:09.7283|Info|Date: 11/2/2013 12:00:00 AM
+2013-12-31 10:30:09.7563|Info|Date: 11/4/2013 12:00:00 AM
+2013-12-31 10:30:09.8123|Info|Date: 11/6/2013 12:00:00 AM
+2013-12-31 10:30:09.8463|Info|Date: 11/7/2013 12:00:00 AM
+2013-12-31 10:30:09.8783|Info|Date: 11/7/2013 12:00:00 AM
+2013-12-31 10:30:09.9213|Info|Date: 11/9/2013 12:00:00 AM
+2013-12-31 10:30:09.9423|Info|Date: 11/12/2013 12:00:00 AM
+2013-12-31 10:30:09.9753|Info|Date: 11/15/2013 12:00:00 AM
+2013-12-31 10:30:09.9993|Info|Date: 11/18/2013 12:00:00 AM
+2013-12-31 10:30:10.0273|Info|Date: 11/18/2013 12:00:00 AM
+2013-12-31 10:30:10.0503|Info|Date: 11/20/2013 12:00:00 AM
+2013-12-31 10:30:10.0813|Info|Date: 11/21/2013 12:00:00 AM
+2013-12-31 10:30:10.1303|Info|Date: 11/21/2013 12:00:00 AM
+2013-12-31 10:30:10.1614|Info|Date: 11/24/2013 12:00:00 AM
+2013-12-31 10:30:10.1964|Info|Date: 11/27/2013 12:00:00 AM
+2013-12-31 10:30:10.2494|Info|Date: 11/27/2013 12:00:00 AM
+2013-12-31 10:30:10.2734|Info|Date: 11/27/2013 12:00:00 AM
+2013-12-31 10:30:10.3084|Info|Date: 12/1/2013 12:00:00 AM
+2013-12-31 10:30:10.3274|Info|Date: 12/4/2013 12:00:00 AM
+2013-12-31 10:30:10.3584|Info|Date: 12/8/2013 12:00:00 AM
+2013-12-31 10:30:10.3854|Info|Date: 12/11/2013 12:00:00 AM
+2013-12-31 10:30:10.4054|Info|Date: 12/15/2013 12:00:00 AM
+2013-12-31 10:30:10.4404|Info|Date: 12/18/2013 12:00:00 AM
+2013-12-31 10:30:10.4754|Info|Date: 12/18/2013 12:00:00 AM
+2013-12-31 10:30:10.5104|Info|Date: 12/19/2013 12:00:00 AM
+2013-12-31 10:30:10.5294|Info|Date: 12/19/2013 12:00:00 AM
+2013-12-31 10:30:10.5474|Info|Date: 12/21/2013 12:00:00 AM
+2013-12-31 10:30:10.5524|Info|Date: 12/23/2013 12:00:00 AM
+2013-12-31 10:30:10.5874|Info|Date: 12/24/2013 12:00:00 AM
+2013-12-31 10:30:10.6014|Info|Date: 12/24/2013 12:00:00 AM
+2013-12-31 10:30:10.6284|Info|Date: 12/24/2013 12:00:00 AM
+2013-12-31 10:30:10.6614|Info|Date: 12/26/2013 12:00:00 AM
+2013-12-31 10:30:10.6794|Info|Date: 12/26/2013 12:00:00 AM
+2013-12-31 10:30:10.6934|Info|Date: 12/27/2013 12:00:00 AM
+2013-12-31 10:30:10.7144|Info|Date: 12/31/2013 12:00:00 AM
+2013-12-31 10:30:13.3020|Info|Create Analytics Test Data for Sku: BULL-ZEBRA-WHITE-SM
+2013-12-31 10:30:13.3020|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 10:30:13.3310|Info|Date: 10/1/2013 12:00:00 AM
+2013-12-31 10:30:13.3550|Info|Date: 10/1/2013 12:00:00 AM
+2013-12-31 10:30:13.3980|Info|Date: 10/1/2013 12:00:00 AM
+2013-12-31 10:30:13.4380|Info|Date: 10/1/2013 12:00:00 AM
+2013-12-31 10:30:13.4560|Info|Date: 10/2/2013 12:00:00 AM
+2013-12-31 10:30:13.4730|Info|Date: 10/2/2013 12:00:00 AM
+2013-12-31 10:30:13.5060|Info|Date: 10/2/2013 12:00:00 AM
+2013-12-31 10:30:13.5240|Info|Date: 10/3/2013 12:00:00 AM
+2013-12-31 10:30:13.5450|Info|Date: 10/4/2013 12:00:00 AM
+2013-12-31 10:30:13.5770|Info|Date: 10/5/2013 12:00:00 AM
+2013-12-31 10:30:13.5971|Info|Date: 10/8/2013 12:00:00 AM
+2013-12-31 10:30:13.6281|Info|Date: 10/10/2013 12:00:00 AM
+2013-12-31 10:30:13.6611|Info|Date: 10/14/2013 12:00:00 AM
+2013-12-31 10:30:13.6841|Info|Date: 10/16/2013 12:00:00 AM
+2013-12-31 10:30:13.7111|Info|Date: 10/18/2013 12:00:00 AM
+2013-12-31 10:30:13.7361|Info|Date: 10/21/2013 12:00:00 AM
+2013-12-31 10:30:13.7561|Info|Date: 10/22/2013 12:00:00 AM
+2013-12-31 10:30:13.7941|Info|Date: 10/24/2013 12:00:00 AM
+2013-12-31 10:30:13.7981|Info|Date: 10/26/2013 12:00:00 AM
+2013-12-31 10:30:13.8131|Info|Date: 10/29/2013 12:00:00 AM
+2013-12-31 10:30:13.8461|Info|Date: 10/31/2013 12:00:00 AM
+2013-12-31 10:30:13.8601|Info|Date: 10/31/2013 12:00:00 AM
+2013-12-31 10:30:13.8901|Info|Date: 11/4/2013 12:00:00 AM
+2013-12-31 10:30:13.9091|Info|Date: 11/6/2013 12:00:00 AM
+2013-12-31 10:30:13.9251|Info|Date: 11/10/2013 12:00:00 AM
+2013-12-31 10:30:13.9571|Info|Date: 11/14/2013 12:00:00 AM
+2013-12-31 10:30:13.9781|Info|Date: 11/17/2013 12:00:00 AM
+2013-12-31 10:30:13.9941|Info|Date: 11/21/2013 12:00:00 AM
+2013-12-31 10:30:14.0301|Info|Date: 11/23/2013 12:00:00 AM
+2013-12-31 10:30:14.0571|Info|Date: 11/23/2013 12:00:00 AM
+2013-12-31 10:30:14.0751|Info|Date: 11/24/2013 12:00:00 AM
+2013-12-31 10:30:14.1181|Info|Date: 11/24/2013 12:00:00 AM
+2013-12-31 10:30:14.1351|Info|Date: 11/25/2013 12:00:00 AM
+2013-12-31 10:30:14.1461|Info|Date: 11/26/2013 12:00:00 AM
+2013-12-31 10:30:14.1761|Info|Date: 11/26/2013 12:00:00 AM
+2013-12-31 10:30:14.1931|Info|Date: 11/30/2013 12:00:00 AM
+2013-12-31 10:30:14.2201|Info|Date: 12/3/2013 12:00:00 AM
+2013-12-31 10:30:14.2451|Info|Date: 12/3/2013 12:00:00 AM
+2013-12-31 10:30:14.2621|Info|Date: 12/4/2013 12:00:00 AM
+2013-12-31 10:30:14.2651|Info|Date: 12/4/2013 12:00:00 AM
+2013-12-31 10:30:14.3051|Info|Date: 12/6/2013 12:00:00 AM
+2013-12-31 10:30:14.3191|Info|Date: 12/7/2013 12:00:00 AM
+2013-12-31 10:30:14.3382|Info|Date: 12/9/2013 12:00:00 AM
+2013-12-31 10:30:14.3651|Info|Date: 12/10/2013 12:00:00 AM
+2013-12-31 10:30:14.3912|Info|Date: 12/13/2013 12:00:00 AM
+2013-12-31 10:30:14.3912|Info|Date: 12/16/2013 12:00:00 AM
+2013-12-31 10:30:14.4062|Info|Date: 12/18/2013 12:00:00 AM
+2013-12-31 10:30:14.4432|Info|Date: 12/21/2013 12:00:00 AM
+2013-12-31 10:30:14.4592|Info|Date: 12/25/2013 12:00:00 AM
+2013-12-31 10:30:14.4802|Info|Date: 12/27/2013 12:00:00 AM
+2013-12-31 10:30:14.5032|Info|Date: 12/28/2013 12:00:00 AM
+2013-12-31 10:30:14.5272|Info|Date: 12/29/2013 12:00:00 AM
+2013-12-31 10:30:16.8758|Info|Create Analytics Test Data for Sku: BULL-MUSHIN-WHITE-XXL
+2013-12-31 10:30:16.8868|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 10:30:16.9058|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 10:30:16.9219|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 10:30:16.9348|Info|Date: 10/1/2013 12:00:00 AM
+2013-12-31 10:30:16.9628|Info|Date: 10/5/2013 12:00:00 AM
+2013-12-31 10:30:16.9799|Info|Date: 10/7/2013 12:00:00 AM
+2013-12-31 10:30:16.9949|Info|Date: 10/9/2013 12:00:00 AM
+2013-12-31 10:30:17.0299|Info|Date: 10/10/2013 12:00:00 AM
+2013-12-31 10:30:17.0459|Info|Date: 10/12/2013 12:00:00 AM
+2013-12-31 10:30:17.0769|Info|Date: 10/16/2013 12:00:00 AM
+2013-12-31 10:30:17.1049|Info|Date: 10/19/2013 12:00:00 AM
+2013-12-31 10:30:17.1229|Info|Date: 10/22/2013 12:00:00 AM
+2013-12-31 10:30:17.1399|Info|Date: 10/25/2013 12:00:00 AM
+2013-12-31 10:30:17.1679|Info|Date: 10/25/2013 12:00:00 AM
+2013-12-31 10:30:17.1939|Info|Date: 10/28/2013 12:00:00 AM
+2013-12-31 10:30:17.2169|Info|Date: 10/31/2013 12:00:00 AM
+2013-12-31 10:30:17.2529|Info|Date: 11/4/2013 12:00:00 AM
+2013-12-31 10:30:17.2789|Info|Date: 11/8/2013 12:00:00 AM
+2013-12-31 10:30:17.3129|Info|Date: 11/10/2013 12:00:00 AM
+2013-12-31 10:30:17.3319|Info|Date: 11/12/2013 12:00:00 AM
+2013-12-31 10:30:17.3559|Info|Date: 11/14/2013 12:00:00 AM
+2013-12-31 10:30:17.3979|Info|Date: 11/15/2013 12:00:00 AM
+2013-12-31 10:30:17.4199|Info|Date: 11/19/2013 12:00:00 AM
+2013-12-31 10:30:17.4479|Info|Date: 11/21/2013 12:00:00 AM
+2013-12-31 10:30:17.4799|Info|Date: 11/23/2013 12:00:00 AM
+2013-12-31 10:30:17.5089|Info|Date: 11/24/2013 12:00:00 AM
+2013-12-31 10:30:17.5399|Info|Date: 11/26/2013 12:00:00 AM
+2013-12-31 10:30:17.5669|Info|Date: 11/28/2013 12:00:00 AM
+2013-12-31 10:30:17.5989|Info|Date: 12/2/2013 12:00:00 AM
+2013-12-31 10:30:17.6189|Info|Date: 12/5/2013 12:00:00 AM
+2013-12-31 10:30:17.6409|Info|Date: 12/5/2013 12:00:00 AM
+2013-12-31 10:30:17.6799|Info|Date: 12/7/2013 12:00:00 AM
+2013-12-31 10:30:17.7199|Info|Date: 12/11/2013 12:00:00 AM
+2013-12-31 10:30:17.7429|Info|Date: 12/11/2013 12:00:00 AM
+2013-12-31 10:30:17.7599|Info|Date: 12/12/2013 12:00:00 AM
+2013-12-31 10:30:17.7780|Info|Date: 12/12/2013 12:00:00 AM
+2013-12-31 10:30:17.7950|Info|Date: 12/12/2013 12:00:00 AM
+2013-12-31 10:30:17.8250|Info|Date: 12/14/2013 12:00:00 AM
+2013-12-31 10:30:17.8530|Info|Date: 12/17/2013 12:00:00 AM
+2013-12-31 10:30:17.8730|Info|Date: 12/17/2013 12:00:00 AM
+2013-12-31 10:30:17.8990|Info|Date: 12/19/2013 12:00:00 AM
+2013-12-31 10:30:17.9160|Info|Date: 12/23/2013 12:00:00 AM
+2013-12-31 10:30:17.9320|Info|Date: 12/27/2013 12:00:00 AM
+2013-12-31 10:30:17.9590|Info|Date: 12/28/2013 12:00:00 AM
+2013-12-31 10:30:17.9780|Info|Date: 12/29/2013 12:00:00 AM
+2013-12-31 10:30:18.0080|Info|Date: 12/31/2013 12:00:00 AM
+2013-12-31 10:30:20.2073|Info|Create Analytics Test Data for Sku: TAT-1010-BLUE-XXL
+2013-12-31 10:30:20.2103|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 10:30:20.2323|Info|Date: 10/2/2013 12:00:00 AM
+2013-12-31 10:30:20.2543|Info|Date: 10/2/2013 12:00:00 AM
+2013-12-31 10:30:20.2913|Info|Date: 10/4/2013 12:00:00 AM
+2013-12-31 10:30:20.3103|Info|Date: 10/4/2013 12:00:00 AM
+2013-12-31 10:30:20.3363|Info|Date: 10/5/2013 12:00:00 AM
+2013-12-31 10:30:20.3583|Info|Date: 10/7/2013 12:00:00 AM
+2013-12-31 10:30:20.3983|Info|Date: 10/7/2013 12:00:00 AM
+2013-12-31 10:30:20.4193|Info|Date: 10/10/2013 12:00:00 AM
+2013-12-31 10:30:20.4383|Info|Date: 10/14/2013 12:00:00 AM
+2013-12-31 10:30:20.4583|Info|Date: 10/16/2013 12:00:00 AM
+2013-12-31 10:30:20.4853|Info|Date: 10/19/2013 12:00:00 AM
+2013-12-31 10:30:20.5133|Info|Date: 10/23/2013 12:00:00 AM
+2013-12-31 10:30:20.5393|Info|Date: 10/26/2013 12:00:00 AM
+2013-12-31 10:30:20.5694|Info|Date: 10/28/2013 12:00:00 AM
+2013-12-31 10:30:20.5863|Info|Date: 10/31/2013 12:00:00 AM
+2013-12-31 10:30:20.6273|Info|Date: 11/3/2013 12:00:00 AM
+2013-12-31 10:30:20.6644|Info|Date: 11/7/2013 12:00:00 AM
+2013-12-31 10:30:20.6864|Info|Date: 11/10/2013 12:00:00 AM
+2013-12-31 10:30:20.7124|Info|Date: 11/14/2013 12:00:00 AM
+2013-12-31 10:30:20.7384|Info|Date: 11/18/2013 12:00:00 AM
+2013-12-31 10:30:20.7574|Info|Date: 11/22/2013 12:00:00 AM
+2013-12-31 10:30:20.8034|Info|Date: 11/23/2013 12:00:00 AM
+2013-12-31 10:30:20.8264|Info|Date: 11/23/2013 12:00:00 AM
+2013-12-31 10:30:20.8714|Info|Date: 11/26/2013 12:00:00 AM
+2013-12-31 10:30:20.8964|Info|Date: 11/27/2013 12:00:00 AM
+2013-12-31 10:30:20.9374|Info|Date: 11/27/2013 12:00:00 AM
+2013-12-31 10:30:20.9904|Info|Date: 11/28/2013 12:00:00 AM
+2013-12-31 10:30:21.0244|Info|Date: 12/1/2013 12:00:00 AM
+2013-12-31 10:30:21.0564|Info|Date: 12/4/2013 12:00:00 AM
+2013-12-31 10:30:21.0834|Info|Date: 12/6/2013 12:00:00 AM
+2013-12-31 10:30:21.1364|Info|Date: 12/8/2013 12:00:00 AM
+2013-12-31 10:30:21.1554|Info|Date: 12/12/2013 12:00:00 AM
+2013-12-31 10:30:21.1914|Info|Date: 12/15/2013 12:00:00 AM
+2013-12-31 10:30:21.2224|Info|Date: 12/17/2013 12:00:00 AM
+2013-12-31 10:30:21.2544|Info|Date: 12/18/2013 12:00:00 AM
+2013-12-31 10:30:21.3284|Info|Date: 12/22/2013 12:00:00 AM
+2013-12-31 10:30:21.3714|Info|Date: 12/22/2013 12:00:00 AM
+2013-12-31 10:30:21.4064|Info|Date: 12/22/2013 12:00:00 AM
+2013-12-31 10:30:21.4294|Info|Date: 12/24/2013 12:00:00 AM
+2013-12-31 10:30:21.4465|Info|Date: 12/24/2013 12:00:00 AM
+2013-12-31 10:30:21.4715|Info|Date: 12/27/2013 12:00:00 AM
+2013-12-31 10:30:21.5025|Info|Date: 12/27/2013 12:00:00 AM
+2013-12-31 10:30:21.5215|Info|Date: 12/27/2013 12:00:00 AM
+2013-12-31 10:30:21.5415|Info|Date: 12/29/2013 12:00:00 AM
+2013-12-31 10:30:21.5715|Info|Date: 12/29/2013 12:00:00 AM
+2013-12-31 10:30:21.5935|Info|Date: 12/29/2013 12:00:00 AM
+2013-12-31 10:30:24.0746|Info|Create Analytics Test Data for Sku: HAYA-HEADGEAR-BLACK-LG
+2013-12-31 10:30:24.0776|Info|Date: 9/30/2013 12:00:00 AM
+2013-12-31 10:30:24.1086|Info|Date: 10/1/2013 12:00:00 AM
+2013-12-31 10:30:24.1286|Info|Date: 10/1/2013 12:00:00 AM
+2013-12-31 10:30:24.1466|Info|Date: 10/1/2013 12:00:00 AM
+2013-12-31 10:30:24.1796|Info|Date: 10/2/2013 12:00:00 AM
+2013-12-31 10:30:24.2106|Info|Date: 10/3/2013 12:00:00 AM
+2013-12-31 10:30:24.2266|Info|Date: 10/3/2013 12:00:00 AM
+2013-12-31 10:30:24.2547|Info|Date: 10/5/2013 12:00:00 AM
+2013-12-31 10:30:24.2727|Info|Date: 10/9/2013 12:00:00 AM
+2013-12-31 10:30:24.2877|Info|Date: 10/11/2013 12:00:00 AM
+2013-12-31 10:30:24.3027|Info|Date: 10/12/2013 12:00:00 AM
+2013-12-31 10:30:24.3267|Info|Date: 10/15/2013 12:00:00 AM
+2013-12-31 10:30:24.3437|Info|Date: 10/17/2013 12:00:00 AM
+2013-12-31 10:30:24.3437|Info|Date: 10/19/2013 12:00:00 AM
+2013-12-31 10:30:24.3817|Info|Date: 10/21/2013 12:00:00 AM
+2013-12-31 10:30:24.4127|Info|Date: 10/21/2013 12:00:00 AM
+2013-12-31 10:30:24.4307|Info|Date: 10/23/2013 12:00:00 AM
+2013-12-31 10:30:24.4607|Info|Date: 10/26/2013 12:00:00 AM
+2013-12-31 10:30:24.4787|Info|Date: 10/27/2013 12:00:00 AM
+2013-12-31 10:30:24.4957|Info|Date: 10/31/2013 12:00:00 AM
+2013-12-31 10:30:24.5217|Info|Date: 11/4/2013 12:00:00 AM
+2013-12-31 10:30:24.5417|Info|Date: 11/5/2013 12:00:00 AM
+2013-12-31 10:30:24.5577|Info|Date: 11/9/2013 12:00:00 AM
+2013-12-31 10:30:24.5737|Info|Date: 11/10/2013 12:00:00 AM
+2013-12-31 10:30:24.5947|Info|Date: 11/13/2013 12:00:00 AM
+2013-12-31 10:30:24.6157|Info|Date: 11/17/2013 12:00:00 AM
+2013-12-31 10:30:24.6337|Info|Date: 11/20/2013 12:00:00 AM
+2013-12-31 10:30:24.6477|Info|Date: 11/20/2013 12:00:00 AM
+2013-12-31 10:30:24.6847|Info|Date: 11/20/2013 12:00:00 AM
+2013-12-31 10:30:24.7057|Info|Date: 11/22/2013 12:00:00 AM
+2013-12-31 10:30:24.7377|Info|Date: 11/23/2013 12:00:00 AM
+2013-12-31 10:30:24.7647|Info|Date: 11/25/2013 12:00:00 AM
+2013-12-31 10:30:24.7887|Info|Date: 11/29/2013 12:00:00 AM
+2013-12-31 10:30:24.8187|Info|Date: 11/30/2013 12:00:00 AM
+2013-12-31 10:30:24.8377|Info|Date: 11/30/2013 12:00:00 AM
+2013-12-31 10:30:24.8617|Info|Date: 12/4/2013 12:00:00 AM
+2013-12-31 10:30:24.8917|Info|Date: 12/7/2013 12:00:00 AM
+2013-12-31 10:30:24.9107|Info|Date: 12/10/2013 12:00:00 AM
+2013-12-31 10:30:24.9287|Info|Date: 12/12/2013 12:00:00 AM
+2013-12-31 10:30:24.9757|Info|Date: 12/16/2013 12:00:00 AM
+2013-12-31 10:30:24.9937|Info|Date: 12/20/2013 12:00:00 AM
+2013-12-31 10:30:25.0278|Info|Date: 12/20/2013 12:00:00 AM
+2013-12-31 10:30:25.0478|Info|Date: 12/24/2013 12:00:00 AM
+2013-12-31 10:30:25.0928|Info|Date: 12/25/2013 12:00:00 AM
+2013-12-31 10:30:25.1268|Info|Date: 12/25/2013 12:00:00 AM
+2013-12-31 10:30:25.1708|Info|Date: 12/26/2013 12:00:00 AM
+2013-12-31 10:30:25.1958|Info|Date: 12/28/2013 12:00:00 AM
+2013-12-31 10:30:25.2508|Info|Date: 12/31/2013 12:00:00 AM
+2013-12-31 10:30:27.4541|Info|Seeding Pushmarket data - Complete!
+2013-12-31 10:30:27.4541|Info|
+PROCESS FINISH:12/31/2013 10:30:27 AM
+

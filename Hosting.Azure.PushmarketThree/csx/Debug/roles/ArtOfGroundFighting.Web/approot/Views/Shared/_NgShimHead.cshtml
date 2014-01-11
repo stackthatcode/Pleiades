@@ -1,0 +1,83 @@
+﻿@using Pleiades.Web.MvcHelpers
+
+<script type="text/javascript">
+    var urlLocator = namespace("CommerceWeb.UrlLocator");
+    urlLocator.baseUrl = '@Url.BaseUrl()';
+    urlLocator.templateBaseUrl = '@Url.Content("~/Content/ArtOfGroundFighting/ng-templates/")';
+
+    // image Library
+    var imageLocator = namespace("PushLibrary.ImageLocator");
+    imageLocator.GenerateUrl = function(ibexternalId, size) {
+        return ibexternalId ? (urlLocator.baseUrl + "/image/" + ibexternalId + "?size=" + size) : "";
+    };
+
+    // ngAjax Libarary
+    var ngAjax = namespace("PushLibrary.NgAjax");
+    
+    ngAjax.Timeout = 60000;
+    ngAjax.SpinnerSelector = "#spinner-layer";
+    
+    ngAjax.ModelErrorSelector = "#modal-error";
+    ngAjax.ModalErrorAction = "#modal-error-action";
+    ngAjax.ModalGenericSelector = "#modal-generic";
+    ngAjax.ModalGenericSelectorHeader = "#modal-generic-header";
+    ngAjax.ModalGenericSelectorBody = "#modal-generic-body";
+    
+    ngAjax.ModalError = function () {
+        $(ngAjax.ModelErrorSelector).modal();
+        $(ngAjax.ModalErrorAction).click(function () {
+            location.reload();
+        });
+    };
+
+    ngAjax.ModalGeneric = function(header, body) {
+        $(ngAjax.ModalGenericSelectorHeader).html(header);
+        $(ngAjax.ModalGenericSelectorBody).html(body);
+        $(ngAjax.ModalGenericSelector).modal();
+    };
+
+    ngAjax.ShowLoading = function() {
+        $(ngAjax.SpinnerSelector).show();
+    };
+
+    ngAjax.HideLoading = function () {
+        $(ngAjax.SpinnerSelector).hide();
+    };
+
+    ngAjax.HideLoadingFactory = function (successClosure) {
+        return function(data, status, headers, config) {
+            $(ngAjax.SpinnerSelector).hide();
+            successClosure(data, status, headers, config);
+        };
+    };
+
+    ngAjax.ModalErrorFactory = function () {
+        return function (data, status, headers, config) {
+            ngAjax.HideLoading();
+            ngAjax.ModalError();
+        };
+    };
+
+    ngAjax.Get = function($http, url, successClosure) {
+        ngAjax.AjaxExecutor(function() { return $http.get(urlLocator.baseUrl + url); }, successClosure );
+    };
+
+    ngAjax.Post = function ($http, url, body, successClosure) {
+        ngAjax.AjaxExecutor(function () { return $http.post(urlLocator.baseUrl + url, body); }, successClosure );
+    };
+
+    ngAjax.Put = function ($http, url, body, successClosure) {
+        ngAjax.AjaxExecutor(function () { return $http.put(urlLocator.baseUrl + url, body); }, successClosure);
+    };
+
+    ngAjax.Delete = function ($http, url, successClosure) {
+        ngAjax.AjaxExecutor(function () { return $http.delete(urlLocator.baseUrl + url); }, successClosure);
+    };
+
+    ngAjax.AjaxExecutor = function(httpMethod, successClosure) {
+        ngAjax.ShowLoading();
+        httpMethod()
+            .success(ngAjax.HideLoadingFactory(successClosure))
+            .error(ngAjax.ModalErrorFactory());
+    };
+</script>

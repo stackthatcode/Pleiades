@@ -57,6 +57,7 @@ namespace Commerce.Application
 
             // Azure Infrastructure
             var azureHosted = ConfigurationManager.AppSettings["AzureHosted"].ToBoolTryParse();
+
             if (azureHosted)
             {
                 RegisterAzureComponents(builder);
@@ -146,7 +147,7 @@ namespace Commerce.Application
         {
             var configuration = AzureConfiguration.Settings;
 
-            // Resource Repositories
+            // File Resource Repositories - intentionally overwrite the local file system-based storage
             builder.Register(ctx => new AzureFileResourceRepository(
                         configuration.StorageConnectionString,
                         configuration.ResourcesStorageContainer,

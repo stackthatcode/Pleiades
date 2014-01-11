@@ -5,7 +5,9 @@ namespace Commerce.Application.Azure
 {
     public class AzureConfiguration : ConfigurationSection
     {
-        static readonly Hashtable _settings = (Hashtable)ConfigurationManager.GetSection("azureConfiguration");
+        static readonly Hashtable _settings =
+            (Hashtable)ConfigurationManager.GetSection("azureConfiguration");
+
         static readonly AzureConfiguration _singleton = new AzureConfiguration();
 
         public static AzureConfiguration Settings
@@ -25,13 +27,6 @@ namespace Commerce.Application.Azure
         {
             get { return (string)_settings["ResourcesStorageContainer"]; }
             set { this["ResourcesStorageContainer"] = value; }
-        }
-
-        [ConfigurationProperty("LogEntryTable", IsRequired = true)]
-        public string LogEntryTable
-        {
-            get { return (string)_settings["LogEntryTable"]; }
-            set { this["LogEntryTable"] = value; }
         }
     }
 }

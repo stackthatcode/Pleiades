@@ -1,0 +1,22 @@
+2013-12-31 10:23:21.6512|Debug|8ebd8923-7b81-4819-a27d-4ebffb5d1b5e|Image - Download: 2f784f94-eb4c-4a1f-995b-d13dfb444195 thumbnail
+2013-12-31 10:23:21.6512|Debug|b391c0bf-6e24-4015-8700-c2f3631405d5|Image - Download: f3e7f87c-a779-406f-b7e2-d210997f8f07 thumbnail
+2013-12-31 10:23:21.6512|Debug|930269c4-a878-4ab4-ac96-c727e6ef0a43|Image - Download: 74017f07-7583-43fe-840c-23d4931ab86d thumbnail
+2013-12-31 10:23:21.6512|Debug|48f56bd3-47a0-4d01-9cf9-a01c1d7dd77c|Image - Download: 427a016f-e0f5-46ad-9b76-9dfd7f6cb85b thumbnail
+2013-12-31 10:23:21.6512|Debug|d2ba8f03-eb11-4849-b9ba-3d2159d298e9|Image - Download: 925ebeb4-3f3b-46db-9de2-ea76dd19e60d thumbnail
+2013-12-31 10:23:22.1263|Debug|caa7bf93-ebfd-48e6-8b43-4d4d7be33dbe|Image - Download: 25432baa-7bb5-488c-b6a5-659b2e61ce2f thumbnail
+2013-12-31 10:23:22.1623|Debug|080d93f8-1174-4a7f-ad82-cd03ab732f24|Image - Download: 3c5cc535-f85c-4e7f-bd6c-723b04380f66 thumbnail
+2013-12-31 10:23:22.1623|Debug|d849dcd0-1ec5-47c4-9355-5c682e9fae41|Image - Download: fe945ac0-0322-4df9-908e-d701c15c749e thumbnail
+2013-12-31 10:23:22.1733|Debug|841f04a4-fe09-481a-b8f4-b42f19155008|Image - Download: d3fe66a9-9d79-438a-a63c-5630746c85b4 thumbnail
+2013-12-31 10:23:22.1733|Debug|ab4da5c1-8ecc-41a6-87d8-1bd5049e534b|Image - Download: f085eadf-44b9-41bf-a784-c0616d3c3a8f thumbnail
+2013-12-31 11:25:03.1894|Error|6b45f643-a8a6-4827-a5e7-8a824da827a4|URL:http://localhost/Commerce.Web/Manager/Error - IsAjaxRequest: False
+2013-12-31 11:25:03.2424|Error|6b45f643-a8a6-4827-a5e7-8a824da827a4|System.NotImplementedException:Oh noes!
+   at Commerce.Web.Controllers.ManagerController.Error() in c:\DEV\Pleiades\Commerce.Web\Controllers\ManagerController.cs:line 38
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)

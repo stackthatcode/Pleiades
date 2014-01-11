@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="Hosting.Azure.PushmarketThree" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2013-10.2.2">
+  <Role name="ArtOfGroundFighting.Web">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="pushmarketthree" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBpQYJKoZIhvcNAQcDoIIBljCCAZICAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEB51g+PAJNSOTU/XGNFsmg8wDQYJKoZIhvcNAQEBBQAEggEAYnqutdE/IIlUKSWdT4ULFv796HpXyCNT+bu2LJEldSSV6o+4lqcmq8tY9kUfL22dSrNQiNr+ZwAzRBOE88WFmDiN3lP7Env30z2Nka2my1ibQpip0SxziQ5cFdu7RUXZ9363zD8p81xxE83EwsXddcwZog2vXSmaDaiBqILMk4en+3rrnGU2L4m3ToPPYAPpkVFE888sJ9hNbL1JLL1IepZRKeEGj14hV46y9OqzDGfuOA5MyXcfG0FsoWdWZzNDIN+91cxg9iVbFhCgJbKtnEF/kK8KN2DJmiTsv3az5phpAW2iNaQYCSK54hKqw5IEDTIPAWHMYuBJtXFLGYUq3TA7BgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECPj4Y5t/VCpogBjd8cb6cnuChMNnndGK2S+tWY4vceY24Ac=" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2015-01-10T23:59:59.0000000-06:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="D854D6F1D1248775FEC011434689D4AFE43D01BF" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

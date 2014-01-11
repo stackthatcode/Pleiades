@@ -1,0 +1,263 @@
+@font-face {
+  font-family: 'Bevan';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Bevan'), url(../Fonts/Bevan.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(../Fonts/OpenSans-400.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(../Fonts/OpenSans-700.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 800;
+  src: local('Open Sans Extrabold'), local('OpenSans-Extrabold'), url(../Fonts/OpenSans-800.woff) format('woff');
+}
+
+.spinner-layer {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+	width: 100%; 
+	height: 100%;
+	background:rgba(255,255,255,0.5);
+    /* filter: alpha(opacity=50); */
+}
+
+.spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -100px; /* half width of the spinner gif */
+    margin-top: -100px; /* half height of the spinner gif */
+    text-align: center;
+    overflow: auto;
+    width: 200px; /* width of the spinner gif */
+    height: 202px; /*height of the spinner gif +2px to fix IE8 issue */
+}
+
+.footer-container {
+    padding-top:15px; padding-bottom:10px; color:#ffffff;
+}
+
+footer {
+    background-color:#333;
+}
+
+ul#footer-mobile-nav > li {
+    display: inline;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+a:hover {text-decoration:underline;}
+a:active {text-decoration:underline;}
+
+.navbar-inverse .navbar-nav>li>a {
+    color:#CCC;    
+}
+
+
+a.gold-link {
+    font-weight:bold; 
+    color:gold;
+}
+
+a.gold-link:hover {
+    font-weight:bold; 
+    color:#FFFFFF;
+    text-decoration: none;
+}
+
+a.gold-link:visited {
+    font-weight:bold; 
+    color:gold;
+}
+
+.product-list-synopsis 
+{
+    padding-top: 5px;
+    font-family: "open-sans", "Helvetica Neue", sans-serif; 
+    font-size:12px;
+    color: #666;
+    height: 103px;
+}
+
+div.product-list-price
+{
+    font-family: "Open Sans";
+    font-weight: bold; 
+    color:#333; 
+    margin-top:3px;
+}
+
+.product-list-link {
+    font-family: "Open Sans";
+    font-weight: bold;
+    color: #F00;
+}
+
+.bold-print-black {
+    font-family: "Open Sans";
+    font-weight: bold;
+    color: #333;
+}
+
+.bold-print-grey {
+    font-family: "Open Sans";
+    font-weight: bold;
+    color: #666;
+}
+
+a.product-list-link:hover {
+    font-weight: bold;
+    color: #900;
+    text-decoration: none;
+}
+
+a.mybreadcrumb {
+    color: #777;
+}
+
+a.thumbnail-image {
+    border: 3px solid #FFF;
+    display: block;
+}
+
+a.thumbnail-image:hover {
+    border: 3px solid #DDD;
+    display: block;
+}
+
+a.thumbnail-color {
+    border: 3px solid #EEE;
+    display: block;
+}
+
+a.thumbnail-color:hover {
+    border: 3px solid #999;
+    display: block;
+}
+
+a.thumbnail-color-selected {
+    border: 3px solid #FF0000;
+    display: block;
+}
+
+
+.btn-oldstyle {
+  background-color: #cc0000;
+  border-color: #cc0000;
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+  background-color: #b80000;
+  background-image: -moz-linear-gradient(top,#cc0000,#990000);
+  background-image: -webkit-gradient(linear,0 0,0 100%,from(#cc0000),to(#990000));
+  background-image: -webkit-linear-gradient(top,#cc0000,#990000);
+  background-image: -o-linear-gradient(top,#cc0000,#990000);
+  background-image: linear-gradient(to bottom,#cc0000,#990000);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffcc0000', endColorstr='#ff990000', GradientType=0);
+  border-color: #990000 #990000 #4d0000;
+  border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+}
+.btn-oldstyle:hover,
+.btn-oldstyle:focus {
+  text-decoration: none;
+  background-position: 0 -15px;
+  -webkit-transition: background-position .1s linear;
+  -moz-transition: background-position .1s linear;
+  -o-transition: background-position .1s linear;
+  transition: background-position .1s linear;
+}
+.btn-oldstyle:hover,
+.btn-oldstyle:focus {
+  background-color: #990000;
+    color: #dddddd;
+}
+.btn-oldstyle:active,
+.btn-oldstyle.active,
+.btn-oldstyle.active:hover {
+  background-color: #b30000;
+  border-color: #990000;
+}
+.btn-oldstyle.disabled:hover,
+.btn-oldstyle.disabled:focus,
+.btn-oldstyle.disabled:active,
+.btn-oldstyle.disabled.active,
+.btn-oldstyle[disabled] .btn-oldstyle:hover,
+.btn-oldstyle[disabled] .btn-oldstyle:focus,
+.btn-oldstyle[disabled] .btn-oldstyle:active,
+.btn-oldstyle[disabled] .btn-oldstyle.active {
+  background-color: #cc0000;
+  border-color: #cc0000;
+}
+
+.main-header {
+    font-family: Open Sans; 
+    font-size:50px; 
+    margin-top: 0px; 
+    font-weight:bolder;
+}
+
+.product-thumbnail {
+    border: #CCC dotted 1px;
+}
+
+.sub-header {
+    font-family:Open Sans; 
+    font-size:35px; 
+    font-weight:bold; 
+    color:#555; 
+    margin-top:0px;
+}
+
+.sub-sub-header {
+    font-family:Open Sans; 
+    font-size:24px; 
+    font-weight:bold; 
+    color:#666; 
+    margin-top:0px;
+}
+
+.product-detail-header {
+    color:#555; 
+    font-weight: bold; 
+    float:left; 
+    margin-right:10px;    
+}
+
+.cart-validation-message {
+    font-weight: bold; color:#F00;
+}
+
+.quantity-list {
+    width:100px; 
+    height:40px; 
+    font-size:18px; 
+    font-weight:bold; 
+    margin-right: 10px;
+}
+
+.action-flasher {
+    font-size:30px; 
+    padding-bottom:10px;    
+}
+
+.cart-big-action {
+    float:left; 
+    font-size:21px; 
+    width:300px;
+}

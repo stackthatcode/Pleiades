@@ -82,7 +82,7 @@ namespace ArtOfGroundFighting.Initializer
             CreateAndRunBuilder<ShockDoctorMouthGuardBuilderCase>();
             CreateAndRunBuilder<ShockDoctorGelNanoBuilder>();
             CreateAndRunBuilder<TapoutMouthguardCaseBuilder>();
-                        
+
             CreateAndRunBuilder<ShippingMethodsBuilder>();
             CreateAndRunBuilder<StateTaxBuilder>();
             CreateAndRunBuilder<AnalyticsBuilder>();

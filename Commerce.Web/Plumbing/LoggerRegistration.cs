@@ -4,7 +4,6 @@ using Pleiades.App.Utility;
 using Pleiades.Web.Activity;
 using Commerce.Application.Azure;
 
-
 namespace Commerce.Web.Plumbing
 {
     public class LoggerRegistration

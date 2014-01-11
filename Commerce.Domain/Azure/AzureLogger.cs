@@ -5,6 +5,8 @@ namespace Commerce.Application.Azure
 {
     public class AzureLogger : ILogger
     {
+        // Storage Account: Pushmarket => Storage Container: ArtOfGroundFighting => Table Name: ApplicationLogs
+
         private readonly AzureLogEntryRepository _repository;
         private readonly string _loggerName;
         private readonly Func<string, string> _messageFormatter = x => x;

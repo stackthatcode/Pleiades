@@ -1,0 +1,21 @@
+Date: 12/31/2013 7:09:46 AM
+To: aleksjones@gmail.com,jeremysimon@me.com
+From: artofgroundfighting@gmail.com
+Subject: Admin Notification: A System Error has occurred - 50e940ee-d0fd-415f-9a52-a3b5ff95a370
+
+
+Admin Notification: A System Error has occurred - 50e940ee-d0fd-415f-9a52-a3b5ff95a370
+
+System.NullReferenceException:Object reference not set to an instance of an object.
+   at Commerce.Application.Products.Entities.ExtensionsMethods.ToJson(Product product) in c:\DEV\Pleiades\Commerce.Domain\Products\Entities\ExtensionsMethods.cs:line 9
+   at Commerce.Application.Products.ProductRepository.RetrieveInfo(Int32 productId) in c:\DEV\Pleiades\Commerce.Domain\Products\ProductRepository.cs:line 88
+   at ArtOfGroundFighting.Web.Controllers.ProductsController.Get(String id) in c:\DEV\Pleiades\ArtOfGroundFighting.Web\Controllers\ProductsController.cs:line 41
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)

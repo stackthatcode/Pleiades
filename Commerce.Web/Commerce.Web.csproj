@@ -394,11 +394,8 @@
     <Content Include="EmailTemplates\Customer\OrderReceived.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Properties\PublishProfiles\Commerce.Web.MockDeploy.pubxml" />
+    <None Include="Properties\PublishProfiles\ArtOfGroundFighting.Admin.pubxml" />
     <None Include="Web.Azure.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.AzureSandbox.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Debug.config">

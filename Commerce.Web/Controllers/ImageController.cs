@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Configuration;
 using System.Drawing;
+using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using Commerce.Application.File;
 using Commerce.Application.File.Entities;
 using Pleiades.App.Data;
 using Pleiades.App.Logging;
+using Pleiades.App.Utility;
 using Pleiades.Web.FineUploader;
 using Pleiades.Web.Json;
 
@@ -16,8 +19,8 @@ namespace Commerce.Web.Controllers
         private readonly IImageBundleRepository _imageBundleRepository;
         private readonly IFileResourceRepository _fileResourceRepository;
         private readonly IBlankImageRepository _blankImageRepository;
-    
-        IUnitOfWork UnitOfWork { get; set; }
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly bool _azureHosted;
 
         public ImageController(
                 IImageBundleRepository imageBundleRepository, 
@@ -28,7 +31,8 @@ namespace Commerce.Web.Controllers
             this._imageBundleRepository = imageBundleRepository;
             this._fileResourceRepository = fileResourceRepository;
             this._blankImageRepository = blankImageRepository;
-            this.UnitOfWork = unitOfWork;
+            this._unitOfWork = unitOfWork;
+            _azureHosted = ConfigurationManager.AppSettings["AzureHosted"].ToBoolTryParse();
         }
 
         [HttpGet]
@@ -54,7 +58,7 @@ namespace Commerce.Web.Controllers
             {
                 var bitmap = new Bitmap(upload.InputStream);
                 var imageBundle = this._imageBundleRepository.AddBitmap(bitmap, true, true, false);
-                this.UnitOfWork.SaveChanges();
+                this._unitOfWork.SaveChanges();
                 return new FineUploaderResult(true, new { ImageBundle = imageBundle });
             }
             catch (Exception ex)
@@ -79,10 +83,16 @@ namespace Commerce.Web.Controllers
             else
             {
                 var fileResource = imageBundle.FileByImageSize(size.ToImageSize());
-                var path = this._fileResourceRepository.PhysicalFilePath(fileResource.ExternalId);
-
-                // TODO: map file types on upload
-                return base.File(path, "image/jpg");
+                if (_azureHosted)
+                {
+                    var bytes = this._fileResourceRepository.RetrieveBytes(fileResource.ExternalId);
+                    return new FileStreamResult(new MemoryStream(bytes), "image/jpg");
+                }
+                else
+                {
+                    var path = this._fileResourceRepository.PhysicalFilePath(fileResource.ExternalId);
+                    return base.File(path, "image/jpg");
+                }
             }
         }
     }
