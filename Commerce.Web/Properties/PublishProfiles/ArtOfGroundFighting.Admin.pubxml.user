@@ -22,16 +22,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/07/2013 17:43:30</publishTime>
     </File>
     <File Include="bin/Commerce.Application.dll">
-      <publishTime>12/31/2013 10:57:05</publishTime>
+      <publishTime>01/11/2014 06:53:16</publishTime>
     </File>
     <File Include="bin/Commerce.Application.pdb">
-      <publishTime>12/31/2013 10:57:05</publishTime>
+      <publishTime>01/11/2014 06:53:16</publishTime>
     </File>
     <File Include="bin/Commerce.Web.dll">
-      <publishTime>01/08/2014 18:30:16</publishTime>
+      <publishTime>01/11/2014 07:28:10</publishTime>
     </File>
     <File Include="bin/Commerce.Web.pdb">
-      <publishTime>01/08/2014 18:30:16</publishTime>
+      <publishTime>01/11/2014 07:28:10</publishTime>
     </File>
     <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
       <publishTime>12/15/2013 09:24:37</publishTime>
@@ -688,7 +688,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/07/2013 17:40:15</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/09/2014 07:38:11</publishTime>
+      <publishTime>01/11/2014 07:49:16</publishTime>
     </File>
   </ItemGroup>
 </Project>

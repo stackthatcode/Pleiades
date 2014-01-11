@@ -3,7 +3,7 @@
   <Role name="ArtOfGroundFighting.Web">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=pushmarket;AccountKey=SWXTWfBSkXJE2Fd9kIXq9sTGzDyAjKvAyKRmGIu9+y5sipQCLvXuiZixPNQwgXXTVlgOhO8dMBDnd+9xC2u7Pg==" />
       <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
       <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="pushmarketthree" />
       <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBpQYJKoZIhvcNAQcDoIIBljCCAZICAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEB51g+PAJNSOTU/XGNFsmg8wDQYJKoZIhvcNAQEBBQAEggEAYnqutdE/IIlUKSWdT4ULFv796HpXyCNT+bu2LJEldSSV6o+4lqcmq8tY9kUfL22dSrNQiNr+ZwAzRBOE88WFmDiN3lP7Env30z2Nka2my1ibQpip0SxziQ5cFdu7RUXZ9363zD8p81xxE83EwsXddcwZog2vXSmaDaiBqILMk4en+3rrnGU2L4m3ToPPYAPpkVFE888sJ9hNbL1JLL1IepZRKeEGj14hV46y9OqzDGfuOA5MyXcfG0FsoWdWZzNDIN+91cxg9iVbFhCgJbKtnEF/kK8KN2DJmiTsv3az5phpAW2iNaQYCSK54hKqw5IEDTIPAWHMYuBJtXFLGYUq3TA7BgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECPj4Y5t/VCpogBjd8cb6cnuChMNnndGK2S+tWY4vceY24Ac=" />
