@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Pleiades.App.Logging;
+﻿using Pleiades.App.Logging;
 using RazorEngine;
 using RazorEngine.Templating;
 

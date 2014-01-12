@@ -40,8 +40,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtOfGroundFighting.Integra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArtOfGroundFighting", "ArtOfGroundFighting", "{16D36CC9-2924-4BBC-BA99-EB21CC1A911C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3dPrintedStuff", "3dPrintedStuff", "{018A7CC9-E636-4381-A629-7AB237D45E7E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtOfGroundFighting.Initializer", "ArtOfGroundFighting.Initializer\ArtOfGroundFighting.Initializer.csproj", "{8E922D95-E286-4AF1-89E2-943EA247B806}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtOfGroundFighting.Web", "ArtOfGroundFighting.Web\ArtOfGroundFighting.Web.csproj", "{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}"
@@ -193,8 +191,7 @@ Global
 		{8E922D95-E286-4AF1-89E2-943EA247B806}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E922D95-E286-4AF1-89E2-943EA247B806}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{8E922D95-E286-4AF1-89E2-943EA247B806}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{8E922D95-E286-4AF1-89E2-943EA247B806}.Debug|x86.ActiveCfg = Debug|x86
-		{8E922D95-E286-4AF1-89E2-943EA247B806}.Debug|x86.Build.0 = Debug|x86
+		{8E922D95-E286-4AF1-89E2-943EA247B806}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}.Azure|Any CPU.ActiveCfg = Azure|Any CPU
 		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}.Azure|Any CPU.Build.0 = Azure|Any CPU
 		{EC5DC292-82C2-4C82-9B64-9B0CBAF8E561}.Azure|Mixed Platforms.ActiveCfg = Azure|Any CPU

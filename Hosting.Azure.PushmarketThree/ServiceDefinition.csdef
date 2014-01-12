@@ -5,19 +5,20 @@
     <Sites>
       <Site name="ArtOfGroundFighting.Admin" physicalDirectory="C:\DEV\Pushmarket\Deployments\ArtOfGroundFighting.Admin">
         <Bindings>
-          <Binding name="AdminEndpoint" endpointName="AdminEndpoint" />
+          <Binding name="AdminEndpoint" endpointName="AogfEndpoint" hostHeader="admin.artofgroundfighting.com" />
+          <Binding name="AdminEndpoint8080Binding" endpointName="AogfEndpointAdministrative" />
         </Bindings>
       </Site>
       <Site name="ArtOfGroundFighting.Storefront" physicalDirectory="C:\DEV\Pushmarket\Deployments\ArtOfGroundFighting.Storefront">
         <Bindings>
-          <Binding name="StorefrontEndpoint" endpointName="StorefrontEndpoint" />
+          <Binding name="StorefrontEndpoint" endpointName="AogfEndpoint"  />
         </Bindings>
       </Site>
     </Sites>
     
     <Endpoints>
-      <InputEndpoint name="AdminEndpoint" protocol="http" port="8080" />
-      <InputEndpoint name="StorefrontEndpoint" protocol="http" port="80" />
+      <InputEndpoint name="AogfEndpoint" protocol="http" port="80" />
+      <InputEndpoint name="AogfEndpointAdministrative" protocol="http" port="8080" />
     </Endpoints>
     
     <Imports>

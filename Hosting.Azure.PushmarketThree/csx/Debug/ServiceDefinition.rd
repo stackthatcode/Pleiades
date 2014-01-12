@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Hosting.Azure.PushmarketThree" generation="1" functional="0" release="0" Id="00f69a05-def1-4788-91e9-0f4d7e74a813" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Hosting.Azure.PushmarketThree" generation="1" functional="0" release="0" Id="69d11f8a-00dd-4805-b10a-99064d0a4652" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="Hosting.Azure.PushmarketThreeGroup" generation="1" functional="0" release="0">
       <componentports>
-        <inPort name="ArtOfGroundFighting.Web:AdminEndpoint" protocol="http">
+        <inPort name="ArtOfGroundFighting.Web:AogfEndpoint" protocol="http">
           <inToChannel>
-            <lBChannelMoniker name="/Hosting.Azure.PushmarketThree/Hosting.Azure.PushmarketThreeGroup/LB:ArtOfGroundFighting.Web:AdminEndpoint" />
+            <lBChannelMoniker name="/Hosting.Azure.PushmarketThree/Hosting.Azure.PushmarketThreeGroup/LB:ArtOfGroundFighting.Web:AogfEndpoint" />
+          </inToChannel>
+        </inPort>
+        <inPort name="ArtOfGroundFighting.Web:AogfEndpointAdministrative" protocol="http">
+          <inToChannel>
+            <lBChannelMoniker name="/Hosting.Azure.PushmarketThree/Hosting.Azure.PushmarketThreeGroup/LB:ArtOfGroundFighting.Web:AogfEndpointAdministrative" />
           </inToChannel>
         </inPort>
         <inPort name="ArtOfGroundFighting.Web:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput" protocol="tcp">
           <inToChannel>
             <lBChannelMoniker name="/Hosting.Azure.PushmarketThree/Hosting.Azure.PushmarketThreeGroup/LB:ArtOfGroundFighting.Web:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput" />
-          </inToChannel>
-        </inPort>
-        <inPort name="ArtOfGroundFighting.Web:StorefrontEndpoint" protocol="http">
-          <inToChannel>
-            <lBChannelMoniker name="/Hosting.Azure.PushmarketThree/Hosting.Azure.PushmarketThreeGroup/LB:ArtOfGroundFighting.Web:StorefrontEndpoint" />
           </inToChannel>
         </inPort>
       </componentports>
@@ -62,19 +62,19 @@
         </aCS>
       </settings>
       <channels>
-        <lBChannel name="LB:ArtOfGroundFighting.Web:AdminEndpoint">
+        <lBChannel name="LB:ArtOfGroundFighting.Web:AogfEndpoint">
           <toPorts>
-            <inPortMoniker name="/Hosting.Azure.PushmarketThree/Hosting.Azure.PushmarketThreeGroup/ArtOfGroundFighting.Web/AdminEndpoint" />
+            <inPortMoniker name="/Hosting.Azure.PushmarketThree/Hosting.Azure.PushmarketThreeGroup/ArtOfGroundFighting.Web/AogfEndpoint" />
+          </toPorts>
+        </lBChannel>
+        <lBChannel name="LB:ArtOfGroundFighting.Web:AogfEndpointAdministrative">
+          <toPorts>
+            <inPortMoniker name="/Hosting.Azure.PushmarketThree/Hosting.Azure.PushmarketThreeGroup/ArtOfGroundFighting.Web/AogfEndpointAdministrative" />
           </toPorts>
         </lBChannel>
         <lBChannel name="LB:ArtOfGroundFighting.Web:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput">
           <toPorts>
             <inPortMoniker name="/Hosting.Azure.PushmarketThree/Hosting.Azure.PushmarketThreeGroup/ArtOfGroundFighting.Web/Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput" />
-          </toPorts>
-        </lBChannel>
-        <lBChannel name="LB:ArtOfGroundFighting.Web:StorefrontEndpoint">
-          <toPorts>
-            <inPortMoniker name="/Hosting.Azure.PushmarketThree/Hosting.Azure.PushmarketThreeGroup/ArtOfGroundFighting.Web/StorefrontEndpoint" />
           </toPorts>
         </lBChannel>
         <sFSwitchChannel name="SW:ArtOfGroundFighting.Web:Microsoft.WindowsAzure.Plugins.RemoteAccess.Rdp">
@@ -129,9 +129,9 @@
         <groupHascomponents>
           <role name="ArtOfGroundFighting.Web" generation="1" functional="0" release="0" software="C:\DEV\Pushmarket\Code\Hosting.Azure.PushmarketThree\csx\Debug\roles\ArtOfGroundFighting.Web" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaIISHost.exe " memIndex="1792" hostingEnvironment="frontendadmin" hostingEnvironmentVersion="2">
             <componentports>
-              <inPort name="AdminEndpoint" protocol="http" portRanges="8080" />
+              <inPort name="AogfEndpoint" protocol="http" portRanges="80" />
+              <inPort name="AogfEndpointAdministrative" protocol="http" portRanges="8080" />
               <inPort name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput" protocol="tcp" />
-              <inPort name="StorefrontEndpoint" protocol="http" portRanges="80" />
               <inPort name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Rdp" protocol="tcp" portRanges="3389" />
               <outPort name="ArtOfGroundFighting.Web:Microsoft.WindowsAzure.Plugins.RemoteAccess.Rdp" protocol="tcp">
                 <outToChannel>
@@ -146,7 +146,7 @@
               <aCS name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" defaultValue="" />
               <aCS name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" defaultValue="" />
               <aCS name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" defaultValue="" />
-              <aCS name="__ModelData" defaultValue="&lt;m role=&quot;ArtOfGroundFighting.Web&quot; xmlns=&quot;urn:azure:m:v1&quot;&gt;&lt;r name=&quot;ArtOfGroundFighting.Web&quot;&gt;&lt;e name=&quot;AdminEndpoint&quot; /&gt;&lt;e name=&quot;Microsoft.WindowsAzure.Plugins.RemoteAccess.Rdp&quot; /&gt;&lt;e name=&quot;Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput&quot; /&gt;&lt;e name=&quot;StorefrontEndpoint&quot; /&gt;&lt;/r&gt;&lt;/m&gt;" />
+              <aCS name="__ModelData" defaultValue="&lt;m role=&quot;ArtOfGroundFighting.Web&quot; xmlns=&quot;urn:azure:m:v1&quot;&gt;&lt;r name=&quot;ArtOfGroundFighting.Web&quot;&gt;&lt;e name=&quot;AogfEndpoint&quot; /&gt;&lt;e name=&quot;AogfEndpointAdministrative&quot; /&gt;&lt;e name=&quot;Microsoft.WindowsAzure.Plugins.RemoteAccess.Rdp&quot; /&gt;&lt;e name=&quot;Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput&quot; /&gt;&lt;/r&gt;&lt;/m&gt;" />
             </settings>
             <resourcereferences>
               <resourceReference name="DiagnosticStore" defaultAmount="[4096,4096,4096]" defaultSticky="true" kind="Directory" />
@@ -178,21 +178,21 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="44a98ba0-f0dc-47ed-8118-fdf7434ec937" ref="Microsoft.RedDog.Contract\ServiceContract\Hosting.Azure.PushmarketThreeContract@ServiceDefinition">
+    <implementation Id="81f2c7a1-a083-4c4d-9351-a525f32b9bf5" ref="Microsoft.RedDog.Contract\ServiceContract\Hosting.Azure.PushmarketThreeContract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="2c37f5bd-d996-4eb2-9b9f-a176c9b3d327" ref="Microsoft.RedDog.Contract\Interface\ArtOfGroundFighting.Web:AdminEndpoint@ServiceDefinition">
+        <interfaceReference Id="a31cd5d0-1858-4b2a-91d4-a17d8cea3eb3" ref="Microsoft.RedDog.Contract\Interface\ArtOfGroundFighting.Web:AogfEndpoint@ServiceDefinition">
           <inPort>
-            <inPortMoniker name="/Hosting.Azure.PushmarketThree/Hosting.Azure.PushmarketThreeGroup/ArtOfGroundFighting.Web:AdminEndpoint" />
+            <inPortMoniker name="/Hosting.Azure.PushmarketThree/Hosting.Azure.PushmarketThreeGroup/ArtOfGroundFighting.Web:AogfEndpoint" />
           </inPort>
         </interfaceReference>
-        <interfaceReference Id="c6e2ec7f-6bf3-4326-b0ae-c702efd5c7e6" ref="Microsoft.RedDog.Contract\Interface\ArtOfGroundFighting.Web:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput@ServiceDefinition">
+        <interfaceReference Id="bf3eaedc-874f-4171-8f71-72c2dcb6b4d7" ref="Microsoft.RedDog.Contract\Interface\ArtOfGroundFighting.Web:AogfEndpointAdministrative@ServiceDefinition">
+          <inPort>
+            <inPortMoniker name="/Hosting.Azure.PushmarketThree/Hosting.Azure.PushmarketThreeGroup/ArtOfGroundFighting.Web:AogfEndpointAdministrative" />
+          </inPort>
+        </interfaceReference>
+        <interfaceReference Id="ccf513a7-4bdd-4f19-af85-7f97cb8b2d82" ref="Microsoft.RedDog.Contract\Interface\ArtOfGroundFighting.Web:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/Hosting.Azure.PushmarketThree/Hosting.Azure.PushmarketThreeGroup/ArtOfGroundFighting.Web:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput" />
-          </inPort>
-        </interfaceReference>
-        <interfaceReference Id="f83f9021-c828-4395-802b-68ec091e0c09" ref="Microsoft.RedDog.Contract\Interface\ArtOfGroundFighting.Web:StorefrontEndpoint@ServiceDefinition">
-          <inPort>
-            <inPortMoniker name="/Hosting.Azure.PushmarketThree/Hosting.Azure.PushmarketThreeGroup/ArtOfGroundFighting.Web:StorefrontEndpoint" />
           </inPort>
         </interfaceReference>
       </interfacereferences>

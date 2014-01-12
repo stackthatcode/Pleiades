@@ -13,9 +13,9 @@
       <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" />
     </ConfigurationSettings>
     <Endpoints>
-      <InputEndpoint name="AdminEndpoint" protocol="http" port="8080" localPort="8080" />
+      <InputEndpoint name="AogfEndpoint" protocol="http" port="80" localPort="80" />
+      <InputEndpoint name="AogfEndpointAdministrative" protocol="http" port="8080" localPort="8080" />
       <InputEndpoint name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput" protocol="tcp" port="3389" localPort="*" ignoreRoleInstanceStatus="true" />
-      <InputEndpoint name="StorefrontEndpoint" protocol="http" port="80" localPort="80" />
       <InternalEndpoint name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Rdp" protocol="tcp">
         <FixedPortRange min="3389" max="3389" />
       </InternalEndpoint>

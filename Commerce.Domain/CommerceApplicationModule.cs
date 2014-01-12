@@ -57,7 +57,6 @@ namespace Commerce.Application
 
             // Azure Infrastructure
             var azureHosted = ConfigurationManager.AppSettings["AzureHosted"].ToBoolTryParse();
-
             if (azureHosted)
             {
                 RegisterAzureComponents(builder);
@@ -113,6 +112,7 @@ namespace Commerce.Application
             builder
                 .Register(c => new StripeChargeService(c.Resolve<IStripeConfigAdapter>().SecretKey))
                 .As<StripeChargeService>();
+
             if (Payment.StripeConfiguration.Settings.ServerSideMockEnabled.ToBoolTryParse())
             {
                 builder.RegisterType<MockPaymentProcessor>().As<IPaymentProcessor>();

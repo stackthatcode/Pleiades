@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <serviceContract xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" dslVersion="1.0.0.0" name="Hosting.Azure.PushmarketThreeContract" xmlns="http://schemas.microsoft.com/dsltools/Contracts">
   <elements>
-    <interface name="ArtOfGroundFighting.Web:AdminEndpoint" url="http://*:8080" />
+    <interface name="ArtOfGroundFighting.Web:AogfEndpoint" url="http://*:80" />
+    <interface name="ArtOfGroundFighting.Web:AogfEndpointAdministrative" url="http://*:8080" />
     <interface name="ArtOfGroundFighting.Web:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput" url="tcp://*:3389" />
-    <interface name="ArtOfGroundFighting.Web:StorefrontEndpoint" url="http://*:80" />
   </elements>
 </serviceContract>
