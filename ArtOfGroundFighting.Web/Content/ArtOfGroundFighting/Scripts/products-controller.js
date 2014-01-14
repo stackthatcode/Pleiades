@@ -24,7 +24,6 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
     $scope.SelectedQuantityValue = null;
 
     var parentScope = $scope;
-
     $scope.ImageUrlGenator = imageLocator.GenerateUrl;
 
     $scope.HasColors = function () {
@@ -89,17 +88,35 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
     };
 
     $scope.AvailableInventory = function () {
+        var output = [];
         if (!$scope.Product || !$scope.Product.Inventory) {
             return [];
         }
         if ($scope.HasMultipleColors()) {
-            return AQ($scope.Product.Inventory)
-                    .where(function (x) { return x.ColorId == $scope.SelectedColorId && x.Quantity > 0; })
+            output = AQ($scope.Product.Inventory)
+                    .where(function (x) { return x.ColorId == $scope.SelectedColorId; })
                     .toArray();
         } else {
-            return AQ($scope.Product.Inventory).where(function (x) { return x.Quantity > 0; }).toArray();
+            output = $scope.Product.Inventory;
         }
+        
+        for (var counter = 0 ; counter < output.length; counter++) {
+            var sku = output[counter];
+            var adjustedQuantity = sku.Quantity;
+            var cartItem = AQ($scope.Cart.CartItems)
+                    .firstOrDefault(function (x) { return x.Sku.SkuCode == sku.SkuCode; });
+            
+            if (cartItem) {
+                adjustedQuantity = cartItem.Quantity > adjustedQuantity ? 0 : adjustedQuantity - cartItem.Quantity;
+            }
+            sku.AdjustedQuantity = adjustedQuantity;
+        }   
+
+        // Remove zeroed-out Quantities
+        output = AQ(output).where(function (x) { return x.AdjustedQuantity > 0; }).toArray();
+        return output;
     };
+
 
     $scope.RefreshSizes = function () {
         $scope.SelectedSizes = [];
@@ -146,10 +163,25 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         $scope.SelectedQuantities = [];
 
         if ($scope.GetSelectedSku()) {
-            for (var i = 1; i <= $scope.GetSelectedSku().Quantity; i++) {
+            var availableQuantity = $scope.GetSelectedSku().AdjustedQuantity;
+            
+            for (var i = 1; i <= availableQuantity; i++) {
                 $scope.SelectedQuantities.push(i);
             }
+            
             $scope.SelectedQuantityValue = $scope.SelectedQuantities[0];
+        }
+    };
+
+    $scope.AdjustQuantitiesWithCart = function(inventoryArray) {
+        var cartItem =
+        AQ($scope.Cart.CartItems)
+            .firstOrDefault(
+                function (x) { return x.Sku.SkuCode == $scope.GetSelectedSku().SkuCode; });
+        console.log(cartItem);
+
+        if (cartItem && cartItem.Quantity <= availableQuantity) {
+            availableQuantity = availableQuantity - cartItem.Quantity;
         }
     };
 
@@ -170,7 +202,6 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         $scope.HideAddButton();
 
         ngAjax.Post($http, url, null, function (cartAddResults) {
-            console.log(cartAddResults);
             var responseFunction = CartResponseFunction(cartAddResults.CartResponseCode);
             if (responseFunction) {
                 responseFunction();
@@ -199,13 +230,26 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         }, 1000);
     };
 
-    ngAjax.Get($http, 'products/' + $routeParams.productid, function (product) {
-        $scope.Product = product;
-        $scope.SelectColorDefault();
-        $scope.RefreshSizes();
-        $scope.RefreshQuantities();
-        $scope.RefreshImages();
-    });
+    flow.exec(
+        function() {
+            ngAjax.Get($http, 'products/' + $routeParams.productid, this);
+        },
+        function(product) {
+            $scope.Product = product;
+            ngAjax.Get($http, 'cart', this);
+        },
+        function (cartGetResponse) {
+            $scope.Cart = cartGetResponse.Cart;
+            
+            console.log($scope.Product);
+            console.log($scope.Cart);
+            
+            $scope.SelectColorDefault();
+            $scope.RefreshSizes();
+            $scope.RefreshQuantities();
+            $scope.RefreshImages();
+        }
+    );
 });
 
 app.controller('ContentController', function ($scope, $routeParams) {

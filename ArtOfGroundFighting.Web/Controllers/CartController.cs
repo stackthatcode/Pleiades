@@ -30,6 +30,7 @@ namespace ArtOfGroundFighting.Web.Controllers
         public JsonNetResult Post(string skuCode, int quantity)
         {
             var result =_cartManagementService.AddQuantity(skuCode, quantity);
+            var cart = _cartManagementService.Retrieve();
             _pushMarketContext.SaveChanges();
             return new JsonNetResult(new { CartResponseCode = (int)result });
         }

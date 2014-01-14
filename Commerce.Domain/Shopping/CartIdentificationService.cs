@@ -25,7 +25,7 @@ namespace Commerce.Application.Shopping
             return identifier;
         }
 
-        public Guid? GetCurrentRequestCardId()
+        public Guid? GetCurrentRequestCartId()
         {
             var cookie = _context.Request.Cookies[CookieName];
             Guid identifier;

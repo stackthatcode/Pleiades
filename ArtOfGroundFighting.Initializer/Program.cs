@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Configuration;
 using System.Diagnostics;
-using ArtOfGroundFighting.Initializer.Builders;
-using ArtOfGroundFighting.Initializer.Builders.Products;
-using Commerce.Application.File;
 using Pleiades.App.Injection;
 using Pleiades.App.Logging;
 using Commerce.Application.Database;
+using Commerce.Application.File;
+using ArtOfGroundFighting.Initializer.Builders;
+using ArtOfGroundFighting.Initializer.Builders.Products;
 
 namespace ArtOfGroundFighting.Initializer
 {

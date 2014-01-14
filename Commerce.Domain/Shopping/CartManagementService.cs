@@ -29,7 +29,7 @@ namespace Commerce.Application.Shopping
 
         private AdjustedCart IdempotentCartFetcher()
         {
-            var identifier = _cartIdentificationService.GetCurrentRequestCardId();
+            var identifier = _cartIdentificationService.GetCurrentRequestCartId();
             if (identifier == null)
             {
                 return CreateNewCart();
