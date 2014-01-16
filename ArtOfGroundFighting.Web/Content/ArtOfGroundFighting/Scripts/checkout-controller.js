@@ -30,7 +30,7 @@ app.controller('CheckoutController', function ($scope, $http) {
     $scope.DeleteItem = function (skuCode) {
         var url = 'cart?skuCode=' + skuCode;
         ngAjax.Delete($http, url, function (data) {
-            DecorateAdjustedCartModelWithQuantities(data);
+            AddQuantityListToCartItems(data);
             $scope.cart = data.Cart;
         });
     };
@@ -67,7 +67,7 @@ app.controller('CheckoutController', function ($scope, $http) {
                 ngAjax.Get($http, 'cart', this);
             },
             function(data) {
-                DecorateAdjustedCartModelWithQuantities(data);
+                AddQuantityListToCartItems(data);
                 $scope.cart = data.Cart;
                 
                 if ($scope.cart.StateTax) {
@@ -86,7 +86,7 @@ app.controller('CheckoutController', function ($scope, $http) {
     $scope.ChangeQuantity = function (item) {
         var url = 'cart?skuCode=' + item.Sku.SkuCode + "&quantity=" + item.Quantity;
         ngAjax.Put($http, url, null, function (data) {
-            DecorateAdjustedCartModelWithQuantities(data);
+            AddQuantityListToCartItems(data);
             $scope.cart = data.Cart;
         });
     };
@@ -94,7 +94,7 @@ app.controller('CheckoutController', function ($scope, $http) {
     $scope.ChangeShippingMethod = function() {
         var url = 'cart?shippingMethodId=' + $scope.ShippingInfo.ShippingMethodId;
         ngAjax.Put($http, url, null, function (data) {
-            DecorateAdjustedCartModelWithQuantities(data);
+            AddQuantityListToCartItems(data);
             $scope.cart = data.Cart;
         });
     };
@@ -102,7 +102,7 @@ app.controller('CheckoutController', function ($scope, $http) {
     $scope.ChangeStateTax = function() {
         var url = 'cart?stateTaxAbbr=' + $scope.ShippingInfo.State;
         ngAjax.Put($http, url, null, function (data) {
-            DecorateAdjustedCartModelWithQuantities(data);
+            AddQuantityListToCartItems(data);
             $scope.cart = data.Cart;
         });
     };

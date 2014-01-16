@@ -1,8 +1,7 @@
 using System;
 using Commerce.Application.File.Entities;
-using Commerce.Application.Products.Entities;
 
-namespace Commerce.Application.Products
+namespace Commerce.Application.Products.Entities
 {
     public class ProductSku
     {

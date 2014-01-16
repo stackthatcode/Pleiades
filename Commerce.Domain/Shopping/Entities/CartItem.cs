@@ -1,4 +1,4 @@
- using Commerce.Application.Products;
+ using Commerce.Application.Products.Entities;
 
 namespace Commerce.Application.Shopping.Entities
 {

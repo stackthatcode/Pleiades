@@ -5,6 +5,8 @@ using Commerce.Application.Shopping.Entities;
 
 namespace Commerce.Application.Shopping
 {
+    // TODO: refactor this and break each piece of logic into a function
+
     public class CartManagementService : ICartManagementService
     {
         private readonly ICartIdentificationService _cartIdentificationService;
@@ -154,7 +156,7 @@ namespace Commerce.Application.Shopping
 
             var inventory = _inventoryRepository.RetreiveBySkuCode(skuCode);
 
-            if (inventory.Available == 0)
+            if (inventory == null || inventory.Available == 0)
             {
                 adjustedCart.InventoryAdjusted = true;
                 cart.CartItems.Remove(cartItem);

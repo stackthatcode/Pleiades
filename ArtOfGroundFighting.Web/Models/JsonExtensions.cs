@@ -3,12 +3,32 @@ using System.Linq;
 using Commerce.Application.Lists.Entities;
 using Commerce.Application.Products;
 using Commerce.Application.Products.Entities;
+using Commerce.Application.Shopping.Entities;
 using Pleiades.Web.Json;
 
 namespace ArtOfGroundFighting.Web.Models
 {
     public static class JsonExtensions
     {
+        public static JsonNetResult BuildCartChangeResponseJson(int cartResponseCode, AdjustedCart cart, List<ProductSku> inventory)
+        {
+            return new JsonNetResult(
+                new
+                {
+                    CartResponseCode = cartResponseCode,
+                    AdjustedCart = cart,
+                    UpdatedInventory = inventory.Select(
+                        item => new
+                        {
+                            Id = item.Id,
+                            SizeId = item.Size != null ? item.Size.Id : (int?)null,
+                            ColorId = item.Color != null ? item.Color.Id : (int?)null,
+                            SkuCode = item.OriginalSkuCode,
+                            Quantity = item.Available,
+                        }),
+                });
+        }
+
         public static JsonNetResult BuildProductDetailJson(JsonProductInfo productInfo,
                 JsonBrand brandInfo, List<JsonProductColor> colors, List<ProductSize> sizes, List<JsonProductImage> images, List<ProductSku> inventory)
         {

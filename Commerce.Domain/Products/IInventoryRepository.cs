@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Commerce.Application.Products.Entities;
 
 namespace Commerce.Application.Products
 {

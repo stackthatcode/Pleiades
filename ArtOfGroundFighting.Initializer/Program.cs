@@ -72,8 +72,8 @@ namespace ArtOfGroundFighting.Initializer
             CreateAndRunBuilder<BrandBuilder>();
             CreateAndRunBuilder<ColorBuilder>();
 
-            CreateAndRunBuilder<TatamiEstiloBuilder>();
             CreateAndRunBuilder<BullTerrierMushinBuilder>();
+            CreateAndRunBuilder<TatamiEstiloBuilder>();
             CreateAndRunBuilder<BullTerrierSuperStarBuilder>();
             CreateAndRunBuilder<BullTerrierZebraBuilder>();
             CreateAndRunBuilder<BullTerrierMastersBuilder>();

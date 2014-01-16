@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Commerce.Application.Billing;
-using Commerce.Application.Email.Model;
-using Commerce.Application.Products;
+using Commerce.Application.Products.Entities;
 using Newtonsoft.Json;
 
 namespace Commerce.Application.Orders.Entities

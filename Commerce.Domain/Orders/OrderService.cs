@@ -8,7 +8,7 @@ using Commerce.Application.Database;
 using Commerce.Application.Email;
 using Commerce.Application.Orders.Entities;
 using Commerce.Application.Payment;
-using Commerce.Application.Products;
+using Commerce.Application.Products.Entities;
 using Pleiades.App.Logging;
 
 namespace Commerce.Application.Orders
@@ -152,8 +152,7 @@ namespace Commerce.Application.Orders
                     line.Quantity = 0;
                     if (sku.Available == 0 || sku.IsDeleted)
                     {
-                        order.AddNote(
-                            "There are no longer any of the " + line.OriginalName + " available in stock.");
+                        order.AddNote("There are no longer any of the " + line.OriginalName + " available in stock.");
                     }
                 }
                 else if (sku.Available < line.Quantity)

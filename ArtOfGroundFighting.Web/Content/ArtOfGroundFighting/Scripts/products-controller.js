@@ -1,8 +1,8 @@
 'use strict';
 
 var ngAjax = namespace("PushLibrary.NgAjax");
-var urlLocator = namespace("CommerceWeb.UrlLocator");
 var imageLocator = namespace("PushLibrary.ImageLocator");
+var urlLocator = namespace("CommerceWeb.UrlLocator");
 var app = angular.module('push-market');
 
 app.controller('ListController', function ($scope, $http) {
@@ -87,36 +87,39 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         return $scope.Product && $scope.Product.Sizes && $scope.Product.Sizes.length >= 1;
     };
 
-    $scope.AvailableInventory = function () {
-        var output = [];
+    // Create AdjustedQuantities based on contents of Cart
+    $scope.RefreshAdjustedQuantities = function () {
         if (!$scope.Product || !$scope.Product.Inventory) {
-            return [];
-        }
-        if ($scope.HasMultipleColors()) {
-            output = AQ($scope.Product.Inventory)
-                    .where(function (x) { return x.ColorId == $scope.SelectedColorId; })
-                    .toArray();
-        } else {
-            output = $scope.Product.Inventory;
+            return;
         }
         
-        for (var counter = 0 ; counter < output.length; counter++) {
-            var sku = output[counter];
+        for (var counter = 0 ; counter < $scope.Product.Inventory.length; counter++) {
+            var sku = $scope.Product.Inventory[counter];
             var adjustedQuantity = sku.Quantity;
             var cartItem = AQ($scope.Cart.CartItems)
                     .firstOrDefault(function (x) { return x.Sku.SkuCode == sku.SkuCode; });
-            
+
             if (cartItem) {
                 adjustedQuantity = cartItem.Quantity > adjustedQuantity ? 0 : adjustedQuantity - cartItem.Quantity;
             }
             sku.AdjustedQuantity = adjustedQuantity;
-        }   
-
-        // Remove zeroed-out Quantities
-        output = AQ(output).where(function (x) { return x.AdjustedQuantity > 0; }).toArray();
-        return output;
+        }
     };
 
+    $scope.AvailableInventory = function () {
+        if (!$scope.Product || !$scope.Product.Inventory) {
+            return [];
+        }
+        if ($scope.HasMultipleColors()) {
+            return AQ($scope.Product.Inventory)
+                    .where(function (x) { return x.ColorId == $scope.SelectedColorId && x.AdjustedQuantity > 0; })
+                    .toArray();
+        } else {
+            return AQ($scope.Product.Inventory)
+                    .where(function (x) { return x.AdjustQuantity > 0; })
+                    .toArray();
+        }
+    };
 
     $scope.RefreshSizes = function () {
         $scope.SelectedSizes = [];
@@ -124,13 +127,16 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         $scope.SelectedSizeId = null;
 
         if ($scope.HasSizes()) {
-            AQ($scope.AvailableInventory()).each(function (inventoryItem) {
-                var size = AQ($scope.Product.Sizes)
-                    .firstOrDefault(function (x) { return x.Id == inventoryItem.SizeId; });
+            AQ($scope.AvailableInventory())
+                .each(
+                    function (inventoryItem) {
+                        var size = AQ($scope.Product.Sizes)
+                            .firstOrDefault(function (x) { return x.Id == inventoryItem.SizeId; });
 
-                $scope.SelectedSizes.push(size);
-            });
+                        $scope.SelectedSizes.push(size);
+                    });
         } else {
+            // Why...?
             $scope.SelectedSizes = $scope.Product.Sizes;
         }
     };
@@ -163,6 +169,7 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         $scope.SelectedQuantities = [];
 
         if ($scope.GetSelectedSku()) {
+            console.log($scope.GetSelectedSku());
             var availableQuantity = $scope.GetSelectedSku().AdjustedQuantity;
             
             for (var i = 1; i <= availableQuantity; i++) {
@@ -170,18 +177,6 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
             }
             
             $scope.SelectedQuantityValue = $scope.SelectedQuantities[0];
-        }
-    };
-
-    $scope.AdjustQuantitiesWithCart = function(inventoryArray) {
-        var cartItem =
-        AQ($scope.Cart.CartItems)
-            .firstOrDefault(
-                function (x) { return x.Sku.SkuCode == $scope.GetSelectedSku().SkuCode; });
-        console.log(cartItem);
-
-        if (cartItem && cartItem.Quantity <= availableQuantity) {
-            availableQuantity = availableQuantity - cartItem.Quantity;
         }
     };
 
@@ -202,6 +197,13 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         $scope.HideAddButton();
 
         ngAjax.Post($http, url, null, function (cartAddResults) {
+            $scope.Product.Inventory = cartAddResults.UpdatedInventory;
+            $scope.Cart = cartAddResults.AdjustedCart.Cart;
+            
+            $scope.RefreshAdjustedQuantities();
+            $scope.RefreshSizes();
+            $scope.RefreshQuantities();
+            
             var responseFunction = CartResponseFunction(cartAddResults.CartResponseCode);
             if (responseFunction) {
                 responseFunction();
@@ -239,17 +241,18 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
             ngAjax.Get($http, 'cart', this);
         },
         function (cartGetResponse) {
-            $scope.Cart = cartGetResponse.Cart;
-            
-            console.log($scope.Product);
-            console.log($scope.Cart);
-            
+            $scope.Cart = cartGetResponse.Cart;            
             $scope.SelectColorDefault();
+            $scope.RefreshImages();
+            
+            // Should these be packaged in a single function?
+            $scope.RefreshAdjustedQuantities();
             $scope.RefreshSizes();
             $scope.RefreshQuantities();
-            $scope.RefreshImages();
         }
     );
+
+    window.scope = $scope;
 });
 
 app.controller('ContentController', function ($scope, $routeParams) {

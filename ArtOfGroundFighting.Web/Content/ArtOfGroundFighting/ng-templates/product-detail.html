@@ -71,7 +71,8 @@
             </div>
             
             <div ng-show="!HasInventory()">
-                <h2 style="color:#555; font-weight:bold;">This Item is Out-of-Stock. Sorry!</h2>
+                <h2 ng-show="!HasColors()" style="color:#555; font-weight:bold;">This Item is Out-of-Stock. Sorry!</h2>
+                <h2 ng-show="HasColors()" style="color:#555; font-weight:bold;">This Item Color is Out-of-Stock. Sorry!</h2>
                 <div style="height:20px;"></div>
             </div>
             
