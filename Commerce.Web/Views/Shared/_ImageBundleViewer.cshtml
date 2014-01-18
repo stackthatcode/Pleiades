@@ -1,89 +1,77 @@
-﻿    @using System.Configuration;
-    @Html.Javascript("~/Content/Bootstrap_2_3_2/js/bootstrap-lightbox.min.js")
-    @Html.Stylesheet("~/Content/Bootstrap_2_3_2/css/bootstrap-lightbox.min.css")
+﻿@using System.Configuration;
+@Html.Javascript("~/Content/fancybox/jquery.fancybox.pack.js?v=2.1.5")
+@Html.Stylesheet("~/Content/fancybox/jquery.fancybox.css?v=2.1.5")
+    
+<script type="text/javascript">
+	var BundleViewer = namespace("Commerce.Web.BundleViewer");
 
-	<script type="text/javascript">
-	    var BundleViewer = namespace("Commerce.Web.BundleViewer");
+	BundleViewer.DownloadTemplate = '@Url.Content("~/Image/Download/{exRID}?size={size}")';
+	BundleViewer.Default75x75 = '@Url.Content(ConfigurationManager.AppSettings["BlankThumbnailImageUrl"])';
+	BundleViewer.Default150x150 = '@Url.Content(ConfigurationManager.AppSettings["BlankSmallImageUrl"])';
 
-	    BundleViewer.DownloadTemplate = '@Url.Content("~/Image/Download/{exRID}?size={size}")';
-	    BundleViewer.Default75x75 = '@Url.Content(ConfigurationManager.AppSettings["BlankThumbnailImageUrl"])';
-	    BundleViewer.Default150x150 = '@Url.Content(ConfigurationManager.AppSettings["BlankSmallImageUrl"])';
+	// $data contains: { either ImageBundle: , which will contain ExternalId --- or ImageBundleExternalId: "(some guid)", 
+	// LightboxSuffixId: "Main, Child or Parent, etc." }
 
-	    // $data contains: { either ImageBundle: , which will contain ExternalId --- or ImageBundleExternalId: "(some guid)", 
-	    // LightboxSuffixId: "Main, Child or Parent, etc." }
+	BundleViewer.ContainsValidImage = function (data) {
+	    return (data.ImageBundleExternalId || (data.ImageBundle && data.ImageBundle.ExternalId));
+	};
 
-	    BundleViewer.ContainsValidImage = function (data) {
-	        return (data.ImageBundleExternalId || (data.ImageBundle && data.ImageBundle.ExternalId));
-	    };
+	BundleViewer.ExtractId = function (data) {
+	    var imageBundleExternalId =
+	        data.ImageBundleExternalId ?
+	            data.ImageBundleExternalId : (data.ImageBundle && data.ImageBundle.ExternalId);
+	    return imageBundleExternalId;
+	};
 
-	    BundleViewer.ExtractId = function (data) {
-	        var imageBundleExternalId =
-	            data.ImageBundleExternalId ?
-	                data.ImageBundleExternalId : (data.ImageBundle && data.ImageBundle.ExternalId);
-	        return imageBundleExternalId;
-	    };
+	BundleViewer.ImageBundleDownloadUrl = function (data, size) {
+	    var id = BundleViewer.ExtractId(data);
 
-	    BundleViewer.ImageBundleDownloadUrl = function (data, size) {
-	        var id = BundleViewer.ExtractId(data);
-
-	        var url = BundleViewer.DownloadTemplate
-	            .replace("{exRID}", id)
-	            .replace("{exRID}", "00000000-0000-0000-0000-000000000000")
-	            .replace("{size}", size);
+	    var url = BundleViewer.DownloadTemplate
+	        .replace("{exRID}", id)
+	        .replace("{exRID}", "00000000-0000-0000-0000-000000000000")
+	        .replace("{size}", size);
 	        
-	        console.log("Generated URL:" + url);
-	        return url;
-	    };
+	    //console.log("Generated URL:" + url);
+	    return url;
+	};
 
-	    BundleViewer.LightBoxElementId = function (data) {
-	        var id = BundleViewer.ExtractId(data);
+	BundleViewer.ShowLightbox = function ($data, event) {
+	    var url = BundleViewer.ImageBundleDownloadUrl($data, 'large');
+	    console.log(event);
+	    $.fancybox.open({
+	        href: url, type: "image", padding: "10", transitionOut: "none",
+	    });
+	};
+</script>
 
-	        return 'lightBox-' + id + '-' + data.LightboxSuffixId;
-	    };
+<!-- 
+    $data contains: { ImageBundle which will contain ExternalId, or ImageBundleExternalId: "(GUID)", 
+	LightboxSuffixId: "Main, Child or Parent, etc." } 
+-->
 
-	    BundleViewer.ShowLightBox = function (data, event) {
-	        var lightboxid = '#' + BundleViewer.LightBoxElementId(data);
-	        var lightboxImgId = lightboxid + " img";
-
-	        console.log(lightboxImgId + ' ' + $(lightboxImgId).attr("data-image"));
-	        
-	        $(lightboxImgId).attr("src", $(lightboxImgId).attr("data-image"));
-	        $(lightboxid).lightbox();
-	    };
-	</script>
-
-    <!-- 
-        $data contains: { ImageBundle which will contain ExternalId, or ImageBundleExternalId: "(GUID)", 
-	    LightboxSuffixId: "Main, Child or Parent, etc." } 
-    -->
-
-	<script type="text/html" id="Image-Bundle-Small-Viewer">
-        <table>
-            <tr>
-            <td style="height:150px; border:1px dotted #CCC; width:150px; text-align:center;">
+<script type="text/html" id="Image-Bundle-Small-Viewer">
+    <table>
+        <tr>
+            <td style="height:75px; border:1px dotted #CCC; width:150px; text-align:center;">
                 <div data-bind="if: BundleViewer.ContainsValidImage($data)">
-                    <a href="#" data-bind="click: BundleViewer.ShowLightBox">
+                    <a data-bind="click: BundleViewer.ShowLightbox">
                         <img data-bind="attr: { src: BundleViewer.ImageBundleDownloadUrl($data, 'small') }" />
                     </a>
-
-                    <div data-bind="template: { name: 'Image-Bundle-Lightbox', data: $data }">
-			        </div>
                 </div>
-
                 <div data-bind="ifnot: BundleViewer.ContainsValidImage($data)">
                     <img data-bind="attr: { src: BundleViewer.Default150x150 }" />
                 </div>
             </td>
-            </tr>
-        </table>
-	</script>
-
-    <script type="text/html" id="Image-Bundle-Thumbnail-Tiny-NoLightbox">
-        <table>
+        </tr>
+    </table>
+</script>
+    
+<script type="text/html" id="Image-Bundle-Thumbnail-Viewer">
+    <table>
         <tr>
-            <td style="height:37px; border:1px dotted #CCC; width:37px; text-align:center; overflow:hidden;">
+            <td style="height:75px; border:1px dotted #CCC; width:75px; text-align:center;">
                 <div data-bind="if: BundleViewer.ContainsValidImage($data)">
-                    <a>
+                    <a data-bind="click: BundleViewer.ShowLightbox">
                         <img data-bind="attr: { src: BundleViewer.ImageBundleDownloadUrl($data, 'thumbnail') }" />
                     </a>
                 </div>
@@ -92,37 +80,20 @@
                 </div>
             </td>
         </tr>
-        </table>
-    </script>
-    
-	<script type="text/html" id="Image-Bundle-Thumbnail-Viewer">
-        <table>
-        <tr>
-            <td style="height:75px; border:1px dotted #CCC; width:75px; text-align:center;">
-                <div data-bind="if: $data.ImageBundle || $data.ImageBundleExternalId">
-                    <a href="#" data-bind="click: BundleViewer.ShowLightBox">
-                        <img data-bind="attr: { src: BundleViewer.ImageBundleDownloadUrl($data, 'thumbnail') }" />
-                    </a>
+    </table>
+</script>
 
-                    <div data-bind="template: { name: 'Image-Bundle-Lightbox', data: $data }">
-			        </div>
+<script type="text/html" id="Image-Bundle-Thumbnail-Tiny-NoLightbox">
+    <table>
+        <tr>
+            <td style="height: 37px; border: 1px dotted #CCC; width: 37px; text-align: center; overflow: hidden;">
+                <div data-bind="if: BundleViewer.ContainsValidImage($data)">
+                    <img data-bind="attr: { src: BundleViewer.ImageBundleDownloadUrl($data, 'thumbnail') }" />
                 </div>
-                <div data-bind="ifnot: $data">
+                <div data-bind="ifnot: BundleViewer.ContainsValidImage($data)">
                     <img data-bind="attr: { src: BundleViewer.Default75x75 }" />
                 </div>
             </td>
         </tr>
-        </table>
-	</script>
-
-<script type="text/html" id="Image-Bundle-Lightbox">
-    <div data-bind="attr: { id: BundleViewer.LightBoxElementId($data) }"  
-            class="lightbox hide fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class='lightbox-header'>
-		    <button type="button" class="close" data-dismiss="lightbox" aria-hidden="true">&times;</button>
-	    </div>
-	    <div class='lightbox-content'>
-		    <img data-bind="attr: { 'data-image': BundleViewer.ImageBundleDownloadUrl($data, 'large') }" />
-	    </div>
-	</div>
+    </table>
 </script>
