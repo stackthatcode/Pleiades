@@ -73,28 +73,22 @@
 		<table class="table table-hover" style="margin-bottom:0px;" data-bind="if: $data == $root.SelectedSku()">
 		    <tbody>
 			    <tr>
-			    <td valign="top">
-				    <span class="span5">
-					    <h4 style="height:24px;"><span data-bind="text: $data.SkuCode"></span></h4>
-                        <p style="line-height:15px; clear:both;">Original Sku Code: <span data-bind="text: $data.OriginalSkuCode"></span></p>
-				    </span>
+			    <td valign="top" style="width:500px;">
+					<h4 style="height:24px;"><span data-bind="text: $data.SkuCode"></span></h4>
+                    <p style="line-height:15px; clear:both;">Original Sku Code: <span data-bind="text: $data.OriginalSkuCode"></span></p>
                 </td>
 			    <td style="vertical-align:top;">
-				    <span class="span4">
-					    <h4 style="height:24px; float:left;">In Stock </h4>
-                            <input class="input-large" style="width:75px; margin:4px 0px 0px 5px;" type="text" 
-                                placeholder="Quantity" data-bind="value: $data.EditTotalFormatted" maxlength="5" />
+					<h4 style="height:24px; float:left;">In Stock </h4>
+                        <input class="input-large" style="width:75px; margin:4px 0px 0px 5px;" type="text" 
+                            placeholder="Quantity" data-bind="value: $data.EditTotalFormatted" maxlength="5" />
                             
-                        <div style="clear:both;"></div>
+                    <div style="clear:both;"></div>
 
-                        <p style="line-height:15px; clear:both;">Reserved: <span data-bind="text: $data.Reserved"></span></p>
-				    </span>
+                    <p style="line-height:15px; clear:both;">Reserved: <span data-bind="text: $data.Reserved"></span></p>
                 </td>
-			    <td>
-				    <span class="span3" style="text-align:right;">
-                        <a class="btn btn-inverse" style="width:70px;" data-bind="click: $root.InventoryCancelClick" href="#"><i class="icon-remove icon-white"></i> Cancel</a>
-                        <a class="btn btn-primary" style="width:70px;" data-bind="click: $root.InventorySaveClick" href="#"><i class="icon-ok icon-white"></i> Save</a>
-				    </span>
+			    <td style="text-align:right;">
+                    <a class="btn btn-inverse" style="width:70px;" data-bind="click: $root.InventoryCancelClick" href="#"><i class="icon-remove icon-white"></i> Cancel</a>
+                    <a class="btn btn-primary" style="width:70px;" data-bind="click: $root.InventorySaveClick" href="#"><i class="icon-ok icon-white"></i> Save</a>
 			    </td>
 			    </tr>
 		    </tbody>
@@ -103,21 +97,15 @@
 		<table class="table table-hover" style="margin-bottom:0px;" data-bind="click: $root.InventoryEditClick, ifnot: $data == $root.SelectedSku()">
 		    <tbody>
 			    <tr>
-			    <td valign="top">
-				    <span class="span5">
-					    <h4 style="height:24px;"><span data-bind="text: $data.SkuCode"></span></h4>
+                    <td valign="top" style="width:500px; ">
+                        <h4 style="height:24px;"><span data-bind="text: $data.SkuCode"></span></h4>
                         <p style="line-height:15px; clear:both;">Original Sku Code: <span data-bind="text: $data.OriginalSkuCode"></span></p>
-				    </span>
-                </td>
+                    </td>
 			    <td style="vertical-align:top">
-				    <span class="span4">
-					    <h4 style="height:24px;">In Stock: <span data-bind="text: $data.TotalObservable"></span></h4>
-                        <p style="line-height:15px; clear:both;">Reserved: <span data-bind="text: $data.Reserved"></span></p>
-				    </span>
+					<h4 style="height:24px;">In Stock: <span data-bind="text: $data.TotalObservable"></span></h4>
+                    <p style="line-height:15px; clear:both;">Reserved: <span data-bind="text: $data.Reserved"></span></p>
                 </td>
-			    <td>
-				    <span class="span3" style="text-align:right;">Touch to Edit</span>
-			    </td>
+			    <td style="text-align:right;">Touch to Edit</td>
 			    </tr>
 		    </tbody>
 		</table>
