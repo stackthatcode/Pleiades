@@ -116,7 +116,7 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
                     .toArray();
         } else {
             return AQ($scope.Product.Inventory)
-                    .where(function (x) { return x.AdjustQuantity > 0; })
+                    .where(function (x) { return x.AdjustedQuantity > 0; })
                     .toArray();
         }
     };
@@ -137,6 +137,7 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
                     });
         } else {
             // Why...?
+            console("$scope.SelectedSizes = $scope.Product.Sizes <= check it out");
             $scope.SelectedSizes = $scope.Product.Sizes;
         }
     };
@@ -236,12 +237,14 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         function() {
             ngAjax.Get($http, 'products/' + $routeParams.productid, this);
         },
-        function(product) {
+        function (product) {
+            console.log(product);
+
             $scope.Product = product;
             ngAjax.Get($http, 'cart', this);
         },
-        function (cartGetResponse) {
-            $scope.Cart = cartGetResponse.Cart;            
+        function (cartGetResponse) {            
+            $scope.Cart = cartGetResponse.Cart;
             $scope.SelectColorDefault();
             $scope.RefreshImages();
             

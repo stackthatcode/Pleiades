@@ -22,16 +22,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/07/2013 17:43:30</publishTime>
     </File>
     <File Include="bin/Commerce.Application.dll">
-      <publishTime>01/11/2014 06:53:16</publishTime>
+      <publishTime>01/18/2014 12:07:22</publishTime>
     </File>
     <File Include="bin/Commerce.Application.pdb">
-      <publishTime>01/11/2014 06:53:16</publishTime>
+      <publishTime>01/18/2014 12:07:22</publishTime>
     </File>
     <File Include="bin/Commerce.Web.dll">
-      <publishTime>01/11/2014 07:28:10</publishTime>
+      <publishTime>01/18/2014 12:07:23</publishTime>
     </File>
     <File Include="bin/Commerce.Web.pdb">
-      <publishTime>01/11/2014 07:28:10</publishTime>
+      <publishTime>01/18/2014 12:07:23</publishTime>
     </File>
     <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
       <publishTime>12/15/2013 09:24:37</publishTime>
@@ -327,6 +327,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/Bootstrap_2_3_2/js/bootstrap.min.js">
       <publishTime>12/07/2013 17:40:14</publishTime>
     </File>
+    <File Include="Content/Bootstrap_3_0_0/css/bootstrap-lightbox.css">
+      <publishTime>01/17/2014 08:06:30</publishTime>
+    </File>
+    <File Include="Content/Bootstrap_3_0_0/js/bootstrap-lightbox.js">
+      <publishTime>01/16/2014 18:26:43</publishTime>
+    </File>
     <File Include="Content/Commerce.Web/Images/200x200.gif">
       <publishTime>12/07/2013 17:40:14</publishTime>
     </File>
@@ -347,6 +353,51 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/Commerce.Web/Style/pushmarketadmin.css">
       <publishTime>12/07/2013 17:40:14</publishTime>
+    </File>
+    <File Include="Content/fancybox/blank.gif">
+      <publishTime>01/18/2014 09:55:44</publishTime>
+    </File>
+    <File Include="Content/fancybox/fancybox_loading%402x.gif">
+      <publishTime>01/18/2014 09:55:44</publishTime>
+    </File>
+    <File Include="Content/fancybox/fancybox_loading.gif">
+      <publishTime>01/18/2014 09:55:44</publishTime>
+    </File>
+    <File Include="Content/fancybox/fancybox_overlay.png">
+      <publishTime>01/18/2014 09:55:44</publishTime>
+    </File>
+    <File Include="Content/fancybox/fancybox_sprite%402x.png">
+      <publishTime>01/18/2014 09:55:44</publishTime>
+    </File>
+    <File Include="Content/fancybox/fancybox_sprite.png">
+      <publishTime>01/18/2014 09:55:44</publishTime>
+    </File>
+    <File Include="Content/fancybox/helpers/fancybox_buttons.png">
+      <publishTime>01/18/2014 09:55:44</publishTime>
+    </File>
+    <File Include="Content/fancybox/helpers/jquery.fancybox-buttons.css">
+      <publishTime>01/18/2014 09:55:44</publishTime>
+    </File>
+    <File Include="Content/fancybox/helpers/jquery.fancybox-buttons.js">
+      <publishTime>01/18/2014 09:55:44</publishTime>
+    </File>
+    <File Include="Content/fancybox/helpers/jquery.fancybox-media.js">
+      <publishTime>01/18/2014 09:55:44</publishTime>
+    </File>
+    <File Include="Content/fancybox/helpers/jquery.fancybox-thumbs.css">
+      <publishTime>01/18/2014 09:55:44</publishTime>
+    </File>
+    <File Include="Content/fancybox/helpers/jquery.fancybox-thumbs.js">
+      <publishTime>01/18/2014 09:55:44</publishTime>
+    </File>
+    <File Include="Content/fancybox/jquery.fancybox.css">
+      <publishTime>01/18/2014 09:55:44</publishTime>
+    </File>
+    <File Include="Content/fancybox/jquery.fancybox.js">
+      <publishTime>01/18/2014 09:55:44</publishTime>
+    </File>
+    <File Include="Content/fancybox/jquery.fancybox.pack.js">
+      <publishTime>01/18/2014 09:55:44</publishTime>
     </File>
     <File Include="Content/Farbtastic/farbtasticSecure.css">
       <publishTime>12/07/2013 17:40:15</publishTime>
@@ -580,7 +631,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/07/2013 17:40:15</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>12/28/2013 08:39:37</publishTime>
+      <publishTime>01/13/2014 08:02:45</publishTime>
     </File>
     <File Include="Views/Image/UploadTest.cshtml">
       <publishTime>12/07/2013 17:40:15</publishTime>
@@ -619,7 +670,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/07/2013 17:40:15</publishTime>
     </File>
     <File Include="Views/Product/Editor.cshtml">
-      <publishTime>12/07/2013 17:40:15</publishTime>
+      <publishTime>01/17/2014 08:13:41</publishTime>
     </File>
     <File Include="Views/Product/_Colors.cshtml">
       <publishTime>12/07/2013 17:40:15</publishTime>
@@ -628,10 +679,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/07/2013 17:40:15</publishTime>
     </File>
     <File Include="Views/Product/_Inventory.cshtml">
-      <publishTime>12/07/2013 17:40:15</publishTime>
+      <publishTime>01/18/2014 12:02:40</publishTime>
     </File>
     <File Include="Views/Product/_SearchAndInfo.cshtml">
-      <publishTime>12/07/2013 17:40:15</publishTime>
+      <publishTime>01/18/2014 11:22:12</publishTime>
     </File>
     <File Include="Views/Product/_Sizes.cshtml">
       <publishTime>12/07/2013 17:40:15</publishTime>
@@ -649,10 +700,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/07/2013 17:40:15</publishTime>
     </File>
     <File Include="Views/Shared/_Footer.cshtml">
-      <publishTime>12/28/2013 08:39:37</publishTime>
+      <publishTime>01/13/2014 08:03:15</publishTime>
     </File>
     <File Include="Views/Shared/_Header.cshtml">
-      <publishTime>12/07/2013 17:40:15</publishTime>
+      <publishTime>01/18/2014 11:15:39</publishTime>
     </File>
     <File Include="Views/Shared/_HeaderBare.cshtml">
       <publishTime>12/30/2013 12:41:01</publishTime>
@@ -661,10 +712,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/07/2013 17:40:15</publishTime>
     </File>
     <File Include="Views/Shared/_ImageBundleViewer.cshtml">
-      <publishTime>12/07/2013 17:40:15</publishTime>
+      <publishTime>01/18/2014 11:55:31</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>12/28/2013 08:38:33</publishTime>
+      <publishTime>01/18/2014 11:01:55</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutBare.cshtml">
       <publishTime>12/30/2013 12:40:53</publishTime>
@@ -688,7 +739,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/07/2013 17:40:15</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/11/2014 07:49:16</publishTime>
+      <publishTime>01/18/2014 12:07:24</publishTime>
     </File>
   </ItemGroup>
 </Project>

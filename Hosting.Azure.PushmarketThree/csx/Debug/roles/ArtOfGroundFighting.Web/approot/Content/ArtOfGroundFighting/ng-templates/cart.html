@@ -36,7 +36,8 @@
     <div class="col-lg-8" style="height:75px;">
         
         <a data-toggle="lightbox" href="#lightbox-{{ item.Id }}">
-            <img ng-src="{{ ImageUrlGenator(item.Sku.ImageBundle.ExternalId, 'thumbnail') }}" style="border: #CCC dotted 1px; float:left; margin-right:20px;" />            
+            <img ng-src="{{ ImageUrlGenator(item.Sku.ImageBundle.ExternalId, 'thumbnail') }}" 
+                 style="border: #CCC dotted 1px; float:left; margin-right:20px;" />            
         </a>
 
         <span class="bold-print-black">{{ item.Sku.Name }}</span><br />

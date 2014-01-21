@@ -19,19 +19,19 @@ app.controller('CartController', function ($scope, $http) {
     $scope.DeleteItem = function (skuCode) {
         var url = 'cart?skuCode=' + skuCode;
         ngAjax.Delete($http, url, function (data) {
-            DecorateAdjustedCartModelWithQuantities(data);
+            AddQuantityListToCartItems(data);
             $scope.cart = data.Cart;
         });
     };
 
     $scope.LoadDataIntoModel = function (data) {
-        DecorateAdjustedCartModelWithQuantities(data);
+        AddQuantityListToCartItems(data);
         $scope.cart = data.Cart;
     };
 
     $scope.RetrieveCart = function () {
         ngAjax.Get($http, 'cart', function (data) {
-            DecorateAdjustedCartModelWithQuantities(data);
+            AddQuantityListToCartItems(data);
             $scope.cart = data.Cart;
         });
     };
@@ -39,7 +39,8 @@ app.controller('CartController', function ($scope, $http) {
     $scope.ChangeQuantity = function (item) {
         var url = 'cart?skuCode=' + item.Sku.SkuCode + "&quantity=" + item.Quantity;
         ngAjax.Put($http, url, null, function (data) {
-            DecorateAdjustedCartModelWithQuantities(data);
+            console.log(data);
+            AddQuantityListToCartItems(data);
             $scope.cart = data.Cart;
         });
     };

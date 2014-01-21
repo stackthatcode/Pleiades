@@ -21,7 +21,8 @@ namespace Commerce.Application.Email
             {
                 var client = new SmtpClient(_emailConfigAdapter.SmtpHost, Int32.Parse(_emailConfigAdapter.SmtpPort))
                 {
-                    Credentials = new NetworkCredential(_emailConfigAdapter.SmtpUserName, _emailConfigAdapter.SmtpPassword),
+                    Credentials = 
+                        new NetworkCredential(_emailConfigAdapter.SmtpUserName, _emailConfigAdapter.SmtpPassword),
                     EnableSsl = true,
                     UseDefaultCredentials = false,                    
                 };
