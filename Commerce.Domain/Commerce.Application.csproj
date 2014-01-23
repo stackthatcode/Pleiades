@@ -134,6 +134,7 @@
     <Compile Include="Azure\AzureFileResourceRepository.cs" />
     <Compile Include="Azure\AzureLogEntryRepository.cs" />
     <Compile Include="Azure\AzureLogger.cs" />
+    <Compile Include="Azure\AzureLogLevel.cs" />
     <Compile Include="Azure\LogEntry.cs" />
     <Compile Include="Billing\BillingInfo.cs" />
     <Compile Include="Billing\StateTax.cs" />

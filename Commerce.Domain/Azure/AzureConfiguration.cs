@@ -28,5 +28,7 @@ namespace Commerce.Application.Azure
             get { return (string)_settings["ResourcesStorageContainer"]; }
             set { this["ResourcesStorageContainer"] = value; }
         }
+
+        public AzureLogLevel LogLevel
     }
 }

@@ -1,6 +1,8 @@
-﻿using System.Web;
+﻿using System.Configuration;
+using System.Web;
 using System.Web.Mvc;
 using Pleiades.App.Logging;
+using Pleiades.App.Utility;
 using Pleiades.Web.Activity;
 
 namespace Commerce.Web.Plumbing
@@ -9,6 +11,11 @@ namespace Commerce.Web.Plumbing
     {
         public override void OnException(ExceptionContext filterContext)
         {
+            if (!ConfigurationManager.AppSettings["ErrorHandlingEnabled"].ToBoolTryParse())
+            {
+                return;
+            }
+
             if (filterContext.ExceptionHandled) return;
             if (new HttpException(null, filterContext.Exception).GetHttpCode() != 500) return;
             if (!ExceptionType.IsInstanceOfType(filterContext.Exception)) return;

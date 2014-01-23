@@ -52,6 +52,11 @@ namespace ArtOfGroundFighting.Web
 
         protected void Application_Error(object sender, EventArgs e)
         {
+            if (!ConfigurationManager.AppSettings["ErrorHandlingEnabled"].ToBoolTryParse())
+            {
+                return;
+            }
+
             var lastError = Server.GetLastError();
             LoggerSingleton.Get().Error(lastError);
             ErrorNotification.Send(lastError);

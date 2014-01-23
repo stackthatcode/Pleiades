@@ -1,6 +1,8 @@
-﻿using System.Web;
+﻿using System.Configuration;
+using System.Web;
 using System.Web.Mvc;
 using Pleiades.App.Logging;
+using Pleiades.App.Utility;
 using Pleiades.Web.Activity;
 
 namespace ArtOfGroundFighting.Web.Plumbing
@@ -9,6 +11,11 @@ namespace ArtOfGroundFighting.Web.Plumbing
     {
         public override void OnException(ExceptionContext filterContext)
         {
+            if (!ConfigurationManager.AppSettings["ErrorHandlingEnabled"].ToBoolTryParse())
+            {
+                return;
+            }
+
             if (filterContext.ExceptionHandled || !filterContext.HttpContext.IsCustomErrorEnabled) return;
             if (new HttpException(null, filterContext.Exception).GetHttpCode() != 500) return;
             if (!ExceptionType.IsInstanceOfType(filterContext.Exception)) return;

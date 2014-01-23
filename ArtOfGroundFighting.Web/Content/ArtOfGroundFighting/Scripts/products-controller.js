@@ -238,8 +238,6 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
             ngAjax.Get($http, 'products/' + $routeParams.productid, this);
         },
         function (product) {
-            console.log(product);
-
             $scope.Product = product;
             ngAjax.Get($http, 'cart', this);
         },
@@ -248,7 +246,7 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
             $scope.SelectColorDefault();
             $scope.RefreshImages();
             
-            // Should these be packaged in a single function?
+            // Should these be packaged in a single function?  Triggered by a dirty bit...?
             $scope.RefreshAdjustedQuantities();
             $scope.RefreshSizes();
             $scope.RefreshQuantities();
