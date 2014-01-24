@@ -9,6 +9,7 @@ namespace Commerce.Application.Azure
 
         private readonly AzureLogEntryRepository _repository;
         private readonly string _loggerName;
+        private AzureLogLevel _azureLogLevel = AzureLogLevel.Error;
         private readonly Func<string, string> _messageFormatter = x => x;
 
         public static Func<ILogger> RegistrationFactory(string loggerName, Func<string, string> formatter = null)
@@ -20,7 +21,8 @@ namespace Commerce.Application.Azure
         public AzureLogger(string loggerName, Func<string, string> formatter)
         {            
             _loggerName = loggerName;
-            _repository = new AzureLogEntryRepository(AzureConfiguration.Settings);            
+            _repository = new AzureLogEntryRepository(AzureConfiguration.Settings);
+            _azureLogLevel = AzureConfiguration.Settings.LogLevel;
             if (formatter != null)
             {
                 _messageFormatter = formatter;
@@ -42,39 +44,60 @@ namespace Commerce.Application.Azure
 
         public void Trace(string message)
         {
-            ExceptionEater(() => _repository.AddEntry(_loggerName, "Trace", _messageFormatter(message)));
+            if (_azureLogLevel <= AzureLogLevel.Trace)
+            {
+                ExceptionEater(() => _repository.AddEntry(_loggerName, "Trace", _messageFormatter(message)));
+            }
         }
 
         public void Debug(string message)
         {
-            ExceptionEater(() => _repository.AddEntry(_loggerName, "Debug", _messageFormatter(message)));
+            if (_azureLogLevel <= AzureLogLevel.Debug)
+            {
+                ExceptionEater(() => _repository.AddEntry(_loggerName, "Debug", _messageFormatter(message)));
+            }
         }
 
         public void Info(string message)
         {
-            ExceptionEater(() => _repository.AddEntry(_loggerName, "Info", _messageFormatter(message)));
+            if (_azureLogLevel <= AzureLogLevel.Info)
+            {
+                ExceptionEater(() => _repository.AddEntry(_loggerName, "Info", _messageFormatter(message)));
+            }
         }
 
         public void Warn(string message)
         {
-            ExceptionEater(() => _repository.AddEntry(_loggerName, "Warn", _messageFormatter(message)));
+            if (_azureLogLevel <= AzureLogLevel.Warn)
+            {
+                ExceptionEater(() => _repository.AddEntry(_loggerName, "Warn", _messageFormatter(message)));
+            }
         }
 
         public void Error(string message)
         {
-            ExceptionEater(() => _repository.AddEntry(_loggerName, "Error", _messageFormatter(message)));
+            if (_azureLogLevel <= AzureLogLevel.Error)
+            {
+                ExceptionEater(() => _repository.AddEntry(_loggerName, "Error", _messageFormatter(message)));
+            }
         }
 
         public void Error(Exception exception)
         {
-            ExceptionEater(
-                () => _repository.AddEntry(
-                    _loggerName, "Error", _messageFormatter(exception.FullStackTraceDump())));
+            if (_azureLogLevel <= AzureLogLevel.Error)
+            {
+                ExceptionEater(
+                    () => _repository.AddEntry(
+                        _loggerName, "Error", _messageFormatter(exception.FullStackTraceDump())));
+            }
         }
 
         public void Fatal(string message)
         {
-            ExceptionEater(() => _repository.AddEntry(_loggerName, "Fatal", _messageFormatter(message)));
+            if (_azureLogLevel <= AzureLogLevel.Critical)
+            {
+                ExceptionEater(() => _repository.AddEntry(_loggerName, "Fatal", _messageFormatter(message)));
+            }
         }
     }
 }

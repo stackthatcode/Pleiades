@@ -153,7 +153,16 @@ namespace Commerce.Application
                         configuration.ResourcesStorageContainer,
                         ctx.Resolve<PushMarketContext>()))
                 .As<IFileResourceRepository>()
-                .InstancePerLifetimeScope();            
+                .InstancePerLifetimeScope();
+
+            if (EmailConfigAdapter.Settings.ServerSideMockEnabled.ToBoolTryParse())
+            {
+                builder.Register(ctx =>
+                    new AzureMockMailService(
+                        configuration, ConfigurationManager.AppSettings["StorefrontName"]))
+                    .As<IEmailService>()
+                    .InstancePerLifetimeScope();
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Configuration;
 
 namespace Commerce.Application.Azure
@@ -29,6 +30,11 @@ namespace Commerce.Application.Azure
             set { this["ResourcesStorageContainer"] = value; }
         }
 
+        [ConfigurationProperty("LogLevel", IsRequired = true)]
         public AzureLogLevel LogLevel
+        {
+            get { return (AzureLogLevel) Enum.Parse(typeof(AzureLogLevel), this["LogLevel"].ToString()); }
+            set { this["LogLevel"] = value.ToString(); }
+        }
     }
 }
