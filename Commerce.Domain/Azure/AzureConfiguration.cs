@@ -33,7 +33,7 @@ namespace Commerce.Application.Azure
         [ConfigurationProperty("LogLevel", IsRequired = true)]
         public AzureLogLevel LogLevel
         {
-            get { return (AzureLogLevel) Enum.Parse(typeof(AzureLogLevel), this["LogLevel"].ToString()); }
+            get { return (AzureLogLevel)Enum.Parse(typeof(AzureLogLevel), _settings["LogLevel"].ToString()); }
             set { this["LogLevel"] = value.ToString(); }
         }
     }

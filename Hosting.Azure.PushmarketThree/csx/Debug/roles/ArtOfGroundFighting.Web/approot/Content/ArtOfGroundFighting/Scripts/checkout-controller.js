@@ -112,8 +112,8 @@ app.controller('CheckoutController', function ($scope, $http) {
         validator.ValidateBillingAddress();
         validator.ValidateCreditCard();
         validator.ValidateShippingInfo();
-
         var failed = false;
+        
         if (!$("#shippingInfoForm").valid()) {
             $("#shipping-info-error").show();
             failed = true;
@@ -160,7 +160,18 @@ app.controller('CheckoutController', function ($scope, $http) {
             }
         );
     };
-    
+
+    $scope.CopyShippingToBilling = function() {
+        $scope.BillingInfo.Name = $scope.ShippingInfo.Name;
+        $scope.BillingInfo.EmailAddress = $scope.ShippingInfo.EmailAddress;
+        $scope.BillingInfo.Phone = $scope.ShippingInfo.Phone;
+        $scope.BillingInfo.Address1 = $scope.ShippingInfo.Address1;
+        $scope.BillingInfo.Address2 = $scope.ShippingInfo.Address2;
+        $scope.BillingInfo.City = $scope.ShippingInfo.City;
+        $scope.BillingInfo.State = $scope.ShippingInfo.State;
+        $scope.BillingInfo.ZipCode = $scope.ShippingInfo.ZipCode;
+    };
+
     $scope.Initialize($scope.RetrieveCart);
     
     $scope.AutomationLoadTestData = function() {

@@ -21,11 +21,11 @@ namespace Commerce.Application.Email
             {
                 var client = new SmtpClient(_emailConfigAdapter.SmtpHost, Int32.Parse(_emailConfigAdapter.SmtpPort))
                 {
-                    Credentials = 
-                        new NetworkCredential(_emailConfigAdapter.SmtpUserName, _emailConfigAdapter.SmtpPassword),
-                    EnableSsl = true,
-                    UseDefaultCredentials = false,                    
+                    UseDefaultCredentials = false
                 };
+                client.EnableSsl = true;
+                client.Credentials = new NetworkCredential(
+                    _emailConfigAdapter.SmtpUserName, _emailConfigAdapter.SmtpPassword);
 
                 var message = new MailMessage(emailMessage.From, emailMessage.To);
                 message.Subject = emailMessage.Subject;

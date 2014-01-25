@@ -13,10 +13,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/07/2013 17:48:12</publishTime>
     </File>
     <File Include="bin/ArtOfGroundFighting.Web.dll">
-      <publishTime>01/18/2014 12:07:48</publishTime>
+      <publishTime>01/25/2014 10:15:53</publishTime>
     </File>
     <File Include="bin/ArtOfGroundFighting.Web.pdb">
-      <publishTime>01/18/2014 12:07:48</publishTime>
+      <publishTime>01/25/2014 10:15:52</publishTime>
     </File>
     <File Include="bin/Autofac.dll">
       <publishTime>12/07/2013 17:43:30</publishTime>
@@ -25,10 +25,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/07/2013 17:48:11</publishTime>
     </File>
     <File Include="bin/Commerce.Application.dll">
-      <publishTime>01/18/2014 12:07:22</publishTime>
+      <publishTime>01/25/2014 10:07:09</publishTime>
     </File>
     <File Include="bin/Commerce.Application.pdb">
-      <publishTime>01/18/2014 12:07:22</publishTime>
+      <publishTime>01/25/2014 10:07:09</publishTime>
     </File>
     <File Include="bin/Content/ArtOfGroundFighting/Fonts/Bevan.woff">
       <publishTime>12/07/2013 17:40:13</publishTime>
@@ -352,25 +352,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/07/2013 17:40:13</publishTime>
     </File>
     <File Include="Content/ArtOfGroundFighting/Images/vintage-logo-sm.png">
-      <publishTime>12/07/2013 18:52:50</publishTime>
+      <publishTime>01/25/2014 10:14:24</publishTime>
     </File>
     <File Include="Content/ArtOfGroundFighting/ng-templates/about.html">
       <publishTime>12/07/2013 17:40:13</publishTime>
     </File>
     <File Include="Content/ArtOfGroundFighting/ng-templates/cart.html">
-      <publishTime>01/18/2014 10:37:37</publishTime>
+      <publishTime>01/25/2014 07:15:01</publishTime>
     </File>
     <File Include="Content/ArtOfGroundFighting/ng-templates/checkout.html">
-      <publishTime>01/16/2014 08:02:46</publishTime>
+      <publishTime>01/25/2014 07:21:37</publishTime>
     </File>
     <File Include="Content/ArtOfGroundFighting/ng-templates/contact.html">
-      <publishTime>12/07/2013 17:40:14</publishTime>
+      <publishTime>01/25/2014 07:28:54</publishTime>
     </File>
     <File Include="Content/ArtOfGroundFighting/ng-templates/content-parent.html">
       <publishTime>12/07/2013 17:40:14</publishTime>
     </File>
     <File Include="Content/ArtOfGroundFighting/ng-templates/product-detail.html">
-      <publishTime>01/15/2014 18:13:27</publishTime>
+      <publishTime>01/24/2014 17:44:00</publishTime>
     </File>
     <File Include="Content/ArtOfGroundFighting/ng-templates/product-list.html">
       <publishTime>12/07/2013 17:40:14</publishTime>
@@ -382,7 +382,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/16/2014 08:08:02</publishTime>
     </File>
     <File Include="Content/ArtOfGroundFighting/Scripts/angular-app.js">
-      <publishTime>12/07/2013 17:40:13</publishTime>
+      <publishTime>01/25/2014 07:12:24</publishTime>
     </File>
     <File Include="Content/ArtOfGroundFighting/Scripts/cart-controller.js">
       <publishTime>01/17/2014 08:11:49</publishTime>
@@ -391,31 +391,34 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/15/2014 18:26:18</publishTime>
     </File>
     <File Include="Content/ArtOfGroundFighting/Scripts/checkout-controller.js">
-      <publishTime>01/15/2014 18:17:29</publishTime>
+      <publishTime>01/25/2014 07:25:07</publishTime>
+    </File>
+    <File Include="Content/ArtOfGroundFighting/Scripts/contact-controller.js">
+      <publishTime>01/25/2014 09:06:46</publishTime>
     </File>
     <File Include="Content/ArtOfGroundFighting/Scripts/order-controller.js">
-      <publishTime>12/07/2013 17:40:13</publishTime>
+      <publishTime>01/25/2014 07:05:44</publishTime>
     </File>
     <File Include="Content/ArtOfGroundFighting/Scripts/products-controller.js">
-      <publishTime>01/15/2014 18:09:57</publishTime>
+      <publishTime>01/25/2014 08:01:42</publishTime>
     </File>
     <File Include="Content/ArtOfGroundFighting/Style/artofgroundfighting.css">
-      <publishTime>12/07/2013 17:40:13</publishTime>
+      <publishTime>01/24/2014 17:49:51</publishTime>
     </File>
     <File Include="Content/Bootstrap_3_0_0/css/bootstrap-lightbox.css">
       <publishTime>01/17/2014 08:07:13</publishTime>
     </File>
     <File Include="Content/Bootstrap_3_0_0/css/bootstrap-theme.css">
-      <publishTime>12/07/2013 17:40:14</publishTime>
+      <publishTime>01/23/2014 07:34:08</publishTime>
     </File>
     <File Include="Content/Bootstrap_3_0_0/css/bootstrap-theme.min.css">
-      <publishTime>12/07/2013 17:40:14</publishTime>
+      <publishTime>01/23/2014 07:34:08</publishTime>
     </File>
     <File Include="Content/Bootstrap_3_0_0/css/bootstrap.css">
-      <publishTime>12/07/2013 17:40:14</publishTime>
+      <publishTime>01/23/2014 07:34:07</publishTime>
     </File>
     <File Include="Content/Bootstrap_3_0_0/css/bootstrap.min.css">
-      <publishTime>12/07/2013 17:40:14</publishTime>
+      <publishTime>01/23/2014 07:34:07</publishTime>
     </File>
     <File Include="Content/Bootstrap_3_0_0/fonts/glyphicons-halflings-regular.eot">
       <publishTime>12/07/2013 17:40:14</publishTime>
@@ -471,6 +474,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Dependencies/System.Web.Razor.dll">
       <publishTime>12/30/2013 17:14:54</publishTime>
     </File>
+    <File Include="EmailTemplates/Admin/CustomerInquiry.cshtml">
+      <publishTime>01/25/2014 09:19:40</publishTime>
+    </File>
     <File Include="EmailTemplates/Admin/OrderItemsRefunded.cshtml">
       <publishTime>12/28/2013 09:12:31</publishTime>
     </File>
@@ -508,7 +514,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/27/2013 08:28:20</publishTime>
     </File>
     <File Include="Views/Page/Index.cshtml">
-      <publishTime>01/13/2014 08:15:33</publishTime>
+      <publishTime>01/25/2014 07:12:04</publishTime>
     </File>
     <File Include="Views/Page/NotFound.cshtml">
       <publishTime>12/27/2013 08:28:27</publishTime>
@@ -520,25 +526,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/27/2013 08:28:33</publishTime>
     </File>
     <File Include="Views/Shared/_NgFooter.cshtml">
-      <publishTime>12/07/2013 17:40:14</publishTime>
+      <publishTime>01/25/2014 07:13:15</publishTime>
     </File>
     <File Include="Views/Shared/_NgHeader.cshtml">
-      <publishTime>01/15/2014 18:34:22</publishTime>
+      <publishTime>01/25/2014 07:12:50</publishTime>
     </File>
     <File Include="Views/Shared/_NgLayout.cshtml">
-      <publishTime>01/17/2014 08:05:35</publishTime>
+      <publishTime>01/25/2014 07:13:59</publishTime>
     </File>
     <File Include="Views/Shared/_NgShimBody.cshtml">
       <publishTime>12/15/2013 10:49:49</publishTime>
     </File>
     <File Include="Views/Shared/_NgShimHead.cshtml">
-      <publishTime>12/07/2013 17:40:14</publishTime>
+      <publishTime>01/25/2014 07:13:21</publishTime>
     </File>
     <File Include="Views/_viewstart.cshtml">
       <publishTime>12/07/2013 17:40:14</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/18/2014 12:07:48</publishTime>
+      <publishTime>01/25/2014 10:03:27</publishTime>
     </File>
   </ItemGroup>
 </Project>

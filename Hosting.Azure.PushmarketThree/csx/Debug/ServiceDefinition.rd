@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Hosting.Azure.PushmarketThree" generation="1" functional="0" release="0" Id="f17b9b53-879a-4192-9885-65c2179ea093" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Hosting.Azure.PushmarketThree" generation="1" functional="0" release="0" Id="12f10db5-6e6f-406c-98e2-a6a928152e7a" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="Hosting.Azure.PushmarketThreeGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -178,19 +178,19 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="bbc280c7-fb54-41df-a927-5fea8fbd711f" ref="Microsoft.RedDog.Contract\ServiceContract\Hosting.Azure.PushmarketThreeContract@ServiceDefinition">
+    <implementation Id="22dcb072-47ae-4f98-a661-f7ea7d27d41a" ref="Microsoft.RedDog.Contract\ServiceContract\Hosting.Azure.PushmarketThreeContract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="f546b187-8e3d-46e0-9632-b6bcec3e13e5" ref="Microsoft.RedDog.Contract\Interface\ArtOfGroundFighting.Web:AogfEndpoint@ServiceDefinition">
+        <interfaceReference Id="e0416662-5153-4dce-861b-d533d57f0c7a" ref="Microsoft.RedDog.Contract\Interface\ArtOfGroundFighting.Web:AogfEndpoint@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/Hosting.Azure.PushmarketThree/Hosting.Azure.PushmarketThreeGroup/ArtOfGroundFighting.Web:AogfEndpoint" />
           </inPort>
         </interfaceReference>
-        <interfaceReference Id="1931c231-fea1-4a46-97fd-1ba8063881e1" ref="Microsoft.RedDog.Contract\Interface\ArtOfGroundFighting.Web:AogfEndpointAdministrative@ServiceDefinition">
+        <interfaceReference Id="e41bdc2f-9df1-428b-9b7d-929acda2927a" ref="Microsoft.RedDog.Contract\Interface\ArtOfGroundFighting.Web:AogfEndpointAdministrative@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/Hosting.Azure.PushmarketThree/Hosting.Azure.PushmarketThreeGroup/ArtOfGroundFighting.Web:AogfEndpointAdministrative" />
           </inPort>
         </interfaceReference>
-        <interfaceReference Id="925e6f51-bed8-4b7c-8672-6c13fa18ff78" ref="Microsoft.RedDog.Contract\Interface\ArtOfGroundFighting.Web:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput@ServiceDefinition">
+        <interfaceReference Id="5a3b5e02-5d4a-4ae0-8783-4676b5499c87" ref="Microsoft.RedDog.Contract\Interface\ArtOfGroundFighting.Web:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/Hosting.Azure.PushmarketThree/Hosting.Azure.PushmarketThreeGroup/ArtOfGroundFighting.Web:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput" />
           </inPort>
