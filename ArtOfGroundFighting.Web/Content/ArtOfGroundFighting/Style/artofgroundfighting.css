@@ -261,3 +261,9 @@ a.thumbnail-color-selected {
     font-size:21px; 
     width:300px;
 }
+
+.shadow {
+  -moz-box-shadow:    3px 3px 5px #666;
+  -webkit-box-shadow: 3px 3px 5px  #666;
+  box-shadow:         3px 3px 5px #666;
+}

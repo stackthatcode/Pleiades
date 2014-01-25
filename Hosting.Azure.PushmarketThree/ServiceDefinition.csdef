@@ -11,7 +11,7 @@
       </Site>
       <Site name="ArtOfGroundFighting.Storefront" physicalDirectory="C:\DEV\Pushmarket\Deployments\ArtOfGroundFighting.Storefront">
         <Bindings>
-          <Binding name="StorefrontEndpoint" endpointName="AogfEndpoint"  />
+          <Binding name="StorefrontEndpoint" endpointName="AogfEndpoint" hostHeader="shop.artofgroundfighting.com" />
         </Bindings>
       </Site>
     </Sites>

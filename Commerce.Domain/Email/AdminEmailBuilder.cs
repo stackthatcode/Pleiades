@@ -74,5 +74,13 @@ namespace Commerce.Application.Email
             output.Body = _templateEngine.Render(body, TemplateIdentifier.AdminSystemError, false);
             return output;
         }
+
+        public EmailMessage CustomerContact(CustomerInquiry customerInquiry)
+        {
+            var output = MessageFactory();
+            output.Subject = SubjectPrefix + "Customer Inquiry";
+            output.Body = _templateEngine.Render(customerInquiry, TemplateIdentifier.AdminCustomerInquiry, false);
+            return output;
+        }
     }
 }

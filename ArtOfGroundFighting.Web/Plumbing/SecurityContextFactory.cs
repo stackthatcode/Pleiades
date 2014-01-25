@@ -15,6 +15,7 @@ namespace ArtOfGroundFighting.Web.Plumbing
                 filterContext.Controller is PageController || 
                 filterContext.Controller is ImageController ||
                 filterContext.Controller is CartController ||
+                filterContext.Controller is ContactController ||
                 filterContext.Controller is ListController ||
                 filterContext.Controller is OrderController ||
                 filterContext.Controller is SystemController)

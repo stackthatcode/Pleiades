@@ -18,6 +18,10 @@ angular.module('push-market', []).
                 templateUrl: templateUrlBase + 'content-parent.html', 
                 controller: 'ContentController'
             })
+            .when('/contact', {
+                templateUrl: templateUrlBase + 'contact.html',
+                controller: 'ContactController'
+            })
             .when('/cart', {
                 templateUrl: templateUrlBase + 'cart.html',
                 controller: 'CartController'

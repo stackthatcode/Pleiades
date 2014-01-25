@@ -10,5 +10,6 @@ namespace Commerce.Application.Email
         EmailMessage OrderItemsShipped(OrderShipment shipment);
         EmailMessage OrderItemsRefunded(OrderRefund refund);
         EmailMessage SystemError(Guid activityId, Exception exception);
+        EmailMessage CustomerContact(CustomerInquiry customerInquiry);
     }
 }

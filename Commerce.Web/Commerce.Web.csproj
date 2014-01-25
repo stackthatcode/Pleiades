@@ -411,6 +411,7 @@
     <Content Include="EmailTemplates\Customer\OrderReceived.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="EmailTemplates\Admin\CustomerInquiry.cshtml" />
     <None Include="Properties\PublishProfiles\ArtOfGroundFighting.Admin.pubxml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>

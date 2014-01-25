@@ -112,8 +112,8 @@ app.controller('CheckoutController', function ($scope, $http) {
         validator.ValidateBillingAddress();
         validator.ValidateCreditCard();
         validator.ValidateShippingInfo();
-
         var failed = false;
+        
         if (!$("#shippingInfoForm").valid()) {
             $("#shipping-info-error").show();
             failed = true;

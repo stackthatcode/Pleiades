@@ -12,15 +12,46 @@
 
 <div class="row">
     <div class="col-lg-6">
+        <h1 class="sub-header">Windy City.  Chicago. Always.</h1>
+        <p>
+            1198 N. Western Avenue, Chicago, IL 60622
+        </p>
+        <p>
+            <img class="shadow img-responsive"
+                 src="http://maps.googleapis.com/maps/api/staticmap?center=41.9030078,-87.6870902&zoom=12&size=500x500&sensor=false&markers=color:red%7C41.9030078,-87.6870902" />
+        </p>
+        <div style="height:30px;"></div>
+    </div>
+
+    <div class="col-lg-6">
         <h1 class="sub-header">Speak Your Mind.</h1>
         <p>
             Lorem ipsum copy text about ArtOfGroundFighting.com and how we're the best Jiu-Jitsu fighters the
             world has ever seen.  Lorem ipsum copy text about ArtOfGroundFighting.com and how we're the best Jiu-Jitsu fighters the
             world has ever seen.
         </p>
-        <p><b>UserVoice Email Form</b></p>
+        <form id="contact-info">
+            <div class="form-group">
+                <label for="email">What's Your Email Address?</label>
+                <input class="form-control" type="text" name="email" ng-model="email" placeholder="Email Address" maxlength="50">
+            </div>
+            <div class="form-group">
+                <label for="message">Comments, Questions, or Complaints</label>
+                <textarea rows="6" class="form-control" name="message" ng-model="message" maxlength="50"></textarea>
+            </div>
+            <div id="validation-error" style="text-align:center; display:none; height:50px; clear:both;" class="alert alert-danger">
+                <strong>Please enter a valid email address and fill in your message</strong>
+            </div>
+            <div>
+                <button class="btn btn-default" ng-click="send()" style="font-weight:bold; color:#555; width:100px;">
+                    Send&nbsp; <i class="glyphicon glyphicon-envelope"></i>
+                </button>
+            </div>
+        </form>
 
-        <h1 class="sub-header">Urgent?  Get on the Horn.</h1>
+        <div style="height:30px;"></div>
+        
+        <h1 class="sub-header">Urgent?  Get on the Horn.</h1>        
         <p>Lorem ipsum copy text about ArtOfGroundFighting.com and how we're the best Jiu-Jitsu fighters the 
             world has ever seen.  Lorem ipsum copy text about ArtOfGroundFighting.com and how we're the best Jiu-Jitsu fighters the 
             world has ever seen.</p>
@@ -28,13 +59,7 @@
             <b>Phone Support Hours: 9AM to 6PM Central Standard Time</b><br/>
             <b>Call Us: 1-800-CHOKE-4U</b><br />
         </p>
+        <div style="height:30px;"></div>
    </div>
-    <div class="col-lg-6">
-        <h1 class="sub-header">Windy City.  Chicago. Always</h1>
-        <p>
-            1198 N. Western Avenue, Chicago, IL 60622
-        </p>
-        <p><b>Insert Google Map here</b></p>
-    </div>
 </div>
 

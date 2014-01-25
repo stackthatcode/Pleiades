@@ -16,6 +16,7 @@ namespace Commerce.Application.Email
                     { TemplateIdentifier.AdminOrderItemsRefunded, @"Admin\OrderItemsRefunded.cshtml" },
                     { TemplateIdentifier.AdminOrderItemsShipped, @"Admin\OrderItemsShipped.cshtml" },
                     { TemplateIdentifier.AdminSystemError, @"Admin\SystemError.cshtml" },
+                    { TemplateIdentifier.AdminCustomerInquiry, @"Admin\CustomerInquiry.cshtml" },
 
                     { TemplateIdentifier.CustomerOrderReceived, @"Customer\OrderReceived.cshtml" },
                     { TemplateIdentifier.CustomerOrderItemsRefunded, @"Customer\OrderItemsRefunded.cshtml" },
