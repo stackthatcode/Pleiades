@@ -27,7 +27,7 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
     $scope.ImageUrlGenator = imageLocator.GenerateUrl;
 
     $scope.HasColors = function () {
-        return $scope.Product && $scope.Product.Colors;
+        return $scope.Product && $scope.Product.Colors && true;
     };
 
     $scope.HasMultipleColors = function () {
@@ -136,8 +136,6 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
                         $scope.SelectedSizes.push(size);
                     });
         } else {
-            // Why...?
-            console("$scope.SelectedSizes = $scope.Product.Sizes <= check it out");
             $scope.SelectedSizes = $scope.Product.Sizes;
         }
     };
@@ -170,9 +168,7 @@ app.controller('DetailController', function ($scope, $routeParams, $http) {
         $scope.SelectedQuantities = [];
 
         if ($scope.GetSelectedSku()) {
-            console.log($scope.GetSelectedSku());
-            var availableQuantity = $scope.GetSelectedSku().AdjustedQuantity;
-            
+            var availableQuantity = $scope.GetSelectedSku().AdjustedQuantity;            
             for (var i = 1; i <= availableQuantity; i++) {
                 $scope.SelectedQuantities.push(i);
             }

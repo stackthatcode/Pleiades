@@ -71,11 +71,13 @@
             </div>
             
             <div ng-show="!HasInventory()">
+                <div>HasColors {{ HasColors() }}</div>
+    
                 <h2 ng-show="!HasColors()" style="color:#555; font-weight:bold;">This Item is Out-of-Stock. Sorry!</h2>
                 <h2 ng-show="HasColors()" style="color:#555; font-weight:bold;">This Item Color is Out-of-Stock. Sorry!</h2>
                 <div style="height:20px;"></div>
             </div>
-            
+
             <div ng-show="HasInventory()">
                 <div ng-show="QuantitiesVisible()" style="height:40px;">
                     <select ng-model="SelectedQuantityValue" class="form-control quantity-list" style="float:left;"
