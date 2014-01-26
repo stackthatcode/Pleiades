@@ -29,6 +29,11 @@ namespace Commerce.Web
             return RouteValueDictionaryExtensions.FromController<UnsecuredController>(x => x.Logout());
         }
 
+        public static RouteValueDictionary PasswordRequest()
+        {
+            return RouteValueDictionaryExtensions.FromController<PasswordController>(x => x.PasswordRequest());
+        }
+
         public static RouteValueDictionary ErrorTest()
         {
             return RouteValueDictionaryExtensions.FromController<ManagerController>(x => x.Error());

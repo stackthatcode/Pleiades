@@ -11,5 +11,6 @@ namespace Commerce.Application.Email
         EmailMessage OrderItemsRefunded(OrderRefund refund);
         EmailMessage SystemError(Guid activityId, Exception exception);
         EmailMessage CustomerContact(CustomerInquiry customerInquiry);
+        EmailMessage PasswordReset(string email, string link);
     }
 }

@@ -10,7 +10,8 @@ namespace Commerce.Web.Plumbing
     {
         public SecurityContext Create(AuthorizationContext filterContext, AggregateUser user)
         {
-            if (filterContext.Controller is UnsecuredController)
+            if (filterContext.Controller is UnsecuredController ||
+                filterContext.Controller is PasswordController)
             {
                 return new SecurityContext(user)
                 {

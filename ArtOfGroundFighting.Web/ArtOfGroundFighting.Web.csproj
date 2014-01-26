@@ -318,6 +318,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="EmailTemplates\Admin\CustomerInquiry.cshtml" />
+    <Content Include="EmailTemplates\Admin\PasswordReset.cshtml" />
     <None Include="Properties\PublishProfiles\ArtOfGroundFighting.Storefront.pubxml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>

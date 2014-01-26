@@ -10,6 +10,7 @@ using Commerce.Application.Lists.Entities;
 using Commerce.Application.Orders.Entities;
 using Commerce.Application.Products;
 using Commerce.Application.Products.Entities;
+using Commerce.Application.Security;
 using Commerce.Application.Shopping.Entities;
 using Pleiades.Web.Security.Model;
 
@@ -24,6 +25,7 @@ namespace Commerce.Application.Database
         public IDbSet<AggregateUser> AggregateUsers { get; set; }
         public IDbSet<PfMembershipUser> MembershipUsers { get; set; }
         public IDbSet<IdentityProfile> IdentityProfiles { get; set; }
+        public IDbSet<PasswordResetLink> PasswordResetLinks { get; set; }
 
         // Lists
         public IDbSet<Category> Categories { get; set; }

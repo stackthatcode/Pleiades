@@ -82,5 +82,14 @@ namespace Commerce.Application.Email
             output.Body = _templateEngine.Render(customerInquiry, TemplateIdentifier.AdminCustomerInquiry, false);
             return output;
         }
+
+        public EmailMessage PasswordReset(string email, string link)
+        {
+            var output = MessageFactory();
+            output.To = email;
+            output.Subject = SubjectPrefix + "Password Reset";
+            output.Body = _templateEngine.Render(link, TemplateIdentifier.AdminPasswordReset, false);
+            return output;
+        }
     }
 }

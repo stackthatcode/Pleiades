@@ -154,6 +154,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\PasswordController.cs" />
+    <Compile Include="Models\Auth\PasswordRequestModel.cs" />
     <Compile Include="Plumbing\LoggerRegistration.cs" />
     <Compile Include="Plumbing\RouteRegistration.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
@@ -412,7 +414,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="EmailTemplates\Admin\CustomerInquiry.cshtml" />
+    <Content Include="EmailTemplates\Admin\PasswordReset.cshtml" />
     <None Include="Properties\PublishProfiles\ArtOfGroundFighting.Admin.pubxml" />
+    <Content Include="Views\Password\PasswordRequest.cshtml" />
+    <Content Include="Views\Password\PasswordRequestSuccess.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

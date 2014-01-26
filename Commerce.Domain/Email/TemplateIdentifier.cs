@@ -9,6 +9,7 @@ namespace Commerce.Application.Email
         AdminOrderItemsShipped,
         AdminSystemError,
         AdminCustomerInquiry,
+        AdminPasswordReset,
 
         CustomerOrderReceived,
         CustomerOrderItemsRefunded,

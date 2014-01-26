@@ -243,8 +243,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AggregateReadOnlyRepository.cs" />
     <Compile Include="Security\AggregateWriteableRepository.cs" />
+    <Compile Include="Security\IPasswordResetLinkRepository.cs" />
     <Compile Include="Security\MembershipReadableRepository.cs" />
     <Compile Include="Security\MembershipWritableRepository.cs" />
+    <Compile Include="Security\PasswordResetLink.cs" />
+    <Compile Include="Security\PasswordResetLinkRepository.cs" />
     <Compile Include="Shopping\CartIdentificationService.cs" />
     <Compile Include="Shopping\CartManagementService.cs" />
     <Compile Include="Shopping\CartRepository.cs" />

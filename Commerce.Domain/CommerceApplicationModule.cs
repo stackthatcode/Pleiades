@@ -74,6 +74,9 @@ namespace Commerce.Application
                 .InstancePerLifetimeScope();
             builder.RegisterType<MembershipReadableRepository>().As<IMembershipReadOnlyRepository>().InstancePerLifetimeScope();
             builder.RegisterType<MembershipWritableRepository>().As<IMembershipWritableRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<PasswordResetLinkRepository>()
+                .As<IPasswordResetLinkRepository>()
+                .InstancePerLifetimeScope();
 
             // List Repositories
             builder.RegisterType<JsonCategoryRepository>().As<IJsonCategoryRepository>().InstancePerLifetimeScope();

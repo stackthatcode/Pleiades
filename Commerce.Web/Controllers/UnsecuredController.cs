@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Net;
 using System.Web.Mvc;
+using Commerce.Application.Email;
+using Commerce.Application.Security;
 using Commerce.Web.Models.Auth;
 using Pleiades.Web.Security.Interface;
 using Pleiades.Web.Security.Model;
@@ -13,9 +15,10 @@ namespace Commerce.Web.Controllers
         public const bool PersistentCookie = true;
         public IAggregateUserService AggregateUserService { get; set; }
         public IFormsAuthenticationService FormsAuthenticationService { get; set; }
-
+        
         public UnsecuredController(
-                IAggregateUserService aggregateUserService, IFormsAuthenticationService formsAuthenticationService)
+                IAggregateUserService aggregateUserService, 
+                IFormsAuthenticationService formsAuthenticationService)
         {
             this.AggregateUserService = aggregateUserService;
             this.FormsAuthenticationService = formsAuthenticationService;

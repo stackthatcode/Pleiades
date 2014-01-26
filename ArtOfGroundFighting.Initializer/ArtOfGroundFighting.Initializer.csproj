@@ -191,6 +191,9 @@
     <Content Include="EmailTemplates\Admin\CustomerInquiry.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="EmailTemplates\Admin\PasswordReset.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <Content Include="EmailTemplates\Shared\MasterTemplate.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
