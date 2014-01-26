@@ -68,7 +68,7 @@
                 </div>
                 <div class="form-group" style="float:left; margin-left:15px;">
                     <label for="state">State</label>
-                    <select class="form-control" id="Select2" name="state" ng-model="ShippingInfo.State" ng-change="ChangeStateTax()"
+                    <select class="form-control" id="shipping-state" name="state" ng-model="ShippingInfo.State" ng-change="ChangeStateTax()"
                             ng-options="state.Abbreviation as state.Abbreviation for state in StatesAndTaxes" />
                 </div>
                 <div class="form-group" style="float:left; margin-left:15px;">
@@ -118,7 +118,7 @@
                 </div>
                 <div class="form-group" style="float:left; margin-left:15px;">
                     <label for="state">State</label>
-                    <select class="form-control" id="Select1" name="state" ng-model="BillingInfo.State"
+                    <select class="form-control" id="billing-state" name="state" ng-model="BillingInfo.State"
                             ng-options="state.Abbreviation as state.Abbreviation for state in StatesAndTaxes" />
                 </div>
                 <div class="form-group" style="float:left; margin-left:15px;">

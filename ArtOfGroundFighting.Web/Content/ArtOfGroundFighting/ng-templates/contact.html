@@ -1,5 +1,5 @@
 ﻿<div id="arena-top-spacer" style="height:50px; padding-top:20px;">
-    <span>Company</span> &gt;&gt; <span>About</span>
+    <span>Company</span> &gt;&gt; <span>Contact</span>
 </div>
 
 <div class="row">
@@ -33,17 +33,20 @@
         <form id="contact-info">
             <div class="form-group">
                 <label for="email">What's Your Email Address?</label>
-                <input class="form-control" type="text" name="email" ng-model="email" placeholder="Email Address" maxlength="50">
+                <input class="form-control" type="text" id="email" name="email" ng-model="email" placeholder="Email Address" maxlength="50">
             </div>
             <div class="form-group">
                 <label for="message">Comments, Questions, or Complaints</label>
-                <textarea rows="6" class="form-control" name="message" ng-model="message" maxlength="50"></textarea>
+                <textarea rows="6" class="form-control" id="message" name="message" ng-model="message" maxlength="50"></textarea>
             </div>
             <div id="validation-error" style="text-align:center; display:none; height:50px; clear:both;" class="alert alert-danger">
                 <strong>Please enter a valid email address and fill in your message</strong>
             </div>
+            <div id="validation-info" style="text-align:center; display:none; height:50px; clear:both;" class="alert alert-info">
+                <strong>Thanks for the message!  We'll respond to you shortly.</strong>
+            </div>
             <div>
-                <button class="btn btn-default" ng-click="send()" style="font-weight:bold; color:#555; width:100px;">
+                <button class="btn btn-default" id="send" ng-click="send()" style="font-weight:bold; color:#555; width:100px;">
                     Send&nbsp; <i class="glyphicon glyphicon-envelope"></i>
                 </button>
             </div>

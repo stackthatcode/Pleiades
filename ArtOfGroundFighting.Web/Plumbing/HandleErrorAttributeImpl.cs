@@ -16,8 +16,10 @@ namespace ArtOfGroundFighting.Web.Plumbing
                 return;
             }
 
+            var httpException = new HttpException(null, filterContext.Exception);
+            
             if (filterContext.ExceptionHandled || !filterContext.HttpContext.IsCustomErrorEnabled) return;
-            if (new HttpException(null, filterContext.Exception).GetHttpCode() != 500) return;
+            if (httpException.GetHttpCode() != 500) return;
             if (!ExceptionType.IsInstanceOfType(filterContext.Exception)) return;
 
             // Log the Exception
@@ -27,7 +29,10 @@ namespace ArtOfGroundFighting.Web.Plumbing
             LoggerSingleton.Get().Error(filterContext.Exception);
 
             // Notify System Admins
-            ErrorNotification.Send(filterContext.Exception);
+            if (httpException.GetHttpCode() != 404)
+            {
+                ErrorNotification.Send(filterContext.Exception);
+            }
 
             // And now respond
             if (filterContext.HttpContext.Request.IsAjaxRequest())

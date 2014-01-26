@@ -58,8 +58,14 @@ namespace ArtOfGroundFighting.Web
             }
 
             var lastError = Server.GetLastError();
+            var httpException = new HttpException(null, lastError);
+
             LoggerSingleton.Get().Error(lastError);
-            ErrorNotification.Send(lastError);
+
+            if (httpException.GetHttpCode() != 404)
+            {
+                ErrorNotification.Send(lastError);
+            }
 
             Server.ClearError();
             var redirectUrl = ConfigurationManager.AppSettings["AdminErrorRedirect"];

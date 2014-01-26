@@ -31,7 +31,7 @@ namespace ArtOfGroundFighting.Initializer.Builders
             if (!users.ToList().Any())
             {
                 AddRootUser( "aleksjones@gmail.com", "Aleksandr", "Jones", "123456", "First Karate Teacher", "Sugiyama");
-                AddRootUser("jeremysimon@me.com", "Jeremy", "Simon", "123456", "First Spiritual Teacher", "Murphy");
+                //AddRootUser("jeremysimon@me.com", "Jeremy", "Simon", "123456", "First Spiritual Teacher", "Murphy");
             }
         }
 

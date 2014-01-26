@@ -26,7 +26,10 @@ app.controller('ContactController', function ($scope, $http) {
         if ($("#contact-info").valid()) {
             var url = 'contact?email=' + $scope.email + '&body=' + $scope.message;
             ngAjax.Post($http, url, null, function (data) {
-                // console.log("OK!");
+                $("#validation-info").show();
+                $("#email").attr("disabled", "disabled");
+                $("#message").attr("disabled", "disabled");
+                $("#send").attr("disabled", "disabled");
             });            
         }
     };
