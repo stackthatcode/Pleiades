@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Commerce.Application.Database;
+using Pleiades.App.Data;
 
 namespace Commerce.Application.Security
 {
@@ -15,6 +16,11 @@ namespace Commerce.Application.Security
 
         public void Add(PasswordResetLink passwordResetLink)
         {
+            foreach (var oldlink in _dbContext.PasswordResetLinks
+                        .Where(x => x.MembershipUserName == passwordResetLink.MembershipUserName))
+            {
+                _dbContext.Delete(oldlink);
+            }
             _dbContext.PasswordResetLinks.Add(passwordResetLink);
         }
 

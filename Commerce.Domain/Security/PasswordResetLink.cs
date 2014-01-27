@@ -6,8 +6,7 @@ namespace Commerce.Application.Security
     {
         public int Id { get; set; }
         public Guid ExternalGuid { get; set; }
-        public int AggregateUserId { get; set; }
-
+        public string MembershipUserName { get; set; }   
         public DateTime DateCreated { get; set; }
         public DateTime ExpirationDate { get; set; }
 
@@ -15,7 +14,7 @@ namespace Commerce.Application.Security
         {
             get
             {
-                return ExpirationDate > DateTime.Now;
+                return ExpirationDate < DateTime.Now;
             }
         }
     }

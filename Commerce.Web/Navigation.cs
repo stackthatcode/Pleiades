@@ -34,6 +34,11 @@ namespace Commerce.Web
             return RouteValueDictionaryExtensions.FromController<PasswordController>(x => x.PasswordRequest());
         }
 
+        public static RouteValueDictionary PasswordChange(string externalGuid)
+        {
+            return RouteValueDictionaryExtensions.FromController<PasswordController>(x => x.Change(externalGuid));
+        }
+
         public static RouteValueDictionary ErrorTest()
         {
             return RouteValueDictionaryExtensions.FromController<ManagerController>(x => x.Error());

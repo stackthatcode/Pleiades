@@ -1,0 +1,62 @@
+﻿@model Commerce.Web.Models.Auth.PasswordChangeModel
+@{
+    Layout = "~/Views/Shared/_LayoutBare.cshtml";
+}
+
+
+@section _Body {    
+    <div class="workspace-heading-parent">
+        <div class="workspace-heading">
+            <div id="heading" class="container">
+                <div class="row">
+                    <div class="span12">
+                        <h1>Change Your Password</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span12">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="body-container" class="container">
+        @using (Html.BeginForm("Change", "Password", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {            
+            @Html.HiddenFor(x => x.ExternalGuid)
+
+            <table>
+                @if (!ViewContext.ViewData.ModelState.IsValid)
+                {
+                <tr>
+                    <td colspan="2">
+                        <div class="alert alert-error" style="padding-top: 17px;">
+                            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            @Html.ValidationSummary()
+                        </div>
+                    </td>
+                </tr>
+                }
+                <tr>
+                    <td class="label-right">Enter your new Password:</td>
+                    <td>
+                        @Html.PasswordFor(x => x.Password, new { maxlength = "50" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-right">Confirm your new Password:</td>
+                    <td>
+                        @Html.PasswordFor(x => x.PasswordConfirm, new { maxlength = "50" })
+                    </td>
+                </tr>                
+                <tr>
+                    <td></td>
+                    <td align="left">
+                        <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i> Ok</button>
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+}

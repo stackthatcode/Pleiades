@@ -155,6 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\PasswordController.cs" />
+    <Compile Include="Models\Auth\PasswordChangeModel.cs" />
     <Compile Include="Models\Auth\PasswordRequestModel.cs" />
     <Compile Include="Plumbing\LoggerRegistration.cs" />
     <Compile Include="Plumbing\RouteRegistration.cs" />
@@ -418,6 +419,9 @@
     <None Include="Properties\PublishProfiles\ArtOfGroundFighting.Admin.pubxml" />
     <Content Include="Views\Password\PasswordRequest.cshtml" />
     <Content Include="Views\Password\PasswordRequestSuccess.cshtml" />
+    <Content Include="Views\Password\Change.cshtml" />
+    <Content Include="Views\Password\BadLink.cshtml" />
+    <Content Include="Views\Password\ChangeSuccess.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
